@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["ES6", "ES7", "ESNext"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "noUnusedLocals": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "incremental": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "declaration": true,
+    "composite": false,
+    "outDir": "./dist",
+    "baseUrl": "packages/",
+    "rootDir": "packages/"
+  },
+  "exclude": ["**/node_modules", "**/dist"],
+  "include": ["packages"]
+}

@@ -1,0 +1,17 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "registry": "https://npm.kilic.dev",
+      "message": "chore(release): publish"
+    },
+    "version": {
+      "allowBranch": ["master"]
+    }
+  },
+  "version": "independent"
+}
