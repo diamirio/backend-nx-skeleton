@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  monorepo:
+    build:
+      context: .docker/node
+    environment:
+      # - COMMAND_INIT_ENV=init-env
+      # - PACKAGE_START_COMMAND=start
+      # format => packages/service1:packages/service2
+      # format => packages/service1,off,override="start":packages/service2,override='dev'
+      - SERVICES=packages/nx-nest
+      # - RUN_IN_BAND=packages/common
+    volumes:
+      - .:/data/app

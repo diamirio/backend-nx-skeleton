@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "NxNestSkeleton",
+  "title": "Create a Nest application from skeleton with NX",
+  "examples": [{
+      "command": "g app myapp --bgtask",
+      "description": "Initiate background task scheduler."
+    },
+    {
+      "command": "g app myapp --command",
+      "description": "Initiate command module."
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the application?"
+    },
+    "dbController": {
+      "description": "Database controller desired to be used.",
+      "type": "string",
+      "default": "none",
+      "alias": "d",
+      "x-prompt": {
+        "message": "Which database would you like to use?",
+        "type": "list",
+        "items": [{
+            "value": "toMysql",
+            "label": "MySQL with Typeorm"
+          },
+          {
+            "value": "toPostgresql",
+            "label": "PostgreSQL with Typeorm"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      }
+    },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
+    "tests": {
+      "description": "Test runner to use for unit and e2e tests",
+      "type": "string",
+      "enum": ["jest", "none"],
+      "default": "jest"
+    }
+  },
+  "required": []
+}

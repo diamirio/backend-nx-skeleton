@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "repository": "",
+  "repository": "<<---REPOSITORYHERE--->>",
   "scripts": {
     "ls": "lerna la",
     "bootstrap": "lerna bootstrap ${ARGS} --scope ${PACKAGE:-''} --",
@@ -19,11 +19,18 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
+  "dependencies": {
+    "@nrwl/workspace": "*"
+  },
   "devDependencies": {
+    "@cenk1cenk2/eslint-config": "*",
     "commitizen": "^4.0.5",
     "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^7.1.0",
     "husky": "^4.2.5",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.5"
   },
   "config": {
     "commitizen": {

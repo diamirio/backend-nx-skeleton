@@ -1,0 +1,55 @@
+{
+  "name": "@webundsoehne/nx-nest",
+  "version": "0.0.1",
+  "description": "Nest Plugin for Nx",
+  "repository": "<<---REPOSITORYHERE--->>",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "Cenk Kilic",
+  "license": "MIT",
+  "schematics": "./collection.json",
+  "builders": "./builders.json",
+  "scripts": {
+    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
+    "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "postbuild": "cpy --cwd=src --parents '**/*.json' ../dist/ && cpy --cwd=src --parents '**/files/**' ../dist/",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
+    "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && yarn postbuild",
+    "lint": "prettier --write src/ && eslint --ext .json,.ts,.js --fix src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "src/*.{ts,js,json}": [
+      "prettier --write",
+      "eslint --ext .json,.ts,.js --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "peerDependencies": {
+    "@nrwl/workspace": "*"
+  },
+  "dependencies": {
+    "@angular-devkit/schematics": "~9.1.0",
+    "@nestjs/schematics": "^6.3.0",
+    "@nrwl/jest": "*",
+    "@nrwl/node": "*"
+  },
+  "devDependencies": {
+    "cpy-cli": "^3.1.1",
+    "lint-staged": "^10.2.11",
+    "rimraf": "^3.0.2",
+    "tsc-watch": "^4.2.8",
+    "tscpaths": "^0.0.9",
+    "typescript": "^3.9.5"
+  }
+}

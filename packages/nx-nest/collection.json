@@ -1,0 +1,21 @@
+{
+  "name": "ws/nest",
+  "version": "0.1",
+  "extends": ["@nestjs/schematics", "@nrwl/workspace"],
+  "schematics": {
+    "init": {
+      "factory": "./dist/schematics/init/main",
+      "schema": "./dist/schematics/init/schema.json",
+      "description": "Initialize the @webundsoehne/nx-nest plugin.",
+      "aliases": ["ng-add"],
+      "hidden": true
+    },
+
+    "application": {
+      "factory": "./dist/schematics/application/main",
+      "schema": "./dist/schematics/application/schema.json",
+      "aliases": ["app"],
+      "description": "Create a new Nest application from skeleton."
+    }
+  }
+}

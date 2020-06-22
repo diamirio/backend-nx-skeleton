@@ -1,0 +1,21 @@
+port: 3000
+logLevel: debug
+misc:
+  lockfile: maintenance.lock
+  maintenanceNotification: null
+  lastUpdateFile: .last-update
+  changelogFile: CHANGELOG.md
+url:
+  basePath: http://localhost:3000
+  apiPath: ""
+swagger:
+  basePath: ""
+  path: /internal/docs
+  useHttps: false
+  title: NestJS Skeleton
+  description: API
+cacheLifetime:
+  defaultExpiresHeader: false
+  defaultLifetime: 0
+  expiresHeader: Expires
+  cacheControlHeader: Cache-control

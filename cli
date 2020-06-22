@@ -1,0 +1,66 @@
+#!/bin/bash
+
+PACKAGE_FOLDER=packages
+
+SEPERATOR="------------------------"
+
+trap trap_int INT
+function trap_int() {
+  echo -e "${SEPERATOR}\n[interrupt] ${PACKAGE_INFO}"
+}
+
+echo "[monorepo] Run in Docker"
+echo "${SEPERATOR}"
+
+# throw default error
+if [ -z "$1" ]; then
+  echo "Please state a package folder relative to '${PACKAGE_FOLDER}'."
+  exit 127
+fi
+
+# ls command
+if [ "$1" == "ls" ]; then
+  npx lerna la
+  exit 0
+fi
+
+# check command
+PACKAGES=$(npx lerna la)
+PACKAGE=($(echo ${PACKAGES} | grep $1 | sed -r 's/^([^ ]*).*$/\1/'))
+
+IS_WORKSPACE=$([[ "$1" == "root" || "$1" == "ws" ]] && echo true)
+IS_FORALL=$([[ "$1" == "all" ]] && echo true)
+IS_LERNA=$([[ "$1" == "lerna" ]] && echo true)
+
+if [[ -z "${PACKAGE}" && -z "${IS_WORKSPACE}" && -z "${IS_FORALL}" && -z "${IS_LERNA}" ]]; then
+  echo "Can not find package in directory."
+  echo "${SEPERATOR}"
+  echo "Available packages are:"
+  echo "${PACKAGES}"
+  exit 127
+fi
+
+# where to run
+if [[ ! -z "${IS_WORKSPACE}" || ! -z "${IS_FORALL}" || ! -z "${IS_LERNA}" ]]; then
+  PACKAGE="workspace"
+  WORKDIR="."
+else
+  WORKDIR="${PACKAGE_FOLDER}/$1"
+fi
+
+# command
+if [ ! -z "${IS_FORALL}" ]; then
+  RUN_COMMAND="npx lerna exec -- ${*:2}"
+elif [ ! -z "${IS_LERNA}" ]; then
+  RUN_COMMAND="npx lerna ${*:2}"
+else
+  RUN_COMMAND="${*:2}"
+fi
+
+if [ -z "${RUN_COMMAND}" ]; then
+  echo "Please state a command to run in '${PACKAGE}'."
+  exit 127
+fi
+
+PACKAGE_INFO="${PACKAGE} in ${WORKDIR} | \$ ${RUN_COMMAND}"
+docker-compose exec monorepo /bin/bash -c "echo -e '[started] ${PACKAGE_INFO}\n${SEPERATOR}' && cd ${WORKDIR} && ${RUN_COMMAND} && echo -e '${SEPERATOR}\n[success] ${PACKAGE_INFO}' || echo -e '${SEPERATOR}\n[failed] ${PACKAGE_INFO}'"

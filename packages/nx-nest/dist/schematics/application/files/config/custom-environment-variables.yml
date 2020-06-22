@@ -1,0 +1,33 @@
+# This file specifies a mapping of environment variables to config properties - keys are config names, while the
+# values are the names of the environment variables that override the associated config.
+#
+# e.g.
+#
+# foo:
+#   bar: MY_CUSTOM_VAR
+#
+# means that if the env var "MY_CUSTOM_VAR" is set, it will override the value of the config "foo.bar" - if it isn't
+# set, the value of the "foo.bar" config will be determined from the .yml files as usual.
+
+# This file uses "json" format for various booleans and integers because boolean and integer unfortunately aren't in
+# the list of available formats - using json, however, causes "0", "false", "1" and "true" to correctly evaluate to
+# falsey/truthy values. It also correctly converts numbers since JSON.parse("123") === 123
+
+port: PORT
+
+logLevel: LOG_LEVEL
+
+misc:
+  lockfile: MAINTENANCE_LOCKFILE
+  lastUpdateFile: LAST_UPDATE_FILE
+  maintenanceNotification: MAINTENANCE_MESSAGE
+
+url:
+  basePath: BASE_URL
+  apiPath: API_BASE_PATH
+
+swagger:
+  useHttps:
+    __name: USE_HTTPS
+    __format: json
+  basePath: API_BASE_PATH
