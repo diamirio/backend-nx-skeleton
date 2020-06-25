@@ -2,7 +2,7 @@ import { JsonObject } from '@angular-devkit/core'
 import { noop, Rule } from '@angular-devkit/schematics'
 import { updateWorkspace } from '@nrwl/workspace'
 
-import { NormalizedSchema } from '../schema'
+import { NormalizedSchema } from '@application/schema'
 
 export function setDefaults (options: NormalizedSchema): Rule {
   return noop()

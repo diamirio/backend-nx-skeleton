@@ -1,11 +1,11 @@
 {
-  "name": "ws/nest",
+  "name": "@webundsoehne/nx-nest",
   "version": "0.1",
-  "extends": ["@nestjs/schematics", "@nrwl/workspace"],
+  "extends": ["@nrwl/workspace"],
   "schematics": {
     "init": {
-      "factory": "./dist/schematics/init/main",
-      "schema": "./dist/schematics/init/schema.json",
+      "factory": "./dist/schematics/application/init",
+      "schema": "./dist/schematics/application/schema.json",
       "description": "Initialize the @webundsoehne/nx-nest plugin.",
       "aliases": ["ng-add"],
       "hidden": true

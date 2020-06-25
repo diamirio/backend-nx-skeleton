@@ -9,12 +9,21 @@ function createApplicationFiles(options) {
             ...workspace_1.names(options.name),
             ...options,
             tmpl: '',
-            offsetFromRoot: workspace_1.offsetFromRoot(options.appProjectRoot)
+            offsetFromRoot: workspace_1.offsetFromRoot(options.root)
         }),
         options.tests === 'none'
-            ? schematics_1.filter((file) => file !== '/src/app/TEST.spec.tsx')
+            ? schematics_1.filter((file) => file !== '*.spec.ts')
             : schematics_1.noop(),
-        schematics_1.move(options.appProjectRoot)
+        !options.components.includes('server')
+            ? schematics_1.filter((file) => !file.match('src/server/'))
+            : schematics_1.noop(),
+        !options.components.includes('bgtask')
+            ? schematics_1.filter((file) => !file.match('src/task/'))
+            : schematics_1.noop(),
+        !options.components.includes('command')
+            ? schematics_1.filter((file) => !file.match('src/command/'))
+            : schematics_1.noop(),
+        schematics_1.move(options.root)
     ]));
 }
 exports.createApplicationFiles = createApplicationFiles;

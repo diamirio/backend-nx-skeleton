@@ -3,14 +3,9 @@
   "id": "NxNestSkeleton",
   "title": "Create a Nest application from skeleton with NX",
   "examples": [{
-      "command": "g app myapp --bgtask",
-      "description": "Initiate background task scheduler."
-    },
-    {
-      "command": "g app myapp --command",
-      "description": "Initiate command module."
-    }
-  ],
+    "command": "g app myapp --bgtask",
+    "description": "Initiate background task scheduler."
+  }],
   "type": "object",
   "properties": {
     "name": {
@@ -22,28 +17,20 @@
       },
       "x-prompt": "What name would you like to use for the application?"
     },
-    "dbController": {
-      "description": "Database controller desired to be used.",
+    "components": {
+      "description": "Components to be embeded.",
       "type": "string",
-      "default": "none",
-      "alias": "d",
-      "x-prompt": {
-        "message": "Which database would you like to use?",
-        "type": "list",
-        "items": [{
-            "value": "toMysql",
-            "label": "MySQL with Typeorm"
-          },
-          {
-            "value": "toPostgresql",
-            "label": "PostgreSQL with Typeorm"
-          },
-          {
-            "value": "none",
-            "label": "None"
-          }
-        ]
-      }
+      "alias": "c"
+    },
+    "server": {
+      "description": "If server component is selected, specifies the type.",
+      "type": "string",
+      "alias": "s"
+    },
+    "database": {
+      "description": "Database that is desired to be used.",
+      "type": "string",
+      "alias": "db"
     },
     "linter": {
       "description": "The tool to use for running lint checks.",

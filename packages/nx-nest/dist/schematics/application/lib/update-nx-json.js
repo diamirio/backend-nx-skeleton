@@ -4,7 +4,7 @@ exports.updateNxJson = void 0;
 const workspace_1 = require("@nrwl/workspace");
 function updateNxJson(options) {
     return workspace_1.updateJsonInTree('nx.json', (json) => {
-        json.projects[options.projectName] = { tags: [] };
+        json.projects[options.name] = { tags: [] };
         return json;
     });
 }

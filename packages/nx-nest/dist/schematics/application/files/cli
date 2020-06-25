@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [[ "$@" = "bash" ]]; then
-  docker-compose exec api "$@"
-else
-  docker-compose exec api yarn run "$@"
-fi

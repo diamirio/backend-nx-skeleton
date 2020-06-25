@@ -19,4 +19,4 @@ function default_1(schema) {
     ]);
 }
 exports.default = default_1;
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=init.js.map

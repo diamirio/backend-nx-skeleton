@@ -2,7 +2,7 @@ import { join, normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
 
-import { NormalizedSchema } from '../schema'
+import { NormalizedSchema } from '@application/schema'
 
 export function addProject (options: NormalizedSchema): Rule {
   return updateWorkspaceInTree((json) => {
@@ -11,17 +11,17 @@ export function addProject (options: NormalizedSchema): Rule {
     architect.build = {
       builder: '@nrwl/web:build',
       options: {
-        outputPath: join(normalize('dist'), options.appProjectRoot),
-        index: join(options.appProjectRoot, 'src/index.html'),
-        main: join(options.appProjectRoot, 'src/main.tsx'),
+        outputPath: join(normalize('dist'), options.root),
+        index: join(options.root, 'src/index.html'),
+        main: join(options.root, 'src/main.tsx'),
         polyfills: join(
-          options.appProjectRoot,
+          options.root,
           'src/polyfills.ts'
         ),
-        tsConfig: join(options.appProjectRoot, 'tsconfig.build.json'),
+        tsConfig: join(options.root, 'tsconfig.build.json'),
         assets: [
-          join(options.appProjectRoot, 'src/favicon.ico'),
-          join(options.appProjectRoot, 'src/assets')
+          join(options.root, 'src/favicon.ico'),
+          join(options.root, 'src/assets')
         ],
         scripts: [],
         webpackConfig: '@nrwl/react/plugins/webpack'
@@ -31,11 +31,11 @@ export function addProject (options: NormalizedSchema): Rule {
           fileReplacements: [
             {
               replace: join(
-                options.appProjectRoot,
+                options.root,
                 'src/environments/environment.ts'
               ),
               with: join(
-                options.appProjectRoot,
+                options.root,
                 'src/environments/environment.prod.ts'
               )
             }
@@ -61,30 +61,30 @@ export function addProject (options: NormalizedSchema): Rule {
     architect.serve = {
       builder: '@nrwl/web:dev-server',
       options: {
-        buildTarget: `${options.projectName}:build`
+        buildTarget: `${options.name}:build`
       },
       configurations: {
         production: {
-          buildTarget: `${options.projectName}:build:production`
+          buildTarget: `${options.name}:build:production`
         }
       }
     }
 
     architect.lint = generateProjectLint(
-      normalize(options.appProjectRoot),
-      join(normalize(options.appProjectRoot), 'tsconfig.app.json'),
+      normalize(options.root),
+      join(normalize(options.root), 'tsconfig.app.json'),
       options.linter
     )
 
-    json.projects[options.projectName] = {
-      root: options.appProjectRoot,
-      sourceRoot: join(options.appProjectRoot, 'src'),
+    json.projects[options.name] = {
+      root: options.root,
+      sourceRoot: join(options.root, 'src'),
       projectType: 'application',
       schematics: {},
       architect
     }
 
-    json.defaultProject = json.defaultProject || options.projectName
+    json.defaultProject = json.defaultProject || options.name
 
     return json
   })

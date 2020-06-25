@@ -7,7 +7,7 @@ import {
 import { addLintFiles, formatFiles } from '@nrwl/workspace'
 
 import { eslintDeps, eslintJson } from '../../utils/lint'
-import init from '../init/main'
+import init from './init'
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
@@ -16,21 +16,22 @@ import { updateNxJson } from './lib/update-nx-json'
 import { Schema } from './schema'
 
 export default function (schema: Schema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    const options = normalizeOptions(host, schema)
+  return async (host: Tree, context: SchematicContext): Promise<Rule> => {
+    const options = await normalizeOptions(host, schema)
+
     return chain([
+      setDefaults(options),
       init({
         ...options,
         skipFormat: true
       }),
-      addLintFiles(options.appProjectRoot, options.linter, {
+      addProject(options),
+      addLintFiles(options.root, options.linter, {
         localConfig: eslintJson,
         extraPackageDeps: eslintDeps
       }),
       createApplicationFiles(options),
       updateNxJson(options),
-      addProject(options),
-      setDefaults(options),
       formatFiles(options)
     ])
   }

@@ -9,14 +9,14 @@ function addProject(options) {
         architect.build = {
             builder: '@nrwl/web:build',
             options: {
-                outputPath: core_1.join(core_1.normalize('dist'), options.appProjectRoot),
-                index: core_1.join(options.appProjectRoot, 'src/index.html'),
-                main: core_1.join(options.appProjectRoot, 'src/main.tsx'),
-                polyfills: core_1.join(options.appProjectRoot, 'src/polyfills.ts'),
-                tsConfig: core_1.join(options.appProjectRoot, 'tsconfig.build.json'),
+                outputPath: core_1.join(core_1.normalize('dist'), options.root),
+                index: core_1.join(options.root, 'src/index.html'),
+                main: core_1.join(options.root, 'src/main.tsx'),
+                polyfills: core_1.join(options.root, 'src/polyfills.ts'),
+                tsConfig: core_1.join(options.root, 'tsconfig.build.json'),
                 assets: [
-                    core_1.join(options.appProjectRoot, 'src/favicon.ico'),
-                    core_1.join(options.appProjectRoot, 'src/assets')
+                    core_1.join(options.root, 'src/favicon.ico'),
+                    core_1.join(options.root, 'src/assets')
                 ],
                 scripts: [],
                 webpackConfig: '@nrwl/react/plugins/webpack'
@@ -25,8 +25,8 @@ function addProject(options) {
                 production: {
                     fileReplacements: [
                         {
-                            replace: core_1.join(options.appProjectRoot, 'src/environments/environment.ts'),
-                            with: core_1.join(options.appProjectRoot, 'src/environments/environment.prod.ts')
+                            replace: core_1.join(options.root, 'src/environments/environment.ts'),
+                            with: core_1.join(options.root, 'src/environments/environment.prod.ts')
                         }
                     ],
                     optimization: true,
@@ -49,23 +49,23 @@ function addProject(options) {
         architect.serve = {
             builder: '@nrwl/web:dev-server',
             options: {
-                buildTarget: `${options.projectName}:build`
+                buildTarget: `${options.name}:build`
             },
             configurations: {
                 production: {
-                    buildTarget: `${options.projectName}:build:production`
+                    buildTarget: `${options.name}:build:production`
                 }
             }
         };
-        architect.lint = workspace_1.generateProjectLint(core_1.normalize(options.appProjectRoot), core_1.join(core_1.normalize(options.appProjectRoot), 'tsconfig.app.json'), options.linter);
-        json.projects[options.projectName] = {
-            root: options.appProjectRoot,
-            sourceRoot: core_1.join(options.appProjectRoot, 'src'),
+        architect.lint = workspace_1.generateProjectLint(core_1.normalize(options.root), core_1.join(core_1.normalize(options.root), 'tsconfig.app.json'), options.linter);
+        json.projects[options.name] = {
+            root: options.root,
+            sourceRoot: core_1.join(options.root, 'src'),
             projectType: 'application',
             schematics: {},
             architect
         };
-        json.defaultProject = json.defaultProject || options.projectName;
+        json.defaultProject = json.defaultProject || options.name;
         return json;
     });
 }

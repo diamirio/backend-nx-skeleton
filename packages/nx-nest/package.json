@@ -42,7 +42,10 @@
     "@angular-devkit/schematics": "~9.1.0",
     "@nestjs/schematics": "^6.3.0",
     "@nrwl/jest": "*",
-    "@nrwl/node": "*"
+    "@nrwl/node": "*",
+    "chalk": "^4.1.0",
+    "enquirer": "^2.3.5",
+    "listr2": "^2.1.9-beta.1"
   },
   "devDependencies": {
     "cpy-cli": "^3.1.1",

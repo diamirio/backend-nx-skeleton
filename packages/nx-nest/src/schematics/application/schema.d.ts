@@ -1,17 +1,32 @@
 import { Path } from '@angular-devkit/core'
 import { Linter } from '@nrwl/workspace'
 
+// this is the one gets inputted from the command line
 export interface Schema {
   name: string
   directory: string
-  dbController: 'none' | 'typeorm' | 'mongoose'
-  tests: 'jest' | 'none'
-  linter: Linter
+  server: string
+  database: string
+  components: string
+  tests: string
+  linter: string
   skipFormat: boolean
 }
 
-export interface NormalizedSchema extends Schema {
-  projectName: string
-  appProjectRoot: Path
+export type AvailableComponents = 'server' | 'command' | 'bgtask'
+export type AvailableServerTypes = 'graphql' | 'restful'
+export type AvailableDBTypes = 'none' | 'typeorm-mysql' | 'typeorm-postgresql' | 'mongoose-mongodb'
+export type AvailableTestsTypes = 'jest' | 'none'
+export type AvailableLinterTypes = Linter
+
+export interface NormalizedSchema {
+  name: string
+  root: Path
+  directory: string
+  components: AvailableComponents[]
+  server: AvailableServerTypes
+  database: AvailableDBTypes
+  tests: AvailableTestsTypes
+  linter: AvailableLinterTypes
   skipFormat: boolean
 }

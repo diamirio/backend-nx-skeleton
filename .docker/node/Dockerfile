@@ -1,4 +1,4 @@
-FROM node:13-alpine
+FROM node:14-alpine
 
 # Package Start Command for the API
 ENV PACKAGE_START_OVERRIDE dev:start

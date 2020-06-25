@@ -5,7 +5,9 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["*"]
+      "@src/*": ["*"],
+      "@application/*": ["schematics/application/*"],
+      "@init/*": ["schematics/init/*"]
     }
   },
   "include": ["src"],
