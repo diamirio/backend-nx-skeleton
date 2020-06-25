@@ -5,6 +5,7 @@ import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { Listr } from 'listr2'
 
 import { parseArguments } from './normalize-options.helper'
+import { ConvertToPromptType } from './normalize-options.interface'
 import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, NormalizedSchema, Schema } from '@application/schema'
 
 export async function normalizeOptions (
@@ -56,7 +57,7 @@ export async function normalizeOptions (
     // select server functionality
     {
       task: async (ctx, task): Promise<void> => {
-        const choices = [
+        const choices: ConvertToPromptType<AvailableComponents> = [
           { name: 'server', message: 'Server' },
           { name: 'bgtask', message: 'Scheduler' },
           { name: 'command', message: 'Command' }
@@ -69,7 +70,7 @@ export async function normalizeOptions (
           ctx.components = await task.prompt<AvailableComponents[]>({
             type: 'MultiSelect',
             message: 'Please select which components you want to include.',
-            choices
+            choices: choices as any
           })
 
         } else {
@@ -91,7 +92,7 @@ export async function normalizeOptions (
       skip: (ctx): boolean => !ctx.components.includes('server'),
       task: async (ctx, task): Promise<void> => {
         // there can be two selections of API servers here
-        const choices = [
+        const choices: ConvertToPromptType<AvailableServerTypes> = [
           { name: 'restful', message: 'RESTFUL' },
           { name: 'graphql', message: 'GraphQL' }
         ]
@@ -100,7 +101,7 @@ export async function normalizeOptions (
           ctx.server = await task.prompt<AvailableServerTypes>({
             type: 'Select',
             message: 'Please select the API server type.',
-            choices
+            choices: choices as any
           })
         } else {
           // when options are passed via cli
@@ -120,7 +121,7 @@ export async function normalizeOptions (
     {
       skip: (ctx): boolean => !ctx.components.includes('server'),
       task: async (ctx, task): Promise<void> => {
-        const choices = [
+        const choices: ConvertToPromptType<AvailableDBTypes> = [
           { name: 'none', message: 'None' },
           { name: 'typeorm-mysql', message: 'Typeorm - MySQL' },
           { name: 'typeorm-postgresql', message: 'Typeorm - PostgreSQL' },
@@ -132,7 +133,7 @@ export async function normalizeOptions (
           ctx.database = await task.prompt<AvailableDBTypes>({
             type: 'Select',
             message: 'Please select the database type.',
-            choices
+            choices: choices as any
           })
         } else {
           // when options are passed via cli

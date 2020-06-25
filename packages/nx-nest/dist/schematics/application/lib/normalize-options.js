@@ -50,7 +50,7 @@ async function normalizeOptions(host, options) {
                     ctx.components = await task.prompt({
                         type: 'MultiSelect',
                         message: 'Please select which components you want to include.',
-                        choices
+                        choices: choices
                     });
                 }
                 else {
@@ -74,7 +74,7 @@ async function normalizeOptions(host, options) {
                     ctx.server = await task.prompt({
                         type: 'Select',
                         message: 'Please select the API server type.',
-                        choices
+                        choices: choices
                     });
                 }
                 else {
@@ -100,7 +100,7 @@ async function normalizeOptions(host, options) {
                     ctx.database = await task.prompt({
                         type: 'Select',
                         message: 'Please select the database type.',
-                        choices
+                        choices: choices
                     });
                 }
                 else {
