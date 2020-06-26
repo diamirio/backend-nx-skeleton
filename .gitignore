@@ -1,16 +1,16 @@
 # Compiled Output
-/node_modules
-/dist
-tsconfig*.tsbuildinfo*
+**/node_modules
+**/dist
+**/tsconfig*.tsbuildinfo*
 
 # Docker stuff
 /volumes
 
 # Logs
 logs
-*.log
-*-debug.log*
-*-error.log*
+/**/*.log
+/**/*-debug.log*
+/**/*-error.log*
 /.nyc_output
 
 # OS
@@ -38,4 +38,4 @@ tsconfig.tsbuildinfo
 # Node Package Manager
 .npm
 .npmrc
-package-lock.json
+**/package-lock.json
