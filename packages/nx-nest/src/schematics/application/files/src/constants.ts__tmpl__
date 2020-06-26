@@ -1,0 +1,13 @@
+export enum service {
+  <% if (components.includes('server')) { %>server = 'server',<% } %>
+  <% if (components.includes('bgtask')) { %>task = 'bgtask',<% } %>
+  <% if (components.includes('command')) { %>command = 'cli'<% } %>
+}
+
+export enum logType {
+  error = 'error',
+  log = 'info',
+  warn = 'warn',
+  debug = 'debug',
+  verbose = 'verbose'
+}

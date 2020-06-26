@@ -10,13 +10,15 @@ import { Command, Positional } from 'nestjs-command'
 export class CommandService {
   private logger: Logger = new Logger(this.constructor.name)
 
-  @Command({ command: 'hello <name>', describe: 'Prints hello <name>', autoExit: true })
+  @Command({
+    command: 'hello <name>', describe: 'Prints hello <name>', autoExit: true
+  })
   async helloWorld (
-    @Positional({
-      name: 'name',
-      describe: 'Name to greet',
-      type: 'string'
-    })
+  @Positional({
+    name: 'name',
+    describe: 'Name to greet',
+    type: 'string'
+  })
     name: string
   ) {
     this.logger.log(`Hello ${name}`)

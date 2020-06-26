@@ -7,7 +7,7 @@ function addProject(options) {
     return workspace_1.updateWorkspaceInTree((json) => {
         const architect = {};
         architect.build = {
-            builder: '@nrwl/web:build',
+            builder: '@webundsoehne/nx-tsc:build',
             options: {
                 outputPath: core_1.join(core_1.normalize('dist'), options.root),
                 index: core_1.join(options.root, 'src/index.html'),
@@ -47,14 +47,9 @@ function addProject(options) {
             }
         };
         architect.serve = {
-            builder: '@nrwl/web:dev-server',
+            builder: '@webundsoehne/nx-tsc:serve',
             options: {
-                buildTarget: `${options.name}:build`
-            },
-            configurations: {
-                production: {
-                    buildTarget: `${options.name}:build:production`
-                }
+                entry: 'src/main.ts'
             }
         };
         architect.lint = workspace_1.generateProjectLint(core_1.normalize(options.root), core_1.join(core_1.normalize(options.root), 'tsconfig.app.json'), options.linter);

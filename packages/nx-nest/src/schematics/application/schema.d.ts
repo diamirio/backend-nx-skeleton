@@ -13,7 +13,7 @@ export interface Schema {
   skipFormat: boolean
 }
 
-export type AvailableComponents = 'server' | 'command' | 'bgtask'
+export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice'
 export type AvailableServerTypes = 'graphql' | 'restful'
 export type AvailableDBTypes = 'none' | 'typeorm-mysql' | 'typeorm-postgresql' | 'mongoose-mongodb'
 export type AvailableTestsTypes = 'jest' | 'none'

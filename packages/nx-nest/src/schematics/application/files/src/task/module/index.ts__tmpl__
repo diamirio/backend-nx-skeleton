@@ -1,0 +1,2 @@
+export * from './default/default.module'
+<% if (database.includes('typeorm')) { %>export * from './migration/migration.module'<% } %>

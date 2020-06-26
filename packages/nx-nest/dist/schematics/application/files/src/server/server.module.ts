@@ -20,7 +20,7 @@ import { ServerService } from './server.service'
 
 export function createServerModule () {
   @Module({
-    controllers: [ServerController],
+    controllers: [ ServerController ],
     providers: [
       ServerService,
       ConfigService,
@@ -49,7 +49,7 @@ export function createServerModule () {
         useClass: RequestProfilerInterceptor
       }
     ],
-    imports: [InternalModule, MaintenanceModule]
+    imports: [ InternalModule, MaintenanceModule ]
   })
   class ServerModule implements NestModule {
     async configure (consumer: MiddlewareConsumer): Promise<any> {

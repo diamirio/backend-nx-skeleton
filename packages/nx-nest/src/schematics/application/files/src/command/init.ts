@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core'
-import { CommandModule, CommandService } from 'nestjs-command'
 import { LoggerService } from '@webundsoehne/nestjs-util'
+import { CommandModule, CommandService } from 'nestjs-command'
 
 import { AppCommandModule } from './command.module'
 

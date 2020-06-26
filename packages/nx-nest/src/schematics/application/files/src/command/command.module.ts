@@ -8,7 +8,7 @@ import { CommandService } from './command.service'
  */
 
 @Module({
-  providers: [CommandService],
-  imports: [CommandModule]
+  providers: [ CommandService ],
+  imports: [ CommandModule ]
 })
 export class AppCommandModule {}

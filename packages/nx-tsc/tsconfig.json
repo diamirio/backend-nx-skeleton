@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "@src/*": ["*"],
+      "@application/*": ["schematics/application/*"],
+      "@init/*": ["schematics/init/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/files"]
+}

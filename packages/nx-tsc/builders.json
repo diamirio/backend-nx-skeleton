@@ -1,0 +1,16 @@
+{
+  "$schema": "@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "serve": {
+      "implementation": "./dist/builders/serve/main",
+      "schema": "./dist/builders/serve/schema.json",
+      "description": "@webundsoehne/nx-nest:serve using tsc-watch"
+    },
+
+    "build": {
+      "implementation": "./dist/builders/build/main",
+      "schema": "./dist/builders/build/schema.json",
+      "description": "@webundsoehne/nx-nest:build builds the project"
+    }
+  }
+}

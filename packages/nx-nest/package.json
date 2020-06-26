@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Nest Plugin for Nx",
   "repository": "<<---REPOSITORYHERE--->>",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "Cenk Kilic",
   "license": "MIT",
   "schematics": "./collection.json",
@@ -20,8 +20,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
@@ -43,6 +42,7 @@
     "@nestjs/schematics": "^6.3.0",
     "@nrwl/jest": "*",
     "@nrwl/node": "*",
+    "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "enquirer": "^2.3.5",
     "listr2": "^2.1.9-beta.1"

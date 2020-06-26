@@ -60,7 +60,8 @@ export async function normalizeOptions (
         const choices: ConvertToPromptType<AvailableComponents> = [
           { name: 'server', message: 'Server' },
           { name: 'bgtask', message: 'Scheduler' },
-          { name: 'command', message: 'Command' }
+          { name: 'command', message: 'Command' },
+          { name: 'microservice', message: 'Microservice' }
         ]
 
         // select the base components
@@ -70,7 +71,14 @@ export async function normalizeOptions (
           ctx.components = await task.prompt<AvailableComponents[]>({
             type: 'MultiSelect',
             message: 'Please select which components you want to include.',
-            choices: choices as any
+            choices: choices as any,
+            validate: (val) => {
+              if (val?.length > 0) {
+                return true
+              } else {
+                return 'At least one component must be included.'
+              }
+            }
           })
 
         } else {

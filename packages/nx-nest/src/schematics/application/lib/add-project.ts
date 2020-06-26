@@ -9,7 +9,7 @@ export function addProject (options: NormalizedSchema): Rule {
     const architect: { [key: string]: any } = {}
 
     architect.build = {
-      builder: '@nrwl/web:build',
+      builder: '@webundsoehne/nx-tsc:build',
       options: {
         outputPath: join(normalize('dist'), options.root),
         index: join(options.root, 'src/index.html'),
@@ -59,14 +59,9 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     architect.serve = {
-      builder: '@nrwl/web:dev-server',
+      builder: '@webundsoehne/nx-tsc:serve',
       options: {
-        buildTarget: `${options.name}:build`
-      },
-      configurations: {
-        production: {
-          buildTarget: `${options.name}:build:production`
-        }
+        entry: 'src/main.ts'
       }
     }
 

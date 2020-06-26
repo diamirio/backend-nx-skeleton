@@ -44,13 +44,22 @@ async function normalizeOptions(host, options) {
                 const choices = [
                     { name: 'server', message: 'Server' },
                     { name: 'bgtask', message: 'Scheduler' },
-                    { name: 'command', message: 'Command' }
+                    { name: 'command', message: 'Command' },
+                    { name: 'microservice', message: 'Microservice' }
                 ];
                 if (!options.components) {
                     ctx.components = await task.prompt({
                         type: 'MultiSelect',
                         message: 'Please select which components you want to include.',
-                        choices: choices
+                        choices: choices,
+                        validate: (val) => {
+                            if ((val === null || val === void 0 ? void 0 : val.length) > 0) {
+                                return true;
+                            }
+                            else {
+                                return 'At least one component must be included.';
+                            }
+                        }
                     });
                 }
                 else {
