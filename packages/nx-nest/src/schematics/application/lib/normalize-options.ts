@@ -127,7 +127,7 @@ export async function normalizeOptions (
 
     // database options
     {
-      skip: (ctx): boolean => !ctx.components.includes('server'),
+      skip: (ctx): boolean => !ctx.components.includes('server') && !ctx.components.includes('bgtask'),
       task: async (ctx, task): Promise<void> => {
         const choices: ConvertToPromptType<AvailableDBTypes> = [
           { name: 'none', message: 'None' },
@@ -137,7 +137,7 @@ export async function normalizeOptions (
         ]
 
         // there can be two selections of API servers here
-        if (!options.database) {
+        if (!options?.database) {
           ctx.database = await task.prompt<AvailableDBTypes>({
             type: 'Select',
             message: 'Please select the database type.',

@@ -8,7 +8,7 @@ import { switchMap } from 'rxjs/operators'
 import { ServeBuilderSchema } from './schema'
 
 function startTypescriptNode (options: ServeBuilderSchema, context: BuilderContext, root: string, callback): ChildProcess {
-  const { entry, tsConfig, debounce, interval, debug, cwd } = options
+  const { entry, tsConfig, debounce, interval, debug, cwd, environment } = options
 
   const args = [
     '-r',
@@ -43,6 +43,7 @@ function startTypescriptNode (options: ServeBuilderSchema, context: BuilderConte
   const spawnOptions: SpawnOptions = {
     env: {
       NODE_ENV: 'develop',
+      ...environment,
       ...process.env
     }
   }
@@ -51,26 +52,26 @@ function startTypescriptNode (options: ServeBuilderSchema, context: BuilderConte
     spawnOptions.cwd = cwd
   }
 
-  const tsNodeDev = spawn('ts-node-dev', args, spawnOptions)
+  const instance = spawn('ts-node-dev', args, spawnOptions)
 
-  tsNodeDev.stdout.on('data', (data) => {
+  instance.stdout.on('data', (data) => {
     logProject('info', context, data)
   })
 
-  tsNodeDev.stderr.on('data', (data) => {
+  instance.stderr.on('data', (data) => {
     logProject('error', context, data)
   })
 
-  tsNodeDev.on('exit', (code, signal) => {
-    context.logger.info(`ts-node-dev process ended with code ${code} ${signal ? `and signal ${signal}` : 'no signal'}`)
+  instance.on('exit', (code, signal) => {
+    logProject('info', context, `ts-node-dev process ended with code ${code} ${signal ? `and signal ${signal}` : 'no signal'}`)
     callback()
   })
 
-  tsNodeDev.on('error', (error) => {
+  instance.on('error', (error) => {
     callback(error)
   })
 
-  return tsNodeDev
+  return instance
 }
 
 export function runBuilder (
@@ -85,7 +86,7 @@ export function runBuilder (
         const { root } = workspace.projects.get(context.target.project)
 
         return new Observable<BuilderOutput>((observer) => {
-          const tsNodeDevProcess = startTypescriptNode(options, context, root, (error) => {
+          const process = startTypescriptNode(options, context, root, (error) => {
             if (error) {
               observer.error(error)
             } else {
@@ -93,14 +94,14 @@ export function runBuilder (
             }
           })
 
-          if (tsNodeDevProcess.pid == null) {
+          if (process.pid == null) {
             observer.next({ success: false })
           } else {
             observer.next({ success: true })
           }
 
           return (): void => {
-            tsNodeDevProcess.kill()
+            process.kill()
           }
         })
       })

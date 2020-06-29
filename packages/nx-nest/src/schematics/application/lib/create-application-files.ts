@@ -16,7 +16,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
   return mergeWith(
     apply(url('./files'), [
       // filter out typeorm specific actions
-      !options.database.includes('typeorm')
+      !options.database?.includes('typeorm')
         ? filter((file) => !file.match('__typeorm__'))
         : noop(),
 
@@ -24,10 +24,10 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
       template({
         ...names(options.name),
         ...options,
+        offsetFromRoot: offsetFromRoot(options.root),
         // replace __*__ from files
         tmpl: '',
-        typeorm: '',
-        offsetFromRoot: offsetFromRoot(options.root)
+        typeorm: ''
       }),
 
       // tests configuration

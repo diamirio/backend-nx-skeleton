@@ -10,7 +10,7 @@ export function logProject (level: keyof Omit<LoggerApi, 'createChild' | 'log'>,
 
   lines.forEach((line) => {
     if (line !== '') {
-      context.logger.log(level, `[${chalk.green.bold(`${project}] `)}${line}`)
+      context.logger.log(level, chalk.green.bold(`[${project}] `) + line)
     }
   })
 }

@@ -18,4 +18,6 @@ export interface ServeBuilderSchema extends JsonObject {
 
   /** process CWD */
   cwd?: string
+
+  environment?: Record<string, string>
 }

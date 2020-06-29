@@ -1,17 +1,12 @@
 {
   "compilerOptions": {
-    "paths": {
-      "*": [
-        "types/*"
-      ]
-    },
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2018",
     "declaration": false,
     "sourceMap": true,
     "removeComments": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
@@ -20,7 +15,6 @@
     "baseUrl": ".",
     "strictNullChecks": true
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", "migrations", "seeds", "test"],
+  "exclude": ["node_modules"]
 }

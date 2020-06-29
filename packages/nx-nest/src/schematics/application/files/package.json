@@ -4,33 +4,17 @@
   "description": "Tailored NestJS application skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
+  "repository": "git@gitlab.tailored-apps.com:backend/nestjs-api-skeleton.git",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/src/main.js",
     "command": "CLI_PATH=./dist/src/main.js NODE_SERVICE=cli npx nestjs-command $command",
-    "dev:start": "NODE_SERVICE=${NODE_SERVICE:-'server'} eval ${PACKAGE_START_OVERRIDE:-\"ts-node-dev --no-notify --inspect=0.0.0.0:${DEBUG_PORT:-'9229'} -r tsconfig-paths/register src/main.ts\"}",
-    "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command $command",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
-    "lint:fix": "npm run lint -- --fix",
-    "prettier": "lint-staged",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch --passWithNoTests",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:start": "docker-compose up -d --force-recreate",
-    "connect:api": "docker-compose exec api bash"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier"
-    }
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "engines": {
     "node": ">=10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.tailored-apps.com:backend/nestjs-api-skeleton.git"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.13",
@@ -73,25 +57,5 @@
     "tsconfig-paths": "^3.9.0",
     "tslint": "^6.1.2",
     "typescript": "^3.9.2"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": "\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  },
-  "lint-staged": {
-    "*.{ts,js}": [
-      "prettier --write",
-      "npm run lint:fix"
-    ]
   }
 }

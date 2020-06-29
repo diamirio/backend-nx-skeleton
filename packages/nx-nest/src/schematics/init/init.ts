@@ -4,10 +4,12 @@ import {
   addPackageWithInit,
   setDefaultCollection,
   updateWorkspace,
-  addDepsToPackageJson
+  addDepsToPackageJson,
+  updatePackageJsonDependencies
 } from '@nrwl/workspace'
 
 import { Schema, NormalizedSchema } from '@application/schema'
+import { baseDeps, restServerDeps } from '@src/utils/versions'
 
 function setDefault (): Rule {
   const updateThisWorkspace = updateWorkspace((workspace) => {
@@ -27,15 +29,21 @@ function jsonIdentity (x: any): JsonObject {
 export default function (schema: NormalizedSchema): Rule {
   return chain([
     setDefault(),
-    // addPackageWithInit('@nestjs/schematics'),
+    // addPackageWithInit('@nrwl/linter'),
     // schema.tests === 'jest'
     // ? addPackageWithInit('@nrwl/jest')
     // : noop(),
+    // base dependencies
     addDepsToPackageJson(
-      {
-      },
-      {
-      }
-    )
+      baseDeps.prod,
+      baseDeps.dev
+    ),
+    // server specific dependencies
+    schema.components.includes('server') && schema.server === 'restful' ?
+      addDepsToPackageJson(
+        restServerDeps.prod,
+        restServerDeps.dev
+      )
+      : noop()
   ])
 }

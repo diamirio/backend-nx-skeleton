@@ -1,9 +1,10 @@
 import { InternalServerErrorException } from '@nestjs/common'
 
-import { createApplication as createCommandApplication } from './command/init'
 import { service } from './constants'
-import { createApplication as createServerApplication } from './server/init'
-import { createApplication as createTaskApplication } from './task/init'
+
+<% if (components.includes('server')) { %>import { createApplication as createServerApplication } from './server/init'<% } %>
+<% if (components.includes('bgtask')) { %>import { createApplication as createTaskApplication } from './task/init'<% } %>
+<% if (components.includes('command')) { %>import { createApplication as createCommandApplication } from './command/init'<% } %>
 
 function bootstrap (): Promise<void> {
   switch (String(process.env.NODE_SERVICE).toLowerCase()) {
@@ -15,7 +16,7 @@ function bootstrap (): Promise<void> {
   case service.task:
     return createTaskApplication()
   <% } %>
-  <% if (components.includes('server')) { %>
+  <% if (components.includes('command')) { %>
   case service.command:
     return createCommandApplication()
   <% } %>

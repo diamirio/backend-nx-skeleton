@@ -5,7 +5,7 @@ import { NormalizedSchema } from '@application/schema'
 
 export function updateNxJson (options: NormalizedSchema): Rule {
   return updateJsonInTree<NxJson>('nx.json', (json) => {
-    json.projects[options.name] = { tags: [] }
+    json.projects[options.name] = { tags: [], implicitDependencies: [] }
     return json
   })
 }
