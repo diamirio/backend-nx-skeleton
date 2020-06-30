@@ -2,11 +2,12 @@ import { join, normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
 
-import { NormalizedSchema } from '@application/schema'
+import { ProjectArchitect } from './add-project.interface'
+import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function addProject (options: NormalizedSchema): Rule {
   return updateWorkspaceInTree((json) => {
-    const architect: { [key: string]: any } = {}
+    const architect: ProjectArchitect = {} as ProjectArchitect
 
     architect.build = {
       builder: '@webundsoehne/nx-tsc:build',
@@ -14,7 +15,8 @@ export function addProject (options: NormalizedSchema): Rule {
         outputPath: `dist/${options.directory}`,
         tsConfig: `${options.root}/tsconfig.build.json`,
         packageJson: `${options.root}/package.json`,
-        main: `${options.root}/src/main.ts`
+        main: `${options.root}/src/main.ts`,
+        assets: [ `${options.root}/config/` ]
       }
     }
 
@@ -44,6 +46,15 @@ export function addProject (options: NormalizedSchema): Rule {
             NODE_SERVICE: 'bgtask'
           }
         }
+      }
+    }
+
+    architect.test = {
+      builder: '@nrwl/jest:jest',
+      options: {
+        jestConfig: join(normalize(options.root), 'test/jest.config.js'),
+        tsConfig: join(normalize(options.root), 'test/tsconfig.json'),
+        passWithNoTests: true
       }
     }
 

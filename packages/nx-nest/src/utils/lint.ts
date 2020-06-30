@@ -3,31 +3,45 @@ import { eslintPluginImportVersion } from './versions'
 export const eslintDeps = {
   dependencies: {},
   devDependencies: {
+    '@cenk1cenk2/eslint-config': '*',
+    '@typescript-eslint/eslint-plugin': '*',
     'eslint-plugin-import': eslintPluginImportVersion
   }
 }
 
-/**
- * FIX THIS LATER
- */
 export const eslintJson = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    jest: true,
-    node: true
-  },
-  settings: {
-
-  },
-  plugins: [ 'import' ],
-
-  /**
-   * Inspired by configuration originally found in create-react-app
-   * https://github.com/facebook/create-react-app
-   */
+  extends: [
+  ],
   rules: {
-
+    'import/order': [
+      'error',
+      {
+        pathGroups: [
+          {
+            pattern: '@src/**',
+            group: 'index'
+          }
+        ],
+        pathGroupsExcludedImportTypes: [
+          'builtin'
+        ],
+        groups: [
+          [
+            'builtin',
+            'external'
+          ],
+          [
+            'index',
+            'parent',
+            'sibling'
+          ]
+        ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true
+        }
+      }
+    ]
   }
 }

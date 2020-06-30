@@ -42,9 +42,13 @@
     "@nestjs/schematics": "^6.3.0",
     "@nrwl/jest": "*",
     "@nrwl/node": "*",
+    "@types/deepmerge": "^2.2.0",
     "@webundsoehne/nx-tools": "*",
+    "@webundsoehne/nx-tsc": "*",
     "chalk": "^4.1.0",
+    "deepmerge": "^4.2.2",
     "enquirer": "^2.3.5",
+    "execa": "^4.0.2",
     "listr2": "^2.1.9-beta.1"
   },
   "devDependencies": {

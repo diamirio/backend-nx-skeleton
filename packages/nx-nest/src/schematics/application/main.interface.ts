@@ -4,6 +4,7 @@ import { Linter } from '@nrwl/workspace'
 // this is the one gets inputted from the command line
 export interface Schema {
   name: string
+  packageName: string
   directory: string
   server: string
   database: string
@@ -21,6 +22,7 @@ export type AvailableLinterTypes = Linter
 
 export interface NormalizedSchema {
   name: string
+  packageName: string
   root: Path
   directory: string
   components: AvailableComponents[]

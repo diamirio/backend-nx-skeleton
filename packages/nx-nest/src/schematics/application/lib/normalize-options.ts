@@ -1,12 +1,12 @@
 import { normalize } from '@angular-devkit/core'
 import { Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { toFileName, readNxJson } from '@nrwl/workspace'
+import { appsDir, readJsonInTree } from '@nrwl/workspace/src/utils/ast-utils'
 import { Listr } from 'listr2'
 
 import { parseArguments } from './normalize-options.helper'
 import { ConvertToPromptType } from './normalize-options.interface'
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, NormalizedSchema, Schema } from '@application/schema'
+import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
 
 export async function normalizeOptions (
   host: Tree,
@@ -41,6 +41,16 @@ export async function normalizeOptions (
         ctx.name = ctx.directory.replace(new RegExp('/', 'g'), '-')
 
         task.title = `Project name is set as "${ctx.name}".`
+      }
+    },
+
+    // normalize package json scope
+    {
+      title: 'Normalizing package.json project name.',
+      task: (ctx, task): void => {
+        ctx.packageName = `@${readNxJson().npmScope}/${ctx.name}`
+
+        task.title = `Project package name set as "${ctx.packageName}".`
       }
     },
 

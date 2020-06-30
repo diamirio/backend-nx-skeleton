@@ -2,6 +2,9 @@
   "name": "root",
   "private": true,
   "repository": "<<---REPOSITORYHERE--->>",
+  "description": "Tailored NestJS NX Based Application Skeleton",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
   "scripts": {
     "ls": "lerna la",
     "bootstrap": "lerna bootstrap ${ARGS} --scope ${PACKAGE:-''} --",

@@ -26,7 +26,7 @@ import { Observable, of, Subscriber } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 import treeKill from 'tree-kill'
 
-import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions } from './schema.d'
+import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions } from './main.interface'
 
 export default createBuilder(runNodePackageBuilder)
 
@@ -185,9 +185,7 @@ function compileTypeScriptFiles (
         tscProcess = fork(tscPath, args, { stdio: [ 0, 1, 2, 'ipc' ] })
         subscriber.next({ success: true })
       } else {
-        logProject('info', context,
-          'Transpiling TypeScript files...'
-        )
+        logProject('info', context, 'Transpiling TypeScript files...')
         tscProcess = fork(tscPath, args, { stdio: [ 0, 1, 2, 'ipc' ] })
         tscProcess.on('exit', (code) => {
           if (code === 0) {
@@ -252,7 +250,11 @@ function copyAssetFiles (
   context: BuilderContext
 ): Promise<BuilderOutput> {
   logProject('info', context, 'Copying asset files...')
-  return Promise.all(options.files.map((file) => copy(file.input, file.output)))
+  return Promise.all(options.files.map((file) => {
+    logProject('debug', context, `Copying "${file.input}" to ${file.output}`)
+
+    return copy(file.input, file.output)
+  }))
     .then(() => {
       logProject('info', context, 'Done copying asset files.')
       return {

@@ -5,7 +5,7 @@ import { spawn, SpawnOptions, ChildProcess } from 'child_process'
 import { from, Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
-import { ServeBuilderSchema } from './schema'
+import { ServeBuilderSchema } from './main.interface'
 
 function startTypescriptNode (options: ServeBuilderSchema, context: BuilderContext, root: string, callback): ChildProcess {
   const { entry, tsConfig, debounce, interval, debug, cwd, environment } = options

@@ -1,17 +1,20 @@
+import { FastifyAdapter } from '@nestjs/platform-fastify'
 import { Test, TestingModule } from '@nestjs/testing'
-import * as request from 'supertest'
 
-import { ServerModule } from '../src/server/server.module'
+import { createServerModule } from '../src/server/server.module'
 
 describe('ServerController (e2e)', () => {
   let app
 
-  beforeEach(async () => {
+  beforeAll(async () => {
+    const ServerModule = createServerModule()
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [ServerModule]
+      imports: [
+        ServerModule
+      ]
     }).compile()
 
-    app = moduleFixture.createNestApplication()
+    app = moduleFixture.createNestApplication(new FastifyAdapter(), { logger: [ 'error' ] })
     await app.init()
   })
 
@@ -19,10 +22,14 @@ describe('ServerController (e2e)', () => {
     await app.close()
   })
 
+  it('should be defined', async () => {
+    expect(app).toBeDefined()
+  })
+
   it('/ (GET)', async () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!')
+    return expect(app.inject({ url: '/', method: 'GET' }))
+      .resolves
+      .toBe('Hello World')
+
   })
 })

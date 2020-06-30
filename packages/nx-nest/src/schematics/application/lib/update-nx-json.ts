@@ -1,7 +1,7 @@
 import { Rule } from '@angular-devkit/schematics'
 import { NxJson, updateJsonInTree } from '@nrwl/workspace'
 
-import { NormalizedSchema } from '@application/schema'
+import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function updateNxJson (options: NormalizedSchema): Rule {
   return updateJsonInTree<NxJson>('nx.json', (json) => {

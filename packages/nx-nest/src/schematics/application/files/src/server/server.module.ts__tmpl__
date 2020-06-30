@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+<% if (database.includes('typeorm')) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
 import {
   ConfigService,
   BadRequestExceptionFilter,
@@ -17,8 +18,9 @@ import {
 
 import { ServerController } from './server.controller'
 import { ServerService } from './server.service'
+<% if (database.includes('typeorm')) { %>import { getDatabaseOptions } from '../util/database'<% } %>
 
-export function createServerModule () {
+export function createServerModule (<% if (database !== 'none') { %>mock = false<% } %>): new() => NestModule {
   @Module({
     controllers: [ ServerController ],
     providers: [
@@ -49,7 +51,7 @@ export function createServerModule () {
         useClass: RequestProfilerInterceptor
       }
     ],
-    imports: [ InternalModule, MaintenanceModule ]
+    imports: [ <% if (database.includes('typeorm')) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)), <% } %>InternalModule, MaintenanceModule ]
   })
   class ServerModule implements NestModule {
     async configure (consumer: MiddlewareConsumer): Promise<any> {

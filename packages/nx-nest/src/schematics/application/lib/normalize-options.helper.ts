@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
-import { AvailableComponents } from '@application/schema'
+import { AvailableComponents } from '@src/schematics/application/main.interface'
 
 export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: {name: string}[], options?: {required?: boolean, single?: boolean}): T {
   const arg = args.split(',')
@@ -23,12 +23,12 @@ export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: stri
 
   // check empty after parsed
   if (options.required && parsedArgs.length === 0) {
-    throw new Error(`Arguments does not match the valid argument list of: ${parsedValidArgs}`)
+    throw new Error(`Arguments does not match the valid argument list of: "${parsedValidArgs}"`)
   }
 
   // check if single argument is required
   if (options.single && parsedArgs.length !== 1) {
-    throw new Error(`Only select one of the given valid argument list of: ${parsedValidArgs}`)
+    throw new Error(`Only select one of the given valid argument list of: "${parsedValidArgs}"`)
   }
 
   return parsedArgs as unknown as T

@@ -4,14 +4,17 @@ import {
   SchematicContext,
   Tree
 } from '@angular-devkit/schematics'
-import { addLintFiles, formatFiles } from '@nrwl/workspace'
+import { addLintFiles, getWorkspacePath, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
+import execa from 'execa'
+import { join } from 'path'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateNxJson } from './lib/update-nx-json'
-import { Schema } from './schema'
+import { updateTsconfigPaths } from './lib/update-tsconfig-json'
+import { Schema } from './main.interface'
 import init from '@init/init'
 
 export default function (schema: Schema): Rule {
@@ -25,13 +28,13 @@ export default function (schema: Schema): Rule {
         skipFormat: true
       }),
       addProject(options),
-      addLintFiles(options.root, options.linter, {
+      addLintFiles(options.root, Linter.EsLint, {
         localConfig: eslintJson,
         extraPackageDeps: eslintDeps
       }),
       createApplicationFiles(options),
       updateNxJson(options),
-      formatFiles(options)
+      updateTsconfigPaths(options)
     ])
   }
 }

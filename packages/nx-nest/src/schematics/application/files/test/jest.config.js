@@ -22,7 +22,7 @@ module.exports = {
   moduleFileExtensions: [ 'js', 'json', 'jsx', 'ts', 'tsx', 'node' ],
   rootDir: '../',
   testEnvironment: 'node',
-  testRegex: '(/tests/.*|/src/.*).(e2e-)?spec.tsx?$',
+  testRegex: '(/test/.*|/src/.*).(e2e-)?spec.tsx?$',
   transform: {
     '^.+\\.(t)s$': 'ts-jest'
   },

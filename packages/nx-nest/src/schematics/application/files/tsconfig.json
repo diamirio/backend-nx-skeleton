@@ -1,19 +1,9 @@
 {
+  "extends": "../../tsconfig",
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es2018",
-    "declaration": false,
-    "sourceMap": true,
-    "removeComments": true,
-    "noUnusedLocals": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "incremental": true,
     "outDir": "./dist",
     "rootDir": ".",
-    "baseUrl": ".",
-    "strictNullChecks": true
+    "baseUrl": "."
   },
   "include": ["src", "migrations", "seeds", "test"],
   "exclude": ["node_modules"]

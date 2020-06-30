@@ -4,6 +4,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "baseUrl": "src",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "incremental": false
   }
 }

@@ -10,16 +10,14 @@ function bootstrap (): Promise<void> {
   switch (String(process.env.NODE_SERVICE).toLowerCase()) {
   <% if (components.includes('server')) { %>
   case service.server:
-    return createServerApplication()
-  <% } %>
+    return createServerApplication()<% } %>
+
   <% if (components.includes('bgtask')) { %>
   case service.task:
-    return createTaskApplication()
-  <% } %>
+    return createTaskApplication()<% } %>
   <% if (components.includes('command')) { %>
   case service.command:
-    return createCommandApplication()
-  <% } %>
+    return createCommandApplication()<% } %>
   default:
     throw new InternalServerErrorException('NODE_SERVICE environment variable is not set.')
   }

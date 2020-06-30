@@ -10,7 +10,7 @@ import {
 } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 
-import { NormalizedSchema } from '@application/schema'
+import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   return mergeWith(
