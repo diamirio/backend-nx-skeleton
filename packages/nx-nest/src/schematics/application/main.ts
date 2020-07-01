@@ -4,14 +4,14 @@ import {
   SchematicContext,
   Tree
 } from '@angular-devkit/schematics'
-import { addLintFiles, getWorkspacePath, Linter } from '@nrwl/workspace'
+import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import execa from 'execa'
-import { join } from 'path'
+import { formatFiles } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
+import { updateBrownie } from './lib/update-brownie-integration'
 import { updateNxJson } from './lib/update-nx-json'
 import { updateTsconfigPaths } from './lib/update-tsconfig-json'
 import { Schema } from './main.interface'
@@ -34,7 +34,9 @@ export default function (schema: Schema): Rule {
       }),
       createApplicationFiles(options),
       updateNxJson(options),
-      updateTsconfigPaths(options)
+      updateTsconfigPaths(options),
+      formatFiles({ eslint: true, prettier: true }),
+      updateBrownie(options)
     ])
   }
 }

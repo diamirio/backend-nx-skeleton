@@ -41,7 +41,10 @@
     "@angular-devkit/core": "^9.0.0",
     "@angular-devkit/schematics": "~9.1.0",
     "@nrwl/cli": "^9.5.0",
-    "eslint": "^7.3.1"
+    "@types/eslint": "^7.2.0",
+    "@types/prettier": "^2.0.1",
+    "eslint": "^7.3.1",
+    "prettier": "^2.0.5"
   },
   "devDependencies": {
     "lint-staged": "^10.2.11",
