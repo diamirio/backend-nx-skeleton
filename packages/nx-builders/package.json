@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne/nx-tsc",
+  "name": "@webundsoehne/nx-builders",
   "version": "0.0.1",
   "description": "TSC compiler for NX.",
   "repository": "<<---REPOSITORYHERE--->>",
@@ -41,11 +41,13 @@
     "@angular-devkit/architect": "^0.901.9",
     "@angular-devkit/core": "^9.0.0",
     "@angular-devkit/schematics": "~9.1.0",
-    "@nrwl/cli": "^9.5.0"
+    "@nrwl/cli": "^9.5.0",
+    "execa": "^4.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.3.1",
+    "@types/execa": "^2.0.0",
     "cpy-cli": "^3.1.1",
+    "eslint": "^7.3.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.8",

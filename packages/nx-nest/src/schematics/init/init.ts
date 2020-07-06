@@ -1,10 +1,10 @@
 import { JsonObject } from '@angular-devkit/core'
-import { chain, Rule, noop } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
 import {
-  addDepsToPackageJson, setDefaultCollection,
-  updateWorkspace,
-  addPackageWithInit
+  addDepsToPackageJson,
+  updateWorkspace
 } from '@nrwl/workspace'
+import { installWorkspaceDependencies } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 import { calculateDependencies } from '@src/utils/versions'
@@ -17,7 +17,7 @@ function setDefault (): Rule {
 
   })
 
-  return chain([ setDefaultCollection('@webundsoehne/nx-nest'), updateThisWorkspace ])
+  return chain([ updateThisWorkspace ])
 }
 
 function jsonIdentity (x: any): JsonObject {

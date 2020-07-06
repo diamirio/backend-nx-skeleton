@@ -21,12 +21,28 @@ export function calculateDependencies (schema: NormalizedSchema): VersionInterfa
     dependencies = merge(dependencies, restServerDeps)
   }
 
+  if (schema.components.includes('server') && schema.server === 'graphql') {
+    dependencies = merge(dependencies, graphqlServerDeps)
+  }
+
+  if (schema.components.includes('microservice')) {
+    dependencies = merge(dependencies, microserviceModuleDeps)
+  }
+
+  if(schema.components.includes('bgtask')) {
+    dependencies = merge(dependencies, taskModuleDeps)
+  }
+
   if(schema.components.includes('command')) {
     dependencies = merge(dependencies, commandModuleDeps)
   }
 
-  if (schema.database.includes('typeorm')) {
+  if (schema.database?.includes('typeorm')) {
     dependencies = merge(dependencies, typeormDeps)
+  }
+
+  if (schema.database?.includes('mongoose')) {
+    dependencies = merge(dependencies, mongooseDeps)
   }
 
   return dependencies
@@ -34,7 +50,10 @@ export function calculateDependencies (schema: NormalizedSchema): VersionInterfa
 
 export const testDeps: VersionInterface = {
   dev: {
-    '@nestjs/testing': '^7.2.0'
+    '@nestjs/testing': '^7.2.0',
+    jest: '^26.1.0',
+    'ts-jest': '^26.1.1',
+    '@types/jest': '^26.0.3'
   }
 }
 
@@ -63,10 +82,23 @@ export const restServerDeps: VersionInterface = {
     '@nestjs/platform-fastify': '^7.2.0',
     'fastify-swagger': '^2.6.0',
     '@nestjs/swagger': '^4.5.12'
-  },
-  dev: {
   }
 }
+
+export const graphqlServerDeps: VersionInterface = {
+  prod: {
+    '@nestjs/graphql': '^7.5.1',
+    'apollo-server-fastify': '^2.15.1',
+    graphql: '^15.3.0',
+    'graphql-tools': '^6.0.12'
+  }
+}
+
+export const taskModuleDeps: VersionInterface = {
+
+}
+
+export const microserviceModuleDeps: VersionInterface = {}
 
 // command module dependencies
 export const commandModuleDeps: VersionInterface = {
@@ -82,3 +114,5 @@ export const typeormDeps: VersionInterface = {
     typeorm: '^0.2.25'
   }
 }
+
+export const mongooseDeps: VersionInterface = {}

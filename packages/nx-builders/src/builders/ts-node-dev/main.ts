@@ -1,7 +1,8 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { NodeJsSyncHost } from '@angular-devkit/core/node'
 import { getWorkspace, logProject, removePathRoot } from '@webundsoehne/nx-tools'
-import { spawn, SpawnOptions, ChildProcess } from 'child_process'
+import { SpawnOptions, ChildProcess } from 'child_process'
+import execa from 'execa'
 import { from, Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
@@ -52,7 +53,9 @@ function startTypescriptNode (options: ServeBuilderSchema, context: BuilderConte
     spawnOptions.cwd = cwd
   }
 
-  const instance = spawn('ts-node-dev', args, spawnOptions)
+  logProject('info', context, `Spawning: ts-node-dev ${args.join(' ')}`)
+
+  const instance = execa('ts-node-dev', args, spawnOptions)
 
   instance.stdout.on('data', (data) => {
     logProject('info', context, data)
@@ -63,7 +66,7 @@ function startTypescriptNode (options: ServeBuilderSchema, context: BuilderConte
   })
 
   instance.on('exit', (code, signal) => {
-    logProject('info', context, `ts-node-dev process ended with code ${code} ${signal ? `and signal ${signal}` : 'no signal'}`)
+    logProject('warn', context, `Process ended with code ${code} ${signal ? `and signal ${signal}` : 'no signal'}`)
     callback()
   })
 

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ScheduleModule } from 'nest-schedule'
 
-import * as tasks from './module/index'
+import * as tasks from './child.modules'
 
 /**
  * Register all services under providers

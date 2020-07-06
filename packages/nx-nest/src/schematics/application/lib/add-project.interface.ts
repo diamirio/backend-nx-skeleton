@@ -1,9 +1,9 @@
-import { NodePackageBuilderOptions } from '@webundsoehne/nx-tsc'
+import { NodePackageBuilderOptions } from '@webundsoehne/nx-builders'
 
 export interface ProjectArchitect {
   [key: string]: any
   build: {
-    builder: '@webundsoehne/nx-tsc:build'
+    builder: '@webundsoehne/nx-builders:tsc'
     options: NodePackageBuilderOptions
   }
 }

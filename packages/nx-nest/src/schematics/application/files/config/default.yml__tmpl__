@@ -12,7 +12,6 @@ url:
   apiPath: ""
 
 swagger:
-  basePath: ""
   path: /internal/docs
   useHttps: false
   title: NestJS Skeleton

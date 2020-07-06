@@ -11,6 +11,6 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../nx-tools/src/utils/normalize-options.helper.ts"],
   "exclude": ["node_modules", "dist", "**/files"]
 }

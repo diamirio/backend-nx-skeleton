@@ -1,5 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER,<% if (server === 'graphql') { %> APP_INTERCEPTOR,<% } %> APP_PIPE } from '@nestjs/core'
+<% if (server === 'graphql') { %>import { GraphQLModule } from '@nestjs/graphql'
+import { FastifyRequest } from 'fastify'
+import { Http2ServerRequest } from 'http2'
+import { join } from 'path'<% } %>
 <% if (database.includes('typeorm')) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
 import {
   ConfigService,
@@ -9,22 +13,21 @@ import {
   InternalModule,
   MaintenanceMiddleware,
   MaintenanceModule,
+  <% if (server !== 'graphql') { %>
   CacheLifetimeHelperInterceptor,
   RequestProfilerInterceptor,
+  <% } %>
   SetApiInfoHeaderMiddleware,
   setEnvironmentVariables,
   ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
 
-import { ServerController } from './server.controller'
-import { ServerService } from './server.service'
+import * as modules from './child.modules'
 <% if (database.includes('typeorm')) { %>import { getDatabaseOptions } from '../util/database'<% } %>
 
 export function createServerModule (<% if (database !== 'none') { %>mock = false<% } %>): new() => NestModule {
   @Module({
-    controllers: [ ServerController ],
     providers: [
-      ServerService,
       ConfigService,
       {
         provide: APP_FILTER,
@@ -41,7 +44,7 @@ export function createServerModule (<% if (database !== 'none') { %>mock = false
       {
         provide: APP_PIPE,
         useClass: ExtendedValidationPipe
-      },
+      }<% if (server !== 'graphql') { %>,
       {
         provide: APP_INTERCEPTOR,
         useClass: CacheLifetimeHelperInterceptor
@@ -49,9 +52,18 @@ export function createServerModule (<% if (database !== 'none') { %>mock = false
       {
         provide: APP_INTERCEPTOR,
         useClass: RequestProfilerInterceptor
-      }
+      }<% } %>
     ],
-    imports: [ <% if (database.includes('typeorm')) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)), <% } %>InternalModule, MaintenanceModule ]
+    imports: [ <% if (server === 'graphql') { %>GraphQLModule.forRoot({
+        autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
+        context: async ({ req }: {req: FastifyRequest<Http2ServerRequest>}): Promise<FastifyRequest<Http2ServerRequest> & Record<string, any>> => {
+          return { ...req }
+        },
+        useGlobalPrefix: true,
+        playground: true,
+        introspection: true,
+        path: '/'
+      }), <% } %> ...Object.values(modules), <% if (database.includes('typeorm')) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)), <% } %>InternalModule, MaintenanceModule ]
   })
   class ServerModule implements NestModule {
     async configure (consumer: MiddlewareConsumer): Promise<any> {

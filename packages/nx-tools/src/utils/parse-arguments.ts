@@ -1,8 +1,6 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
-import { AvailableComponents } from '@src/schematics/application/main.interface'
-
 export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: {name: string}[], options?: {required?: boolean, single?: boolean}): T {
   const arg = args.split(',')
 
@@ -11,7 +9,7 @@ export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: stri
   }, [])
 
   const parsedArgs = arg.reduce((o, val) => {
-    if (isCorrectType(parsedValidArgs, val)) {
+    if (isCorrectType<T>(parsedValidArgs, val)) {
       return [ ...o, val ]
     } else {
       task.output = chalk.yellow(`Skipping "${val}" since it is not a valid entry.`)
@@ -34,6 +32,6 @@ export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: stri
   return parsedArgs as unknown as T
 }
 
-export function isCorrectType (keys: string[], value: string): value is AvailableComponents {
+export function isCorrectType <T> (keys: string[], value: any): value is T {
   return keys.indexOf(value) !== -1
 }

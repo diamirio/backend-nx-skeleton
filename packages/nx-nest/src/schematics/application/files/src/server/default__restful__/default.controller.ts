@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
-import { ServerService } from './server.service'
+import { DefaultService } from './default.service'
 
 @ApiTags('Developer')
 @Controller()
-export class ServerController {
-  constructor (private readonly appService: ServerService) {}
+export class DefaultController {
+  constructor (private readonly appService: DefaultService) {}
 
   @ApiOperation({ summary: 'Test', description: 'Hello world route' })
   @ApiResponse({ status: 200, description: 'Hello world route' })

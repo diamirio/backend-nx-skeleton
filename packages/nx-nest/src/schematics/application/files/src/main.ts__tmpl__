@@ -3,6 +3,7 @@ import { InternalServerErrorException } from '@nestjs/common'
 import { service } from './constants'
 
 <% if (components.includes('server')) { %>import { createApplication as createServerApplication } from './server/init'<% } %>
+<% if (components.includes('microservice')) { %>import { createApplication as createMicroserviceApplication } from './microservice/init'<% } %>
 <% if (components.includes('bgtask')) { %>import { createApplication as createTaskApplication } from './task/init'<% } %>
 <% if (components.includes('command')) { %>import { createApplication as createCommandApplication } from './command/init'<% } %>
 
@@ -11,7 +12,9 @@ function bootstrap (): Promise<void> {
   <% if (components.includes('server')) { %>
   case service.server:
     return createServerApplication()<% } %>
-
+  <% if (components.includes('microservice')) { %>
+  case service.microservice:
+    return createMicroserviceApplication()<% } %>
   <% if (components.includes('bgtask')) { %>
   case service.task:
     return createTaskApplication()<% } %>

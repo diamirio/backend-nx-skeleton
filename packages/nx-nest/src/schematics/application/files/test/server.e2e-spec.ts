@@ -27,9 +27,9 @@ describe('ServerController (e2e)', () => {
   })
 
   it('/ (GET)', async () => {
-    return expect(app.inject({ url: '/', method: 'GET' }))
-      .resolves
-      .toBe('Hello World')
+    const response = await app.inject({ url: '/', method: 'GET' })
 
+    return expect(response.body)
+      .toBe('Hello World')
   })
 })

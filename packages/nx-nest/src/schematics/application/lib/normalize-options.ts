@@ -1,11 +1,10 @@
 import { normalize } from '@angular-devkit/core'
 import { Tree } from '@angular-devkit/schematics'
-import { toFileName, readNxJson } from '@nrwl/workspace'
-import { appsDir, readJsonInTree } from '@nrwl/workspace/src/utils/ast-utils'
+import { readNxJson, toFileName } from '@nrwl/workspace'
+import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
-import { parseArguments } from './normalize-options.helper'
-import { ConvertToPromptType } from './normalize-options.interface'
 import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
 
 export async function normalizeOptions (
@@ -164,6 +163,14 @@ export async function normalizeOptions (
       options: {
         bottomBar: Infinity,
         persistentOutput: true
+      }
+    },
+
+    // default database
+    {
+      skip: (ctx): boolean => !(!ctx.components.includes('server') && !ctx.components.includes('bgtask')),
+      task: async (ctx): Promise<void> => {
+        ctx.database = 'none'
       }
     }
 

@@ -10,7 +10,7 @@ export function addProject (options: NormalizedSchema): Rule {
     const architect: ProjectArchitect = {} as ProjectArchitect
 
     architect.build = {
-      builder: '@webundsoehne/nx-tsc:build',
+      builder: '@webundsoehne/nx-builders:tsc',
       options: {
         outputPath: `dist/${options.directory}`,
         tsConfig: `${options.root}/tsconfig.build.json`,
@@ -23,12 +23,12 @@ export function addProject (options: NormalizedSchema): Rule {
     // prefer server mode
     if (options.components.includes('server')) {
       architect.serve = {
-        builder: '@webundsoehne/nx-tsc:serve',
+        builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           entry: join(options.root, 'src/main.ts'),
           tsConfig: join(options.root, 'tsconfig.json'),
+          cwd: options.root,
           environment: {
-            NODE_CONFIG_DIR: join(options.root, 'config/'),
             NODE_SERVICE: 'server'
           }
         }
@@ -37,7 +37,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.components.includes('bgtask')) {
       architect.bgtask = {
-        builder: '@webundsoehne/nx-tsc:serve',
+        builder: '@webundsoehne/nx-builders:serve',
         options: {
           entry: join(options.root, 'src/main.ts'),
           tsConfig: join(options.root, 'tsconfig.json'),

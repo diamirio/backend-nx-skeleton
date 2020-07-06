@@ -7,7 +7,7 @@ import { Command, Positional } from 'nestjs-command'
  */
 
 @Injectable()
-export class CommandService {
+export class DefaultService {
   private logger: Logger = new Logger(this.constructor.name)
 
   @Command({
@@ -15,9 +15,7 @@ export class CommandService {
   })
   async helloWorld (
   @Positional({
-    name: 'name',
-    describe: 'Name to greet',
-    type: 'string'
+    name: 'name'
   })
     name: string
   ) {

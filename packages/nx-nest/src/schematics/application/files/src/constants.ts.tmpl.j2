@@ -1,5 +1,6 @@
 export enum service {
-  <% if (components.includes('server')) { %>server = 'server',<% } %>
+  {% if 'server' in components %}server = 'server',{% endif %}
+  <% if (components.includes('microservice')) { %>microservice = 'microservice',<% } %>
   <% if (components.includes('bgtask')) { %>task = 'bgtask',<% } %>
   <% if (components.includes('command')) { %>command = 'cli'<% } %>
 }

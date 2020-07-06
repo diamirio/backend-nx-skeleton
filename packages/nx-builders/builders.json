@@ -1,0 +1,16 @@
+{
+  "$schema": "@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "ts-node-dev": {
+      "implementation": "./dist/builders/ts-node-dev/main",
+      "schema": "./dist/builders/ts-node-dev/schema.json",
+      "description": "@webundsoehne/nx-nest:ts-node-dev"
+    },
+
+    "tsc": {
+      "implementation": "./dist/builders/tsc/main",
+      "schema": "./dist/builders/tsc/schema.json",
+      "description": "@webundsoehne/nx-nest:tsc"
+    }
+  }
+}

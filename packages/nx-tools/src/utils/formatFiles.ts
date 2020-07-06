@@ -29,7 +29,6 @@ export function formatFiles (
     return noop()
   }
 
-  // @ts-ignore
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = new Set(
       host.actions

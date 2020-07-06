@@ -6,7 +6,7 @@ import {
 } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import { formatFiles } from '@webundsoehne/nx-tools'
+import { formatFiles, installWorkspaceDependencies } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'

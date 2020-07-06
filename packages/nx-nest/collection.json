@@ -16,6 +16,13 @@
       "schema": "./dist/schematics/application/schema.json",
       "aliases": ["app"],
       "description": "Create a new Nest application from skeleton."
+    },
+
+    "command": {
+      "factory": "./dist/schematics/command/main",
+      "schema": "./dist/schematics/command/schema.json",
+      "aliases": ["cmd"],
+      "description": "Add command module to skeleton."
     }
   }
 }
