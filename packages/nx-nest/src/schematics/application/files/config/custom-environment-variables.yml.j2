@@ -32,7 +32,7 @@ swagger:
     __format: json
   basePath: API_BASE_PATH
 
-<% if (database.includes('typeorm')) { %>
+{% if 'typeorm' in database %}
 database:
   type: DATABASE_TYPE
   host: DATABASE_HOST
@@ -41,4 +41,4 @@ database:
   password: DATABASE_PASSWORD
   database: DATABASE_NAME
   migrationsTableName: DATABASE_MIGRATIONS_TABLE
-<% } %>
+{% endif %}

@@ -1,6 +1,5 @@
 import {
   CreateFileAction,
-
   OverwriteFileAction,
   Rule,
   SchematicContext,

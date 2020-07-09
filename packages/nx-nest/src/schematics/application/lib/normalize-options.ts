@@ -2,6 +2,7 @@ import { normalize } from '@angular-devkit/core'
 import { Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
@@ -58,6 +59,10 @@ export async function normalizeOptions (
       title: 'Setting project root directory.',
       task: (ctx, task): void => {
         ctx.root = normalize(`${appsDir(host)}/${ctx.directory}`)
+
+        if (directoryExists(ctx.root)) {
+          throw new Error(`Project root directory is not empty at: "${ctx.root}"`)
+        }
 
         task.title = `Project root directory is set as "${ctx.root}".`
       }

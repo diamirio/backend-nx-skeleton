@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
-    "postbuild": "cpy --cwd=src --parents '**/*.json' ../dist/ && cpy --cwd=src --parents '**/files/**' ../dist/",
+    "postbuild": "cpy --cwd=src --parents '**/*.json' ../dist/ && rimraf dist/**/files/ && cpy --cwd=src --parents '**/files/**' ../dist/",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
     "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && yarn postbuild",

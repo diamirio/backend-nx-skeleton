@@ -1,0 +1,41 @@
+import { InternalServerErrorException } from '@nestjs/common'
+
+import { service } from './constants'
+
+{% if 'server' in components %}
+import { createApplication as createServerApplication } from './server/init'
+{% endif %}
+{% if 'microservice' in components %}
+import { createApplication as createMicroserviceApplication } from './microservice/init'
+{% endif %}
+{% if 'bgtask' in components %}
+import { createApplication as createTaskApplication } from './task/init'
+{% endif %}
+{% if 'command' in components %}
+import { createApplication as createCommandApplication } from './command/init'
+{% endif %}
+
+function bootstrap (): Promise<void> {
+  switch (String(process.env.NODE_SERVICE).toLowerCase()) {
+  {% if 'server' in components %}
+  case service.server:
+    return createServerApplication()
+  {% endif %}
+  {% if 'microservice' in components %}
+  case service.microservice:
+    return createMicroserviceApplication()
+  {% endif %}
+  {% if 'bgtask' in components %}
+  case service.task:
+    return createTaskApplication()
+  {% endif %}
+  {% if 'command' in components %}
+  case service.command:
+    return createCommandApplication()
+  {% endif %}
+  default:
+    throw new InternalServerErrorException('NODE_SERVICE environment variable is not set.')
+  }
+}
+
+bootstrap()

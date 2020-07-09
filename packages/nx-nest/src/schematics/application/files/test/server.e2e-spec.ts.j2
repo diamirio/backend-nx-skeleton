@@ -7,7 +7,7 @@ describe('ServerController (e2e)', () => {
   let app
 
   beforeAll(async () => {
-    const ServerModule = createServerModule()
+    const ServerModule = createServerModule({% if database != 'none' %}true{% endif %})
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         ServerModule

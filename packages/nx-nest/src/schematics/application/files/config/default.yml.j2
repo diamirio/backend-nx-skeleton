@@ -23,14 +23,16 @@ cacheLifetime:
   expiresHeader: Expires
   cacheControlHeader: Cache-control
 
-<% if (database.includes('typeorm')) { %>
+{% if 'typeorm' in database %}
 database:
-  <% if (database === 'typeorm-mysql') { %>
+  {% if database == 'typeorm-mysql' -%}
   type: mysql
-  port: 3306<% } %>
-  <% if (database === 'typeorm-postgresql') { %>
-  type: postgresql
-  port: 5432<% } %>
+  port: 3306
+  {% endif -%}
+  {% if database == 'typeorm-postgresql' -%}
+  type: postgres
+  port: 5432
+  {% endif -%}
   host: db
   username: user
   password: secret
@@ -45,4 +47,4 @@ database:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
-<% } %>
+{% endif %}
