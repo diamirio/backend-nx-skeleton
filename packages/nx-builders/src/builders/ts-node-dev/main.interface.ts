@@ -1,8 +1,11 @@
 import { JsonObject } from '@angular-devkit/core'
 
-export interface ServeBuilderSchema extends JsonObject {
+export interface NodePackageServeOptions extends JsonObject {
+  /** process CWD */
+  cwd: string
+
   /** Path to entry point */
-  entry: string
+  main: string
 
   /** Path to tsconfig.json */
   tsConfig?: string
@@ -15,9 +18,6 @@ export interface ServeBuilderSchema extends JsonObject {
 
   /** Interval in ms */
   interval?: number
-
-  /** process CWD */
-  cwd?: string
 
   environment?: Record<string, string>
 }

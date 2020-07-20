@@ -3,6 +3,10 @@
   "description": "Packages a Node library using TypeScript",
   "type": "object",
   "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "Root directory of the project to use as cwd."
+    },
     "main": {
       "type": "string",
       "description": "The name of the main entry-point file."
@@ -14,6 +18,10 @@
     "outputPath": {
       "type": "string",
       "description": "The output path of the generated files."
+    },
+    "swapPaths": {
+      "type": "boolean",
+      "description": "Swap Typescript paths in tsconfig in build-time."
     },
     "watch": {
       "type": "boolean",
@@ -40,7 +48,7 @@
     },
     "packageJson": {
       "type": "string",
-      "description": "The name of the package.json file"
+      "description": "Override package.json with absolute path package.json file."
     }
   },
   "required": ["tsConfig", "main"],

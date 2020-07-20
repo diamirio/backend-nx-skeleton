@@ -1,8 +1,7 @@
-version: '3.7'
+version: "3.7"
 services:
   monorepo:
-    build:
-      context: .docker/node
+    image: cenk1cenk2/lerna-dev
     environment:
       # - COMMAND_INIT_ENV=init-env
       # - PACKAGE_START_COMMAND=start

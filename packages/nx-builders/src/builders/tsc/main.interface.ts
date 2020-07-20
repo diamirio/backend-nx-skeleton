@@ -1,13 +1,24 @@
 import { JsonObject } from '@angular-devkit/core'
 
 export interface NodePackageBuilderOptions extends JsonObject {
+  cwd: string
+
   main: string
+
   tsConfig: string
+
   outputPath: string
+
+  swapPaths?: boolean
+
   watch?: boolean
+
   sourceMap?: boolean
+
   assets?: (AssetGlob | string)[]
+
   packageJson?: string
+
   updateBuildableProjectDepsInPackageJson?: boolean
 }
 

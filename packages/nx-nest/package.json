@@ -16,7 +16,7 @@
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
     "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && yarn postbuild",
-    "lint": "prettier --write src/ && eslint --ext .json,.ts,.js --fix src/"
+    "lint": "prettier --write src/ && eslint --ext .ts,.js --fix src/"
   },
   "husky": {
     "hooks": {
@@ -26,7 +26,7 @@
   "lint-staged": {
     "src/*.{ts,js,json}": [
       "prettier --write",
-      "eslint --ext .json,.ts,.js --fix"
+      "eslint --ext .ts,.js --fix"
     ]
   },
   "config": {

@@ -12,10 +12,11 @@ export function addProject (options: NormalizedSchema): Rule {
     architect.build = {
       builder: '@webundsoehne/nx-builders:tsc',
       options: {
+        cwd: options.root,
+        main: `${options.root}/src/main.ts`,
         outputPath: `dist/${options.directory}`,
         tsConfig: `${options.root}/tsconfig.build.json`,
-        packageJson: `${options.root}/package.json`,
-        main: `${options.root}/src/main.ts`,
+        swapPaths: true,
         assets: [ `${options.root}/config/` ]
       }
     }
@@ -25,9 +26,9 @@ export function addProject (options: NormalizedSchema): Rule {
       architect.serve = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
-          entry: join(options.root, 'src/main.ts'),
-          tsConfig: join(options.root, 'tsconfig.json'),
           cwd: options.root,
+          main: join(options.root, 'src/main.ts'),
+          tsConfig: join(options.root, 'tsconfig.json'),
           environment: {
             NODE_SERVICE: 'server'
           }
@@ -37,9 +38,10 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.components.includes('bgtask')) {
       architect.bgtask = {
-        builder: '@webundsoehne/nx-builders:serve',
+        builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
-          entry: join(options.root, 'src/main.ts'),
+          cwd: options.root,
+          main: join(options.root, 'src/main.ts'),
           tsConfig: join(options.root, 'tsconfig.json'),
           environment: {
             NODE_CONFIG_DIR: join(options.root, 'config/'),
