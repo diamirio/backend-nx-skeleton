@@ -4,6 +4,39 @@
   "title": "@webundsoehne/nx-nest:serve",
   "description": "",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "Root directory of the project to use as cwd."
+    },
+    "main": {
+      "type": "string",
+      "description": "The name of the main entry-point file."
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "The name of the Typescript configuration file."
+    },
+    "debounce": {
+      "type": "number",
+      "description": "Debounce parameter for ts-node-dev."
+    },
+    "interval": {
+      "type": "number",
+      "description": "Interval parameter for ts-node-dev."
+    },
+    "debug": {
+      "type": "number",
+      "description": "Show additional debug log for ts-node-dev."
+    },
+    "inspect": {
+      "type": "number",
+      "description": "Punch a inspector port to connect to."
+    },
+    "environment": {
+      "type": "object",
+      "description": "Pass in additional environment variables for ts-node-dev."
+    }
+  },
   "required": []
 }

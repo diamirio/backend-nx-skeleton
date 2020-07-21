@@ -17,7 +17,13 @@ export function addProject (options: NormalizedSchema): Rule {
         outputPath: `dist/${options.directory}`,
         tsConfig: `${options.root}/tsconfig.build.json`,
         swapPaths: true,
-        assets: [ `${options.root}/config/` ]
+        assets: [
+          {
+            glob: '*',
+            input: `${options.root}/config`,
+            output: 'config'
+          }
+        ]
       }
     }
 

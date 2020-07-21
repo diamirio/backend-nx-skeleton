@@ -10,14 +10,18 @@ export interface NodePackageServeOptions extends JsonObject {
   /** Path to tsconfig.json */
   tsConfig?: string
 
-  /** Additional debug output */
-  debug?: boolean
-
   /** Debounce in ms */
   debounce?: number
 
   /** Interval in ms */
   interval?: number
 
+  /** Additional debug output */
+  debug?: boolean
+
+  /** Inspect port */
+  inspect?: number
+
+  /** environment variables */
   environment?: Record<string, string>
 }

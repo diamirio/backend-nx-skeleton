@@ -49,6 +49,10 @@
     "packageJson": {
       "type": "string",
       "description": "Override package.json with absolute path package.json file."
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Dump more output as always."
     }
   },
   "required": ["tsConfig", "main"],

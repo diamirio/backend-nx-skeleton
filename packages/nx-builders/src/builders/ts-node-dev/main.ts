@@ -44,7 +44,7 @@ function startTypescriptNode (options: NodePackageServeOptions, context: Builder
 }
 
 function normalizeOptions (options: NodePackageServeOptions): { args: string[], spawnOptions: execa.Options } {
-  const { main, tsConfig, debounce, interval, debug, cwd, environment } = options
+  const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
   // default options
   let args = [ '-r', 'tsconfig-paths/register' ]
@@ -64,6 +64,10 @@ function normalizeOptions (options: NodePackageServeOptions): { args: string[], 
 
   if (debug) {
     args = [ ...args, '--debug' ]
+  }
+
+  if (inspect) {
+    args = [ ...args, `--inspect=0.0.0.0:${options.inspect}` ]
   }
 
   if (!main) {

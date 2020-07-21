@@ -20,6 +20,8 @@ export interface NodePackageBuilderOptions extends JsonObject {
   packageJson?: string
 
   updateBuildableProjectDepsInPackageJson?: boolean
+
+  verbose?: boolean
 }
 
 export interface NormalizedBuilderOptions extends NodePackageBuilderOptions {
@@ -35,5 +37,5 @@ export type FileInputOutput = {
 
 export type AssetGlob = FileInputOutput & {
   glob: string
-  ignore: string[]
+  ignore?: string[]
 }

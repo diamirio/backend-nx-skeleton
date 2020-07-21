@@ -5,15 +5,15 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function updateBrownie (options: NormalizedSchema): Rule {
   return chain([
-    updateBrownieIntegration({ package: options.name, containers: [ 'nx' ] }),
+    updateBrownieIntegration({ name: options.name, containers: [ 'nx' ] }),
     options.database?.includes('mysql') ?
-      updateBrownieIntegration({ package: options.name, containers: [ 'mysql' ] }) :
+      updateBrownieIntegration({ name: options.name, containers: [ 'mysql' ] }) :
       noop(),
     options.database?.includes('postgresql') ?
-      updateBrownieIntegration({ package: options.name, containers: [ 'postgresql' ] }) :
+      updateBrownieIntegration({ name: options.name, containers: [ 'postgresql' ] }) :
       noop(),
     options.database?.includes('mongodb') ?
-      updateBrownieIntegration({ package: options.name, containers: [ 'mongodb' ] }) :
+      updateBrownieIntegration({ name: options.name, containers: [ 'mongodb' ] }) :
       noop()
   ])
 }

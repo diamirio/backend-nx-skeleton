@@ -9,7 +9,7 @@ export class Logger {
 
   constructor (private context: BuilderContext, private options?: LoggerOptions) {
     // set default options
-    this.options = { useIcons: true, ...options }
+    this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
   }
 
   public fatal (data: string | Buffer): void {
