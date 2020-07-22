@@ -17,5 +17,5 @@ export function removePathRoot (filename: string, sourceRoot: string): string {
     return path.startsWith('/') ? path.substring(1) : path
   }
 
-  throw new Error('Root path could not be removed')
+  throw new Error('Root path could not be removed.')
 }

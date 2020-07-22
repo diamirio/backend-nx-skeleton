@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { Tree } from '@angular-devkit/schematics'
+import { Tree, SchematicContext } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { appsDir, readJsonInTree } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
@@ -10,13 +10,15 @@ import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, Normalized
 
 export async function normalizeOptions (
   host: Tree,
+  context: SchematicContext,
   options: Schema
 ): Promise<NormalizedSchema> {
+
   return new Listr<NormalizedSchema>([
     // assign options to parsed schema
     {
       task: async (ctx): Promise<void> => {
-        await Promise.all([ 'name', 'tests', 'linter' ].map((item) => {
+        await Promise.all([ 'name', 'verbose', 'tests', 'linter' ].map((item) => {
           ctx[item] = options[item]
         }))
 
@@ -60,11 +62,43 @@ export async function normalizeOptions (
       task: (ctx, task): void => {
         ctx.root = normalize(`${appsDir(host)}/${ctx.directory}`)
 
-        if (directoryExists(ctx.root)) {
-          throw new Error(`Project root directory is not empty at: "${ctx.root}"`)
-        }
-
         task.title = `Project root directory is set as "${ctx.root}".`
+      }
+    },
+
+    // check for prior configuration
+    {
+      title: 'Checking if the application is configured before.',
+      task: (ctx, task): void => {
+        if (directoryExists(ctx.root)) {
+          task.output = `Project root directory is not empty at: "${ctx.root}"`
+
+          task.title = 'Looking for prior application configuration in "nx.json".'
+
+          const nxJson = readJsonInTree(host, 'nx.json')
+
+          const thisProject = nxJson.projects?.[ctx.name]?.integration
+          if (thisProject) {
+            ctx.priorConfiguration = {
+              components: thisProject?.components,
+              server: thisProject.setup?.server,
+              database: thisProject.setup?.database
+            }
+            task.title = 'Prior configuration successfully found in "nx.json".'
+
+          } else {
+            throw new Error('Can not read prior configuration from "nx.json".')
+
+          }
+
+        } else {
+          task.title = 'This is the initial configuration of the package.'
+
+        }
+      },
+      options: {
+        persistentOutput: true,
+        bottomBar: false
       }
     },
 
@@ -81,8 +115,11 @@ export async function normalizeOptions (
         // select the base components
         if (!options.components) {
 
+          task.output = JSON.stringify(ctx.priorConfiguration)
+
           // when options are not passed as an option to the command
           ctx.components = await task.prompt<AvailableComponents[]>({
+            // @ts-ignore
             type: 'MultiSelect',
             message: 'Please select which components you want to include.',
             choices: choices as any,
@@ -92,7 +129,9 @@ export async function normalizeOptions (
               } else {
                 return 'At least one component must be included.'
               }
-            }
+            },
+            // @ts-ignore
+            initial: getInitialFromPriorConfiguration(ctx, 'components', choices)
           })
 
         } else {
@@ -121,9 +160,12 @@ export async function normalizeOptions (
 
         if (!options.server) {
           ctx.server = await task.prompt<AvailableServerTypes>({
+             // @ts-ignore
             type: 'Select',
             message: 'Please select the API server type.',
-            choices: choices as any
+            choices: choices as any,
+             // @ts-ignore
+            initial: getInitialFromPriorConfiguration(ctx, 'server', choices)
           })
         } else {
           // when options are passed via cli
@@ -153,9 +195,12 @@ export async function normalizeOptions (
         // there can be two selections of API servers here
         if (!options?.database) {
           ctx.database = await task.prompt<AvailableDBTypes>({
+            // @ts-ignore
             type: 'Select',
             message: 'Please select the database type.',
-            choices: choices as any
+            choices: choices as any,
+             // @ts-ignore
+            initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
           })
         } else {
           // when options are passed via cli
@@ -180,6 +225,29 @@ export async function normalizeOptions (
     }
 
   ], {
-    concurrent: false
+    concurrent: false, renderer: (context.debug ? 'verbose' : 'verbose') as 'default'
   }).run()
+}
+
+function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof NormalizedSchema['priorConfiguration'], choices: ConvertToPromptType<any>): number[] | number {
+  if (key === 'components') {
+    return ctx.priorConfiguration?.[key]?.reduce((o, val) => {
+      choices.forEach((v, i) => {
+        if (v.name === val) {
+          o = [...o, i]
+        }
+      })
+      return o
+    }, []) ?? []
+
+  } else {
+    let value = 0
+    choices.forEach((val, i) => {
+      if (val.name === ctx.priorConfiguration?.[key]) {
+        value = i
+      }
+    })
+
+    return value
+  }
 }

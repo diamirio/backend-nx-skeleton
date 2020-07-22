@@ -1,17 +1,14 @@
 import { JsonObject } from '@angular-devkit/core'
-import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
+import { chain, Rule } from '@angular-devkit/schematics'
 import {
   addDepsToPackageJson,
   updateWorkspace
 } from '@nrwl/workspace'
-import { installWorkspaceDependencies } from '@webundsoehne/nx-tools'
-
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 import { calculateDependencies } from '@src/utils/versions'
 
 function setDefault (): Rule {
   const updateThisWorkspace = updateWorkspace((workspace) => {
-    // Also generate all new react apps with babel.
     workspace.extensions.schematics =
       jsonIdentity(workspace.extensions.schematics) || {}
 

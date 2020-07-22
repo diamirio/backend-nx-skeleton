@@ -29,6 +29,7 @@ export function formatFiles (
     return noop()
   }
 
+  // @ts-ignore RX-JS clash between packages
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = new Set(
       host.actions

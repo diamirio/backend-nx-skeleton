@@ -38,10 +38,10 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.901.9",
-    "@angular-devkit/core": "^9.0.0",
-    "@angular-devkit/schematics": "~9.1.0",
-    "@nrwl/cli": "^9.5.0",
+    "@angular-devkit/architect": "^0.1000.3",
+    "@angular-devkit/core": "^10.0.3",
+    "@angular-devkit/schematics": "~10.0.3",
+    "@nrwl/cli": "^10.0.2",
     "execa": "^4.0.2"
   },
   "devDependencies": {

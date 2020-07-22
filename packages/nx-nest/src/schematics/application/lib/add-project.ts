@@ -2,7 +2,7 @@ import { join, normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
 
-import { ProjectArchitect } from './add-project.interface'
+import { ProjectArchitect } from '../interfaces/add-project.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function addProject (options: NormalizedSchema): Rule {

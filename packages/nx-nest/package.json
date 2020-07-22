@@ -38,8 +38,8 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~9.1.0",
-    "@nestjs/schematics": "^6.3.0",
+    "@angular-devkit/schematics": "~10.0.3",
+    "@nestjs/schematics": "^7.0.1",
     "@nrwl/jest": "*",
     "@nrwl/node": "*",
     "@types/deepmerge": "^2.2.0",

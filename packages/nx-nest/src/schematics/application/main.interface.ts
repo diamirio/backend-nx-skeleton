@@ -12,6 +12,7 @@ export interface Schema {
   tests: string
   linter: string
   skipFormat: boolean
+  verbose: boolean
 }
 
 export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice'
@@ -31,4 +32,9 @@ export interface NormalizedSchema {
   tests: AvailableTestsTypes
   linter: AvailableLinterTypes
   skipFormat: boolean
+  priorConfiguration: {
+    components: AvailableComponents[]
+    server: AvailableServerTypes
+    database: AvailableDBTypes
+  }
 }

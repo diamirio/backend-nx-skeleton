@@ -6,12 +6,19 @@ import {
   noop,
   Rule,
   template,
-  url
+  url,
+  MergeStrategy,
+  branchAndMerge,
+  partitionApplyMerge,
+  SchematicContext,
+  Source,
+  Tree,
+  forEach
 } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { jinjaTemplate } from '@webundsoehne/nx-tools'
 
-import { FileTemplatesInterface, OmitFoldersInterface } from './create-application-files.interface'
+import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
@@ -62,8 +69,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
     }
   ]
 
-  return mergeWith(
-    apply(url('./files'), [
+  return applyWithOverwrite(url('./files'), [
       ...fileTemplates.map((val) => {
         return val.condition
           ? filter((file) => !file.match(`__${val.match}__`))
@@ -94,5 +100,25 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
       // move all the files that are not filtered
       move(options.root)
     ])
-  )
+}
+
+// FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
+export function applyWithOverwrite(source: Source, rules: Rule[]): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    const rule = mergeWith(
+      apply(source, [
+        ...rules,
+        forEach((fileEntry) => {
+          if (tree.exists(fileEntry.path)) {
+            tree.overwrite(fileEntry.path, fileEntry.content);
+            return null;
+          }
+          return fileEntry;
+        }),
+
+      ]),
+    );
+
+    return rule(tree, context);
+  };
 }

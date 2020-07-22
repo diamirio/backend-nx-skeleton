@@ -43,6 +43,10 @@
       "type": "string",
       "enum": ["jest", "none"],
       "default": "jest"
+    },
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
     }
   },
   "required": []
