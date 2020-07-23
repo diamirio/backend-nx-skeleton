@@ -1,7 +1,8 @@
-import { chain, Rule, SchematicContext, Tree, branchAndMerge, MergeStrategy, mergeWith } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext, Tree, branchAndMerge, MergeStrategy, mergeWith, noop } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
 import { formatFiles } from '@webundsoehne/nx-tools'
+import merge from 'deepmerge'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -25,7 +26,7 @@ export default function (schema: Schema): Rule {
       // localConfig: eslintJson,
       // extraPackageDeps: eslintDeps
       // }),
-      createApplicationFiles(options),
+      await createApplicationFiles(options, context),
       updateIntegration(options),
       updateTsconfigPaths(options),
       formatFiles({ eslint: true, prettier: true })

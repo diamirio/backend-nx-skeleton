@@ -11,7 +11,6 @@ function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {
 }
 
 export function isValidationError (exception: BadRequestException): exception is ClassValidatorException {
-  // eslint-disable-next-line no-prototype-builtins
   if (!exception.hasOwnProperty('validation')) {
     return false
   }

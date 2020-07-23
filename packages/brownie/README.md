@@ -16,21 +16,23 @@ A CLI that automatically merges the desired skeleton to the current repository a
 # Navigation
 
 <!-- toc -->
-* [@webundsoehne/brownie](#webundsoehnebrownie)
-* [Description](#description)
-* [Navigation](#navigation)
-* [Initial Run as a Client](#initial-run-as-a-client)
-* [After Initial Run](#after-initial-run)
-* [Adding to a Project](#adding-to-a-project)
-* [Adding to a Skeleton](#adding-to-a-skeleton)
-* [Customizing Configuration](#customizing-configuration)
-* [Missing Features](#missing-features)
-* [Usage](#usage)
-* [Commands](#commands)
-* [TODO](#todo)
-* [Package Size](#package-size)
+
+- [@webundsoehne/brownie](#webundsoehnebrownie)
+- [Description](#description)
+- [Navigation](#navigation)
+- [Initial Run as a Client](#initial-run-as-a-client)
+- [After Initial Run](#after-initial-run)
+- [Adding to a Project](#adding-to-a-project)
+- [Adding to a Skeleton](#adding-to-a-skeleton)
+- [Customizing Configuration](#customizing-configuration)
+- [Missing Features](#missing-features)
+- [Usage](#usage)
+- [Commands](#commands)
+- [TODO](#todo)
+- [Package Size](#package-size)
 <!-- tocstop -->
-- [Changelog](./CHANGELOG.md)
+
+* [Changelog](./CHANGELOG.md)
 
 # Initial Run as a Client
 
@@ -193,13 +195,14 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`cenk1cenk2 config`](#cenk1cenk2-config)
-* [`cenk1cenk2 config:workspace`](#cenk1cenk2-configworkspace)
-* [`cenk1cenk2 docker`](#cenk1cenk2-docker)
-* [`cenk1cenk2 help [COMMAND]`](#cenk1cenk2-help-command)
-* [`cenk1cenk2 workspace`](#cenk1cenk2-workspace)
-* [`cenk1cenk2 workspace:create`](#cenk1cenk2-workspacecreate)
-* [`cenk1cenk2 workspace:refresh`](#cenk1cenk2-workspacerefresh)
+
+- [`cenk1cenk2 config`](#cenk1cenk2-config)
+- [`cenk1cenk2 config:workspace`](#cenk1cenk2-configworkspace)
+- [`cenk1cenk2 docker`](#cenk1cenk2-docker)
+- [`cenk1cenk2 help [COMMAND]`](#cenk1cenk2-help-command)
+- [`cenk1cenk2 workspace`](#cenk1cenk2-workspace)
+- [`cenk1cenk2 workspace:create`](#cenk1cenk2-workspacecreate)
+- [`cenk1cenk2 workspace:refresh`](#cenk1cenk2-workspacerefresh)
 
 ## `cenk1cenk2 config`
 
@@ -210,7 +213,7 @@ USAGE
   $ cenk1cenk2 config
 ```
 
-_See code: [dist/commands/config/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/config/index.ts)_
+_See code: [dist/commands/config/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/config/index.ts)_
 
 ## `cenk1cenk2 config:workspace`
 
@@ -221,7 +224,7 @@ USAGE
   $ cenk1cenk2 config:workspace
 ```
 
-_See code: [dist/commands/config/workspace.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/config/workspace.ts)_
+_See code: [dist/commands/config/workspace.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/config/workspace.ts)_
 
 ## `cenk1cenk2 docker`
 
@@ -232,7 +235,7 @@ USAGE
   $ cenk1cenk2 docker
 ```
 
-_See code: [dist/commands/docker/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/docker/index.ts)_
+_See code: [dist/commands/docker/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/docker/index.ts)_
 
 ## `cenk1cenk2 help [COMMAND]`
 
@@ -260,7 +263,7 @@ USAGE
   $ cenk1cenk2 workspace
 ```
 
-_See code: [dist/commands/workspace/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/workspace/index.ts)_
+_See code: [dist/commands/workspace/index.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/workspace/index.ts)_
 
 ## `cenk1cenk2 workspace:create`
 
@@ -275,7 +278,7 @@ OPTIONS
   --package-json=package-json  [default: package.json] Package json file to work with.
 ```
 
-_See code: [dist/commands/workspace/create.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/workspace/create.ts)_
+_See code: [dist/commands/workspace/create.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/workspace/create.ts)_
 
 ## `cenk1cenk2 workspace:refresh`
 
@@ -289,7 +292,8 @@ OPTIONS
   --package-json=package-json  [default: package.json] Package json file to work with.
 ```
 
-_See code: [dist/commands/workspace/refresh.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0-development/dist/commands/workspace/refresh.ts)_
+_See code: [dist/commands/workspace/refresh.ts](https://github.com/cenk1cenk2/boilerplate-oclif/blob/v1.0.0/dist/commands/workspace/refresh.ts)_
+
 <!-- commandsstop -->
 
 # TODO

@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   monorepo:
     image: cenk1cenk2/lerna-dev
@@ -9,5 +9,6 @@ services:
       # format => packages/service1,off,override="start":packages/service2,override='dev'
       - SERVICES=packages/brownie:packages/nestjs-util:packages/nx-tools:packages/nx-builders:packages/nx-nest
       - RUN_IN_BAND=packages/nx-tools:packages/nx-builders
+      - RUN_IN_BAND_WAIT=15
     volumes:
       - .:/data/app

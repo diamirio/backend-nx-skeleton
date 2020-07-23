@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common'
-import * as fs from 'fs-extra'
-import * as moment from 'moment'
+import fs from 'fs-extra'
+import moment from 'moment'
 
 import { ConfigParam, Configurable } from '../../provider/config'
 import { ApiStatus } from './internal.interface'

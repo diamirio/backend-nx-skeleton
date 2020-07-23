@@ -1,24 +1,12 @@
 {
+  "extends": "../../tsconfig",
   "compilerOptions": {
-    "paths": {
-      "*": [
-        "types/*"
-      ]
-    },
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es2018",
-    "declaration": true,
-    "sourceMap": true,
-    "removeComments": true,
-    "noUnusedLocals": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "incremental": true,
     "outDir": "./dist",
-    "baseUrl": "."
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+    }
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

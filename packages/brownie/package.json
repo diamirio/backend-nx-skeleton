@@ -1,7 +1,7 @@
 {
   "name": "@webundsoehne/brownie",
   "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
-  "version": "1.0.0-development",
+  "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -74,6 +74,7 @@
     "@oclif/command": "^1.6.1",
     "@oclif/config": "^1.15.1",
     "@oclif/errors": "^1.2.2",
+    "@tiagonapoli/oclif-plugin-spaced-commands": "^0.0.6",
     "config": "^3.3.1",
     "deepmerge": "^4.2.2",
     "enquirer": "^2.3.5",

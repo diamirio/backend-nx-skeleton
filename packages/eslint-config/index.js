@@ -97,6 +97,7 @@ module.exports = {
     'new-parens': 'error',
     'no-bitwise': 'error',
     'no-caller': 'error',
+    'no-prototype-builtins': 'off',
     'no-console': 'warn',
     'no-debugger': 'warn',
     'no-empty': 'warn',

@@ -10,7 +10,7 @@ export function readPackageJsonFromPath (path: string): string {
   }
 }
 
-export function writePackageJsonToPath (packageJson: object, path: string): void {
+export function writePackageJsonToPath (packageJson: Record<string, unknown>, path: string): void {
   try {
     return writeFileSync(join(path, 'package.json'), JSON.stringify(packageJson, null, 4), 'utf8')
   } catch (error) {

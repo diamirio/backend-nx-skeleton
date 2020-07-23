@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nx-nest",
-  "version": "1.0.0-development",
+  "version": "1.0.0",
   "description": "Nest Plugin for Nx",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "main": "dist/index.js",
@@ -46,13 +46,13 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~10.0.3",
-    "@nestjs/schematics": "^7.0.1",
-    "@nrwl/jest": "*",
-    "@nrwl/node": "*",
-    "@types/deepmerge": "^2.2.0",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
+    "@angular-devkit/schematics": "~10.0.3",
+    "@nestjs/schematics": "^7.0.1",
+    "@nrwl/jest": "~10.0.4",
+    "@nrwl/node": "~10.0.4",
+    "@types/deepmerge": "^2.2.0",
     "chalk": "^4.1.0",
     "deepmerge": "^4.2.2",
     "enquirer": "^2.3.5",

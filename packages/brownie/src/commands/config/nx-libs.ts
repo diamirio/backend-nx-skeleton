@@ -1,5 +1,4 @@
-import { ConfigBaseCommand, promptUser, createTable, ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
-import { PromptOptionsType } from 'listr2'
+import { ConfigBaseCommand, ConfigRemove, createTable, promptUser } from '@cenk1cenk2/boilerplate-oclif'
 
 import { NxLibrariesConfig } from '@context/config/nx-libs.config.interface'
 

@@ -78,9 +78,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             if (thisProject) {
               ctx.priorConfiguration = {
                 components: thisProject?.components,
-                server: thisProject.setup?.server,
-                database: thisProject.setup?.database
+                server: thisProject?.server,
+                database: thisProject?.database
               }
+
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
               throw new Error('Can not read prior configuration from "nx.json".')
@@ -107,8 +108,6 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
           // select the base components
           if (!options.components) {
-            task.output = JSON.stringify(ctx.priorConfiguration)
-
             // when options are not passed as an option to the command
             ctx.components = await task.prompt<AvailableComponents[]>({
               type: 'MultiSelect',

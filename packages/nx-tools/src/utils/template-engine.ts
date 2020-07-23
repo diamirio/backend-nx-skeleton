@@ -4,8 +4,7 @@ import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 export function jinjaTemplate (ctx: Record<string, any>, options: { templates: string[], nunjucks?: nunjucks.ConfigureOptions }): Rule {
-  // @ts-ignore RX-JS clash between packages
-  return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = new Set(
       host.actions
         .filter((action) => action.kind !== 'd' && action.kind !== 'r')
@@ -55,5 +54,5 @@ export function jinjaTemplate (ctx: Record<string, any>, options: { templates: s
       }),
       map(() => host)
     )
-  }
+  }) as unknown as Rule
 }

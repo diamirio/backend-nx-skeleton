@@ -1,29 +1,40 @@
 import {
-  apply,
+  apply, chain,
   filter,
-  mergeWith,
   move,
   noop,
   Rule,
-  template,
-  url,
-  MergeStrategy,
-  branchAndMerge,
-  partitionApplyMerge,
   SchematicContext,
-  Source,
-  Tree,
-  forEach,
-  chain
+
+  Source, template,
+  url
 } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
-import { jinjaTemplate } from '@webundsoehne/nx-tools'
-import { Observable } from 'rxjs'
+import { applyOverwriteWithDiff, jinjaTemplate } from '@webundsoehne/nx-tools'
+import merge from 'deepmerge'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
-export function createApplicationFiles (options: NormalizedSchema): Rule {
+export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+  // source is always the same
+  const source = url('./files')
+
+  return chain([
+    await applyOverwriteWithDiff(
+      // just needs the url the rest it will do it itself
+      apply(source, generateRules(options)),
+      // needs the rule applied files, representing the prior configuration
+      options.priorConfiguration ?
+        apply(source, generateRules(merge<NormalizedSchema>(options, options.priorConfiguration))) :
+        null,
+      context
+    )
+  ])
+
+}
+
+function generateRules (options: NormalizedSchema): Rule[] {
   const fileTemplates: FileTemplatesInterface[] = [
     {
       condition: options?.server !== 'restful',
@@ -71,54 +82,35 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
     }
   ]
 
-  return chain([
-    applyWithOverwrite(url('./files'), [
-      ...fileTemplates.map((val) => {
-        return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
-      }),
+  return [
+    ...fileTemplates.map((val) => {
+      return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
+    }),
 
-      // interpolate the templates
-      jinjaTemplate(
-        {
-          ...names(options.name),
-          ...options,
-          offsetFromRoot: offsetFromRoot(options.root)
-        },
-        { templates: [ '.j2' ] }
-      ),
-
-      // clean up rest of the names
-      template({
+    // interpolate the templates
+    jinjaTemplate(
+      {
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.root),
-        // replace __*__ from files
-        ...fileTemplates.reduce((o, val) => ({ ...o, [val.match.toString()]: '' }), {})
-      }),
+        ...options,
+        offsetFromRoot: offsetFromRoot(options.root)
+      },
+      { templates: [ '.j2' ] }
+    ),
 
-      ...omitFolders.map((val) => {
-        return val.condition ? filter((file) => val.match(file)) : noop()
-      }),
+    // clean up rest of the names
+    template({
+      ...names(options.name),
+      offsetFromRoot: offsetFromRoot(options.root),
+      // replace __*__ from files
+      ...fileTemplates.reduce((o, val) => ({ ...o, [val.match.toString()]: '' }), {})
+    }),
 
-      // move all the files that are not filtered
-      move(options.root)
-    ])
-  ])
-}
+    ...omitFolders.map((val) => {
+      return val.condition ? filter((file) => val.match(file)) : noop()
+    }),
 
-// FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
-export function applyWithOverwrite (source: Source, rules: Rule[]): Rule {
-  return (tree: Tree): Rule => {
-    return mergeWith(
-      apply(source, [
-        ...rules,
-        forEach((fileEntry) => {
-          if (tree.exists(fileEntry.path)) {
-            tree.overwrite(fileEntry.path, fileEntry.content)
-            return null
-          }
-          return fileEntry
-        })
-      ])
-    )
-  }
+    // move all the files that are not filtered
+    move(options.root)
+  ]
+
 }

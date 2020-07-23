@@ -1,6 +1,6 @@
 import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/common'
 import { FastifyReply } from 'fastify'
-import * as moment from 'moment'
+import moment from 'moment'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
