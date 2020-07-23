@@ -6,8 +6,9 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "registry": "https://npm.kilic.dev",
-      "message": "chore(release): publish"
+      "message": "chore(release): publish",
+      "conventionalCommits": true,
+      "create-release": "github"
     },
     "version": {
       "allowBranch": ["master"]

@@ -1,0 +1,5 @@
+cli: 'brownie'
+loglevel: module
+configDir: '.config/brownie'
+localConfig: '.brownie.local.yml'
+lock: '.brownie.lock'

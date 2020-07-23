@@ -1,0 +1,279 @@
+import { BaseCommand, promptUser, readFile, spacesBetweenComments, tasksOverwritePrompt, writeFile, mergeObjects } from '@cenk1cenk2/boilerplate-oclif'
+import { flags } from '@oclif/command'
+import chalk from 'chalk'
+import { Listr } from 'listr2'
+
+// import { ResetDockerCommand } from '@commands/reset/docker'
+import { DockerNxCommandCtx } from '@context/docker/index.interface'
+import { IInitDockerComposeServiceWithInitCli } from '@interfaces/brownie.interface'
+import { DockerServices } from '@interfaces/commands/docker/index.interface'
+import { NodeHelper } from '@src/helpers/node.helper.asdts'
+
+export class DockerNxCommand extends BaseCommand {
+  static description = 'Generate docker-compose configuration depending on the current NX configuration.'
+
+  static flags = {
+    'nx-json': flags.string({
+      char: 'c',
+      description: 'Config file to use.',
+      default: 'nx.json'
+    }),
+    output: flags.string({
+      char: 'o',
+      description: 'Output file to write.',
+      default: 'docker-compose.yml'
+    }),
+    envfile: flags.string({
+      char: 'e',
+      description: 'Environment variable file to write',
+      default: '.env'
+    }),
+    'package-json': flags.string({ description: 'Package json file to work with.', default: 'package.json' }),
+    force: flags.boolean({ char: 'f', description: 'Do not prompt for overwrites.' })
+  }
+
+  // TODO: maybe hold the run smaller, which just calls subfunctions ... no have to
+  async run (): Promise<void> {
+    // get oclif parameters
+    const { flags } = this.parse(DockerNxCommand)
+
+    // check lock file and offer reset instead
+    const lockFile = await this.locker.getLockFile()
+
+    if (
+      !flags?.override &&
+      (lockFile?.[this.id]?.services?.variable && lockFile?.[this.id]?.services?.variable !== DockerServices.none || lockFile?.[this.id]?.services?.optional)
+    ) {
+      const warning = await promptUser({
+        type: 'Toggle',
+        message: chalk.yellow(
+          'Prior configuration in lock file has been found. You can try `reset:docker` function to change configuration instead.\n' + 'Do you want to try that instead of forcing?'
+        ),
+        initial: true
+      })
+
+      if (warning) {
+        // await ResetDockerCommand.run(this.argv)
+        process.exit(127)
+      }
+    }
+
+    // initiate the context
+    this.tasks.ctx = new DockerNxCommandCtx()
+
+    // run tasks
+    this.tasks.add<DockerNxCommandCtx>([
+      // get prompts then collapse
+      this.tasks.indent(
+        [
+          // read configuration file
+          {
+            title: 'Reading configuration file.',
+            task: async (ctx): Promise<void> => {
+              ctx.brownieConfiguration = await readFile(flags.config)
+            }
+          },
+
+          // check for docker compose overwrite
+          {
+            enabled: (): boolean => !flags?.force && !flags?.override,
+            task: (ctx, task): Promise<void> => tasksOverwritePrompt(flags.output, task)
+          },
+
+          // add base configuration itself
+          {
+            title: 'Adding base services to configuration.',
+            enabled: (ctx): boolean => ctx.brownieConfiguration?.base && Object.keys(ctx.brownieConfiguration?.base).length > 0,
+            task: (ctx): void => {
+              Object.assign(ctx.serviceQueue, ctx.brownieConfiguration?.base)
+              this.locker.add({ path: 'services.children.base', data: Object.keys(ctx.brownieConfiguration?.base) })
+            }
+          },
+
+          // add additional/variable services
+          {
+            title: 'Adding additional services to configuration.',
+            enabled: (ctx): boolean => ctx.brownieConfiguration?.variable && Object.keys(ctx.brownieConfiguration?.variable).length > 0,
+            task: (ctx, task): Listr =>
+              task.newListr([
+                // Additional services prompt
+                {
+                  enabled: (): boolean => ![ DockerServices.none, ...Object.keys(ctx.brownieConfiguration?.variable) ].includes(flags?.['override-variable']),
+                  task: async (ctx, task): Promise<string> =>
+                    ctx.prompts.services.variable = await task.prompt<string>({
+                      type: 'Select',
+                      message: 'What additional services you want to add to base configuration?',
+                      choices: [ DockerServices.none, ...Object.keys(ctx.brownieConfiguration.variable) ]
+                    })
+                },
+
+                // Additional services override.
+                {
+                  enabled: (): boolean => [ DockerServices.none, ...Object.keys(ctx.brownieConfiguration?.variable) ].includes(flags?.['override-variable']),
+                  task: (): void => {
+                    ctx.prompts.services.variable = flags?.['override-variable']
+                  }
+                },
+
+                // Add to variable services to configuration configuration
+                {
+                  enabled: (): boolean => ctx.prompts.services?.variable !== DockerServices.none,
+                  task: (): void => {
+                    // for making things shorter
+                    const service = ctx.prompts.services.variable
+                    const conf = ctx.brownieConfiguration?.variable[service]?.base
+
+                    // add to service queue
+                    Object.assign(ctx.serviceQueue, conf)
+
+                    // debug log
+                    this.logger.debug(`Added "${service}" to configuration.`)
+
+                    // add to locker
+                    this.locker.add({ path: `services.children.${ctx.prompts.services.variable}`, data: Object.keys(conf) })
+                  }
+                }
+              ])
+          },
+
+          // add optional services to configuration
+          {
+            title: 'Adding optional services to configuration.',
+            enabled: (ctx): boolean => ctx.brownieConfiguration?.variable && ctx.prompts.services?.variable !== DockerServices.none,
+            task: (ctx, task): Listr =>
+              task.newListr([
+                {
+                  task: async (ctx, task): Promise<void> => {
+                    // for making things shorter
+                    const conf = ctx.brownieConfiguration.variable
+                    const prompt = ctx.prompts.services.variable
+
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
+                    const { base, ...optional } = conf[prompt]
+                    if (Object.keys(optional).length > 0) {
+                      ctx.prompts.services.optional = await task.prompt<string[]>({
+                        type: 'MultiSelect',
+                        message: 'What optional services you want to add to this configuration? [space to select, a to select all]',
+                        choices: Object.keys(optional)
+                      })
+
+                      const baseService = ctx.brownieConfiguration.variable[ctx.prompts.services.variable]
+                      // add to service queue
+                      ctx.serviceQueue = ctx.prompts.services.optional.reduce((o, service: string): IInitDockerComposeServiceWithInitCli => {
+                        // add to locker
+                        this.locker.add({ path: `services.children.${service}`, data: Object.keys(baseService[service]) })
+
+                        // debug log
+                        this.logger.debug(`Added "${service}" to configuration.`)
+
+                        // return the parsed object
+                        return Object.assign(o, baseService[service])
+                      }, ctx.serviceQueue)
+                    }
+                  }
+                }
+              ])
+          }
+        ],
+        { rendererOptions: { collapse: true } },
+        { title: 'Performing initial tasks.' }
+      ),
+
+      // parse service queue
+      {
+        title: 'Generating the data.',
+        task: async (ctx): Promise<void> => {
+          // go through all the services to strip them out of init-env configuration
+          await Promise.all(
+            Object.entries(ctx.serviceQueue).map(async ([ name, service ]) => {
+              if (service.brownie) {
+                // split
+                const { brownie: init, ...rest } = service
+
+                // push service as the rest of the object
+                ctx.services[name] = rest
+
+                // add environment variable to queue
+                if (init?.environment) {
+                  // add to lock queue
+                  this.locker.add({ path: `env.${name}`, data: init.environment })
+
+                  ctx.envFile = [ ...ctx.envFile, ...init.environment ]
+                  this.logger.debug(`Added environment variables to write to queue from "${name}".`)
+                }
+
+              } else {
+                ctx.services[name] = service
+              }
+            })
+          )
+        }
+      },
+
+      // add parallel tasks
+      this.tasks.indent(
+        [
+
+          // write to environment file
+          {
+            title: 'Writing enviroment file.',
+            enabled: (ctx): boolean => ctx.envFile.length > 0,
+            task: async (ctx, task): Promise<void> => {
+              try {
+                ctx.envFile = spacesBetweenComments(ctx.envFile, '#')
+
+                await writeFile(flags.envfile, ctx.envFile)
+
+                task.title = 'Environment file initiated.'
+              } catch (e) {
+                throw new Error(e)
+              }
+            }
+          }
+
+        ],
+        { concurrent: true },
+        { title: 'Adapting configuration files.' }
+      ),
+
+      // run the finalizing tasks
+      this.tasks.indent([
+        {
+          title: `Writing "${flags.output}".`,
+          task: async (ctx, task): Promise<void> => {
+            try {
+              const generatedConf: Record<string, any> = {}
+              Object.assign(generatedConf, ctx.brownieConfiguration?.header, { services: ctx.services }, ctx.brownieConfiguration?.footer)
+
+              // write file
+              await writeFile(flags.output, generatedConf)
+              task.title = `Generated "${flags.output}".`
+
+              // add to locker
+              this.locker.add([
+                { path: 'services.variable', data: ctx.prompts.services?.variable },
+                { path: 'services.optional', data: ctx.prompts.services?.optional }
+              ])
+            } catch (e) {
+              this.logger.debug(e)
+              throw new Error(`Error trying to generate "${flags.output}".`)
+            }
+          }
+        },
+
+        {
+          title: 'Adapting the lock file.',
+          task: async (ctx, task): Promise<void> => {
+            await this.locker.unlock()
+            await this.locker.lockAll()
+
+            task.title = 'Lock file adapted.'
+          }
+        }
+      ])
+    ])
+
+    // helper info and warnings
+    this.logger.info(`Edit "${flags.envfile}" before running docker-compose stack, if you do not want to use the preconfigured settings.`)
+  }
+}

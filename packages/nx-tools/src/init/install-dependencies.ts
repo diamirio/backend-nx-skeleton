@@ -21,7 +21,6 @@ export function installWorkspaceDependencies (): Rule {
               throw new Error(`Something went wrong while installing dependencies.\n${e}`)
             }
           }
-
         }
       }
     ]).run()

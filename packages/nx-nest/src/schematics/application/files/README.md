@@ -8,10 +8,10 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 ## Description
 
-This is a boilerplate project used to quickly get a basic API based on [Nest](https://github.com/nestjs/nest) up and running.
-It comes with Docker integration, Gitlab continuous integration, linting, a background task and a CLI script.
+This is a boilerplate project used to quickly get a basic API based on [Nest](https://github.com/nestjs/nest) up and running. It comes with Docker integration, Gitlab continuous integration, linting, a background task and a CLI script.
 
 ## Quick Setup with Brownie
+
 Brownie will automatically merge skeleton repositories to the current folder and generate preconfigured "docker-compose.yml" files, depending on the configuration. The configuration will be generated from ".init-docker-compose.yml" file in the skeleton and it will automatically add all the configuration changes and dependencies to the project. This configuration will be a custom tailored one since user is prompted for the variables in configuration.
 
 Read more about brownie the CLI helper [@webundsoehne/brownie](https://gitlab.tailored-apps.com/bdsm/brownie).
@@ -32,8 +32,7 @@ $ docker-compose up -d
 
 ## Getting started
 
-To start a new project create an empty gitlab repository and clone it.
-Afterwards add this repository as a remote and merge it into your project.
+To start a new project create an empty gitlab repository and clone it. Afterwards add this repository as a remote and merge it into your project.
 
 ```bash
 # clone your new project
@@ -85,10 +84,9 @@ $ yarn test:cov
 
 ## Documentation
 
-Swagger API documentation is solved of the [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger) module.
-While the application is running, you will find the documentation on the `/internal/docs` path.
+Swagger API documentation is solved of the [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger) module. While the application is running, you will find the documentation on the `/internal/docs` path.
 
 ## Stay in touch
 
-* Author: [Backend Team](mailto:backend@webundsoehne.com)
-* Website: [Web & Söhne](https://webundsoehne.com)
+- Author: [Backend Team](mailto:backend@webundsoehne.com)
+- Website: [Web & Söhne](https://webundsoehne.com)

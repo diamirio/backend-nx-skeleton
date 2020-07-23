@@ -3,14 +3,13 @@ import { RpcException } from '@nestjs/microservices'
 import { EnrichedHttpException, getErrorMessage } from '@webundsoehne/nestjs-util'
 import { Observable, throwError } from 'rxjs'
 
-export type EnrichedRpcException = Omit<EnrichedHttpException, 'statusCode'> & { statusCode: string}
+export type EnrichedRpcException = Omit<EnrichedHttpException, 'statusCode'> & { statusCode: string }
 
 @Catch()
 export class RpcGlobalExceptionFilter implements RpcExceptionFilter<RpcException> {
   private logger = new Logger(this.constructor.name)
 
   catch (exception: RpcException): Observable<EnrichedRpcException> {
-
     const payload = this.payload(exception)
     this.logger.debug(`[${payload.status}] - "${getErrorMessage(exception.message)}" \n${exception.stack}`)
 

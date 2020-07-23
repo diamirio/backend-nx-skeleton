@@ -29,11 +29,11 @@ export function calculateDependencies (schema: NormalizedSchema): VersionInterfa
     dependencies = merge(dependencies, microserviceModuleDeps)
   }
 
-  if(schema.components.includes('bgtask')) {
+  if (schema.components.includes('bgtask')) {
     dependencies = merge(dependencies, taskModuleDeps)
   }
 
-  if(schema.components.includes('command')) {
+  if (schema.components.includes('command')) {
     dependencies = merge(dependencies, commandModuleDeps)
   }
 
@@ -70,7 +70,7 @@ export const baseDeps: VersionInterface = {
     'class-validator': '^0.12.2',
     'nest-schedule': '^0.6.4'
   },
-  dev :{
+  dev: {
     'ts-node-dev': '^1.0.0-pre.44',
     'tsconfig-paths': '^3.9.0'
   }
@@ -94,9 +94,7 @@ export const graphqlServerDeps: VersionInterface = {
   }
 }
 
-export const taskModuleDeps: VersionInterface = {
-
-}
+export const taskModuleDeps: VersionInterface = {}
 
 export const microserviceModuleDeps: VersionInterface = {}
 

@@ -157,17 +157,16 @@ function compileTypeScriptFiles (
 
         await Promise.all([
           execa.node(tscPath, args, spawnOptions),
-          execa.node(normalize(`./${options.relativeMainFileOutput}/${basename(options.main, '.ts')}.js`),
-            [],
-            { ...spawnOptions, cwd: join(context.workspaceRoot, options.outputPath) })
+          execa.node(normalize(`./${options.relativeMainFileOutput}/${basename(options.main, '.ts')}.js`), [], {
+            ...spawnOptions,
+            cwd: join(context.workspaceRoot, options.outputPath)
+          })
         ])
-
       } else {
         logger.info('Transpiling TypeScript files...')
-        await execa.node(tscPath, args, spawnOptions )
+        await execa.node(tscPath, args, spawnOptions)
 
         logger.info('Transpiling to TypeScript is done.')
-
       }
 
       // optional swap paths, which will swap all the typescripts to relative paths.
@@ -198,7 +197,6 @@ function compileTypeScriptFiles (
 
       subscriber.next({ success: true })
       subscriber.complete()
-
     } catch (error) {
       subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
     }

@@ -8,7 +8,7 @@ import * as tasks from './child.modules'
  */
 
 @Module({
-  providers: [ ],
+  providers: [],
   imports: [ ScheduleModule.register(), ...Object.values(tasks) ]
 })
 export class AppTaskModule {}

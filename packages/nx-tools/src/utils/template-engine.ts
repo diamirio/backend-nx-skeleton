@@ -1,10 +1,4 @@
-import {
-  CreateFileAction,
-  OverwriteFileAction,
-  Rule,
-  SchematicContext,
-  Tree
-} from '@angular-devkit/schematics'
+import { CreateFileAction, OverwriteFileAction, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import nunjucks from 'nunjucks'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
@@ -27,19 +21,24 @@ export function jinjaTemplate (ctx: Record<string, any>, options: { templates: s
 
     // nunjucks configuration
     nunjucks.configure({
-      autoescape: false, throwOnUndefined: true, trimBlocks: true, lstripBlocks: false, ...options?.nunjucks
+      autoescape: false,
+      throwOnUndefined: true,
+      trimBlocks: true,
+      lstripBlocks: false,
+      ...options?.nunjucks
     })
 
     return from(files).pipe(
       filter((file) => host.exists(file.path)),
       mergeMap(async (file) => {
-
         let matchedTemplate: string
-        await Promise.all(options.templates.map((template) => {
-          if (file.path.match(template)) {
-            matchedTemplate = template
-          }
-        }))
+        await Promise.all(
+          options.templates.map((template) => {
+            if (file.path.match(template)) {
+              matchedTemplate = template
+            }
+          })
+        )
 
         if (!matchedTemplate) {
           return
@@ -53,10 +52,8 @@ export function jinjaTemplate (ctx: Record<string, any>, options: { templates: s
         } catch (e) {
           context.logger.warn(`Could not create "${file.path}" from template because ${e.message}`)
         }
-
       }),
       map(() => host)
     )
-
   }
 }

@@ -1,0 +1,48 @@
+# CLI Files
+
+# Source Code
+.drone.yml
+
+# Compiled Output
+/node_modules
+/tmp
+
+# tsconfig
+tsconfig*
+
+# OS
+.DS_Store
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+
+# Node Package Manager
+.npm
+.npmrc
+
+# linter
+.prettierrc*
+.eslintrc*
+
+# Logs
+logs
+*.log
+*-debug.log*
+*-error.log*
+/.nyc_output
+
+# yarn
+yarn.lock
+yarn-error*
+
+# tsbuild
+tsconfig.tsbuildinfo

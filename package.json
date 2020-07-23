@@ -9,8 +9,9 @@
     "ls": "lerna la",
     "bootstrap": "lerna bootstrap ${ARGS} --scope ${PACKAGE:-''} --",
     "rimraf": "rimraf node_modules && lerna clean --scope ${PACKAGE:-''} -y",
-    "release": "lerna --conventional-commits --create-release github",
-    "command": "lerna exec --scope ${PACKAGE:-''} --stream --no-bail --parallel",
+    "release": "lerna publish -y",
+    "exec": "lerna exec --scope ${PACKAGE:-''} --stream --no-bail --parallel",
+    "command": "lerna run --scope ${PACKAGE:-''} --stream --no-bail --parallel",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": [
@@ -23,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@nrwl/workspace": "10.0.2"
+    "@nrwl/workspace": "10.0.4"
   },
   "devDependencies": {
     "@cenk1cenk2/eslint-config": "*",

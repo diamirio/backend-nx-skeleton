@@ -12,7 +12,7 @@ export class MicroservicesFactory {
   public messageQueueGenerate (queue: string, server?: boolean, @ConfigParam('message-queue') mqConfig?: Record<string, any>): RmqOptions {
     const logger = new Logger('Microservices')
 
-    logger.log(`${server ? 'Hosting': 'Connecting'} message queue: "${queue}"@"${mqConfig.protocol}://${mqConfig.host}:${mqConfig.port}"`)
+    logger.log(`${server ? 'Hosting' : 'Connecting'} message queue: "${queue}"@"${mqConfig.protocol}://${mqConfig.host}:${mqConfig.port}"`)
     return {
       transport: Transport.RMQ,
       options: {

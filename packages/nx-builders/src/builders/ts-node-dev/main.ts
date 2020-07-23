@@ -10,11 +10,10 @@ import { NodePackageServeOptions } from './main.interface'
 
 try {
   require('dotenv').config()
-// eslint-disable-next-line no-empty
+  // eslint-disable-next-line no-empty
 } catch (e) {}
 
 function startTypescriptNode (options: NodePackageServeOptions, context: BuilderContext, root: string, callback): ChildProcess {
-
   const logger = new Logger(context)
 
   const { args, spawnOptions } = normalizeOptions(options)

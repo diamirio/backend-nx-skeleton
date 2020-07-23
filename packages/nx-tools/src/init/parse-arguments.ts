@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
-export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: {name: string}[], options?: {required?: boolean, single?: boolean}): T {
+export function parseArguments<T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: { name: string }[], options?: { required?: boolean, single?: boolean }): T {
   const arg = args.split(',')
 
   const parsedValidArgs = validArgs.reduce((o, val) => {
@@ -16,7 +16,6 @@ export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: stri
 
       return o
     }
-
   }, [])
 
   // check empty after parsed
@@ -29,9 +28,9 @@ export function parseArguments <T> (task: ListrTaskWrapper<any, any>, args: stri
     throw new Error(`Only select one of the given valid argument list of: "${parsedValidArgs}"`)
   }
 
-  return parsedArgs as unknown as T
+  return (parsedArgs as unknown) as T
 }
 
-export function isCorrectType <T> (keys: string[], value: any): value is T {
+export function isCorrectType<T> (keys: string[], value: any): value is T {
   return keys.indexOf(value) !== -1
 }

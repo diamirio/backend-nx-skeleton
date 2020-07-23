@@ -13,10 +13,12 @@ import {
   SchematicContext,
   Source,
   Tree,
-  forEach
+  forEach,
+  chain
 } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { jinjaTemplate } from '@webundsoehne/nx-tools'
+import { Observable } from 'rxjs'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
@@ -69,19 +71,21 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
     }
   ]
 
-  return applyWithOverwrite(url('./files'), [
+  return chain([
+    applyWithOverwrite(url('./files'), [
       ...fileTemplates.map((val) => {
-        return val.condition
-          ? filter((file) => !file.match(`__${val.match}__`))
-          : noop
+        return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
       }),
 
       // interpolate the templates
-      jinjaTemplate({
-        ...names(options.name),
-        ...options,
-        offsetFromRoot: offsetFromRoot(options.root)
-      }, { templates: [ '.j2' ] } ),
+      jinjaTemplate(
+        {
+          ...names(options.name),
+          ...options,
+          offsetFromRoot: offsetFromRoot(options.root)
+        },
+        { templates: [ '.j2' ] }
+      ),
 
       // clean up rest of the names
       template({
@@ -92,33 +96,29 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
       }),
 
       ...omitFolders.map((val) => {
-        return val.condition
-          ? filter((file) => val.match(file))
-          : noop()
+        return val.condition ? filter((file) => val.match(file)) : noop()
       }),
 
       // move all the files that are not filtered
       move(options.root)
     ])
+  ])
 }
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
-export function applyWithOverwrite(source: Source, rules: Rule[]): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    const rule = mergeWith(
+export function applyWithOverwrite (source: Source, rules: Rule[]): Rule {
+  return (tree: Tree): Rule => {
+    return mergeWith(
       apply(source, [
         ...rules,
         forEach((fileEntry) => {
           if (tree.exists(fileEntry.path)) {
-            tree.overwrite(fileEntry.path, fileEntry.content);
-            return null;
+            tree.overwrite(fileEntry.path, fileEntry.content)
+            return null
           }
-          return fileEntry;
-        }),
-
-      ]),
-    );
-
-    return rule(tree, context);
-  };
+          return fileEntry
+        })
+      ])
+    )
+  }
 }

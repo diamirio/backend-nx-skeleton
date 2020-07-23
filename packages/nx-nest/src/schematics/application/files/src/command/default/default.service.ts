@@ -11,7 +11,9 @@ export class DefaultService {
   private logger: Logger = new Logger(this.constructor.name)
 
   @Command({
-    command: 'hello <name>', describe: 'Prints hello <name>', autoExit: true
+    command: 'hello <name>',
+    describe: 'Prints hello <name>',
+    autoExit: true
   })
   async helloWorld (
   @Positional({

@@ -7,7 +7,7 @@ services:
       # - PACKAGE_START_COMMAND=start
       # format => packages/service1:packages/service2
       # format => packages/service1,off,override="start":packages/service2,override='dev'
-      - SERVICES=packages/nx-tools:packages/nx-builders:packages/nx-nest
+      - SERVICES=packages/brownie:packages/nestjs-util:packages/nx-tools:packages/nx-builders:packages/nx-nest
       - RUN_IN_BAND=packages/nx-tools:packages/nx-builders
     volumes:
       - .:/data/app

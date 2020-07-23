@@ -1,11 +1,4 @@
-import {
-  CreateFileAction,
-  noop,
-  OverwriteFileAction,
-  Rule,
-  SchematicContext,
-  Tree
-} from '@angular-devkit/schematics'
+import { CreateFileAction, noop, OverwriteFileAction, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { findWorkspaceRoot } from '@nrwl/cli/lib/find-workspace-root'
 import { ESLint } from 'eslint'
 import * as path from 'path'
@@ -16,7 +9,9 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 
 export function formatFiles (
   options: { skipFormat?: boolean, prettier?: boolean, eslint?: boolean } = {
-    skipFormat: false, prettier: true, eslint: false
+    skipFormat: false,
+    prettier: true,
+    eslint: false
   }
 ): Rule {
   const appRootPath = findWorkspaceRoot(process.cwd()).dir
@@ -92,10 +87,8 @@ export function formatFiles (
         } catch (e) {
           context.logger.warn(`Could not format ${file.path} because ${e.message}`)
         }
-
       }),
       map(() => host)
     )
-
   }
 }

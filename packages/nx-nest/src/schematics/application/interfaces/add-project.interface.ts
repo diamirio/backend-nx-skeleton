@@ -16,5 +16,4 @@ export interface ProjectArchitect {
     builder: '@webundsoehne/nx-builders:ts-node-dev'
     options: NodePackageServeOptions
   }
-
 }

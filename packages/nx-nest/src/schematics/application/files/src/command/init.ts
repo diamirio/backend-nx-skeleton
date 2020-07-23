@@ -9,8 +9,5 @@ export async function createApplication (): Promise<void> {
     logger: new LoggerService()
   })
 
-  app
-    .select(CommandModule)
-    .get(CommandService)
-    .exec()
+  app.select(CommandModule).get(CommandService).exec()
 }

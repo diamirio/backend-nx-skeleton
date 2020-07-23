@@ -1,0 +1,120 @@
+{
+  "name": "@webundsoehne/brownie",
+  "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
+  "version": "1.0.0-development",
+  "author": "Cenk Kilic <ck@webundsoehne.com>, Backend <backend@webundsoehne.com>",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "brownie": "bin/run.js"
+  },
+  "repository": "https://github.com/cenk1cenk2/boilerplate-oclif",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
+    "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
+    "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "lint": "prettier --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "release": "yarn lint && yarn readme",
+    "readme": "yarn oclif-dev readme",
+    "oclif": "oclif $command",
+    "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
+    "test": "NODE_ENV=test jest --forceExit --runInBand --config ./tests/jest.config.js",
+    "test:cov": "NODE_ENV=test jest --coverage --config ./tests/jest.config.js",
+    "dev:test": "NODE_ENV=test jest --verbose --runInBand --forceExit --watchAll --config ./tests/jest.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "./*.{ts,js,tsx,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "files": [
+    "bin/",
+    "config/",
+    "dist/"
+  ],
+  "oclif": {
+    "commands": "./dist/commands",
+    "bin": "cenk1cenk2",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@tiagonapoli/oclif-plugin-spaced-commands"
+    ],
+    "hooks": {
+      "init": "./dist/hooks/init.hook",
+      "command_not_found": "./dist/hooks/not-found.hook",
+      "prerun": "./dist/hooks/prerun.hook"
+    }
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "oclif",
+    "cenk1cenk2"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@cenk1cenk2/boilerplate-oclif": "^1.1.0",
+    "@oclif/command": "^1.6.1",
+    "@oclif/config": "^1.15.1",
+    "@oclif/errors": "^1.2.2",
+    "config": "^3.3.1",
+    "deepmerge": "^4.2.2",
+    "enquirer": "^2.3.5",
+    "execa": "^4.0.2",
+    "fs-extra": "^9.0.0",
+    "globby": "^11.0.0",
+    "lerna": "^3.22.1",
+    "listr2": "^2.1.3",
+    "object-path": "^0.11.4",
+    "object-path-immutable": "^4.1.0",
+    "pad": "^3.2.0",
+    "table": "^5.4.6",
+    "tslib": "^2.0.0",
+    "types": "^0.1.1",
+    "winston": "^3.2.1",
+    "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "@cenk1cenk2/eslint-config": "*",
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/config": "^0.0.36",
+    "@types/fs-extra": "^9.0.1",
+    "@types/jest": "^26.0.5",
+    "@types/node": "^14.0.6",
+    "@types/object-path": "^0.11.0",
+    "cz-conventional-changelog": "3.2.0",
+    "eslint": "^7.1.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.7",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.10.2",
+    "tsc-watch": "^4.2.8",
+    "tsconfig-paths": "^3.9.0",
+    "tscpaths": "^0.0.9",
+    "typescript": "^3.9.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

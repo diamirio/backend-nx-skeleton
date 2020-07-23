@@ -5,10 +5,13 @@
   "repository": "<<---REPOSITORYHERE--->>",
   "author": "Cenk Kilic",
   "license": "MIT",
-  "schematics": "./collection.json",
-  "builders": "./builders.json",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "schematics": "./collection.json",
+  "builders": "./builders.json",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
@@ -16,17 +19,22 @@
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
     "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && yarn postbuild",
-    "lint": "prettier --write src/ && eslint --ext .ts,.js --fix src/"
+    "lint": "prettier --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "lint-staged": {
-    "src/*.{ts,js,json}": [
+    "./*.{ts,js,tsx,jsx}": [
       "prettier --write",
-      "eslint --ext .ts,.js --fix"
+      "eslint --fix"
+    ],
+    "./*.{json,md}": [
+      "prettier --write"
     ]
   },
   "config": {

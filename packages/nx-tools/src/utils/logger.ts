@@ -6,7 +6,6 @@ import { EOL } from 'os'
 import { LogLevels, LoggerOptions } from './logger.interface'
 
 export class Logger {
-
   constructor (private context: BuilderContext, private options?: LoggerOptions) {
     // set default options
     this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
@@ -33,11 +32,14 @@ export class Logger {
   }
 
   private parseMessage (level: LogLevels, data: string | Buffer): void {
-    data.toString().split(EOL).forEach((line) => {
-      if (line !== '') {
-        this.context.logger.log(level, this.logColoring({ level, message: `[${this.context.target.project}] ` }) + line)
-      }
-    })
+    data
+      .toString()
+      .split(EOL)
+      .forEach((line) => {
+        if (line !== '') {
+          this.context.logger.log(level, this.logColoring({ level, message: `[${this.context.target.project}] ` }) + line)
+        }
+      })
   }
 
   private logColoring ({ level, message }: { level: LogLevels, message: string }): string {
@@ -95,7 +97,6 @@ export class Logger {
         icon = '[DEBUG]'
       }
       break
-
     }
 
     return coloring(`${icon} ${message}`)

@@ -1,12 +1,4 @@
-import {
-  chain,
-  Rule,
-  SchematicContext,
-  Tree,
-  branchAndMerge,
-  MergeStrategy,
-  mergeWith
-} from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext, Tree, branchAndMerge, MergeStrategy, mergeWith } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
 import { formatFiles } from '@webundsoehne/nx-tools'
@@ -30,8 +22,8 @@ export default function (schema: Schema): Rule {
       }),
       addProject(options),
       // addLintFiles(options.root, Linter.EsLint, {
-        // localConfig: eslintJson,
-        // extraPackageDeps: eslintDeps
+      // localConfig: eslintJson,
+      // extraPackageDeps: eslintDeps
       // }),
       createApplicationFiles(options),
       updateIntegration(options),

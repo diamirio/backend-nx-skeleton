@@ -8,7 +8,6 @@ import { getDatabaseOptions } from '@root/utils/database'
 import * as modules from './child.modules'
 
 export function createMicroserviceModule (mock = false): new (mock: boolean) => NestModule {
-
   @Module({
     providers: [
       {
@@ -24,11 +23,7 @@ export function createMicroserviceModule (mock = false): new (mock: boolean) => 
         useClass: RpcGlobalExceptionFilter
       }
     ],
-    imports: [
-      GlobalModules,
-      TypeOrmModule.forRoot({ ...getDatabaseOptions(mock) }),
-      ...Object.values(modules)
-    ]
+    imports: [ GlobalModules, TypeOrmModule.forRoot({ ...getDatabaseOptions(mock) }), ...Object.values(modules) ]
   })
   class MicroservicesModule implements NestModule {
     // eslint-disable-next-line @typescript-eslint/no-empty-function

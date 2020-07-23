@@ -10,8 +10,7 @@ export const eslintDeps = {
 }
 
 export const eslintJson = {
-  extends: [
-  ],
+  extends: [],
   rules: {
     'import/order': [
       'error',
@@ -38,19 +37,10 @@ export const eslintJson = {
             group: 'index'
           }
         ],
-        pathGroupsExcludedImportTypes: [
-          'builtin'
-        ],
+        pathGroupsExcludedImportTypes: [ 'builtin' ],
         groups: [
-          [
-            'builtin',
-            'external'
-          ],
-          [
-            'index',
-            'parent',
-            'sibling'
-          ]
+          [ 'builtin', 'external' ],
+          [ 'index', 'parent', 'sibling' ]
         ],
         'newlines-between': 'always',
         alphabetize: {

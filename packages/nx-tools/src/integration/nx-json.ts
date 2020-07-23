@@ -2,15 +2,13 @@ import { Rule } from '@angular-devkit/schematics'
 import { updateJsonInTree } from '@nrwl/workspace'
 import merge from 'deepmerge'
 
-import { NxJsonIntegration } from './nx-json.interface'
-
-export function updateNxIntegration (name: string, options: NxJsonIntegration): Rule {
+export function updateNxIntegration<T> (name: string, options: T): Rule {
   return updateJsonInTree('nx.json', (json) => {
-    let nxJson = {} as NxJsonIntegration
+    let nxJson = {} as T
 
     // get the current config or create a new one
     if (!json?.projects?.[name]?.integration) {
-      json.projects[name].integration = {} as NxJsonIntegration
+      json.projects[name].integration = {} as T
     } else {
       nxJson = json.projects[name].integration
     }

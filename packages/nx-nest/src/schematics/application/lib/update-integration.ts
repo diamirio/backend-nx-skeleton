@@ -13,30 +13,22 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add the components that needs to be known
-    updateNxIntegration(options.name,
-      {
-        components: options.components,
-        setup: {
-          server: options.server, database: options.database
-        }
-      }),
+    updateNxIntegration<NormalizedSchema['priorConfiguration']>(options.name, {
+      components: options.components,
+      server: options.server,
+      database: options.database
+    }),
 
     // add nx container
     updateBrownieIntegration(options.name, { containers: [ 'nx' ] }),
 
     // add mysql container
-    options.database?.includes('mysql') ?
-      updateBrownieIntegration(options.name, { containers: [ 'mysql' ] }) :
-      noop(),
+    options.database?.includes('mysql') ? updateBrownieIntegration(options.name, { containers: [ 'mysql' ] }) : noop(),
 
     // add postgresql container
-    options.database?.includes('postgresql') ?
-      updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) :
-      noop(),
+    options.database?.includes('postgresql') ? updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) : noop(),
 
     // add mongodb container
-    options.database?.includes('mongodb') ?
-      updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) :
-      noop()
+    options.database?.includes('mongodb') ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop()
   ])
 }
