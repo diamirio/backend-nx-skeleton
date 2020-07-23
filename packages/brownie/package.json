@@ -2,13 +2,14 @@
   "name": "@webundsoehne/brownie",
   "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
   "version": "1.0.0-development",
-  "author": "Cenk Kilic <ck@webundsoehne.com>, Backend <backend@webundsoehne.com>",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
     "brownie": "bin/run.js"
   },
-  "repository": "https://github.com/cenk1cenk2/boilerplate-oclif",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
     "access": "public"
   },
@@ -68,7 +69,6 @@
     "oclif",
     "cenk1cenk2"
   ],
-  "license": "MIT",
   "dependencies": {
     "@cenk1cenk2/boilerplate-oclif": "^1.1.0",
     "@oclif/command": "^1.6.1",

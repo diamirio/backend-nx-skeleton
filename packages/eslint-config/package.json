@@ -3,9 +3,12 @@
   "version": "1.0.0-development",
   "description": "Eslint configuration for my taste.",
   "main": "index.js",
-  "repository": "https://github.com/cenk1cenk2/eslint-config",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "author": "Backend <backend@webundsoehne.com>",
-  "license": "MIT",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "prettier --write ./*.js && eslint --ext .ts,.js,.tsx,.jsx --fix ./",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx ./"

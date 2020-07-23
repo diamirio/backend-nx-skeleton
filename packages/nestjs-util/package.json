@@ -1,9 +1,9 @@
 {
   "name": "@webundsoehne/nestjs-util",
-  "version": "1.0.0",
+  "version": "1.0.0-development",
   "description": "NestJS skeleton util library",
   "author": "Backend <backend@webundsoehne.com>",
-  "license": "MIT",
+  "license": "ISC",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {

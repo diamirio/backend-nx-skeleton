@@ -1,6 +1,5 @@
 {
   "name": "@webundsoehne/nx-nest",
-  "version": "0.1",
   "extends": ["@nrwl/workspace"],
   "schematics": {
     "init": {

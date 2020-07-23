@@ -1,17 +1,17 @@
 {
   "name": "@webundsoehne/nx-nest",
-  "version": "0.0.1",
+  "version": "1.0.0-development",
   "description": "Nest Plugin for Nx",
-  "repository": "<<---REPOSITORYHERE--->>",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "author": "Cenk Kilic",
-  "license": "MIT",
-  "schematics": "./collection.json",
-  "builders": "./builders.json",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
+  "schematics": "./collection.json",
+  "builders": "./builders.json",
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",

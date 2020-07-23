@@ -1,17 +1,17 @@
 {
   "name": "@webundsoehne/nx-builders",
-  "version": "0.0.1",
+  "version": "1.0.0-development",
   "description": "TSC compiler for NX.",
-  "repository": "<<---REPOSITORYHERE--->>",
-  "author": "Cenk Kilic",
-  "license": "MIT",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "schematics": "./collection.json",
-  "builders": "./builders.json",
   "publishConfig": {
     "access": "public"
   },
+  "schematics": "./collection.json",
+  "builders": "./builders.json",
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
