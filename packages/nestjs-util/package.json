@@ -48,10 +48,12 @@
     "@nestjs/common": ">= 7 < 8",
     "@nestjs/core": ">= 7 < 8",
     "@nestjs/swagger": ">= 4 < 5",
-    "fastify-swagger": ">= 2.5.0",
+    "fastify": ">= 3.0.0",
+    "fastify-swagger": ">= 3.0.0",
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
+    "cz-conventional-changelog": "3.2.0",
     "@nestjs/common": "^7.0.13",
     "@nestjs/core": "^7.0.13",
     "@nestjs/swagger": "^4.5.7",
@@ -67,13 +69,10 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
     "nest-schedule": "^0.6.4",
-    "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
-    "supertest": "^4.0.2",
-    "ts-jest": "^26.0.0",
     "ts-node": "^8.5.3",
     "tsconfig-paths": "^3.9.0",
-    "tslint": "^6.1.2",
+    "eslint": "^7.5.0",
     "typescript": "^3.9.2",
     "wait-on": "^5.0.0"
   },

@@ -60,7 +60,6 @@
     "prettier": "^2.0.5"
   },
   "devDependencies": {
-    "@cenk1cenk2/eslint-config": "*",
     "@types/figures": "^3.0.1",
     "@types/nunjucks": "^3.1.3",
     "lint-staged": "^10.2.11",

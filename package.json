@@ -27,10 +27,9 @@
     "@nrwl/workspace": "10.0.4"
   },
   "devDependencies": {
-    "@cenk1cenk2/eslint-config": "*",
     "commitizen": "^4.0.5",
     "cz-conventional-changelog": "^3.1.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
     "prettier": "^2.0.5",

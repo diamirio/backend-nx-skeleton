@@ -92,7 +92,6 @@
     "yaml": "^1.10.0"
   },
   "devDependencies": {
-    "@cenk1cenk2/eslint-config": "*",
     "@oclif/dev-cli": "^1.22.2",
     "@types/config": "^0.0.36",
     "@types/fs-extra": "^9.0.1",

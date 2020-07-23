@@ -1,9 +1,8 @@
 module.exports = {
   extends: [
-    '@cenk1cenk2/eslint-config/typescript'
+    './packages/eslint-config/typescript'
   ],
   rules: {
-    'typescript-eslint/explicit-module-boundary-types': 'off',
     'import/order': [
       'error',
       {
@@ -18,6 +17,10 @@ module.exports = {
           },
           {
             pattern: '@init/**',
+            group: 'index'
+          },
+          {
+            pattern: '@interfaces/**',
             group: 'index'
           }
         ],
