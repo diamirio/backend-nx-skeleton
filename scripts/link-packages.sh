@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Register all packages for development."
-PACKAGES=packages/*
+echo "Register all packages globally for development."
+PACKAGES=../packages/*
 
 if [ -z "$1" ]; then
   echo "Give out a command: link | unlink"
