@@ -5,28 +5,28 @@ import {
   noop,
   Rule,
   SchematicContext,
-
-  Source, template,
+  template,
   url
 } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
-import { applyOverwriteWithDiff, jinjaTemplate } from '@webundsoehne/nx-tools'
+import { applyOverwriteWithDiff, formatFiles, jinjaTemplate, Logger } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+  const log = new Logger(context)
   // source is always the same
   const source = url('./files')
 
   return chain([
     await applyOverwriteWithDiff(
       // just needs the url the rest it will do it itself
-      apply(source, generateRules(options)),
+      apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
-      options.priorConfiguration ?
-        apply(source, generateRules(merge<NormalizedSchema>(options, options.priorConfiguration))) :
+      options?.priorConfiguration ?
+        apply(source, generateRules(merge<NormalizedSchema>(options, options.priorConfiguration, { arrayMerge: (target, source) => source }), log)) :
         null,
       context
     )
@@ -34,7 +34,10 @@ export async function createApplicationFiles (options: NormalizedSchema, context
 
 }
 
-function generateRules (options: NormalizedSchema): Rule[] {
+function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
+  log.debug('Generating rules for given options.')
+  log.debug(JSON.stringify(options, null, 2))
+
   const fileTemplates: FileTemplatesInterface[] = [
     {
       condition: options?.server !== 'restful',
@@ -83,6 +86,7 @@ function generateRules (options: NormalizedSchema): Rule[] {
   ]
 
   return [
+    // clean up unwanted folders from tree
     ...fileTemplates.map((val) => {
       return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
     }),
@@ -105,11 +109,15 @@ function generateRules (options: NormalizedSchema): Rule[] {
       ...fileTemplates.reduce((o, val) => ({ ...o, [val.match.toString()]: '' }), {})
     }),
 
+    // omit some folders
     ...omitFolders.map((val) => {
       return val.condition ? filter((file) => val.match(file)) : noop()
     }),
 
-    // move all the files that are not filtered
+    // need to format files before putting them through difference, or else it goes crazy.
+    formatFiles({ eslint: true, prettier: true }),
+
+    // move all the files to package root
     move(options.root)
   ]
 

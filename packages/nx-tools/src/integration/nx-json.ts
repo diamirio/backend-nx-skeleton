@@ -14,7 +14,9 @@ export function updateNxIntegration<T> (name: string, options: T): Rule {
     }
 
     // write it back
-    json.projects[name].integration = merge(nxJson, options)
+    json.projects[name].integration = merge(nxJson, options, {
+      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
+    })
 
     return json
   })

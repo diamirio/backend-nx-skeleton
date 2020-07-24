@@ -49,7 +49,7 @@
     "@angular-devkit/architect": "^0.1000.3",
     "@angular-devkit/core": "^10.0.3",
     "@angular-devkit/schematics": "~10.0.3",
-    "@nrwl/cli": "^10.0.2",
+    "@nrwl/cli": "^10.0.6",
     "execa": "^4.0.2"
   },
   "devDependencies": {

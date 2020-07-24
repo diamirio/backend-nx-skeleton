@@ -16,7 +16,9 @@ export function updateBrownieIntegration (name: string, options: BrownieIntegrat
     }
 
     // write it back
-    json.projects[name].brownie = merge(brownie, options)
+    json.projects[name].brownie = merge(brownie, options, {
+      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
+    })
 
     return json
   })

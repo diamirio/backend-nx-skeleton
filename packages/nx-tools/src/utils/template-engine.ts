@@ -49,7 +49,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: { templates: s
           host.overwrite(file.path, file.content)
           host.rename(file.path, file.path.replace(matchedTemplate, ''))
         } catch (e) {
-          context.logger.warn(`Could not create "${file.path}" from template because ${e.message}`)
+          context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)
         }
       }),
       map(() => host)

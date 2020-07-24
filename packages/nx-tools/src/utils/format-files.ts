@@ -84,7 +84,7 @@ export function formatFiles (
 
           host.overwrite(file.path, file.content)
         } catch (e) {
-          context.logger.warn(`Could not format ${file.path} because ${e.message}`)
+          context.logger.warn(`Could not format ${file.path}: ${e.message}`)
         }
       }),
       map(() => host)

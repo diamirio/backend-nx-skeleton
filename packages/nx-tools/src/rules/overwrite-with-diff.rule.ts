@@ -9,6 +9,8 @@ import {
 } from '@angular-devkit/schematics'
 import { Logger } from '@utils/logger'
 import * as diff from 'diff'
+import { createPrompt } from 'listr2'
+import { dirname } from 'path'
 import { Observable } from 'rxjs'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
@@ -18,80 +20,156 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
   // generate the old tree without aplying something
   let oldTree: Tree
   if (oldSource) {
-    oldTree = await (oldSource(context) as unknown as Observable<Tree>).toPromise()
+    try {
+      oldTree = await (oldSource(context) as unknown as Observable<Tree>).toPromise()
+      log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
+    // eslint-disable-next-line no-empty
+    } catch {
+
+    }
   }
+
+  // angular is not enough for this, need a hacky solution to track the files, because some of them we overwrite directly
+  let fileChanges: string[] = []
+  let filesToRemove: string[] = []
+  let filesToKeep: string[] = []
 
   return (tree: Tree): Rule => {
     return mergeWith(
       apply(source, [
         forEach((file) => {
           if (tree.exists(file.path)) {
-            log.warn(`File already exists: "${file.path}"`)
+            let buffer = file.content
 
             if (oldTree?.exists(file.path)) {
+              // check if this file is part of old application
               const oldFile = oldTree.read(file.path).toString()
-              const targetFile = tree.read(file.path).toString()
-              const futureFile = file.content.toString()
+              const currentFile = tree.read(file.path).toString()
+              const newFile = file.content.toString()
 
-              mergeFiles(targetFile, oldFile, futureFile)
+              const mergedFiles = mergeFiles(file.path, currentFile, oldFile, newFile, log)
+
+              if (typeof mergedFiles === 'string') {
+                buffer = Buffer.from(mergedFiles, 'utf-8')
+
+                tree.overwrite(file.path, buffer)
+              } else {
+                log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
+
+                tree.rename(file.path, `${file.path}.old`)
+
+                tree.create(file.path, buffer)
+              }
+
+            } else {
+              // file is not part of the old setup but still exists
+              log.error(`File with same name exists: "${file.path}" -> "${file.path}.old"`)
+
+              // move file
+              tree.rename(file.path, `${file.path}.old`)
+
+              // create file
+              tree.create(file.path, buffer)
             }
 
-            tree.overwrite(file.path, file.content)
-
+            // add this to file changes, return null since we did the operation directly
+            fileChanges = [ ...fileChanges, file.path ]
             return null
           }
 
+          // vanilla mode
+          fileChanges = [ ...fileChanges, file.path ]
           return file
-        })
+        }),
 
-        // TODO: WILL ADD REMOVE LATER ON, it is bit harder than anticipated
-        // (): void => oldTree.visit((path) => {
+        // compare current and old configuration to get not needed files
+        (): void => {
+          oldTree?.visit((path) => {
+            // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
+            if (tree.exists(path) && !fileChanges.includes(path)) {
+              filesToRemove = [ ...filesToRemove, path ]
+            }
 
-        //   log.error(path)
-        // })
+          })
+        },
 
-        // forEach((file) => {
+        // ask user if he/she wants to keep files that are not needed anymore
+        async (): Promise<void> => {
+          if (filesToRemove.length > 0) {
+            filesToKeep = await createPrompt({
+              type: 'MultiSelect',
+              message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
+              choices: filesToRemove
+            }, {
+              stdout: process.stdout,
+              cancelCallback: () => {
+                log.error('Cancelled prompt.')
+                process.exit(127)
+              }
+            })
+          }
+        },
 
-        //   if (oldTree?.exists(file.path)) {
-        //     // if the old tree has file and new tree doesnt have it
-        //     log.error(`Should delete file: "${file.path}"`)
+        // delete not needed files from changing setup
+        async (): Promise<void> => {
+          if (filesToRemove.length > 0) {
+            // get which files to remove
+            filesToRemove = filesToRemove.reduce((o, val) => {
+              // angular normalizes even path arrays defined outside!
+              o = [ ...o, (val as any).path ]
+              return o
+            }, [])
 
-        //     tree.delete(file.path)
+            // remove that file
+            await Promise.all(filesToRemove.map((file) => {
 
-        //     return null
+              if (!filesToKeep.includes(file)) {
+                log.debug(`Deleting not-needed file: "${file}"`)
+                tree.delete(file)
+              } else {
+                log.debug(`Keeping not-needed file: "${file}"`)
+              }
 
-        //   }
+            }))
+          }
 
-        //   return file
-        // })
+        },
+
+        // delete empty directories after changes
+        async (): Promise<void> => {
+          if (filesToRemove.length > 0) {
+            // get all directory names of files to remove
+            const directories = filesToRemove
+              .map((path) => dirname(path))
+              .filter((item, index, array) => array.indexOf(item) === index)
+
+            // check and delete empty directories
+            await Promise.all(directories.map(async (directory) => {
+
+              if (tree.getDir(directory)?.subfiles?.length === 0 && !(tree.getDir(directory)?.subdirs?.length > 0)) {
+                log.debug(`Deleting not-needed empty directory: "${directory}"`)
+                tree.delete(directory)
+
+              } else if (tree.getDir(directory)?.subdirs?.length > 0) {
+                // dont delete if has subdirectories
+                log.debug(`Still has subdirectories: "${directory}"`)
+
+              }
+
+            }))
+          }
+        }
 
       ])
     )
   }
 }
 
-export function mergeFiles (targetFile: string, oldFile: string, futureFile: string) {
-  let differences = diff.diffLines(oldFile, futureFile)
+export function mergeFiles (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
+  // create difference-patch
+  const patch = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
 
-  let buffer = differences.reduce((o, difference) => {
-    if (!difference.added && !difference.removed) {
-      o += difference.value
-    } else if (difference.added) {
-      o += difference.value
-    }
-    return o
-  }, '')
+  log.debug(patch)
 
-  differences = diff.diffLines(targetFile, buffer)
-
-  buffer = differences.reduce((o, difference) => {
-    if (!difference.added && !difference.removed) {
-      o += difference.value
-    } else if (difference.added) {
-      o += difference.value
-    }
-    return o
-  }, '')
-
-  console.log(buffer)
+  return diff.applyPatch(currentFile, patch)
 }

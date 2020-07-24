@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@nrwl/workspace": "10.0.4"
+    "@nrwl/workspace": "10.0.6"
   },
   "devDependencies": {
     "commitizen": "^4.0.5",
