@@ -11,7 +11,7 @@ module.exports = {
       // },
       rules: {
         // this is a bit buggy at the moment
-        'typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/array-type': 'error',

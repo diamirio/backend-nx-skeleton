@@ -27,15 +27,15 @@ export default function (schema: Schema): Rule {
       (): void => log.info('Adding project to workspace.'),
       addProject(options),
 
-      !host.exists(`${options.root}/.eslintrc`) ?
-        chain([
+      !host.exists(`${options.root}/.eslintrc`)
+        ? chain([
           (): void => log.info('Adding eslint configuration.'),
           addLintFiles(options.root, Linter.EsLint, {
             localConfig: eslintJson,
             extraPackageDeps: eslintDeps
           })
-        ]) :
-        (): void => log.warn('Skipping since eslint configuration already exists.'),
+        ])
+        : (): void => log.warn('Skipping since eslint configuration already exists.'),
 
       (): void => log.info('Creating application files.'),
       await createApplicationFiles(options, context),

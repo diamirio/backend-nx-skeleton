@@ -1,0 +1,3 @@
+- from: mongo-initialize.sh
+  to: /docker-entrypoint-initdb.d/mongo-initialize-multiple.sh
+  options: ro

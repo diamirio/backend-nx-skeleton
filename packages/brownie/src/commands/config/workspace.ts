@@ -1,24 +1,15 @@
-import { ConfigBaseCommand, promptUser, createTable, ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
+import { ConfigBaseCommand, promptUser, createTable, ConfigRemove, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
 
-import { WorkspaceConfig } from '@context/config/workspace.config.interface'
+import { WorkspaceConfig, WorkspacePrompt } from '@context/config/workspace.config.interface'
 
 export class WorkspaceConfigCommand extends ConfigBaseCommand {
   static description = 'Edit available workspace skeletons through a user interface.'
   protected configName = 'workspace.config.yml'
-  protected configType: 'general' = 'general'
+  protected configType = ConfigTypes.general
 
   async configAdd (config: WorkspaceConfig): Promise<WorkspaceConfig> {
     // prompt user for details
-    const response = await promptUser({
-      type: 'Form',
-      message: 'Please provide the details for repository below.',
-      choices: [
-        { name: 'value', message: 'Repository' },
-        { name: 'name', message: 'Name' }
-      ],
-      validate: (value) => this.validate(value),
-      result: (value) => this.result(value)
-    })
+    const response = await this.prompt(config)
 
     // userInput user if name already exists
     let overwritePrompt = true
@@ -42,24 +33,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
       choices: Object.keys(config)
     })
 
-    const edit = await promptUser({
-      type: 'Form',
-      message: 'Please provide the details for repository below.',
-      choices: [
-        {
-          name: 'value',
-          message: 'Repository',
-          initial: config[select]
-        },
-        {
-          name: 'name',
-          message: 'Name',
-          initial: select
-        }
-      ],
-      validate: (value) => this.validate(value),
-      result: (value) => this.result(value)
-    })
+    const edit = await this.prompt(config, select)
 
     // strip old item
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
@@ -84,8 +58,16 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
 
   async configRemove (config: WorkspaceConfig): Promise<ConfigRemove<WorkspaceConfig>> {
     return {
-      keys: [],
-      removeFunction: async (config): Promise<WorkspaceConfig> => config
+      keys: Object.keys(config),
+      removeFunction: async (config, userInput): Promise<WorkspaceConfig> => {
+        userInput.forEach((input) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { [input]: omit, ...rest } = config
+          config = rest
+        })
+
+        return config
+      }
     }
   }
 
@@ -102,5 +84,26 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
       this.logger.warn(`Name was empty for "${value.value}", initiated it as "${value.name}".`)
     }
     return value
+  }
+
+  private prompt (config: WorkspaceConfig, select?: string): Promise<WorkspacePrompt> {
+    return promptUser<WorkspacePrompt>({
+      type: 'Form',
+      message: 'Please provide the details for repository below.',
+      choices: [
+        {
+          name: 'value',
+          message: 'Repository',
+          initial: select ?? config[select]
+        },
+        {
+          name: 'name',
+          message: 'Name',
+          initial: select ?? select
+        }
+      ],
+      validate: (value) => this.validate(value),
+      result: (value) => this.result(value)
+    })
   }
 }

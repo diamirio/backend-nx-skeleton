@@ -1,12 +1,4 @@
-import {
-  apply,
-  forEach,
-  mergeWith,
-  Rule,
-  SchematicContext,
-  Source,
-  Tree
-} from '@angular-devkit/schematics'
+import { apply, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
 import { Logger } from '@utils/logger'
 import * as diff from 'diff'
 import { createPrompt } from 'listr2'
@@ -21,12 +13,10 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
   let oldTree: Tree
   if (oldSource) {
     try {
-      oldTree = await (oldSource(context) as unknown as Observable<Tree>).toPromise()
+      oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
       log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
-    // eslint-disable-next-line no-empty
-    } catch {
-
-    }
+      // eslint-disable-next-line no-empty
+    } catch {}
   }
 
   // angular is not enough for this, need a hacky solution to track the files, because some of them we overwrite directly
@@ -60,7 +50,6 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
 
                 tree.create(file.path, buffer)
               }
-
             } else {
               // file is not part of the old setup but still exists
               log.error(`File with same name exists: "${file.path}" -> "${file.path}.old"`)
@@ -89,24 +78,26 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
             if (tree.exists(path) && !fileChanges.includes(path)) {
               filesToRemove = [ ...filesToRemove, path ]
             }
-
           })
         },
 
         // ask user if he/she wants to keep files that are not needed anymore
         async (): Promise<void> => {
           if (filesToRemove.length > 0) {
-            filesToKeep = await createPrompt({
-              type: 'MultiSelect',
-              message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
-              choices: filesToRemove
-            }, {
-              stdout: process.stdout,
-              cancelCallback: () => {
-                log.error('Cancelled prompt.')
-                process.exit(127)
+            filesToKeep = await createPrompt(
+              {
+                type: 'MultiSelect',
+                message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
+                choices: filesToRemove
+              },
+              {
+                stdout: process.stdout,
+                cancelCallback: () => {
+                  log.error('Cancelled prompt.')
+                  process.exit(127)
+                }
               }
-            })
+            )
           }
         },
 
@@ -121,45 +112,39 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
             }, [])
 
             // remove that file
-            await Promise.all(filesToRemove.map((file) => {
-
-              if (!filesToKeep.includes(file)) {
-                log.debug(`Deleting not-needed file: "${file}"`)
-                tree.delete(file)
-              } else {
-                log.debug(`Keeping not-needed file: "${file}"`)
-              }
-
-            }))
+            await Promise.all(
+              filesToRemove.map((file) => {
+                if (!filesToKeep.includes(file)) {
+                  log.debug(`Deleting not-needed file: "${file}"`)
+                  tree.delete(file)
+                } else {
+                  log.debug(`Keeping not-needed file: "${file}"`)
+                }
+              })
+            )
           }
-
         },
 
         // delete empty directories after changes
         async (): Promise<void> => {
           if (filesToRemove.length > 0) {
             // get all directory names of files to remove
-            const directories = filesToRemove
-              .map((path) => dirname(path))
-              .filter((item, index, array) => array.indexOf(item) === index)
+            const directories = filesToRemove.map((path) => dirname(path)).filter((item, index, array) => array.indexOf(item) === index)
 
             // check and delete empty directories
-            await Promise.all(directories.map(async (directory) => {
-
-              if (tree.getDir(directory)?.subfiles?.length === 0 && !(tree.getDir(directory)?.subdirs?.length > 0)) {
-                log.debug(`Deleting not-needed empty directory: "${directory}"`)
-                tree.delete(directory)
-
-              } else if (tree.getDir(directory)?.subdirs?.length > 0) {
-                // dont delete if has subdirectories
-                log.debug(`Still has subdirectories: "${directory}"`)
-
-              }
-
-            }))
+            await Promise.all(
+              directories.map(async (directory) => {
+                if (tree.getDir(directory)?.subfiles?.length === 0 && !(tree.getDir(directory)?.subdirs?.length > 0)) {
+                  log.debug(`Deleting not-needed empty directory: "${directory}"`)
+                  tree.delete(directory)
+                } else if (tree.getDir(directory)?.subdirs?.length > 0) {
+                  // dont delete if has subdirectories
+                  log.debug(`Still has subdirectories: "${directory}"`)
+                }
+              })
+            )
           }
         }
-
       ])
     )
   }

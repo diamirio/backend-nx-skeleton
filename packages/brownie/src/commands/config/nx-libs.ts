@@ -1,11 +1,11 @@
-import { ConfigBaseCommand, ConfigRemove, createTable, promptUser } from '@cenk1cenk2/boilerplate-oclif'
+import { ConfigBaseCommand, ConfigRemove, createTable, promptUser, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
 
 import { NxLibrariesConfig } from '@context/config/nx-libs.config.interface'
 
 export class NxLibrariesCommand extends ConfigBaseCommand {
   static description = 'Edit available NX packages through a user interface.'
   protected configName = 'nx-libs.config.yml'
-  protected configType: 'general' = 'general'
+  protected configType = ConfigTypes.general
 
   async configAdd (config: NxLibrariesConfig): Promise<NxLibrariesConfig> {
     // prompt user for details

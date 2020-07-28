@@ -1,13 +1,4 @@
-import {
-  apply, chain,
-  filter,
-  move,
-  noop,
-  Rule,
-  SchematicContext,
-  template,
-  url
-} from '@angular-devkit/schematics'
+import { apply, chain, filter, move, noop, Rule, SchematicContext, template, url } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { applyOverwriteWithDiff, formatFiles, jinjaTemplate, Logger } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
@@ -25,13 +16,18 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // just needs the url the rest it will do it itself
       apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
-      options?.priorConfiguration ?
-        apply(source, generateRules(merge<NormalizedSchema>(options, options.priorConfiguration, { arrayMerge: (target, source) => source }), log)) :
-        null,
+      options?.priorConfiguration
+        ? apply(
+          source,
+          generateRules(
+            merge<NormalizedSchema>(options, options.priorConfiguration, { arrayMerge: (target, source) => source }),
+            log
+          )
+        )
+        : null,
       context
     )
   ])
-
 }
 
 function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
@@ -120,5 +116,4 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
     // move all the files to package root
     move(options.root)
   ]
-
 }

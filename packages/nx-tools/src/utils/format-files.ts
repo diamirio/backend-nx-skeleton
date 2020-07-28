@@ -24,7 +24,7 @@ export function formatFiles (
     return noop()
   }
 
-  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = new Set(
       host.actions
         .filter((action) => action.kind !== 'd' && action.kind !== 'r')
@@ -89,5 +89,5 @@ export function formatFiles (
       }),
       map(() => host)
     )
-  }) as unknown as Rule
+  }) as unknown) as Rule
 }
