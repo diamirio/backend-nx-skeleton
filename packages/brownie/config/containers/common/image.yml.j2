@@ -1,0 +1,6 @@
+{% if dockerfile is defined %}
+build:
+  context: {{ './' + dir + '/' + '.' }}
+{% else %}
+image: {{ image }}
+{% endif %}

@@ -1,6 +1,10 @@
 services:
   mongo:
-    image: mongo:latest
+    {% filter indent(4, true) %}
+      {% set image = 'mongo:latest' %}
+      {% include '../common/image.yml.j2' %}
+    {% endfilter %}
+
     command: --directoryperdb
     {% filter indent(4, true) %}
       {% include '../common/env.yml.j2' %}
@@ -8,5 +12,6 @@ services:
 
     ports:
       - 27017:27017
-    volumes:
-      - ./mongo-initialize.sh:/docker-entrypoint-initdb.d/mongo-initialize-multiple.sh:ro
+    {% filter indent(4, true) %}
+      {% include '../common/volumes.yml.j2' %}
+    {% endfilter %}

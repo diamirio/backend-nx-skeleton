@@ -27,7 +27,7 @@
     "@nrwl/workspace": "10.0.6"
   },
   "devDependencies": {
-    "@cenk1cenk2/cz-cc": "^1.0.4",
+    "@cenk1cenk2/cz-cc": "^1.0.5",
     "commitizen": "^4.0.5",
     "eslint": "^7.5.0",
     "husky": "^4.2.5",

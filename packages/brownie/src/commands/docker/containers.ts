@@ -5,14 +5,19 @@ import {
   parseYaml, promptUser,
   readRaw,
   writeFile,
-  mergeObjects
+  mergeObjects,
+  createDirIfNotExists,
+  promptOverwrite,
+  tasksOverwritePrompt
 } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
+import { formatFiles } from '@webundsoehne/nx-tools'
 import fs from 'fs-extra'
 import globby from 'globby'
+import { Listr, ListrClass, ListrTask, ListrDefaultRenderer } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 
-import { AvailableContainers, DockerComposeFile, ParsedContainers } from '@context/docker/containers'
+import { AvailableContainers, DockerComposeFile, ParsedContainers, DockerContainerAddCtx } from '@context/docker/containers'
 import { jinja }from '@helpers/jinja.helper'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
@@ -25,6 +30,10 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       char: 'o',
       description: 'Output folder for the Docker files.',
       default: '.docker'
+    }),
+    volume: flags.boolean({
+      char: 'v',
+      description: 'Use optional persistent volumes with the containers.'
     })
   }
 
@@ -37,77 +46,257 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
     const { flags } = this.parse(DockerContainerCommand)
 
-    // get available containers
-    const availableContainers = await this.getAvailableContainers()
-
-    if (availableContainers.length === 0) {
-      this.logger.fatal(`No configuration files found in "${this.dockerConfigLocation}".`)
-      process.exit(1)
-    }
-
-    const prompt = await promptUser<string[]>({
-      type: 'MultiSelect',
-      message: 'Please select which containers you want to add.',
-      choices: availableContainers.map((item) => item.name)
-    })
-
-    // be sure that necassary folders are created
-    await this.ensureDirectory(flags.output)
-
-    // process containers
-    await Promise.all(
-      prompt.map(async (p) => {
-        // select this container
-        const container = availableContainers.find((item) => item.name === p)
-        console.log(container)
-
-        // create jinja context
-        const context: Partial<ParsedContainers> = {
-          name: container.name,
-          path: container.path,
-          flags: {
-            output: flags.output
-          }
+    this.tasks.add<DockerContainerAddCtx>([
+      // get available containers
+      {
+        title: 'Looking for available containers.',
+        task: async (ctx): Promise<void> => {
+          ctx.containers = await this.getAvailableContainers()
         }
+      },
 
-        // volumes parsing
-        if (this.checkArrayIsExactlyOneInLength(container.volumes)) {
-          // add this to context
-          context.volumes = await this.readYamlTemplate(container.volumes.pop(), context)
+      // check if there is available containers
+      {
+        skip: (ctx): boolean => Object.keys(ctx.containers).length !== 0,
+        task: (): void => {
+          throw new Error(`No configuration files found in "${this.dockerConfigLocation}".`)
         }
+      },
 
-        // environment files parsing
-        if (this.checkArrayIsExactlyOneInLength(container.env)) {
-          // add this to context
-          context.env = container.env
+      // get user prompts
+      {
+        task: async (ctx, task): Promise<string[]> => ctx.prompt = await task.prompt<string[]>({
+          type: 'MultiSelect',
+          message: 'Please select which containers you want to add.',
+          choices: Object.keys(ctx.containers)
+        })
+      },
 
-          // read the yaml template for one file
-          const file = await this.readYamlTemplate(container.env.pop(), context)
+      // be sure that necassary folders are created
+      {
+        title: 'Creating output directory.',
+        task: async (): Promise<void> => await createDirIfNotExists(flags.output)
+      },
 
-          // parse environment variables
-          const buffer = Object.entries(file).reduce((o, [ key, val ]) => {
-            return [ ...o, `${key}=${val}` ]
-          }, [])
+      // find selected container
+      {
+        title: 'Processing containers.',
+        task: (ctx, task): Listr => {
+          // initialize variables
+          ctx.context = {}
+          const containerTasks = ctx.prompt.map((name): { name: string, tasks: ListrTask<DockerContainerAddCtx, ListrDefaultRenderer>[]} => {
+            return {
+              name: ctx.containers[name].name,
+              tasks: [
+                {
+                  title: 'Initiating...',
+                  task: (ctx, task): void => {
+                    // create jinja context
+                    ctx.context[name] = {
+                      name: ctx.containers[name].name,
+                      dir: join(flags.output, ctx.containers[name].name),
+                      path: ctx.containers[name].path,
+                      output: flags.output
+                    }
 
-          // output file
-          const dir = join(flags.output, container.name)
-          const env = join(dir, '.env')
+                    // lock necassary information
+                    this.locker.add({
+                      path: ctx.containers[name].name, data: { output: flags.output, dir: ctx.context[name].dir }, merge: true
+                    })
 
-          // create directory and files
-          await this.ensureDirectory(dir)
-          await writeFile(env, buffer)
+                    task.title = 'Initialization complete.'
+                  }
+                },
 
-          // add the information to locker
-          await this.locker.lock({
-            path: container.name, data: { dir, env }, merge: true
+                {
+                  title: 'Processing Dockerfile...',
+                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.dockerfile),
+                  task: async (ctx, task): Promise<void> => {
+                    ctx.context[name].dockerfile = ctx.containers[name].dockerfile[0]
+
+                    // output file
+                    const output = join(ctx.context[name].dir, 'Dockerfile')
+
+                    // ask for overwrite
+                    try {
+                      if (!flags.force) {
+                        await tasksOverwritePrompt(output, task, false)
+                      }
+                    } catch (e) {
+                      this.message.warn(`Skipping: ${e}`)
+                    }
+
+                    // create directory and files
+                    await createDirIfNotExists(ctx.context[name].dir)
+
+                    // write to file
+                    await writeFile(output, await readRaw(ctx.context[name].dockerfile))
+
+                    // add the information to locker, immediately
+                    await this.locker.lock({
+                      path: ctx.containers[name].name, data: { dockerfile: output }, merge: true
+                    })
+
+                    task.title = 'Environment files generated.'
+                  }
+                },
+
+                {
+                  title: 'Processing volumes...',
+                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
+                  task: async (ctx, task): Promise<void> => {
+                    ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
+
+                    // process all volumes async
+                    await Promise.all(ctx.context[name].volumes.map(async (volume) => {
+                      // create asset
+                      const asset = {
+                        from: join(ctx.containers[name].files, volume.from),
+                        to: join(ctx.context[name].dir, 'volumes')
+                      }
+
+                      if (volume.mode === 'file') {
+                        // if this is a file copy it directly
+                        this.message.debug(`Copying file: ${asset.from} -> ${asset.to}`)
+
+                        try {
+                          await fs.copyFile(asset.from, asset.to)
+                        } catch (e) {
+                          this.message.fail(`Error while copying asset: ${e}`)
+
+                          // just delete this from the list
+                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                        }
+
+                      } else if (volume.mode === 'dir') {
+                        // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
+                        this.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
+
+                        try {
+                          await createDirIfNotExists(join(asset.to, volume.from))
+                          await fs.copy(asset.from, join(asset.to, volume.from))
+
+                        } catch (e) {
+                          this.message.fail(`Error while copying folder: ${e}`)
+
+                          // just delete this from the list
+                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+
+                        }
+                      } else if (volume.mode === 'volume') {
+                        // we can add persistent volumes if you want to keep data
+                        let prompt: boolean
+
+                        // only asks this with this flag
+                        if (flags.volume) {
+                          prompt = await task.prompt({
+                            type: 'Toggle', message: `Do you want to add persistent volume for the container at "${volume.to}"?`, initial: true
+                          })
+                        }
+
+                        // it will clear out this entry
+                        if (!prompt) {
+                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                        }
+
+                      } else {
+                        throw new Error('Unknown volume mode this may be do to templating error.')
+                      }
+
+                    }))
+
+                    task.title = 'Volumes are generated.'
+                  }
+                },
+
+                // processing environment files
+                {
+                  title: 'Processing environment files...',
+                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
+                  task: async (ctx, task): Promise<void> => {
+                    // add this to context
+                    ctx.context[name].env = ctx.containers[name].env[0]
+
+                    // output file
+                    const output = join(ctx.context[name].dir, '.env')
+
+                    // ask for overwrite
+                    try {
+                      if (!flags.force) {
+                        await tasksOverwritePrompt(output, task, false)
+                      }
+                    } catch (e) {
+                      this.message.warn(`Skipping: ${e}`)
+                    }
+
+                    // read the yaml template for one file
+                    const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
+
+                    // parse environment variables, this is more reasonable than jinja
+                    const buffer = Object.entries(file).reduce((o, [ key, val ]) => {
+                      return [ ...o, `${key}=${val}` ]
+                    }, [])
+
+                    // create directory and files
+                    await createDirIfNotExists(ctx.context[name].dir)
+
+                    // write to file
+                    await writeFile(output, buffer)
+
+                    // add the information to locker, immediately
+                    await this.locker.lock({
+                      path: ctx.containers[name].name, data: { env: output }, merge: true
+                    })
+
+                    task.title = 'Environment files generated.'
+                  }
+                },
+
+                // creating configuration
+                {
+                  title: 'Creating configuration.',
+                  task: async (ctx, task): Promise<void> => {
+                    try {
+                      this.logger.debug(`Context for "${ctx.containers[name].path}":\n%o`, ctx.context[name])
+
+                      // read the template
+                      const template = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
+
+                      // configuration can still be null which is not mergable
+                      if (template) {
+                        config = mergeObjects(config, template, { array: 'overwrite' })
+                      } else {
+                        throw new Error(`Container "${ctx.containers[name]}" does not have a valid template.`)
+                      }
+
+                    } catch (e) {
+                      throw new Error(e)
+                    }
+
+                    task.title = 'Configuration generated.'
+                  }
+                }
+
+              ]
+            }
           })
-        }
 
-        // console.log(await this.readYamlTemplate(container.path, context))
-        // add container to config a.k.a docker-compose file in this case
-        config = mergeObjects(config, await this.readYamlTemplate(container.path, context), { array: 'overwrite' })
-      })
-    )
+          return task.newListr(
+            containerTasks.map((containerTask) => {
+              return this.tasks.indent(containerTask.tasks, { rendererOptions: { collapse: false } }, { title: `Processing: ${containerTask.name}` })
+            }),
+            {
+              rendererOptions: { collapse: false }
+            })
+        }
+      }
+    ])
+
+    // run all the tasks
+    await this.runTasks()
+
+    // lock all in queue
+    await this.locker.lockAll()
 
     return config
   }
@@ -135,66 +324,67 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
     return {
       keys: [],
-      removeFunction: async (config): Promise<DockerComposeFile> => config
+      removeFunction: async (config, input): Promise<DockerComposeFile> => config
     }
   }
 
-  private async getAvailableContainers (): Promise<AvailableContainers[]> {
-    return Promise.all(
+  private async getAvailableContainers (): Promise<AvailableContainers> {
+    // some trickery to make it async
+    return (await Promise.all(
       (await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })).map(async (item) => {
-        const dir = dirname(item)
+        const base = dirname(item)
+        const name = relative(this.dockerConfigLocation, base)
 
         return {
-          name: relative(this.dockerConfigLocation, dir),
+          name,
+
+          base,
+
+          files: join(base, 'files'),
 
           path: item,
 
-          files: await globby([ '*', '.*', '!docker-compose.yml(.j2)?', '!env.yml(.j2)?', 'Dockerfile(.j2)?' ], {
-            cwd: dir,
+          dockerfile: await globby([ '**/Dockerfile(.j2)?', '**/dockerfile(.j2)?' ], {
+            cwd: base,
             absolute: true,
             dot: true
           }),
 
           env: await globby([ '**/env.yml(.j2)?' ], {
-            cwd: dir,
+            cwd: base,
             absolute: true,
             dot: true
           }),
 
           volumes: await globby([ '**/volumes.yml(.j2)?' ], {
-            cwd: dir,
-            absolute: true,
-            dot: true
-          }),
-
-          dockerfile: await globby([ '**/Dockerfile(.j2)?' ], {
-            cwd: dir,
+            cwd: base,
             absolute: true,
             dot: true
           })
+
         }
       })
-    )
+    )).reduce((o, item) => ({ ...o, [item.name]: item }), {})
+
   }
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
     let template: string
     template = await readRaw(path)
 
+    // check if this is jinja
     if (extname(path) === '.j2') {
       template = jinja.bind(this)(path).renderString(template, context)
     }
 
-    console.log(template)
-
-    return parseYaml<T>(template)
-  }
-
-  private async ensureDirectory (path: string): Promise<void> {
     try {
-      await fs.mkdirp(path)
+      const parsedTemplate = parseYaml<T>(template)
+
+      return parsedTemplate
     } catch (e) {
-      this.logger.fatal(`Error while necessary folders: ${e}`)
+      this.logger.debug(`"${path}" does not seem like a valid template file.`)
+      this.logger.debug(JSON.stringify(template, null, 2))
+      throw e
     }
   }
 

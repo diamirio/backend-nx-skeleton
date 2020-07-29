@@ -53,12 +53,12 @@
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.0.13",
-    "@nestjs/core": "^7.0.13",
+    "@nestjs/common": "^7.4.1",
+    "@nestjs/core": "^7.4.1",
     "@nestjs/swagger": "^4.5.7",
-    "@nestjs/testing": "^7.0.13",
+    "@nestjs/testing": "^7.4.1",
     "@types/jest": "^26.0.7",
-    "@types/node": "^14.0.26",
+    "@types/node": "^14.0.27",
     "@types/supertest": "^2.0.8",
     "@types/winston": "^2.4.4",
     "concurrently": "^5.0.0",

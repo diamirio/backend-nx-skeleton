@@ -1,3 +1,11 @@
+{% set mounted_volumes = [] %}
+{% for volume in volumes %}
+  {% set current_volume = './' + dir + '/' + volume.from + ':' + volume.to %}
+  {% if 'options' in volume %}
+    {% set current_volume = current_volume + ':' + volume.options %}
+  {% endif %}
+  {% set mounted_volumes = mounted_volumes + [ current_volume ] %}
+{% endfor %}
 {% if volumes | length > 0 %}
-{{ { volumes: volumes } | from_object | to_nice_yaml }}
+{{ { volumes: mounted_volumes } | from_object | to_nice_yaml }}
 {% endif %}
