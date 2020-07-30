@@ -4,8 +4,8 @@
   {% if 'options' in volume %}
     {% set current_volume = current_volume + ':' + volume.options %}
   {% endif %}
-  {% set mounted_volumes = mounted_volumes + [ current_volume ] %}
+  {% set mounted_volumes = (mounted_volumes.push(current_volume), mounted_volumes) %}
 {% endfor %}
-{% if volumes | length > 0 %}
-{{ { volumes: mounted_volumes } | from_object | to_nice_yaml }}
+{% if mounted_volumes | length > 0 %}
+{{ { volumes: mounted_volumes } | to_nice_yaml }}
 {% endif %}

@@ -157,10 +157,13 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
                       if (volume.mode === 'file') {
                         // if this is a file copy it directly
-                        this.message.debug(`Copying file: ${asset.from} -> ${asset.to}`)
+                        this.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
 
                         try {
-                          await fs.copyFile(asset.from, asset.to)
+                          await createDirIfNotExists(asset.to)
+
+                          asset.to = join(asset.to, volume.from)
+                          await fs.copy(asset.from, asset.to)
                         } catch (e) {
                           this.message.fail(`Error while copying asset: ${e}`)
 
@@ -266,7 +269,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                       if (template) {
                         config = mergeObjects(config, template, { array: 'overwrite' })
                       } else {
-                        throw new Error(`Container "${ctx.containers[name]}" does not have a valid template.`)
+                        throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
                       }
 
                     } catch (e) {
@@ -369,6 +372,13 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   }
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
+    const rawTemplate = await this.readTemplate(path, context)
+    this.logger.debug(`Parsing template "${path}":\n%s`, rawTemplate)
+
+    return parseYaml<T>(rawTemplate)
+  }
+
+  private async readTemplate (path: string, context: any): Promise<string> {
     let template: string
     template = await readRaw(path)
 
@@ -377,15 +387,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       template = jinja.bind(this)(path).renderString(template, context)
     }
 
-    try {
-      const parsedTemplate = parseYaml<T>(template)
-
-      return parsedTemplate
-    } catch (e) {
-      this.logger.debug(`"${path}" does not seem like a valid template file.`)
-      this.logger.debug(JSON.stringify(template, null, 2))
-      throw e
-    }
+    return template
   }
 
   private checkArrayIsExactlyOneInLength (array: any[]): boolean {
