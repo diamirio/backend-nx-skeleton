@@ -1,10 +1,8 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { NodeJsSyncHost } from '@angular-devkit/core/node'
-import { getWorkspace, Logger, removePathRoot } from '@webundsoehne/nx-tools'
-import { SpawnOptions, ChildProcess } from 'child_process'
+import { ExecaArguments, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
+import { SpawnOptions } from 'child_process'
 import execa from 'execa'
-import { from, Observable } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
+import { Observable, Subscriber } from 'rxjs'
 
 import { NodePackageServeOptions } from './main.interface'
 
@@ -13,36 +11,24 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-function startTypescriptNode (options: NodePackageServeOptions, context: BuilderContext, root: string, callback): ChildProcess {
-  const logger = new Logger(context)
+export function runBuilder (options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
+  return Observable.create(async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+    const { args, spawnOptions } = normalizeArguments(options)
 
-  const { args, spawnOptions } = normalizeOptions(options)
+    try {
+      await pipeProcessToLogger(context, execa('ts-node-dev', args, spawnOptions), { start: true })
 
-  logger.info(`Spawning: ts-node-dev ${args.join(' ')}`)
+      subscriber.next({ success: true })
+    } catch (error) {
+      subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+    } finally {
+      subscriber.complete()
+    }
 
-  const instance = execa('ts-node-dev', args, spawnOptions)
-
-  instance.stdout.on('data', (data) => {
-    logger.info(data)
   })
-
-  instance.stderr.on('data', (data) => {
-    logger.warn(data)
-  })
-
-  instance.on('exit', (code, signal) => {
-    logger.fatal(`Process ended with code ${code} ${signal ? `and signal ${signal}` : 'no signal'}`)
-    callback()
-  })
-
-  instance.on('error', (error) => {
-    callback(error)
-  })
-
-  return instance
 }
 
-function normalizeOptions (options: NodePackageServeOptions): { args: string[], spawnOptions: execa.Options } {
+function normalizeArguments (options: NodePackageServeOptions): ExecaArguments {
   const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
   // default options
@@ -70,7 +56,7 @@ function normalizeOptions (options: NodePackageServeOptions): { args: string[], 
   }
 
   if (!main) {
-    throw new Error('No entry point set')
+    throw new Error('No entry point set.')
   }
 
   // run path
@@ -78,6 +64,7 @@ function normalizeOptions (options: NodePackageServeOptions): { args: string[], 
 
   const spawnOptions: SpawnOptions = {
     env: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       NODE_ENV: 'develop',
       ...environment,
       ...process.env
@@ -89,36 +76,6 @@ function normalizeOptions (options: NodePackageServeOptions): { args: string[], 
   }
 
   return { args, spawnOptions }
-}
-
-export function runBuilder (options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
-  const host = new NodeJsSyncHost()
-
-  return from(getWorkspace(context, host)).pipe(
-    switchMap((workspace) => {
-      const { root } = workspace.projects.get(context.target.project)
-
-      return new Observable<BuilderOutput>((observer) => {
-        const process = startTypescriptNode(options, context, root, (error) => {
-          if (error) {
-            observer.error(error)
-          } else {
-            observer.complete()
-          }
-        })
-
-        if (process.pid == null) {
-          observer.next({ success: false })
-        } else {
-          observer.next({ success: true })
-        }
-
-        return (): void => {
-          process.kill()
-        }
-      })
-    })
-  )
 }
 
 export default createBuilder(runBuilder)

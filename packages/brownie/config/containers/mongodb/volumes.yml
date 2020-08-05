@@ -1,4 +1,4 @@
 - from: mongo-initialize.sh
-  to: /docker-entrypoint-initdb.d/mongo-initialize-multiple.sh
+  to: /docker-entrypoint-initdb.d/mongo-initialize.sh
   options: ro
   mode: file

@@ -46,10 +46,10 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~10.0.3",
+    "@angular-devkit/schematics": "~10.0.5",
     "@nestjs/schematics": "^7.0.1",
-    "@nrwl/jest": "~10.0.6",
-    "@nrwl/node": "~10.0.6",
+    "@nrwl/jest": "~10.0.7",
+    "@nrwl/node": "~10.0.7",
     "@types/deepmerge": "^2.2.0",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",

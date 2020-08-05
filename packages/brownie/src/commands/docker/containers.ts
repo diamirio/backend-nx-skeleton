@@ -237,7 +237,11 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
                     // parse environment variables, this is more reasonable than jinja
                     const buffer = Object.entries(file).reduce((o, [ key, val ]) => {
-                      return [ ...o, `${key}=${val}` ]
+                      if (val) {
+                        return [ ...o, `${key}=${val}` ]
+                      } else {
+                        return [ ...o, `${key}=` ]
+                      }
                     }, [])
 
                     // create directory and files
@@ -286,7 +290,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
           return task.newListr(
             containerTasks.map((containerTask) => {
-              return this.tasks.indent(containerTask.tasks, { rendererOptions: { collapse: false } }, { title: `Processing: ${containerTask.name}` })
+              return this.tasks.indent(containerTask.tasks, { rendererOptions: { collapse: true } }, { title: `Processing: ${containerTask.name}` })
             }),
             {
               rendererOptions: { collapse: false }

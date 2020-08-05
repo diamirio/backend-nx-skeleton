@@ -30,6 +30,8 @@ export interface NormalizedBuilderOptions extends NodePackageBuilderOptions {
   relativeMainFileOutput: string
 }
 
+export type ProcessPaths = Record<'typescript' | 'tscpaths' | 'tsc-watch' | 'tsconfig', string>
+
 export type FileInputOutput = {
   input: string
   output: string

@@ -46,20 +46,22 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1000.3",
-    "@angular-devkit/core": "^10.0.3",
-    "@angular-devkit/schematics": "~10.0.3",
-    "@nrwl/cli": "^10.0.6",
-    "execa": "^4.0.2"
+    "@angular-devkit/architect": "^0.1000.5",
+    "@angular-devkit/core": "^10.0.5",
+    "@angular-devkit/schematics": "~10.0.5",
+    "@nrwl/cli": "^10.0.7",
+    "execa": "^4.0.2",
+    "tree-kill": "^1.2.2",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^3.9.7"
   },
   "devDependencies": {
     "@types/execa": "^2.0.0",
+    "@types/tsc-watch": "^4.2.0",
     "cpy-cli": "^3.1.1",
     "eslint": "^7.3.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
-    "tsc-watch": "^4.2.8",
-    "tscpaths": "^0.0.9",
-    "typescript": "^3.9.5"
+    "tscpaths": "^0.0.9"
   }
 }

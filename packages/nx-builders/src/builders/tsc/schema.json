@@ -59,8 +59,7 @@
 
   "definitions": {
     "assetPattern": {
-      "oneOf": [
-        {
+      "oneOf": [{
           "type": "object",
           "properties": {
             "glob": {

@@ -12,7 +12,7 @@ import {
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
-import { createDependenciesForProjectFromGraph, Logger, mergeDependencies } from '@webundsoehne/nx-tools'
+import { ExecaArguments, createDependenciesForProjectFromGraph, Logger, mergeDependencies, pipeProcessToLogger } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -22,11 +22,9 @@ import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, of, Subscriber } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
-import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions } from './main.interface'
+import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
 
-export default createBuilder(runNodePackageBuilder)
-
-export function runNodePackageBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
+export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
   const projGraph = createProjectGraph()
   const normalizedOptions = normalizeOptions(options, context)
   const { target, dependencies } = calculateProjectDependencies(projGraph, context)
@@ -34,7 +32,7 @@ export function runNodePackageBuilder (options: NodePackageBuilderOptions, conte
   return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
     switchMap((result) => {
       if (result) {
-        return compileTypeScriptFiles(normalizedOptions, context, projGraph, dependencies).pipe(
+        return compileFiles(normalizedOptions, context, projGraph, dependencies).pipe(
           tap(() => {
             // update package.json
             updatePackageJson(normalizedOptions, context)
@@ -105,7 +103,7 @@ function normalizeOptions (options: NodePackageBuilderOptions, context: BuilderC
   }
 }
 
-function compileTypeScriptFiles (
+function compileFiles (
   options: NormalizedBuilderOptions,
   context: BuilderContext,
   projGraph: ProjectGraph,
@@ -116,91 +114,121 @@ function compileTypeScriptFiles (
   // Cleaning the /dist folder
   removeSync(options.normalizedOutputPath)
 
-  let tsConfigPath = join(context.workspaceRoot, options.tsConfig)
+  const paths: ProcessPaths = {
+    typescript: require.resolve('typescript/bin/tsc'),
+    tscpaths: require.resolve('tscpaths/cjs/index'),
+    'tsc-watch': require.resolve('tsc-watch/lib/tsc-watch'),
+    tsconfig: join(context.workspaceRoot, options.tsConfig)
+  }
 
-  return Observable.create(async (subscriber: Subscriber<BuilderOutput>) => {
+  // have to return a observable here
+  return Observable.create(async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
     if (projectDependencies.length > 0) {
       const libRoot = projGraph.nodes[context.target.project].data.root
-      tsConfigPath = createTmpTsConfig(tsConfigPath, context.workspaceRoot, libRoot, projectDependencies)
+      paths.tsconfig = createTmpTsConfig(paths.tsconfig, context.workspaceRoot, libRoot, projectDependencies)
     }
 
     try {
-      let args = [ '-p', tsConfigPath, '--outDir', options.normalizedOutputPath ]
+      // paths of the programs, more convient than using the api since tscpaths does not have api
 
-      if (options.sourceMap) {
-        args = [ ...args, '--sourceMap' ]
-      }
-
-      if (options.verbose) {
-        args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
-      }
-
-      const tscPath = join(context.workspaceRoot, '/node_modules/typescript/bin/tsc')
-      const tscPathsPath = join(context.workspaceRoot, '/node_modules/tscpaths/cjs/index.js')
-
-      const spawnOptions: SpawnOptions = { stdio: 'inherit' }
-
-      if (options.cwd) {
-        spawnOptions.cwd = options.cwd
-      }
-
-      // check if typescript really installed
-      if (!fs.isFile(tscPath)) {
-        subscriber.error(new Error('TSC is not found.'))
-      }
+      // check if needed tools are really installed
+      Object.entries(paths).forEach(([ key, value ]) => {
+        if (!fs.isFile(value)) {
+          subscriber.error(new Error(`${key} is not found.`))
+        }
+      })
 
       if (options.watch) {
         // TODO: This part is not working as intended atm
-        logger.info('Starting TypeScript watch')
+        logger.info('Starting TypeScript-Watch')
 
-        args = [ ...args, '--watch' ]
+        logger.debug(`Typescript path: ${paths.typescript}`)
+
+        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'typescript')
 
         await Promise.all([
-          execa.node(tscPath, args, spawnOptions),
+          execa.node(paths.typescript, args, spawnOptions),
           execa.node(normalize(`./${options.relativeMainFileOutput}/${basename(options.main, '.ts')}.js`), [], {
             ...spawnOptions,
             cwd: join(context.workspaceRoot, options.outputPath)
           })
         ])
       } else {
+        // the normal mode of compiling
         logger.info('Transpiling TypeScript files...')
-        await execa.node(tscPath, args, spawnOptions)
+
+        logger.debug(`typescript path: ${paths.typescript}`)
+
+        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'typescript')
+
+        await pipeProcessToLogger(context, execa.node(paths.typescript, args, spawnOptions))
 
         logger.info('Transpiling to TypeScript is done.')
       }
 
       // optional swap paths, which will swap all the typescripts to relative paths.
       if (options.swapPaths) {
-        if (!fs.isFile(tscPathsPath)) {
+        if (!fs.isFile(paths.tscpaths)) {
           subscriber.error(new Error('TSCPaths is not found.'))
         }
 
         logger.info('Swapping Typescript paths...')
 
+        logger.debug(`tscpaths path: ${paths.tscpaths}`)
+
         // create temporary tsconfig.paths
-        const tsconfig = readJsonFile(tsConfigPath)
+        const tsconfig = readJsonFile(paths.tsconfig)
 
-        writeJsonFile(tsConfigPath, merge(tsconfig, { compilerOptions: { baseUrl: join(context.workspaceRoot, options.outputPath) } }))
+        writeJsonFile(paths.tsconfig, merge(tsconfig, { compilerOptions: { baseUrl: join(context.workspaceRoot, options.outputPath) } }))
 
-        args = [ '-p', tsConfigPath, '-s', options.outputPath, '-o', options.outputPath ]
+        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'tscpaths')
 
-        if (options.verbose) {
-          args = [ ...args, '--verbose' ]
-        }
-
-        spawnOptions.cwd = context.workspaceRoot
-
-        await execa.node(tscPathsPath, args, spawnOptions)
+        await pipeProcessToLogger(context, execa.node(paths.tscpaths, args, spawnOptions))
 
         logger.info('Swapped TypeScript paths.')
       }
 
       subscriber.next({ success: true })
-      subscriber.complete()
     } catch (error) {
       subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+    } finally {
+      subscriber.complete()
     }
   })
+}
+
+function normalizeArguments (options: NormalizedBuilderOptions, context: BuilderContext, paths: ProcessPaths, mode: 'typescript' | 'tscpaths'): ExecaArguments {
+  let args: string[]
+  let spawnOptions: SpawnOptions
+  spawnOptions = { stdio: 'inherit' }
+
+  if (mode === 'typescript') {
+    // arguments for typescript compiler
+    args = [ '-p', paths.tsconfig, '--outDir', options.normalizedOutputPath ]
+
+    if (options.sourceMap) {
+      args = [ ...args, '--sourceMap' ]
+    }
+
+    if (options.verbose) {
+      args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
+    }
+
+    if (options.cwd) {
+      spawnOptions = { ...spawnOptions, cwd: options.cwd }
+    }
+  } else if (mode === 'tscpaths') {
+    // arguments for tsc paths
+    args = [ '-p', paths.tsconfig, '-s', options.outputPath, '-o', options.outputPath ]
+
+    if (options.verbose) {
+      args = [ ...args, '--verbose' ]
+    }
+
+    spawnOptions = { ...spawnOptions, cwd: context.workspaceRoot }
+  }
+
+  return { args, spawnOptions }
 }
 
 // function killProcess (context: BuilderContext): void {
@@ -296,3 +324,5 @@ function copyAssetFiles (options: NormalizedBuilderOptions, context: BuilderCont
       }
     })
 }
+
+export default createBuilder(runBuilder)

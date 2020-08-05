@@ -1,4 +1,0 @@
-nx:
-  image: something
-  volumes:
-    - .:/data/app

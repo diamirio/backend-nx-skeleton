@@ -14,9 +14,10 @@
     "command": "lerna run --scope ${PACKAGE:-''} --stream --no-bail --parallel",
     "link-packages": "lerna link --force-local"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": []
+  },
   "husky": {
     "hooks": {
       "pre-commit": "yarn command lint-staged",
@@ -24,7 +25,7 @@
     }
   },
   "dependencies": {
-    "@nrwl/workspace": "10.0.6"
+    "@nrwl/workspace": "10.0.7"
   },
   "devDependencies": {
     "@cenk1cenk2/cz-cc": "^1.0.5",
@@ -39,5 +40,10 @@
     "commitizen": {
       "path": "./node_modules/@cenk1cenk2/cz-cc"
     }
+  },
+  "resolutions": {
+    "**/@angular-devkit/architect": "0.1000.5",
+    "**/@angular-devkit/core": "10.0.5",
+    "**/@angular-devkit/schematics": "10.0.5"
   }
 }
