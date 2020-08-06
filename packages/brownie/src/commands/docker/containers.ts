@@ -1,8 +1,11 @@
 import {
   ConfigBaseCommand,
-  ConfigCommandChoices, ConfigRemove,
-  ConfigTypes, createTable,
-  parseYaml, promptUser,
+  ConfigCommandChoices,
+  ConfigRemove,
+  ConfigTypes,
+  createTable,
+  parseYaml,
+  promptUser,
   readRaw,
   writeFile,
   mergeObjects,
@@ -18,7 +21,7 @@ import { Listr, ListrClass, ListrTask, ListrDefaultRenderer } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 
 import { AvailableContainers, DockerComposeFile, ParsedContainers, DockerContainerAddCtx } from '@context/docker/containers'
-import { jinja }from '@helpers/jinja.helper'
+import { jinja } from '@helpers/jinja.helper'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {
@@ -65,11 +68,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
       // get user prompts
       {
-        task: async (ctx, task): Promise<string[]> => ctx.prompt = await task.prompt<string[]>({
-          type: 'MultiSelect',
-          message: 'Please select which containers you want to add.',
-          choices: Object.keys(ctx.containers)
-        })
+        task: async (ctx, task): Promise<string[]> =>
+          ctx.prompt = await task.prompt<string[]>({
+            type: 'MultiSelect',
+            message: 'Please select which containers you want to add.',
+            choices: Object.keys(ctx.containers)
+          })
       },
 
       // be sure that necassary folders are created
@@ -84,7 +88,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         task: (ctx, task): Listr => {
           // initialize variables
           ctx.context = {}
-          const containerTasks = ctx.prompt.map((name): { name: string, tasks: ListrTask<DockerContainerAddCtx, ListrDefaultRenderer>[]} => {
+          const containerTasks = ctx.prompt.map((name): { name: string, tasks: ListrTask<DockerContainerAddCtx, ListrDefaultRenderer>[] } => {
             return {
               name: ctx.containers[name].name,
               tasks: [
@@ -101,7 +105,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
                     // lock necassary information
                     this.locker.add({
-                      path: ctx.containers[name].name, data: { output: flags.output, dir: ctx.context[name].dir }, merge: true
+                      path: ctx.containers[name].name,
+                      data: { output: flags.output, dir: ctx.context[name].dir },
+                      merge: true
                     })
 
                     task.title = 'Initialization complete.'
@@ -134,7 +140,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
                     // add the information to locker, immediately
                     await this.locker.lock({
-                      path: ctx.containers[name].name, data: { dockerfile: output }, merge: true
+                      path: ctx.containers[name].name,
+                      data: { dockerfile: output },
+                      merge: true
                     })
 
                     task.title = 'Environment files generated.'
@@ -148,65 +156,64 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                     ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
 
                     // process all volumes async
-                    await Promise.all(ctx.context[name].volumes.map(async (volume) => {
-                      // create asset
-                      const asset = {
-                        from: join(ctx.containers[name].files, volume.from),
-                        to: join(ctx.context[name].dir, 'volumes')
-                      }
-
-                      if (volume.mode === 'file') {
-                        // if this is a file copy it directly
-                        this.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
-
-                        try {
-                          await createDirIfNotExists(asset.to)
-
-                          asset.to = join(asset.to, volume.from)
-                          await fs.copy(asset.from, asset.to)
-                        } catch (e) {
-                          this.message.fail(`Error while copying asset: ${e}`)
-
-                          // just delete this from the list
-                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                    await Promise.all(
+                      ctx.context[name].volumes.map(async (volume) => {
+                        // create asset
+                        const asset = {
+                          from: join(ctx.containers[name].files, volume.from),
+                          to: join(ctx.context[name].dir, 'volumes')
                         }
 
-                      } else if (volume.mode === 'dir') {
-                        // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
-                        this.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
+                        if (volume.mode === 'file') {
+                          // if this is a file copy it directly
+                          this.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
 
-                        try {
-                          await createDirIfNotExists(join(asset.to, volume.from))
-                          await fs.copy(asset.from, join(asset.to, volume.from))
+                          try {
+                            await createDirIfNotExists(asset.to)
 
-                        } catch (e) {
-                          this.message.fail(`Error while copying folder: ${e}`)
+                            asset.to = join(asset.to, volume.from)
+                            await fs.copy(asset.from, asset.to)
+                          } catch (e) {
+                            this.message.fail(`Error while copying asset: ${e}`)
 
-                          // just delete this from the list
-                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                            // just delete this from the list
+                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                          }
+                        } else if (volume.mode === 'dir') {
+                          // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
+                          this.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
 
+                          try {
+                            await createDirIfNotExists(join(asset.to, volume.from))
+                            await fs.copy(asset.from, join(asset.to, volume.from))
+                          } catch (e) {
+                            this.message.fail(`Error while copying folder: ${e}`)
+
+                            // just delete this from the list
+                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                          }
+                        } else if (volume.mode === 'volume') {
+                          // we can add persistent volumes if you want to keep data
+                          let prompt: boolean
+
+                          // only asks this with this flag
+                          if (flags.volume) {
+                            prompt = await task.prompt({
+                              type: 'Toggle',
+                              message: `Do you want to add persistent volume for the container at "${volume.to}"?`,
+                              initial: true
+                            })
+                          }
+
+                          // it will clear out this entry
+                          if (!prompt) {
+                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                          }
+                        } else {
+                          throw new Error('Unknown volume mode this may be do to templating error.')
                         }
-                      } else if (volume.mode === 'volume') {
-                        // we can add persistent volumes if you want to keep data
-                        let prompt: boolean
-
-                        // only asks this with this flag
-                        if (flags.volume) {
-                          prompt = await task.prompt({
-                            type: 'Toggle', message: `Do you want to add persistent volume for the container at "${volume.to}"?`, initial: true
-                          })
-                        }
-
-                        // it will clear out this entry
-                        if (!prompt) {
-                          ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                        }
-
-                      } else {
-                        throw new Error('Unknown volume mode this may be do to templating error.')
-                      }
-
-                    }))
+                      })
+                    )
 
                     task.title = 'Volumes are generated.'
                   }
@@ -252,7 +259,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
                     // add the information to locker, immediately
                     await this.locker.lock({
-                      path: ctx.containers[name].name, data: { env: output }, merge: true
+                      path: ctx.containers[name].name,
+                      data: { env: output },
+                      merge: true
                     })
 
                     task.title = 'Environment files generated.'
@@ -275,7 +284,6 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                       } else {
                         throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
                       }
-
                     } catch (e) {
                       throw new Error(e)
                     }
@@ -283,7 +291,6 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                     task.title = 'Configuration generated.'
                   }
                 }
-
               ]
             }
           })
@@ -294,7 +301,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             }),
             {
               rendererOptions: { collapse: false }
-            })
+            }
+          )
         }
       }
     ])
@@ -337,42 +345,42 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   private async getAvailableContainers (): Promise<AvailableContainers> {
     // some trickery to make it async
-    return (await Promise.all(
-      (await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })).map(async (item) => {
-        const base = dirname(item)
-        const name = relative(this.dockerConfigLocation, base)
+    return (
+      await Promise.all(
+        (await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })).map(async (item) => {
+          const base = dirname(item)
+          const name = relative(this.dockerConfigLocation, base)
 
-        return {
-          name,
+          return {
+            name,
 
-          base,
+            base,
 
-          files: join(base, 'files'),
+            files: join(base, 'files'),
 
-          path: item,
+            path: item,
 
-          dockerfile: await globby([ '**/Dockerfile(.j2)?', '**/dockerfile(.j2)?' ], {
-            cwd: base,
-            absolute: true,
-            dot: true
-          }),
+            dockerfile: await globby([ '**/Dockerfile(.j2)?', '**/dockerfile(.j2)?' ], {
+              cwd: base,
+              absolute: true,
+              dot: true
+            }),
 
-          env: await globby([ '**/env.yml(.j2)?' ], {
-            cwd: base,
-            absolute: true,
-            dot: true
-          }),
+            env: await globby([ '**/env.yml(.j2)?' ], {
+              cwd: base,
+              absolute: true,
+              dot: true
+            }),
 
-          volumes: await globby([ '**/volumes.yml(.j2)?' ], {
-            cwd: base,
-            absolute: true,
-            dot: true
-          })
-
-        }
-      })
-    )).reduce((o, item) => ({ ...o, [item.name]: item }), {})
-
+            volumes: await globby([ '**/volumes.yml(.j2)?' ], {
+              cwd: base,
+              absolute: true,
+              dot: true
+            })
+          }
+        })
+      )
+    ).reduce((o, item) => ({ ...o, [item.name]: item }), {})
   }
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {

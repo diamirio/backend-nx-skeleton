@@ -58,7 +58,7 @@ export class Logger {
     switch (level) {
     case 'fatal':
       if (this.options?.useIcons) {
-        coloring = chalk.bgRed.red
+        coloring = chalk.bgRed.whiteBright
         icon = figures.main.cross
       }
 

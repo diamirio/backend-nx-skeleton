@@ -28,6 +28,11 @@
       "description": "Enable re-building when files change.",
       "default": false
     },
+    "runAfterWatch": {
+      "type": "string",
+      "description": "Run after building in watch mode.",
+      "default": false
+    },
     "sourceMap": {
       "type": "boolean",
       "description": "Output sourcemaps.",

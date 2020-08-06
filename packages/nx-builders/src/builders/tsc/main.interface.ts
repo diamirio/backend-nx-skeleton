@@ -13,6 +13,8 @@ export interface NodePackageBuilderOptions extends JsonObject {
 
   watch?: boolean
 
+  runAfterWatch?: string
+
   sourceMap?: boolean
 
   assets?: (AssetGlob | string)[]
@@ -30,7 +32,7 @@ export interface NormalizedBuilderOptions extends NodePackageBuilderOptions {
   relativeMainFileOutput: string
 }
 
-export type ProcessPaths = Record<'typescript' | 'tscpaths' | 'tsc-watch' | 'tsconfig', string>
+export type ProcessPaths = Partial<Record<'typescript' | 'tscpaths' | 'tscWatch' | 'tsconfig' | 'tsconfigPaths', string>>
 
 export type FileInputOutput = {
   input: string

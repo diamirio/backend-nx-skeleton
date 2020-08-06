@@ -1,5 +1,6 @@
 import { BuilderContext } from '@angular-devkit/architect'
 import { ExecaChildProcess } from 'execa'
+import through from 'through'
 
 import { Logger } from './logger'
 import { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
@@ -8,22 +9,36 @@ export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChi
   const logger = new Logger(context)
 
   // default options
-  options = { ...{ exitCode: true, start: false }, ...options }
+  options = {
+    exitCode: false,
+    start: false,
+    stderr: true,
+    stdout: true,
+    ...options
+  }
 
   if (options.start) {
     logger.info(`Spawning process: ${instance.spawnargs.join(' ')}`)
   }
 
-  if (instance.stdout && instance. stderr) {
-    instance.stdout.on('data', (data) => {
-      logger.info(data)
-    })
+  if (instance.stdout) {
+    instance.stdout.pipe(through((chunk: string) => {
+      if (options.stdout) {
+        logger.info(chunk)
+      } else {
+        logger.debug(chunk)
+      }
+    }))
+  }
 
-    instance.stderr.on('data', (data) => {
-      logger.warn(data)
-    })
-  } else {
-    instance.on('message', (msg) => logger.info(String(msg)))
+  if (instance.stderr) {
+    instance.stderr.pipe(through((chunk: string) => {
+      if (options.stderr) {
+        logger.warn(chunk)
+      } else {
+        logger.debug(chunk)
+      }
+    }))
   }
 
   if (options.exitCode) {
@@ -48,7 +63,7 @@ export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChi
 
     // callback for compatability reasons with observable
     if (options?.callback) {
-      options.callback()
+      options.callback(error)
     }
   })
 

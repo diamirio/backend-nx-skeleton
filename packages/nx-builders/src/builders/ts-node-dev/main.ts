@@ -12,20 +12,21 @@ try {
 } catch (e) {}
 
 export function runBuilder (options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
-  return Observable.create(async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
-    const { args, spawnOptions } = normalizeArguments(options)
+  return Observable.create(
+    async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+      const { args, spawnOptions } = normalizeArguments(options)
 
-    try {
-      await pipeProcessToLogger(context, execa('ts-node-dev', args, spawnOptions), { start: true })
+      try {
+        await pipeProcessToLogger(context, execa('ts-node-dev', args, spawnOptions), { start: true })
 
-      subscriber.next({ success: true })
-    } catch (error) {
-      subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
-    } finally {
-      subscriber.complete()
+        subscriber.next({ success: true })
+      } catch (error) {
+        subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+      } finally {
+        subscriber.complete()
+      }
     }
-
-  })
+  )
 }
 
 function normalizeArguments (options: NodePackageServeOptions): ExecaArguments {

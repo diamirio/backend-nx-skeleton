@@ -3,7 +3,7 @@ import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/ar
 import { fs } from '@angular-devkit/core/node'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
-import { createProjectGraph, ProjectGraph } from '@nrwl/workspace/src/core/project-graph'
+import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
@@ -12,7 +12,7 @@ import {
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
-import { ExecaArguments, createDependenciesForProjectFromGraph, Logger, mergeDependencies, pipeProcessToLogger } from '@webundsoehne/nx-tools'
+import { createDependenciesForProjectFromGraph, ExecaArguments, Logger, mergeDependencies, pipeProcessToLogger, ProcessManager } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -20,309 +20,365 @@ import { copy, removeSync } from 'fs-extra'
 import glob from 'glob'
 import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, of, Subscriber } from 'rxjs'
-import { map, switchMap, tap } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 
 import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
 
 export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
-  const projGraph = createProjectGraph()
-  const normalizedOptions = normalizeOptions(options, context)
-  const { target, dependencies } = calculateProjectDependencies(projGraph, context)
+  const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
 
   return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
     switchMap((result) => {
       if (result) {
-        return compileFiles(normalizedOptions, context, projGraph, dependencies).pipe(
-          tap(() => {
-            // update package.json
-            updatePackageJson(normalizedOptions, context)
-
-            // this is the default behaviour, lets keep this.
-            if (dependencies.length > 0 && options.updateBuildableProjectDepsInPackageJson) {
-              updateBuildableProjectPackageJsonDependencies(context, target, dependencies)
-            }
-          }),
-          switchMap(() => copyAssetFiles(normalizedOptions, context))
-        )
+        const builder = new Builder(options, context)
+        return builder.compileFiles()
       } else {
         return of({ success: false })
       }
     }),
     map((value) => {
-      return {
-        ...value,
-        outputPath: normalizedOptions.outputPath
-      }
+      return value
     })
   )
 }
 
-function normalizeOptions (options: NodePackageBuilderOptions, context: BuilderContext) {
-  const outDir = options.outputPath
-  const files: FileInputOutput[] = []
+// i converted this to a class since it makes not to much sense to have seperate functions with tons of same inputs
+class Builder {
+  private logger: Logger
+  private projectGraph: ProjectGraph
+  private projectTarget: ProjectGraphNode<Record<string, unknown>>
+  private projectDependencies: DependentBuildableProjectNode[]
+  private options: NormalizedBuilderOptions
+  private paths: ProcessPaths
+  private manager: ProcessManager
 
-  const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
-    return glob.sync(pattern, {
-      cwd: input,
-      nodir: true,
-      ignore
+  constructor (options: NodePackageBuilderOptions, private context: BuilderContext) {
+    this.logger = new Logger(context)
+
+    // create dependency
+    this.projectGraph = createProjectGraph()
+    const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context)
+    this.projectTarget = target
+    this.projectDependencies = dependencies
+
+    // normalize options
+    this.options = this.normalizeOptions(options)
+
+    // create a process manager
+    this.manager = new ProcessManager(this.context)
+  }
+
+  public compileFiles (): Observable<BuilderOutput> {
+
+    // Cleaning the /dist folder
+    removeSync(this.options.normalizedOutputPath)
+
+    // paths of the programs, more convient than using the api since tscpaths does not have api
+    this.paths = {
+      typescript: require.resolve('typescript/bin/tsc'),
+      tscpaths: require.resolve('tscpaths/cjs/index'),
+      tscWatch: require.resolve('tsc-watch/lib/tsc-watch'),
+      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig)
+    }
+
+    // have to return a observable here
+    return Observable.create(
+      async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+        // stop all manager tasks
+        await this.manager.stop()
+
+        const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
+        if (this.projectDependencies.length > 0) {
+          this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
+        }
+        this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
+
+        try {
+
+          // check if needed tools are really installed
+          Object.entries(this.paths).forEach(([ key, value ]) => {
+            if (![ 'tsconfigPaths' ].includes(value) && !fs.isFile(value)) {
+              throw new Error(`Binary for application not found: ${key}`)
+            }
+          })
+
+          if (this.options.watch) {
+          // TODO: This part is not working as intended atm
+            this.logger.info('Starting TypeScript-Watch...')
+
+            this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
+
+            const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
+
+            const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
+
+            instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
+              switch (msg) {
+              case 'success':
+
+                await this.secondaryCompileActions()
+
+                if (this.options.runAfterWatch) {
+                  await this.manager.kill()
+                  const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
+
+                  // we dont want errors from this since it can be killed
+                  try {
+                    await pipeProcessToLogger(this.context, subInstance)
+                  } catch (e) {
+                    this.logger.debug(e.message)
+                  }
+
+                } else {
+
+                  this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
+
+                }
+
+                break
+              default:
+                break
+              }
+            })
+
+            await pipeProcessToLogger(this.context, instance)
+          } else {
+          // the normal mode of compiling
+            this.logger.info('Transpiling TypeScript files...')
+
+            this.logger.debug(`typescript path: ${this.paths.typescript}`)
+
+            const { args, spawnOptions } = this.normalizeArguments('typescript')
+
+            const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
+
+            await pipeProcessToLogger(this.context, instance)
+
+            this.logger.info('Transpiling to TypeScript is done.')
+
+            // perform secondary actions
+            await this.secondaryCompileActions()
+          }
+
+          subscriber.next({ success: true, outputPath: this.options.normalizedOutputPath })
+        } catch (error) {
+          subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+        } finally {
+          // clean up the zombies!
+          await this.manager.stop()
+          subscriber.complete()
+        }
+      }
+    )
+  }
+
+  protected normalizeOptions (options: NodePackageBuilderOptions): NormalizedBuilderOptions {
+
+    const outDir = options.outputPath
+    const files: FileInputOutput[] = []
+
+    const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
+      return glob.sync(pattern, {
+        cwd: input,
+        nodir: true,
+        ignore
+      })
+    }
+
+    options.assets.forEach((asset) => {
+      if (typeof asset === 'string') {
+        globbedFiles(asset, this.context.workspaceRoot).forEach((globbedFile) => {
+          files.push({
+            input: join(this.context.workspaceRoot, globbedFile),
+            output: join(this.context.workspaceRoot, outDir, basename(globbedFile))
+          })
+        })
+      } else {
+        globbedFiles(asset.glob, join(this.context.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
+          files.push({
+            input: join(this.context.workspaceRoot, asset.input, globbedFile),
+            output: join(this.context.workspaceRoot, outDir, asset.output, globbedFile)
+          })
+        })
+      }
     })
+
+    // Relative path for the dist directory
+    const tsconfig = readJsonFile(join(this.context.workspaceRoot, options.tsConfig))
+    const rootDir = tsconfig.compilerOptions?.rootDir || ''
+    const mainFileDir = dirname(options.main)
+    const tsconfigDir = dirname(options.tsConfig)
+
+    const relativeMainFileOutput = relative(`${tsconfigDir}/${rootDir}`, mainFileDir)
+
+    return {
+      ...options,
+      files,
+      relativeMainFileOutput,
+      normalizedOutputPath: join(this.context.workspaceRoot, options.outputPath)
+    }
   }
 
-  options.assets.forEach((asset) => {
-    if (typeof asset === 'string') {
-      globbedFiles(asset, context.workspaceRoot).forEach((globbedFile) => {
-        files.push({
-          input: join(context.workspaceRoot, globbedFile),
-          output: join(context.workspaceRoot, outDir, basename(globbedFile))
-        })
-      })
+  private async secondaryCompileActions () {
+    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
+  }
+
+  private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
+    let args: string[]
+    let spawnOptions: SpawnOptions
+    spawnOptions = { stdio: 'pipe' }
+
+    // set spawn options
+    if (mode === 'typescript' || mode === 'tsc-watch') {
+      if (this.options.cwd) {
+        spawnOptions = { ...spawnOptions, cwd: this.options.cwd }
+      }
+    } else if (mode === 'tscpaths') {
+      spawnOptions = { ...spawnOptions, cwd: this.context.workspaceRoot }
+
+    } else if (mode === 'runAfterWatch') {
+      spawnOptions = {
+        ...spawnOptions, cwd: this.options.normalizedOutputPath, shell: true
+      }
+
+    }
+
+    // set arguments
+    if (mode === 'typescript' || mode === 'tsc-watch') {
+    // arguments for typescript compiler
+      args = [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ]
+
+      if (this.options.sourceMap) {
+        args = [ ...args, '--sourceMap' ]
+      }
+
+      if (this.options.verbose) {
+        args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
+      }
+
+      if (mode === 'tsc-watch') {
+      // it can use the same options with tsc
+        args = [ ...args, '--noClear', '--sourceMap' ]
+      }
+    } else if (mode === 'tscpaths') {
+    // arguments for tsc paths
+      args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
+
+      if (this.options.verbose) {
+        args = [ ...args, '--verbose' ]
+      }
+    }
+
+    return { args, spawnOptions }
+  }
+
+  private async swapPaths () {
+    // optional swap paths, which will swap all the typescripts to relative paths.
+    if (this.options.swapPaths) {
+      this.logger.info('Swapping Typescript paths...')
+
+      this.logger.debug(`tscpaths path: ${this.paths.tscpaths}`)
+
+      // create temporary tsconfig.paths
+      const tsconfig = readJsonFile(this.paths.tsconfig)
+
+      writeJsonFile(this.paths.tsconfigPaths, merge(tsconfig, { compilerOptions: { baseUrl: join(this.context.workspaceRoot, this.options.outputPath) } }))
+
+      const { args, spawnOptions } = this.normalizeArguments('tscpaths')
+
+      const instance = this.manager.add(execa.node(this.paths.tscpaths, args, spawnOptions))
+
+      // we dont want errors from this it can be sig terminated
+      try {
+        await pipeProcessToLogger(this.context, instance, { stderr: false, stdout: false })
+      } catch (e) {
+        this.logger.debug(e)
+      }
+
+      this.logger.info('Swapped TypeScript paths.')
+    }
+  }
+
+  private updatePackageJson () {
+
+    let packageJson = readJsonFile(
+      this.options.packageJson ?
+        join(this.context.workspaceRoot, this.options.packageJson) :
+        join(this.context.workspaceRoot, this.options.cwd, 'package.json')
+    )
+
+    if (!packageJson) {
+      this.logger.warn('No implicit package.json file found for the package. Skipping.')
+      return
     } else {
-      globbedFiles(asset.glob, join(context.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
-        files.push({
-          input: join(context.workspaceRoot, asset.input, globbedFile),
-          output: join(context.workspaceRoot, outDir, asset.output, globbedFile)
-        })
+      this.logger.info('Processing "package.json"...')
+    }
+
+    const mainFile = basename(this.options.main, '.ts')
+    const globalPackageJson = readPackageJson()
+
+    // update main file and typings
+    packageJson = {
+      ...packageJson,
+      main: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`),
+      typings: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
+    }
+
+    // update implicit dependencies
+    const implicitDependencies = {}
+
+    if (packageJson.implicitDependencies) {
+      this.logger.info('Processing "package.json "implicit dependencies...')
+
+      Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+        implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
       })
     }
-  })
 
-  // Relative path for the dist directory
-  const tsconfig = readJsonFile(join(context.workspaceRoot, options.tsConfig))
-  const rootDir = tsconfig.compilerOptions?.rootDir || ''
-  const mainFileDir = dirname(options.main)
-  const tsconfigDir = dirname(options.tsConfig)
+    delete packageJson.implicitDependencies
 
-  const relativeMainFileOutput = relative(`${tsconfigDir}/${rootDir}`, mainFileDir)
+    // update package dependencies
+    const project = this.context.target.project
+    const graph = createProjectGraph()
 
-  return {
-    ...options,
-    files,
-    relativeMainFileOutput,
-    normalizedOutputPath: join(context.workspaceRoot, options.outputPath)
-  }
-}
+    packageJson.dependencies = mergeDependencies(createDependenciesForProjectFromGraph(graph, project), packageJson.dependencies, implicitDependencies)
 
-function compileFiles (
-  options: NormalizedBuilderOptions,
-  context: BuilderContext,
-  projGraph: ProjectGraph,
-  projectDependencies: DependentBuildableProjectNode[]
-): Observable<BuilderOutput> {
-  const logger = new Logger(context)
+    // write file back
+    writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
 
-  // Cleaning the /dist folder
-  removeSync(options.normalizedOutputPath)
-
-  const paths: ProcessPaths = {
-    typescript: require.resolve('typescript/bin/tsc'),
-    tscpaths: require.resolve('tscpaths/cjs/index'),
-    'tsc-watch': require.resolve('tsc-watch/lib/tsc-watch'),
-    tsconfig: join(context.workspaceRoot, options.tsConfig)
-  }
-
-  // have to return a observable here
-  return Observable.create(async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
-    if (projectDependencies.length > 0) {
-      const libRoot = projGraph.nodes[context.target.project].data.root
-      paths.tsconfig = createTmpTsConfig(paths.tsconfig, context.workspaceRoot, libRoot, projectDependencies)
+    // this is the default behaviour, lets keep this.
+    if (this.projectDependencies.length > 0 && this.options.updateBuildableProjectDepsInPackageJson) {
+      updateBuildableProjectPackageJsonDependencies(this.context, this.projectTarget, this.projectDependencies)
     }
+
+    this.logger.info('Generated "package.json".')
+  }
+
+  private async copyAssetFiles (): Promise<BuilderOutput> {
+    this.logger.info('Copying asset files...')
 
     try {
-      // paths of the programs, more convient than using the api since tscpaths does not have api
+      await Promise.all(this.options.files.map((file) => {
+        this.logger.debug(`Copying "${file.input}" to ${file.output}`)
 
-      // check if needed tools are really installed
-      Object.entries(paths).forEach(([ key, value ]) => {
-        if (!fs.isFile(value)) {
-          subscriber.error(new Error(`${key} is not found.`))
-        }
-      })
+        return copy(file.input, file.output)
+      }))
 
-      if (options.watch) {
-        // TODO: This part is not working as intended atm
-        logger.info('Starting TypeScript-Watch')
+      this.logger.info('Done copying asset files.')
 
-        logger.debug(`Typescript path: ${paths.typescript}`)
-
-        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'typescript')
-
-        await Promise.all([
-          execa.node(paths.typescript, args, spawnOptions),
-          execa.node(normalize(`./${options.relativeMainFileOutput}/${basename(options.main, '.ts')}.js`), [], {
-            ...spawnOptions,
-            cwd: join(context.workspaceRoot, options.outputPath)
-          })
-        ])
-      } else {
-        // the normal mode of compiling
-        logger.info('Transpiling TypeScript files...')
-
-        logger.debug(`typescript path: ${paths.typescript}`)
-
-        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'typescript')
-
-        await pipeProcessToLogger(context, execa.node(paths.typescript, args, spawnOptions))
-
-        logger.info('Transpiling to TypeScript is done.')
-      }
-
-      // optional swap paths, which will swap all the typescripts to relative paths.
-      if (options.swapPaths) {
-        if (!fs.isFile(paths.tscpaths)) {
-          subscriber.error(new Error('TSCPaths is not found.'))
-        }
-
-        logger.info('Swapping Typescript paths...')
-
-        logger.debug(`tscpaths path: ${paths.tscpaths}`)
-
-        // create temporary tsconfig.paths
-        const tsconfig = readJsonFile(paths.tsconfig)
-
-        writeJsonFile(paths.tsconfig, merge(tsconfig, { compilerOptions: { baseUrl: join(context.workspaceRoot, options.outputPath) } }))
-
-        const { args, spawnOptions } = normalizeArguments(options, context, paths, 'tscpaths')
-
-        await pipeProcessToLogger(context, execa.node(paths.tscpaths, args, spawnOptions))
-
-        logger.info('Swapped TypeScript paths.')
-      }
-
-      subscriber.next({ success: true })
-    } catch (error) {
-      subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
-    } finally {
-      subscriber.complete()
-    }
-  })
-}
-
-function normalizeArguments (options: NormalizedBuilderOptions, context: BuilderContext, paths: ProcessPaths, mode: 'typescript' | 'tscpaths'): ExecaArguments {
-  let args: string[]
-  let spawnOptions: SpawnOptions
-  spawnOptions = { stdio: 'inherit' }
-
-  if (mode === 'typescript') {
-    // arguments for typescript compiler
-    args = [ '-p', paths.tsconfig, '--outDir', options.normalizedOutputPath ]
-
-    if (options.sourceMap) {
-      args = [ ...args, '--sourceMap' ]
-    }
-
-    if (options.verbose) {
-      args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
-    }
-
-    if (options.cwd) {
-      spawnOptions = { ...spawnOptions, cwd: options.cwd }
-    }
-  } else if (mode === 'tscpaths') {
-    // arguments for tsc paths
-    args = [ '-p', paths.tsconfig, '-s', options.outputPath, '-o', options.outputPath ]
-
-    if (options.verbose) {
-      args = [ ...args, '--verbose' ]
-    }
-
-    spawnOptions = { ...spawnOptions, cwd: context.workspaceRoot }
-  }
-
-  return { args, spawnOptions }
-}
-
-// function killProcess (context: BuilderContext): void {
-//   const logger = new Logger(context)
-
-//   childProcesses.forEach((process, i) => {
-//     return treeKill(process.pid, 'SIGTERM', (error) => {
-
-//       if (error) {
-//         if (Array.isArray(error) && error[0] && error[2]) {
-//           const errorMessage = error[2]
-//           logger.error(errorMessage)
-//         } else if (error.message) {
-//           logger.error(error.message)
-//         }
-
-//       } else {
-//         delete childProcesses[i]
-
-//       }
-
-//       logger.debug(`Stopped PID: ${process.pid}`)
-//     })
-
-//   })
-// }
-
-function updatePackageJson (options: NormalizedBuilderOptions, context: BuilderContext) {
-  const logger = new Logger(context)
-
-  const mainFile = basename(options.main, '.ts')
-  let packageJson = readJsonFile(options.packageJson ?? join(context.workspaceRoot, options.cwd, 'package.json'))
-
-  if (packageJson) {
-    logger.warn('No implicit package.json file found for the package. Skipping.')
-    return
-  }
-
-  const globalPackageJson = readPackageJson()
-
-  // update main file and typings
-  packageJson = {
-    ...packageJson,
-    main: normalize(`./${options.relativeMainFileOutput}/${mainFile}.js`),
-    typings: normalize(`./${options.relativeMainFileOutput}/${mainFile}.d.ts`)
-  }
-
-  // update implicit dependencies
-  const implicitDependencies = {}
-
-  if (packageJson.implicitDependencies) {
-    logger.info('Processing implicit dependencies...')
-
-    Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
-      implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
-    })
-  }
-
-  delete packageJson.implicitDependencies
-
-  // update package dependencies
-  const project = context.target.project
-  const graph = createProjectGraph()
-
-  packageJson.dependencies = mergeDependencies(createDependenciesForProjectFromGraph(graph, project), packageJson.dependencies, implicitDependencies)
-
-  // write file back
-  writeJsonFile(`${options.outputPath}/package.json`, packageJson)
-}
-
-function copyAssetFiles (options: NormalizedBuilderOptions, context: BuilderContext): Promise<BuilderOutput> {
-  const logger = new Logger(context)
-
-  logger.info('Copying asset files...')
-
-  return Promise.all(
-    options.files.map((file) => {
-      logger.debug(`Copying "${file.input}" to ${file.output}`)
-
-      return copy(file.input, file.output)
-    })
-  )
-    .then(() => {
-      logger.info('Done copying asset files.')
       return {
         success: true
       }
-    })
-    .catch((err: Error) => {
+
+    } catch (err) {
+
       return {
         error: err.message,
         success: false
       }
-    })
+
+    }
+  }
 }
 
 export default createBuilder(runBuilder)
