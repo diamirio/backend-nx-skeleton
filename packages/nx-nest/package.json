@@ -43,14 +43,12 @@
     }
   },
   "peerDependencies": {
-    "@nrwl/workspace": "*"
+    "@nrwl/workspace": "*",
+    "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
     "@angular-devkit/schematics": "~10.0.5",
     "@nestjs/schematics": "^7.0.1",
-    "@nrwl/jest": "~10.0.7",
-    "@nrwl/node": "~10.0.7",
-    "@types/deepmerge": "^2.2.0",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
@@ -60,6 +58,7 @@
     "listr2": "^2.4.1"
   },
   "devDependencies": {
+    "@types/deepmerge": "^2.2.0",
     "cpy-cli": "^3.1.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",

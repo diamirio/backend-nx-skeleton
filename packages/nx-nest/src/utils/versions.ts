@@ -1,6 +1,6 @@
+import { PackageVersions } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
 
-import { VersionInterface } from './versions.interface'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 // nx
@@ -10,8 +10,14 @@ export const nxVersion = '*'
 export const eslintPluginImportVersion = '2.20.2'
 
 // calculate dependencies
-export function calculateDependencies (schema: NormalizedSchema): VersionInterface {
-  let dependencies: VersionInterface = baseDeps
+export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
+
+  // only add builders
+  if (builders) {
+    return builderDeps
+  }
+
+  let dependencies: PackageVersions = baseDeps
 
   if (schema.tests === 'jest') {
     dependencies = merge(dependencies, testDeps)
@@ -48,7 +54,13 @@ export function calculateDependencies (schema: NormalizedSchema): VersionInterfa
   return dependencies
 }
 
-export const testDeps: VersionInterface = {
+export const builderDeps: PackageVersions = {
+  dev: {
+
+  }
+}
+
+export const testDeps: PackageVersions = {
   dev: {
     '@nestjs/testing': '^7.2.0',
     jest: '^26.1.0',
@@ -58,7 +70,7 @@ export const testDeps: VersionInterface = {
 }
 
 // base dependencies
-export const baseDeps: VersionInterface = {
+export const baseDeps: PackageVersions = {
   prod: {
     '@nestjs/common': '^7.2.0',
     '@nestjs/core': '^7.2.0',
@@ -77,7 +89,7 @@ export const baseDeps: VersionInterface = {
 }
 
 // server dependencies for rest
-export const restServerDeps: VersionInterface = {
+export const restServerDeps: PackageVersions = {
   prod: {
     '@nestjs/platform-fastify': '^7.2.0',
     'fastify-swagger': '^2.6.0',
@@ -85,7 +97,7 @@ export const restServerDeps: VersionInterface = {
   }
 }
 
-export const graphqlServerDeps: VersionInterface = {
+export const graphqlServerDeps: PackageVersions = {
   prod: {
     '@nestjs/graphql': '^7.5.1',
     'apollo-server-fastify': '^2.15.1',
@@ -94,23 +106,23 @@ export const graphqlServerDeps: VersionInterface = {
   }
 }
 
-export const taskModuleDeps: VersionInterface = {}
+export const taskModuleDeps: PackageVersions = {}
 
-export const microserviceModuleDeps: VersionInterface = {}
+export const microserviceModuleDeps: PackageVersions = {}
 
 // command module dependencies
-export const commandModuleDeps: VersionInterface = {
+export const commandModuleDeps: PackageVersions = {
   prod: {
     'nestjs-command': '1.4.0'
   }
 }
 
 // typeorm dependencies
-export const typeormDeps: VersionInterface = {
+export const typeormDeps: PackageVersions = {
   prod: {
     '@nestjs/typeorm': '^7.1.0',
     typeorm: '^0.2.25'
   }
 }
 
-export const mongooseDeps: VersionInterface = {}
+export const mongooseDeps: PackageVersions = {}
