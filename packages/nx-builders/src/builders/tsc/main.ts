@@ -24,6 +24,11 @@ import { map, switchMap } from 'rxjs/operators'
 
 import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
 
+try {
+  require('dotenv').config()
+  // eslint-disable-next-line no-empty
+} catch (e) {}
+
 export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
   const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
 
@@ -226,7 +231,12 @@ class Builder {
   private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
     let args: string[]
     let spawnOptions: SpawnOptions
-    spawnOptions = { stdio: 'pipe' }
+    spawnOptions = {
+      stdio: 'pipe',
+      env: {
+        ...process.env
+      }
+    }
 
     // set spawn options
     if (mode === 'typescript' || mode === 'tsc-watch') {
