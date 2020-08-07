@@ -7,7 +7,7 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 export const nxVersion = '*'
 
 // eslint
-export const eslintPluginImportVersion = '2.20.2'
+export const eslintPluginImportVersion = '^2.22.0'
 
 // calculate dependencies
 export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
@@ -72,37 +72,33 @@ export const testDeps: PackageVersions = {
 // base dependencies
 export const baseDeps: PackageVersions = {
   prod: {
-    '@nestjs/common': '^7.2.0',
-    '@nestjs/core': '^7.2.0',
+    '@nestjs/common': '^7.4.2',
+    '@nestjs/core': '^7.4.2',
     '@nestjsx/crud': '^4.6.2',
-    rxjs: '^6.5.5',
+    rxjs: '^6.6.2',
     'reflect-metadata': '^0.1.13',
     '@webundsoehne/nestjs-util': '^1.0.0',
-    'class-transformer': '^0.2.3',
+    'class-transformer': '^0.3.1',
     'class-validator': '^0.12.2',
     'nest-schedule': '^0.6.4'
-  },
-  dev: {
-    'ts-node-dev': '^1.0.0-pre.44',
-    'tsconfig-paths': '^3.9.0'
   }
 }
 
 // server dependencies for rest
 export const restServerDeps: PackageVersions = {
   prod: {
-    '@nestjs/platform-fastify': '^7.2.0',
-    'fastify-swagger': '^2.6.0',
+    '@nestjs/platform-fastify': '^7.4.2',
+    'fastify-swagger': '^3.2.0',
     '@nestjs/swagger': '^4.5.12'
   }
 }
 
 export const graphqlServerDeps: PackageVersions = {
   prod: {
-    '@nestjs/graphql': '^7.5.1',
-    'apollo-server-fastify': '^2.15.1',
+    '@nestjs/graphql': '^7.6.0',
+    'apollo-server-fastify': '^2.16.1',
     graphql: '^15.3.0',
-    'graphql-tools': '^6.0.12'
+    'graphql-tools': '^6.0.16'
   }
 }
 
