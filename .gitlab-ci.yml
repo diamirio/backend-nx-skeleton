@@ -11,6 +11,7 @@ workflow:
 
 stages:
   - install
+  - lint
   - build
 
 variables:
@@ -39,8 +40,16 @@ lint:
     - node
 
 build:
-  stage: lint
+  stage: build
   script:
     - PACKAGE="@webundsoehne/nx-builders" yarn command build
+  artifacts:
+    paths:
+      - '**/dist'
+    expire_in: 30 minutes
+  only:
+    - develop
+    - master
+    - tags
   tags:
     - node
