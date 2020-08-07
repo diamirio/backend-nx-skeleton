@@ -22,7 +22,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn command lint-staged",
+      "pre-commit": "lerna exec --scope ${PACKAGE:-''} --stream -- npx --no-install lint-staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
