@@ -18,7 +18,7 @@ variables:
 cache:
   paths:
     - node_modules/
-    - packages/*/node_modules/
+    - packages/**/node_modules/
 
 install:
   stage: install
@@ -27,7 +27,7 @@ install:
   artifacts:
     paths:
       - node_modules/
-      - packages/*/node_modules/
+      - packages/**/node_modules/
     expire_in: 30 minutes
   tags:
     - node
@@ -43,10 +43,11 @@ lint:
 build:
   stage: build
   script:
-    - PACKAGE="@webundsoehne/nx-tools --scope @webundsoehne/nx-builders" yarn command -- build
+    # build the dependent packages first
+    - for i in (@webundsoehne/nx-tools @webundsoehne/nx-builders); do PACKAGE="$i" yarn command -- build; done
   artifacts:
     paths:
-      - packages/*/dist/
+      - packages/**/dist/
     expire_in: 30 minutes
   only:
     - develop
