@@ -1,0 +1,46 @@
+image: node:14-alpine
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /master$/
+      when: always
+    - if: $CI_COMMIT_REF_NAME =~ /develop$/
+      when: always
+    - if: $CI_COMMIT_TAG
+      when: always
+
+stages:
+  - install
+  - build
+
+variables:
+  PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+
+cache:
+  paths:
+    - node_modules/
+
+install:
+  stage: install
+  script:
+    - yarn --frozen-lockfile
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 30 minutes
+  tags:
+    - node
+
+lint:
+  stage: lint
+  script:
+    - yarn command lint:check
+  tags:
+    - node
+
+build:
+  stage: lint
+  script:
+    - PACKAGE="@webundsoehne/nx-builders" yarn command build
+  tags:
+    - node

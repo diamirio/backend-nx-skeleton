@@ -7,11 +7,10 @@
   "license": "ISC",
   "scripts": {
     "ls": "lerna la",
-    "bootstrap": "lerna bootstrap ${ARGS} --scope ${PACKAGE:-''} --",
     "rimraf": "rimraf node_modules && lerna clean --scope ${PACKAGE:-''} -y",
     "release": "lerna publish -y",
-    "exec": "lerna exec --scope ${PACKAGE:-''} --stream --no-bail --parallel",
-    "command": "lerna run --scope ${PACKAGE:-''} --stream --no-bail --parallel",
+    "exec": "lerna exec --scope ${PACKAGE:-''} --stream --parallel",
+    "command": "lerna run --scope ${PACKAGE:-''} --stream --parallel",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": {
