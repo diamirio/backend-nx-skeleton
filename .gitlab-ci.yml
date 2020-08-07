@@ -17,7 +17,7 @@ variables:
 
 cache:
   paths:
-    - node_modules/
+    - '**/node_modules/'
 
 install:
   stage: install
@@ -25,7 +25,7 @@ install:
     - yarn --frozen-lockfile
   artifacts:
     paths:
-      - node_modules/
+      - '**/node_modules/'
     expire_in: 30 minutes
   tags:
     - node
@@ -41,10 +41,10 @@ lint:
 build:
   stage: build
   script:
-    - PACKAGE="@webundsoehne/nx-tools,@webundsoehne/nx-builders" yarn command --parallel -- build
+    - PACKAGE="@webundsoehne/nx-tools --scope @webundsoehne/nx-builders" yarn command -- build
   artifacts:
     paths:
-      - '**/dist'
+      - '**/dist/'
     expire_in: 30 minutes
   only:
     - develop
