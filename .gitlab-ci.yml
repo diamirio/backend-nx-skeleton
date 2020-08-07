@@ -43,8 +43,9 @@ lint:
 build:
   stage: build
   script:
+    - apk add --no-cache --no-progress bash
     # build the dependent packages first
-    - /bin/ash -c 'PACKAGES=(@webundsoehne/nx-tools @webundsoehne/nx-builders) for i in "${PACKAGES[@]}"; do PACKAGE="$i" yarn command -- build; done'
+    - /bin/bash -c 'PACKAGES=("@webundsoehne/nx-tools" "@webundsoehne/nx-builders") for i in "${PACKAGES[@]}"; do PACKAGE="$i" yarn command -- build; done'
   artifacts:
     paths:
       - packages/*/dist
