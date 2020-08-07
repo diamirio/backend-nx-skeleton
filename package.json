@@ -9,8 +9,8 @@
     "ls": "lerna la",
     "rimraf": "rimraf node_modules && lerna clean --scope ${PACKAGE:-''} -y",
     "release": "lerna publish -y",
-    "exec": "lerna exec --scope ${PACKAGE:-''} --stream --parallel",
-    "command": "lerna run --scope ${PACKAGE:-''} --stream --parallel",
+    "exec": "lerna exec --scope ${PACKAGE:-''} --stream",
+    "command": "lerna run --scope ${PACKAGE:-''} --stream",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": {

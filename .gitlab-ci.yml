@@ -6,8 +6,6 @@ workflow:
       when: always
     - if: $CI_COMMIT_REF_NAME =~ /develop$/
       when: always
-    - if: $CI_COMMIT_TAG
-      when: always
 
 stages:
   - install
@@ -35,7 +33,7 @@ install:
 lint:
   stage: lint
   script:
-    # - yarn command lint:check
+    # - yarn command --parallel -- lint:check
     - echo "disabled for now"
   tags:
     - node
@@ -43,7 +41,7 @@ lint:
 build:
   stage: build
   script:
-    - PACKAGE="@webundsoehne/nx-builders" yarn command build
+    - PACKAGE="@webundsoehne/nx-tools,@webundsoehne/nx-builders" yarn command --parallel -- build
   artifacts:
     paths:
       - '**/dist'
@@ -51,6 +49,5 @@ build:
   only:
     - develop
     - master
-    - tags
   tags:
     - node
