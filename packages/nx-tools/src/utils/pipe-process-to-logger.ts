@@ -22,23 +22,27 @@ export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChi
   }
 
   if (instance.stdout) {
-    instance.stdout.pipe(through((chunk: string) => {
-      if (options.stdout) {
-        logger.info(chunk)
-      } else {
-        logger.debug(chunk)
-      }
-    }))
+    instance.stdout.pipe(
+      through((chunk: string) => {
+        if (options.stdout) {
+          logger.info(chunk)
+        } else {
+          logger.debug(chunk)
+        }
+      })
+    )
   }
 
   if (instance.stderr) {
-    instance.stderr.pipe(through((chunk: string) => {
-      if (options.stderr) {
-        logger.warn(chunk)
-      } else {
-        logger.debug(chunk)
-      }
-    }))
+    instance.stderr.pipe(
+      through((chunk: string) => {
+        if (options.stderr) {
+          logger.warn(chunk)
+        } else {
+          logger.debug(chunk)
+        }
+      })
+    )
   }
 
   if (options.exitCode) {
