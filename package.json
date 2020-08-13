@@ -21,9 +21,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn command lint-staged",
+      "pre-commit": "lint-staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
+  },
+  "lint-staged": {
+    "./*.{ts,js,tsx,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@nrwl/workspace": "10.0.11"

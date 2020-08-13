@@ -50,6 +50,7 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
+    "@webundsoehne/nx-tools": "*",
     "@angular-devkit/architect": "^0.1000.5",
     "@angular-devkit/core": "^10.0.5",
     "@angular-devkit/schematics": "~10.0.5",

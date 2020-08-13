@@ -29,7 +29,7 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
+export function runBuilder(options: NodePackageBuilderOptions, context: BuilderContext) {
   const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
 
   return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
@@ -57,7 +57,7 @@ class Builder {
   private paths: ProcessPaths
   private manager: ProcessManager
 
-  constructor (options: NodePackageBuilderOptions, private context: BuilderContext) {
+  constructor(options: NodePackageBuilderOptions, private context: BuilderContext) {
     this.logger = new Logger(context)
 
     // create dependency
@@ -73,8 +73,7 @@ class Builder {
     this.manager = new ProcessManager(this.context)
   }
 
-  public compileFiles (): Observable<BuilderOutput> {
-
+  public compileFiles(): Observable<BuilderOutput> {
     // Cleaning the /dist folder
     removeSync(this.options.normalizedOutputPath)
 
@@ -99,16 +98,15 @@ class Builder {
         this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
         try {
-
           // check if needed tools are really installed
-          Object.entries(this.paths).forEach(([ key, value ]) => {
-            if (![ 'tsconfigPaths' ].includes(value) && !fs.isFile(value)) {
+          Object.entries(this.paths).forEach(([key, value]) => {
+            if (!['tsconfigPaths'].includes(value) && !fs.isFile(value)) {
               throw new Error(`Binary for application not found: ${key}`)
             }
           })
 
           if (this.options.watch) {
-          // TODO: This part is not working as intended atm
+            // TODO: This part is not working as intended atm
             this.logger.info('Starting TypeScript-Watch...')
 
             this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
@@ -119,36 +117,32 @@ class Builder {
 
             instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
               switch (msg) {
-              case 'success':
+                case 'success':
+                  await this.secondaryCompileActions()
 
-                await this.secondaryCompileActions()
+                  if (this.options.runAfterWatch) {
+                    await this.manager.kill()
+                    const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
 
-                if (this.options.runAfterWatch) {
-                  await this.manager.kill()
-                  const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
-
-                  // we dont want errors from this since it can be killed
-                  try {
-                    await pipeProcessToLogger(this.context, subInstance)
-                  } catch (e) {
-                    this.logger.debug(e.message)
+                    // we dont want errors from this since it can be killed
+                    try {
+                      await pipeProcessToLogger(this.context, subInstance)
+                    } catch (e) {
+                      this.logger.debug(e.message)
+                    }
+                  } else {
+                    this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
                   }
 
-                } else {
-
-                  this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
-
-                }
-
-                break
-              default:
-                break
+                  break
+                default:
+                  break
               }
             })
 
             await pipeProcessToLogger(this.context, instance)
           } else {
-          // the normal mode of compiling
+            // the normal mode of compiling
             this.logger.info('Transpiling TypeScript files...')
 
             this.logger.debug(`typescript path: ${this.paths.typescript}`)
@@ -177,8 +171,7 @@ class Builder {
     )
   }
 
-  protected normalizeOptions (options: NodePackageBuilderOptions): NormalizedBuilderOptions {
-
+  protected normalizeOptions(options: NodePackageBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
@@ -224,11 +217,11 @@ class Builder {
     }
   }
 
-  private async secondaryCompileActions () {
-    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
+  private async secondaryCompileActions() {
+    return Promise.all([this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles()])
   }
 
-  private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
+  private normalizeArguments(mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
     let args: string[]
     let spawnOptions: SpawnOptions
     spawnOptions = {
@@ -245,44 +238,44 @@ class Builder {
       }
     } else if (mode === 'tscpaths') {
       spawnOptions = { ...spawnOptions, cwd: this.context.workspaceRoot }
-
     } else if (mode === 'runAfterWatch') {
       spawnOptions = {
-        ...spawnOptions, cwd: this.options.normalizedOutputPath, shell: true
+        ...spawnOptions,
+        cwd: this.options.normalizedOutputPath,
+        shell: true
       }
-
     }
 
     // set arguments
     if (mode === 'typescript' || mode === 'tsc-watch') {
-    // arguments for typescript compiler
-      args = [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ]
+      // arguments for typescript compiler
+      args = ['-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath]
 
       if (this.options.sourceMap) {
-        args = [ ...args, '--sourceMap' ]
+        args = [...args, '--sourceMap']
       }
 
       if (this.options.verbose) {
-        args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
+        args = [...args, '--extendedDiagnostics', '--listEmittedFiles']
       }
 
       if (mode === 'tsc-watch') {
-      // it can use the same options with tsc
-        args = [ ...args, '--noClear', '--sourceMap' ]
+        // it can use the same options with tsc
+        args = [...args, '--noClear', '--sourceMap']
       }
     } else if (mode === 'tscpaths') {
-    // arguments for tsc paths
-      args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
+      // arguments for tsc paths
+      args = ['-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath]
 
       if (this.options.verbose) {
-        args = [ ...args, '--verbose' ]
+        args = [...args, '--verbose']
       }
     }
 
     return { args, spawnOptions }
   }
 
-  private async swapPaths () {
+  private async swapPaths() {
     // optional swap paths, which will swap all the typescripts to relative paths.
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
@@ -309,12 +302,9 @@ class Builder {
     }
   }
 
-  private updatePackageJson () {
-
+  private updatePackageJson() {
     let packageJson = readJsonFile(
-      this.options.packageJson ?
-        join(this.context.workspaceRoot, this.options.packageJson) :
-        join(this.context.workspaceRoot, this.options.cwd, 'package.json')
+      this.options.packageJson ? join(this.context.workspaceRoot, this.options.packageJson) : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
     )
 
     if (!packageJson) {
@@ -340,7 +330,7 @@ class Builder {
     if (packageJson.implicitDependencies) {
       this.logger.info('Processing "package.json "implicit dependencies...')
 
-      Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+      Object.entries(packageJson.implicitDependencies).forEach(([name, version]) => {
         implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
       })
     }
@@ -364,29 +354,28 @@ class Builder {
     this.logger.info('Generated "package.json".')
   }
 
-  private async copyAssetFiles (): Promise<BuilderOutput> {
+  private async copyAssetFiles(): Promise<BuilderOutput> {
     this.logger.info('Copying asset files...')
 
     try {
-      await Promise.all(this.options.files.map((file) => {
-        this.logger.debug(`Copying "${file.input}" to ${file.output}`)
+      await Promise.all(
+        this.options.files.map((file) => {
+          this.logger.debug(`Copying "${file.input}" to ${file.output}`)
 
-        return copy(file.input, file.output)
-      }))
+          return copy(file.input, file.output)
+        })
+      )
 
       this.logger.info('Done copying asset files.')
 
       return {
         success: true
       }
-
     } catch (err) {
-
       return {
         error: err.message,
         success: false
       }
-
     }
   }
 }

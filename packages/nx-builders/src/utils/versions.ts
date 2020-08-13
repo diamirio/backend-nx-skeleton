@@ -4,7 +4,7 @@ import merge from 'deepmerge'
 import { InitiateBuilderDependenciesOptions } from '@src/init/main.interface'
 
 // calculate dependencies
-export function calculateDependencies (options: InitiateBuilderDependenciesOptions): PackageVersions {
+export function calculateDependencies(options: InitiateBuilderDependenciesOptions): PackageVersions {
   let dependencies: PackageVersions = baseDeps
 
   if (options.includes('ts-node-dev')) {
