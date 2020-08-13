@@ -307,18 +307,20 @@
     winston "^3.3.3"
     yaml "^1.10.0"
 
-"@cenk1cenk2/cz-cc@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@cenk1cenk2/cz-cc/-/cz-cc-1.0.5.tgz#7782aa4b01c659d07586f4286bca4e8395db5a45"
-  integrity sha512-czTIYyRWW/2JYw7tST960a5i/d+wN2IBkWrHeq4qdXArGLlNFyJA7QUrqXKJgUyw1wXYYCaD019pupUOE2WkNQ==
+"@cenk1cenk2/cz-cc@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@cenk1cenk2/cz-cc/-/cz-cc-1.1.2.tgz#2bd29a9e6512b343ca0e3229751c6b5a03547ca3"
+  integrity sha512-rslw/HckLg4HL/NJ+dMWKc+pEq1kdT0Xv13411vFs1YmsQUfLgjrkSpLpYyHHEBTtHTb0xDdwaQp0v8/OeCjbw==
   dependencies:
     chalk "^4.1.0"
     commitizen "^4.1.2"
     conventional-commit-types "^3.0.0"
     enquirer "^2.3.6"
-    listr2 "^2.4.1"
+    enquirer-editor "^1.0.0"
+    enquirer-prompt-editor "^2.0.1"
+    find-git-root "^1.0.4"
+    listr2 "^2.5.1"
     lodash.map "^4.6.0"
-    longest "^2.0.1"
     word-wrap "^1.2.3"
   optionalDependencies:
     "@commitlint/load" "^9.1.1"
@@ -1954,6 +1956,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.26.tgz#22a3b8a46510da8944b67bfc27df02c34a35331c"
   integrity sha512-W+fpe5s91FBGE0pEa0lnqGLL4USgpLgs4nokw16SrBBco/gQxuua7KnArSEOd5iaMqbbSHV10vUDkJYJJqpXKA==
 
+"@types/node@10.12.21":
+  version "10.12.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.21.tgz#7e8a0c34cf29f4e17a36e9bd0ea72d45ba03908e"
+  integrity sha512-CBgLNk4o3XMnqMc0rhb6lc77IwShMEglz05deDcn2lQxyXEZivfwgYJu7SMha9V5XcrP6qZuevTHV/QrN2vjKQ==
+
 "@types/node@^14.0.27":
   version "14.0.27"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
@@ -3443,6 +3450,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+crypto-random-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
+  integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
+
 cssom@^0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/cssom/-/cssom-0.4.4.tgz#5a66cf93d2d0b661d80bf6a44fb65f5c2e4e0a10"
@@ -3780,6 +3792,14 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
+edit-briefly@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/edit-briefly/-/edit-briefly-1.0.0.tgz#3726e9c718216ce0582f0709a663cb6c4e169b48"
+  integrity sha512-pH/SkNKda9qoxRKzntlHaATciL1auKcZjc7PrbVYY8bzPbyeQd2X7JMhI+G1CF3uYzO8F7AFIcmyenRccils1w==
+  dependencies:
+    "@types/node" "10.12.21"
+    tempy "0.2.1"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -3829,7 +3849,23 @@ end-of-stream@^1.0.0, end-of-stream@^1.1.0, end-of-stream@^1.4.1:
   dependencies:
     once "^1.4.0"
 
-enquirer@^2.3.5, enquirer@^2.3.6:
+enquirer-editor@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/enquirer-editor/-/enquirer-editor-1.0.0.tgz#76e5a49714c957b69068df1c803ac8f9bfe3a02b"
+  integrity sha512-JX8+ID3vxvhqsjpdueDDZnTBqbb3Hbu491J33VmLkIDDdJB2eBfvSYuES1DVgIZ2mFe1Rehz6jE9jTHFrlqqCg==
+  dependencies:
+    enquirer "^2.3.2"
+    external-editor "^3.1.0"
+
+enquirer-prompt-editor@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/enquirer-prompt-editor/-/enquirer-prompt-editor-2.0.1.tgz#53a51095160de886c591a3ff817a9e35eeb66b71"
+  integrity sha512-7nsg4kkeGF5NaHQGsmdAFbOnCBmljNHUkSiWUVPncri/kBkOxFoszplaDlVURm+BIE49GjNqk+DZXgGugSJqsw==
+  dependencies:
+    edit-briefly "^1.0.0"
+    enquirer "^2.3.0"
+
+enquirer@^2.3.0, enquirer@^2.3.2, enquirer@^2.3.5, enquirer@^2.3.6:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/enquirer/-/enquirer-2.3.6.tgz#2a7fe5dd634a1e4125a975ec994ff5456dc3734d"
   integrity sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==
@@ -4297,7 +4333,7 @@ extend@~3.0.2:
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
 
-external-editor@^3.0.3:
+external-editor@^3.0.3, external-editor@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/external-editor/-/external-editor-3.1.0.tgz#cb03f740befae03ea4d283caed2741a83f335495"
   integrity sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew==
@@ -4518,6 +4554,11 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
+
+find-git-root@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/find-git-root/-/find-git-root-1.0.4.tgz#8bc1e0897db783e06762bf050b0943288e5399fd"
+  integrity sha512-468fmirKKgcrqfZfPn0xIpwZUUsZQcYXfx0RC2/jX39GPz83TwutQNZZhDrI6HqjO8cRejxQVaUY8GQdXopFfA==
 
 find-my-way@^3.0.0:
   version "3.0.1"
@@ -6497,20 +6538,6 @@ listr2@^2.1.0:
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-2.3.5.tgz#ba88ac8317a9839d517052c4cd98f38ec34c1906"
   integrity sha512-mka3F7Xw/9YhzmO3tJ8fc5uQgvZyA2LShn9qa02k63APLTTmIDHItKNov7VMS01bg7jcx4Stzfvo1e0nolh/bw==
-  dependencies:
-    chalk "^4.1.0"
-    cli-truncate "^2.1.0"
-    figures "^3.2.0"
-    indent-string "^4.0.0"
-    log-update "^4.0.0"
-    p-map "^4.0.0"
-    rxjs "^6.6.0"
-    through "^2.3.8"
-
-listr2@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-2.4.1.tgz#006fc94ae77b3195403cbf3a4a563e2d6366224f"
-  integrity sha512-8pYsCZCztr5+KAjReLyBeGhLV0vaQ2Du/eMe/ux9QAfQl7efiWejM1IWjALh0zHIRYuIbhQ8N2KztZ4ci56pnQ==
   dependencies:
     chalk "^4.1.0"
     cli-truncate "^2.1.0"
@@ -9546,6 +9573,14 @@ temp-write@^3.4.0:
     temp-dir "^1.0.0"
     uuid "^3.0.1"
 
+tempy@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tempy/-/tempy-0.2.1.tgz#9038e4dbd1c201b74472214179bc2c6f7776e54c"
+  integrity sha512-LB83o9bfZGrntdqPuRdanIVCPReam9SOZKW0fOy5I9X3A854GGWi0tjCqoXEk84XIEYBc/x9Hq3EFop/H5wJaw==
+  dependencies:
+    temp-dir "^1.0.0"
+    unique-string "^1.0.0"
+
 terminal-link@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"
@@ -9962,6 +9997,13 @@ unique-slug@^2.0.0:
   integrity sha512-zoWr9ObaxALD3DOPfjPSqxt4fnZiWblxHIgeWqW8x7UqDzEtHEQLzji2cuJYQFCU6KmoJikOYAZlrTHHebjx2w==
   dependencies:
     imurmurhash "^0.1.4"
+
+unique-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/unique-string/-/unique-string-1.0.0.tgz#9e1057cca851abb93398f8b33ae187b99caec11a"
+  integrity sha1-nhBXzKhRq7kzmPizOuGHuZyuwRo=
+  dependencies:
+    crypto-random-string "^1.0.0"
 
 universal-user-agent@^4.0.0:
   version "4.0.1"

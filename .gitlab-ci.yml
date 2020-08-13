@@ -63,7 +63,11 @@ publish:
     PLUGIN_MODE: predict
     PLUGIN_ADD_MODULES: semantic-release-monorepo
     PLUGIN_OVERRIDE: npx --no-install lerna exec --scope "@webundsoehne/nx-builders" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
+    PLUGIN_GIT_USER_EMAIL: ck@webundsoehne.com
+    PLUGIN_GITLAB_TOKEN: asdsadsaasdsadas
   script:
+    - pwd
+    - ls -la
     - /semantic-release/release.sh
   only:
     - develop
