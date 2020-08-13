@@ -77,4 +77,4 @@ publish:
     - develop
     - master
   tags:
-    - docker
+    - node
