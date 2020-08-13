@@ -79,3 +79,9 @@ There are couple of scripts in the scripts folder:
 
 - `./initiate-new-empty-workspace.sh`
   > Copy this script to somewhere else for easily creating a new empty workspace in the designated folder to test out the schematics.
+
+## Package Manager
+
+`yarn` must be used due to its support of `resolutions` field in the `package.json` as well as this repository being configured for `yarn workspaces`.
+
+`@angular` scoped packages have inconsistencies between similar versions due to utilizing different versioned sub-packages. In the development process you can get over this with fixing the package versions utilizing `resolutions` in the root `package.json`.
