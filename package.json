@@ -21,12 +21,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna exec --scope ${PACKAGE:-''} --stream -- npx --no-install lint-staged",
+      "pre-commit": "yarn command lint-staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "dependencies": {
-    "@nrwl/workspace": "10.0.8"
+    "@nrwl/workspace": "10.0.11"
   },
   "devDependencies": {
     "@cenk1cenk2/cz-cc": "^1.0.5",
