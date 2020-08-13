@@ -64,7 +64,7 @@ publish:
     PLUGIN_ADD_MODULES: semantic-release-monorepo
     PLUGIN_OVERRIDE: npx --no-install lerna exec --scope "@webundsoehne/nx-builders" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
     PLUGIN_GIT_USER_EMAIL: gitlab-ci-token
-    PLUGIN_GITLAB_TOKEN: $GITLAB_CI_TOKEN
+    PLUGIN_GITLAB_TOKEN: $CI_BUILD_TOKEN
   before_script:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
