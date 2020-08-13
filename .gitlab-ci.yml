@@ -67,7 +67,7 @@ publish:
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN
   before_script:
     - apk add --no-cache --no-progress rsync
-    - rsync -a $CI_PROJECT_DIR /drone/src
+    - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
   script:
     - pwd
