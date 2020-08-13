@@ -29,7 +29,7 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder(options: NodePackageBuilderOptions, context: BuilderContext) {
+export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
   const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
 
   return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
@@ -57,7 +57,7 @@ class Builder {
   private paths: ProcessPaths
   private manager: ProcessManager
 
-  constructor(options: NodePackageBuilderOptions, private context: BuilderContext) {
+  constructor (options: NodePackageBuilderOptions, private context: BuilderContext) {
     this.logger = new Logger(context)
 
     // create dependency
@@ -73,7 +73,7 @@ class Builder {
     this.manager = new ProcessManager(this.context)
   }
 
-  public compileFiles(): Observable<BuilderOutput> {
+  public compileFiles (): Observable<BuilderOutput> {
     // Cleaning the /dist folder
     removeSync(this.options.normalizedOutputPath)
 
@@ -99,8 +99,8 @@ class Builder {
 
         try {
           // check if needed tools are really installed
-          Object.entries(this.paths).forEach(([key, value]) => {
-            if (!['tsconfigPaths'].includes(value) && !fs.isFile(value)) {
+          Object.entries(this.paths).forEach(([ key, value ]) => {
+            if (![ 'tsconfigPaths' ].includes(value) && !fs.isFile(value)) {
               throw new Error(`Binary for application not found: ${key}`)
             }
           })
@@ -117,26 +117,26 @@ class Builder {
 
             instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
               switch (msg) {
-                case 'success':
-                  await this.secondaryCompileActions()
+              case 'success':
+                await this.secondaryCompileActions()
 
-                  if (this.options.runAfterWatch) {
-                    await this.manager.kill()
-                    const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
+                if (this.options.runAfterWatch) {
+                  await this.manager.kill()
+                  const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
 
-                    // we dont want errors from this since it can be killed
-                    try {
-                      await pipeProcessToLogger(this.context, subInstance)
-                    } catch (e) {
-                      this.logger.debug(e.message)
-                    }
-                  } else {
-                    this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
+                  // we dont want errors from this since it can be killed
+                  try {
+                    await pipeProcessToLogger(this.context, subInstance)
+                  } catch (e) {
+                    this.logger.debug(e.message)
                   }
+                } else {
+                  this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
+                }
 
-                  break
-                default:
-                  break
+                break
+              default:
+                break
               }
             })
 
@@ -171,7 +171,7 @@ class Builder {
     )
   }
 
-  protected normalizeOptions(options: NodePackageBuilderOptions): NormalizedBuilderOptions {
+  protected normalizeOptions (options: NodePackageBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
@@ -217,11 +217,11 @@ class Builder {
     }
   }
 
-  private async secondaryCompileActions() {
-    return Promise.all([this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles()])
+  private async secondaryCompileActions () {
+    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
   }
 
-  private normalizeArguments(mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
+  private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
     let args: string[]
     let spawnOptions: SpawnOptions
     spawnOptions = {
@@ -249,33 +249,33 @@ class Builder {
     // set arguments
     if (mode === 'typescript' || mode === 'tsc-watch') {
       // arguments for typescript compiler
-      args = ['-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath]
+      args = [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ]
 
       if (this.options.sourceMap) {
-        args = [...args, '--sourceMap']
+        args = [ ...args, '--sourceMap' ]
       }
 
       if (this.options.verbose) {
-        args = [...args, '--extendedDiagnostics', '--listEmittedFiles']
+        args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
       }
 
       if (mode === 'tsc-watch') {
         // it can use the same options with tsc
-        args = [...args, '--noClear', '--sourceMap']
+        args = [ ...args, '--noClear', '--sourceMap' ]
       }
     } else if (mode === 'tscpaths') {
       // arguments for tsc paths
-      args = ['-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath]
+      args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
 
       if (this.options.verbose) {
-        args = [...args, '--verbose']
+        args = [ ...args, '--verbose' ]
       }
     }
 
     return { args, spawnOptions }
   }
 
-  private async swapPaths() {
+  private async swapPaths () {
     // optional swap paths, which will swap all the typescripts to relative paths.
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
@@ -302,7 +302,7 @@ class Builder {
     }
   }
 
-  private updatePackageJson() {
+  private updatePackageJson () {
     let packageJson = readJsonFile(
       this.options.packageJson ? join(this.context.workspaceRoot, this.options.packageJson) : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
     )
@@ -328,14 +328,17 @@ class Builder {
     const implicitDependencies = {}
 
     if (packageJson.implicitDependencies) {
-      this.logger.info('Processing "package.json "implicit dependencies...')
+      this.logger.info('Processing "package.json" implicit dependencies...')
 
-      Object.entries(packageJson.implicitDependencies).forEach(([name, version]) => {
+      Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
         implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
       })
     }
 
-    delete packageJson.implicitDependencies
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { implicitDependencies: omit, ...rest } = packageJson
+
+    packageJson = rest
 
     // update package dependencies
     const project = this.context.target.project
@@ -354,7 +357,7 @@ class Builder {
     this.logger.info('Generated "package.json".')
   }
 
-  private async copyAssetFiles(): Promise<BuilderOutput> {
+  private async copyAssetFiles (): Promise<BuilderOutput> {
     this.logger.info('Copying asset files...')
 
     try {

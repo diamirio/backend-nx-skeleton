@@ -16,7 +16,7 @@ export default function (schema: NormalizedSchema): Rule {
       try {
         const builderInit = await import('@webundsoehne/nx-builders')
         return builderInit.initiateBuilderDependencies([ 'ts-node-dev', 'tsc' ])
-      // eslint-disable-next-line no-empty
+        // eslint-disable-next-line no-empty
       } catch (e) {}
     },
 

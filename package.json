@@ -7,10 +7,10 @@
   "license": "ISC",
   "scripts": {
     "ls": "lerna la",
-    "rimraf": "rimraf node_modules && lerna clean --scope ${PACKAGE:-''} -y",
+    "rimraf": "rimraf node_modules && lerna clean --scope -y",
     "release": "lerna publish -y",
-    "exec": "lerna exec --scope ${PACKAGE:-''} --stream",
-    "command": "lerna run --scope ${PACKAGE:-''} --stream",
+    "exec": "lerna exec --stream",
+    "command": "lerna run --stream",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": {

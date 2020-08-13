@@ -1,20 +1,13 @@
 image: node:14-alpine
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^master$/
-      when: always
-    - if: $CI_COMMIT_REF_NAME =~ /^develop$/
-      when: always
+variables:
+  PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders"'
 
 stages:
   - install
   - lint
   - build
   - publish
-
-variables:
-  PARENT_PIPELINE_ID: $CI_PIPELINE_ID
 
 cache:
   paths:
@@ -36,15 +29,14 @@ install:
 lint:
   stage: lint
   script:
-    # - yarn command --parallel -- lint:check
-    - echo "disabled for now"
+    - eval yarn command --parallel ${PACKAGE_SCOPE} lint:check
   tags:
     - node
 
 build:
   stage: build
   script:
-    - yarn command --scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders" --include-dependencies build
+    - eval yarn command ${PACKAGE_SCOPE} --include-dependencies build
   artifacts:
     paths:
       - packages/*/dist
@@ -62,8 +54,8 @@ publish:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: predict
     PLUGIN_ADD_MODULES: semantic-release-monorepo
-    PLUGIN_OVERRIDE: npx --no-install lerna exec --scope "@webundsoehne/nx-builders" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
-    PLUGIN_GIT_USER_EMAIL: ck@webundsoehne.com
+    PLUGIN_OVERRIDE: npx --no-install lerna exec ${PACKAGE_SCOPE} --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
+    PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
   before_script:
     - apk add --no-cache --no-progress rsync

@@ -11,7 +11,7 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder(options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
+export function runBuilder (options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
   return Observable.create(
     async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
       const { args, spawnOptions } = normalizeArguments(options)
@@ -29,31 +29,31 @@ export function runBuilder(options: NodePackageServeOptions, context: BuilderCon
   )
 }
 
-function normalizeArguments(options: NodePackageServeOptions): ExecaArguments {
+function normalizeArguments (options: NodePackageServeOptions): ExecaArguments {
   const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
   // default options
-  let args = ['-r', 'tsconfig-paths/register']
+  let args = [ '-r', 'tsconfig-paths/register' ]
 
   // options
   if (tsConfig) {
-    args = [...args, '--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig]
+    args = [ ...args, '--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig ]
   }
 
   if (debounce) {
-    args = [...args, '--debounce', `${debounce}`]
+    args = [ ...args, '--debounce', `${debounce}` ]
   }
 
   if (interval) {
-    args = [...args, '--interval', `${interval}`]
+    args = [ ...args, '--interval', `${interval}` ]
   }
 
   if (debug) {
-    args = [...args, '--debug']
+    args = [ ...args, '--debug' ]
   }
 
   if (inspect) {
-    args = [...args, `--inspect=0.0.0.0:${options.inspect}`]
+    args = [ ...args, `--inspect=0.0.0.0:${options.inspect}` ]
   }
 
   if (!main) {
@@ -61,7 +61,7 @@ function normalizeArguments(options: NodePackageServeOptions): ExecaArguments {
   }
 
   // run path
-  args = [...args, cwd ? removePathRoot(main, cwd) : main]
+  args = [ ...args, cwd ? removePathRoot(main, cwd) : main ]
 
   const spawnOptions: SpawnOptions = {
     env: {

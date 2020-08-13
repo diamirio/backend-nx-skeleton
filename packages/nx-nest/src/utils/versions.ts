@@ -11,7 +11,6 @@ export const eslintPluginImportVersion = '^2.22.0'
 
 // calculate dependencies
 export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
-
   // only add builders
   if (builders) {
     return builderDeps
@@ -55,9 +54,7 @@ export function calculateDependencies (schema: NormalizedSchema, builders?: bool
 }
 
 export const builderDeps: PackageVersions = {
-  dev: {
-
-  }
+  dev: {}
 }
 
 export const testDeps: PackageVersions = {
