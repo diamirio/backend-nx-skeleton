@@ -64,7 +64,8 @@ publish:
     PLUGIN_ADD_MODULES: semantic-release-monorepo
     PLUGIN_OVERRIDE: npx --no-install lerna exec --scope "@webundsoehne/nx-builders" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
     PLUGIN_GIT_USER_EMAIL: ck@webundsoehne.com
-    PLUGIN_GITLAB_TOKEN: asdsadsaasdsadas
+    PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN
+    GIT_CLONE_PATH: /drone/src
   script:
     - pwd
     - ls -la
