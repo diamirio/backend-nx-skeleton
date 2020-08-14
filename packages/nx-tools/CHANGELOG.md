@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-tools-v1.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.5...@webundsoehne/nx-tools-v1.0.6) (2020-08-14)
+
+
+### Bug Fixes
+
+* **nx-builders:** added init method to builders ([3b0052a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b0052a52d38719ac3ff40fc7b1d9a13ac2d330e))
+
 # [@webundsoehne/nx-tools-v1.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.4...@webundsoehne/nx-tools-v1.0.5) (2020-08-14)
 
 
