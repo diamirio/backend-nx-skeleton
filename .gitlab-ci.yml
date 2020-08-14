@@ -59,9 +59,7 @@ publish:
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: "true"
     PLUGIN_README_LOCATION: "README.md $$(find packages -maxdepth 2 -name README.md | paste -sd ' ')"
-    PLUGIN_NPM_USERNAME: $NPM_WS_USERNAME
-    PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
-    PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL
+    PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
   before_script:
     - apk add --no-cache --no-progress rsync
