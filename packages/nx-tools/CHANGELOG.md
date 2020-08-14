@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-tools-v1.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.4...@webundsoehne/nx-tools-v1.0.5) (2020-08-14)
+
+
+### Bug Fixes
+
+* retry npm shortage ([b8a25c0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b8a25c0cded811860b9b020fa9b0675816c395bf))
+
 # [@webundsoehne/nx-tools-v1.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.3...@webundsoehne/nx-tools-v1.0.4) (2020-08-14)
 
 
