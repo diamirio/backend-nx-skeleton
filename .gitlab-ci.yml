@@ -57,6 +57,9 @@ publish:
     PLUGIN_OVERRIDE: npx --no-install lerna exec ${PACKAGE_SCOPE} --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
+    NPM_USERNAME: $NPM_WS_USERNAME
+    NPM_PASSWORD: $NPM_WS_PASSWORD
+    NPM_EMAIL: $NPM_WS_EMAIL
   before_script:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/

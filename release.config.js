@@ -32,6 +32,7 @@ module.exports = {
       {
         assets: []
       }
-    ]
+    ],
+    '@semantic-release/npm'
   ]
 }
