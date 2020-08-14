@@ -1,8 +1,7 @@
-import { chain, Rule, SchematicContext, Tree, branchAndMerge, MergeStrategy, mergeWith, noop } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
 import { formatFiles, Logger } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -10,7 +9,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { updateTsconfigPaths } from './lib/update-tsconfig-json'
 import { Schema } from './main.interface'
-import init from '@init/init'
+import init from '@src/schematics/init/main'
 
 export default function (schema: Schema): Rule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -30,6 +29,7 @@ export default function (schema: Schema): Rule {
       !host.exists(`${options.root}/.eslintrc`)
         ? chain([
           (): void => log.info('Adding eslint configuration.'),
+
           addLintFiles(options.root, Linter.EsLint, {
             localConfig: eslintJson,
             extraPackageDeps: eslintDeps

@@ -1,0 +1,10 @@
+{
+  "name": "@webundsoehne/nx-builders",
+  "schematics": {
+    "init": {
+      "factory": "./dist/schematics/init/main",
+      "description": "Install dependencies for @webundsoehne/nx-builders plugin.",
+      "hidden": true
+    }
+  }
+}

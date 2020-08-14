@@ -1,7 +1,6 @@
+import { InitiateBuilderDependenciesOptions } from '@utils/initiate-builder.interface'
 import { PackageVersions } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
-
-import { InitiateBuilderDependenciesOptions } from '@src/init/main.interface'
 
 // calculate dependencies
 export function calculateDependencies (options: InitiateBuilderDependenciesOptions): PackageVersions {

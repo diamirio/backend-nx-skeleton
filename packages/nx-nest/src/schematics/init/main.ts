@@ -11,6 +11,7 @@ export default function (schema: NormalizedSchema): Rule {
   return chain([
     // add builder and its dependencies
     addDepsToPackageJson(builders.prod, builders.dev),
+
     async (): Promise<Rule> => {
       // dynamically import it from the package, we can change it there
       try {

@@ -3,10 +3,9 @@
   "extends": ["@nrwl/workspace"],
   "schematics": {
     "init": {
-      "factory": "./dist/schematics/application/init",
+      "factory": "./dist/schematics/init/main",
       "schema": "./dist/schematics/application/schema.json",
       "description": "Initialize the @webundsoehne/nx-nest plugin.",
-      "aliases": ["ng-add"],
       "hidden": true
     },
 

@@ -7,7 +7,9 @@
     "paths": {
       "@src/*": ["*"],
       "@application/*": ["schematics/application/*"],
-      "@init/*": ["schematics/init/*"]
+      "@init/*": ["schematics/init/*"],
+      "@builders/*": ["builders/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],
