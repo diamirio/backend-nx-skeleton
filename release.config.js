@@ -15,7 +15,7 @@ module.exports = {
       prerelease: true
     }
   ],
-  verifyConditions: ['@semantic-release/changelog', '@semantic-release/git'],
+  verifyConditions: ['@semantic-release/changelog', '@semantic-release/git', '@semantic-release/npm'],
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
