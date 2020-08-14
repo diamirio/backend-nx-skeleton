@@ -5,6 +5,13 @@
 
 * **nx-builders:** added init method to builders ([3b0052a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b0052a52d38719ac3ff40fc7b1d9a13ac2d330e))
 
+# [@webundsoehne/nx-builders-v1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.2...@webundsoehne/nx-builders-v1.0.3) (2020-08-14)
+
+
+### Bug Fixes
+
+* **nx-builders:** added init method to builders ([3b0052a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b0052a52d38719ac3ff40fc7b1d9a13ac2d330e))
+
 # [@webundsoehne/nx-builders-v1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.1...@webundsoehne/nx-builders-v1.0.2) (2020-08-14)
 
 
