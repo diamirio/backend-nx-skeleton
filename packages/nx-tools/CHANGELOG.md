@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-tools-v1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.2...@webundsoehne/nx-tools-v1.0.3) (2020-08-14)
+
+
+### Bug Fixes
+
+* **npm:** retry npm is down ([17062e1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/17062e1f663b1471019e2031bc218a6457d0dd40))
+
 # [@webundsoehne/nx-tools-v1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.1...@webundsoehne/nx-tools-v1.0.2) (2020-08-14)
 
 
