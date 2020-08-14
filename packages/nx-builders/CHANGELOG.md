@@ -1,3 +1,15 @@
+# [@webundsoehne/nx-builders-v1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.0...@webundsoehne/nx-builders-v1.0.1) (2020-08-14)
+
+
+### Bug Fixes
+
+* enable publish ([96d5f22](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/96d5f22e44f3a5a7243d50885296aaff00904f55))
+* force publish because of npm shortage ([4c2c04a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c2c04acbb494ead5bd541799312075c346496b8))
+* retry npm shortage ([b8a25c0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b8a25c0cded811860b9b020fa9b0675816c395bf))
+* retry npm token ([9258a20](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9258a20dfbdc7a0a686e56805fe2856e25f98826))
+* **npm:** retry npm is down ([17062e1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/17062e1f663b1471019e2031bc218a6457d0dd40))
+* retry publish npm is down ([70fa53d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/70fa53df60d684f8b758df91e9f4190a7de238be))
+
 # @webundsoehne/nx-builders-v1.0.0 (2020-08-13)
 
 
