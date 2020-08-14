@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-builders-v1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.1...@webundsoehne/nx-builders-v1.0.2) (2020-08-14)
+
+
+### Bug Fixes
+
+* retry npm ([d7768f1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d7768f16eb07d0635b6c62f439a39e6fd0ed57b4))
+
 # [@webundsoehne/nx-builders-v1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.0...@webundsoehne/nx-builders-v1.0.1) (2020-08-14)
 
 
