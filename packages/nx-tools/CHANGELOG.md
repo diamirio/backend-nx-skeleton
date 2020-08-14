@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-tools-v1.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.3...@webundsoehne/nx-tools-v1.0.4) (2020-08-14)
+
+
+### Bug Fixes
+
+* retry npm token ([9258a20](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9258a20dfbdc7a0a686e56805fe2856e25f98826))
+
 # [@webundsoehne/nx-tools-v1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.2...@webundsoehne/nx-tools-v1.0.3) (2020-08-14)
 
 
