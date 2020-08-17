@@ -11,8 +11,8 @@ import {
   DependentBuildableProjectNode,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils'
-import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
-import { createDependenciesForProjectFromGraph, ExecaArguments, Logger, mergeDependencies, pipeProcessToLogger, ProcessManager } from '@webundsoehne/nx-tools'
+import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils'
+import { createDependenciesForProjectFromGraph, ExecaArguments, Logger, mergeDependencies, pipeProcessToLogger, ProcessManager, removePathRoot } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -91,18 +91,19 @@ class Builder {
         // stop all manager tasks
         await this.manager.stop()
 
+        // check if needed tools are really installed
+        Object.entries(this.paths).forEach(([ key, value ]) => {
+          if (!fs.isFile(value)) {
+            throw new Error(`File not found: "${key}"@"${value}"`)
+          }
+        })
+
         const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
         if (this.projectDependencies.length > 0) {
           this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
         }
 
         try {
-          // check if needed tools are really installed
-          Object.entries(this.paths).forEach(([ key, value ]) => {
-            if (!fs.isFile(value)) {
-              throw new Error(`File not found: "${key}"@"${value}"`)
-            }
-          })
 
           // add this after since we do not want to patch check it
           this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
@@ -187,11 +188,9 @@ class Builder {
 
     options.assets.forEach((asset) => {
       if (typeof asset === 'string') {
-        globbedFiles(asset, this.context.workspaceRoot).forEach((globbedFile) => {
-          files.push({
-            input: join(this.context.workspaceRoot, globbedFile),
-            output: join(this.context.workspaceRoot, outDir, basename(globbedFile))
-          })
+        files.push({
+          input: join(this.context.workspaceRoot, asset),
+          output: join(this.context.workspaceRoot, outDir, removePathRoot(asset, options.cwd))
         })
       } else {
         globbedFiles(asset.glob, join(this.context.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
@@ -238,8 +237,10 @@ class Builder {
       if (this.options.cwd) {
         spawnOptions = { ...spawnOptions, cwd: this.options.cwd }
       }
+
     } else if (mode === 'tscpaths') {
       spawnOptions = { ...spawnOptions, cwd: this.context.workspaceRoot }
+
     } else if (mode === 'runAfterWatch') {
       spawnOptions = {
         ...spawnOptions,
@@ -300,56 +301,69 @@ class Builder {
         this.logger.debug(e)
       }
 
+      removeSync(this.paths.tsconfigPaths)
+
       this.logger.info('Swapped TypeScript paths.')
     }
   }
 
   private updatePackageJson () {
-    let packageJson = readJsonFile(
-      this.options.packageJson ? join(this.context.workspaceRoot, this.options.packageJson) : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
-    )
+    const packageJsonPath = this.options.packageJson ?
+      join(this.context.workspaceRoot, this.options.packageJson) :
+      join(this.context.workspaceRoot, this.options.cwd, 'package.json')
 
-    if (!packageJson) {
+    if (!fileExists(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
-      return
+
     } else {
       this.logger.info('Processing "package.json"...')
+
+      let packageJson = readJsonFile(packageJsonPath)
+
+      const mainFile = basename(this.options.main, '.ts')
+      const globalPackageJson = readPackageJson()
+
+      // update main file and typings
+      packageJson = {
+        ...packageJson,
+        main: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`),
+        typings: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
+      }
+
+      // update implicit dependencies
+      const implicitDependencies = {}
+
+      if (packageJson?.implicitDependencies && Object.keys(packageJson.implicitDependencies).length > 0) {
+        this.logger.info('Processing "package.json" implicit dependencies...')
+
+        Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+          implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
+        })
+      }
+
+      delete packageJson.implicitDependencies
+
+      // update package dependencies
+      const project = this.context.target.project
+      const graph = createProjectGraph()
+
+      // some trickery because of the design of angular functions
+      const dependencies = createDependenciesForProjectFromGraph(graph, project)
+      if (packageJson.dependencies) {
+        packageJson.dependencies = mergeDependencies(dependencies, packageJson.dependencies)
+      } else {
+        packageJson.dependencies = dependencies
+      }
+
+      if (Object.keys(implicitDependencies).length > 0) {
+
+        packageJson.dependencies = mergeDependencies(packageJson.dependencies, implicitDependencies)
+      }
+
+      // write file back
+      writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
+
     }
-
-    const mainFile = basename(this.options.main, '.ts')
-    const globalPackageJson = readPackageJson()
-
-    // update main file and typings
-    packageJson = {
-      ...packageJson,
-      main: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`),
-      typings: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
-    }
-
-    // update implicit dependencies
-    const implicitDependencies = {}
-
-    if (packageJson.implicitDependencies) {
-      this.logger.info('Processing "package.json" implicit dependencies...')
-
-      Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
-        implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
-      })
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { implicitDependencies: omit, ...rest } = packageJson
-
-    packageJson = rest
-
-    // update package dependencies
-    const project = this.context.target.project
-    const graph = createProjectGraph()
-
-    packageJson.dependencies = mergeDependencies(createDependenciesForProjectFromGraph(graph, project), packageJson.dependencies, implicitDependencies)
-
-    // write file back
-    writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
 
     // this is the default behaviour, lets keep this.
     if (this.projectDependencies.length > 0 && this.options.updateBuildableProjectDepsInPackageJson) {

@@ -1,7 +1,7 @@
 image: node:14-alpine
 
 variables:
-  PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders"'
+  PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders" --scope "@webundsoehne/eslint-config"'
 
 stages:
   - install

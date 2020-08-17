@@ -19,6 +19,7 @@ export function calculateDependencies (options: InitiateBuilderDependenciesOptio
 
 export const baseDeps: PackageVersions = {
   dev: {
+    'nrwl-workspace': '^10.0.12',
     typescript: '^3.9.0'
   }
 }
