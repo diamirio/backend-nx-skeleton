@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-tools-v1.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.6...@webundsoehne/nx-tools-v1.0.7) (2020-08-17)
+
+
+### Bug Fixes
+
+* **nx-builders:tsc:** fix tsconfig paths error ([c0f22c9](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c0f22c9d0f35e210ecdc6c0771889a6853afcbde))
+
 # [@webundsoehne/nx-tools-v1.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.5...@webundsoehne/nx-tools-v1.0.6) (2020-08-14)
 
 
