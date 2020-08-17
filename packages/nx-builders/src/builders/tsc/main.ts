@@ -95,15 +95,17 @@ class Builder {
         if (this.projectDependencies.length > 0) {
           this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
         }
-        this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
         try {
           // check if needed tools are really installed
           Object.entries(this.paths).forEach(([ key, value ]) => {
-            if (![ 'tsconfigPaths' ].includes(value) && !fs.isFile(value)) {
-              throw new Error(`Binary for application not found: ${key}`)
+            if (!fs.isFile(value)) {
+              throw new Error(`File not found: "${key}"@"${value}"`)
             }
           })
+
+          // add this after since we do not want to patch check it
+          this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
           if (this.options.watch) {
             // TODO: This part is not working as intended atm

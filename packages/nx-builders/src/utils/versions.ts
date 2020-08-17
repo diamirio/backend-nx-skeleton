@@ -26,7 +26,8 @@ export const baseDeps: PackageVersions = {
 export const tsNodeDevDeps: PackageVersions = {
   dev: {
     'ts-node': '^8.10.0',
-    'ts-node-dev': '^1.0.0'
+    'ts-node-dev': '^1.0.0',
+    'tsconfig-paths': '^3.9.0'
   }
 }
 

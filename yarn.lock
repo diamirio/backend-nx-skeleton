@@ -2,18 +2,18 @@
 # yarn lockfile v1
 
 
-"@angular-devkit/architect@0.1000.5", "@angular-devkit/architect@^0.1000.5", "@angular-devkit/architect@~0.1000.0":
-  version "0.1000.5"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1000.5.tgz#39488b92a366e49d50dda0af4eee3b0bb9425ec4"
-  integrity sha512-BhNqB7fmmrDQwxoJ3zdw5FslFD+nYGgMTiC48ERVYJVuN3BK6xtt2OGA7vho3eJ13OE5cPGUi8crQDRROgxxQg==
+"@angular-devkit/architect@0.1000.6", "@angular-devkit/architect@^0.1000.6", "@angular-devkit/architect@~0.1000.0":
+  version "0.1000.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1000.6.tgz#d8143abbf1a1cef8e0ea9c80690821e8ca4cd54c"
+  integrity sha512-IZ8yiiW+LQ5mI3VbNHzisTIn0j6D1inQZgcZtc5W2A7fFNvBlIh6vGU3mB6Qvg678Gt6tlvnNT6/R9A9Ct7VnA==
   dependencies:
-    "@angular-devkit/core" "10.0.5"
+    "@angular-devkit/core" "10.0.6"
     rxjs "6.5.5"
 
-"@angular-devkit/core@10.0.5", "@angular-devkit/core@9.1.7", "@angular-devkit/core@^10.0.5", "@angular-devkit/core@~10.0.0":
-  version "10.0.5"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-10.0.5.tgz#ad747edbf3344a87f86acb71bdeaac0380538c04"
-  integrity sha512-ZaF1EYniIo+yRLvvaKnLrjYCdKeg2U3YtbA932M2AIfjgfFv/9mnAbH4jmZsBZhCstxZPz+ItwJesdR20h4Z1Q==
+"@angular-devkit/core@10.0.6", "@angular-devkit/core@9.1.7", "@angular-devkit/core@^10.0.6", "@angular-devkit/core@~10.0.0":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-10.0.6.tgz#cbb40a34f976f9496270efc4fbdb3ad836b9723e"
+  integrity sha512-mVvqSEoeErZ7bAModk95EAa6R9Nl23rvX+/TXuKVTK2dziMFBOrwHjb1DYhnZxFIH4xfUftCx+BWHjXBXCPYlA==
   dependencies:
     ajv "6.12.3"
     fast-json-stable-stringify "2.1.0"
@@ -21,12 +21,12 @@
     rxjs "6.5.5"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@10.0.5", "@angular-devkit/schematics@9.1.7", "@angular-devkit/schematics@~10.0.0", "@angular-devkit/schematics@~10.0.5":
-  version "10.0.5"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-10.0.5.tgz#a9365e06a433c89f0cf7e0a0937ab17816206b1e"
-  integrity sha512-UeeV8O0IydxCKj2oejygs80oIAQXPYrJHo0PQ/fa0RH6rtV3wZwirdy+yqq/BDGhtV/5VQSVCvu6uyAtGGMgNg==
+"@angular-devkit/schematics@10.0.6", "@angular-devkit/schematics@9.1.7", "@angular-devkit/schematics@~10.0.0", "@angular-devkit/schematics@~10.0.6":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-10.0.6.tgz#dc3486448cc34544f7076f7fe0a67b75137ae840"
+  integrity sha512-V3T4cf+jVKiPYyBrSVHf3ZSnk4wIc1WEaaeFta56HccEGQCQpvAFKqDurmtMHer50Hhaxhn7IC3Oi5kPnvkNyQ==
   dependencies:
-    "@angular-devkit/core" "10.0.5"
+    "@angular-devkit/core" "10.0.6"
     ora "4.0.4"
     rxjs "6.5.5"
 
@@ -1475,21 +1475,21 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@nrwl/cli@10.0.11", "@nrwl/cli@^10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.0.11.tgz#f0cca05c05c0a9be5b089ff6d88f52b8ecfb73ca"
-  integrity sha512-c30tar3OlYMBpfzILzVEqOfGYjQuYmNbIB1bNO5afo0c3ocAlo/akIVB79g1g8+9Fh0nAscQd54+Z4/lC/fzzQ==
+"@nrwl/cli@10.0.12", "@nrwl/cli@^10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.0.12.tgz#3b48602981cb459921572bbe28012e5baf1371fe"
+  integrity sha512-7FBRjOxAXAn0r2Z9MuJj/PZA8GhTt9knWANWGubGzJh6Izr1jexgpaXMtvVcJUt8G/XFBAn2sBhWyyFZ8HqG5A==
   dependencies:
-    "@nrwl/tao" "10.0.11"
+    "@nrwl/tao" "10.0.12"
     chalk "2.4.2"
     tmp "0.0.33"
     yargs "^11.0.0"
     yargs-parser "10.0.0"
 
-"@nrwl/tao@10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.0.11.tgz#0bad10642c09ed9d250bf9ade5c311546b160f6d"
-  integrity sha512-1M4Kyjn6n8bnbcypkwz4qObzuALEp0UppLYmzepFe4oH3memg/JpBvkVrxDGFp/0wNbt/aKBrUItd9ZayCrFtA==
+"@nrwl/tao@10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.0.12.tgz#3e0dce225505530cfa2c650ca84216bc83890a36"
+  integrity sha512-L73NxtkAj9HXdfUpX7x+HkrldooInML9fPybiBP0LCgCLotpkKF0cC+Fans4S3qb+S/9ntHkjcYx0DlElxC2+w==
   dependencies:
     "@angular-devkit/architect" "~0.1000.0"
     "@angular-devkit/core" "~10.0.0"
@@ -1498,14 +1498,14 @@
     minimist "^1.2.0"
     strip-json-comments "2.0.1"
 
-"@nrwl/workspace@10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.0.11.tgz#264e99d63bde8181657bd3800c0a945f8fd8c50b"
-  integrity sha512-0cWa9NPLeH6yGFWyP4G0PSb3Euc8aG03zF4lZtgPSFfblMs+zXmySS5htLWAqhvYIpc2a32lPxdmcDWSBqIPvw==
+"@nrwl/workspace@10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.0.12.tgz#91c21d27df2736c149d4437400f30b6f58de8869"
+  integrity sha512-5K9DsTT8BqDzBTXlT68YSo8KbSKm8ZxItu7hztH0tS017N4ZT4NZ3gc3t5ppMqNTJK1LCVSxFU7+dMYvvof5ig==
   dependencies:
     "@angular-devkit/core" "~10.0.0"
     "@angular-devkit/schematics" "~10.0.0"
-    "@nrwl/cli" "10.0.11"
+    "@nrwl/cli" "10.0.12"
     axios "0.19.2"
     chalk "2.4.2"
     cosmiconfig "4.0.0"
@@ -4149,6 +4149,48 @@ eslint@^7.6.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
+eslint@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.7.0.tgz#18beba51411927c4b64da0a8ceadefe4030d6073"
+  integrity sha512-1KUxLzos0ZVsyL81PnRN335nDtQ8/vZUD6uMtWbF+5zDtjKcsklIi78XoE0MVL93QvWTu+E5y44VyyCsOMBrIg==
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    ajv "^6.10.0"
+    chalk "^4.0.0"
+    cross-spawn "^7.0.2"
+    debug "^4.0.1"
+    doctrine "^3.0.0"
+    enquirer "^2.3.5"
+    eslint-scope "^5.1.0"
+    eslint-utils "^2.1.0"
+    eslint-visitor-keys "^1.3.0"
+    espree "^7.2.0"
+    esquery "^1.2.0"
+    esutils "^2.0.2"
+    file-entry-cache "^5.0.1"
+    functional-red-black-tree "^1.0.1"
+    glob-parent "^5.0.0"
+    globals "^12.1.0"
+    ignore "^4.0.6"
+    import-fresh "^3.0.0"
+    imurmurhash "^0.1.4"
+    is-glob "^4.0.0"
+    js-yaml "^3.13.1"
+    json-stable-stringify-without-jsonify "^1.0.1"
+    levn "^0.4.1"
+    lodash "^4.17.19"
+    minimatch "^3.0.4"
+    natural-compare "^1.4.0"
+    optionator "^0.9.1"
+    progress "^2.0.0"
+    regexpp "^3.1.0"
+    semver "^7.2.1"
+    strip-ansi "^6.0.0"
+    strip-json-comments "^3.1.0"
+    table "^5.2.3"
+    text-table "^0.2.0"
+    v8-compile-cache "^2.0.3"
+
 espree@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/espree/-/espree-7.2.0.tgz#1c263d5b513dbad0ac30c4991b93ac354e948d69"
@@ -6552,6 +6594,20 @@ listr2@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-2.5.1.tgz#f265dddf916c8a9b475437b34ae85a7d8f495c7a"
   integrity sha512-qkNRW70SwfwWLD/eiaTf2tfgWT/ZvjmMsnEFJOCzac0cjcc8rYHDBr1eQhRxopj6lZO7Oa5sS/pZzS6q+BsX+w==
+  dependencies:
+    chalk "^4.1.0"
+    cli-truncate "^2.1.0"
+    figures "^3.2.0"
+    indent-string "^4.0.0"
+    log-update "^4.0.0"
+    p-map "^4.0.0"
+    rxjs "^6.6.2"
+    through "^2.3.8"
+
+listr2@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-2.6.0.tgz#788a3d202978a1b8582062952cbc49272c8e206a"
+  integrity sha512-nwmqTJYQQ+AsKb4fCXH/6/UmLCEDL1jkRAdSn9M6cEUzoRGrs33YD/3N86gAZQnGZ6hxV18XSdlBcJ1GTmetJA==
   dependencies:
     chalk "^4.1.0"
     cli-truncate "^2.1.0"

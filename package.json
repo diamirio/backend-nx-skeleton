@@ -7,7 +7,7 @@
   "license": "ISC",
   "scripts": {
     "ls": "lerna la",
-    "rimraf": "rimraf node_modules && lerna clean --scope -y",
+    "rimraf": "rimraf node_modules && lerna clean -y",
     "release": "lerna publish -y",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
@@ -35,7 +35,7 @@
     ]
   },
   "dependencies": {
-    "@nrwl/workspace": "10.0.11"
+    "@nrwl/workspace": "10.0.12"
   },
   "devDependencies": {
     "@cenk1cenk2/cz-cc": "^1.1.2",
@@ -53,8 +53,8 @@
     }
   },
   "resolutions": {
-    "**/@angular-devkit/architect": "0.1000.5",
-    "**/@angular-devkit/core": "10.0.5",
-    "**/@angular-devkit/schematics": "10.0.5"
+    "**/@angular-devkit/architect": "0.1000.6",
+    "**/@angular-devkit/core": "10.0.6",
+    "**/@angular-devkit/schematics": "10.0.6"
   }
 }
