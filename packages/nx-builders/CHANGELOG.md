@@ -1,3 +1,19 @@
+# [@webundsoehne/nx-builders-v1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.2...@webundsoehne/nx-builders-v1.1.0) (2020-08-18)
+
+
+### Bug Fixes
+
+* retry publish ([d679dec](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d679dece2f09550a1ca04ae0eb074a36b87dd7d9))
+* **implicit-dependencies:** fix minor bug ([e32b4db](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e32b4dba626f11ae76925baf56deed71aaf32c30))
+* retry publish ([8701ad3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8701ad32bef3668f8438aaddffefa49ffc4ee224))
+* **nx-builders:** added init method to builders ([3b0052a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b0052a52d38719ac3ff40fc7b1d9a13ac2d330e))
+* **nx-builders:tsc:** fix tsconfig paths error ([c0f22c9](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c0f22c9d0f35e210ecdc6c0771889a6853afcbde))
+
+
+### Features
+
+* retry build process ([86a88fd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/86a88fd9218e9ba62201d4f4b6ea7f8aa8592b0a))
+
 # [@webundsoehne/nx-builders-v1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.2...@webundsoehne/nx-builders-v1.0.3) (2020-08-17)
 
 
