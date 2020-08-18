@@ -1,3 +1,15 @@
+# [@webundsoehne/nx-tools-v1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.8...@webundsoehne/nx-tools-v1.1.0) (2020-08-18)
+
+
+### Bug Fixes
+
+* retry publish ([d679dec](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d679dece2f09550a1ca04ae0eb074a36b87dd7d9))
+
+
+### Features
+
+* retry build process ([86a88fd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/86a88fd9218e9ba62201d4f4b6ea7f8aa8592b0a))
+
 # [@webundsoehne/nx-tools-v1.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.0.7...@webundsoehne/nx-tools-v1.0.8) (2020-08-17)
 
 
