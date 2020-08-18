@@ -27,12 +27,6 @@ module.exports = {
         message: "chore(release): <%= nextRelease.version %> - <%= new Date().toISOString().slice(0,10).replace(/-/g,'') %> [skip ci]\n\n<%= nextRelease.notes %>"
       }
     ],
-    [
-      '@semantic-release/gitlab',
-      {
-        assets: []
-      }
-    ],
     '@semantic-release/npm'
   ]
 }
