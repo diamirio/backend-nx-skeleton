@@ -1,3 +1,10 @@
+# [@webundsoehne/eslint-config-v1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config-v1.0.0...@webundsoehne/eslint-config-v1.0.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* **builders:** added to use ts-node-dev locally only ([89b7f95](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/89b7f9505f7713d58881cfc7729873affe82c611))
+
 # @webundsoehne/eslint-config-v1.0.0 (2020-08-18)
 
 
