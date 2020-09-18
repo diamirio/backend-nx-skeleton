@@ -1,3 +1,10 @@
+# [@webundsoehne/nx-builders-v1.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.1.0...@webundsoehne/nx-builders-v1.1.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* **builders:** added to use ts-node-dev locally only ([89b7f95](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/89b7f9505f7713d58881cfc7729873affe82c611))
+
 # [@webundsoehne/nx-builders-v1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.0.2...@webundsoehne/nx-builders-v1.1.0) (2020-08-18)
 
 
