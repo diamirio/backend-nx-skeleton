@@ -82,7 +82,7 @@ export class Logger {
     case 'info':
       if (this.options?.useIcons) {
         coloring = chalk.green
-        icon = figures.main.tick
+        icon = figures.main.pointerSmall
       }
       break
 

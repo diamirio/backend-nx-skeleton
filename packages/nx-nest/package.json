@@ -46,15 +46,15 @@
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~10.0.6",
-    "@nestjs/schematics": "^7.0.1",
+    "@angular-devkit/schematics": "~10.1.2",
+    "@nestjs/schematics": "^7.1.2",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "deepmerge": "^4.2.2",
     "enquirer": "^2.3.5",
     "execa": "^4.0.2",
-    "listr2": "^2.6.0"
+    "listr2": "^3.0.1"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",

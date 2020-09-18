@@ -11,7 +11,7 @@ export class DefaultController {
   @ApiOperation({ summary: 'Test', description: 'Hello world route' })
   @ApiResponse({ status: 200, description: 'Hello world route' })
   @Get()
-  async getHello (): Promise<string> {
+  public getHello (): string {
     return this.appService.getHello()
   }
 }

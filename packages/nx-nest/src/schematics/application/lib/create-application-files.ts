@@ -1,6 +1,7 @@
 import { apply, chain, filter, move, noop, Rule, SchematicContext, template, url } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { applyOverwriteWithDiff, formatFiles, jinjaTemplate, Logger } from '@webundsoehne/nx-tools'
+import { constants } from 'buffer'
 import merge from 'deepmerge'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
@@ -78,6 +79,11 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
     {
       condition: !options.components.includes('microservice'),
       match: (file): boolean => !file.match('src/microservice/')
+    },
+    // omit constants when a single service is selected
+    {
+      condition: options.components.length === 1,
+      match: (file): boolean => !file.match('src/constants.ts')
     }
   ]
 
