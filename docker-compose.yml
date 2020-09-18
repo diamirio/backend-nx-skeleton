@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   monorepo:
     image: cenk1cenk2/lerna-dev:latest

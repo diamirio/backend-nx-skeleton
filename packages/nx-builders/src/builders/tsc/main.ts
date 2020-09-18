@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { fs } from '@angular-devkit/core/node'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
@@ -11,8 +10,17 @@ import {
   DependentBuildableProjectNode,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils'
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils'
-import { createDependenciesForProjectFromGraph, ExecaArguments, Logger, mergeDependencies, pipeProcessToLogger, ProcessManager, removePathRoot } from '@webundsoehne/nx-tools'
+import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
+import {
+  checkNodeModulesExists,
+  createDependenciesForProjectFromGraph,
+  ExecaArguments,
+  Logger,
+  mergeDependencies,
+  pipeProcessToLogger,
+  ProcessManager,
+  removePathRoot
+} from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -92,11 +100,7 @@ class Builder {
         await this.manager.stop()
 
         // check if needed tools are really installed
-        Object.entries(this.paths).forEach(([ key, value ]) => {
-          if (!fs.isFile(value)) {
-            throw new Error(`File not found: "${key}"@"${value}"`)
-          }
-        })
+        checkNodeModulesExists(this.paths)
 
         const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
         if (this.projectDependencies.length > 0) {
@@ -104,7 +108,6 @@ class Builder {
         }
 
         try {
-
           // add this after since we do not want to patch check it
           this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
@@ -237,10 +240,8 @@ class Builder {
       if (this.options.cwd) {
         spawnOptions = { ...spawnOptions, cwd: this.options.cwd }
       }
-
     } else if (mode === 'tscpaths') {
       spawnOptions = { ...spawnOptions, cwd: this.context.workspaceRoot }
-
     } else if (mode === 'runAfterWatch') {
       spawnOptions = {
         ...spawnOptions,
@@ -308,13 +309,12 @@ class Builder {
   }
 
   private updatePackageJson () {
-    const packageJsonPath = this.options.packageJson ?
-      join(this.context.workspaceRoot, this.options.packageJson) :
-      join(this.context.workspaceRoot, this.options.cwd, 'package.json')
+    const packageJsonPath = this.options.packageJson
+      ? join(this.context.workspaceRoot, this.options.packageJson)
+      : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
 
     if (!fileExists(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
-
     } else {
       this.logger.info('Processing "package.json"...')
 
@@ -356,13 +356,11 @@ class Builder {
       }
 
       if (Object.keys(implicitDependencies).length > 0) {
-
         packageJson.dependencies = mergeDependencies(packageJson.dependencies, implicitDependencies)
       }
 
       // write file back
       writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
-
     }
 
     // this is the default behaviour, lets keep this.

@@ -1,7 +1,8 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { ExecaArguments, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
+import { ExecaArguments, pipeProcessToLogger, removePathRoot, checkNodeModulesExists } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import execa from 'execa'
+import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
 import { NodePackageServeOptions } from './main.interface'
@@ -16,8 +17,15 @@ export function runBuilder (options: NodePackageServeOptions, context: BuilderCo
     async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
       const { args, spawnOptions } = normalizeArguments(options)
 
+      const paths: Record<string, string> = {
+        tsNodeDev: join((await execa('npm', [ 'bin' ])).stdout, 'ts-node-dev')
+      }
+
+      // check if needed tools are really installed
+      checkNodeModulesExists(paths)
+
       try {
-        await pipeProcessToLogger(context, execa('ts-node-dev', args, spawnOptions), { start: true })
+        await pipeProcessToLogger(context, execa.node(paths.tsNodeDev, args, spawnOptions), { start: true })
 
         subscriber.next({ success: true })
       } catch (error) {

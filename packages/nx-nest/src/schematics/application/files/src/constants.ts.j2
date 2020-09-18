@@ -1,22 +1,16 @@
-export enum service {
+{% if components | length != 1 %}
+export enum Service {
   {% if 'server' in components %}
-  server = 'server',
+  SERVER = 'server',
   {% endif %}
   {% if 'microservice' in components %}
-  microservice = 'microservice',
+  MICROSERVICE = 'microservice',
   {% endif %}
   {% if 'bgtask' in components %}
-  task = 'bgtask',
+  TASK = 'bgtask',
   {% endif %}
   {% if 'command' in components %}
-  command = 'cli'
+  COMMAND = 'cli'
   {% endif %}
 }
-
-export enum logType {
-  error = 'error',
-  log = 'info',
-  warn = 'warn',
-  debug = 'debug',
-  verbose = 'verbose'
-}
+{% endif %}

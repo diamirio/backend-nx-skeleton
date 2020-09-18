@@ -1,0 +1,5 @@
+import { FastifyRequest, RequestGenericInterface } from 'fastify'
+
+export async function graphqlContextParser ({ req }: { req: FastifyRequest<RequestGenericInterface> }): Promise<FastifyRequest<RequestGenericInterface> & Record<string, any>> {
+  return { ...req }
+}

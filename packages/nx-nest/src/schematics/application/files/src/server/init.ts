@@ -4,13 +4,13 @@ import { LoggerService, SwaggerService, ConfigService } from '@webundsoehne/nest
 
 import { createServerModule } from './server.module'
 
-const port: number = ConfigService.get('port') ?? 3000
-const prefix: string = ConfigService.get('url.apiPath') ?? ''
-
 export async function createApplication (): Promise<void> {
   const app = await NestFactory.create<NestFastifyApplication>(createServerModule(), new FastifyAdapter(), {
     logger: new LoggerService()
   })
+
+  const port: number = ConfigService.get('port') ?? 3000
+  const prefix: string = ConfigService.get('url.apiPath') ?? ''
 
   app.enableCors()
 
