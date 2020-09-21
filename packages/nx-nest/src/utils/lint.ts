@@ -1,11 +1,11 @@
-import { eslintPluginImportVersion } from './versions'
+import { eslintPluginVersion } from './versions'
 
 export const eslintDeps = {
   dependencies: {},
   devDependencies: {
-    '@cenk1cenk2/eslint-config': '*',
-    '@typescript-eslint/eslint-plugin': '*',
-    'eslint-plugin-import': eslintPluginImportVersion
+    '@webundsoehne/eslint-config': '*',
+    '@typescript-eslint/eslint-plugin': eslintPluginVersion['@typescript-eslint/eslint-plugin'],
+    'eslint-plugin-import': eslintPluginVersion['eslint-plugin-import']
   }
 }
 

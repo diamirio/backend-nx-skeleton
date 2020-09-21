@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import * as config from 'config'
+import config from 'config'
 
 import { Config } from './config.interfaces'
 

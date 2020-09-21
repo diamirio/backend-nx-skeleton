@@ -3,7 +3,7 @@ import { APP_FILTER,{% if server == 'restful' %} APP_INTERCEPTOR,{% endif %} APP
 {% if server == 'graphql' %}
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
-import { graphqlContextParser } from './graphql-setup'
+import { graphqlContextParser, graphqlErrorParser } from './graphql-setup'
 {% endif %}
 {% if 'typeorm' in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -63,6 +63,7 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
       {% if server == 'graphql' %}GraphQLModule.forRoot({
         autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
         context: graphqlContextParser,
+        formatError: graphqlErrorParser,
         useGlobalPrefix: true,
         playground: true,
         introspection: true,

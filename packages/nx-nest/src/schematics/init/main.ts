@@ -5,12 +5,12 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 import { calculateDependencies } from '@src/utils/versions'
 
 export default function (schema: NormalizedSchema): Rule {
-  // const builders = calculateDependencies(schema, true)
+  const builders = calculateDependencies(schema, true)
   const dependencies = calculateDependencies(schema)
 
   return chain([
     // add builder and its dependencies
-    // addDepsToPackageJson(builders.prod, builders.dev),
+    // addDepsToPackageJson(builders?.prod, builders?.dev),
 
     // async (): Promise<Rule> => {
     //   // dynamically import it from the package, we can change it there
@@ -22,6 +22,6 @@ export default function (schema: NormalizedSchema): Rule {
     // },
 
     // add the rest of the dependencies
-    addDepsToPackageJson(dependencies.prod, dependencies.dev)
+    addDepsToPackageJson(dependencies?.prod, dependencies?.dev)
   ])
 }

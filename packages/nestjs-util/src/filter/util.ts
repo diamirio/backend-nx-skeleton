@@ -1,6 +1,8 @@
-import { BadRequestException, ValidationError } from '@nestjs/common'
+import { BadRequestException, ValidationError, Logger } from '@nestjs/common'
+import { AbstractHttpAdapter, HttpAdapterHost } from '@nestjs/core'
+import { EOL } from 'os'
 
-import { ClassValidatorException, ClassValidatorError } from './exception.interface'
+import { EnrichedException, ClassValidatorException, ClassValidatorError } from './exception.interface'
 
 export function getErrorMessage (message: any): string | undefined {
   return typeof message === 'string' ? message : typeof message.message === 'string' ? message.message : undefined
@@ -42,4 +44,16 @@ export function formatValidationError (errors: ValidationError[]): ClassValidato
   }
 
   return flattened
+}
+
+// ignore some errors that you do not want to log
+export function ignoreErrors (exception: Error): boolean {
+  const ignoredErrors = [ 'favicon.ico' ]
+
+  return ignoredErrors.some((err) => exception.message.match(err))
+}
+
+// log debug message
+export function logErrorDebugMsg (logger: Logger, payload: EnrichedException, trace: string): void {
+  logger.debug(`[${payload.statusCode}] - "${getErrorMessage(payload.message)}"${EOL}${trace}"`)
 }

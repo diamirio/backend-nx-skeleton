@@ -36,11 +36,6 @@
       "prettier --write"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "ts-node": ">= 8.10.0",
