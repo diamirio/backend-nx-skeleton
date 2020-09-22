@@ -11,7 +11,6 @@ export default function (schema: NormalizedSchema): Rule {
   return chain([
     // add builder and its dependencies
     // addDepsToPackageJson(builders?.prod, builders?.dev),
-
     // async (): Promise<Rule> => {
     //   // dynamically import it from the package, we can change it there
     //   try {
@@ -20,7 +19,6 @@ export default function (schema: NormalizedSchema): Rule {
     //     // eslint-disable-next-line no-empty
     //   } catch (e) {}
     // },
-
     // add the rest of the dependencies
     addDepsToPackageJson(dependencies?.prod, dependencies?.dev)
   ])

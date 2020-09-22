@@ -81,7 +81,8 @@ export const baseDeps: PackageVersions = {
     'class-transformer': '^0.3.1',
     'class-validator': '^0.12.2',
     'nest-schedule': '^0.6.4'
-  }
+  },
+  dev: {}
 }
 
 // server dependencies for rest

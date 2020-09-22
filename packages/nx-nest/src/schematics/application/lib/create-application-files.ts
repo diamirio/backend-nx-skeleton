@@ -58,7 +58,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
     // tests configuration
     {
       condition: options.tests !== 'jest',
-      match: (file): boolean => !file.match('*.spec.ts') && !file.match('src/test')
+      match: (file): boolean => !(file.match('.spec.ts') && file.match('src/test/'))
     },
     // server configuration
     {

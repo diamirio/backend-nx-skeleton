@@ -6,7 +6,7 @@ import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
+import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -15,7 +15,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         task: async (ctx): Promise<void> => {
           await Promise.all(
-            [ 'name', 'verbose', 'tests', 'linter' ].map((item) => {
+            [ 'name', 'verbose', 'linter' ].map((item) => {
               ctx[item] = options[item]
             })
           )
@@ -79,7 +79,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
               ctx.priorConfiguration = {
                 components: thisProject?.components,
                 server: thisProject?.server,
-                database: thisProject?.database
+                database: thisProject?.database,
+                tests: thisProject?.tests
               }
 
               task.title = 'Prior configuration successfully found in "nx.json".'
@@ -202,6 +203,35 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         skip: (ctx): boolean => !(!ctx.components.includes('server') && !ctx.components.includes('bgtask')),
         task: async (ctx): Promise<void> => {
           ctx.database = 'none'
+        }
+      },
+
+      // select tests
+      {
+        task: async (ctx, task): Promise<void> => {
+          const choices: ConvertToPromptType<AvailableTestsTypes> = [
+            { name: 'jest', message: 'Jest' },
+            { name: 'none', message: 'None' }
+          ]
+
+          // there can be two selections of API servers here
+          if (!options?.tests) {
+            ctx.tests = await task.prompt<AvailableTestsTypes>({
+              type: 'Select',
+              message: 'Please select the test runner type.',
+              choices: choices as any,
+              initial: getInitialFromPriorConfiguration(ctx, 'tests', choices)
+            })
+          } else {
+            // when options are passed via cli
+            ctx.tests = parseArguments<AvailableTestsTypes>(task, options.tests, choices, { required: true, single: true })
+          }
+
+          task.title = `Test runner selected as: ${ctx.tests}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
         }
       }
     ],
