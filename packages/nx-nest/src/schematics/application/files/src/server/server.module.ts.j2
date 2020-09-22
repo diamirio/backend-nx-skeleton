@@ -7,6 +7,8 @@ import { graphqlContextParser, graphqlErrorParser } from './graphql-setup'
 {% endif %}
 {% if 'typeorm' in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
+{% elif 'mongoose-mongodb' == database %}
+import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 import {
   ConfigService,
@@ -25,8 +27,8 @@ import {
   ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
 
-import * as modules from './child.modules'
-{% if 'typeorm' in database %}
+import * as modules from './modules'
+{% if database is defined and database != 'none' %}
 import { getDatabaseOptions } from '../util/database'
 {% endif %}
 
@@ -70,7 +72,11 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
         path: '/'
       }), {% endif %}
       ...Object.values(modules),
-      {% if 'typeorm' in database %}TypeOrmModule.forRoot(getDatabaseOptions(mock)), {% endif %}
+      {% if 'typeorm' in database %}
+      TypeOrmModule.forRoot(getDatabaseOptions(mock)),
+      {% elif 'mongoose-mongodb' == database %}
+      MongooseModule.forRoot(...getDatabaseOptions(mock)),
+      {% endif %}
       InternalModule,
       MaintenanceModule
       ]

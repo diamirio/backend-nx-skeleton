@@ -122,4 +122,12 @@ export const typeormDeps: PackageVersions = {
   }
 }
 
-export const mongooseDeps: PackageVersions = {}
+export const mongooseDeps: PackageVersions = {
+  prod: {
+    '@nestjs/mongoose': '^7.0.2',
+    mongoose: '^5.10.6'
+  },
+  dev: {
+    '@types/mongoose': '^5.7.36',
+  }
+}
