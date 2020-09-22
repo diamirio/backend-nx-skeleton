@@ -15,13 +15,19 @@ swagger:
     __format: json
   basePath: API_BASE_PATH
 
-{% if 'typeorm' in database %}
+{% if database is defined and database != 'none' %}
 database:
-  type: DATABASE_TYPE
   host: DATABASE_HOST
   port: DATABASE_PORT
+  database: DATABASE_NAME
+  {% if 'typeorm' in database -%}
+  type: DATABASE_TYPE
   username: DATABASE_USER
   password: DATABASE_PASSWORD
-  database: DATABASE_NAME
   migrationsTableName: DATABASE_MIGRATIONS_TABLE
+  {% elif 'mongoose-mongodb' == database -%}
+  authentication:
+    username: DATABASE_USER
+    password: DATABASE_PASSWORD
+  {% endif -%}
 {% endif %}
