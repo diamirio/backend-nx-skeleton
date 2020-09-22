@@ -84,20 +84,19 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
         // ask user if he/she wants to keep files that are not needed anymore
         async (): Promise<void> => {
           if (filesToRemove.length > 0) {
-            filesToKeep = await createPrompt(
-              {
-                type: 'MultiSelect',
-                message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
-                choices: filesToRemove
-              },
-              {
-                stdout: process.stdout,
-                cancelCallback: () => {
-                  log.error('Cancelled prompt.')
-                  process.exit(127)
-                }
-              }
-            )
+            try {
+              filesToKeep = await createPrompt.bind(this)(
+                {
+                  type: 'MultiSelect',
+                  message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
+                  choices: filesToRemove
+                },
+                { error: false }
+              )
+            } catch {
+              log.error('Cancelled prompt.')
+              process.exit(127)
+            }
           }
         },
 

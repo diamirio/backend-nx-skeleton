@@ -1607,17 +1607,7 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@nrwl/cli@10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.2.0.tgz#d7a4debb9876e1910989a7414b4b6b74c39afa74"
-  integrity sha512-PYr8I5LCblT9gr8AOxKOKOyOXFLjRbd/zjQLyv0C3FzoeP/P5BegZoHJoYLKfLef/6dG9p9lSDTrvYZkT03MMw==
-  dependencies:
-    "@nrwl/tao" "10.2.0"
-    chalk "2.4.2"
-    tmp "0.0.33"
-    yargs "15.4.1"
-
-"@nrwl/cli@^10.2.0":
+"@nrwl/cli@10.2.1", "@nrwl/cli@^10.2.0":
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.2.1.tgz#394fb523fb7869ebbebf5ae2cbf593b8a01aacc4"
   integrity sha512-RH+Ni5wA1TA3SRhUtUO+j6QvhmsZWqcwrpOHKKfSH/fA8mMHVaabz987eRvxnjcUR24Mz0+m/4hrxb6QRPyR5g==
@@ -1627,18 +1617,6 @@
     tmp "0.0.33"
     yargs "15.4.1"
     yargs-parser "20.0.0"
-
-"@nrwl/tao@10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.2.0.tgz#a0d2163fde301f5af32dc40da369887f0ede7d95"
-  integrity sha512-TzR32SXSpy3G/DlUvdCzB58GQ1hqNe0S2wlixvlg8COblo4W0mg7f46ZvCLSfOSjEnlaKykG5ly1NRuxcdPJ3w==
-  dependencies:
-    "@angular-devkit/architect" "~0.1000.0"
-    "@angular-devkit/core" "~10.0.0"
-    "@angular-devkit/schematics" "~10.0.0"
-    inquirer "^6.3.1"
-    minimist "^1.2.0"
-    strip-json-comments "2.0.1"
 
 "@nrwl/tao@10.2.1":
   version "10.2.1"
@@ -1656,14 +1634,15 @@
     tslib "^1.9.3"
     yargs-parser "20.0.0"
 
-"@nrwl/workspace@10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.2.0.tgz#3365f4a3b9245336bd191181289b01133feadda3"
-  integrity sha512-mOmgTlM8eQC57nsvzSbRyh6eKNt3hmPYfda8Bug+UDfyNG5PMhXRJW3yYgjOmGk9mJmlsEbC4WZioHFoWoC++g==
+"@nrwl/workspace@10.2.1":
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.2.1.tgz#1fff600919ed373f2ef0ab4570fb35465d457128"
+  integrity sha512-iek7Wb3UCMymgLUPQvRucKgPHY/WrBBoLAgtAhb2k9XZ0+f4rm8S7e4YY+wmajxCmtxyoXG2i2YHp8naAaBjQA==
   dependencies:
+    "@angular-devkit/architect" "~0.1000.0"
     "@angular-devkit/core" "~10.0.0"
     "@angular-devkit/schematics" "~10.0.0"
-    "@nrwl/cli" "10.2.0"
+    "@nrwl/cli" "10.2.1"
     axios "0.19.2"
     chalk "2.4.2"
     cosmiconfig "4.0.0"
@@ -1671,14 +1650,18 @@
     flat "^5.0.2"
     fs-extra "6.0.0"
     ignore "5.0.4"
+    inquirer "^6.3.1"
     minimatch "3.0.4"
     npm-run-all "4.1.5"
     opn "^5.3.0"
+    resolve "1.17.0"
     rxjs "^6.5.4"
     semver "5.4.1"
     strip-json-comments "2.0.1"
     tmp "0.0.33"
+    tslib "^1.9.3"
     yargs "15.4.1"
+    yargs-parser "20.0.0"
 
 "@nuxtjs/opencollective@0.2.2":
   version "0.2.2"
@@ -4218,6 +4201,20 @@ cz-conventional-changelog@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/cz-conventional-changelog/-/cz-conventional-changelog-3.2.0.tgz#6aef1f892d64113343d7e455529089ac9f20e477"
   integrity sha512-yAYxeGpVi27hqIilG1nh4A9Bnx4J3Ov+eXy4koL3drrR+IO9GaWPsKjik20ht608Asqi8TQPf0mczhEeyAtMzg==
+  dependencies:
+    chalk "^2.4.1"
+    commitizen "^4.0.3"
+    conventional-commit-types "^3.0.0"
+    lodash.map "^4.5.1"
+    longest "^2.0.1"
+    word-wrap "^1.0.3"
+  optionalDependencies:
+    "@commitlint/load" ">6.1.1"
+
+cz-conventional-changelog@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/cz-conventional-changelog/-/cz-conventional-changelog-3.3.0.tgz#9246947c90404149b3fe2cf7ee91acad3b7d22d2"
+  integrity sha512-U466fIzU5U22eES5lTNiNbZ+d8dfcHcssH4o7QsdWaCcRs/feIPCxKYSWkYBNs5mny7MvEfwpTLWjvbm94hecw==
   dependencies:
     chalk "^2.4.1"
     commitizen "^4.0.3"
@@ -7392,10 +7389,10 @@ listr2@^2.6.0:
     rxjs "^6.6.2"
     through "^2.3.8"
 
-listr2@^3.0.1, listr2@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-3.1.0.tgz#09841af305f7c3048c07851631b07b0cfaff1527"
-  integrity sha512-JBw2DvFbeTrvQPmBQAhjLtfsAOi4ipCdaojGTDcWurNR6zUk3adeYpsCgOT6n/VNjmxkjrxQ1txYBGyTyRA4+A==
+listr2@^3.1.0, listr2@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-3.1.1.tgz#08d2eb56a79bfe09e2bc90cb8650d3d58e2b911d"
+  integrity sha512-5HjYFP0FpG2dOuSAth2vQ172rWqI78746itLIvgg0KjHMAyW8CVNc9wzBzEo4/5UYfNbmT28u0J29NoA3W0z+Q==
   dependencies:
     chalk "^4.1.0"
     cli-truncate "^2.1.0"
@@ -9586,7 +9583,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.10.0, resolve@^1.13.1, resolve@^1.17.0, resolve@^1.3.2:
+resolve@1.17.0, resolve@^1.10.0, resolve@^1.13.1, resolve@^1.17.0, resolve@^1.3.2:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
   integrity sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
@@ -10820,10 +10817,10 @@ ts-morph@^8.0.0:
     "@ts-morph/common" "~0.6.0"
     code-block-writer "^10.1.0"
 
-ts-node@^8.5.3:
-  version "8.10.2"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.10.2.tgz#eee03764633b1234ddd37f8db9ec10b75ec7fb8d"
-  integrity sha512-ISJJGgkIpDdBhWVu3jufsWpK3Rzo7bdiIXJjQc0ynKxVOVcg2oIrf2H2cejminGrptVc6q6/uynAHNCuWGbpVA==
+ts-node@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-9.0.0.tgz#e7699d2a110cc8c0d3b831715e417688683460b3"
+  integrity sha512-/TqB4SnererCDR/vb4S/QvSZvzQMJN8daAslg7MeaiHvD8rDZsSfXmNeNumyZZzMned72Xoq/isQljYSt8Ynfg==
   dependencies:
     arg "^4.1.0"
     diff "^4.0.1"
@@ -10960,12 +10957,7 @@ types@^0.1.1:
   resolved "https://registry.yarnpkg.com/types/-/types-0.1.1.tgz#860c6859d11366293f835d8c95aebcf95029838e"
   integrity sha1-hgxoWdETZik/g12Mla68+VApg44=
 
-typescript@^3.9.2, typescript@^3.9.3, typescript@^3.9.5, typescript@^3.9.6, typescript@^3.9.7:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
-
-typescript@~4.0.2:
+typescript@^4.0.3, typescript@~4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
   integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
