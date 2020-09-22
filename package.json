@@ -7,16 +7,14 @@
   "license": "ISC",
   "scripts": {
     "ls": "lerna la",
-    "rimraf": "rimraf node_modules && lerna clean -y",
+    "clean": "lerna clean -y && rimraf node_modules yarn.lock",
     "release": "lerna publish -y",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
+    "packages": ["packages/*"],
     "nohoist": []
   },
   "husky": {
@@ -26,13 +24,8 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "./*.{json,md}": [
-      "prettier --write"
-    ]
+    "./*.{ts,js,tsx,jsx}": ["prettier --write", "eslint --fix"],
+    "./*.{json,md}": ["prettier --write"]
   },
   "dependencies": {
     "@nrwl/workspace": "10.2.0"
