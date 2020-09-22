@@ -1,1 +1,1 @@
-export * from './default/default.command'
+export * from './modules/default/default.command'

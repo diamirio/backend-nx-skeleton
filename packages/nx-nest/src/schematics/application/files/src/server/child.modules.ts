@@ -1,1 +1,1 @@
-export * from './default/default.module'
+export * from './modules/default/default.module'

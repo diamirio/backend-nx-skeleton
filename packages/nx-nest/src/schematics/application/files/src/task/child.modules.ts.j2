@@ -1,4 +1,4 @@
-export * from './default/default.module'
+export * from './modules/default/default.module'
 {% if 'typeorm' in database %}
-export * from './migration/migration.module'
+export * from './modules/migration/migration.module'
 {% endif %}
