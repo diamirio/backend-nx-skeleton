@@ -1,16 +1,6 @@
-import {
-  ExceptionFilter,
-  Catch,
-  ArgumentsHost,
-  Logger,
-  HttpStatus,
-  HttpException,
-  UnauthorizedException
-} from '@nestjs/common'
+import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common'
 import { HttpAdapterHost } from '@nestjs/core'
 import { FastifyRequest } from 'fastify'
-import { GraphQLError } from 'graphql'
-import { EOL } from 'os'
 
 import { EnrichedException } from './exception.interface'
 import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
@@ -23,7 +13,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
   public static defaultPayload (exception: any): EnrichedException {
     return {
-      statusCode: exception?.getStatus() ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      statusCode: exception?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
       error: exception?.error ?? exception.message,
       message: getErrorMessage(exception)
     }

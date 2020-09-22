@@ -1,7 +1,7 @@
 FROM node:14-alpine
 
-WORKDIR /opt/app
-COPY . /opt/app
+WORKDIR /data/app
+COPY . /data/app
 
 # copy transpiled files to the main root and remove the dist folder
 RUN cp -rpf ./dist/* ./ && rm -rf ./dist

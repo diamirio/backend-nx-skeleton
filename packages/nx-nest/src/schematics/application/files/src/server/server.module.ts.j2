@@ -3,7 +3,7 @@ import { APP_FILTER,{% if server == 'restful' %} APP_INTERCEPTOR,{% endif %} APP
 {% if server == 'graphql' %}
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
-import { graphqlContextParser, graphqlErrorParser } from './graphql-setup'
+import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
 {% endif %}
 {% if 'typeorm' in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -11,7 +11,6 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import {
   ConfigService,
   BadRequestExceptionFilter,
-  HttpExceptionFilter,
   GlobalExceptionFilter,
   InternalModule,
   MaintenanceMiddleware,
@@ -40,10 +39,6 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
       },
       {
         provide: APP_FILTER,
-        useClass: HttpExceptionFilter
-      },
-      {
-        provide: APP_FILTER,
         useClass: BadRequestExceptionFilter
       },
       {
@@ -62,8 +57,8 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
     imports: [
       {% if server == 'graphql' %}GraphQLModule.forRoot({
         autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
-        context: graphqlContextParser,
-        formatError: graphqlErrorParser,
+        context: graphQLContextParser,
+        formatError: graphQLErrorParser,
         useGlobalPrefix: true,
         playground: true,
         introspection: true,
