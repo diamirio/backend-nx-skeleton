@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['./packages/eslint-config/index', './packages/eslint-config/typescript'],
+  extends: [ './packages/eslint-config/index', './packages/eslint-config/typescript' ],
   rules: {
     'import/order': [
       'error',
@@ -20,12 +20,16 @@ module.exports = {
           {
             pattern: '@interfaces/**',
             group: 'index'
+          },
+          {
+            pattern: '@utils/**',
+            group: 'index'
           }
         ],
-        pathGroupsExcludedImportTypes: ['builtin'],
+        pathGroupsExcludedImportTypes: [ 'builtin' ],
         groups: [
-          ['builtin', 'external'],
-          ['index', 'parent', 'sibling']
+          [ 'builtin', 'external' ],
+          [ 'index', 'parent', 'sibling' ]
         ],
         'newlines-between': 'always',
         alphabetize: {
