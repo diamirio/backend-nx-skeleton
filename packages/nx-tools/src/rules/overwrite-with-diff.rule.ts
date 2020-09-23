@@ -1,9 +1,10 @@
 import { apply, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
-import { Logger } from '@utils/logger'
 import * as diff from 'diff'
 import { createPrompt } from 'listr2'
 import { dirname } from 'path'
 import { Observable } from 'rxjs'
+
+import { Logger } from '@utils/logger'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 export async function applyOverwriteWithDiff (source: Source, oldSource: Source, context: SchematicContext): Promise<Rule> {
