@@ -90,8 +90,9 @@ export class NxLibrariesCommand extends ConfigBaseCommand {
   }
 
   async configRemove (config: NxLibrariesConfig): Promise<ConfigRemove<NxLibrariesConfig>> {
+    // @TODO
     return {
-      keys: [],
+      keys: Object.keys(config),
       removeFunction: async (config): Promise<NxLibrariesConfig> => config
     }
   }

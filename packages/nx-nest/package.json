@@ -36,11 +36,6 @@
       "prettier --write"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@webundsoehne/nx-builders": "*"
@@ -54,7 +49,7 @@
     "deepmerge": "^4.2.2",
     "enquirer": "^2.3.5",
     "execa": "^4.0.2",
-    "listr2": "^3.0.1"
+    "listr2": "^3.1.1"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
@@ -63,6 +58,6 @@
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.8",
     "tscpaths": "^0.0.9",
-    "typescript": "^3.9.5"
+    "typescript": "^4.0.3"
   }
 }

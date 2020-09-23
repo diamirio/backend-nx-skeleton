@@ -7,16 +7,14 @@
   "license": "ISC",
   "scripts": {
     "ls": "lerna la",
-    "rimraf": "rimraf node_modules && lerna clean -y",
+    "clean": "lerna clean -y && rimraf node_modules yarn.lock",
     "release": "lerna publish -y",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
     "link-packages": "lerna link --force-local"
   },
   "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
+    "packages": ["packages/*"],
     "nohoist": []
   },
   "husky": {
@@ -26,16 +24,11 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "./*.{json,md}": [
-      "prettier --write"
-    ]
+    "./*.{ts,js,tsx,jsx}": ["prettier --write", "eslint --fix"],
+    "./*.{json,md}": ["prettier --write"]
   },
   "dependencies": {
-    "@nrwl/workspace": "10.2.0"
+    "@nrwl/workspace": "10.2.1"
   },
   "devDependencies": {
     "@cenk1cenk2/cz-cc": "^1.1.2",
@@ -45,7 +38,7 @@
     "lerna": "^3.20.2",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.6"
+    "typescript": "^4.0.3"
   },
   "config": {
     "commitizen": {

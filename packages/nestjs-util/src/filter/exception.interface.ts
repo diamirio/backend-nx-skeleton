@@ -9,11 +9,14 @@ export class ClassValidatorException extends BadRequestException {
   }
 }
 
-export interface EnrichedHttpException {
+export interface EnrichedException {
   statusCode: HttpStatus
   error: string
   message?: string
   errors?: string[] | ClassValidatorError[]
+  service?: string[]
+  path?: string[]
+  stacktrace?: string
 }
 
 export interface ClassValidatorError {

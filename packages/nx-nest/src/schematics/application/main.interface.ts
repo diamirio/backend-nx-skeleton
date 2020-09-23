@@ -36,5 +36,6 @@ export interface NormalizedSchema {
     components: AvailableComponents[]
     server: AvailableServerTypes
     database: AvailableDBTypes
+    tests: AvailableTestsTypes
   }
 }

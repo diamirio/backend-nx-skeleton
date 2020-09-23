@@ -1,7 +1,6 @@
 import { apply, chain, filter, move, noop, Rule, SchematicContext, template, url } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { applyOverwriteWithDiff, formatFiles, jinjaTemplate, Logger } from '@webundsoehne/nx-tools'
-import { constants } from 'buffer'
 import merge from 'deepmerge'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'
@@ -58,7 +57,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
     // tests configuration
     {
       condition: options.tests !== 'jest',
-      match: (file): boolean => !file.match('*.spec.ts') && !file.match('src/test')
+      match: (file): boolean => !(file.match('.spec.ts') && file.match('src/test/'))
     },
     // server configuration
     {

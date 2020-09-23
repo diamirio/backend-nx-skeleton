@@ -20,9 +20,9 @@ export class SwaggerService {
     @ConfigParam('url') url?: UrlConfig
   ): void {
     let builder = new DocumentBuilder()
-      .setTitle(config.title)
-      .setDescription(config.description)
-      .setVersion(process.env.PACKAGE_VERSION)
+      .setTitle(config?.title)
+      .setDescription(config?.description)
+      .setVersion(process.env?.PACKAGE_VERSION ?? '0.0.0')
 
     if (typeof options?.customize === 'function') {
       builder = options.customize(builder)

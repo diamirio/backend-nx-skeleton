@@ -2,12 +2,10 @@
   "$schema": "http://json-schema.org/schema",
   "id": "NxNestSkeleton",
   "title": "Create a Nest application from skeleton with NX",
-  "examples": [
-    {
-      "command": "g app myapp --bgtask",
-      "description": "Initiate background task scheduler."
-    }
-  ],
+  "examples": [{
+    "command": "g app myapp --bgtask",
+    "description": "Initiate background task scheduler."
+  }],
   "type": "object",
   "properties": {
     "name": {
@@ -27,12 +25,14 @@
     "server": {
       "description": "If server component is selected, specifies the type.",
       "type": "string",
-      "alias": "s"
+      "alias": "s",
+      "enum": ["graphql", "restful"]
     },
     "database": {
       "description": "Database that is desired to be used.",
       "type": "string",
-      "alias": "db"
+      "alias": "db",
+      "enum": ["none", "typeorm-mysql", "typeorm-postgresql", "mongoose-mongodb"]
     },
     "linter": {
       "description": "The tool to use for running lint checks.",
@@ -43,8 +43,7 @@
     "tests": {
       "description": "Test runner to use for unit and e2e tests",
       "type": "string",
-      "enum": ["jest", "none"],
-      "default": "jest"
+      "enum": ["jest", "none"]
     },
     "verbose": {
       "description": "Set this to debug mode.",

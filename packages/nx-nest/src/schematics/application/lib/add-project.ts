@@ -58,12 +58,14 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     }
 
-    architect.test = {
-      builder: '@nrwl/jest:jest',
-      options: {
-        jestConfig: join(normalize(options.root), 'test/jest.config.js'),
-        tsConfig: join(normalize(options.root), 'test/tsconfig.json'),
-        passWithNoTests: true
+    if (options.tests === 'jest') {
+      architect.test = {
+        builder: '@nrwl/jest:jest',
+        options: {
+          jestConfig: join(normalize(options.root), 'test/jest.config.js'),
+          tsConfig: join(normalize(options.root), 'test/tsconfig.json'),
+          passWithNoTests: true
+        }
       }
     }
 

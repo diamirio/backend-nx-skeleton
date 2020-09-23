@@ -7,5 +7,11 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "proseWrap": "never",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "overrides": [{
+    "files": ["**/*.json"],
+    "options": {
+      "parser": "json"
+    }
+  }]
 }

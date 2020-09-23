@@ -23,20 +23,20 @@ cacheLifetime:
   expiresHeader: Expires
   cacheControlHeader: Cache-control
 
-{% if 'typeorm' in database %}
+{% if database is defined and database != 'none' %}
 database:
+  host: db
+  database: db
+  {% if 'typeorm' in database -%}
   {% if database == 'typeorm-mysql' -%}
   type: mysql
   port: 3306
-  {% endif -%}
-  {% if database == 'typeorm-postgresql' -%}
+  {% elif database == 'typeorm-postgresql' -%}
   type: postgres
   port: 5432
   {% endif -%}
-  host: db
   username: user
   password: secret
-  database: db
   synchronize: false
   cache: false
   keepConnectionAlive: true
@@ -47,4 +47,13 @@ database:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
+  {% elif 'mongoose-mongodb' == database -%}
+  username: user
+  password: secret
+  mock:
+    host: db-mock
+  ignoreUndefined: true
+  useNewUrlParser: true
+  useUnifiedTopology: true
+  {% endif -%}
 {% endif %}

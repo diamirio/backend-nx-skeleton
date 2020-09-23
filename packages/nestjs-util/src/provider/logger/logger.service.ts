@@ -1,5 +1,5 @@
 import { LoggerService as LoggerServiceCommon } from '@nestjs/common'
-import * as winston from 'winston'
+import winston from 'winston'
 
 import { Configurable, ConfigParam } from '../config'
 import { LogType, logLevel } from './logger.constants'

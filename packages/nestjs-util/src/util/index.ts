@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common'
-import * as fs from 'fs-extra'
+import fs from 'fs-extra'
 
 export async function setEnvironmentVariables (packageFile = 'package.json'): Promise<void> {
   const { name, version } = await fs.readJSON(packageFile)

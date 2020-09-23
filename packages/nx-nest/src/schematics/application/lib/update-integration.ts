@@ -16,7 +16,8 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     updateNxIntegration<NormalizedSchema['priorConfiguration']>(options.name, {
       components: options.components,
       server: options.server,
-      database: options.database
+      database: options.database,
+      tests: options.tests
     }),
 
     // add nx container

@@ -3,15 +3,16 @@ import { APP_FILTER,{% if server == 'restful' %} APP_INTERCEPTOR,{% endif %} APP
 {% if server == 'graphql' %}
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
-import { graphqlContextParser } from './graphql-setup'
+import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
 {% endif %}
 {% if 'typeorm' in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
+{% elif 'mongoose-mongodb' == database %}
+import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 import {
   ConfigService,
   BadRequestExceptionFilter,
-  HttpExceptionFilter,
   GlobalExceptionFilter,
   InternalModule,
   MaintenanceMiddleware,
@@ -25,8 +26,8 @@ import {
   ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
 
-import * as modules from './child.modules'
-{% if 'typeorm' in database %}
+import * as modules from './modules'
+{% if database is defined and database != 'none' %}
 import { getDatabaseOptions } from '../util/database'
 {% endif %}
 
@@ -37,10 +38,6 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
       {
         provide: APP_FILTER,
         useClass: GlobalExceptionFilter
-      },
-      {
-        provide: APP_FILTER,
-        useClass: HttpExceptionFilter
       },
       {
         provide: APP_FILTER,
@@ -62,14 +59,19 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
     imports: [
       {% if server == 'graphql' %}GraphQLModule.forRoot({
         autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
-        context: graphqlContextParser,
+        context: graphQLContextParser,
+        formatError: graphQLErrorParser,
         useGlobalPrefix: true,
         playground: true,
         introspection: true,
         path: '/'
       }), {% endif %}
       ...Object.values(modules),
-      {% if 'typeorm' in database %}TypeOrmModule.forRoot(getDatabaseOptions(mock)), {% endif %}
+      {% if 'typeorm' in database %}
+      TypeOrmModule.forRoot(getDatabaseOptions(mock)),
+      {% elif 'mongoose-mongodb' == database %}
+      MongooseModule.forRoot(...getDatabaseOptions(mock)),
+      {% endif %}
       InternalModule,
       MaintenanceModule
       ]

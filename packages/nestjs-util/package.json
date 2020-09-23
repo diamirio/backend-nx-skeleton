@@ -47,41 +47,47 @@
   "peerDependencies": {
     "@nestjs/common": ">= 7 < 8",
     "@nestjs/core": ">= 7 < 8",
+    "@nestjs/graphql": ">= 7 < 8",
+    "@nestjs/microservices": ">= 7 < 8",
     "@nestjs/swagger": ">= 4 < 5",
+    "class-transformer": ">= 0.3.0",
+    "class-validator": ">= 0.12.0",
     "fastify": ">= 3.0.0",
     "fastify-swagger": ">= 3.0.0",
+    "graphql": ">= 15 < 16",
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
     "@nestjs/common": "^7.4.2",
     "@nestjs/core": "^7.4.2",
+    "@nestjs/graphql": "^7.6.0",
+    "@nestjs/microservices": "^7.4.4",
     "@nestjs/swagger": "^4.5.7",
     "@nestjs/testing": "^7.4.2",
+    "@types/config": "^0.0.36",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.0.27",
     "@types/supertest": "^2.0.8",
     "@types/winston": "^2.4.4",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
     "concurrently": "^5.0.0",
-    "cz-conventional-changelog": "3.2.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.6.0",
     "fastify": "^3.2.0",
     "fastify-swagger": "^3.2.0",
+    "graphql": "^15.3.0",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "lint-staged": "^10.2.2",
     "nest-schedule": "^0.6.4",
     "prettier": "^2.0.5",
-    "ts-node": "^8.5.3",
+    "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.9.2",
+    "typescript": "^4.0.3",
     "wait-on": "^5.0.0"
   },
   "engines": {
     "node": ">=10"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
