@@ -2,10 +2,12 @@
   "$schema": "http://json-schema.org/schema",
   "id": "NxNestSkeleton",
   "title": "Create a Nest application from skeleton with NX",
-  "examples": [{
-    "command": "g app myapp --bgtask",
-    "description": "Initiate background task scheduler."
-  }],
+  "examples": [
+    {
+      "command": "g app myapp --bgtask",
+      "description": "Initiate background task scheduler."
+    }
+  ],
   "type": "object",
   "properties": {
     "name": {

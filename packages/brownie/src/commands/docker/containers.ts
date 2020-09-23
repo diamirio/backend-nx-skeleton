@@ -3,24 +3,21 @@ import {
   ConfigCommandChoices,
   ConfigRemove,
   ConfigTypes,
-  createTable,
-  parseYaml,
-  promptUser,
-  readRaw,
-  writeFile,
-  mergeObjects,
   createDirIfNotExists,
-  promptOverwrite,
-  tasksOverwritePrompt
+  createTable,
+  mergeObjects,
+  parseYaml,
+  readRaw,
+  tasksOverwritePrompt,
+  writeFile
 } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { formatFiles } from '@webundsoehne/nx-tools'
 import fs from 'fs-extra'
 import globby from 'globby'
-import { Listr, ListrClass, ListrTask, ListrDefaultRenderer } from 'listr2'
+import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 
-import { AvailableContainers, DockerComposeFile, ParsedContainers, DockerContainerAddCtx } from '@context/docker/containers'
+import { AvailableContainers, DockerComposeFile, DockerContainerAddCtx } from '@context/docker/containers'
 import { jinja } from '@helpers/jinja.helper'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
@@ -336,10 +333,10 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
+  async configRemove (): Promise<ConfigRemove<DockerComposeFile>> {
     return {
       keys: [],
-      removeFunction: async (config, input): Promise<DockerComposeFile> => config
+      removeFunction: async (config): Promise<DockerComposeFile> => config
     }
   }
 

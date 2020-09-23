@@ -11,7 +11,9 @@
     "release": "lerna publish -y",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
-    "link-packages": "lerna link --force-local"
+    "link-packages": "lerna link --force-local",
+    "lint": "yarn command --concurrency 1 lint",
+    "lint:check": "yarn command --concurrency 1 lint:check"
   },
   "workspaces": {
     "packages": ["packages/*"],
@@ -19,13 +21,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "yarn command --concurrency 1 lint:staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
-  },
-  "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": ["prettier --write", "eslint --fix"],
-    "./*.{json,md}": ["prettier --write"]
   },
   "dependencies": {
     "@nrwl/workspace": "10.2.1"

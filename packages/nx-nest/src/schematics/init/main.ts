@@ -5,7 +5,7 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 import { calculateDependencies } from '@src/utils/versions'
 
 export default function (schema: NormalizedSchema): Rule {
-  const builders = calculateDependencies(schema, true)
+  // const builders = calculateDependencies(schema, true)
   const dependencies = calculateDependencies(schema)
 
   return chain([

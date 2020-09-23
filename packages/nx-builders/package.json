@@ -18,8 +18,9 @@
     "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents '**/*.json' ../dist/",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn postbuild\"",
-    "lint": "prettier --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged"
   },
   "husky": {
     "hooks": {
@@ -28,13 +29,8 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "./*.{json,md}": [
-      "prettier --write"
-    ]
+    "./*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",

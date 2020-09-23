@@ -3,7 +3,7 @@ import { PackageVersions } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
 
 // calculate dependencies
-export function calculateDependencies(options: InitiateBuilderDependenciesOptions): PackageVersions {
+export function calculateDependencies (options: InitiateBuilderDependenciesOptions): PackageVersions {
   let dependencies: PackageVersions = baseDeps
 
   if (options.includes('ts-node-dev')) {

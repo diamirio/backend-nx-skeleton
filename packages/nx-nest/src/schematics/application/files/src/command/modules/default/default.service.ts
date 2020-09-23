@@ -16,11 +16,11 @@ export class DefaultService {
     autoExit: true
   })
   async helloWorld (
-  @Positional({
-    name: 'name'
-  })
-    name: string
-  ) {
+    @Positional({
+      name: 'name'
+    })
+      name: string
+  ): Promise<void> {
     this.logger.log(`Hello ${name}`)
   }
 }
