@@ -25,13 +25,14 @@ cacheLifetime:
 
 {% if database is defined and database != 'none' %}
 database:
-  host: db
   database: db
   {% if 'typeorm' in database -%}
   {% if database == 'typeorm-mysql' -%}
+  host: db-mysql
   type: mysql
   port: 3306
   {% elif database == 'typeorm-postgresql' -%}
+  host: db-postgres
   type: postgres
   port: 5432
   {% endif -%}
@@ -41,17 +42,17 @@ database:
   cache: false
   keepConnectionAlive: true
   mock:
-    host: db-mock
     database: db
   directories:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
   {% elif 'mongoose-mongodb' == database -%}
+  host: db-mongodb
   username: user
   password: secret
   mock:
-    host: db-mock
+    database: db-mock
   ignoreUndefined: true
   useNewUrlParser: true
   useUnifiedTopology: true

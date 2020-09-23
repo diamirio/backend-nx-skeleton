@@ -21,10 +21,10 @@ export function runBuilder (options: NodePackageServeOptions, context: BuilderCo
         tsNodeDev: join((await execa('npm', [ 'bin' ])).stdout, 'ts-node-dev')
       }
 
-      // check if needed tools are really installed
-      checkNodeModulesExists(paths)
-
       try {
+        // check if needed tools are really installed
+        checkNodeModulesExists(paths)
+
         await pipeProcessToLogger(context, execa.node(paths.tsNodeDev, args, spawnOptions), { start: true })
 
         subscriber.next({ success: true })

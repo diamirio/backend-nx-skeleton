@@ -96,18 +96,18 @@ class Builder {
     // have to return a observable here
     return Observable.create(
       async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
-        // stop all manager tasks
-        await this.manager.stop()
-
-        // check if needed tools are really installed
-        checkNodeModulesExists(this.paths)
-
-        const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
-        if (this.projectDependencies.length > 0) {
-          this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
-        }
-
         try {
+          // stop all manager tasks
+          await this.manager.stop()
+
+          // check if needed tools are really installed
+          checkNodeModulesExists(this.paths)
+
+          const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
+          if (this.projectDependencies.length > 0) {
+            this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
+          }
+
           // add this after since we do not want to patch check it
           this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 

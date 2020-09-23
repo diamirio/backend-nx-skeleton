@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { CommandModule } from 'nestjs-command'
 
-import * as modules from './default/default.service'
+import * as modules from './modules'
 
 /**
  * Register all services under providers
