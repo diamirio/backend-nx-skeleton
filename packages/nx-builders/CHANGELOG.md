@@ -1,3 +1,11 @@
+# [@webundsoehne/nx-builders-v1.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.1.2...@webundsoehne/nx-builders-v1.1.3) (2020-09-23)
+
+
+### Bug Fixes
+
+* a bug with error output ([dd0081f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/dd0081f57454d878c58190de69a0e1ccbb379f46))
+* relint ([00290a8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/00290a822bbf583f4b3d93c6b7dc305145d3ddec))
+
 # [@webundsoehne/nx-builders-v1.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.1.1...@webundsoehne/nx-builders-v1.1.2) (2020-09-23)
 
 
