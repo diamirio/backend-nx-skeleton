@@ -1,9 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common'
+import { getDatabaseOptions } from '@util/database'
 import { MaintenanceLocker } from '@webundsoehne/nestjs-util'
 import { Timeout, NestSchedule, UseLocker } from 'nest-schedule'
 import { createConnection } from 'typeorm'
-
-import { getDatabaseOptions } from '../../../util/database.ts__typeorm__'
 
 @Injectable()
 export class MigrationTask extends NestSchedule {
@@ -11,7 +10,7 @@ export class MigrationTask extends NestSchedule {
 
   @Timeout(0, { maxRetry: 24, retryInterval: 2.5 * 1000 })
   @UseLocker(MaintenanceLocker)
-  async migrate () {
+  public async migrate (): Promise<void> {
     try {
       const connection = await createConnection({ ...getDatabaseOptions(), logging: true })
 

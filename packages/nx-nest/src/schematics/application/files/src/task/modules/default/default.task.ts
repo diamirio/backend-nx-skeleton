@@ -11,7 +11,7 @@ export class DefaultTaskService extends NestSchedule {
   private logger: Logger = new Logger(this.constructor.name)
 
   @Interval(1000)
-  intervalJob () {
+  public intervalJob (): void {
     this.logger.debug('Another Message')
   }
 }

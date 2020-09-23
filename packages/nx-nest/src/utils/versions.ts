@@ -129,6 +129,6 @@ export const mongooseDeps: PackageVersions = {
     mongoose: '^5.10.6'
   },
   dev: {
-    '@types/mongoose': '^5.7.36',
+    '@types/mongoose': '^5.7.36'
   }
 }
