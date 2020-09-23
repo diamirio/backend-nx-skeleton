@@ -1,7 +1,6 @@
 import { apply, chain, filter, move, noop, Rule, SchematicContext, template, url } from '@angular-devkit/schematics'
 import { names, offsetFromRoot } from '@nrwl/workspace'
 import { applyOverwriteWithDiff, formatFiles, jinjaTemplate, Logger } from '@webundsoehne/nx-tools'
-import { constants } from 'buffer'
 import merge from 'deepmerge'
 
 import { FileTemplatesInterface, OmitFoldersInterface } from '../interfaces/create-application-files.interface'

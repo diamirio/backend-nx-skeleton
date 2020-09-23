@@ -1,26 +1,18 @@
 import { MongooseModuleOptions } from '@nestjs/mongoose'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
-const { authentication, connectOptions, mockOptions, ...databaseOptions } = ConfigService.get('database')
-
-let mockFlag: boolean = false
-function setMockFlag (mock?: any): boolean {
-  if (typeof mock !== 'undefined') {
-    mockFlag = typeof mock === 'string' ? mock.toLowerCase() === 'true' || Boolean(Number(mock)) : Boolean(mock)
-  }
-
-  return mockFlag
-}
+const { mock: mockOptions = {}, ...options } = ConfigService.get('database')
 
 export function getDatabaseOptions (mock?: boolean): [string, MongooseModuleOptions] {
-  const options = setMockFlag(mock) ? { ...databaseOptions, ...mockOptions } : databaseOptions
-  const uri = `mongodb://${options.host}${options?.port ? `:${options.port}` : ''}/${options.database}`
+  const databaseOptions: MongooseModuleOptions = mock ? { ...options, ...mockOptions } : options
 
-  const mongoOptions: MongooseModuleOptions = { ...connectOptions }
+  const { host, port, database, username, password, ...mongoOptions } = databaseOptions
 
-  if (authentication?.username && authentication?.password) {
-    mongoOptions.user = authentication.username
-    mongoOptions.pass = authentication.password
+  const uri = `mongodb://${host}${port ? `:${port}` : ''}/${database}`
+
+  if (username && password) {
+    mongoOptions.user = username
+    mongoOptions.pass = password
   }
 
   return [uri, mongoOptions]

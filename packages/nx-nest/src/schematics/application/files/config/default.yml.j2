@@ -48,14 +48,12 @@ database:
     migration: migrations
     seed: seeds
   {% elif 'mongoose-mongodb' == database -%}
-  authentication:
-    username: user
-    password: secret
-  mockOptions:
+  username: user
+  password: secret
+  mock:
     host: db-mock
-  connectOptions:
-    ignoreUndefined: true
-    useNewUrlParser: true
-    useUnifiedTopology: true
+  ignoreUndefined: true
+  useNewUrlParser: true
+  useUnifiedTopology: true
   {% endif -%}
 {% endif %}
