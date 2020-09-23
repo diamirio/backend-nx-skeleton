@@ -1,3 +1,10 @@
+# [@webundsoehne/eslint-config-v1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config-v1.0.1...@webundsoehne/eslint-config-v1.0.2) (2020-09-23)
+
+
+### Bug Fixes
+
+* update lint setupo ([8c58401](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8c58401fe579c63d487b3405f1a4b5a6b467133f))
+
 # [@webundsoehne/eslint-config-v1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config-v1.0.0...@webundsoehne/eslint-config-v1.0.1) (2020-09-18)
 
 
