@@ -7,8 +7,10 @@ import prettier from 'prettier'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
+import { FormatFilesOptions } from './format-files.interface'
+
 export function formatFiles (
-  options: { skipFormat?: boolean, prettier?: boolean, eslint?: boolean } = {
+  options: FormatFilesOptions = {
     skipFormat: false,
     prettier: true,
     eslint: false
