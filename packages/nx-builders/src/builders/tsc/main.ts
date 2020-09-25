@@ -30,14 +30,14 @@ import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, of, Subscriber } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
-import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
+import { FileInputOutput, TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
+export function runBuilder (options: TscBuilderOptions, context: BuilderContext) {
   const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
 
   return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
@@ -65,7 +65,7 @@ class Builder {
   private paths: ProcessPaths
   private manager: ProcessManager
 
-  constructor (options: NodePackageBuilderOptions, private context: BuilderContext) {
+  constructor (options: TscBuilderOptions, private context: BuilderContext) {
     this.logger = new Logger(context)
 
     // create dependency
@@ -177,7 +177,7 @@ class Builder {
     )
   }
 
-  protected normalizeOptions (options: NodePackageBuilderOptions): NormalizedBuilderOptions {
+  protected normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
@@ -214,7 +214,11 @@ class Builder {
     const relativeMainFileOutput = relative(`${tsconfigDir}/${rootDir}`, mainFileDir)
 
     return {
+      // default behaviour
+      swapPaths: true,
+      // injected options
       ...options,
+      // parsed options
       files,
       relativeMainFileOutput,
       normalizedOutputPath: join(this.context.workspaceRoot, options.outputPath)

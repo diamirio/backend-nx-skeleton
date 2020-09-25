@@ -16,7 +16,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     updateNxIntegration<NormalizedSchema['priorConfiguration']>(options.name, {
       components: options.components,
       server: options.server,
-      microservice: options.microservice,
       database: options.database,
       tests: options.tests
     }),
@@ -31,9 +30,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     options.database?.includes('postgresql') ? updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) : noop(),
 
     // add mongodb container
-    options.database?.includes('mongodb') ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop(),
-
-    // add message queue container
-    options.components?.includes('microservice-server') ? updateBrownieIntegration(options.name, { containers: [ 'rabbitmq' ] }) : noop()
+    options.database?.includes('mongodb') ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop()
   ])
 }

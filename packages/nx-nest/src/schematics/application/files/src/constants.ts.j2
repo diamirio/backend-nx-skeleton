@@ -3,8 +3,8 @@ export enum Service {
   {% if 'server' in components %}
   SERVER = 'server',
   {% endif %}
-  {% if 'microservice' in components %}
-  MICROSERVICE = 'microservice',
+  {% if 'microservice-server' in components %}
+  MICROSERVICE_SERVER = 'microservice-servicer',
   {% endif %}
   {% if 'bgtask' in components %}
   TASK = 'bgtask',

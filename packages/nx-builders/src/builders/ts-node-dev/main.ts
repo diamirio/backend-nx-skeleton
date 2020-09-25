@@ -5,14 +5,14 @@ import execa from 'execa'
 import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
-import { NodePackageServeOptions } from './main.interface'
+import { TsNodeBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder (options: NodePackageServeOptions, context: BuilderContext): Observable<BuilderOutput> {
+export function runBuilder (options: TsNodeBuilderOptions, context: BuilderContext): Observable<BuilderOutput> {
   return Observable.create(
     async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
       const { args, spawnOptions } = normalizeArguments(options)
@@ -37,7 +37,7 @@ export function runBuilder (options: NodePackageServeOptions, context: BuilderCo
   )
 }
 
-function normalizeArguments (options: NodePackageServeOptions): ExecaArguments {
+function normalizeArguments (options: TsNodeBuilderOptions): ExecaArguments {
   const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
   // default options

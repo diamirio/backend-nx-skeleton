@@ -28,10 +28,10 @@ import {
 
 import * as modules from './modules'
 {% if database is defined and database != 'none' %}
-import { getDatabaseOptions } from '../util/database'
+import { getDatabaseOptions } from '@util/database'
 {% endif %}
 
-export function createServerModule ({% if database != 'none' %}mock = false{% endif %}): new() => NestModule {
+export function createServerModule ({% if database != 'none' %}mock = false{% endif %}): new({% if database != 'none' %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
       ConfigService,

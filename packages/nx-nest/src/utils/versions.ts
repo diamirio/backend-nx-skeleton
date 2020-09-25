@@ -33,8 +33,12 @@ export function calculateDependencies (schema: NormalizedSchema, builders?: bool
     dependencies = merge(dependencies, graphqlServerDeps)
   }
 
-  if (schema.components.includes('microservice')) {
-    dependencies = merge(dependencies, microserviceModuleDeps)
+  if (schema.components.includes('microservice-server')) {
+    dependencies = merge(dependencies, microserviceServerModuleDeps)
+  }
+
+  if (schema.components.includes('microservice-client')) {
+    dependencies = merge(dependencies, microserviceClientModuleDeps)
   }
 
   if (schema.components.includes('bgtask')) {
@@ -106,7 +110,17 @@ export const graphqlServerDeps: PackageVersions = {
 
 export const taskModuleDeps: PackageVersions = {}
 
-export const microserviceModuleDeps: PackageVersions = {}
+export const microserviceSharedModuleDeps: PackageVersions = {
+  prod: {
+    '@nestjs/microservices': '^7.4.4'
+  }
+}
+export const microserviceServerModuleDeps: PackageVersions = {
+  prod: {
+    ...microserviceSharedModuleDeps.prod
+  }
+}
+export const microserviceClientModuleDeps: PackageVersions = {}
 
 // command module dependencies
 export const commandModuleDeps: PackageVersions = {

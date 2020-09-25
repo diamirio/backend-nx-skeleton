@@ -8,8 +8,8 @@
       {% if 'server' in components %}
       "@server/*": ["src/server/*"],
       {% endif %}
-      {% if 'microservice' in components %}
-      "@microservice/*": ["src/microservice/*"],
+      {% if 'microservice-server' in components %}
+      "@microservice-server/*": ["src/microservice-server/*"],
       {% endif %}
       {% if 'bgtask' in components %}
       "@task/*": ["src/task/*"],
@@ -17,7 +17,8 @@
       {% if 'command' in components %}
       "@command/*": ["src/command/*"],
       {% endif %}
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@util/*": ["util/*"]
     }
   },
   "include": ["src", "migrations", "seeds", "test"],

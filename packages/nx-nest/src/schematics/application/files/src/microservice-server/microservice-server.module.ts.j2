@@ -1,13 +1,14 @@
-import { RpcGlobalExceptionFilter, ExtendedValidationPipe } from '@cenk1cenk2/nestjs-utils'
+import { RpcGlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { GlobalModules } from '@root/global.modules'
-import { getDatabaseOptions } from '@root/utils/database'
 
-import * as modules from './child.modules'
+import * as modules from './modules'
+{% if database is defined and database != 'none' %}
+import { getDatabaseOptions } from '@util/database'
+{% endif %}
 
-export function createMicroserviceModule (mock = false): new (mock: boolean) => NestModule {
+export function createMicroserviceModule ({% if database != 'none' %}mock = false{% endif %}): new({% if database != 'none' %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
       {
@@ -23,7 +24,14 @@ export function createMicroserviceModule (mock = false): new (mock: boolean) => 
         useClass: RpcGlobalExceptionFilter
       }
     ],
-    imports: [ GlobalModules, TypeOrmModule.forRoot({ ...getDatabaseOptions(mock) }), ...Object.values(modules) ]
+    imports: [
+    {% if 'typeorm' in database %}
+      TypeOrmModule.forRoot(getDatabaseOptions(mock)),
+      {% elif 'mongoose-mongodb' == database %}
+      MongooseModule.forRoot(...getDatabaseOptions(mock)),
+      {% endif %}
+    ...Object.values(modules)
+    ]
   })
   class MicroservicesModule implements NestModule {
     // eslint-disable-next-line @typescript-eslint/no-empty-function

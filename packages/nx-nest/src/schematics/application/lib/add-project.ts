@@ -2,13 +2,14 @@
 import { join, normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
+import { WorkspaceJSON } from '@webundsoehne/nx-tools'
 
-import { ProjectArchitect } from '../interfaces/add-project.interface'
-import { NormalizedSchema } from '@src/schematics/application/main.interface'
+import { SchematicArchitect } from '../interfaces/add-project.interface'
+import { NormalizedSchema } from '../main.interface'
 
 export function addProject (options: NormalizedSchema): Rule {
-  return updateWorkspaceInTree((json) => {
-    const architect: ProjectArchitect = {} as ProjectArchitect
+  return updateWorkspaceInTree((json: WorkspaceJSON<SchematicArchitect>) => {
+    const architect: SchematicArchitect = {} as SchematicArchitect
 
     architect.build = {
       builder: '@webundsoehne/nx-builders:tsc',
@@ -38,6 +39,18 @@ export function addProject (options: NormalizedSchema): Rule {
           tsConfig: join(options.root, 'tsconfig.json'),
           environment: {
             NODE_SERVICE: 'server'
+          }
+        }
+      }
+    } else if (options.components.includes('microservice-server')) {
+      architect.serve = {
+        builder: '@webundsoehne/nx-builders:ts-node-dev',
+        options: {
+          cwd: options.root,
+          main: join(options.root, 'src/main.ts'),
+          tsConfig: join(options.root, 'tsconfig.json'),
+          environment: {
+            NODE_SERVICE: 'microservice-server'
           }
         }
       }
@@ -78,8 +91,6 @@ export function addProject (options: NormalizedSchema): Rule {
       schematics: {},
       architect
     }
-
-    json.defaultProject = json.defaultProject || options.name
 
     return json
   })

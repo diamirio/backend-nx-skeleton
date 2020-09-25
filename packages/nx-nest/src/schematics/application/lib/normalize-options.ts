@@ -6,7 +6,7 @@ import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
+import { AvailableComponents, AvailableDBTypes, AvailableMicroserviceTypes, AvailableServerTypes, AvailableTestsTypes, NormalizedSchema, Schema } from '../main.interface'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -76,12 +76,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
             const thisProject = nxJson.projects?.[ctx.name]?.integration
             if (thisProject) {
-              ctx.priorConfiguration = {
-                components: thisProject?.components,
-                server: thisProject?.server,
-                database: thisProject?.database,
-                tests: thisProject?.tests
-              }
+              ctx.priorConfiguration = thisProject
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -104,7 +99,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             { name: 'server', message: 'Server' },
             { name: 'bgtask', message: 'Scheduler' },
             { name: 'command', message: 'Command' },
-            { name: 'microservice', message: 'Microservice' }
+            { name: 'microservice-client', message: 'Microservice Client' },
+            { name: 'microservice-server', message: 'Microservice Server' }
           ]
 
           // select the base components
@@ -159,6 +155,33 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           }
 
           task.title = `Server type selected as: ${ctx.server}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
+      // microservice-server types
+      {
+        skip: (ctx): boolean => !ctx.components.includes('microservice-server'),
+        task: async (ctx, task): Promise<void> => {
+          // there can be two selections of API servers here
+          const choices: ConvertToPromptType<AvailableMicroserviceTypes> = [ { name: 'rabbitmq', message: 'RabbitMQ' } ]
+
+          if (!options.server) {
+            ctx.microservice = await task.prompt<AvailableMicroserviceTypes>({
+              type: 'Select',
+              message: 'Please select the microservice server type.',
+              choices: choices as any,
+              initial: getInitialFromPriorConfiguration(ctx, 'microservice', choices)
+            })
+          } else {
+            // when options are passed via cli
+            ctx.microservice = parseArguments<AvailableMicroserviceTypes>(task, options.microservice, choices, { required: true, single: true })
+          }
+
+          task.title = `Microservice type selected as: ${ctx.microservice}`
         },
         options: {
           bottomBar: Infinity,

@@ -7,7 +7,6 @@ export interface Schema {
   packageName: string
   directory: string
   server: string
-  microservice: string
   database: string
   components: string
   tests: string
@@ -16,9 +15,8 @@ export interface Schema {
   verbose: boolean
 }
 
-export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice-client' | 'microservice-server'
+export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice'
 export type AvailableServerTypes = 'graphql' | 'restful'
-export type AvailableMicroserviceTypes = 'rabbitmq'
 export type AvailableDBTypes = 'none' | 'typeorm-mysql' | 'typeorm-postgresql' | 'mongoose-mongodb'
 export type AvailableTestsTypes = 'jest' | 'none'
 export type AvailableLinterTypes = Linter
@@ -28,17 +26,15 @@ export interface NormalizedSchema {
   packageName: string
   root: Path
   directory: string
-  linter: AvailableLinterTypes
-  skipFormat: boolean
   components: AvailableComponents[]
   server: AvailableServerTypes
-  microservice: AvailableMicroserviceTypes
   database: AvailableDBTypes
   tests: AvailableTestsTypes
+  linter: AvailableLinterTypes
+  skipFormat: boolean
   priorConfiguration: {
     components: AvailableComponents[]
     server: AvailableServerTypes
-    microservice: AvailableMicroserviceTypes
     database: AvailableDBTypes
     tests: AvailableTestsTypes
   }

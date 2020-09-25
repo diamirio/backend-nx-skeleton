@@ -1,19 +1,19 @@
-import { NodePackageBuilderOptions, NodePackageServeOptions } from '@webundsoehne/nx-builders'
+import { TscBuilderOptions, TsNodeBuilderOptions } from '@webundsoehne/nx-builders'
 
-export interface ProjectArchitect {
+export interface SchematicArchitect {
   [key: string]: any
   build: {
     builder: '@webundsoehne/nx-builders:tsc'
-    options: NodePackageBuilderOptions
+    options: TscBuilderOptions
   }
 
   serve: {
     builder: '@webundsoehne/nx-builders:ts-node-dev'
-    options: NodePackageServeOptions
+    options: TsNodeBuilderOptions
   }
 
   bgtask: {
     builder: '@webundsoehne/nx-builders:ts-node-dev'
-    options: NodePackageServeOptions
+    options: TsNodeBuilderOptions
   }
 }

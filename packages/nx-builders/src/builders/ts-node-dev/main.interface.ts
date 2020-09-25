@@ -1,6 +1,6 @@
 import { JsonObject } from '@angular-devkit/core'
 
-export interface NodePackageServeOptions extends JsonObject {
+export interface TsNodeBuilderOptions extends JsonObject {
   /** process CWD */
   cwd: string
 

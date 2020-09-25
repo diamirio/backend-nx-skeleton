@@ -1,3 +1,3 @@
 export interface BrownieIntegrationInterface {
-  containers?: ('nx' | 'postgresql' | 'mysql' | 'mongodb')[]
+  containers?: ('nx' | 'postgresql' | 'mysql' | 'mongodb' | 'rabbitmq')[]
 }

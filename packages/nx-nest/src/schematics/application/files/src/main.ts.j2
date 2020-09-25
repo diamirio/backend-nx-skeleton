@@ -7,8 +7,8 @@ import { service } from './constants'
 {% if 'server' in components %}
 import { createApplication as createServerApplication } from './server/init'
 {% endif %}
-{% if 'microservice' in components %}
-import { createApplication as createMicroserviceApplication } from './microservice/init'
+{% if 'microservice-server' in components %}
+import { createApplication as createMicroserviceApplication } from './microservice-server/init'
 {% endif %}
 {% if 'bgtask' in components %}
 import { createApplication as createTaskApplication } from './task/init'
@@ -27,9 +27,9 @@ function bootstrap (): Promise<void> {
   {% endif %}
     return createServerApplication()
   {% endif %}
-  {% if 'microservice' in components %}
+  {% if 'microservice-server' in components %}
   {% if components | length != 1 %}
-  case Service.MICROSERVICE:
+  case Service.MICROSERVICE_SERVER:
   {% endif %}
     return createMicroserviceApplication()
   {% endif %}

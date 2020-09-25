@@ -1,6 +1,6 @@
 import { JsonObject } from '@angular-devkit/core'
 
-export interface NodePackageBuilderOptions extends JsonObject {
+export interface TscBuilderOptions extends JsonObject {
   cwd: string
 
   main: string
@@ -26,7 +26,7 @@ export interface NodePackageBuilderOptions extends JsonObject {
   verbose?: boolean
 }
 
-export interface NormalizedBuilderOptions extends NodePackageBuilderOptions {
+export interface NormalizedBuilderOptions extends TscBuilderOptions {
   files: FileInputOutput[]
   normalizedOutputPath: string
   relativeMainFileOutput: string
