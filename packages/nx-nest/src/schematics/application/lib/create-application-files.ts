@@ -51,7 +51,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
         match: 'mongoose'
       }
     ],
-    omitFolders: [
+    omit: [
       // tests configuration
       {
         condition: options.tests !== 'jest',

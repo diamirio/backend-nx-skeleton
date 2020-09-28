@@ -34,7 +34,17 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
 
   const template: CreateApplicationRuleInterface = {
     templates: [],
-    omitFolders: []
+    multipleTemplates: [
+      ...options.parsedMicroservices.map((microservice) => ({
+        path: 'src/interfaces/__default__.interface.ts.j2',
+        output: `${options.root}/src/interfaces/${microservice.casing.kebab}/default.interface.ts`,
+        factory: (ctx: NormalizedSchema): Record<string, any> => {
+          return {
+            ...ctx.parsedMicroservices
+          }
+        }
+      }))
+    ]
   }
 
   return createApplicationRule(template, options)

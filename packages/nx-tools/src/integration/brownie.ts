@@ -1,8 +1,9 @@
 import { Rule } from '@angular-devkit/schematics'
-import { updateJsonInTree } from '@nrwl/workspace'
+import { readNxJson, updateJsonInTree } from '@nrwl/workspace'
 import merge from 'deepmerge'
 
 import { BrownieIntegrationInterface } from './brownie.interface'
+import { EnrichedNxJson } from '@interfaces/nx-json.interface'
 
 export function updateBrownieIntegration (name: string, options: BrownieIntegrationInterface): Rule {
   return updateJsonInTree('nx.json', (json) => {
@@ -13,4 +14,8 @@ export function updateBrownieIntegration (name: string, options: BrownieIntegrat
 
     return json
   })
+}
+
+export function readBrownieIntegration (name: string): BrownieIntegrationInterface {
+  return (readNxJson() as EnrichedNxJson).projects?.[name]?.brownie
 }

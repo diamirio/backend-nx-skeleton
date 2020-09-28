@@ -41,9 +41,9 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1001.2",
-    "@angular-devkit/core": "^10.1.2",
-    "@angular-devkit/schematics": "~10.1.2",
+    "@angular-devkit/architect": "^0.1001.3",
+    "@angular-devkit/core": "^10.1.3",
+    "@angular-devkit/schematics": "~10.1.3",
     "@nrwl/cli": "^10.2.0",
     "@webundsoehne/nx-tools": "*",
     "execa": "^4.0.2",

@@ -1,16 +1,16 @@
-import { CreateFileAction, OverwriteFileAction, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { getFilesInTree } from './file-system'
 import { getJinjaDefaults } from './jinja-defaults'
-import { GenerateMultipleJinjaTemplateOptions, JinjaTemplateOptions } from './template-engine.interface'
+import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
 
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
 
-    if (files.size === 0) {
+    if (files.size === 0 || !options.templates) {
       return host
     }
 
@@ -21,7 +21,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
       mergeMap(async (file) => {
         let matchedTemplate: string
         await Promise.all(
-          options.templates.map(async (template) => {
+          options.templates?.map(async (template) => {
             if (file.path.match(template)) {
               matchedTemplate = template
             }
@@ -46,11 +46,11 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
   }) as unknown) as Rule
 }
 
-export function generateMultipleJinjaTemplate<T extends Record<string, any>> (ctx: T, options: GenerateMultipleJinjaTemplateOptions<T>): Rule {
+export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, options: MultipleJinjaTemplateOptions<T>): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
 
-    if (files.size === 0) {
+    if (files.size === 0 || !options.templates) {
       return host
     }
 
@@ -61,7 +61,7 @@ export function generateMultipleJinjaTemplate<T extends Record<string, any>> (ct
       mergeMap(async (file) => {
         let matchedTemplate: string
         await Promise.all(
-          options.templates.map(async (template) => {
+          options.templates?.map(async (template) => {
             if (file.path.match(template.path)) {
               matchedTemplate = template.path
             }
@@ -72,14 +72,20 @@ export function generateMultipleJinjaTemplate<T extends Record<string, any>> (ct
           return
         }
 
-        try {
-          file.content = nunjucks.renderString(file.content, ctx)
+        await Promise.all(
+          options.templates.map(async (template) => {
+            try {
+              const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
 
-          host.overwrite(file.path, file.content)
-          host.rename(file.path, file.path.replace(matchedTemplate, ''))
-        } catch (e) {
-          context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)
-        }
+              host.create(template.output, content)
+            } catch (e) {
+              context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)
+            }
+          })
+        )
+
+        // remove the template itself
+        host.delete(file.path)
       }),
       map(() => host)
     )

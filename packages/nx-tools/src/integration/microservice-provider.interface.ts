@@ -1,3 +1,6 @@
 export interface MicroserviceIntegrationInterface {
-  microservices?: string[]
+  name: string
+  root: string
+  sourceRoot: string
+  microservice: unknown
 }

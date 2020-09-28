@@ -1,6 +1,8 @@
 import { Rule } from '@angular-devkit/schematics'
-import { updateJsonInTree } from '@nrwl/workspace'
+import { readNxJson, updateJsonInTree } from '@nrwl/workspace'
 import merge from 'deepmerge'
+
+import { EnrichedNxJson } from '@interfaces/nx-json.interface'
 
 export function updateNxIntegration<T> (name: string, options: T): Rule {
   return updateJsonInTree('nx.json', (json) => {
@@ -20,4 +22,8 @@ export function updateNxIntegration<T> (name: string, options: T): Rule {
 
     return json
   })
+}
+
+export function readNxIntegration<T> (name: string): T {
+  return (readNxJson() as EnrichedNxJson<T>).projects?.[name]?.integration
 }

@@ -2,25 +2,15 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
-import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
+import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
   createTmpTsConfig,
-  DependentBuildableProjectNode,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
-import {
-  checkNodeModulesExists,
-  createDependenciesForProjectFromGraph,
-  ExecaArguments,
-  Logger,
-  mergeDependencies,
-  pipeProcessToLogger,
-  ProcessManager,
-  removePathRoot
-} from '@webundsoehne/nx-tools'
+import { checkNodeModulesExists, createDependenciesForProjectFromGraph, ExecaArguments, mergeDependencies, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -30,61 +20,17 @@ import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, of, Subscriber } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
-import { FileInputOutput, TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
+import { FileInputOutput, NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
+import { BaseBuilder, runBuilder } from '@src/lib/base-builder'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder (options: TscBuilderOptions, context: BuilderContext) {
-  const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
-
-  return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
-    switchMap((result) => {
-      if (result) {
-        const builder = new Builder(options, context)
-        return builder.compileFiles()
-      } else {
-        return of({ success: false })
-      }
-    }),
-    map((value) => {
-      return value
-    })
-  )
-}
-
 // i converted this to a class since it makes not to much sense to have seperate functions with tons of same inputs
-class Builder {
-  private logger: Logger
-  private projectGraph: ProjectGraph
-  private projectTarget: ProjectGraphNode<Record<string, unknown>>
-  private projectDependencies: DependentBuildableProjectNode[]
-  private options: NormalizedBuilderOptions
-  private paths: ProcessPaths
-  private manager: ProcessManager
-
-  constructor (options: TscBuilderOptions, private context: BuilderContext) {
-    this.logger = new Logger(context)
-
-    // create dependency
-    this.projectGraph = createProjectGraph()
-    const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context)
-    this.projectTarget = target
-    this.projectDependencies = dependencies
-
-    // normalize options
-    this.options = this.normalizeOptions(options)
-
-    // create a process manager
-    this.manager = new ProcessManager(this.context)
-  }
-
-  public compileFiles (): Observable<BuilderOutput> {
-    // Cleaning the /dist folder
-    removeSync(this.options.normalizedOutputPath)
-
+class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
+  public init (): void {
     // paths of the programs, more convient than using the api since tscpaths does not have api
     this.paths = {
       typescript: require.resolve('typescript/bin/tsc'),
@@ -92,10 +38,15 @@ class Builder {
       tscWatch: require.resolve('tsc-watch/lib/tsc-watch'),
       tsconfig: join(this.context.workspaceRoot, this.options.tsConfig)
     }
+  }
 
+  public run (): Observable<BuilderOutput> {
     // have to return a observable here
     return Observable.create(
       async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+        // Cleaning the /dist folder
+        removeSync(this.options.normalizedOutputPath)
+
         try {
           // stop all manager tasks
           await this.manager.stop()
@@ -177,7 +128,7 @@ class Builder {
     )
   }
 
-  protected normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
+  public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
@@ -401,4 +352,4 @@ class Builder {
   }
 }
 
-export default createBuilder(runBuilder)
+export default createBuilder(runBuilder(Builder))

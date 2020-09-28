@@ -1,13 +1,12 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import { formatFiles, Logger } from '@webundsoehne/nx-tools'
+import { formatFiles, Logger, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
-import { updateTsconfigPaths } from './lib/update-tsconfig-json'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
 

@@ -3,7 +3,7 @@ import { names, offsetFromRoot } from '@nrwl/workspace'
 
 import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from './create-application-rule.interface'
 import { formatFiles } from '@utils/format-files'
-import { jinjaTemplate } from '@utils/template-engine'
+import { multipleJinjaTemplate, jinjaTemplate } from '@utils/template-engine'
 
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
   files: CreateApplicationRuleInterface,
@@ -15,6 +15,16 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     ...files.templates.map((val) => {
       return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
     }),
+
+    // interpolate multiple templates first because we want to remove the jinja file
+    multipleJinjaTemplate<T>(
+      {
+        ...names(options.name),
+        ...options,
+        offsetFromRoot: offsetFromRoot(options.root)
+      },
+      { templates: files.multipleTemplates as any }
+    ),
 
     // interpolate the templates
     jinjaTemplate(
@@ -35,9 +45,9 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     }),
 
     // omit some folders
-    ...files.omitFolders.map((val) => {
+    ...files.omit?.map((val) => {
       return val.condition ? filter((file) => val.match(file)) : noop()
-    }),
+    }) ?? [],
 
     // need to format files before putting them through difference, or else it goes crazy.
     formatFiles({

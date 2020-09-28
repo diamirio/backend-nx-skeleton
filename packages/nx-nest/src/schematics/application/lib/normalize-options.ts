@@ -1,9 +1,9 @@
 import { normalize } from '@angular-devkit/core'
 import { Tree, SchematicContext } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
-import { appsDir, readJsonInTree } from '@nrwl/workspace/src/utils/ast-utils'
+import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, parseArguments, readNxIntegration } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { AvailableComponents, AvailableDBTypes, AvailableMicroserviceTypes, AvailableServerTypes, AvailableTestsTypes, NormalizedSchema, Schema } from '../main.interface'
@@ -15,8 +15,15 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         task: async (ctx): Promise<void> => {
           await Promise.all(
-            [ 'name', 'verbose', 'linter' ].map((item) => {
+            [ 'name', 'verbose', 'linter' ].map(async (item) => {
               ctx[item] = options[item]
+            })
+          )
+
+          // defaults
+          await Promise.all(
+            [ { key: 'sourceRoot', value: 'src' } ].map(async (item) => {
+              ctx[item.key] = item.value
             })
           )
         }
@@ -72,9 +79,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const nxJson = readJsonInTree(host, 'nx.json')
-
-            const thisProject = nxJson.projects?.[ctx.name]?.integration
+            const thisProject = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
             if (thisProject) {
               ctx.priorConfiguration = thisProject
 
@@ -97,10 +102,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableComponents> = [
             { name: 'server', message: 'Server' },
-            { name: 'bgtask', message: 'Scheduler' },
-            { name: 'command', message: 'Command' },
+            { name: 'microservice-server', message: 'Microservice Server' },
             { name: 'microservice-client', message: 'Microservice Client' },
-            { name: 'microservice-server', message: 'Microservice Server' }
+            { name: 'bgtask', message: 'Scheduler' },
+            { name: 'command', message: 'Command' }
           ]
 
           // select the base components

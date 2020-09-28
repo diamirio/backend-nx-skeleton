@@ -24,6 +24,10 @@ module.exports = {
           {
             pattern: '@utils/**',
             group: 'index'
+          },
+          {
+            pattern: '@integration/**',
+            group: 'index'
           }
         ],
         pathGroupsExcludedImportTypes: [ 'builtin' ],

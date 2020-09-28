@@ -25,6 +25,7 @@ export type AvailableLinterTypes = Linter
 
 export interface NormalizedSchema {
   name: string
+  sourceRoot: string
   packageName: string
   root: Path
   directory: string

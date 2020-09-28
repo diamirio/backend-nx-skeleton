@@ -5,7 +5,7 @@ export interface JinjaTemplateOptions {
   nunjucks?: ConfigureOptions
 }
 
-export interface GenerateMultipleJinjaTemplateOptions<T> {
-  templates: { path: string, output: string, factory: (ctx: T) => { path: string, content: string } }[]
+export interface MultipleJinjaTemplateOptions<T extends Record<string, any> = Record<string, any>> {
+  templates: { path: string, output: string, factory: (ctx: T, output: string) => T }[]
   nunjucks?: ConfigureOptions
 }

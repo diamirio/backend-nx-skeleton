@@ -34,6 +34,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     options.database?.includes('mongodb') ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop(),
 
     // add message queue container
-    options.components?.includes('microservice-server') ? updateBrownieIntegration(options.name, { containers: [ 'rabbitmq' ] }) : noop()
+    options.components?.includes('microservice-server') ? updateBrownieIntegration(options.name, { containers: [ options.microservice ] }) : noop()
   ])
 }

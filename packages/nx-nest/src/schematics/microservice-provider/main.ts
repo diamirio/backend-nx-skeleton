@@ -13,7 +13,7 @@ export default function (schema: Schema): Rule {
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      (): void => log.info('Adding project to workspace.'),
+      (): void => log.info('Adding microservice-provider library to workspace.'),
       addProject(options),
 
       (): void => log.info('Creating application files.'),

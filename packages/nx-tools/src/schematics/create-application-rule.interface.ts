@@ -1,20 +1,22 @@
 import { Path } from '@angular-devkit/core'
 
 import { FormatFilesOptions } from '@utils/format-files.interface'
+import { MultipleJinjaTemplateOptions } from '@utils/template-engine.interface'
 
 export interface FileTemplatesInterface {
   condition: boolean
   match: string | RegExp
 }
 
-export interface OmitFoldersInterface {
+export interface OmitInterface {
   condition: boolean
   match: (file: Path) => boolean
 }
 
 export interface CreateApplicationRuleInterface {
   templates?: FileTemplatesInterface[]
-  omitFolders?: OmitFoldersInterface[]
+  multipleTemplates?: MultipleJinjaTemplateOptions['templates']
+  omit?: OmitInterface[]
 }
 
 export interface BaseCreateApplicationFilesOptions {

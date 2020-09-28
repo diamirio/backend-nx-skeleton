@@ -1,16 +1,25 @@
-import { Rule } from '@angular-devkit/schematics'
-import { updateJsonInTree } from '@nrwl/workspace'
-import merge from 'deepmerge'
+import { readNxJson, readWorkspaceJson } from '@nrwl/workspace'
 
 import { MicroserviceIntegrationInterface } from './microservice-provider.interface'
+import { EnrichedNxJson } from '@interfaces/nx-json.interface'
 
-export function updateBrownieIntegration (name: string, options: MicroserviceIntegrationInterface): Rule {
-  return updateJsonInTree('nx.json', (json) => {
-    // write it back
-    json.projects[name].microservices = merge(json.projects[name]?.microservices ?? {}, options, {
-      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
-    })
+export function readMicroserviceIntegration (): MicroserviceIntegrationInterface[] {
+  const nxJson = readNxJson() as EnrichedNxJson
+  const workspaceJson = readWorkspaceJson()
 
-    return json
-  })
+  return Object.entries(nxJson.projects).reduce((o, [ key, value ]) => {
+    if (value.integration?.microservice) {
+      o = [
+        ...o,
+        {
+          name: key,
+          root: workspaceJson.projects[key].root,
+          sourceRoot: workspaceJson.projects[key].sourceRoot,
+          microservice: value.integration.microservice
+        }
+      ]
+    }
+
+    return o
+  }, [] as MicroserviceIntegrationInterface[])
 }

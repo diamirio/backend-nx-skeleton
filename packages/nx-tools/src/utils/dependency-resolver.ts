@@ -1,5 +1,5 @@
 import { ProjectGraph } from '@nrwl/workspace/src/core/project-graph'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs-extra'
 import { join } from 'path'
 
 export function readPackageJsonFromPath (path: string): string {
