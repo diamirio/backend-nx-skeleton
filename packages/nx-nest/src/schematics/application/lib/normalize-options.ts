@@ -16,7 +16,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: async (ctx): Promise<void> => {
           await Promise.all(
             [ 'name', 'verbose', 'linter' ].map(async (item) => {
-              ctx[item] = options[item]
+              if (options[item]) {
+                ctx[item] = options[item]
+              }
             })
           )
 

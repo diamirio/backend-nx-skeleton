@@ -1,5 +1,5 @@
 import { normalize } from '@angular-devkit/core'
-import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
 
@@ -113,7 +113,7 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       },
       {
         condition: options.components.includes('server') && options.server === 'restful',
-        rule: externalSchematic<ComponentSchema>('@webundsoehne/nx-nest', 'component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
+        rule: schematic<ComponentSchema>('component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
       }
     ]
   }

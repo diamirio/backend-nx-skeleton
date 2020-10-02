@@ -1,7 +1,6 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { addLintFiles, Linter } from '@nrwl/workspace'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import { formatFiles, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintToWorkspace, formatFiles, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -25,16 +24,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       runInRule(log.info.bind(log), 'Adding project to workspace.'),
       addProject(options),
 
-      !host.exists(`${options.root}/.eslintrc`)
-        ? chain([
-          runInRule(log.info.bind(log), 'Adding eslint configuration.'),
-
-          addLintFiles(options.root, Linter.EsLint, {
-            localConfig: eslintJson,
-            extraPackageDeps: eslintDeps
-          })
-        ])
-        : runInRule(log.warn.bind(log), 'Skipping since eslint configuration already exists.'),
+      addEslintToWorkspace(host, log, options, { deps: eslintDeps, json: eslintJson }),
 
       runInRule(log.info.bind(log), 'Creating application files.'),
       await createApplicationFiles(options, context),
