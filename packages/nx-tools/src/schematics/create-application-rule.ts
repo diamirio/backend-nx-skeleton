@@ -6,15 +6,20 @@ import { formatFiles } from '@utils/format-files'
 import { multipleJinjaTemplate, jinjaTemplate } from '@utils/template-engine'
 
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
-  files: CreateApplicationRuleInterface,
+  appRule: CreateApplicationRuleInterface,
   options: T,
   ruleOptions?: CreateApplicationRuleOptions
 ): Rule[] {
   return [
     // clean up unwanted folders from tree
-    ...files.templates.map((val) => {
-      return val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
-    }),
+    ...appRule.templates?.map((val) => {
+      return !val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
+    }) ?? [],
+
+    // omit some folders
+    ...appRule.omit?.map((val) => {
+      return val.condition ? filter((file) => val.match(file)) : noop()
+    }) ?? [],
 
     // interpolate multiple templates first because we want to remove the jinja file
     multipleJinjaTemplate<T>(
@@ -23,7 +28,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
         ...options,
         offsetFromRoot: offsetFromRoot(options.root)
       },
-      { templates: files.multipleTemplates as any }
+      { templates: appRule.multipleTemplates as any }
     ),
 
     // interpolate the templates
@@ -41,19 +46,20 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
       ...names(options.name),
       offsetFromRoot: offsetFromRoot(options.root),
       // replace __*__ from files
-      ...files.templates.reduce((o, val) => ({ ...o, [val.match.toString()]: '' }), {})
+      ...appRule.templates?.reduce((o, val) => ({ ...o, [val.match.toString()]: val?.rename ?? '' }), {})
     }),
 
-    // omit some folders
-    ...files.omit?.map((val) => {
-      return val.condition ? filter((file) => val.match(file)) : noop()
-    }) ?? [],
+    ...appRule.trigger
+      ?.map((val) => {
+        return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [ val.rule ] : noop()
+      })
+      .flat() ?? [],
 
     // need to format files before putting them through difference, or else it goes crazy.
     formatFiles({
-      ...ruleOptions?.format,
       eslint: true,
-      prettier: true
+      prettier: true,
+      ...ruleOptions?.format
     }),
 
     // move all the files to package root

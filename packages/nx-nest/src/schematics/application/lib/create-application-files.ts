@@ -1,8 +1,10 @@
-import { apply, chain, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import { normalize } from '@angular-devkit/core'
+import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
 import merge from 'deepmerge'
 
 import { NormalizedSchema } from '../main.interface'
+import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 
 export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
   const log = new Logger(context)
@@ -19,7 +21,8 @@ export async function createApplicationFiles (options: NormalizedSchema, context
           source,
           generateRules(
             merge<NormalizedSchema>(options, options.priorConfiguration, { arrayMerge: (target, source) => source }),
-            log
+            log,
+            { silent: true }
           )
         )
         : null,
@@ -28,29 +31,44 @@ export async function createApplicationFiles (options: NormalizedSchema, context
   ])
 }
 
-function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
-  log.debug('Generating rules for given options.')
-  log.debug(JSON.stringify(options, null, 2))
+export function generateRules (options: NormalizedSchema, log: Logger, settings?: { silent: boolean }): Rule[] {
+  if (!settings?.silent) {
+    log.debug('Generating rules for given options.')
+    log.debug(JSON.stringify(options, null, 2))
+  }
+
+  const componentSchematicDefaultOptions: Partial<ComponentSchema> = {
+    force: true,
+    name: 'test2',
+    parent: options.name,
+    silent: true,
+    skipFormat: true,
+    parentWsConfiguration: {
+      root: normalize('./'),
+      sourceRoot: options.sourceRoot
+    }
+  }
 
   const template: CreateApplicationRuleInterface = {
     templates: [
       {
-        condition: options?.server !== 'restful',
+        condition: options?.server === 'restful',
         match: 'restful'
       },
       {
-        condition: options?.server !== 'graphql',
+        condition: options?.server === 'graphql',
         match: 'graphql'
       },
       {
-        condition: !options.database.includes('typeorm'),
+        condition: options.database.includes('typeorm'),
         match: 'typeorm'
       },
       {
-        condition: !options.database.includes('mongoose'),
+        condition: options.database.includes('mongoose'),
         match: 'mongoose'
       }
     ],
+
     omit: [
       // tests configuration
       {
@@ -85,6 +103,17 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
       {
         condition: options.components.length === 1,
         match: (file: string): boolean => !file.match('src/constants.ts')
+      }
+    ],
+
+    trigger: [
+      {
+        condition: !settings?.silent,
+        rule: runInRule(log.info.bind(log), 'Adding default components to repository.')
+      },
+      {
+        condition: options.components.includes('server') && options.server === 'restful',
+        rule: externalSchematic<ComponentSchema>('@webundsoehne/nx-nest', 'component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
       }
     ]
   }

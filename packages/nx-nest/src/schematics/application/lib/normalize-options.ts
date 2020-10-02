@@ -40,16 +40,6 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
-      // remove unwanted charachters from directory name
-      {
-        title: 'Normalizing project name.',
-        task: (ctx, task): void => {
-          ctx.name = ctx.directory.replace(new RegExp('/', 'g'), '-')
-
-          task.title = `Project name is set as "${ctx.name}".`
-        }
-      },
-
       // normalize package json scope
       {
         title: 'Normalizing package.json project name.',
@@ -109,7 +99,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           ]
 
           // select the base components
-          if (!options.components) {
+          if (options.components.length === 0) {
             // when options are not passed as an option to the command
             ctx.components = await task.prompt<AvailableComponents[]>({
               type: 'MultiSelect',

@@ -1,14 +1,21 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
-export function parseArguments<T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: { name: string }[], options?: { required?: boolean, single?: boolean }): T {
-  const arg = args.split(',')
-
+export function parseArguments<T> (
+  task: ListrTaskWrapper<any, any>,
+  args: string | string[],
+  validArgs: { name: string }[],
+  options?: { required?: boolean, single?: boolean }
+): T {
   const parsedValidArgs = validArgs.reduce((o, val) => {
     return [ ...o, val.name ]
   }, [])
 
-  const parsedArgs = arg.reduce((o, val) => {
+  if (typeof args === 'string') {
+    args = args.split(',')
+  }
+
+  const parsedArgs = args.reduce((o, val) => {
     if (isCorrectType<T>(parsedValidArgs, val)) {
       return [ ...o, val ]
     } else {

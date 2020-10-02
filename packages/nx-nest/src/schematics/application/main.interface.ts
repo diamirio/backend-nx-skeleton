@@ -9,11 +9,10 @@ export interface Schema {
   server: string
   microservice: string
   database: string
-  components: string
+  components: string[]
   tests: string
   linter: string
   skipFormat: boolean
-  verbose: boolean
 }
 
 export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice-client' | 'microservice-server'
@@ -25,10 +24,10 @@ export type AvailableLinterTypes = Linter
 
 export interface NormalizedSchema {
   name: string
-  sourceRoot: string
-  packageName: string
   root: Path
+  sourceRoot: Path
   directory: string
+  packageName: string
   linter: AvailableLinterTypes
   skipFormat: boolean
   components: AvailableComponents[]

@@ -7,12 +7,19 @@ import { Observable } from 'rxjs'
 import { Logger } from '@utils/logger'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
-export async function applyOverwriteWithDiff (source: Source, oldSource: Source, context: SchematicContext): Promise<Rule> {
+export async function applyOverwriteWithDiff (source: Source, oldSource: Source | true, context: SchematicContext): Promise<Rule> {
   const log = new Logger(context)
 
   // generate the old tree without aplying something
   let oldTree: Tree
-  if (oldSource) {
+
+  const properties = {
+    historical: typeof oldSource !== 'boolean'
+  }
+
+  if (typeof oldSource === 'boolean') {
+    oldTree = await ((source(context) as unknown) as Observable<Tree>).toPromise()
+  } else if (oldSource) {
     try {
       oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
       log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
@@ -38,7 +45,7 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
               const currentFile = tree.read(file.path).toString()
               const newFile = file.content.toString()
 
-              const mergedFiles = mergeFiles(file.path, currentFile, oldFile, newFile, log)
+              const mergedFiles = mergeFiles(file.path, currentFile, oldFile, newFile, log, { historical: properties.historical })
 
               if (typeof mergedFiles === 'string') {
                 buffer = Buffer.from(mergedFiles, 'utf-8')
@@ -150,11 +157,24 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source,
   }
 }
 
-export function mergeFiles (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
+export function mergeFiles (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger, options?: { historical: boolean }): string | boolean {
   // create difference-patch
-  const patch = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
+  let patch: string
+  if (options?.historical) {
+    // triple patch mode, if you know the history of the file
+    patch = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
+  } else {
+    // double patch mode if you dont know the history of the file
+    patch = diff.createPatch(name, newFile, currentFile, '', '', { context: 1 })
+  }
 
   log.debug(patch)
 
-  return diff.applyPatch(currentFile, patch)
+  if (options?.historical) {
+    // triple patch mode, if you know the history of the file
+    return diff.applyPatch(currentFile, patch)
+  } else {
+    // double patch mode if you dont know the history of the file
+    return diff.applyPatch(newFile, patch)
+  }
 }

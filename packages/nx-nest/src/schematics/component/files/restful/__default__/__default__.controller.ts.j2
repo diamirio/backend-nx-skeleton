@@ -1,0 +1,17 @@
+import { Controller, Get } from '@nestjs/common'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+
+import { {{ casing.pascal }}Service } from './{{ name }}.service'
+
+@ApiTags('{{ casing.pascal }}')
+@Controller()
+export class {{ casing.pascal }}Controller {
+  constructor (private readonly {{ casing.camel }}Service: {{ casing.pascal }}Service) {}
+
+  @ApiOperation({ summary: '{{ casing.pascal }}', description: 'Route auto-generated for {{ casing.pascal }}' })
+  @ApiResponse({ status: 200, description: '{{ casing.pascal }} route' })
+  @Get()
+  public default (): string {
+    return this.{{ casing.camel }}Service.default()
+  }
+}
