@@ -115,6 +115,19 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
         condition: options.components.includes('server') && options.server === 'restful',
         rule: schematic<ComponentSchema>('component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
       }
+    ],
+
+    exports: [
+      {
+        condition: options.components.includes('server'),
+        template: [
+          {
+            pattern: [ '**/*.module.ts' ],
+            output: '/src/server/modules/index.ts',
+            options: { cwd: '/src/server/modules/' }
+          }
+        ]
+      }
     ]
   }
 

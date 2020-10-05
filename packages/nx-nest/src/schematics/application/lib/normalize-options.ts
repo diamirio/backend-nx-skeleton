@@ -3,6 +3,7 @@ import { Tree, SchematicContext } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
+import { setSchemaDefaultsInContext } from '@utils/custom.utils'
 import { ConvertToPromptType, parseArguments, readNxIntegration } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
@@ -14,20 +15,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: async (ctx): Promise<void> => {
-          await Promise.all(
-            [ 'name', 'verbose', 'linter' ].map(async (item) => {
-              if (options[item]) {
-                ctx[item] = options[item]
-              }
-            })
-          )
-
-          // defaults
-          await Promise.all(
-            [ { key: 'sourceRoot', value: 'src' } ].map(async (item) => {
-              ctx[item.key] = item.value
-            })
-          )
+          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'linter' ] }, default: [ { key: 'sourceRoot', value: 'src' } ] })
         }
       },
 

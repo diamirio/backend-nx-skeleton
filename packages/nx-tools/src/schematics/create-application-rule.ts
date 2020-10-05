@@ -1,9 +1,10 @@
 import { filter, move, noop, Rule, template } from '@angular-devkit/schematics'
-import { names, offsetFromRoot } from '@nrwl/workspace'
+import { offsetFromRoot } from '@nrwl/workspace'
 
 import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from './create-application-rule.interface'
+import { generateExports } from '@src/utils/generate-exports'
 import { formatFiles } from '@utils/format-files'
-import { multipleJinjaTemplate, jinjaTemplate } from '@utils/template-engine'
+import { jinjaTemplate, multipleJinjaTemplate } from '@utils/template-engine'
 
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
   appRule: CreateApplicationRuleInterface,
@@ -24,7 +25,6 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     // interpolate multiple templates first because we want to remove the jinja file
     multipleJinjaTemplate<T>(
       {
-        ...names(options.name),
         ...options,
         offsetFromRoot: offsetFromRoot(options.root)
       },
@@ -34,7 +34,6 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     // interpolate the templates
     jinjaTemplate(
       {
-        ...names(options.name),
         ...options,
         offsetFromRoot: offsetFromRoot(options.root)
       },
@@ -43,7 +42,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
 
     // clean up rest of the names
     template({
-      ...names(options.name),
+      name: options.name,
       offsetFromRoot: offsetFromRoot(options.root),
       // replace __*__ from files
       ...appRule.templates?.reduce((o, val) => ({ ...o, [val.match.toString()]: val?.rename ?? '' }), {})
@@ -52,6 +51,12 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     ...appRule.trigger
       ?.map((val) => {
         return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [ val.rule ] : noop()
+      })
+      .flat() ?? [],
+
+    ...appRule.exports
+      ?.map((val) => {
+        return val.condition ?? true ? generateExports({ templates: val?.template }) : noop()
       })
       .flat() ?? [],
 

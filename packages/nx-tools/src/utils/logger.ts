@@ -12,36 +12,36 @@ export class Logger {
     this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
   }
 
-  public fatal (data: string | Buffer): void {
-    return this.parseMessage('fatal', data)
+  public fatal (data: string | Buffer, ...args: any): void {
+    return this.parseMessage('fatal', data, args)
   }
 
-  public error (data: string | Buffer): void {
-    return this.parseMessage('error', data)
+  public error (data: string | Buffer, ...args: any): void {
+    return this.parseMessage('error', data, args)
   }
 
-  public warn (data: string | Buffer): void {
-    return this.parseMessage('warn', data)
+  public warn (data: string | Buffer, ...args: any): void {
+    return this.parseMessage('warn', data, args)
   }
 
-  public info (data: string | Buffer): void {
-    return this.parseMessage('info', data)
+  public info (data: string | Buffer, ...args: any): void {
+    return this.parseMessage('info', data, args)
   }
 
-  public debug (data: string | Buffer): void {
-    return this.parseMessage('debug', data)
+  public debug (data: string | Buffer, ...args: any): void {
+    return this.parseMessage('debug', data, args)
   }
 
-  private parseMessage (level: LogLevels, data: string | Buffer): void {
+  private parseMessage (level: LogLevels, data: string | Buffer, args: any[]): void {
     data
       .toString()
       .split(EOL)
       .forEach((line) => {
         if (line !== '') {
           if (isBuildContext(this.context)) {
-            this.context.logger.log(level, this.logColoring({ level, message: `[${this.context?.target.project}] ` }) + line)
+            this.context.logger.log(level, this.logColoring({ level, message: `[${this.context?.target.project}] ` }) + line, ...args)
           } else {
-            this.context.logger.log(level, this.logColoring({ level, message: `[${level.toUpperCase()}] ` }) + line)
+            this.context.logger.log(level, this.logColoring({ level, message: `[${level.toUpperCase()}] ` }) + line, ...args)
           }
         }
       })

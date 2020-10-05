@@ -2,13 +2,14 @@ import { Path } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 
 import { FormatFilesOptions } from '@utils/format-files.interface'
-import { MultipleJinjaTemplateOptions } from '@utils/template-engine.interface'
+import { GenerateExportsJinjaTemplateOptions, MultipleJinjaTemplateOptions } from '@utils/template-engine.interface'
 
 export interface CreateApplicationRuleInterface {
   templates?: FileTemplatesInterface[]
   multipleTemplates?: MultipleJinjaTemplateOptions['templates']
   omit?: OmitInterface[]
   trigger?: TriggerActionsInterface[]
+  exports?: CreateExportFilesOptions[]
 }
 
 export interface FileTemplatesInterface {
@@ -30,6 +31,11 @@ export interface OmitInterface {
 export interface BaseCreateApplicationFilesOptions {
   name: string
   root: string
+}
+
+export interface CreateExportFilesOptions {
+  condition?: boolean
+  template: GenerateExportsJinjaTemplateOptions['templates']
 }
 
 export interface CreateApplicationRuleOptions {

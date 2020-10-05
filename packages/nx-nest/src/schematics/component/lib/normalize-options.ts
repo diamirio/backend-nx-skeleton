@@ -9,6 +9,7 @@ import { join } from 'path'
 
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { setSchemaDefaultsInContext } from '@src/utils/custom.utils'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -16,13 +17,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: async (ctx): Promise<void> => {
-          await Promise.all(
-            [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration' ].map(async (item) => {
-              if (options[item]) {
-                ctx[item] = options[item]
-              }
-            })
-          )
+          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration' ] } })
         }
       },
 
