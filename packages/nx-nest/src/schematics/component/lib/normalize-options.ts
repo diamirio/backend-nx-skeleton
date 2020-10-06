@@ -2,14 +2,13 @@ import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { toFileName } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, EnrichedWorkspaceJsonProject, readNxIntegration, readWorkspaceJson } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, EnrichedWorkspaceJsonProject, readNxIntegration, readWorkspaceJson, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { camelCase, pascalCase } from 'change-case'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
-import { setSchemaDefaultsInContext } from '@src/utils/custom.utils'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(

@@ -3,7 +3,7 @@ import { SchematicContext } from '@angular-devkit/schematics'
 import { ExecaChildProcess } from 'execa'
 import pidtree from 'pidtree'
 
-import { Logger } from './logger'
+import { Logger } from '@src/utils/logger/logger'
 
 export class ProcessManager {
   private logger: Logger

@@ -1,10 +1,10 @@
 import { filter, move, noop, Rule, template } from '@angular-devkit/schematics'
 import { offsetFromRoot } from '@nrwl/workspace'
 
-import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from './create-application-rule.interface'
+import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@src/rules/create-application.rule.interface'
+import { jinjaTemplate, multipleJinjaTemplate } from '@src/templates/template-engine'
+import { formatFiles } from '@src/utils/file-system/format-files'
 import { generateExports } from '@src/utils/generate-exports'
-import { formatFiles } from '@utils/format-files'
-import { jinjaTemplate, multipleJinjaTemplate } from '@utils/template-engine'
 
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
   appRule: CreateApplicationRuleInterface,
@@ -42,7 +42,6 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
 
     // clean up rest of the names
     template({
-      name: options.name,
       offsetFromRoot: offsetFromRoot(options.root),
       // replace __*__ from files
       ...appRule.templates?.reduce((o, val) => ({ ...o, [val.match.toString()]: val?.rename ?? '' }), {})
@@ -56,7 +55,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
 
     ...appRule.exports
       ?.map((val) => {
-        return val.condition ?? true ? generateExports({ templates: val?.template }) : noop()
+        return val.condition ?? true ? generateExports({ templates: val?.template, root: options.root }) : noop()
       })
       .flat() ?? [],
 

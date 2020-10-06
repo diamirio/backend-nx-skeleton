@@ -10,7 +10,9 @@
       "@interfaces/*": ["interfaces/*"],
       "@init/*": ["init/*"],
       "@rules/*": ["rules/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@templates/*": ["templates/*"],
+      "@schematics/*": ["schematics/*"]
     }
   },
   "include": ["src"],

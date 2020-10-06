@@ -4,7 +4,7 @@ import { createPrompt } from 'listr2'
 import { dirname } from 'path'
 import { Observable } from 'rxjs'
 
-import { Logger } from '@utils/logger'
+import { Logger } from '@src/utils/logger/logger'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 export async function applyOverwriteWithDiff (source: Source, oldSource: Source | true, context: SchematicContext): Promise<Rule> {
@@ -32,17 +32,17 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
   let filesToRemove: string[] = []
   let filesToKeep: string[] = []
 
-  return (tree: Tree): Rule => {
+  return (host: Tree): Rule => {
     return mergeWith(
       apply(source, [
         forEach((file) => {
-          if (tree.exists(file.path)) {
+          if (host.exists(file.path)) {
             let buffer = file.content
 
             if (oldTree?.exists(file.path)) {
               // check if this file is part of old application
               const oldFile = oldTree.read(file.path).toString()
-              const currentFile = tree.read(file.path).toString()
+              const currentFile = host.read(file.path).toString()
               const newFile = file.content.toString()
 
               const mergedFiles = mergeFiles(file.path, currentFile, oldFile, newFile, log, { historical: properties.historical })
@@ -50,23 +50,23 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
               if (typeof mergedFiles === 'string') {
                 buffer = Buffer.from(mergedFiles, 'utf-8')
 
-                tree.overwrite(file.path, buffer)
+                host.overwrite(file.path, buffer)
               } else {
                 log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
 
-                tree.rename(file.path, `${file.path}.old`)
+                host.rename(file.path, `${file.path}.old`)
 
-                tree.create(file.path, buffer)
+                host.create(file.path, buffer)
               }
             } else {
               // file is not part of the old setup but still exists
               log.error(`File with same name exists: "${file.path}" -> "${file.path}.old"`)
 
               // move file
-              tree.rename(file.path, `${file.path}.old`)
+              host.rename(file.path, `${file.path}.old`)
 
               // create file
-              tree.create(file.path, buffer)
+              host.create(file.path, buffer)
             }
 
             // add this to file changes, return null since we did the operation directly
@@ -83,7 +83,7 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
         (): void => {
           oldTree?.visit((path) => {
             // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
-            if (tree.exists(path) && !fileChanges.includes(path)) {
+            if (host.exists(path) && !fileChanges.includes(path)) {
               filesToRemove = [ ...filesToRemove, path ]
             }
           })
@@ -123,7 +123,7 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
               filesToRemove.map((file) => {
                 if (!filesToKeep.includes(file)) {
                   log.debug(`Deleting not-needed file: "${file}"`)
-                  tree.delete(file)
+                  host.delete(file)
                 } else {
                   log.debug(`Keeping not-needed file: "${file}"`)
                 }
@@ -141,10 +141,10 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
             // check and delete empty directories
             await Promise.all(
               directories.map(async (directory) => {
-                if (tree.getDir(directory)?.subfiles?.length === 0 && !(tree.getDir(directory)?.subdirs?.length > 0)) {
+                if (host.getDir(directory)?.subfiles?.length === 0 && !(host.getDir(directory)?.subdirs?.length > 0)) {
                   log.debug(`Deleting not-needed empty directory: "${directory}"`)
-                  tree.delete(directory)
-                } else if (tree.getDir(directory)?.subdirs?.length > 0) {
+                  host.delete(directory)
+                } else if (host.getDir(directory)?.subdirs?.length > 0) {
                   // dont delete if has subdirectories
                   log.debug(`Still has subdirectories: "${directory}"`)
                 }

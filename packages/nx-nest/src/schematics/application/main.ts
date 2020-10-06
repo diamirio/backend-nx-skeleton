@@ -1,6 +1,6 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import { addEslintToWorkspace, formatFiles, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintToWorkspace, formatFiles, generateExportsRule, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'

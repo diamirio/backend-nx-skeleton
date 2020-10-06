@@ -1,8 +1,8 @@
 import { chain, Rule, Tree } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
-import { Logger } from '@utils/logger'
-import { runInRule } from '@utils/run-in-rule'
+import { runInRule } from '@src/rules/run.rule'
+import { Logger } from '@src/utils/logger/logger'
 
 export function addEslintToWorkspace<T extends { root: string }> (host: Tree, log: Logger, options: T, eslint: { json: any, deps: any }): Rule {
   return chain([

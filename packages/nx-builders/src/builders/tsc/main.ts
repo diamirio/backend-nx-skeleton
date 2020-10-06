@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
-import {
-  calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt,
-  createTmpTsConfig,
-  updateBuildableProjectPackageJsonDependencies
-} from '@nrwl/workspace/src/utils/buildable-libs-utils'
+import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import { checkNodeModulesExists, createDependenciesForProjectFromGraph, ExecaArguments, mergeDependencies, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
@@ -17,8 +11,7 @@ import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
 import glob from 'glob'
 import { basename, dirname, join, normalize, relative } from 'path'
-import { Observable, of, Subscriber } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { Observable, Subscriber } from 'rxjs'
 
 import { FileInputOutput, NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
 import { BaseBuilder, runBuilder } from '@src/lib/base-builder'
@@ -176,7 +169,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     }
   }
 
-  private async secondaryCompileActions () {
+  private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
     return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
   }
 
@@ -234,7 +227,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     return { args, spawnOptions }
   }
 
-  private async swapPaths () {
+  private async swapPaths (): Promise<void> {
     // optional swap paths, which will swap all the typescripts to relative paths.
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
@@ -263,7 +256,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     }
   }
 
-  private updatePackageJson () {
+  private updatePackageJson (): void {
     const packageJsonPath = this.options.packageJson
       ? join(this.context.workspaceRoot, this.options.packageJson)
       : join(this.context.workspaceRoot, this.options.cwd, 'package.json')

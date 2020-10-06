@@ -1,3 +1,4 @@
+import { Path } from '@angular-devkit/core'
 import * as micromatch from 'micromatch'
 import { ConfigureOptions } from 'nunjucks'
 
@@ -12,6 +13,7 @@ export interface MultipleJinjaTemplateOptions<T extends Record<string, any> = Re
 }
 
 export interface GenerateExportsJinjaTemplateOptions {
+  root: string
   templates: { pattern: string | string[], output: string, options?: micromatch.Options }[]
   nunjucks?: ConfigureOptions
 }

@@ -4,14 +4,14 @@ import { dirname, join, parse, relative } from 'path'
 import { from } from 'rxjs'
 import { map, mergeMap, scan } from 'rxjs/operators'
 
-import { getFilesInTree } from './file-system'
-import { getJinjaDefaults } from './jinja-defaults'
-import { Logger } from './logger'
-import { GenerateExportsJinjaTemplateOptions } from './template-engine.interface'
+import { getJinjaDefaults } from '@src/templates/jinja-defaults'
+import { GenerateExportsJinjaTemplateOptions } from '@src/templates/template-engine.interface'
+import { getFilesInTree } from '@src/utils/file-system/file-system'
+import { Logger } from '@src/utils/logger/logger'
 
 export function generateExports (options: GenerateExportsJinjaTemplateOptions): Rule {
   return ((async (host: Tree, context: SchematicContext): Promise<Tree> => {
-    const logger = new Logger(context)
+    const log = new Logger(context)
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
 
     if (files.size === 0 || options.templates.length === 0) {
@@ -30,7 +30,7 @@ export function generateExports (options: GenerateExportsJinjaTemplateOptions): 
             }
 
             if (micromatch.isMatch(file.path, template.pattern, template.options)) {
-              logger.debug(`Generate export pattern "${template.pattern}" matches: "${file.path}"`)
+              log.debug(`Generate export pattern "${template.pattern}" matches: "${file.path}"`)
               return { output: template.output, path: file.path }
             }
           })
@@ -55,7 +55,7 @@ export function generateExports (options: GenerateExportsJinjaTemplateOptions): 
       .toPromise()
 
     Object.entries(output).forEach(([ o, val ]) => {
-      logger.debug(`Creating export file: "${o}" with imported files "${val.join(', ')}".`)
+      log.debug(`Creating export file: "${o}" with imported files "${val.join(', ')}".`)
       host[!host.exists(o) ? 'create' : 'overwrite'](o, nunjucks.renderString('{% for file in files %}export * from \'{{ file }}\'\n{% endfor %}', { files: val }))
     })
 

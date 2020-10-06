@@ -1,4 +1,4 @@
-import { chain, noop, Rule } from '@angular-devkit/schematics'
+import { chain, Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
 import { updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
 

@@ -2,9 +2,9 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
-import { getFilesInTree } from './file-system'
 import { getJinjaDefaults } from './jinja-defaults'
 import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
+import { getFilesInTree } from '@src/utils/file-system/file-system'
 
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
