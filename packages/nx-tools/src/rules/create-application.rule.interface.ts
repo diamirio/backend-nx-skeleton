@@ -6,25 +6,27 @@ import { FormatFilesOptions } from '@src/utils/file-system/format-files.interfac
 
 export interface CreateApplicationRuleInterface {
   templates?: FileTemplatesInterface[]
-  multipleTemplates?: MultipleJinjaTemplateOptions['templates']
+  multipleTemplates?: MultipleFileTemplatesInterface[]
   omit?: OmitInterface[]
   trigger?: TriggerActionsInterface[]
   exports?: CreateExportFilesOptions[]
 }
 
-export interface FileTemplatesInterface {
-  condition: boolean
+export interface FileTemplatesInterface extends BaseWithCondition {
   match: string | RegExp
   rename?: string
 }
 
-export interface TriggerActionsInterface {
-  condition?: boolean
+export interface MultipleFileTemplatesInterface extends BaseWithCondition {
+  match: string | RegExp
+  templates?: MultipleJinjaTemplateOptions['templates']
+}
+
+export interface TriggerActionsInterface extends BaseWithCondition {
   rule: Rule | Rule[]
 }
 
-export interface OmitInterface {
-  condition: boolean
+export interface OmitInterface extends BaseWithCondition {
   match: (file: Path) => boolean
 }
 
@@ -32,11 +34,14 @@ export interface BaseCreateApplicationFilesOptions {
   root: string
 }
 
-export interface CreateExportFilesOptions {
-  condition?: boolean
+export interface CreateExportFilesOptions extends BaseWithCondition {
   template: GenerateExportsJinjaTemplateOptions['templates']
 }
 
 export interface CreateApplicationRuleOptions {
   format: FormatFilesOptions
+}
+
+interface BaseWithCondition {
+  condition?: boolean
 }

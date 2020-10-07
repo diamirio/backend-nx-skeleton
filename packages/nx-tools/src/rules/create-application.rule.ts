@@ -4,7 +4,6 @@ import { offsetFromRoot } from '@nrwl/workspace'
 import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@src/rules/create-application.rule.interface'
 import { jinjaTemplate, multipleJinjaTemplate } from '@src/templates/template-engine'
 import { formatFiles } from '@src/utils/file-system/format-files'
-import { generateExports } from '@src/utils/generate-exports'
 
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
   appRule: CreateApplicationRuleInterface,
@@ -13,49 +12,50 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
 ): Rule[] {
   return [
     // clean up unwanted folders from tree
-    ...appRule.templates?.map((val) => {
-      return !val.condition ? filter((file) => !file.match(`__${val.match}__`)) : noop
+    ...[ ...appRule.templates ?? [], ...appRule.multipleTemplates ?? [] ].map((val) => {
+      return !val.condition ?? false ? filter((file) => !file.match(`__${val.match}__`)) : noop
     }) ?? [],
 
     // omit some folders
     ...appRule.omit?.map((val) => {
-      return val.condition ? filter((file) => val.match(file)) : noop()
+      return val.condition ?? false ? filter((file) => val.match(file)) : noop()
     }) ?? [],
 
     // interpolate multiple templates first because we want to remove the jinja file
-    multipleJinjaTemplate<T>(
-      {
-        ...options,
-        offsetFromRoot: offsetFromRoot(options.root)
-      },
-      { templates: appRule.multipleTemplates as any }
-    ),
+    ...appRule.multipleTemplates?.map((val) => {
+      return val.condition ?? true
+        ? multipleJinjaTemplate<T>(
+          {
+            ...options
+            // offsetFromRoot: offsetFromRoot(options.root)
+          },
+          {
+            templates: val.templates as any
+          }
+        )
+        : noop()
+    }) ?? [],
 
     // interpolate the templates
     jinjaTemplate(
       {
-        ...options,
-        offsetFromRoot: offsetFromRoot(options.root)
+        ...options
+        // offsetFromRoot: offsetFromRoot(options.root)
       },
       { templates: [ '.j2' ] }
     ),
 
     // clean up rest of the names
     template({
-      offsetFromRoot: offsetFromRoot(options.root),
+      // offsetFromRoot: offsetFromRoot(options.root),
+      ...options,
       // replace __*__ from files
-      ...appRule.templates?.reduce((o, val) => ({ ...o, [val.match.toString()]: val?.rename ?? '' }), {})
+      ...[ ...appRule.templates ?? [], ...appRule.multipleTemplates ?? [] ].reduce((o, val) => ({ ...o, [val.match.toString()]: (val as any)?.rename ?? '' }), {})
     }),
 
     ...appRule.trigger
       ?.map((val) => {
         return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [ val.rule ] : noop()
-      })
-      .flat() ?? [],
-
-    ...appRule.exports
-      ?.map((val) => {
-        return val.condition ?? true ? generateExports({ templates: val?.template, root: options.root }) : noop()
       })
       .flat() ?? [],
 

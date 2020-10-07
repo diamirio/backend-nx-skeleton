@@ -1,102 +1,59 @@
-import { apply, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
 import * as micromatch from 'micromatch'
 import { dirname, join, parse, relative } from 'path'
-import { from } from 'rxjs'
-import { map, mergeMap, scan } from 'rxjs/operators'
 
 import { createApplicationRule } from './create-application.rule'
-import { mergeFiles } from './overwrite-with-diff.rule'
 import { GenerateExportsJinjaTemplateOptions } from '@src/templates/template-engine.interface'
-import { getFilesInTree } from '@src/utils/file-system/file-system'
 import { Logger } from '@src/utils/logger/logger'
+import { deepMergeWithUniqueMergeArray } from '@utils/index'
 
-export async function generateExportsRule (source: Source, host: Tree, context: SchematicContext, options: GenerateExportsJinjaTemplateOptions): Promise<Rule> {
-  const log = new Logger(context)
+export function generateExportsRule (source: Source, options: GenerateExportsJinjaTemplateOptions): Rule {
+  return (host: Tree, context: SchematicContext): Rule => {
+    let output: Record<string, string[]>
 
-  const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
+    const log = new Logger(context)
 
-  if (files.size === 0 || options.templates.length === 0) {
-    return
-  }
-
-  const output: { [output: string]: string[] } = await from(files)
-    .pipe(
-      map((file) => {
-        return options.templates.map(async (template) => {
+    // parse the host tree first generate which files to output
+    host.visit((file) => {
+      // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
+      output = deepMergeWithUniqueMergeArray(
+        output,
+        options.templates.reduce((o, template) => {
           if (!Array.isArray(template.pattern)) {
             template.pattern = [ template.pattern ]
           }
 
-          if (micromatch.isMatch(file.path, template.pattern, template.options)) {
-            log.debug(`Generate export pattern "${template.pattern}" matches: "${file.path}"`)
-            return { output: template.output, path: file.path }
+          if (micromatch.isMatch(file, template.pattern, template.options)) {
+            log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
+
+            o = deepMergeWithUniqueMergeArray(o, {
+              [template.output]: [ './' + relative(dirname(join(options.root, template.output)), join(dirname(file), parse(file).name)) ]
+            })
           }
-        })
-      }),
 
-      mergeMap(async (file) => {
-        return await Promise.all(file)
-      }),
+          return o
+        }, {} as Record<string, string[]>)
+      )
+    })
 
-      scan((acc, cur) => {
-        if (cur) {
-          cur.forEach((file) => {
-            if (!file) {
-              return
-            }
-
-            acc[file.output] = [ ...acc?.[file.output] ?? [], './' + relative(dirname(file.output), join(dirname(file.path), parse(file.path).name)) ]
-          })
-        }
-
-        return acc
-      }, {})
-    )
-    .toPromise()
-
-  return (host: Tree): Rule => {
     return mergeWith(
       apply(source, [
         ...createApplicationRule(
           {
             multipleTemplates: Object.entries(output).map(([ path, files ]) => ({
-              output: path,
-              path: '__default__.ts.j2',
-              factory: (): Record<string, unknown> => ({ files })
+              condition: files.length > 0,
+              match: 'default',
+              template: {
+                output: path,
+                path: '__default__.ts.j2',
+                factory: (): Record<string, unknown> => ({ files })
+              }
             }))
           },
           {
             root: options.root
           }
-        ),
-        forEach((file) => {
-          if (host.exists(file.path)) {
-            let buffer = file.content
-
-            // check if this file is part of old application
-            const currentFile = host.read(file.path).toString()
-            const newFile = file.content.toString()
-
-            const mergedFiles = mergeFiles(file.path, currentFile, null, newFile, log, { historical: false })
-
-            if (typeof mergedFiles === 'string') {
-              buffer = Buffer.from(mergedFiles, 'utf-8')
-
-              host.overwrite(file.path, buffer)
-            } else {
-              log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
-
-              host.rename(file.path, `${file.path}.old`)
-
-              host.create(file.path, buffer)
-            }
-            // add this to file changes, return null since we did the operation directly
-            return null
-          }
-
-          // vanilla mode
-          return file
-        })
+        )
       ])
     )
   }

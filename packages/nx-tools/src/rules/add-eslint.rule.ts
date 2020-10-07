@@ -6,7 +6,7 @@ import { Logger } from '@src/utils/logger/logger'
 
 export function addEslintToWorkspace<T extends { root: string }> (host: Tree, log: Logger, options: T, eslint: { json: any, deps: any }): Rule {
   return chain([
-    !host.exists(`${options.root}/.eslintrc`)
+    !host.exists(`${options.root}/.eslintrc`) && !host.exists(`${options.root}/.eslintrc.json`)
       ? chain([
         runInRule(log.info.bind(log), 'Adding eslint configuration.'),
 

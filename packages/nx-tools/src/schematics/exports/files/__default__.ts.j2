@@ -1,1 +1,3 @@
-{{ files }}
+{% for file in files %}
+export * from '{{file}}'
+{% endfor %}

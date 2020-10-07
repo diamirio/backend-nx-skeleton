@@ -10,6 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "schematics": "./schematics.json",
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",

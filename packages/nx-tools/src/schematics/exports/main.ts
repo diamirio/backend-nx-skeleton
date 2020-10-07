@@ -12,8 +12,8 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      // runInRule(log.info.bind(log), `Creating export files: ${options.name}@${options.root}`, !schema.silent),
-      await createApplicationFiles(options, context, host),
+      runInRule(log.info.bind(log), `Creating export files: ${options.template.templates.map((t) => t.output).join(', ')}`, !schema.silent),
+      await createApplicationFiles(options),
 
       !schema.skipFormat ? chain([ runInRule(log.info.bind(log), 'Formatting and linting files.'), formatFiles({ eslint: true, prettier: true }) ]) : noop()
     ])

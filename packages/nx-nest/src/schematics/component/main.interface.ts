@@ -1,4 +1,3 @@
-import { Path } from '@angular-devkit/core'
 import { EnrichedWorkspaceJsonProject } from '@webundsoehne/nx-tools'
 
 import { AvailableComponents, AvailableServerTypes, NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
@@ -16,7 +15,7 @@ export interface Schema {
 
 export interface NormalizedSchema {
   name: string
-  root: Path
+  root: string
   parent: string
   force: boolean
   type: Schema['type']

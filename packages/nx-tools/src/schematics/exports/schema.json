@@ -4,29 +4,5 @@
   "title": "Add exports with regex pattern.",
   "examples": [],
   "type": "object",
-  "properties": {
-    "parent": {
-      "description": "The name of parent application.",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use for the application?"
-    },
-    "name": {
-      "description": "The name of the component.",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 1
-      },
-      "x-prompt": "What name would you like to use for the application?"
-    },
-    "force": {
-      "description": "Do not prompt for overwrites.",
-      "type": "boolean"
-    }
-  },
   "required": []
 }

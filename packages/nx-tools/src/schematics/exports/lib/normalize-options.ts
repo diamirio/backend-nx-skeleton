@@ -10,7 +10,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: async (ctx): Promise<void> => {
-          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'root', 'template' ] } })
+          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'template' ] } })
         }
       }
     ],

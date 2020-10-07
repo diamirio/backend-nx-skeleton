@@ -12,7 +12,7 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use for the application?"
+      "x-prompt": "What parent application do you want to run on?"
     },
     "name": {
       "description": "The name of the component.",
@@ -21,7 +21,7 @@
         "$source": "argv",
         "index": 1
       },
-      "x-prompt": "What name would you like to use for the application?"
+      "x-prompt": "What name do you want to give to your module?"
     },
     "force": {
       "description": "Do not prompt for overwrites.",

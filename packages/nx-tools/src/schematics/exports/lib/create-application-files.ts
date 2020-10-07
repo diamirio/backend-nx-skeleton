@@ -1,13 +1,13 @@
-import { chain, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import { chain, Rule, url } from '@angular-devkit/schematics'
 import { generateExportsRule } from '@rules/index'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
 
-export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext, host: Tree): Promise<Rule> {
+export async function createApplicationFiles (options: NormalizedSchema): Promise<Rule> {
   const source = url(join('./files'))
 
-  return chain([ await generateExportsRule(source, host, context, options.template) ])
+  return chain([ generateExportsRule(source, options.template) ])
 }
 
 // function generateRules (options: NormalizedSchema, log: Logger): Rule[] {

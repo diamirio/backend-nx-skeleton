@@ -1,5 +1,6 @@
-import { apply, chain, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, externalSchematic, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
@@ -16,7 +17,18 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // needs the rule applied files, representing the prior configuration
       true,
       context
-    )
+    ),
+    externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+      template: {
+        root: options.root,
+        templates: [
+          {
+            output: 'modules/index.ts',
+            pattern: [ '**/*.module.ts' ]
+          }
+        ]
+      }
+    })
   ])
 }
 
