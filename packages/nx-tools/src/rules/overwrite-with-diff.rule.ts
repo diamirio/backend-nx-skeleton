@@ -1,6 +1,7 @@
 import { apply, FileEntry, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
 import * as diff from 'diff'
 import { createPrompt } from 'listr2'
+import { EOL } from 'os'
 import { dirname } from 'path'
 import { Observable } from 'rxjs'
 
@@ -131,29 +132,83 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
   }
 }
 
+const context = 1
+
 export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
+  let buffer: string
   // create difference-patch
-  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
+  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context })
+
+  try {
+    buffer = diff.applyPatch(currentFile, patch)
+  } catch (e) {
+    log.debug(`Error while triple-merging: ${e}`)
+    return false
+  }
 
   log.debug(patch)
 
-  return diff.applyPatch(currentFile, patch)
+  return buffer
 }
 
 export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
-  const patch = diff.structuredPatch(name, name, currentFile, newFile, '', '', { context: 1 })
+  let buffer: string
+  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context }), 'add')
 
-  console.log(patch.hunks)
+  try {
+    buffer = diff.applyPatch(currentFile, newToCurrentPatch)
+  } catch (e) {
+    log.debug(`Error while double-merging: ${e}`)
+    return false
+  }
+  // const currentToNewPatch = diff.structuredPatch(name, name, file, currentFile, '', '', { context })
+  // console.log('currentToNewPatch', currentToNewPatch.hunks)
+  // try {
+  //   file = diff.applyPatch(newFile, currentToNewPatch)
+  // } catch (e) {
+  //   log.debug(e)
+  //   return false
+  // }
 
-  return diff.applyPatch(newFile, patch)
+  return buffer
 }
 
-function selectivePatch (patch: diff.ParsedDiff, options: { add: boolean, remove: boolean } = { add: true, remove: true}): diff.ParsedDiff {
-  patch.
+export function selectivePatch (patch: diff.ParsedDiff, select: 'add' | 'remove'): diff.ParsedDiff {
+  return {
+    ...patch,
+    hunks: [
+      ...patch.hunks.map((p) => {
+        // reduce instead of map because, i am trying some operations
+        // let linechanges = 0
+        const lines = p.lines.reduce((o, l) => {
+          if (select === 'add') {
+            // linechanges++
+            return [ ...o, replaceFirstChars(l, '-', ' ') ]
+          } else if (select === 'remove') {
+            // linechanges++
+            return [ ...o, replaceFirstChars(l, '+', ' ') ]
+          }
+        }, [])
 
+        return {
+          ...p,
+          linedelimiters: p.lines.map(() => EOL),
+          lines
+        }
+      })
+    ]
+  }
 }
 
-function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean, log: Logger): void {
+function replaceFirstChars (str: string, from: string, to: string): string {
+  if (str.substring(0, from.length) === from) {
+    return to + str.substring(from.length)
+  } else {
+    return str
+  }
+}
+
+export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean, log: Logger): void {
   let buffer = file.content
 
   if (typeof mergedFiles === 'string') {
@@ -169,7 +224,7 @@ function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean,
   }
 }
 
-function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
+export function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
   const backupFilePath = `${file.path}.old`
 
   log.error(`Can not merge file: "${file.path}" -> "${backupFilePath}"`)

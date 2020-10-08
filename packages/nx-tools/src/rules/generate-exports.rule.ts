@@ -24,7 +24,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
             template.pattern = [ template.pattern ]
           }
 
-          if (micromatch.isMatch(file, template.pattern, template.options)) {
+          if (micromatch.every(file.toString(), [ ...template.pattern, '!**/node_modules/**' ], template.options)) {
             log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
