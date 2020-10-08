@@ -1,5 +1,5 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { formatFiles, Logger } from '@webundsoehne/nx-tools'
+import { formatOrSkip, Logger } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -23,7 +23,7 @@ export default function (schema: Schema): Rule {
       updateTsconfigPaths(options),
 
       (): void => log.info('Formatting and linting files.'),
-      formatFiles({ eslint: true, prettier: true })
+      formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })
     ])
   }
 }

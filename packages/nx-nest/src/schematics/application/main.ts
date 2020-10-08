@@ -1,6 +1,6 @@
-import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { eslintDeps, eslintJson } from '@utils/lint'
-import { addEslintToWorkspace, formatFiles, generateExportsRule, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintToWorkspace, formatOrSkip, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -35,7 +35,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       runInRule(log.info.bind(log), 'Updating tsconfig files.'),
       updateTsconfigPaths(options),
 
-      !schema.skipFormat ? chain([ runInRule(log.info.bind(log), 'Formatting and linting files.'), formatFiles({ eslint: true, prettier: true }) ]) : noop()
+      formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })
     ])
   }
 }

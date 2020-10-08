@@ -1,4 +1,5 @@
 import { apply, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { applyOverwriteWithDiff } from '@rules/index'
 import * as micromatch from 'micromatch'
 import { dirname, join, parse, relative } from 'path'
 
@@ -8,7 +9,7 @@ import { Logger } from '@src/utils/logger/logger'
 import { deepMergeWithUniqueMergeArray } from '@utils/index'
 
 export function generateExportsRule (source: Source, options: GenerateExportsJinjaTemplateOptions): Rule {
-  return (host: Tree, context: SchematicContext): Rule => {
+  return (host: Tree, context: SchematicContext): Promise<Rule> => {
     let output: Record<string, string[]>
 
     const log = new Logger(context)
@@ -27,7 +28,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
             log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
-              [template.output]: [ './' + relative(dirname(join(options.root, template.output)), join(dirname(file), parse(file).name)) ]
+              [template.output]: [ './' + join(relative('/' + dirname(join(options.root ?? '', template.output)), '/' + dirname(file)), parse(file).name) ]
             })
           }
 
@@ -36,25 +37,27 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       )
     })
 
-    return mergeWith(
+    return applyOverwriteWithDiff(
       apply(source, [
         ...createApplicationRule(
           {
-            multipleTemplates: Object.entries(output).map(([ path, files ]) => ({
-              condition: files.length > 0,
-              match: 'default',
-              template: {
-                output: path,
-                path: '__default__.ts.j2',
-                factory: (): Record<string, unknown> => ({ files })
+            multipleTemplates: [
+              {
+                templates: Object.entries(output).map(([ output, files ]) => ({
+                  output,
+                  path: new RegExp(/\[\[exports\]\].ts.j2/),
+                  factory: (): Record<string, unknown> => ({ files })
+                }))
               }
-            }))
+            ]
           },
           {
             root: options.root
           }
         )
-      ])
+      ]),
+      null,
+      context
     )
   }
 }

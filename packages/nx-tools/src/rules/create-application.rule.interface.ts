@@ -9,7 +9,6 @@ export interface CreateApplicationRuleInterface {
   multipleTemplates?: MultipleFileTemplatesInterface[]
   omit?: OmitInterface[]
   trigger?: TriggerActionsInterface[]
-  exports?: CreateExportFilesOptions[]
 }
 
 export interface FileTemplatesInterface extends BaseWithCondition {
@@ -18,7 +17,6 @@ export interface FileTemplatesInterface extends BaseWithCondition {
 }
 
 export interface MultipleFileTemplatesInterface extends BaseWithCondition {
-  match: string | RegExp
   templates?: MultipleJinjaTemplateOptions['templates']
 }
 
@@ -31,11 +29,7 @@ export interface OmitInterface extends BaseWithCondition {
 }
 
 export interface BaseCreateApplicationFilesOptions {
-  root: string
-}
-
-export interface CreateExportFilesOptions extends BaseWithCondition {
-  template: GenerateExportsJinjaTemplateOptions['templates']
+  root?: string
 }
 
 export interface CreateApplicationRuleOptions {

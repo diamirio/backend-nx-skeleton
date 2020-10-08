@@ -1,6 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, externalSchematic, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import merge from 'deepmerge'
 
 import { NormalizedSchema } from '../main.interface'
@@ -10,6 +11,18 @@ export async function createApplicationFiles (options: NormalizedSchema, context
   const log = new Logger(context)
   // source is always the same
   const source = url('./files')
+
+  const componentSchematicDefaultOptions: Partial<ComponentSchema> = {
+    force: true,
+    name: 'test2',
+    parent: options.name,
+    silent: true,
+    skipFormat: true,
+    parentWsConfiguration: {
+      root: options.root,
+      sourceRoot: options.sourceRoot
+    }
+  }
 
   return chain([
     await applyOverwriteWithDiff(
@@ -27,26 +40,26 @@ export async function createApplicationFiles (options: NormalizedSchema, context
         )
         : null,
       context
-    )
+    ),
+
+    ...createApplicationRule({
+      trigger: [
+        {
+          rule: runInRule(log.info.bind(log), 'Adding default components to repository.')
+        },
+        {
+          condition: options.components.includes('server') && options.server === 'restful',
+          rule: schematic<ComponentSchema>('component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
+        }
+      ]
+    })
   ])
 }
 
-export function generateRules (options: NormalizedSchema, log: Logger, settings?: { silent: boolean }): Rule[] {
+export function generateRules (options: NormalizedSchema, log: Logger, settings?: { silent?: boolean }): Rule[] {
   if (!settings?.silent) {
     log.debug('Generating rules for given options.')
     log.debug(JSON.stringify(options, null, 2))
-  }
-
-  const componentSchematicDefaultOptions: Partial<ComponentSchema> = {
-    force: true,
-    name: 'test2',
-    parent: options.name,
-    silent: true,
-    skipFormat: true,
-    parentWsConfiguration: {
-      root: normalize('./'),
-      sourceRoot: options.sourceRoot
-    }
   }
 
   const template: CreateApplicationRuleInterface = {
@@ -103,30 +116,6 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       {
         condition: options.components.length === 1,
         match: (file: string): boolean => !file.match('src/constants.ts')
-      }
-    ],
-
-    trigger: [
-      {
-        condition: !settings?.silent,
-        rule: runInRule(log.info.bind(log), 'Adding default components to repository.')
-      },
-      {
-        condition: options.components.includes('server') && options.server === 'restful',
-        rule: schematic<ComponentSchema>('component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
-      }
-    ],
-
-    exports: [
-      {
-        condition: options.components.includes('server'),
-        template: [
-          {
-            pattern: [ '**/*.module.ts' ],
-            output: '/src/server/modules/index.ts',
-            options: { cwd: '/src/server/modules/' }
-          }
-        ]
       }
     ]
   }

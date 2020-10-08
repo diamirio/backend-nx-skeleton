@@ -22,16 +22,16 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
     return from(files).pipe(
       filter((file) => host.exists(file.path)),
       mergeMap(async (file) => {
-        let matchedTemplate: string
+        let matched: string
         await Promise.all(
           options.templates?.map(async (template) => {
             if (file.path.match(template)) {
-              matchedTemplate = template
+              matched = template
             }
           })
         )
 
-        if (!matchedTemplate) {
+        if (!matched) {
           return
         }
 
@@ -39,7 +39,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
           file.content = nunjucks.renderString(file.content, ctx)
 
           host.overwrite(file.path, file.content)
-          host.rename(file.path, file.path.replace(matchedTemplate, ''))
+          host.rename(file.path, file.path.replace(matched, ''))
         } catch (e) {
           log.warn(`Could not create "${file.path}" from template: ${e.message}`)
         }
@@ -63,27 +63,26 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
 
     return from(files).pipe(
       mergeMap(async (file) => {
-        let matchedTemplate: string
+        let matched: string
         await Promise.all(
           options.templates?.map(async (template) => {
             if (file.path.match(template.path)) {
-              matchedTemplate = template.path
+              matched = file.path
             }
           })
         )
 
-        log.warn(file.path)
-
-        if (!matchedTemplate) {
+        if (!matched) {
+          log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => t.path).join(', ')}`)
           return
         }
-        log.error(matchedTemplate)
 
         await Promise.all(
           options.templates.map(async (template) => {
             try {
-              const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
+              log.debug(`Generating template from ${matched}: ${template.output}`)
 
+              const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
               host.create(template.output, content)
             } catch (e) {
               context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)

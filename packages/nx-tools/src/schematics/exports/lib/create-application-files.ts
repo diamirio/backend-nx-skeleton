@@ -7,12 +7,5 @@ import { NormalizedSchema } from '../main.interface'
 export async function createApplicationFiles (options: NormalizedSchema): Promise<Rule> {
   const source = url(join('./files'))
 
-  return chain([ generateExportsRule(source, options.template) ])
+  return chain([ generateExportsRule(source, options.templates) ])
 }
-
-// function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
-//   log.debug('Generating rules for given options.')
-//   log.debug(JSON.stringify(options, null, 2))
-
-//   return createApplicationRule({}, options, { format: { prettier: false, eslint: false } })
-// }

@@ -18,6 +18,7 @@ export interface NormalizedSchema {
   root: string
   parent: string
   force: boolean
+  silent: boolean
   type: Schema['type']
   casing: {
     pascal: string

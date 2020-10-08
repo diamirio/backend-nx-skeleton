@@ -15,16 +15,20 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // just needs the url the rest it will do it itself
       apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
-      true,
+      null,
       context
     ),
+
     externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-      template: {
+      silent: false,
+      skipFormat: true,
+      templates: {
         root: options.root,
         templates: [
           {
-            output: 'modules/index.ts',
-            pattern: [ '**/*.module.ts' ]
+            output: 'index.ts',
+            pattern: [ '**/*.module.ts' ],
+            options: { cwd: options.root }
           }
         ]
       }

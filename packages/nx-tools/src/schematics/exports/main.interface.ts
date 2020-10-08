@@ -4,9 +4,9 @@ import { GenerateExportsJinjaTemplateOptions } from '@src/templates'
 export interface Schema {
   skipFormat?: boolean
   silent?: boolean
-  template: GenerateExportsJinjaTemplateOptions
+  templates: GenerateExportsJinjaTemplateOptions
 }
 
 export interface NormalizedSchema {
-  template: Schema['template']
+  templates: Schema['templates']
 }

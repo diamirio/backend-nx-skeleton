@@ -1,4 +1,4 @@
-import { apply, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply, FileEntry, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
 import * as diff from 'diff'
 import { createPrompt } from 'listr2'
 import { dirname } from 'path'
@@ -7,19 +7,13 @@ import { Observable } from 'rxjs'
 import { Logger } from '@src/utils/logger/logger'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
-export async function applyOverwriteWithDiff (source: Source, oldSource: Source | true, context: SchematicContext): Promise<Rule> {
+export async function applyOverwriteWithDiff (source: Source, oldSource: Source | void, context: SchematicContext): Promise<Rule> {
   const log = new Logger(context)
 
   // generate the old tree without aplying something
   let oldTree: Tree
 
-  const properties = {
-    historical: typeof oldSource !== 'boolean'
-  }
-
-  if (typeof oldSource === 'boolean') {
-    oldTree = await ((source(context) as unknown) as Observable<Tree>).toPromise()
-  } else if (oldSource) {
+  if (oldSource) {
     try {
       oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
       log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
@@ -37,36 +31,16 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
       apply(source, [
         forEach((file) => {
           if (host.exists(file.path)) {
-            let buffer = file.content
+            const currentFile = host.read(file.path).toString()
+            const newFile = file.content.toString()
 
             if (oldTree?.exists(file.path)) {
               // check if this file is part of old application
               const oldFile = oldTree.read(file.path).toString()
-              const currentFile = host.read(file.path).toString()
-              const newFile = file.content.toString()
 
-              const mergedFiles = mergeFiles(file.path, currentFile, oldFile, newFile, log, { historical: properties.historical })
-
-              if (typeof mergedFiles === 'string') {
-                buffer = Buffer.from(mergedFiles, 'utf-8')
-
-                host.overwrite(file.path, buffer)
-              } else {
-                log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
-
-                host.rename(file.path, `${file.path}.old`)
-
-                host.create(file.path, buffer)
-              }
+              mergeFiles(host, file, tripleFileMerge(file.path, currentFile, oldFile, newFile, log), log)
             } else {
-              // file is not part of the old setup but still exists
-              log.error(`File with same name exists: "${file.path}" -> "${file.path}.old"`)
-
-              // move file
-              host.rename(file.path, `${file.path}.old`)
-
-              // create file
-              host.create(file.path, buffer)
+              mergeFiles(host, file, doubleFileMerge(file.path, newFile, currentFile, log), log)
             }
 
             // add this to file changes, return null since we did the operation directly
@@ -157,24 +131,52 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
   }
 }
 
-export function mergeFiles (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger, options?: { historical: boolean }): string | boolean {
+export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
   // create difference-patch
-  let patch: string
-  if (options?.historical) {
-    // triple patch mode, if you know the history of the file
-    patch = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
-  } else {
-    // double patch mode if you dont know the history of the file
-    patch = diff.createPatch(name, newFile, currentFile, '', '', { context: 1 })
-  }
+  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context: 1 })
 
   log.debug(patch)
 
-  if (options?.historical) {
-    // triple patch mode, if you know the history of the file
-    return diff.applyPatch(currentFile, patch)
+  return diff.applyPatch(currentFile, patch)
+}
+
+export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
+  const patch = diff.structuredPatch(name, name, currentFile, newFile, '', '', { context: 1 })
+
+  console.log(patch.hunks)
+
+  return diff.applyPatch(newFile, patch)
+}
+
+function selectivePatch (patch: diff.ParsedDiff, options: { add: boolean, remove: boolean } = { add: true, remove: true}): diff.ParsedDiff {
+  patch.
+
+}
+
+function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean, log: Logger): void {
+  let buffer = file.content
+
+  if (typeof mergedFiles === 'string') {
+    buffer = Buffer.from(mergedFiles, 'utf-8')
+
+    host.overwrite(file.path, buffer)
   } else {
-    // double patch mode if you dont know the history of the file
-    return diff.applyPatch(newFile, patch)
+    log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
+
+    createFileBackup(host, file, log)
+
+    host.create(file.path, buffer)
   }
+}
+
+function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
+  const backupFilePath = `${file.path}.old`
+
+  log.error(`Can not merge file: "${file.path}" -> "${backupFilePath}"`)
+
+  if (host.exists(backupFilePath)) {
+    host.delete(backupFilePath)
+  }
+
+  host.rename(file.path, backupFilePath)
 }
