@@ -1,20 +1,24 @@
-import { normalize } from '@angular-devkit/core'
-import { apply, chain, externalSchematic, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import merge from 'deepmerge'
 
 import { NormalizedSchema } from '../main.interface'
+import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 
+/**
+ * Create application files in tree.
+ * @param options
+ * @param context
+ */
 export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
   const log = new Logger(context)
   // source is always the same
   const source = url('./files')
 
-  const componentSchematicDefaultOptions: Partial<ComponentSchema> = {
+  const componentSchematicDefaultOptions: Omit<ComponentSchema, 'type'> = {
     force: true,
-    name: 'test2',
+    name: 'default',
     parent: options.name,
     silent: true,
     skipFormat: true,
@@ -48,14 +52,36 @@ export async function createApplicationFiles (options: NormalizedSchema, context
           rule: runInRule(log.info.bind(log), 'Adding default components to repository.')
         },
         {
-          condition: options.components.includes('server') && options.server === 'restful',
-          rule: schematic<ComponentSchema>('component', { ...(componentSchematicDefaultOptions as ComponentSchema), type: 'restful' })
+          condition: options.components.includes(AvailableComponents.SERVER) && options?.server === AvailableServerTypes.RESTFUL,
+          rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.RESTFUL })
+        },
+        {
+          condition: options.components.includes(AvailableComponents.SERVER) && options?.server === AvailableServerTypes.GRAPHQL,
+          rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.GRAPHQL })
+        },
+        {
+          condition: options.components.includes(AvailableComponents.BG_TASK),
+          rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.BG_TASK })
+        },
+        {
+          condition: options.components.includes(AvailableComponents.COMMAND),
+          rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.COMMAND })
+        },
+        {
+          condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
+          rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.MICROSERVICE_SERVER })
         }
       ]
     })
   ])
 }
 
+/**
+ * Generate rules individually since it is required to do this twice because of diff-merge like architecture.
+ * @param options
+ * @param log
+ * @param settings
+ */
 export function generateRules (options: NormalizedSchema, log: Logger, settings?: { silent?: boolean }): Rule[] {
   if (!settings?.silent) {
     log.debug('Generating rules for given options.')
@@ -65,19 +91,20 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
   const template: CreateApplicationRuleInterface = {
     templates: [
       {
-        condition: options?.server === 'restful',
-        match: 'restful'
+        condition: options?.server === AvailableServerTypes.RESTFUL,
+        match: AvailableServerTypes.RESTFUL
       },
       {
-        condition: options?.server === 'graphql',
-        match: 'graphql'
+        condition: options?.server === AvailableServerTypes.GRAPHQL,
+        match: AvailableServerTypes.GRAPHQL
       },
+      // this might be shared so not using enum
       {
-        condition: options.database.includes('typeorm'),
+        condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database),
         match: 'typeorm'
       },
       {
-        condition: options.database.includes('mongoose'),
+        condition: [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database),
         match: 'mongoose'
       }
     ],
@@ -85,31 +112,31 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
     omit: [
       // tests configuration
       {
-        condition: options.tests !== 'jest',
-        match: (file: string): boolean => !(file.match('.spec.ts') && file.match('src/test/'))
+        condition: options.tests !== AvailableTestsTypes.JEST,
+        match: (file: string): boolean => !(file.match('.spec.ts') && file.match('tests/'))
       },
       // server configuration
       {
-        condition: !options.components.includes('server'),
+        condition: !options.components.includes(AvailableComponents.SERVER),
         match: (file: string): boolean => !file.match('src/server/')
       },
       // bgtask aka nest-scheduler
       {
-        condition: !options.components.includes('bgtask'),
+        condition: !options.components.includes(AvailableComponents.BG_TASK),
         match: (file: string): boolean => !file.match('src/task/')
       },
       // command module
       {
-        condition: !options.components.includes('command'),
+        condition: !options.components.includes(AvailableComponents.COMMAND),
         match: (file: string): boolean => !file.match('src/command/')
       },
       // microservices host
       {
-        condition: !options.components.includes('microservice-server'),
+        condition: !options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
         match: (file: string): boolean => !file.match('src/microservice-server/')
       },
       {
-        condition: !options.components.includes('microservice-client'),
+        condition: !options.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
         match: (file: string): boolean => !file.match('src/microservice-client/')
       },
       // omit constants when a single service is selected

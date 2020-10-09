@@ -3,7 +3,12 @@ import { updateNxJsonInTree } from '@nrwl/workspace'
 import { updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
+import { AvailableComponents, AvailableDBTypes } from '@src/interfaces'
 
+/**
+ * Update integration with different interfaces.
+ * @param options
+ */
 export function updateIntegration (options: NormalizedSchema): Rule {
   return chain([
     // create nx json entry
@@ -25,15 +30,16 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     updateBrownieIntegration(options.name, { containers: [ 'nx' ] }),
 
     // add mysql container
-    options.database?.includes('mysql') ? updateBrownieIntegration(options.name, { containers: [ 'mysql' ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'mysql' ] }) : noop(),
 
     // add postgresql container
-    options.database?.includes('postgresql') ? updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) : noop(),
 
     // add mongodb container
-    options.database?.includes('mongodb') ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop(),
+    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop(),
 
     // add message queue container
-    options.components?.includes('microservice-server') ? updateBrownieIntegration(options.name, { containers: [ options.microservice ] }) : noop()
+    // fix me later
+    options.components?.includes(AvailableComponents.MICROSERVICE_SERVER) ? updateBrownieIntegration(options.name, { containers: [ 'rabbitmq' ] }) : noop()
   ])
 }

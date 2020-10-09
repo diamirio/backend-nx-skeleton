@@ -8,15 +8,24 @@ import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
+import { AvailableComponents, AvailableServerTypes } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
+/**
+ * @param  {Tree} host
+ * @param  {SchematicContext} context
+ * @param  {Schema} options This should be unparsed options entry coming from the Angular schematics.
+ * @returns Promise
+ * Normalizes options for given schematic.
+ */
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
-        task: async (ctx): Promise<void> => {
-          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent' ] } })
+        task: (ctx): void => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent' ] } })
         }
       },
 
@@ -72,12 +81,11 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponentsSelection> = [
-            { name: 'server', message: 'Server' },
-            { name: 'microservice-server', message: 'Microservice Server' },
-            { name: 'bgtask', message: 'Scheduler' },
-            { name: 'command', message: 'Command' }
-          ]
+          const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components.map((c) => {
+            if (c === 'server' || c === 'bgtask' || c === 'command' || c === 'microservice-server') {
+              return { name: c as AvailableComponentsSelection, message: c }
+            }
+          })
 
           // select the base components
           // when options are not passed as an option to the command
@@ -88,7 +96,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           })
 
           // parse the prompt depending on the prior configuration
-          if (prompt === 'server') {
+          if (prompt === AvailableComponents.SERVER) {
             ctx.type = ctx.parentPriorConfiguration.server
           } else {
             ctx.type = prompt
@@ -107,11 +115,11 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
           const rootMap: Record<typeof ctx.type, string> = {
-            restful: 'server',
-            graphql: 'server',
-            bgtask: 'task',
-            command: 'command',
-            'microservice-server': 'microservice-server'
+            [AvailableServerTypes.RESTFUL]: 'server',
+            [AvailableServerTypes.GRAPHQL]: 'server',
+            [AvailableComponents.BG_TASK]: 'task',
+            [AvailableComponents.COMMAND]: 'command',
+            [AvailableComponents.MICROSERVICE_SERVER]: 'microservice-server'
           }
 
           ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, rootMap[ctx.type], 'modules'))

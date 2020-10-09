@@ -19,7 +19,8 @@
     "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "jsdoc2md --files './src/interfaces/**' --configure './jsdoc2md.json' > ./API.md"
   },
   "husky": {
     "hooks": {
@@ -48,8 +49,16 @@
     "listr2": "^3.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/deepmerge": "^2.2.0",
     "cpy-cli": "^3.1.1",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^6.0.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.8",

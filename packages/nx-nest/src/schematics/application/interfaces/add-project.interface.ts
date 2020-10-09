@@ -1,5 +1,8 @@
 import { TscBuilderOptions, TsNodeBuilderOptions } from '@webundsoehne/nx-builders'
 
+/**
+ * Interface setting builder settings
+ */
 export interface SchematicArchitect {
   [key: string]: any
   build: {

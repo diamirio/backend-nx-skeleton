@@ -1,18 +1,24 @@
 import { EnrichedWorkspaceJsonProject } from '@webundsoehne/nx-tools'
 
-import { AvailableComponents, AvailableServerTypes, NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { AvailableComponents, AvailableServerTypes } from '@src/interfaces'
+import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
-// this is the one gets inputted from the command line
+/**
+ * This is the unparsed schema coming from the angular-schematics
+ */
 export interface Schema {
   name: string
   parent: string
   skipFormat: boolean
-  type: Exclude<AvailableComponents, 'server' | 'microservice-client'> | AvailableServerTypes
+  type: Exclude<AvailableComponents, AvailableComponents.SERVER | AvailableComponents.MICROSERVICE_CLIENT> | AvailableServerTypes
   force: boolean
   silent: boolean
   parentWsConfiguration: EnrichedWorkspaceJsonProject
 }
 
+/**
+ * This is the parsed schema through normalize options.
+ */
 export interface NormalizedSchema {
   name: string
   root: string
@@ -28,4 +34,7 @@ export interface NormalizedSchema {
   parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }
 
-export type AvailableComponentsSelection = Exclude<AvailableComponents, 'microservice-client'>
+/**
+ * Some components are currently disabled to generate components from at the moment.
+ */
+export type AvailableComponentsSelection = Exclude<AvailableComponents, AvailableComponents.MICROSERVICE_CLIENT>

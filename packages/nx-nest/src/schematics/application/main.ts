@@ -9,6 +9,10 @@ import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
 
+/**
+ * Entrypoint to the schematic.
+ * @param schema
+ */
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)

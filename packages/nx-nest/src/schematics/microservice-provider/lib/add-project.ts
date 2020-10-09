@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { join, normalize } from '@angular-devkit/core'
+import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
 import { WorkspaceJSON } from '@webundsoehne/nx-tools'
+import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
 
@@ -14,7 +15,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     json.projects[options.name] = {
       root: options.root,
-      sourceRoot: join(options.root, 'src'),
+      sourceRoot: join(normalize(options.root), 'src'),
       projectType: 'library',
       schematics: {},
       architect

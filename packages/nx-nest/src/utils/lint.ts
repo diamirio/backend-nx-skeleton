@@ -1,5 +1,8 @@
-import { eslintPluginVersion } from './versions'
+import { eslintPluginVersion } from './versions.constant'
 
+/**
+ * eslint dependencies that are installed automatically for this schematic.
+ */
 export const eslintDeps = {
   dependencies: {},
   devDependencies: {
@@ -9,6 +12,9 @@ export const eslintDeps = {
   }
 }
 
+/**
+ * Default eslint configuration to inject to repository.
+ */
 export const eslintJson = {
   extends: [],
   rules: {

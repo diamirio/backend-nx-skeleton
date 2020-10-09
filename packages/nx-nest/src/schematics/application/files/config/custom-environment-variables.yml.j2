@@ -15,7 +15,7 @@ swagger:
     __format: json
   basePath: API_BASE_PATH
 
-{% if database is defined and database != 'none' %}
+{% if database is defined and database != enum.database.NONE %}
 database:
   host: DATABASE_HOST
   port: DATABASE_PORT
@@ -25,7 +25,7 @@ database:
   username: DATABASE_USER
   password: DATABASE_PASSWORD
   migrationsTableName: DATABASE_MIGRATIONS_TABLE
-  {% elif 'mongoose-mongodb' == database -%}
+  {% elif 'mongoose' in database -%}
   authentication:
     username: DATABASE_USER
     password: DATABASE_PASSWORD

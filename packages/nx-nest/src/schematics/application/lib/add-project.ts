@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { join, normalize } from '@angular-devkit/core'
+import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
 import { WorkspaceJSON } from '@webundsoehne/nx-tools'
+import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
 import { NormalizedSchema } from '../main.interface'
+import { AvailableComponents, AvailableTestsTypes } from '@src/interfaces'
 
+/**
+ * Add the project to the {workspace,angular}.json
+ * @param options Parsed schema
+ */
 export function addProject (options: NormalizedSchema): Rule {
   return updateWorkspaceInTree((json: WorkspaceJSON<SchematicArchitect>) => {
     const architect: SchematicArchitect = {} as SchematicArchitect
@@ -30,7 +36,7 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     // prefer server mode
-    if (options.components.includes('server')) {
+    if (options.components.includes(AvailableComponents.SERVER)) {
       architect.serve = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -42,7 +48,7 @@ export function addProject (options: NormalizedSchema): Rule {
           }
         }
       }
-    } else if (options.components.includes('microservice-server')) {
+    } else if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
       architect.serve = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -56,7 +62,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     }
 
-    if (options.components.includes('bgtask')) {
+    if (options.components.includes(AvailableComponents.BG_TASK)) {
       architect.bgtask = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -71,7 +77,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     }
 
-    if (options.tests === 'jest') {
+    if (options.tests === AvailableTestsTypes.JEST) {
       architect.test = {
         builder: '@nrwl/jest:jest',
         options: {

@@ -7,11 +7,11 @@ import { Interval, NestSchedule } from 'nest-schedule'
  */
 
 @Injectable()
-export class DefaultTaskService extends NestSchedule {
+export class {{ casing.pascal }}Task extends NestSchedule {
   private logger: Logger = new Logger(this.constructor.name)
 
   @Interval(1000)
-  public intervalJob (): void {
+  public defaultJob (): void {
     this.logger.debug('Another Message')
   }
 }

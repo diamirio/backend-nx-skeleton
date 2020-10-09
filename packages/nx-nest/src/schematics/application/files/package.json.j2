@@ -7,7 +7,7 @@
   "repository": "<<---REPOSITORYHERE--->>",
   "scripts": {
     "start": "node ./src/main.js",
-    {% if 'command' in components %}
+    {% if enum.components.COMMAND in components %}
     "command": "CLI_PATH=./src/main.js NODE_SERVICE=cli npx nestjs-command",
     "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command",
     {% endif %}

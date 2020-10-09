@@ -26,7 +26,7 @@
       "description": "Components to be embeded.",
       "alias": "c",
       "items": {
-        "oneOf": [{
+        "manyOf": [{
           "type": "string",
           "enum": ["server", "microservice-server", "microservice-client", "bgtask", "command"]
         }]
@@ -37,6 +37,12 @@
       "type": "string",
       "alias": "s",
       "enum": ["graphql", "restful"]
+    },
+    "microservice": {
+      "description": "If microservices component is selected, specifies the type.",
+      "type": "string",
+      "alias": "m",
+      "enum": ["rabbitmq"]
     },
     "database": {
       "description": "Database that is desired to be used.",

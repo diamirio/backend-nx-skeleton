@@ -23,15 +23,15 @@ cacheLifetime:
   expiresHeader: Expires
   cacheControlHeader: Cache-control
 
-{% if database is defined and database != 'none' %}
+{% if database is defined and database != enum.database.NONE %}
 database:
   database: db
   {% if 'typeorm' in database -%}
-  {% if database == 'typeorm-mysql' -%}
+  {% if  database == enum.database.TYPEORM_MYSQL -%}
   host: db-mysql
   type: mysql
   port: 3306
-  {% elif database == 'typeorm-postgresql' -%}
+  {% elif database == enum.database.TYPEORM_POSTGRESQL -%}
   host: db-postgres
   type: postgres
   port: 5432
@@ -47,7 +47,7 @@ database:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
-  {% elif 'mongoose-mongodb' == database -%}
+  {% elif 'mongoose' == database -%}
   host: db-mongodb
   username: user
   password: secret

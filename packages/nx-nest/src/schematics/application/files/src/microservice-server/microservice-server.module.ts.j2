@@ -4,11 +4,11 @@ import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 import * as modules from './modules'
-{% if database is defined and database != 'none' %}
+{% if database is defined and database != enum.database.NONE %}
 import { getDatabaseOptions } from '@util/database'
 {% endif %}
 
-export function createMicroserviceModule ({% if database != 'none' %}mock = false{% endif %}): new({% if database != 'none' %}mock : boolean{% endif %}) => NestModule {
+export function createMicroserviceModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
       {

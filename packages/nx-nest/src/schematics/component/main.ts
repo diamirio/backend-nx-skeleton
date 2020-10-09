@@ -5,6 +5,10 @@ import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
 
+/**
+ * @param  {Schema} schema
+ * The schematic itself.
+ */
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)

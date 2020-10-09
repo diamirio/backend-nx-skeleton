@@ -1,19 +1,19 @@
 {% if components | length != 1 %}
 import { InternalServerErrorException } from '@nestjs/common'
 
-import { service } from './constants'
+import { Service } from './constants'
 {% endif %}
 
-{% if 'server' in components %}
+{% if enum.components.SERVER in components %}
 import { createApplication as createServerApplication } from './server/init'
 {% endif %}
-{% if 'microservice-server' in components %}
+{% if enum.components.MICROSERVICE_SERVER in components %}
 import { createApplication as createMicroserviceApplication } from './microservice-server/init'
 {% endif %}
-{% if 'bgtask' in components %}
+{% if enum.components.BG_TASK in components %}
 import { createApplication as createTaskApplication } from './task/init'
 {% endif %}
-{% if 'command' in components %}
+{% if enum.components.COMMAND in components %}
 import { createApplication as createCommandApplication } from './command/init'
 {% endif %}
 
@@ -21,25 +21,25 @@ function bootstrap (): Promise<void> {
   {% if components | length != 1 %}
   switch (String(process.env.NODE_SERVICE).toLowerCase()) {
   {% endif %}
-  {% if 'server' in components %}
+  {% if enum.components.SERVER in components %}
   {% if components | length != 1 %}
   case Service.SERVER:
   {% endif %}
     return createServerApplication()
   {% endif %}
-  {% if 'microservice-server' in components %}
+  {% if enum.components.MICROSERVICE_SERVER in components %}
   {% if components | length != 1 %}
   case Service.MICROSERVICE_SERVER:
   {% endif %}
     return createMicroserviceApplication()
   {% endif %}
-  {% if 'bgtask' in components %}
+  {% if enum.components.BG_TASK in components %}
   {% if components | length != 1 %}
   case Service.TASK:
   {% endif %}
     return createTaskApplication()
   {% endif %}
-  {% if 'command' in components %}
+  {% if enum.components.COMMAND in components %}
   {% if components | length != 1 %}
   case Service.COMMAND:
   {% endif %}

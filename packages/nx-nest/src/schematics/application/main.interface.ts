@@ -1,45 +1,44 @@
-import { Path } from '@angular-devkit/core'
-import { Linter } from '@nrwl/workspace'
+import {
+  AvailableComponents,
+  AvailableDBTypes,
+  AvailableServerTypes,
+  AvailableTestsTypes,
+  AvailableLinterTypes,
+  AvailableMicroserviceTypes
+} from '@interfaces/available-options.interface'
 
-// this is the one gets inputted from the command line
-export interface Schema {
+/**
+ * This is the unparsed options list coming from angular-schematics
+ */
+export interface Schema extends CommonPropertiesToSaveAndUse<true> {
   name: string
-  packageName: string
+  // options for schematic
   directory: string
-  server: string
-  microservice: string
-  database: string
-  components: string[]
-  tests: string
-  linter: string
+  linter: AvailableLinterTypes
+  // injected options
   skipFormat: boolean
 }
 
-export type AvailableComponents = 'server' | 'command' | 'bgtask' | 'microservice-client' | 'microservice-server'
-export type AvailableServerTypes = 'graphql' | 'restful'
-export type AvailableMicroserviceTypes = 'rabbitmq'
-export type AvailableDBTypes = 'none' | 'typeorm-mysql' | 'typeorm-postgresql' | 'mongoose-mongodb'
-export type AvailableTestsTypes = 'jest' | 'none'
-export type AvailableLinterTypes = Linter
-
-export interface NormalizedSchema {
+/**
+ * This is the parsed options after normalizing options.
+ * It can not extend the default schema because types are different after parsed
+ */
+export interface NormalizedSchema extends Schema {
   name: string
-  root: Path
-  sourceRoot: Path
-  directory: string
+  // parsed internally
   packageName: string
-  linter: AvailableLinterTypes
-  skipFormat: boolean
-  components: AvailableComponents[]
-  server: AvailableServerTypes
-  microservice: AvailableMicroserviceTypes
-  database: AvailableDBTypes
-  tests: AvailableTestsTypes
-  priorConfiguration: {
-    components: AvailableComponents[]
-    server: AvailableServerTypes
-    microservice: AvailableMicroserviceTypes
-    database: AvailableDBTypes
-    tests: AvailableTestsTypes
-  }
+  root: string
+  sourceRoot: string
+  // prior configuration will be written to nx.json for further processing
+  priorConfiguration: CommonPropertiesToSaveAndUse<true>
+  // injecting enums since i want to compare this in jinja templates
+  enum: CommonPropertiesToSaveAndUse<false>
+}
+
+interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
+  components: Values extends true ? AvailableComponents[] : typeof AvailableComponents
+  server: Values extends true ? AvailableServerTypes : typeof AvailableServerTypes
+  microservice: Values extends true ? AvailableMicroserviceTypes : typeof AvailableMicroserviceTypes
+  database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
+  tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
 }

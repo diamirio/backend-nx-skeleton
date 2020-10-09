@@ -1,4 +1,3 @@
-import { Path } from '@angular-devkit/core'
 import { Linter } from '@nrwl/workspace'
 
 // this is the one gets inputted from the command line
@@ -15,7 +14,7 @@ export type AvailableLinterTypes = Linter
 export interface NormalizedSchema {
   name: string
   packageName: string
-  root: Path
+  root: string
   directory: string
   microservices: string[]
   parsedMicroservices: ParsedMicroservices[]

@@ -1,25 +1,6 @@
 {
   "extends": "../../tsconfig.base",
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "paths": {
-      {% if 'server' in components %}
-      "@server/*": ["src/server/*"],
-      {% endif %}
-      {% if 'microservice-server' in components %}
-      "@microservice-server/*": ["src/microservice-server/*"],
-      {% endif %}
-      {% if 'bgtask' in components %}
-      "@task/*": ["src/task/*"],
-      {% endif %}
-      {% if 'command' in components %}
-      "@command/*": ["src/command/*"],
-      {% endif %}
-      "@src/*": ["src/*"],
-      "@util/*": ["util/*"]
-    }
   },
   "include": ["src", "migrations", "seeds", "test"],
   "exclude": ["node_modules"]

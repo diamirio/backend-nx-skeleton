@@ -1,10 +1,10 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
 
-import { DefaultSchema } from './default.schema'
+import { {{ casing.pascal }}Schema } from './{{ name }}.schema'
 
-@Resolver('Default')
-export class DefaultResolver {
-  @Query(() => DefaultSchema)
+@Resolver('{{ casing.pascal }}')
+export class {{ casing.pascal }}Resolver {
+  @Query(() => {{ casing.pascal }}Schema)
   public hello (
     @Args({
       name: 'name',
@@ -12,7 +12,7 @@ export class DefaultResolver {
       defaultValue: 'world'
     })
       name: string
-  ): DefaultSchema {
+  ): {{ casing.pascal }}Schema {
     return { response: `Hello ${name}.` }
   }
 }
