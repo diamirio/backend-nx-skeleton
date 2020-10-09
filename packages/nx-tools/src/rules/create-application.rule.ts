@@ -46,7 +46,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     ),
 
     ...appRule.templates?.map((val) => {
-      return forEach(applyPathTemplate({ [val.match.toString()]: val.rename ?? '' }))
+      return val.condition ? forEach(applyPathTemplate({ [String(val.match)]: val?.rename ?? '' })) : noop()
     }) ?? [],
 
     ...appRule.trigger

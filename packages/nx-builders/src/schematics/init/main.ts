@@ -4,5 +4,5 @@ import { Schema } from './main.interface'
 import { initiateBuilderDependencies } from '@src/utils/initiate-builder'
 
 export default function (schema: Schema): Rule {
-  return chain([ initiateBuilderDependencies(schema) ])
+  return chain([ initiateBuilderDependencies(schema.items) ])
 }

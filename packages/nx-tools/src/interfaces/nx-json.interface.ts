@@ -1,4 +1,3 @@
-import { Path } from '@angular-devkit/core'
 import { NxJson, NxJsonProjectConfig } from '@nrwl/workspace/src/core/shared-interfaces'
 
 import { BrownieIntegrationInterface } from '@integration/brownie.interface'
@@ -22,8 +21,8 @@ export interface EnrichedWorkspaceJson {
 }
 
 export interface EnrichedWorkspaceJsonProject {
-  root: Path
-  sourceRoot: Path
+  root: string
+  sourceRoot: string
   projectType?: 'library' | 'application'
   schematics?: any
   architecht?: any

@@ -1,6 +1,6 @@
 import merge from 'deepmerge'
 
-export function deepMergeWithUniqueMergeArray (t: Record<string, any>, s: Record<string, any>): Record<string, any> {
+export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, s: Partial<T>): T {
   return merge(t, s, {
     arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
   })

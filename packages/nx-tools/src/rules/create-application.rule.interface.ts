@@ -1,7 +1,7 @@
 import { Path } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 
-import { GenerateExportsJinjaTemplateOptions, MultipleJinjaTemplateOptions } from '@src/templates/template-engine.interface'
+import { MultipleJinjaTemplateOptions } from '@src/templates/template-engine.interface'
 import { FormatFilesOptions } from '@src/utils/file-system/format-files.interface'
 
 export interface CreateApplicationRuleInterface {
@@ -24,6 +24,9 @@ export interface TriggerActionsInterface extends BaseWithCondition {
   rule: Rule | Rule[]
 }
 
+/**
+ * TEST
+ */
 export interface OmitInterface extends BaseWithCondition {
   match: (file: Path) => boolean
 }

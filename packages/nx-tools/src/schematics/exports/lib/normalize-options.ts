@@ -9,8 +9,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
     [
       // assign options to parsed schema
       {
-        task: async (ctx): Promise<void> => {
-          await setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'templates' ] } })
+        task: (ctx): void => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'templates' ] } })
         }
       }
     ],

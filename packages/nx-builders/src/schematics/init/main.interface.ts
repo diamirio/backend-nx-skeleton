@@ -1,1 +1,3 @@
-export type Schema = ('tsc' | 'ts-node-dev')[]
+export interface Schema {
+  items: ('tsc' | 'ts-node-dev')[]
+}
