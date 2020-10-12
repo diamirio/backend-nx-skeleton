@@ -9,6 +9,6 @@ import * as tasks from './modules'
 
 @Module({
   providers: [],
-  imports: [ ScheduleModule.register(), ...Object.values(tasks) ]
+  imports: [ScheduleModule.register(), ...Object.values(tasks)]
 })
 export class AppTaskModule {}

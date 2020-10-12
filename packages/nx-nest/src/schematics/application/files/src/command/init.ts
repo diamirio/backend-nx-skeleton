@@ -4,7 +4,7 @@ import { CommandModule, CommandService } from 'nestjs-command'
 
 import { AppCommandModule } from './command.module'
 
-export async function createApplication (): Promise<void> {
+export async function createApplication(): Promise<void> {
   const app = await NestFactory.createApplicationContext(AppCommandModule, {
     logger: new LoggerService()
   })

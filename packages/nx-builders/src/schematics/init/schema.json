@@ -9,10 +9,12 @@
       "description": "The name of the application.",
       "alias": "i",
       "items": {
-        "manyOf": [{
-          "type": "string",
-          "enum": ["ts-node-dev", "tsc"]
-        }]
+        "manyOf": [
+          {
+            "type": "string",
+            "enum": ["ts-node-dev", "tsc"]
+          }
+        ]
       }
     }
   },

@@ -1,6 +1,8 @@
 ## Classes
 
 <dl>
+<dt><a href="#BaseBuilder">BaseBuilder</a></dt>
+<dd><p>Base builder for extending from.</p></dd>
 <dt><a href="#Logger">Logger</a></dt>
 <dd><p>A general logger that is wrapped around the angular-cli logger.</p>
 <p>It is not great but winston was not working that well in a amazingly stateless architecture.</p></dd>
@@ -62,6 +64,8 @@
 <dd><p>Generates jinja templates with given context.</p></dd>
 <dt><a href="#multipleJinjaTemplate">multipleJinjaTemplate(ctx, options)</a></dt>
 <dd><p>Generates multiple files from single template with dynamic context.</p></dd>
+<dt><a href="#runBuilder">runBuilder(Builder)</a></dt>
+<dd><p>Run a designated builder that is extended from base builder in NX way.</p></dd>
 <dt><a href="#getWorkspace">getWorkspace(context, host)</a></dt>
 <dd><p>Will return the workspace definition.</p></dd>
 <dt><a href="#checkNodeModulesExists">checkNodeModulesExists(paths)</a></dt>
@@ -90,6 +94,20 @@
 <p>Mutates the object.</p></dd>
 </dl>
 
+<a name="BaseBuilder"></a>
+
+## BaseBuilder
+
+<p>Base builder for extending from.</p>
+
+**Kind**: global class  
+<a name="BaseBuilder+init"></a>
+
+### baseBuilder.init()
+
+<p>Initiate the builder first.</p>
+
+**Kind**: instance method of [<code>BaseBuilder</code>](#BaseBuilder)  
 <a name="Logger"></a>
 
 ## Logger
@@ -465,6 +483,18 @@
 | ------- |
 | ctx     |
 | options |
+
+<a name="runBuilder"></a>
+
+## runBuilder(Builder)
+
+<p>Run a designated builder that is extended from base builder in NX way.</p>
+
+**Kind**: global function
+
+| Param   |
+| ------- |
+| Builder |
 
 <a name="getWorkspace"></a>
 

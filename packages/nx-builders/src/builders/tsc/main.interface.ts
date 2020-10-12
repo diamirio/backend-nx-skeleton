@@ -1,6 +1,7 @@
 import { JsonObject } from '@angular-devkit/core'
 
 export interface TscBuilderOptions extends JsonObject {
+  /** process cwd */
   cwd: string
 
   main: string

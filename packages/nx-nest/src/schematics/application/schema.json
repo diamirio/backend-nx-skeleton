@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/schema",
   "id": "nx-nest:application",
   "title": "Create a Nest application from skeleton with NX.",
-  "examples": [{
+  "examples": [
+    {
       "command": "g app myapp",
       "description": "Initiate a application in interactive mode."
     },
@@ -26,10 +27,12 @@
       "description": "Components to be embeded.",
       "alias": "c",
       "items": {
-        "manyOf": [{
-          "type": "string",
-          "enum": ["server", "microservice-server", "microservice-client", "bgtask", "command"]
-        }]
+        "manyOf": [
+          {
+            "type": "string",
+            "enum": ["server", "microservice-server", "microservice-client", "bgtask", "command"]
+          }
+        ]
       }
     },
     "server": {

@@ -1,12 +1,11 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { checkNodeModulesExists, ExecaArguments, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
+import { checkNodeModulesExists, ExecaArguments, pipeProcessToLogger, removePathRoot, BaseBuilder, runBuilder } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import execa from 'execa'
 import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
 import { TsNodeBuilderOptions } from './main.interface'
-import { BaseBuilder, runBuilder } from '@src/lib/base-builder'
 
 try {
   require('dotenv').config()

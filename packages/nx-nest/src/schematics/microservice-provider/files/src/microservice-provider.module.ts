@@ -9,7 +9,7 @@ import { MessageQueueService } from './message-queue.service'
 const messageQueueUrls: string[] = ConfigService.get('messageQueue')?.urls
 const fileServiceUrl: string = ConfigService.get('messageQueue')?.fileService ?? 'http://localhost:3008'
 
-function provideMessageQueueClient (queue: MessageQueueEnum) {
+function provideMessageQueueClient(queue: MessageQueueEnum) {
   return {
     provide: queue,
     useFactory: (): ClientProxyFactory => {
@@ -40,6 +40,6 @@ function provideMessageQueueClient (queue: MessageQueueEnum) {
     provideMessageQueueClient(MessageQueueEnum.FILE),
     provideMessageQueueClient(MessageQueueEnum.EXTERNAL)
   ],
-  exports: [ MessageQueueService ]
+  exports: [MessageQueueService]
 })
 export class MessageQueueModule {}

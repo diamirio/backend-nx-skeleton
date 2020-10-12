@@ -8,7 +8,7 @@ import * as modules from './modules'
  */
 
 @Module({
-  providers: [ ...Object.values(modules) ],
-  imports: [ CommandModule ]
+  providers: [...Object.values(modules)],
+  imports: [CommandModule]
 })
 export class AppCommandModule {}

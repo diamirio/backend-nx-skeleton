@@ -4,7 +4,16 @@ import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
-import { checkNodeModulesExists, createDependenciesForProjectFromGraph, ExecaArguments, mergeDependencies, pipeProcessToLogger, removePathRoot } from '@webundsoehne/nx-tools'
+import {
+  checkNodeModulesExists,
+  createDependenciesForProjectFromGraph,
+  ExecaArguments,
+  mergeDependencies,
+  pipeProcessToLogger,
+  removePathRoot,
+  BaseBuilder,
+  runBuilder
+} from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
 import execa from 'execa'
@@ -14,7 +23,6 @@ import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
 import { FileInputOutput, NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
-import { BaseBuilder, runBuilder } from '@src/lib/base-builder'
 
 try {
   require('dotenv').config()

@@ -209,23 +209,18 @@ The useful function of installing dependencies that are required by this builder
 
 It returns a rule of ensuring the install of required dependencies where it can be used inside a `chain[]` in the initiation of your schematic.
 
-- With Static Import
-
 ```typescript
-import { initiateBuilderDependencies } from '@webundsoehne/nx-builders'
+import { addDepsToPackageJson } from '@nrwl/workspace'
+import { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/schematics/init/main'
 
-initiateBuilderDependencies(['ts-node-dev', 'tsc'])
-```
+export default function (schema: NormalizedSchema): Rule {
+  const builders = calculateDependencies(schema, true)
 
-- With Dynamic Import
-
-```typescript
-    async (): Promise<Rule> => {
-      // dynamically import it from the package, we can change it there
-      try {
-        const builderInit = await import('@webundsoehne/nx-builders')
-        return builderInit.initiateBuilderDependencies([ 'ts-node-dev', 'tsc' ])
-      // eslint-disable-next-line no-empty
-      } catch (e) {}
-    },
+  return chain([
+    // add builder and its dependencies
+    addDepsToPackageJson(builders?.prod, builders?.dev),
+    // call the init schematic with the items of your desire
+    externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: ['tsc', 'ts-node-dev'] })
+  ])
+}
 ```

@@ -21,7 +21,7 @@ export class MicroserviceProviderService {
   private readonly clients: Record<MessageQueueEnum, ClientProxy>
   private readonly logger = new LoggerService(this.constructor.name)
 
-  constructor (
+  constructor(
     @Inject(MessageQueueEnum.AUTH) private readonly authClient: ClientProxy,
     @Inject(MessageQueueEnum.LICENSE) private readonly licenseClient: ClientProxy,
     @Inject(MessageQueueEnum.PRODUCT) private readonly productClient: ClientProxy,

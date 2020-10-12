@@ -1,34 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
 import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
-import { calculateProjectDependencies, checkDependentProjectsHaveBeenBuilt, DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils'
-import { Logger, ProcessManager } from '@webundsoehne/nx-tools'
-import { Observable, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils'
+import { Observable } from 'rxjs'
 
-export function runBuilder<T extends new (options: BuilderOptions, context: BuilderContext) => BaseBuilder<BuilderOptions, any, any>, BuilderOptions extends Record<string, any>> (
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  Builder: T
-): (options: BuilderOptions, context: BuilderContext) => Observable<BuilderOutput> {
-  return function (options: BuilderOptions, context: BuilderContext): Observable<BuilderOutput> {
-    const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
+import { Logger, ProcessManager } from '@utils/index'
 
-    return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
-      switchMap((result) => {
-        if (result) {
-          const builder = new Builder(options, context)
-          return builder.run()
-        } else {
-          return of({ success: false })
-        }
-      }),
-      map((value) => {
-        return value
-      })
-    )
-  }
-}
-
+/**
+ * Base builder for extending from.
+ */
 export abstract class BaseBuilder<
   BuilderOptions extends Record<string, any>,
   NormalizedBuilderOptions extends Record<string, any>,
@@ -61,11 +41,21 @@ export abstract class BaseBuilder<
     this.init()
   }
 
+  /**
+   * Initiate the builder first.
+   */
   public init (): void {
     return
   }
 
+  /**
+   * The run command about what to do
+   */
   public abstract run (): Observable<BuilderOutput>
 
+  /**
+   * Normalize the incoming options
+   * @param options
+   */
   public abstract normalizeOptions (options: BuilderOptions): NormalizedBuilderOptions
 }

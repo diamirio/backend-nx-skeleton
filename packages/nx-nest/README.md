@@ -15,4 +15,10 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) schematics to generate nest.js projects.
 
-# [Read The API Documentation](./API.md)
+**[Read The API Documentation](./API.md)**
+
+# Schematics
+
+## Application
+
+## Component

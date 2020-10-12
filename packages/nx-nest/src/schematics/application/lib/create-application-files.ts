@@ -29,7 +29,7 @@ export async function createApplicationFiles (options: NormalizedSchema, context
   }
 
   return chain([
-    await applyOverwriteWithDiff(
+    applyOverwriteWithDiff(
       // just needs the url the rest it will do it itself
       apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
