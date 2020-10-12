@@ -52,26 +52,22 @@ export enum AvailableMicroserviceTypes {
  */
 export type AvailableLinterTypes = Exclude<Linter, 'tslint'>
 
-//  Prettified names for components to use with prompts and such.
-export const PrettyNamesForAvailableThingies: Record<
-| keyof typeof AvailableComponents
-| keyof typeof AvailableServerTypes
-| keyof typeof AvailableDBTypes
-| keyof typeof AvailableTestsTypes
-| keyof typeof AvailableMicroserviceTypes,
-string
-> = {
-  SERVER: 'Server',
-  COMMAND: 'Command',
-  BG_TASK: 'Scheduler',
-  MICROSERVICE_CLIENT: 'Microservice Client',
-  MICROSERVICE_SERVER: 'Microservice Server',
-  GRAPHQL: 'GraphQL Server',
-  RESTFUL: 'Restful Server',
-  NONE: 'None',
-  TYPEORM_MYSQL: 'MySQL with TypeORM',
-  TYPEORM_POSTGRESQL: 'PostgreSQL with TypeORM',
-  MONGOOSE_MONGODB: 'MongoDB with Mongoose',
-  JEST: 'Jest',
-  RMQ: 'RabbitMQ'
+/**
+ * Prettified names for components to use with prompts and such.
+ */
+export const PrettyNamesForAvailableThingies: Record<AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes, string> = {
+  [AvailableComponents.SERVER]: 'Server',
+  [AvailableComponents.COMMAND]: 'Command',
+  [AvailableComponents.BG_TASK]: 'Scheduler',
+  [AvailableComponents.MICROSERVICE_CLIENT]: 'Microservice Client',
+  [AvailableComponents.MICROSERVICE_SERVER]: 'Microservice Server',
+  [AvailableServerTypes.GRAPHQL]: 'GraphQL Server',
+  [AvailableServerTypes.RESTFUL]: 'Restful Server',
+  [AvailableDBTypes.NONE]: 'None',
+  [AvailableDBTypes.TYPEORM_MYSQL]: 'MySQL with TypeORM',
+  [AvailableDBTypes.TYPEORM_POSTGRESQL]: 'PostgreSQL with TypeORM',
+  [AvailableDBTypes.MONGOOSE_MONGODB]: 'MongoDB with Mongoose',
+  [AvailableTestsTypes.JEST]: 'Jest',
+  [AvailableTestsTypes.NONE]: 'None',
+  [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ'
 }

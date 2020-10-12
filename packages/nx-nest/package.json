@@ -16,7 +16,7 @@
     "build": "tsc -p tsconfig.build.json",
     "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents '**/*.json' ../dist/ && rimraf dist/**/files/ && cpy --cwd=src --parents '**/files/**' ../dist/",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",

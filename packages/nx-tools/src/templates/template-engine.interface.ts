@@ -1,4 +1,3 @@
-import * as micromatch from 'micromatch'
 import { ConfigureOptions } from 'nunjucks'
 
 export interface JinjaTemplateOptions {
@@ -7,12 +6,13 @@ export interface JinjaTemplateOptions {
 }
 
 export interface MultipleJinjaTemplateOptions<T extends Record<string, any> = Record<string, any>> {
-  templates: { path: RegExp, output: string, factory: (ctx?: T, output?: string) => T }[]
+  templates: MultipleJinjaTemplateTemplates<T>[]
   nunjucks?: ConfigureOptions
 }
 
-export interface GenerateExportsJinjaTemplateOptions {
+export interface MultipleJinjaTemplateTemplates<T extends Record<string, any> = Record<string, any>> {
   root?: string
-  templates: { pattern: string | string[], output: string, options?: micromatch.Options }[]
-  nunjucks?: ConfigureOptions
+  path: string | RegExp
+  output: string
+  factory: (ctx?: T, output?: string) => T
 }

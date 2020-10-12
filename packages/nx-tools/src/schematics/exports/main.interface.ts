@@ -1,4 +1,4 @@
-import { GenerateExportsJinjaTemplateOptions } from '@src/templates'
+import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 
 // this is the one gets inputted from the command line
 export interface Schema {

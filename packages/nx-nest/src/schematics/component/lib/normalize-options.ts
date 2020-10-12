@@ -7,8 +7,9 @@ import { camelCase, pascalCase } from 'change-case'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
+import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
-import { AvailableComponents, AvailableServerTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**
@@ -32,6 +33,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // check for prior configuration
       {
         title: 'Checking for parent application.',
+        /**
+         * if parent configuration is not injected through schematic we will parse it ourselves
+         * this should be for cases that the schematic is not run internally and run through cli
+         */
         enabled: (ctx): boolean => ctx.parentWsConfiguration === undefined,
         task: (ctx, task): void => {
           // if this is created with this schematic there should be a nx json
@@ -62,7 +67,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
-      // remove unwanted charachters from directory name
+      // parse component name and convert casings to use in template
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
@@ -77,13 +82,13 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
-      // select server functionality
+      // select comnponent type
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components.map((c) => {
-            if (c === 'server' || c === 'bgtask' || c === 'command' || c === 'microservice-server') {
-              return { name: c as AvailableComponentsSelection, message: c }
+            if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+              return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
             }
           })
 
@@ -114,15 +119,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          const rootMap: Record<typeof ctx.type, string> = {
-            [AvailableServerTypes.RESTFUL]: 'server',
-            [AvailableServerTypes.GRAPHQL]: 'server',
-            [AvailableComponents.BG_TASK]: 'task',
-            [AvailableComponents.COMMAND]: 'command',
-            [AvailableComponents.MICROSERVICE_SERVER]: 'microservice-server'
-          }
-
-          ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, rootMap[ctx.type], 'modules'))
+          ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type], 'modules'))
 
           if (
             directoryExists(join(ctx.root, ctx.name)) &&

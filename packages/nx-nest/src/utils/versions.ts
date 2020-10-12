@@ -1,5 +1,4 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
+import { PackageVersions, mergeObjectsWithArrayOverwrite } from '@webundsoehne/nx-tools'
 
 import * as versions from './versions.constant'
 import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
@@ -20,39 +19,39 @@ export function calculateDependencies (schema: NormalizedSchema, builders?: bool
   let dependencies: PackageVersions = versions.baseDeps
 
   if (schema.tests === AvailableTestsTypes.JEST) {
-    dependencies = merge(dependencies, versions.testDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.testDeps)
   }
 
   if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.RESTFUL) {
-    dependencies = merge(dependencies, versions.restServerDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.restServerDeps)
   }
 
   if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.GRAPHQL) {
-    dependencies = merge(dependencies, versions.graphqlServerDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.graphqlServerDeps)
   }
 
   if (schema.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
-    dependencies = merge(dependencies, versions.microserviceServerModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.microserviceServerModuleDeps)
   }
 
   if (schema.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
-    dependencies = merge(dependencies, versions.microserviceClientModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.microserviceClientModuleDeps)
   }
 
   if (schema.components.includes(AvailableComponents.BG_TASK)) {
-    dependencies = merge(dependencies, versions.taskModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.taskModuleDeps)
   }
 
   if (schema.components.includes(AvailableComponents.COMMAND)) {
-    dependencies = merge(dependencies, versions.commandModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.commandModuleDeps)
   }
 
   if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(schema.database)) {
-    dependencies = merge(dependencies, versions.typeormDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.typeormDeps)
   }
 
   if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(schema.database)) {
-    dependencies = merge(dependencies, versions.mongooseDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.mongooseDeps)
   }
 
   return dependencies

@@ -9,6 +9,7 @@ export interface CreateApplicationRuleInterface {
   multipleTemplates?: MultipleFileTemplatesInterface[]
   omit?: OmitInterface[]
   trigger?: TriggerActionsInterface[]
+  format?: boolean
 }
 
 export interface FileTemplatesInterface extends BaseWithCondition {

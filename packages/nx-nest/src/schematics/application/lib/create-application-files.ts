@@ -1,9 +1,9 @@
 import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, mergeObjectsWithArrayOverwrite, runInRule } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/index'
+import { SchematicFiles, SchematicMatchKeywords } from '@src/interfaces/file.constants'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 
 /**
@@ -33,16 +33,7 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // just needs the url the rest it will do it itself
       apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
-      options?.priorConfiguration
-        ? apply(
-          source,
-          generateRules(
-            merge<NormalizedSchema>(options, options.priorConfiguration, { arrayMerge: (target, source) => source }),
-            log,
-            { silent: true }
-          )
-        )
-        : null,
+      options?.priorConfiguration ? apply(source, generateRules(mergeObjectsWithArrayOverwrite(options, options.priorConfiguration), log, { silent: true })) : null,
       context
     ),
 
@@ -89,6 +80,7 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
   }
 
   const template: CreateApplicationRuleInterface = {
+    format: true,
     templates: [
       {
         condition: options?.server === AvailableServerTypes.RESTFUL,
@@ -101,11 +93,11 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       // this might be shared so not using enum
       {
         condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database),
-        match: 'typeorm'
+        match: SchematicMatchKeywords.TYPEORM_FILES
       },
       {
         condition: [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database),
-        match: 'mongoose'
+        match: SchematicMatchKeywords.MONGOOSE_FILES
       }
     ],
 
@@ -113,36 +105,37 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       // tests configuration
       {
         condition: options.tests !== AvailableTestsTypes.JEST,
-        match: (file: string): boolean => !(file.match('.spec.ts') && file.match('tests/'))
+        match: (file: string): boolean => !SchematicFiles[AvailableTestsTypes.JEST].every((f) => file.match(f))
       },
       // server configuration
       {
         condition: !options.components.includes(AvailableComponents.SERVER),
-        match: (file: string): boolean => !file.match('src/server/')
+        match: (file: string): boolean => !SchematicFiles[AvailableComponents.SERVER].every((f) => file.match(f))
       },
       // bgtask aka nest-scheduler
       {
         condition: !options.components.includes(AvailableComponents.BG_TASK),
-        match: (file: string): boolean => !file.match('src/task/')
+        match: (file: string): boolean => !SchematicFiles[AvailableComponents.BG_TASK].every((f) => file.match(f))
       },
       // command module
       {
         condition: !options.components.includes(AvailableComponents.COMMAND),
-        match: (file: string): boolean => !file.match('src/command/')
+        match: (file: string): boolean => !SchematicFiles[AvailableComponents.COMMAND].every((f) => file.match(f))
       },
       // microservices host
       {
         condition: !options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
-        match: (file: string): boolean => !file.match('src/microservice-server/')
+        match: (file: string): boolean => !SchematicFiles[AvailableComponents.MICROSERVICE_SERVER].every((f) => file.match(f))
       },
       {
+        // @TODO: REMVOE THIS?
         condition: !options.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
         match: (file: string): boolean => !file.match('src/microservice-client/')
       },
       // omit constants when a single service is selected
       {
         condition: options.components.length === 1,
-        match: (file: string): boolean => !file.match('src/constants.ts')
+        match: (file: string): boolean => !SchematicFiles.CONSTANTS.every((f) => file.match(f))
       }
     ]
   }

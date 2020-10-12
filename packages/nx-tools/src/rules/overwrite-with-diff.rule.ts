@@ -5,7 +5,7 @@ import { EOL } from 'os'
 import { dirname } from 'path'
 import { Observable } from 'rxjs'
 
-import { Logger } from '@src/utils/logger/logger'
+import { Logger } from '@utils/index'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 export async function applyOverwriteWithDiff (source: Source, oldSource: Source | void, context: SchematicContext): Promise<Rule> {

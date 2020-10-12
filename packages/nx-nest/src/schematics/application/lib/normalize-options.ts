@@ -114,13 +114,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => ctx.components?.length > 0,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponents> = [
-            { name: AvailableComponents.SERVER, message: PrettyNamesForAvailableThingies.SERVER },
-            { name: AvailableComponents.MICROSERVICE_SERVER, message: PrettyNamesForAvailableThingies.MICROSERVICE_SERVER },
-            { name: AvailableComponents.MICROSERVICE_CLIENT, message: PrettyNamesForAvailableThingies.MICROSERVICE_CLIENT },
-            { name: AvailableComponents.BG_TASK, message: PrettyNamesForAvailableThingies.BG_TASK },
-            { name: AvailableComponents.COMMAND, message: PrettyNamesForAvailableThingies.COMMAND }
-          ]
+          const choices: ConvertToPromptType<AvailableComponents> = Object.keys(AvailableComponents).map((o) => ({
+            name: AvailableComponents[o],
+            message: PrettyNamesForAvailableThingies[AvailableComponents[o]]
+          }))
 
           // select the base components
           ctx.components = await task.prompt<AvailableComponents[]>({
@@ -150,10 +147,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx?.server,
         task: async (ctx, task): Promise<void> => {
           // there can be two selections of API servers here
-          const choices: ConvertToPromptType<AvailableServerTypes> = [
-            { name: AvailableServerTypes.RESTFUL, message: PrettyNamesForAvailableThingies.RESTFUL },
-            { name: AvailableServerTypes.GRAPHQL, message: PrettyNamesForAvailableThingies.GRAPHQL }
-          ]
+          const choices: ConvertToPromptType<AvailableServerTypes> = Object.keys(AvailableServerTypes).map((o) => ({
+            name: AvailableServerTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableServerTypes[o]]
+          }))
 
           ctx.server = await task.prompt<AvailableServerTypes>({
             type: 'Select',
@@ -175,7 +172,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_SERVER) && !ctx?.microservice,
         task: async (ctx, task): Promise<void> => {
           // there can be two selections of API servers here
-          const choices: ConvertToPromptType<AvailableMicroserviceTypes> = [ { name: AvailableMicroserviceTypes.RMQ, message: PrettyNamesForAvailableThingies.RMQ } ]
+          const choices: ConvertToPromptType<AvailableMicroserviceTypes> = Object.keys(AvailableMicroserviceTypes).map((o) => ({
+            name: AvailableMicroserviceTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableMicroserviceTypes[o]]
+          }))
 
           ctx.microservice = await task.prompt<AvailableMicroserviceTypes>({
             type: 'Select',
@@ -196,12 +196,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx.components.includes(AvailableComponents.BG_TASK) && !ctx?.database,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableDBTypes> = [
-            { name: AvailableDBTypes.NONE, message: PrettyNamesForAvailableThingies.NONE },
-            { name: AvailableDBTypes.TYPEORM_MYSQL, message: PrettyNamesForAvailableThingies.TYPEORM_MYSQL },
-            { name: AvailableDBTypes.TYPEORM_POSTGRESQL, message: PrettyNamesForAvailableThingies.TYPEORM_POSTGRESQL },
-            { name: AvailableDBTypes.MONGOOSE_MONGODB, message: PrettyNamesForAvailableThingies.MONGOOSE_MONGODB }
-          ]
+          const choices: ConvertToPromptType<AvailableDBTypes> = Object.keys(AvailableDBTypes).map((o) => ({
+            name: AvailableDBTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableDBTypes[o]]
+          }))
 
           // there can be two selections of API servers here
           ctx.database = await task.prompt<AvailableDBTypes>({
@@ -223,10 +221,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !ctx?.tests,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableTestsTypes> = [
-            { name: AvailableTestsTypes.JEST, message: PrettyNamesForAvailableThingies.JEST },
-            { name: AvailableTestsTypes.NONE, message: PrettyNamesForAvailableThingies.NONE }
-          ]
+          const choices: ConvertToPromptType<AvailableTestsTypes> = Object.keys(AvailableTestsTypes).map((o) => ({
+            name: AvailableTestsTypes[o],
+            message: PrettyNamesForAvailableThingies[o]
+          }))
 
           ctx.tests = await task.prompt<AvailableTestsTypes>({
             type: 'Select',

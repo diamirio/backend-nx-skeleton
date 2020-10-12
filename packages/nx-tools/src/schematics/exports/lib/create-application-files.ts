@@ -7,5 +7,5 @@ import { NormalizedSchema } from '../main.interface'
 export async function createApplicationFiles (options: NormalizedSchema): Promise<Rule> {
   const source = url(join('./files'))
 
-  return chain([ generateExportsRule(source, options.templates) ])
+  return chain([ generateExportsRule(source, options.templates, 'exports.ts.j2') ])
 }

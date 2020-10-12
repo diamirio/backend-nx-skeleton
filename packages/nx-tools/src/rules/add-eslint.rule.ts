@@ -2,7 +2,7 @@ import { chain, Rule, Tree } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
 import { runInRule } from '@src/rules/run.rule'
-import { Logger } from '@src/utils/logger/logger'
+import { Logger } from '@utils/index'
 
 /**
  * @param  {Tree} host

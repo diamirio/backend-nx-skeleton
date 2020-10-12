@@ -64,6 +64,7 @@ export function formatFiles (
               return
             }
 
+            // dont remove await, eventhough it is not marked as promise it is
             file.content = await prettier.format(file.content, config)
           }
 

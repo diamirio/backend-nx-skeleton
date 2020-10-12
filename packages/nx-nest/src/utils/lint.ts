@@ -31,7 +31,7 @@ export const eslintJson = {
             group: 'index'
           },
           {
-            pattern: '@microservice/**',
+            pattern: '@microservice-server/**',
             group: 'index'
           },
           {

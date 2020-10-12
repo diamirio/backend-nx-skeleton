@@ -56,11 +56,13 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
       .flat() ?? [],
 
     // need to format files before putting them through difference, or else it goes crazy.
-    formatFiles({
-      eslint: true,
-      prettier: true,
-      ...ruleOptions?.format
-    }),
+    appRule.format
+      ? formatFiles({
+        eslint: true,
+        prettier: true,
+        ...ruleOptions?.format
+      })
+      : noop(),
 
     // move all the files to package root
     options?.root ? move(options.root) : noop()

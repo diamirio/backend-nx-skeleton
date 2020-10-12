@@ -4,10 +4,10 @@ import { dirname, join, parse, relative } from 'path'
 import { from } from 'rxjs'
 import { map, mergeMap, scan } from 'rxjs/operators'
 
+import { GenerateExportsJinjaTemplateOptions } from '@src/rules/generate-exports.rule.interface'
 import { getJinjaDefaults } from '@src/templates/jinja-defaults'
-import { GenerateExportsJinjaTemplateOptions } from '@src/templates/template-engine.interface'
 import { getFilesInTree } from '@src/utils/file-system/file-system'
-import { Logger } from '@src/utils/logger/logger'
+import { Logger } from '@utils/index'
 
 export function generateExports (options: GenerateExportsJinjaTemplateOptions): Rule {
   return ((async (host: Tree, context: SchematicContext): Promise<Tree> => {

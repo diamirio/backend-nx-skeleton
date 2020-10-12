@@ -1,11 +1,12 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { join } from 'path'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { getJinjaDefaults } from './jinja-defaults'
 import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
 import { getFilesInTree } from '@src/utils/file-system/file-system'
-import { Logger } from '@utils/logger/logger'
+import { Logger } from '@utils/index'
 
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
@@ -73,7 +74,7 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
         )
 
         if (!matched) {
-          log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => t.path).join(', ')}`)
+          log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => `${t.path}@${t.output}`).join(', ')}`)
           return
         }
 
@@ -83,7 +84,10 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
               log.debug(`Generating template from ${matched}: ${template.output}`)
 
               const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
-              host.create(template.output, content)
+
+              const output: string = template.root ? join(template.root, template.output) : template.output
+
+              host.create(output, content)
             } catch (e) {
               context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)
             }
