@@ -8,6 +8,11 @@ import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-e
 import { getFilesInTree } from '@src/utils/file-system/file-system'
 import { Logger } from '@utils/index'
 
+/**
+ * Generates jinja templates with given context.
+ * @param ctx
+ * @param options
+ */
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
@@ -50,6 +55,11 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
   }) as unknown) as Rule
 }
 
+/**
+ * Generates multiple files from single template with dynamic context.
+ * @param ctx
+ * @param options
+ */
 export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, options: MultipleJinjaTemplateOptions<T>): Rule {
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)

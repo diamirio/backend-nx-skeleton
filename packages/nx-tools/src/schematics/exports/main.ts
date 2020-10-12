@@ -6,6 +6,10 @@ import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
 import { Logger } from '@utils/index'
 
+/**
+ * Default entrypoint for the schematic.
+ * @param schema
+ */
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)

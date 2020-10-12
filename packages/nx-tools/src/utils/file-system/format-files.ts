@@ -9,6 +9,14 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { FormatFilesOptions } from './format-files.interface'
 
+/**
+ * Format files as a rule in a tree.
+ *
+ * Requires configuration to be present in the current tree.
+ *
+ * Will use prettier first, others after.
+ * @param options
+ */
 export function formatFiles (
   options: FormatFilesOptions = {
     skipFormat: false,
@@ -16,15 +24,18 @@ export function formatFiles (
     eslint: false
   }
 ): Rule {
-  const appRootPath = findWorkspaceRoot(process.cwd()).dir
-
-  const eslint = new ESLint({
-    fix: true
-  })
-
+  // insanity check
   if (options.skipFormat || !(options.prettier && options.eslint)) {
     return noop()
   }
+
+  // get root path
+  const appRootPath = findWorkspaceRoot(process.cwd()).dir
+
+  // create new eslint instance
+  const eslint = new ESLint({
+    fix: true
+  })
 
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const files = new Set(

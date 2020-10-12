@@ -8,19 +8,21 @@ import { Observable } from 'rxjs'
 import { Logger } from '@utils/index'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
-export async function applyOverwriteWithDiff (source: Source, oldSource: Source | void, context: SchematicContext): Promise<Rule> {
+/**
+ * Given two sources, this will try to diff-merge prior and new configuration and apply it to current configuration.
+ *
+ * If given one source, it will only apply what is missing from the current file and does not delete anything.
+ *
+ * NX have a problem with its internal overwriting data mechanism so it is generated this way.
+ * @param source
+ * @param oldSource
+ * @param context
+ */
+export function applyOverwriteWithDiff (source: Source, oldSource: Source | void, context: SchematicContext): Rule {
   const log = new Logger(context)
 
   // generate the old tree without aplying something
   let oldTree: Tree
-
-  if (oldSource) {
-    try {
-      oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
-      log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
-      // eslint-disable-next-line no-empty
-    } catch {}
-  }
 
   // angular is not enough for this, need a hacky solution to track the files, because some of them we overwrite directly
   let fileChanges: string[] = []
@@ -30,6 +32,18 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
   return (host: Tree): Rule => {
     return mergeWith(
       apply(source, [
+        // recover old tree first
+        async (): Promise<void> => {
+          if (oldSource) {
+            try {
+              oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
+              log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
+              // eslint-disable-next-line no-empty
+            } catch {}
+          }
+        },
+
+        // merge files for each file
         forEach((file) => {
           if (host.exists(file.path)) {
             const currentFile = host.read(file.path).toString()
@@ -134,6 +148,14 @@ export async function applyOverwriteWithDiff (source: Source, oldSource: Source 
 
 const context = 1
 
+/**
+ * Triple file merge will compare old with new file and apply the changes to the current file.
+ * @param name
+ * @param currentFile
+ * @param oldFile
+ * @param newFile
+ * @param log
+ */
 export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
   let buffer: string
   // create difference-patch
@@ -151,6 +173,13 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
   return buffer
 }
 
+/**
+ * Double file merge only adds changes on the new file to the current file. No delete operation will be performed.
+ * @param name
+ * @param newFile
+ * @param currentFile
+ * @param log
+ */
 export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
   let buffer: string
   const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context }), 'add')
@@ -173,6 +202,11 @@ export function doubleFileMerge (name: string, newFile: string, currentFile: str
   return buffer
 }
 
+/**
+ * Selectively applies patches where you can define to only add or remove items.
+ * @param patch
+ * @param select
+ */
 export function selectivePatch (patch: diff.ParsedDiff, select: 'add' | 'remove'): diff.ParsedDiff {
   return {
     ...patch,
@@ -200,6 +234,12 @@ export function selectivePatch (patch: diff.ParsedDiff, select: 'add' | 'remove'
   }
 }
 
+/**
+ * Required for parsing selective patchs in a string format.
+ * @param str
+ * @param from
+ * @param to
+ */
 function replaceFirstChars (str: string, from: string, to: string): string {
   if (str.substring(0, from.length) === from) {
     return to + str.substring(from.length)
@@ -208,6 +248,13 @@ function replaceFirstChars (str: string, from: string, to: string): string {
   }
 }
 
+/**
+ * Merges files the common part.
+ * @param host
+ * @param file
+ * @param mergedFiles
+ * @param log
+ */
 export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean, log: Logger): void {
   let buffer = file.content
 
@@ -224,6 +271,12 @@ export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | b
   }
 }
 
+/**
+ * Creates a file backup in tree.
+ * @param host
+ * @param file
+ * @param log
+ */
 export function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
   const backupFilePath = `${file.path}.old`
 

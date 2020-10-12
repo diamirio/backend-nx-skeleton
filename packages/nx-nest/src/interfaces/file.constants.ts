@@ -3,7 +3,7 @@ import { AvailableComponents } from '@src/interfaces'
 import { AvailableTestsTypes } from '@src/interfaces/index'
 
 /**
- * This constant includes the files that are required for different components.abs
+ * This constant includes the files that are required for different components.
  * It can be used to filter out files, if that component is not used.
  */
 export const SchematicFiles: Record<string, string[]> = {

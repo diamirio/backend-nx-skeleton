@@ -10,7 +10,7 @@
     "access": "public"
   },
   "scripts": {
-    "lint": "prettier --loglevel warn --write ./*.js && eslint --ext .ts,.js,.tsx,.jsx --fix ./",
+    "lint": "prettier --loglevel warn --write ./**/*.js && eslint --ext .ts,.js,.tsx,.jsx --fix ./",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx ./",
     "lint:staged": "lint-staged"
   },
@@ -21,11 +21,11 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": [
+    "./**/*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./*.{json,md}": [
+    "./**/*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },

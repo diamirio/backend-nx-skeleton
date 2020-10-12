@@ -4,6 +4,12 @@ import { Listr } from 'listr2'
 import { NormalizedSchema, Schema } from '../main.interface'
 import { setSchemaDefaultsInContext } from '@utils/schematics/defaults'
 
+/**
+ * Normalize options for the schematic.
+ * @param host
+ * @param context
+ * @param options
+ */
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [

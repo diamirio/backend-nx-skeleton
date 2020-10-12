@@ -5,6 +5,12 @@ import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, Crea
 import { jinjaTemplate, multipleJinjaTemplate } from '@src/templates/template-engine'
 import { formatFiles } from '@src/utils/file-system/format-files'
 
+/**
+ * Returns a general application rule that can be used in schematics.
+ * @param appRule
+ * @param options
+ * @param ruleOptions
+ */
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
   appRule: CreateApplicationRuleInterface,
   options?: T,

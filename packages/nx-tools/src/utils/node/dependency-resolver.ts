@@ -1,23 +1,10 @@
 import { ProjectGraph } from '@nrwl/workspace/src/core/project-graph'
-import { readFileSync, writeFileSync } from 'fs-extra'
-import { join } from 'path'
 
-export function readPackageJsonFromPath (path: string): string {
-  try {
-    return JSON.parse(readFileSync(join(path, 'package.json'), 'utf8'))
-  } catch (error) {
-    throw new Error('Could not read package.json')
-  }
-}
-
-export function writePackageJsonToPath (packageJson: Record<string, unknown>, path: string): void {
-  try {
-    return writeFileSync(join(path, 'package.json'), JSON.stringify(packageJson, null, 4), 'utf8')
-  } catch (error) {
-    throw new Error('Could not write package.json')
-  }
-}
-
+/**
+ * Will create a dependency graph from nx project graph.
+ * @param graph
+ * @param project
+ */
 export function createDependenciesForProjectFromGraph (graph: ProjectGraph, project: string): Record<string, string> {
   const npmDependencies: Record<string, string> = {}
   const projects: string[] = [ project ]
@@ -46,6 +33,10 @@ export function createDependenciesForProjectFromGraph (graph: ProjectGraph, proj
   return npmDependencies
 }
 
+/**
+ * Merge multiple set of dependencies together.
+ * @param dependenciesObjects
+ */
 export function mergeDependencies (...dependenciesObjects: Record<string, string>[]): Record<string, string> {
   const mergedDependencies: Record<string, string> = {}
 

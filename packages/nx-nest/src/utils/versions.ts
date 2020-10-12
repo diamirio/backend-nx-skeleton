@@ -5,7 +5,7 @@ import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableT
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**
- * Will calculate the dependencies depending on the components selected.abs
+ * Will calculate the dependencies depending on the components selected.
  * Can set the optional variable to true to only return builder dependencies to install it first
  * @param schema
  * @param builders

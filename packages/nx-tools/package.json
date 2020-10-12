@@ -19,7 +19,8 @@
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged && yarn docs:jsdoc",
+    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md"
   },
   "husky": {
     "hooks": {
@@ -28,8 +29,8 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*"
@@ -55,6 +56,14 @@
     "through": "^2.3.8"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^6.0.1",
     "@types/diff": "^4.0.2",
     "@types/eslint": "^7.2.0",
     "@types/figures": "^3.0.1",

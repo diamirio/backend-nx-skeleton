@@ -5,6 +5,12 @@ import through from 'through'
 import { Logger } from './logger'
 import { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
 
+/**
+ * Given the instance it will pipe process output through the logger to append prefixes such as the application name.
+ * @param context
+ * @param instance
+ * @param options
+ */
 export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChildProcess, options?: PipeProcessToLoggerOptions): ExecaChildProcess {
   const logger = new Logger(context)
 

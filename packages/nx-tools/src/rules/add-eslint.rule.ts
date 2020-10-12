@@ -5,13 +5,13 @@ import { runInRule } from '@src/rules/run.rule'
 import { Logger } from '@utils/index'
 
 /**
+ * Adding eslint to workspace
  * @param  {Tree} host
  * @param  {Logger} log
  * @param  {T} options
  * @param  {{json:any} eslint
  * @param  {any}} deps
  * @returns Rule
- * Adding eslint to workspace
  */
 export function addEslintToWorkspace<T extends { root: string }> (host: Tree, log: Logger, options: T, eslint: { json: any, deps: any }): Rule {
   return chain([

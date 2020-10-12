@@ -6,6 +6,11 @@ import { EOL } from 'os'
 
 import { LogLevels, LoggerOptions } from './logger.interface'
 
+/**
+ * A general logger that is wrapped around the angular-cli logger.
+ *
+ * It is not great but winston was not working that well in a amazingly stateless architecture.
+ */
 export class Logger {
   constructor (private context: BuilderContext | SchematicContext, private options?: LoggerOptions) {
     // set default options

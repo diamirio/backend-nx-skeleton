@@ -14,6 +14,32 @@ This is the database available that can be automatically injected.</p></dd>
 <dd><p>Available microservice types after selecting microservice-server as component.</p></dd>
 <dt><a href="#AvailableMicroserviceTypes">AvailableMicroserviceTypes</a></dt>
 <dd><p>Available Linters</p></dd>
+<dt><a href="#SchematicFiles">SchematicFiles</a></dt>
+<dd><p>This enum includes keywords that is used in template to omit certain parts of application.
+Templates are files decorataded with <strong>KEYWORD</strong>.
+Or can be directly used for the other enums like available components and such.</p></dd>
+<dt><a href="#eslintDeps">eslintDeps</a></dt>
+<dd><p>Default eslint configuration to inject to repository.</p></dd>
+</dl>
+
+## Constants
+
+<dl>
+<dt><a href="#PrettyNamesForAvailableThingies">PrettyNamesForAvailableThingies</a></dt>
+<dd><p>Prettified names for components to use with prompts and such.</p></dd>
+<dt><a href="#SchematicFiles">SchematicFiles</a></dt>
+<dd><p>This constant includes the files that are required for different components.
+It can be used to filter out files, if that component is not used.</p></dd>
+<dt><a href="#eslintDeps">eslintDeps</a></dt>
+<dd><p>eslint dependencies that are installed automatically for this schematic.</p></dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#calculateDependencies">calculateDependencies(schema, builders)</a></dt>
+<dd><p>Will calculate the dependencies depending on the components selected.
+Can set the optional variable to true to only return builder dependencies to install it first</p></dd>
 </dl>
 
 <a name="AvailableComponents"></a>
@@ -58,4 +84,55 @@ This is the database available that can be automatically injected.</p>
 
 <p>Available Linters</p>
 
-**Kind**: global variable
+**Kind**: global variable  
+<a name="SchematicFiles"></a>
+
+## SchematicFiles
+
+<p>This enum includes keywords that is used in template to omit certain parts of application.
+Templates are files decorataded with <strong>KEYWORD</strong>.
+Or can be directly used for the other enums like available components and such.</p>
+
+**Kind**: global variable  
+<a name="eslintDeps"></a>
+
+## eslintDeps
+
+<p>Default eslint configuration to inject to repository.</p>
+
+**Kind**: global variable  
+<a name="PrettyNamesForAvailableThingies"></a>
+
+## PrettyNamesForAvailableThingies
+
+<p>Prettified names for components to use with prompts and such.</p>
+
+**Kind**: global constant  
+<a name="SchematicFiles"></a>
+
+## SchematicFiles
+
+<p>This constant includes the files that are required for different components.
+It can be used to filter out files, if that component is not used.</p>
+
+**Kind**: global constant  
+<a name="eslintDeps"></a>
+
+## eslintDeps
+
+<p>eslint dependencies that are installed automatically for this schematic.</p>
+
+**Kind**: global constant  
+<a name="calculateDependencies"></a>
+
+## calculateDependencies(schema, builders)
+
+<p>Will calculate the dependencies depending on the components selected.
+Can set the optional variable to true to only return builder dependencies to install it first</p>
+
+**Kind**: global function
+
+| Param    |
+| -------- |
+| schema   |
+| builders |

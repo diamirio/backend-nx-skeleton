@@ -7,6 +7,6 @@ export interface Schema {
   templates: GenerateExportsJinjaTemplateOptions
 }
 
-export interface NormalizedSchema {
+export interface NormalizedSchema extends Schema {
   templates: Schema['templates']
 }

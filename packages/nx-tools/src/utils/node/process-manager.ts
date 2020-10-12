@@ -5,6 +5,11 @@ import pidtree from 'pidtree'
 
 import { Logger } from '@utils/index'
 
+/**
+ * Process manager is an instance where it tracks current child processes.abs
+ *
+ * You can add long-living and short-living process to keep track of processes spawned by node.
+ */
 export class ProcessManager {
   private logger: Logger
   private tasks: ExecaChildProcess[] = []
@@ -14,27 +19,32 @@ export class ProcessManager {
     this.logger = new Logger(context)
   }
 
+  /** Add a new task that is killable. */
   public add (instance: ExecaChildProcess): ExecaChildProcess {
     this.tasks = [ ...this.tasks, instance ]
     return instance
   }
 
+  /** Add a persistent task that should not be killed until everything finishes. */
   public addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
     this.persistentTasks = [ ...this.persistentTasks, instance ]
     return instance
   }
 
+  /** Kill all non-persistent tasks. */
   public async kill (): Promise<void | void[]> {
     await this.killProcesses(this.tasks)
     this.tasks = []
   }
 
+  /** Stop the processes compeletely. */
   public async stop (): Promise<void | void[]> {
     await this.kill()
     await this.killProcesses(this.persistentTasks)
     this.persistentTasks = []
   }
 
+  /** Tree kill proceseses. */
   private async killProcesses (tasks: ExecaChildProcess[]): Promise<void | void[]> {
     if (tasks.length === 0) {
       this.logger.debug('Nothing found to kill.')

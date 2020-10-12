@@ -1,6 +1,17 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
+/**
+ * @deprecated Now nx schema.json should be utilized better.
+ *
+ * Parses arguments coming from the cli.
+ * The arguments can multiple seperated by commas or single.
+ * The argument can be marked as required, which in that case will throw an error if not provided.
+ * @param task
+ * @param args
+ * @param validArgs
+ * @param options
+ */
 export function parseArguments<T> (
   task: ListrTaskWrapper<any, any>,
   args: string | string[],
