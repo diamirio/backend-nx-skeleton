@@ -12,7 +12,8 @@ import {
   pipeProcessToLogger,
   removePathRoot,
   BaseBuilder,
-  runBuilder
+  runBuilder,
+  isVerbose
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import merge from 'deepmerge'
@@ -37,12 +38,12 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       typescript: require.resolve('typescript/bin/tsc'),
       tscpaths: require.resolve('tscpaths/cjs/index'),
       tscWatch: require.resolve('tsc-watch/lib/tsc-watch'),
-      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig)
+      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }
 
   public run (): Observable<BuilderOutput> {
-    // have to return a observable here
+    // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(
       async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
         // Cleaning the /dist folder
@@ -215,7 +216,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
         args = [ ...args, '--sourceMap' ]
       }
 
-      if (this.options.verbose) {
+      if (isVerbose()) {
         args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
       }
 
@@ -227,7 +228,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       // arguments for tsc paths
       args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
 
-      if (this.options.verbose) {
+      if (isVerbose()) {
         args = [ ...args, '--verbose' ]
       }
     }

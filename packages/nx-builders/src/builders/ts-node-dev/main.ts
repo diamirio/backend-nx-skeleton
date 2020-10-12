@@ -20,6 +20,7 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
   }
 
   public run (): Observable<BuilderOutput> {
+    // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(
       async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
         try {
