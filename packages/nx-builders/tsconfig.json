@@ -9,7 +9,8 @@
       "@application/*": ["schematics/application/*"],
       "@init/*": ["schematics/init/*"],
       "@builders/*": ["builders/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@interfaces/*": ["interfaces/*"]
     }
   },
   "include": ["src"],

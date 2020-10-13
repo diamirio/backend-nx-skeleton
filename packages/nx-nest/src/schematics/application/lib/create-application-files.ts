@@ -40,7 +40,7 @@ export async function createApplicationFiles (options: NormalizedSchema, context
     ...createApplicationRule({
       trigger: [
         {
-          rule: runInRule(log.info.bind(log), 'Adding default components to repository.')
+          rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
         },
         {
           condition: options.components.includes(AvailableComponents.SERVER) && options?.server === AvailableServerTypes.RESTFUL,

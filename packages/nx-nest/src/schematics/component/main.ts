@@ -15,7 +15,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      runInRule(log.info.bind(log), `Creating "${options.type}" component files: ${options.name}@${options.root}`, !schema.silent),
+      runInRule(log.info.bind(log)(`Creating "${options.type}" component files: ${options.name}@${options.root}`), !schema.silent),
       await createApplicationFiles(options, context),
 
       formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })

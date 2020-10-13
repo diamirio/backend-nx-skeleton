@@ -1,17 +1,3 @@
-import { eslintPluginVersion } from './versions.constant'
-
-/**
- * eslint dependencies that are installed automatically for this schematic.
- */
-export const eslintDeps = {
-  dependencies: {},
-  devDependencies: {
-    '@webundsoehne/eslint-config': '*',
-    '@typescript-eslint/eslint-plugin': eslintPluginVersion['@typescript-eslint/eslint-plugin'],
-    'eslint-plugin-import': eslintPluginVersion['eslint-plugin-import']
-  }
-}
-
 /**
  * Default eslint configuration to inject to repository.
  */

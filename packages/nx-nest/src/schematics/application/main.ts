@@ -1,5 +1,6 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { eslintDeps, eslintJson } from '@utils/lint'
+import { eslintJson } from '@utils/lint'
+import { VERSIONS } from '@utils/versions.constant'
 import { addEslintToWorkspace, formatOrSkip, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
@@ -19,24 +20,24 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      runInRule(log.info.bind(log), 'Initiating workspace.'),
+      runInRule(log.info.bind(log)('Initiating workspace.')),
       init({
         ...options,
         skipFormat: true
       }),
 
-      runInRule(log.info.bind(log), 'Adding project to workspace.'),
+      runInRule(log.info.bind(log)('Adding project to workspace.')),
       addProject(options),
 
-      addEslintToWorkspace(host, log, options, { deps: eslintDeps, json: eslintJson }),
+      addEslintToWorkspace(host, log, options, { deps: VERSIONS.eslint, json: eslintJson }),
 
-      runInRule(log.info.bind(log), 'Creating application files.'),
+      runInRule(log.info.bind(log)('Creating application files.')),
       await createApplicationFiles(options, context),
 
-      runInRule(log.info.bind(log), 'Updating integration.'),
+      runInRule(log.info.bind(log)('Updating integration.')),
       updateIntegration(options),
 
-      runInRule(log.info.bind(log), 'Updating tsconfig files.'),
+      runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsconfigPaths(options),
 
       formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })

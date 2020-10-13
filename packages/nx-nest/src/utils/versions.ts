@@ -1,7 +1,7 @@
 import { PackageVersions, mergeObjectsWithArrayOverwrite } from '@webundsoehne/nx-tools'
 
-import * as versions from './versions.constant'
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
+import { VERSIONS } from './versions.constant'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**
@@ -13,45 +13,54 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
   // only add builders
   if (builders) {
-    return versions.builderDeps
+    return VERSIONS.builder
   }
 
-  let dependencies: PackageVersions = versions.baseDeps
+  let dependencies: PackageVersions = VERSIONS.base.default
 
+  // tests
   if (schema.tests === AvailableTestsTypes.JEST) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.testDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableTestsTypes.JEST])
   }
 
+  // api interfaces
   if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.RESTFUL) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.restServerDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableServerTypes.RESTFUL])
   }
 
   if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.GRAPHQL) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.graphqlServerDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableServerTypes.GRAPHQL])
+  }
+
+  // microservices
+  if ([ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => schema.components.includes(c))) {
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS.base.microservice)
   }
 
   if (schema.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.microserviceServerModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_SERVER])
   }
 
   if (schema.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.microserviceClientModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_CLIENT])
   }
 
+  // components
   if (schema.components.includes(AvailableComponents.BG_TASK)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.taskModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.BG_TASK])
   }
 
   if (schema.components.includes(AvailableComponents.COMMAND)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.commandModuleDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.COMMAND])
   }
 
+  // db related
   if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(schema.database)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.typeormDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableDBAdapters.TYPEORM])
   }
 
   if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(schema.database)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, versions.mongooseDeps)
+    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableDBAdapters.MONGOOSE])
   }
 
   return dependencies

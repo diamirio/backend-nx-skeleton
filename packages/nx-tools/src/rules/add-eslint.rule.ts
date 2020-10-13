@@ -17,13 +17,13 @@ export function addEslintToWorkspace<T extends { root: string }> (host: Tree, lo
   return chain([
     !host.exists(`${options.root}/.eslintrc`) && !host.exists(`${options.root}/.eslintrc.json`)
       ? chain([
-        runInRule(log.info.bind(log), 'Adding eslint configuration.'),
+        runInRule(log.info.bind(log)('Adding eslint configuration.')),
 
         addLintFiles(options.root, Linter.EsLint, {
           localConfig: eslint.json,
           extraPackageDeps: eslint.deps
         })
       ])
-      : runInRule(log.warn.bind(log), 'Skipping since eslint configuration already exists.')
+      : runInRule(log.warn.bind(log)('Skipping since eslint configuration already exists.'))
   ])
 }

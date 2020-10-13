@@ -5,7 +5,7 @@ import {
   AvailableTestsTypes,
   AvailableLinterTypes,
   AvailableMicroserviceTypes
-} from '@interfaces/available-options.interface'
+} from '@src/interfaces/available.constants'
 
 /**
  * This is the unparsed options list coming from angular-schematics

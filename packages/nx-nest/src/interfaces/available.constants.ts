@@ -33,6 +33,14 @@ export enum AvailableDBTypes {
 }
 
 /**
+ * Database adapters, these are not selectable but used in internal scripts.
+ */
+export enum AvailableDBAdapters {
+  TYPEORM = 'typeorm',
+  MONGOOSE = 'mongoose'
+}
+
+/**
  * Available test configurations.
  */
 export enum AvailableTestsTypes {
