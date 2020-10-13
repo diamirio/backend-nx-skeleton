@@ -1,7 +1,7 @@
 {
   "name": "@webundsoehne/eslint-config",
   "version": "1.0.0",
-  "description": "Eslint configuration for my taste.",
+  "description": "Eslint configuration for Web&Söhne applications.",
   "main": "index.js",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "author": "Backend <backend@webundsoehne.com>",

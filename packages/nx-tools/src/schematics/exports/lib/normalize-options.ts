@@ -2,7 +2,7 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { setSchemaDefaultsInContext } from '@utils/schematics/defaults'
+import { setSchemaDefaultsInContext } from '@utils'
 
 /**
  * Normalize options for the schematic.
@@ -16,7 +16,6 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'templates' ] } })
         }
       }

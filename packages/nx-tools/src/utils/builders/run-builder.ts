@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
 import { calculateProjectDependencies, checkDependentProjectsHaveBeenBuilt } from '@nrwl/workspace/src/utils/buildable-libs-utils'
@@ -12,7 +11,6 @@ import { BaseBuilder } from './base-builder'
  * @param Builder
  */
 export function runBuilder<T extends new (options: BuilderOptions, context: BuilderContext) => BaseBuilder<BuilderOptions, any, any>, BuilderOptions extends Record<string, any>> (
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Builder: T
 ): (options: BuilderOptions, context: BuilderContext) => Observable<BuilderOutput> {
   return function (options: BuilderOptions, context: BuilderContext): Observable<BuilderOutput> {

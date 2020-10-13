@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { NormalizedSchema } from './../main.interface'
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 

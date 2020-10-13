@@ -1,7 +1,7 @@
 image: node:14-alpine
 
 variables:
-  PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders" --scope "@webundsoehne/eslint-config"'
+  PUBLIC_PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders" --scope "@webundsoehne/eslint-config"'
 
 stages:
   - install
@@ -29,14 +29,14 @@ install:
 lint:
   stage: lint
   script:
-    - eval yarn command --parallel ${PACKAGE_SCOPE} lint:check
+    - eval yarn command --parallel ${PUBLIC_PACKAGE_SCOPE} lint:check
   tags:
     - node
 
 build:
   stage: build
   script:
-    - eval yarn command ${PACKAGE_SCOPE} --include-dependencies build
+    - eval yarn command ${PUBLIC_PACKAGE_SCOPE} --include-dependencies build
   artifacts:
     paths:
       - packages/*/dist
@@ -54,7 +54,7 @@ publish:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: publish
     PLUGIN_ADD_MODULES: semantic-release-monorepo @semantic-release/gitlab
-    PLUGIN_OVERRIDE: npx --no-install lerna exec ${PACKAGE_SCOPE} --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
+    PLUGIN_OVERRIDE: npx --no-install lerna exec ${PUBLIC_PACKAGE_SCOPE} --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: "true"

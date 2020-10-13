@@ -29,7 +29,6 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           setSchemaDefaultsInContext(ctx, {
             default: [
               {

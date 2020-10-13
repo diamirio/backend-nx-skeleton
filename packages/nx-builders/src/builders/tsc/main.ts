@@ -134,6 +134,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
+    // globbing some files
     const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
       return glob.sync(pattern, {
         cwd: input,
@@ -142,6 +143,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       })
     }
 
+    // normalize assets
     options.assets.forEach((asset) => {
       if (typeof asset === 'string') {
         files.push({

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
 import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
 import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils'

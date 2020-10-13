@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import { Linter } from '@nrwl/workspace'
 
 /**
