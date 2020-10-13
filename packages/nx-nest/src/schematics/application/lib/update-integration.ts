@@ -3,7 +3,7 @@ import { updateNxJsonInTree } from '@nrwl/workspace'
 import { updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
 
 /**
  * Update integration with different interfaces.

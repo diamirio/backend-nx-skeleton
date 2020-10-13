@@ -1,44 +1,48 @@
 {
-  "extends": "../../.eslintrc.js",
+  "extends":"../../.eslintrc.js",
   "rules": {
     "import/order": [
       "error",
       {
         "pathGroups": [
           {
-            "pattern": "@src/**",
+            "pattern": "@filter",
             "group": "index"
           },
           {
-            "pattern": "@init/**",
+            "pattern": "@filter/**",
             "group": "index"
           },
           {
-            "pattern": "@integration/**",
+            "pattern": "@decorator",
             "group": "index"
           },
           {
-            "pattern": "@interfaces/**",
+            "pattern": "@decorator/**",
             "group": "index"
           },
           {
-            "pattern": "@rules/**",
+            "pattern": "@interface",
             "group": "index"
           },
           {
-            "pattern": "@schematics/**",
+            "pattern": "@module",
             "group": "index"
           },
           {
-            "pattern": "@templates/**",
+            "pattern": "@module/**",
             "group": "index"
           },
           {
-            "pattern": "@utils",
+            "pattern": "@provider",
             "group": "index"
           },
           {
-            "pattern": "@utils/**",
+            "pattern": "@provider/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@util",
             "group": "index"
           }
         ],
@@ -54,6 +58,5 @@
         }
       }
     ]
-  },
-  "ignorePatterns": ["!**/*"]
+  }
 }

@@ -1,9 +1,9 @@
 import { Path } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 
-import { SchematicFiles } from '@src/interfaces'
-import { MultipleJinjaTemplateOptions } from '@src/templates/template-engine.interface'
-import { FormatFilesOptions } from '@src/utils/file-system/format-files.interface'
+import { SchematicFiles } from '@interfaces/schematic-files.interface'
+import { MultipleJinjaTemplateOptions } from '@templates/template-engine.interface'
+import { FormatFilesOptions } from '@utils'
 
 /**
  * Generates application rules for many of the scheematics.

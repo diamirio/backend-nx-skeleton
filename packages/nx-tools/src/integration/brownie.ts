@@ -3,7 +3,7 @@ import { readNxJson, updateJsonInTree } from '@nrwl/workspace'
 
 import { BrownieIntegrationInterface } from './brownie.interface'
 import { EnrichedNxJson } from '@interfaces/nx-json.interface'
-import { deepMergeWithUniqueMergeArray } from '@utils/index'
+import { deepMergeWithUniqueMergeArray } from '@utils'
 
 /**
  * Updates brownie integration by wiriting data to nx.json

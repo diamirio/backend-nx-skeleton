@@ -11,22 +11,6 @@ export const eslintJson = {
           {
             pattern: '@src/**',
             group: 'index'
-          },
-          {
-            pattern: '@server/**',
-            group: 'index'
-          },
-          {
-            pattern: '@microservice-server/**',
-            group: 'index'
-          },
-          {
-            pattern: '@task/**',
-            group: 'index'
-          },
-          {
-            pattern: '@command/**',
-            group: 'index'
           }
         ],
         pathGroupsExcludedImportTypes: [ 'builtin' ],

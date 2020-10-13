@@ -4,8 +4,8 @@ import moment from 'moment'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
-import { CacheLifetimeOptions, Request } from '../interface'
-import { ConfigParam, Configurable } from '../provider/config'
+import { CacheLifetimeOptions, Request } from '@interface'
+import { ConfigParam, Configurable } from '@provider/config'
 
 export class CacheLifetimeHelperInterceptor implements NestInterceptor {
   private readonly logger = new Logger(this.constructor.name)

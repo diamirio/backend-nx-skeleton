@@ -1,4 +1,4 @@
-import { AvailableBuilders } from '@src/interfaces/available.constants'
+import { AvailableBuilders } from '@interfaces/available.constants'
 
 /** Input schema for schematic */
 export interface Schema {

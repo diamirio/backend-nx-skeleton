@@ -2,7 +2,7 @@ import { Rule } from '@angular-devkit/schematics'
 import { readNxJson, readWorkspaceJson as baseReadWorkspaceJson, updateJsonInTree } from '@nrwl/workspace'
 
 import { EnrichedNxJson, EnrichedWorkspaceJson } from '@interfaces/nx-json.interface'
-import { deepMergeWithUniqueMergeArray } from '@utils/index'
+import { deepMergeWithUniqueMergeArray } from '@utils'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.

@@ -1,13 +1,6 @@
 import { PackageVersions, LinterDependencies } from '@webundsoehne/nx-tools'
 
-import {
-  AvailableDBAdapters,
-  AvailableMicroserviceTypes,
-  AvailableTestsTypes,
-  AvailableComponents,
-  AvailableDBTypes,
-  AvailableServerTypes
-} from '@src/interfaces/available.constants'
+import { AvailableDBAdapters, AvailableMicroserviceTypes, AvailableTestsTypes, AvailableComponents, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
 
 export type Versions = Partial<
 Record<

@@ -1,10 +1,10 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { formatOrSkip } from '@rules/index'
 
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { Logger } from '@utils/index'
+import { formatOrSkip } from '@rules/format-with-skip.rule'
+import { Logger } from '@utils'
 
 /**
  * Default entrypoint for the schematic.

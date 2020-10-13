@@ -7,7 +7,7 @@ import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { FormatFilesOptions } from './format-files.interface'
-import { Logger } from '@utils/index'
+import { Logger } from '@utils'
 
 /**
  * Format files as a rule in a tree.

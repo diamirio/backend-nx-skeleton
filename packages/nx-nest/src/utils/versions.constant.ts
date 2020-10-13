@@ -1,6 +1,5 @@
 import { Versions } from './versions.interface'
-import { AvailableDBTypes } from '@interfaces/index'
-import { AvailableComponents, AvailableDBAdapters, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 
 export const VERSIONS: Versions = {
   builder: {},

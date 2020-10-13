@@ -5,7 +5,7 @@ import { EOL } from 'os'
 import { dirname } from 'path'
 import { Observable } from 'rxjs'
 
-import { Logger } from '@utils/index'
+import { Logger } from '@utils'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 /**

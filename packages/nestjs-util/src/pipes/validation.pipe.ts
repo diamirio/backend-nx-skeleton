@@ -1,7 +1,7 @@
 import { ValidationPipe, ValidationError, ValidationPipeOptions, Injectable, ArgumentMetadata } from '@nestjs/common'
 
-import { ClassValidatorException } from '../filter/exception.interface'
-import { OVERRIDE_VALIDATION } from './../decorator/validation-override/validation-override.constants'
+import { OVERRIDE_VALIDATION } from '@decorator/validation-override/validation-override.constants'
+import { ClassValidatorException } from '@filter/exception.interface'
 
 @Injectable()
 export class ExtendedValidationPipe extends ValidationPipe {

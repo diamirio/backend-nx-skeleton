@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { NormalizedSchema } from './../main.interface'
-import { AvailableComponents, AvailableServerTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 
 export const ComponentLocationsMap: Record<NormalizedSchema['type'], string> = {
   [AvailableServerTypes.RESTFUL]: 'server',

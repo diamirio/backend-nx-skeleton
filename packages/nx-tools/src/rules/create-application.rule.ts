@@ -1,9 +1,9 @@
 import { filter, forEach, move, noop, Rule } from '@angular-devkit/schematics'
 import { applyPathTemplate } from '@angular-devkit/schematics/src/rules/template'
 
-import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@src/rules/create-application.rule.interface'
-import { jinjaTemplate, multipleJinjaTemplate } from '@src/templates/template-engine'
-import { formatFiles } from '@src/utils/file-system/format-files'
+import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
+import { jinjaTemplate, multipleJinjaTemplate } from '@templates/template-engine'
+import { formatFiles } from '@utils/file-system/format-files'
 
 /**
  * Returns a general application rule that can be used in schematics.

@@ -1,6 +1,6 @@
 import { EnrichedWorkspaceJsonProject } from '@webundsoehne/nx-tools'
 
-import { AvailableComponents, AvailableServerTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**

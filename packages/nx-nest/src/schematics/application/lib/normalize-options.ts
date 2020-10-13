@@ -15,7 +15,7 @@ import {
   AvailableServerTypes,
   AvailableTestsTypes,
   PrettyNamesForAvailableThingies
-} from '@src/interfaces/available.constants'
+} from '@interfaces/available.constants'
 
 /**
  * Normalize the options passed in through angular-schematics.

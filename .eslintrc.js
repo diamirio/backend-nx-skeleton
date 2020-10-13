@@ -10,23 +10,11 @@ module.exports = {
             group: 'index'
           },
           {
-            pattern: '@application/**',
-            group: 'index'
-          },
-          {
-            pattern: '@init/**',
-            group: 'index'
-          },
-          {
             pattern: '@interfaces/**',
             group: 'index'
           },
           {
             pattern: '@utils/**',
-            group: 'index'
-          },
-          {
-            pattern: '@integration/**',
             group: 'index'
           }
         ],

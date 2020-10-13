@@ -1,8 +1,8 @@
 import { chain, Rule, url } from '@angular-devkit/schematics'
-import { generateExportsRule } from '@rules/index'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
+import { generateExportsRule } from '@rules/generate-exports.rule'
 
 /**
  * Creates application files for auto generating exports.

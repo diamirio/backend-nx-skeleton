@@ -2,7 +2,7 @@ import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common'
 import fs from 'fs-extra'
 import path from 'path'
 
-import { Configurable, ConfigParam } from '../../provider/config'
+import { Configurable, ConfigParam } from '@provider/config'
 
 let MaintenanceServiceInstance: MaintenanceService
 

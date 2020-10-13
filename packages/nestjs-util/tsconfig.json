@@ -5,6 +5,16 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
+      "@filter": ["filter/index"],
+      "@filter/*": ["filter/*"],
+      "@decorator": ["decorator/index"],
+      "@decorator/*": ["decorator/*"],
+      "@interface": ["interface"],
+      "@module": ["module/index"],
+      "@module/*": ["module/*"],
+      "@provider": ["provider/index"],
+      "@provider/*": ["provider/*"],
+      "@util": ["util/index"]
     }
   },
   "include": ["src"],

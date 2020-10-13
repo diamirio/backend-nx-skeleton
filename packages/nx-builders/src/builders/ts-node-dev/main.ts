@@ -77,7 +77,6 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
 
     const spawnOptions: SpawnOptions = {
       env: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         NODE_ENV: 'develop',
         ...environment,
         ...process.env

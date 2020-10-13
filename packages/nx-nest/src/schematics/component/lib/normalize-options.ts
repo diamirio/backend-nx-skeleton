@@ -9,7 +9,7 @@ import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
-import { AvailableComponents, PrettyNamesForAvailableThingies } from '@src/interfaces'
+import { AvailableComponents, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**

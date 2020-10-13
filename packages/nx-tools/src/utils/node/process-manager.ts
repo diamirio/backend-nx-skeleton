@@ -3,7 +3,7 @@ import { SchematicContext } from '@angular-devkit/schematics'
 import { ExecaChildProcess } from 'execa'
 import pidtree from 'pidtree'
 
-import { Logger } from '@utils/index'
+import { Logger } from '@utils'
 
 /**
  * Process manager is an instance where it tracks current child processes.abs

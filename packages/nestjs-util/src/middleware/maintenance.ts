@@ -1,7 +1,7 @@
 import { Inject, NestMiddleware } from '@nestjs/common'
 import { FastifyRequest } from 'fastify'
 
-import { MaintenanceService } from '../module/maintenance/maintenance.service'
+import { MaintenanceService } from '@module/maintenance/maintenance.service'
 
 export class MaintenanceMiddleware implements NestMiddleware {
   constructor (@Inject(MaintenanceService) private readonly service: MaintenanceService) {}

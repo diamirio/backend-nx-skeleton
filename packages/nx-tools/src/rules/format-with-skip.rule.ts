@@ -1,7 +1,7 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics'
 
 import { runInRule } from './run.rule'
-import { Logger, formatFiles, FormatFilesOptions } from '@utils/index'
+import { Logger, formatFiles, FormatFilesOptions } from '@utils'
 
 /**
  * Returns a general prettier-eslint format rule for schematics.

@@ -2,7 +2,7 @@ import { chain, Rule } from '@angular-devkit/schematics'
 import { addDepsToPackageJson } from '@nrwl/workspace'
 
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
-import { calculateDependencies } from '@src/utils/versions'
+import { calculateDependencies } from '@utils/versions'
 
 // import { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/schematics/init/main'
 

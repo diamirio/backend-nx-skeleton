@@ -3,7 +3,7 @@ import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInt
 
 import { getSchematicFiles } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/index'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 
 /**

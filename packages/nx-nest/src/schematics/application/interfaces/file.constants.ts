@@ -1,9 +1,7 @@
 import { SchematicFiles } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
-/* eslint-disable @typescript-eslint/naming-convention */
-import { AvailableComponents } from '@src/interfaces'
-import { AvailableTestsTypes } from '@src/interfaces/index'
+import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.constants'
 
 /**
  * This constant includes the files that are required for different components.

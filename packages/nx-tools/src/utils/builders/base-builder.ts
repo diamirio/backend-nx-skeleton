@@ -4,7 +4,7 @@ import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/worksp
 import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { Observable } from 'rxjs'
 
-import { Logger, ProcessManager } from '@utils/index'
+import { Logger, ProcessManager } from '@utils'
 
 /**
  * Base builder for extending from.

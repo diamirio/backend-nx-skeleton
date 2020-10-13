@@ -1,12 +1,12 @@
 import { apply, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff } from '@rules/index'
 import * as micromatch from 'micromatch'
 import { dirname, join, parse, relative } from 'path'
 
 import { createApplicationRule } from './create-application.rule'
-import { GenerateExportsJinjaTemplateOptions } from '@src/rules/generate-exports.rule.interface'
-import { MultipleJinjaTemplateTemplates } from '@src/templates/template-engine.interface'
-import { deepMergeWithUniqueMergeArray, Logger } from '@utils/index'
+import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
+import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
+import { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
+import { deepMergeWithUniqueMergeArray, Logger } from '@utils'
 
 /**
  * Generates from given template. Will search for multiple files that match the import case and will export them from root of the output file.

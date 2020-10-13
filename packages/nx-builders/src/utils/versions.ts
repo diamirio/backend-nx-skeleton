@@ -1,7 +1,7 @@
 import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
 import { VERSIONS } from './versions.constants'
-import { AvailableBuilders } from '@src/interfaces/available.constants'
+import { AvailableBuilders } from '@interfaces/available.constants'
 import { Schema } from '@src/schematics/init/main.interface'
 
 // calculate dependencies

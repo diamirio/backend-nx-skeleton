@@ -1,8 +1,8 @@
 import { chain, Rule, Tree } from '@angular-devkit/schematics'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
-import { runInRule } from '@src/rules/run.rule'
-import { Logger } from '@utils/index'
+import { runInRule } from '@rules/run.rule'
+import { Logger } from '@utils'
 
 /**
  * Adding eslint to workspace

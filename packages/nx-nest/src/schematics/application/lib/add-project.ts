@@ -7,7 +7,7 @@ import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableTestsTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.constants'
 
 /**
  * Add the project to the {workspace,angular}.json

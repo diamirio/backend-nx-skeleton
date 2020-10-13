@@ -1,7 +1,7 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 
 import { Schema } from './main.interface'
-import { initiateBuilderDependencies } from '@src/utils/initiate-builder'
+import { initiateBuilderDependencies } from '@utils/initiate-builder'
 
 /**
  * Install builder dependencies

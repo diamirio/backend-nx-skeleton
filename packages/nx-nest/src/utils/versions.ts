@@ -1,7 +1,7 @@
 import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
 import { VERSIONS } from './versions.constant'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**

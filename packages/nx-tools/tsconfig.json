@@ -6,13 +6,14 @@
     "baseUrl": "src",
     "paths": {
       "@src/*": ["*"],
+      "@init/*": ["init/*"],
       "@integration/*": ["integration/*"],
       "@interfaces/*": ["interfaces/*"],
-      "@init/*": ["init/*"],
       "@rules/*": ["rules/*"],
-      "@utils/*": ["utils/*"],
+      "@schematics/*": ["schematics/*"],
       "@templates/*": ["templates/*"],
-      "@schematics/*": ["schematics/*"]
+      "@utils": ["utils/index"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

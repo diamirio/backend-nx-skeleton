@@ -1,12 +1,12 @@
-import { AvailableDBAdapters } from '@interfaces/index'
 import {
   AvailableComponents,
   AvailableDBTypes,
   AvailableServerTypes,
   AvailableTestsTypes,
   AvailableLinterTypes,
-  AvailableMicroserviceTypes
-} from '@src/interfaces/available.constants'
+  AvailableMicroserviceTypes,
+  AvailableDBAdapters
+} from '@interfaces/available.constants'
 
 /**
  * This is the unparsed options list coming from angular-schematics

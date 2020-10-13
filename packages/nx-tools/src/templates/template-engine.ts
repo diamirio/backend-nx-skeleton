@@ -6,7 +6,7 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { getJinjaDefaults } from './jinja-defaults'
 import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
 import { getFilesInTree } from '@src/utils/file-system/file-system'
-import { Logger } from '@utils/index'
+import { Logger } from '@utils'
 
 /**
  * Generates jinja templates with given context.
