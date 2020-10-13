@@ -8,14 +8,17 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 [![Version](https://img.shields.io/npm/v/@webundsoehne/nx-builders.svg)](https://npmjs.org/package/@webundsoehne/nx-builders) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nx-builders.svg)](https://npmjs.org/package/@webundsoehne/nx-builders) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nx-builders)](https://npmjs.org/package/@webundsoehne/nx-builders) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-<!-- toc -->
-<!-- tocstop -->
-
 # Description
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for customizing the build and serve process.
 
-**[Read The API Documentation](./API.md)**
+- **[Read The API Documentation](./API.md)**
+- [Changelog](./CHANGELOG.md)
+
+<!-- toc -->
+<!-- tocstop -->
+
+---
 
 # Using It in Your Schematic
 

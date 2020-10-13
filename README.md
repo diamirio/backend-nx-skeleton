@@ -4,12 +4,14 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 ---
 
+# @webundsoehne/nx-skeleton
+
+A set of schematics and tools that provides the basis for fast template scaffolding base on the [@nrwl/nx](https://github.com/nrwl/nx).
+
 <!-- toc -->
 <!-- tocstop -->
 
-# nx-skeleton
-
-A set of schematics and tools that provides the basis for fast template scaffolding base on the [@nrwl/nx](https://github.com/nrwl/nx).
+---
 
 ## Packages
 

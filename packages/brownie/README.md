@@ -5,6 +5,8 @@
 </p>
 Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
+---
+
 # @webundsoehne/brownie
 
 [![Version](https://img.shields.io/npm/v/@webundsoehne/brownie.svg)](https://npmjs.org/package/@webundsoehne/brownie) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/brownie.svg)](https://npmjs.org/package/@webundsoehne/brownie)
@@ -13,26 +15,12 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 A CLI that automatically merges the desired skeleton to the current repository and generates the docker-compose to run.js on development versions. It will prompt the user to tailor out a custom configuration.
 
-# Navigation
+- [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/brownie](#webundsoehnebrownie)
-- [Description](#description)
-- [Navigation](#navigation)
-- [Initial Run as a Client](#initial-run-as-a-client)
-- [After Initial Run](#after-initial-run)
-- [Adding to a Project](#adding-to-a-project)
-- [Adding to a Skeleton](#adding-to-a-skeleton)
-- [Customizing Configuration](#customizing-configuration)
-- [Missing Features](#missing-features)
-- [Usage](#usage)
-- [Commands](#commands)
-- [TODO](#todo)
-- [Package Size](#package-size)
 <!-- tocstop -->
 
-* [Changelog](./CHANGELOG.md)
+---
 
 # Initial Run as a Client
 
