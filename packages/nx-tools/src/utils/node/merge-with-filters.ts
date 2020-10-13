@@ -1,5 +1,7 @@
 import merge from 'deepmerge'
 
+// deep merge all does not work in all cases
+
 /**
  * Merge objects with defaults.
  *
@@ -8,7 +10,9 @@ import merge from 'deepmerge'
  * @param s
  */
 export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return merge.all([ t, ...s ]) as T
+  return s.reduce((o, val) => {
+    return merge(o, val ?? {})
+  }, t) as T
 }
 
 /**
@@ -19,9 +23,11 @@ export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>
  * @param s
  */
 export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return merge.all([ t, ...s ], {
-    arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
-  }) as T
+  return s.reduce((o, val) => {
+    return merge(o, val ?? {}, {
+      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
+    })
+  }, t) as T
 }
 
 /**
@@ -32,7 +38,9 @@ export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t:
  * @param s
  */
 export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return merge.all([ t, ...s ], {
-    arrayMerge: (_, source) => source
-  }) as T
+  return s.reduce((o, val) => {
+    return merge(o, val ?? {}, {
+      arrayMerge: (_, source) => source
+    })
+  }, t) as T
 }

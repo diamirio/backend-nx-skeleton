@@ -8,6 +8,7 @@ import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { FormatFilesOptions } from './format-files.interface'
+import { Logger } from '@utils/index'
 
 /**
  * Format files as a rule in a tree.
@@ -29,15 +30,11 @@ export function formatFiles (
     return noop()
   }
 
-  // get root path
-  const appRootPath = findWorkspaceRoot(process.cwd()).dir
-
-  // create new eslint instance
-  const eslint = new ESLint({
-    fix: true
-  })
-
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+    const log = new Logger(context)
+    // get root path
+    const appRootPath = findWorkspaceRoot(process.cwd()).dir
+
     const files = new Set(
       host.actions
         .filter((action) => action.kind !== 'd' && action.kind !== 'r')
@@ -49,6 +46,14 @@ export function formatFiles (
 
     if (files.size === 0) {
       return host
+    }
+
+    let eslint: ESLint
+    if (options.eslint) {
+      // create new eslint instance
+      eslint = new ESLint({
+        fix: true
+      })
     }
 
     return from(files).pipe(
@@ -98,7 +103,7 @@ export function formatFiles (
 
           host.overwrite(file.path, file.content)
         } catch (e) {
-          context.logger.warn(`Could not format ${file.path}: ${e.message}`)
+          log.error(`Could not format ${file.path}: ${e.message}`)
         }
       }),
       map(() => host)

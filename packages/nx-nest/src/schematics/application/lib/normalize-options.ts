@@ -31,13 +31,12 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: (ctx): void => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'linter' ] },
             default: [
               {
-                sourceRoot: 'src'
+                ...options
               },
               {
-                ...options
+                sourceRoot: 'src'
               },
               {
                 enum: {
@@ -221,11 +220,11 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // select tests
       {
-        skip: (ctx): boolean => !ctx?.tests,
+        skip: (ctx): boolean => !!ctx.tests,
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableTestsTypes> = Object.keys(AvailableTestsTypes).map((o) => ({
             name: AvailableTestsTypes[o],
-            message: PrettyNamesForAvailableThingies[o]
+            message: PrettyNamesForAvailableThingies[AvailableTestsTypes[o]]
           }))
 
           ctx.tests = await task.prompt<AvailableTestsTypes>({

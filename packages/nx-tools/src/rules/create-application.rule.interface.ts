@@ -1,6 +1,7 @@
 import { Path } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 
+import { SchematicFiles } from '@src/interfaces'
 import { MultipleJinjaTemplateOptions } from '@src/templates/template-engine.interface'
 import { FormatFilesOptions } from '@src/utils/file-system/format-files.interface'
 
@@ -40,6 +41,10 @@ export interface CreateApplicationRuleInterface {
    * This will trigger additional actions before moving the files in to designated file root.
    */
   trigger?: TriggerActionsInterface[]
+  /**
+   * Schematic files and folders to include based on condition
+   */
+  include?: SchematicFiles
   /**
    * You can either enable or disable to format inside the rule, since this is moslty required for diff-merge capabilites to be sure that spacing of code does not cause problems.
    */

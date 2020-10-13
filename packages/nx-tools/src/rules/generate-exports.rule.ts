@@ -38,7 +38,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           }
 
           if (micromatch.isMatch(file, template.pattern, { ...micromatchDefaultOptions, ...template.options })) {
-            log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
+            // log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
               [template.output]: [ './' + join(relative('/' + dirname(join(template.cwd ?? '', template.output)), '/' + dirname(file)), parse(file).name) ]

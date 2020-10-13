@@ -6,12 +6,14 @@
   "license": "ISC",
   "repository": "<<---REPOSITORYHERE--->>",
   "scripts": {
-    "start": "node ./src/main.js",
+    "start": "node ./src/main.js"
     {% if enum.components.COMMAND in components %}
+    ,
     "command": "CLI_PATH=./src/main.js NODE_SERVICE=cli npx nestjs-command",
-    "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command",
+    "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command"
     {% endif %}
-    {% if enum.tests.JEST in tests %}
+    {% if enum.tests.JEST == tests %}
+    ,
     "test": "jest --config ./test/jest.config.js --passWithNoTests",
     "test:watch": "jest --config ./test/jest.config.js --watch --passWithNoTests",
     "test:cov": "jest --config ./test/jest.config.js --coverage"
