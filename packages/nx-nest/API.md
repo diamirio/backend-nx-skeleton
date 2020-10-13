@@ -9,6 +9,8 @@
 <dd><p>Database can be selected for various parts of the application.
 This is the database available that can be automatically injected.</p></dd>
 <dt><a href="#AvailableDBTypes">AvailableDBTypes</a></dt>
+<dd><p>Database adapters, these are not selectable but used in internal scripts.</p></dd>
+<dt><a href="#AvailableDBAdapters">AvailableDBAdapters</a></dt>
 <dd><p>Available test configurations.</p></dd>
 <dt><a href="#AvailableTestsTypes">AvailableTestsTypes</a></dt>
 <dd><p>Available microservice types after selecting microservice-server as component.</p></dd>
@@ -18,8 +20,6 @@ This is the database available that can be automatically injected.</p></dd>
 <dd><p>This enum includes keywords that is used in template to omit certain parts of application.
 Templates are files decorataded with <strong>KEYWORD</strong>.
 Or can be directly used for the other enums like available components and such.</p></dd>
-<dt><a href="#eslintDeps">eslintDeps</a></dt>
-<dd><p>Default eslint configuration to inject to repository.</p></dd>
 </dl>
 
 ## Constants
@@ -30,8 +30,8 @@ Or can be directly used for the other enums like available components and such.<
 <dt><a href="#SchematicFiles">SchematicFiles</a></dt>
 <dd><p>This constant includes the files that are required for different components.
 It can be used to filter out files, if that component is not used.</p></dd>
-<dt><a href="#eslintDeps">eslintDeps</a></dt>
-<dd><p>eslint dependencies that are installed automatically for this schematic.</p></dd>
+<dt><a href="#eslintJson">eslintJson</a></dt>
+<dd><p>Default eslint configuration to inject to repository.</p></dd>
 </dl>
 
 ## Functions
@@ -68,6 +68,13 @@ This is the database available that can be automatically injected.</p>
 
 ## AvailableDBTypes
 
+<p>Database adapters, these are not selectable but used in internal scripts.</p>
+
+**Kind**: global variable  
+<a name="AvailableDBAdapters"></a>
+
+## AvailableDBAdapters
+
 <p>Available test configurations.</p>
 
 **Kind**: global variable  
@@ -94,13 +101,6 @@ Templates are files decorataded with <strong>KEYWORD</strong>.
 Or can be directly used for the other enums like available components and such.</p>
 
 **Kind**: global variable  
-<a name="eslintDeps"></a>
-
-## eslintDeps
-
-<p>Default eslint configuration to inject to repository.</p>
-
-**Kind**: global variable  
 <a name="PrettyNamesForAvailableThingies"></a>
 
 ## PrettyNamesForAvailableThingies
@@ -116,11 +116,11 @@ Or can be directly used for the other enums like available components and such.<
 It can be used to filter out files, if that component is not used.</p>
 
 **Kind**: global constant  
-<a name="eslintDeps"></a>
+<a name="eslintJson"></a>
 
-## eslintDeps
+## eslintJson
 
-<p>eslint dependencies that are installed automatically for this schematic.</p>
+<p>Default eslint configuration to inject to repository.</p>
 
 **Kind**: global constant  
 <a name="calculateDependencies"></a>

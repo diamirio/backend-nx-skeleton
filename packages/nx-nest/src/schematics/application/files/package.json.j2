@@ -11,9 +11,11 @@
     "command": "CLI_PATH=./src/main.js NODE_SERVICE=cli npx nestjs-command",
     "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command",
     {% endif %}
+    {% if enum.tests.JEST in tests %}
     "test": "jest --config ./test/jest.config.js --passWithNoTests",
     "test:watch": "jest --config ./test/jest.config.js --watch --passWithNoTests",
     "test:cov": "jest --config ./test/jest.config.js --coverage"
+    {% endif %}
   },
   "engines": {
     "node": ">=12"

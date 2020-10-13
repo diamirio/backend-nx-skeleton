@@ -5,9 +5,9 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
 {% endif %}
-{% if 'typeorm' in database %}
+{% if enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
-{% elif 'mongoose-mongodb' == database %}
+{% elif enum.dbAdapters.MONGOOSE in database %}
 import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 import {
@@ -67,9 +67,9 @@ export function createServerModule ({% if database is defined and database != en
         path: '/'
       }), {% endif %}
       ...Object.values(modules),
-      {% if 'typeorm' in database %}
+      {% if enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
-      {% elif 'mongoose-mongodb' == database %}
+      {% elif enum.dbAdapters.MONGOOSE in database %}
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
       InternalModule,

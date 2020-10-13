@@ -9,6 +9,7 @@ import { Listr } from 'listr2'
 import { NormalizedSchema, Schema } from '../main.interface'
 import {
   AvailableComponents,
+  AvailableDBAdapters,
   AvailableDBTypes,
   AvailableMicroserviceTypes,
   AvailableServerTypes,
@@ -44,7 +45,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
                   server: AvailableServerTypes,
                   database: AvailableDBTypes,
                   tests: AvailableTestsTypes,
-                  microservice: AvailableMicroserviceTypes
+                  microservice: AvailableMicroserviceTypes,
+                  dbAdapters: AvailableDBAdapters
                 }
               }
             ]

@@ -1,3 +1,4 @@
+import { AvailableDBAdapters } from '@interfaces/index'
 import {
   AvailableComponents,
   AvailableDBTypes,
@@ -32,7 +33,7 @@ export interface NormalizedSchema extends Schema {
   // prior configuration will be written to nx.json for further processing
   priorConfiguration: CommonPropertiesToSaveAndUse<true>
   // injecting enums since i want to compare this in jinja templates
-  enum: CommonPropertiesToSaveAndUse<false>
+  enum: CommonPropertiesToSaveAndUse<false> & Record<'dbAdapters', typeof AvailableDBAdapters>
 }
 
 interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {

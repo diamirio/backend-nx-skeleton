@@ -2,8 +2,8 @@ import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-d
 import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, mergeObjectsWithArrayOverwrite, runInRule } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/index'
-import { SchematicFiles, SchematicMatchKeywords } from '@src/interfaces/file.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/index'
+import { SchematicFiles } from '@src/interfaces/file.constants'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 
 /**
@@ -93,11 +93,11 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       // this might be shared so not using enum
       {
         condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database),
-        match: SchematicMatchKeywords.TYPEORM_FILES
+        match: AvailableDBAdapters.TYPEORM
       },
       {
         condition: [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database),
-        match: SchematicMatchKeywords.MONGOOSE_FILES
+        match: AvailableDBAdapters.MONGOOSE
       }
     ],
 

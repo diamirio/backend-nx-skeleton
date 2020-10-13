@@ -56,7 +56,7 @@
 <dd><p>Merges files the common part.</p></dd>
 <dt><a href="#createFileBackup">createFileBackup(host, file, log)</a></dt>
 <dd><p>Creates a file backup in tree.</p></dd>
-<dt><a href="#runInRule">runInRule(run, args, condition)</a></dt>
+<dt><a href="#runInRule">runInRule(run, condition)</a></dt>
 <dd><p>Run something in a rule. It is just a empty function runs on condition. Just added to make everything look cleaner.</p></dd>
 <dt><a href="#getJinjaDefaults">getJinjaDefaults(options)</a></dt>
 <dd><p>Default settings for jinja compatible nunjucks.</p></dd>
@@ -434,7 +434,7 @@
 
 <a name="runInRule"></a>
 
-## runInRule(run, args, condition)
+## runInRule(run, condition)
 
 <p>Run something in a rule. It is just a empty function runs on condition. Just added to make everything look cleaner.</p>
 
@@ -443,7 +443,6 @@
 | Param     | Default           |
 | --------- | ----------------- |
 | run       |                   |
-| args      |                   |
 | condition | <code>true</code> |
 
 <a name="getJinjaDefaults"></a>
