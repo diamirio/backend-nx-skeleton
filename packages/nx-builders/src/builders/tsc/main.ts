@@ -13,10 +13,10 @@ import {
   removePathRoot,
   BaseBuilder,
   runBuilder,
-  isVerbose
+  isVerbose,
+  deepMerge
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
-import merge from 'deepmerge'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
 import glob from 'glob'
@@ -246,7 +246,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       // create temporary tsconfig.paths
       const tsconfig = readJsonFile(this.paths.tsconfig)
 
-      writeJsonFile(this.paths.tsconfigPaths, merge(tsconfig, { compilerOptions: { baseUrl: join(this.context.workspaceRoot, this.options.outputPath) } }))
+      writeJsonFile(this.paths.tsconfigPaths, deepMerge(tsconfig, { compilerOptions: { baseUrl: join(this.context.workspaceRoot, this.options.outputPath) } }))
 
       const { args, spawnOptions } = this.normalizeArguments('tscpaths')
 

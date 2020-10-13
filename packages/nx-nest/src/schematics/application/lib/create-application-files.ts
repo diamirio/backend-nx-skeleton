@@ -1,5 +1,5 @@
 import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, mergeObjectsWithArrayOverwrite, runInRule } from '@webundsoehne/nx-tools'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/index'
@@ -33,7 +33,7 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // just needs the url the rest it will do it itself
       apply(source, generateRules(options, log)),
       // needs the rule applied files, representing the prior configuration
-      options?.priorConfiguration ? apply(source, generateRules(mergeObjectsWithArrayOverwrite(options, options.priorConfiguration), log, { silent: true })) : null,
+      options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite(options, options.priorConfiguration), log, { silent: true })) : null,
       context
     ),
 

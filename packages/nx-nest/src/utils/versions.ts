@@ -1,4 +1,4 @@
-import { PackageVersions, mergeObjectsWithArrayOverwrite } from '@webundsoehne/nx-tools'
+import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
 import { VERSIONS } from './versions.constant'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@src/interfaces'
@@ -7,10 +7,10 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 /**
  * Will calculate the dependencies depending on the components selected.
  * Can set the optional variable to true to only return builder dependencies to install it first
- * @param schema
+ * @param options
  * @param builders
  */
-export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
+export function calculateDependencies (options: NormalizedSchema, builders?: boolean): PackageVersions {
   // only add builders
   if (builders) {
     return VERSIONS.builder
@@ -19,48 +19,48 @@ export function calculateDependencies (schema: NormalizedSchema, builders?: bool
   let dependencies: PackageVersions = VERSIONS.base.default
 
   // tests
-  if (schema.tests === AvailableTestsTypes.JEST) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableTestsTypes.JEST])
+  if (options.tests === AvailableTestsTypes.JEST) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableTestsTypes.JEST])
   }
 
   // api interfaces
-  if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.RESTFUL) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableServerTypes.RESTFUL])
+  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.RESTFUL) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.RESTFUL])
   }
 
-  if (schema.components.includes(AvailableComponents.SERVER) && schema.server === AvailableServerTypes.GRAPHQL) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableServerTypes.GRAPHQL])
+  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.GRAPHQL) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.GRAPHQL])
   }
 
   // microservices
-  if ([ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => schema.components.includes(c))) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS.base.microservice)
+  if ([ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c))) {
+    dependencies = deepMerge(dependencies, VERSIONS.base.microservice)
   }
 
-  if (schema.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_SERVER])
+  if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_SERVER])
   }
 
-  if (schema.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_CLIENT])
+  if (options.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_CLIENT])
   }
 
   // components
-  if (schema.components.includes(AvailableComponents.BG_TASK)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.BG_TASK])
+  if (options.components.includes(AvailableComponents.BG_TASK)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.BG_TASK])
   }
 
-  if (schema.components.includes(AvailableComponents.COMMAND)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableComponents.COMMAND])
+  if (options.components.includes(AvailableComponents.COMMAND)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.COMMAND])
   }
 
   // db related
-  if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(schema.database)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableDBAdapters.TYPEORM])
+  if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.TYPEORM])
   }
 
-  if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(schema.database)) {
-    dependencies = mergeObjectsWithArrayOverwrite(dependencies, VERSIONS[AvailableDBAdapters.MONGOOSE])
+  if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.MONGOOSE])
   }
 
   return dependencies

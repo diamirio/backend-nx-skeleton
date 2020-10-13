@@ -16,10 +16,6 @@ This is the database available that can be automatically injected.</p></dd>
 <dd><p>Available microservice types after selecting microservice-server as component.</p></dd>
 <dt><a href="#AvailableMicroserviceTypes">AvailableMicroserviceTypes</a></dt>
 <dd><p>Available Linters</p></dd>
-<dt><a href="#SchematicFiles">SchematicFiles</a></dt>
-<dd><p>This enum includes keywords that is used in template to omit certain parts of application.
-Templates are files decorataded with <strong>KEYWORD</strong>.
-Or can be directly used for the other enums like available components and such.</p></dd>
 </dl>
 
 ## Constants
@@ -90,15 +86,6 @@ This is the database available that can be automatically injected.</p>
 ## AvailableMicroserviceTypes
 
 <p>Available Linters</p>
-
-**Kind**: global variable  
-<a name="SchematicFiles"></a>
-
-## SchematicFiles
-
-<p>This enum includes keywords that is used in template to omit certain parts of application.
-Templates are files decorataded with <strong>KEYWORD</strong>.
-Or can be directly used for the other enums like available components and such.</p>
 
 **Kind**: global variable  
 <a name="PrettyNamesForAvailableThingies"></a>

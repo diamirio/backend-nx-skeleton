@@ -15,6 +15,7 @@ export default function (schema: NormalizedSchema): Rule {
     // addDepsToPackageJson(builders?.prod, builders?.dev),
     // externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: ['tsc', 'ts-node-dev']}),
     // add the rest of the dependencies
-    addDepsToPackageJson(dependencies?.prod, dependencies?.dev)
+    // angular-cli bug in ~10 requires mock initialize and does not like when empty
+    addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {})
   ])
 }

@@ -7,5 +7,5 @@ import { calculateDependencies } from '@utils/versions'
 export function initiateBuilderDependencies (options: Schema['items']): Rule {
   const dependencies = calculateDependencies(options)
 
-  return chain([ addDepsToPackageJson(dependencies.prod, dependencies.dev) ])
+  return chain([ addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}) ])
 }

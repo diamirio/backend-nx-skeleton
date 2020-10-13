@@ -1,5 +1,4 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
+import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
 import { VERSIONS } from './versions.constants'
 import { AvailableBuilders } from '@src/interfaces/available.constants'
@@ -10,11 +9,11 @@ export function calculateDependencies (options: Schema['items']): PackageVersion
   let dependencies: PackageVersions = VERSIONS.base.default
 
   if (options.includes(AvailableBuilders.TSC)) {
-    dependencies = merge(dependencies, VERSIONS[AvailableBuilders.TSC])
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableBuilders.TSC])
   }
 
   if (options.includes(AvailableBuilders.TS_NODE_DEV)) {
-    dependencies = merge(dependencies, VERSIONS[AvailableBuilders.TS_NODE_DEV])
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableBuilders.TS_NODE_DEV])
   }
 
   return dependencies

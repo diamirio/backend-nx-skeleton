@@ -2,6 +2,6 @@
  * Versions for npm packages.
  */
 export interface PackageVersions {
-  prod?: Record<string, string>
-  dev?: Record<string, string>
+  deps?: Record<string, string>
+  devDeps?: Record<string, string>
 }

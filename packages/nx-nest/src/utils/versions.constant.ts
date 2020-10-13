@@ -6,7 +6,7 @@ export const VERSIONS: Versions = {
   builder: {},
   base: {
     default: {
-      prod: {
+      deps: {
         '@nestjs/common': '^7.4.4',
         '@nestjs/core': '^7.4.4',
         '@nestjsx/crud': '^4.6.2',
@@ -18,12 +18,13 @@ export const VERSIONS: Versions = {
       }
     },
     microservice: {
-      prod: {
+      deps: {
         '@nestjs/microservices': '^7.4.4'
       }
     }
   },
   eslint: {
+    dependencies: {},
     devDependencies: {
       '@webundsoehne/eslint-config': '*',
       '@typescript-eslint/eslint-plugin': '^4.1.1',
@@ -31,7 +32,7 @@ export const VERSIONS: Versions = {
     }
   },
   [AvailableServerTypes.RESTFUL]: {
-    prod: {
+    deps: {
       // pin for graphql version
       '@nestjs/platform-fastify': '7.2.0',
       'fastify-swagger': '^2.6.0',
@@ -39,7 +40,7 @@ export const VERSIONS: Versions = {
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
-    prod: {
+    deps: {
       '@nestjs/graphql': '^7.6.0',
       'apollo-server-fastify': '^2.17.0',
       graphql: '^15.3.0',
@@ -47,19 +48,19 @@ export const VERSIONS: Versions = {
     }
   },
   [AvailableComponents.BG_TASK]: {
-    prod: {
+    deps: {
       'nest-schedule': '^0.6.4'
     }
   },
   [AvailableComponents.COMMAND]: {
-    prod: {
+    deps: {
       'nestjs-command': '1.4.0'
     }
   },
   [AvailableComponents.MICROSERVICE_SERVER]: {},
   [AvailableComponents.MICROSERVICE_CLIENT]: {},
   [AvailableTestsTypes.JEST]: {
-    dev: {
+    devDeps: {
       '@nestjs/testing': '^7.2.0',
       jest: '^26.1.0',
       'ts-jest': '^26.1.1',
@@ -67,17 +68,17 @@ export const VERSIONS: Versions = {
     }
   },
   [AvailableDBAdapters.TYPEORM]: {
-    prod: {
+    deps: {
       '@nestjs/typeorm': '^7.1.4',
       typeorm: '^0.2.26'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
-    prod: {
+    deps: {
       '@nestjs/mongoose': '^7.0.2',
       mongoose: '^5.10.6'
     },
-    dev: {
+    devDeps: {
       '@types/mongoose': '^5.7.36'
     }
   },
