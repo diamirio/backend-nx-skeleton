@@ -2,7 +2,6 @@ import { CreateFileAction, noop, OverwriteFileAction, Rule, SchematicContext, Tr
 import { findWorkspaceRoot } from '@nrwl/cli/lib/find-workspace-root'
 import { ESLint } from 'eslint'
 import * as path from 'path'
-import { extname } from 'path'
 import prettier from 'prettier'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
@@ -90,7 +89,7 @@ export function formatFiles (
             }
 
             // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
-            if (await eslint.isPathIgnored(systemPath) || extname(systemPath) === '.json') {
+            if (await eslint.isPathIgnored(systemPath)) {
               return
             }
 
@@ -103,7 +102,7 @@ export function formatFiles (
 
           host.overwrite(file.path, file.content)
         } catch (e) {
-          log.error(`Could not format ${file.path}: ${e.message}`)
+          log.error(`Could not format ${file.path}:\n${e.message}`)
         }
       }),
       map(() => host)
