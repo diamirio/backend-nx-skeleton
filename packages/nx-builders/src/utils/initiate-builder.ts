@@ -4,6 +4,10 @@ import { addDepsToPackageJson } from '@nrwl/workspace'
 import { Schema } from '@src/schematics/init/main.interface'
 import { calculateDependencies } from '@utils/versions'
 
+/**
+ * A function to initiate builder depdencies. It may be wiser to call it via schematic.
+ * @param options
+ */
 export function initiateBuilderDependencies (options: Schema['items']): Rule {
   const dependencies = calculateDependencies(options)
 

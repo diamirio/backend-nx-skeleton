@@ -33,7 +33,7 @@ It can be used to filter out files, if that component is not used.</p></dd>
 ## Functions
 
 <dl>
-<dt><a href="#calculateDependencies">calculateDependencies(schema, builders)</a></dt>
+<dt><a href="#calculateDependencies">calculateDependencies(options, builders)</a></dt>
 <dd><p>Will calculate the dependencies depending on the components selected.
 Can set the optional variable to true to only return builder dependencies to install it first</p></dd>
 </dl>
@@ -112,7 +112,7 @@ It can be used to filter out files, if that component is not used.</p>
 **Kind**: global constant  
 <a name="calculateDependencies"></a>
 
-## calculateDependencies(schema, builders)
+## calculateDependencies(options, builders)
 
 <p>Will calculate the dependencies depending on the components selected.
 Can set the optional variable to true to only return builder dependencies to install it first</p>
@@ -121,5 +121,5 @@ Can set the optional variable to true to only return builder dependencies to ins
 
 | Param    |
 | -------- |
-| schema   |
+| options  |
 | builders |

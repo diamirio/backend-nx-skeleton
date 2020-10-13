@@ -86,10 +86,13 @@
 <dd><p>Will create a dependency graph from nx project graph.</p></dd>
 <dt><a href="#mergeDependencies">mergeDependencies(...dependenciesObjects)</a></dt>
 <dd><p>Merge multiple set of dependencies together.</p></dd>
+<dt><a href="#deepMerge">deepMerge(t, ...s)</a></dt>
+<dd><p>Merge objects with defaults.</p>
+<p>Mutates the object.</p></dd>
 <dt><a href="#deepMergeWithUniqueMergeArray">deepMergeWithUniqueMergeArray(t, ...s)</a></dt>
 <dd><p>Merge objects with array merge and filtering them uniquely.</p>
 <p>Mutates the object.</p></dd>
-<dt><a href="#mergeObjectsWithArrayOverwrite">mergeObjectsWithArrayOverwrite(t, ...s)</a></dt>
+<dt><a href="#deepMergeWithArrayOverwrite">deepMergeWithArrayOverwrite(t, ...s)</a></dt>
 <dd><p>Merge objects with overwriting the target array with source array.</p>
 <p>Mutates the object.</p></dd>
 </dl>
@@ -612,6 +615,20 @@
 | ---------------------- |
 | ...dependenciesObjects |
 
+<a name="deepMerge"></a>
+
+## deepMerge(t, ...s)
+
+<p>Merge objects with defaults.</p>
+<p>Mutates the object.</p>
+
+**Kind**: global function
+
+| Param |
+| ----- |
+| t     |
+| ...s  |
+
 <a name="deepMergeWithUniqueMergeArray"></a>
 
 ## deepMergeWithUniqueMergeArray(t, ...s)
@@ -626,9 +643,9 @@
 | t     |
 | ...s  |
 
-<a name="mergeObjectsWithArrayOverwrite"></a>
+<a name="deepMergeWithArrayOverwrite"></a>
 
-## mergeObjectsWithArrayOverwrite(t, ...s)
+## deepMergeWithArrayOverwrite(t, ...s)
 
 <p>Merge objects with overwriting the target array with source array.</p>
 <p>Mutates the object.</p>

@@ -13,7 +13,8 @@
     "command": "lerna run --stream",
     "link-packages": "lerna link --force-local",
     "lint": "yarn command --concurrency 1 lint",
-    "lint:check": "yarn command --concurrency 1 lint:check"
+    "lint:check": "yarn command --concurrency 1 lint:check",
+    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
   },
   "workspaces": {
     "packages": [
@@ -23,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn command --concurrency 1 lint:staged",
+      "pre-commit": "yarn run docs:jsdoc && yarn command --concurrency 1 lint:staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
