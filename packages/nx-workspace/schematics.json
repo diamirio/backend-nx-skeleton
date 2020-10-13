@@ -3,31 +3,9 @@
   "extends": ["@nrwl/workspace"],
   "schematics": {
     "init": {
-      "factory": "./dist/schematics/init/main",
-      "schema": "./dist/schematics/application/schema.json",
-      "description": "Initialize the @webundsoehne/nx-nest plugin.",
-      "hidden": true
-    },
-
-    "application": {
-      "factory": "./dist/schematics/application/main",
-      "schema": "./dist/schematics/application/schema.json",
-      "aliases": ["app"],
-      "description": "Create a new Nest application from skeleton."
-    },
-
-    "component": {
-      "factory": "./dist/schematics/component/main",
-      "schema": "./dist/schematics/component/schema.json",
-      "aliases": ["co"],
-      "description": "Generate a new component from schematic."
-    },
-
-    "microservice-provider": {
-      "factory": "./dist/schematics/microservice-provider/main",
-      "schema": "./dist/schematics/microservice-provider/schema.json",
-      "aliases": ["msp"],
-      "description": "Generate microservice based library."
+      "factory": "./dist/schematics/remove/main",
+      "schema": "./dist/schematics/remove/schema.json",
+      "description": "Remove a application from the project."
     }
   }
 }

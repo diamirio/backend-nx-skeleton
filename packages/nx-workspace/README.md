@@ -1,4 +1,4 @@
-![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)
+[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
 
 Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 

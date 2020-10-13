@@ -34,5 +34,5 @@ export interface EnrichedWorkspaceJsonProject {
   sourceRoot: string
   projectType?: 'library' | 'application'
   schematics?: any
-  architecht?: any
+  architect?: any
 }

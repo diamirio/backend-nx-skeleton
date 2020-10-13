@@ -1,4 +1,4 @@
-![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)
+[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
 
 Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
@@ -17,7 +17,7 @@ A set of schematics and tools that provides the basis for fast template scaffold
 
 ### brownie - @webundsoehne/brownie
 
-A CLI interface for creating `nx` workspaces and Docker templates from scratch.
+A CLI interface for creating `@nrwl/nx` workspaces and Docker templates from scratch.
 
 [**Read more...**](./packages/brownie/README.md)
 
@@ -35,25 +35,31 @@ Utility package for `@nestjs`.
 
 ### nx-builders - @webundsoehne/nx-builders
 
-Custom builders for `nx`.
+Custom builders for `@nrwl/nx`.
 
 [**Read more...**](./packages/nx-builders/README.md)
 
 ### nx-nest - @webundsoehne/nx-nest
 
-A skeleton that can be generated through `nx` schematics.
+A skeleton that can be generated through `@nrwl/nx` schematics.
 
 [**Read more...**](./packages/nx-nest/README.md)
 
 ### nx-tools - @webundsoehne/nx-tools
 
-Various tools that can be used while developing new `nx` schematics.
+Various tools that can be used while developing new `@nrwl/nx` schematics.
 
 [**Read more...**](./packages/nx-tools/README.md)
 
+### nx-workspace - @webundsoehne/nx-workspace
+
+Schematic for scaffolding `@nrwl/nx` workspace.
+
+[**Read more...**](./packages/nx-workspace/README.md)
+
 # Further Development
 
-Developing schematics for `nx` is not really possible in one-hit wonder due to templating and all the options that can be added to the schematics itself.
+Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder due to templating and all the options that can be added to the schematics itself.
 
 ## Docker Setup
 

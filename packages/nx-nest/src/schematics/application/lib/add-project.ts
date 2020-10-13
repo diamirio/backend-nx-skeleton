@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
-import { WorkspaceJSON } from '@webundsoehne/nx-tools'
+import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
@@ -13,7 +13,7 @@ import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.
  * @param options Parsed schema
  */
 export function addProject (options: NormalizedSchema): Rule {
-  return updateWorkspaceInTree((json: WorkspaceJSON<SchematicArchitect>) => {
+  return updateWorkspaceInTree<EnrichedWorkspaceJson>((json) => {
     const architect: SchematicArchitect = {} as SchematicArchitect
 
     architect.build = {
