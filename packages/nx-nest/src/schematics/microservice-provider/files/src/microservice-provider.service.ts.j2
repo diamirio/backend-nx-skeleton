@@ -1,0 +1,57 @@
+import { Inject, Injectable } from '@nestjs/common'
+import { ClientProxy } from '@nestjs/microservices'
+import { LoggerService } from '@webundsoehne/nestjs-util'
+
+import { MessageQueueEnum, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
+import {
+{% for microservice in microservices %}
+{{ microservice.names.pattern }},
+{% endfor %}
+} from './patterns'
+
+@Injectable()
+export class MicroserviceProviderService {
+  private readonly clients: Record<MessageQueueEnum, ClientProxy>
+  private readonly logger = new LoggerService(this.constructor.name)
+
+  constructor (
+    {% for microservice in microservices %}
+    @Inject(MessageQueueEnum.{{ microservice.names.queue }}) {{ microservice.names.client }}: ClientProxy,
+    {% endfor %}
+  ) {
+    this.clients = {
+      {% for microservice in microservices %}
+      [MessageQueueEnum.{{ microservice.names.queue }}]: {{ microservice.names.client }},
+      {% endfor %}
+    }
+  }
+
+  private static getMessageQueueFromPattern<Pattern extends MessageQueuePatterns>(pattern: Pattern): MessageQueueEnum {
+    {% for microservice in microservices %}
+    if (this.isPattern<{{ microservice.names.pattern }}>(pattern, {{ microservice.names.pattern }})) {
+      return MessageQueueEnum.{{ microservice.names.queue }}
+    }
+    {% endfor %}
+
+    throw new Error(`Pattern "${pattern}" is not defined in available patterns.`)
+  }
+
+  private static isPattern<T extends MessageQueuePatterns>(pattern: MessageQueuePatterns, queuePatterns: MessageQueuePatterns<true>): pattern is T {
+    return Object.values(queuePatterns).includes(pattern)
+  }
+
+  async send<Pattern extends MessageQueuePatterns>(pattern: Pattern, payload: MessageQueueMap[Pattern]['request']): Promise<MessageQueueMap[Pattern]['response']> {
+    // write to MessageQueue
+    const messageQueue = MicroserviceProviderService.getMessageQueueFromPattern(pattern)
+
+    try {
+      const response: MessageQueueMap[Pattern]['response'] = await this.clients[messageQueue].send(pattern, payload).toPromise()
+
+      return response
+    } catch (e) {
+      // maybe add something here later
+      throw e
+    }
+
+  }
+}

@@ -24,5 +24,5 @@ export function readMicroserviceIntegration (): MicroserviceIntegrationInterface
     }
 
     return o
-  }, [] as MicroserviceIntegrationInterface[])
+  }, [])
 }

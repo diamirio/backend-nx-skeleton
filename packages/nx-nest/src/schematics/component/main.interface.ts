@@ -1,4 +1,4 @@
-import { EnrichedWorkspaceJsonProject } from '@webundsoehne/nx-tools'
+import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
@@ -26,10 +26,7 @@ export interface NormalizedSchema {
   force: boolean
   silent: boolean
   type: Schema['type']
-  casing: {
-    pascal: string
-    camel: string
-  }
+  casing: GeneratedNameCases
   parentWsConfiguration: Schema['parentWsConfiguration']
   parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }

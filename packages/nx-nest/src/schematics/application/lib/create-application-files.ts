@@ -11,7 +11,7 @@ import { Schema as ComponentSchema } from '@src/schematics/component/main.interf
  * @param options
  * @param context
  */
-export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
   // source is always the same
   const source = url('./files')

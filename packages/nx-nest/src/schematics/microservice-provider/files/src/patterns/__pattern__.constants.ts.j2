@@ -1,0 +1,8 @@
+{# Since this is a multiple jinja template this uses only the 'microservice' part of the variables. #}
+
+/**
+ * Message patterns for "{{ name }}" with pattern "{{ names.pattern }}"
+ */
+export enum {{ names.pattern }} {
+  {{ casing.upper }}_DEFAULT = '{{ casing.camel }}'
+}

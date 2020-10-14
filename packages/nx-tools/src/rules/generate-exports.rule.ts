@@ -6,7 +6,7 @@ import { createApplicationRule } from './create-application.rule'
 import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
 import { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
-import { deepMergeWithUniqueMergeArray, Logger } from '@utils'
+import { convertStringToDirPath, deepMergeWithUniqueMergeArray, Logger } from '@utils'
 
 /**
  * Generates from given template. Will search for multiple files that match the import case and will export them from root of the output file.
@@ -38,10 +38,19 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           }
 
           if (micromatch.isMatch(file, template.pattern, { ...micromatchDefaultOptions, ...template.options })) {
-            // log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
+            log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
-              [template.output]: [ './' + join(relative('/' + dirname(join(template.cwd ?? '', template.output)), '/' + dirname(file)), parse(file).name) ]
+              [template.output]: [
+                './' +
+                  join(
+                    relative(
+                      convertStringToDirPath(dirname(join(template?.cwd ?? options.root, template.output)), { start: true, end: false }),
+                      convertStringToDirPath(dirname(file), { start: true, end: false })
+                    ),
+                    parse(file).name
+                  )
+              ]
             })
           }
 
@@ -50,7 +59,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       )
     })
 
-    if (Object.keys(output).length === 0) {
+    if (!output || Object.keys(output).length === 0) {
       log.warn('Can not generate exports, because there is no file matched.')
       return
     }

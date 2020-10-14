@@ -10,7 +10,7 @@ import { generateExportsRule } from '@rules/generate-exports.rule'
  * Not intended to be a schematic that is called externally but mostly internally.
  * @param options
  */
-export async function createApplicationFiles (options: NormalizedSchema): Promise<Rule> {
+export function createApplicationFiles (options: NormalizedSchema): Rule {
   const source = url(join('./files'))
 
   return chain([ generateExportsRule(source, options.templates, 'exports.ts.j2') ])

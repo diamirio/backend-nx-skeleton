@@ -17,7 +17,7 @@ export function updateIntegration (options: NormalizedSchema): Rule {
       microservices: options.microservices
     }),
 
-    // add nx container
+    // add nx message queue container
     updateBrownieIntegration(options.name, { containers: [ 'nx' ] })
   ])
 }

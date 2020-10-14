@@ -1,9 +1,11 @@
-import { apply, chain, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
+import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, deepMergeWithArrayOverwrite, convertStringToDirPath } from '@webundsoehne/nx-tools'
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
+import { join } from 'path'
 
-import { NormalizedSchema } from '../main.interface'
+import { NormalizedSchema, ParsedMicroservice } from '../main.interface'
 
-export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
   // source is always the same
   const source = url('./files')
@@ -15,7 +17,25 @@ export async function createApplicationFiles (options: NormalizedSchema, context
       // needs the rule applied files, representing the prior configuration
       options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite<NormalizedSchema>(options, options.priorConfiguration), log)) : null,
       context
-    )
+    ),
+
+    externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+      silent: true,
+      skipFormat: true,
+      templates: {
+        root: options.root,
+        templates: [
+          {
+            output: convertStringToDirPath(options.sourceRoot) + 'patterns/index.ts',
+            pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'patterns/**/*.constants.ts'
+          },
+          {
+            output: convertStringToDirPath(options.sourceRoot) + 'interfaces/index.ts',
+            pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'interfaces/**/*.interface.ts'
+          }
+        ]
+      }
+    })
   ])
 }
 
@@ -24,18 +44,27 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
   log.debug(JSON.stringify(options, null, 2))
 
   const template: CreateApplicationRuleInterface = {
-    templates: []
-    // multipleTemplates: [
-    //   ...options.parsedMicroservices.map((microservice) => ({
-    //     path: 'src/interfaces/__default__.interface.ts.j2',
-    //     output: `${options.root}/src/interfaces/${microservice.casing.kebab}/default.interface.ts`,
-    //     factory: (ctx: NormalizedSchema): Record<string, any> => {
-    //       return {
-    //         ...ctx.parsedMicroservices
-    //       }
-    //     }
-    //   }))
-    // ]
+    multipleTemplates: [
+      {
+        templates: options.microservices.map((microservice) => ({
+          path: new RegExp('src/patterns/__pattern__.constants.ts.j2'),
+          output: `src/patterns/${microservice.names.file}.constants.ts`,
+          factory: (): ParsedMicroservice => {
+            return microservice
+          }
+        }))
+      },
+
+      {
+        templates: options.microservices.map((microservice) => ({
+          path: new RegExp('src/interfaces/__interface__.interface.ts.j2'),
+          output: `src/interfaces/${microservice.names.file}.interface.ts`,
+          factory: (): ParsedMicroservice => {
+            return microservice
+          }
+        }))
+      }
+    ]
   }
 
   return createApplicationRule(template, options)

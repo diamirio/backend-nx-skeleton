@@ -1,0 +1,13 @@
+{# Since this is a multiple jinja template this uses only the 'microservice' part of the variables. #}
+import { MicroserviceProviderBaseMessage } from '../microservice-provider.interface'
+import { {{ names.pattern }} } from '../patterns'
+
+/**
+ * Message patterns for "{{ name }}" with pattern "{{ names.pattern }}"
+ */
+export interface {{ names.interface }} extends MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
+  [{{ names.pattern }}.{{ casing.upper }}_DEFAULT]: {
+    response: {}
+    request: {}
+  }
+}

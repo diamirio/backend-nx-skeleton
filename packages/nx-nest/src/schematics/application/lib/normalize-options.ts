@@ -3,7 +3,7 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, isVerbose, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
@@ -92,9 +92,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const thisProject = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
-            if (thisProject) {
-              ctx.priorConfiguration = thisProject
+            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
+            if (integration) {
+              ctx.priorConfiguration = integration
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -242,8 +242,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       }
     ],
     {
-      concurrent: false,
-      rendererFallback: context.debug
+      rendererFallback: isVerbose()
     }
   ).run()
 }

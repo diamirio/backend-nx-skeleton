@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
+import { NxProjectTypes, EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
@@ -92,7 +92,7 @@ export function addProject (options: NormalizedSchema): Rule {
     json.projects[options.name] = {
       root: options.root,
       sourceRoot: options.sourceRoot,
-      projectType: 'application',
+      projectType: NxProjectTypes.APP,
       schematics: {},
       architect
     }

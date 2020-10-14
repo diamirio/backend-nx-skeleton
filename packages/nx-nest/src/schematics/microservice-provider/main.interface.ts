@@ -1,36 +1,46 @@
-import { Linter } from '@nrwl/workspace'
+import { GeneratedNameCases } from '@webundsoehne/nx-tools'
 
-// this is the one gets inputted from the command line
-export interface Schema {
+import { AvailableLinterTypes } from '@interfaces/available.constants'
+
+/**
+ * The options that it gets from angular-cli
+ */
+export interface Schema extends CommonPropertiesToSaveAndUse {
   name: string
-  microservices: string
   linter: string
   skipFormat: boolean
-  verbose: boolean
+  silent: boolean
 }
 
-export type AvailableLinterTypes = Linter
-
-export interface NormalizedSchema {
-  name: string
+/**
+ * After the options has been normalized.
+ */
+export interface NormalizedSchema extends Schema {
   packageName: string
   root: string
-  directory: string
-  microservices: string[]
-  parsedMicroservices: ParsedMicroservices[]
+  sourceRoot: string
   linter: AvailableLinterTypes
-  skipFormat: boolean
-  priorConfiguration: {
-    microservices: string[]
-  }
+  priorConfiguration: CommonPropertiesToSaveAndUse
 }
 
-export interface ParsedMicroservices {
+/**
+ * The templating bones of a single microservice.
+ */
+export interface ParsedMicroservice {
   name: string
   names: {
+    queue: string
+    client: string
+    file: string
     pattern: string
+    interface: string
   }
-  casing: {
-    kebab: string
-  }
+  casing: GeneratedNameCases
+}
+
+/**
+ * This properties are shared across the input, normalized and saved configurations.
+ */
+interface CommonPropertiesToSaveAndUse {
+  microservices: ParsedMicroservice[]
 }

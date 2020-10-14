@@ -32,7 +32,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       addEslintToWorkspace(host, log, options, { deps: VERSIONS.eslint, json: eslintJson }),
 
       runInRule(log.info.bind(log)('Creating application files.')),
-      await createApplicationFiles(options, context),
+      createApplicationFiles(options, context),
 
       runInRule(log.info.bind(log)('Updating integration.')),
       updateIntegration(options),

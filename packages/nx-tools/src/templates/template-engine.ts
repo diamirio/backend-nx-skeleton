@@ -6,7 +6,7 @@ import { filter, map, mergeMap } from 'rxjs/operators'
 import { getJinjaDefaults } from './jinja-defaults'
 import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
 import { getFilesInTree } from '@src/utils/file-system/file-system'
-import { Logger } from '@utils'
+import { isVerbose, Logger } from '@utils'
 
 /**
  * Generates jinja templates with given context.
@@ -47,7 +47,12 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
           host.overwrite(file.path, file.content)
           host.rename(file.path, file.path.replace(matched, ''))
         } catch (e) {
-          log.warn(`Could not create "${file.path}" from template: ${e.message}`)
+          log.error(`Could not create "${file.path}" from template: ${e.message}`)
+
+          // i want to stop execution if it is not verbose
+          if (!isVerbose()) {
+            throw e
+          }
         }
       }),
       map(() => host)
@@ -84,7 +89,7 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
         )
 
         if (!matched) {
-          log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => `${t.path}@${t.output}`).join(', ')}`)
+          // log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => `${t.path}@${t.output}`).join(', ')}`)
           return
         }
 
@@ -99,7 +104,12 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
 
               host.create(output, content)
             } catch (e) {
-              context.logger.warn(`Could not create "${file.path}" from template: ${e.message}`)
+              log.error(`Could not create multiple file "${file.path}" from template: ${e.message}`)
+
+              // i want to stop execution if it is not verbose
+              if (!isVerbose()) {
+                throw e
+              }
             }
           })
         )

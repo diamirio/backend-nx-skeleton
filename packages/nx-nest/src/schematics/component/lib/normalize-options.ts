@@ -2,8 +2,15 @@ import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { toFileName } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, EnrichedWorkspaceJsonProject, readNxIntegration, readWorkspaceJson, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
-import { camelCase, pascalCase } from 'change-case'
+import {
+  ConvertToPromptType,
+  EnrichedWorkspaceJsonProject,
+  generateNameCases,
+  isVerbose,
+  readNxIntegration,
+  readWorkspaceJson,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
@@ -72,10 +79,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: (ctx, task): void => {
           ctx.name = toFileName(options.name)
 
-          ctx.casing = {
-            pascal: pascalCase(ctx.name),
-            camel: camelCase(ctx.name)
-          }
+          ctx.casing = generateNameCases(ctx.name)
 
           task.title = `Component name is set as "${ctx.name}".`
         }
@@ -137,8 +141,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       }
     ],
     {
-      concurrent: false,
-      rendererFallback: context.debug,
+      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
   ).run()

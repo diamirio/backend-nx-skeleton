@@ -11,6 +11,16 @@
 <p>You can add long-living and short-living process to keep track of processes spawned by node.</p></dd>
 </dl>
 
+## Members
+
+<dl>
+<dt><a href="#NxConstants">NxConstants</a></dt>
+<dd><p>Some NX constants.
+They seem to change every minor patch XD</p></dd>
+<dt><a href="#NxConstants">NxConstants</a></dt>
+<dd><p>Nx application types</p></dd>
+</dl>
+
 ## Functions
 
 <dl>
@@ -170,6 +180,21 @@
 <p>Tree kill proceseses.</p>
 
 **Kind**: instance method of [<code>ProcessManager</code>](#ProcessManager)  
+<a name="NxConstants"></a>
+
+## NxConstants
+
+<p>Some NX constants.
+They seem to change every minor patch XD</p>
+
+**Kind**: global variable  
+<a name="NxConstants"></a>
+
+## NxConstants
+
+<p>Nx application types</p>
+
+**Kind**: global variable  
 <a name="installWorkspaceDependencies"></a>
 
 ## ~~installWorkspaceDependencies()~~

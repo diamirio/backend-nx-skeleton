@@ -25,9 +25,9 @@ export function createMicroserviceModule ({% if database is defined and database
       }
     ],
     imports: [
-    {% if enum.dbAdapters.TYPEORM in database %}
+    {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
-      {% elif enum.dbAdapters.MONGOOSE in database %}
+      {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
     ...Object.values(modules)

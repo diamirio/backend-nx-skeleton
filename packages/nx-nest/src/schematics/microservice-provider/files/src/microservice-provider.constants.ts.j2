@@ -1,0 +1,26 @@
+import {
+{% for microservice in microservices %}
+{{ microservice.names.pattern }},
+{% endfor %}
+} from './patterns'
+import {
+{% for microservice in microservices %}
+{{ microservice.names.interface }},
+{% endfor %}
+} from './interfaces'
+
+export enum MessageQueueEnum {
+  {% for microservice in microservices %}
+  {{ microservice.names.queue }} = '{{ microservice.casing.kebab }}Queue',
+  {% endfor %}
+}
+
+export type MessageQueuePatterns <Type extends boolean = false> =
+{% for microservice in microservices %}
+| Type extends true ? typeof {{ microservice.names.pattern }} : {{ microservice.names.pattern }}
+{% endfor %}
+
+export type MessageQueueMap =
+{% for microservice in microservices %}
+& {{ microservice.names.interface }}
+{% endfor %}
