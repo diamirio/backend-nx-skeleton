@@ -1,3 +1,23 @@
+# [@webundsoehne/nx-builders-v1.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.1.3...@webundsoehne/nx-builders-v1.2.0) (2020-10-14)
+
+
+### Bug Fixes
+
+* **nx-tools/nx-builders:** isolate eslint to utils and a function, use schematics to install deps for builders ([ee45435](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ee45435a70705e774daddb5926e11acbac5b82f9))
+* **tscpaths:** typescript path swap problem ([ee00fa0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ee00fa0c6b1e1d9906f18b50a323213fe43cf83c))
+
+
+### Features
+
+* added new workspace package, cleaned up eslint ignore ([4cd1d67](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4cd1d6705d6494af02e8ab0e7766f11d9494ba7f))
+* added workspace and the scafolding of it ([dbec287](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/dbec28797b1ae6f230940d6ab43c3716776cc32b))
+* finished exports generated documentation ([84e8411](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/84e8411c3bfaf3df6b14beabd255831816cff4f9))
+* fixed and did the exports at last ([1518ce0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1518ce001b1b2ece3bca26cebd469946577e9955))
+* isolate exports schematic ([c57e142](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c57e14254a5b84acc1df72d709136af0adae51f8))
+* microservices ([a368812](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a368812b42c2a59e48d8193368c6421fae5e8111))
+* only comitted half of it ([7258dd0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7258dd0d17eb453ccc75b5d57aaa9be665557e0d))
+* **microservices:** microservices and some generic refactoring in ttools ([e34f66f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e34f66fce6ba01d1e183a626dcea257f68628ae1))
+
 # [@webundsoehne/nx-builders-v1.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders-v1.1.2...@webundsoehne/nx-builders-v1.1.3) (2020-09-23)
 
 
