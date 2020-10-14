@@ -1,3 +1,34 @@
+# [@webundsoehne/nx-tools-v1.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.1.3...@webundsoehne/nx-tools-v1.2.0) (2020-10-14)
+
+
+### Bug Fixes
+
+* fix tiny lint error on jsons ([59eed2e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59eed2e53352a768075fd54f0c9b2064e40b1e40))
+* **nx-tools/nx-builders:** isolate eslint to utils and a function, use schematics to install deps for builders ([ee45435](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ee45435a70705e774daddb5926e11acbac5b82f9))
+
+
+### Features
+
+* add generate exports functionallity for index.ts generation ([5dcb8f9](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5dcb8f933bb35e18eeac39dff250897b6c4deb44))
+* added new workspace package, cleaned up eslint ignore ([4cd1d67](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4cd1d6705d6494af02e8ab0e7766f11d9494ba7f))
+* added workspace and the scafolding of it ([dbec287](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/dbec28797b1ae6f230940d6ab43c3716776cc32b))
+* finished exports generated documentation ([84e8411](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/84e8411c3bfaf3df6b14beabd255831816cff4f9))
+* fixed and did the exports at last ([1518ce0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1518ce001b1b2ece3bca26cebd469946577e9955))
+* isolate exports schematic ([c57e142](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c57e14254a5b84acc1df72d709136af0adae51f8))
+* microservices ([a368812](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a368812b42c2a59e48d8193368c6421fae5e8111))
+* only comitted half of it ([7258dd0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7258dd0d17eb453ccc75b5d57aaa9be665557e0d))
+* scrap microservices, cleanup ([7c0f572](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7c0f5721feaad9a7b0c2c16d70dd0cd0c9f15ea3))
+* streamlined file/folder includes on schematics ([c97ac18](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c97ac18762bf544102fec544aefbced9a45cf99f))
+* **microservices:** microservices and some generic refactoring in ttools ([e34f66f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e34f66fce6ba01d1e183a626dcea257f68628ae1))
+* **nx-nest:** started external schematics, implemented template features ([189a1e7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/189a1e72f42cd9c57c48b29f256bbf2ef7332953))
+
+
+### Performance Improvements
+
+* fix multi matching and stuff for templating and exports ([86512a5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/86512a5f56e5e717a9c0d0b1e5a78b2d936142b8))
+* **templating:** updated templating methodology, mostly fixed exporting and multiple jinja templates ([34e6902](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/34e69024e4fb7ca1c1ad4ccdde85ed6eaec009c1))
+* template generating driving me crazy ([578b30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/578b30a34b2498cb472eec8214c24d879b8538ec))
+
 # [@webundsoehne/nx-tools-v1.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools-v1.1.2...@webundsoehne/nx-tools-v1.1.3) (2020-09-23)
 
 
