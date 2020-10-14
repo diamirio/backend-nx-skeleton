@@ -1,3 +1,12 @@
+# [@webundsoehne/eslint-config-v1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config-v1.0.2...@webundsoehne/eslint-config-v1.1.0) (2020-10-14)
+
+
+### Features
+
+* added new workspace package, cleaned up eslint ignore ([4cd1d67](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4cd1d6705d6494af02e8ab0e7766f11d9494ba7f))
+* added workspace and the scafolding of it ([dbec287](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/dbec28797b1ae6f230940d6ab43c3716776cc32b))
+* finished exports generated documentation ([84e8411](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/84e8411c3bfaf3df6b14beabd255831816cff4f9))
+
 # [@webundsoehne/eslint-config-v1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config-v1.0.1...@webundsoehne/eslint-config-v1.0.2) (2020-09-23)
 
 
