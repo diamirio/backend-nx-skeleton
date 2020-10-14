@@ -248,7 +248,12 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       // create temporary tsconfig.paths
       const tsconfig = readJsonFile(this.paths.tsconfig)
 
-      writeJsonFile(this.paths.tsconfigPaths, deepMerge(tsconfig, { compilerOptions: { baseUrl: join(this.context.workspaceRoot, this.options.outputPath) } }))
+      writeJsonFile(
+        this.paths.tsconfigPaths,
+        deepMerge(tsconfig, {
+          compilerOptions: { outDir: join(this.context.workspaceRoot, this.options.outputPath), baseUrl: join(this.context.workspaceRoot, this.options.outputPath) }
+        })
+      )
 
       const { args, spawnOptions } = this.normalizeArguments('tscpaths')
 
@@ -256,7 +261,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
       // we dont want errors from this it can be sig terminated
       try {
-        await pipeProcessToLogger(this.context, instance, { stderr: false, stdout: false })
+        await pipeProcessToLogger(this.context, instance, { stderr: true, stdout: false })
       } catch (e) {
         this.logger.debug(e)
       }
