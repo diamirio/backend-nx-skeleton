@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { {{ casing.pascal }}Command } from './{{ name }}.command'
+
+@Module({
+  imports: [ {{ casing.pascal }}Command ],
+  exports: [ {{ casing.pascal }}Command ]
+})
+export class {{ casing.pascal }}CommandModule {}

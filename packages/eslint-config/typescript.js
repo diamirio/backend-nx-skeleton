@@ -1,9 +1,10 @@
 module.exports = {
+  extends: [ './index' ],
   overrides: [
     {
       files: [ '*.ts', '*.tsx' ],
       plugins: [ '@typescript-eslint' ],
-      extends: [ './index', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended' ],
+      extends: [ 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended' ],
       // parserOptions: {
       //   project: './tsconfig.json',
       //   ecmaVersion: 2018,
@@ -52,23 +53,28 @@ module.exports = {
           'error',
           {
             selector: 'default',
-            format: [ 'camelCase' ]
+            format: [ 'camelCase', 'PascalCase' ]
           },
 
           {
             selector: 'variable',
-            format: [ 'camelCase', 'UPPER_CASE' ]
+            format: [ 'camelCase', 'UPPER_CASE', 'PascalCase' ]
           },
 
-          // {
-          //   select: 'function',
-          //   format: [ 'camelCase', 'PascalCase' ]
-          // },
+          {
+            selector: 'function',
+            format: [ 'camelCase', 'PascalCase' ]
+          },
 
           {
             selector: 'parameter',
-            format: [ 'camelCase' ],
+            format: [ 'camelCase', 'PascalCase' ],
             leadingUnderscore: 'allow'
+          },
+
+          {
+            selector: 'property',
+            format: [ 'camelCase', 'UPPER_CASE', 'snake_case' ]
           },
 
           {
@@ -90,11 +96,11 @@ module.exports = {
 
           {
             selector: 'interface',
-            format: [ 'PascalCase' ],
-            custom: {
-              regex: '^I[A-Z]',
-              match: false
-            }
+            format: [ 'PascalCase' ]
+            // custom: {
+            //   regex: '^I[A-Z]',
+            //   match: false
+            // }
           }
         ],
         '@typescript-eslint/no-parameter-properties': 'off',

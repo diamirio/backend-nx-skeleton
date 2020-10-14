@@ -1,4 +1,4 @@
-![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)
+[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
 
 Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
@@ -8,87 +8,66 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 [![Version](https://img.shields.io/npm/v/@webundsoehne/nx-tools.svg)](https://npmjs.org/package/@webundsoehne/nx-tools) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nx-tools.svg)](https://npmjs.org/package/@webundsoehne/nx-tools) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nx-tools)](https://npmjs.org/package/@webundsoehne/nx-tools) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-<!-- toc -->
-<!-- tocstop -->
-
 # Description
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) some tools to be commonly used in the schematics.
 
 All the functions are imported from the root of the project.
 
-## Init
+- **[Read The API Documentation](./API.md)**
+- [Changelog](./CHANGELOG.md)
 
-### `installWorkspaceDependencies`
+<!-- toc -->
+<!-- tocstop -->
 
-Used for installing the dependencies of the whole workspace if the `yarn workspaces` has been enabled.
+---
 
-### `parseArguments`
+# Tools
 
-Used for parsing comma-separated string variables passed into builder like `--roots packages/asd,something/asd`. It can be configured to return multiple values in an array of the desired type. Can just accept a single value, can make the value required, and throw an error if not found.
+This library mostly comprimises of tools that are useful for generating schematics. All the generic methods and types that is usually used in schematics are exported from the root of the package. You can read the generated API documentation for further explanation of indivudual functionality.
 
-## Integration
+# Schematics
 
-### `updateBrownieIntegration`
+## Generate Exports
 
-Used for adding data for later use with brownie. It will add data to `nx.json` under the appropriate package name.
+This schematic can be used internally for other schematics to generate exports based on designated patterns.
 
-### `updateNxIntegration`
+After parsing through your rules, you can add this as a indivudual role to go through all the files and match designated patterns and create TypeScript exported modules of matching files. All paths will be relative.
 
-Used for updating the `nx.json` `integration` field to keep some variables like prior generated template configuration in the workspace.
+There is two use cases for this:
 
-## Rules
+- Internal processing
+  > This will parse your files in your tree you defined and only export them, and does not care about the real files on host. To achieve this, this rule has to come before "mergeWith" function of tree with physical files.
+- External processing
+  > To achive this, this rule has to come after "mergeWith". Schematic will go through the whole real file base supplied as a tree and match the files on the physical file system as well.
 
-### `applyOverwriteWithDiff`
+**This schematic has no way to call from cli since it does not make much sense.**
 
-A complicated setup of `nx` initiate template files where it is possible to diff-merge depending on the older, current, and upcoming generated files from the template. It has the functionality to delete older files.
+**Example:**
 
-## Utils
+```typescript
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 
-### `readPackageJsonFromPath`
+export async function createApplicationFiles(options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+  return chain([
+    /** Your chain */
+    /** Your chain */
+    /** Your chain */
 
-Reads the package.json from the given path and parses it.
-
-### `writePackageJsonToPath`
-
-Write the package.json in the given path.
-
-### `createDependenciesForProjectFromGraph`
-
-Will create dependencies from the `nx` project graph. Not very good at detecting dynamic imports.
-
-### `mergeDependencies`
-
-Will merge multiple dependency tree in to one, omitting the duplicates.
-
-### `getWorkspace`
-
-Will get the workspace root.
-
-### `formatFiles`
-
-Format a given tree with prettier or eslint or even both.
-
-### `Logger`
-
-An `angular` specific logger for accessing through from other utils. It will prefix the name of the package if available and has a beautified interface.
-
-### `replaceExtension`
-
-Replaces extension.
-
-### `removePathRoot`
-
-Removes the root path from the absolute path.
-
-### `pipeProcessToLogger`
-
-Pipes a child process' output through the logger for prefixing the package name.
-
-### `ProcessManager`
-
-Creates a process manager where you can track the available processes. It will log the output through the logger automatically and kill all process trees if the user desires.
-
-### `jinjaTemplate`
-
-Creates a new jinja compatible nunjucks templating engine.
+    externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+      silent: true,
+      skipFormat: true,
+      templates: {
+        root: options.root,
+        templates: [
+          {
+            cwd: options.root,
+            output: 'index.ts',
+            pattern: '**/*.module.ts'
+          }
+        ]
+      }
+    })
+  ])
+}
+```

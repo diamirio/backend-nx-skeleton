@@ -2,8 +2,8 @@ import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/
 import { Observable } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
-import { Request } from '../interface'
-import { getDuration } from '../util'
+import { Request } from '@interface'
+import { getDuration } from '@util'
 
 export class RequestProfilerInterceptor implements NestInterceptor {
   private readonly logger = new Logger(this.constructor.name)

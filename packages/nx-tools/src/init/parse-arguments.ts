@@ -1,14 +1,32 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
-export function parseArguments<T> (task: ListrTaskWrapper<any, any>, args: string, validArgs: { name: string }[], options?: { required?: boolean, single?: boolean }): T {
-  const arg = args.split(',')
-
+/**
+ * @deprecated Now nx schema.json should be utilized better.
+ *
+ * Parses arguments coming from the cli.
+ * The arguments can multiple seperated by commas or single.
+ * The argument can be marked as required, which in that case will throw an error if not provided.
+ * @param task
+ * @param args
+ * @param validArgs
+ * @param options
+ */
+export function parseArguments<T> (
+  task: ListrTaskWrapper<any, any>,
+  args: string | string[],
+  validArgs: { name: string }[],
+  options?: { required?: boolean, single?: boolean }
+): T {
   const parsedValidArgs = validArgs.reduce((o, val) => {
     return [ ...o, val.name ]
   }, [])
 
-  const parsedArgs = arg.reduce((o, val) => {
+  if (typeof args === 'string') {
+    args = args.split(',')
+  }
+
+  const parsedArgs = args.reduce((o, val) => {
     if (isCorrectType<T>(parsedValidArgs, val)) {
       return [ ...o, val ]
     } else {

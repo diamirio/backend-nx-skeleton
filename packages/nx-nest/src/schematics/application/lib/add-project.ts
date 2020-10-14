@@ -1,14 +1,20 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { join, normalize } from '@angular-devkit/core'
+import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
+import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
+import { join } from 'path'
 
-import { ProjectArchitect } from '../interfaces/add-project.interface'
-import { NormalizedSchema } from '@src/schematics/application/main.interface'
+import { SchematicArchitect } from '../interfaces/add-project.interface'
+import { NormalizedSchema } from '../main.interface'
+import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.constants'
 
+/**
+ * Add the project to the {workspace,angular}.json
+ * @param options Parsed schema
+ */
 export function addProject (options: NormalizedSchema): Rule {
-  return updateWorkspaceInTree((json) => {
-    const architect: ProjectArchitect = {} as ProjectArchitect
+  return updateWorkspaceInTree<EnrichedWorkspaceJson>((json) => {
+    const architect: SchematicArchitect = {} as SchematicArchitect
 
     architect.build = {
       builder: '@webundsoehne/nx-builders:tsc',
@@ -29,7 +35,7 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     // prefer server mode
-    if (options.components.includes('server')) {
+    if (options.components.includes(AvailableComponents.SERVER)) {
       architect.serve = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -41,9 +47,21 @@ export function addProject (options: NormalizedSchema): Rule {
           }
         }
       }
+    } else if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
+      architect.serve = {
+        builder: '@webundsoehne/nx-builders:ts-node-dev',
+        options: {
+          cwd: options.root,
+          main: join(options.root, 'src/main.ts'),
+          tsConfig: join(options.root, 'tsconfig.json'),
+          environment: {
+            NODE_SERVICE: 'microservice-server'
+          }
+        }
+      }
     }
 
-    if (options.components.includes('bgtask')) {
+    if (options.components.includes(AvailableComponents.BG_TASK)) {
       architect.bgtask = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -58,7 +76,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     }
 
-    if (options.tests === 'jest') {
+    if (options.tests === AvailableTestsTypes.JEST) {
       architect.test = {
         builder: '@nrwl/jest:jest',
         options: {
@@ -69,17 +87,15 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     }
 
-    architect.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter)
+    architect.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter, [ '*.ts', '*.js' ])
 
     json.projects[options.name] = {
       root: options.root,
-      sourceRoot: join(options.root, 'src'),
+      sourceRoot: options.sourceRoot,
       projectType: 'application',
       schematics: {},
       architect
     }
-
-    json.defaultProject = json.defaultProject || options.name
 
     return json
   })

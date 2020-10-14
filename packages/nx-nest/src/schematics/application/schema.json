@@ -1,11 +1,15 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "NxNestSkeleton",
-  "title": "Create a Nest application from skeleton with NX",
+  "id": "nx-nest:application",
+  "title": "Create a Nest application from skeleton with NX.",
   "examples": [
     {
-      "command": "g app myapp --bgtask",
-      "description": "Initiate background task scheduler."
+      "command": "g app myapp",
+      "description": "Initiate a application in interactive mode."
+    },
+    {
+      "command": "g app myapp -c server -c bgtask -s graphql",
+      "description": "Initiate GraphQL API with bgtask enabled."
     }
   ],
   "type": "object",
@@ -21,14 +25,27 @@
     },
     "components": {
       "description": "Components to be embeded.",
-      "type": "string",
-      "alias": "c"
+      "alias": "c",
+      "items": {
+        "manyOf": [
+          {
+            "type": "string",
+            "enum": ["server", "microservice-server", "microservice-client", "bgtask", "command"]
+          }
+        ]
+      }
     },
     "server": {
       "description": "If server component is selected, specifies the type.",
       "type": "string",
       "alias": "s",
       "enum": ["graphql", "restful"]
+    },
+    "microservice": {
+      "description": "If microservices component is selected, specifies the type.",
+      "type": "string",
+      "alias": "m",
+      "enum": ["rabbitmq"]
     },
     "database": {
       "description": "Database that is desired to be used.",
@@ -46,10 +63,6 @@
       "description": "Test runner to use for unit and e2e tests",
       "type": "string",
       "enum": ["jest", "none"]
-    },
-    "verbose": {
-      "description": "Set this to debug mode.",
-      "type": "boolean"
     }
   },
   "required": []

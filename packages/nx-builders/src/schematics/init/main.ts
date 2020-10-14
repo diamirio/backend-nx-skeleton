@@ -1,7 +1,12 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 
-import { initiateBuilderDependencies } from '@src/utils/initiate-builder'
+import { Schema } from './main.interface'
+import { initiateBuilderDependencies } from '@utils/initiate-builder'
 
-export default function (): Rule {
-  return chain([ initiateBuilderDependencies([ 'ts-node-dev', 'tsc' ]) ])
+/**
+ * Install builder dependencies
+ * @param schema
+ */
+export default function (schema: Schema): Rule {
+  return chain([ initiateBuilderDependencies(schema.items) ])
 }

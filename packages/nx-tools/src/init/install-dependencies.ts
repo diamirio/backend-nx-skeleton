@@ -3,6 +3,11 @@ import { findWorkspaceRoot } from '@nrwl/cli/lib/find-workspace-root'
 import execa from 'execa'
 import { Listr } from 'listr2'
 
+/**
+ * @deprecated Template should not use the yarn workspaces anymore.
+ *
+ * Installs yarn workspace dependencies.
+ */
 export function installWorkspaceDependencies (): Rule {
   return async (): Promise<void> => {
     await new Listr<void>([

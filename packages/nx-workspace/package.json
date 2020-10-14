@@ -1,0 +1,60 @@
+{
+  "name": "@webundsoehne/nx-workspace",
+  "version": "1.0.0",
+  "description": "Workspace plugin for Nx",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./schematics.json",
+  "scripts": {
+    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents '**/*.json' ../dist/ && rimraf dist/**/files/ && cpy --cwd=src --parents '**/files/**' ../dist/",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
+    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "echo 'disabled for now' && exit 0 && jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md && git add ./API.md"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+  },
+  "peerDependencies": {
+    "@nrwl/workspace": "*"
+  },
+  "dependencies": {
+    "@angular-devkit/schematics": "~10.1.2",
+    "@webundsoehne/nx-tools": "*",
+    "enquirer": "^2.3.5",
+    "listr2": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "cpy-cli": "^3.1.1",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^6.0.1",
+    "lint-staged": "^10.2.11",
+    "rimraf": "^3.0.2",
+    "tsc-watch": "^4.2.8",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.0.3"
+  }
+}

@@ -13,14 +13,14 @@
   "schematics": "./schematics.json",
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
-    "postbuild": "cpy --cwd=src --parents '**/*.json' ../dist/ && rimraf dist/**/files/ && cpy --cwd=src --parents '**/files/**' ../dist/",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
-    "dev:start": "yarn dev:build && TS_NODE_PROJECT='tsconfig.paths.json' tsc-watch --noClear --onSuccess \"yarn dev:start:onSuccess\"",
-    "dev:start:onSuccess": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && yarn postbuild",
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents '**/*.json' ../dist/ && rimraf dist/**/files/ && cpy --cwd=src --parents '**/files/**' ../dist/",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
+    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md && git add ./API.md"
   },
   "husky": {
     "hooks": {
@@ -29,8 +29,8 @@
     }
   },
   "lint-staged": {
-    "./*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",
@@ -42,14 +42,21 @@
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
-    "deepmerge": "^4.2.2",
+    "change-case": "^4.1.1",
     "enquirer": "^2.3.5",
     "execa": "^4.0.2",
     "listr2": "^3.1.1"
   },
   "devDependencies": {
-    "@types/deepmerge": "^2.2.0",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
     "cpy-cli": "^3.1.1",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^6.0.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.8",

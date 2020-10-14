@@ -1,41 +1,20 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
+import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
-import { InitiateBuilderDependenciesOptions } from '@utils/initiate-builder.interface'
+import { VERSIONS } from './versions.constants'
+import { AvailableBuilders } from '@interfaces/available.constants'
+import { Schema } from '@src/schematics/init/main.interface'
 
 // calculate dependencies
-export function calculateDependencies (options: InitiateBuilderDependenciesOptions): PackageVersions {
-  let dependencies: PackageVersions = baseDeps
+export function calculateDependencies (options: Schema['items']): PackageVersions {
+  let dependencies: PackageVersions = VERSIONS.base.default
 
-  if (options.includes('ts-node-dev')) {
-    dependencies = merge(dependencies, tsNodeDevDeps)
+  if (options.includes(AvailableBuilders.TSC)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableBuilders.TSC])
   }
 
-  if (options.includes('tsc')) {
-    dependencies = merge(dependencies, tscDeps)
+  if (options.includes(AvailableBuilders.TS_NODE_DEV)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableBuilders.TS_NODE_DEV])
   }
 
   return dependencies
-}
-
-export const baseDeps: PackageVersions = {
-  dev: {
-    'nrwl-workspace': '^10.0.12',
-    typescript: '^3.9.0'
-  }
-}
-
-export const tsNodeDevDeps: PackageVersions = {
-  dev: {
-    'ts-node': '^8.10.0',
-    'ts-node-dev': '^1.0.0',
-    'tsconfig-paths': '^3.9.0'
-  }
-}
-
-export const tscDeps: PackageVersions = {
-  dev: {
-    tscpaths: '^0.0.9',
-    'tsc-watch': '^4.2.0'
-  }
 }

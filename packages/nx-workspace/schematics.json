@@ -1,0 +1,11 @@
+{
+  "name": "@webundsoehne/nx-nest",
+  "extends": ["@nrwl/workspace"],
+  "schematics": {
+    "init": {
+      "factory": "./dist/schematics/remove/main",
+      "schema": "./dist/schematics/remove/schema.json",
+      "description": "Remove a application from the project."
+    }
+  }
+}

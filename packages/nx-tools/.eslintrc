@@ -1,1 +1,59 @@
-{ "extends": "../../.eslintrc.js", "rules": {}, "ignorePatterns": ["!**/*"] }
+{
+  "extends": "../../.eslintrc.js",
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@src/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@init/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@integration/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@interfaces/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@rules/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@schematics/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@templates/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@utils",
+            "group": "index"
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "index"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "groups": [
+          ["builtin", "external"],
+          ["index", "parent", "sibling"]
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+  "ignorePatterns": ["!**/*"]
+}

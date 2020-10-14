@@ -1,134 +1,67 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
-import merge from 'deepmerge'
+import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
 
+import { VERSIONS } from './versions.constant'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
-// nx
-export const nxVersion = '*'
-
-// eslint
-export const eslintPluginVersion = {
-  'eslint-plugin-import': '^2.22.0',
-  '@typescript-eslint/eslint-plugin': '^4.1.1'
-}
-
-// calculate dependencies
-export function calculateDependencies (schema: NormalizedSchema, builders?: boolean): PackageVersions {
+/**
+ * Will calculate the dependencies depending on the components selected.
+ * Can set the optional variable to true to only return builder dependencies to install it first
+ * @param options
+ * @param builders
+ */
+export function calculateDependencies (options: NormalizedSchema, builders?: boolean): PackageVersions {
   // only add builders
   if (builders) {
-    return builderDeps
+    return VERSIONS.builder
   }
 
-  let dependencies: PackageVersions = baseDeps
+  let dependencies: PackageVersions = VERSIONS.base.default
 
-  if (schema.tests === 'jest') {
-    dependencies = merge(dependencies, testDeps)
+  // tests
+  if (options.tests === AvailableTestsTypes.JEST) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableTestsTypes.JEST])
   }
 
-  if (schema.components.includes('server') && schema.server === 'restful') {
-    dependencies = merge(dependencies, restServerDeps)
+  // api interfaces
+  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.RESTFUL) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.RESTFUL])
   }
 
-  if (schema.components.includes('server') && schema.server === 'graphql') {
-    dependencies = merge(dependencies, graphqlServerDeps)
+  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.GRAPHQL) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.GRAPHQL])
   }
 
-  if (schema.components.includes('microservice')) {
-    dependencies = merge(dependencies, microserviceModuleDeps)
+  // microservices
+  if ([ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c))) {
+    dependencies = deepMerge(dependencies, VERSIONS.base.microservice)
   }
 
-  if (schema.components.includes('bgtask')) {
-    dependencies = merge(dependencies, taskModuleDeps)
+  if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_SERVER])
   }
 
-  if (schema.components.includes('command')) {
-    dependencies = merge(dependencies, commandModuleDeps)
+  if (options.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_CLIENT])
   }
 
-  if (schema.database?.includes('typeorm')) {
-    dependencies = merge(dependencies, typeormDeps)
+  // components
+  if (options.components.includes(AvailableComponents.BG_TASK)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.BG_TASK])
   }
 
-  if (schema.database?.includes('mongoose')) {
-    dependencies = merge(dependencies, mongooseDeps)
+  if (options.components.includes(AvailableComponents.COMMAND)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.COMMAND])
+  }
+
+  // db related
+  if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.TYPEORM])
+  }
+
+  if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database)) {
+    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.MONGOOSE])
   }
 
   return dependencies
-}
-
-export const builderDeps: PackageVersions = {
-  dev: {}
-}
-
-export const testDeps: PackageVersions = {
-  dev: {
-    '@nestjs/testing': '^7.2.0',
-    jest: '^26.1.0',
-    'ts-jest': '^26.1.1',
-    '@types/jest': '^26.0.3'
-  }
-}
-
-// base dependencies
-export const baseDeps: PackageVersions = {
-  prod: {
-    '@nestjs/common': '^7.4.4',
-    '@nestjs/core': '^7.4.4',
-    '@nestjsx/crud': '^4.6.2',
-    rxjs: '^6.6.3',
-    'reflect-metadata': '^0.1.13',
-    '@webundsoehne/nestjs-util': '^1.0.0',
-    'class-transformer': '^0.3.1',
-    'class-validator': '^0.12.2',
-    'nest-schedule': '^0.6.4'
-  },
-  dev: {}
-}
-
-// server dependencies for rest
-export const restServerDeps: PackageVersions = {
-  prod: {
-    // pin for graphql version
-    '@nestjs/platform-fastify': '7.2.0',
-    'fastify-swagger': '^3.3.0',
-    '@nestjs/swagger': '^4.6.0'
-  }
-}
-
-export const graphqlServerDeps: PackageVersions = {
-  prod: {
-    '@nestjs/graphql': '^7.6.0',
-    'apollo-server-fastify': '^2.17.0',
-    graphql: '^15.3.0',
-    'graphql-tools': '^6.2.3'
-  }
-}
-
-export const taskModuleDeps: PackageVersions = {}
-
-export const microserviceModuleDeps: PackageVersions = {}
-
-// command module dependencies
-export const commandModuleDeps: PackageVersions = {
-  prod: {
-    'nestjs-command': '1.4.0'
-  }
-}
-
-// typeorm dependencies
-export const typeormDeps: PackageVersions = {
-  prod: {
-    '@nestjs/typeorm': '^7.1.4',
-    typeorm: '^0.2.26'
-  }
-}
-
-export const mongooseDeps: PackageVersions = {
-  prod: {
-    '@nestjs/mongoose': '^7.0.2',
-    mongoose: '^5.10.6'
-  },
-  dev: {
-    '@types/mongoose': '^5.7.36'
-  }
 }

@@ -1,15 +1,15 @@
 {% if components | length != 1 %}
 export enum Service {
-  {% if 'server' in components %}
+  {% if enum.components.SERVER in components %}
   SERVER = 'server',
   {% endif %}
-  {% if 'microservice' in components %}
-  MICROSERVICE = 'microservice',
+  {% if enum.components.MICROSERVICE_SERVER in components %}
+  MICROSERVICE_SERVER = 'microservice_server',
   {% endif %}
-  {% if 'bgtask' in components %}
-  TASK = 'bgtask',
+  {% if enum.components.BG_TASK in components %}
+  TASK = 'bg_task',
   {% endif %}
-  {% if 'command' in components %}
+  {% if enum.components.COMMAND in components %}
   COMMAND = 'cli'
   {% endif %}
 }

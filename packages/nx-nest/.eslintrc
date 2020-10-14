@@ -10,19 +10,11 @@
             "group": "index"
           },
           {
-            "pattern": "@application/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@init/**",
-            "group": "index"
-          },
-          {
             "pattern": "@interfaces/**",
             "group": "index"
           },
           {
-            "pattern": "@util/**",
+            "pattern": "@utils/**",
             "group": "index"
           }
         ],

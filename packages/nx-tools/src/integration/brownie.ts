@@ -1,25 +1,28 @@
 import { Rule } from '@angular-devkit/schematics'
-import { updateJsonInTree } from '@nrwl/workspace'
-import merge from 'deepmerge'
+import { readNxJson, updateJsonInTree } from '@nrwl/workspace'
 
 import { BrownieIntegrationInterface } from './brownie.interface'
+import { EnrichedNxJson } from '@interfaces/nx-json.interface'
+import { deepMergeWithUniqueMergeArray } from '@utils'
 
+/**
+ * Updates brownie integration by wiriting data to nx.json
+ * @param name
+ * @param options
+ */
 export function updateBrownieIntegration (name: string, options: BrownieIntegrationInterface): Rule {
   return updateJsonInTree('nx.json', (json) => {
-    let brownie = {} as BrownieIntegrationInterface
-
-    // get the current config or create a new one
-    if (!json?.projects?.[name]?.brownie) {
-      json.projects[name].brownie = {} as BrownieIntegrationInterface
-    } else {
-      brownie = json.projects[name].brownie
-    }
-
     // write it back
-    json.projects[name].brownie = merge(brownie, options, {
-      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
-    })
+    json.projects[name].brownie = deepMergeWithUniqueMergeArray(json.projects[name]?.brownie ?? {}, options)
 
     return json
   })
+}
+
+/**
+ * Returns the brownie integration part of the nx.json.
+ * @param name
+ */
+export function readBrownieIntegration (name: string): BrownieIntegrationInterface {
+  return (readNxJson() as EnrichedNxJson).projects?.[name]?.brownie
 }

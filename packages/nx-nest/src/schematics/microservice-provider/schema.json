@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "NxNestSkeleton",
+  "title": "Create a Nest application from skeleton with NX",
+  "type": "object",
+  "properties": {
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint"],
+      "default": "eslint"
+    },
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

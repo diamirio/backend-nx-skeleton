@@ -1,13 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
-import { APP_FILTER,{% if server == 'restful' %} APP_INTERCEPTOR,{% endif %} APP_PIPE } from '@nestjs/core'
-{% if server == 'graphql' %}
+import { APP_FILTER,{% if server == enum.server.RESTFUL %} APP_INTERCEPTOR,{% endif %} APP_PIPE } from '@nestjs/core'
+{% if server == enum.server.GRAPHQL %}
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
 {% endif %}
-{% if 'typeorm' in database %}
+{% if enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
-{% elif 'mongoose-mongodb' == database %}
+{% elif enum.dbAdapters.MONGOOSE in database %}
 import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 import {
@@ -17,7 +17,7 @@ import {
   InternalModule,
   MaintenanceMiddleware,
   MaintenanceModule,
-  {% if server == 'restful' %}
+  {% if server == enum.server.RESTFUL %}
   CacheLifetimeHelperInterceptor,
   RequestProfilerInterceptor,
   {% endif %}
@@ -27,11 +27,11 @@ import {
 } from '@webundsoehne/nestjs-util'
 
 import * as modules from './modules'
-{% if database is defined and database != 'none' %}
-import { getDatabaseOptions } from '../util/database'
+{% if database is defined and database != enum.database.NONE %}
+import { getDatabaseOptions } from '@util/database'
 {% endif %}
 
-export function createServerModule ({% if database != 'none' %}mock = false{% endif %}): new() => NestModule {
+export function createServerModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database is defined and database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
       ConfigService,
@@ -46,7 +46,7 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
       {
         provide: APP_PIPE,
         useClass: ExtendedValidationPipe
-      }{% if server == 'restful' %},
+      }{% if server == enum.server.RESTFUL %},
       {
         provide: APP_INTERCEPTOR,
         useClass: CacheLifetimeHelperInterceptor
@@ -57,7 +57,7 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
       }{% endif %}
     ],
     imports: [
-      {% if server == 'graphql' %}GraphQLModule.forRoot({
+      {% if server == enum.server.GRAPHQL %}GraphQLModule.forRoot({
         autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
         context: graphQLContextParser,
         formatError: graphQLErrorParser,
@@ -67,9 +67,9 @@ export function createServerModule ({% if database != 'none' %}mock = false{% en
         path: '/'
       }), {% endif %}
       ...Object.values(modules),
-      {% if 'typeorm' in database %}
+      {% if enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
-      {% elif 'mongoose-mongodb' == database %}
+      {% elif enum.dbAdapters.MONGOOSE in database %}
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
       InternalModule,

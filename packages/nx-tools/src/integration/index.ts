@@ -1,2 +1,5 @@
 export * from './brownie'
 export * from './nx-json'
+export * from './microservice-provider'
+export * from './microservice-provider.interface'
+export * from './update-ts-config'

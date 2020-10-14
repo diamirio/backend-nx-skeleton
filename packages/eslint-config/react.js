@@ -1,8 +1,8 @@
 module.exports = {
+  extends: [ './index' ],
   overrides: [
     {
       files: [ '*.jsx' ],
-      extends: [ './index' ],
       plugins: [ 'react', 'react-hooks' ],
       parserOptions: {
         project: null,

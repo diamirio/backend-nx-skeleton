@@ -11,7 +11,7 @@ export class MigrationTask extends NestSchedule {
 
   @Timeout(0, { maxRetry: 24, retryInterval: 2.5 * 1000 })
   @UseLocker(MaintenanceLocker)
-  public async migrate (): Promise<void> {
+  public async migrate(): Promise<void> {
     try {
       const connection = await createConnection({ ...getDatabaseOptions(), logging: true })
 

@@ -1,25 +1,35 @@
 import { JsonObject } from '@angular-devkit/core'
 
-export interface NodePackageServeOptions extends JsonObject {
-  /** process CWD */
+/**
+ * Options for ts-node-dev
+ */
+export interface TsNodeBuilderOptions extends JsonObject {
+  /**
+   * process current working directory
+   *
+   * this will spawn the process from the current working directory so most of the plugins will work as expected
+   */
   cwd: string
 
-  /** Path to entry point */
+  /** entrypoint for the application which ts-node will run */
   main: string
 
-  /** Path to tsconfig.json */
+  /**
+   * tsconfig file that is used
+   * will default to tsconfig.json
+   */
   tsConfig?: string
 
-  /** Debounce in ms */
+  /** ts-node-dev debounce in ms */
   debounce?: number
 
-  /** Interval in ms */
+  /** ts-node-dev interval in ms */
   interval?: number
 
-  /** Additional debug output */
+  /** node debug port enable */
   debug?: boolean
 
-  /** Inspect port */
+  /** inspect port that should be opened when debugging */
   inspect?: number
 
   /** environment variables */

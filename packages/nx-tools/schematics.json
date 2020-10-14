@@ -1,0 +1,12 @@
+{
+  "name": "@webundsoehne/nx-tools",
+  "extends": ["@nrwl/workspace"],
+  "schematics": {
+    "exports": {
+      "factory": "./dist/schematics/exports/main",
+      "schema": "./dist/schematics/exports/schema.json",
+      "aliases": ["ex"],
+      "description": "Export files a default module with regex patterns."
+    }
+  }
+}

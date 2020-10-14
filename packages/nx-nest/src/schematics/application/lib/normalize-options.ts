@@ -1,24 +1,54 @@
 import { normalize } from '@angular-devkit/core'
-import { Tree, SchematicContext } from '@angular-devkit/schematics'
+import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
-import { appsDir, readJsonInTree } from '@nrwl/workspace/src/utils/ast-utils'
+import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, parseArguments } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
-import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes, NormalizedSchema, Schema } from '@src/schematics/application/main.interface'
+import { NormalizedSchema, Schema } from '../main.interface'
+import {
+  AvailableComponents,
+  AvailableDBAdapters,
+  AvailableDBTypes,
+  AvailableMicroserviceTypes,
+  AvailableServerTypes,
+  AvailableTestsTypes,
+  PrettyNamesForAvailableThingies
+} from '@interfaces/available.constants'
 
+/**
+ * Normalize the options passed in through angular-schematics.
+ * @param host
+ * @param context
+ * @param options
+ */
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
-        task: async (ctx): Promise<void> => {
-          await Promise.all(
-            [ 'name', 'verbose', 'linter' ].map((item) => {
-              ctx[item] = options[item]
-            })
-          )
+        task: (ctx): void => {
+          setSchemaDefaultsInContext(ctx, {
+            default: [
+              {
+                ...options
+              },
+              {
+                sourceRoot: 'src'
+              },
+              {
+                enum: {
+                  components: AvailableComponents,
+                  server: AvailableServerTypes,
+                  database: AvailableDBTypes,
+                  tests: AvailableTestsTypes,
+                  microservice: AvailableMicroserviceTypes,
+                  dbAdapters: AvailableDBAdapters
+                }
+              }
+            ]
+          })
         }
       },
 
@@ -30,16 +60,6 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           } else {
             ctx.directory = toFileName(options.name)
           }
-        }
-      },
-
-      // remove unwanted charachters from directory name
-      {
-        title: 'Normalizing project name.',
-        task: (ctx, task): void => {
-          ctx.name = ctx.directory.replace(new RegExp('/', 'g'), '-')
-
-          task.title = `Project name is set as "${ctx.name}".`
         }
       },
 
@@ -72,16 +92,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const nxJson = readJsonInTree(host, 'nx.json')
-
-            const thisProject = nxJson.projects?.[ctx.name]?.integration
+            const thisProject = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
             if (thisProject) {
-              ctx.priorConfiguration = {
-                components: thisProject?.components,
-                server: thisProject?.server,
-                database: thisProject?.database,
-                tests: thisProject?.tests
-              }
+              ctx.priorConfiguration = thisProject
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -99,34 +112,27 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // select server functionality
       {
+        skip: (ctx): boolean => ctx.components?.length > 0,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponents> = [
-            { name: 'server', message: 'Server' },
-            { name: 'bgtask', message: 'Scheduler' },
-            { name: 'command', message: 'Command' },
-            { name: 'microservice', message: 'Microservice' }
-          ]
+          const choices: ConvertToPromptType<AvailableComponents> = Object.keys(AvailableComponents).map((o) => ({
+            name: AvailableComponents[o],
+            message: PrettyNamesForAvailableThingies[AvailableComponents[o]]
+          }))
 
           // select the base components
-          if (!options.components) {
-            // when options are not passed as an option to the command
-            ctx.components = await task.prompt<AvailableComponents[]>({
-              type: 'MultiSelect',
-              message: 'Please select which components you want to include.',
-              choices: choices as any,
-              validate: (val) => {
-                if (val?.length > 0) {
-                  return true
-                } else {
-                  return 'At least one component must be included.'
-                }
-              },
-              initial: getInitialFromPriorConfiguration(ctx, 'components', choices)
-            })
-          } else {
-            // when options are passed via cli
-            ctx.components = parseArguments<AvailableComponents[]>(task, options.components, choices, { required: true })
-          }
+          ctx.components = await task.prompt<AvailableComponents[]>({
+            type: 'MultiSelect',
+            message: 'Please select which components you want to include.',
+            choices: choices as any,
+            validate: (val) => {
+              if (val?.length > 0) {
+                return true
+              } else {
+                return 'At least one component must be included.'
+              }
+            },
+            initial: getInitialFromPriorConfiguration(ctx, 'components', choices)
+          })
 
           task.title = `Server components selected: ${ctx.components}`
         },
@@ -138,25 +144,20 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // backend server types
       {
-        skip: (ctx): boolean => !ctx.components.includes('server'),
+        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx?.server,
         task: async (ctx, task): Promise<void> => {
           // there can be two selections of API servers here
-          const choices: ConvertToPromptType<AvailableServerTypes> = [
-            { name: 'restful', message: 'RESTFUL' },
-            { name: 'graphql', message: 'GraphQL' }
-          ]
+          const choices: ConvertToPromptType<AvailableServerTypes> = Object.keys(AvailableServerTypes).map((o) => ({
+            name: AvailableServerTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableServerTypes[o]]
+          }))
 
-          if (!options.server) {
-            ctx.server = await task.prompt<AvailableServerTypes>({
-              type: 'Select',
-              message: 'Please select the API server type.',
-              choices: choices as any,
-              initial: getInitialFromPriorConfiguration(ctx, 'server', choices)
-            })
-          } else {
-            // when options are passed via cli
-            ctx.server = parseArguments<AvailableServerTypes>(task, options.server, choices, { required: true, single: true })
-          }
+          ctx.server = await task.prompt<AvailableServerTypes>({
+            type: 'Select',
+            message: 'Please select the API server type.',
+            choices: choices as any,
+            initial: getInitialFromPriorConfiguration(ctx, 'server', choices)
+          })
 
           task.title = `Server type selected as: ${ctx.server}`
         },
@@ -166,29 +167,47 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
+      // microservice-server types
+      {
+        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_SERVER) && !ctx?.microservice,
+        task: async (ctx, task): Promise<void> => {
+          // there can be two selections of API servers here
+          const choices: ConvertToPromptType<AvailableMicroserviceTypes> = Object.keys(AvailableMicroserviceTypes).map((o) => ({
+            name: AvailableMicroserviceTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableMicroserviceTypes[o]]
+          }))
+
+          ctx.microservice = await task.prompt<AvailableMicroserviceTypes>({
+            type: 'Select',
+            message: 'Please select the microservice server type.',
+            choices: choices as any,
+            initial: getInitialFromPriorConfiguration(ctx, 'microservice', choices)
+          })
+
+          task.title = `Microservice type selected as: ${ctx.microservice}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
       // database options
       {
-        skip: (ctx): boolean => !ctx.components.includes('server') && !ctx.components.includes('bgtask'),
+        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx.components.includes(AvailableComponents.BG_TASK) && !ctx?.database,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableDBTypes> = [
-            { name: 'none', message: 'None' },
-            { name: 'typeorm-mysql', message: 'Typeorm - MySQL' },
-            { name: 'typeorm-postgresql', message: 'Typeorm - PostgreSQL' },
-            { name: 'mongoose-mongodb', message: 'Mongoose - MongoDB' }
-          ]
+          const choices: ConvertToPromptType<AvailableDBTypes> = Object.keys(AvailableDBTypes).map((o) => ({
+            name: AvailableDBTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableDBTypes[o]]
+          }))
 
           // there can be two selections of API servers here
-          if (!options?.database) {
-            ctx.database = await task.prompt<AvailableDBTypes>({
-              type: 'Select',
-              message: 'Please select the database type.',
-              choices: choices as any,
-              initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
-            })
-          } else {
-            // when options are passed via cli
-            ctx.database = parseArguments<AvailableDBTypes>(task, options.database, choices, { required: true, single: true })
-          }
+          ctx.database = await task.prompt<AvailableDBTypes>({
+            type: 'Select',
+            message: 'Please select the database type.',
+            choices: choices as any,
+            initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
+          })
 
           task.title = `Database selected as: ${ctx.database}`
         },
@@ -198,34 +217,21 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
-      // default database
-      {
-        skip: (ctx): boolean => !(!ctx.components.includes('server') && !ctx.components.includes('bgtask')),
-        task: async (ctx): Promise<void> => {
-          ctx.database = 'none'
-        }
-      },
-
       // select tests
       {
+        skip: (ctx): boolean => !!ctx.tests,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableTestsTypes> = [
-            { name: 'jest', message: 'Jest' },
-            { name: 'none', message: 'None' }
-          ]
+          const choices: ConvertToPromptType<AvailableTestsTypes> = Object.keys(AvailableTestsTypes).map((o) => ({
+            name: AvailableTestsTypes[o],
+            message: PrettyNamesForAvailableThingies[AvailableTestsTypes[o]]
+          }))
 
-          // there can be two selections of API servers here
-          if (!options?.tests) {
-            ctx.tests = await task.prompt<AvailableTestsTypes>({
-              type: 'Select',
-              message: 'Please select the test runner type.',
-              choices: choices as any,
-              initial: getInitialFromPriorConfiguration(ctx, 'tests', choices)
-            })
-          } else {
-            // when options are passed via cli
-            ctx.tests = parseArguments<AvailableTestsTypes>(task, options.tests, choices, { required: true, single: true })
-          }
+          ctx.tests = await task.prompt<AvailableTestsTypes>({
+            type: 'Select',
+            message: 'Please select the test runner type.',
+            choices: choices as any,
+            initial: getInitialFromPriorConfiguration(ctx, 'tests', choices)
+          })
 
           task.title = `Test runner selected as: ${ctx.tests}`
         },

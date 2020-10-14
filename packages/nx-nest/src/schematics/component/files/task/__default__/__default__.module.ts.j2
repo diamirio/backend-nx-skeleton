@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { {{ casing.pascal }}Task } from './{{ name }}.task'
+
+@Module({
+  providers: [ {{ casing.pascal }}Task ],
+  exports: [ {{ casing.pascal }}Task ]
+})
+export class {{ casing.pascal }}TaskModule {}

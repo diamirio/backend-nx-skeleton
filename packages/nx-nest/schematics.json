@@ -14,6 +14,20 @@
       "schema": "./dist/schematics/application/schema.json",
       "aliases": ["app"],
       "description": "Create a new Nest application from skeleton."
+    },
+
+    "component": {
+      "factory": "./dist/schematics/component/main",
+      "schema": "./dist/schematics/component/schema.json",
+      "aliases": ["co"],
+      "description": "Generate a new component from schematic."
+    },
+
+    "microservice-provider": {
+      "factory": "./dist/schematics/microservice-provider/main",
+      "schema": "./dist/schematics/microservice-provider/schema.json",
+      "aliases": ["msp"],
+      "description": "Generate microservice based library."
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts", "**/files"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": "src",
+    "noUnusedLocals": true,
+    "incremental": false
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "printWidth": 180,
+  "printWidth": 179,
   "tabWidth": 2,
   "semi": false,
   "singleQuote": true,
@@ -9,9 +9,16 @@
   "proseWrap": "never",
   "endOfLine": "lf",
   "overrides": [{
-    "files": ["**/*.json"],
-    "options": {
-      "parser": "json"
+      "files": ["**/*.json"],
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": ["**/*.ts"],
+      "options": {
+        "parser": "typescript"
+      }
     }
-  }]
+  ]
 }

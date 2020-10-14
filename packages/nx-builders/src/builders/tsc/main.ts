@@ -1,101 +1,54 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
-import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
-import {
-  calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt,
-  createTmpTsConfig,
-  DependentBuildableProjectNode,
-  updateBuildableProjectPackageJsonDependencies
-} from '@nrwl/workspace/src/utils/buildable-libs-utils'
+import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
+import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import {
   checkNodeModulesExists,
   createDependenciesForProjectFromGraph,
   ExecaArguments,
-  Logger,
   mergeDependencies,
   pipeProcessToLogger,
-  ProcessManager,
-  removePathRoot
+  removePathRoot,
+  BaseBuilder,
+  runBuilder,
+  isVerbose,
+  deepMerge
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
-import merge from 'deepmerge'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
 import glob from 'glob'
 import { basename, dirname, join, normalize, relative } from 'path'
-import { Observable, of, Subscriber } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { Observable, Subscriber } from 'rxjs'
 
-import { FileInputOutput, NodePackageBuilderOptions, NormalizedBuilderOptions, ProcessPaths } from './main.interface'
+import { FileInputOutput, NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-export function runBuilder (options: NodePackageBuilderOptions, context: BuilderContext) {
-  const { dependencies } = calculateProjectDependencies(createProjectGraph(), context)
-
-  return of(checkDependentProjectsHaveBeenBuilt(context, dependencies)).pipe(
-    switchMap((result) => {
-      if (result) {
-        const builder = new Builder(options, context)
-        return builder.compileFiles()
-      } else {
-        return of({ success: false })
-      }
-    }),
-    map((value) => {
-      return value
-    })
-  )
-}
-
 // i converted this to a class since it makes not to much sense to have seperate functions with tons of same inputs
-class Builder {
-  private logger: Logger
-  private projectGraph: ProjectGraph
-  private projectTarget: ProjectGraphNode<Record<string, unknown>>
-  private projectDependencies: DependentBuildableProjectNode[]
-  private options: NormalizedBuilderOptions
-  private paths: ProcessPaths
-  private manager: ProcessManager
-
-  constructor (options: NodePackageBuilderOptions, private context: BuilderContext) {
-    this.logger = new Logger(context)
-
-    // create dependency
-    this.projectGraph = createProjectGraph()
-    const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context)
-    this.projectTarget = target
-    this.projectDependencies = dependencies
-
-    // normalize options
-    this.options = this.normalizeOptions(options)
-
-    // create a process manager
-    this.manager = new ProcessManager(this.context)
-  }
-
-  public compileFiles (): Observable<BuilderOutput> {
-    // Cleaning the /dist folder
-    removeSync(this.options.normalizedOutputPath)
-
+class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
+  public init (): void {
     // paths of the programs, more convient than using the api since tscpaths does not have api
     this.paths = {
       typescript: require.resolve('typescript/bin/tsc'),
       tscpaths: require.resolve('tscpaths/cjs/index'),
       tscWatch: require.resolve('tsc-watch/lib/tsc-watch'),
-      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig)
+      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig ?? 'tsconfig.build.json')
     }
+  }
 
-    // have to return a observable here
+  public run (): Observable<BuilderOutput> {
+    // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(
       async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+        // Cleaning the /dist folder
+        removeSync(this.options.normalizedOutputPath)
+
         try {
           // stop all manager tasks
           await this.manager.stop()
@@ -177,10 +130,11 @@ class Builder {
     )
   }
 
-  protected normalizeOptions (options: NodePackageBuilderOptions): NormalizedBuilderOptions {
+  public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = []
 
+    // globbing some files
     const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
       return glob.sync(pattern, {
         cwd: input,
@@ -189,6 +143,7 @@ class Builder {
       })
     }
 
+    // normalize assets
     options.assets.forEach((asset) => {
       if (typeof asset === 'string') {
         files.push({
@@ -214,14 +169,18 @@ class Builder {
     const relativeMainFileOutput = relative(`${tsconfigDir}/${rootDir}`, mainFileDir)
 
     return {
+      // default behaviour
+      swapPaths: true,
+      // injected options
       ...options,
+      // parsed options
       files,
       relativeMainFileOutput,
       normalizedOutputPath: join(this.context.workspaceRoot, options.outputPath)
     }
   }
 
-  private async secondaryCompileActions () {
+  private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
     return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
   }
 
@@ -259,7 +218,7 @@ class Builder {
         args = [ ...args, '--sourceMap' ]
       }
 
-      if (this.options.verbose) {
+      if (isVerbose()) {
         args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
       }
 
@@ -271,7 +230,7 @@ class Builder {
       // arguments for tsc paths
       args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
 
-      if (this.options.verbose) {
+      if (isVerbose()) {
         args = [ ...args, '--verbose' ]
       }
     }
@@ -279,7 +238,7 @@ class Builder {
     return { args, spawnOptions }
   }
 
-  private async swapPaths () {
+  private async swapPaths (): Promise<void> {
     // optional swap paths, which will swap all the typescripts to relative paths.
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
@@ -289,7 +248,12 @@ class Builder {
       // create temporary tsconfig.paths
       const tsconfig = readJsonFile(this.paths.tsconfig)
 
-      writeJsonFile(this.paths.tsconfigPaths, merge(tsconfig, { compilerOptions: { baseUrl: join(this.context.workspaceRoot, this.options.outputPath) } }))
+      writeJsonFile(
+        this.paths.tsconfigPaths,
+        deepMerge(tsconfig, {
+          compilerOptions: { outDir: join(this.context.workspaceRoot, this.options.outputPath), baseUrl: join(this.context.workspaceRoot, this.options.outputPath) }
+        })
+      )
 
       const { args, spawnOptions } = this.normalizeArguments('tscpaths')
 
@@ -297,7 +261,7 @@ class Builder {
 
       // we dont want errors from this it can be sig terminated
       try {
-        await pipeProcessToLogger(this.context, instance, { stderr: false, stdout: false })
+        await pipeProcessToLogger(this.context, instance, { stderr: true, stdout: false })
       } catch (e) {
         this.logger.debug(e)
       }
@@ -308,7 +272,7 @@ class Builder {
     }
   }
 
-  private updatePackageJson () {
+  private updatePackageJson (): void {
     const packageJsonPath = this.options.packageJson
       ? join(this.context.workspaceRoot, this.options.packageJson)
       : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
@@ -397,4 +361,4 @@ class Builder {
   }
 }
 
-export default createBuilder(runBuilder)
+export default createBuilder(runBuilder(Builder))

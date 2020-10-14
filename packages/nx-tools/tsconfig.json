@@ -6,9 +6,13 @@
     "baseUrl": "src",
     "paths": {
       "@src/*": ["*"],
-      "@integration/*": ["integration/*"],
       "@init/*": ["init/*"],
+      "@integration/*": ["integration/*"],
+      "@interfaces/*": ["interfaces/*"],
       "@rules/*": ["rules/*"],
+      "@schematics/*": ["schematics/*"],
+      "@templates/*": ["templates/*"],
+      "@utils": ["utils/index"],
       "@utils/*": ["utils/*"]
     }
   },

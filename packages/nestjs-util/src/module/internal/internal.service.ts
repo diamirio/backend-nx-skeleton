@@ -2,8 +2,8 @@ import { Injectable, Logger } from '@nestjs/common'
 import fs from 'fs-extra'
 import moment from 'moment'
 
-import { ConfigParam, Configurable } from '../../provider/config'
 import { ApiStatus } from './internal.interface'
+import { ConfigParam, Configurable } from '@provider/config'
 
 @Injectable()
 export class InternalService {

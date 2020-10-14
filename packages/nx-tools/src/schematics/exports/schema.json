@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "nx-tools:exports",
+  "title": "Add exports with regex pattern.",
+  "examples": [],
+  "type": "object",
+  "required": []
+}

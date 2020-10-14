@@ -1,0 +1,18 @@
+import { Args, Query, Resolver } from '@nestjs/graphql'
+
+import { {{ casing.pascal }}Schema } from './{{ name }}.schema'
+
+@Resolver('{{ casing.pascal }}')
+export class {{ casing.pascal }}Resolver {
+  @Query(() => {{ casing.pascal }}Schema)
+  public hello (
+    @Args({
+      name: 'name',
+      nullable: true,
+      defaultValue: 'world'
+    })
+      name: string
+  ): {{ casing.pascal }}Schema {
+    return { response: `Hello ${name}.` }
+  }
+}

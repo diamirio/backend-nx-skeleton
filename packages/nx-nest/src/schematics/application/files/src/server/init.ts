@@ -4,7 +4,7 @@ import { LoggerService, SwaggerService, ConfigService } from '@webundsoehne/nest
 
 import { createServerModule } from './server.module'
 
-export async function createApplication (): Promise<void> {
+export async function createApplication(): Promise<void> {
   const app = await NestFactory.create<NestFastifyApplication>(createServerModule(), new FastifyAdapter(), {
     logger: new LoggerService()
   })
