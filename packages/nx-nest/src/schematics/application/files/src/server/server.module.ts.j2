@@ -5,9 +5,9 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
 {% endif %}
-{% if enum.dbAdapters.TYPEORM in database %}
+{% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
-{% elif enum.dbAdapters.MONGOOSE in database %}
+{% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
 import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 import {
@@ -25,6 +25,9 @@ import {
   setEnvironmentVariables,
   ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
+{% if enum.components.MICROSERVICE_CLIENT in components %}
+import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+{% endif %}
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}
@@ -67,17 +70,20 @@ export function createServerModule ({% if database is defined and database != en
         path: '/'
       }), {% endif %}
       ...Object.values(modules),
-      {% if enum.dbAdapters.TYPEORM in database %}
+      {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
-      {% elif enum.dbAdapters.MONGOOSE in database %}
+      {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
+      {% endif %}
+      {% if enum.components.MICROSERVICE_CLIENT in components %}
+      MicroserviceProviderModule,
       {% endif %}
       InternalModule,
       MaintenanceModule
       ]
   })
   class ServerModule implements NestModule {
-    async configure (consumer: MiddlewareConsumer): Promise<any> {
+    async configure (consumer: MiddlewareConsumer): Promise<void> {
       await setEnvironmentVariables()
 
       consumer

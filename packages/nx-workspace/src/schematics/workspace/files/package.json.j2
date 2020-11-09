@@ -1,0 +1,54 @@
+{
+  "name": "@{{ packageScope }}/root",
+  "root": true,
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    {% if cli == enum.cli.ANGULAR %}
+    "ng": "nx",
+    "postinstall": "node ./decorate-angular-cli.js",
+    {% endif %}
+    "nx": "nx",
+    "start": "{{ cliCmd }} run-many --target=serve --parallel --maxParallel=1000 --all",
+    "start:one": "{{ cliCmd }} serve",
+    "build": "{{ cliCmd }} run-many --target=build --all",
+    "build:one": "{{ cliCmd }} build",
+    "build:nocache": "yarn build --skip-nx-cache",
+    "test": "{{ cliCmd }} run-many --target=test --parallel --maxParallel=1000 --all",
+    "test:one": "{{ cliCmd }} test",
+    "test:e2e": "{{ cliCmd }} run-many --target=e2e --parallel --maxParallel=1000 --all",
+    "lint": "{{ cliCmd }} format:write --all && nx workspace-lint && yarn lint:check --fix",
+    "lint:check": "{{ cliCmd }} run-many --target=lint --all --",
+    "affected": "nx affected",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx format:write && nx affected:lint --all --fix",
+    "affected:dep-graph": "nx affected:dep-graph",
+    {% if cli == enum.cli.ANGULAR %}
+    "update": "ng update @nrwl/workspace",
+    {% endif %}
+    {% if cli == enum.cli.NX %}
+    "update": "nx migrate latest",
+    {% endif %}
+    "workspace-schematic": "nx workspace-schematic",
+    "dep-graph": "nx dep-graph",
+    "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
+  },
+  "dependencies": {
+    {% if deps is defined and deps | length > 0 %}
+    {% for name, item in deps %}
+    "{{ name }}": "{{ item }}",
+    {% endfor %}
+    {% endif %}
+  },
+  "devDependencies": {
+    {% if devDeps is defined and devDeps | length > 0 %}
+    {% for name, item in devDeps %}
+    "{{ name }}": "{{ item }}",
+    {% endfor %}
+    {% endif %}
+  }
+}

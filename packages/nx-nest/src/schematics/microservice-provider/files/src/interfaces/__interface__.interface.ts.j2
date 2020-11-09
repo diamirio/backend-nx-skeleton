@@ -7,7 +7,7 @@ import { {{ names.pattern }} } from '../patterns'
  */
 export interface {{ names.interface }} extends MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
   [{{ names.pattern }}.{{ casing.upper }}_DEFAULT]: {
-    response: {}
-    request: {}
+    response: any
+    request: any
   }
 }

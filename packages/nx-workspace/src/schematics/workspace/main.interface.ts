@@ -1,11 +1,33 @@
-export interface Schema {
+import { PackageVersions } from '@webundsoehne/nx-tools'
+
+import { AvailableCLIs, AvailableFolderStructures } from '@interfaces/available.constants'
+
+/**
+ * This is the unparsed options list coming from angular-schematics
+ */
+export interface Schema extends CommonPropertiesToSaveAndUse<true> {
   directory: string
   name: string
-  npmScope?: string
   skipInstall?: boolean
   skipGit?: boolean
-  style?: string
   commit?: { name: string, email: string, message?: string }
-  cli: 'nx' | 'angular'
-  layout: 'apps-and-libs' | 'packages'
+}
+
+/**
+ * This is the parsed options after normalizing options.
+ * It can not extend the default schema because types are different after parsed
+ */
+export interface NormalizedSchema extends Schema {
+  root: string
+  packageScope: string
+  workspaceFile: string
+  cliCmd: string
+  deps: PackageVersions['deps']
+  devDeps: PackageVersions['devDeps']
+  enum: CommonPropertiesToSaveAndUse
+}
+
+interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
+  cli: Values extends true ? AvailableCLIs : typeof AvailableCLIs
+  layout: Values extends true ? AvailableFolderStructures : typeof AvailableFolderStructures
 }

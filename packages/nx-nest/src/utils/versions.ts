@@ -1,4 +1,4 @@
-import { PackageVersions, deepMerge } from '@webundsoehne/nx-tools'
+import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 import { VERSIONS } from './versions.constant'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
@@ -16,52 +16,54 @@ export function calculateDependencies (options: NormalizedSchema, builders?: boo
     return VERSIONS.builder
   }
 
-  let dependencies: PackageVersions = VERSIONS.base.default
-
-  // tests
-  if (options.tests === AvailableTestsTypes.JEST) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableTestsTypes.JEST])
-  }
-
-  // api interfaces
-  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.RESTFUL) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.RESTFUL])
-  }
-
-  if (options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.GRAPHQL) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableServerTypes.GRAPHQL])
-  }
-
-  // microservices
-  if ([ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c))) {
-    dependencies = deepMerge(dependencies, VERSIONS.base.microservice)
-  }
-
-  if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_SERVER])
-  }
-
-  if (options.components.includes(AvailableComponents.MICROSERVICE_CLIENT)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.MICROSERVICE_CLIENT])
-  }
-
-  // components
-  if (options.components.includes(AvailableComponents.BG_TASK)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.BG_TASK])
-  }
-
-  if (options.components.includes(AvailableComponents.COMMAND)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableComponents.COMMAND])
-  }
-
-  // db related
-  if ([ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.TYPEORM])
-  }
-
-  if ([ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database)) {
-    dependencies = deepMerge(dependencies, VERSIONS[AvailableDBAdapters.MONGOOSE])
-  }
-
-  return dependencies
+  return dependencyCalculator([
+    {
+      deps: VERSIONS.base.default
+    },
+    // tests
+    {
+      condition: options.tests === AvailableTestsTypes.JEST,
+      deps: VERSIONS[AvailableTestsTypes.JEST]
+    },
+    // api interfaces
+    {
+      condition: options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.RESTFUL,
+      deps: VERSIONS[AvailableServerTypes.RESTFUL]
+    },
+    {
+      condition: options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.GRAPHQL,
+      deps: VERSIONS[AvailableServerTypes.GRAPHQL]
+    },
+    // microservices
+    {
+      condition: [ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c)),
+      deps: VERSIONS.base.microservice
+    },
+    {
+      condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
+      deps: VERSIONS[AvailableComponents.MICROSERVICE_SERVER]
+    },
+    {
+      condition: options.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
+      deps: VERSIONS[AvailableComponents.MICROSERVICE_CLIENT]
+    },
+    // components
+    {
+      condition: options.components.includes(AvailableComponents.BG_TASK),
+      deps: VERSIONS[AvailableComponents.BG_TASK]
+    },
+    {
+      condition: options.components.includes(AvailableComponents.COMMAND),
+      deps: VERSIONS[AvailableComponents.COMMAND]
+    },
+    // db related stuff
+    {
+      condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database),
+      deps: VERSIONS[AvailableDBAdapters.TYPEORM]
+    },
+    {
+      condition: [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database),
+      deps: VERSIONS[AvailableDBAdapters.MONGOOSE]
+    }
+  ])
 }

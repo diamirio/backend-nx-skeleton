@@ -6,6 +6,7 @@ import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
+import { SchematicConstants } from '@src/interfaces'
 
 export default function (schema: Schema): Rule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -13,7 +14,7 @@ export default function (schema: Schema): Rule {
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      runInRule(log.info.bind(log)('Adding microservice-provider library to workspace.')),
+      runInRule(log.info.bind(log)(`Adding ${SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE} library to workspace.`)),
       addProject(options),
 
       runInRule(log.info.bind(log)('Creating application files.')),

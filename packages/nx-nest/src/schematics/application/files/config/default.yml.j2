@@ -1,4 +1,6 @@
+{% if server is defined %}
 port: 3000
+{% endif %}
 logLevel: debug
 
 misc:
@@ -7,10 +9,12 @@ misc:
   lastUpdateFile: .last-update
   changelogFile: CHANGELOG.md
 
+{% if server is defined %}
 url:
   basePath: http://localhost:3000
   apiPath: ""
 
+{% if server == enum.server.RESTFUL %}
 swagger:
   path: /internal/docs
   title: NestJS Skeleton
@@ -22,20 +26,22 @@ cacheLifetime:
   defaultLifetime: 0
   expiresHeader: Expires
   cacheControlHeader: Cache-control
+{% endif %}
+{% endif %}
 
 {% if database is defined and database != enum.database.NONE %}
 database:
   database: db
-  {% if enum.dbAdapters.TYPEORM in database -%}
-  {% if  database == enum.database.TYPEORM_MYSQL -%}
+{% if enum.dbAdapters.TYPEORM in database %}
+{% if  database == enum.database.TYPEORM_MYSQL %}
   host: db-mysql
   type: mysql
   port: 3306
-  {% elif database == enum.database.TYPEORM_POSTGRESQL -%}
+{% elif database == enum.database.TYPEORM_POSTGRESQL %}
   host: db-postgres
   type: postgres
   port: 5432
-  {% endif -%}
+{% endif %}
   username: user
   password: secret
   synchronize: false
@@ -47,7 +53,7 @@ database:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
-  {% elif enum.dbAdapters.MONGOOSE == database -%}
+{% elif enum.dbAdapters.MONGOOSE == database %}
   host: db-mongodb
   username: user
   password: secret
@@ -56,5 +62,13 @@ database:
   ignoreUndefined: true
   useNewUrlParser: true
   useUnifiedTopology: true
-  {% endif -%}
+{% endif %}
+{% endif %}
+
+{% if microservice is defined %}
+messageQueue:
+{% if microservice == enum.microservice.RMQ %}
+  urls:
+    - amqp://rabbitmq:5672
+{% endif %}
 {% endif %}

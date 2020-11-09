@@ -1,3 +1,5 @@
+import { GeneratedNameCases } from '@webundsoehne/nx-tools'
+
 import {
   AvailableComponents,
   AvailableDBTypes,
@@ -7,6 +9,7 @@ import {
   AvailableMicroserviceTypes,
   AvailableDBAdapters
 } from '@interfaces/available.constants'
+import { SchematicConstants } from '@interfaces/constants'
 
 /**
  * This is the unparsed options list coming from angular-schematics
@@ -28,8 +31,11 @@ export interface NormalizedSchema extends Schema {
   name: string
   // parsed internally
   packageName: string
+  packageScope: string
   root: string
   sourceRoot: string
+  casing: GeneratedNameCases
+  constants: typeof SchematicConstants
   // prior configuration will be written to nx.json for further processing
   priorConfiguration: CommonPropertiesToSaveAndUse<true>
   // injecting enums since i want to compare this in jinja templates

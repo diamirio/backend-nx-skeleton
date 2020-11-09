@@ -4,7 +4,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { {{ casing.pascal }}Service } from './{{ name }}.service'
 
 @ApiTags('{{ casing.pascal }}')
-@Controller()
+@Controller('{{ mount }}')
 export class {{ casing.pascal }}Controller {
   constructor (private readonly {{ casing.camel }}Service: {{ casing.pascal }}Service) {}
 

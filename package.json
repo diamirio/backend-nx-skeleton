@@ -15,7 +15,8 @@
     "lint": "yarn command --concurrency 1 lint",
     "lint:check": "yarn command --concurrency 1 lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
-    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
+    "docs:jsdoc": "yarn command --no-bail docs:jsdoc",
+    "scripts:link": "./scripts/link-packages.sh"
   },
   "workspaces": {
     "packages": [
@@ -44,8 +45,8 @@
     }
   },
   "resolutions": {
-    "**/@angular-devkit/architect": "0.1001.6",
-    "**/@angular-devkit/core": "10.1.6",
-    "**/@angular-devkit/schematics": "10.1.6"
+    "**/@angular-devkit/architect": "0.1002.0",
+    "**/@angular-devkit/core": "10.2.0",
+    "**/@angular-devkit/schematics": "10.2.0"
   }
 }

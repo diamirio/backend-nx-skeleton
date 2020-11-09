@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 
 import { MessageQueueEnum } from './microservice-provider.constants'
 import { MicroserviceProviderService } from './microservice-provider.service'
 import { provideMessageQueueClient } from './utils/microservice-client.util'
 
+@Global()
 @Module({
   providers: [
     MicroserviceProviderService,

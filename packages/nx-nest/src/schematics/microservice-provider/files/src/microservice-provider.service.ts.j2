@@ -40,18 +40,10 @@ export class MicroserviceProviderService {
     return Object.values(queuePatterns).includes(pattern)
   }
 
-  async send<Pattern extends MessageQueuePatterns>(pattern: Pattern, payload: MessageQueueMap[Pattern]['request']): Promise<MessageQueueMap[Pattern]['response']> {
+  public async send<Pattern extends MessageQueuePatterns>(pattern: Pattern, payload: MessageQueueMap[Pattern]['request']): Promise<MessageQueueMap[Pattern]['response']> {
     // write to MessageQueue
     const messageQueue = MicroserviceProviderService.getMessageQueueFromPattern(pattern)
 
-    try {
-      const response: MessageQueueMap[Pattern]['response'] = await this.clients[messageQueue].send(pattern, payload).toPromise()
-
-      return response
-    } catch (e) {
-      // maybe add something here later
-      throw e
-    }
-
+    return this.clients[messageQueue].send(pattern, payload).toPromise()
   }
 }

@@ -1,6 +1,7 @@
 import { GeneratedNameCases } from '@webundsoehne/nx-tools'
 
-import { AvailableLinterTypes } from '@interfaces/available.constants'
+import { AvailableLinterTypes, AvailableMicroserviceTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 
 /**
  * The options that it gets from angular-cli
@@ -10,6 +11,7 @@ export interface Schema extends CommonPropertiesToSaveAndUse {
   linter: string
   skipFormat: boolean
   silent: boolean
+  microservice: AvailableMicroserviceTypes
 }
 
 /**
@@ -17,9 +19,11 @@ export interface Schema extends CommonPropertiesToSaveAndUse {
  */
 export interface NormalizedSchema extends Schema {
   packageName: string
+  packageScope: string
   root: string
   sourceRoot: string
   linter: AvailableLinterTypes
+  constants: typeof SchematicConstants
   priorConfiguration: CommonPropertiesToSaveAndUse
 }
 

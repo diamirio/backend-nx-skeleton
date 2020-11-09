@@ -1,6 +1,6 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import { readNxJson, toFileName } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import {
   ConvertToPromptType,
@@ -16,7 +16,8 @@ import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
-import { AvailableComponents, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**
@@ -32,7 +33,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent' ] } })
+          setSchemaDefaultsInContext(ctx, {
+            assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent', 'mount' ] },
+            default: [ { constants: SchematicConstants } ]
+          })
         }
       },
 
@@ -85,6 +89,14 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         }
       },
 
+      // need package scope for imports and such
+      {
+        task: (ctx): void => {
+          const nxJson = readNxJson()
+          ctx.packageScope = `${nxJson.npmScope}`
+        }
+      },
+
       // select comnponent type
       {
         enabled: (ctx): boolean => ctx.type === undefined,
@@ -100,7 +112,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           const prompt = await task.prompt<AvailableComponentsSelection>({
             type: 'Select',
             message: 'Please select the component type.',
-            choices: choices as any
+            choices
           })
 
           // parse the prompt depending on the prior configuration
@@ -136,7 +148,18 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             throw new Error(`Cancelled generation of component: "${ctx.name}"@"${ctx.root}"`)
           }
 
-          task.title = `Component root directory is set as "${ctx.root}".`
+          task.title = `Component root directory is set as: ${ctx.root}`
+        }
+      },
+
+      // ask for controller root when server
+      {
+        enabled: (ctx): boolean => ctx.mount === undefined,
+        skip: (ctx): boolean => ctx.type !== AvailableServerTypes.RESTFUL,
+        task: async (ctx, task): Promise<void> => {
+          ctx.mount = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
+
+          task.title = `Component mount point set as: ${ctx.mount}`
         }
       }
     ],

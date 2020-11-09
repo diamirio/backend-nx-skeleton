@@ -20,6 +20,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
     force: true,
     name: 'default',
     parent: options.name,
+    mount: '/',
     silent: true,
     skipFormat: true,
     parentWsConfiguration: {

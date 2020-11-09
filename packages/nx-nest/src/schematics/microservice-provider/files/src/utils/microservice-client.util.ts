@@ -1,4 +1,4 @@
-import { ClientProxyFactory } from '@nestjs/microservices'
+import { ClientProxyFactory, ClientOptions } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices/enums/transport.enum'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
@@ -10,13 +10,19 @@ export function provideMessageQueueClient(queue: MessageQueueEnum | MessageQueue
   return queue.map((q) => ({
     provide: q,
     useFactory: (): ClientProxyFactory => {
-      return ClientProxyFactory.create({
-        transport: Transport.RMQ,
-        options: {
-          queue: q,
-          urls: ConfigService.get('messageQueue')?.urls
-        }
-      })
+      return ClientProxyFactory.create(provideMessageQueueConnection(q))
     }
   }))
+}
+
+export function provideMessageQueueConnection(queue: MessageQueueEnum): ClientOptions {
+  const { urls } = ConfigService.get('messageQueue')
+
+  return {
+    transport: Transport.RMQ,
+    options: {
+      queue,
+      urls
+    }
+  }
 }

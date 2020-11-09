@@ -3,7 +3,7 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, isVerbose, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, generateNameCases, isVerbose, readNxIntegration, setSchemaDefaultsInContext, mapPromptChoices } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
@@ -16,6 +16,7 @@ import {
   AvailableTestsTypes,
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -36,6 +37,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
               },
               {
                 sourceRoot: 'src'
+              },
+              {
+                constants: SchematicConstants
               },
               {
                 enum: {
@@ -67,7 +71,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Normalizing package.json project name.',
         task: (ctx, task): void => {
-          ctx.packageName = `@${readNxJson().npmScope}/${ctx.name}`
+          const nxJson = readNxJson()
+          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
+          ctx.packageScope = `${nxJson.npmScope}`
 
           task.title = `Project package name set as "${ctx.packageName}".`
         }
@@ -114,16 +120,13 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => ctx.components?.length > 0,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponents> = Object.keys(AvailableComponents).map((o) => ({
-            name: AvailableComponents[o],
-            message: PrettyNamesForAvailableThingies[AvailableComponents[o]]
-          }))
+          const choices = mapPromptChoices<AvailableComponents>(AvailableComponents, PrettyNamesForAvailableThingies)
 
           // select the base components
           ctx.components = await task.prompt<AvailableComponents[]>({
             type: 'MultiSelect',
             message: 'Please select which components you want to include.',
-            choices: choices as any,
+            choices,
             validate: (val) => {
               if (val?.length > 0) {
                 return true
@@ -146,16 +149,12 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx?.server,
         task: async (ctx, task): Promise<void> => {
-          // there can be two selections of API servers here
-          const choices: ConvertToPromptType<AvailableServerTypes> = Object.keys(AvailableServerTypes).map((o) => ({
-            name: AvailableServerTypes[o],
-            message: PrettyNamesForAvailableThingies[AvailableServerTypes[o]]
-          }))
+          const choices = mapPromptChoices<AvailableServerTypes>(AvailableServerTypes, PrettyNamesForAvailableThingies)
 
           ctx.server = await task.prompt<AvailableServerTypes>({
             type: 'Select',
             message: 'Please select the API server type.',
-            choices: choices as any,
+            choices,
             initial: getInitialFromPriorConfiguration(ctx, 'server', choices)
           })
 
@@ -171,16 +170,12 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_SERVER) && !ctx?.microservice,
         task: async (ctx, task): Promise<void> => {
-          // there can be two selections of API servers here
-          const choices: ConvertToPromptType<AvailableMicroserviceTypes> = Object.keys(AvailableMicroserviceTypes).map((o) => ({
-            name: AvailableMicroserviceTypes[o],
-            message: PrettyNamesForAvailableThingies[AvailableMicroserviceTypes[o]]
-          }))
+          const choices = mapPromptChoices<AvailableMicroserviceTypes>(AvailableMicroserviceTypes, PrettyNamesForAvailableThingies)
 
           ctx.microservice = await task.prompt<AvailableMicroserviceTypes>({
             type: 'Select',
             message: 'Please select the microservice server type.',
-            choices: choices as any,
+            choices,
             initial: getInitialFromPriorConfiguration(ctx, 'microservice', choices)
           })
 
@@ -196,16 +191,13 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx.components.includes(AvailableComponents.BG_TASK) && !ctx?.database,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableDBTypes> = Object.keys(AvailableDBTypes).map((o) => ({
-            name: AvailableDBTypes[o],
-            message: PrettyNamesForAvailableThingies[AvailableDBTypes[o]]
-          }))
+          const choices = mapPromptChoices<AvailableDBTypes>(AvailableDBTypes, PrettyNamesForAvailableThingies)
 
           // there can be two selections of API servers here
           ctx.database = await task.prompt<AvailableDBTypes>({
             type: 'Select',
             message: 'Please select the database type.',
-            choices: choices as any,
+            choices,
             initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
           })
 
@@ -221,15 +213,12 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         skip: (ctx): boolean => !!ctx.tests,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableTestsTypes> = Object.keys(AvailableTestsTypes).map((o) => ({
-            name: AvailableTestsTypes[o],
-            message: PrettyNamesForAvailableThingies[AvailableTestsTypes[o]]
-          }))
+          const choices = mapPromptChoices<AvailableTestsTypes>(AvailableTestsTypes, PrettyNamesForAvailableThingies)
 
           ctx.tests = await task.prompt<AvailableTestsTypes>({
             type: 'Select',
             message: 'Please select the test runner type.',
-            choices: choices as any,
+            choices,
             initial: getInitialFromPriorConfiguration(ctx, 'tests', choices)
           })
 
@@ -238,6 +227,14 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         options: {
           bottomBar: Infinity,
           persistentOutput: true
+        }
+      },
+
+      // generate casing
+      {
+        task: async (ctx): Promise<void> => {
+          const casing = generateNameCases(ctx.name)
+          ctx.casing = casing
         }
       }
     ],

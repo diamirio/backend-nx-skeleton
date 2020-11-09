@@ -1,3 +1,4 @@
+{% if microservices | length > 0 %}
 import {
 {% for microservice in microservices %}
 {{ microservice.names.pattern }},
@@ -8,6 +9,7 @@ import {
 {{ microservice.names.interface }},
 {% endfor %}
 } from './interfaces'
+{% endif %}
 
 export enum MessageQueueEnum {
   {% for microservice in microservices %}
@@ -16,11 +18,19 @@ export enum MessageQueueEnum {
 }
 
 export type MessageQueuePatterns <Type extends boolean = false> =
+{% if microservices | length > 0 %}
 {% for microservice in microservices %}
 | Type extends true ? typeof {{ microservice.names.pattern }} : {{ microservice.names.pattern }}
 {% endfor %}
+{% else %}
+| Type extends true ? never : never
+{% endif %}
 
 export type MessageQueueMap =
+{% if microservices | length > 0 %}
 {% for microservice in microservices %}
 & {{ microservice.names.interface }}
 {% endfor %}
+{% else %}
+never
+{% endif %}

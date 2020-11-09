@@ -1,7 +1,14 @@
-import { RpcGlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
+import { GlobalExceptionFilter, RpcGlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
+{% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
+{% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
+import { MongooseModule } from '@nestjs/mongoose'
+{% endif %}
+{% if enum.components.MICROSERVICE_CLIENT in components %}
+import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+{% endif %}
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}
@@ -21,16 +28,23 @@ export function createMicroserviceModule ({% if database is defined and database
       },
       {
         provide: APP_FILTER,
+        useClass: GlobalExceptionFilter
+      },
+      {
+        provide: APP_FILTER,
         useClass: RpcGlobalExceptionFilter
       }
     ],
     imports: [
-    {% if database is defined and enum.dbAdapters.TYPEORM in database %}
+      {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
       {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
-    ...Object.values(modules)
+      {% if enum.components.MICROSERVICE_CLIENT in components %}
+      MicroserviceProviderModule,
+      {% endif %}
+      ...Object.values(modules)
     ]
   })
   class MicroservicesModule implements NestModule {

@@ -1,6 +1,7 @@
 import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 
 /**
@@ -13,21 +14,18 @@ export interface Schema {
   type: Exclude<AvailableComponents, AvailableComponents.SERVER | AvailableComponents.MICROSERVICE_CLIENT> | AvailableServerTypes
   force: boolean
   silent: boolean
+  mount?: string
   parentWsConfiguration: EnrichedWorkspaceJsonProject
 }
 
 /**
  * This is the parsed schema through normalize options.
  */
-export interface NormalizedSchema {
-  name: string
+export interface NormalizedSchema extends Schema {
   root: string
-  parent: string
-  force: boolean
-  silent: boolean
-  type: Schema['type']
+  packageScope: string
   casing: GeneratedNameCases
-  parentWsConfiguration: Schema['parentWsConfiguration']
+  constants: typeof SchematicConstants
   parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }
 

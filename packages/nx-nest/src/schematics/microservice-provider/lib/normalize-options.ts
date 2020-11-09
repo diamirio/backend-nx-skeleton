@@ -3,10 +3,12 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { readMicroserviceIntegration, readNxIntegration, setSchemaDefaultsInContext, isVerbose, generateNameCases } from '@webundsoehne/nx-tools'
+import { isVerbose, readMicroserviceIntegration, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { SchematicConstants } from '@src/interfaces'
+import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -14,7 +16,16 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: async (ctx): Promise<void> => {
-          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'linter' ] }, default: [ { sourceRoot: 'src', name: 'microservice-provider' } ] })
+          setSchemaDefaultsInContext(ctx, {
+            assign: { from: options, keys: [ 'name', 'linter' ] },
+            default: [
+              {
+                sourceRoot: 'src',
+                name: SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE,
+                constants: SchematicConstants
+              }
+            ]
+          })
         }
       },
 
@@ -22,7 +33,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Normalizing package.json library name.',
         task: (ctx, task): void => {
-          ctx.packageName = `@${readNxJson().npmScope}/${ctx.name}`
+          const nxJson = readNxJson()
+          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
+          ctx.packageScope = `@${nxJson.npmScope}/${ctx.name}`
 
           task.title = `Library package name set as "${ctx.packageName}".`
         }
@@ -72,19 +85,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           const microservices = readMicroserviceIntegration()
 
           ctx.microservices = microservices.map((microservice) => {
-            const casing = generateNameCases(microservice.name)
-
-            return {
-              name: microservice.name,
-              names: {
-                queue: `${casing.upper}_QUEUE`,
-                client: `${casing.camel}Client`,
-                file: `${casing.kebab}-microservice`,
-                pattern: `${casing.pascal}MessagePattern`,
-                interface: `${casing.pascal}Message`
-              },
-              casing
-            }
+            return generateMicroserviceCasing(microservice.name)
           })
 
           task.title = `Microservice servers found: ${ctx.microservices.map((m) => m.name).join(', ')}`

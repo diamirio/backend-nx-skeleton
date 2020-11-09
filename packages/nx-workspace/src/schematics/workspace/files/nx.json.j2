@@ -1,0 +1,25 @@
+{
+  "npmScope": "{{ packageScope }}",
+  "implicitDependencies": {
+    "{{ workspaceFile }}.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "**/config/**": "*",
+    "**/assets/**": "*"
+  },
+  "tasksRunnerOptions": {
+    "runner": "@nrwl/workspace/tasks-runners/default",
+    "options": {
+      "cacheDirectory": ".cache/nx",
+      "cacheableOperations": ["build", "lint", "test", "e2e"]
+    }
+  },
+  "projects": {}
+}

@@ -1,11 +1,12 @@
 {
-  "name": "@webundsoehne/nx-nest",
+  "name": "@webundsoehne/nx-workspace",
   "extends": ["@nrwl/workspace"],
   "schematics": {
-    "init": {
-      "factory": "./dist/schematics/remove/main",
-      "schema": "./dist/schematics/remove/schema.json",
-      "description": "Remove a application from the project."
+    "workspace": {
+      "factory": "./dist/schematics/workspace/main",
+      "schema": "./dist/schematics/workspace/schema.json",
+      "description": "Create a new workspace.",
+      "aliases": ["new", "ws", "app"]
     }
   }
 }

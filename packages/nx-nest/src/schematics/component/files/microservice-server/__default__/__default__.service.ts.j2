@@ -1,9 +1,9 @@
-import { AuthServiceRequestsTypes } from '@fullctrl/be-common'
+import { App1Message, App1MessagePattern, MessageQueueMap } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class DefaultMicroservice {
-  public async default (options: AuthServiceRequestsTypes['authenticate']['request']): Promise<AuthServiceRequestsTypes['authenticate']['response']> {
+  public async default (options: MessageQueueMap[App1MessagePattern.APP1_DEFAULT]['request']): Promise<MessageQueueMap[App1MessagePattern.APP1_DEFAULT]['response']> {
     return 'Hello world.'
   }
 }
