@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
-import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { appsDir, libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { isVerbose, readMicroserviceIntegration, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
@@ -82,13 +82,26 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Parsing all integrated microservices...',
         task: (ctx, task): void => {
-          const microservices = readMicroserviceIntegration()
+          let microservices = readMicroserviceIntegration()
+
+          if (microservices.length === 0) {
+            task.title = 'No microservice integration has been found working in mock mode.'
+
+            microservices = [
+              {
+                name: 'mock',
+                microservice: 'unknown',
+                root: `${appsDir(host)}/unknown`,
+                sourceRoot: 'src'
+              }
+            ]
+          } else {
+            task.title = `Microservice servers found: ${ctx.microservices.map((m) => m.name).join(', ')}`
+          }
 
           ctx.microservices = microservices.map((microservice) => {
             return generateMicroserviceCasing(microservice.name)
           })
-
-          task.title = `Microservice servers found: ${ctx.microservices.map((m) => m.name).join(', ')}`
         }
       }
     ],
