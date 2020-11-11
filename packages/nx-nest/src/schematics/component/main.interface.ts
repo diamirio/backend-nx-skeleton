@@ -3,6 +3,7 @@ import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
 
 /**
  * This is the unparsed schema coming from the angular-schematics
@@ -24,7 +25,11 @@ export interface Schema {
 export interface NormalizedSchema extends Schema {
   root: string
   packageScope: string
-  casing: GeneratedNameCases
+  casing: GeneratedNameCases & {
+    injected: {
+      microservices: GeneratedMicroserviceCasing
+    }
+  }
   constants: typeof SchematicConstants
   parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }

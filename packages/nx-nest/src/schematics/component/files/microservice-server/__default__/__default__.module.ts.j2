@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
 
-import { DefaultMicrocontroller } from './default.controller'
-import { DefaultMicroservice } from './default.service'
+import { {{ casing.pascal }}Microcontroller } from './{{ name }}.controller'
+import { {{ casing.pascal }}Microservice } from './{{ name }}.service'
 
 @Module({
   imports: [],
-  controllers: [ DefaultMicrocontroller ],
-  providers: [ DefaultMicroservice ]
+  controllers: [ {{ casing.pascal }}Microcontroller ],
+  providers: [ {{ casing.pascal }}Microservice ]
 })
-export class DefaultModule {}
+export class {{ casing.pascal }}Module {}

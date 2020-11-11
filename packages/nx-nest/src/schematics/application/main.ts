@@ -1,5 +1,5 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { addEslintToWorkspace, formatOrSkip, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { eslintJson, addEslintToWorkspace, formatOrSkip, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -7,7 +7,6 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
-import { eslintJson } from '@utils/lint.constants'
 import { VERSIONS } from '@utils/versions.constant'
 
 /**
@@ -29,7 +28,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       runInRule(log.info.bind(log)('Adding project to workspace.')),
       addProject(options),
 
-      addEslintToWorkspace(host, log, options, { deps: VERSIONS.eslint, json: eslintJson }),
+      addEslintToWorkspace(host, log, options, { deps: VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
 
       runInRule(log.info.bind(log)('Creating application files.')),
       createApplicationFiles(options, context),

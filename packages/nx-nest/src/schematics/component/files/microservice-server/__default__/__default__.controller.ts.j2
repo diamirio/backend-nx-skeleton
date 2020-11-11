@@ -1,15 +1,17 @@
 import { Controller } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
-import { App1Message, App1MessagePattern, MessageQueueMap } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
-import { DefaultMicroservice } from './default.service'
+
+import { {{ casing.inject.microservices.interface }}, {{ casing.inject.microservices.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import { DefaultMicroservice } from './{{ name }}.service'
 
 @Controller()
-export class DefaultMicrocontroller {
-  constructor (private defaultMicroService: DefaultMicroservice) {}
+export class {{ casing.pascal }}Microcontroller {
+  constructor (private readonly {{ casing.camel }}Microservice: {{ casing.pascal }}Microservice) {}
 
-  {# fix this later #}
-  @MessagePattern(App1MessagePattern.APP1_DEFAULT)
-  public default (options: any): Promise<any> {
-    return this.defaultMicroService.default(options)
+  @MessagePattern({{ casing.inject.microservices.pattern }}.{{ casing.inject.microservices.default }})
+  public default (
+    options: {{ casing.inject.microservices.interface }}[{{ casing.inject.microservices.pattern }}.{{ casing.inject.microservices.default }}]['request']
+  ): Promise<{{ casing.inject.microservices.interface }}[{{ casing.inject.microservices.pattern }}.{{ casing.inject.microservices.default }}]['response']> {
+    return this.{{ casing.camel }}Microservice.default(options)
   }
 }

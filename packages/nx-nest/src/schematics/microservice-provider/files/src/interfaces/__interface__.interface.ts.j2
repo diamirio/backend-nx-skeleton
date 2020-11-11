@@ -5,9 +5,9 @@ import { {{ names.pattern }} } from '../patterns'
 /**
  * Message patterns for "{{ name }}" with pattern "{{ names.pattern }}"
  */
-export interface {{ names.interface }} extends MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
-  [{{ names.pattern }}.{{ casing.upper }}_DEFAULT]: {
-    response: any
-    request: any
+export declare class {{ names.interface }} implements MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
+  [{{ names.pattern }}.{{ casing.default }}]: {
+    response?: any | never
+    request?: any | never
   }
 }

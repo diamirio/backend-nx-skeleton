@@ -24,6 +24,8 @@ They seem to change every minor patch XD</p></dd>
 ## Functions
 
 <dl>
+<dt><a href="#eslintJson">eslintJson()</a></dt>
+<dd><p>Default eslint configuration to inject to repository.</p></dd>
 <dt><del><a href="#installWorkspaceDependencies">installWorkspaceDependencies()</a></del></dt>
 <dd></dd>
 <dt><del><a href="#parseArguments">parseArguments(task, args, validArgs, options)</a></del></dt>
@@ -195,6 +197,13 @@ They seem to change every minor patch XD</p>
 <p>Nx application types</p>
 
 **Kind**: global variable  
+<a name="eslintJson"></a>
+
+## eslintJson()
+
+<p>Default eslint configuration to inject to repository.</p>
+
+**Kind**: global function  
 <a name="installWorkspaceDependencies"></a>
 
 ## ~~installWorkspaceDependencies()~~

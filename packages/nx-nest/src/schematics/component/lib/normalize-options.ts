@@ -19,6 +19,7 @@ import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.
 import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { generateMicroserviceCasing } from '@src/utils'
 
 /**
  * @param  {Tree} host
@@ -83,7 +84,12 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: (ctx, task): void => {
           ctx.name = toFileName(options.name)
 
-          ctx.casing = generateNameCases(ctx.name)
+          ctx.casing = {
+            ...generateNameCases(ctx.name),
+            injected: {
+              microservices: generateMicroserviceCasing(ctx.parent)
+            }
+          }
 
           task.title = `Component name is set as "${ctx.name}".`
         }

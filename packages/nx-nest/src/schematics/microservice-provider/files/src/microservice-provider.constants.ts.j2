@@ -11,26 +11,23 @@ import {
 } from './interfaces'
 {% endif %}
 
-export enum MessageQueueEnum {
-  {% for microservice in microservices %}
-  {{ microservice.names.queue }} = '{{ microservice.casing.kebab }}Queue',
-  {% endfor %}
+
+export enum MessageQueues {
+{% for microservice in microservices %}
+  {{ microservice.names.queue }} = '{{ microservice.names.queue }}',
+{% endfor %}
 }
 
-export type MessageQueuePatterns <Type extends boolean = false> =
-{% if microservices | length > 0 %}
+export interface MessageQueuePatterns {
 {% for microservice in microservices %}
-| Type extends true ? typeof {{ microservice.names.pattern }} : {{ microservice.names.pattern }}
+  [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.pattern }}
 {% endfor %}
-{% else %}
-| Type extends true ? never : never
-{% endif %}
+}
 
-export type MessageQueueMap =
-{% if microservices | length > 0 %}
+export interface MessageQueueMap {
 {% for microservice in microservices %}
-& {{ microservice.names.interface }}
+  [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.interface }}
 {% endfor %}
-{% else %}
-never
-{% endif %}
+}
+
+export type MicroserviceClient = MicroserviceProviderService<MessageQueues, MessageQueuePatterns, MessageQueueMap>

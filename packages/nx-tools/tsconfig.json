@@ -7,6 +7,7 @@
     "paths": {
       "@src/*": ["*"],
       "@init/*": ["init/*"],
+      "@constants/*": ["constants/*"],
       "@integration/*": ["integration/*"],
       "@interfaces/*": ["interfaces/*"],
       "@rules/*": ["rules/*"],

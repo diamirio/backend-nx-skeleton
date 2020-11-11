@@ -23,8 +23,6 @@ This is the database available that can be automatically injected.</p></dd>
 <dl>
 <dt><a href="#PrettyNamesForAvailableThingies">PrettyNamesForAvailableThingies</a></dt>
 <dd><p>Prettified names for components to use with prompts and such.</p></dd>
-<dt><a href="#eslintJson">eslintJson</a></dt>
-<dd><p>Default eslint configuration to inject to repository.</p></dd>
 </dl>
 
 ## Functions
@@ -90,13 +88,6 @@ This is the database available that can be automatically injected.</p>
 ## PrettyNamesForAvailableThingies
 
 <p>Prettified names for components to use with prompts and such.</p>
-
-**Kind**: global constant  
-<a name="eslintJson"></a>
-
-## eslintJson
-
-<p>Default eslint configuration to inject to repository.</p>
 
 **Kind**: global constant  
 <a name="calculateDependencies"></a>

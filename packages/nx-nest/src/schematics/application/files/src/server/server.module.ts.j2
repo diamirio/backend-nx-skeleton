@@ -76,7 +76,7 @@ export function createServerModule ({% if database is defined and database != en
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
       {% if enum.components.MICROSERVICE_CLIENT in components %}
-      MicroserviceProviderModule,
+      MicroserviceProviderModule.forRoot({ queue: [ MessageQueues.APP1_QUEUE, MessageQueues.APP2_QUEUE ] }),
       {% endif %}
       InternalModule,
       MaintenanceModule

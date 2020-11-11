@@ -1,9 +1,11 @@
-import { App1Message, App1MessagePattern, MessageQueueMap } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 import { Injectable } from '@nestjs/common'
+import { {{ casing.inject.microservices.interface }}, {{ casing.inject.microservices.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 
 @Injectable()
-export class DefaultMicroservice {
-  public async default (options: MessageQueueMap[App1MessagePattern.APP1_DEFAULT]['request']): Promise<MessageQueueMap[App1MessagePattern.APP1_DEFAULT]['response']> {
+export class {{ casing.pascal }}Microservice {
+  public async default (
+    options: {{ casing.inject.microservices.interface }}[{{ casing.inject.microservices.pattern }}.{{ casing.inject.microservices.default }}]['request']
+  ): Promise<{{ casing.inject.microservices.interface }}[{{ casing.inject.microservices.pattern }}.{{ casing.inject.microservices.default }}]['response']> {
     return 'Hello world.'
   }
 }

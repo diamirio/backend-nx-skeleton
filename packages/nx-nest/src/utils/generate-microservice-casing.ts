@@ -8,11 +8,11 @@ export function generateMicroserviceCasing (name: string): GeneratedMicroservice
   return {
     name,
     names: {
-      queue: `${casing.upper}_QUEUE`,
-      client: `${casing.camel}Client`,
       file: `${casing.kebab}-microservice`,
-      pattern: `${casing.pascal}MessagePattern`,
-      interface: `${casing.pascal}Message`
+      queue: `${casing.upper}_QUEUE`,
+      pattern: `${casing.pascal}Pattern`,
+      interface: `${casing.pascal}Message`,
+      default: `${casing.upper}_DEFAULT`
     },
     casing
   }
