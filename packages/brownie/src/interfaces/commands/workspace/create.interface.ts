@@ -1,22 +1,11 @@
-export class WorkspaceCreateCommandCtx {
-  prompts: {
-    repo?: string
-    branch?: string
-    packageEdit?: boolean
-    package?: Record<string, any>
-  }
-  branches: string[]
-  skeletons: Record<string, string>
-  gitInit: boolean
-  gitDir: {
-    top?: string
-  }
-  cwd: string
-  scope: string
+import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 
+export class WorkspaceCreateCommandCtx {
+  public prompts: {
+    workspace?: string
+  }
+  public workspaces: WorkspaceConfig
   constructor () {
     this.prompts = {}
-    this.branches = []
-    this.gitDir = {}
   }
 }

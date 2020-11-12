@@ -184,6 +184,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
   }
 
+  // so complicated maybe simplify this?
   private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
     let args: string[]
     let spawnOptions: SpawnOptions
@@ -282,16 +283,18 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     } else {
       this.logger.info('Processing "package.json"...')
 
-      let packageJson = readJsonFile(packageJsonPath)
+      const packageJson = readJsonFile(packageJsonPath)
 
       const mainFile = basename(this.options.main, '.ts')
       const globalPackageJson = readPackageJson()
 
-      // update main file and typings
-      packageJson = {
-        ...packageJson,
-        main: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`),
-        typings: normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
+      // made this optional since it was not alway strue
+      if (!packageJson.main) {
+        packageJson.main = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`)
+      }
+
+      if (!packageJson.types) {
+        packageJson.types = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
       }
 
       // update implicit dependencies
@@ -328,7 +331,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     }
 
     // this is the default behaviour, lets keep this.
-    if (this.projectDependencies.length > 0 && this.options.updateBuildableProjectDepsInPackageJson) {
+    if (this.projectDependencies.length > 0) {
       updateBuildableProjectPackageJsonDependencies(this.context, this.projectTarget, this.projectDependencies)
     }
 

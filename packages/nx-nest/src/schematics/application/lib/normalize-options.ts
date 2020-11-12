@@ -3,7 +3,15 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, generateNameCases, isVerbose, readNxIntegration, setSchemaDefaultsInContext, mapPromptChoices } from '@webundsoehne/nx-tools'
+import {
+  ConvertToPromptType,
+  generateNameCases,
+  isVerbose,
+  readNxIntegration,
+  setSchemaDefaultsInContext,
+  mapPromptChoices,
+  readMicroserviceIntegration
+} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
@@ -17,6 +25,7 @@ import {
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
+import { generateMicroserviceCasing } from '@src/utils'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -137,6 +146,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             initial: getInitialFromPriorConfiguration(ctx, 'components', choices)
           })
 
+          ctx.effectiveComponents = ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT) ? ctx.components.length - 1 : ctx.components.length
+
           task.title = `Server components selected: ${ctx.components}`
         },
         options: {
@@ -202,6 +213,35 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           })
 
           task.title = `Database selected as: ${ctx.database}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
+      // microservice-client options
+      {
+        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
+        task: async (ctx, task): Promise<void> => {
+          const microservices = readMicroserviceIntegration().map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
+
+          // there can be two selections of API servers here
+          ctx.microserviceClient = await task.prompt<string[]>({
+            type: 'MultiSelect',
+            message: 'Please select which microservice-servers you want to include.',
+            choices: microservices,
+            initial: getInitialFromPriorConfiguration(ctx, 'microserviceClient', microservices)
+          })
+
+          ctx.microserviceCasing = {}
+          // generate the microservice names
+          await Promise.all(ctx.microserviceClient.map(async (m) => ctx.microserviceCasing[m] = generateMicroserviceCasing(m)))
+
+          // select the components to inject these microservice-clients to
+          // TODO: not sure if this is required a trivial case
+
+          task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
         },
         options: {
           bottomBar: Infinity,

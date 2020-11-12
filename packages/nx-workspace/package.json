@@ -29,14 +29,19 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~10.1.2",
+    "@angular-devkit/schematics": "~11.0.0",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "enquirer": "^2.3.5",

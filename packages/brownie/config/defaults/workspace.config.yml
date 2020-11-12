@@ -1,1 +1,1 @@
-nx-base-workspace: git@gitlab.tailored-apps.com:ckilic/nx-workspace.git
+- package: '@webundsoehne/nx-workspace'

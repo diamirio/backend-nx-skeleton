@@ -1,0 +1,38 @@
+import { Module } from '@nestjs/common'
+import { ScheduleModule } from 'nest-schedule'
+{% if database is defined and enum.dbAdapters.TYPEORM in database %}
+import { TypeOrmModule } from '@nestjs/typeorm'
+{% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
+import { MongooseModule } from '@nestjs/mongoose'
+{% endif %}
+
+import {
+  ConfigService,
+  {% if enum.components.MICROSERVICE_CLIENT in components %}
+  MicroserviceProviderModule
+  {% endif %}
+} from '@webundsoehne/nestjs-util'
+
+import * as tasks from './modules'
+
+/**
+ * Register all services under providers
+ */
+
+@Module({
+  providers: [],
+  imports: [
+    ScheduleModule.register(),
+    ConfigService,
+    {% if database is defined and enum.dbAdapters.TYPEORM in database %}
+    TypeOrmModule.forRoot(getDatabaseOptions(mock)),
+    {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
+    MongooseModule.forRoot(...getDatabaseOptions(mock)),
+    {% endif %}
+    {% if enum.components.MICROSERVICE_CLIENT in components %}
+    MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
+    {% endif %}
+    ...Object.values(tasks)
+    ]
+})
+export class AppTaskModule {}

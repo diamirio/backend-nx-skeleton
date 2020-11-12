@@ -19,19 +19,24 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
     }
   }
 
-  public run (): Observable<BuilderOutput> {
+  public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(
-      async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+      async (sub: Subscriber<BuilderOutput>): Promise<void> => {
+        const subscriber = injectSubscriber ?? sub
+
         try {
           // stop all manager tasks
           await this.manager.stop()
 
           checkNodeModulesExists(this.paths)
 
-          await pipeProcessToLogger(this.context, this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions)), { start: true })
+          const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
+          await pipeProcessToLogger(this.context, instance, { start: true })
         } catch (error) {
-          subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+          this.logger.error('ts-node-dev crashed restarting.')
+
+          this.run(subscriber)
         } finally {
           // clean up the zombies!
           await this.manager.stop()
@@ -47,26 +52,21 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
     // default options
     let args = [ '-r', 'tsconfig-paths/register' ]
 
+    const argParser: { condition: boolean, args: string[] }[] = [
+      { condition: !!tsConfig, args: [ '--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig ] },
+      { condition: !!debounce, args: [ '--debounce', `${debounce}` ] },
+      { condition: !!interval, args: [ '--interval', `${interval}` ] },
+      { condition: !!debug, args: [ '--debug' ] },
+      { condition: !!inspect, args: [ `--inspect=0.0.0.0:${options.inspect}` ] }
+    ]
+
+    argParser.forEach((a) => {
+      if (a.condition) {
+        args = [ ...args, ...a.args ]
+      }
+    })
+
     // options
-    if (tsConfig) {
-      args = [ ...args, '--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig ]
-    }
-
-    if (debounce) {
-      args = [ ...args, '--debounce', `${debounce}` ]
-    }
-
-    if (interval) {
-      args = [ ...args, '--interval', `${interval}` ]
-    }
-
-    if (debug) {
-      args = [ ...args, '--debug' ]
-    }
-
-    if (inspect) {
-      args = [ ...args, `--inspect=0.0.0.0:${options.inspect}` ]
-    }
 
     if (!main) {
       throw new Error('No entry point set.')

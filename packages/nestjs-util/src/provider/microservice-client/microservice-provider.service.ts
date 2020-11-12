@@ -84,6 +84,12 @@ export class MicroserviceProviderService<
   ): Promise<ReturnValue> {
     const o = { ...this.options, ...options }
 
+    if (this.clients[queue]) {
+      throw new Error(
+        `"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs.`
+      )
+    }
+
     return this.clients[queue][command](pattern, payload)
       .pipe(timeoutWith(o.timeout, throwError(new TimeoutException(queue)), asyncScheduler))
       .toPromise()

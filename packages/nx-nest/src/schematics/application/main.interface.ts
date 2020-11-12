@@ -1,5 +1,6 @@
 import { GeneratedNameCases } from '@webundsoehne/nx-tools'
 
+import { GeneratedMicroserviceCasing } from './../../utils/generate-microservice-casing.interface'
 import {
   AvailableComponents,
   AvailableDBTypes,
@@ -35,17 +36,20 @@ export interface NormalizedSchema extends Schema {
   root: string
   sourceRoot: string
   casing: GeneratedNameCases
+  microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
   // prior configuration will be written to nx.json for further processing
   priorConfiguration: CommonPropertiesToSaveAndUse<true>
   // injecting enums since i want to compare this in jinja templates
-  enum: CommonPropertiesToSaveAndUse<false> & Record<'dbAdapters', typeof AvailableDBAdapters>
+  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'> & Record<'dbAdapters', typeof AvailableDBAdapters>
 }
 
 interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   components: Values extends true ? AvailableComponents[] : typeof AvailableComponents
+  effectiveComponents: number
   server: Values extends true ? AvailableServerTypes : typeof AvailableServerTypes
   microservice: Values extends true ? AvailableMicroserviceTypes : typeof AvailableMicroserviceTypes
+  microserviceClient: string[]
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
 }

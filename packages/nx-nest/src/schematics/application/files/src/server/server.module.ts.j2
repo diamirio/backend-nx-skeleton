@@ -24,9 +24,12 @@ import {
   SetApiInfoHeaderMiddleware,
   setEnvironmentVariables,
   ExtendedValidationPipe
+  {% if enum.components.MICROSERVICE_CLIENT in components %}
+  MicroserviceProviderModule
+  {% endif %}
 } from '@webundsoehne/nestjs-util'
 {% if enum.components.MICROSERVICE_CLIENT in components %}
-import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 {% endif %}
 
 import * as modules from './modules'
@@ -76,7 +79,7 @@ export function createServerModule ({% if database is defined and database != en
       MongooseModule.forRoot(...getDatabaseOptions(mock)),
       {% endif %}
       {% if enum.components.MICROSERVICE_CLIENT in components %}
-      MicroserviceProviderModule.forRoot({ queue: [ MessageQueues.APP1_QUEUE, MessageQueues.APP2_QUEUE ] }),
+      MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
       {% endif %}
       InternalModule,
       MaintenanceModule

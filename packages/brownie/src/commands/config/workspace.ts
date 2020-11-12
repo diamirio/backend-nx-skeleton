@@ -1,6 +1,7 @@
 import { ConfigBaseCommand, promptUser, createTable, ConfigRemove, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
 
-import { WorkspaceConfig, WorkspacePrompt } from '@context/config/workspace.config.interface'
+import { WorkspacePrompt } from '@context/config/workspace.config.interface'
+import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 
 export class WorkspaceConfigCommand extends ConfigBaseCommand {
   static description = 'Edit available workspace skeletons through a user interface.'
@@ -12,14 +13,11 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     const response = await this.prompt(config)
 
     // userInput user if name already exists
-    let overwritePrompt = true
-    if (config?.[response?.name]) {
-      overwritePrompt = await promptUser({ type: 'Toggle', message: `"${response?.name}" already exists in local configuration. Do you want to overwrite?` })
-    }
-
-    if (overwritePrompt) {
-      config[response?.name] = response.value
-      this.logger.success(`Added "${response.name}" to the local configuration.`)
+    const index = config.findIndex((c) => c.package === response.package)
+    if (index >= 0 && await promptUser({ type: 'Toggle', message: `"${response?.package}" already exists in local configuration. Do you want to overwrite?` })) {
+      config[index] = response
+    } else {
+      config.push(response)
     }
 
     return config
@@ -30,25 +28,30 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     const select = await promptUser({
       type: 'Select',
       message: 'Please select configuration to edit.',
-      choices: Object.keys(config)
+      choices: config.map((c) => c.package)
     })
 
     const edit = await this.prompt(config, select)
 
-    // strip old item
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
-    const { [select]: omit, ...rest } = config
+    config.splice(
+      config.findIndex((c) => c.package === select),
+      1,
+      edit
+    )
 
-    // write to temp
-    rest[edit.name] = edit.value
-    this.logger.success(`Edited "${select}" with "${edit.name}@${edit.value}" in the local configuration.`)
+    this.logger.success(`Edited "${select}" with "${edit.package}" in the local configuration.`)
 
-    return rest
+    return config
   }
 
   async configShow (config: WorkspaceConfig): Promise<void> {
-    if (Object.keys(config).length > 0) {
-      this.logger.info(createTable([ 'Name', 'Repository' ], Object.entries(config)))
+    if (config.length > 0) {
+      this.logger.info(
+        createTable(
+          [ 'Package' ],
+          config.map((c) => [ c.package ])
+        )
+      )
     } else {
       this.logger.warn('Configuration file is empty.')
     }
@@ -58,12 +61,10 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
 
   async configRemove (config: WorkspaceConfig): Promise<ConfigRemove<WorkspaceConfig>> {
     return {
-      keys: Object.keys(config),
+      keys: config.map((c) => c.package),
       removeFunction: async (config, userInput): Promise<WorkspaceConfig> => {
         userInput.forEach((input) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { [input]: omit, ...rest } = config
-          config = rest
+          config = config.filter((c) => c.package !== input)
         })
 
         return config
@@ -71,18 +72,14 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     }
   }
 
-  protected validate (value): boolean | string {
-    if (value.value === '') {
-      return 'Repository field can not be left empty.'
+  protected validate (value: WorkspacePrompt): boolean | string {
+    if (value.package === '') {
+      return 'Package field can not be left empty.'
     }
     return true
   }
 
-  protected result (value): { name: string, value: string } {
-    if (value.name === '') {
-      value.name = value.value?.split('/').pop()
-      this.logger.warn(`Name was empty for "${value.value}", initiated it as "${value.name}".`)
-    }
+  protected result (value: WorkspacePrompt): WorkspacePrompt {
     return value
   }
 
@@ -92,14 +89,9 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
       message: 'Please provide the details for repository below.',
       choices: [
         {
-          name: 'value',
-          message: 'Repository',
+          name: 'package',
+          message: 'Package',
           initial: select ?? config[select]
-        },
-        {
-          name: 'name',
-          message: 'Name',
-          initial: select ?? select
         }
       ],
       validate: (value) => this.validate(value),

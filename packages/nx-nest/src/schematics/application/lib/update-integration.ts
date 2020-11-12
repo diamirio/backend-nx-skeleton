@@ -20,10 +20,12 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     // add the components that needs to be known
     updateNxIntegration<NormalizedSchema['priorConfiguration']>(options.name, {
       components: options.components,
+      effectiveComponents: options.effectiveComponents,
       server: options.server,
       microservice: options.microservice,
       database: options.database,
-      tests: options.tests
+      tests: options.tests,
+      microserviceClient: options.microserviceClient
     }),
 
     // add nx container
