@@ -4,3 +4,11 @@ logcolor: true
 configDir: '.config/brownie'
 localConfig: '.brownie.local.yml'
 lock: '.brownie.lock'
+
+workspace:
+  requiredDependencies:
+    - '@nrwl/cli'
+    - '@nrwl/tao'
+    - '@nrwl/workspace'
+    - '@angular-devkit/core'
+    - '@angular-devkit/schematics'

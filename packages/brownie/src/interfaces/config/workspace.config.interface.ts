@@ -1,1 +1,4 @@
-export type WorkspaceConfig = { package: string }[]
+export interface WorkspaceConfig {
+  package: string
+  registry?: string
+}

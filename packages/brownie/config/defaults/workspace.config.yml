@@ -1,1 +1,2 @@
 - package: '@webundsoehne/nx-workspace'
+  registry: https://verdaccio.dev.webundsoehne.com

@@ -54,8 +54,7 @@
     "commands": "./dist/commands",
     "bin": "cenk1cenk2",
     "plugins": [
-      "@oclif/plugin-help",
-      "@tiagonapoli/oclif-plugin-spaced-commands"
+      "@oclif/plugin-help"
     ],
     "hooks": {
       "init": "./dist/hooks/init.hook",
@@ -71,11 +70,10 @@
     "cenk1cenk2"
   ],
   "dependencies": {
-    "@cenk1cenk2/boilerplate-oclif": "^1.2.11",
+    "@cenk1cenk2/boilerplate-oclif": "^1.3.0",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/errors": "^1.3.4",
-    "@tiagonapoli/oclif-plugin-spaced-commands": "^0.0.6",
     "enquirer": "^2.3.5",
     "execa": "^4.0.2",
     "fs-extra": "^9.0.0",

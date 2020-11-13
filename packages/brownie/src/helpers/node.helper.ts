@@ -4,7 +4,6 @@ import execa from 'execa'
 import { readJson, stat } from 'fs-extra'
 import { ListrTask } from 'listr2'
 import { join } from 'path'
-import through from 'through'
 import notifier from 'update-notifier'
 
 import {
@@ -16,6 +15,7 @@ import {
   PackageManagerDependencyTypes,
   PackageManagerUsableCommands
 } from './node.helper.interface'
+import { pipeProcessThroughListr } from '@helpers/execa.helper'
 
 export class NodeHelper {
   public globalFolder: string[]
@@ -45,6 +45,7 @@ export class NodeHelper {
       [
         {
           title: 'Working on dependencies...',
+          skip: (): boolean => packages.length === 0,
           task: async (_, task): Promise<void> => {
             // packages to install
             try {
@@ -55,7 +56,8 @@ export class NodeHelper {
                 { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
                 { condition: options.action === PackageManagerUsableCommands.ADD, arg: PackageManagerUsableCommands.ADD },
                 { condition: options.action === PackageManagerUsableCommands.REMOVE, arg: PackageManagerUsableCommands.REMOVE },
-                { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT }
+                { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
+                { condition: options.force, arg: PackageManagerUsableCommands.FORCE }
               ]
 
               argumentParser.forEach((a) => {
@@ -64,15 +66,10 @@ export class NodeHelper {
                 }
               })
 
-              const logOut = through((chunk: Buffer | string) => {
-                task.output = chunk?.toString('utf-8').trim()
-              })
+              const args = [ ...command, ...packages ]
+              this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o', this.manager, args, packages)
 
-              // do the action
-              const instance = execa(this.manager, [ ...command, ...packages ], { stdio: 'inherit', shell: true })
-              instance.stdout.pipe(logOut)
-              instance.stderr.pipe(logOut)
-              await instance
+              await pipeProcessThroughListr(task, execa(this.manager, args, { stdio: 'pipe', shell: true }))
             } catch (e) {
               throw new Error(`There were errors with ${this.manager} while processing dependencies "${packages.join(', ')}".\n${e.stderr}`)
             }
@@ -80,8 +77,7 @@ export class NodeHelper {
         }
       ],
       {
-        concurrent: false,
-        rendererOptions: { collapse: false }
+        concurrent: false
       }
     )
   }
@@ -132,6 +128,7 @@ export class NodeHelper {
 
               ;(await stat(packagePath)).isDirectory()
               o.installed = true
+              o.path = packagePath
 
               // get version from stuff
               const packageJson = join(packagePath, 'package.json')
@@ -139,7 +136,7 @@ export class NodeHelper {
                 try {
                   o.version = (await readJson(packageJson))?.version
                 } catch {
-                  this.cmd.logger.debug(`Can not read package version of package: ${p}`)
+                  this.cmd.message.warn(`Can not read package version of package: ${p}`)
                 }
               }
               // dont care about the catch case since this will look at multiple cwds
@@ -156,12 +153,20 @@ export class NodeHelper {
             if (updatable.type !== 'latest') {
               o.hasUpdate = true
               o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`
+              o.latest = updatable.latest
             } else {
               o.hasUpdate = false
             }
+
+            o.parsable = { [o.pkg]: o.latest ?? 'latest' }
           } catch (e) {
-            this.cmd.logger.debug(`Can not check for current version: ${p}`)
+            this.cmd.message.warn(`Can not check for current version: ${p}`)
           }
+        }
+
+        // idiomatic can sometimes happen if package not set
+        if (!o.pkg) {
+          throw new Error('There is no package defined while checking for dependencies.')
         }
 
         return o
@@ -169,17 +174,8 @@ export class NodeHelper {
     )
   }
 
-  public parseDependencies (deps: PackageVersions): { prod: string[], dev: string[] } {
-    const prod: string[] = []
-    const dev: string[] = []
-
-    if (deps.deps) {
-      prod.push(...Object.entries(deps.deps).map((p, v) => `${p}@${v}`))
-    }
-    if (deps.devDeps) {
-      dev.push(...Object.entries(deps.devDeps).map((p, v) => `${p}@${v}`))
-    }
-
-    return { prod, dev }
+  public parseDependencies (deps: PackageVersions['deps'] | PackageVersions['devDeps']): string[] {
+    console.log(deps)
+    return Object.entries(deps).map(([ p, v ]) => `${p}@${v}`)
   }
 }

@@ -8,7 +8,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   protected configName = 'workspace.config.yml'
   protected configType = ConfigTypes.general
 
-  async configAdd (config: WorkspaceConfig): Promise<WorkspaceConfig> {
+  async configAdd (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
     // prompt user for details
     const response = await this.prompt(config)
 
@@ -23,7 +23,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     return config
   }
 
-  async configEdit (config: WorkspaceConfig): Promise<WorkspaceConfig> {
+  async configEdit (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
     // prompt user for which keys to edit
     const select = await promptUser({
       type: 'Select',
@@ -44,12 +44,12 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     return config
   }
 
-  async configShow (config: WorkspaceConfig): Promise<void> {
+  async configShow (config: WorkspaceConfig[]): Promise<void> {
     if (config.length > 0) {
       this.logger.info(
         createTable(
-          [ 'Package' ],
-          config.map((c) => [ c.package ])
+          [ 'Package', 'Registry' ],
+          config.map((c) => [ c.package, c.registry ])
         )
       )
     } else {
@@ -59,10 +59,10 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  async configRemove (config: WorkspaceConfig): Promise<ConfigRemove<WorkspaceConfig>> {
+  async configRemove (config: WorkspaceConfig[]): Promise<ConfigRemove<WorkspaceConfig[]>> {
     return {
       keys: config.map((c) => c.package),
-      removeFunction: async (config, userInput): Promise<WorkspaceConfig> => {
+      removeFunction: async (config, userInput): Promise<WorkspaceConfig[]> => {
         userInput.forEach((input) => {
           config = config.filter((c) => c.package !== input)
         })
@@ -80,10 +80,16 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   }
 
   protected result (value: WorkspacePrompt): WorkspacePrompt {
+    if (!value.registry) {
+      value.registry = 'https://registry.npmjs.org/'
+    }
+
     return value
   }
 
-  private prompt (config: WorkspaceConfig, select?: string): Promise<WorkspacePrompt> {
+  private prompt (config: WorkspaceConfig[], select?: string): Promise<WorkspacePrompt> {
+    const matching = config.find((c) => c.package === select)
+
     return promptUser<WorkspacePrompt>({
       type: 'Form',
       message: 'Please provide the details for repository below.',
@@ -91,7 +97,12 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
         {
           name: 'package',
           message: 'Package',
-          initial: select ?? config[select]
+          initial: matching?.package ?? null
+        },
+        {
+          name: 'registry',
+          message: 'Registry',
+          initial: matching?.registry ?? null
         }
       ],
       validate: (value) => this.validate(value),
