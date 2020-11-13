@@ -6,6 +6,7 @@ import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { pipeProcessThroughListr } from '@helpers/execa.helper'
 import { NodeHelper } from '@helpers/node.helper'
 import { PackageManagerUsableCommands } from '@helpers/node.helper.interface'
+import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
@@ -13,15 +14,24 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   private helpers: { node: NodeHelper }
 
   static flags = {
-    'skip-updates': flags.boolean({ description: 'Skip the dependency updates.', default: false })
+    'skip-updates': flags.boolean({
+      description: 'Skip the dependency updates.',
+      default: false,
+      char: 's'
+    }),
+    force: flags.boolean({
+      description: 'Force override for schematic.',
+      default: false,
+      char: 'f'
+    })
   }
 
-  async construct () {
+  public async construct (): Promise<void> {
     // can not initiate helpers as private since this is initiated by oclif
     this.helpers = { node: new NodeHelper(this) }
   }
 
-  async run (): Promise<void> {
+  public async run (): Promise<void> {
     // get oclif parameters
     const { flags } = this.parse(WorkspaceCreateCommand)
 
@@ -29,7 +39,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     this.tasks.ctx = new WorkspaceCreateCommandCtx()
 
     // get config
-    const { config } = await this.getConfig('workspace.config.yml')
+    const { config } = await this.getConfig<WorkspaceConfig[]>('workspace.config.yml')
 
     // add configuration in on ctx
     this.tasks.options.ctx.workspaces = config
@@ -59,12 +69,15 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       // Get which workspace to use.
       {
         enabled: (ctx): boolean => Object.keys(ctx?.workspaces).length > 0,
-        task: async (ctx, task): Promise<string> =>
+        task: async (ctx, task): Promise<void> => {
           ctx.prompts.workspace = await task.prompt({
             type: 'Select',
             message: 'Which workspace library you want to use?',
             choices: ctx.workspaces.map((w) => w.package)
           })
+
+          ctx.workspace = config.find((c) => c.package === ctx.prompts.workspace)
+        }
       },
 
       // check dependencies
@@ -73,7 +86,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
-              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.prompts.workspace ], {
+              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.workspace.package ], {
                 getVersion: true,
                 global: true,
                 getUpdate: true
@@ -119,7 +132,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           // add dependencies that should be installed to list
           {
             title: 'Looking for missing dependencies...',
-            task: async (ctx, task) => {
+            task: async (ctx, task): Promise<void> => {
               const shouldBeInstalled = ctx.deps.filter((d) => !d.installed)
 
               if (shouldBeInstalled.length > 0) {
@@ -147,18 +160,22 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
         ],
         { rendererOptions: { collapse: true }, concurrent: false },
         { title: 'Performing required dependency operations.' }
-      ),
-
-      {
-        title: 'Generating workspace...',
-        task: async (ctx, task) => {
-          console.log(ctx.deps)
-          await pipeProcessThroughListr(
-            task,
-            execa('yarn', [ 'exec', 'tao', 'new', '--collection', `${ctx.prompts.workspace}/schematics.json`, '--preset', 'workspace' ], { stdio: 'inherit', shell: true })
-          )
-        }
-      }
+      )
     ])
+
+    const ctx = await this.tasks.runAll<WorkspaceCreateCommandCtx>()
+
+    this.logger.info('Now will start generating the workspace...')
+
+    const workspace = (
+      await this.helpers.node.checkIfModuleInstalled([ ctx.workspace.package ], {
+        getVersion: true,
+        global: true,
+        getUpdate: true
+      })
+    ).find((c) => c.pkg === ctx.workspace.package)
+
+    // this will be the command
+    await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null ], { stdio: 'inherit', shell: true })
   }
 }

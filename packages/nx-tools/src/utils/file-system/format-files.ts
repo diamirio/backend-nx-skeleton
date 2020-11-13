@@ -32,7 +32,7 @@ export function formatFiles (
   return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
     // get root path
-    const appRootPath = findWorkspaceRoot(process.cwd()).dir
+    const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
 
     const files = new Set(
       host.actions

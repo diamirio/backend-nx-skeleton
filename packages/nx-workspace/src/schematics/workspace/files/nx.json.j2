@@ -21,5 +21,16 @@
       "cacheableOperations": ["build", "lint", "test", "e2e"]
     }
   },
+  {% if layout === enum.layout.SINGLE %}
+  "workspaceLayout": {
+        "appsDir": "packages",
+        "libsDir": "packages"
+  },
+  {% elif layout === enum.layout.MULTIPLE %}
+  "workspaceLayout": {
+        "appsDir": "apps",
+        "libsDir": "libs"
+  },
+  {% endif %}
   "projects": {}
 }
