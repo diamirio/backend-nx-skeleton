@@ -1,4 +1,5 @@
 export * from './brownie'
+export * from './brownie.interface'
 export * from './nx-json'
 export * from './microservice-provider'
 export * from './microservice-provider.interface'

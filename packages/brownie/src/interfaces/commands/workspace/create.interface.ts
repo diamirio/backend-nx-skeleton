@@ -7,10 +7,10 @@ export class WorkspaceCreateCommandCtx {
   }
   public workspaces: WorkspaceConfig[]
   public deps: CheckIfModuleInstalled[]
-  public installDeps: string[]
+  public packages: string[]
   public workspace: WorkspaceConfig
   constructor () {
     this.prompts = {}
-    this.installDeps = []
+    this.packages = []
   }
 }

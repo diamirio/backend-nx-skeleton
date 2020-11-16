@@ -59,12 +59,12 @@
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.4.2",
-    "@nestjs/core": "^7.4.2",
-    "@nestjs/graphql": "^7.8.1",
-    "@nestjs/microservices": "^7.4.4",
-    "@nestjs/swagger": "^4.7.2",
-    "@nestjs/testing": "^7.4.2",
+    "@nestjs/common": "^7.5.2",
+    "@nestjs/core": "^7.5.2",
+    "@nestjs/graphql": "^7.8.2",
+    "@nestjs/microservices": "^7.5.2",
+    "@nestjs/swagger": "^4.7.4",
+    "@nestjs/testing": "^7.5.2",
     "@types/config": "^0.0.36",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.14.7",

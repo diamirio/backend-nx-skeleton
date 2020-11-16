@@ -6,11 +6,11 @@ import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing
  * The options that it gets from angular-cli
  */
 export interface Schema extends CommonPropertiesToSaveAndUse {
-  name: string
-  linter: string
-  skipFormat: boolean
-  silent: boolean
-  microservice: AvailableMicroserviceTypes
+  name?: string
+  linter?: string
+  skipFormat?: boolean
+  silent?: boolean
+  microservice?: AvailableMicroserviceTypes
 }
 
 /**
@@ -35,5 +35,5 @@ export type ParsedMicroservice = GeneratedMicroserviceCasing
  * This properties are shared across the input, normalized and saved configurations.
  */
 interface CommonPropertiesToSaveAndUse {
-  microservices: ParsedMicroservice[]
+  microservices?: ParsedMicroservice[]
 }

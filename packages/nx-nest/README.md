@@ -4,9 +4,9 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 ---
 
-# @webundsoehne/nx-nest
+# @webundsoehne-int/nx-nest
 
-[![Version](https://img.shields.io/npm/v/@webundsoehne/nx-nest.svg)](https://npmjs.org/package/@webundsoehne/nx-nest) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nx-nest.svg)](https://npmjs.org/package/@webundsoehne/nx-nest) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nx-nest)](https://npmjs.org/package/@webundsoehne/nx-nest) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Version](https://img.shields.io/npm/v/@webundsoehne-int/nx-nest.svg)](https://npmjs.org/package/@webundsoehne-int/nx-nest) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne-int/nx-nest.svg)](https://npmjs.org/package/@webundsoehne-int/nx-nest) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne-int/nx-nest)](https://npmjs.org/package/@webundsoehne-int/nx-nest) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 # Description
 
@@ -26,7 +26,7 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) schematics to gener
 
 Application schematic creates a `@nestjs` application. Run the `application` schematic with its name or alias of `app` to follow through an interactive menu.
 
-The first argument passed in to `nx g @webundsoehne/nx-nest:app ${APP_NAME}` will be the application name itself. This application will be created under the folder `apps/` with the given name.
+The first argument passed in to `nx g @webundsoehne-int/nx-nest:app ${APP_NAME}` will be the application name itself. This application will be created under the folder `apps/` with the given name.
 
 Follow through the interactive menu to generate a application with the components you need.
 
@@ -38,7 +38,7 @@ Application will use `ts-node-dev` for development and `tsc` for distrubition.
 
 To generate new components after an application has been created, run the `component` schematic with its name or alias of `co`.
 
-The first argument passed in to `nx g @webundsoehne/nx-nest:co ${APP_NAME} ${COMPONENT_NAME}` is the application name and the second is the component name.
+The first argument passed in to `nx g @webundsoehne-int/nx-nest:co ${APP_NAME} ${COMPONENT_NAME}` is the application name and the second is the component name.
 
 Follow through the prompts, where it will guide you with only available components that can be added to the application due to memoryful operation.
 

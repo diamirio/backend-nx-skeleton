@@ -4,4 +4,6 @@ export interface Configuration extends BaseConfig {
   workspace: {
     requiredDependencies: string[]
   }
+
+  npm_registry?: string
 }

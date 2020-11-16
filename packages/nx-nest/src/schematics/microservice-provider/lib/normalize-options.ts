@@ -96,7 +96,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
               }
             ]
           } else {
-            task.title = `Microservice servers found: ${ctx.microservices.map((m) => m.name).join(', ')}`
+            task.title = `Microservice servers found: ${microservices.map((m) => m.name).join(', ')}`
           }
 
           ctx.microservices = microservices.map((microservice) => {

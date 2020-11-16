@@ -1,10 +1,19 @@
 import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger, runInRule } from '@webundsoehne/nx-tools'
+import {
+  addSchematicTask,
+  applyOverwriteWithDiff,
+  createApplicationRule,
+  CreateApplicationRuleInterface,
+  deepMergeWithArrayOverwrite,
+  Logger,
+  runInRule
+} from '@webundsoehne/nx-tools'
 
 import { getSchematicFiles } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
+import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
 
 /**
  * Create application files in tree.
@@ -64,7 +73,9 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.MICROSERVICE_SERVER })
         }
       ]
-    })
+    }),
+
+    addSchematicTask<MspSchema>('msp', {})
   ])
 }
 

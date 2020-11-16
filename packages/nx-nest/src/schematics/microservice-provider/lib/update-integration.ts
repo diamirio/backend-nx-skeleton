@@ -1,6 +1,6 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
-import { updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
+import { BrownieAvailableContainers, updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
 
@@ -18,6 +18,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add nx message queue container
-    updateBrownieIntegration(options.name, { containers: [ 'nx' ] })
+    updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.NX ] })
   ])
 }

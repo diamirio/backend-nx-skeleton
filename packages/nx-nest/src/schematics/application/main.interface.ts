@@ -36,6 +36,7 @@ export interface NormalizedSchema extends Schema {
   root: string
   sourceRoot: string
   casing: GeneratedNameCases
+  injectedCasing?: { microservice?: GeneratedMicroserviceCasing }
   microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
   // prior configuration will be written to nx.json for further processing

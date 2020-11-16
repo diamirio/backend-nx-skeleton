@@ -23,9 +23,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
             default: [
-              {
-                ...options
-              },
+              options,
               {
                 enum: {
                   cli: AvailableCLIs,

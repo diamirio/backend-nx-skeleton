@@ -4,14 +4,16 @@
 export function eslintJson (options: { packageScope?: string, override?: Record<string, any> }): Record<string, any> {
   return (
     options.override ?? {
-      extends: [],
+      root: true,
+      plugins: [ '@nrwl/nx' ],
+      extends: [ '@webundsoehne/eslint-config/index', '@webundsoehne/eslint-config/typescript' ],
       rules: {
         'import/order': [
           'error',
           {
             pathGroups: [
               {
-                pattern: `@${options?.packageScope ?? 'package'}/**`,
+                pattern: '@${packageScope}/**',
                 group: 'index'
               }
             ],
@@ -26,8 +28,27 @@ export function eslintJson (options: { packageScope?: string, override?: Record<
               caseInsensitive: true
             }
           }
+        ],
+        '@typescript-eslint/explicit-member-accessibility': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-parameter-properties': 'off',
+        '@nrwl/nx/enforce-module-boundaries': [
+          'error',
+          {
+            enforceBuildableLibDependency: true,
+            allow: [],
+            depConstraints: [ { sourceTag: '*', onlyDependOnLibsWithTags: [ '*' ] } ]
+          }
         ]
-      }
+      },
+      overrides: [
+        {
+          files: [ '*.tsx' ],
+          rules: {
+            '@typescript-eslint/no-unused-vars': 'off'
+          }
+        }
+      ]
     }
   )
 }

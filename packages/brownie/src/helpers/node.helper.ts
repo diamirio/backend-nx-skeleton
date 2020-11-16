@@ -1,8 +1,8 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { PackageVersions } from '@webundsoehne/nx-tools'
+import { PackageVersions, pipeProcessThroughListr } from '@webundsoehne/nx-tools'
 import execa from 'execa'
 import { readJson, stat } from 'fs-extra'
-import { ListrTask } from 'listr2'
+import { Listr } from 'listr2'
 import { join } from 'path'
 import notifier from 'update-notifier'
 
@@ -15,7 +15,6 @@ import {
   PackageManagerDependencyTypes,
   PackageManagerUsableCommands
 } from './node.helper.interface'
-import { pipeProcessThroughListr } from '@helpers/execa.helper'
 
 export class NodeHelper {
   public globalFolder: string[]
@@ -39,9 +38,12 @@ export class NodeHelper {
     cmd.logger.debug(`NodeHelper initiated with package manager: ${this.manager}`)
   }
 
-  // package manager task itself
-  public packageManager (options: PackageManagerActions, packages: string[]): ListrTask {
-    return this.cmd.tasks.indent(
+  /**
+   * This gets ctx.packages as input to perform the required operation
+   * @param options
+   */
+  public packageManager (options: PackageManagerActions, packages: string[]): Listr {
+    return this.cmd.tasks.newListr(
       [
         {
           title: 'Working on dependencies...',
@@ -175,7 +177,6 @@ export class NodeHelper {
   }
 
   public parseDependencies (deps: PackageVersions['deps'] | PackageVersions['devDeps']): string[] {
-    console.log(deps)
     return Object.entries(deps).map(([ p, v ]) => `${p}@${v}`)
   }
 }

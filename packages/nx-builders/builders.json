@@ -4,13 +4,13 @@
     "ts-node-dev": {
       "implementation": "./dist/builders/ts-node-dev/main",
       "schema": "./dist/builders/ts-node-dev/schema.json",
-      "description": "@webundsoehne/nx-nest:ts-node-dev"
+      "description": "@webundsoehne-int/nx-nest:ts-node-dev"
     },
 
     "tsc": {
       "implementation": "./dist/builders/tsc/main",
       "schema": "./dist/builders/tsc/schema.json",
-      "description": "@webundsoehne/nx-nest:tsc"
+      "description": "@webundsoehne-int/nx-nest:tsc"
     }
   }
 }

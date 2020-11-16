@@ -1,6 +1,6 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
-import { updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
+import { updateBrownieIntegration, updateNxIntegration, BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
@@ -29,19 +29,19 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add nx container
-    updateBrownieIntegration(options.name, { containers: [ 'nx' ] }),
+    updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.NX ] }),
 
     // add mysql container
-    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'mysql' ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.MYSQL ] }) : noop(),
 
     // add postgresql container
-    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'postgresql' ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.POSTGRESQL ] }) : noop(),
 
     // add mongodb container
-    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ 'mongodb' ] }) : noop(),
+    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
 
     // add message queue container
     // fix me later
-    options.components?.includes(AvailableComponents.MICROSERVICE_SERVER) ? updateBrownieIntegration(options.name, { containers: [ 'rabbitmq' ] }) : noop()
+    options.components?.includes(AvailableComponents.MICROSERVICE_SERVER) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.RABBITMQ ] }) : noop()
   ])
 }

@@ -1,9 +1,9 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import execa from 'execa'
+import { Listr } from 'listr2'
 
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
-import { pipeProcessThroughListr } from '@helpers/execa.helper'
 import { NodeHelper } from '@helpers/node.helper'
 import { PackageManagerUsableCommands } from '@helpers/node.helper.interface'
 import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
@@ -11,8 +11,6 @@ import { Configuration } from '@interfaces/default-config.interface'
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
-  private helpers: { node: NodeHelper }
-
   static flags = {
     'skip-updates': flags.boolean({
       description: 'Skip the dependency updates.',
@@ -25,6 +23,8 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       char: 'f'
     })
   }
+
+  private helpers: { node: NodeHelper }
 
   public async construct (): Promise<void> {
     // can not initiate helpers as private since this is initiated by oclif
@@ -82,7 +82,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
       // check dependencies
       this.tasks.indent(
-        (ctx) => [
+        [
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
@@ -118,7 +118,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
                 const parsedToUpdate = this.helpers.node.parseDependencies(updatable.filter((d) => updateDeps.includes(d.pkg)).reduce((o, d) => ({ ...o, ...d.parsable }), {}))
 
-                ctx.installDeps = [ ...ctx.installDeps, ...parsedToUpdate ]
+                ctx.packages = [ ...ctx.packages, ...parsedToUpdate ]
 
                 this.logger.debug('Dependencies in update queue: %o', parsedToUpdate)
 
@@ -138,7 +138,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
               if (shouldBeInstalled.length > 0) {
                 const parsedToInstall = this.helpers.node.parseDependencies(shouldBeInstalled.reduce((o, d) => ({ ...o, ...d.parsable }), {}))
 
-                ctx.installDeps = [ ...ctx.installDeps, ...parsedToInstall ]
+                ctx.packages = [ ...ctx.packages, ...parsedToInstall ]
 
                 this.logger.debug('Dependencies in install queue: %o', parsedToInstall)
 
@@ -149,14 +149,17 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
             }
           },
 
-          this.helpers.node.packageManager(
-            {
-              action: PackageManagerUsableCommands.ADD,
-              global: true,
-              force: true
-            },
-            ctx.installDeps
-          )
+          {
+            task: (ctx): Listr =>
+              this.helpers.node.packageManager(
+                {
+                  action: PackageManagerUsableCommands.ADD,
+                  global: true,
+                  force: true
+                },
+                ctx.packages
+              )
+          }
         ],
         { rendererOptions: { collapse: true }, concurrent: false },
         { title: 'Performing required dependency operations.' }

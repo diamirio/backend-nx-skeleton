@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne/nx-nest",
+  "name": "@webundsoehne-int/nx-nest",
   "version": "1.0.0",
   "description": "Nest Plugin for Nx",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
@@ -29,21 +29,16 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~11.0.0",
-    "@nestjs/schematics": "^7.1.2",
+    "@angular-devkit/schematics": "~11.0.1",
+    "@nestjs/schematics": "^7.2.2",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",

@@ -26,14 +26,6 @@ export const VERSIONS: Versions = {
       }
     }
   },
-  eslint: {
-    dependencies: {},
-    devDependencies: {
-      '@webundsoehne/eslint-config': '^1.1.0',
-      '@typescript-eslint/eslint-plugin': '^4.1.1',
-      'eslint-plugin-import': '^2.22.0'
-    }
-  },
   [AvailableServerTypes.RESTFUL]: {
     deps: {
       // pin for graphql version

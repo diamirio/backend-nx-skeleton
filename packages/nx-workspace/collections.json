@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne/nx-workspace",
+  "name": "@webundsoehne-int/nx-workspace",
   "schematics": {
     "workspace": {
       "factory": "./dist/schematics/workspace/main",

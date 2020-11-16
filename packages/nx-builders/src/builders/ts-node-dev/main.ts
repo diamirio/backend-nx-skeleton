@@ -1,6 +1,7 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { checkNodeModulesExists, ExecaArguments, pipeProcessToLogger, removePathRoot, BaseBuilder, runBuilder } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
+import delay from 'delay'
 import execa from 'execa'
 import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
@@ -34,9 +35,11 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
           const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
           await pipeProcessToLogger(this.context, instance, { start: true })
         } catch (error) {
-          this.logger.error('ts-node-dev crashed restarting.')
+          this.logger.error('ts-node-dev crashed restarting in 3 secs.')
+          this.logger.warn(error)
 
-          this.run(subscriber)
+          await delay(3000)
+          await this.run(subscriber).toPromise()
         } finally {
           // clean up the zombies!
           await this.manager.stop()

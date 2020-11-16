@@ -7,10 +7,10 @@ import {
   ConvertToPromptType,
   generateNameCases,
   isVerbose,
-  readNxIntegration,
-  setSchemaDefaultsInContext,
   mapPromptChoices,
-  readMicroserviceIntegration
+  readMicroserviceIntegration,
+  readNxIntegration,
+  setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
@@ -59,6 +59,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
                   microservice: AvailableMicroserviceTypes,
                   dbAdapters: AvailableDBAdapters
                 }
+              },
+              {
+                injectedCasing: {}
               }
             ]
           })
@@ -189,6 +192,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             choices,
             initial: getInitialFromPriorConfiguration(ctx, 'microservice', choices)
           })
+
+          ctx.injectedCasing.microservice = generateMicroserviceCasing(ctx.name)
 
           task.title = `Microservice type selected as: ${ctx.microservice}`
         },

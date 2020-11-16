@@ -35,19 +35,19 @@
     {% endif %}
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
+    "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json"
   },
   "dependencies": {
     {% if deps is defined and deps | length > 0 %}
     {% for name, item in deps %}
-    "{{ name }}": "{{ item }}",
+    "{{ name }}": "{{ item }}"{{ "," if not loop.last }}
     {% endfor %}
     {% endif %}
   },
   "devDependencies": {
     {% if devDeps is defined and devDeps | length > 0 %}
     {% for name, item in devDeps %}
-    "{{ name }}": "{{ item }}",
+    "{{ name }}": "{{ item }}"{{ "," if not loop.last }}
     {% endfor %}
     {% endif %}
   }

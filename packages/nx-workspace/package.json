@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne/nx-workspace",
+  "name": "@webundsoehne-int/nx-workspace",
   "version": "1.0.0",
   "description": "Workspace plugin for Nx",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
@@ -33,9 +33,9 @@
     "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~11.0.0",
-    "@angular-devkit/core": "~11.0.0",
-    "@nrwl/workspace": "^10.3.3",
+    "@angular-devkit/core": "~11.0.1",
+    "@angular-devkit/schematics": "~11.0.1",
+    "@nrwl/workspace": "^10.4.0",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "enquirer": "^2.3.5",

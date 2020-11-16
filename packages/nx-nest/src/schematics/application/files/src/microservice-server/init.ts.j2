@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { ConfigService, LoggerService } from '@webundsoehne/nestjs-util'
-import { MessageQueueEnum } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 
 import { createMicroserviceModule } from './microservice-server.module'
 
@@ -13,7 +13,7 @@ export async function createApplication (): Promise<void> {
     transport: Transport.{% if microservice === enum.microservice.RMQ %}RMQ{% endif %},
     options: {
       urls,
-      queue: MessageQueueEnum.APP1_DEFAULT
+      queue: MessageQueues.{{ injectedCasing.microservice.names.queue }}
     }
   })
 

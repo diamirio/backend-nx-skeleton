@@ -5,8 +5,8 @@ export const VERSIONS: Versions = {
   base: {
     default: {
       devDeps: {
-        'nrwl-workspace': '^10.0.12',
-        typescript: '^3.9.0'
+        // already in workspace
+        // typescript: '^4.0.5'
       }
     }
   },
