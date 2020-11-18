@@ -50,53 +50,51 @@ export class NodeHelper {
         {
           title: 'Working on dependencies...',
           skip: (): boolean => packages.length === 0,
-          task: async (_, task): Promise<void> => {
-            // packages to install
-            try {
-              // have to do this in loop because registry of each package might be different unfortunetly :()
-              packages.forEach(async (p) => {
-                const currentPkg: NodeDependency = {
-                  pkg: typeof p === 'string' ? p : p.pkg,
-                  registry: typeof p !== 'string' && p.registry
+          task: (_, task): Listr =>
+            task.newListr(
+              packages.map((p) => ({
+                title: `Working on: ${typeof p === 'string' ? p : p.pkg}`,
+                task: async (ctx, task): Promise<void> => {
+                  const currentPkg: NodeDependency = {
+                    pkg: typeof p === 'string' ? p : p.pkg,
+                    registry: typeof p !== 'string' && p.registry
+                  }
+
+                  // parse according to package manager and type
+                  const command: string[] = []
+
+                  const argumentParser = [
+                    { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
+                    { condition: options.force, arg: PackageManagerUsableCommands.FORCE },
+                    { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
+                    {
+                      condition: currentPkg.registry,
+                      arg: PackageManagerUsableCommands.REGISTRY,
+                      val: currentPkg.registry
+                    },
+                    { condition: options.action === PackageManagerUsableCommands.ADD, arg: PackageManagerUsableCommands.ADD },
+                    { condition: options.action === PackageManagerUsableCommands.REMOVE, arg: PackageManagerUsableCommands.REMOVE }
+                  ]
+
+                  argumentParser.forEach((a) => {
+                    if (a.condition) {
+                      command.push(PackageManagerCommands[this.manager][a.arg])
+                    }
+
+                    if (a?.val) {
+                      command.push(a.val)
+                    }
+                  })
+
+                  const pkgWithVersion = options.useLatest ? `${currentPkg.pkg}@${currentPkg.latest ?? 'latest'}` : currentPkg.pkg
+
+                  const args = [ ...command, pkgWithVersion ]
+                  this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o', this.manager, args, packages)
+
+                  await pipeProcessThroughListr(task, execa(this.manager, args, { stdio: 'pipe', shell: true }))
                 }
-
-                // parse according to package manager and type
-                const command: string[] = []
-
-                const argumentParser = [
-                  { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
-                  { condition: options.force, arg: PackageManagerUsableCommands.FORCE },
-                  { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
-                  {
-                    condition: currentPkg.registry,
-                    arg: PackageManagerUsableCommands.REGISTRY,
-                    val: currentPkg.registry
-                  },
-                  { condition: options.action === PackageManagerUsableCommands.ADD, arg: PackageManagerUsableCommands.ADD },
-                  { condition: options.action === PackageManagerUsableCommands.REMOVE, arg: PackageManagerUsableCommands.REMOVE }
-                ]
-
-                argumentParser.forEach((a) => {
-                  if (a.condition) {
-                    command.push(PackageManagerCommands[this.manager][a.arg])
-                  }
-
-                  if (a?.val) {
-                    command.push(a.val)
-                  }
-                })
-
-                const pkgWithVersion = options.useLatest ? `${currentPkg.pkg}@${currentPkg.latest ?? 'latest'}` : currentPkg.pkg
-
-                const args = [ ...command, pkgWithVersion ]
-                this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o', this.manager, args, packages)
-
-                await pipeProcessThroughListr(task, execa(this.manager, args, { stdio: 'pipe', shell: true }))
-              })
-            } catch (e) {
-              throw new Error(`There were errors with ${this.manager} while processing dependencies "${packages.join(', ')}".\n${e.stderr}`)
-            }
-          }
+              }))
+            )
         }
       ],
       {
@@ -108,6 +106,7 @@ export class NodeHelper {
   // i will leave this as is and just use direct proxy
   // FIXME: when the issue is resolved and merge complete use the upstream one instead of fork
   // * https://github.com/yeoman/update-notifier/issues/100 open issue with the update check for global registry npmrc stuff
+  // FIXME: this is a bit wierd have to be improved up on
   public async checkIfModuleInstalled (
     pkg: NodeDependency | NodeDependency[],
     options?: { global?: boolean, cwd?: string | string[], getVersion?: boolean, getUpdate?: boolean }
@@ -200,7 +199,7 @@ export class NodeHelper {
               o.hasUpdate = false
             }
           } catch (e) {
-            this.cmd.message.warn(`Can not check for current version: ${p}`)
+            this.cmd.message.warn(`Can not check for current version: ${currentPkg.pkg}`)
             this.cmd.message.debug(e.message)
           }
         }

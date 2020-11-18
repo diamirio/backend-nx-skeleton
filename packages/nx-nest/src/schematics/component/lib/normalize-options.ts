@@ -107,11 +107,13 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components.map((c) => {
-            if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
-              return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
-            }
-          })
+          const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components
+            .map((c) => {
+              if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+                return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
+              }
+            })
+            .filter(Boolean)
 
           // select the base components
           // when options are not passed as an option to the command

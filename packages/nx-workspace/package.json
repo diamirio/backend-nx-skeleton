@@ -35,7 +35,7 @@
   "dependencies": {
     "@angular-devkit/core": "~11.0.1",
     "@angular-devkit/schematics": "~11.0.1",
-    "@nrwl/workspace": "^10.4.0",
+    "@nrwl/workspace": "^10.4.2",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "enquirer": "^2.3.5",

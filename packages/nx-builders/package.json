@@ -42,10 +42,10 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1100.1",
-    "@angular-devkit/core": "^11.0.1",
-    "@angular-devkit/schematics": "~11.0.1",
-    "@nrwl/cli": "^10.4.0",
+    "@angular-devkit/architect": "^0.1000.4",
+    "@angular-devkit/core": "^10.0.4",
+    "@angular-devkit/schematics": "^10.0.4",
+    "@nrwl/cli": "^10.4.2",
     "@webundsoehne/nx-tools": "*",
     "delay": "^4.4.0",
     "execa": "^4.1.0",

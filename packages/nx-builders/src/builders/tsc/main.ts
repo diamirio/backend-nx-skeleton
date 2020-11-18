@@ -5,26 +5,25 @@ import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import {
+  BaseBuilder,
   checkNodeModulesExists,
   createDependenciesForProjectFromGraph,
+  deepMerge,
   ExecaArguments,
+  FileInputOutput,
+  generateBuilderAssets,
+  isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  BaseBuilder,
-  runBuilder,
-  isVerbose,
-  deepMerge,
-  FileInputOutput,
-  generateBuilderAssets
+  runBuilder
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
-import glob from 'glob'
 import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
-import { NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
+import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()
@@ -133,7 +132,14 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
   public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
-    const files: FileInputOutput[] = generateBuilderAssets({ outDir, cwd: options.cwd }, options.assets)
+    const files: FileInputOutput[] = generateBuilderAssets(
+      {
+        outDir,
+        cwd: options.cwd,
+        workspaceRoot: this.context.workspaceRoot
+      },
+      options.assets
+    )
 
     // Relative path for the dist directory
     const tsconfig = readJsonFile(join(this.context.workspaceRoot, options.tsConfig))
@@ -155,13 +161,9 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     }
   }
 
-  private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
-    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
-  }
-
   // so complicated maybe simplify this?
-  private normalizeArguments (mode?: 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'): ExecaArguments {
-    let args: string[]
+  public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
+    let args: string[] = []
     let spawnOptions: SpawnOptions
     spawnOptions = {
       stdio: 'pipe',
@@ -170,48 +172,86 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       }
     }
 
-    // set spawn options
-    if (mode === 'typescript' || mode === 'tsc-watch') {
-      if (this.options.cwd) {
-        spawnOptions = { ...spawnOptions, cwd: this.options.cwd }
+    const spawnOptionsParser: OptionParser<Record<string, any>> = [
+      {
+        mode: [ 'typescript', 'tsc-watch' ],
+        rules: [ { condition: !!this.options.cwd, args: { cwd: this.options.cwd } } ]
+      },
+      {
+        mode: [ 'tsc-watch' ],
+        rules: [ { args: { cwd: this.context.workspaceRoot } } ]
+      },
+      {
+        mode: [ 'runAfterWatch' ],
+        rules: [
+          {
+            args: {
+              cwd: this.options.normalizedOutputPath,
+              shell: true
+            }
+          }
+        ]
       }
-    } else if (mode === 'tscpaths') {
-      spawnOptions = { ...spawnOptions, cwd: this.context.workspaceRoot }
-    } else if (mode === 'runAfterWatch') {
-      spawnOptions = {
-        ...spawnOptions,
-        cwd: this.options.normalizedOutputPath,
-        shell: true
-      }
-    }
+    ]
 
-    // set arguments
-    if (mode === 'typescript' || mode === 'tsc-watch') {
-      // arguments for typescript compiler
-      args = [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ]
-
-      if (this.options.sourceMap) {
-        args = [ ...args, '--sourceMap' ]
+    spawnOptionsParser.forEach((o) => {
+      if (typeof o.mode === 'undefined' ? true : o.mode.includes(mode)) {
+        o.rules.forEach((r) => {
+          if (typeof r.condition === 'undefined' ? true : r.condition) {
+            spawnOptions = { ...spawnOptions, ...r.args }
+          }
+        })
       }
+    })
 
-      if (isVerbose()) {
-        args = [ ...args, '--extendedDiagnostics', '--listEmittedFiles' ]
+    const argumentParser: OptionParser<string[]> = [
+      {
+        mode: [ 'typescript', 'tsc-watch' ],
+        rules: [
+          { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
+          {
+            condition: this.options.sourceMap,
+            args: [ '--sourceMap' ]
+          },
+          {
+            condition: isVerbose(),
+            args: [ '--extendedDiagnostics', '--listEmittedFiles' ]
+          },
+          {
+            condition: mode === 'tsc-watch',
+            args: [ '--noClear', '--sourceMap' ]
+          }
+        ]
+      },
+      {
+        mode: [ 'tscpaths' ],
+        rules: [
+          {
+            args: [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
+          },
+          {
+            condition: isVerbose(),
+            args: [ '--verbose' ]
+          }
+        ]
       }
+    ]
 
-      if (mode === 'tsc-watch') {
-        // it can use the same options with tsc
-        args = [ ...args, '--noClear', '--sourceMap' ]
+    argumentParser.forEach((o) => {
+      if (typeof o.mode === 'undefined' ? true : o.mode.includes(mode)) {
+        o.rules.forEach((r) => {
+          if (typeof r.condition === 'undefined' ? true : r.condition) {
+            args = [ ...args, ...r.args ]
+          }
+        })
       }
-    } else if (mode === 'tscpaths') {
-      // arguments for tsc paths
-      args = [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
-
-      if (isVerbose()) {
-        args = [ ...args, '--verbose' ]
-      }
-    }
+    })
 
     return { args, spawnOptions }
+  }
+
+  private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
+    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
   }
 
   private async swapPaths (): Promise<void> {

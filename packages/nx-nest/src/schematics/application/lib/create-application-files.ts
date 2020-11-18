@@ -1,4 +1,4 @@
-import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, Rule, schematic, SchematicContext, url, noop } from '@angular-devkit/schematics'
 import {
   addSchematicTask,
   applyOverwriteWithDiff,
@@ -75,7 +75,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
       ]
     }),
 
-    addSchematicTask<MspSchema>('msp', {})
+    options.components.includes(AvailableComponents.MICROSERVICE_SERVER) ? addSchematicTask<MspSchema>('msp', {}) : noop()
   ])
 }
 

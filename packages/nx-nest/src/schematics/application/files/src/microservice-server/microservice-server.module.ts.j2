@@ -9,6 +9,12 @@ import { MongooseModule } from '@nestjs/mongoose'
 {% if enum.components.MICROSERVICE_CLIENT in components %}
 import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 {% endif %}
+import {
+  ConfigService,
+  {% if enum.components.MICROSERVICE_CLIENT in components %}
+  MicroserviceProviderModule,
+  {% endif %}
+} from '@webundsoehne/nestjs-util'
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}
@@ -18,6 +24,7 @@ import { getDatabaseOptions } from '@util/database'
 export function createMicroserviceModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
+      ConfigService,
       {
         provide: APP_PIPE,
         useClass: ExtendedValidationPipe

@@ -4,7 +4,7 @@ import { join } from 'path'
 import { AssetGlob, FileInputOutput } from '@interfaces/assets.interface'
 import { removePathRoot } from '@utils'
 
-export function generateBuilderAssets (options: { outDir: string, cwd?: string }, assets: (AssetGlob | string)[]): FileInputOutput[] {
+export function generateBuilderAssets (options: { workspaceRoot: string, outDir: string, cwd?: string }, assets: (AssetGlob | string)[]): FileInputOutput[] {
   const files: FileInputOutput[] = []
 
   // globbing some files
@@ -20,14 +20,14 @@ export function generateBuilderAssets (options: { outDir: string, cwd?: string }
   assets.forEach((asset) => {
     if (typeof asset === 'string') {
       files.push({
-        input: join(this.context.workspaceRoot, asset),
-        output: options.cwd ? join(this.context.workspaceRoot, options.outDir, removePathRoot(asset, options.cwd)) : asset
+        input: join(options.workspaceRoot, asset),
+        output: options.cwd ? join(options.workspaceRoot, options.outDir, removePathRoot(asset, options.cwd)) : asset
       })
     } else {
-      globbedFiles(asset.glob, join(this.context.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
+      globbedFiles(asset.glob, join(options.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
         files.push({
-          input: join(this.context.workspaceRoot, asset.input, globbedFile),
-          output: join(this.context.workspaceRoot, options.outDir, asset.output, globbedFile)
+          input: join(options.workspaceRoot, asset.input, globbedFile),
+          output: join(options.workspaceRoot, options.outDir, asset.output, globbedFile)
         })
       })
     }

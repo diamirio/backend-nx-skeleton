@@ -5,13 +5,14 @@ import {
   ConfigTypes,
   createDirIfNotExists,
   createTable,
-  mergeObjects,
   parseYaml,
+  readFile,
   readRaw,
   tasksOverwritePrompt,
   writeFile
 } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
+import { deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
 import fs from 'fs-extra'
 import globby from 'globby'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
@@ -34,14 +35,23 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     volume: flags.boolean({
       char: 'v',
       description: 'Use optional persistent volumes with the containers.'
+    }),
+    'volumes-folder': flags.string({
+      char: 'V',
+      description: 'Output to volumes folder.',
+      default: 'volumes'
     })
   }
 
   static description = 'Create docker-compose configuration from boilerplates.'
+
   public choices: ConfigCommandChoices[] = [ ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, ConfigCommandChoices.delete ]
+
   protected configName = 'docker-compose.yml'
   protected configType = ConfigTypes.localRoot
-  private dockerConfigLocation: string = join(this.config.root, 'config', 'containers')
+
+  private dockerConfigLocation: string = join(this.config.root, 'templates', 'containers')
+  private templatesLocation: string = join(this.config.root, 'templates', 'base')
 
   async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
     const { flags } = this.parse(DockerContainerCommand)
@@ -67,9 +77,11 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       {
         task: async (ctx, task): Promise<string[]> =>
           ctx.prompt = await task.prompt<string[]>({
-            type: 'MultiSelect',
+            type: 'AutoComplete',
+            multiple: true,
             message: 'Please select which containers you want to add.',
-            choices: Object.keys(ctx.containers)
+            choices: Object.keys(ctx.containers),
+            initial: this.getInitialFromPriorConfiguration(config, Object.keys(ctx.containers))
           })
       },
 
@@ -97,13 +109,17 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                       name: ctx.containers[name].name,
                       dir: join(flags.output, ctx.containers[name].name),
                       path: ctx.containers[name].path,
-                      output: flags.output
+                      output: flags.output,
+                      volumeDir: join(flags['volumes-folder'], ctx.containers[name].name)
                     }
 
                     // lock necassary information
                     this.locker.add({
                       path: ctx.containers[name].name,
-                      data: { output: flags.output, dir: ctx.context[name].dir },
+                      data: {
+                        dir: ctx.context[name].dir,
+                        volumeDir: ctx.context[name].volumeDir
+                      },
                       merge: true
                     })
 
@@ -158,7 +174,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                         // create asset
                         const asset = {
                           from: join(ctx.containers[name].files, volume.from),
-                          to: join(ctx.context[name].dir, 'volumes')
+                          to: join(ctx.context[name].volumeDir)
                         }
 
                         if (volume.mode === 'file') {
@@ -205,6 +221,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                           // it will clear out this entry
                           if (!prompt) {
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                          } else {
+                            await createDirIfNotExists(join(asset.to, volume.from))
                           }
                         } else {
                           throw new Error('Unknown volume mode this may be do to templating error.')
@@ -273,11 +291,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                       this.logger.debug(`Context for "${ctx.containers[name].path}":\n%o`, ctx.context[name])
 
                       // read the template
+                      const base = await readFile<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
                       const template = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
 
                       // configuration can still be null which is not mergable
                       if (template) {
-                        config = mergeObjects(config, template, { array: 'overwrite' })
+                        config = deepMergeWithArrayOverwrite(base, config, template)
                       } else {
                         throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
                       }
@@ -318,12 +337,11 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   }
 
   async configShow (config: DockerComposeFile): Promise<void> {
-    if (Object.keys(config).length > 0) {
+    if (config?.services ? Object.keys(config.services).length > 0 : false) {
       this.logger.info(
         createTable(
           [ 'Container', 'Details' ],
-          [ [ '', '' ] ]
-          // config.map((val, i) => [ Object.keys(config)[i], val ])
+          Object.entries(config.services).map(([ service, val ]) => [ service, val.image ])
         )
       )
     } else {
@@ -333,10 +351,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  async configRemove (): Promise<ConfigRemove<DockerComposeFile>> {
+  async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
     return {
-      keys: [],
-      removeFunction: async (config): Promise<DockerComposeFile> => config
+      keys: config?.services ? Object.keys(config.services) : [],
+      removeFunction: async (config): Promise<DockerComposeFile> => {
+        return config
+      }
     }
   }
 
@@ -388,8 +408,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   }
 
   private async readTemplate (path: string, context: any): Promise<string> {
-    let template: string
-    template = await readRaw(path)
+    let template: string = await readRaw(path)
 
     // check if this is jinja
     if (extname(path) === '.j2') {
@@ -411,5 +430,19 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     } else {
       return false
     }
+  }
+
+  // do this with locker
+  private getInitialFromPriorConfiguration (config: DockerComposeFile, choices: string[]): number[] | number {
+    return (
+      config?.services?.reduce((o, val) => {
+        choices.forEach((v, i) => {
+          if (v === val) {
+            o = [ ...o, i ]
+          }
+        })
+        return o
+      }, []) ?? []
+    )
   }
 }

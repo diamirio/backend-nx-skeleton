@@ -1,12 +1,15 @@
 import { CheckIfModuleInstalled } from '@helpers/node.helper.interface'
-import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
+import { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
+import { CommonNodeDependency } from '@interfaces/dependency.interface'
 
 export class NxAddCommandCtx {
   public prompts: {
-    schematic?: string
+    schematic?: NxSchematicsConfig
+    toRunSchematic?: SchematicConfig
+    arguments?: string
   }
   public deps: CheckIfModuleInstalled[]
-  public packages: string[]
+  public packages: CommonNodeDependency[]
   constructor () {
     this.prompts = {}
     this.packages = []

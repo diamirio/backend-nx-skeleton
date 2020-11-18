@@ -23,9 +23,9 @@ import {
   {% endif %}
   SetApiInfoHeaderMiddleware,
   setEnvironmentVariables,
-  ExtendedValidationPipe
+  ExtendedValidationPipe,
   {% if enum.components.MICROSERVICE_CLIENT in components %}
-  MicroserviceProviderModule
+  MicroserviceProviderModule,
   {% endif %}
 } from '@webundsoehne/nestjs-util'
 {% if enum.components.MICROSERVICE_CLIENT in components %}

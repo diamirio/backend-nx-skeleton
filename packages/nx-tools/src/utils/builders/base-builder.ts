@@ -34,7 +34,7 @@ export abstract class BaseBuilder<
     this.options = this.normalizeOptions(options)
 
     // create a process manager
-    this.manager = new ProcessManager(this.context)
+    this.manager = new ProcessManager(context)
 
     // initialize if defined
     this.init()

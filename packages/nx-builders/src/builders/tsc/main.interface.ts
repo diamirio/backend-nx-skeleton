@@ -62,4 +62,8 @@ export interface NormalizedBuilderOptions extends TscBuilderOptions {
   relativeMainFileOutput: string
 }
 
+export type OptionParserModes = 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'
+
+export type OptionParser<T extends any> = { mode?: OptionParserModes[], rules?: { condition?: boolean, args: T }[] }[]
+
 export type ProcessPaths = Partial<Record<'typescript' | 'tscpaths' | 'tscWatch' | 'tsconfig' | 'tsconfigPaths', string>>

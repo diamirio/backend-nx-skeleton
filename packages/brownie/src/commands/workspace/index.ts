@@ -123,7 +123,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
                 this.logger.debug('Dependencies in update queue: %o', parsedToUpdate)
 
-                task.title = `Dependencies ${parsedToUpdate.join(', ')} will be updated.`
+                task.title = `Dependencies ${parsedToUpdate.map((p) => p.pkg).join(', ')} will be updated.`
               } else {
                 task.title = 'All dependencies are up-to-date.'
               }
@@ -143,7 +143,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
                 this.logger.debug('Dependencies in install queue: %o', parsedToInstall)
 
-                task.title = `Dependencies ${parsedToInstall.join(', ')} will be installed.`
+                task.title = `Dependencies ${parsedToInstall.map((p) => p.pkg).join(', ')} will be installed.`
               } else {
                 task.title = 'All dependencies are already installed.'
               }
@@ -168,9 +168,10 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       )
     ])
 
-    const ctx = await this.tasks.runAll<WorkspaceCreateCommandCtx>()
+    // run finally prematurely
+    const { ctx } = await this.finally<WorkspaceCreateCommandCtx>()
 
-    this.logger.info('Now will start generating the workspace...')
+    this.logger.module('Now will start generating the workspace...')
 
     const workspace = (
       await this.helpers.node.checkIfModuleInstalled([ ctx.workspace ], {

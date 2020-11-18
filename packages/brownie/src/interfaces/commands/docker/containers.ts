@@ -1,4 +1,5 @@
 export interface DockerComposeFile {
+  version: string
   services: DockerComposeService
 }
 
@@ -21,6 +22,7 @@ export interface ParsedContainers {
   path: string
   output: string
   dir: string
+  volumeDir: string
   dockerfile?: string
   env?: string
   volumes?: {

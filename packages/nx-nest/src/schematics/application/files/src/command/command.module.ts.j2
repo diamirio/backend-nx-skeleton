@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import {
   ConfigService,
   {% if enum.components.MICROSERVICE_CLIENT in components %}
-  MicroserviceProviderModule
+  MicroserviceProviderModule,
   {% endif %}
 } from '@webundsoehne/nestjs-util'
 

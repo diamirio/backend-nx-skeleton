@@ -1,16 +1,16 @@
 services:
-  mysql:
+  db-mysql:
     {% filter indent(4, true) %}
       {% set image = 'mysql:latest' %}
-      {% include '../common/image.yml.j2' %}
+      {% include '../../base/image.yml.j2' %}
     {% endfilter %}
 
     {% filter indent(4, true) %}
-      {% include '../common/env.yml.j2' %}
+      {% include '../../base/env.yml.j2' %}
     {% endfilter %}
 
     ports:
       - 3306:3306
     {% filter indent(4, true) %}
-      {% include '../common/volumes.yml.j2' %}
+      {% include '../../base/volumes.yml.j2' %}
     {% endfilter %}
