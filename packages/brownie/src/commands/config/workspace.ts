@@ -13,8 +13,8 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     const response = await this.prompt(config)
 
     // userInput user if name already exists
-    const index = config.findIndex((c) => c.package === response.package)
-    if (index >= 0 && await promptUser({ type: 'Toggle', message: `"${response?.package}" already exists in local configuration. Do you want to overwrite?` })) {
+    const index = config.findIndex((c) => c.pkg === response.pkg)
+    if (index >= 0 && await promptUser({ type: 'Toggle', message: `"${response?.pkg}" already exists in local configuration. Do you want to overwrite?` })) {
       config[index] = response
     } else {
       config.push(response)
@@ -28,18 +28,18 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     const select = await promptUser({
       type: 'Select',
       message: 'Please select configuration to edit.',
-      choices: config.map((c) => c.package)
+      choices: config.map((c) => c.pkg)
     })
 
     const edit = await this.prompt(config, select)
 
     config.splice(
-      config.findIndex((c) => c.package === select),
+      config.findIndex((c) => c.pkg === select),
       1,
       edit
     )
 
-    this.logger.success(`Edited "${select}" with "${edit.package}" in the local configuration.`)
+    this.logger.success(`Edited "${select}" with "${edit.pkg}" in the local configuration.`)
 
     return config
   }
@@ -49,7 +49,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
       this.logger.info(
         createTable(
           [ 'Package', 'Registry' ],
-          config.map((c) => [ c.package, c.registry ])
+          config.map((c) => [ c.pkg, c.registry ])
         )
       )
     } else {
@@ -61,10 +61,10 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
 
   async configRemove (config: WorkspaceConfig[]): Promise<ConfigRemove<WorkspaceConfig[]>> {
     return {
-      keys: config.map((c) => c.package),
+      keys: config.map((c) => c.pkg),
       removeFunction: async (config, userInput): Promise<WorkspaceConfig[]> => {
         userInput.forEach((input) => {
-          config = config.filter((c) => c.package !== input)
+          config = config.filter((c) => c.pkg !== input)
         })
 
         return config
@@ -73,7 +73,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   }
 
   protected validate (value: WorkspacePrompt): boolean | string {
-    if (value.package === '') {
+    if (value.pkg === '') {
       return 'Package field can not be left empty.'
     }
     return true
@@ -88,7 +88,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   }
 
   private prompt (config: WorkspaceConfig[], select?: string): Promise<WorkspacePrompt> {
-    const matching = config.find((c) => c.package === select)
+    const matching = config.find((c) => c.pkg === select)
 
     return promptUser<WorkspacePrompt>({
       type: 'Form',
@@ -97,7 +97,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
         {
           name: 'package',
           message: 'Package',
-          initial: matching?.package ?? null
+          initial: matching?.pkg ?? null
         },
         {
           name: 'registry',

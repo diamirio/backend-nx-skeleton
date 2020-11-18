@@ -15,18 +15,17 @@
 <a name="AvailableBuilders"></a>
 
 ## AvailableBuilders
-
 <p>Available Builders</p>
 
 **Kind**: global variable  
 <a name="initiateBuilderDependencies"></a>
 
 ## initiateBuilderDependencies(options)
-
 <p>A function to initiate builder depdencies. It may be wiser to call it via schematic.</p>
 
-**Kind**: global function
+**Kind**: global function  
 
-| Param   |
-| ------- |
-| options |
+| Param |
+| --- |
+| options | 
+

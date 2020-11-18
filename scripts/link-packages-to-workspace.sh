@@ -15,7 +15,7 @@ fi
 echo "Running against directory: $1"
 cd $1
 
-declare -a PACKAGES=(@webundsoehne-int/nx-nest @webundsoehne/nx-builders @webundsoehne/nx-tools @webundsoehne-int/nx-workspace @webundsoehne/eslint-config @webundsoehne/nestjs-util)
+declare -a PACKAGES=(@webundsoehne-private/nx-nest @webundsoehne/nx-builders @webundsoehne/nx-tools @webundsoehne-private/nx-workspace @webundsoehne/eslint-config @webundsoehne/nestjs-util)
 
 for i in "${PACKAGES[@]}"; do
   yarn $2 $i

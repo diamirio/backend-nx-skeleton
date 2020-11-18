@@ -1,15 +1,12 @@
 import { CheckIfModuleInstalled } from '@helpers/node.helper.interface'
 import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import { NodeDependency } from '@interfaces/dependency.interface'
 
-export class WorkspaceCreateCommandCtx {
+export class NxAddCommandCtx {
   public prompts: {
-    workspace?: string
+    schematic?: string
   }
-  public workspaces: WorkspaceConfig[]
   public deps: CheckIfModuleInstalled[]
-  public packages: NodeDependency[]
-  public workspace: WorkspaceConfig
+  public packages: string[]
   constructor () {
     this.prompts = {}
     this.packages = []

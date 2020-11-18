@@ -13,4 +13,4 @@ workspace:
     - '@angular-devkit/core'
     - '@angular-devkit/schematics'
 
-npm_registry: https://verdaccio.dev.webundsoehne.com
+package_registry: https://verdaccio.dev.webundsoehne.com

@@ -29,8 +29,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*"
@@ -47,6 +52,7 @@
     "eslint": "^7.9.0",
     "execa": "^4.0.2",
     "figures": "^3.2.0",
+    "glob": "^7.1.6",
     "listr2": "^3.1.1",
     "micromatch": "^4.0.2",
     "nunjucks": "^3.2.1",

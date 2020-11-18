@@ -39,7 +39,7 @@ Custom builders for `@nrwl/nx`.
 
 [**Read more...**](./packages/nx-builders/README.md)
 
-### nx-nest - @webundsoehne-int/nx-nest
+### nx-nest - @webundsoehne-private/nx-nest
 
 A skeleton that can be generated through `@nrwl/nx` schematics.
 
@@ -51,7 +51,7 @@ Various tools that can be used while developing new `@nrwl/nx` schematics.
 
 [**Read more...**](./packages/nx-tools/README.md)
 
-### nx-workspace - @webundsoehne-int/nx-workspace
+### nx-workspace - @webundsoehne-private/nx-workspace
 
 Schematic for scaffolding `@nrwl/nx` workspace.
 

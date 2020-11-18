@@ -1,0 +1,6 @@
+- package: '@webundsoehne-private/nx-nest'
+  registry: 'https://verdaccio.dev.webundsoehne.com'
+  description: 'Some description.'
+  schematics:
+    - name: app
+      description: Creates a new application.

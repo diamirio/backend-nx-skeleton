@@ -73,10 +73,11 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           ctx.prompts.workspace = await task.prompt({
             type: 'Select',
             message: 'Which workspace library you want to use?',
-            choices: ctx.workspaces.map((w) => w.package)
+            choices: ctx.workspaces.map((w) => w.pkg)
           })
 
-          ctx.workspace = config.find((c) => c.package === ctx.prompts.workspace)
+          ctx.workspace = config.find((c) => c.pkg === ctx.prompts.workspace)
+          this.logger.debug('Selected workspace package is: %o', ctx.workspace)
         }
       },
 
@@ -86,7 +87,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
-              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.workspace.package ], {
+              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.workspace ], {
                 getVersion: true,
                 global: true,
                 getUpdate: true
@@ -116,7 +117,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
                   }))
                 })
 
-                const parsedToUpdate = this.helpers.node.parseDependencies(updatable.filter((d) => updateDeps.includes(d.pkg)).reduce((o, d) => ({ ...o, ...d.parsable }), {}))
+                const parsedToUpdate = updatable.filter((d) => updateDeps.includes(d.pkg)).map((u) => u.parsable)
 
                 ctx.packages = [ ...ctx.packages, ...parsedToUpdate ]
 
@@ -136,7 +137,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
               const shouldBeInstalled = ctx.deps.filter((d) => !d.installed)
 
               if (shouldBeInstalled.length > 0) {
-                const parsedToInstall = this.helpers.node.parseDependencies(shouldBeInstalled.reduce((o, d) => ({ ...o, ...d.parsable }), {}))
+                const parsedToInstall = shouldBeInstalled.map((i) => i.parsable)
 
                 ctx.packages = [ ...ctx.packages, ...parsedToInstall ]
 
@@ -155,7 +156,8 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
                 {
                   action: PackageManagerUsableCommands.ADD,
                   global: true,
-                  force: true
+                  force: true,
+                  useLatest: true
                 },
                 ctx.packages
               )
@@ -171,12 +173,12 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     this.logger.info('Now will start generating the workspace...')
 
     const workspace = (
-      await this.helpers.node.checkIfModuleInstalled([ ctx.workspace.package ], {
+      await this.helpers.node.checkIfModuleInstalled([ ctx.workspace ], {
         getVersion: true,
         global: true,
         getUpdate: true
       })
-    ).find((c) => c.pkg === ctx.workspace.package)
+    ).find((c) => c.pkg === ctx.workspace.pkg)
 
     // this will be the command
     await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null ], { stdio: 'inherit', shell: true })

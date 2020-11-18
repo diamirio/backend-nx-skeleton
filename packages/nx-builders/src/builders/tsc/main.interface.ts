@@ -1,5 +1,5 @@
 import { JsonObject } from '@angular-devkit/core'
-
+import { FileInputOutput, AvailableAssetGlob } from '@webundsoehne/nx-tools'
 /**
  * TSC Builder options
  */
@@ -45,7 +45,7 @@ export interface TscBuilderOptions extends JsonObject {
    * copy assets
    * @param asset when a string defined it has to be inside the application directory, if it is outside a glob should be defined
    */
-  assets?: (AssetGlob | string)[]
+  assets?: AvailableAssetGlob
 
   /**
    * package.json name to process
@@ -63,13 +63,3 @@ export interface NormalizedBuilderOptions extends TscBuilderOptions {
 }
 
 export type ProcessPaths = Partial<Record<'typescript' | 'tscpaths' | 'tscWatch' | 'tsconfig' | 'tsconfigPaths', string>>
-
-export type FileInputOutput = {
-  input: string
-  output: string
-}
-
-export type AssetGlob = FileInputOutput & {
-  glob: string
-  ignore?: string[]
-}

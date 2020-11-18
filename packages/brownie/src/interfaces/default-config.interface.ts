@@ -1,9 +1,10 @@
 import { BaseConfig } from '@cenk1cenk2/boilerplate-oclif'
 
-export interface Configuration extends BaseConfig {
-  workspace: {
-    requiredDependencies: string[]
-  }
+import { NodeDependency } from './dependency.interface'
 
-  npm_registry?: string
+export interface Configuration extends BaseConfig {
+  package_registry?: string
+  workspace: {
+    requiredDependencies: NodeDependency[]
+  }
 }

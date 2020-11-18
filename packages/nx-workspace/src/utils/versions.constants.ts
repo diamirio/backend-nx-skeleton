@@ -10,7 +10,7 @@ export const VERSIONS: Versions = {
       '@nrwl/workspace': '^10.4.0',
       '@nrwl/tao': '^10.4.0',
       // '@angular-devkit/core': '^11.0.1',
-      '@webundsoehne-int/nx-workspace': '*',
+      '@webundsoehne-private/nx-workspace': '*',
       typescript: '^4.0.5',
       '@types/node': '^14.14.7',
       dotenv: '^8.2.0',

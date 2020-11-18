@@ -10,11 +10,12 @@ import {
   ExecaArguments,
   mergeDependencies,
   pipeProcessToLogger,
-  removePathRoot,
   BaseBuilder,
   runBuilder,
   isVerbose,
-  deepMerge
+  deepMerge,
+  FileInputOutput,
+  generateBuilderAssets
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import execa from 'execa'
@@ -23,7 +24,7 @@ import glob from 'glob'
 import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
-import { FileInputOutput, NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
+import { NormalizedBuilderOptions, ProcessPaths, TscBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()
@@ -132,33 +133,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
   public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
-    const files: FileInputOutput[] = []
-
-    // globbing some files
-    const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
-      return glob.sync(pattern, {
-        cwd: input,
-        nodir: true,
-        ignore
-      })
-    }
-
-    // normalize assets
-    options.assets.forEach((asset) => {
-      if (typeof asset === 'string') {
-        files.push({
-          input: join(this.context.workspaceRoot, asset),
-          output: join(this.context.workspaceRoot, outDir, removePathRoot(asset, options.cwd))
-        })
-      } else {
-        globbedFiles(asset.glob, join(this.context.workspaceRoot, asset.input), asset.ignore).forEach((globbedFile) => {
-          files.push({
-            input: join(this.context.workspaceRoot, asset.input, globbedFile),
-            output: join(this.context.workspaceRoot, outDir, asset.output, globbedFile)
-          })
-        })
-      }
-    })
+    const files: FileInputOutput[] = generateBuilderAssets({ outDir, cwd: options.cwd }, options.assets)
 
     // Relative path for the dist directory
     const tsconfig = readJsonFile(join(this.context.workspaceRoot, options.tsConfig))

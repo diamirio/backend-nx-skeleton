@@ -1,4 +1,4 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
+import { CommonNodeDependency } from '@src/interfaces/dependency.interface'
 
 export interface NodeHelperCtx {
   fail: Partial<Record<AvailablePackageManagers, boolean>>
@@ -9,6 +9,7 @@ export interface PackageManagerActions {
   type?: PackageManagerDependencyTypes
   global?: boolean
   force?: boolean
+  useLatest?: boolean
 }
 
 export enum AvailablePackageManagers {
@@ -25,6 +26,7 @@ export enum PackageManagerUsableCommands {
   GLOBAL,
   ADD,
   REMOVE,
+  REGISTRY,
   DEVELOPMENT,
   FORCE
 }
@@ -35,14 +37,16 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.ADD]: 'install',
     [PackageManagerUsableCommands.REMOVE]: 'uninstall',
     [PackageManagerUsableCommands.DEVELOPMENT]: '--save-dev',
-    [PackageManagerUsableCommands.FORCE]: '--force'
+    [PackageManagerUsableCommands.FORCE]: '--force',
+    [PackageManagerUsableCommands.REGISTRY]: '--registry'
   },
   [AvailablePackageManagers.YARN]: {
     [PackageManagerUsableCommands.GLOBAL]: 'global',
     [PackageManagerUsableCommands.ADD]: 'add',
     [PackageManagerUsableCommands.REMOVE]: 'remove',
     [PackageManagerUsableCommands.DEVELOPMENT]: '-D',
-    [PackageManagerUsableCommands.FORCE]: '--force'
+    [PackageManagerUsableCommands.FORCE]: '--force',
+    [PackageManagerUsableCommands.REGISTRY]: '--registry'
   }
 }
 
@@ -54,5 +58,5 @@ export interface CheckIfModuleInstalled {
   updateType?: string
   path?: string
   latest?: string
-  parsable: PackageVersions['deps'] | PackageVersions['devDeps']
+  parsable: CommonNodeDependency
 }
