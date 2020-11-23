@@ -3,7 +3,7 @@ import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util'
 import { {{ names.pattern }} } from '../patterns'
 
 /**
- * Message patterns for "{{ name }}" with pattern "{{ names.pattern }}"
+ * Request-response patterns for all message patterns of "{{ name }}" with pattern "{{ names.pattern }}"
  */
 export declare class {{ names.interface }} implements MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
   [{{ names.pattern }}.{{ names.default }}]: {

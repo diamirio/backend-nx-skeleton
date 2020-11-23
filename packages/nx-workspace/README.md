@@ -10,12 +10,29 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 # Description
 
-This package includes [@nrwl/nx](https://github.com/nrwl/nx) workspace to generate base workspace.
+This package includes [@nrwl/nx](https://github.com/nrwl/nx) workspace to generate base workspace. This extends the default `@nrwl/workspace` so all commands not defined inside of it is inherited from the base schematic.
 
 - **[Read The API Documentation](./API.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [Schematics](#schematics)
+  - [Workspace](#workspace)
+
 <!-- tocstop -->
 
 ---
+
+# Schematics
+
+## Workspace
+
+Workspace is a hidden schematic that can be called through `ng` cli or `brownie`. This will create a custom workspace for tailored `@webundsoehne` applications.
+
+```shell
+# with angular-cli
+ng new --collection=${FULL_PATH_TO_GLOBAL_MODULE}/collections.json
+# with brownie
+brownie workspace
+```

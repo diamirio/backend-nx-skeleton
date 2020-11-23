@@ -15,6 +15,13 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [Rules](#rules)
+  - [Default](#default)
+  - [Typescript](#typescript)
+  - [React](#react)
+  - [React-TypeScript](#react-typescript)
+
 <!-- tocstop -->
 
 ---

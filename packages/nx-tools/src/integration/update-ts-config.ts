@@ -8,7 +8,9 @@ import { updateJsonInTree } from '@nrwl/workspace'
  */
 export function updateTsconfigPaths<T extends { packageName: string, sourceRoot: string, root: string }> (options: T): Rule {
   return updateJsonInTree(NxConstants.TS_CONFIG_PATH, (json) => {
-    json.compilerOptions.paths[options.packageName] = [ `${options.root}/${options.sourceRoot}/index` ]
+    json.compilerOptions.paths[options.packageName] = [ `${options.root}/${options.sourceRoot}` ]
+    json.compilerOptions.paths[`${options.packageName}/*`] = [ `${options.root}/${options.sourceRoot}/*` ]
+
     return json
   })
 }

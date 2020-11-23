@@ -1,7 +1,7 @@
 import { Rule } from '@angular-devkit/schematics'
 import { readNxJson, updateJsonInTree } from '@nrwl/workspace'
 
-import { BrownieIntegrationInterface } from './brownie.interface'
+import { BrownieAvailableContainers, BrownieIntegrationInterface } from './brownie.interface'
 import { EnrichedNxJson } from '@interfaces/nx-json.interface'
 import { deepMergeWithUniqueMergeArray } from '@utils'
 
@@ -25,4 +25,19 @@ export function updateBrownieIntegration (name: string, options: BrownieIntegrat
  */
 export function readBrownieIntegration (name: string): BrownieIntegrationInterface {
   return (readNxJson() as EnrichedNxJson).projects?.[name]?.brownie
+}
+
+/**
+ * Returns sum of brownie containers read from nx.json.
+ */
+export function readBrownieContainers (): BrownieAvailableContainers[] {
+  const nxJson = readNxJson() as EnrichedNxJson
+
+  return Object.values(nxJson.projects).reduce((o, value) => {
+    if (value.brownie?.containers) {
+      o = deepMergeWithUniqueMergeArray(o, value.brownie.containers)
+    }
+
+    return o
+  }, [])
 }

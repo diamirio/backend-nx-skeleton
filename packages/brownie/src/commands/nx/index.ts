@@ -103,7 +103,7 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const help = await execa('yarn', [ 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help' ], { shell: true })
+      const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help' ], { shell: true })
       this.logger.direct(help.stdout)
       try {
         ctx.prompts.arguments = await createPrompt({ type: 'Input', message: 'Arguments:' + EOL }, { error: false })
@@ -116,8 +116,14 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this will be the command
     await execa(
-      'yarn',
-      [ 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : [] ],
+      this.helpers.node.manager,
+      [
+        'run',
+        'nx',
+        'g',
+        `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
+        ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : []
+      ],
       { stdio: 'inherit', shell: true }
     )
   }

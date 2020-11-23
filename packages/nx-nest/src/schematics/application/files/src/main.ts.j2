@@ -8,7 +8,7 @@ import { Service } from './constants'
 import { createApplication as createServerApplication } from './server/init'
 {% endif %}
 {% if enum.components.MICROSERVICE_SERVER in components %}
-import { createApplication as createMicroserviceApplication } from './microservice-server/init'
+import { createApplication as createMicroserviceApplication } from './microservice/init'
 {% endif %}
 {% if enum.components.BG_TASK in components %}
 import { createApplication as createTaskApplication } from './task/init'

@@ -29,7 +29,7 @@ export class SwaggerService {
     }
 
     SwaggerModule.setup(
-      `${url.apiPath}${config.path}`,
+      `${url?.apiPath}${config.path}`,
       app,
       SwaggerModule.createDocument(app, builder.build(), {
         ignoreGlobalPrefix: true

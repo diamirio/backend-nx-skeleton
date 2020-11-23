@@ -41,7 +41,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
 
     // add message queue container
-    // fix me later
     options.components?.includes(AvailableComponents.MICROSERVICE_SERVER) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.RABBITMQ ] }) : noop()
   ])
 }

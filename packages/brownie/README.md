@@ -15,6 +15,10 @@ A CLI that automatically merges the desired skeleton to the current repository a
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [UPDATE](#update)
+- [Commands](#commands)
+
 <!-- tocstop -->
 
 ---

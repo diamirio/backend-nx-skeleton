@@ -16,6 +16,13 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) schematics to gener
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [Schematics](#schematics)
+  - [Application](#application)
+  - [Component](#component)
+  - [Microservice Provider](#microservice-provider)
+- [Notes](#notes)
+
 <!-- tocstop -->
 
 ---
@@ -43,6 +50,14 @@ The first argument passed in to `nx g @webundsoehne-private/nx-nest:co ${APP_NAM
 Follow through the prompts, where it will guide you with only available components that can be added to the application due to memoryful operation.
 
 It will place the new component inside respective `modules/` folder under the component folder and regenerate `index.ts` file to make it automatically imported to the main application. Generating `index.ts` only consists of adding the missing lines in to the file so nothing is allowed to be deleted from the current file.
+
+## Microservice Provider
+
+To generate a microservice-provider that utilizes the `@webundsoehne/nestjs-util` `MicroserviceProviderModule`, run the `microservice-provider` schematic with its name or alias of `msp`.
+
+This will take no argument and will auto detect applications that are created with this plugin and have `microservice-server` selected as a component. If it fails to find any services it will run in mock mode for integration to legacy applications.
+
+This will create a new library called `microservice-provider` where the applications that utilize `microservice-client` to connect through. It will house the generic message queue names, patterns and request-response map for auto-compeletion.
 
 # Notes
 

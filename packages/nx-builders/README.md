@@ -16,6 +16,18 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for custo
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [Using It in Your Schematic](#using-it-in-your-schematic)
+  - [Ensuring Required Dependencies](#ensuring-required-dependencies)
+  - [Utilizing Types](#utilizing-types)
+- [Builders](#builders)
+  - [TSC](#tsc)
+    - [Configuration](#configuration)
+      - [Build Mode](#build-mode)
+      - [Watch Mode](#watch-mode)
+  - [ts-node-dev](#ts-node-dev)
+    - [Configuration](#configuration-1)
+
 <!-- tocstop -->
 
 ---

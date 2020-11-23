@@ -1,25 +1,14 @@
-import {
-  ConfigBaseCommand,
-  ConfigCommandChoices,
-  ConfigRemove,
-  ConfigTypes,
-  createDirIfNotExists,
-  createTable,
-  parseYaml,
-  readFile,
-  readRaw,
-  tasksOverwritePrompt,
-  writeFile
-} from '@cenk1cenk2/boilerplate-oclif'
+import { ConfigBaseCommand, ConfigCommandChoices, ConfigRemove, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
-import fs from 'fs-extra'
-import globby from 'globby'
-import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
-import { dirname, extname, join, relative } from 'path'
+import { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+import * as fs from 'fs-extra'
+import { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
+import { join } from 'path'
 
-import { AvailableContainers, DockerComposeFile, DockerContainerAddCtx } from '@context/docker/containers'
-import { jinja } from '@helpers/jinja.helper'
+import { DockerContainerAddCtx, DockerContainersPurgeCtx } from '@context/docker/containers'
+import { DockerHelper } from '@helpers/docker.helper'
+import { DockerComposeFile } from '@helpers/docker.helper.interface'
+import { DockerHelperLock, LockFile, LockPaths } from '@src/interfaces/lock-file.interface'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {
@@ -45,38 +34,38 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   static description = 'Create docker-compose configuration from boilerplates.'
 
-  public choices: ConfigCommandChoices[] = [ ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, ConfigCommandChoices.delete ]
+  public choices: (ConfigCommandChoices | string)[] = [ ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge' ]
 
   protected configName = 'docker-compose.yml'
   protected configType = ConfigTypes.localRoot
 
-  private dockerConfigLocation: string = join(this.config.root, 'templates', 'containers')
-  private templatesLocation: string = join(this.config.root, 'templates', 'base')
+  private helpers: { docker: DockerHelper }
 
-  async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
+  public async construct (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
+    this.helpers = {
+      docker: new DockerHelper(this, {
+        flags: {
+          force: flags.force,
+          output: flags.output,
+          volume: flags.volume,
+          'volumes-folder': flags['volumes-folder']
+        }
+      })
+    }
+  }
 
+  public async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
+    this.tasks.ctx = { config }
     this.tasks.add<DockerContainerAddCtx>([
-      // get available containers
       {
-        title: 'Looking for available containers.',
-        task: async (ctx): Promise<void> => {
-          ctx.containers = await this.getAvailableContainers()
-        }
-      },
-
-      // check if there is available containers
-      {
-        skip: (ctx): boolean => Object.keys(ctx.containers).length !== 0,
-        task: (): void => {
-          throw new Error(`No configuration files found in "${this.dockerConfigLocation}".`)
-        }
+        task: (): Listr => this.helpers.docker.generateGetContainerTasks()
       },
 
       // get user prompts
       {
-        task: async (ctx, task): Promise<string[]> =>
-          ctx.prompt = await task.prompt<string[]>({
+        task: async (ctx, task): Promise<BrownieAvailableContainers[]> =>
+          ctx.prompt = await task.prompt<BrownieAvailableContainers[]>({
             type: 'AutoComplete',
             multiple: true,
             message: 'Please select which containers you want to add.',
@@ -85,263 +74,28 @@ export class DockerContainerCommand extends ConfigBaseCommand {
           })
       },
 
-      // be sure that necassary folders are created
       {
-        title: 'Creating output directory.',
-        task: async (): Promise<void> => await createDirIfNotExists(flags.output)
-      },
-
-      // find selected container
-      {
-        title: 'Processing containers.',
-        task: (ctx, task): Listr => {
-          // initialize variables
-          ctx.context = {}
-          const containerTasks = ctx.prompt.map((name): { name: string, tasks: ListrTask<DockerContainerAddCtx, ListrDefaultRenderer>[] } => {
-            return {
-              name: ctx.containers[name].name,
-              tasks: [
-                {
-                  title: 'Initiating...',
-                  task: (ctx, task): void => {
-                    // create jinja context
-                    ctx.context[name] = {
-                      name: ctx.containers[name].name,
-                      dir: join(flags.output, ctx.containers[name].name),
-                      path: ctx.containers[name].path,
-                      output: flags.output,
-                      volumeDir: join(flags['volumes-folder'], ctx.containers[name].name)
-                    }
-
-                    // lock necassary information
-                    this.locker.add({
-                      path: ctx.containers[name].name,
-                      data: {
-                        dir: ctx.context[name].dir,
-                        volumeDir: ctx.context[name].volumeDir
-                      },
-                      merge: true
-                    })
-
-                    task.title = 'Initialization complete.'
-                  }
-                },
-
-                {
-                  title: 'Processing Dockerfile...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.dockerfile),
-                  task: async (ctx, task): Promise<void> => {
-                    ctx.context[name].dockerfile = ctx.containers[name].dockerfile[0]
-
-                    // output file
-                    const output = join(ctx.context[name].dir, 'Dockerfile')
-
-                    // ask for overwrite
-                    try {
-                      if (!flags.force) {
-                        await tasksOverwritePrompt(output, task, false)
-                      }
-                    } catch (e) {
-                      this.message.warn(`Skipping: ${e}`)
-                    }
-
-                    // create directory and files
-                    await createDirIfNotExists(ctx.context[name].dir)
-
-                    // write to file
-                    await writeFile(output, await readRaw(ctx.context[name].dockerfile))
-
-                    // add the information to locker, immediately
-                    await this.locker.lock({
-                      path: ctx.containers[name].name,
-                      data: { dockerfile: output },
-                      merge: true
-                    })
-
-                    task.title = 'Environment files generated.'
-                  }
-                },
-
-                {
-                  title: 'Processing volumes...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
-                  task: async (ctx, task): Promise<void> => {
-                    ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
-
-                    // process all volumes async
-                    await Promise.all(
-                      ctx.context[name].volumes.map(async (volume) => {
-                        // create asset
-                        const asset = {
-                          from: join(ctx.containers[name].files, volume.from),
-                          to: join(ctx.context[name].volumeDir)
-                        }
-
-                        if (volume.mode === 'file') {
-                          // if this is a file copy it directly
-                          this.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
-
-                          try {
-                            await createDirIfNotExists(asset.to)
-
-                            asset.to = join(asset.to, volume.from)
-                            await fs.copy(asset.from, asset.to)
-                          } catch (e) {
-                            this.message.fail(`Error while copying asset: ${e}`)
-
-                            // just delete this from the list
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                          }
-                        } else if (volume.mode === 'dir') {
-                          // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
-                          this.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
-
-                          try {
-                            await createDirIfNotExists(join(asset.to, volume.from))
-                            await fs.copy(asset.from, join(asset.to, volume.from))
-                          } catch (e) {
-                            this.message.fail(`Error while copying folder: ${e}`)
-
-                            // just delete this from the list
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                          }
-                        } else if (volume.mode === 'volume') {
-                          // we can add persistent volumes if you want to keep data
-                          let prompt: boolean
-
-                          // only asks this with this flag
-                          if (flags.volume) {
-                            prompt = await task.prompt({
-                              type: 'Toggle',
-                              message: `Do you want to add persistent volume for the container at "${volume.to}"?`,
-                              initial: true
-                            })
-                          }
-
-                          // it will clear out this entry
-                          if (!prompt) {
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                          } else {
-                            await createDirIfNotExists(join(asset.to, volume.from))
-                          }
-                        } else {
-                          throw new Error('Unknown volume mode this may be do to templating error.')
-                        }
-                      })
-                    )
-
-                    task.title = 'Volumes are generated.'
-                  }
-                },
-
-                // processing environment files
-                {
-                  title: 'Processing environment files...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
-                  task: async (ctx, task): Promise<void> => {
-                    // add this to context
-                    ctx.context[name].env = ctx.containers[name].env[0]
-
-                    // output file
-                    const output = join(ctx.context[name].dir, '.env')
-
-                    // ask for overwrite
-                    try {
-                      if (!flags.force) {
-                        await tasksOverwritePrompt(output, task, false)
-                      }
-                    } catch (e) {
-                      this.message.warn(`Skipping: ${e}`)
-                    }
-
-                    // read the yaml template for one file
-                    const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
-
-                    // parse environment variables, this is more reasonable than jinja
-                    const buffer = Object.entries(file).reduce((o, [ key, val ]) => {
-                      if (val) {
-                        return [ ...o, `${key}=${val}` ]
-                      } else {
-                        return [ ...o, `${key}=` ]
-                      }
-                    }, [])
-
-                    // create directory and files
-                    await createDirIfNotExists(ctx.context[name].dir)
-
-                    // write to file
-                    await writeFile(output, buffer)
-
-                    // add the information to locker, immediately
-                    await this.locker.lock({
-                      path: ctx.containers[name].name,
-                      data: { env: output },
-                      merge: true
-                    })
-
-                    task.title = 'Environment files generated.'
-                  }
-                },
-
-                // creating configuration
-                {
-                  title: 'Creating configuration.',
-                  task: async (ctx, task): Promise<void> => {
-                    try {
-                      this.logger.debug(`Context for "${ctx.containers[name].path}":\n%o`, ctx.context[name])
-
-                      // read the template
-                      const base = await readFile<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
-                      const template = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
-
-                      // configuration can still be null which is not mergable
-                      if (template) {
-                        config = deepMergeWithArrayOverwrite(base, config, template)
-                      } else {
-                        throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
-                      }
-                    } catch (e) {
-                      throw new Error(e)
-                    }
-
-                    task.title = 'Configuration generated.'
-                  }
-                }
-              ]
-            }
-          })
-
-          return task.newListr(
-            containerTasks.map((containerTask) => {
-              return this.tasks.indent(containerTask.tasks, { rendererOptions: { collapse: true } }, { title: `Processing: ${containerTask.name}` })
-            }),
-            {
-              rendererOptions: { collapse: false }
-            }
-          )
-        }
+        task: (ctx): Listr => this.helpers.docker.generateDockerTasks(ctx.prompt)
       }
     ])
 
     // run all the tasks
-    await this.runTasks()
+    const { ctx } = await this.finally<DockerContainerAddCtx>()
 
-    // lock all in queue
-    await this.locker.lockAll()
-
-    return config
+    return ctx.config
   }
 
-  async configEdit (): Promise<null> {
+  // have to add this it is abstract :/
+  public async configEdit (): Promise<null> {
     return
   }
 
-  async configShow (config: DockerComposeFile): Promise<void> {
+  public async configShow (config: DockerComposeFile): Promise<void> {
     if (config?.services ? Object.keys(config.services).length > 0 : false) {
       this.logger.info(
         createTable(
-          [ 'Container', 'Details' ],
-          Object.entries(config.services).map(([ service, val ]) => [ service, val.image ])
+          [ 'Container', 'Image' ],
+          Object.entries(config.services).map(([ service, val ]) => [ service, val.image ?? val.build ])
         )
       )
     } else {
@@ -351,98 +105,211 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
+  public async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
     return {
       keys: config?.services ? Object.keys(config.services) : [],
-      removeFunction: async (config): Promise<DockerComposeFile> => {
+      removeFunction: async (config, key): Promise<DockerComposeFile> => {
+        await Promise.all(
+          key.map(async (k) => {
+            delete config.services[k]
+          })
+        )
         return config
       }
     }
   }
 
-  private async getAvailableContainers (): Promise<AvailableContainers> {
-    // some trickery to make it async
-    return (
-      await Promise.all(
-        (await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })).map(async (item) => {
-          const base = dirname(item)
-          const name = relative(this.dockerConfigLocation, base)
+  public async purgeConfig (): Promise<void> {
+    const { flags } = this.parse(DockerContainerCommand)
+    const lock = await this.lockerLocal.getLockFile<LockFile>()
+    const containers = lock[LockPaths.DOCKER_HELPER]
 
-          return {
-            name,
-
-            base,
-
-            files: join(base, 'files'),
-
-            path: item,
-
-            dockerfile: await globby([ '**/Dockerfile(.j2)?', '**/dockerfile(.j2)?' ], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            }),
-
-            env: await globby([ '**/env.yml(.j2)?' ], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            }),
-
-            volumes: await globby([ '**/volumes.yml(.j2)?' ], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            })
-          }
-        })
-      )
-    ).reduce((o, item) => ({ ...o, [item.name]: item }), {})
-  }
-
-  private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
-    const rawTemplate = await this.readTemplate(path, context)
-    this.logger.debug(`Parsing template "${path}":\n%s`, rawTemplate)
-
-    return parseYaml<T>(rawTemplate)
-  }
-
-  private async readTemplate (path: string, context: any): Promise<string> {
-    let template: string = await readRaw(path)
-
-    // check if this is jinja
-    if (extname(path) === '.j2') {
-      template = jinja.bind(this)(path).renderString(template, context)
+    if (!containers || Object.keys(containers).length === 0) {
+      throw new Error('Nothing in lock file to purge.')
     }
 
-    return template
-  }
+    this.tasks.ctx = new DockerContainersPurgeCtx()
 
-  private checkArrayIsExactlyOneInLength (array: any[]): boolean {
-    // this is implemented to not handle more than file at the moment it is prune to change,
-    // when multi-file handling which i think is unnecassary atm is required
-    if (array.length === 1) {
-      return true
-    } else if (array.length > 1) {
-      // maybe i will add multiple later, even though it is unnecassary?
-      this.logger.fatal(`Error in configuration. There should be one file per container.\n${JSON.stringify(array, null, 2)}`)
-      process.exit(1)
-    } else {
-      return false
-    }
+    this.tasks.add<DockerContainersPurgeCtx>([
+      {
+        task: async (ctx, task): Promise<void> => {
+          ctx.prompt.containers = await task.prompt({
+            type: 'MultiSelect',
+            message: 'Which containers you want to apply this on?',
+            choices: Object.keys(containers)
+          })
+          task.title = `Will apply on containers: ${ctx.prompt.containers.join(', ')}`
+        }
+      },
+
+      {
+        skip: (ctx): boolean => ctx.prompt.containers.length === 0,
+        task: async (ctx, task): Promise<void> => {
+          ctx.prompt.purge = await task.prompt({
+            type: 'MultiSelect',
+            message: 'Which data you want to purge?',
+            choices: Object.values(DockerHelperLock)
+          })
+
+          task.title = `Will purge: ${ctx.prompt.purge.join(', ')}`
+        }
+      },
+
+      {
+        title: 'Processing containers...',
+        skip: (ctx): boolean => ctx.prompt.purge.length === 0,
+        task: (ctx, task): Listr => {
+          const subtasks = ctx.prompt.containers.map((name): { name: string, tasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] } => {
+            return {
+              name,
+              tasks: [
+                {
+                  title: 'Deleting volumes...',
+                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes,
+                  task: async (ctx, task): Promise<void> => {
+                    await this.deleteFolder(task, join(process.cwd(), containers[name].volumes))
+
+                    // unlock volumes from lock file
+                    this.lockerLocal.addUnlock({
+                      path: `${name}.${DockerHelperLock.VOLUMES}`
+                    })
+                  }
+                },
+
+                {
+                  title: 'Deleting configuration...',
+                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration,
+                  task: async (ctx, task): Promise<void> => {
+                    await this.deleteFolder(task, join(process.cwd(), containers[name].configuration))
+
+                    // delete from dockercompose file as well
+                    await this.configLock.unlock([
+                      {
+                        path: `services.${name}`,
+                        root: true
+                      }
+                    ])
+
+                    // unlock directories from local lock file
+                    this.lockerLocal.addUnlock({
+                      path: `${name}.${DockerHelperLock.DIRECTORIES}`
+                    })
+                  }
+                },
+
+                {
+                  title: 'Updating lock file...',
+                  task: async (): Promise<void> => {
+                    // ensure lock file entries are not empty
+                    await this.lockerLocal.unlockAll()
+                    const lock = await this.lockerLocal.getLockFile<LockFile>()
+                    const containers = lock[LockPaths.DOCKER_HELPER]
+
+                    await Promise.all(
+                      Object.keys(containers).map((c) => {
+                        if (Object.keys(containers[c]).length === 0) {
+                          this.lockerLocal.addUnlock({
+                            path: name
+                          })
+                        }
+                      })
+                    )
+                  }
+                }
+              ]
+            }
+          })
+
+          return task.newListr(
+            subtasks.map((t) => {
+              return this.tasks.indent(t.tasks, { rendererOptions: { collapse: true } }, { title: `Processing: ${t.name}` })
+            }),
+            {
+              rendererOptions: { collapse: false },
+              concurrent: false,
+              exitOnError: false
+            }
+          )
+        }
+      },
+
+      {
+        title: 'Checking general folders for clean-up.',
+        task: (ctx, task): Listr =>
+          task.newListr([
+            {
+              task: async (ctx, task): Promise<void> => {
+                try {
+                  const dir = fs.readdirSync(join(process.cwd(), flags.output))
+                  if (dir.length === 0) {
+                    await this.deleteFolder(task, join(process.cwd(), flags.output))
+                  }
+                } catch (e) {
+                  this.logger.debug(e.message)
+                }
+              }
+            },
+
+            {
+              task: async (ctx, task): Promise<void> => {
+                try {
+                  const dir = fs.readdirSync(join(process.cwd(), flags['volumes-folder']))
+                  if (dir.length === 0) {
+                    await this.deleteFolder(task, join(process.cwd(), flags['volumes-folder']))
+                  }
+                } catch (e) {
+                  this.logger.debug(e.message)
+                }
+              }
+            }
+          ])
+      }
+    ])
   }
 
   // do this with locker
   private getInitialFromPriorConfiguration (config: DockerComposeFile, choices: string[]): number[] | number {
-    return (
-      config?.services?.reduce((o, val) => {
+    return config?.services
+      ? Object.keys(config?.services).reduce((o, val) => {
         choices.forEach((v, i) => {
           if (v === val) {
             o = [ ...o, i ]
           }
         })
         return o
-      }, []) ?? []
-    )
+      }, [])
+      : []
+  }
+
+  private async deleteFolder (task: ListrTaskWrapper<any, any>, folder?: string): Promise<void> {
+    const { flags } = this.parse(DockerContainerCommand)
+
+    if (!folder) {
+      task.skip(`Not-found: ${folder}`)
+    }
+
+    let prompt: boolean = flags.force
+    if (!flags.force) {
+      prompt = await task.prompt({
+        type: 'Toggle',
+        message: `Do you want to really delete: ${folder}`,
+        initial: true
+      })
+    }
+
+    if (prompt) {
+      try {
+        if (fs.existsSync(folder)) {
+          fs.emptyDirSync(folder)
+          fs.removeSync(folder)
+          task.title = `Deleted: ${folder}`
+        } else {
+          task.skip(`Not-Found: ${folder}`)
+        }
+      } catch (e) {
+        this.message.debug(e.message)
+        throw new Error(`Can not delete folder: ${folder}`)
+      }
+    }
   }
 }

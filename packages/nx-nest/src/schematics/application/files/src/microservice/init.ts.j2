@@ -3,7 +3,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { ConfigService, LoggerService } from '@webundsoehne/nestjs-util'
 import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 
-import { createMicroserviceModule } from './microservice-server.module'
+import { createMicroserviceModule } from './microservice.module'
 
 export async function createApplication (): Promise<void> {
   const { urls } = ConfigService.get('messageQueue')

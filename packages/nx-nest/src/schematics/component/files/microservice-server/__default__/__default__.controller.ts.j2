@@ -1,7 +1,12 @@
 import { Controller } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 
-import { {{ casing.injected.microservices.names.interface }}, {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import {
+  MicroserviceRequest,
+  MicroserviceResponse,
+  MessageQueues,
+  {{ casing.injected.microservices.names.interface }},
+  {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 import { DefaultMicroservice } from './{{ name }}.service'
 
 @Controller()
@@ -10,8 +15,8 @@ export class {{ casing.pascal }}Microcontroller {
 
   @MessagePattern({{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }})
   public default (
-    options: {{ casing.injected.microservices.names.interface }}[{{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}]['request']
-  ): Promise<{{ casing.injected.microservices.names.interface }}[{{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}]['response']> {
+    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
+  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {
     return this.{{ casing.camel }}Microservice.default(options)
   }
 }

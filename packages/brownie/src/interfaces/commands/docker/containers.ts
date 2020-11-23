@@ -1,40 +1,21 @@
-export interface DockerComposeFile {
-  version: string
-  services: DockerComposeService
+import { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+
+import { DockerHelperCtx } from '@helpers/docker.helper.interface'
+import { DockerHelperLock } from '@interfaces/lock-file.interface'
+
+export interface DockerContainerAddCtx extends DockerHelperCtx {
+  prompt: BrownieAvailableContainers[]
 }
 
-export type DockerComposeService = Record<string, any>
-
-export interface AvailableContainers {
-  [name: string]: {
-    name: string
-    base: string
-    files: string
-    path: string
-    dockerfile: string[]
-    env: string[]
-    volumes: string[]
+export class DockerContainersPurgeCtx {
+  prompt: {
+    containers?: BrownieAvailableContainers[]
+    purge?: DockerHelperLock[]
   }
-}
 
-export interface ParsedContainers {
-  name: string
-  path: string
-  output: string
-  dir: string
-  volumeDir: string
-  dockerfile?: string
-  env?: string
-  volumes?: {
-    from: string
-    to: string
-    options?: string
-    mode?: 'file' | 'dir' | 'volume'
-  }[]
-}
-
-export interface DockerContainerAddCtx {
-  containers: AvailableContainers
-  prompt: string[]
-  context: Record<string, ParsedContainers>
+  constructor () {
+    this.prompt = {}
+    this.prompt.containers = []
+    this.prompt.purge = []
+  }
 }

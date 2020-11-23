@@ -1,5 +1,6 @@
 import { Tree } from '@angular-devkit/schematics'
 import { getWorkspace, NxJson, readJsonInTree, serializeJson } from '@nrwl/workspace'
+import { NxConstants } from '@webundsoehne/nx-tools'
 import { from, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -17,7 +18,7 @@ export function updateTsconfig (schema: Schema) {
         const nxJson = readJsonInTree<NxJson>(tree, 'nx.json')
         const project = workspace.projects.get(schema.projectName)
 
-        const tsConfigPath = 'tsconfig.base.json'
+        const tsConfigPath = NxConstants.TS_CONFIG_PATH
 
         if (tree.exists(tsConfigPath)) {
           const tsConfigJson = readJsonInTree(tree, tsConfigPath)

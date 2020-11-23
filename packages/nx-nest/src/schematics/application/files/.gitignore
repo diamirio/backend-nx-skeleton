@@ -51,7 +51,6 @@ uploads
 # Build Code
 dist
 
-# Files used by brownie!
-.*env*
-.brownie.lock
-docker-compose.yml
+# Some server files
+.graphql/
+volumes/

@@ -13,13 +13,11 @@ url:
   basePath: BASE_URL
   apiPath: API_BASE_PATH
 
-{% if server == enum.server.RESTFUL %}
 swagger:
   useHttps:
     __name: USE_HTTPS
     __format: json
   basePath: API_BASE_PATH
-{% endif %}
 {% endif %}
 
 {% if database is defined and database != enum.database.NONE %}
@@ -39,7 +37,7 @@ database:
 {% endif %}
 {% endif %}
 
-{% if microservice is defined %}
+{% if microservice is defined or enum.components.MICROSERVICE_CLIENT in components %}
 messageQueue:
   urls: MESSAGE_QUEUE_URLS
 {% endif %}

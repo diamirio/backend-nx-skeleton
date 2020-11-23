@@ -18,6 +18,11 @@ All the functions are imported from the root of the project.
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
+
+- [Tools](#tools)
+- [Schematics](#schematics)
+  - [Generate Exports](#generate-exports)
+
 <!-- tocstop -->
 
 ---

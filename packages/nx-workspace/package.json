@@ -8,7 +8,8 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://verdaccio.dev.webundsoehne.com"
   },
   "schematics": "./schematics.json",
   "scripts": {
@@ -20,7 +21,8 @@
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:jsdoc": "echo 'disabled for now' && exit 0 && jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md && git add ./API.md"
+    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
     "hooks": {
@@ -48,9 +50,9 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
-    "cpy-cli": "^3.1.1",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-to-markdown": "^6.0.1",
+    "cpy-cli": "^3.1.1",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.8",

@@ -20,8 +20,8 @@ import { NodeDependency } from '@src/interfaces/dependency.interface'
 
 export class NodeHelper {
   public globalFolder: string[]
+  public manager: AvailablePackageManagers
   private ctx: NodeHelperCtx = { fail: {} }
-  private manager: AvailablePackageManagers
 
   constructor (private readonly cmd: BaseCommand<Configuration>) {
     Object.values(AvailablePackageManagers).forEach((m) => {

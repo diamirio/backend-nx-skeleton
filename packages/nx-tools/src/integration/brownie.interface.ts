@@ -13,8 +13,8 @@ export interface BrownieIntegrationInterface {
  */
 export enum BrownieAvailableContainers {
   NX = 'nx',
-  POSTGRESQL = 'postgresql',
-  MYSQL = 'mysql',
-  MONGODB = 'mongodb',
+  POSTGRESQL = 'db-postgresql',
+  MYSQL = 'db-mysql',
+  MONGODB = 'db-mongodb',
   RABBITMQ = 'rabbitmq'
 }

@@ -17,29 +17,39 @@ Mostly all of this modules are used by the in-house boilerplate of Web & Söhne.
 
 ## Publishing
 
-On each Git tag commit to this repo, the source-code will be automatically transpiled and published to [NPM](https://www.npmjs.com/~ws-admin).
+This repository now uses conventional commits since it's monorepo structure. On matching commits that is related to this package, the source-code will be automatically transpiled and published to [NPM](https://www.npmjs.com/~ws-admin).
 
 ## Modules
 
-* [Internal](#internal)
-  * [Status](#internal-status)
-  * [Changelog](#internal-changelog)
-* [Maintenance](#maintenance)
-  * [Middleware](#maintenance-middleware)
-  * [Locker](#maintenance-locker)
-* [Info-Header](#info-header)
-* [Config](#config)
-* [Logger](#logger)
-* [Swagger](#swagger)
-* [Decorators](#decorators)
-* [Pipes](#pipes)
-* [Exception-Filter](#exception-filter)
-  * [Http](#exception-filter-http)
-  * [Bad-Request](#exception-filter-bad-request)
-* [Cache-Lifetime](#cache-lifetime)
-* [Request-Profiler](#request-profile)
+- [Changelog](./CHANGELOG.md)
 
-### Internal <a name="internal"></a>
+<!-- toc -->
+
+  - [Internal](#internal)
+    - [Status](#status)
+    - [Changelog](#changelog)
+  - [Maintenance](#maintenance)
+    - [Locker](#locker)
+    - [Middleware](#middleware)
+  - [Info-Header](#info-header)
+  - [Config](#config)
+  - [Logger](#logger)
+  - [Swagger](#swagger)
+  - [Microservice-Client Provider](#microservice-client-provider)
+  - [Decorators](#decorators)
+    - [Validation Override](#validation-override)
+  - [Pipes](#pipes)
+    - [Validation Pipe](#validation-pipe)
+  - [Exception-Filters](#exception-filters)
+    - [Http](#http)
+    - [Bad-Request](#bad-request)
+  - [Cache-Lifetime](#cache-lifetime)
+  - [Request-Profiler](#request-profiler)
+- [Stay in touch](#stay-in-touch)
+
+<!-- tocstop -->
+
+### Internal
 
 This is a NestJS controller module for internal API endpoints, which can simply be added to each project.
 The controller provides you 2 endpoints `/status` and `/changelog`.
@@ -67,19 +77,19 @@ misc.changelogFile    | String  | 'CHANGELOG.md'  | The filepath of the project'
 misc.lastUpdateFile   | String  | '.last-update'  | The filepath of the projects's last update file
 
 
-#### Status <a name="internal-status"></a>
+#### Status
 
 The status endpoint returns the current API version set during the process environment and the last modification of the `.last-update` in your root directory.
 The version will be set with the util function `setEnvironmentVariables()` read from `package.json` and the file will normally be generated/modified during the deployment process.
 You may change this value with the `misc.lastUpdateFile` configuration.
 
-#### Changelog <a name="internal-changelog"></a>
+#### Changelog
 
 This endpoint simply reads and response the `CHANGELOG.md` from your root directory.
 You can change the filepath with the configuration value `misc.changelogFile`.
 
 
-### Maintenance <a name="maintenance"></a>
+### Maintenance
 
 The maintenance module gives you the possibility to generete and remove a lock file, as well as checking if the lock file exists and throwing a preconfigured `ServiceUnavailableException` error.
 You may use the maintenance module anywhere in your project, e.g. for database migrations.
@@ -121,7 +131,7 @@ url.basePath                   | String  |                    | The base API url
 misc.maintenanceNotification   | String  | (see hint above)   | The notification, which will be thrown in case of maintenance
 misc.lockfile                  | String  | 'maintenance.lock' | The filepath of the projects's maintenance lock file
 
-#### Locker <a name="maintenance-locker"></a>
+#### Locker
 
 The maintenance locker can be used combined with the `nest-schedule` module for putting the API into maintenance mode programmatically while a background task executes.
 
@@ -140,11 +150,11 @@ export class BgTask extends NestSchedule {
 ```
 
 
-#### Middleware <a name="maintenance-middleware"></a>
+#### Middleware
 
 The middleware of the maintenance module, uses directly the `MaintenanceService`, to check if there exists a lock file and raises the correct exception. You will see the implementation in the usage block above.
 
-### Info-Header <a name="info-header"></a>
+### Info-Header
 
 The information header middleware is a really short `NestMiddleware` which set the `X-Api-Name` and `X-Api-Version` response header out of the `process.env` data.
 Both environment variables will be set with the `setEnvironmentVariables` util function, which loads the information from the `package.json`.
@@ -165,7 +175,7 @@ class ServerModule implements NestModule {
 }
 ```
 
-### Config <a name="config"></a>
+### Config
 
 This is a NestJS service, which allows you to uses the great [config](https://github.com/lorenwest/node-config) library with decorators.
 But for scripts or in common no classes, you can use it normally too.
@@ -197,7 +207,7 @@ class CustomService {
 }
 ```
 
-### Logger <a name="logger"></a>
+### Logger
 
 Customized logger service, which uses [winston](https://github.com/winstonjs/winston) for nicer output.
 
@@ -237,7 +247,7 @@ class CustomService {
 
 ```
 
-### Swagger <a name="swagger"></a>
+### Swagger
 
 Automatically creates a Swagger documentation out of your controllers.
 For detailed information about the how-to, take a deeper look at the Nest [documentation](https://docs.nestjs.com/recipes/swagger).
@@ -277,7 +287,155 @@ path        | true     | String  | The sub-path to reach the API
 title       | true     | String  | The name of the API or the customer
 description | true     | String  | A description for the whole API
 
-### Decorators <a name="decorators"></a>
+
+### Microservice-Client Provider
+Microservice client provider is a way to provide multiple microservice clients globally as well as accesing them through one common service with auto-typing to make things more convienent.
+
+**Currently only supports RabbitMQ out-of-the-box.**
+
+__Usage__
+
+- Create your own types for message queue names, patterns and request-response maps in a common-package that is accesible for every service in monorepo.
+  - Define queue names.
+  ```typescript
+  // microservice-provider.constants.ts
+  export enum MessageQueues {
+    MOCK_QUEUE = 'MOCK_QUEUE'
+  }
+  ```
+  - Define message patterns for given queue.
+  ```typescript
+  // patterns/some-queue.pattern.ts
+  export enum MockPattern {
+    MOCK_DEFAULT = 'mock'
+  }
+  ```
+  - Define message request-response maps for given message patterns.
+  ```typescript
+  // interfaces/some-queue.interface.ts
+  import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util'
+
+  import { MockPattern } from '../patterns'
+
+  export declare class MockMessage implements MicroserviceProviderBaseMessage<typeof MockPattern> {
+    [MockPattern.MOCK_DEFAULT]: {
+      response: any | never
+      request: any | never
+    }
+  }
+  ```
+  - Put the message patterns in to maps to match the patterns and request-responses to queues.
+  ```typescript
+  // microservice-provider.constants.ts
+  import { MockMessage } from './interfaces'
+  import { MockPattern } from './patterns'
+
+  export interface MessageQueuePatterns {
+    [MessageQueues.MOCK_QUEUE]: MockPattern
+  }
+
+  export interface MessageQueueMap {
+    [MessageQueues.MOCK_QUEUE]: MockMessage
+  }
+  ```
+  - Create your helper types for convienence from generics to not fill out the generics everytime.
+  ```typescript
+  // microservice-provider.interface.ts
+  import { MessageQueues, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
+  import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util'
+
+  /**
+   * Helper type for microservice client.
+  */
+  export type MicroserviceClient = MicroserviceProviderService<MessageQueues, MessageQueuePatterns, MessageQueueMap>
+
+  /**
+  * Helper type for microservice requests.
+  */
+  export type MicroserviceRequest <Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request']
+
+  /**
+  * Helper type for microservice responses.
+  */
+  export type MicroserviceResponse <Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+  ```
+  - You can utilize these helper types in two ways in your microservice-server or directly without going through the maps.
+  ```typescript
+  import { Controller } from '@nestjs/common'
+  import { MessagePattern } from '@nestjs/microservices'
+
+  import { DefaultMicroservice } from './default.service'
+
+  import {
+    AppPattern,
+    MicroserviceRequest,
+    MicroserviceResponse,
+    MessageQueues
+  } from '@my-scope/my-common-package'
+
+  @Controller()
+  export class DefaultMicrocontroller {
+    constructor (private readonly defaultMicroservice: DefaultMicroservice) {}
+
+    @MessagePattern(AppPattern.APP_DEFAULT)
+    public default (
+      options: MicroserviceRequest<MessageQueues.APP_QUEUE, AppPattern.APP_DEFAULT>
+    ): Promise<MicroserviceResponse<MessageQueues.APP_QUEUE, AppPattern.APP_DEFAULT>> {
+      return this.defaultMicroservice.default(options)
+    }
+  }
+  ```
+  ```typescript
+  import { Controller } from '@nestjs/common'
+  import { MessagePattern } from '@nestjs/microservices'
+
+  import { DefaultMicroservice } from './default.service'
+  import { AppMessage, AppPattern } from '@my-scope/my-common-package'
+
+  @Controller()
+  export class DefaultMicrocontroller {
+    constructor (private readonly defaultMicroservice: DefaultMicroservice) {}
+
+    @MessagePattern(AppPattern.APP_DEFAULT)
+    public default (
+      options: AppMessage[AppPattern.APP_DEFAULT]['request']
+    ): Promise<AppMessage[AppPattern.APP_DEFAULT]['response']> {
+      return this.defaultMicroservice.default(options)
+    }
+  }
+  ```
+
+
+- Import the module itself and since the current default is RMQ, pass in the which queues you want to connect for this instance.
+```typescript
+import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util'
+
+ @Module({
+   imports: [
+      MicroserviceProviderModule.forRoot({ queue: [ ...THE_QUEUES_YOU_WANT_TO_IMPORT ] }),
+      ]
+  })
+  export class ServerModule {}
+```
+
+- This will automatically create a client service, `MicroserviceProviderService`, with the specified clients embeded inside.
+
+- Then you can use the client in any service by injecting it. Everything will be autotyped if you use the helper type as well.
+```typescript
+import { MicroserviceClient, MicroserviceResponse } from '@my-scope/my-common-package'
+import { Injectable, Inject } from '@nestjs/common'
+
+@Injectable()
+export class DefaultService {
+  constructor (@Inject() private readonly msp: MicroserviceClient) {}
+
+  public default (): Promise<MicroserviceResponse<queue, pattern>> {
+    return this.msp.send(queue, pattern, payload)
+  }
+}
+```
+
+### Decorators
 Decorates provide a way to inject or override data on the function level.
 
 #### Validation Override
@@ -312,7 +470,7 @@ export class SomeExtendedEntity extends SomeEntity {
 }
 ```
 
-### Pipes <a name="pipes"></a>
+### Pipes
 
 Extended pipes provide capabilities over the default ones for interacting with this library better.
 
@@ -340,7 +498,7 @@ import { ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 export class ServerModule {}
 ```
 
-### Exception-Filters <a name="exception-filter"></a>
+### Exception-Filters
 
 We implemented a generic `ExceptionFilter` called `GlobalExceptionFilter`, which catches all errors and set the payload to am user friendly information.
 The real exception will be just logged in `debug` logger mode.
@@ -359,7 +517,7 @@ import { GlobalExceptionFilter } from '@webundsoehne/nestjs-util'
 class ServerModule implements NestModule {}
 ```
 
-#### Http <a name="exception-filter-http"></a>
+#### Http
 
 The `HttpExceptionFilter` extends from the `GlobalExceptionFilter` and just catches all `HttpException` errors.
 It just overwrites the protected `payload()` method, which builds the message for the user.
@@ -381,7 +539,7 @@ import { HttpExceptionFilter, GlobalExceptionFilter } from '@webundsoehne/nestjs
 class ServerModule implements NestModule {}
 ```
 
-#### Bad-Request <a name="exception-filter-bad-request"></a>
+#### Bad-Request
 
 The `BadRequestExceptionFilter` extends from the `GlobalExceptionFilter` and just catches `BadRequestException` errors.
 This will handle the complex validation error messages (`ValidationError`) in the overwritten `payload()` method, which just happens on `BadRequestException` errors.
@@ -410,7 +568,7 @@ import { BadRequestExceptionFilter, HttpExceptionFilter, GlobalExceptionFilter }
 class ServerModule implements NestModule {}
 ```
 
-### Cache-Lifetime <a name="cache-lifetime"></a>
+### Cache-Lifetime
 
 The interceptor sets the cache-lifetime information of the response as it was configured.
 The configuration depends normally by project and environment.
@@ -452,7 +610,7 @@ cacheLifetime.expiresHeader         | String  | 'Expires'       | The header key
 cacheLifetime.cacheControlHeader    | String  | 'Cache-control' | The header key for the `cacheControlHeader`
 
 
-### Request-Profiler <a name="request-profile"></a>
+### Request-Profiler
 
 On `debug` logger level the request profile informs you when an request got started and when it was finished.
 It also logs down the information, how many seconds the request took.

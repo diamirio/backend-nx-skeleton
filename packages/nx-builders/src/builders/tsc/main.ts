@@ -18,6 +18,7 @@ import {
   runBuilder
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
+import delay from 'delay'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
 import { basename, dirname, join, normalize, relative } from 'path'
@@ -42,10 +43,12 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     }
   }
 
-  public run (): Observable<BuilderOutput> {
+  public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(
-      async (subscriber: Subscriber<BuilderOutput>): Promise<void> => {
+      async (sub: Subscriber<BuilderOutput>): Promise<void> => {
+        const subscriber = injectSubscriber ?? sub
+
         // Cleaning the /dist folder
         removeSync(this.options.normalizedOutputPath)
 
@@ -120,7 +123,17 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
           subscriber.next({ success: true, outputPath: this.options.normalizedOutputPath })
         } catch (error) {
-          subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+          if (this.options.watch) {
+            // if in watch mode just restart it
+            this.logger.error('tsc-watch crashed restarting in 3 secs.')
+            this.logger.warn(error)
+
+            await delay(3000)
+            await this.manager.stop()
+            await this.run(subscriber).toPromise()
+          } else {
+            subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+          }
         } finally {
           // clean up the zombies!
           await this.manager.stop()

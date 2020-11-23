@@ -2,7 +2,7 @@ cli: 'brownie'
 loglevel: module
 logcolor: true
 configDir: '.config/brownie'
-localConfig: '.brownie.local.yml'
+localConfig: '.brownie.local.lock'
 lock: '.brownie.lock'
 
 workspace:

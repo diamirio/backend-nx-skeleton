@@ -19,6 +19,7 @@ import * as modules from './modules'
  * Register all services under providers
  */
 
+export function createCommandModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
 @Module({
   providers: [
     ConfigService,
@@ -34,4 +35,11 @@ import * as modules from './modules'
     ],
   imports: [ CommandModule ]
 })
-export class AppCommandModule {}
+  class CommandModule implements NestModule {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    async configure (): Promise<any> {}
+  }
+
+  return CommandModule
+}
+

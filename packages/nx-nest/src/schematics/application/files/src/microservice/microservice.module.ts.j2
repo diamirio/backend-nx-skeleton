@@ -18,7 +18,7 @@ import {
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}
-import { getDatabaseOptions } from '@util/database'
+import { getDatabaseOptions } from '../util/database'
 {% endif %}
 
 export function createMicroserviceModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {

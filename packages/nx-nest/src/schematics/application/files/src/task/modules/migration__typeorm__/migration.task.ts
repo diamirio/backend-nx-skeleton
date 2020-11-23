@@ -3,7 +3,7 @@ import { MaintenanceLocker } from '@webundsoehne/nestjs-util'
 import { Timeout, NestSchedule, UseLocker } from 'nest-schedule'
 import { createConnection } from 'typeorm'
 
-import { getDatabaseOptions } from '@util/database'
+import { getDatabaseOptions } from '../../../util/database'
 
 @Injectable()
 export class MigrationTask extends NestSchedule {
