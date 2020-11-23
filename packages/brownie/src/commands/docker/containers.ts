@@ -167,12 +167,14 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   title: 'Deleting volumes...',
                   skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes,
                   task: async (ctx, task): Promise<void> => {
-                    await this.deleteFolder(task, join(process.cwd(), containers[name].volumes))
+                    const deleted = await this.deleteFolder(task, join(process.cwd(), containers[name].volumes))
 
-                    // unlock volumes from lock file
-                    this.lockerLocal.addUnlock({
-                      path: `${name}.${DockerHelperLock.VOLUMES}`
-                    })
+                    if (deleted) {
+                      // unlock volumes from lock file
+                      this.lockerLocal.addUnlock({
+                        path: `${name}.${DockerHelperLock.VOLUMES}`
+                      })
+                    }
                   }
                 },
 
@@ -180,20 +182,22 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   title: 'Deleting configuration...',
                   skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration,
                   task: async (ctx, task): Promise<void> => {
-                    await this.deleteFolder(task, join(process.cwd(), containers[name].configuration))
+                    const deleted = await this.deleteFolder(task, join(process.cwd(), containers[name].configuration))
 
-                    // delete from dockercompose file as well
-                    await this.configLock.unlock([
-                      {
-                        path: `services.${name}`,
-                        root: true
-                      }
-                    ])
+                    if (deleted) {
+                      // delete from dockercompose file as well
+                      await this.configLock.unlock([
+                        {
+                          path: `services.${name}`,
+                          root: true
+                        }
+                      ])
 
-                    // unlock directories from local lock file
-                    this.lockerLocal.addUnlock({
-                      path: `${name}.${DockerHelperLock.DIRECTORIES}`
-                    })
+                      // unlock directories from local lock file
+                      this.lockerLocal.addUnlock({
+                        path: `${name}.${DockerHelperLock.DIRECTORIES}`
+                      })
+                    }
                   }
                 },
 
@@ -281,15 +285,11 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       : []
   }
 
-  private async deleteFolder (task: ListrTaskWrapper<any, any>, folder?: string): Promise<void> {
+  private async deleteFolder (task: ListrTaskWrapper<any, any>, folder?: string): Promise<boolean> {
     const { flags } = this.parse(DockerContainerCommand)
 
-    if (!folder) {
-      task.skip(`Not-found: ${folder}`)
-    }
-
     let prompt: boolean = flags.force
-    if (!flags.force) {
+    if (!prompt) {
       prompt = await task.prompt({
         type: 'Toggle',
         message: `Do you want to really delete: ${folder}`,
@@ -303,6 +303,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
           fs.emptyDirSync(folder)
           fs.removeSync(folder)
           task.title = `Deleted: ${folder}`
+
+          return true
         } else {
           task.skip(`Not-Found: ${folder}`)
         }
@@ -311,5 +313,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         throw new Error(`Can not delete folder: ${folder}`)
       }
     }
+
+    return false
   }
 }
