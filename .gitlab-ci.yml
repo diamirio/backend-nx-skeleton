@@ -34,6 +34,10 @@ build:
   stage: build
   script:
     - yarn command build --concurrency 1 --include-dependencies
+  artifacts:
+    paths:
+    - dist/
+    - packages/*/dist
   tags:
    - node
 
