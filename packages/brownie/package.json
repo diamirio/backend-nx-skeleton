@@ -1,7 +1,7 @@
 {
   "name": "@webundsoehne/brownie",
   "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",

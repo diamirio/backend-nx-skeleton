@@ -568,6 +568,63 @@ import { BadRequestExceptionFilter, HttpExceptionFilter, GlobalExceptionFilter }
 class ServerModule implements NestModule {}
 ```
 
+#### GraphQL Error Parser
+Since `nest.js` lets `GraphQL` handle its errors its own way, `graphqlErrorParser` is just a function instead of a filter. This will format the errors in the same way of the HTTP errors so you can also throw `HTTP_STATUS` errors instead of plain `GraphQLError` for more distinction and using the status code directly in the frontend. It will also add the GraphQL error field of which field this error is comming from.
+
+__Usage__
+
+Just add the error parser to the GraphQL Module itself.
+
+```typescript
+import { GraphQLModule } from '@nestjs/graphql'
+import { GraphQLErrorParser } from '@webundsoehne/nestjs-util'
+import { Module } from '@nestjs/common'
+
+@Module({
+  imports: [
+    GraphQLModule.forRoot({
+      formatError: GraphQLErrorParser,
+    })
+  ]
+})
+export class ServerModule { }
+```
+
+#### RPC Global Exception
+This filter will handle errors from microservices. If you use `GlobalExceptionFilter` on front of it will format the errors in the same way as the RESTFUL API and you can also throw `HTTP_STATUS` exceptions. This filter will also output which microservice this error is coming from for convienece of debugging.
+
+__Usage__
+
+```typescript
+import { Module } from '@nestjs/common'
+import { APP_FILTER } from '@nestjs/core'
+import {
+  GlobalExceptionFilter
+  RpcGlobalExceptionFilter,
+} from '@webundsoehne/nestjs-util'
+
+@Module({
+    providers: [
+      {
+        provide: APP_FILTER,
+        useClass: GlobalExceptionFilter
+      },
+      {
+        provide: APP_FILTER,
+        useClass: RpcGlobalExceptionFilter
+      }
+    ],
+    imports: [ ...Object.values(modules) ]
+  })
+  class MicroservicesModule implements NestModule {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    async configure (): Promise<any> {}
+  }
+
+  return MicroservicesModule
+}
+```
+
 ### Cache-Lifetime
 
 The interceptor sets the cache-lifetime information of the response as it was configured.
