@@ -1,6 +1,6 @@
-import { PackageVersions, LinterDependencies } from '@webundsoehne/nx-tools'
+import { PackageVersions } from '@webundsoehne/nx-tools'
 
-import { AvailableDBAdapters, AvailableMicroserviceTypes, AvailableTestsTypes, AvailableComponents, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableMicroserviceTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 
 export type Versions = Partial<
 Record<
@@ -9,5 +9,4 @@ PackageVersions
 >
 > &
 Record<'builder', PackageVersions> &
-Record<'base', Record<'default' | 'microservice', PackageVersions>> &
-Record<'eslint', LinterDependencies>
+Record<'base', Record<'default' | 'microservice', PackageVersions>>

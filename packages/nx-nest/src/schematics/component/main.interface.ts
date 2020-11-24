@@ -1,7 +1,9 @@
-import { EnrichedWorkspaceJsonProject } from '@webundsoehne/nx-tools'
+import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
 
 /**
  * This is the unparsed schema coming from the angular-schematics
@@ -13,24 +15,22 @@ export interface Schema {
   type: Exclude<AvailableComponents, AvailableComponents.SERVER | AvailableComponents.MICROSERVICE_CLIENT> | AvailableServerTypes
   force: boolean
   silent: boolean
+  mount?: string
   parentWsConfiguration: EnrichedWorkspaceJsonProject
 }
 
 /**
  * This is the parsed schema through normalize options.
  */
-export interface NormalizedSchema {
-  name: string
+export interface NormalizedSchema extends Schema {
   root: string
-  parent: string
-  force: boolean
-  silent: boolean
-  type: Schema['type']
-  casing: {
-    pascal: string
-    camel: string
+  packageScope: string
+  casing: GeneratedNameCases & {
+    injected: {
+      microservices: GeneratedMicroserviceCasing
+    }
   }
-  parentWsConfiguration: Schema['parentWsConfiguration']
+  constants: typeof SchematicConstants
   parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }
 

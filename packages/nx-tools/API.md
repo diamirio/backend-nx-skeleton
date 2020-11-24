@@ -11,17 +11,49 @@
 <p>You can add long-living and short-living process to keep track of processes spawned by node.</p></dd>
 </dl>
 
+## Members
+
+<dl>
+<dt><a href="#NxConstants">NxConstants</a></dt>
+<dd><p>Some NX constants.
+They seem to change every minor patch XD</p></dd>
+<dt><a href="#NxConstants">NxConstants</a></dt>
+<dd><p>Nx application types</p></dd>
+<dt><a href="#BrownieAvailableContainers">BrownieAvailableContainers</a></dt>
+<dd><p>Available containers that is known by brownie.
+It is here instead of brownie since it is an integration thingy as well as avoiding circular dependencies.</p></dd>
+</dl>
+
+## Constants
+
+<dl>
+<dt><a href="#VERSION_CONSTANTS">VERSION_CONSTANTS</a></dt>
+<dd><p>Version constants that is shared through multiple places.</p></dd>
+</dl>
+
 ## Functions
 
 <dl>
+<dt><a href="#eslintJson">eslintJson()</a></dt>
+<dd><p>Default eslint configuration to inject to repository.</p></dd>
+<dt><a href="#addGitTask">addGitTask(options)</a></dt>
+<dd><p>Add a git init task to context to install the dependencies, ripped of from nx but it has the functionallity to chdir.</p></dd>
 <dt><del><a href="#installWorkspaceDependencies">installWorkspaceDependencies()</a></del></dt>
 <dd></dd>
+<dt><a href="#addInstallTask">addInstallTask(options)</a></dt>
+<dd><p>Add a install task to context to install the dependencies, ripped of from nx but it has the functionallity to chdir.</p></dd>
 <dt><del><a href="#parseArguments">parseArguments(task, args, validArgs, options)</a></del></dt>
 <dd></dd>
+<dt><a href="#addSchematicTask">addSchematicTask(s, o)</a></dt>
+<dd><p>Add a schematic task to run after the actions finish.</p></dd>
+<dt><a href="#addExternalSchematicTask">addExternalSchematicTask(c, s, o)</a></dt>
+<dd><p>Add a external schmatic task to run after the actions finish.</p></dd>
 <dt><a href="#updateBrownieIntegration">updateBrownieIntegration(name, options)</a></dt>
 <dd><p>Updates brownie integration by wiriting data to nx.json</p></dd>
 <dt><a href="#readBrownieIntegration">readBrownieIntegration(name)</a></dt>
 <dd><p>Returns the brownie integration part of the nx.json.</p></dd>
+<dt><a href="#readBrownieContainers">readBrownieContainers()</a></dt>
+<dd><p>Returns sum of brownie containers read from nx.json.</p></dd>
 <dt><a href="#readMicroserviceIntegration">readMicroserviceIntegration()</a></dt>
 <dd><p>Reads microservice integration part of the nx.json.</p></dd>
 <dt><a href="#updateNxIntegration">updateNxIntegration(name, options)</a></dt>
@@ -170,6 +202,55 @@
 <p>Tree kill proceseses.</p>
 
 **Kind**: instance method of [<code>ProcessManager</code>](#ProcessManager)  
+<a name="NxConstants"></a>
+
+## NxConstants
+
+<p>Some NX constants.
+They seem to change every minor patch XD</p>
+
+**Kind**: global variable  
+<a name="NxConstants"></a>
+
+## NxConstants
+
+<p>Nx application types</p>
+
+**Kind**: global variable  
+<a name="BrownieAvailableContainers"></a>
+
+## BrownieAvailableContainers
+
+<p>Available containers that is known by brownie.
+It is here instead of brownie since it is an integration thingy as well as avoiding circular dependencies.</p>
+
+**Kind**: global variable  
+<a name="VERSION_CONSTANTS"></a>
+
+## VERSION_CONSTANTS
+
+<p>Version constants that is shared through multiple places.</p>
+
+**Kind**: global constant  
+<a name="eslintJson"></a>
+
+## eslintJson()
+
+<p>Default eslint configuration to inject to repository.</p>
+
+**Kind**: global function  
+<a name="addGitTask"></a>
+
+## addGitTask(options)
+
+<p>Add a git init task to context to install the dependencies, ripped of from nx but it has the functionallity to chdir.</p>
+
+**Kind**: global function
+
+| Param   |
+| ------- |
+| options |
+
 <a name="installWorkspaceDependencies"></a>
 
 ## ~~installWorkspaceDependencies()~~
@@ -177,6 +258,18 @@
 **_Deprecated_**
 
 **Kind**: global function  
+<a name="addInstallTask"></a>
+
+## addInstallTask(options)
+
+<p>Add a install task to context to install the dependencies, ripped of from nx but it has the functionallity to chdir.</p>
+
+**Kind**: global function
+
+| Param   |
+| ------- |
+| options |
+
 <a name="parseArguments"></a>
 
 ## ~~parseArguments(task, args, validArgs, options)~~
@@ -191,6 +284,33 @@
 | args      |
 | validArgs |
 | options   |
+
+<a name="addSchematicTask"></a>
+
+## addSchematicTask(s, o)
+
+<p>Add a schematic task to run after the actions finish.</p>
+
+**Kind**: global function
+
+| Param |
+| ----- |
+| s     |
+| o     |
+
+<a name="addExternalSchematicTask"></a>
+
+## addExternalSchematicTask(c, s, o)
+
+<p>Add a external schmatic task to run after the actions finish.</p>
+
+**Kind**: global function
+
+| Param |
+| ----- |
+| c     |
+| s     |
+| o     |
 
 <a name="updateBrownieIntegration"></a>
 
@@ -217,6 +337,13 @@
 | ----- |
 | name  |
 
+<a name="readBrownieContainers"></a>
+
+## readBrownieContainers()
+
+<p>Returns sum of brownie containers read from nx.json.</p>
+
+**Kind**: global function  
 <a name="readMicroserviceIntegration"></a>
 
 ## readMicroserviceIntegration()

@@ -1,16 +1,25 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import { readNxJson, toFileName } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { ConvertToPromptType, EnrichedWorkspaceJsonProject, readNxIntegration, readWorkspaceJson, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
-import { camelCase, pascalCase } from 'change-case'
+import {
+  ConvertToPromptType,
+  EnrichedWorkspaceJsonProject,
+  generateNameCases,
+  isVerbose,
+  readNxIntegration,
+  readWorkspaceJson,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
-import { AvailableComponents, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { generateMicroserviceCasing } from '@src/utils'
 
 /**
  * @param  {Tree} host
@@ -25,7 +34,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent' ] } })
+          setSchemaDefaultsInContext(ctx, {
+            assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent', 'mount' ] },
+            default: [ { constants: SchematicConstants } ]
+          })
         }
       },
 
@@ -73,11 +85,21 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
           ctx.name = toFileName(options.name)
 
           ctx.casing = {
-            pascal: pascalCase(ctx.name),
-            camel: camelCase(ctx.name)
+            ...generateNameCases(ctx.name),
+            injected: {
+              microservices: generateMicroserviceCasing(ctx.parent)
+            }
           }
 
           task.title = `Component name is set as "${ctx.name}".`
+        }
+      },
+
+      // need package scope for imports and such
+      {
+        task: (ctx): void => {
+          const nxJson = readNxJson()
+          ctx.packageScope = `${nxJson.npmScope}`
         }
       },
 
@@ -85,18 +107,20 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
-          const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components.map((c) => {
-            if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
-              return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
-            }
-          })
+          const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components
+            .map((c) => {
+              if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+                return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
+              }
+            })
+            .filter(Boolean)
 
           // select the base components
           // when options are not passed as an option to the command
           const prompt = await task.prompt<AvailableComponentsSelection>({
             type: 'Select',
             message: 'Please select the component type.',
-            choices: choices as any
+            choices
           })
 
           // parse the prompt depending on the prior configuration
@@ -132,13 +156,23 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             throw new Error(`Cancelled generation of component: "${ctx.name}"@"${ctx.root}"`)
           }
 
-          task.title = `Component root directory is set as "${ctx.root}".`
+          task.title = `Component root directory is set as: ${ctx.root}`
+        }
+      },
+
+      // ask for controller root when server
+      {
+        enabled: (ctx): boolean => ctx.mount === undefined,
+        skip: (ctx): boolean => ctx.type !== AvailableServerTypes.RESTFUL,
+        task: async (ctx, task): Promise<void> => {
+          ctx.mount = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
+
+          task.title = `Component mount point set as: ${ctx.mount}`
         }
       }
     ],
     {
-      concurrent: false,
-      rendererFallback: context.debug,
+      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
   ).run()

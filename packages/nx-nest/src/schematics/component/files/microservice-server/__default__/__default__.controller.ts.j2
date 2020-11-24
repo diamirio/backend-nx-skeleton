@@ -1,15 +1,22 @@
-import { AuthServiceRequests, AuthServiceRequestsTypes } from '@fullctrl/be-common'
 import { Controller } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 
-import { DefaultMicroservice } from './__default__.service'
+import {
+  MicroserviceRequest,
+  MicroserviceResponse,
+  MessageQueues,
+  {{ casing.injected.microservices.names.interface }},
+  {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import { DefaultMicroservice } from './{{ name }}.service'
 
 @Controller()
-export class DefaultMicrocontroller {
-  constructor (private defaultMicroService: DefaultMicroservice) {}
+export class {{ casing.pascal }}Microcontroller {
+  constructor (private readonly {{ casing.camel }}Microservice: {{ casing.pascal }}Microservice) {}
 
-  @MessagePattern(AuthServiceRequests.authenticate)
-  public default (options: AuthServiceRequestsTypes['authenticate']['request']): Promise<AuthServiceRequestsTypes['authenticate']['response']> {
-    return this.defaultMicroService.default(options)
+  @MessagePattern({{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }})
+  public default (
+    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
+  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {
+    return this.{{ casing.camel }}Microservice.default(options)
   }
 }

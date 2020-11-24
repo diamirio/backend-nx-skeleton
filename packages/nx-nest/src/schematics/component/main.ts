@@ -16,7 +16,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
 
     return chain([
       runInRule(log.info.bind(log)(`Creating "${options.type}" component files: ${options.name}@${options.root}`), !schema.silent),
-      await createApplicationFiles(options, context),
+      createApplicationFiles(options, context),
 
       formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })
     ])

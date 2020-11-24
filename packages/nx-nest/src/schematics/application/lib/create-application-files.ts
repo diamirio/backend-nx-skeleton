@@ -1,17 +1,26 @@
-import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger, runInRule } from '@webundsoehne/nx-tools'
+import { apply, chain, Rule, schematic, SchematicContext, url, noop } from '@angular-devkit/schematics'
+import {
+  addSchematicTask,
+  applyOverwriteWithDiff,
+  createApplicationRule,
+  CreateApplicationRuleInterface,
+  deepMergeWithArrayOverwrite,
+  Logger,
+  runInRule
+} from '@webundsoehne/nx-tools'
 
 import { getSchematicFiles } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
+import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
 
 /**
  * Create application files in tree.
  * @param options
  * @param context
  */
-export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
   // source is always the same
   const source = url('./files')
@@ -20,6 +29,7 @@ export async function createApplicationFiles (options: NormalizedSchema, context
     force: true,
     name: 'default',
     parent: options.name,
+    mount: '/',
     silent: true,
     skipFormat: true,
     parentWsConfiguration: {
@@ -63,7 +73,9 @@ export async function createApplicationFiles (options: NormalizedSchema, context
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.MICROSERVICE_SERVER })
         }
       ]
-    })
+    }),
+
+    options.components.includes(AvailableComponents.MICROSERVICE_SERVER) ? addSchematicTask<MspSchema>('msp', {}) : noop()
   ])
 }
 

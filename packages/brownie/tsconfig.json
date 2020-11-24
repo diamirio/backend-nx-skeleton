@@ -4,6 +4,7 @@
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
+    "strictNullChecks": false,
     "paths": {
       "@src/*": ["*"],
       "@commands/*": ["commands/*"],

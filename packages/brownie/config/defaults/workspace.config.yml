@@ -1,1 +1,3 @@
-nx-base-workspace: git@gitlab.tailored-apps.com:ckilic/nx-workspace.git
+- pkg: '@webundsoehne-private/nx-workspace'
+  registry: https://verdaccio.dev.webundsoehne.com
+  collection: collections.json

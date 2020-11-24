@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsNxNgNew",
-  "title": "Create an empty workspace",
+  "id": "nx-workspace:workspace",
+  "title": "Create an empty workspace. This can only be called with @nrwl/tao",
   "type": "object",
   "properties": {
     "name": {
@@ -10,48 +10,17 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      },
-      "x-prompt": "What name would you like to use for the workspace?"
-    },
-    "style": {
-      "description": "The file extension to be used for style files.",
-      "type": "string",
-      "default": "css",
-      "x-prompt": {
-        "message": "Which stylesheet format would you like to use?",
-        "type": "list",
-        "items": [
-          { "value": "css", "label": "CSS" },
-          {
-            "value": "scss",
-            "label": "SASS(.scss)  [ http://sass-lang.com   ]"
-          },
-          {
-            "value": "styl",
-            "label": "Stylus(.styl)[ http://stylus-lang.com ]"
-          },
-          {
-            "value": "less",
-            "label": "LESS         [ http://lesscss.org     ]"
-          }
-        ]
       }
     },
     "directory": {
       "type": "string",
       "format": "path",
-      "description": "The directory name to create the workspace in.",
-      "default": ""
+      "description": "The directory name to create the workspace in."
     },
     "layout": {
       "type": "string",
       "description": "Layout of the workspace",
-      "default": "apps-and-libs",
       "enum": ["apps-and-libs", "packages"]
-    },
-    "npmScope": {
-      "type": "string",
-      "description": "Npm scope for importing libs."
     },
     "skipInstall": {
       "description": "Skip installing dependency packages.",
@@ -67,7 +36,9 @@
     "commit": {
       "description": "Initial repository commit information.",
       "oneOf": [
-        { "type": "boolean" },
+        {
+          "type": "boolean"
+        },
         {
           "type": "object",
           "properties": {
@@ -90,8 +61,7 @@
     "cli": {
       "description": "CLI used for generating code and running tasks",
       "type": "string",
-      "enum": ["nx", "angular"],
-      "default": "nx"
+      "enum": ["nx", "angular"]
     }
   }
 }

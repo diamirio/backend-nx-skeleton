@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core'
 import { LoggerService } from '@webundsoehne/nestjs-util'
 
-import { AppTaskModule } from './task.module'
+import { createTaskModule } from './task.module'
 
 export async function createApplication(): Promise<void> {
-  await NestFactory.createApplicationContext(AppTaskModule, {
+  await NestFactory.createApplicationContext(createTaskModule(), {
     logger: new LoggerService()
   })
 }

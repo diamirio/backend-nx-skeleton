@@ -39,7 +39,7 @@ Custom builders for `@nrwl/nx`.
 
 [**Read more...**](./packages/nx-builders/README.md)
 
-### nx-nest - @webundsoehne/nx-nest
+### nx-nest - @webundsoehne-private/nx-nest
 
 A skeleton that can be generated through `@nrwl/nx` schematics.
 
@@ -51,7 +51,7 @@ Various tools that can be used while developing new `@nrwl/nx` schematics.
 
 [**Read more...**](./packages/nx-tools/README.md)
 
-### nx-workspace - @webundsoehne/nx-workspace
+### nx-workspace - @webundsoehne-private/nx-workspace
 
 Schematic for scaffolding `@nrwl/nx` workspace.
 
@@ -81,11 +81,11 @@ The image uses s6-overlay to monitor the crashes and will run `dev:start` for ea
 
 There are couple of scripts in the scripts folder:
 
-- `./scripts/link-packages.sh`
+- `./scripts/link-packages.sh` link | unlink
 
   > Will link all the packages inside the packages folder.
 
-- `./initiate-new-empty-workspace.sh`
+- `./link-packages-to-workspace.sh` \${PWD_OF_MOCK_PROJECT} link | unlink
   > Copy this script to somewhere else for easily creating a new empty workspace in the designated folder to test out the schematics.
 
 ## Package Manager

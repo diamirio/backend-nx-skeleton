@@ -17,7 +17,8 @@
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
     "hooks": {
@@ -59,17 +60,19 @@
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.4.2",
-    "@nestjs/core": "^7.4.2",
-    "@nestjs/graphql": "^7.6.0",
-    "@nestjs/microservices": "^7.4.4",
-    "@nestjs/swagger": "^4.5.7",
-    "@nestjs/testing": "^7.4.2",
+    "@nestjs/common": "^7.5.4",
+    "@nestjs/core": "^7.5.4",
+    "@nestjs/graphql": "^7.8.2",
+    "@nestjs/microservices": "^7.5.4",
+    "@nestjs/swagger": "^4.7.4",
+    "@nestjs/testing": "^7.5.4",
     "@types/config": "^0.0.36",
     "@types/jest": "^26.0.9",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.14.8",
     "@types/supertest": "^2.0.8",
     "@types/winston": "^2.4.4",
+    "amqp-connection-manager": "^3.2.1",
+    "amqplib": "^0.6.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "concurrently": "^5.0.0",

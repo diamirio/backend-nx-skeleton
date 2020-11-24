@@ -15,7 +15,9 @@
     "lint": "yarn command --concurrency 1 lint",
     "lint:check": "yarn command --concurrency 1 lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
-    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
+    "docs:jsdoc": "yarn command --no-bail docs:jsdoc",
+    "scripts:link": "./scripts/link-packages.sh",
+    "scripts:workspace": "./scripts/link-packages-to-workspace.sh"
   },
   "workspaces": {
     "packages": [
@@ -25,17 +27,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run docs:jsdoc && yarn run lint:staged",
+      "pre-commit": "yarn run lint:staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "dependencies": {},
   "devDependencies": {
     "@cenk1cenk2/cz-cc": "^1.1.2",
-    "@nrwl/workspace": "10.3.0",
+    "@nrwl/workspace": "^10.4.4",
     "commitizen": "^4.0.5",
     "husky": "^4.2.5",
     "lerna": "^3.20.2",
+    "markdown-toc": "^1.2.0",
     "typescript": "^4.0.3"
   },
   "config": {
@@ -44,8 +47,8 @@
     }
   },
   "resolutions": {
-    "**/@angular-devkit/architect": "0.1001.6",
-    "**/@angular-devkit/core": "10.1.6",
-    "**/@angular-devkit/schematics": "10.1.6"
+    "**/@angular-devkit/architect": "0.1000.4",
+    "**/@angular-devkit/core": "10.0.4",
+    "**/@angular-devkit/schematics": "10.0.4"
   }
 }

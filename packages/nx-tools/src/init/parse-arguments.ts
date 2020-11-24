@@ -1,6 +1,8 @@
 import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
+import { ConvertToPromptType } from './parse-arguments.interface'
+
 /**
  * @deprecated Now nx schema.json should be utilized better.
  *
@@ -51,4 +53,11 @@ export function parseArguments<T> (
 
 export function isCorrectType<T> (keys: string[], value: any): value is T {
   return keys.indexOf(value) !== -1
+}
+
+export function mapPromptChoices<T> (self: any, names: Record<string, string>): ConvertToPromptType<T> {
+  return Object.keys(self).map((o) => ({
+    name: self[o],
+    message: names[self[o]]
+  }))
 }

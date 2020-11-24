@@ -1,3 +1,4 @@
+import { NxProjectTypes } from '@constants/nx.constants'
 import { NxJson, NxJsonProjectConfig } from '@nrwl/workspace/src/core/shared-interfaces'
 
 import { BrownieIntegrationInterface } from '@integration/brownie.interface'
@@ -32,7 +33,7 @@ export interface EnrichedWorkspaceJson {
 export interface EnrichedWorkspaceJsonProject {
   root: string
   sourceRoot: string
-  projectType?: 'library' | 'application'
+  projectType?: NxProjectTypes
   schematics?: any
   architect?: any
 }

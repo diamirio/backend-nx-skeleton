@@ -1,0 +1,74 @@
+variables:
+  CONTAINER_CURRENT_IMAGE: gitlab.tailored-apps.com:4567/$CI_PROJECT_PATH/$MICROSERVICE_NAME:$CI_BUILD_REF_NAME
+  CONTAINER_LATEST_IMAGE: gitlab.tailored-apps.com:4567/$CI_PROJECT_PATH/$MICROSERVICE_NAME:latest
+  BUILD_DIRECTORY: dist
+  MICROSERVICE_NAME: service
+  MICROSERVICE_CWD: .
+  PARENT_DOWNLOAD_ARTIFACTS: 'build'
+
+stages:
+  - prepare
+  - build
+  - tag_latest
+
+prepare:
+  stage: prepare
+  image: alpine:latest
+  script:
+    # greet
+    - echo "${MICROSERVICE_NAME}@${MICROSERVICE_CWD}"
+    # introduce preleminary actions
+    - apk add --no-cache --no-progress -q curl unzip jq
+    # Download artifacts from the parent pipeline
+    - |
+      if [ ! -z "${PARENT_DOWNLOAD_ARTIFACTS}" ]; then
+        echo "PARENT_CI_PIPELINE_ID: ${PARENT_PIPELINE_ID}"
+        GITLAB_API_RESPONSE=$(curl --location --silent "https://gitlab.tailored-apps.com/api/v4/projects/${CI_PROJECT_ID}/pipelines/${PARENT_PIPELINE_ID}/jobs/?scope=success&private_token=${BANDAID_API_TOKEN}")
+        for i in ${PARENT_DOWNLOAD_ARTIFACTS}; do
+          BUILD_JOB_ID=$(echo "${GITLAB_API_RESPONSE}" | tr '\r\n' ' ' | jq -r --arg name "${i}" '.[] | select(.name == $name) | .id')
+          [  -z "${BUILD_JOB_ID}" ] && echo "ERROR: CAN NOT FETCH BUILD_JOB_ID FROM GITLAB-API" && exit 127
+          echo "DOWNLOADING ARTIFACT FROM PARENT PIPELINE: ${i}.zip@${BUILD_JOB_ID}"
+          curl --location --output ${i}.zip "https://gitlab.tailored-apps.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${BUILD_JOB_ID}/artifacts/?job_token=${CI_JOB_TOKEN}"
+          unzip -o -qq ${i}.zip -d ./ &>/dev/null || echo "ERROR: FAILED UNZIPPING ARTIFACT: ${i}.zip@${BUILD_JOB_ID}"
+        done
+      fi
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 30 minutes
+  tags:
+    - node
+  only:
+    - develop
+    - master
+    - tags
+
+build_image:
+  stage: build
+  before_script:
+    - cd ${BUILD_DIRECTORY}/${MICROSERVICE_CWD}
+  script:
+    - docker build --pull -t $CONTAINER_CURRENT_IMAGE .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.tailored-apps.com:4567
+    - docker push $CONTAINER_CURRENT_IMAGE
+  tags:
+    - docker
+  only:
+    - develop
+    - master
+    - tags
+
+tag_latest_image:
+  stage: tag_latest
+  before_script:
+    - cd ${BUILD_DIRECTORY}/${MICROSERVICE_CWD}
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.tailored-apps.com:4567
+    - docker pull $CONTAINER_CURRENT_IMAGE
+    - docker tag $CONTAINER_CURRENT_IMAGE $CONTAINER_LATEST_IMAGE
+    - docker push $CONTAINER_LATEST_IMAGE
+  tags:
+    - docker
+  only:
+    - master
+    - tags

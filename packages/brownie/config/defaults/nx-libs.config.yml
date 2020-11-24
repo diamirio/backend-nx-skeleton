@@ -1,3 +1,0 @@
-- name: NestJS Backend Skeleton
-  description: Supports Restful or GraphQL Backend Server with schedeluded background tasks and external command line interface.
-  package: "@webundsoehne/nx-nest"

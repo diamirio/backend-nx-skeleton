@@ -15,6 +15,6 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const log = new Logger(context)
     const options = await normalizeOptions(host, context, schema)
 
-    return chain([ await createApplicationFiles(options), formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true }) ])
+    return chain([ createApplicationFiles(options), formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true }) ])
   }
 }

@@ -1,4 +1,4 @@
-{% if components | length != 1 %}
+{% if effectiveComponents != 1 %}
 export enum Service {
   {% if enum.components.SERVER in components %}
   SERVER = 'server',

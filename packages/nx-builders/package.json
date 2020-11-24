@@ -15,13 +15,14 @@
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents '**/*.json' ../dist/",
+    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents --dot '**/*.json' ../dist/",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md && git add ./API.md"
+    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
     "hooks": {
@@ -42,12 +43,13 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1001.6",
-    "@angular-devkit/core": "^10.1.6",
-    "@angular-devkit/schematics": "~10.1.6",
-    "@nrwl/cli": "^10.2.0",
+    "@angular-devkit/architect": "^0.1000.4",
+    "@angular-devkit/core": "^10.0.4",
+    "@angular-devkit/schematics": "^10.0.4",
+    "@nrwl/cli": "^10.4.2",
     "@webundsoehne/nx-tools": "*",
-    "execa": "^4.0.2",
+    "delay": "^4.4.0",
+    "execa": "^4.1.0",
     "tree-kill": "^1.2.2"
   },
   "devDependencies": {

@@ -82,9 +82,18 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      * Mostly for templates
      */
 
-    ...appRule.templates?.map((val) => {
-      return val.condition ? forEach(applyPathTemplate({ [String(val.match)]: val?.rename ?? '' })) : noop()
-    }) ?? [],
+    // FIXME: This trickery is required in some of the stupid stuff, having two template engines and history merging
+    forEach((entry) => {
+      if (!entry.path.includes('node_modules')) {
+        return applyPathTemplate(
+          appRule.templates?.reduce((o, val) => {
+            return val.condition ? { ...o, [String(val.match)]: val?.rename ?? '' } : o
+          }, {})
+        )(entry)
+      } else {
+        return entry
+      }
+    }),
 
     /**
      * Trigger some additional rules

@@ -28,10 +28,10 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
     },
     [AvailableComponents.MICROSERVICE_SERVER]: {
       condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
-      folders: [ `${options.sourceRoot}/microservice-server/` ]
+      folders: [ `${options.sourceRoot}/microservice/` ]
     },
     CONSTANTS: {
-      condition: options.components.length > 1,
+      condition: options.effectiveComponents > 1,
       files: [ `${options.sourceRoot}/constants.ts` ]
     }
   }

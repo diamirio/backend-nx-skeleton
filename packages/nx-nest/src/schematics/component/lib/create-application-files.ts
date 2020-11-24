@@ -11,7 +11,7 @@ import { NormalizedSchema } from '../main.interface'
  * @returns Promise
  * A function that can create the application files for the given schematic.
  */
-export async function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Promise<Rule> {
+export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
   // source is always the same
   const source = url(join('./files', options.type))

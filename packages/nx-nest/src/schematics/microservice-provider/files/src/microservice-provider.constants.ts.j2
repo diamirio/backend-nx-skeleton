@@ -1,0 +1,39 @@
+{% if microservices | length > 0 %}
+import {
+{% for microservice in microservices %}
+{{ microservice.names.pattern }},
+{% endfor %}
+} from './patterns'
+import {
+{% for microservice in microservices %}
+{{ microservice.names.interface }},
+{% endfor %}
+} from './interfaces'
+{% endif %}
+
+/**
+ * All available message queues.
+ */
+export enum MessageQueues {
+{% for microservice in microservices %}
+  {{ microservice.names.queue }} = '{{ microservice.names.queue }}',
+{% endfor %}
+}
+
+/**
+ * A map for all available patterns for given message queue.
+ */
+export interface MessageQueuePatterns {
+{% for microservice in microservices %}
+  [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.pattern }}
+{% endfor %}
+}
+
+/**
+ * A map for all requests and responses for a given message queue.
+ */
+export interface MessageQueueMap {
+{% for microservice in microservices %}
+  [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.interface }}
+{% endfor %}
+}

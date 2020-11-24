@@ -1,8 +1,5 @@
 image: node:14-alpine
 
-variables:
-  PUBLIC_PACKAGE_SCOPE: '--scope "@webundsoehne/nx-tools" --scope "@webundsoehne/nx-builders" --scope "@webundsoehne/eslint-config"'
-
 stages:
   - install
   - lint
@@ -29,23 +26,16 @@ install:
 lint:
   stage: lint
   script:
-    - eval yarn command --parallel ${PUBLIC_PACKAGE_SCOPE} lint:check
+    - yarn command --parallel lint:check
   tags:
     - node
 
 build:
   stage: build
   script:
-    - eval yarn command ${PUBLIC_PACKAGE_SCOPE} --include-dependencies build
-  artifacts:
-    paths:
-      - packages/*/dist
-    expire_in: 30 minutes
-  only:
-    - develop
-    - master
+    - yarn command build --concurrency 1 --include-dependencies
   tags:
-    - node
+   - node
 
 publish:
   stage: publish
@@ -53,12 +43,11 @@ publish:
   variables:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: publish
-    PLUGIN_ADD_MODULES: semantic-release-monorepo @semantic-release/gitlab
-    PLUGIN_OVERRIDE: npx --no-install lerna exec ${PUBLIC_PACKAGE_SCOPE} --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
+    PLUGIN_ADD_MODULES: "@qiwi/multi-semantic-release @semantic-release/gitlab"
+    PLUGIN_OVERRIDE: multi-semantic-release
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
-    PLUGIN_UPDATE_README_TOC: "true"
-    PLUGIN_README_LOCATION: "README.md $$(find packages -maxdepth 2 -name README.md | paste -sd ' ')"
+    PLUGIN_UPDATE_README_TOC: "false"
     PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
   before_script:

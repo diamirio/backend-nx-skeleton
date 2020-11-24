@@ -1,13 +1,14 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
-import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { appsDir, libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { readMicroserviceIntegration, readNxIntegration } from '@webundsoehne/nx-tools'
-import { constantCase, paramCase } from 'change-case'
+import { isVerbose, readMicroserviceIntegration, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, ParsedMicroservices, Schema } from '../main.interface'
+import { NormalizedSchema, Schema } from '../main.interface'
+import { SchematicConstants } from '@src/interfaces'
+import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -15,28 +16,16 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       // assign options to parsed schema
       {
         task: async (ctx): Promise<void> => {
-          await Promise.all(
-            [ 'name', 'verbose', 'linter' ].map((item) => {
-              ctx[item] = options[item]
-            })
-          )
-        }
-      },
-
-      // decide the application root directory
-      {
-        task: (ctx): void => {
-          ctx.directory = 'microservice-provider'
-        }
-      },
-
-      // remove unwanted charachters from directory name
-      {
-        title: 'Normalizing library name.',
-        task: (ctx, task): void => {
-          ctx.name = ctx.directory.replace(new RegExp('/', 'g'), '-')
-
-          task.title = `Library name is set as "${ctx.name}".`
+          setSchemaDefaultsInContext(ctx, {
+            assign: { from: options, keys: [ 'name', 'linter' ] },
+            default: [
+              {
+                sourceRoot: 'src',
+                name: SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE,
+                constants: SchematicConstants
+              }
+            ]
+          })
         }
       },
 
@@ -44,7 +33,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Normalizing package.json library name.',
         task: (ctx, task): void => {
-          ctx.packageName = `@${readNxJson().npmScope}/${ctx.name}`
+          const nxJson = readNxJson()
+          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
+          ctx.packageScope = `@${nxJson.npmScope}/${ctx.name}`
 
           task.title = `Library package name set as "${ctx.packageName}".`
         }
@@ -54,7 +45,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${libsDir(host)}/${ctx.directory}`)
+          ctx.root = normalize(`${libsDir(host)}/${ctx.name}`)
 
           task.title = `Library root directory is set as "${ctx.root}".`
         }
@@ -69,9 +60,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const thisProject = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
-            if (thisProject) {
-              ctx.priorConfiguration = thisProject
+            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
+            if (integration) {
+              ctx.priorConfiguration = integration
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -89,31 +80,35 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // parse microservices for templates
       {
-        title: 'Parsing all integrated microservices.',
+        title: 'Parsing all integrated microservices...',
         task: (ctx, task): void => {
-          const microservices = readMicroserviceIntegration()
+          let microservices = readMicroserviceIntegration()
 
-          ctx.parsedMicroservices = microservices.reduce((o, microservice) => {
-            return [
-              ...o,
+          if (microservices.length === 0) {
+            task.title = 'No microservice integration has been found working in mock mode.'
+
+            microservices = [
               {
-                name: microservice.name,
-                names: {
-                  pattern: `${constantCase(microservice.name)}_QUEUE`
-                },
-                casing: {
-                  kebab: paramCase(microservice.name)
-                }
+                name: 'mock',
+                microservice: 'unknown',
+                root: `${appsDir(host)}/unknown`,
+                sourceRoot: 'src'
               }
             ]
-          }, [] as ParsedMicroservices[])
-          task.title = 'test'
+          } else {
+            task.title = `Microservice servers found: ${microservices.map((m) => m.name).join(', ')}`
+          }
+
+          ctx.microservices = microservices.map((microservice) => {
+            return generateMicroserviceCasing(microservice.name)
+          })
         }
       }
     ],
     {
       concurrent: false,
-      rendererFallback: context.debug
+      rendererFallback: isVerbose(),
+      rendererSilent: options.silent
     }
   ).run()
 }

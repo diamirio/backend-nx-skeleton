@@ -2,7 +2,7 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { setSchemaDefaultsInContext } from '@utils'
+import { isVerbose, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * Normalize options for the schematic.
@@ -22,7 +22,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
     ],
     {
       concurrent: false,
-      rendererFallback: context.debug,
+      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
   ).run()

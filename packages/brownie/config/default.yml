@@ -2,5 +2,15 @@ cli: 'brownie'
 loglevel: module
 logcolor: true
 configDir: '.config/brownie'
-localConfig: '.brownie.local.yml'
+localConfig: '.brownie.local.lock'
 lock: '.brownie.lock'
+
+workspace:
+  requiredDependencies:
+    - '@nrwl/cli'
+    - '@nrwl/tao'
+    - '@nrwl/workspace'
+    - '@angular-devkit/core'
+    - '@angular-devkit/schematics'
+
+package_registry: https://verdaccio.dev.webundsoehne.com

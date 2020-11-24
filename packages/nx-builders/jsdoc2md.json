@@ -6,7 +6,7 @@
   "plugins": ["plugins/markdown", "../../node_modules/jsdoc-babel"],
   "babel": {
     "extensions": ["ts", "tsx"],
-    "ignore": ["**/*.(test|spec).ts", "**/files/"],
+    "ignore": ["**/*.(test|spec).ts", "**/files/", "**/assets/"],
     "babelrc": false,
     "presets": [
       [

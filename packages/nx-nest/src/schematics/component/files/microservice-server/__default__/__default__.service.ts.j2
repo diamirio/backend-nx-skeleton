@@ -1,9 +1,11 @@
-import { AuthServiceRequestsTypes } from '@fullctrl/be-common'
 import { Injectable } from '@nestjs/common'
+import { {{ casing.injected.microservices.names.interface }}, {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 
 @Injectable()
-export class DefaultMicroservice {
-  public async default (options: AuthServiceRequestsTypes['authenticate']['request']): Promise<AuthServiceRequestsTypes['authenticate']['response']> {
+export class {{ casing.pascal }}Microservice {
+  public async default (
+    options: {{ casing.injected.microservices.names.interface }}[{{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}]['request']
+  ): Promise<{{ casing.injected.microservices.names.interface }}[{{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}]['response']> {
     return 'Hello world.'
   }
 }

@@ -1,0 +1,36 @@
+{
+  "npmScope": "{{ packageScope }}",
+  "implicitDependencies": {
+    "{{ workspaceFile }}.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "**/config/**": "*",
+    "**/assets/**": "*"
+  },
+  "tasksRunnerOptions": {
+    "runner": "@nrwl/workspace/tasks-runners/default",
+    "options": {
+      "cacheDirectory": ".cache/nx",
+      "cacheableOperations": ["build", "lint", "test", "e2e"]
+    }
+  },
+  {% if layout === enum.layout.SINGLE %}
+  "workspaceLayout": {
+        "appsDir": "packages",
+        "libsDir": "packages"
+  },
+  {% elif layout === enum.layout.MULTIPLE %}
+  "workspaceLayout": {
+        "appsDir": "apps",
+        "libsDir": "libs"
+  },
+  {% endif %}
+  "projects": {}
+}

@@ -1,0 +1,70 @@
+image: node:14-alpine
+
+stages:
+  - install
+  - lint
+  - test
+  - build
+  - monorepo
+
+variables:
+  PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+  # Space seperated of yaml env files to injecting variables at build time
+  INJECT_ENV_FILES: ''
+
+cache:
+  paths:
+    - node_modules/
+    - .cache/
+
+install:
+  stage: install
+  script:
+    - yarn install
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 30 minutes
+  tags:
+    - node
+
+lint:
+  stage: lint
+  script:
+    - yarn run lint:check
+  tags:
+    - node
+
+# unit-tests:
+#   stage: test
+#   script:
+#     - yarn run test
+#   tags:
+#     - node
+
+build:
+  stage: build
+  script:
+    # inject frontend env variables from gitlab-ci secrets
+    - |
+      if [ ! -z "${INJECT_ENV_FILES}" ]; then
+        yarn global add tailored-gitlab-env
+        if [ ! -z "${CI_COMMIT_TAG}" ]; then
+          echo "${CI_COMMIT_TAG}" | grep -wqE "^v?.*\.0\.0$" && FALLBACK_BRANCH="production" || FALLBACK_BRANCH="stage"
+        else
+          FALLBACK_BRANCH="master"
+        fi
+        for e in ${INJECT_ENV_FILES} ; do
+          ENV_VARS="$(ta-gitlab-env --yml-file=${e} --prefix=${CI_COMMIT_REF_NAME} --fallback=${FALLBACK_BRANCH})"
+          echo -e "GITLAB ENVIRONMENT VARIABLES INJECTED FROM '${e}':\nREFERENCE: '${CI_COMMIT_REF_NAME}' | FALLBACK: '${FALLBACK_BRANCH}'\n${ENV_VARS}"
+          eval "${ENV_VARS}"
+        done
+      fi
+    # build
+    - yarn run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 30 minutes
+  tags:
+    - node

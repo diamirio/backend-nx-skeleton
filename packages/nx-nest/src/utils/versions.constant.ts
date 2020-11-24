@@ -2,7 +2,11 @@ import { Versions } from './versions.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 
 export const VERSIONS: Versions = {
-  builder: {},
+  builder: {
+    devDeps: {
+      '@webundsoehne/nx-builders': '^1.2.0'
+    }
+  },
   base: {
     default: {
       deps: {
@@ -20,14 +24,6 @@ export const VERSIONS: Versions = {
       deps: {
         '@nestjs/microservices': '^7.4.4'
       }
-    }
-  },
-  eslint: {
-    dependencies: {},
-    devDependencies: {
-      '@webundsoehne/eslint-config': '*',
-      '@typescript-eslint/eslint-plugin': '^4.1.1',
-      'eslint-plugin-import': '^2.22.0'
     }
   },
   [AvailableServerTypes.RESTFUL]: {
@@ -56,8 +52,19 @@ export const VERSIONS: Versions = {
       'nestjs-command': '1.4.0'
     }
   },
-  [AvailableComponents.MICROSERVICE_SERVER]: {},
-  [AvailableComponents.MICROSERVICE_CLIENT]: {},
+  // if the support for per message queue support added this has to be done in a more complicated way
+  [AvailableComponents.MICROSERVICE_SERVER]: {
+    deps: {
+      amqplib: '^0.6.0',
+      'amqp-connection-manager': '^3.2.1'
+    }
+  },
+  [AvailableComponents.MICROSERVICE_CLIENT]: {
+    deps: {
+      amqplib: '^0.6.0',
+      'amqp-connection-manager': '^3.2.1'
+    }
+  },
   [AvailableTestsTypes.JEST]: {
     devDeps: {
       '@nestjs/testing': '^7.2.0',

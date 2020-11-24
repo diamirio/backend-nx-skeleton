@@ -6,5 +6,5 @@ export const ComponentLocationsMap: Record<NormalizedSchema['type'], string> = {
   [AvailableServerTypes.GRAPHQL]: 'server',
   [AvailableComponents.BG_TASK]: 'task',
   [AvailableComponents.COMMAND]: 'command',
-  [AvailableComponents.MICROSERVICE_SERVER]: 'microservice-server'
+  [AvailableComponents.MICROSERVICE_SERVER]: 'microservice'
 }

@@ -1,0 +1,48 @@
+import { Module, NestModule } from '@nestjs/common'
+import { ScheduleModule } from 'nest-schedule'
+{% if database is defined and enum.dbAdapters.TYPEORM in database %}
+import { TypeOrmModule } from '@nestjs/typeorm'
+{% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
+import { MongooseModule } from '@nestjs/mongoose'
+{% endif %}
+
+{% if database is defined and database != enum.database.NONE %}
+import { getDatabaseOptions } from '../util/database'
+{% endif %}
+import {
+  ConfigService,
+  {% if enum.components.MICROSERVICE_CLIENT in components %}
+  MicroserviceProviderModule,
+  {% endif %}
+} from '@webundsoehne/nestjs-util'
+
+import * as tasks from './modules'
+
+/**
+ * Register all services under providers
+ */
+
+export function createTaskModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
+  @Module({
+    providers: [],
+    imports: [
+      ScheduleModule.register(),
+      ConfigService,
+      {% if database is defined and enum.dbAdapters.TYPEORM in database %}
+      TypeOrmModule.forRoot(getDatabaseOptions(mock)),
+      {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
+      MongooseModule.forRoot(...getDatabaseOptions(mock)),
+      {% endif %}
+      {% if enum.components.MICROSERVICE_CLIENT in components %}
+      MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
+      {% endif %}
+      ...Object.values(tasks)
+      ]
+  })
+  class TaskModule implements NestModule {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    async configure (): Promise<any> {}
+  }
+
+  return TaskModule
+}

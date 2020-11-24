@@ -1,6 +1,3 @@
-export type WorkspaceConfig = Record<string, string>
+import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 
-export interface WorkspacePrompt {
-  value: string
-  name: string
-}
+export type WorkspacePrompt = WorkspaceConfig

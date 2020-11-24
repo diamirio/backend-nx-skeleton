@@ -1,4 +1,0 @@
-- from: mysql-initialize.sh
-  to: /docker-entrypoint-initdb.d/mysql-initialize.sh
-  options: ro
-  mode: file

@@ -1,22 +1,24 @@
 import { Injectable, Logger } from '@nestjs/common'
+import { InjectConnection } from '@nestjs/typeorm'
 import { MaintenanceLocker } from '@webundsoehne/nestjs-util'
-import { Timeout, NestSchedule, UseLocker } from 'nest-schedule'
-import { createConnection } from 'typeorm'
+import { NestSchedule, Timeout, UseLocker } from 'nest-schedule'
+import { Connection } from 'typeorm'
 
-import { getDatabaseOptions } from '@util/database'
+import { TimeoutTaskDefaults } from '../../defaults/task.constants'
 
 @Injectable()
 export class MigrationTask extends NestSchedule {
   private readonly logger: Logger = new Logger(this.constructor.name)
 
-  @Timeout(0, { maxRetry: 24, retryInterval: 2.5 * 1000 })
+  constructor(@InjectConnection() private readonly connection: Connection) {
+    super()
+  }
+
+  @Timeout(0, TimeoutTaskDefaults)
   @UseLocker(MaintenanceLocker)
   public async migrate(): Promise<void> {
     try {
-      const connection = await createConnection({ ...getDatabaseOptions(), logging: true })
-
-      await connection.runMigrations({ transaction: 'all' })
-      await connection.close()
+      await this.connection.runMigrations({ transaction: 'all' })
     } catch (error) {
       this.logger.error(error.message)
       throw error

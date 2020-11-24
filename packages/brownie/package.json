@@ -23,12 +23,13 @@
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "release": "yarn lint && yarn readme",
-    "readme": "yarn oclif-dev readme",
     "oclif": "oclif $command",
     "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
     "test": "NODE_ENV=test jest --forceExit --runInBand --config ./tests/jest.config.js",
     "test:cov": "NODE_ENV=test jest --coverage --config ./tests/jest.config.js",
-    "dev:test": "NODE_ENV=test jest --verbose --runInBand --forceExit --watchAll --config ./tests/jest.config.js"
+    "dev:test": "NODE_ENV=test jest --verbose --runInBand --forceExit --watchAll --config ./tests/jest.config.js",
+    "docs:readme": "yarn oclif-dev readme",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
     "hooks": {
@@ -54,8 +55,7 @@
     "commands": "./dist/commands",
     "bin": "cenk1cenk2",
     "plugins": [
-      "@oclif/plugin-help",
-      "@tiagonapoli/oclif-plugin-spaced-commands"
+      "@oclif/plugin-help"
     ],
     "hooks": {
       "init": "./dist/hooks/init.hook",
@@ -71,26 +71,31 @@
     "cenk1cenk2"
   ],
   "dependencies": {
-    "@cenk1cenk2/boilerplate-oclif": "^1.2.11",
+    "@cenk1cenk2/boilerplate-oclif": "^1.5.0",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
-    "@oclif/errors": "^1.3.3",
-    "@tiagonapoli/oclif-plugin-spaced-commands": "^0.0.6",
+    "@oclif/errors": "^1.3.4",
+    "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.5",
     "execa": "^4.0.2",
     "fs-extra": "^9.0.0",
     "globby": "^11.0.0",
     "listr2": "^3.1.1",
     "nunjucks": "^3.2.2",
+    "through": "^2.3.8",
     "tslib": "^2.0.1",
     "types": "^0.1.1",
+    "update-notifier": "^5.0.1",
+    "update-notifier2": "^1.0.6",
     "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
-    "@types/fs-extra": "^9.0.1",
+    "@types/fs-extra": "^9.0.4",
     "@types/jest": "^26.0.9",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.14.8",
+    "@types/through": "^0.0.30",
+    "@types/update-notifier": "^5.0.0",
     "eslint": "^7.6.0",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
