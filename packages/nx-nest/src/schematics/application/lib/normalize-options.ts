@@ -140,6 +140,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             message: 'Please select which components you want to include.',
             choices,
             validate: (val) => {
+              if (val.includes(AvailableComponents.MICROSERVICE_CLIENT) && val.length === 1) {
+                return 'Microservice client can not be selected by its own.'
+              }
+
               if (val?.length > 0) {
                 return true
               } else {
@@ -205,7 +209,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // database options
       {
-        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx.components.includes(AvailableComponents.BG_TASK) && !ctx?.database,
+        skip: (ctx): boolean => !!ctx?.database,
         task: async (ctx, task): Promise<void> => {
           const choices = mapPromptChoices<AvailableDBTypes>(AvailableDBTypes, PrettyNamesForAvailableThingies)
 

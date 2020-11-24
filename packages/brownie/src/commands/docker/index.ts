@@ -1,6 +1,6 @@
 import { ConfigBaseCommand, ConfigCommandChoices, ConfigRemove, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+import { BrownieAvailableContainers, readBrownieContainers } from '@webundsoehne/nx-tools'
 import * as fs from 'fs-extra'
 import { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
 import { join } from 'path'
@@ -8,7 +8,8 @@ import { join } from 'path'
 import { DockerContainerAddCtx, DockerContainersPurgeCtx } from '@context/docker/containers'
 import { DockerHelper } from '@helpers/docker.helper'
 import { DockerComposeFile } from '@helpers/docker.helper.interface'
-import { DockerHelperLock, LockFile, LockPaths } from '@src/interfaces/lock-file.interface'
+import { DockerNxCtx } from '@interfaces/commands/docker/nx'
+import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {
@@ -34,7 +35,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   static description = 'Create docker-compose configuration from boilerplates.'
 
-  public choices: (ConfigCommandChoices | string)[] = [ ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge' ]
+  public choices: (ConfigCommandChoices | string)[] = [ 'Nx', ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge' ]
 
   protected configName = 'docker-compose.yml'
   protected configType = ConfigTypes.localRoot
@@ -53,6 +54,38 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         }
       })
     }
+  }
+
+  public async nxConfig (): Promise<void> {
+    this.tasks.add<DockerNxCtx>([
+      {
+        task: (): Listr => this.helpers.docker.generateGetContainerTasks()
+      },
+
+      {
+        title: 'Reading integration...',
+        task: (ctx, task): void => {
+          ctx.prompt = readBrownieContainers()
+
+          task.title = `Found containers: ${ctx.prompt.join(', ')}`
+        }
+      },
+
+      {
+        task: (ctx): Listr => this.helpers.docker.generateDockerTasks(ctx.prompt)
+      }
+    ])
+
+    const { ctx } = await this.finally<DockerNxCtx>()
+
+    // this is done auto in config commands but not in this one, due to my lib
+    await this.configLock.lock([
+      {
+        data: ctx.config,
+        merge: true,
+        root: this.configType === ConfigTypes.localRoot
+      }
+    ])
   }
 
   public async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
@@ -121,8 +154,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   public async purgeConfig (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
-    const lock = await this.lockerLocal.getLockFile<LockFile>()
-    const containers = lock[LockPaths.DOCKER_HELPER]
+    const lock = await this.lockerLocal.getLockFile<LocalLockFile>()
+    const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
     if (!containers || Object.keys(containers).length === 0) {
       throw new Error('Nothing in lock file to purge.')
@@ -206,8 +239,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   task: async (): Promise<void> => {
                     // ensure lock file entries are not empty
                     await this.lockerLocal.unlockAll()
-                    const lock = await this.lockerLocal.getLockFile<LockFile>()
-                    const containers = lock[LockPaths.DOCKER_HELPER]
+                    const lock = await this.lockerLocal.getLockFile<LocalLockFile>()
+                    const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
                     await Promise.all(
                       Object.keys(containers).map((c) => {

@@ -5,9 +5,9 @@ import globby from 'globby'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 
-import { AvailableContainers, DockerComposeFile, DockerHelperCtx } from './docker.helper.interface'
+import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
 import { jinja } from '@helpers/jinja.helper'
-import { DockerHelperLock, LockFile, LockPaths } from '@interfaces/lock-file.interface'
+import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
 
 export class DockerHelper {
   public dockerConfigLocation: string = join(this.cmd.config.root, 'templates', 'containers')
@@ -15,7 +15,7 @@ export class DockerHelper {
 
   constructor (private readonly cmd: BaseCommand, private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, 'volumes-folder': string } }) {
     cmd.logger.debug('DockerHelper initiated.')
-    this.cmd.lockerLocal.setRoot(LockPaths.DOCKER_HELPER)
+    this.cmd.lockerLocal.setRoot(LocalLockPaths.DOCKER_HELPER)
   }
 
   public generateGetContainerTasks (): Listr {
@@ -55,11 +55,13 @@ export class DockerHelper {
           containers.filter((c) => Object.keys(ctx.containers).includes(c))
 
           // fail safe
-          containers = containers.filter((c) => Object.keys(ctx.containers).includes(c))
           const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
           if (templateCheck.length > 0) {
             this.cmd.message.fail(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
           }
+
+          // only process known containers
+          containers = containers.filter((c) => Object.keys(ctx.containers).includes(c))
 
           const subtasks = containers.map((name): { name: string, tasks: ListrTask<DockerHelperCtx, ListrDefaultRenderer>[] } => {
             return {
@@ -76,16 +78,6 @@ export class DockerHelper {
                       output: this.options.flags.output,
                       volumeDir: join(this.options.flags['volumes-folder'], ctx.containers[name].name)
                     }
-
-                    // lock necassary information
-                    this.cmd.lockerLocal.add<LockFile[LockPaths.DOCKER_HELPER]['any']>({
-                      path: ctx.containers[name].name,
-                      data: {
-                        [DockerHelperLock.DIRECTORIES]: ctx.context[name].dir,
-                        [DockerHelperLock.VOLUMES]: ctx.context[name].volumeDir
-                      },
-                      merge: true
-                    })
 
                     task.title = 'Initialization complete.'
                   }
@@ -115,7 +107,16 @@ export class DockerHelper {
                     // write to file
                     await writeFile(output, await readRaw(ctx.context[name].dockerfile))
 
-                    task.title = 'Environment files generated.'
+                    // lock necassary information
+                    this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                      path: ctx.containers[name].name,
+                      data: {
+                        [DockerHelperLock.DIRECTORIES]: ctx.context[name].dir
+                      },
+                      merge: true
+                    })
+
+                    task.title = 'Dockerfile files generated.'
                   }
                 },
 
@@ -123,6 +124,7 @@ export class DockerHelper {
                   title: 'Processing volumes...',
                   skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
                   task: async (ctx, task): Promise<void> => {
+                    // doing this the counter intuative way because of globbing, first globbing then filtering out unwanted
                     ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
 
                     // process all volumes async
@@ -134,7 +136,7 @@ export class DockerHelper {
                           to: join(ctx.context[name].volumeDir)
                         }
 
-                        if (volume.mode === 'file') {
+                        if (volume.mode === VolumeModes.FILE) {
                           // if this is a file copy it directly
                           this.cmd.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
 
@@ -149,7 +151,7 @@ export class DockerHelper {
                             // just delete this from the list
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
-                        } else if (volume.mode === 'dir') {
+                        } else if (volume.mode === VolumeModes.DIR) {
                           // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
                           this.cmd.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
 
@@ -162,7 +164,7 @@ export class DockerHelper {
                             // just delete this from the list
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
-                        } else if (volume.mode === 'volume') {
+                        } else if (volume.mode === VolumeModes.VOLUME) {
                           // we can add persistent volumes if you want to keep data
                           let prompt: boolean
 
@@ -181,8 +183,21 @@ export class DockerHelper {
                           } else {
                             await createDirIfNotExists(join(asset.to, volume.from))
                           }
+                        } else if (volume.mode === VolumeModes.MOUNT) {
+                          this.cmd.logger.debug('Running in persistent volume mode for: %s with %o', name, asset)
                         } else {
                           throw new Error('Unknown volume mode this may be do to templating error.')
+                        }
+
+                        if (volume.mode !== VolumeModes.MOUNT && ctx.context[name].volumes?.length > 0) {
+                          // lock necassary information
+                          this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                            path: ctx.containers[name].name,
+                            data: {
+                              [DockerHelperLock.VOLUMES]: ctx.context[name].volumeDir
+                            },
+                            merge: true
+                          })
                         }
                       })
                     )
@@ -228,6 +243,15 @@ export class DockerHelper {
 
                     // write to file
                     await writeFile(output, buffer)
+
+                    // lock necassary information
+                    this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                      path: ctx.containers[name].name,
+                      data: {
+                        [DockerHelperLock.DIRECTORIES]: ctx.context[name].dir
+                      },
+                      merge: true
+                    })
 
                     task.title = 'Environment files generated.'
                   }

@@ -1,6 +1,9 @@
 {% set mounted_volumes = [] %}
 {% for volume in volumes %}
   {% set current_volume = './' + volumeDir + '/' + volume.from + ':' + volume.to %}
+  {% if volume.mode == 'mount' %}
+    {% set current_volume = volume.from + ':' + volume.to %}
+  {% endif %}
   {% if 'options' in volume %}
     {% set current_volume = current_volume + ':' + volume.options %}
   {% endif %}

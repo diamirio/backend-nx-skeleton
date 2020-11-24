@@ -53,7 +53,7 @@ database:
     entity: ./**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
-{% elif enum.dbAdapters.MONGOOSE == database %}
+{% elif enum.dbAdapters.MONGOOSE in database %}
   host: db-mongodb
   username: user
   password: secret

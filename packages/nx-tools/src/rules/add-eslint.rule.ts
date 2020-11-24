@@ -13,7 +13,7 @@ import { Logger } from '@utils'
  * @param  {any}} deps
  * @returns Rule
  */
-export function addEslintToWorkspace<T extends { root: string }> (host: Tree, log: Logger, options: T, eslint: { json: any, deps: any }): Rule {
+export function addEslintToTree<T extends { root: string }> (host: Tree, log: Logger, options: T, eslint: { json: any, deps: any }): Rule {
   return chain([
     !host.exists(`${options.root}/.eslintrc`) && !host.exists(`${options.root}/.eslintrc.json`)
       ? chain([

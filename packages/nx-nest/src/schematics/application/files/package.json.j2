@@ -9,8 +9,8 @@
     "start": "node ./src/main.js"
     {% if enum.components.COMMAND in components %}
     ,
-    "command": "CLI_PATH=./src/main.js NODE_SERVICE=cli npx nestjs-command",
-    "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli npx nestjs-command"
+    "command": "CLI_PATH=./src/main.js NODE_SERVICE=cli nestjs-command",
+    "dev:command": "CLI_PATH=./src/main.ts NODE_SERVICE=cli ../../node_modules/.bin/nestjs-command"
     {% endif %}
     {% if enum.tests.JEST == tests %}
     ,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export interface LockFile {
-  [LockPaths.DOCKER_HELPER]: Record<string, Partial<Record<DockerHelperLock, string>>>
+export interface LocalLockFile {
+  [LocalLockPaths.DOCKER_HELPER]: Record<string, Partial<Record<DockerHelperLock, string>>>
 }
 
 export enum DockerHelperLock {
@@ -9,6 +9,6 @@ export enum DockerHelperLock {
   VOLUMES = 'volumes'
 }
 
-export enum LockPaths {
+export enum LocalLockPaths {
   DOCKER_HELPER = 'helpers:docker'
 }

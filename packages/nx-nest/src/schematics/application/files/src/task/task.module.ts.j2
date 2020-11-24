@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module, NestModule } from '@nestjs/common'
 import { ScheduleModule } from 'nest-schedule'
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 
+{% if database is defined and database != enum.database.NONE %}
+import { getDatabaseOptions } from '../util/database'
+{% endif %}
 import {
   ConfigService,
   {% if enum.components.MICROSERVICE_CLIENT in components %}

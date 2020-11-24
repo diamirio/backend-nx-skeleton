@@ -29,8 +29,16 @@ export interface ParsedContainers {
     from: string
     to: string
     options?: string
-    mode?: 'file' | 'dir' | 'volume'
+    mode?: VolumeModes
+    exact?: boolean
   }[]
+}
+
+export enum VolumeModes {
+  FILE = 'file',
+  DIR = 'dir',
+  VOLUME = 'volume',
+  MOUNT = 'mount'
 }
 
 export interface DockerHelperCtx {
