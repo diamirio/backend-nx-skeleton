@@ -1,3 +1,18 @@
+## @webundsoehne/eslint-config [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@1.0.0...@webundsoehne/eslint-config@1.0.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* retry ([9e329de](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9e329deb362657a98e97ac3a9e17abb5476516b1))
+
+
+
+
+
+yarn run v1.22.4
+$ markdown-toc README.md --bullets='-' -i
+Done in 0.18s.
+
 # @webundsoehne/eslint-config 1.0.0 (2020-11-24)
 
 
