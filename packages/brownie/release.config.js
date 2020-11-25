@@ -12,7 +12,7 @@ module.exports = {
     [
       '@semantic-release/exec',
       {
-        prepareCmd: 'yarn docs:readme && yarn docs:toc',
+        prepareCmd: 'npm whoami && yarn docs:readme && yarn docs:toc',
         failCmd: 'echo "Building failed." && exit 127'
       }
     ],
