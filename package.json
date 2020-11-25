@@ -21,7 +21,8 @@
   },
   "workspaces": {
     "packages": [
-      "packages/brownie"
+      "packages/brownie",
+      "packages/eslint-config"
     ],
     "nohoist": []
   },
