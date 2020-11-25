@@ -22,7 +22,8 @@
   "workspaces": {
     "packages": [
       "packages/brownie",
-      "packages/eslint-config"
+      "packages/eslint-config",
+      "packages/nx-tools"
     ],
     "nohoist": []
   },
