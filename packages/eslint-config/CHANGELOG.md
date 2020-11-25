@@ -1,3 +1,15 @@
+## @webundsoehne/eslint-config [1.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@1.1.0...@webundsoehne/eslint-config@1.1.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* fix ([8ef15e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8ef15e6bdd637ddad3dcc6eb3828fcdf2abefeb2))
+
+
+### Performance Improvements
+
+* force publish ([cd7fad3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cd7fad3bc192d33b145decfbe019c99f89863b96))
+
 ## @webundsoehne/eslint-config [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@1.0.0...@webundsoehne/eslint-config@1.0.1) (2020-11-24)
 
 
