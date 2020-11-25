@@ -3,7 +3,7 @@ import { flags } from '@oclif/command'
 import { BrownieAvailableContainers, readBrownieContainers } from '@webundsoehne/nx-tools'
 import * as fs from 'fs-extra'
 import { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
-import { join } from 'path'
+import { dirname, join } from 'path'
 
 import { DockerContainerAddCtx, DockerContainersPurgeCtx } from '@context/docker/containers'
 import { DockerHelper } from '@helpers/docker.helper'
@@ -154,7 +154,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   public async purgeConfig (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
-    const lock = await this.lockerLocal.getLockFile<LocalLockFile>()
+    const lock = await this.locker.getLockFile<LocalLockFile>()
     const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
     if (!containers || Object.keys(containers).length === 0) {
@@ -198,39 +198,56 @@ export class DockerContainerCommand extends ConfigBaseCommand {
               tasks: [
                 {
                   title: 'Deleting volumes...',
-                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes,
-                  task: async (ctx, task): Promise<void> => {
-                    const deleted = await this.deleteFolder(task, join(process.cwd(), containers[name].volumes))
+                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
+                  task: (ctx, task): Listr => {
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([ key, v ]) => ({
+                      task: async (_, task): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
 
-                    if (deleted) {
-                      // unlock volumes from lock file
-                      this.lockerLocal.addUnlock({
-                        path: `${name}.${DockerHelperLock.VOLUMES}`
-                      })
-                    }
+                        if (deleted || deleted === 'unlock') {
+                          // unlock volumes from lock file
+                          this.locker.addUnlock({
+                            path: `${name}.${DockerHelperLock.VOLUMES}.${key}`
+                          })
+                        }
+                      }
+                    }))
+
+                    return task.newListr(subtasks)
                   }
                 },
 
                 {
                   title: 'Deleting configuration...',
-                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration,
-                  task: async (ctx, task): Promise<void> => {
-                    const deleted = await this.deleteFolder(task, join(process.cwd(), containers[name].configuration))
+                  skip: (ctx): boolean =>
+                    !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
+                  task: (ctx, task): Listr => {
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].configuration).map(([ key, v ]) => ({
+                      task: async (_, task): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
 
-                    if (deleted) {
-                      // delete from dockercompose file as well
-                      await this.configLock.unlock([
-                        {
-                          path: `services.${name}`,
-                          root: true
+                        if (deleted || deleted === 'unlock') {
+                          // unlock directories from local lock file
+                          this.locker.addUnlock({
+                            path: `${name}.${DockerHelperLock.DIRECTORIES}.${key}`
+                          })
                         }
-                      ])
+                      }
+                    }))
 
-                      // unlock directories from local lock file
-                      this.lockerLocal.addUnlock({
-                        path: `${name}.${DockerHelperLock.DIRECTORIES}`
-                      })
-                    }
+                    return task.newListr([
+                      {
+                        task: async (): Promise<void> => {
+                          await this.configLock.unlock([
+                            {
+                              path: `services.${name}`,
+                              root: true
+                            }
+                          ])
+                        }
+                      },
+                      ...subtasks
+                    ])
                   }
                 },
 
@@ -238,15 +255,27 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   title: 'Updating lock file...',
                   task: async (): Promise<void> => {
                     // ensure lock file entries are not empty
-                    await this.lockerLocal.unlockAll()
-                    const lock = await this.lockerLocal.getLockFile<LocalLockFile>()
+                    await this.locker.unlockAll()
+                    const lock = await this.locker.getLockFile<LocalLockFile>()
                     const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
                     await Promise.all(
                       Object.keys(containers).map((c) => {
+                        if (containers[c]?.configuration && Object.keys(containers[c].configuration).length === 0) {
+                          this.locker.addUnlock({
+                            path: `${c}.${DockerHelperLock.DIRECTORIES}`
+                          })
+                        }
+
+                        if (containers[c]?.volumes && Object.keys(containers[c].volumes).length === 0) {
+                          this.locker.addUnlock({
+                            path: `${c}.${DockerHelperLock.VOLUMES}`
+                          })
+                        }
+
                         if (Object.keys(containers[c]).length === 0) {
-                          this.lockerLocal.addUnlock({
-                            path: name
+                          this.locker.addUnlock({
+                            path: c
                           })
                         }
                       })
@@ -278,8 +307,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
               task: async (ctx, task): Promise<void> => {
                 try {
                   const dir = fs.readdirSync(join(process.cwd(), flags.output))
+
                   if (dir.length === 0) {
-                    await this.deleteFolder(task, join(process.cwd(), flags.output))
+                    await this.deleteArtifacts(task, join(process.cwd(), flags.output))
                   }
                 } catch (e) {
                   this.logger.debug(e.message)
@@ -291,8 +321,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
               task: async (ctx, task): Promise<void> => {
                 try {
                   const dir = fs.readdirSync(join(process.cwd(), flags['volumes-folder']))
+
                   if (dir.length === 0) {
-                    await this.deleteFolder(task, join(process.cwd(), flags['volumes-folder']))
+                    await this.deleteArtifacts(task, join(process.cwd(), flags['volumes-folder']))
                   }
                 } catch (e) {
                   this.logger.debug(e.message)
@@ -318,33 +349,44 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       : []
   }
 
-  private async deleteFolder (task: ListrTaskWrapper<any, any>, folder?: string): Promise<boolean> {
+  private async deleteArtifacts (task: ListrTaskWrapper<any, any>, path: string): Promise<boolean | 'unlock'> {
     const { flags } = this.parse(DockerContainerCommand)
 
-    let prompt: boolean = flags.force
-    if (!prompt) {
-      prompt = await task.prompt({
-        type: 'Toggle',
-        message: `Do you want to really delete: ${folder}`,
-        initial: true
-      })
-    }
+    if (fs.existsSync(path)) {
+      let prompt: boolean = flags.force
+      if (!prompt) {
+        prompt = await task.prompt({
+          type: 'Toggle',
+          message: `Will delete: ${path}`,
+          initial: true
+        })
+      }
 
-    if (prompt) {
-      try {
-        if (fs.existsSync(folder)) {
-          fs.emptyDirSync(folder)
-          fs.removeSync(folder)
-          task.title = `Deleted: ${folder}`
+      if (prompt) {
+        try {
+          if (fs.statSync(path).isDirectory()) {
+            await fs.emptyDir(path)
+            await fs.remove(path)
+            task.title = `Deleted folder: ${path}`
+          } else if (fs.statSync(path).isFile()) {
+            await fs.remove(path)
+            task.title = `Deleted file: ${path}`
+          }
+
+          if (fs.readdirSync(dirname(path)).length === 0) {
+            this.logger.debug(`After removing ${path}, folder is empty, will remove it as well.`)
+            await fs.remove(dirname(path))
+          }
 
           return true
-        } else {
-          task.skip(`Not-Found: ${folder}`)
+        } catch (e) {
+          this.message.debug(e.message)
+          throw new Error(`Can not delete folder: ${path}`)
         }
-      } catch (e) {
-        this.message.debug(e.message)
-        throw new Error(`Can not delete folder: ${folder}`)
       }
+    } else {
+      // if it does not already exists we want to unlock unnecassary key
+      return 'unlock'
     }
 
     return false

@@ -1,0 +1,9 @@
+- from: postgre-initialize.sh
+  to: /docker-entrypoint-initdb.d/postgre-initialize.sh
+  options: ro
+  mode: file
+  perm: 764
+
+- from: db
+  to: /var/lib/postgresql/data
+  mode: volume

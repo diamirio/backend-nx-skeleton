@@ -1,5 +1,5 @@
 services:
-  monorepo:
+  {{ name }}:
     {% filter indent(4, true) %}
       {% set image = 'cenk1cenk2/lerna-dev:14' %}
       {% include '../../base/image.yml.j2' %}

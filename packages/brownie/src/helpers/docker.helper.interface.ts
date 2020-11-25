@@ -30,6 +30,7 @@ export interface ParsedContainers {
     to: string
     options?: string
     mode?: VolumeModes
+    perm?: string
     exact?: boolean
   }[]
 }

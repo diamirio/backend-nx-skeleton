@@ -88,7 +88,15 @@ export const VERSIONS: Versions = {
       '@types/mongoose': '^5.7.36'
     }
   },
-  [AvailableDBTypes.TYPEORM_MYSQL]: {},
-  [AvailableDBTypes.TYPEORM_POSTGRESQL]: {},
+  [AvailableDBTypes.TYPEORM_MYSQL]: {
+    deps: {
+      mysql2: '^2.2.5'
+    }
+  },
+  [AvailableDBTypes.TYPEORM_POSTGRESQL]: {
+    deps: {
+      pg: '^8.5.1'
+    }
+  },
   [AvailableDBTypes.MONGOOSE_MONGODB]: {}
 }

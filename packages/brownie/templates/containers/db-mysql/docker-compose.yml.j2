@@ -1,5 +1,5 @@
 services:
-  db-mysql:
+  {{ name }}:
     {% filter indent(4, true) %}
       {% set image = 'mysql:latest' %}
       {% include '../../base/image.yml.j2' %}

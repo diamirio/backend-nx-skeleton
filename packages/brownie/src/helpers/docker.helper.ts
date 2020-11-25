@@ -4,6 +4,7 @@ import fs from 'fs-extra'
 import globby from 'globby'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
+import { v4 as uuidv4 } from 'uuid'
 
 import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
 import { jinja } from '@helpers/jinja.helper'
@@ -15,7 +16,7 @@ export class DockerHelper {
 
   constructor (private readonly cmd: BaseCommand, private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, 'volumes-folder': string } }) {
     cmd.logger.debug('DockerHelper initiated.')
-    this.cmd.lockerLocal.setRoot(LocalLockPaths.DOCKER_HELPER)
+    this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
   }
 
   public generateGetContainerTasks (): Listr {
@@ -99,6 +100,8 @@ export class DockerHelper {
                       }
                     } catch {
                       this.cmd.message.warn(`Skipping Dockerfile overwrite: ${name}`)
+
+                      return
                     }
 
                     // create directory and files
@@ -108,10 +111,10 @@ export class DockerHelper {
                     await writeFile(output, await readRaw(ctx.context[name].dockerfile))
 
                     // lock necassary information
-                    this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                    this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                       path: ctx.containers[name].name,
                       data: {
-                        [DockerHelperLock.DIRECTORIES]: ctx.context[name].dir
+                        [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: output }
                       },
                       merge: true
                     })
@@ -145,6 +148,19 @@ export class DockerHelper {
 
                             asset.to = join(asset.to, volume.from)
                             await fs.copy(asset.from, asset.to)
+
+                            // set permissions
+                            if (volume.perm) {
+                              await fs.chmod(asset.to, volume.perm)
+                            }
+
+                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                              path: ctx.containers[name].name,
+                              data: {
+                                [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: asset.to }
+                              },
+                              merge: true
+                            })
                           } catch (e) {
                             this.cmd.message.fail(`Error while copying asset: ${e}`)
 
@@ -156,8 +172,23 @@ export class DockerHelper {
                           this.cmd.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
 
                           try {
-                            await createDirIfNotExists(join(asset.to, volume.from))
-                            await fs.copy(asset.from, join(asset.to, volume.from))
+                            asset.to = join(asset.to, volume.from)
+
+                            await createDirIfNotExists(asset.to)
+                            await fs.copy(asset.from, asset.to)
+
+                            // set permissions
+                            if (volume.perm) {
+                              await fs.chmod(asset.to, volume.perm)
+                            }
+
+                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                              path: ctx.containers[name].name,
+                              data: {
+                                [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: asset.to }
+                              },
+                              merge: true
+                            })
                           } catch (e) {
                             this.cmd.message.fail(`Error while copying folder: ${e}`)
 
@@ -177,27 +208,26 @@ export class DockerHelper {
                             })
                           }
 
+                          asset.to = join(asset.to, volume.from)
+
                           // it will clear out this entry
-                          if (!prompt) {
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                          if (prompt) {
+                            await createDirIfNotExists(asset.to)
+
+                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                              path: ctx.containers[name].name,
+                              data: {
+                                [DockerHelperLock.VOLUMES]: { [uuidv4()]: asset.to }
+                              },
+                              merge: true
+                            })
                           } else {
-                            await createDirIfNotExists(join(asset.to, volume.from))
+                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
                         } else if (volume.mode === VolumeModes.MOUNT) {
                           this.cmd.logger.debug('Running in persistent volume mode for: %s with %o', name, asset)
                         } else {
                           throw new Error('Unknown volume mode this may be do to templating error.')
-                        }
-
-                        if (volume.mode !== VolumeModes.MOUNT && ctx.context[name].volumes?.length > 0) {
-                          // lock necassary information
-                          this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                            path: ctx.containers[name].name,
-                            data: {
-                              [DockerHelperLock.VOLUMES]: ctx.context[name].volumeDir
-                            },
-                            merge: true
-                          })
                         }
                       })
                     )
@@ -224,6 +254,8 @@ export class DockerHelper {
                       }
                     } catch {
                       this.cmd.message.warn(`Skipping .env file overwrite: ${name}`)
+
+                      return
                     }
 
                     // read the yaml template for one file
@@ -245,10 +277,10 @@ export class DockerHelper {
                     await writeFile(output, buffer)
 
                     // lock necassary information
-                    this.cmd.lockerLocal.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                    this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                       path: ctx.containers[name].name,
                       data: {
-                        [DockerHelperLock.DIRECTORIES]: ctx.context[name].dir
+                        [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: output }
                       },
                       merge: true
                     })

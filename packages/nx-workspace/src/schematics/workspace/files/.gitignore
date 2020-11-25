@@ -40,3 +40,6 @@ Thumbs.db
 
 # brownie local
 .brownie.local.lock
+
+# nx templating engine ignores
+**/*.old

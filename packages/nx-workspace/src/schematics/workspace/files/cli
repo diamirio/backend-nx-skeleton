@@ -1,0 +1,179 @@
+#!/bin/bash
+
+VERSION=v2.1.0
+SCRIPT_NAME="${YELLOW}run-in-docker${RESET}"
+
+########## START-OF common.sh
+# source me: source <(curl -s "https://gist.githubusercontent.com/cenk1cenk2/0446f3be22a39c9f5fe5ee1cfb3cca63/raw/common.sh?$(date +%s)")
+
+# Constants
+RESET='\033[0m'
+RED='\033[38;5;1m'
+GREEN='\033[38;5;2m'
+YELLOW='\033[38;5;3m'
+MAGENTA='\033[38;5;5m'
+CYAN='\033[38;5;6m'
+SEPERATOR="\033[90m-------------------------${RESET}"
+
+stdout_print() {
+  # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
+  local bool="${QUIET:-false}"
+  # comparison is performed without regard to the case of alphabetic characters
+  shopt -s nocasematch
+  if ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+    echo -e "${RESET}${1}"
+  fi
+}
+
+log_debug() {
+  # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
+  local bool="${DEBUG:-false}"
+  # comparison is performed without regard to the case of alphabetic characters
+  shopt -s nocasematch
+  if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+    log_this "${1:-}" "${MAGENTA}DEBUG${RESET}" "${2}"
+  fi
+}
+
+log_this() {
+  INFO="${1:-}"
+  SCOPE="${2:-}"
+  SEPERATOR_INSERT="${3:-}"
+
+  DATA="${INFO}"
+
+  if [ ! -z "${SCOPE}" ] && [ "${SCOPE}" != "false" ]; then
+    DATA="[${SCOPE}] ${DATA}"
+  fi
+
+  if [ ! -z "${SEPERATOR_INSERT}" ]; then
+    if [[ ${SEPERATOR_INSERT} == "top" ]] || [[ ${SEPERATOR_INSERT} == "both" ]]; then
+      DATA="${SEPERATOR}\n${DATA}"
+    fi
+
+    if [[ ${SEPERATOR_INSERT} == "bottom" ]] || [[ ${SEPERATOR_INSERT} == "both" ]]; then
+      DATA="${DATA}\n${SEPERATOR}"
+    fi
+  fi
+
+  stdout_print "${DATA}"
+}
+
+log_error() {
+  log_this "${1:-}" "${RED}ERROR${RESET}" "${2:-}"
+}
+
+log_info() {
+  log_this "${1:-}" "${CYAN}INFO${RESET}" "${2:-}"
+}
+
+log_interrupt() {
+  log_this "${1:-}" "${RED}INTERRUPT${RESET}" "${2:-}"
+}
+
+########## END-OF common.sh
+
+print_header() {
+  log_this "${VERSION}-online" "${SCRIPT_NAME}" "bottom"
+}
+
+run_cli() {
+  # SCRIPT
+  trap trap_int INT
+  function trap_int() {
+    log_interrupt "${PACKAGE_INFO}" "top"
+  }
+
+  # throw default error
+  if [ -z "$1" ] && [ -z "${WORKSPACE_ONLY}" ]; then
+    log_error "Please state a package folder relative to '${PACKAGE_FOLDER}'."
+    exit 127
+  fi
+
+  # check command
+  [[ "$1" == "run-outside" ]] && shift && IS_RUN_OUTSIDE=true
+  IS_WORKSPACE=$([[ "$1" == "root" || "$1" == "ws" || "$1" == "." ]] && echo true)
+  IS_FORALL=$([[ "$1" == "all" ]] && echo true)
+  IS_LERNA=$([[ "$1" == "lerna" ]] && echo true)
+
+  # parse command
+  if [ -z "$WORKSPACE_ONLY" ] && [ ! -z "$ENABLE_LERNA" ]; then
+    PACKAGES=$(npx lerna la)
+    PACKAGE=($(echo ${PACKAGES} | grep $1 | sed -r 's/^([^ ]*).*$/\1/'))
+  elif [ -z "$WORKSPACE_ONLY" ] && [ -z "$ENABLE_LERNA" ]; then
+    PACKAGE="$1"
+    PACKAGES=$(ls -d */ | tr '\n' ' ')
+  else
+    IS_WORKSPACE=true
+  fi
+
+  # ls command
+  if [ "$1" == "ls" ] && [ -z "$WORKSPACE_ONLY" ]; then
+    log_info "Available packages are:"
+    echo "$PACKAGES"
+    exit 0
+  fi
+
+  # throw error when packages are missing
+  if [[ -z "${PACKAGE}" && -z "${IS_WORKSPACE}" && -z "${IS_FORALL}" && -z "${IS_LERNA}" ]]; then
+    log_error "Can not find ${PACKAGE} in directory."
+    log_info "Available packages are:"
+    echo "${PACKAGES}"
+    exit 127
+  fi
+
+  # where to run
+  if [[ ! -z "${IS_WORKSPACE}" || ! -z "${IS_FORALL}" || ! -z "${IS_LERNA}" ]]; then
+    PACKAGE="workspace"
+    WORKDIR="."
+  else
+    WORKDIR="${PACKAGE_FOLDER}/$1"
+  fi
+
+  # command
+  if [ -z "${WORKSPACE_ONLY}" ]; then
+    if [ ! -z "${IS_FORALL}" ]; then
+      if [ ! -z "${ENABLE_LERNA}" ]; then
+        RUN_COMMAND="npx lerna exec -- ${*:2}"
+      else
+        log_error "Lerna is not enabled, can not use this command."
+        exit 127
+      fi
+    elif [ ! -z "${IS_LERNA}" ]; then
+      if [ ! -z "${ENABLE_LERNA}" ]; then
+        RUN_COMMAND="npx lerna ${*:2}"
+      else
+        log_error "Lerna is not enabled, can not use this command."
+        exit 127
+      fi
+    else
+      RUN_COMMAND="${*:2}"
+    fi
+  else
+    RUN_COMMAND="${*:1}"
+  fi
+
+  # run command missing
+  if [ -z "${RUN_COMMAND}" ]; then
+    log_error "Please state a command to run in '${PACKAGE}'."
+    exit 127
+  fi
+
+  PACKAGE_INFO="${PACKAGE} in ${WORKDIR} | \$ ${RUN_COMMAND}"
+  if [ -z "${IS_RUN_OUTSIDE}" ]; then
+    docker-compose exec ${CONTAINER_NAME} /bin/bash -c "echo -e '[${GREEN}START${RESET}] ${PACKAGE_INFO}\n${SEPERATOR}' && cd ${WORKDIR}; if [ -f .env ]; then source .env && echo -e '[${YELLOW}env${RESET}] Sourced .env file.\n${SEPERATOR}'; fi && ${RUN_COMMAND} && echo -e '${SEPERATOR}\n[${GREEN}FINISH${RESET}] ${PACKAGE_INFO}' || echo -e '${SEPERATOR}\n[${RED}ERROR${RESET}] ${PACKAGE_INFO}'"
+  else
+    log_info "Running outside docker..." && echo -e "[${GREEN}START${RESET}] ${PACKAGE_INFO}\n${SEPERATOR}" && cd ${WORKDIR}
+    if [ -f .env ]; then source .env && echo -e "[${YELLOW}env${RESET}] Sourced .env file.\n${SEPERATOR}"; fi && ${RUN_COMMAND} && echo -e "${SEPERATOR}\n[${GREEN}FINISH${RESET}] ${PACKAGE_INFO}" || echo -e "${SEPERATOR}\n[${RED}ERROR${RESET}] ${PACKAGE_INFO}"
+  fi
+}
+
+print_header
+
+# VARIABLES
+PACKAGE_FOLDER=apps
+CONTAINER_NAME=nx
+WORKSPACE_ONLY=
+ENABLE_LERNA=
+
+run_cli ${*:1}

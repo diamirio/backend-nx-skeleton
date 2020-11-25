@@ -1,7 +1,7 @@
 services:
   {{ name }}:
     {% filter indent(4, true) %}
-      {% set image = 'rabbitmq:3-management-alpine:latest' %}
+      {% set image = 'postgres:latest' %}
       {% include '../../base/image.yml.j2' %}
     {% endfilter %}
 
@@ -10,8 +10,7 @@ services:
     {% endfilter %}
 
     ports:
-      - 15672:15672
-      - 5672:5672
+      - 5432:5432
     {% filter indent(4, true) %}
       {% include '../../base/volumes.yml.j2' %}
     {% endfilter %}
