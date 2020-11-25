@@ -2,3 +2,5 @@
 !dist/
 !dist/**
 !builders.json
+!schematics.json
+!collections.json
