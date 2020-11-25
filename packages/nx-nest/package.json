@@ -9,7 +9,7 @@
   "license": "ISC",
   "publishConfig": {
     "access": "public",
-    "registry": "https://verdaccio.dev.webundsoehne.com"
+    "registry": "https://verdaccio.dev.webundsoehne.com/"
   },
   "schematics": "./schematics.json",
   "scripts": {

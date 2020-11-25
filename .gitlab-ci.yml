@@ -4,7 +4,9 @@ stages:
   - install
   - lint
   - build
+  - docs
   - publish
+  - publish-private
 
 cache:
   paths:
@@ -42,7 +44,7 @@ build:
    - node
 
 docs-readme:
-  stage: build
+  stage: docs
   script:
     - yarn command docs:readme
   artifacts:
@@ -53,7 +55,7 @@ docs-readme:
    - node
 
 docs-jsdoc:
-  stage: build
+  stage: docs
   script:
     - yarn command docs:jsdoc
   artifacts:
@@ -63,7 +65,7 @@ docs-jsdoc:
    - node
 
 docs-toc:
-  stage: build
+  stage: docs
   script:
     - yarn command docs:toc
   artifacts:
@@ -93,6 +95,7 @@ publish:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
+    - git pull
   script:
     - /semantic-release/release.sh
   after_script:
@@ -103,7 +106,7 @@ publish:
     - node
 
 publish-private:
-  stage: publish
+  stage: publish-private
   image: cenk1cenk2/drone-semantic-release
   variables:
     PLUGIN_GIT_METHOD: gl
@@ -123,6 +126,7 @@ publish-private:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
+    - git pull
   script:
     - /semantic-release/release.sh
   after_script:
