@@ -28,8 +28,7 @@
     "test": "NODE_ENV=test jest --forceExit --runInBand --config ./tests/jest.config.js",
     "test:cov": "NODE_ENV=test jest --coverage --config ./tests/jest.config.js",
     "dev:test": "NODE_ENV=test jest --verbose --runInBand --forceExit --watchAll --config ./tests/jest.config.js",
-    "docs:readme": "yarn oclif-dev readme",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+    "docs:readme": "yarn oclif-dev readme"
   },
   "husky": {
     "hooks": {

@@ -41,6 +41,37 @@ build:
   tags:
    - node
 
+docs-readme:
+  stage: build
+  script:
+    - yarn command docs:readme
+  artifacts:
+    paths:
+    - dist/
+    - packages/*/README.md
+  tags:
+   - node
+
+docs-jsdoc:
+  stage: build
+  script:
+    - yarn command docs:jsdoc
+  artifacts:
+    paths:
+    - packages/*/API.md
+  tags:
+   - node
+
+docs-toc:
+  stage: build
+  script:
+    - yarn command docs:toc
+  artifacts:
+    paths:
+    - packages/*/README.md
+  tags:
+   - node
+
 publish:
   stage: publish
   image: cenk1cenk2/drone-semantic-release
