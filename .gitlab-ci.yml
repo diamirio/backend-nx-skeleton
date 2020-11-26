@@ -78,9 +78,9 @@ publish:
   image: cenk1cenk2/drone-semantic-release
   variables:
     PLUGIN_GIT_METHOD: gl
-    PLUGIN_MODE: predict
+    PLUGIN_MODE: release
     PLUGIN_ADD_MODULES: "multi-semantic-release @semantic-release/gitlab"
-    PLUGIN_OVERRIDE: multi-semantic-release
+    PLUGIN_OVERRIDE: multi-semantic-release --dry-run
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: "false"
