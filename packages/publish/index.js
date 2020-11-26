@@ -28,14 +28,13 @@ async function prepare (pluginConfig, context) {
 async function publish (pluginConfig, context) {
   await prepareNpm(npmrc, pluginConfig, context)
 
-  const pkg = internalVerify(pluginConfig, context)
+  const pkg = await internalVerify(pluginConfig, context)
 
-  console.log(pkg)
   return publishNpm(npmrc, pluginConfig, pkg, context)
 }
 
 async function addChannel (pluginConfig, context) {
-  const pkg = internalVerify(pluginConfig, context)
+  const pkg = await internalVerify(pluginConfig, context)
 
   return addChannelNpm(npmrc, pluginConfig, pkg, context)
 }
