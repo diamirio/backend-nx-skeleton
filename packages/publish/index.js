@@ -8,6 +8,8 @@ const AggregateError = require('aggregate-error')
 const { defaultTo, castArray } = require('lodash')
 const tempy = require('tempy')
 
+const setLegacyToken = require('./lib/set-legacy-token')
+
 const npmrc = tempy.file({ name: '.npmrc' })
 
 async function verifyConditions (pluginConfig, context) {
@@ -40,6 +42,8 @@ async function addChannel (pluginConfig, context) {
 }
 
 async function internalVerify (pluginConfig, context) {
+  setLegacyToken(context)
+
   let pkg
   const errors = verifyNpmConfig(pluginConfig)
 

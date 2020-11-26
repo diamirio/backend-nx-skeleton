@@ -23,13 +23,11 @@ module.exports = async (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CONFIG_USE
   }
 
   if (NPM_USERNAME && NPM_PASSWORD && NPM_EMAIL) {
-    const token = Buffer.from(`${NPM_USERNAME}:${NPM_PASSWORD}`, 'utf8').toString('base64')
-
-    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = ${token}\nemail = ${NPM_EMAIL}`)
+    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = \${LEGACY_TOKEN}\nemail = \${NPM_EMAIL}`)
 
     logger.log(`Wrote NPM_USERNAME, NPM_PASSWORD and NPM_EMAIL to ${npmrc}`)
   } else if (NPM_TOKEN) {
-    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}${nerfDart(registry)}:_authToken = ${NPM_TOKEN}`)
+    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}${nerfDart(registry)}:_authToken = \${NPM_TOKEN}`)
 
     logger.log(`Wrote NPM_TOKEN to ${npmrc}`)
   } else {
