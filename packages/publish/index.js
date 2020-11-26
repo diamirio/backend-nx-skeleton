@@ -10,7 +10,6 @@ const { defaultTo, castArray } = require('lodash')
 const tempy = require('tempy')
 
 let verified
-let prepared
 const npmrc = tempy.file({ name: '.npmrc' })
 
 async function verifyConditions (pluginConfig, context) {
@@ -65,8 +64,6 @@ async function prepare (pluginConfig, context) {
   }
 
   await prepareNpm(npmrc, pluginConfig, context)
-  // eslint-disable-next-line no-unused-vars
-  prepared = true
 }
 
 async function publish (pluginConfig, context) {
@@ -75,7 +72,7 @@ async function publish (pluginConfig, context) {
 
   setLegacyToken(context)
 
-  context.logger.log(process.env.LEGACY_TOKEN)
+  console.log(process.env.LEGACY_TOKEN)
 
   try {
     // Reload package.json in case a previous external step updated it
@@ -84,13 +81,14 @@ async function publish (pluginConfig, context) {
       await verifyNpmAuth(npmrc, pkg, context)
     }
   } catch (error) {
-    context.logger.log('yaatttara')
     errors.push(...error)
   }
 
   if (errors.length > 0) {
     throw new AggregateError(errors)
   }
+
+  console.log(context, npmrc, pluginConfig)
 
   await prepareNpm(npmrc, pluginConfig, context)
 
