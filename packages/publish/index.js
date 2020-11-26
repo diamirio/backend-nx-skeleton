@@ -20,38 +20,42 @@ async function verifyConditions (pluginConfig, context) {
   }
 
   const npmrc = tempy.file({ name: '.npmrc' })
+
   console.log(`Generated new .npmrc for ${context.cwd} with ${npmrc}.`)
 
-  pluginConfig.INJECT_NPM_RC = npmrc
+  context.INJECT_NPM_RC = npmrc
 }
 
 async function prepare (pluginConfig, context) {
-  await prepareNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, context)
+  await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
 }
 
 async function publish (pluginConfig, context) {
-  await prepareNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, context)
+  await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
 
   const pkg = await internalVerify(pluginConfig, context)
 
-  return publishNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return publishNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
 }
 
 async function addChannel (pluginConfig, context) {
   const pkg = await internalVerify(pluginConfig, context)
 
-  return addChannelNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return addChannelNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
 }
 
 async function internalVerify (pluginConfig, context) {
+  console.info(`Verifying against rc file: ${context.INJECT_NPM_RC ?? 'unknown'}`)
+
   let pkg
   const errors = verifyNpmConfig(pluginConfig) ?? []
 
   try {
     // Reload package.json in case a previous external step updated it
     pkg = await getPkg(pluginConfig, context)
+
     if (pluginConfig.npmPublish !== false && pkg.private !== true) {
-      await verifyNpmAuth(pluginConfig.INJECT_NPM_RC, pkg, context)
+      await verifyNpmAuth(context.INJECT_NPM_RC, pkg, context)
     }
   } catch (error) {
     if (Array.isArray(error)) {
