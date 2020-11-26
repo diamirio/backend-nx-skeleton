@@ -26,14 +26,30 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 
 <!-- commands -->
 * [`cenk1cenk2 config:workspace`](#cenk1cenk2-configworkspace)
+* [`cenk1cenk2 docker`](#cenk1cenk2-docker)
 * [`cenk1cenk2 gitlab`](#cenk1cenk2-gitlab)
 * [`cenk1cenk2 help [COMMAND]`](#cenk1cenk2-help-command)
+* [`cenk1cenk2 nx`](#cenk1cenk2-nx)
+* [`cenk1cenk2 workspace`](#cenk1cenk2-workspace)
 
 ## `cenk1cenk2 config:workspace`
 
 ```
 USAGE
   $ cenk1cenk2 config:workspace
+```
+
+## `cenk1cenk2 docker`
+
+```
+USAGE
+  $ cenk1cenk2 docker
+
+OPTIONS
+  -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
+  -f, --force                          Force overwrites.
+  -o, --output=output                  [default: .docker] Output folder for the Docker files.
+  -v, --volume                         Use optional persistent volumes with the containers.
 ```
 
 ## `cenk1cenk2 gitlab`
@@ -60,4 +76,28 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `cenk1cenk2 nx`
+
+```
+USAGE
+  $ cenk1cenk2 nx
+
+OPTIONS
+  -a, --arguments  Enable prompt for passing in arguments.
+```
+
+## `cenk1cenk2 workspace`
+
+```
+USAGE
+  $ cenk1cenk2 workspace
+
+OPTIONS
+  -f, --force         Force override for schematic.
+  -s, --skip-updates  Skip the dependency updates.
+
+ALIASES
+  $ cenk1cenk2 ws
+```
 <!-- commandsstop -->
