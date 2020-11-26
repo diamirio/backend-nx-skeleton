@@ -9,6 +9,8 @@ const tempy = require('tempy')
 
 const verifyNpmAuth = require('./lib/verify-auth')
 
+const INJECT_NPM_RC = {}
+
 async function verifyConditions (pluginConfig, context) {
   // If the npm publish plugin is used and has `npmPublish`, `tarballDir` or `pkgRoot` configured, validate them now in order to prevent any release if the configuration is wrong
   if (context.options.publish) {
@@ -23,27 +25,27 @@ async function verifyConditions (pluginConfig, context) {
 
   console.log(`Generated new .npmrc for ${context.cwd} with ${npmrc}.`)
 
-  context.INJECT_NPM_RC = npmrc
+  INJECT_NPM_RC[context.cwd] = npmrc
 }
 
 async function prepare (pluginConfig, context) {
-  await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
+  await prepareNpm(INJECT_NPM_RC[context.cwd], pluginConfig, context)
 }
 
 async function publish (pluginConfig, context) {
-  console.info(`Publishing against rc file for ${context.cwd}: ${context.INJECT_NPM_RC ?? 'unknown'}`)
+  console.info(`Publishing against rc file for ${context.cwd}: ${INJECT_NPM_RC[context.cwd] ?? 'unknown'}`)
 
-  await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
+  await prepareNpm(INJECT_NPM_RC[context.cwd], pluginConfig, context)
 
   const pkg = await internalVerify(pluginConfig, context)
 
-  return publishNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return publishNpm(INJECT_NPM_RC[context.cwd], pluginConfig, pkg, context)
 }
 
 async function addChannel (pluginConfig, context) {
   const pkg = await internalVerify(pluginConfig, context)
 
-  return addChannelNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return addChannelNpm(INJECT_NPM_RC[context.cwd], pluginConfig, pkg, context)
 }
 
 async function internalVerify (pluginConfig, context) {
@@ -55,7 +57,7 @@ async function internalVerify (pluginConfig, context) {
     pkg = await getPkg(pluginConfig, context)
 
     if (pluginConfig.npmPublish !== false && pkg.private !== true) {
-      await verifyNpmAuth(context.INJECT_NPM_RC, pkg, context)
+      await verifyNpmAuth(INJECT_NPM_RC[context.cwd], pkg, context)
     }
   } catch (error) {
     if (Array.isArray(error)) {
