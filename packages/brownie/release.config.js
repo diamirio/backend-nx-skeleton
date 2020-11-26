@@ -9,6 +9,6 @@ module.exports = {
         assets: [ 'CHANGELOG.md', 'README.md', 'API.md' ]
       }
     ],
-    '../publish'
+    '@semantic-release/npm'
   ]
 }
