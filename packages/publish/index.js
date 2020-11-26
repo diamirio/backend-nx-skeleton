@@ -9,7 +9,6 @@ const AggregateError = require('aggregate-error')
 const { defaultTo, castArray } = require('lodash')
 const tempy = require('tempy')
 
-let verified
 const npmrc = tempy.file({ name: '.npmrc' })
 
 async function verifyConditions (pluginConfig, context) {
@@ -21,15 +20,21 @@ async function verifyConditions (pluginConfig, context) {
     pluginConfig.tarballDir = defaultTo(pluginConfig.tarballDir, publishPlugin.tarballDir)
     pluginConfig.pkgRoot = defaultTo(pluginConfig.pkgRoot, publishPlugin.pkgRoot)
   }
+}
 
+async function prepare (pluginConfig, context) {
+  await prepareNpm(npmrc, pluginConfig, context)
+}
+
+async function publish (pluginConfig, context) {
+  let pkg
   const errors = verifyNpmConfig(pluginConfig)
 
   setLegacyToken(context)
 
   try {
-    const pkg = await getPkg(pluginConfig, context)
-
-    // Verify the npm authentication only if `npmPublish` is not false and `pkg.private` is not `true`
+    // Reload package.json in case a previous external step updated it
+    pkg = await getPkg(pluginConfig, context)
     if (pluginConfig.npmPublish !== false && pkg.private !== true) {
       await verifyNpmAuth(npmrc, pkg, context)
     }
@@ -41,55 +46,6 @@ async function verifyConditions (pluginConfig, context) {
     throw new AggregateError(errors)
   }
 
-  verified = true
-}
-
-async function prepare (pluginConfig, context) {
-  const errors = verified ? [] : verifyNpmConfig(pluginConfig)
-
-  setLegacyToken(context)
-
-  try {
-    // Reload package.json in case a previous external step updated it
-    const pkg = await getPkg(pluginConfig, context)
-    if (!verified && pluginConfig.npmPublish !== false && pkg.private !== true) {
-      await verifyNpmAuth(npmrc, pkg, context)
-    }
-  } catch (error) {
-    errors.push(...error)
-  }
-
-  if (errors.length > 0) {
-    throw new AggregateError(errors)
-  }
-
-  await prepareNpm(npmrc, pluginConfig, context)
-}
-
-async function publish (pluginConfig, context) {
-  let pkg
-  const errors = verified ? [] : verifyNpmConfig(pluginConfig)
-
-  setLegacyToken(context)
-
-  console.log(process.env.LEGACY_TOKEN)
-
-  try {
-    // Reload package.json in case a previous external step updated it
-    pkg = await getPkg(pluginConfig, context)
-    if (!verified && pluginConfig.npmPublish !== false && pkg.private !== true) {
-      await verifyNpmAuth(npmrc, pkg, context)
-    }
-  } catch (error) {
-    errors.push(...error)
-  }
-
-  if (errors.length > 0) {
-    throw new AggregateError(errors)
-  }
-
-  console.log(context, npmrc, pluginConfig)
-
   await prepareNpm(npmrc, pluginConfig, context)
 
   return publishNpm(npmrc, pluginConfig, pkg, context)
@@ -97,14 +53,14 @@ async function publish (pluginConfig, context) {
 
 async function addChannel (pluginConfig, context) {
   let pkg
-  const errors = verified ? [] : verifyNpmConfig(pluginConfig)
+  const errors = verifyNpmConfig(pluginConfig)
 
   setLegacyToken(context)
 
   try {
     // Reload package.json in case a previous external step updated it
     pkg = await getPkg(pluginConfig, context)
-    if (!verified && pluginConfig.npmPublish !== false && pkg.private !== true) {
+    if (pluginConfig.npmPublish !== false && pkg.private !== true) {
       await verifyNpmAuth(npmrc, pkg, context)
     }
   } catch (error) {
