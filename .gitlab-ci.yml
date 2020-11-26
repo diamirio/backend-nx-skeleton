@@ -24,12 +24,12 @@ install:
   tags:
     - node
 
-lint:
-  stage: lint
-  script:
-    - yarn command --parallel lint:check
-  tags:
-    - node
+# lint:
+#   stage: lint
+#   script:
+#     - yarn command --parallel lint:check
+#   tags:
+#     - node
 
 build:
   stage: build
@@ -42,36 +42,36 @@ build:
   tags:
    - node
 
-docs-readme:
-  stage: docs
-  script:
-    - yarn command docs:readme
-  artifacts:
-    paths:
-    - dist/
-    - packages/*/README.md
-  tags:
-   - node
+# docs-readme:
+#   stage: docs
+#   script:
+#     - yarn command docs:readme
+#   artifacts:
+#     paths:
+#     - dist/
+#     - packages/*/README.md
+#   tags:
+#    - node
 
-docs-jsdoc:
-  stage: docs
-  script:
-    - yarn command docs:jsdoc
-  artifacts:
-    paths:
-    - packages/*/API.md
-  tags:
-   - node
+# docs-jsdoc:
+#   stage: docs
+#   script:
+#     - yarn command docs:jsdoc
+#   artifacts:
+#     paths:
+#     - packages/*/API.md
+#   tags:
+#    - node
 
-docs-toc:
-  stage: docs
-  script:
-    - yarn command docs:toc
-  artifacts:
-    paths:
-    - packages/*/README.md
-  tags:
-   - node
+# docs-toc:
+#   stage: docs
+#   script:
+#     - yarn command docs:toc
+#   artifacts:
+#     paths:
+#     - packages/*/README.md
+#   tags:
+#    - node
 
 publish:
   stage: publish
