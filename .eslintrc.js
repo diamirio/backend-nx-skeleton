@@ -1,7 +1,7 @@
 module.exports = {
   extends: [ './packages/eslint-config/index', './packages/eslint-config/typescript' ],
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 2020
   },
   rules: {
     'import/order': [
