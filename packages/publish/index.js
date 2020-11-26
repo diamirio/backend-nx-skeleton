@@ -26,9 +26,9 @@ async function prepare (pluginConfig, context) {
 }
 
 async function publish (pluginConfig, context) {
-  const pkg = internalVerify(pluginConfig, context)
-
   await prepareNpm(npmrc, pluginConfig, context)
+
+  const pkg = internalVerify(pluginConfig, context)
 
   return publishNpm(npmrc, pluginConfig, pkg, context)
 }

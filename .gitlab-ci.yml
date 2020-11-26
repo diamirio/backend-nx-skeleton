@@ -2,9 +2,9 @@ image: node:14-alpine
 
 stages:
   - install
-  - lint
+  # - lint
   - build
-  - docs
+  # - docs
   - publish
 
 cache:
