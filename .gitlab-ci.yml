@@ -2,9 +2,9 @@ image: node:14-alpine
 
 stages:
   - install
-  # - lint
+  - lint
   - build
-  # - docs
+  - docs
   - publish
 
 cache:
@@ -24,12 +24,12 @@ install:
   tags:
     - node
 
-# lint:
-#   stage: lint
-#   script:
-#     - yarn command --parallel lint:check
-#   tags:
-#     - node
+lint:
+  stage: lint
+  script:
+    - yarn command --parallel lint:check
+  tags:
+    - node
 
 build:
   stage: build
@@ -42,43 +42,26 @@ build:
   tags:
    - node
 
-# docs-readme:
-#   stage: docs
-#   script:
-#     - yarn command docs:readme
-#   artifacts:
-#     paths:
-#     - dist/
-#     - packages/*/README.md
-#   tags:
-#    - node
-
-# docs-jsdoc:
-#   stage: docs
-#   script:
-#     - yarn command docs:jsdoc
-#   artifacts:
-#     paths:
-#     - packages/*/API.md
-#   tags:
-#    - node
-
-# docs-toc:
-#   stage: docs
-#   script:
-#     - yarn command docs:toc
-#   artifacts:
-#     paths:
-#     - packages/*/README.md
-#   tags:
-#    - node
+docs:
+  stage: docs
+  script:
+    - yarn command docs:readme
+    - yarn command docs:jsdoc
+    - yarn command docs:toc
+  artifacts:
+    paths:
+    - packages/*/README.md
+    - packages/*/API.md
+  tags:
+   - node
 
 publish:
   stage: publish
   image: cenk1cenk2/drone-semantic-release
   variables:
     PLUGIN_GIT_METHOD: gl
-    PLUGIN_ADD_MODULES: "@qiwi/multi-semantic-release @semantic-release/gitlab"
+    PLUGIN_MODE: release
+    PLUGIN_ADD_MODULES: "multi-semantic-release @semantic-release/gitlab"
     PLUGIN_OVERRIDE: multi-semantic-release --sequential-init
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
@@ -86,7 +69,7 @@ publish:
     PLUGIN_NPM_USERNAME: $NPM_WS_USERNAME
     PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
     PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL
-    npm_config_loglevel: verbose
+    # npm_config_loglevel: verbose
     # PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
   before_script:
