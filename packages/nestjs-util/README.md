@@ -43,6 +43,8 @@ This repository now uses conventional commits since it's monorepo structure. On 
   - [Exception-Filters](#exception-filters)
     - [Http](#http)
     - [Bad-Request](#bad-request)
+    - [GraphQL Error Parser](#graphql-error-parser)
+    - [RPC Global Exception](#rpc-global-exception)
   - [Cache-Lifetime](#cache-lifetime)
   - [Request-Profiler](#request-profiler)
 - [Stay in touch](#stay-in-touch)
