@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.0.1...@webundsoehne/nestjs-util@2.1.0) (2020-11-26)
+
+
+### Features
+
+* bump all ([f44d875](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f44d8759906a5c0050c7b711e3f1a923b3303ca3))
+
 ## @webundsoehne/nestjs-util [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.0.0...@webundsoehne/nestjs-util@2.0.1) (2020-11-26)
 
 
