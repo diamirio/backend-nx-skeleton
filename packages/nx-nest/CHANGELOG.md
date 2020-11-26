@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-nest [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.0.1...@webundsoehne-private/nx-nest@1.0.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* retry ([8c900e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8c900e6c2ecbefeb0a7b5d691d978566fd7ec8ab))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 2.0.5
+* **@webundsoehne/nx-tools:** upgraded to 2.0.0
+
 ## @webundsoehne-private/nx-nest [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.0.0...@webundsoehne-private/nx-nest@1.0.1) (2020-11-26)
 
 
