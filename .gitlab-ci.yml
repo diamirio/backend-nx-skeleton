@@ -6,7 +6,6 @@ stages:
   - build
   - docs
   - publish
-  - publish-private
 
 cache:
   paths:
@@ -79,39 +78,9 @@ publish:
   image: cenk1cenk2/drone-semantic-release
   variables:
     PLUGIN_GIT_METHOD: gl
-    PLUGIN_MODE: predict
-    PLUGIN_ADD_MODULES: "semantic-release-monorepo @semantic-release/gitlab"
-    PLUGIN_OVERRIDE: npx --no-install lerna exec --scope="@webundsoehne/*" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
-    PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
-    PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
-    PLUGIN_UPDATE_README_TOC: "false"
-    # PLUGIN_NPM_USERNAME: $NPM_WS_USERNAME
-    # PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
-    # PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL
-    npm_config_loglevel: verbose
-    PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
-    DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
-  before_script:
-    - apk add --no-cache --no-progress rsync
-    - rsync -a $CI_PROJECT_DIR/ /drone/src/
-    - cd /drone/src
-  script:
-    - /semantic-release/release.sh
-  after_script:
-    - rsync -a /drone/src/ $CI_PROJECT_DIR/
-  only:
-    - master
-  tags:
-    - node
-
-publish-private:
-  stage: publish-private
-  image: cenk1cenk2/drone-semantic-release
-  variables:
-    PLUGIN_GIT_METHOD: gl
-    PLUGIN_MODE: predict
-    PLUGIN_ADD_MODULES: "semantic-release-monorepo @semantic-release/gitlab"
-    PLUGIN_OVERRIDE: npx --no-install lerna exec --scope="@webundsoehne-private/*" --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo
+    PLUGIN_MODE: release
+    PLUGIN_ADD_MODULES: "multi-semantic-release @semantic-release/gitlab"
+    PLUGIN_OVERRIDE: multi-semantic-release
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: "false"
