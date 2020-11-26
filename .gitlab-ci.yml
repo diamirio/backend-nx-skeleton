@@ -80,7 +80,7 @@ publish:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: release
     PLUGIN_ADD_MODULES: "multi-semantic-release @semantic-release/gitlab"
-    PLUGIN_OVERRIDE: multi-semantic-release --dry-run --sequential-init --debug
+    PLUGIN_OVERRIDE: multi-semantic-release --sequential-init --debug
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: "false"
