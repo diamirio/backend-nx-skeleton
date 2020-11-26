@@ -2,13 +2,12 @@ const addChannelNpm = require('@semantic-release/npm/lib/add-channel')
 const getPkg = require('@semantic-release/npm/lib/get-pkg')
 const prepareNpm = require('@semantic-release/npm/lib/prepare')
 const publishNpm = require('@semantic-release/npm/lib/publish')
-const verifyNpmAuth = require('@semantic-release/npm/lib/verify-auth')
 const verifyNpmConfig = require('@semantic-release/npm/lib/verify-config')
 const AggregateError = require('aggregate-error')
 const { defaultTo, castArray } = require('lodash')
 const tempy = require('tempy')
 
-const setLegacyToken = require('./lib/set-legacy-token')
+const verifyNpmAuth = require('.lib/verify-auth')
 
 const npmrc = tempy.file({ name: '.npmrc' })
 
@@ -24,6 +23,7 @@ async function verifyConditions (pluginConfig, context) {
 }
 
 async function prepare (pluginConfig, context) {
+  console.log(`Generated new .npmrc for ${context.cwd} with ${npmrc}.`)
   await prepareNpm(npmrc, pluginConfig, context)
 }
 
@@ -42,8 +42,6 @@ async function addChannel (pluginConfig, context) {
 }
 
 async function internalVerify (pluginConfig, context) {
-  setLegacyToken(context)
-
   let pkg
   const errors = verifyNpmConfig(pluginConfig)
 

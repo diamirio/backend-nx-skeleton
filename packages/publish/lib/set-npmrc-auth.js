@@ -6,13 +6,13 @@ const path = require('path')
 const rc = require('rc')
 const getAuthToken = require('registry-auth-token')
 
-module.exports = async (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CONFIG_USERCONFIG, NPM_USERNAME, NPM_PASSWORD, NPM_EMAIL }, logger }) => {
-  logger.log('Verify authentication for registry %s', registry)
+module.exports = async (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CONFIG_USERCONFIG, NPM_USERNAME, NPM_PASSWORD, NPM_EMAIL } }) => {
+  console.info(`Verify authentication for registry ${registry} for cwd ${cwd}.`)
 
   const { configs, ...rcConfig } = rc('npm', { registry: 'https://registry.npmjs.org/' }, { config: NPM_CONFIG_USERCONFIG || path.resolve(cwd, '.npmrc') })
 
   if (configs) {
-    logger.log('Reading npm config from %s', configs.join(', '))
+    console.info(`Reading npm config from: ${configs.join(', ')}`)
   }
 
   const currentConfig = configs ? (await Promise.all(configs.map((config) => readFile(config)))).join('\n') : ''
@@ -23,13 +23,17 @@ module.exports = async (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CONFIG_USE
   }
 
   if (NPM_USERNAME && NPM_PASSWORD && NPM_EMAIL) {
-    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = \${LEGACY_TOKEN}\nemail = \${NPM_EMAIL}`)
+    console.info('Will generate token from username, password, email.')
 
-    logger.log(`Wrote NPM_USERNAME, NPM_PASSWORD and NPM_EMAIL to ${npmrc}`)
+    const TOKEN = Buffer.from(`${NPM_USERNAME}:${NPM_PASSWORD}`, 'utf8').toString('base64')
+
+    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = ${TOKEN}\nemail = ${NPM_EMAIL}`)
+
+    console.info(`Wrote NPM_USERNAME, NPM_PASSWORD and NPM_EMAIL to ${npmrc}`)
   } else if (NPM_TOKEN) {
-    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}${nerfDart(registry)}:_authToken = \${NPM_TOKEN}`)
+    await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}${nerfDart(registry)}:_authToken = ${NPM_TOKEN}`)
 
-    logger.log(`Wrote NPM_TOKEN to ${npmrc}`)
+    console.info(`Wrote NPM_TOKEN to ${npmrc}`)
   } else {
     throw new AggregateError([ getError('ENONPMTOKEN', { registry }) ])
   }
