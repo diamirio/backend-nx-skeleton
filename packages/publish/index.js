@@ -7,7 +7,7 @@ const AggregateError = require('aggregate-error')
 const { defaultTo, castArray } = require('lodash')
 const tempy = require('tempy')
 
-const verifyNpmAuth = require('.lib/verify-auth')
+const verifyNpmAuth = require('./lib/verify-auth')
 
 const npmrc = tempy.file({ name: '.npmrc' })
 
