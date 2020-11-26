@@ -1,3 +1,13 @@
+## @webundsoehne/brownie [1.0.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.0.8...@webundsoehne/brownie@1.0.9) (2020-11-26)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.0.0
+
 ## @webundsoehne/brownie [1.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.0.7...@webundsoehne/brownie@1.0.8) (2020-11-26)
 
 
