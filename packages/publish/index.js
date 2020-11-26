@@ -46,7 +46,7 @@ async function addChannel (pluginConfig, context) {
 
 async function internalVerify (pluginConfig, context) {
   let pkg
-  const errors = verifyNpmConfig(pluginConfig)
+  const errors = verifyNpmConfig(pluginConfig) ?? []
 
   try {
     // Reload package.json in case a previous external step updated it
@@ -55,7 +55,11 @@ async function internalVerify (pluginConfig, context) {
       await verifyNpmAuth(context.INJECT_NPM_RC, pkg, context)
     }
   } catch (error) {
-    errors.push(...error)
+    if (Array.isArray(error)) {
+      errors.push(...error)
+    } else {
+      errors.push(error)
+    }
   }
 
   if (errors.length > 0) {
