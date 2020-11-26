@@ -30,6 +30,7 @@ async function publish (pluginConfig, context) {
 
   const pkg = internalVerify(pluginConfig, context)
 
+  console.log(pkg)
   return publishNpm(npmrc, pluginConfig, pkg, context)
 }
 
