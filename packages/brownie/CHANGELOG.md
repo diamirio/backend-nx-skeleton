@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [1.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.0.5...@webundsoehne/brownie@1.0.6) (2020-11-26)
+
+
+### Bug Fixes
+
+* change lock mechanism ([99f3d4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/99f3d4bc0ed72841b2eb0e36d55d6f57da80a528))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.0.0
+
 ## @webundsoehne/brownie [1.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.0.4...@webundsoehne/brownie@1.0.5) (2020-11-25)
 
 
