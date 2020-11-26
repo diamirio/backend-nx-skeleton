@@ -31,6 +31,8 @@ async function prepare (pluginConfig, context) {
 }
 
 async function publish (pluginConfig, context) {
+  console.info(`Publishing against rc file for ${context.cwd}: ${context.INJECT_NPM_RC ?? 'unknown'}`)
+
   await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
 
   const pkg = await internalVerify(pluginConfig, context)
@@ -45,8 +47,6 @@ async function addChannel (pluginConfig, context) {
 }
 
 async function internalVerify (pluginConfig, context) {
-  console.info(`Verifying against rc file: ${context.INJECT_NPM_RC ?? 'unknown'}`)
-
   let pkg
   const errors = verifyNpmConfig(pluginConfig) ?? []
 
