@@ -33,6 +33,13 @@
 
 * try the old way of publishing as well ([efdd3c2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/efdd3c24e098333cd74205b9dd2afa3fcf02afea))
 
+## @webundsoehne/nestjs-util [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.0.0...@webundsoehne/nestjs-util@2.0.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* try the old way of publishing as well ([efdd3c2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/efdd3c24e098333cd74205b9dd2afa3fcf02afea))
+
 # @webundsoehne/nestjs-util [2.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@1.0.0...@webundsoehne/nestjs-util@2.0.0) (2020-11-25)
 
 
