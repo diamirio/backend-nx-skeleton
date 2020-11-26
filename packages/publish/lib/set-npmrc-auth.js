@@ -27,6 +27,7 @@ module.exports = async (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CONFIG_USE
 
     const TOKEN = Buffer.from(`${NPM_USERNAME}:${NPM_PASSWORD}`, 'utf8').toString('base64')
 
+    console.log(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = ${TOKEN}\nemail = ${NPM_EMAIL}`)
     await outputFile(npmrc, `${currentConfig ? `${currentConfig}\n` : ''}_auth = ${TOKEN}\nemail = ${NPM_EMAIL}`)
 
     console.info(`Wrote NPM_USERNAME, NPM_PASSWORD and NPM_EMAIL to ${npmrc}`)
