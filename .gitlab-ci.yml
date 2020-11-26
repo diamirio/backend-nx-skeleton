@@ -95,7 +95,6 @@ publish:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
-    - git pull
   script:
     - /semantic-release/release.sh
   after_script:
@@ -126,7 +125,6 @@ publish-private:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
-    - git pull
   script:
     - /semantic-release/release.sh
   after_script:
