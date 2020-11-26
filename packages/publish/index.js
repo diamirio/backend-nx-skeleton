@@ -18,30 +18,29 @@ async function verifyConditions (pluginConfig, context) {
     pluginConfig.tarballDir = defaultTo(pluginConfig.tarballDir, publishPlugin.tarballDir)
     pluginConfig.pkgRoot = defaultTo(pluginConfig.pkgRoot, publishPlugin.pkgRoot)
   }
+
+  const npmrc = tempy.file({ name: '.npmrc' })
+  console.log(`Generated new .npmrc for ${context.cwd} with ${npmrc}.`)
+
+  pluginConfig.INJECT_NPM_RC = npmrc
 }
 
 async function prepare (pluginConfig, context) {
-  const npmrc = tempy.file({ name: '.npmrc' })
-
-  context.INJECT_NPM_RC = npmrc
-
-  console.log(`Generated new .npmrc for ${context.cwd} with ${npmrc}.`)
-
-  await prepareNpm(npmrc, pluginConfig, context)
+  await prepareNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, context)
 }
 
 async function publish (pluginConfig, context) {
-  await prepareNpm(context.INJECT_NPM_RC, pluginConfig, context)
+  await prepareNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, context)
 
   const pkg = await internalVerify(pluginConfig, context)
 
-  return publishNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return publishNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, pkg, context)
 }
 
 async function addChannel (pluginConfig, context) {
   const pkg = await internalVerify(pluginConfig, context)
 
-  return addChannelNpm(context.INJECT_NPM_RC, pluginConfig, pkg, context)
+  return addChannelNpm(pluginConfig.INJECT_NPM_RC, pluginConfig, pkg, context)
 }
 
 async function internalVerify (pluginConfig, context) {
@@ -52,7 +51,7 @@ async function internalVerify (pluginConfig, context) {
     // Reload package.json in case a previous external step updated it
     pkg = await getPkg(pluginConfig, context)
     if (pluginConfig.npmPublish !== false && pkg.private !== true) {
-      await verifyNpmAuth(context.INJECT_NPM_RC, pkg, context)
+      await verifyNpmAuth(pluginConfig.INJECT_NPM_RC, pkg, context)
     }
   } catch (error) {
     if (Array.isArray(error)) {
