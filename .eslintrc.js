@@ -1,5 +1,8 @@
 module.exports = {
   extends: [ './packages/eslint-config/index', './packages/eslint-config/typescript' ],
+  parserOptions: {
+    ecmaVersion: 8
+  },
   rules: {
     'import/order': [
       'error',

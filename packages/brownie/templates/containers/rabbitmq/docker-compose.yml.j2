@@ -1,7 +1,7 @@
 services:
   {{ name }}:
     {% filter indent(4, true) %}
-      {% set image = 'rabbitmq:3-management-alpine:latest' %}
+      {% set image = 'rabbitmq:3-management-alpine' %}
       {% include '../../base/image.yml.j2' %}
     {% endfilter %}
 
