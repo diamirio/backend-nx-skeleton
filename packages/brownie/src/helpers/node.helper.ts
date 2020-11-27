@@ -80,7 +80,7 @@ export class NodeHelper {
 
                   const envParser = [
                     {
-                      condition: currentPkg.registry,
+                      condition: !!currentPkg.registry,
                       arg: PackageManagerUsableCommands.REGISTRY,
                       val: currentPkg.registry
                     }
@@ -88,7 +88,7 @@ export class NodeHelper {
 
                   const env = envParser.reduce((o, e) => {
                     if (e.condition ?? true) {
-                      o = { ...o, [e.arg]: e.val }
+                      o = { ...o, [PackageManagerCommands[this.manager][e.arg]]: e.val }
                     }
 
                     return o
@@ -97,7 +97,7 @@ export class NodeHelper {
                   const pkgWithVersion = options.useLatest ? `${currentPkg.pkg}@${currentPkg.latest ?? 'latest'}` : currentPkg.pkg
 
                   const args = [ ...command, pkgWithVersion ]
-                  this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o', this.manager, args, packages)
+                  this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o, env: %o', this.manager, args, packages, env)
 
                   await pipeProcessThroughListr(
                     task,
