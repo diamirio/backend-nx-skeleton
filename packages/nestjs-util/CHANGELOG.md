@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.1...@webundsoehne/nestjs-util@2.1.2) (2020-11-27)
+
+
+### Bug Fixes
+
+* export microservice related stuff from another index since it breaks typescript as a peer ([85c68a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/85c68a27945ea9e77c1f353b8c2c2ae11895f4d4))
+
 ## @webundsoehne/nestjs-util [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.0...@webundsoehne/nestjs-util@2.1.1) (2020-11-26)
 
 
