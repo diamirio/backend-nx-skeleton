@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.1...@webundsoehne/nx-tools@2.1.2) (2020-11-27)
+
+
+### Bug Fixes
+
+* fix again for searching deps ([14d9b19](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/14d9b191bb433dce14a00ca28afc131b4d440c53))
+
 ## @webundsoehne/nx-tools [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.0...@webundsoehne/nx-tools@2.1.1) (2020-11-26)
 
 
