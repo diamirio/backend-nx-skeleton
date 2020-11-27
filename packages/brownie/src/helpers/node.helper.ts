@@ -72,7 +72,7 @@ export class NodeHelper {
                   ]
 
                   argumentParser.forEach((a) => {
-                    if (a.condition ?? true) {
+                    if (a.condition) {
                       const cmd = PackageManagerCommands[this.manager][a.arg]
                       command.push(cmd)
                     }
@@ -146,7 +146,7 @@ export class NodeHelper {
 
     // set default cwd
     if (!options?.cwd) {
-      options.cwd = process.cwd()
+      options.cwd = join(process.cwd(), 'node_modules')
     }
 
     // better to have cwd as array to look for multiple places
@@ -157,6 +157,12 @@ export class NodeHelper {
     if (!Array.isArray(pkg)) {
       pkg = [ pkg ]
     }
+
+    this.cmd.logger.debug(
+      'Searching for deps %o in cwd %o.',
+      pkg.map((p) => typeof p === 'string' ? p : p.pkg),
+      options.cwd
+    )
 
     // ugly function need refactoring
     return Promise.all(

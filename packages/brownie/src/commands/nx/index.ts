@@ -8,7 +8,7 @@ import { EOL } from 'os'
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
-import { PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
+import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
 
 export class NxCommand extends BaseCommand<Configuration> {
@@ -59,9 +59,13 @@ export class NxCommand extends BaseCommand<Configuration> {
       {
         title: 'Checking whether this package is already installed.',
         task: async (ctx, task): Promise<void> => {
-          const pkg = (await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, { getVersion: true, getUpdate: true })).find(
-            (p) => p.pkg === ctx.prompts.schematic.pkg
-          )
+          const pkg = (
+            await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, {
+              getVersion: true,
+              getUpdate: true,
+              global: false
+            })
+          ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
 
           if (!pkg.installed) {
             ctx.packages = [ ...ctx.packages, pkg.parsable ]
@@ -80,9 +84,9 @@ export class NxCommand extends BaseCommand<Configuration> {
           this.helpers.node.packageManager(
             {
               action: PackageManagerUsableCommands.ADD,
-              global: true,
               force: true,
-              useLatest: true
+              useLatest: true,
+              type: PackageManagerDependencyTypes.DEVELOPMENT
             },
             ctx.packages
           )
