@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [1.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.4...@webundsoehne/brownie@1.2.5) (2020-11-27)
+
+
+### Bug Fixes
+
+* fix again for searching deps ([14d9b19](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/14d9b191bb433dce14a00ca28afc131b4d440c53))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.2
+
 ## @webundsoehne/brownie [1.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.3...@webundsoehne/brownie@1.2.4) (2020-11-27)
 
 
