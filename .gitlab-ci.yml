@@ -61,7 +61,7 @@ publish:
   variables:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: release
-    PLUGIN_ADD_MODULES: "multi-semantic-release @semantic-release/gitlab"
+    PLUGIN_ADD_MODULES: "@qiwi/multi-semantic-release @semantic-release/gitlab"
     PLUGIN_OVERRIDE: multi-semantic-release --sequential-init
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
