@@ -152,6 +152,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           },
 
           {
+            skip: (): boolean => flags['skip-updates'],
             task: (ctx): Listr =>
               this.helpers.node.packageManager(
                 {

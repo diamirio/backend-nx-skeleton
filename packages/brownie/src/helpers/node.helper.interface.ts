@@ -38,7 +38,7 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REMOVE]: 'uninstall',
     [PackageManagerUsableCommands.DEVELOPMENT]: '--save-dev',
     [PackageManagerUsableCommands.FORCE]: '--force',
-    [PackageManagerUsableCommands.REGISTRY]: '--registry'
+    [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry'
   },
   [AvailablePackageManagers.YARN]: {
     [PackageManagerUsableCommands.GLOBAL]: 'global',
@@ -46,7 +46,7 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REMOVE]: 'remove',
     [PackageManagerUsableCommands.DEVELOPMENT]: '-D',
     [PackageManagerUsableCommands.FORCE]: '--force',
-    [PackageManagerUsableCommands.REGISTRY]: '--registry'
+    [PackageManagerUsableCommands.REGISTRY]: 'YARN_REGISTRY'
   }
 }
 

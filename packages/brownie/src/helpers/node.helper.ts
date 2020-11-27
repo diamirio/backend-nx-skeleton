@@ -64,25 +64,22 @@ export class NodeHelper {
                   const command: string[] = []
 
                   const argumentParser = [
-                    { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
-                    { condition: options.force, arg: PackageManagerUsableCommands.FORCE },
-                    { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
                     {
                       condition: currentPkg.registry,
                       arg: PackageManagerUsableCommands.REGISTRY,
                       val: currentPkg.registry
                     },
+                    { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
+                    { condition: options.force, arg: PackageManagerUsableCommands.FORCE },
+                    { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
                     { condition: options.action === PackageManagerUsableCommands.ADD, arg: PackageManagerUsableCommands.ADD },
                     { condition: options.action === PackageManagerUsableCommands.REMOVE, arg: PackageManagerUsableCommands.REMOVE }
                   ]
 
                   argumentParser.forEach((a) => {
                     if (a.condition) {
-                      command.push(PackageManagerCommands[this.manager][a.arg])
-                    }
-
-                    if (a?.val) {
-                      command.push(a.val)
+                      const cmd = PackageManagerCommands[this.manager][a.arg]
+                      command.push(!a.val ? cmd : `${cmd}=${a.val}`)
                     }
                   })
 
