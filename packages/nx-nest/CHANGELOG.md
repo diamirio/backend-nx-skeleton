@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.4...@webundsoehne-private/nx-nest@1.1.5) (2020-11-27)
+
+
+### Bug Fixes
+
+* microservice-provider fixes for new nestjsutils ([87cb681](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/87cb681de721fec43ce73145324dace0b8b95aa8))
+
 ## @webundsoehne-private/nx-nest [1.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.3...@webundsoehne-private/nx-nest@1.1.4) (2020-11-27)
 
 
