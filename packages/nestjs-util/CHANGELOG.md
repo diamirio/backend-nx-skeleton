@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.2...@webundsoehne/nestjs-util@2.1.3) (2020-11-27)
+
+
+### Bug Fixes
+
+* microservice-provider fixes for new nestjsutils ([87cb681](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/87cb681de721fec43ce73145324dace0b8b95aa8))
+
 ## @webundsoehne/nestjs-util [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.1...@webundsoehne/nestjs-util@2.1.2) (2020-11-27)
 
 
