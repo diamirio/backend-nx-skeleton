@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.0...@webundsoehne/nestjs-util@2.1.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
+
 # @webundsoehne/nestjs-util [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.0.1...@webundsoehne/nestjs-util@2.1.0) (2020-11-26)
 
 

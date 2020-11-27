@@ -1,3 +1,24 @@
+# @webundsoehne/brownie [1.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.1.0...@webundsoehne/brownie@1.2.0) (2020-11-26)
+
+
+### Bug Fixes
+
+* add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
+* cleanup and changelogs ([a44fc4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a44fc4b0e74b66c6a75109436f710dec803cd2e9))
+
+
+### Features
+
+* just bump to solve collision ([940d1a5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/940d1a5c574166cb24fab90a9c1fba0d247d6556))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.1
+
 # @webundsoehne/brownie [1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.0.24...@webundsoehne/brownie@1.1.0) (2020-11-26)
 
 ### Features
