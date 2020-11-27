@@ -25,25 +25,25 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`cenk1cenk2 config:workspace`](#cenk1cenk2-configworkspace)
-* [`cenk1cenk2 docker`](#cenk1cenk2-docker)
-* [`cenk1cenk2 gitlab`](#cenk1cenk2-gitlab)
-* [`cenk1cenk2 help [COMMAND]`](#cenk1cenk2-help-command)
-* [`cenk1cenk2 nx`](#cenk1cenk2-nx)
-* [`cenk1cenk2 workspace`](#cenk1cenk2-workspace)
+* [`brownie config:workspace`](#brownie-configworkspace)
+* [`brownie docker`](#brownie-docker)
+* [`brownie gitlab`](#brownie-gitlab)
+* [`brownie help [COMMAND]`](#brownie-help-command)
+* [`brownie nx`](#brownie-nx)
+* [`brownie workspace`](#brownie-workspace)
 
-## `cenk1cenk2 config:workspace`
-
-```
-USAGE
-  $ cenk1cenk2 config:workspace
-```
-
-## `cenk1cenk2 docker`
+## `brownie config:workspace`
 
 ```
 USAGE
-  $ cenk1cenk2 docker
+  $ brownie config:workspace
+```
+
+## `brownie docker`
+
+```
+USAGE
+  $ brownie docker
 
 OPTIONS
   -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
@@ -52,21 +52,21 @@ OPTIONS
   -v, --volume                         Use optional persistent volumes with the containers.
 ```
 
-## `cenk1cenk2 gitlab`
+## `brownie gitlab`
 
 ```
 USAGE
-  $ cenk1cenk2 gitlab
+  $ brownie gitlab
 
 ALIASES
-  $ cenk1cenk2 ci
+  $ brownie ci
 ```
 
-## `cenk1cenk2 help [COMMAND]`
+## `brownie help [COMMAND]`
 
 ```
 USAGE
-  $ cenk1cenk2 help [COMMAND]
+  $ brownie help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -77,28 +77,28 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `cenk1cenk2 nx`
+## `brownie nx`
 
 ```
 USAGE
-  $ cenk1cenk2 nx
+  $ brownie nx
 
 OPTIONS
   -a, --arguments     Enable prompt for passing in arguments.
   -s, --skip-updates  Skip the dependency updates.
 ```
 
-## `cenk1cenk2 workspace`
+## `brownie workspace`
 
 ```
 USAGE
-  $ cenk1cenk2 workspace
+  $ brownie workspace
 
 OPTIONS
   -f, --force         Force override for schematic.
   -s, --skip-updates  Skip the dependency updates.
 
 ALIASES
-  $ cenk1cenk2 ws
+  $ brownie ws
 ```
 <!-- commandsstop -->
