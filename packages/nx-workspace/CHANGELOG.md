@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@1.0.1...@webundsoehne-private/nx-workspace@1.0.2) (2020-11-27)
+
+
+### Bug Fixes
+
+* fix linting setup update the install method ([da1c66e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da1c66eab971d3839de2d218a176329de52eac23))
+
 ## @webundsoehne-private/nx-workspace [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@1.0.0...@webundsoehne-private/nx-workspace@1.0.1) (2020-11-26)
 
 
