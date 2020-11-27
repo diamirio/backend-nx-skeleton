@@ -53,7 +53,7 @@
   ],
   "oclif": {
     "commands": "./dist/commands",
-    "bin": "cenk1cenk2",
+    "bin": "brownie",
     "plugins": [
       "@oclif/plugin-help"
     ],
@@ -68,7 +68,7 @@
   },
   "keywords": [
     "oclif",
-    "cenk1cenk2"
+    "brownie"
   ],
   "dependencies": {
     "@cenk1cenk2/boilerplate-oclif": "^1.5.0",
