@@ -17,7 +17,8 @@
     "lint:staged": "yarn command --concurrency 1 lint:staged",
     "docs:jsdoc": "yarn command --no-bail docs:jsdoc",
     "scripts:link": "./scripts/link-packages.sh",
-    "scripts:workspace": "./scripts/link-packages-to-workspace.sh"
+    "scripts:workspace": "./scripts/link-packages-to-workspace.sh",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "workspaces": {
     "packages": [

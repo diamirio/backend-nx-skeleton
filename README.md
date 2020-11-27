@@ -9,6 +9,22 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 A set of schematics and tools that provides the basis for fast template scaffolding base on the [@nrwl/nx](https://github.com/nrwl/nx).
 
 <!-- toc -->
+
+- [Packages](#packages)
+  - [brownie - @webundsoehne/brownie](#brownie---webundsoehnebrownie)
+  - [eslint-config - @webundsoehne/eslint-config](#eslint-config---webundsoehneeslint-config)
+  - [nestjs-util - @webundsoehne/nestjs-util](#nestjs-util---webundsoehnenestjs-util)
+  - [nx-builders - @webundsoehne/nx-builders](#nx-builders---webundsoehnenx-builders)
+  - [nx-nest - @webundsoehne-private/nx-nest](#nx-nest---webundsoehne-privatenx-nest)
+  - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
+  - [nx-workspace - @webundsoehne-private/nx-workspace](#nx-workspace---webundsoehne-privatenx-workspace)
+- [Further Development](#further-development)
+  - [Docker Setup](#docker-setup)
+    - [CLI-Script](#cli-script)
+  - [Scripts](#scripts)
+  - [Package Manager](#package-manager)
+  - [Versioning of Individual Packages](#versioning-of-individual-packages)
+
 <!-- tocstop -->
 
 ---
@@ -81,11 +97,11 @@ The image uses s6-overlay to monitor the crashes and will run `dev:start` for ea
 
 There are couple of scripts in the scripts folder:
 
-- `./scripts/link-packages.sh` link | unlink
+- `./scripts/link-packages.sh [link | unlink]`
 
   > Will link all the packages inside the packages folder.
 
-- `./link-packages-to-workspace.sh` \${PWD_OF_MOCK_PROJECT} link | unlink
+- `./link-packages-to-workspace.sh \${PWD_OF_MOCK_PROJECT} [link | unlink]`
   > Copy this script to somewhere else for easily creating a new empty workspace in the designated folder to test out the schematics.
 
 ## Package Manager
@@ -93,3 +109,16 @@ There are couple of scripts in the scripts folder:
 `yarn` must be used due to its support of `resolutions` field in the `package.json` as well as this repository being configured for `yarn workspaces`.
 
 `@angular` scoped packages have inconsistencies between similar versions due to utilizing different versioned sub-packages. In the development process you can get over this with fixing the package versions utilizing `resolutions` in the root `package.json`.
+
+## Versioning of Individual Packages
+
+This repository uses [semantic-release](https://github.com/semantic-release/semantic-release) to versioning of the indivudal packages. Since semantic-release is not intended for multiple packages at the same time it uses [multi-semantic-release](https://github.com/qiwi/multi-semantic-release#readme) on top of it.
+
+What it does is:
+
+- Goes through all the packages analyzes the commits and generate changelogs and decide next version for each.
+- Writes cross-dependency versions as pinned to avoid dependency problems to each package.
+- Release packages that have relevant commits on it filtering the commits to their own folder.
+- Closes issues dependending on the commits, comments them if they have been released in which version.
+
+`semantic-release` relies on [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/) commit format to decide through these changes. This is enforced through a `git` `prepare-commit-msg` hook to create a interactive menu to help you through the process.

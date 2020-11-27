@@ -48,6 +48,7 @@ docs:
     - yarn command docs:readme
     - yarn command docs:jsdoc
     - yarn command docs:toc
+    - yarn docs:toc
   artifacts:
     paths:
     - packages/*/README.md
