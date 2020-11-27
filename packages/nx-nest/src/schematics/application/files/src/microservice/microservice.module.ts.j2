@@ -1,4 +1,4 @@
-import { GlobalExceptionFilter, RpcGlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
+import { ConfigService, GlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
@@ -8,13 +8,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 {% if enum.components.MICROSERVICE_CLIENT in components %}
 import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
+import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util/dist/microservices'
 {% endif %}
-import {
-  ConfigService,
-  {% if enum.components.MICROSERVICE_CLIENT in components %}
-  MicroserviceProviderModule,
-  {% endif %}
-} from '@webundsoehne/nestjs-util'
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}

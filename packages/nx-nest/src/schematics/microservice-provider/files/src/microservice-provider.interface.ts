@@ -1,4 +1,4 @@
-import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util'
+import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util/dist/microservices'
 
 import { MessageQueues, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
 

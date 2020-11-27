@@ -45,8 +45,8 @@ export class MicroserviceProviderService<
   public async send<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request'],
-    ReturnValue extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+    Payload = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request'],
+    ReturnValue = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
   >(
     queue: Queue,
     pattern: Pattern,
