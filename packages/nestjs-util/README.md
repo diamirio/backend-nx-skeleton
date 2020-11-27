@@ -315,7 +315,7 @@ __Usage__
   - Define message request-response maps for given message patterns.
   ```typescript
   // interfaces/some-queue.interface.ts
-  import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util'
+  import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util/dist/microservices'
 
   import { MockPattern } from '../patterns'
 
@@ -344,7 +344,7 @@ __Usage__
   ```typescript
   // microservice-provider.interface.ts
   import { MessageQueues, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
-  import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util'
+  import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util/dist/microservices'
 
   /**
    * Helper type for microservice client.
@@ -410,7 +410,7 @@ __Usage__
 
 - Import the module itself and since the current default is RMQ, pass in the which queues you want to connect for this instance.
 ```typescript
-import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util'
+import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
 
  @Module({
    imports: [
@@ -436,6 +436,8 @@ export class DefaultService {
   }
 }
 ```
+
+**This module is exported from `@webundsoehne/nestjs-util/dist/microservices` and through index to not break compatability with the projects that does not have `@nestjs/microservices` installed.**
 
 ### Decorators
 Decorates provide a way to inject or override data on the function level.
@@ -600,10 +602,8 @@ __Usage__
 ```typescript
 import { Module } from '@nestjs/common'
 import { APP_FILTER } from '@nestjs/core'
-import {
-  GlobalExceptionFilter
-  RpcGlobalExceptionFilter,
-} from '@webundsoehne/nestjs-util'
+import { GlobalExceptionFilter } from '@webundsoehne/nestjs-util'
+import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util/dist/microservices'
 
 @Module({
     providers: [
@@ -626,6 +626,8 @@ import {
   return MicroservicesModule
 }
 ```
+
+**This module is exported from `@webundsoehne/nestjs-util/dist/microservices` and through index to not break compatability with the projects that does not have `@nestjs/microservices` installed.**
 
 ### Cache-Lifetime
 
