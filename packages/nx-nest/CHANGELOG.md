@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.2...@webundsoehne-private/nx-nest@1.1.3) (2020-11-27)
+
+
+### Bug Fixes
+
+* env variables for yarn-npm ([7a02e3a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7a02e3a9cd1c950ff5cfcdf20bd1299db6340465))
+
 ## @webundsoehne-private/nx-nest [1.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.1...@webundsoehne-private/nx-nest@1.1.2) (2020-11-27)
 
 
