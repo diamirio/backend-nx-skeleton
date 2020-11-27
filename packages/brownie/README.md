@@ -84,7 +84,8 @@ USAGE
   $ cenk1cenk2 nx
 
 OPTIONS
-  -a, --arguments  Enable prompt for passing in arguments.
+  -a, --arguments     Enable prompt for passing in arguments.
+  -s, --skip-updates  Skip the dependency updates.
 ```
 
 ## `cenk1cenk2 workspace`
