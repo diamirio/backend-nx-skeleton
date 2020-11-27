@@ -64,11 +64,6 @@ export class NodeHelper {
                   const command: string[] = []
 
                   const argumentParser = [
-                    {
-                      condition: currentPkg.registry,
-                      arg: PackageManagerUsableCommands.REGISTRY,
-                      val: currentPkg.registry
-                    },
                     { condition: options.global, arg: PackageManagerUsableCommands.GLOBAL },
                     { condition: options.force, arg: PackageManagerUsableCommands.FORCE },
                     { condition: options.type === PackageManagerDependencyTypes.DEVELOPMENT, arg: PackageManagerUsableCommands.DEVELOPMENT },
@@ -77,18 +72,41 @@ export class NodeHelper {
                   ]
 
                   argumentParser.forEach((a) => {
-                    if (a.condition) {
+                    if (a.condition ?? true) {
                       const cmd = PackageManagerCommands[this.manager][a.arg]
-                      command.push(!a.val ? cmd : `${cmd}=${a.val}`)
+                      command.push(cmd)
                     }
                   })
+
+                  const envParser = [
+                    {
+                      condition: currentPkg.registry,
+                      arg: PackageManagerUsableCommands.REGISTRY,
+                      val: currentPkg.registry
+                    }
+                  ]
+
+                  const env = envParser.reduce((o, e) => {
+                    if (e.condition ?? true) {
+                      o = { ...o, [e.arg]: e.val }
+                    }
+
+                    return o
+                  }, {})
 
                   const pkgWithVersion = options.useLatest ? `${currentPkg.pkg}@${currentPkg.latest ?? 'latest'}` : currentPkg.pkg
 
                   const args = [ ...command, pkgWithVersion ]
                   this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o', this.manager, args, packages)
 
-                  await pipeProcessThroughListr(task, execa(this.manager, args, { stdio: 'pipe', shell: true }))
+                  await pipeProcessThroughListr(
+                    task,
+                    execa(this.manager, args, {
+                      stdio: 'pipe',
+                      shell: true,
+                      env
+                    })
+                  )
                 }
               }))
             )
