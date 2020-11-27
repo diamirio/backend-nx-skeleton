@@ -1,3 +1,11 @@
+## @webundsoehne/brownie [1.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.1...@webundsoehne/brownie@1.2.2) (2020-11-27)
+
+
+### Bug Fixes
+
+* fix brownie name ([199c746](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/199c7461358c045174868c2a2d58ade3eb4b665d))
+* fix registry handling ([6656152](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/66561523a0e894244025a16e86cf7deb42914555))
+
 ## @webundsoehne/brownie [1.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.0...@webundsoehne/brownie@1.2.1) (2020-11-27)
 
 
