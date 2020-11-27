@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [1.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.3...@webundsoehne/brownie@1.2.4) (2020-11-27)
+
+
+### Bug Fixes
+
+* fix env problem with brownie ([246cf77](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/246cf771dd23e720717780403d719037489755a6))
+
 ## @webundsoehne/brownie [1.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.2...@webundsoehne/brownie@1.2.3) (2020-11-27)
 
 
