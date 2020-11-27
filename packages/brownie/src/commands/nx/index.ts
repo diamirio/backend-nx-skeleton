@@ -2,18 +2,26 @@ import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import chalk from 'chalk'
 import execa from 'execa'
-import { createPrompt } from 'listr2'
+import { createPrompt, Listr } from 'listr2'
 import { EOL } from 'os'
 
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
+import { PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
 
-  static flags = { arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }) }
+  static flags = {
+    'skip-updates': flags.boolean({
+      description: 'Skip the dependency updates.',
+      default: false,
+      char: 's'
+    }),
+    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' })
+  }
 
   private helpers: { node: NodeHelper }
 
@@ -66,18 +74,19 @@ export class NxCommand extends BaseCommand<Configuration> {
         }
       },
 
-      // {
-      //   task: (ctx): Listr =>
-      //     this.helpers.node.packageManager(
-      //       {
-      //         action: PackageManagerUsableCommands.ADD,
-      //         global: true,
-      //         force: true,
-      //         useLatest: true
-      //       },
-      //       ctx.packages
-      //     )
-      // },
+      {
+        skip: (): boolean => flags['skip-updates'],
+        task: (ctx): Listr =>
+          this.helpers.node.packageManager(
+            {
+              action: PackageManagerUsableCommands.ADD,
+              global: true,
+              force: true,
+              useLatest: true
+            },
+            ctx.packages
+          )
+      },
 
       {
         task: async (ctx, task): Promise<void> => {

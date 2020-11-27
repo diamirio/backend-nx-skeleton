@@ -18,7 +18,7 @@
     "test": "{{ cliCmd }} run-many --target=test --parallel --maxParallel=1000 --all",
     "test:one": "{{ cliCmd }} test",
     "test:e2e": "{{ cliCmd }} run-many --target=e2e --parallel --maxParallel=1000 --all",
-    "lint": "{{ cliCmd }} format:write --all && nx workspace-lint && yarn lint:check --fix",
+    "lint": "{{ cliCmd }} format:write --parallel --loglevel warn --all && nx workspace-lint && yarn lint:check --parallel --fix",
     "lint:check": "{{ cliCmd }} run-many --target=lint --all --",
     "affected": "nx affected",
     "affected:apps": "nx affected:apps",
