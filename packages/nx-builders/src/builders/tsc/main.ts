@@ -126,13 +126,13 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
           if (this.options.watch) {
             // if in watch mode just restart it
             this.logger.error('tsc-watch crashed restarting in 3 secs.')
-            this.logger.warn(error)
+            this.logger.debug(error)
 
             await delay(3000)
             await this.manager.stop()
             await this.run(subscriber).toPromise()
           } else {
-            subscriber.error(new Error(`Could not compile Typescript files:\n${error}`))
+            subscriber.error(new Error('Transpiling process has beeen crashed.'))
           }
         } finally {
           // clean up the zombies!
@@ -181,7 +181,8 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
     spawnOptions = {
       stdio: 'pipe',
       env: {
-        ...process.env
+        ...process.env,
+        ...this.options.environment
       }
     }
 
@@ -223,7 +224,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
         rules: [
           { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
           {
-            condition: this.options.sourceMap,
+            condition: !!this.options.sourceMap,
             args: [ '--sourceMap' ]
           },
           {

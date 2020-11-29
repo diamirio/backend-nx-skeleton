@@ -1,0 +1,49 @@
+{
+  "title": "Schema for Executing NodeJS apps",
+  "description": "NodeJS execution options",
+  "type": "object",
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "Current working directory run the command against."
+    },
+    "buildTarget": {
+      "type": "string",
+      "description": "The target to run to build you the app."
+    },
+    "runAfter": {
+      "type": "string",
+      "description": "Run after build has finished."
+    },
+    "waitUntilTargets": {
+      "type": "array",
+      "description": "The targets to run to before starting the node app",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Run build when files change",
+      "default": true
+    },
+    "keepAlive": {
+      "type": "boolean",
+      "description": "Run build when files change",
+      "default": true
+    },
+    "inject": {
+      "type": "object",
+      "description": "Extra args passed to the node process",
+      "default": {}
+    },
+    "env": {
+      "type": "object",
+      "description": "Extra args passed to the node process",
+      "default": {}
+    }
+  },
+  "additionalProperties": false,
+  "required": ["buildTarget"]
+}

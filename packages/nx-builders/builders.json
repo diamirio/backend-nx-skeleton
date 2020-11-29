@@ -11,6 +11,12 @@
       "implementation": "./dist/builders/tsc/main",
       "schema": "./dist/builders/tsc/schema.json",
       "description": "@webundsoehne-private/nx-nest:tsc"
+    },
+
+    "execute": {
+      "implementation": "./dist/builders/execute/main",
+      "schema": "./dist/builders/execute/schema.json",
+      "description": "@webundsoehne-private/nx-nest:execute"
     }
   }
 }

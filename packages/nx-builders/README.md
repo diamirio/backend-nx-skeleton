@@ -144,9 +144,18 @@ architect.build = {
 }
 
 architect.serve = {
-      builder: '@nrwl/node:execute',
+      builder: '@webundsoehne/nx-builders:execute',
       options: {
         buildTarget: '${options.name}:build'
+          // this will inject options to the tsc-watch builder
+        inject: {
+          // you have to have a valid command since this will be run inside the
+          runAfterWatch: 'yarn start -r source-map-support/register',
+          sourceMap: true,
+          environment: {
+            NODE_ENV: 'develop'
+          }
+        }
       }
   }
 }
@@ -197,5 +206,70 @@ architect.serve = {
       NODE_SERVICE: 'server'
     }
   }
+}
+```
+
+## execute
+
+Builder: `@webundsoehne/nx-builders:execute`
+
+This builder is a jumper to run another builders first then run a shell command in selected working directory if you so desire.
+
+### Configuration
+
+```typescript
+architect.anything = {
+  builder: '@webundsoehne/nx-builders:execute',
+  options: {
+    // ...
+  }
+}
+```
+
+These options are valid for this builder.
+
+- It will first run for `waitUntilTargets` to run builders in workspace.
+- It will then run `buildTarget` builder.
+  - You can inject options to `buildTarget` through `inject` key.
+- Then it will change to `cwd` if defined and run shell command `runAfter`.
+  - You can inject environment variables through `environment` key-
+
+```typescript
+**
+ * Options for execute
+ */
+export interface ExecuteBuilderOptions extends JsonObject {
+  /**
+   * Run the command in a working directory
+   */
+  cwd?: string
+  /**
+   * The target to build before starting the process
+   */
+  buildTarget: string
+  /**
+   * Run after the tasks has been finished building
+   */
+  runAfter?: string
+  /**
+   * Wait until targets to finish before executing
+   */
+  waitUntilTargets?: string[]
+  /**
+   * Watch parameter for passing in to the target
+   */
+  watch?: boolean
+  /**
+   * inject schematic options to the target
+   */
+  inject?: Record<string, any>
+  /**
+   * keep alive the process
+   */
+  keepAlive?: boolean
+  /**
+   * Inject env variables to the run after build
+   */
+  environment?: Record<string, string>
 }
 ```

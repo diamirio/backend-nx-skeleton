@@ -53,7 +53,10 @@ export interface TscBuilderOptions extends JsonObject {
    */
   packageJson?: string
 
-  updateBuildableProjectDepsInPackageJson?: boolean
+  /**
+   * inject environment variables to build process
+   */
+  environment?: Record<string, string>
 }
 
 export interface NormalizedBuilderOptions extends TscBuilderOptions {

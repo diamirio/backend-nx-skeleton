@@ -31,7 +31,7 @@
     "runAfterWatch": {
       "type": "string",
       "description": "Run after building in watch mode.",
-      "default": false
+      "default": ""
     },
     "sourceMap": {
       "type": "boolean",
@@ -42,6 +42,10 @@
       "type": "boolean",
       "description": "Update buildable project dependencies in package.json",
       "default": true
+    },
+    "environment": {
+      "type": "object",
+      "description": "Pass in additional environment variables for ts-node-dev."
     },
     "assets": {
       "type": "array",

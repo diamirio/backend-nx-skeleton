@@ -37,7 +37,7 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
         } catch (error) {
           // just restart it
           this.logger.error('ts-node-dev crashed restarting in 3 secs.')
-          this.logger.warn(error)
+          this.logger.debug(error)
 
           await delay(3000)
           await this.manager.stop()
