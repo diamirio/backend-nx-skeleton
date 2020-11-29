@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [2.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.2...@webundsoehne/nx-builders@2.1.3) (2020-11-29)
+
+
+### Bug Fixes
+
+* added execute builder as extra for tsc-watch ([05ebb68](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/05ebb682686e7f60ebda552d2f9e94ba070f3f2a))
+
 ## @webundsoehne/nx-builders [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.1...@webundsoehne/nx-builders@2.1.2) (2020-11-27)
 
 
