@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.3...@webundsoehne/nestjs-util@2.1.4) (2020-11-30)
+
+
+### Bug Fixes
+
+* update missing deps add back registry url fix boilerplate ([29dc7fc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/29dc7fc2ae74a9a7c92015a79386bb9e7139032a))
+
 ## @webundsoehne/nestjs-util [2.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.2...@webundsoehne/nestjs-util@2.1.3) (2020-11-27)
 
 
