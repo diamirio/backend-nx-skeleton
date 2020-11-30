@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.8...@webundsoehne-private/nx-nest@1.1.9) (2020-11-30)
+
+
+### Bug Fixes
+
+* added eslint ignore to ts-ignores to orm configurition, refactored jest config ([af71a2e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/af71a2eb6d4abf7fc6e35b9b7e1bfd23869f2824))
+
 ## @webundsoehne-private/nx-nest [1.1.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.7...@webundsoehne-private/nx-nest@1.1.8) (2020-11-30)
 
 
