@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [1.2.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.6...@webundsoehne/brownie@1.2.7) (2020-11-30)
+
+
+### Bug Fixes
+
+* workspace to peer ([67dc71f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/67dc71fac17c2ede212ffd6121f4ba87c24d2696))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.4
+
 ## @webundsoehne/brownie [1.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.5...@webundsoehne/brownie@1.2.6) (2020-11-30)
 
 
