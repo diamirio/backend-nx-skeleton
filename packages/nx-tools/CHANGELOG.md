@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [2.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.3...@webundsoehne/nx-tools@2.1.4) (2020-11-30)
+
+
+### Bug Fixes
+
+* workspace to peer ([67dc71f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/67dc71fac17c2ede212ffd6121f4ba87c24d2696))
+
 ## @webundsoehne/nx-tools [2.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.2...@webundsoehne/nx-tools@2.1.3) (2020-11-30)
 
 
