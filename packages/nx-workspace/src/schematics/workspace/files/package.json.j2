@@ -18,14 +18,14 @@
     "test": "{{ cliCmd }} run-many --target=test --parallel --maxParallel=1000 --all",
     "test:one": "{{ cliCmd }} test",
     "test:e2e": "{{ cliCmd }} run-many --target=e2e --parallel --maxParallel=1000 --all",
-    "lint": "{{ cliCmd }} format:write --parallel --loglevel warn --all && nx workspace-lint && yarn lint:check --parallel --fix",
-    "lint:check": "{{ cliCmd }} run-many --target=lint --all --",
+    "lint": "{{ cliCmd }} format:write --all && nx workspace-lint && yarn lint:check --fix",
+    "lint:check": "{{ cliCmd }} run-many --parallel --target=lint --all --",
     "affected": "nx affected",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:test": "nx affected:test",
-    "affected:lint": "nx format:write && nx affected:lint --all --fix",
+    "affected:lint": "nx format:write && nx affected:lint --parallel --all --fix",
     "affected:dep-graph": "nx affected:dep-graph",
     {% if cli == enum.cli.ANGULAR %}
     "update": "ng update @nrwl/workspace",
@@ -36,6 +36,11 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     {% if deps is defined and deps | length > 0 %}

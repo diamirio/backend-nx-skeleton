@@ -17,6 +17,7 @@ export const VERSIONS: Versions = {
       prettier: '^2.1.2',
       '@nrwl/jest': '^10.4.4',
       '@nrwl/linter': '^10.4.4',
+      'lint-staged': '^10.5.2',
       ...VERSION_CONSTANTS.eslint.dependencies,
       ...VERSION_CONSTANTS.eslint.devDependencies
     }
