@@ -208,7 +208,7 @@ export class NodeHelper {
             const mock = console.log
             // eslint-disable-next-line no-console
             console.log = (): void => null
-            const updatable = await notifier({ pkg: { name: currentPkg.pkg, version: o.version } }).checkNpm()
+            const updatable = await notifier({ pkg: { name: currentPkg.pkg, version: o.version }, registryUrl: currentPkg?.registry }).checkNpm()
             // eslint-disable-next-line no-console
             console.log = mock
 
