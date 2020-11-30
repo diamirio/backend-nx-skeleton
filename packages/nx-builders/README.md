@@ -27,6 +27,8 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for custo
       - [Watch Mode](#watch-mode)
   - [ts-node-dev](#ts-node-dev)
     - [Configuration](#configuration-1)
+  - [execute](#execute)
+    - [Configuration](#configuration-2)
 
 <!-- tocstop -->
 

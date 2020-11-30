@@ -1,3 +1,18 @@
+## @webundsoehne-private/nx-nest [1.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.5...@webundsoehne-private/nx-nest@1.1.6) (2020-11-29)
+
+
+### Bug Fixes
+
+* added execute builder as extra for tsc-watch ([05ebb68](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/05ebb682686e7f60ebda552d2f9e94ba070f3f2a))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 2.1.3
+
 ## @webundsoehne-private/nx-nest [1.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.4...@webundsoehne-private/nx-nest@1.1.5) (2020-11-27)
 
 
