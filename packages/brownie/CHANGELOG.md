@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [1.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.5...@webundsoehne/brownie@1.2.6) (2020-11-30)
+
+
+### Bug Fixes
+
+* update missing deps add back registry url fix boilerplate ([29dc7fc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/29dc7fc2ae74a9a7c92015a79386bb9e7139032a))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.3
+
 ## @webundsoehne/brownie [1.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.4...@webundsoehne/brownie@1.2.5) (2020-11-27)
 
 
