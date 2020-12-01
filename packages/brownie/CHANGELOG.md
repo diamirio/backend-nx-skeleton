@@ -1,3 +1,11 @@
+## @webundsoehne/brownie [1.2.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.7...@webundsoehne/brownie@1.2.8) (2020-12-01)
+
+
+### Bug Fixes
+
+* brownie fixed falling back to npm, set npm as default ([51a527d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/51a527dee629eb3355664c32391e513534c0f456))
+* fix global folder checking ([c94f363](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c94f3635024f9ccc3cfa3963694b69f4c749b857))
+
 ## @webundsoehne/brownie [1.2.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.6...@webundsoehne/brownie@1.2.7) (2020-11-30)
 
 
