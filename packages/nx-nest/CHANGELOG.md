@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.9...@webundsoehne-private/nx-nest@1.1.10) (2020-11-30)
+
+
+### Bug Fixes
+
+* update linting setup for generated package, add missing type ([f8e58a5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f8e58a51fe5a8854e9e38ae13e4cff738271dccd))
+
 ## @webundsoehne-private/nx-nest [1.1.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.8...@webundsoehne-private/nx-nest@1.1.9) (2020-11-30)
 
 
