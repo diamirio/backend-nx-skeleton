@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [2.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.4...@webundsoehne/nestjs-util@2.2.0) (2020-12-01)
+
+
+### Features
+
+* add microservice provider token injection on desire ([2f8be55](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2f8be55d35ada64877153d93d16c869cd6aad8db))
+
 ## @webundsoehne/nestjs-util [2.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.3...@webundsoehne/nestjs-util@2.1.4) (2020-11-30)
 
 
