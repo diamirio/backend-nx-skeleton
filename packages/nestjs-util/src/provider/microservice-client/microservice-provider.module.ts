@@ -20,7 +20,7 @@ export class MicroserviceProviderModule {
     const tokens = clients.map((c) => c.provide)
 
     const clientServices: FactoryProvider<MicroserviceProviderService<any, any, any>> = {
-      provide: MicroserviceProviderService,
+      provide: options?.name ? options.name : MicroserviceProviderService,
       useFactory: (...clients: ClientProviderOptions[]) => {
         // can not get the provider name in here so we have to inject it a bit stupidly
         return new MicroserviceProviderService(clients, tokens as string[])

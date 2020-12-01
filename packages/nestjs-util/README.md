@@ -423,19 +423,48 @@ import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/micr
 - This will automatically create a client service, `MicroserviceProviderService`, with the specified clients embeded inside.
 
 - Then you can use the client in any service by injecting it. Everything will be autotyped if you use the helper type as well.
-```typescript
-import { MicroserviceClient, MicroserviceResponse } from '@my-scope/my-common-package'
-import { Injectable, Inject } from '@nestjs/common'
+  - You can inject client service through its class.
+  ```typescript
+  import { MicroserviceClient, MicroserviceResponse, MicroserviceProviderService } from '@my-scope/my-common-package'
+  import { Injectable, Inject } from '@nestjs/common'
 
-@Injectable()
-export class DefaultService {
-  constructor (@Inject() private readonly msp: MicroserviceClient) {}
+  @Injectable()
+  export class DefaultService {
+    constructor (@Inject(MicroserviceProviderService) private readonly msp: MicroserviceClient) {}
 
-  public default (): Promise<MicroserviceResponse<queue, pattern>> {
-    return this.msp.send(queue, pattern, payload)
+    public default (): Promise<MicroserviceResponse<queue, pattern>> {
+      return this.msp.send(queue, pattern, payload)
+    }
   }
-}
-```
+  ```
+  - You can inject client service with a token of your choice that you can define while initializing the module.
+  ```typescript
+  // the service
+  import { MicroserviceClient, MicroserviceResponse } from '@my-scope/my-common-package'
+  import { Injectable, Inject } from '@nestjs/common'
+
+  @Injectable()
+  export class DefaultService {
+    constructor (@Inject('MY_CLIENT_TOKEN') private readonly msp: MicroserviceClient) {}
+
+    public default (): Promise<MicroserviceResponse<queue, pattern>> {
+      return this.msp.send(queue, pattern, payload)
+    }
+  }
+  ```
+  ```typescript
+  // the global module
+  import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
+
+  @Module({
+    name: 'MY_CLIENT_TOKEN'
+    imports: [
+        MicroserviceProviderModule.forRoot({ queue: [ ...THE_QUEUES_YOU_WANT_TO_IMPORT ] }),
+        ]
+    })
+  export class ServerModule {}
+  ```
+
 
 **This module is exported from `@webundsoehne/nestjs-util/dist/microservices` and through index to not break compatability with the projects that does not have `@nestjs/microservices` installed.**
 
