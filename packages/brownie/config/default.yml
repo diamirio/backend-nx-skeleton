@@ -10,7 +10,6 @@ workspace:
     - '@nrwl/cli'
     - '@nrwl/tao'
     - '@nrwl/workspace'
-    - '@angular-devkit/core'
-    - '@angular-devkit/schematics'
+    - '@angular/cli'
 
 package_registry: https://verdaccio.dev.webundsoehne.com

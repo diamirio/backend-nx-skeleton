@@ -19,7 +19,7 @@ import { Configuration } from '@interfaces/default-config.interface'
 import { NodeDependency } from '@src/interfaces/dependency.interface'
 
 export class NodeHelper {
-  public globalFolder: string[]
+  public globalFolder: string[] = []
   public manager: AvailablePackageManagers
   private ctx: NodeHelperCtx = { fail: {} }
 
@@ -36,7 +36,7 @@ export class NodeHelper {
       }
     })
 
-    this.manager = !this.ctx.fail?.yarn ? AvailablePackageManagers.YARN : AvailablePackageManagers.NPM
+    this.manager = !this.ctx.fail?.npm ? AvailablePackageManagers.NPM : AvailablePackageManagers.YARN
     cmd.logger.debug(`NodeHelper initiated with package manager: ${this.manager}`)
   }
 
@@ -130,15 +130,23 @@ export class NodeHelper {
     if (options?.global) {
       // these are the global folders that modules can be found
       if (!this.globalFolder) {
-        const yarnGlobalFolder = join(
-          (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
-          'node_modules'
-        )
-        const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
-        const npmGlobalFolder = join(
-          (await execa(AvailablePackageManagers.NPM, [ PackageManagerCommands[AvailablePackageManagers.NPM][PackageManagerUsableCommands.GLOBAL], 'root' ])).stdout
-        )
-        this.globalFolder = [ npmGlobalFolder, yarnGlobalFolder, yarnLinkFolder ]
+        if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
+          const yarnGlobalFolder = join(
+            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
+            'node_modules'
+          )
+          const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
+
+          this.globalFolder.push(yarnGlobalFolder, yarnLinkFolder)
+        }
+
+        if (!this.ctx.fail[AvailablePackageManagers.NPM]) {
+          const npmGlobalFolder = join(
+            (await execa(AvailablePackageManagers.NPM, [ PackageManagerCommands[AvailablePackageManagers.NPM][PackageManagerUsableCommands.GLOBAL], 'root' ])).stdout
+          )
+
+          this.globalFolder.push(npmGlobalFolder)
+        }
       }
 
       options.cwd = this.globalFolder
