@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.10...@webundsoehne-private/nx-nest@1.1.11) (2020-12-01)
+
+
+### Bug Fixes
+
+* brownie fixed falling back to npm, set npm as default ([51a527d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/51a527dee629eb3355664c32391e513534c0f456))
+
 ## @webundsoehne-private/nx-nest [1.1.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.9...@webundsoehne-private/nx-nest@1.1.10) (2020-11-30)
 
 
