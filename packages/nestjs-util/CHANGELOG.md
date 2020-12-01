@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.2.0...@webundsoehne/nestjs-util@2.2.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* negation deleted ([8a92046](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8a92046459b95635c8e4032d8418073649186523))
+
 # @webundsoehne/nestjs-util [2.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.1.4...@webundsoehne/nestjs-util@2.2.0) (2020-12-01)
 
 
