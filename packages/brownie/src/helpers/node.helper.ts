@@ -129,7 +129,7 @@ export class NodeHelper {
     // get the global modules folder with trickery
     if (options?.global) {
       // these are the global folders that modules can be found
-      if (!this.globalFolder) {
+      if (this.globalFolder.length === 0) {
         if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
           const yarnGlobalFolder = join(
             (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
