@@ -1,6 +1,6 @@
 import { FactoryProvider } from '@nestjs/common'
 import { RuntimeException } from '@nestjs/core/errors/exceptions/runtime.exception'
-import { ClientProxyFactory } from '@nestjs/microservices'
+import { ClientProxyFactory, RmqOptions } from '@nestjs/microservices'
 
 export interface MicroserviceProviderModuleOptions {
   /** give a inject token of your desire  */
@@ -9,12 +9,20 @@ export interface MicroserviceProviderModuleOptions {
   queue: string[]
   /** if you want to override the default provider */
   provider?: (queue?: string[]) => FactoryProvider<ClientProxyFactory>[]
+  /** client options, if you dont want to use default config.js key of messageQueue.clientOptions */
+  clientOptions?: MicroserviceProviderClientOptions
 }
 
 export interface MicroserviceProviderServiceOptions {
   /** add timeout functionality to the message queue */
   timeout?: number
 }
+
+/**
+ * Inject options for provider client configuration
+ * Currently only supports options for RMQ
+ */
+export type MicroserviceProviderClientOptions = Omit<RmqOptions['options'], 'urls'>
 
 /**
  * This is the base format which a message queue maps for request responses can be supplied.

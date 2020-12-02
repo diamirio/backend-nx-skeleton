@@ -2,6 +2,7 @@ import { FactoryProvider } from '@nestjs/common'
 import { ClientProxyFactory } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices/enums/transport.enum'
 
+import { MicroserviceProviderClientOptions } from '../microservice-provider.interface'
 import { ConfigService } from '@provider/config/config.service'
 
 /**
@@ -9,9 +10,12 @@ import { ConfigService } from '@provider/config/config.service'
  * Currently only supports RabbitMQ, but can be made generic later on.
  * @param queue
  */
-export function provideMessageQueueClient (queue: string | string[]): FactoryProvider<ClientProxyFactory>[] {
+export function provideMessageQueueClient (
+  queue: string | string[],
+  options?: MicroserviceProviderClientOptions
+): FactoryProvider<ClientProxyFactory>[] {
   queue = !Array.isArray(queue) ? [ queue ] : queue
-  const options = ConfigService.get('messageQueue')?.clientOptions
+  options = options ? options : ConfigService.get('messageQueue')?.clientOptions
 
   // currently only works for rabbitmq, idk if it is worth atm to make it generic even though i want to do it xd
   return queue.map((q) => ({
