@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [2.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.2.1...@webundsoehne/nestjs-util@2.3.0) (2020-12-02)
+
+
+### Features
+
+* add injecting your own options to the microservice-client-provider ([e1aedfe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e1aedfe679ab189751e5992b0e9d07cb7f79a693))
+
 ## @webundsoehne/nestjs-util [2.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.2.0...@webundsoehne/nestjs-util@2.2.1) (2020-12-01)
 
 
