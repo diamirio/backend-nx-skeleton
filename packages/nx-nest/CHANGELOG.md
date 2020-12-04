@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.12](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.11...@webundsoehne-private/nx-nest@1.1.12) (2020-12-04)
+
+
+### Bug Fixes
+
+* fix inherited gitignore ([944cb9a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/944cb9a438112865598fd0ba3a7db365c795a9ab))
+
 ## @webundsoehne-private/nx-nest [1.1.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.10...@webundsoehne-private/nx-nest@1.1.11) (2020-12-01)
 
 
