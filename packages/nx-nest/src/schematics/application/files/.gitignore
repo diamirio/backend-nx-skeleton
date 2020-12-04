@@ -5,10 +5,6 @@ node_modules
 # enviroment files
 .*env*
 
-# database folder
-database/
-db/
-
 # Logs
 logs
 *.log

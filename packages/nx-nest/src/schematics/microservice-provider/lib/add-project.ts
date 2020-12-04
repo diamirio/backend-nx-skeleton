@@ -11,7 +11,10 @@ export function addProject (options: NormalizedSchema): Rule {
     // we dont need to enforce types here, since it is only going to be linting
     const architect: any = {}
 
-    architect.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter, [ '*.ts', '*.js' ])
+    architect.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter, [
+      `${options.root}/**/*.ts`,
+      `${options.root}/**/*.js`
+    ])
 
     json.projects[options.name] = {
       root: normalize(options.root),
