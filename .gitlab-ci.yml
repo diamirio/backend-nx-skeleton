@@ -83,5 +83,8 @@ publish:
     - rsync -a /drone/src/ $CI_PROJECT_DIR/
   only:
     - master
+    - beta
+    - rc
+    - alpha
   tags:
     - node
