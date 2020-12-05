@@ -10,6 +10,7 @@ import {
 {% endfor %}
 } from './interfaces'
 {% endif %}
+import { BaseMessageQueueMap, BaseMessageQueuePatterns } from '@webundsoehne/nestjs-util/dist/microservices'
 
 /**
  * All available message queues.
@@ -23,7 +24,7 @@ export enum MessageQueues {
 /**
  * A map for all available patterns for given message queue.
  */
-export interface MessageQueuePatterns {
+export declare class MessageQueuePatterns implements BaseMessageQueuePatterns<MessageQueues> {
 {% for microservice in microservices %}
   [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.pattern }}
 {% endfor %}
@@ -32,9 +33,8 @@ export interface MessageQueuePatterns {
 /**
  * A map for all requests and responses for a given message queue.
  */
-export interface MessageQueueMap {
+export declare class MessageQueueMap implements BaseMessageQueueMap<MessageQueues> {
 {% for microservice in microservices %}
   [MessageQueues.{{ microservice.names.queue }}]: {{ microservice.names.interface }}
 {% endfor %}
 }
-

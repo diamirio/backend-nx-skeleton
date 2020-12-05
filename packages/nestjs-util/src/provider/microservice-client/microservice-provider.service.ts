@@ -3,11 +3,7 @@ import { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
 import { asyncScheduler, throwError } from 'rxjs'
 import { timeoutWith } from 'rxjs/operators'
 
-import {
-  GetKeyFromTypeMap,
-  MicroserviceProviderServiceOptions,
-  TimeoutException
-} from './microservice-provider.interface'
+import { MicroserviceProviderServiceOptions, TimeoutException } from './microservice-provider.interface'
 import { ConfigService } from '@provider/config/config.service'
 
 /**
@@ -45,8 +41,8 @@ export class MicroserviceProviderService<
   public async send<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request'],
-    ReturnValue = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+    Payload extends MessageQueueMap[Queue][Pattern]['request'],
+    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
   >(
     queue: Queue,
     pattern: Pattern,
@@ -59,8 +55,8 @@ export class MicroserviceProviderService<
   public async emit<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request'],
-    ReturnValue extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+    Payload extends MessageQueueMap[Queue][Pattern]['request'],
+    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
   >(
     queue: Queue,
     pattern: Pattern,
@@ -73,8 +69,8 @@ export class MicroserviceProviderService<
   private async execute<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request'],
-    ReturnValue extends GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+    Payload extends MessageQueueMap[Queue][Pattern]['request'],
+    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
   >(
     command: 'send' | 'emit',
     queue: Queue,

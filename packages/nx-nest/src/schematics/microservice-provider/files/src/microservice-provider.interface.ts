@@ -1,6 +1,6 @@
-import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util/dist/microservices'
+import { MicroserviceProviderService } from '@webundsoehne/nestjs-util/dist/microservices'
 
-import { MessageQueues, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
+import { MessageQueueMap, MessageQueuePatterns, MessageQueues } from './microservice-provider.constants'
 
 /**
  * Helper type for microservice client.
@@ -10,9 +10,9 @@ export type MicroserviceClient = MicroserviceProviderService<MessageQueues, Mess
 /**
  * Helper type for microservice requests.
  */
-export type MicroserviceRequest<Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request']
+export type MicroserviceRequest<Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = MessageQueueMap[Queue][Pattern]['request']
 
 /**
  * Helper type for microservice responses.
  */
-export type MicroserviceResponse<Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+export type MicroserviceResponse<Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = MessageQueueMap[Queue][Pattern]['response']
