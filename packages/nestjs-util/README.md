@@ -315,11 +315,12 @@ __Usage__
   - Define message request-response maps for given message patterns.
   ```typescript
   // interfaces/some-queue.interface.ts
-  import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util/dist/microservices'
-
   import { MockPattern } from '../patterns'
 
-  export declare class MockMessage implements MicroserviceProviderBaseMessage<typeof MockPattern> {
+  import { MicroserviceProviderBaseMessage, BaseMessageIndexes } from '@webundsoehne/nestjs-util/dist/microservices'
+
+  // we need this base message indexes because of typescript indexing enum problem.
+  export declare class MockMessage extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<AppPattern> {
     [MockPattern.MOCK_DEFAULT]: {
       response: any | never
       request: any | never
@@ -331,12 +332,13 @@ __Usage__
   // microservice-provider.constants.ts
   import { MockMessage } from './interfaces'
   import { MockPattern } from './patterns'
+  import { BaseMessageQueueMap, BaseMessageQueuePatterns } from '@webundsoehne/nestjs-util/dist/microservices'
 
-  export interface MessageQueuePatterns {
+  export declare class MessageQueuePatterns implements BaseMessageQueuePatterns<MessageQueues> {
     [MessageQueues.MOCK_QUEUE]: MockPattern
   }
 
-  export interface MessageQueueMap {
+  export declare class MessageQueueMap implements BaseMessageQueueMap<MessageQueues> {
     [MessageQueues.MOCK_QUEUE]: MockMessage
   }
   ```
@@ -344,22 +346,28 @@ __Usage__
   ```typescript
   // microservice-provider.interface.ts
   import { MessageQueues, MessageQueuePatterns, MessageQueueMap } from './microservice-provider.constants'
-  import { MicroserviceProviderService, GetKeyFromTypeMap } from '@webundsoehne/nestjs-util/dist/microservices'
+  import { MicroserviceProviderService } from '@webundsoehne/nestjs-util/dist/microservices'
 
   /**
-   * Helper type for microservice client.
+  * Helper type for microservice client.
   */
   export type MicroserviceClient = MicroserviceProviderService<MessageQueues, MessageQueuePatterns, MessageQueueMap>
 
   /**
   * Helper type for microservice requests.
   */
-  export type MicroserviceRequest <Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['request']
+  export type MicroserviceRequest<
+    Queue extends MessageQueues,
+    Pattern extends MessageQueuePatterns[Queue]
+  > = MessageQueueMap[Queue][Pattern]['request']
 
   /**
   * Helper type for microservice responses.
   */
-  export type MicroserviceResponse <Queue extends MessageQueues, Pattern extends MessageQueuePatterns[Queue]> = GetKeyFromTypeMap<MessageQueueMap, Queue>[Pattern]['response']
+  export type MicroserviceResponse<
+    Queue extends MessageQueues,
+    Pattern extends MessageQueuePatterns[Queue]
+  > = MessageQueueMap[Queue][Pattern]['response']
   ```
   - You can utilize these helper types in two ways in your microservice-server or directly without going through the maps.
   ```typescript

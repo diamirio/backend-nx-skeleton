@@ -1,11 +1,11 @@
 {# Since this is a multiple jinja template this uses only the 'microservice' part of the variables. #}
-import { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util/dist/microservices'
 import { {{ names.pattern }} } from '../patterns'
+import { MicroserviceProviderBaseMessage, BaseMessageIndexes } from '@webundsoehne/nestjs-util/dist/microservices'
 
 /**
  * Request-response patterns for all message patterns of "{{ name }}" with pattern "{{ names.pattern }}"
  */
-export declare class {{ names.interface }} implements MicroserviceProviderBaseMessage<typeof {{ names.pattern }}> {
+export declare class {{ names.interface }} extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<{{ names.pattern }}> {
   [{{ names.pattern }}.{{ names.default }}]: {
     response: any | never
     request: any | never

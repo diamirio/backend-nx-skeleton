@@ -1,9 +1,17 @@
-## @webundsoehne-private/nx-nest [1.1.12](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.11...@webundsoehne-private/nx-nest@1.1.12) (2020-12-04)
+## @webundsoehne-private/nx-nest [1.1.13-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.12...@webundsoehne-private/nx-nest@1.1.13-beta.1) (2020-12-05)
+
+
+### Bug Fixes
+
+* fix typescript enum indexing problem possibly? ([4c6eaa3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c6eaa350bf47ee1ba6ca29fbbf65e460a5ae403))
+
+## @webundsoehne-private/nx-nest [1.1.12-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.11...@webundsoehne-private/nx-nest@1.1.12-beta.1) (2020-12-05)
 
 
 ### Bug Fixes
 
 * fix inherited gitignore ([944cb9a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/944cb9a438112865598fd0ba3a7db365c795a9ab))
+* fix typescript enum indexing problem possibly? ([4c6eaa3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c6eaa350bf47ee1ba6ca29fbbf65e460a5ae403))
 
 ## @webundsoehne-private/nx-nest [1.1.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.10...@webundsoehne-private/nx-nest@1.1.11) (2020-12-01)
 

@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.3.1-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.0...@webundsoehne/nestjs-util@2.3.1-beta.1) (2020-12-05)
+
+
+### Bug Fixes
+
+* fix typescript enum indexing problem possibly? ([4c6eaa3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c6eaa350bf47ee1ba6ca29fbbf65e460a5ae403))
+
 # @webundsoehne/nestjs-util [2.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.2.1...@webundsoehne/nestjs-util@2.3.0) (2020-12-02)
 
 
