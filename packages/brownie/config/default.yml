@@ -10,6 +10,9 @@ workspace:
     - '@nrwl/cli'
     - '@nrwl/tao'
     - '@nrwl/workspace'
+    # this is because @nrwl/workspace has these as peer and we are installing it globally
+    - typescript
+    - uuid
     - '@angular/cli'
 
 package_registry: https://verdaccio.dev.webundsoehne.com
