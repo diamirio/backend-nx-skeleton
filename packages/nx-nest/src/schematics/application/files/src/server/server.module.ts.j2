@@ -23,11 +23,11 @@ import {
   {% endif %}
   SetApiInfoHeaderMiddleware,
   setEnvironmentVariables,
-  ExtendedValidationPipe,
-  {% if enum.components.MICROSERVICE_CLIENT in components %}
-  MicroserviceProviderModule,
-  {% endif %}
+  ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
+{% if enum.components.MICROSERVICE_CLIENT in components %}
+import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
+{% endif %}
 {% if enum.components.MICROSERVICE_CLIENT in components %}
 import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 {% endif %}

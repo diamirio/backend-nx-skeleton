@@ -6,9 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
 import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
-{% if enum.components.MICROSERVICE_CLIENT in components %}
-import { MicroserviceProviderModule } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util/dist/microservices'
+{% if enum.components.MICROSERVICE_CLIENT in components %}
+import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
 {% endif %}
 
 import * as modules from './modules'

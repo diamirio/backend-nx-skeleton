@@ -235,22 +235,26 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: async (ctx, task): Promise<void> => {
           const microservices = readMicroserviceIntegration().map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
 
-          // there can be two selections of API servers here
-          ctx.microserviceClient = await task.prompt<string[]>({
-            type: 'MultiSelect',
-            message: 'Please select which microservice-servers you want to include.',
-            choices: microservices,
-            initial: getInitialFromPriorConfiguration(ctx, 'microserviceClient', microservices)
-          })
+          if (microservices?.length > 0) {
+            // there can be two selections of API servers here
+            ctx.microserviceClient = await task.prompt<string[]>({
+              type: 'MultiSelect',
+              message: 'Please select which microservice-servers you want to include.',
+              choices: microservices,
+              initial: getInitialFromPriorConfiguration(ctx, 'microserviceClient', microservices)
+            })
 
-          ctx.microserviceCasing = {}
-          // generate the microservice names
-          await Promise.all(ctx.microserviceClient.map(async (m) => ctx.microserviceCasing[m] = generateMicroserviceCasing(m)))
+            ctx.microserviceCasing = {}
+            // generate the microservice names
+            await Promise.all(ctx.microserviceClient.map(async (m) => ctx.microserviceCasing[m] = generateMicroserviceCasing(m)))
 
-          // select the components to inject these microservice-clients to
-          // TODO: not sure if this is required a trivial case
+            // select the components to inject these microservice-clients to
+            // TODO: not sure if this is required a trivial case
 
-          task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
+            task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
+          } else {
+            task.title = 'No microservice clients are found running in mock mode.'
+          }
         },
         options: {
           bottomBar: Infinity,

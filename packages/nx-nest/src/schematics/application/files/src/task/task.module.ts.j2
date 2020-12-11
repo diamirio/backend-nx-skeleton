@@ -9,12 +9,10 @@ import { MongooseModule } from '@nestjs/mongoose'
 {% if database is defined and database != enum.database.NONE %}
 import { getDatabaseOptions } from '../util/database'
 {% endif %}
-import {
-  ConfigService,
-  {% if enum.components.MICROSERVICE_CLIENT in components %}
-  MicroserviceProviderModule,
-  {% endif %}
-} from '@webundsoehne/nestjs-util'
+import { ConfigService } from '@webundsoehne/nestjs-util'
+{% if enum.components.MICROSERVICE_CLIENT in components %}
+import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
+{% endif %}
 
 import * as tasks from './modules'
 

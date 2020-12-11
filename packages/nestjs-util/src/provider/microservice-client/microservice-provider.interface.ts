@@ -11,6 +11,8 @@ export interface MicroserviceProviderModuleOptions {
   provider?: (queue?: string[]) => FactoryProvider<ClientProxyFactory>[]
   /** client options, if you dont want to use default config.js key of messageQueue.clientOptions */
   clientOptions?: MicroserviceProviderClientOptions
+  /** disable service itself, just provide the client */
+  disableService?: boolean
 }
 
 export interface MicroserviceProviderServiceOptions {
