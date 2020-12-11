@@ -34,12 +34,16 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 
 ## `brownie config:workspace`
 
+Edit available workspace skeletons through a user interface.
+
 ```
 USAGE
   $ brownie config:workspace
 ```
 
 ## `brownie docker`
+
+Create docker-compose configuration from boilerplates.
 
 ```
 USAGE
@@ -54,6 +58,8 @@ OPTIONS
 
 ## `brownie gitlab`
 
+Create a gitlab ci configuration from known NX configuration.
+
 ```
 USAGE
   $ brownie gitlab
@@ -63,6 +69,8 @@ ALIASES
 ```
 
 ## `brownie help [COMMAND]`
+
+display help for brownie
 
 ```
 USAGE
@@ -79,6 +87,8 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0
 
 ## `brownie nx`
 
+Configure NX modules.
+
 ```
 USAGE
   $ brownie nx
@@ -89,6 +99,8 @@ OPTIONS
 ```
 
 ## `brownie workspace`
+
+Create a new workspace with NX.
 
 ```
 USAGE

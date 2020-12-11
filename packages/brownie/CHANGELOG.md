@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [1.2.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.8...@webundsoehne/brownie@1.2.9) (2020-12-06)
+
+
+### Bug Fixes
+
+* add typescript and uuid for now ([07fcd96](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/07fcd9616df884435f8419d0343b402e4c24f350))
+
 ## @webundsoehne/brownie [1.2.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.7...@webundsoehne/brownie@1.2.8) (2020-12-01)
 
 
