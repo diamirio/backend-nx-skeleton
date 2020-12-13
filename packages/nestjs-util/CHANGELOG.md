@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.3.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.2...@webundsoehne/nestjs-util@2.3.3) (2020-12-13)
+
+
+### Bug Fixes
+
+* updated validation pipe errors for graphql ([4c48668](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c486682633f0837f5910571cbc412d0814f5b07))
+
 ## @webundsoehne/nestjs-util [2.3.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.1...@webundsoehne/nestjs-util@2.3.2) (2020-12-11)
 
 
