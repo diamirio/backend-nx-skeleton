@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.14](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.13...@webundsoehne-private/nx-nest@1.1.14) (2020-12-11)
+
+
+### Bug Fixes
+
+* minor fixes to templating, schematics and add the option to only inject microservice provider ([a14386e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a14386e901e6bd70bd090c633c7420eee603e54f))
+
 ## @webundsoehne-private/nx-nest [1.1.13](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.12...@webundsoehne-private/nx-nest@1.1.13) (2020-12-05)
 
 

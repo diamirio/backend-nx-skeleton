@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.3.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.1...@webundsoehne/nestjs-util@2.3.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* minor fixes to templating, schematics and add the option to only inject microservice provider ([a14386e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a14386e901e6bd70bd090c633c7420eee603e54f))
+
 ## @webundsoehne/nestjs-util [2.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.0...@webundsoehne/nestjs-util@2.3.1) (2020-12-05)
 
 
