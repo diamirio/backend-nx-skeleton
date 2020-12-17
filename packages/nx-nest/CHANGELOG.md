@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.16](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.15...@webundsoehne-private/nx-nest@1.1.16) (2020-12-17)
+
+
+### Bug Fixes
+
+* fix casing ([86ed693](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/86ed693370de060353edea70b00f5ee7b1b5615e))
+
 ## @webundsoehne-private/nx-nest [1.1.15](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.14...@webundsoehne-private/nx-nest@1.1.15) (2020-12-17)
 
 
