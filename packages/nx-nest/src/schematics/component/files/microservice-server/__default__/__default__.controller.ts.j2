@@ -6,7 +6,7 @@ import {
   MicroserviceResponse,
   MessageQueues,
   {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
-import { DefaultMicroservice } from './{{ name }}.service'
+import { {{ casing.pascal }}Microservice } from './{{ name }}.service'
 
 @Controller()
 export class {{ casing.pascal }}Microcontroller {
