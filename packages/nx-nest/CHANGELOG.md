@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.15](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.14...@webundsoehne-private/nx-nest@1.1.15) (2020-12-17)
+
+
+### Bug Fixes
+
+* disable default component generation on later runs, fix little templating issue with ms ([d9bbc8e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d9bbc8ec661591bd42db660cd06466a8360ea522))
+
 ## @webundsoehne-private/nx-nest [1.1.14](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.13...@webundsoehne-private/nx-nest@1.1.14) (2020-12-11)
 
 
