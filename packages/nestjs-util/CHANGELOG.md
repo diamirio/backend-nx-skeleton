@@ -1,3 +1,11 @@
+## @webundsoehne/nestjs-util [2.3.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.3...@webundsoehne/nestjs-util@2.3.4) (2020-12-18)
+
+
+### Bug Fixes
+
+* change error message optional ([046bc35](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/046bc35fc16a576e4c6f4d107ca13b6fea060430))
+* fix for provide message client to use server url ([9896521](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/98965211aa324b318f760e2d9134041eb88b4635))
+
 ## @webundsoehne/nestjs-util [2.3.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.2...@webundsoehne/nestjs-util@2.3.3) (2020-12-13)
 
 
