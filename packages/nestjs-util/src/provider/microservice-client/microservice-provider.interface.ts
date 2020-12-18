@@ -24,7 +24,7 @@ export interface MicroserviceProviderServiceOptions {
  * Inject options for provider client configuration
  * Currently only supports options for RMQ
  */
-export type MicroserviceProviderClientOptions = Omit<RmqOptions['options'], 'urls'>
+export type MicroserviceProviderClientOptions = RmqOptions['options']
 
 /**
  * This is the base format which a message queue maps for request responses can be supplied.

@@ -15,7 +15,8 @@ export function provideMessageQueueClient (
   options?: MicroserviceProviderClientOptions
 ): FactoryProvider<ClientProxyFactory>[] {
   queue = !Array.isArray(queue) ? [ queue ] : queue
-  options = options ? options : ConfigService.get('messageQueue')?.clientOptions
+  options = options ? options : ConfigService.get('messageQueue.clientOptions')
+  const urls = options?.urls ? options?.urls : ConfigService.get('messageQueue.urls')
 
   // currently only works for rabbitmq, idk if it is worth atm to make it generic even though i want to do it xd
   return queue.map((q) => ({
@@ -25,7 +26,8 @@ export function provideMessageQueueClient (
         transport: Transport.RMQ,
         options: {
           ...options,
-          queue: q
+          queue: q,
+          urls
         }
       })
     }
