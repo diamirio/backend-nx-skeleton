@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [2.4.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.4...@webundsoehne/nestjs-util@2.4.0) (2020-12-20)
+
+
+### Features
+
+* remove override validation decarotor since it does not work anymore ([5bf75a5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5bf75a5c45d415d772782ad6ad9dc7cb7e800d89))
+
 ## @webundsoehne/nestjs-util [2.3.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.3...@webundsoehne/nestjs-util@2.3.4) (2020-12-18)
 
 
