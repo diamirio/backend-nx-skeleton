@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.4.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.0...@webundsoehne/nestjs-util@2.4.1) (2020-12-20)
+
+
+### Bug Fixes
+
+* ditch es2017 ([ba9483d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ba9483d6a8acc887f61f702b761f913eb5532d71))
+
 # @webundsoehne/nestjs-util [2.4.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.3.4...@webundsoehne/nestjs-util@2.4.0) (2020-12-20)
 
 
