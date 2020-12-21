@@ -16,7 +16,10 @@ export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
       service: host
         .switchToRpc()
         .getContext()
-        .args.map((args) => args.fields.routingKey)
+        .args.map((args) => args.fields?.routingKey)
+        .filter((i) => {
+          return i !== null
+        })
     }
   }
 

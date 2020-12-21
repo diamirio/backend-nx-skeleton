@@ -6,11 +6,12 @@ import { EnrichedException } from './exception.interface'
 import { formatValidationError, getErrorMessage, isValidationError, logErrorDebugMsg } from './util'
 
 export function GraphQLErrorParser (exception: GraphQLError): EnrichedException {
-  let payload = {
+  let payload: EnrichedException = {
     statusCode: exception.extensions?.exception?.response?.statusCode ?? HttpStatus.INTERNAL_SERVER_ERROR,
     error: exception?.name ?? exception.message,
     message: getErrorMessage(exception),
-    path: exception.path?.map((i) => i.toString())
+    path: exception.path?.map((i) => i.toString()),
+    service: exception.extensions?.exception?.response?.service
   }
 
   if (isValidationError(exception.extensions.exception)) {
