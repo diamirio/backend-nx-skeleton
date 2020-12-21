@@ -55,7 +55,11 @@ export function formatValidationError (errors: ValidationError[]): ClassValidato
 export function ignoreErrors (exception: Error): boolean {
   const ignoredErrors = [ 'favicon.ico' ]
 
-  return ignoredErrors.some((err) => exception.message.match(err))
+  if (exception.message) {
+    return ignoredErrors.some((err) => exception.message.match(err))
+  } else {
+    return false
+  }
 }
 
 // log debug message
