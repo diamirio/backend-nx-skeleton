@@ -4,13 +4,11 @@ import { EOL } from 'os'
 import { ClassValidatorError, ClassValidatorException, EnrichedException } from './exception.interface'
 
 export function getErrorMessage (message: any): string | undefined {
-  return message !== undefined
-    ? typeof message === 'string'
-      ? message
-      : typeof message.message === 'string'
-        ? message.message
-        : undefined
-    : message
+  return typeof message === 'string'
+    ? message
+    : typeof message?.message === 'string'
+      ? message.message
+      : String(message)
 }
 
 function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {
