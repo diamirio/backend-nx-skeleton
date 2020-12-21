@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.4.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.3...@webundsoehne/nestjs-util@2.4.4) (2020-12-21)
+
+
+### Bug Fixes
+
+* try to fix graphql error parsing from microservices ([95e9cb7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/95e9cb77d1e7f0648055188c5a5d04996fa0d76c))
+
 ## @webundsoehne/nestjs-util [2.4.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.2...@webundsoehne/nestjs-util@2.4.3) (2020-12-21)
 
 
