@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.1.17](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.16...@webundsoehne-private/nx-nest@1.1.17) (2020-12-21)
+
+
+### Bug Fixes
+
+* fix error parser for graphql with undefined messages ([cc16be6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cc16be6b4241fab1bb2d17b41755636b2bfa6d5c))
+
 ## @webundsoehne-private/nx-nest [1.1.16](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.15...@webundsoehne-private/nx-nest@1.1.16) (2020-12-17)
 
 
