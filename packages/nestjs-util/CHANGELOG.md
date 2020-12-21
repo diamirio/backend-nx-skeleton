@@ -1,3 +1,11 @@
+## @webundsoehne/nestjs-util [2.4.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.1...@webundsoehne/nestjs-util@2.4.2) (2020-12-21)
+
+
+### Bug Fixes
+
+* fix error parser for graphql with undefined messages ([cc16be6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cc16be6b4241fab1bb2d17b41755636b2bfa6d5c))
+* fix ignore thing as well ([97a1765](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/97a1765a3d1b608a36b0f71ad65146756cec835f))
+
 ## @webundsoehne/nestjs-util [2.4.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.0...@webundsoehne/nestjs-util@2.4.1) (2020-12-20)
 
 
