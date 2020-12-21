@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.4.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.2...@webundsoehne/nestjs-util@2.4.3) (2020-12-21)
+
+
+### Bug Fixes
+
+* refix for rpc exception from rmq ([ad9496a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ad9496a11e16f49f4dff1be7c80be835b8f5a199))
+
 ## @webundsoehne/nestjs-util [2.4.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.1...@webundsoehne/nestjs-util@2.4.2) (2020-12-21)
 
 
