@@ -1,3 +1,15 @@
+# @webundsoehne/nestjs-util [2.5.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.4...@webundsoehne/nestjs-util@2.5.0) (2021-01-05)
+
+
+### Bug Fixes
+
+* update dependencies and some little things ([e50dde8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50dde8aa83cd44871aad79ccf8d60d86e6bac23))
+
+
+### Features
+
+* updated graphql filter to comply with the graphql regulations ([273bd84](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/273bd84a3774f67eecfa4cb5fb7fceb75a596541))
+
 ## @webundsoehne/nestjs-util [2.4.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.4.3...@webundsoehne/nestjs-util@2.4.4) (2020-12-21)
 
 

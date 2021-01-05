@@ -1,3 +1,27 @@
+# @webundsoehne-private/nx-nest [1.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.17...@webundsoehne-private/nx-nest@1.2.0) (2021-01-05)
+
+
+### Bug Fixes
+
+* log anyways while generating default component ([24aec23](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/24aec23cc02d3bc648e466dbdb5d68ea193dc46f))
+* update dependencies and some little things ([e50dde8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50dde8aa83cd44871aad79ccf8d60d86e6bac23))
+* update template to use resolvers folder for graphql ([f9c915a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f9c915a4a5ad1a6f076991b05f9ebdfa86cc2921))
+* update the msp schematic ([d4a91c1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d4a91c12188fde386363890da8f50bcdc25930bb))
+
+
+### Features
+
+* updated component generation ([26ab6d2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/26ab6d21a43f7bc26a530ff1ab51365f74d6e38a))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 2.1.6
+* **@webundsoehne/nx-tools:** upgraded to 2.1.5
+
 ## @webundsoehne-private/nx-nest [1.1.17](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.16...@webundsoehne-private/nx-nest@1.1.17) (2020-12-21)
 
 
