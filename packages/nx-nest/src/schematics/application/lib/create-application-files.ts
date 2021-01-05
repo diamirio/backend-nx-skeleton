@@ -50,7 +50,6 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
     ...createApplicationRule({
       trigger: [
         {
-          condition: !options.priorConfiguration,
           rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
         },
         {
