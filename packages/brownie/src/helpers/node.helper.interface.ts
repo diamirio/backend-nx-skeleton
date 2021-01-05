@@ -34,7 +34,7 @@ export enum PackageManagerUsableCommands {
 export const PackageManagerCommands: Record<AvailablePackageManagers, Record<PackageManagerUsableCommands, string>> = {
   [AvailablePackageManagers.NPM]: {
     [PackageManagerUsableCommands.GLOBAL]: '-g',
-    [PackageManagerUsableCommands.ADD]: 'install',
+    [PackageManagerUsableCommands.ADD]: 'install --legacy-peer-deps',
     [PackageManagerUsableCommands.REMOVE]: 'uninstall',
     [PackageManagerUsableCommands.DEVELOPMENT]: '--save-dev',
     [PackageManagerUsableCommands.FORCE]: '--force',

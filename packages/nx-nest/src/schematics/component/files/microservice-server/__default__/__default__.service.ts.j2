@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { MessageQueues, MicroserviceRequest, MicroserviceResponse, {{ casing.injected.microservices.names.pattern }}  } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 
 @Injectable()
 export class {{ casing.pascal }}Microservice {
+  private logger: Logger = new Logger(this.constructor.name)
+
+  constructor() {}
+
   public async default (
     options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
   ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {

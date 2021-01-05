@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class {{ casing.pascal }}Schema {
+export class {{ casing.pascal }}Output {
   @Field(() => String, { nullable: true })
   response?: string
 }

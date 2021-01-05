@@ -1,3 +1,3 @@
 module.exports = {
-  '*': () => ['yarn affected:lint']
+  '*': () => ['npm run affected:lint']
 }

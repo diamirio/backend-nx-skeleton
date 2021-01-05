@@ -8,7 +8,7 @@ export function getErrorMessage (message: any): string | undefined {
     ? message
     : typeof message?.message === 'string'
       ? message.message
-      : String(message)
+      : JSON.stringify(message)
 }
 
 function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {

@@ -65,7 +65,7 @@ export class MicroserviceProviderService<
   >(
     queue: Queue,
     pattern: Pattern,
-    payload: Payload,
+    payload?: Payload,
     options?: MicroserviceProviderServiceOptions
   ): Promise<ReturnValue> {
     return this.execute('emit', queue, pattern, payload, options)

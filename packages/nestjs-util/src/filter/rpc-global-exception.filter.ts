@@ -6,7 +6,7 @@ import { EnrichedException } from './exception.interface'
 import { GlobalExceptionFilter } from './global-exception.filter'
 import { logErrorDebugMsg } from './util'
 
-@Catch(RpcException)
+@Catch(HttpException, RpcException)
 export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
   private logger = new Logger(this.constructor.name)
 
@@ -17,9 +17,7 @@ export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
         .switchToRpc()
         .getContext()
         .args.map((args) => args.fields?.routingKey)
-        .filter((i) => {
-          return i !== null
-        })
+        .filter(Boolean)
     }
   }
 

@@ -21,9 +21,7 @@
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
+    "packages": ["packages/*"],
     "nohoist": []
   },
   "husky": {
@@ -48,8 +46,9 @@
     }
   },
   "resolutions": {
-    "**/@angular-devkit/architect": "0.1000.4",
-    "**/@angular-devkit/core": "10.0.4",
-    "**/@angular-devkit/schematics": "10.0.4"
+    "**/@angular-devkit/architect": "0.1100.5",
+    "**/@angular-devkit/core": "11.0.5",
+    "**/@angular-devkit/schematics": "11.0.5"
   }
 }
+

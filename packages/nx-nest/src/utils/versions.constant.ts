@@ -4,25 +4,25 @@ import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableSe
 export const VERSIONS: Versions = {
   builder: {
     devDeps: {
-      '@webundsoehne/nx-builders': '^1.2.0'
+      '@webundsoehne/nx-builders': '^2.1.5'
     }
   },
   base: {
     default: {
       deps: {
-        '@nestjs/common': '^7.4.4',
-        '@nestjs/core': '^7.4.4',
+        '@nestjs/common': '^7.6.5',
+        '@nestjs/core': '^7.6.5',
         '@nestjsx/crud': '^4.6.2',
         rxjs: '^6.6.3',
         'reflect-metadata': '^0.1.13',
-        '@webundsoehne/nestjs-util': '^1.0.0',
+        '@webundsoehne/nestjs-util': '^2.4.4',
         'class-transformer': '^0.3.1',
         'class-validator': '^0.12.2'
       }
     },
     microservice: {
       deps: {
-        '@nestjs/microservices': '^7.4.4'
+        '@nestjs/microservices': '^7.6.5'
       }
     }
   },
@@ -36,10 +36,11 @@ export const VERSIONS: Versions = {
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
-      '@nestjs/graphql': '^7.6.0',
-      'apollo-server-fastify': '^2.17.0',
-      graphql: '^15.3.0',
-      'graphql-tools': '^6.2.3'
+      '@nestjs/graphql': '^7.9.4',
+      '@nestjs/platform-fastify': '7.2.0',
+      'apollo-server-fastify': '^2.19.1',
+      graphql: '^15.4.0',
+      'graphql-tools': '^7.0.2'
     }
   },
   [AvailableComponents.BG_TASK]: {
@@ -67,25 +68,25 @@ export const VERSIONS: Versions = {
   },
   [AvailableTestsTypes.JEST]: {
     devDeps: {
-      '@nestjs/testing': '^7.2.0',
-      jest: '^26.1.0',
-      'ts-jest': '^26.1.1',
-      '@types/jest': '^26.0.3'
+      '@nestjs/testing': '^7.6.5',
+      jest: '^26.6.3',
+      'ts-jest': '^26.4.4',
+      '@types/jest': '^26.0.19'
     }
   },
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
-      '@nestjs/typeorm': '^7.1.4',
-      typeorm: '^0.2.26'
+      '@nestjs/typeorm': '^7.1.5',
+      typeorm: '^0.2.29'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
-      '@nestjs/mongoose': '^7.0.2',
-      mongoose: '^5.10.6'
+      '@nestjs/mongoose': '^7.2.0',
+      mongoose: '^5.11.10'
     },
     devDeps: {
-      '@types/mongoose': '^5.7.36'
+      '@types/mongoose': '^5.10.3'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {

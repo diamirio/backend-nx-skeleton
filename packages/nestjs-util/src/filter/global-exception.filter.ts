@@ -13,9 +13,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
   public static defaultPayload (exception: any): EnrichedException {
     return {
-      statusCode: exception?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      statusCode: typeof exception?.status === 'number' ? exception?.status : HttpStatus.INTERNAL_SERVER_ERROR,
       error: exception?.error ?? exception.message,
-      message: getErrorMessage(exception)
+      message: getErrorMessage(exception),
+      service: exception?.service
     }
   }
 
@@ -32,7 +33,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     logErrorDebugMsg(this.logger, payload, exception.stack)
 
-    if (request) {
+    if (request && this.httpAdapterHost?.httpAdapter) {
       // do not handle internal error mechanisms
       const response = ctx.getResponse()
       this.httpAdapterHost.httpAdapter.reply(response, payload, payload.statusCode)

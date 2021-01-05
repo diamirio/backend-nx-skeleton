@@ -10,6 +10,8 @@ import { Command, Positional } from 'nestjs-command'
 export class {{ casing.pascal }}Command {
   private logger: Logger = new Logger(this.constructor.name)
 
+  constructor () {}
+
   @Command({
     command: 'hello <name>',
     describe: 'Prints hello <name>',

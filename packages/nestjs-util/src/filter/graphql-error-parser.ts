@@ -1,12 +1,16 @@
-import { HttpStatus } from '@nestjs/common'
+import { HttpStatus, Logger } from '@nestjs/common'
 import { GraphQLError, GraphQLFormattedError } from 'graphql'
+import { EOL } from 'os'
 
 import { EnrichedException } from './exception.interface'
-import { formatValidationError, getErrorMessage, isValidationError } from './util'
+import { formatValidationError, getErrorMessage, isValidationError, logErrorDebugMsg } from './util'
 
 export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedError<EnrichedException> {
   let payload: EnrichedException = {
-    statusCode: exception.extensions?.exception?.response?.statusCode ?? HttpStatus.INTERNAL_SERVER_ERROR,
+    statusCode:
+      exception.extensions?.exception?.statusCode ??
+      exception.extensions?.exception?.response?.statusCode ??
+      HttpStatus.INTERNAL_SERVER_ERROR,
     error: exception?.name ?? exception.message,
     message: getErrorMessage(exception),
     service: exception.extensions?.exception?.response?.service
@@ -21,7 +25,7 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
     }
   }
 
-  // logErrorDebugMsg(new Logger('GraphQLErrorParser'), payload, exception.extensions?.exception.stacktrace.join(EOL))
+  logErrorDebugMsg(new Logger('GraphQLErrorParser'), payload, exception.extensions?.exception.stacktrace.join(EOL))
 
   return {
     message: getErrorMessage(exception),

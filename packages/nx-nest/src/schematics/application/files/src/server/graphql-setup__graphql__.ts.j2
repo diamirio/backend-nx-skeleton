@@ -1,4 +1,4 @@
-import { GraphQLErrorParser } from '@webundsoehne/nestjs-util'
+import { GraphQLErrorParser, EnrichedException } from '@webundsoehne/nestjs-util'
 import { FastifyRequest } from 'fastify'
 import { GraphQLError, GraphQLFormattedError } from 'graphql'
 
@@ -7,10 +7,10 @@ export async function graphQLContextParser ({ req }: { req: FastifyRequest<any> 
   return { ...req }
 }
 
-export function graphQLErrorParser (exception: GraphQLError): GraphQLFormattedError<Record<string, any>> {
+export function graphQLErrorParser (exception: GraphQLError): GraphQLFormattedError<EnrichedException> {
     // to convert this to enriched exception,
     // graphql handles all the errors internally, graphql exception filter is just for catching the rest of the http errors
     return {
-      ...GraphQLErrorParser(exception),
-    } as GraphQLFormattedError<Record<string, any>>
+      ...GraphQLErrorParser(exception)
+    }
 }

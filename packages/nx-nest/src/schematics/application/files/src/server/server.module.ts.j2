@@ -32,7 +32,9 @@ import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/micro
 import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
 {% endif %}
 
+{% if server == enum.server.RESTFUL %}
 import * as modules from './modules'
+{% endif %}
 {% if server == enum.server.GRAPHQL %}
 import * as resolvers from './resolvers'
 {% endif %}
@@ -76,7 +78,9 @@ export function createServerModule ({% if database is defined and database != en
         path: '/'
       }),
       ...Object.values(resolvers),{% endif %}
+      {% if server == enum.server.RESTFUL %}
       ...Object.values(modules),
+      {% endif %}
       {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
       {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
