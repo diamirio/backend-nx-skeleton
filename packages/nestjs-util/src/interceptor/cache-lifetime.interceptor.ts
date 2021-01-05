@@ -1,5 +1,4 @@
 import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/common'
-import { FastifyReply } from 'fastify'
 import moment from 'moment'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
@@ -16,17 +15,17 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
   }
 
   @Configurable()
-  getOptionsFromConfig (
+  public getOptionsFromConfig (
     @ConfigParam('cacheLifetime') cacheLifetimeOptions?: CacheLifetimeOptions
   ): CacheLifetimeOptions {
     return cacheLifetimeOptions
   }
 
-  intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
+  public intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
     const httpContext = context.switchToHttp()
 
     const request: Request = httpContext.getRequest()
-    const reply: FastifyReply<any> = httpContext.getResponse()
+    const response: Response = httpContext.getResponse()
 
     if (!request.state) {
       request.state = {}
@@ -42,6 +41,8 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
           request.state.setCacheLifetime(this.options.defaultLifetime, this.options.defaultExpiresHeader)
         }
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore <- "known" ts issue with || {}
         const { lifetime, useExpiresHeader } = request.state.caching || {}
 
         if (lifetime && !isNaN(lifetime) && lifetime > 0) {
@@ -53,7 +54,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
 
           this.logger.verbose(`Cache lifetime is ${lifetime}sec -> setting "${headerName}" to ${value}`)
 
-          reply.header(headerName, value)
+          response.headers.append(headerName, value)
         } else {
           this.logger.debug('No cache lifetime set.')
         }

@@ -3,7 +3,12 @@ import { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
 import { asyncScheduler, throwError } from 'rxjs'
 import { timeoutWith } from 'rxjs/operators'
 
-import { MicroserviceProviderServiceOptions, TimeoutException } from './microservice-provider.interface'
+import {
+  GetMicroserviceMessageRequestFromMap,
+  GetMicroserviceMessageResponseFromMap,
+  MicroserviceProviderServiceOptions,
+  TimeoutException
+} from './microservice-provider.interface'
 import { ConfigService } from '@provider/config/config.service'
 
 /**
@@ -41,12 +46,12 @@ export class MicroserviceProviderService<
   public async send<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends MessageQueueMap[Queue][Pattern]['request'],
-    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
+    Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
+    ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
   >(
     queue: Queue,
     pattern: Pattern,
-    payload?: Payload,
+    payload: Payload,
     options?: MicroserviceProviderServiceOptions
   ): Promise<ReturnValue> {
     return this.execute('send', queue, pattern, payload, options)
@@ -55,12 +60,12 @@ export class MicroserviceProviderService<
   public async emit<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends MessageQueueMap[Queue][Pattern]['request'],
-    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
+    Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
+    ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
   >(
     queue: Queue,
     pattern: Pattern,
-    payload?: Payload,
+    payload: Payload,
     options?: MicroserviceProviderServiceOptions
   ): Promise<ReturnValue> {
     return this.execute('emit', queue, pattern, payload, options)
@@ -69,8 +74,8 @@ export class MicroserviceProviderService<
   private async execute<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
-    Payload extends MessageQueueMap[Queue][Pattern]['request'],
-    ReturnValue extends MessageQueueMap[Queue][Pattern]['response']
+    Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
+    ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
   >(
     command: 'send' | 'emit',
     queue: Queue,

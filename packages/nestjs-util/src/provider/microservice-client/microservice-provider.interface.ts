@@ -35,9 +35,27 @@ export type MicroserviceProviderBaseMessage<Pattern extends string | symbol | nu
 }
 
 export interface MicroserviceProviderMessage {
-  request: any | never
-  response: any | never
+  request?: any
+  response?: any
 }
+
+/**
+ * Request type of an microservice message.
+ */
+// this is a partial of any object since we want to make properties optional if we dont do this it will go mad
+export type GetMicroserviceMessageRequestFromMap<
+  Event extends string,
+  Map extends Record<string, MicroserviceProviderMessage>
+> = Event extends keyof Map ? ('request' extends keyof Map[Event] ? Map[Event]['request'] : never) : never
+
+/**
+ * Response type of an microservice message.
+ */
+// this is a partial of any object since we want to make properties optional if we dont do this it will go mad
+export type GetMicroserviceMessageResponseFromMap<
+  Event extends string,
+  Map extends Record<string, MicroserviceProviderMessage>
+> = Event extends keyof Map ? ('response' extends keyof Map[Event] ? Map[Event]['response'] : void) : never
 
 /**
  * A timeout exception for message queue internally.

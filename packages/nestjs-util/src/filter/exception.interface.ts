@@ -15,7 +15,6 @@ export interface EnrichedException {
   message?: string
   errors?: string[] | ClassValidatorError[]
   service?: string[]
-  path?: string[]
   stacktrace?: string
 }
 
