@@ -7,7 +7,7 @@ import { MicroserviceProviderBaseMessage, BaseMessageIndexes } from '@webundsoeh
  */
 export declare class {{ names.interface }} extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<{{ names.pattern }}> {
   [{{ names.pattern }}.{{ names.default }}]: {
-    response: any | never
-    request: any | never
+    request: any
+    response: any
   }
 }
