@@ -33,6 +33,9 @@ import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PRO
 {% endif %}
 
 import * as modules from './modules'
+{% if server == enum.server.GRAPHQL %}
+import * as resolvers from './resolvers'
+{% endif %}
 {% if database is defined and database != enum.database.NONE %}
 import { getDatabaseOptions } from '../util/database'
 {% endif %}
@@ -71,7 +74,8 @@ export function createServerModule ({% if database is defined and database != en
         playground: true,
         introspection: true,
         path: '/'
-      }), {% endif %}
+      }),
+      ...Object.values(resolvers),{% endif %}
       ...Object.values(modules),
       {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
