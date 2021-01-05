@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 
 @Injectable()
 export class {{ casing.pascal }}Service {
+  private logger: Logger = new Logger(this.constructor.name)
+
   public default (): string {
     return 'Hello World!'
   }

@@ -59,9 +59,7 @@ export function addProject (options: NormalizedSchema): Rule {
           }
         }
       }
-    }
-
-    if (options.components.includes(AvailableComponents.BG_TASK)) {
+    } else if (options.components.includes(AvailableComponents.BG_TASK)) {
       architect.bgtask = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
@@ -69,7 +67,6 @@ export function addProject (options: NormalizedSchema): Rule {
           main: join(options.root, 'src/main.ts'),
           tsConfig: join(options.root, 'tsconfig.json'),
           environment: {
-            NODE_CONFIG_DIR: join(options.root, 'config/'),
             NODE_SERVICE: 'bgtask'
           }
         }

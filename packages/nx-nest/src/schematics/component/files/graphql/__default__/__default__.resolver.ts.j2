@@ -1,18 +1,16 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
 
-import { {{ casing.pascal }}Schema } from './{{ name }}.schema'
+import { {{ casing.pascal }}Input } from './{{ name }}.input'
+import { {{ casing.pascal }}Output } from './{{ name }}.output'
+import { {{ casing.pascal }}Service } from './{{ name }}.service'
 
-@Resolver('{{ casing.pascal }}')
+@Resolver(() => {{ casing.pascal }}Output)
 export class {{ casing.pascal }}Resolver {
-  @Query(() => {{ casing.pascal }}Schema)
-  public hello (
-    @Args({
-      name: 'name',
-      nullable: true,
-      defaultValue: 'world'
-    })
-      name: string
-  ): {{ casing.pascal }}Schema {
-    return { response: `Hello ${name}.` }
+
+  constructor (private {{ casing.camel }}Service: {{ casing.pascal }}Service) {}
+
+  @Query(() => {{ casing.pascal }}Output)
+  public hello (@Args() args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
+    return this.{{ casing.camel }}Service.default(args)
   }
 }

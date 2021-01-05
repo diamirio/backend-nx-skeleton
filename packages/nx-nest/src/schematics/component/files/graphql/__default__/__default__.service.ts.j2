@@ -1,0 +1,13 @@
+import { Injectable, Logger } from '@nestjs/common'
+
+import { {{ casing.pascal }}Input } from './{{ name }}.input'
+import { {{ casing.pascal }}Output } from './{{ name }}.output'
+
+@Injectable()
+export class {{ casing.pascal }}Service {
+  private logger: Logger = new Logger(this.constructor.name)
+
+  public async default (args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
+    return { response: `Hello ${args?.name}.` }
+  }
+}

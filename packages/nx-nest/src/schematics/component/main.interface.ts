@@ -12,7 +12,7 @@ export interface Schema {
   name: string
   parent: string
   skipFormat: boolean
-  type: Exclude<AvailableComponents, AvailableComponents.SERVER | AvailableComponents.MICROSERVICE_CLIENT> | AvailableServerTypes
+  type: AvailableComponentsSelection
   force: boolean
   silent: boolean
   mount?: string
@@ -37,4 +37,4 @@ export interface NormalizedSchema extends Schema {
 /**
  * Some components are currently disabled to generate components from at the moment.
  */
-export type AvailableComponentsSelection = Exclude<AvailableComponents, AvailableComponents.MICROSERVICE_CLIENT>
+export type AvailableComponentsSelection = Exclude<AvailableComponents, AvailableComponents.SERVER | AvailableComponents.MICROSERVICE_CLIENT> | AvailableServerTypes

@@ -109,26 +109,25 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components
             .map((c) => {
-              if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+              if ([ AvailableComponents.SERVER ].includes(c)) {
+                return [
+                  { name: AvailableServerTypes.RESTFUL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.RESTFUL] },
+                  { name: AvailableServerTypes.GRAPHQL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.GRAPHQL] }
+                ]
+              } else if ([ AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
                 return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
               }
             })
             .filter(Boolean)
+            .flat()
 
           // select the base components
           // when options are not passed as an option to the command
-          const prompt = await task.prompt<AvailableComponentsSelection>({
+          ctx.type = await task.prompt<AvailableComponentsSelection>({
             type: 'Select',
             message: 'Please select the component type.',
             choices
           })
-
-          // parse the prompt depending on the prior configuration
-          if (prompt === AvailableComponents.SERVER) {
-            ctx.type = ctx.parentPriorConfiguration.server
-          } else {
-            ctx.type = prompt
-          }
 
           task.title = `Components type selected: ${ctx.type}`
         },
@@ -142,7 +141,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type], 'modules'))
+          ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
 
           if (
             directoryExists(join(ctx.root, ctx.name)) &&

@@ -54,23 +54,30 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
           rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
         },
         {
-          condition: !options.priorConfiguration && options.components.includes(AvailableComponents.SERVER) && options?.server === AvailableServerTypes.RESTFUL,
+          condition:
+            !options.priorConfiguration?.components?.includes(AvailableComponents.SERVER) &&
+            options.components.includes(AvailableComponents.SERVER) &&
+            options?.server === AvailableServerTypes.RESTFUL,
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.RESTFUL })
         },
         {
-          condition: !options.priorConfiguration && options.components.includes(AvailableComponents.SERVER) && options?.server === AvailableServerTypes.GRAPHQL,
+          condition:
+            !options.priorConfiguration?.components?.includes(AvailableComponents.SERVER) &&
+            options.components.includes(AvailableComponents.SERVER) &&
+            options?.server === AvailableServerTypes.GRAPHQL,
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.GRAPHQL })
         },
         {
-          condition: !options.priorConfiguration && options.components.includes(AvailableComponents.BG_TASK),
+          condition: !options.priorConfiguration?.components?.includes(AvailableComponents.BG_TASK) && options.components.includes(AvailableComponents.BG_TASK),
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.BG_TASK })
         },
         {
-          condition: !options.priorConfiguration && options.components.includes(AvailableComponents.COMMAND),
+          condition: !options.priorConfiguration?.components?.includes(AvailableComponents.COMMAND) && options.components.includes(AvailableComponents.COMMAND),
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.COMMAND })
         },
         {
-          condition: !options.priorConfiguration && options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
+          condition:
+            !options.priorConfiguration?.components?.includes(AvailableComponents.MICROSERVICE_SERVER) && options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.MICROSERVICE_SERVER })
         }
       ]
