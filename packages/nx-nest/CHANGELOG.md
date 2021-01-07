@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.5...@webundsoehne-private/nx-nest@1.3.6) (2021-01-07)
+
+
+### Bug Fixes
+
+* fix import to provider in command component ([e68c1b8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e68c1b869df11fe78a152291ef5580bbfea6e9d4))
+
 ## @webundsoehne-private/nx-nest [1.3.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.4...@webundsoehne-private/nx-nest@1.3.5) (2021-01-07)
 
 
