@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.4...@webundsoehne-private/nx-nest@1.3.5) (2021-01-07)
+
+
+### Bug Fixes
+
+* improve component known paths detection ([21276c1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/21276c1e376f53841d453e4d803ebd2d951278ca))
+
 ## @webundsoehne-private/nx-nest [1.3.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.3...@webundsoehne-private/nx-nest@1.3.4) (2021-01-07)
 
 
