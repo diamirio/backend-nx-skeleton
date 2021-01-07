@@ -1,3 +1,18 @@
+## @webundsoehne/nx-builders [2.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.6...@webundsoehne/nx-builders@2.1.7) (2021-01-07)
+
+
+### Bug Fixes
+
+* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.6
+
 ## @webundsoehne/nx-builders [2.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.5...@webundsoehne/nx-builders@2.1.6) (2021-01-05)
 
 
