@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.1...@webundsoehne/nestjs-util@2.5.2) (2021-01-07)
+
+
+### Bug Fixes
+
+* remove rewire since that bandaid did not work ([a600751](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a600751c86a22357780aa5d9d43f660739299851))
+
 ## @webundsoehne/nestjs-util [2.5.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.0...@webundsoehne/nestjs-util@2.5.1) (2021-01-05)
 
 
