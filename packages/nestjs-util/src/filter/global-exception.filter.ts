@@ -31,9 +31,9 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return
     }
 
-    logErrorDebugMsg(this.logger, payload, exception.stack)
-
     if (request && this.httpAdapterHost?.httpAdapter) {
+      logErrorDebugMsg(this.logger, payload, exception.stack)
+
       // do not handle internal error mechanisms
       const response = ctx.getResponse()
       this.httpAdapterHost.httpAdapter.reply(response, payload, payload.statusCode)

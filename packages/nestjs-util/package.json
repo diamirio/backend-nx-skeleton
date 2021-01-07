@@ -44,7 +44,6 @@
     "fs-extra": "^9.0.0",
     "moment": "^2.28.0",
     "reflect-metadata": "^0.1.13",
-    "rewire": "^5.0.0",
     "winston": "^3.2.1"
   },
   "peerDependencies": {
@@ -70,8 +69,6 @@
     "@types/config": "^0.0.37",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.14.8",
-    "@types/rewire": "^2.5.28",
-    "@types/supertest": "^2.0.8",
     "@types/winston": "^2.4.4",
     "amqp-connection-manager": "^3.2.1",
     "amqplib": "^0.6.0",
