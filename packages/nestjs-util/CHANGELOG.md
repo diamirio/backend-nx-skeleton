@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.2...@webundsoehne/nestjs-util@2.5.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* update config service to inject the type ([44df384](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/44df384a8e6b0ea147e15e858162d0a0d174396c))
+
 ## @webundsoehne/nestjs-util [2.5.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.1...@webundsoehne/nestjs-util@2.5.2) (2021-01-07)
 
 
