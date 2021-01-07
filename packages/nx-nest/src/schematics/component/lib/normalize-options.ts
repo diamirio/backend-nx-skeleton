@@ -141,14 +141,12 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          // do singular plural check for component
-          if (directoryExists(join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))) {
-            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
-          } else if (join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1))) {
-            // maybe handle this better in the future
-            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1)))
+          const root = ComponentLocationsMap[ctx.type].find((t) => directoryExists(join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, t)))
+
+          if (root) {
+            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, root))
           } else {
-            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
+            throw new Error(`Can not find components folder in the known paths: ${ComponentLocationsMap[ctx.type].join(', ')}`)
           }
 
           if (
