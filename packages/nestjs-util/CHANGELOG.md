@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.3...@webundsoehne/nestjs-util@2.5.4) (2021-01-07)
+
+
+### Bug Fixes
+
+* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
+
 ## @webundsoehne/nestjs-util [2.5.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.2...@webundsoehne/nestjs-util@2.5.3) (2021-01-07)
 
 
