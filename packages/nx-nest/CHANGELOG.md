@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.3...@webundsoehne-private/nx-nest@1.3.4) (2021-01-07)
+
+
+### Bug Fixes
+
+* fix component name of bgtask ([b25714d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b25714df74c887ea73d6a4ad94d41ec06139b7ab))
+
 ## @webundsoehne-private/nx-nest [1.3.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.2...@webundsoehne-private/nx-nest@1.3.3) (2021-01-07)
 
 
