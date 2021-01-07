@@ -28,7 +28,7 @@ import { generateMicroserviceCasing } from '@src/utils'
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -142,15 +142,15 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
           // do singular plural check for component
-          if (directoryExists(ComponentLocationsMap[ctx.type])) {
+          if (directoryExists(join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))) {
             ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
-          } else if (directoryExists(ComponentLocationsMap[ctx.type].slice(0, -1))) {
+          } else if (join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1))) {
             // maybe handle this better in the future
             this.logger.warn('Component root directory seems to be singular named instead of the default plural.')
             ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1)))
           } else {
-            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
             this.logger.error('Component root directory does not exists, using the default one.')
+            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
           }
 
           if (

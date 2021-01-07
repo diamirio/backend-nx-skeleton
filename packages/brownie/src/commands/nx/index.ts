@@ -136,8 +136,8 @@ export class NxCommand extends BaseCommand<Configuration> {
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
-        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--verbose' ] : [],
-        ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : []
+        ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : [],
+        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--', '--verbose' ] : []
       ],
       { stdio: 'inherit', shell: true }
     )
