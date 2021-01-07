@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.1...@webundsoehne-private/nx-nest@1.3.2) (2021-01-07)
+
+
+### Bug Fixes
+
+* fix verbose mode with brownie and root directory check for components ([f600150](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f600150a6bb5f941526dfae727bc8adc64611971))
+
 ## @webundsoehne-private/nx-nest [1.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.0...@webundsoehne-private/nx-nest@1.3.1) (2021-01-07)
 
 
