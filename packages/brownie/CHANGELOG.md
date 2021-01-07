@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [1.2.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.10...@webundsoehne/brownie@1.2.11) (2021-01-07)
+
+
+### Bug Fixes
+
+* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 2.1.6
+
 ## @webundsoehne/brownie [1.2.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.9...@webundsoehne/brownie@1.2.10) (2021-01-05)
 
 
