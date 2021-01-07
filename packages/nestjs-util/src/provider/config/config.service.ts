@@ -12,7 +12,7 @@ export class ConfigService {
    * @param {any} defaultValue
    * @returns {any}
    */
-  static get (path: string, defaultValue?: any): any {
+  static get<T extends any = any>(path: string, defaultValue?: T): T {
     let configValue
 
     try {
@@ -56,8 +56,8 @@ export class ConfigService {
     return ConfigService.has(path)
   }
 
-  public get (path: string, defaultValue?: any): any {
-    return ConfigService.get(path, defaultValue)
+  public get<T extends any = any>(path: string, defaultValue?: T): T {
+    return ConfigService.get<T>(path, defaultValue)
   }
 
   public setModuleConfig (moduleName: string, moduleConfig: Config): void {
