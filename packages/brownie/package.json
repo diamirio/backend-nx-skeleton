@@ -77,7 +77,7 @@
     "@oclif/errors": "^1.3.4",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.5",
-    "execa": "^4.0.2",
+    "execa": "^5.0.0",
     "fs-extra": "^9.0.0",
     "globby": "^11.0.0",
     "listr2": "^3.1.1",

@@ -1,4 +1,4 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
+import { BaseCommand, LogLevels } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import chalk from 'chalk'
 import execa from 'execa'
@@ -118,6 +118,7 @@ export class NxCommand extends BaseCommand<Configuration> {
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
       const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help' ], { shell: true })
       this.logger.direct(help.stdout)
+
       try {
         ctx.prompts.arguments = await createPrompt({ type: 'Input', message: 'Arguments:' + EOL }, { error: false })
       } catch {
@@ -135,6 +136,7 @@ export class NxCommand extends BaseCommand<Configuration> {
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
+        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--verbose' ] : [],
         ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : []
       ],
       { stdio: 'inherit', shell: true }
