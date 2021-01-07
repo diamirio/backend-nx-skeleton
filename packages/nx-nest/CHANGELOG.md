@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-nest [1.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.0...@webundsoehne-private/nx-nest@1.3.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 2.1.7
+* **@webundsoehne/nx-tools:** upgraded to 2.1.6
+
 # @webundsoehne-private/nx-nest [1.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.2.0...@webundsoehne-private/nx-nest@1.3.0) (2021-01-07)
 
 
