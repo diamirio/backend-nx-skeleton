@@ -146,10 +146,8 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
           } else if (join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1))) {
             // maybe handle this better in the future
-            this.logger.warn('Component root directory seems to be singular named instead of the default plural.')
             ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1)))
           } else {
-            this.logger.error('Component root directory does not exists, using the default one.')
             ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
           }
 
