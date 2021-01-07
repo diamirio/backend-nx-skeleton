@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [2.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.5...@webundsoehne/nx-tools@2.1.6) (2021-01-07)
+
+
+### Bug Fixes
+
+* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
+
 ## @webundsoehne/nx-tools [2.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.4...@webundsoehne/nx-tools@2.1.5) (2021-01-05)
 
 
