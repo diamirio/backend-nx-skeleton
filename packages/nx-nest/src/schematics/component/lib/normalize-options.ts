@@ -141,7 +141,17 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
+          // do singular plural check for component
+          if (directoryExists(ComponentLocationsMap[ctx.type])) {
+            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
+          } else if (directoryExists(ComponentLocationsMap[ctx.type].slice(0, -1))) {
+            // maybe handle this better in the future
+            this.logger.warn('Component root directory seems to be singular named instead of the default plural.')
+            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type].slice(0, -1)))
+          } else {
+            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, ComponentLocationsMap[ctx.type]))
+            this.logger.error('Component root directory does not exists, using the default one.')
+          }
 
           if (
             directoryExists(join(ctx.root, ctx.name)) &&
