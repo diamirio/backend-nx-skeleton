@@ -1,3 +1,10 @@
+# @webundsoehne-private/nx-nest [1.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.2.0...@webundsoehne-private/nx-nest@1.3.0) (2021-01-07)
+
+
+### Features
+
+* add bandaid support for singular module directory names ([3db03e5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3db03e54e052bc042a3bc9acc1421b1480b1e1c9))
+
 # @webundsoehne-private/nx-nest [1.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.1.17...@webundsoehne-private/nx-nest@1.2.0) (2021-01-05)
 
 
