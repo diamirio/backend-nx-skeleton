@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [1.2.12](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.11...@webundsoehne/brownie@1.2.12) (2021-01-07)
+
+
+### Bug Fixes
+
+* fix verbose mode with brownie and root directory check for components ([f600150](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f600150a6bb5f941526dfae727bc8adc64611971))
+
 ## @webundsoehne/brownie [1.2.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@1.2.10...@webundsoehne/brownie@1.2.11) (2021-01-07)
 
 
