@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.2...@webundsoehne-private/nx-nest@1.3.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* delete logger from schematic ([7629d60](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7629d60fe656bceeaf8e33b554511e032d040b48))
+
 ## @webundsoehne-private/nx-nest [1.3.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.1...@webundsoehne-private/nx-nest@1.3.2) (2021-01-07)
 
 
