@@ -141,12 +141,13 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          const root = ComponentLocationsMap[ctx.type].find((t) => directoryExists(join(process.cwd(), ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, t)))
+          const basePath = join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot)
+          const root = ComponentLocationsMap[ctx.type].find((t) => directoryExists(join(process.cwd(), basePath, t)))
 
           if (root) {
-            ctx.root = normalize(join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot, root))
+            ctx.root = normalize(join(basePath, root))
           } else {
-            throw new Error(`Can not find components folder in the known paths: ${ComponentLocationsMap[ctx.type].join(', ')}`)
+            ctx.root = normalize(join(basePath, ComponentLocationsMap[ctx.type].shift()))
           }
 
           if (
