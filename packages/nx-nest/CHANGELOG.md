@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.6...@webundsoehne-private/nx-nest@1.3.7) (2021-01-11)
+
+
+### Bug Fixes
+
+* component generation for empty project to use first in array of known paths ([2f436b1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2f436b1b4bb9dbae2966c8b631f783093bff6a8f))
+
 ## @webundsoehne-private/nx-nest [1.3.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.5...@webundsoehne-private/nx-nest@1.3.6) (2021-01-07)
 
 
