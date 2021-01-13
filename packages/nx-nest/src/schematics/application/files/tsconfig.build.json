@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {},
+  "include": ["src", "migrations", "seeds"],
   "exclude": ["node_modules", "tests", "dist", "**/*spec.ts"]
 }
