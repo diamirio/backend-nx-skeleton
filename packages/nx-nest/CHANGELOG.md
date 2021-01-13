@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [1.3.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.7...@webundsoehne-private/nx-nest@1.3.8) (2021-01-13)
+
+
+### Bug Fixes
+
+* move includes to build tsconfig itself ([a342846](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a342846f5684f3e826e6643b3b52947a9cee3be5))
+
 ## @webundsoehne-private/nx-nest [1.3.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.6...@webundsoehne-private/nx-nest@1.3.7) (2021-01-11)
 
 
