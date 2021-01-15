@@ -1,3 +1,14 @@
+## @webundsoehne-private/nx-nest [1.3.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.8...@webundsoehne-private/nx-nest@1.3.9) (2021-01-15)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 2.1.8
+* **@webundsoehne/nx-tools:** upgraded to 2.1.7
+
 ## @webundsoehne-private/nx-nest [1.3.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.7...@webundsoehne-private/nx-nest@1.3.8) (2021-01-13)
 
 
