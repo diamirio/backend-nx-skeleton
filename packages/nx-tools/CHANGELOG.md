@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [2.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.6...@webundsoehne/nx-tools@2.1.7) (2021-01-15)
+
+
+### Bug Fixes
+
+* adds environment variable on import of isverbose ([03c0170](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/03c017056f382368023d5e423542cfbea74bdcb5))
+
 ## @webundsoehne/nx-tools [2.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.5...@webundsoehne/nx-tools@2.1.6) (2021-01-07)
 
 
