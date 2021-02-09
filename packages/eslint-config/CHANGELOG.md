@@ -1,3 +1,10 @@
+## @webundsoehne/eslint-config [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.1...@webundsoehne/eslint-config@2.1.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* bump packages of eslint that is failing ([839f06a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/839f06a7d903b3894a0d2e0eb8f6ee798ff00d38))
+
 ## @webundsoehne/eslint-config [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.0...@webundsoehne/eslint-config@2.1.1) (2020-11-26)
 
 
