@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [2.1.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.7...@webundsoehne/nx-tools@2.1.8) (2021-01-15)
+
+
+### Bug Fixes
+
+* update debug mode to use the env variable as in angular ([0beaf24](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0beaf24e2a04f45e4270127748df8247d3cc39fd))
+
 ## @webundsoehne/nx-tools [2.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@2.1.6...@webundsoehne/nx-tools@2.1.7) (2021-01-15)
 
 
