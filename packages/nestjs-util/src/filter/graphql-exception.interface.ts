@@ -5,8 +5,8 @@ export class GraphQLPreformattedException<T> extends Error implements GraphQLFor
   public path: GraphQLFormattedError<T>['path']
   public extensions: GraphQLFormattedError<T>['extensions']
 
-  constructor (error: GraphQLFormattedError<T>) {
-    const err = super()
-    Object.assign(this, err, error)
+  constructor ({ message, ...error }: GraphQLFormattedError<T>) {
+    super(message)
+    Object.assign(this, error)
   }
 }

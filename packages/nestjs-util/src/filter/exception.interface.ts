@@ -20,9 +20,9 @@ export class EnrichedExceptionError extends Error implements EnrichedException {
   public service?: string[]
   public stacktrace?: string
 
-  constructor (error: EnrichedException) {
-    const err = super()
-    Object.assign(this, err, error)
+  constructor ({ message, ...error }: EnrichedException) {
+    super(message)
+    Object.assign(this, error)
   }
 }
 
