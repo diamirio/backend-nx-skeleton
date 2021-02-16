@@ -12,12 +12,12 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
       exception.extensions?.exception?.statusCode ??
       exception.extensions?.exception?.response?.statusCode ??
       HttpStatus.INTERNAL_SERVER_ERROR,
-    error: exception?.name ?? exception.message,
+    error: exception?.name ?? exception?.message,
     message: getErrorMessage(exception),
     service: exception.extensions?.exception?.response?.service
   }
 
-  if (isValidationError(exception.extensions.exception)) {
+  if (isValidationError(exception?.extensions?.exception)) {
     const errors = formatValidationError(exception.extensions.exception.validation)
 
     if (errors.length > 0) {
@@ -28,7 +28,11 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
     }
   }
 
-  logErrorDebugMsg(new Logger('GraphQLErrorParser'), extensions, exception.extensions?.exception.stacktrace.join(EOL))
+  logErrorDebugMsg(
+    new Logger('GraphQLErrorParser'),
+    extensions,
+    exception?.extensions?.exception?.stacktrace?.join(EOL)
+  )
 
   return new GraphQLPreformattedException({
     message: getErrorMessage(exception),

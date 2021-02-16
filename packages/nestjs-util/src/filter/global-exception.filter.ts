@@ -2,7 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nest
 import { HttpAdapterHost } from '@nestjs/core'
 import { FastifyRequest } from 'fastify'
 
-import { EnrichedException } from './exception.interface'
+import { EnrichedException, EnrichedExceptionError } from './exception.interface'
 import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
 
 @Catch()
@@ -12,12 +12,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   constructor (private readonly httpAdapterHost: HttpAdapterHost) {}
 
   public static defaultPayload (exception: any): EnrichedException {
-    return {
+    return new EnrichedExceptionError({
       statusCode: typeof exception?.status === 'number' ? exception?.status : HttpStatus.INTERNAL_SERVER_ERROR,
       error: exception?.error ?? exception.message,
       message: getErrorMessage(exception),
       service: exception?.service
-    }
+    })
   }
 
   public catch (exception: Error, host: ArgumentsHost): void {
