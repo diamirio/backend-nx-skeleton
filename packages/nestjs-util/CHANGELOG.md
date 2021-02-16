@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.9...@webundsoehne/nestjs-util@2.5.10) (2021-02-16)
+
+
+### Bug Fixes
+
+* rollback ([a438845](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a438845de0ce3f55acd449116b4a5fd7fbc6a085))
+
 ## @webundsoehne/nestjs-util [2.5.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.8...@webundsoehne/nestjs-util@2.5.9) (2021-02-16)
 
 
