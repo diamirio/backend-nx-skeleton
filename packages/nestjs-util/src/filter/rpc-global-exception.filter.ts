@@ -26,7 +26,7 @@ export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
 
     logErrorDebugMsg(this.logger, payload, exception.stack)
 
-    throwError(payload)
+    return throwError(payload)
   }
 
   protected payload (exception: RpcException | HttpException, host: ArgumentsHost): EnrichedException {
