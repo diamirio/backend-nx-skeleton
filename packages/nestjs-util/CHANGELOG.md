@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.8...@webundsoehne/nestjs-util@2.5.9) (2021-02-16)
+
+
+### Bug Fixes
+
+* update extending from error ([f3ebb40](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f3ebb40c58bd00efbf89adfb97378a34e69b07fa))
+
 ## @webundsoehne/nestjs-util [2.5.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.7...@webundsoehne/nestjs-util@2.5.8) (2021-02-16)
 
 
