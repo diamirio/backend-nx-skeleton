@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.4...@webundsoehne/nestjs-util@2.5.5) (2021-02-16)
+
+
+### Bug Fixes
+
+* update global exception filter to log message always! ([1530546](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1530546df4ad08564f46ead087409bc8208e03aa))
+
 ## @webundsoehne/nestjs-util [2.5.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.3...@webundsoehne/nestjs-util@2.5.4) (2021-01-07)
 
 
