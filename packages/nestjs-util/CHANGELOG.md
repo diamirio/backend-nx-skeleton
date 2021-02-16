@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.7...@webundsoehne/nestjs-util@2.5.8) (2021-02-16)
+
+
+### Bug Fixes
+
+* trying to fix new error parsing ([d079a4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d079a4a74d3ba803273a5654f20fd37e27f68df0))
+
 ## @webundsoehne/nestjs-util [2.5.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.6...@webundsoehne/nestjs-util@2.5.7) (2021-02-16)
 
 
