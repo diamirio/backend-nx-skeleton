@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [2.5.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.5...@webundsoehne/nestjs-util@2.5.6) (2021-02-16)
+
+
+### Bug Fixes
+
+* update debug parser ([48756c0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48756c015764b7bac239ff3c602d841d2875dfbf))
+
 ## @webundsoehne/nestjs-util [2.5.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@2.5.4...@webundsoehne/nestjs-util@2.5.5) (2021-02-16)
 
 
