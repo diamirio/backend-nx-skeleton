@@ -47,6 +47,6 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
       })
     )
 
-    createTable([ 'name', 'package-name', 'package-version' ], table)
+    this.logger.direct(createTable([ 'patch', 'package-name', 'package-version' ], table))
   }
 }

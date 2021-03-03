@@ -3,18 +3,22 @@ import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags as Flags } from '@oclif/command'
 import { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
 import fs from 'fs-extra'
+import globby from 'globby'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
 import { getPackageDetailsFromPatchFilename } from 'patch-package/dist/PackageDetails'
 import { packageIsDevDependency } from 'patch-package/dist/packageIsDevDependency'
-import { join, resolve, isAbsolute } from 'path'
+import { join, resolve, isAbsolute, basename } from 'path'
 import rewire from 'rewire'
 import tmp from 'tmp-promise'
 
 import { ApplicationConfiguration } from '@src/interfaces/config.interface'
 
 export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
+  static strict = false
   static description = 'Patches or reserves given patches in a directory.'
-  static flags: Record<'path' | 'directory', IOptionFlag<string>> & Record<'exitOnError' | 'reverse', IBooleanFlag<boolean>> & Record<'limit', IOptionFlag<string[]>> = {
+  static examples = [ 'Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0', 'Use extended glob patterns: patch-package patch "graphql*"' ]
+  static aliases = [ 'apply' ]
+  static flags: Record<'path' | 'directory', IOptionFlag<string>> & Record<'exitOnError' | 'reverse', IBooleanFlag<boolean>> = {
     directory: Flags.string({
       char: 'd',
       description: 'Directory to apply the patches from.'
@@ -23,11 +27,6 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
       char: 'p',
       description: 'Directory to apply patches to.',
       default: getAppRootPath()
-    }),
-    limit: Flags.string({
-      char: 'l',
-      description: 'Limit the patches to the given variables.',
-      multiple: true
     }),
     exitOnError: Flags.boolean({
       char: 'e',
@@ -78,7 +77,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
   public async run (): Promise<void> {
     // get arguments
-    const { flags } = this.parse(PatchCommand)
+    const { flags, argv } = this.parse(PatchCommand)
 
     // set default arguments
     flags.directory = flags.directory
@@ -91,21 +90,26 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     this.logger.info('Importing patches from directory: %s', flags.directory)
 
-    if (flags?.limit?.length > 0) {
+    if (argv?.length > 0) {
       // check for missing patches when limited to
+      let matched = []
       const missingPatches = []
+
       await Promise.all(
-        flags.limit.map(async (patch) => {
-          const path = join(flags.directory, `${patch}.patch`)
-
+        argv.map(async (patch) => {
           try {
-            const stat = await fs.stat(path)
+            const glob = await globby(`${patch}.patch`, {
+              cwd: flags.directory,
+              onlyFiles: true
+            })
 
-            if (!stat.isFile()) {
-              throw new Error('Is not a file.')
+            matched.push(...glob)
+
+            if (glob.length === 0) {
+              throw new Error('Can not match pattern.')
             }
           } catch (err) {
-            this.logger.debug(`Missing file ${path}: %s`, err.message)
+            this.logger.debug('Missing file: %s with error %s', patch, err.message)
 
             missingPatches.push(patch)
           }
@@ -123,13 +127,13 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
       this.logger.debug('Created a temporary directory: %s', this.temp.path)
 
       // move limited patches to the temporary directory
-      this.logger.info('Limitting patches: %s', flags.limit.join(', '))
+      matched = matched.filter((x, i, array) => i === array.indexOf(x))
+
+      this.logger.info('Limitting patches: %s', matched.join(', '))
 
       await Promise.all(
-        flags.limit.map(async (patch) => {
-          const path = join(flags.directory, `${patch}.patch`)
-
-          await fs.copyFile(path, join(this.temp.path, `${patch}.patch`))
+        matched.map(async (patch) => {
+          await fs.copyFile(join(flags.directory, patch), join(this.temp.path, `${basename(patch)}`))
         })
       )
 
