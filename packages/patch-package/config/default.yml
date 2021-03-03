@@ -1,0 +1,8 @@
+cli: 'patch-package'
+loglevel: module
+logcolor: true
+configDir: '.config/patch-package'
+localConfig: '.patch-package.local.lock'
+lock: '.patch-package.lock'
+
+patchesDir: 'patches'

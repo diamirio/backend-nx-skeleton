@@ -1,13 +1,13 @@
 {
-  "name": "@webundsoehne/brownie",
-  "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
+  "name": "@webundsoehne/patch-package",
+  "description": "A wrapper CLI for patching packages for certain applications.",
   "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "brownie": "bin/run.js"
+    "patch-package": "bin/run.js"
   },
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
@@ -18,15 +18,13 @@
     "build": "tsc -p tsconfig.build.json",
     "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
+    "start": "./bin/run.js",
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "oclif": "oclif $command",
     "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
-    "test": "NODE_ENV=test jest --forceExit --runInBand --config ./tests/jest.config.js",
-    "test:cov": "NODE_ENV=test jest --coverage --config ./tests/jest.config.js",
-    "dev:test": "NODE_ENV=test jest --verbose --runInBand --forceExit --watchAll --config ./tests/jest.config.js",
     "docs:readme": "yarn oclif-dev readme"
   },
   "husky": {
@@ -48,11 +46,11 @@
     "bin/",
     "config/",
     "dist/",
-    "templates/"
+    "patches/"
   ],
   "oclif": {
     "commands": "./dist/commands",
-    "bin": "brownie",
+    "bin": "patch-package",
     "plugins": [
       "@oclif/plugin-help"
     ],
@@ -67,40 +65,29 @@
   },
   "keywords": [
     "oclif",
-    "brownie"
+    "patch-package"
   ],
   "dependencies": {
     "@cenk1cenk2/boilerplate-oclif": "^1.5.2",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/errors": "^1.3.4",
-    "@webundsoehne/nx-tools": "*",
-    "enquirer": "^2.3.5",
-    "execa": "^5.0.0",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^9.1.0",
     "globby": "^11.0.0",
-    "listr2": "^3.1.1",
-    "nunjucks": "^3.2.2",
-    "through": "^2.3.8",
-    "tslib": "^2.0.1",
-    "types": "^0.1.1",
-    "update-notifier": "^5.0.1",
-    "update-notifier2": "^1.0.6",
-    "yaml": "^1.10.0"
+    "patch-package": "^6.4.4",
+    "rewire": "^5.0.0",
+    "tmp-promise": "^3.0.2",
+    "tslib": "^2.0.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
-    "@types/fs-extra": "^9.0.4",
-    "@types/jest": "^26.0.9",
     "@types/node": "^14.14.8",
-    "@types/through": "^0.0.30",
-    "@types/update-notifier": "^5.0.0",
+    "@types/rewire": "^2.5.28",
     "eslint": "^7.6.0",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "lint-staged": "^10.2.7",
     "prettier": "^2.0.5",
-    "ts-jest": "^26.1.4",
     "tsc-watch": "^4.2.8",
     "tsconfig-paths": "^3.9.0",
     "tscpaths": "^0.0.9",
