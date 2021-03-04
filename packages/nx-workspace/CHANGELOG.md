@@ -1,3 +1,31 @@
+# @webundsoehne-private/nx-workspace [2.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@1.0.10...@webundsoehne-private/nx-workspace@2.0.0) (2021-03-04)
+
+
+### Bug Fixes
+
+* add husky to workspace dependencies ([67d0c20](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/67d0c203a1a3e74d60a08882b4210493ae65679d))
+
+
+### Performance Improvements
+
+* update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
+
+
+### BREAKING CHANGES
+
+* There is ton of breaking changes due to angular, nx base libraries.
+
+Fixed the bug with the apollo-server not liking fastify2 for playground by using beta.
+Updated everything to latest version therefore contains a lot of breaking changes.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.0.0
+
 ## @webundsoehne-private/nx-workspace [1.0.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@1.0.9...@webundsoehne-private/nx-workspace@1.0.10) (2021-01-15)
 
 
