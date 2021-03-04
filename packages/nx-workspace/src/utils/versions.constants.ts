@@ -18,6 +18,7 @@ export const VERSIONS: Versions = {
       '@nrwl/jest': '^11.4.0',
       '@nrwl/linter': '^11.4.0',
       'lint-staged': '^10.5.4',
+      husky: '^4',
       ...VERSION_CONSTANTS.eslint.dependencies,
       ...VERSION_CONSTANTS.eslint.devDependencies
     }
