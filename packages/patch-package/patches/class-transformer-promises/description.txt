@@ -1,0 +1,1 @@
+There is an error for class-transformer with validating promises. The problem is solved supposedly for >v0.4.0 but there are breaking changes. For older projects, this should work a charm.

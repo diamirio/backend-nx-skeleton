@@ -1,0 +1,14 @@
+diff --git a/node_modules/class-transformer/TransformOperationExecutor.js b/node_modules/class-transformer/TransformOperationExecutor.js
+index dec36c7..9ae33de 100644
+--- a/node_modules/class-transformer/TransformOperationExecutor.js
++++ b/node_modules/class-transformer/TransformOperationExecutor.js
+@@ -38,6 +38,9 @@ class TransformOperationExecutor {
+     // Public Methods
+     // -------------------------------------------------------------------------
+     transform(source, value, targetType, arrayType, isMap, level = 0) {
++        if (value && typeof value === 'object' && typeof value.then === 'function') {
++            return value;
++        };
+         if (Array.isArray(value) || value instanceof Set) {
+             const newValue = arrayType && this.transformationType === enums_1.TransformationType.PLAIN_TO_CLASS
+                 ? instantiateArrayType(arrayType)
