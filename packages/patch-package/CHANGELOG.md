@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.0...@webundsoehne/patch-package@1.0.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* add class transformer fix ([60b6785](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/60b6785807150349c384850f08085c846bacabf9))
+
 # @webundsoehne/patch-package 1.0.0 (2021-03-04)
 
 
