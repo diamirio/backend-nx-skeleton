@@ -1,3 +1,27 @@
+# @webundsoehne-private/nx-nest [2.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.10...@webundsoehne-private/nx-nest@2.0.0) (2021-03-04)
+
+
+### Performance Improvements
+
+* update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
+
+
+### BREAKING CHANGES
+
+* There is ton of breaking changes due to angular, nx base libraries.
+
+Fixed the bug with the apollo-server not liking fastify2 for playground by using beta.
+Updated everything to latest version therefore contains a lot of breaking changes.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 3.0.0
+* **@webundsoehne/nx-tools:** upgraded to 3.0.0
+
 ## @webundsoehne-private/nx-nest [1.3.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@1.3.9...@webundsoehne-private/nx-nest@1.3.10) (2021-01-15)
 
 
