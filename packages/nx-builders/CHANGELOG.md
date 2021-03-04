@@ -1,3 +1,31 @@
+# @webundsoehne/nx-builders [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.9...@webundsoehne/nx-builders@3.0.0) (2021-03-04)
+
+
+### Bug Fixes
+
+* adds patching packages module, bump packages ([cac9597](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cac9597b2c3baab1396b2dc8ca3141e235508f00))
+
+
+### Performance Improvements
+
+* update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
+
+
+### BREAKING CHANGES
+
+* There is ton of breaking changes due to angular, nx base libraries.
+
+Fixed the bug with the apollo-server not liking fastify2 for playground by using beta.
+Updated everything to latest version therefore contains a lot of breaking changes.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.0.0
+
 ## @webundsoehne/nx-builders [2.1.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.8...@webundsoehne/nx-builders@2.1.9) (2021-01-15)
 
 
