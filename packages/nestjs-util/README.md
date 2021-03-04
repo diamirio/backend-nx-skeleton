@@ -36,8 +36,6 @@ This repository now uses conventional commits since it's monorepo structure. On 
   - [Logger](#logger)
   - [Swagger](#swagger)
   - [Microservice-Client Provider](#microservice-client-provider)
-  - [Decorators](#decorators)
-    - [Validation Override](#validation-override)
   - [Pipes](#pipes)
     - [Validation Pipe](#validation-pipe)
   - [Exception-Filters](#exception-filters)
