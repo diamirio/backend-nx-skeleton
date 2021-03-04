@@ -88,63 +88,61 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     this.logger.module(`${flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, flags.path)
 
-    if (argv?.length > 0) {
-      // check for missing patches when limited to
-      let matched = []
-      const missingPatches = []
+    const limit = argv.length === 0 ? [ '*' ] : argv
 
-      this.logger.info('Limitting patches: %s', argv.join(', '))
+    // check for missing patches when limited to
+    let matched = []
+    const missingPatches = []
 
-      await Promise.all(
-        argv.map(async (path) => {
-          this.logger.info('Importing patches from directory: %s', join(flags.directory, path))
+    this.logger.info('Limitting patches: %s', limit.join(', '))
 
-          try {
-            const glob = await globby(`${path ?? '.'}/*.patch`, {
-              cwd: flags.directory,
-              onlyFiles: true,
-              absolute: true
-            })
+    await Promise.all(
+      limit.map(async (path) => {
+        this.logger.info('Importing patches from directory: %s', join(flags.directory, path))
 
-            matched.push(...glob)
+        try {
+          const glob = await globby(`${path ?? '.'}/*.patch`, {
+            cwd: flags.directory,
+            onlyFiles: true,
+            absolute: true
+          })
 
-            this.logger.debug(`Matched from subdirectory ${path}: ${glob.join(', ')}`)
+          matched.push(...glob)
 
-            if (glob.length === 0) {
-              throw new Error('Can not match pattern.')
-            }
-          } catch (err) {
-            this.logger.debug('Missing file: %s with error %s', path, err.message)
+          this.logger.debug(`Matched from subdirectory ${path}: ${glob.join(', ')}`)
 
-            missingPatches.push(path)
+          if (glob.length === 0) {
+            throw new Error('Can not match pattern.')
           }
-        })
-      )
+        } catch (err) {
+          this.logger.debug('Missing file: %s with error %s', path, err.message)
 
-      if (missingPatches.length > 0) {
-        this.logger.fatal(`Some of the patches you limit to is not appropirate: ${missingPatches.join(', ')}`)
+          missingPatches.push(path)
+        }
+      })
+    )
 
-        process.exit(127)
-      }
+    if (missingPatches.length > 0) {
+      this.logger.fatal(`Some of the patches you limit to is not appropirate: ${missingPatches.join(', ')}`)
 
-      // create temporary directory and move the patches there
-      this.temp = await tmp.dir({ unsafeCleanup: true })
-      this.logger.debug('Created a temporary directory: %s', this.temp.path)
-
-      // move limited patches to the temporary directory
-      matched = matched.filter((x, i, array) => i === array.indexOf(x))
-
-      await Promise.all(
-        matched.map(async (patch) => {
-          await fs.copyFile(patch, join(this.temp.path, `${basename(patch)}`))
-        })
-      )
-
-      // set patch directory to temporary directory
-      flags.directory = this.temp.path
-    } else {
-      this.logger.info('Importing patches from directory: %s', flags.directory)
+      process.exit(127)
     }
+
+    // create temporary directory and move the patches there
+    this.temp = await tmp.dir({ unsafeCleanup: true })
+    this.logger.debug('Created a temporary directory: %s', this.temp.path)
+
+    // move limited patches to the temporary directory
+    matched = matched.filter((x, i, array) => i === array.indexOf(x))
+
+    await Promise.all(
+      matched.map(async (patch) => {
+        await fs.copyFile(patch, join(this.temp.path, `${basename(patch)}`))
+      })
+    )
+
+    // set patch directory to temporary directory
+    flags.directory = this.temp.path
 
     // apply patches
     let shouldTerminate = false
