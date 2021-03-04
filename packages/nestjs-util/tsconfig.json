@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "skipLibCheck": true,
+    "removeComments": false,
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
     "lib": [ "DOM", "DOM.Iterable", "ES2020" ],
-    "removeComments": false,
     "paths": {
       "@filter": ["filter/index"],
       "@filter/*": ["filter/*"],

@@ -37,10 +37,10 @@ build:
     - yarn command build --concurrency 1 --include-dependencies
   artifacts:
     paths:
-    - dist/
-    - packages/*/dist
+      - dist/
+      - packages/*/dist
   tags:
-   - node
+    - node
 
 docs:
   stage: docs
@@ -51,10 +51,15 @@ docs:
     - yarn docs:toc
   artifacts:
     paths:
-    - packages/*/README.md
-    - packages/*/API.md
+      - packages/*/README.md
+      - packages/*/API.md
+  only:
+    - master
+    - beta
+    - rc
+    - alpha
   tags:
-   - node
+    - node
 
 publish:
   stage: publish
@@ -62,11 +67,11 @@ publish:
   variables:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: release
-    PLUGIN_ADD_MODULES: "@qiwi/multi-semantic-release @semantic-release/gitlab"
+    PLUGIN_ADD_MODULES: '@qiwi/multi-semantic-release @semantic-release/gitlab'
     PLUGIN_OVERRIDE: multi-semantic-release --sequential-init
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
-    PLUGIN_UPDATE_README_TOC: "false"
+    PLUGIN_UPDATE_README_TOC: 'false'
     PLUGIN_NPM_USERNAME: $NPM_WS_USERNAME
     PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
     PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL

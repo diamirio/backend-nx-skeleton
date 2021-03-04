@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",

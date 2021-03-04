@@ -99,7 +99,7 @@ export function createServerModule ({% if database is defined and database != en
 
       consumer
         .apply(MaintenanceMiddleware, SetApiInfoHeaderMiddleware)
-        .forRoutes({ path: '*', method: RequestMethod.ALL })
+        .forRoutes({ path: '(.*)', method: RequestMethod.ALL })
     }
   }
 

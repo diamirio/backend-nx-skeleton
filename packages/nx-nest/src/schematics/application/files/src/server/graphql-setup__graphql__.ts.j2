@@ -1,9 +1,9 @@
-import { GraphQLErrorParser, EnrichedException } from '@webundsoehne/nestjs-util'
-import { FastifyRequest } from 'fastify'
-import { GraphQLError, GraphQLFormattedError } from 'graphql'
+import { EnrichedException } from '@webundsoehne/nestjs-util'
+import { GraphQLErrorParser } from '@webundsoehne/nestjs-util/dist/graphql'
+import { FastifyRequest, RequestGenericInterface } from 'fastify'
+import { GraphQLError, GraphQLFormattedError } from 'graphql/error'
 
-// add RequestGenericInterface back with Fastify3
-export async function graphQLContextParser ({ req }: { req: FastifyRequest<any> }): Promise<FastifyRequest<any> & Record<string, any>> {
+export async function graphQLContextParser ({ req }: { req: FastifyRequest<RequestGenericInterface> }): Promise<FastifyRequest<RequestGenericInterface> & Record<string, any>> {
   return { ...req }
 }
 

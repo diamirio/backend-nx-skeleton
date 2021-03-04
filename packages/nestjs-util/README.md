@@ -5,7 +5,7 @@
 </p>
 Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
-@webundsoehne/nestjs-util
+# @webundsoehne/nestjs-util
 ===
 [![Version](https://img.shields.io/npm/v/init-cli.svg)](https://npmjs.org/package/@webundsoehne/nestjs-util)
 [![Downloads/week](https://img.shields.io/npm/dw/init-cli.svg)](https://npmjs.org/package/@webundsoehne/nestjs-util)
@@ -476,41 +476,6 @@ import {  MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/micr
 
 **This module is exported from `@webundsoehne/nestjs-util/dist/microservices` and through index to not break compatability with the projects that does not have `@nestjs/microservices` installed.**
 
-### Decorators
-Decorates provide a way to inject or override data on the function level.
-
-#### Validation Override
-This decorator provides a way to override the supplied Validation Pipe on a function basis.
-
-__Usage__
-
-Controller has to have the decorator on the designated path to designate the `class-validator` group.
-
-```typescript
-/* ... */
-import { OverrideValidationOptions } from '@webundsoehne/nestjs-util'
-
-@Controller()
-export class SomeController {
-  @Post('some/path')
-  @OverrideValidationOptions({ groups: [ 'some:group' ] })
-  public someFunction (): Promise<void> {
-    return
-  }
-}
-```
-
-The counter-part of group designation has to be in the given class that utilizes `class-validator`.
-
-```typescript
-/* ... */
-export class SomeExtendedEntity extends SomeEntity {
-  @IsNotEmpty()
-  @IsOptional({ groups: [ 'some:group' ] })
-  dependsOnGroup?: string
-}
-```
-
 ### Pipes
 
 Extended pipes provide capabilities over the default ones for interacting with this library better.
@@ -618,7 +583,7 @@ Just add the error parser to the GraphQL Module itself.
 
 ```typescript
 import { GraphQLModule } from '@nestjs/graphql'
-import { GraphQLErrorParser } from '@webundsoehne/nestjs-util'
+import { GraphQLErrorParser } from '@webundsoehne/nestjs-util/dist/graphql'
 import { Module } from '@nestjs/common'
 
 @Module({
@@ -630,6 +595,8 @@ import { Module } from '@nestjs/common'
 })
 export class ServerModule { }
 ```
+
+**This module is exported from `@webundsoehne/nestjs-util/dist/graphql` and through index to not break compatability with the projects that does not have `graphql` installed.**
 
 #### RPC Global Exception
 This filter will handle errors from microservices. If you use `GlobalExceptionFilter` on front of it will format the errors in the same way as the RESTFUL API and you can also throw `HTTP_STATUS` exceptions. This filter will also output which microservice this error is coming from for convienece of debugging.

@@ -100,7 +100,7 @@ export class NodeHelper {
                   this.cmd.logger.debug('Running command for node helper: %s with args %o for packages %o, env: %o', this.manager, args, packages, env)
 
                   await pipeProcessThroughListr(
-                    task,
+                    task as any,
                     execa(this.manager, args, {
                       stdio: 'pipe',
                       shell: true,
