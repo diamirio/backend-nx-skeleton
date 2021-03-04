@@ -32,7 +32,7 @@ export class SwaggerService {
       `${url?.apiPath}${config.path}`,
       app,
       SwaggerModule.createDocument(app, builder.build(), {
-        ignoreGlobalPrefix: true
+        ignoreGlobalPrefix: false
       })
     )
   }

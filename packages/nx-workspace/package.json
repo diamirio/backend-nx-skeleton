@@ -37,26 +37,10 @@
   "dependencies": {
     "@angular-devkit/core": "~11.0.1",
     "@angular-devkit/schematics": "~11.0.1",
-    "@nrwl/workspace": "^10.4.2",
+    "@nrwl/workspace": "^11.4.0",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.0",
     "enquirer": "^2.3.5",
-    "listr2": "^3.1.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-typescript": "^7.10.4",
-    "jsdoc-babel": "^0.5.0",
-    "jsdoc-to-markdown": "^6.0.1",
-    "cpy-cli": "^3.1.1",
-    "lint-staged": "^10.2.11",
-    "rimraf": "^3.0.2",
-    "tsc-watch": "^4.2.8",
-    "tscpaths": "^0.0.9",
-    "typescript": "^4.0.3"
+    "listr2": "^3.3.4"
   }
 }
