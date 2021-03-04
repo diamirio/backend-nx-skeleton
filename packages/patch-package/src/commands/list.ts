@@ -1,8 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import { BaseCommand, createTable } from '@cenk1cenk2/boilerplate-oclif'
+import fs from 'fs-extra'
+import globby from 'globby'
+import { EOL } from 'os'
 import { getPackageDetailsFromPatchFilename } from 'patch-package/dist/PackageDetails'
 import { join } from 'path'
 import rewire from 'rewire'
+import wrap from 'wrap-ansi'
 
 import { ApplicationConfiguration } from '@src/interfaces/config.interface'
 
@@ -28,25 +32,43 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
   public async run (): Promise<void> {
     this.logger.module('Listing all the available patches in this module.')
 
-    const files: string[] = this.rewire.findPatchFiles(join(this.config.root, this.constants.patchesDir))
+    const directories = await globby('*', {
+      cwd: join(this.config.root, this.constants.patchesDir),
+      onlyDirectories: true
+    })
 
     const table: string[][] = []
+
     await Promise.all(
-      files.map(async (filename) => {
-        const packageDetails = getPackageDetailsFromPatchFilename(filename)
+      directories.map(async (dir) => {
+        const cwd = join(this.config.root, this.constants.patchesDir, dir)
 
-        if (!packageDetails) {
-          this.logger.warn(`Unrecognized patch file in patches directory: ${filename}`)
+        const files: string[] = this.rewire.findPatchFiles(cwd)
 
-          return
-        }
+        const description = fs.existsSync(join(cwd, 'description.txt')) ? await fs.readFile(join(cwd, 'description.txt')) : '-'
 
-        const { name, version, patchFilename } = packageDetails
+        const subtable: string[] = []
 
-        table.push([ patchFilename, name, version ])
+        await Promise.all(
+          files.map(async (filename) => {
+            const packageDetails = getPackageDetailsFromPatchFilename(filename)
+
+            if (!packageDetails) {
+              this.logger.warn(`Unrecognized patch file in patches directory: ${filename}`)
+
+              return
+            }
+
+            const { name, version, patchFilename } = packageDetails
+
+            subtable.push(`${patchFilename} -> ${name}@${version}`)
+          })
+        )
+
+        table.push([ dir, wrap(description.toString(), 60), subtable.join(EOL) ])
       })
     )
 
-    this.logger.direct(createTable([ 'patch', 'package-name', 'package-version' ], table))
+    this.logger.direct(createTable([ 'name', 'description', 'patches' ], table))
   }
 }

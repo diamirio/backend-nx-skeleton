@@ -77,12 +77,14 @@
     "patch-package": "^6.4.4",
     "rewire": "^5.0.0",
     "tmp-promise": "^3.0.2",
-    "tslib": "^2.0.1"
+    "tslib": "^2.0.1",
+    "wrap-ansi": "^7.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@types/node": "^14.14.8",
     "@types/rewire": "^2.5.28",
+    "@types/wrap-ansi": "^3.0.0",
     "eslint": "^7.6.0",
     "husky": "^4.2.5",
     "jest": "^26.2.2",

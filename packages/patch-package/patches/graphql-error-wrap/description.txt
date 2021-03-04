@@ -1,0 +1,1 @@
+Fixes the introducted pattern of wrapping the output in a error for version >15. This is especially problematic for errors returning from backend message queue, since they have no types and processed as plain object so that instaneof check fails.

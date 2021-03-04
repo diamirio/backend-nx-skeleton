@@ -88,30 +88,35 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     this.logger.module(`${flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, flags.path)
 
-    this.logger.info('Importing patches from directory: %s', flags.directory)
-
     if (argv?.length > 0) {
       // check for missing patches when limited to
       let matched = []
       const missingPatches = []
 
+      this.logger.info('Limitting patches: %s', argv.join(', '))
+
       await Promise.all(
-        argv.map(async (patch) => {
+        argv.map(async (path) => {
+          this.logger.info('Importing patches from directory: %s', join(flags.directory, path))
+
           try {
-            const glob = await globby(`${patch}.patch`, {
+            const glob = await globby(`${path ?? '.'}/*.patch`, {
               cwd: flags.directory,
-              onlyFiles: true
+              onlyFiles: true,
+              absolute: true
             })
 
             matched.push(...glob)
+
+            this.logger.debug(`Matched from subdirectory ${path}: ${glob.join(', ')}`)
 
             if (glob.length === 0) {
               throw new Error('Can not match pattern.')
             }
           } catch (err) {
-            this.logger.debug('Missing file: %s with error %s', patch, err.message)
+            this.logger.debug('Missing file: %s with error %s', path, err.message)
 
-            missingPatches.push(patch)
+            missingPatches.push(path)
           }
         })
       )
@@ -129,44 +134,43 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
       // move limited patches to the temporary directory
       matched = matched.filter((x, i, array) => i === array.indexOf(x))
 
-      this.logger.info('Limitting patches: %s', matched.join(', '))
-
       await Promise.all(
         matched.map(async (patch) => {
-          await fs.copyFile(join(flags.directory, patch), join(this.temp.path, `${basename(patch)}`))
+          await fs.copyFile(patch, join(this.temp.path, `${basename(patch)}`))
         })
       )
 
       // set patch directory to temporary directory
       flags.directory = this.temp.path
+    } else {
+      this.logger.info('Importing patches from directory: %s', flags.directory)
     }
 
-    this.logger.debug('Final patch directory: %s', flags.directory)
-
     // apply patches
-    this.applyPatchesForApp({
-      appPath: flags?.path,
-      reverse: flags?.reverse,
-      patchDir: flags.directory,
-      shouldExitWithError: flags?.exitOnError
-    })
+    let shouldTerminate = false
+    try {
+      await this.applyPatchesForApp({
+        appPath: flags?.path,
+        reverse: flags?.reverse,
+        patchDir: flags.directory
+      })
+    } catch (e) {
+      shouldTerminate = flags?.exitOnError === true ? true : false
+    } finally {
+      if (this.temp) {
+        this.logger.debug('Cleaning up temporary directory: %s', this.temp.path)
 
-    if (this.temp) {
-      this.logger.debug('Cleaning up temporary directory: %s', this.temp.path)
+        await this.temp.cleanup()
+      }
+    }
 
-      await this.temp.cleanup()
+    if (shouldTerminate) {
+      this.logger.fatal('Terminating application with exit code 127.')
+      process.exit(127)
     }
   }
 
-  private async applyPatchesForApp ({ appPath,
-    reverse,
-    patchDir,
-    shouldExitWithError }: {
-    appPath: string
-    reverse: boolean
-    patchDir: string
-    shouldExitWithError: boolean
-  }): Promise<void> {
+  private async applyPatchesForApp ({ appPath, reverse, patchDir }: { appPath: string, reverse: boolean, patchDir: string }): Promise<void> {
     const files: string[] = this.rewire.findPatchFiles(patchDir)
 
     if (files.length === 0) {
@@ -281,7 +285,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     if (errors.length) {
       this.logger.fatal(`${errors.length} error(s).`)
-      process.exit(shouldExitWithError ? 1 : 0)
+      throw new Error('Encountered errors.')
     }
   }
 }
