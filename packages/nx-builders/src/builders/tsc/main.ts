@@ -15,7 +15,8 @@ import {
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runBuilder
+  runBuilder,
+  getNodeBinaryPath
 } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import delay from 'delay'
@@ -36,9 +37,9 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
   public init (): void {
     // paths of the programs, more convient than using the api since tscpaths does not have api
     this.paths = {
-      typescript: require.resolve('typescript/bin/tsc'),
-      tscpaths: require.resolve('tscpaths/cjs/index'),
-      tscWatch: require.resolve('tsc-watch/lib/tsc-watch'),
+      typescript: getNodeBinaryPath('tsc'),
+      tscpaths: getNodeBinaryPath('tscpaths'),
+      tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.workspaceRoot, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }

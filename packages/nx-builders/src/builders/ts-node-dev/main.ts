@@ -1,9 +1,8 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { checkNodeModulesExists, ExecaArguments, pipeProcessToLogger, removePathRoot, BaseBuilder, runBuilder } from '@webundsoehne/nx-tools'
+import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runBuilder } from '@webundsoehne/nx-tools'
 import { SpawnOptions } from 'child_process'
 import delay from 'delay'
 import execa from 'execa'
-import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
 import { TsNodeBuilderOptions } from './main.interface'
@@ -16,7 +15,7 @@ try {
 class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNodeDev: string }> {
   public async init (): Promise<void> {
     this.paths = {
-      tsNodeDev: join(execa.sync('npm', [ 'bin' ]).stdout, 'ts-node-dev')
+      tsNodeDev: getNodeBinaryPath('ts-node-dev')
     }
   }
 

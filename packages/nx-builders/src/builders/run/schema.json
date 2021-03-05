@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "https://json-schema.org/draft-07/schema",
+  "title": "@webundsoehne-private/nx-builders:run",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "Root directory of the project to use as cwd."
+    },
+    "cli": {
+      "type": "string",
+      "description": "The CLI to run."
+    },
+    "arguments": {
+      "type": "string",
+      "description": "The CLI arguments to inject."
+    },
+    "environment": {
+      "type": "object",
+      "description": "Pass in additional environment variables for ts-node-dev."
+    }
+  },
+  "required": []
+}

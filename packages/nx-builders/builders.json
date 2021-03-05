@@ -4,19 +4,25 @@
     "ts-node-dev": {
       "implementation": "./dist/builders/ts-node-dev/main",
       "schema": "./dist/builders/ts-node-dev/schema.json",
-      "description": "@webundsoehne-private/nx-nest:ts-node-dev"
+      "description": "@webundsoehne-private/nx-builders:ts-node-dev"
     },
 
     "tsc": {
       "implementation": "./dist/builders/tsc/main",
       "schema": "./dist/builders/tsc/schema.json",
-      "description": "@webundsoehne-private/nx-nest:tsc"
+      "description": "@webundsoehne-private/nx-builders:tsc"
     },
 
     "execute": {
       "implementation": "./dist/builders/execute/main",
       "schema": "./dist/builders/execute/schema.json",
-      "description": "@webundsoehne-private/nx-nest:execute"
+      "description": "@webundsoehne-private/nx-builders:execute"
+    },
+
+    "run": {
+      "implementation": "./dist/builders/run/main",
+      "schema": "./dist/builders/run/schema.json",
+      "description": "@webundsoehne-private/nx-builders:run"
     }
   }
 }

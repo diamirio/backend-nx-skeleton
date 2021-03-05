@@ -84,9 +84,6 @@ class Builder extends BaseBuilder<ExecuteBuilderOptions, NormalizedExecuteBuilde
     return zip(
       ...this.options.waitUntilTargets.map((b) => {
         return scheduleTargetAndForget(this.context, targetFromTargetString(b)).pipe(
-          // some internal angular stuff causes type problem it should be okay
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           filter((e) => e.success !== undefined),
           first()
         )

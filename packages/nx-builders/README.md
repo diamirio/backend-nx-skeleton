@@ -211,6 +211,31 @@ architect.serve = {
 }
 ```
 
+## run
+
+Builder: `@webundsoehne/nx-builders:run`
+
+Run a cli like `webpack` from `node_modules`. The logs from it will be appended with the application name, and you can run anything and create a custom task with it.
+
+### Configuration
+
+If you want to add this to an existing project or a new `nx` schematic. You can configure it as minimum below. Where options fields must match with your directories.
+
+```typescript
+architect.serve = {
+  builder: '@webundsoehne/nx-builders:run',
+  options: {
+    cwd: options.root,
+    cli: 'webpack',
+    arguments: '--config webpack.config.js',
+    // optional
+    environment: {
+      NODE_SERVICE: 'server'
+    }
+  }
+}
+```
+
 ## execute
 
 Builder: `@webundsoehne/nx-builders:execute`

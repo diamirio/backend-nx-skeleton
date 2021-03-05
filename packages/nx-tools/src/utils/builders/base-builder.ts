@@ -21,7 +21,7 @@ export abstract class BaseBuilder<
   public paths: ProcessPaths
   public manager: ProcessManager
 
-  constructor (options: BuilderOptions, public context: BuilderContext) {
+  constructor (public builderOptions: BuilderOptions, public context: BuilderContext) {
     this.logger = new Logger(context)
 
     // create dependency
@@ -31,7 +31,7 @@ export abstract class BaseBuilder<
     this.projectDependencies = dependencies
 
     // normalize options
-    this.options = this.normalizeOptions(options)
+    this.options = this.normalizeOptions(builderOptions)
 
     // create a process manager
     this.manager = new ProcessManager(context)
