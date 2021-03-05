@@ -1,3 +1,18 @@
+# @webundsoehne/nx-builders [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.0.0...@webundsoehne/nx-builders@3.1.0) (2021-03-05)
+
+
+### Features
+
+* add run builder for webpack hmr which did not go well ([c696ba0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c696ba04d2bda3a71aced1991a674f803c47d128))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.1.0
+
 # @webundsoehne/nx-builders [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.9...@webundsoehne/nx-builders@3.0.0) (2021-03-04)
 
 
