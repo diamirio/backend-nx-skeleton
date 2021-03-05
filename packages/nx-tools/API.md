@@ -108,6 +108,8 @@ It is here instead of brownie since it is an integration thingy as well as avoid
 <dd><p>Format files as a rule in a tree.</p>
 <p>Requires configuration to be present in the current tree.</p>
 <p>Will use prettier first, others after.</p></dd>
+<dt><a href="#getNodeBinaryPath">getNodeBinaryPath([bin])</a> ⇒ <code>string</code></dt>
+<dd><p>Returns the binary path for a given cli in node_modules.</p></dd>
 <dt><a href="#replaceExtension">replaceExtension(path, extension)</a></dt>
 <dd><p>Replaces given extension.</p></dd>
 <dt><a href="#removePathRoot">removePathRoot(filename, sourceRoot)</a></dt>
@@ -628,6 +630,17 @@ It is here instead of brownie since it is an integration thingy as well as avoid
 | Param |
 | --- |
 | options | 
+
+<a name="getNodeBinaryPath"></a>
+
+## getNodeBinaryPath([bin]) ⇒ <code>string</code>
+<p>Returns the binary path for a given cli in node_modules.</p>
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| [bin] | <code>string</code> | 
 
 <a name="replaceExtension"></a>
 
