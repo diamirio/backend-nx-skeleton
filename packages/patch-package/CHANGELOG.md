@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.1...@webundsoehne/patch-package@1.0.2) (2021-03-05)
+
+
+### Bug Fixes
+
+* add missing deps ([aaa2d2c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/aaa2d2c4d7116c80581a2dcd2db712c2f3ca4336))
+
 ## @webundsoehne/patch-package [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.0...@webundsoehne/patch-package@1.0.1) (2021-03-04)
 
 
