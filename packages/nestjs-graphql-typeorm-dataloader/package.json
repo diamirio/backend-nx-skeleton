@@ -1,0 +1,67 @@
+{
+  "name": "@webundsoehne/nestjs-graphql-typeorm-dataloader",
+  "description": "A library to utilize the graphql-dataloader with nestjs and typeorm.",
+  "version": "1.0.0",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "patch-package": "bin/run.js"
+  },
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
+    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "apollo-server-plugin-base": "^0.10.4",
+    "dataloader": "^2.0.0",
+    "lodash": "^4.17.21",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@nestjs/graphql": "^7.9.11",
+    "@types/jest": "^26.0.20",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.35",
+    "@types/uuid": "^8.3.0",
+    "apollo-server-fastify": "^3.0.0-alpha.3",
+    "class-validator": "^0.13.1",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
+    "mikro-orm": "^4.4.4",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.0.2",
+    "typeorm": "^0.2.31"
+  }
+}
