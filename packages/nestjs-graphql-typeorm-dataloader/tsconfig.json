@@ -7,8 +7,11 @@
     "strictNullChecks": false,
     "paths": {
       "@src/*": ["*"],
+      "@constants/*": ["constants/*"],
       "@decorators/*": ["decorators/*"],
       "@interfaces/*": ["interfaces/*"],
+      "@loader-handlers/*": ["loader-handlers/*"],
+      "@loaders/*": ["loaders/*"],
       "@plugins/*": ["plugins/*"]
     }
   },

@@ -1,4 +1,4 @@
-export { ApolloServerDataLoaderPlugin } from './plugins/apollo-server/data-loader.plugin'
+export { ApolloServerDataLoaderPlugin } from './plugins/data-loader.plugin'
 
-export { Loader } from './decorators/loader'
-export { TypeormLoader } from './decorators/typeorm-loader'
+export * from './decorators'
+export * from './middleware'

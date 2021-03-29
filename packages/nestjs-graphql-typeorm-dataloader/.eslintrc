@@ -10,11 +10,7 @@
             "group": "index"
           },
           {
-            "pattern": "@commands/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@helpers/**",
+            "pattern": "@constants/**",
             "group": "index"
           },
           {
@@ -22,11 +18,11 @@
             "group": "index"
           },
           {
-            "pattern": "@context/**",
+            "pattern": "@loaders/**",
             "group": "index"
           },
           {
-            "pattern": "@templates/**",
+            "pattern": "@loader-handlers/**",
             "group": "index"
           }
         ],

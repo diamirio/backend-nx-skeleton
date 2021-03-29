@@ -3,7 +3,7 @@ services:
   monorepo:
     image: cenk1cenk2/lerna-dev:latest
     environment:
-      - SERVICES=packages/brownie:packages/nestjs-util:packages/nx-tools:packages/nx-builders:packages/nx-nest:packages/nx-workspace:packages/patch-package
+      - SERVICES=packages/brownie:packages/nestjs-util:packages/nx-tools:packages/nx-builders:packages/nx-nest:packages/nx-workspace:packages/patch-package:packages/nestjs-graphql-typeorm-dataloader
       - RUN_IN_BAND=packages/nx-tools:packages/nx-builders
       - RUN_IN_BAND_WAIT=15
     volumes:
