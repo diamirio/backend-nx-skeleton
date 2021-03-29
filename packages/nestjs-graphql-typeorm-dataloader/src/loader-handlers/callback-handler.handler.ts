@@ -4,7 +4,8 @@ import type { Connection } from 'typeorm'
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata'
 import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
-import { Context, DATA_LOADER_CONTEXT_KEY } from '@interfaces/context.interface'
+import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
+import { Context } from '@interfaces/context.interface'
 
 export async function handler<V> (
   context: Context,

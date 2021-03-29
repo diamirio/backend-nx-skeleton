@@ -1,15 +1,19 @@
 import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql'
 
-import { Context, DATA_LOADER_CONTEXT_KEY } from '@interfaces/context.interface'
+import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
+import { TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
+import { Context } from '@interfaces/context.interface'
 import { Extensions } from '@interfaces/extensions.interface'
-import { TYPEORM_DATALOADER_EXTENSION_FIELD } from '@src/constants'
-import { ParsedTypeormExtensionInput, TypeormLoaderExtensionInput } from '@src/interfaces/typorm-loader.interface'
-import { handleOneToManyWithSelfKey, handleOneToOneNotOwnerWithSelfKey, handleToMany, handleToOne } from '@src/loader-handlers'
+import { handleOneToManyWithSelfKey, handleOneToOneNotOwnerWithSelfKey, handleToMany, handleToOne } from '@loader-handlers/index'
 
+/**
+ * This middleware checks and processes for the subfields of a parent entity that should be resolved by the data loader.
+ * It will automatically parse the subfield with the given decorator according to the relation type given.
+ */
 export const TypeormLoaderMiddleware: FieldMiddleware = async ({ context, info, source }: MiddlewareContext<any, Context>, next: NextFn) => {
   const extensions = info.parentType.getFields()[info.fieldName].extensions?.[TYPEORM_DATALOADER_EXTENSION_FIELD] as Extensions['TYPEORM_DATALOADER_EXTENSION_FIELD']
 
-  const args = parseExtensionArguments(extensions?.args)
+  const args = extensions?.args
 
   if (!args) {
     return next()
@@ -42,14 +46,4 @@ export const TypeormLoaderMiddleware: FieldMiddleware = async ({ context, info, 
   }
 
   return handle(args.keyFunc, source, context, relation)
-}
-
-/**
- * Some documentation will go here.
- */
-function parseExtensionArguments (input: TypeormLoaderExtensionInput): ParsedTypeormExtensionInput {
-  // parse arguments from the type of the overloaded arguments
-  const overloadedArgs: ParsedTypeormExtensionInput = { keyFunc: input[0], options: input?.[1] }
-
-  return overloadedArgs
 }

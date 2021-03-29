@@ -10,8 +10,9 @@ import type {
 import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 
+import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
 import { ApolloServerLoaderPluginOptions } from '@interfaces/apollo-server-plugin.interface'
-import { Context, DATA_LOADER_CONTEXT_KEY } from '@interfaces/context.interface'
+import { Context } from '@interfaces/context.interface'
 
 export class ApolloServerDataLoaderPlugin implements ApolloServerPlugin {
   constructor (private options?: ApolloServerLoaderPluginOptions) {}

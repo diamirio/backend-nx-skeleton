@@ -1,13 +1,24 @@
-import { TypeormLoaderExtensionInput } from './typorm-loader.interface'
-import { TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
+import DataLoader from 'dataloader'
+
+import { BatchLoadFn } from './batch-loader.interface'
+import { KeyFunc } from './typeorm-loader-handler.interface'
+import { TypeormLoaderOptions } from './typeorm-loader.interface'
+import { CUSTOM_DATALOADER_EXTENSION_FIELD, TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
 
 export interface Extensions {
   [key: string]: any
 
-  [TYPEORM_DATALOADER_EXTENSION_FIELD]: {
-    args: TypeormLoaderExtensionInput
-    key: string | symbol
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    target: Function | object
-  }
+  [TYPEORM_DATALOADER_EXTENSION_FIELD]: ExtensionType<{ keyFunc: KeyFunc, options?: TypeormLoaderOptions }>
+
+  [CUSTOM_DATALOADER_EXTENSION_FIELD]: ExtensionType<{
+    batchLoadFn: BatchLoadFn<any, any>
+    options?: DataLoader.Options<any, any, any>
+  }>
+}
+
+interface ExtensionType<T> {
+  args: T
+  key: string | symbol
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  target: Function | object
 }
