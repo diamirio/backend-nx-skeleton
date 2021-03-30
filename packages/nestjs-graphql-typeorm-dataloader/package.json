@@ -6,9 +6,6 @@
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "patch-package": "bin/run.js"
-  },
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
     "access": "public"
@@ -21,7 +18,9 @@
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
     "hooks": {

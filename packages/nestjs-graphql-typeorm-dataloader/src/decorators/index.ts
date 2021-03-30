@@ -1,2 +1,2 @@
-export * from './loader.decorator'
+export * from './custom-loader.decorator'
 export * from './typeorm-loader.decorator'
