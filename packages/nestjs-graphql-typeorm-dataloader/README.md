@@ -13,7 +13,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 `nestjs-graphql-typeorm-dataloader` implements the middleware and the decorators needed to enable `graphql` `data-loader` in the entity or DTO level. So instead of defining the data loader in every resolve field, it is easier to just define it over a more generic field and let it handle which type of relations does it have to resolve and load the data properly. This also eliminates the setup for how to load the data, for which key to load the data for every field resolver.
 
 - [Changelog](./CHANGELOG.md)
-- [API Documentations](./docs/README.md)
+- [API Documentation](./docs/README.md)
 
 <!-- toc -->
 
