@@ -2,6 +2,8 @@
 
 # Class: ToManyDataloader<V\>
 
+A common loader to handle to many relations.
+
 ## Type parameters
 
 | Name |
@@ -51,7 +53,7 @@
 
 Overrides: void
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-many.loader.ts:7
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-many.loader.ts:10
 
 ## Methods
 

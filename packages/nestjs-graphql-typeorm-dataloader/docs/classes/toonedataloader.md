@@ -2,6 +2,8 @@
 
 # Class: ToOneDataloader<V\>
 
+A common loader to handle to one relations.
+
 ## Type parameters
 
 | Name |
@@ -51,7 +53,7 @@
 
 Overrides: void
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-one.loader.ts:7
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-one.loader.ts:10
 
 ## Methods
 

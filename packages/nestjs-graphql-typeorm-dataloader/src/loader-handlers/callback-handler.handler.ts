@@ -7,6 +7,10 @@ import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
 import { Context } from '@interfaces/context.interface'
 
+/**
+ * Handles the all data loader handlers common functionality to check the connection and
+ * dependency injection.
+ */
 export async function handler<V> (
   context: Context,
   relation: RelationMetadata,

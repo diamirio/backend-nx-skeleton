@@ -7,6 +7,7 @@ import { TypeormLoaderOptions } from '@interfaces/typeorm-loader.interface'
 
 /**
  * Add data required for a given field or field-resolver for typeorm dataloader.
+ * This will automatically parse and create a dataloader complying to setup in this field.
  */
 export function TypeormLoaderExtension (keyFunc: KeyFunc, options?: TypeormLoaderOptions): MethodDecorator & PropertyDecorator {
   // eslint-disable-next-line @typescript-eslint/ban-types

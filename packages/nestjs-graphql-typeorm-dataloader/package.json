@@ -10,6 +10,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "nestjs",
+    "graphql",
+    "typeorm",
+    "dataloader",
+    "data-loader"
+  ],
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",

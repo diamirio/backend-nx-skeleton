@@ -32,7 +32,9 @@
 
 • `Const` **CUSTOM_DATALOADER_EXTENSION_FIELD**: _CUSTOM_DATALOADER_EXTENSION_FIELD_= 'CUSTOM_DATALOADER_EXTENSION_FIELD'
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-field.constants.ts:3
+Custom data loader extension data key for the field, that is stored inside the nestjs typestore. No different then @Extension decorator of nestjs for graphql, just a wrapper for types.
+
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-field.constants.ts:11
 
 ---
 
@@ -40,7 +42,9 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-f
 
 • `Const` **DATA_LOADER_CONTEXT_KEY**: _DATA_LOADER_CONTEXT_= 'DATA_LOADER_CONTEXT'
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/context.constants.ts:1
+The context key of data-loader plugin per key injected by the interceptor or apollo-server plugin. This will be appended to the context instead of the request to ensure compatibility between two.
+
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/context.constants.ts:5
 
 ---
 
@@ -48,7 +52,9 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/context.con
 
 • `Const` **TYPEORM_DATALOADER_EXTENSION_FIELD**: _TYPEORM_DATALOADER_EXTENSION_FIELD_= 'TYPEORM_DATALOADER_EXTENSION_FIELD'
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-field.constants.ts:1
+Typeorm data loader extension data key for the field, that is stored inside the nestjs typestore. No different then @Extension decorator of nestjs for graphql, just a wrapper for types.
+
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-field.constants.ts:5
 
 ## Functions
 
@@ -56,7 +62,7 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-f
 
 ▸ **CustomLoaderExtension**<K, V, C\>(`batchLoadFn`: _BatchLoadFn_<K, V\>, `options?`: _DataLoader.Options_<K, V, C\>): MethodDecorator & PropertyDecorator
 
-Add data required for a given field or field-resolver for custom dataloader.
+Add data required for a given field or field-resolver for custom dataloader. This will pass in a new instance of data loader to batch your function, to the field-resolver itself.
 
 #### Type parameters:
 
@@ -75,7 +81,7 @@ Add data required for a given field or field-resolver for custom dataloader.
 
 **Returns:** MethodDecorator & PropertyDecorator
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/decorators/loader.decorator.ts:11
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/decorators/custom-loader.decorator.ts:12
 
 ---
 
@@ -102,7 +108,7 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/middleware/custom-loa
 
 ▸ **TypeormLoaderExtension**(`keyFunc`: KeyFunc, `options?`: TypeormLoaderOptions): MethodDecorator & PropertyDecorator
 
-Add data required for a given field or field-resolver for typeorm dataloader.
+Add data required for a given field or field-resolver for typeorm dataloader. This will automatically parse and create a dataloader complying to setup in this field.
 
 #### Parameters:
 
@@ -113,7 +119,7 @@ Add data required for a given field or field-resolver for typeorm dataloader.
 
 **Returns:** MethodDecorator & PropertyDecorator
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/decorators/typeorm-loader.decorator.ts:11
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/decorators/typeorm-loader.decorator.ts:12
 
 ---
 
@@ -140,6 +146,8 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/middleware/typeorm-lo
 
 ▸ **directLoader**<V\>(`relation`: RelationMetadata, `connection`: Connection, `grouper`: _string_ \| (`entity`: V) => _any_): _function_
 
+A shared component for handling the end result of the query.
+
 #### Type parameters:
 
 | Name |
@@ -156,4 +164,4 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/middleware/typeorm-lo
 
 **Returns:** (`ids`: readonly _any_[]) => _Promise_<any\>
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:5
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:8

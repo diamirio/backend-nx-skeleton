@@ -2,6 +2,8 @@
 
 # Class: SelfKeyDataloader<V\>
 
+A common loader for loading entities by their own key.
+
 ## Type parameters
 
 | Name |
@@ -52,7 +54,7 @@
 
 Overrides: void
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/self-key.loader.ts:8
+Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/self-key.loader.ts:11
 
 ## Methods
 

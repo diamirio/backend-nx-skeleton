@@ -5,6 +5,9 @@ import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 import { SelfKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
 
+/**
+ * A common loader for loading entities by their own key.
+ */
 export class SelfKeyDataloader<V> extends DataLoader<any, V[]> {
   constructor (relation: RelationMetadata, connection: Connection, selfKeyFunc: SelfKeyFunc) {
     super(async (ids) => {

@@ -13,7 +13,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 `nestjs-graphql-typeorm-dataloader` implements the middleware and the decorators needed to enable `graphql` `data-loader` in the entity or DTO level. So instead of defining the data loader in every resolve field, it is easier to just define it over a more generic field and let it handle which type of relations does it have to resolve and load the data properly. This also eliminates the setup for how to load the data, for which key to load the data for every field resolver.
 
 - [Changelog](./CHANGELOG.md)
-- [API Documentations](./docs/modules.md)
+- [API Documentations](./docs/README.md)
   <!-- toc -->
   <!-- tocstop -->
 
@@ -81,7 +81,11 @@ import { ApolloServerDataLoaderPlugin } from '@webundsoehne/nestjs-graphql-typeo
 
 ## Field Middleware
 
-Field middleware can either be injected to `Field`, `FieldResolver` or globally. Unfortunately `nest.js` does not allow to tamper with the `GraphQL` setup so i could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
+Field middleware can either be injected to `Field`, `FieldResolver` or globally.
+
+Unfortunately `nest.js` does not allow to tamper with the `GraphQL` setup so i could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
+
+This is due to `graphql` resolvers and field-resolvers inside the `nest.js` only registered once. Therefore you can not lazily register metadata afterwards, this behavior as I understand it can be seen in [field decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/field.decorator.ts#L86) and [field resolver decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/resolve-field.decorator.ts#L96) and following the behaviour to add [metadata for resolvers](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/schema-builder/storages/type-metadata.storage.ts#L196).
 
 ### Injecting to a Specific Field
 
@@ -93,7 +97,7 @@ While you will see this making sense in the upcoming examples, it should just be
 
 ### Injecting it Globally
 
-To inject this middleware for each and every field, which will cause a little overhead but not much since it is pretty basic to check the `context` to have matching keys can be done as follows.
+To inject this middleware for each and every field, which will cause a little overhead but not much since it is pretty basic to check the `context` to have matching keys can be done as follows. But for more specific control over the fields you can always use the injectiong to a specific field approach.
 
 ```typescript
 import { getConnection } from 'typeorm'
@@ -191,7 +195,7 @@ export class DocumentEntity extends BaseEntityWithPrimary<DocumentEntity> {
 You can also define your own data loader, but this time it should be in the resolver itself.
 
 ```typescript
-import { CustomLoaderExtension } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
+import { CustomLoaderExtension, CustomLoaderMiddleware } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 
 @Resolver(() => UserEntity)
 export class UserResolver {
@@ -215,6 +219,10 @@ export class UserResolver {
   }
 }
 ```
+
+# Further Process Data
+
+Since this will resolve value and use the `next` function to forwart it, you can later process the data utilizing a `field-resolver`.
 
 ---
 
