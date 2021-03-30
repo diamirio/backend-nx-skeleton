@@ -228,9 +228,9 @@ export class UserResolver {
 
     return ids.map((id) => documentById[id] ?? [])
   })
-  public resolveUser(@Parent() user: UserEntity): Promise<UserEntity['documents']> {
+  public resolveDocuments(@Parent() user: UserEntity): (dataloader: DataLoader<number, Photo[]>) => DocumentEntity[]  {
     return (dataloader: DataLoader<string, DocumentEntity[]>) =>
-      dataloader.load(user.id);
+      dataloader.load(user.id)
     }
   }
 }
