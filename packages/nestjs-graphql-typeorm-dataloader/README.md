@@ -99,7 +99,7 @@ import { ApolloServerDataLoaderPlugin } from '@webundsoehne/nestjs-graphql-typeo
 
 Field middleware can either be injected to `Field`, `FieldResolver` or globally.
 
-Unfortunately `nest.js` does not allow to tamper with the `GraphQL` setup so i could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
+Unfortunately `nest.js` does not allow to tamper with the `GraphQL` setup so I could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
 
 This is due to `graphql` resolvers and field-resolvers inside the `nest.js` only registered once. Therefore you can not lazily register metadata afterwards, this behavior as I understand it can be seen in [field decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/field.decorator.ts#L86) and [field resolver decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/resolve-field.decorator.ts#L96) and following the behaviour to add [metadata for resolvers](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/schema-builder/storages/type-metadata.storage.ts#L196).
 
@@ -113,7 +113,7 @@ While you will see this making sense in the upcoming examples, it should just be
 
 ### Injecting it Globally
 
-To inject this middleware for each and every field, which will cause a little overhead but not much since it is pretty basic to check the `context` to have matching keys can be done as follows. But for more specific control over the fields you can always use the injectiong to a specific field approach.
+To inject this middleware for each and every field, which will cause a little overhead but not much since it is pretty basic to check the `context` to have matching keys can be done as follows. But for more specific control over the fields you can always use the injecting to a specific field approach.
 
 ```typescript
 import { getConnection } from 'typeorm'
@@ -145,9 +145,9 @@ Entities or DTOs should be decorated with directions of how to resolve a relatio
 
 The only critical thing here is getting the relation ids of the relation. Since `typeorm` already exposes fetching relation ids, another field can be decorated with `RelationId` and since the parent document will be injected to the function in `TypeormLoaderExtension` as an argument, this relation ids will be resolved and `typeorm` `metadata` will indicate the relation type and it will use the appropiarete `dataLoader` with the given field. You can omit this fields serialization with marking it without a `field` decorator.
 
-You can either use this decorators in the entity, dto or resolver. But the intention is to keep this in the DTOs or entities to define resolving them genericly. You can also further process the output result, the GraphQL way.
+You can either use this decorators in the entity, DTO or resolver. But the intention is to keep this in the DTOs or entities to define resolving them genericly. You can also further process the output result, the GraphQL way.
 
-**If you define the resolver and extensions at the entity or dto level, you do not need to define any field resolvers for a given field and it will be resolved automatically.**
+**If you define the resolver and extensions at the entity or DTO level, you do not need to define any field resolvers for a given field and it will be resolved automatically.**
 
 ## Generic Setup
 
@@ -238,7 +238,7 @@ export class UserResolver {
 
 # Further Process Data
 
-Since this will resolve value and use the `next` function to forwart it, you can later process the data utilizing a `field-resolver`.
+Since this will resolve value and use the `next` function to forward it, you can later process the data utilizing a `field-resolver`.
 
 ---
 
