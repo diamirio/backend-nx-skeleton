@@ -14,8 +14,24 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 - [Changelog](./CHANGELOG.md)
 - [API Documentations](./docs/README.md)
-  <!-- toc -->
-  <!-- tocstop -->
+
+<!-- toc -->
+
+- [What it does](#what-it-does)
+- [Setup](#setup)
+  - [Global Setup for Project](#global-setup-for-project)
+    - [Interceptor](#interceptor)
+    - [Apollo Plugin](#apollo-plugin)
+  - [Field Middleware](#field-middleware)
+    - [Injecting to a Specific Field](#injecting-to-a-specific-field)
+    - [Injecting it Globally](#injecting-it-globally)
+- [Resolving Relations](#resolving-relations)
+  - [Generic Setup](#generic-setup)
+  - [With Self Key](#with-self-key)
+  - [Custom Loader](#custom-loader)
+- [Further Process Data](#further-process-data)
+
+<!-- tocstop -->
 
 ---
 
