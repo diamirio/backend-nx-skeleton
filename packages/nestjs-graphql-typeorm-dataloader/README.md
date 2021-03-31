@@ -151,6 +151,8 @@ You can either use these decorators in the entity, DTO, or resolver. But the int
 
 **If you define the resolver and extensions at the entity or DTO level, you do not need to define any field resolvers for a given field and it will be resolved automatically.**
 
+**Please do not forget to set the middleware per field if you did not set it globally, else it won't work at all.**
+
 ## Owning Side of the Relationship
 
 Imagine a relationship where every company has a corporation. So it is an incoming relationship from the other side where we inherit the foreign key.
