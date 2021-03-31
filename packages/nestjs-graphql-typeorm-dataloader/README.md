@@ -59,16 +59,15 @@ Import the interceptor and use it globally or module-scoped in your project.
 import { getConnection } from 'typeorm'
 import { DataLoaderInterceptor } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 
-// ...
-  @Module({
-    providers: [
-      // ...
-      {
-        provide: APP_INTERCEPTOR,
-        useFactory: (): DataLoaderInterceptor => new DataLoaderInterceptor({ typeormGetConnection: getConnection })
-      }
-    ],
-    // ...
+@Module({
+  imports: [
+    {
+      provide: APP_INTERCEPTOR,
+      useFactory: (): DataLoaderInterceptor => new DataLoaderInterceptor({ typeormGetConnection: getConnection })
+    }
+  ]
+})
+export class ServerModule {}
 ```
 
 ### Apollo Plugin
@@ -79,22 +78,17 @@ Initially designed this plugin to use the apollo plugin method, then converted i
 import { getConnection } from 'typeorm'
 import { ApolloServerDataLoaderPlugin } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 
-...
-  @Module({
-    providers: [
-    imports: [
-      GraphQLModule.forRoot({
-        autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
-        context: graphQLContextParser,
-        formatError: graphQLErrorParser,
-        useGlobalPrefix: true,
-        playground: true,
-        introspection: true,
-        uploads: false,
-        path: '/',
-        plugins: [ new ApolloServerDataLoaderPlugin({ typeormGetConnection: getConnection })]
-      }),
+@Module({
+  imports: [
+    GraphQLModule.forRoot({
       // ...
+      buildSchemaOptions: {
+        plugins: [new ApolloServerDataLoaderPlugin({ typeormGetConnection: getConnection })]
+      }
+    })
+  ]
+})
+export class ServerModule {}
 ```
 
 ## Field Middleware
@@ -121,24 +115,19 @@ To inject this middleware for each field, which will cause a little overhead but
 import { getConnection } from 'typeorm'
 import { ApolloServerDataLoaderPlugin, TypeormLoaderMiddleware } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 
-...
-  @Module({
-    providers: [
+@Module({
+  providers: [
     imports: [
       GraphQLModule.forRoot({
-        autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
-        context: graphQLContextParser,
-        formatError: graphQLErrorParser,
-        useGlobalPrefix: true,
-        playground: true,
-        introspection: true,
-        uploads: false,
-        path: '/',
+        // ...
         buildSchemaOptions: {
-            fieldMiddleware: [TypeormLoaderMiddleware],
+          fieldMiddleware: [TypeormLoaderMiddleware]
         }
-      }),
-      // ...
+      })
+    ]
+  ]
+})
+export class ServerModule {}
 ```
 
 # Resolving Relations
