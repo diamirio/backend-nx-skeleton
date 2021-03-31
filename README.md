@@ -43,6 +43,12 @@ A CLI interface for creating `@nrwl/nx` workspaces and Docker templates from scr
 
 [**Read more...**](./packages/eslint-config/README.md)
 
+### nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader
+
+Easily implement data-loader to Typeorm projects via decorating the DTOs or entities instead of creating custom ones.
+
+[**Read more...**](./packages/nestjs-graphql-typeorm-dataloader/README.md)
+
 ### nestjs-util - @webundsoehne/nestjs-util
 
 Utility package for `@nestjs`.
@@ -72,6 +78,12 @@ Various tools that can be used while developing new `@nrwl/nx` schematics.
 Schematic for scaffolding `@nrwl/nx` workspace.
 
 [**Read more...**](./packages/nx-workspace/README.md)
+
+### patch-package - @webundsoehne-private/patch-package
+
+A wrapper around the `patch-package` libraray which can automatically apply predefined patchs or create new ones.
+
+[**Read more...**](./packages/patch-package/README.md)
 
 # Further Development
 
