@@ -9,6 +9,6 @@ import { directLoader } from './direct.loader'
  */
 export class ToOneDataloader<V> extends DataLoader<any, V> {
   constructor (relation: RelationMetadata, connection: Connection) {
-    super(directLoader(relation, connection, relation.inverseEntityMetadata.primaryColumns[0].propertyName))
+    super(directLoader(relation, connection))
   }
 }

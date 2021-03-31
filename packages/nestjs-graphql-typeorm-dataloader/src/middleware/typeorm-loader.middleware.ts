@@ -33,17 +33,15 @@ export const TypeormLoaderMiddleware: FieldMiddleware = async ({ context, info, 
     throw new Error('selfKey option is available only for OneToMany or OneToOneNotOwner.')
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let handle = (..._args: any[]): Promise<any> => next()
   if (relation.isManyToOne || relation.isOneToOneOwner) {
-    handle = handleToOne
+    return handleToOne(args.keyFunc, source, context, relation)
   } else if (relation.isOneToMany) {
-    handle = args?.options?.selfKey ? handleOneToManyWithSelfKey : handleToMany
+    return args?.options?.selfKey ? handleOneToManyWithSelfKey(args.keyFunc, source, context, relation) : handleToMany(args.keyFunc, source, context, relation)
   } else if (relation.isOneToOneNotOwner) {
-    handle = args?.options?.selfKey ? handleOneToOneNotOwnerWithSelfKey : handleToOne
+    return args?.options?.selfKey ? handleOneToOneNotOwnerWithSelfKey(args.keyFunc, source, context, relation) : handleToOne(args.keyFunc, source, context, relation)
   } else if (relation.isManyToMany) {
-    handle = handleToMany
+    return handleToMany(args.keyFunc, source, context, relation)
+  } else {
+    return next()
   }
-
-  return handle(args.keyFunc, source, context, relation)
 }

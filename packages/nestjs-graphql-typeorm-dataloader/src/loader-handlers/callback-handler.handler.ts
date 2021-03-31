@@ -19,11 +19,7 @@ export async function handler<V> (
   callback: (dataloader: DataLoader<any, V>, columns: ColumnMetadata[]) => Promise<any>
 ): Promise<any> {
   if (context[DATA_LOADER_CONTEXT_KEY].typeormGetConnection == null) {
-    throw new Error('Typeorm connection is not available.')
-  }
-
-  if (columns.length !== 1) {
-    throw new Error('Loading by multiple columns as foreign key is not supported.')
+    throw new Error('Typeorm connection function is not available.')
   }
 
   const serviceId = `${DATA_LOADER_CONTEXT_KEY}#${relation.entityMetadata.tableName}#${relation.propertyName}`
