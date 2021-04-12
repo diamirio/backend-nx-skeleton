@@ -53,6 +53,7 @@ docs:
     paths:
       - packages/*/README.md
       - packages/*/API.md
+      - packages/*/docs
   only:
     - master
     - beta
