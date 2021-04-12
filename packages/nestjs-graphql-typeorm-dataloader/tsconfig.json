@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "strictNullChecks": false,
+    "paths": {
+      "@constants/*": ["constants/*"],
+      "@decorators/*": ["decorators/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@loader-handlers/*": ["loader-handlers/*"],
+      "@loaders/*": ["loaders/*"],
+      "@plugins/*": ["plugins/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

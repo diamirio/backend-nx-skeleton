@@ -43,6 +43,12 @@ A CLI interface for creating `@nrwl/nx` workspaces and Docker templates from scr
 
 [**Read more...**](./packages/eslint-config/README.md)
 
+### nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader
+
+Easily implement data-loader to Typeorm projects via decorating the DTOs or entities instead of creating custom ones.
+
+[**Read more...**](./packages/nestjs-graphql-typeorm-dataloader/README.md)
+
 ### nestjs-util - @webundsoehne/nestjs-util
 
 Utility package for `@nestjs`.
@@ -73,6 +79,12 @@ Schematic for scaffolding `@nrwl/nx` workspace.
 
 [**Read more...**](./packages/nx-workspace/README.md)
 
+### patch-package - @webundsoehne-private/patch-package
+
+A wrapper around the `patch-package` libraray which can automatically apply predefined patchs or create new ones.
+
+[**Read more...**](./packages/patch-package/README.md)
+
 # Further Development
 
 Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder due to templating and all the options that can be added to the schematics itself.
@@ -81,7 +93,7 @@ Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder du
 
 This repository includes a Docker-Compose stack for automatically compiling `SERVICES` variable defined. It will first compile the `RUN_IN_BAND` packages sequentially and after that it will compile everything else defined in the `SERVICES` variable in parallel.
 
-The image uses s6-overlay to monitor the crashes and will run `dev:start` for each package unless overriden with the `SERVICE` variable. Since these are intended to be published packages to NPM, it is a better approach to use `tsc-watch` to create a structure as if the package is published.
+The image uses s6-overlay to monitor the crashes and will run `dev:start` for each package unless overridden with the `SERVICE` variable. Since these are intended to be published packages to NPM, it is a better approach to use `tsc-watch` to create a structure as if the package is published.
 
 ### CLI-Script
 
