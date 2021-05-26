@@ -36,15 +36,15 @@ export function checkDependencies (schema: Schema): Rule {
       }
 
       tree.getDir(dir).visit((file: string) => {
-        files.push(({
+        files.push({
           file: path.relative(workspaceDir, file),
           ext: path.extname(file),
           mtime
-        } as unknown) as FileData)
+        } as unknown as FileData)
       })
     }
 
-    const graph: ProjectGraph = createProjectGraph(readWorkspace(tree), readNxJsonInTree(tree), files, (file) => tree.read(file).toString('utf-8'), false, false)
+    const graph: ProjectGraph = createProjectGraph(readWorkspace(tree), readNxJsonInTree(tree), files)
 
     const reverseGraph = onlyWorkspaceProjects(reverse(graph))
 

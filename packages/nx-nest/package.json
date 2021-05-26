@@ -39,13 +39,13 @@
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "~11.0.1",
-    "@nestjs/schematics": "^7.2.8",
+    "@angular-devkit/schematics": "~12.0.1",
+    "@nestjs/schematics": "^7.3.1",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.1",
     "enquirer": "^2.3.5",
     "execa": "^5.0.0",
-    "listr2": "^3.3.4"
+    "listr2": "^3.8.4"
   }
 }

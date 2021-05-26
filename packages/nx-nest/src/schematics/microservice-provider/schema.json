@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "NxNestSkeleton",
+  "$id": "NxNestSkeleton",
   "title": "Create a Nest application from skeleton with NX",
   "type": "object",
   "properties": {

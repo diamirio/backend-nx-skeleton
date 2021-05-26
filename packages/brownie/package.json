@@ -67,28 +67,28 @@
     "brownie"
   ],
   "dependencies": {
-    "@cenk1cenk2/boilerplate-oclif": "^1.6.1",
+    "@cenk1cenk2/boilerplate-oclif": "^1.10.1",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/errors": "^1.3.4",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.5",
     "execa": "^5.0.0",
-    "fs-extra": "^9.1.0",
-    "globby": "^11.0.0",
-    "listr2": "^3.3.4",
+    "fs-extra": "^10.0.0",
+    "globby": "^11.0.3",
+    "listr2": "^3.8.4",
     "nunjucks": "^3.2.3",
     "through": "^2.3.8",
-    "tslib": "^2.0.1",
+    "tslib": "^2.2.0",
     "types": "^0.1.1",
     "update-notifier": "^5.1.0",
     "update-notifier2": "^1.0.6",
-    "yaml": "^1.10.0"
+    "yaml": "^1.10.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
-    "@types/fs-extra": "^9.0.8",
-    "@types/node": "^14.14.31",
+    "@types/fs-extra": "^9.0.11",
+    "@types/node": "^15.6.1",
     "@types/through": "^0.0.30",
     "@types/update-notifier": "^5.0.0"
   }
