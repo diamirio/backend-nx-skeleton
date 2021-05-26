@@ -21,9 +21,7 @@
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
+    "packages": ["packages/*"],
     "nohoist": []
   },
   "husky": {
