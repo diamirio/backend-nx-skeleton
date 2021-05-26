@@ -12,13 +12,12 @@ import {
   ExecaArguments,
   FileInputOutput,
   generateBuilderAssets,
+  getNodeBinaryPath,
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runBuilder,
-  getNodeBinaryPath
+  runBuilder
 } from '@webundsoehne/nx-tools'
-import { SpawnOptions } from 'child_process'
 import delay from 'delay'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
@@ -175,7 +174,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
   // so complicated maybe simplify this?
   public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
     let args: string[] = []
-    let spawnOptions: SpawnOptions
+    let spawnOptions: ExecaArguments['spawnOptions']
     spawnOptions = {
       stdio: 'pipe',
       env: {

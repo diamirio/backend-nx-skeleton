@@ -1,6 +1,5 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runBuilder } from '@webundsoehne/nx-tools'
-import { SpawnOptions } from 'child_process'
 import delay from 'delay'
 import execa from 'execa'
 import { Observable, Subscriber } from 'rxjs'
@@ -20,34 +19,32 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
   }
 
   public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
-    // have to be observable create because of async subscriber, it causes no probs dont worry
-    return Observable.create(
-      async (sub: Subscriber<BuilderOutput>): Promise<void> => {
-        const subscriber = injectSubscriber ?? sub
+    // @NOTE: have to be observable create because of async subscriber, it causes no probs dont worry
+    return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
+      const subscriber = injectSubscriber ?? sub
 
-        try {
-          // stop all manager tasks
-          await this.manager.stop()
+      try {
+        // stop all manager tasks
+        await this.manager.stop()
 
-          checkNodeModulesExists(this.paths)
+        checkNodeModulesExists(this.paths)
 
-          const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
-          await pipeProcessToLogger(this.context, instance, { start: true })
-        } catch (error) {
-          // just restart it
-          this.logger.error('ts-node-dev crashed restarting in 3 secs.')
-          this.logger.debug(error)
+        const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
+        await pipeProcessToLogger(this.context, instance, { start: true })
+      } catch (error) {
+        // just restart it
+        this.logger.error('ts-node-dev crashed restarting in 3 secs.')
+        this.logger.debug(error)
 
-          await delay(3000)
-          await this.manager.stop()
-          await this.run(subscriber).toPromise()
-        } finally {
-          // clean up the zombies!
-          await this.manager.stop()
-          subscriber.complete()
-        }
+        await delay(3000)
+        await this.manager.stop()
+        await this.run(subscriber).toPromise()
+      } finally {
+        // clean up the zombies!
+        await this.manager.stop()
+        subscriber.complete()
       }
-    )
+    })
   }
 
   public normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {
@@ -79,7 +76,7 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
     // run path
     args = [ ...args, cwd ? removePathRoot(main, cwd) : main ]
 
-    const spawnOptions: SpawnOptions = {
+    const spawnOptions: ExecaArguments['spawnOptions'] = {
       env: {
         NODE_ENV: 'develop',
         ...environment,

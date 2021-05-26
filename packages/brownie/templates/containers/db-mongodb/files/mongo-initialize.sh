@@ -1,52 +1,69 @@
 #!/bin/bash
 
-# Constants
-RESET='\033[0m'
-RED='\033[38;5;1m'
-GREEN='\033[38;5;2m'
-YELLOW='\033[38;5;3m'
-MAGENTA='\033[38;5;5m'
-CYAN='\033[38;5;6m'
-SEPARATOR="\033[90m-------------------------${RESET}"
+VERSION=202105261637
 
-VERSION=v2.1.0
-SCRIPT_NAME="${YELLOW}mongodb-multiple-init${RESET}"
+set +u
 
-########## START-OF common.sh
-# source me: source <(curl -s "https://gist.githubusercontent.com/cenk1cenk2/0446f3be22a39c9f5fe5ee1cfb3cca63/raw/common.sh?$(date +%s)")
+## logger.sh embedded, to manual update: https://gist.github.com/cenk1cenk2/e03d8610534a9c78f755c1c1ed93a293
 
-stdout_print() {
-	# 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
-	local bool="${QUIET:-false}"
-	# comparison is performed without regard to the case of alphabetic characters
-	shopt -s nocasematch
-	if ! [[ $bool == 1 || $bool =~ ^(yes|true)$ ]]; then
-		echo -e "${RESET}${1}"
+# coloring
+# formats
+export RESET='\033[0m'
+export BOLD='\033[1m'
+export DIM='\033[2m'
+export UNDERLINE='\033[4m'
+
+# Regular Colors
+export BLACK='\033[38;5;0m'
+export RED='\033[38;5;1m'
+export GREEN='\033[38;5;2m'
+export YELLOW='\033[38;5;3m'
+export BLUE='\033[38;5;4m'
+export MAGENTA='\033[38;5;5m'
+export CYAN='\033[38;5;6m'
+export WHITE='\033[38;5;7m'
+
+# Background
+export ON_BLACK='\033[48;5;0m'
+export ON_RED='\033[48;5;1m'
+export ON_GREEN='\033[48;5;2m'
+export ON_YELLOW='\033[48;5;3m'
+export ON_BLUE='\033[48;5;4m'
+export ON_MAGENTA='\033[48;5;5m'
+export ON_CYAN='\033[48;5;6m'
+export ON_WHITE='\033[48;5;7m'
+
+# predefined
+SEPARATOR="${DIM}-------------------------${RESET}"
+
+# default log level and log levels
+LOG_LEVEL=${LOG_LEVEL:-"INFO"}
+
+declare -A LOG_LEVELS=([0]=0 [SILENT]=0 [silent]=0 [1]=1 [ERROR]=1 [error]=1 [2]=2 [WARN]=2 [warn]=2 [3]=3 [LIFETIME]=3 [lifetime]=3 [4]=4 [INFO]=4 [info]=4 [5]=5 [DEBUG]=5 [debug]=5)
+
+# log function
+log() {
+	local LEVEL="${2}"
+
+	if [[ ${LOG_LEVELS[$LEVEL]} ]] && [[ ${LOG_LEVELS[$LOG_LEVEL]} -ge ${LOG_LEVELS[$LEVEL]} ]]; then
+		echo -e "${1}"
 	fi
 }
 
-log_debug() {
-	# 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
-	local bool="${DEBUG:-false}"
-	# comparison is performed without regard to the case of alphabetic characters
-	shopt -s nocasematch
-	if [[ $bool == 1 || $bool =~ ^(yes|true)$ ]]; then
-		log_this "${1:-}" "${MAGENTA}DEBUG${RESET}" "${2}"
-	fi
-}
-
+# general logging function with seperators and level parsing
 log_this() {
 	INFO="${1:-}"
 	SCOPE="${2:-}"
-	SEPARATOR_INSERT="${3:-}"
+	LEVEL="${3:-"INFO"}"
+	SEPARATOR_INSERT="${4:-}"
 
 	DATA="${INFO}"
 
-	if [ ! -z "${SCOPE}" ] && [ "${SCOPE}" != "false" ]; then
+	if [ -n "${SCOPE}" ] && [ "${SCOPE}" != "false" ]; then
 		DATA="[${SCOPE}] ${DATA}"
 	fi
 
-	if [ ! -z "${SEPARATOR_INSERT}" ]; then
+	if [ -n "${SEPARATOR_INSERT}" ]; then
 		if [[ ${SEPARATOR_INSERT} == "top" ]] || [[ ${SEPARATOR_INSERT} == "both" ]]; then
 			DATA="${SEPARATOR}\n${DATA}"
 		fi
@@ -56,38 +73,99 @@ log_this() {
 		fi
 	fi
 
-	stdout_print "${DATA}"
+	log "${DATA}" "${LEVEL}"
 }
 
+# LOG_LEVEL = 1
+log_error() {
+	log_this "${1:-}" "${RED}ERROR${RESET}" "ERROR" "${2:-}"
+}
+
+log_interrupt() {
+	log_this "${1:-}" "${RED}INTERRUPT${RESET}" "ERROR" "${2:-}"
+}
+
+# LOG_LEVEL = 2
+log_warn() {
+	log_this "${1:-}" "${YELLOW}WARN${RESET}" "WARN" "${2:-}"
+}
+
+# LOG_LEVEL = 3
 log_start() {
-	log_this "${1:-}" "${GREEN}START${RESET}" "${2:-}"
+	log_this "${1:-}" "${GREEN}START${RESET}" "LIFETIME" "${2:-}"
 }
 
 log_finish() {
-	log_this "${1:-}" "${GREEN}FINISH${RESET}" "${2:-}"
+	log_this "${1:-}" "${GREEN}FINISH${RESET}" "LIFETIME" "${2:-}"
 }
 
-########## END-OF common.sh
+# LOG_LEVEL = 4
+log_info() {
+	log_this "${1:-}" "${CYAN}INFO${RESET}" "INFO" "${2:-}"
+}
 
-log_this "${VERSION} - Starting up..." "${SCRIPT_NAME}" "bottom"
+log_wait() {
+	log_this "${1:-}" "${YELLOW}WAIT${RESET}" "INFO" "${2:-}"
+}
 
-# a default non-root role
-MONGO_NON_ROOT_USERNAME="${DATABASE_USERNAME:-user}"
-MONGO_NON_ROOT_PASSWORD="${DATABASE_PASSWORD:-secret}"
-MONGO_INITDB_DATABASE="${DATABASE_DATABASE:-${MONGO_INITDB_DATABASE}}"
-MONGO_INITDB_MULTIPLE="${MONGO_INITDB_MULTIPLE:-${MONGO_INITDB_DATABASE}}"
-MONGO_NON_ROOT_ROLE="${MONGO_NON_ROOT_ROLE:-readWrite}"
-MONGO_INITDB_ROOT_PASSWORD="${MONGO_INITDB_ROOT_PASSWORD:-${MONGODB_ROOT_PASSWORD}}"
+log_divider() {
+	log "${SEPARATOR}" "INFO"
+}
 
-if [ ! -z "${MONGO_INITDB_ROOT_PASSWORD}" ]; then
-	MONGO_AUTHENTICATION_STRING="--authenticationDatabase admin --username root -p${MONGO_INITDB_ROOT_PASSWORD}"
+# LOG_LEVEL = 5
+log_debug() {
+	log_this "${1:-}" "${DIM}DEBUG${RESET}" "DEBUG" "${2:-}"
+}
+
+## END logger.sh embedded
+
+## greet
+SCRIPT_NAME="${YELLOW}mongodb-multiple-init${RESET}"
+log_this "${VERSION} - Starting up..." "${SCRIPT_NAME}" "LIFETIME" "bottom"
+
+## END greet
+
+## initate-variables.sh, version 202105261454
+# set REQUIRED_VARIABLES_NAME for variables required
+# set OPTIONAL_VARIABLES_NAME and OPTIONAL_VARIABLES_DEFAULTS for initiating rest of variables
+
+## required variables
+REQUIRED_VARIABLES_NAME=("MONGO_INITDB_MULTIPLE")
+
+## optional variables
+log_start "Setting defaults for optional environment variables..."
+OPTIONAL_VARIABLES_NAME=("MONGO_NON_ROOT_USERNAME" "MONGO_NON_ROOT_PASSWORD" "MONGO_INITDB_DATABASE" "MONGO_INITDB_MULTIPLE" "MONGO_NON_ROOT_ROLE" "MONGO_INITDB_ROOT_PASSWORD")
+OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${DATABASE_PASSWORD:-secret}" "${DATABASE_DATABASE:-${MONGO_INITDB_DATABASE}}" "${MONGO_INITDB_MULTIPLE:-${MONGO_INITDB_DATABASE}}" "${MONGO_NON_ROOT_ROLE:-'readWrite'}" "${MONGO_INITDB_ROOT_PASSWORD:-${MONGODB_ROOT_PASSWORD}}")
+
+for i in "${!OPTIONAL_VARIABLES_NAME[@]}"; do
+	VALUE=$(eval "echo \$${OPTIONAL_VARIABLES_NAME[$i]}")
+	if [ -z "${VALUE}" ]; then
+		log_debug "${OPTIONAL_VARIABLES_NAME[$i]} is not set using default: ${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
+		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}=${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
+	fi
+done
+log_finish "Set some sane-defaults for environment variables."
+
+log_start "Testing required environment variables..."
+for i in "${!REQUIRED_VARIABLES_NAME[@]}"; do
+	VALUE=$(eval "echo \$${REQUIRED_VARIABLES_NAME[$i]}")
+	[ -z "${VALUE}" ] && log_error "${REQUIRED_VARIABLES_NAME[$i]} is unset." && REQUIRED_VARIABLE_IS_UNSET=true
+done
+log_finish "All required environment variables are in place."
+
+[ -n "$REQUIRED_VARIABLE_IS_UNSET" ] && log_error "Can not run withot the required variables." && exit 127
+
+## END initate-variables.sh
+
+if [ -n "${MONGO_INITDB_ROOT_PASSWORD}" ]; then
+	MONGO_AUTHENTICATION_STRING="--authenticationDatabase admin -uroot -p${MONGO_INITDB_ROOT_PASSWORD}"
 else
 	MONGO_AUTHENTICATION_STRING=""
 fi
 
-for i in ${MONGO_INITDB_MULTIPLE[@]}; do
+for i in "${MONGO_INITDB_MULTIPLE[@]}"; do
 
-	log_start "Init database: ${i} with user '${MONGO_NON_ROOT_USERNAME}'" "bottom"
+	log_start "Initiating database ${i} with user '${MONGO_NON_ROOT_USERNAME}'..." "bottom"
 
 	# for many users in array
 	if [ -n "${MONGO_NON_ROOT_USERNAME:-}" ] && [ -n "${MONGO_NON_ROOT_PASSWORD:-}" ]; then
@@ -104,8 +182,8 @@ for i in ${MONGO_INITDB_MULTIPLE[@]}; do
 		EOJS
 	fi
 
-	log_finish "Init database: ${i}" "top"
+	log_finish "Created database: ${i}" "top"
 
 done
 
-log_this "${VERSION} - Finished." "${SCRIPT_NAME}" "top"
+log_this "Completed." "${SCRIPT_NAME}" "LIFETIME" "top"
