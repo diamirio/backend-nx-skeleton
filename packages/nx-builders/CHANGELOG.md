@@ -1,3 +1,19 @@
+## @webundsoehne/nx-builders [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.0...@webundsoehne/nx-builders@3.1.1) (2021-05-27)
+
+
+### Bug Fixes
+
+* fix database initiation scripts, type errors because of updates ([a4a114d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a4a114d6878217ac7cf84e113f3d10a43ba9c0cc))
+* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.1.1
+
 # @webundsoehne/nx-builders [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.0.0...@webundsoehne/nx-builders@3.1.0) (2021-03-05)
 
 
