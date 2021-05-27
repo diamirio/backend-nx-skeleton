@@ -12,13 +12,12 @@ import {
   ExecaArguments,
   FileInputOutput,
   generateBuilderAssets,
+  getNodeBinaryPath,
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runBuilder,
-  getNodeBinaryPath
+  runBuilder
 } from '@webundsoehne/nx-tools'
-import { SpawnOptions } from 'child_process'
 import delay from 'delay'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
@@ -46,102 +45,99 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
   public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
-    return Observable.create(
-      async (sub: Subscriber<BuilderOutput>): Promise<void> => {
-        const subscriber = injectSubscriber ?? sub
+    return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
+      const subscriber = injectSubscriber ?? sub
 
-        // Cleaning the /dist folder
-        removeSync(this.options.normalizedOutputPath)
+      // Cleaning the /dist folder
+      removeSync(this.options.normalizedOutputPath)
 
-        try {
-          // stop all manager tasks
-          await this.manager.stop()
+      try {
+        // stop all manager tasks
+        await this.manager.stop()
 
-          // check if needed tools are really installed
-          checkNodeModulesExists(this.paths)
+        // check if needed tools are really installed
+        checkNodeModulesExists(this.paths)
 
-          const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
-          if (this.projectDependencies.length > 0) {
-            this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
-          }
-
-          // add this after since we do not want to patch check it
-          this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
-
-          if (this.options.watch) {
-            // TODO: This part is not working as intended atm
-            this.logger.info('Starting TypeScript-Watch...')
-
-            this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
-
-            const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
-
-            const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
-
-            instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
-              switch (msg) {
-              case 'success':
-                await this.secondaryCompileActions()
-
-                if (this.options.runAfterWatch) {
-                  await this.manager.kill()
-                  const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
-
-                  // we dont want errors from this since it can be killed
-                  try {
-                    await pipeProcessToLogger(this.context, subInstance)
-                  } catch (e) {
-                    this.logger.debug(e.message)
-                  }
-                } else {
-                  this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
-                }
-
-                break
-              default:
-                break
-              }
-            })
-
-            await pipeProcessToLogger(this.context, instance)
-          } else {
-            // the normal mode of compiling
-            this.logger.info('Transpiling TypeScript files...')
-
-            this.logger.debug(`typescript path: ${this.paths.typescript}`)
-
-            const { args, spawnOptions } = this.normalizeArguments('typescript')
-
-            const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
-
-            await pipeProcessToLogger(this.context, instance)
-
-            this.logger.info('Transpiling to TypeScript is done.')
-
-            // perform secondary actions
-            await this.secondaryCompileActions()
-          }
-
-          subscriber.next({ success: true, outputPath: this.options.normalizedOutputPath })
-        } catch (error) {
-          if (this.options.watch) {
-            // if in watch mode just restart it
-            this.logger.error('tsc-watch crashed restarting in 3 secs.')
-            this.logger.debug(error)
-
-            await delay(3000)
-            await this.manager.stop()
-            await this.run(subscriber).toPromise()
-          } else {
-            subscriber.error(new Error('Transpiling process has beeen crashed.'))
-          }
-        } finally {
-          // clean up the zombies!
-          await this.manager.stop()
-          subscriber.complete()
+        const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
+        if (this.projectDependencies.length > 0) {
+          this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
         }
+
+        // add this after since we do not want to patch check it
+        this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
+
+        if (this.options.watch) {
+          this.logger.info('Starting TypeScript-Watch...')
+
+          this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
+
+          const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
+
+          const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
+
+          instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
+            switch (msg) {
+            case 'success':
+              await this.secondaryCompileActions()
+
+              if (this.options.runAfterWatch) {
+                await this.manager.kill()
+                const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
+
+                // we dont want errors from this since it can be killed
+                try {
+                  await pipeProcessToLogger(this.context, subInstance)
+                } catch (e) {
+                  this.logger.debug(e.message)
+                }
+              } else {
+                this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
+              }
+
+              break
+            default:
+              break
+            }
+          })
+
+          await pipeProcessToLogger(this.context, instance)
+        } else {
+          // the normal mode of compiling
+          this.logger.info('Transpiling TypeScript files...')
+
+          this.logger.debug(`typescript path: ${this.paths.typescript}`)
+
+          const { args, spawnOptions } = this.normalizeArguments('typescript')
+
+          const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
+
+          await pipeProcessToLogger(this.context, instance)
+
+          this.logger.info('Transpiling to TypeScript is done.')
+
+          // perform secondary actions
+          await this.secondaryCompileActions()
+        }
+
+        subscriber.next({ success: true, outputPath: this.options.normalizedOutputPath })
+      } catch (error) {
+        if (this.options.watch) {
+          // if in watch mode just restart it
+          this.logger.error('tsc-watch crashed restarting in 3 secs.')
+          this.logger.debug(error)
+
+          await delay(3000)
+          await this.manager.stop()
+          await this.run(subscriber).toPromise()
+        } else {
+          subscriber.error(new Error('Transpiling process has beeen crashed.'))
+        }
+      } finally {
+        // clean up the zombies!
+        await this.manager.stop()
+        subscriber.complete()
       }
-    )
+    })
   }
 
   public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
@@ -178,7 +174,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
   // so complicated maybe simplify this?
   public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
     let args: string[] = []
-    let spawnOptions: SpawnOptions
+    let spawnOptions: ExecaArguments['spawnOptions']
     spawnOptions = {
       stdio: 'pipe',
       env: {

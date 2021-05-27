@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "NxWorkspaceRemove",
+  "$id": "NxWorkspaceRemove",
   "title": "Nx Remove",
   "description": "Remove a project from the workspace",
   "type": "object",

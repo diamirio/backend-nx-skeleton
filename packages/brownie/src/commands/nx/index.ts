@@ -116,7 +116,7 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help' ], { shell: true })
+      const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--', '--help' ], { shell: true })
       this.logger.direct(help.stdout)
 
       try {

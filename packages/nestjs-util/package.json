@@ -40,8 +40,8 @@
     "util"
   ],
   "dependencies": {
-    "config": "^3.3.4",
-    "fs-extra": "^9.1.0",
+    "config": "^3.3.6",
+    "fs-extra": "^10.0.0",
     "moment": "^2.28.0",
     "reflect-metadata": "^0.1.13",
     "winston": "^3.2.1"
@@ -49,15 +49,15 @@
   "peerDependencies": {
     "@nestjs/common": ">= 7 < 8",
     "@nestjs/core": ">= 7 < 8",
+    "@nestjs/graphql": ">= 7 < 8",
+    "@nestjs/microservices": ">= 7 < 8",
     "@nestjs/swagger": ">= 4 < 5",
     "class-transformer": ">= 0.3.0",
     "class-validator": ">= 0.12.0",
     "fastify": ">= 2",
     "fastify-swagger": ">= 3.0.0",
-    "nest-schedule": ">= 0.6.0",
     "graphql": ">= 15 < 16",
-    "@nestjs/microservices": ">= 7 < 8",
-    "@nestjs/graphql": ">= 7 < 8"
+    "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
     "@nestjs/common": "^7.6.13",
@@ -67,21 +67,21 @@
     "@nestjs/swagger": "^4.7.15",
     "@nestjs/testing": "^7.6.13",
     "@types/config": "^0.0.38",
-    "@types/jest": "^26.0.9",
-    "@types/node": "^14.14.31",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.1",
     "@types/winston": "^2.4.4",
     "amqp-connection-manager": "^3.2.2",
-    "amqplib": "^0.7.0",
+    "amqplib": "^0.8.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-    "concurrently": "^6.0.0",
+    "concurrently": "^6.2.0",
     "fastify": "^3.13.0",
     "fastify-swagger": "^4.3.3",
     "graphql": "^15.5.0",
     "nest-schedule": "^0.6.4",
-    "prettier": "^2.0.5",
+    "prettier": "^2.3.0",
     "swagger-ui-express": "^4.1.5",
-    "wait-on": "^5.0.0"
+    "wait-on": "^5.3.0"
   },
   "engines": {
     "node": ">=10"

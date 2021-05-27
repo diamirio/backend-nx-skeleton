@@ -37,33 +37,33 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1000.4",
-    "@angular-devkit/core": "^10.0.4",
-    "@angular-devkit/schematics": "^10.0.4",
-    "@nrwl/cli": "^11.4.0",
+    "@angular-devkit/architect": "^0.1200.1",
+    "@angular-devkit/core": "^12.0.1",
+    "@angular-devkit/schematics": "^12.0.1",
+    "@nrwl/cli": "^12.3.4",
     "@types/micromatch": "^4.0.1",
-    "@types/picomatch": "^2.2.1",
+    "@types/picomatch": "^2.2.4",
     "change-case": "^4.1.1",
     "deepmerge": "^4.2.2",
     "diff": "^5.0.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.27.0",
     "execa": "^5.0.0",
     "figures": "^3.2.0",
-    "glob": "^7.1.6",
-    "listr2": "^3.3.4",
-    "micromatch": "^4.0.2",
+    "glob": "^7.1.7",
+    "listr2": "^3.8.4",
+    "micromatch": "^4.0.4",
     "nunjucks": "^3.2.3",
-    "picomatch": "^2.2.2",
+    "picomatch": "^2.3.0",
     "pidtree": "^0.5.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.3.0",
     "through": "^2.3.8"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
     "@types/diff": "^5.0.0",
-    "@types/eslint": "^7.2.5",
+    "@types/eslint": "^7.2.11",
     "@types/figures": "^3.0.1",
     "@types/nunjucks": "^3.1.4",
-    "@types/prettier": "^2.2.2"
+    "@types/prettier": "^2.2.3"
   }
 }

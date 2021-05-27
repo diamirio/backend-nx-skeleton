@@ -60,7 +60,7 @@ export function addProject (options: NormalizedSchema): Rule {
         }
       }
     } else if (options.components.includes(AvailableComponents.BG_TASK)) {
-      architect.bgtask = {
+      architect.serve = {
         builder: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,

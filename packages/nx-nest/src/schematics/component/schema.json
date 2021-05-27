@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "nx-nest:component",
+  "$id": "nx-nest:component",
   "title": "Add a component to existing nx-nest schematic.",
   "examples": [],
   "type": "object",
