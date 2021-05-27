@@ -1,3 +1,10 @@
+## @webundsoehne/eslint-config [3.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.0...@webundsoehne/eslint-config@3.0.1) (2021-05-27)
+
+
+### Bug Fixes
+
+* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+
 # @webundsoehne/eslint-config [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.2...@webundsoehne/eslint-config@3.0.0) (2021-03-04)
 
 
