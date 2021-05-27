@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-workspace [2.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.1...@webundsoehne-private/nx-workspace@2.0.2) (2021-05-27)
+
+
+### Bug Fixes
+
+* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+* **templates:** add more ignores ([ba70181](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ba7018163a9be5490e255fe3787a26089ddedf8e))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.1.1
+
 ## @webundsoehne-private/nx-workspace [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.0...@webundsoehne-private/nx-workspace@2.0.1) (2021-03-05)
 
 
