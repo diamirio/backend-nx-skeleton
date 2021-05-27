@@ -1,3 +1,20 @@
+## @webundsoehne-private/nx-nest [2.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.1...@webundsoehne-private/nx-nest@2.0.2) (2021-05-27)
+
+
+### Bug Fixes
+
+* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+* **schematics:** bgtask naming scheme ([9bf84d8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9bf84d8a91039aab1b5cf90fb4865ed24b7bb34f))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 3.1.1
+* **@webundsoehne/nx-tools:** upgraded to 3.1.1
+
 ## @webundsoehne-private/nx-nest [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.0...@webundsoehne-private/nx-nest@2.0.1) (2021-03-05)
 
 
