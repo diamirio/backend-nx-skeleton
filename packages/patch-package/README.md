@@ -28,7 +28,6 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 * [`patch-package `](#patch-package-)
 * [`patch-package create`](#patch-package-create)
 * [`patch-package help [COMMAND]`](#patch-package-help-command)
-* [`patch-package list`](#patch-package-list)
 * [`patch-package patch`](#patch-package-patch)
 
 ## `patch-package `
@@ -74,18 +73,6 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
-
-## `patch-package list`
-
-Lists all the static entities that are shipped with this module.
-
-```
-USAGE
-  $ patch-package list
-
-ALIASES
-  $ patch-package ls
-```
 
 ## `patch-package patch`
 

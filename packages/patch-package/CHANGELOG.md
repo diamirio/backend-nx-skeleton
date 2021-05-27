@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.2...@webundsoehne/patch-package@1.0.3) (2021-05-27)
+
+
+### Bug Fixes
+
+* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+
 ## @webundsoehne/patch-package [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.1...@webundsoehne/patch-package@1.0.2) (2021-03-05)
 
 
