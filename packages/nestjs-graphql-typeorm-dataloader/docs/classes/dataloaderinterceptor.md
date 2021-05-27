@@ -4,7 +4,7 @@
 
 ## Implements
 
-- _NestInterceptor_
+- *NestInterceptor*
 
 ## Table of contents
 
@@ -20,15 +20,15 @@
 
 ### constructor
 
-\+ **new DataLoaderInterceptor**(`options?`: ApolloServerLoaderPluginOptions): [_DataLoaderInterceptor_](dataloaderinterceptor.md)
+\+ **new DataLoaderInterceptor**(`options?`: ApolloServerLoaderPluginOptions): [*DataLoaderInterceptor*](dataloaderinterceptor.md)
 
-#### Parameters:
+#### Parameters
 
-| Name       | Type                            |
-| :--------- | :------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `options?` | ApolloServerLoaderPluginOptions |
 
-**Returns:** [_DataLoaderInterceptor_](dataloaderinterceptor.md)
+**Returns:** [*DataLoaderInterceptor*](dataloaderinterceptor.md)
 
 Defined in: packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:13
 
@@ -36,17 +36,17 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loa
 
 ### intercept
 
-▸ **intercept**(`context`: ExecutionContext, `next`: _CallHandler_<any\>): _Observable_<any\>
+▸ **intercept**(`context`: ExecutionContext, `next`: *CallHandler*<any\>): *Observable*<any\>
 
-#### Parameters:
+#### Parameters
 
-| Name      | Type                |
-| :-------- | :------------------ |
-| `context` | ExecutionContext    |
-| `next`    | _CallHandler_<any\> |
+| Name | Type |
+| :------ | :------ |
+| `context` | ExecutionContext |
+| `next` | *CallHandler*<any\> |
 
-**Returns:** _Observable_<any\>
+**Returns:** *Observable*<any\>
 
-Implementation of: void
+Implementation of: NestInterceptor.intercept
 
 Defined in: packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16

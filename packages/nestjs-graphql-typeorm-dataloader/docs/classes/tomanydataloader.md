@@ -7,12 +7,12 @@ A common loader to handle to many relations.
 ## Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
 ## Hierarchy
 
-- _DataLoader_<any, V\>
+- *DataLoader*<any, V\>
 
   ↳ **ToManyDataloader**
 
@@ -34,24 +34,24 @@ A common loader to handle to many relations.
 
 ### constructor
 
-\+ **new ToManyDataloader**<V\>(`relation`: _RelationMetadata_, `connection`: _Connection_): [_ToManyDataloader_](tomanydataloader.md)<V\>
+\+ **new ToManyDataloader**<V\>(`relation`: *RelationMetadata*, `connection`: *Connection*): [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-#### Type parameters:
+#### Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
-#### Parameters:
+#### Parameters
 
-| Name         | Type               |
-| :----------- | :----------------- |
-| `relation`   | _RelationMetadata_ |
-| `connection` | _Connection_       |
+| Name | Type |
+| :------ | :------ |
+| `relation` | *RelationMetadata* |
+| `connection` | *Connection* |
 
-**Returns:** [_ToManyDataloader_](tomanydataloader.md)<V\>
+**Returns:** [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Overrides: void
+Overrides: DataLoader&lt;any, V\&gt;.constructor
 
 Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-many.loader.ts:10
 
@@ -59,61 +59,64 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-many.loade
 
 ### clear
 
-▸ **clear**(`key`: _any_): [_ToManyDataloader_](tomanydataloader.md)<V\>
+▸ **clear**(`key`: *any*): [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Clears the value at `key` from the cache, if it exists. Returns itself for method chaining.
+Clears the value at `key` from the cache, if it exists. Returns itself for
+method chaining.
 
-#### Parameters:
+#### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
-| `key` | _any_ |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 
-**Returns:** [_ToManyDataloader_](tomanydataloader.md)<V\>
+**Returns:** [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.clear
 
 Defined in: node_modules/dataloader/index.d.ts:46
 
----
+___
 
 ### clearAll
 
-▸ **clearAll**(): [_ToManyDataloader_](tomanydataloader.md)<V\>
+▸ **clearAll**(): [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Clears the entire cache. To be used when some event results in unknown invalidations across this particular `DataLoader`. Returns itself for method chaining.
+Clears the entire cache. To be used when some event results in unknown
+invalidations across this particular `DataLoader`. Returns itself for
+method chaining.
 
-**Returns:** [_ToManyDataloader_](tomanydataloader.md)<V\>
+**Returns:** [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.clearAll
 
 Defined in: node_modules/dataloader/index.d.ts:53
 
----
+___
 
 ### load
 
-▸ **load**(`key`: _any_): _Promise_<V\>
+▸ **load**(`key`: *any*): *Promise*<V\>
 
 Loads a key, returning a `Promise` for the value represented by that key.
 
-#### Parameters:
+#### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
-| `key` | _any_ |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 
-**Returns:** _Promise_<V\>
+**Returns:** *Promise*<V\>
 
-Inherited from: void
+Inherited from: DataLoader.load
 
 Defined in: node_modules/dataloader/index.d.ts:25
 
----
+___
 
 ### loadMany
 
-▸ **loadMany**(`keys`: _ArrayLike_<any\>): _Promise_<(Error \| V)[]\>
+▸ **loadMany**(`keys`: *ArrayLike*<any\>): *Promise*<(Error \| V)[]\>
 
 Loads multiple keys, promising an array of values:
 
@@ -126,35 +129,36 @@ This is equivalent to the more verbose:
       myLoader.load('b')
     ]);
 
-#### Parameters:
+#### Parameters
 
-| Name   | Type              |
-| :----- | :---------------- |
-| `keys` | _ArrayLike_<any\> |
+| Name | Type |
+| :------ | :------ |
+| `keys` | *ArrayLike*<any\> |
 
-**Returns:** _Promise_<(Error \| V)[]\>
+**Returns:** *Promise*<(Error \| V)[]\>
 
-Inherited from: void
+Inherited from: DataLoader.loadMany
 
 Defined in: node_modules/dataloader/index.d.ts:40
 
----
+___
 
 ### prime
 
-▸ **prime**(`key`: _any_, `value`: Error \| V): [_ToManyDataloader_](tomanydataloader.md)<V\>
+▸ **prime**(`key`: *any*, `value`: Error \| V): [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Adds the provied key and value to the cache. If the key already exists, no change is made. Returns itself for method chaining.
+Adds the provied key and value to the cache. If the key already exists, no
+change is made. Returns itself for method chaining.
 
-#### Parameters:
+#### Parameters
 
-| Name    | Type       |
-| :------ | :--------- |
-| `key`   | _any_      |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 | `value` | Error \| V |
 
-**Returns:** [_ToManyDataloader_](tomanydataloader.md)<V\>
+**Returns:** [*ToManyDataloader*](tomanydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.prime
 
 Defined in: node_modules/dataloader/index.d.ts:59

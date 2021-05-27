@@ -7,12 +7,12 @@ A common loader for loading entities by their own key.
 ## Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
 ## Hierarchy
 
-- _DataLoader_<any, V[]\>
+- *DataLoader*<any, V[]\>
 
   ↳ **SelfKeyDataloader**
 
@@ -34,25 +34,25 @@ A common loader for loading entities by their own key.
 
 ### constructor
 
-\+ **new SelfKeyDataloader**<V\>(`relation`: _RelationMetadata_, `connection`: _Connection_, `selfKeyFunc`: SelfKeyFunc): [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+\+ **new SelfKeyDataloader**<V\>(`relation`: *RelationMetadata*, `connection`: *Connection*, `selfKeyFunc`: SelfKeyFunc): [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-#### Type parameters:
+#### Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
-#### Parameters:
+#### Parameters
 
-| Name          | Type               |
-| :------------ | :----------------- |
-| `relation`    | _RelationMetadata_ |
-| `connection`  | _Connection_       |
-| `selfKeyFunc` | SelfKeyFunc        |
+| Name | Type |
+| :------ | :------ |
+| `relation` | *RelationMetadata* |
+| `connection` | *Connection* |
+| `selfKeyFunc` | SelfKeyFunc |
 
-**Returns:** [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+**Returns:** [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Overrides: void
+Overrides: DataLoader&lt;any, V[]\&gt;.constructor
 
 Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/self-key.loader.ts:11
 
@@ -60,61 +60,64 @@ Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/self-key.load
 
 ### clear
 
-▸ **clear**(`key`: _any_): [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+▸ **clear**(`key`: *any*): [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Clears the value at `key` from the cache, if it exists. Returns itself for method chaining.
+Clears the value at `key` from the cache, if it exists. Returns itself for
+method chaining.
 
-#### Parameters:
+#### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
-| `key` | _any_ |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 
-**Returns:** [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+**Returns:** [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.clear
 
 Defined in: node_modules/dataloader/index.d.ts:46
 
----
+___
 
 ### clearAll
 
-▸ **clearAll**(): [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+▸ **clearAll**(): [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Clears the entire cache. To be used when some event results in unknown invalidations across this particular `DataLoader`. Returns itself for method chaining.
+Clears the entire cache. To be used when some event results in unknown
+invalidations across this particular `DataLoader`. Returns itself for
+method chaining.
 
-**Returns:** [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+**Returns:** [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.clearAll
 
 Defined in: node_modules/dataloader/index.d.ts:53
 
----
+___
 
 ### load
 
-▸ **load**(`key`: _any_): _Promise_<V[]\>
+▸ **load**(`key`: *any*): *Promise*<V[]\>
 
 Loads a key, returning a `Promise` for the value represented by that key.
 
-#### Parameters:
+#### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
-| `key` | _any_ |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 
-**Returns:** _Promise_<V[]\>
+**Returns:** *Promise*<V[]\>
 
-Inherited from: void
+Inherited from: DataLoader.load
 
 Defined in: node_modules/dataloader/index.d.ts:25
 
----
+___
 
 ### loadMany
 
-▸ **loadMany**(`keys`: _ArrayLike_<any\>): _Promise_<(V[] \| Error)[]\>
+▸ **loadMany**(`keys`: *ArrayLike*<any\>): *Promise*<(V[] \| Error)[]\>
 
 Loads multiple keys, promising an array of values:
 
@@ -127,35 +130,36 @@ This is equivalent to the more verbose:
       myLoader.load('b')
     ]);
 
-#### Parameters:
+#### Parameters
 
-| Name   | Type              |
-| :----- | :---------------- |
-| `keys` | _ArrayLike_<any\> |
+| Name | Type |
+| :------ | :------ |
+| `keys` | *ArrayLike*<any\> |
 
-**Returns:** _Promise_<(V[] \| Error)[]\>
+**Returns:** *Promise*<(V[] \| Error)[]\>
 
-Inherited from: void
+Inherited from: DataLoader.loadMany
 
 Defined in: node_modules/dataloader/index.d.ts:40
 
----
+___
 
 ### prime
 
-▸ **prime**(`key`: _any_, `value`: V[] \| Error): [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+▸ **prime**(`key`: *any*, `value`: V[] \| Error): [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Adds the provied key and value to the cache. If the key already exists, no change is made. Returns itself for method chaining.
+Adds the provied key and value to the cache. If the key already exists, no
+change is made. Returns itself for method chaining.
 
-#### Parameters:
+#### Parameters
 
-| Name    | Type         |
-| :------ | :----------- |
-| `key`   | _any_        |
+| Name | Type |
+| :------ | :------ |
+| `key` | *any* |
 | `value` | V[] \| Error |
 
-**Returns:** [_SelfKeyDataloader_](selfkeydataloader.md)<V\>
+**Returns:** [*SelfKeyDataloader*](selfkeydataloader.md)<V\>
 
-Inherited from: void
+Inherited from: DataLoader.prime
 
 Defined in: node_modules/dataloader/index.d.ts:59
