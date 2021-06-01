@@ -4,7 +4,7 @@
 
 ## Implements
 
-- *ApolloServerPlugin*
+- `ApolloServerPlugin`
 
 ## Table of contents
 
@@ -20,26 +20,32 @@
 
 ### constructor
 
-\+ **new ApolloServerDataLoaderPlugin**(`options?`: ApolloServerLoaderPluginOptions): [*ApolloServerDataLoaderPlugin*](apolloserverdataloaderplugin.md)
+• **new ApolloServerDataLoaderPlugin**(`options?`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | ApolloServerLoaderPluginOptions |
+| `options?` | `ApolloServerLoaderPluginOptions` |
 
-**Returns:** [*ApolloServerDataLoaderPlugin*](apolloserverdataloaderplugin.md)
+#### Defined in
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/plugins/data-loader.plugin.ts:17
+packages/nestjs-graphql-typeorm-dataloader/src/plugins/data-loader.plugin.ts:17
 
 ## Methods
 
 ### requestDidStart
 
-▸ **requestDidStart**(): *void* \| *GraphQLRequestListener*<BaseContext\>
+▸ **requestDidStart**(): `void` \| `GraphQLRequestListener`<BaseContext\>
 
-**Returns:** *void* \| *GraphQLRequestListener*<BaseContext\>
+#### Returns
 
-Implementation of: ApolloServerPlugin.requestDidStart
+`void` \| `GraphQLRequestListener`<BaseContext\>
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/plugins/data-loader.plugin.ts:20
+#### Implementation of
+
+ApolloServerPlugin.requestDidStart
+
+#### Defined in
+
+packages/nestjs-graphql-typeorm-dataloader/src/plugins/data-loader.plugin.ts:20

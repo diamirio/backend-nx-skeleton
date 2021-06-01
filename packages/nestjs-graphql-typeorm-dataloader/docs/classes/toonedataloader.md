@@ -12,7 +12,7 @@ A common loader to handle to one relations.
 
 ## Hierarchy
 
-- *DataLoader*<any, V\>
+- `DataLoader`<any, V\>
 
   ↳ **ToOneDataloader**
 
@@ -34,7 +34,7 @@ A common loader to handle to one relations.
 
 ### constructor
 
-\+ **new ToOneDataloader**<V\>(`relation`: *RelationMetadata*, `connection`: *Connection*): [*ToOneDataloader*](toonedataloader.md)<V\>
+• **new ToOneDataloader**<V\>(`relation`, `connection`)
 
 #### Type parameters
 
@@ -46,20 +46,22 @@ A common loader to handle to one relations.
 
 | Name | Type |
 | :------ | :------ |
-| `relation` | *RelationMetadata* |
-| `connection` | *Connection* |
+| `relation` | `RelationMetadata` |
+| `connection` | `Connection` |
 
-**Returns:** [*ToOneDataloader*](toonedataloader.md)<V\>
+#### Overrides
 
-Overrides: DataLoader&lt;any, V\&gt;.constructor
+DataLoader&lt;any, V\&gt;.constructor
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-one.loader.ts:10
+#### Defined in
+
+packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-one.loader.ts:10
 
 ## Methods
 
 ### clear
 
-▸ **clear**(`key`: *any*): [*ToOneDataloader*](toonedataloader.md)<V\>
+▸ **clear**(`key`): [ToOneDataloader](toonedataloader.md)<V\>
 
 Clears the value at `key` from the cache, if it exists. Returns itself for
 method chaining.
@@ -68,35 +70,47 @@ method chaining.
 
 | Name | Type |
 | :------ | :------ |
-| `key` | *any* |
+| `key` | `any` |
 
-**Returns:** [*ToOneDataloader*](toonedataloader.md)<V\>
+#### Returns
 
-Inherited from: DataLoader.clear
+[ToOneDataloader](toonedataloader.md)<V\>
 
-Defined in: node_modules/dataloader/index.d.ts:46
+#### Inherited from
+
+DataLoader.clear
+
+#### Defined in
+
+node_modules/dataloader/index.d.ts:46
 
 ___
 
 ### clearAll
 
-▸ **clearAll**(): [*ToOneDataloader*](toonedataloader.md)<V\>
+▸ **clearAll**(): [ToOneDataloader](toonedataloader.md)<V\>
 
 Clears the entire cache. To be used when some event results in unknown
 invalidations across this particular `DataLoader`. Returns itself for
 method chaining.
 
-**Returns:** [*ToOneDataloader*](toonedataloader.md)<V\>
+#### Returns
 
-Inherited from: DataLoader.clearAll
+[ToOneDataloader](toonedataloader.md)<V\>
 
-Defined in: node_modules/dataloader/index.d.ts:53
+#### Inherited from
+
+DataLoader.clearAll
+
+#### Defined in
+
+node_modules/dataloader/index.d.ts:53
 
 ___
 
 ### load
 
-▸ **load**(`key`: *any*): *Promise*<V\>
+▸ **load**(`key`): `Promise`<V\>
 
 Loads a key, returning a `Promise` for the value represented by that key.
 
@@ -104,19 +118,25 @@ Loads a key, returning a `Promise` for the value represented by that key.
 
 | Name | Type |
 | :------ | :------ |
-| `key` | *any* |
+| `key` | `any` |
 
-**Returns:** *Promise*<V\>
+#### Returns
 
-Inherited from: DataLoader.load
+`Promise`<V\>
 
-Defined in: node_modules/dataloader/index.d.ts:25
+#### Inherited from
+
+DataLoader.load
+
+#### Defined in
+
+node_modules/dataloader/index.d.ts:25
 
 ___
 
 ### loadMany
 
-▸ **loadMany**(`keys`: *ArrayLike*<any\>): *Promise*<(Error \| V)[]\>
+▸ **loadMany**(`keys`): `Promise`<(Error \| V)[]\>
 
 Loads multiple keys, promising an array of values:
 
@@ -133,19 +153,25 @@ This is equivalent to the more verbose:
 
 | Name | Type |
 | :------ | :------ |
-| `keys` | *ArrayLike*<any\> |
+| `keys` | `ArrayLike`<any\> |
 
-**Returns:** *Promise*<(Error \| V)[]\>
+#### Returns
 
-Inherited from: DataLoader.loadMany
+`Promise`<(Error \| V)[]\>
 
-Defined in: node_modules/dataloader/index.d.ts:40
+#### Inherited from
+
+DataLoader.loadMany
+
+#### Defined in
+
+node_modules/dataloader/index.d.ts:40
 
 ___
 
 ### prime
 
-▸ **prime**(`key`: *any*, `value`: Error \| V): [*ToOneDataloader*](toonedataloader.md)<V\>
+▸ **prime**(`key`, `value`): [ToOneDataloader](toonedataloader.md)<V\>
 
 Adds the provied key and value to the cache. If the key already exists, no
 change is made. Returns itself for method chaining.
@@ -154,11 +180,17 @@ change is made. Returns itself for method chaining.
 
 | Name | Type |
 | :------ | :------ |
-| `key` | *any* |
-| `value` | Error \| V |
+| `key` | `any` |
+| `value` | `Error` \| `V` |
 
-**Returns:** [*ToOneDataloader*](toonedataloader.md)<V\>
+#### Returns
 
-Inherited from: DataLoader.prime
+[ToOneDataloader](toonedataloader.md)<V\>
 
-Defined in: node_modules/dataloader/index.d.ts:59
+#### Inherited from
+
+DataLoader.prime
+
+#### Defined in
+
+node_modules/dataloader/index.d.ts:59

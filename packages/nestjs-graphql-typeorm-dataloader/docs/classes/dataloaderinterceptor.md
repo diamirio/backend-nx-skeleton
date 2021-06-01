@@ -4,7 +4,7 @@
 
 ## Implements
 
-- *NestInterceptor*
+- `NestInterceptor`
 
 ## Table of contents
 
@@ -20,33 +20,39 @@
 
 ### constructor
 
-\+ **new DataLoaderInterceptor**(`options?`: ApolloServerLoaderPluginOptions): [*DataLoaderInterceptor*](dataloaderinterceptor.md)
+• **new DataLoaderInterceptor**(`options?`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | ApolloServerLoaderPluginOptions |
+| `options?` | `ApolloServerLoaderPluginOptions` |
 
-**Returns:** [*DataLoaderInterceptor*](dataloaderinterceptor.md)
+#### Defined in
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:13
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:13
 
 ## Methods
 
 ### intercept
 
-▸ **intercept**(`context`: ExecutionContext, `next`: *CallHandler*<any\>): *Observable*<any\>
+▸ **intercept**(`context`, `next`): `Observable`<any\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `context` | ExecutionContext |
-| `next` | *CallHandler*<any\> |
+| `context` | `ExecutionContext` |
+| `next` | `CallHandler`<any\> |
 
-**Returns:** *Observable*<any\>
+#### Returns
 
-Implementation of: NestInterceptor.intercept
+`Observable`<any\>
 
-Defined in: packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16
+#### Implementation of
+
+NestInterceptor.intercept
+
+#### Defined in
+
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16
