@@ -1,14 +1,14 @@
 import { NxProjectTypes } from '@constants/nx.constants'
-import { NxJson, NxJsonProjectConfig } from '@nrwl/workspace/src/core/shared-interfaces'
+import { NxJsonConfiguration, NxJsonProjectConfiguration } from '@nrwl/devkit'
 
 import { BrownieIntegrationInterface } from '@integration/brownie.interface'
 
 /**
  * Improved nx.json with integration stuff.
  */
-export interface EnrichedNxJson<T extends any = any> extends NxJson {
+export interface EnrichedNxJson<T extends any = any> extends NxJsonConfiguration {
   projects: {
-    [name: string]: NxJsonProjectConfig & {
+    [name: string]: NxJsonProjectConfiguration & {
       integration: T
       brownie: BrownieIntegrationInterface
     }

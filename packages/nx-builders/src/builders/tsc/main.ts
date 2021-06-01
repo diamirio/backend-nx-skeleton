@@ -1,13 +1,11 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
-import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import {
   BaseBuilder,
   checkNodeModulesExists,
-  createDependenciesForProjectFromGraph,
   deepMerge,
   ExecaArguments,
   FileInputOutput,
@@ -31,7 +29,7 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-// i converted this to a class since it makes not to much sense to have seperate functions with tons of same inputs
+// i converted this to a class since it makes not to much sense to have separate functions with tons of same inputs
 class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
   public init (): void {
     // paths of the programs, more convient than using the api since tscpaths does not have api
@@ -335,18 +333,6 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       }
 
       delete packageJson.implicitDependencies
-
-      // update package dependencies
-      const project = this.context.target.project
-      const graph = createProjectGraph()
-
-      // some trickery because of the design of angular functions
-      const dependencies = createDependenciesForProjectFromGraph(graph, project)
-      if (packageJson.dependencies) {
-        packageJson.dependencies = mergeDependencies(dependencies, packageJson.dependencies)
-      } else {
-        packageJson.dependencies = dependencies
-      }
 
       if (Object.keys(implicitDependencies).length > 0) {
         packageJson.dependencies = mergeDependencies(packageJson.dependencies, implicitDependencies)

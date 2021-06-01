@@ -32,26 +32,7 @@
           "caseInsensitive": true
         }
       }
-    ],
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-parameter-properties": "off",
-    "@nrwl/nx/enforce-module-boundaries": [
-      "error",
-      {
-        "enforceBuildableLibDependency": true,
-        "allow": [],
-        "depConstraints": [{
-          "sourceTag": "*",
-          "onlyDependOnLibsWithTags": ["*"]
-        }]
-      }
     ]
   },
-  "overrides": [{
-    "files": ["*.tsx"],
-    "rules": {
-      "@typescript-eslint/no-unused-vars": "off"
-    }
-  }]
+  "overrides": []
 }

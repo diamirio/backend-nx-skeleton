@@ -46,10 +46,10 @@
     "@angular-devkit/architect": "^0.1200.1",
     "@angular-devkit/core": "^12.0.1",
     "@angular-devkit/schematics": "^12.0.1",
-    "@nrwl/cli": "^12.3.4",
+    "@nrwl/cli": "^12.3.5",
     "@webundsoehne/nx-tools": "*",
     "delay": "^5.0.0",
-    "execa": "^5.0.0",
+    "execa": "^5.0.1",
     "tree-kill": "^1.2.2"
   },
   "devDependencies": {
