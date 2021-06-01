@@ -1,3 +1,11 @@
+## @webundsoehne/patch-package [1.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.3...@webundsoehne/patch-package@1.0.4) (2021-06-01)
+
+
+### Bug Fixes
+
+* package dependency injection to remove npm: prefixes ([9ee680a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9ee680a30ad2e7f8b7f5c6f54b521cce11a88435))
+* update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
+
 ## @webundsoehne/patch-package [1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@1.0.2...@webundsoehne/patch-package@1.0.3) (2021-05-27)
 
 
