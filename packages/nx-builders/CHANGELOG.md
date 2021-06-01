@@ -1,3 +1,19 @@
+## @webundsoehne/nx-builders [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.1...@webundsoehne/nx-builders@3.1.2) (2021-06-01)
+
+
+### Bug Fixes
+
+* package dependency injection to remove npm: prefixes ([9ee680a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9ee680a30ad2e7f8b7f5c6f54b521cce11a88435))
+* update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.1.2
+
 ## @webundsoehne/nx-builders [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.0...@webundsoehne/nx-builders@3.1.1) (2021-05-27)
 
 
