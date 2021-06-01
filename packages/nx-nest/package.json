@@ -45,7 +45,7 @@
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.1",
     "enquirer": "^2.3.5",
-    "execa": "^5.0.0",
-    "listr2": "^3.8.4"
+    "execa": "^5.0.1",
+    "listr2": "^3.9.0"
   }
 }

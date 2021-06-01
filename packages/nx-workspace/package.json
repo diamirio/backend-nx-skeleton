@@ -37,10 +37,11 @@
   "dependencies": {
     "@angular-devkit/core": "~12.0.1",
     "@angular-devkit/schematics": "~12.0.1",
-    "@nrwl/workspace": "^12.3.4",
+    "@nrwl/devkit": "^12.3.5",
+    "@nrwl/workspace": "^12.3.5",
     "@webundsoehne/nx-tools": "*",
     "chalk": "^4.1.1",
     "enquirer": "^2.3.5",
-    "listr2": "^3.8.4"
+    "listr2": "^3.9.0"
   }
 }

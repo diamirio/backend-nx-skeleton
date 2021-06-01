@@ -1,5 +1,6 @@
 import { Rule } from '@angular-devkit/schematics'
-import { NxJson, updateJsonInTree } from '@nrwl/workspace'
+import { NxJsonConfiguration } from '@nrwl/devkit'
+import { updateJsonInTree } from '@nrwl/workspace'
 
 import { Schema } from '../main.interface'
 
@@ -9,7 +10,7 @@ import { Schema } from '../main.interface'
  * @param schema The options provided to the schematic
  */
 export function updateNxJson (schema: Schema): Rule {
-  return updateJsonInTree<NxJson>('nx.json', (json) => {
+  return updateJsonInTree<NxJsonConfiguration>('nx.json', (json) => {
     delete json.projects[schema.projectName]
 
     Object.values(json.projects).forEach((project) => {
