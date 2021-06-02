@@ -163,7 +163,7 @@ else
 	MONGO_AUTHENTICATION_STRING=""
 fi
 
-for i in "${MONGO_INITDB_MULTIPLE[@]}"; do
+for i in ${MONGO_INITDB_MULTIPLE[@]}; do
 
 	log_start "Initiating database ${i} with user '${MONGO_NON_ROOT_USERNAME}'..." "bottom"
 
