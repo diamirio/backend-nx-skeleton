@@ -161,7 +161,7 @@ docker_process_sql() {
 	psql --username "${POSTGRES_USER}" --dbname "${POSTGRES_DB}" $@
 }
 
-for i in "${POSTGRES_INITDB_MULTIPLE[@]}"; do
+for i in ${POSTGRES_INITDB_MULTIPLE[@]}; do
 
 	log_start "Initiating database ${i} with user '${POSTGRES_USER}'..." "bottom"
 

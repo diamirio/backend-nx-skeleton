@@ -37,9 +37,9 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1200.1",
-    "@angular-devkit/core": "^12.0.1",
-    "@angular-devkit/schematics": "^12.0.1",
+    "@angular-devkit/architect": "^0.1200.2",
+    "@angular-devkit/core": "^12.0.2",
+    "@angular-devkit/schematics": "^12.0.2",
     "@nrwl/cli": "^12.3.5",
     "@nrwl/devkit": "^12.3.5",
     "@types/micromatch": "^4.0.1",

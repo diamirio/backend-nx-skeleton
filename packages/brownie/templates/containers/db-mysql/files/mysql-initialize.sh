@@ -161,7 +161,7 @@ docker_process_sql() {
 	mysql -uroot -p${MYSQL_ROOT_PASSWORD} -hlocalhost --batch $@
 }
 
-for i in "${MYSQL_INITDB_MULTIPLE[@]}"; do
+for i in ${MYSQL_INITDB_MULTIPLE[@]}; do
 
 	log_start "Initiating database ${i} with user '${MYSQL_USER}'..." "bottom"
 
