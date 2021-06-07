@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.1.2...@webundsoehne/nx-tools@3.1.3) (2021-06-07)
+
+
+### Bug Fixes
+
+* database initiater scripts ([8e96d91](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8e96d914abd78638b09d3044b19d5f26ca74ffbf))
+
 ## @webundsoehne/nx-tools [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.1.1...@webundsoehne/nx-tools@3.1.2) (2021-06-01)
 
 
