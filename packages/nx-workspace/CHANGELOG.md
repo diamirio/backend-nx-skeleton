@@ -1,3 +1,18 @@
+## @webundsoehne-private/nx-workspace [2.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.3...@webundsoehne-private/nx-workspace@2.0.4) (2021-06-07)
+
+
+### Bug Fixes
+
+* swap out the docker container ([2178036](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2178036fa7f7506e1f6e3a325067f5dd1bc7024b))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.1.3
+
 ## @webundsoehne-private/nx-workspace [2.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.2...@webundsoehne-private/nx-workspace@2.0.3) (2021-06-01)
 
 
