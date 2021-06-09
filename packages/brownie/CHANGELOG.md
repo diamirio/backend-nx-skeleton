@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [2.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.4...@webundsoehne/brownie@2.0.5) (2021-06-09)
+
+
+### Bug Fixes
+
+* database initatian scripts bash version error :( ([b496319](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b4963191f84216fc51b1ed694fe6bcc19b7ed644))
+
 ## @webundsoehne/brownie [2.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.3...@webundsoehne/brownie@2.0.4) (2021-06-07)
 
 
