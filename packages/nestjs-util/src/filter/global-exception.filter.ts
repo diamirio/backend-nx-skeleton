@@ -24,7 +24,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp()
     const request: FastifyRequest = ctx.getRequest()
 
-    const payload = GlobalExceptionFilter.defaultPayload(exception)
+    const payload = this.payload(exception)
 
     // messages to avoid
     if (ignoreErrors(exception)) {
