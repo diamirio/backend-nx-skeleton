@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=202105261637
+VERSION=20210609
 
 set +u
 
@@ -134,13 +134,13 @@ REQUIRED_VARIABLES_NAME=("POSTGRES_USER")
 ## optional variables
 log_start "Setting defaults for optional environment variables..."
 OPTIONAL_VARIABLES_NAME=("POSTGRES_USER" "POSTGRES_INITDB_MULTIPLE")
-OPTIONAL_VARIABLES_DEFAULTS=("${${POSTGRES_USER:-${DATABASE_USERNAME:-user}}}" "${POSTGRES_INITDB_MULTIPLE:-${DATABASE_DATABASE}}")
+OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${DATABASE_DATABASE[@]}")
 
 for i in "${!OPTIONAL_VARIABLES_NAME[@]}"; do
 	VALUE=$(eval "echo \$${OPTIONAL_VARIABLES_NAME[$i]}")
 	if [ -z "${VALUE}" ]; then
 		log_debug "${OPTIONAL_VARIABLES_NAME[$i]} is not set using default: ${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
-		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}=${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
+		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}='${OPTIONAL_VARIABLES_DEFAULTS[$i]}'"
 	fi
 done
 log_finish "Set some sane-defaults for environment variables."
@@ -155,7 +155,6 @@ log_finish "All required environment variables are in place."
 [ -n "$REQUIRED_VARIABLE_IS_UNSET" ] && log_error "Can not run withot the required variables." && exit 127
 
 ## END initate-variables.sh
-
 
 docker_process_sql() {
 	psql --username "${POSTGRES_USER}" --dbname "${POSTGRES_DB}" $@

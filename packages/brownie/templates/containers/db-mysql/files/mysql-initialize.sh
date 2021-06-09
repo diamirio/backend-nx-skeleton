@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=202105261637
+VERSION=20210609
 
 set +u
 
@@ -135,13 +135,13 @@ REQUIRED_VARIABLES_NAME=("MYSQL_ROOT_PASSWORD")
 ## optional variables
 log_start "Setting defaults for optional environment variables..."
 OPTIONAL_VARIABLES_NAME=("MYSQL_USER" "MYSQL_INITDB_MULTIPLE")
-OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${MYSQL_INITDB_MULTIPLE:-${DATABASE_DATABASE}}")
+OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${DATABASE_DATABASE[@]}")
 
 for i in "${!OPTIONAL_VARIABLES_NAME[@]}"; do
 	VALUE=$(eval "echo \$${OPTIONAL_VARIABLES_NAME[$i]}")
 	if [ -z "${VALUE}" ]; then
 		log_debug "${OPTIONAL_VARIABLES_NAME[$i]} is not set using default: ${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
-		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}=${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
+		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}='${OPTIONAL_VARIABLES_DEFAULTS[$i]}'"
 	fi
 done
 log_finish "Set some sane-defaults for environment variables."

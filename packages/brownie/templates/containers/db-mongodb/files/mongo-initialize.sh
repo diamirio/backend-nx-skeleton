@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=202105261637
+VERSION=20210609
 
 set +u
 
@@ -130,18 +130,18 @@ log_this "${VERSION} - Starting up..." "${SCRIPT_NAME}" "LIFETIME" "bottom"
 # set OPTIONAL_VARIABLES_NAME and OPTIONAL_VARIABLES_DEFAULTS for initiating rest of variables
 
 ## required variables
-REQUIRED_VARIABLES_NAME=("MONGO_INITDB_MULTIPLE")
+REQUIRED_VARIABLES_NAME=("MONGO_INITDB_DATABASE")
 
 ## optional variables
 log_start "Setting defaults for optional environment variables..."
-OPTIONAL_VARIABLES_NAME=("MONGO_NON_ROOT_USERNAME" "MONGO_NON_ROOT_PASSWORD" "MONGO_INITDB_DATABASE" "MONGO_INITDB_MULTIPLE" "MONGO_NON_ROOT_ROLE" "MONGO_INITDB_ROOT_PASSWORD")
-OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${DATABASE_PASSWORD:-secret}" "${DATABASE_DATABASE:-${MONGO_INITDB_DATABASE}}" "${MONGO_INITDB_MULTIPLE:-${MONGO_INITDB_DATABASE}}" "${MONGO_NON_ROOT_ROLE:-'readWrite'}" "${MONGO_INITDB_ROOT_PASSWORD:-${MONGODB_ROOT_PASSWORD}}")
+OPTIONAL_VARIABLES_NAME=("MONGO_NON_ROOT_USERNAME" "MONGO_NON_ROOT_PASSWORD" "MONGO_INITDB_MULTIPLE" "MONGO_NON_ROOT_ROLE" "MONGO_INITDB_ROOT_PASSWORD")
+OPTIONAL_VARIABLES_DEFAULTS=("${DATABASE_USERNAME:-user}" "${DATABASE_PASSWORD:-secret}" "${DATABASE_DATABASE[@]:-${MONGO_INITDB_DATABASE[@]}}" "${MONGO_NON_ROOT_ROLE:-'readWrite'}" "${MONGO_INITDB_ROOT_PASSWORD:-${MONGODB_ROOT_PASSWORD}}")
 
 for i in "${!OPTIONAL_VARIABLES_NAME[@]}"; do
 	VALUE=$(eval "echo \$${OPTIONAL_VARIABLES_NAME[$i]}")
 	if [ -z "${VALUE}" ]; then
 		log_debug "${OPTIONAL_VARIABLES_NAME[$i]} is not set using default: ${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
-		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}=${OPTIONAL_VARIABLES_DEFAULTS[$i]}"
+		eval "export ${OPTIONAL_VARIABLES_NAME[$i]}='${OPTIONAL_VARIABLES_DEFAULTS[$i]}'"
 	fi
 done
 log_finish "Set some sane-defaults for environment variables."
@@ -153,7 +153,7 @@ for i in "${!REQUIRED_VARIABLES_NAME[@]}"; do
 done
 log_finish "All required environment variables are in place."
 
-[ -n "$REQUIRED_VARIABLE_IS_UNSET" ] && log_error "Can not run withot the required variables." && exit 127
+[ -n "$REQUIRED_VARIABLE_IS_UNSET" ] && log_error "Can not run without the required variables." && exit 127
 
 ## END initate-variables.sh
 
