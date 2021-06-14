@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.3...@webundsoehne/nx-builders@3.1.4) (2021-06-14)
+
+
+### Bug Fixes
+
+* add more verbosity for debugging ([2aef50f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2aef50f58e31c1398a2e261cceeea70f273d5e37))
+
 ## @webundsoehne/nx-builders [3.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.2...@webundsoehne/nx-builders@3.1.3) (2021-06-07)
 
 
