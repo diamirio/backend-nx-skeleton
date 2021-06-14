@@ -128,7 +128,8 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
           await this.manager.stop()
           await this.run(subscriber).toPromise()
         } else {
-          subscriber.error(new Error('Transpiling process has beeen crashed.'))
+          this.logger.error(error)
+          subscriber.error(new Error('Transpiling process has been crashed.'))
         }
       } finally {
         // clean up the zombies!
