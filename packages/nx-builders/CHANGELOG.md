@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.4...@webundsoehne/nx-builders@3.1.5) (2021-06-14)
+
+
+### Bug Fixes
+
+* crashing when dependencies are not defined ([650d61f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/650d61f7d5c980e0ec47085a676676f9759c248c))
+
 ## @webundsoehne/nx-builders [3.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.3...@webundsoehne/nx-builders@3.1.4) (2021-06-14)
 
 
