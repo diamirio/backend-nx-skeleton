@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [3.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@3.0.2...@webundsoehne/nestjs-util@3.0.3) (2021-06-09)
+
+
+### Bug Fixes
+
+* bad request exception filter call ([85e858c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/85e858cb41212a17b65b545f4fbd1a8c5ace16f8))
+
 ## @webundsoehne/nestjs-util [3.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@3.0.1...@webundsoehne/nestjs-util@3.0.2) (2021-06-01)
 
 
