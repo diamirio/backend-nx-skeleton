@@ -19,6 +19,7 @@ import {
 import delay from 'delay'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
+import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
@@ -128,8 +129,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
           await this.manager.stop()
           await this.run(subscriber).toPromise()
         } else {
-          this.logger.error(error)
-          subscriber.error(new Error('Transpiling process has been crashed.'))
+          subscriber.error(new Error(`Transpiling process has been crashed.${EOL}${error}`))
         }
       } finally {
         // clean up the zombies!
@@ -303,6 +303,8 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       ? join(this.context.workspaceRoot, this.options.packageJson)
       : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
 
+    this.logger.debug(`package.json path: ${packageJsonPath}`)
+
     if (!fileExists(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
     } else {
@@ -314,11 +316,11 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       const globalPackageJson = readPackageJson()
 
       // made this optional since it was not alway strue
-      if (!packageJson.main) {
+      if (!packageJson?.main) {
         packageJson.main = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`)
       }
 
-      if (!packageJson.types) {
+      if (!packageJson?.types) {
         packageJson.types = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
       }
 
@@ -329,6 +331,10 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
         this.logger.info('Processing "package.json" implicit dependencies...')
 
         Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+          if (version === true && !globalPackageJson.dependencies[name]) {
+            throw new Error(`Package can be not listed as an implicit dependency since it does not exists on global package.json: ${name}`)
+          }
+
           implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
         })
       }
@@ -336,7 +342,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       delete packageJson.implicitDependencies
 
       if (Object.keys(implicitDependencies).length > 0) {
-        packageJson.dependencies = mergeDependencies(packageJson.dependencies, implicitDependencies)
+        packageJson.dependencies = mergeDependencies(packageJson.dependencies ?? {}, implicitDependencies)
       }
 
       // write file back
