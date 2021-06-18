@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [3.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@3.0.3...@webundsoehne/nestjs-util@3.0.4) (2021-06-18)
+
+
+### Bug Fixes
+
+* add online versions for scripts, faster package manager selection ([5e6e50d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5e6e50ddde97c2fd37226aa20d7f15f81a44380c))
+
 ## @webundsoehne/nestjs-util [3.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@3.0.2...@webundsoehne/nestjs-util@3.0.3) (2021-06-09)
 
 
