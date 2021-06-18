@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-nest [2.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.6...@webundsoehne-private/nx-nest@2.0.7) (2021-06-18)
+
+
+### Bug Fixes
+
+* add online versions for scripts, faster package manager selection ([5e6e50d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5e6e50ddde97c2fd37226aa20d7f15f81a44380c))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 3.1.6
+* **@webundsoehne/nx-tools:** upgraded to 3.1.4
+
 ## @webundsoehne-private/nx-nest [2.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.5...@webundsoehne-private/nx-nest@2.0.6) (2021-06-14)
 
 
