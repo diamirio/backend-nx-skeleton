@@ -110,7 +110,7 @@ It will automatically run the function that is embedded inside the DATA_LOADER e
 
 | Name | Type |
 | :------ | :------ |
-| `ctx` | `MiddlewareContext`<any, `Object`, `Object`\> |
+| `ctx` | `MiddlewareContext`<any, any, `Object`\> |
 | `next` | `NextFn`<any\> |
 
 #### Returns
@@ -158,7 +158,7 @@ It will automatically parse the subfield with the given decorator according to t
 
 | Name | Type |
 | :------ | :------ |
-| `ctx` | `MiddlewareContext`<any, `Object`, `Object`\> |
+| `ctx` | `MiddlewareContext`<any, any, `Object`\> |
 | `next` | `NextFn`<any\> |
 
 #### Returns
