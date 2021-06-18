@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.1.3...@webundsoehne/nx-tools@3.1.4) (2021-06-18)
+
+
+### Bug Fixes
+
+* add online versions for scripts, faster package manager selection ([5e6e50d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5e6e50ddde97c2fd37226aa20d7f15f81a44380c))
+
 ## @webundsoehne/nx-tools [3.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.1.2...@webundsoehne/nx-tools@3.1.3) (2021-06-07)
 
 
