@@ -24,19 +24,18 @@ export class NodeHelper {
   private ctx: NodeHelperCtx = { fail: {} }
 
   constructor (private readonly cmd: BaseCommand<Configuration>) {
-    Object.values(AvailablePackageManagers).forEach((m) => {
-      try {
-        execa.sync(m, [ '--version' ], {
-          shell: true,
-          stdio: [ 'ignore', 'ignore', 'ignore' ]
-        })
-      } catch {
-        cmd.logger.debug(`Package manager not found: ${m}`)
-        this.ctx.fail[m] = true
-      }
-    })
+    this.manager = cmd.constants.package_manager
 
-    this.manager = !this.ctx.fail?.npm ? AvailablePackageManagers.NPM : AvailablePackageManagers.YARN
+    try {
+      execa.sync(this.manager, [ '--version' ], {
+        shell: true,
+        stdio: [ 'ignore', 'ignore', 'ignore' ]
+      })
+    } catch {
+      cmd.logger.debug(`Package manager not found: ${this.manager}`)
+      this.ctx.fail[this.manager] = true
+    }
+
     cmd.logger.debug(`NodeHelper initiated with package manager: ${this.manager}`)
   }
 
@@ -54,7 +53,7 @@ export class NodeHelper {
             task.newListr(
               packages.map((p) => ({
                 title: `Working on: ${typeof p === 'string' ? p : p.pkg}`,
-                task: async (ctx, task): Promise<void> => {
+                task: async (_, task): Promise<void> => {
                   const currentPkg: NodeDependency = {
                     pkg: typeof p === 'string' ? p : p.pkg,
                     registry: typeof p !== 'string' && p.registry

@@ -31,6 +31,12 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
+  "resolutions": {
+    "**/rxjs": "6.6.7",
+    "**/@angular-devkit/architect": "0.1200.5",
+    "**/@angular-devkit/core": "12.0.5",
+    "**/@angular-devkit/schematics": "12.0.5"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.14.3",
@@ -43,7 +49,7 @@
     "@nrwl/workspace": "^12.3.5",
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
-    "husky": "^4",
+    "husky-v4": "^4.3.8",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-to-markdown": "^7.0.1",
     "lerna": "^4.0.0",
@@ -53,19 +59,13 @@
     "rxjs": "^6.6.7",
     "tsc-watch": "^4.3.1",
     "tscpaths": "^0.0.9",
-    "typedoc": "^0.20.36",
-    "typedoc-plugin-markdown": "^3.9.0",
+    "typedoc": "^0.21.0",
+    "typedoc-plugin-markdown": "^3.10.0",
     "typescript": "^4.3.2"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/@cenk1cenk2/cz-cc"
     }
-  },
-  "resolutions": {
-    "**/rxjs": "6.6.7",
-    "**/@angular-devkit/architect": "0.1200.2",
-    "**/@angular-devkit/core": "12.0.2",
-    "**/@angular-devkit/schematics": "12.0.2"
   }
 }

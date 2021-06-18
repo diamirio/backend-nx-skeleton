@@ -15,4 +15,6 @@ workspace:
     - uuid
     - '@angular/cli'
 
+package_manager: npm
+
 package_registry: https://verdaccio.dev.webundsoehne.com

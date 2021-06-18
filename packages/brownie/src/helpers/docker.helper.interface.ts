@@ -28,6 +28,7 @@ export interface ParsedContainers {
   volumes?: {
     from: string
     to: string
+    url?: string
     options?: string
     mode?: VolumeModes
     perm?: string
@@ -37,6 +38,7 @@ export interface ParsedContainers {
 
 export enum VolumeModes {
   FILE = 'file',
+  URL = 'url',
   DIR = 'dir',
   VOLUME = 'volume',
   MOUNT = 'mount'

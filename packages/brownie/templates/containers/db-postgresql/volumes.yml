@@ -1,7 +1,8 @@
 - from: postgre-initialize.sh
   to: /docker-entrypoint-initdb.d/postgre-initialize.sh
   options: ro
-  mode: file
+  url: https://gist.githubusercontent.com/cenk1cenk2/50de15104b960128bb15ae832b8cf828/raw/postgresql-initialize.sh
+  mode: url
   perm: 764
 
 - from: db

@@ -2,4 +2,9 @@
   to: /docker-entrypoint-initdb.d/mongo-initialize.sh
   perm: 764
   options: ro
-  mode: file
+  url: https://gist.githubusercontent.com/cenk1cenk2/50de15104b960128bb15ae832b8cf828/raw/mongo-initialize.sh
+  mode: url
+
+- from: db
+  to: /data/db
+  mode: volume

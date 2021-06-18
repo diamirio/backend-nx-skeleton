@@ -2,6 +2,7 @@ import { BaseCommand, createDirIfNotExists, parseYaml, readFile, readRaw, tasksO
 import { BrownieAvailableContainers, deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
 import fs from 'fs-extra'
 import globby from 'globby'
+import got, { Progress } from 'got'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 import { v4 as uuidv4 } from 'uuid'
@@ -139,15 +140,40 @@ export class DockerHelper {
                           to: join(ctx.context[name].volumeDir)
                         }
 
-                        if (volume.mode === VolumeModes.FILE) {
+                        if ([ VolumeModes.FILE, VolumeModes.URL ].includes(volume.mode)) {
                           // if this is a file copy it directly
-                          this.cmd.logger.debug(`Copying file: ${asset.from} -> ${asset.to}`)
+                          this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
 
                           try {
                             await createDirIfNotExists(asset.to)
 
                             asset.to = join(asset.to, volume.from)
-                            await fs.copy(asset.from, asset.to)
+
+                            if (volume.mode === VolumeModes.FILE) {
+                              task.output = `Copying asset: ${asset.from} -> ${asset.to}`
+
+                              await fs.copy(asset.from, asset.to)
+                            } else {
+                              if (!volume.url) {
+                                throw new Error(`Can not copy asset ${asset.from} -> ${asset.to}, since it is marked as url but no url has been given.`)
+                              }
+
+                              asset.from = volume.url
+
+                              const stream = got.stream(asset.from)
+
+                              stream.on('downloadProgress', (progress: Progress) => {
+                                task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress?.percent ?? 0 * 100}% ]`
+                              })
+
+                              const file = fs.createWriteStream(asset.to)
+
+                              await new Promise((resolve, reject) => {
+                                stream.pipe(file)
+                                stream.on('close', () => resolve(null))
+                                stream.on('error', (err) => reject(err))
+                              })
+                            }
 
                             // set permissions
                             if (volume.perm) {
@@ -168,7 +194,7 @@ export class DockerHelper {
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
                         } else if (volume.mode === VolumeModes.DIR) {
-                          // if this is a directory we have to create the directory seperately and copy files in them, because of how fs works in node
+                          // if this is a directory we have to create the directory separetly and copy files in them, because of how fs works in node
                           this.cmd.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
 
                           try {
@@ -334,7 +360,9 @@ export class DockerHelper {
     // some trickery to make it async
     return (
       await Promise.all(
-        (await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })).map(async (item) => {
+        (
+          await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })
+        ).map(async (item) => {
           const base = dirname(item)
           const name = relative(this.dockerConfigLocation, base)
 

@@ -62,7 +62,7 @@
   "devDependencies": {
     "@nestjs/common": "^7.6.13",
     "@nestjs/core": "^7.6.13",
-    "@nestjs/graphql": "^7.9.11",
+    "@nestjs/graphql": "^7.11.0",
     "@nestjs/microservices": "^7.6.13",
     "@nestjs/swagger": "^4.7.15",
     "@nestjs/testing": "^7.6.13",
