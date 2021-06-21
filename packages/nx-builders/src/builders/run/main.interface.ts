@@ -15,7 +15,7 @@ export interface RunBuilderOptions extends JsonObject {
   command: string
 
   /** append arguments to the command */
-  args?: string
+  args?: string | string[]
 
   /** run with interactive mode, will not parse through the logger */
   interactive: boolean

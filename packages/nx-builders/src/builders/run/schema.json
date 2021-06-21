@@ -14,7 +14,14 @@
       "description": "The CLI to run."
     },
     "args": {
-      "type": "string",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        }
+      ],
       "description": "Append arguments to the command on runtime."
     },
     "watch": {
