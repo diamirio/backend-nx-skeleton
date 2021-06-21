@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [3.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.2...@webundsoehne/nx-builders@3.3.0) (2021-06-21)
+
+
+### Features
+
+* further modify run builder for user manager tests, add interactive mode and run in shell ([d86f447](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d86f44777eb599b62979f0a8120ef76c392c84a1))
+
 ## @webundsoehne/nx-builders [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.1...@webundsoehne/nx-builders@3.2.2) (2021-06-21)
 
 
