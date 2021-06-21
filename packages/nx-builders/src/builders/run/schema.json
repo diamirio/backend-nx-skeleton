@@ -13,6 +13,10 @@
       "type": "string",
       "description": "The CLI to run."
     },
+    "args": {
+      "type": "string",
+      "description": "Append arguments to the command on runtime."
+    },
     "watch": {
       "type": "boolean",
       "description": "Run again when process crashes.",

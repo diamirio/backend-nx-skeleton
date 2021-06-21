@@ -14,6 +14,9 @@ export interface RunBuilderOptions extends JsonObject {
   /** command */
   command: string
 
+  /** append arguments to the command */
+  args?: string
+
   /** run with node */
   node: boolean
 

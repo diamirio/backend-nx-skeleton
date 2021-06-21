@@ -59,7 +59,7 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
     const unparsedCommand = options.command.split(' ')
 
     const command = unparsedCommand.shift()
-    const args = unparsedCommand
+    const args = [ ...unparsedCommand, ...options.args ? options.args.split(' ') : [] ]
 
     this.paths = {
       command: options.node ? getNodeBinaryPath(command) : command
