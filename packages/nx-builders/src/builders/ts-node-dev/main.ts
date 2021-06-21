@@ -31,6 +31,8 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
 
         const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
         await pipeProcessToLogger(this.context, instance, { start: true })
+
+        subscriber.next({ success: true })
       } catch (error) {
         // just restart it
         this.logger.error('ts-node-dev crashed restarting in 3 secs.')
@@ -39,9 +41,12 @@ class Builder extends BaseBuilder<TsNodeBuilderOptions, ExecaArguments, { tsNode
         await delay(3000)
         await this.manager.stop()
         await this.run(subscriber).toPromise()
+
+        subscriber.next({ success: false })
       } finally {
         // clean up the zombies!
         await this.manager.stop()
+
         subscriber.complete()
       }
     })

@@ -9,17 +9,27 @@
       "type": "string",
       "description": "Root directory of the project to use as cwd."
     },
-    "cli": {
+    "command": {
       "type": "string",
       "description": "The CLI to run."
     },
-    "arguments": {
+    "watch": {
+      "type": "boolean",
+      "description": "Run again when process crashes.",
+      "default": true
+    },
+    "node": {
+      "type": "boolean",
+      "description": "Run this with local binary in node_modules.",
+      "default": false
+    },
+    "nodeOptions": {
       "type": "string",
-      "description": "The CLI arguments to inject."
+      "description": "Pass in node options, when node mode is enabled."
     },
     "environment": {
       "type": "object",
-      "description": "Pass in additional environment variables for ts-node-dev."
+      "description": "Pass internal environment variables for the process."
     }
   },
   "required": []

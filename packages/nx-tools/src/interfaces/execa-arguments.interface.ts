@@ -9,5 +9,5 @@ export interface ExecaArguments {
   /** These are the input arguments */
   args: string[]
   /** While these are the execa options */
-  spawnOptions: Writeable<execa.Options<string>>
+  spawnOptions: Writeable<execa.Options<string> | execa.NodeOptions<string>>
 }

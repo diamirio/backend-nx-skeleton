@@ -9,9 +9,9 @@ import { Logger, ProcessManager } from '@utils'
  * Base builder for extending from.
  */
 export abstract class BaseBuilder<
-  BuilderOptions extends Record<string, any>,
-  NormalizedBuilderOptions extends Record<string, any>,
-  ProcessPaths extends Record<string, string> = Record<string, string>
+  BuilderOptions extends Record<PropertyKey, any>,
+  NormalizedBuilderOptions extends Record<PropertyKey, any>,
+  ProcessPaths extends Record<PropertyKey, string> = Record<PropertyKey, string>
 > {
   public logger: Logger
   public projectGraph: ProjectGraph

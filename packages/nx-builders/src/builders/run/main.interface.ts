@@ -11,11 +11,17 @@ export interface RunBuilderOptions extends JsonObject {
    */
   cwd: string
 
-  /** the cli name */
-  cli: string
+  /** command */
+  command: string
 
-  /** pass in arguments after cli */
-  arguments: string
+  /** run with node */
+  node: boolean
+
+  /** pass in node options when running as node */
+  nodeOptions?: string
+
+  /** keep alive the process if it crashes */
+  watch: boolean
 
   /** environment variables */
   environment?: Record<string, string>

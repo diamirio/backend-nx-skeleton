@@ -131,6 +131,8 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
         } else {
           subscriber.error(new Error(`Transpiling process has been crashed.${EOL}${error}`))
         }
+
+        subscriber.next({ success: false })
       } finally {
         // clean up the zombies!
         await this.manager.stop()
