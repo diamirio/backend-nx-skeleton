@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.1...@webundsoehne/nx-builders@3.2.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* add ability to process args ([1316771](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1316771f5a1e909c0b4689a0e67e4b588a95fa35))
+
 ## @webundsoehne/nx-builders [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.0...@webundsoehne/nx-builders@3.2.1) (2021-06-21)
 
 
