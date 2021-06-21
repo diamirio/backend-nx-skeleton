@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.0...@webundsoehne/nx-builders@3.2.1) (2021-06-21)
+
+
+### Bug Fixes
+
+* env variable injection order ([33b5b73](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/33b5b73a840ed2e92f06c8ec9c11d8b1144a66d1))
+
 # @webundsoehne/nx-builders [3.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.6...@webundsoehne/nx-builders@3.2.0) (2021-06-21)
 
 
