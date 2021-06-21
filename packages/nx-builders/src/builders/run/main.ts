@@ -69,9 +69,10 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
     const spawnOptions: ExecaArguments['spawnOptions'] = {
       env: {
         NODE_ENV: 'develop',
-        ...options.environment,
-        ...process.env
+        ...process.env,
+        ...options.environment
       },
+      extendEnv: false,
       ...options.node && options?.nodeOptions?.length > 0 ? { nodeOptions: options.nodeOptions.split(' ') } : {}
     }
 
