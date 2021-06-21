@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.3.0...@webundsoehne/nx-builders@3.3.1) (2021-06-21)
+
+
+### Bug Fixes
+
+* change arg injection for user manager ([f539119](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f539119b1b1abba05d618f536cc659eb288dad25))
+
 # @webundsoehne/nx-builders [3.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.2...@webundsoehne/nx-builders@3.3.0) (2021-06-21)
 
 
