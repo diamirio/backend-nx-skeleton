@@ -1,3 +1,18 @@
+# @webundsoehne/nx-builders [3.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.6...@webundsoehne/nx-builders@3.2.0) (2021-06-21)
+
+
+### Features
+
+* update builder for user-manager to run migrations and such ([1afcd03](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1afcd03550e68ef3264b4c222bc205e1dd9d6e7a))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.2.0
+
 ## @webundsoehne/nx-builders [3.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.5...@webundsoehne/nx-builders@3.1.6) (2021-06-18)
 
 
