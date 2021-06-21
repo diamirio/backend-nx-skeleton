@@ -31,6 +31,11 @@
       "type": "string",
       "description": "Pass in node options, when node mode is enabled."
     },
+    "interactive": {
+      "type": "boolean",
+      "description": "Will run in interactive mode and not pipe through the logger.",
+      "default": false
+    },
     "environment": {
       "type": "object",
       "description": "Pass internal environment variables for the process."

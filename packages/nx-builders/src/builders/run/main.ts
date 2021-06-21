@@ -31,7 +31,11 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
           instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
         }
 
-        await pipeProcessToLogger(this.context, instance, { start: true })
+        if (this.builderOptions.interactive) {
+          await instance
+        } else {
+          await pipeProcessToLogger(this.context, instance, { start: true })
+        }
 
         subscriber.next({ success: true })
       } catch (error) {
@@ -72,7 +76,9 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
         ...process.env,
         ...options.environment
       },
+      stdio: options.interactive ? 'inherit' : 'pipe',
       extendEnv: false,
+      shell: true,
       ...options.node && options?.nodeOptions?.length > 0 ? { nodeOptions: options.nodeOptions.split(' ') } : {}
     }
 
