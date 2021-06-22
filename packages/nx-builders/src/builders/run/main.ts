@@ -12,8 +12,6 @@ try {
 } catch (e) {}
 
 class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: string }> {
-  private readonly jinja = getJinjaDefaults()
-
   public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
@@ -62,6 +60,8 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
   }
 
   public normalizeOptions (options: RunBuilderOptions): ExecaArguments {
+    const jinja = getJinjaDefaults()
+
     const env = {
       NODE_ENV: 'develop',
       ...process.env,
@@ -71,10 +71,10 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
     const ctx = { ...options, environment: env }
 
     // interpolate with jinja
-    options.command = this.jinja.renderString(options.command, ctx)
-    options.args = this.jinja.renderString(Array.isArray(options.args) ? options.args.join(' ') : options.args, ctx)
+    options.command = jinja.renderString(options.command, ctx)
+    options.args = jinja.renderString(Array.isArray(options.args) ? options.args.join(' ') : options.args, ctx)
     if (options.nodeOptions) {
-      options.nodeOptions = this.jinja.renderString(options.nodeOptions, ctx)
+      options.nodeOptions = jinja.renderString(options.nodeOptions, ctx)
     }
 
     const unparsedCommand = options.command.split(' ')
