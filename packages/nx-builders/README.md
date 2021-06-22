@@ -227,14 +227,47 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 architect.serve = {
   builder: '@webundsoehne/nx-builders:run',
   options: {
-    cwd: options.root,
-    cli: 'webpack',
-    arguments: '--config webpack.config.js',
-    // optional
-    environment: {
-      NODE_SERVICE: 'server'
-    }
+    // ...
   }
+}
+```
+
+- Command and args will be interpolated by jinja and all the options will be passed in the builder itself. So jinja templating is possible.
+- You can either run this in node mode which will find the node binary you target from the `node_modules` or in the command mode.
+- Watch mode keeps alive the process even if it crashes.
+
+```typescript
+/**
+ * Options for run builder
+ */
+export interface RunBuilderOptions extends JsonObject {
+  /**
+   * process current working directory
+   *
+   * this will spawn the process from the current working directory so most of the plugins will work as expected
+   */
+  cwd: string
+
+  /** command */
+  command: string
+
+  /** append arguments to the command */
+  args?: string | string[]
+
+  /** run with interactive mode, will not parse through the logger */
+  interactive: boolean
+
+  /** run with node */
+  node: boolean
+
+  /** pass in node options when running as node */
+  nodeOptions?: string
+
+  /** keep alive the process if it crashes */
+  watch: boolean
+
+  /** environment variables */
+  environment?: Record<string, string>
 }
 ```
 

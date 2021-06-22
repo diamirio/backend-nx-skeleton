@@ -1,5 +1,5 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, runBuilder } from '@webundsoehne/nx-tools'
+import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runBuilder } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa, { ExecaChildProcess } from 'execa'
 import { Observable, Subscriber } from 'rxjs'
@@ -12,6 +12,8 @@ try {
 } catch (e) {}
 
 class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: string }> {
+  private readonly jinja = getJinjaDefaults()
+
   public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
@@ -60,8 +62,23 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
   }
 
   public normalizeOptions (options: RunBuilderOptions): ExecaArguments {
+    const env = {
+      NODE_ENV: 'develop',
+      ...process.env,
+      ...options.environment
+    }
+
+    const ctx = { ...options, environment: env }
+
+    // interpolate with jinja
+    options.command = this.jinja.renderString(options.command, ctx)
+    options.args = this.jinja.renderString(Array.isArray(options.args) ? options.args.join(' ') : options.args, ctx)
+    if (options.nodeOptions) {
+      options.nodeOptions = this.jinja.renderString(options.nodeOptions, ctx)
+    }
+
     const unparsedCommand = options.command.split(' ')
-    const extendedArgs = options.args ? Array.isArray(options.args) ? options.args : options.args.split(' ') : []
+    const extendedArgs = options.args.split(' ')
 
     const command = unparsedCommand.shift()
     const args = [ ...unparsedCommand, ...extendedArgs ]
@@ -72,11 +89,7 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
 
     // options
     const spawnOptions: ExecaArguments['spawnOptions'] = {
-      env: {
-        NODE_ENV: 'develop',
-        ...process.env,
-        ...options.environment
-      },
+      env,
       stdio: options.interactive ? 'inherit' : 'pipe',
       extendEnv: false,
       shell: true,

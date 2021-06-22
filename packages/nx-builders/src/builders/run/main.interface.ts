@@ -1,7 +1,7 @@
 import { JsonObject } from '@angular-devkit/core'
 
 /**
- * Options for ts-node-dev
+ * Options for run builder
  */
 export interface RunBuilderOptions extends JsonObject {
   /**

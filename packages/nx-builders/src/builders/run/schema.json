@@ -22,7 +22,8 @@
           "type": "array"
         }
       ],
-      "description": "Append arguments to the command on runtime."
+      "description": "Append arguments to the command on runtime.",
+      "default": []
     },
     "watch": {
       "type": "boolean",
