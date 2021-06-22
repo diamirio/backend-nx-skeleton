@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [3.4.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.3.1...@webundsoehne/nx-builders@3.4.0) (2021-06-22)
+
+
+### Features
+
+* add variable parsing for user-manager ([b99e735](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b99e735f754f1635d4d158326308d157fcf785cb))
+
 ## @webundsoehne/nx-builders [3.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.3.0...@webundsoehne/nx-builders@3.3.1) (2021-06-21)
 
 
