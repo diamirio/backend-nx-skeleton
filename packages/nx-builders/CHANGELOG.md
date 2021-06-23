@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.4.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.5...@webundsoehne/nx-builders@3.4.6) (2021-06-23)
+
+
+### Bug Fixes
+
+* emtpy argument problem with typeorm-seeding in usermanager ([960da77](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/960da773e06a4bae759a6b199b2e97dd38d49cba))
+
 ## @webundsoehne/nx-builders [3.4.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.4...@webundsoehne/nx-builders@3.4.5) (2021-06-23)
 
 
