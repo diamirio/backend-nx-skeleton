@@ -2,6 +2,8 @@ import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runBuilder } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa, { ExecaChildProcess } from 'execa'
+import fs from 'fs'
+import { join } from 'path'
 import { Observable, Subscriber } from 'rxjs'
 
 import { RunBuilderOptions } from './main.interface'
@@ -83,8 +85,15 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
     const command = unparsedCommand.shift()
     const args = [ ...unparsedCommand, ...extendedArgs ]
 
-    this.paths = {
-      command: options.node ? getNodeBinaryPath(command) : command
+    if (options.node && fs.existsSync(join(options.cwd, command))) {
+      // the case where file name is given and it exists
+      this.paths.command = command
+    } else if (options.node) {
+      // the case where a node binary like webpack or jest is given
+      this.paths.command = getNodeBinaryPath(command)
+    } else {
+      // the case where it will run any other shell command
+      this.paths.command = command
     }
 
     // options
