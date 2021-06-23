@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [3.4.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.2...@webundsoehne/nx-builders@3.4.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* update builder for usermanager to run custom mongodb seeds ([baee83d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/baee83d9e0e6c55107d2a084312d37e4fb360110))
+
 ## @webundsoehne/nx-builders [3.4.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.1...@webundsoehne/nx-builders@3.4.2) (2021-06-23)
 
 
