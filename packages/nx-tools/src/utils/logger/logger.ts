@@ -103,7 +103,7 @@ export class Logger {
       icon = `[${level.toUpperCase()}]`
     }
 
-    return coloring(`${icon} ${message}`)
+    return `${coloring(icon)} ${message}`
   }
 }
 
