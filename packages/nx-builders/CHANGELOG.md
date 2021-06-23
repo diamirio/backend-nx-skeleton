@@ -1,3 +1,13 @@
+## @webundsoehne/nx-builders [3.4.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.3...@webundsoehne/nx-builders@3.4.4) (2021-06-23)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 3.2.2
+
 ## @webundsoehne/nx-builders [3.4.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.2...@webundsoehne/nx-builders@3.4.3) (2021-06-23)
 
 
