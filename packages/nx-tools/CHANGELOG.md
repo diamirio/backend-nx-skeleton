@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.0...@webundsoehne/nx-tools@3.2.1) (2021-06-23)
+
+
+### Bug Fixes
+
+* log coloring whole line ([bf4b328](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/bf4b328755a1062618e7208774f7c9078bc16973))
+
 # @webundsoehne/nx-tools [3.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.1.4...@webundsoehne/nx-tools@3.2.0) (2021-06-21)
 
 
