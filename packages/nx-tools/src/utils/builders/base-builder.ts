@@ -24,6 +24,8 @@ export abstract class BaseBuilder<
   constructor (public builderOptions: BuilderOptions, public context: BuilderContext) {
     this.logger = new Logger(context)
 
+    this.paths = {} as ProcessPaths
+
     // create dependency
     this.projectGraph = createProjectGraph()
     const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context)
