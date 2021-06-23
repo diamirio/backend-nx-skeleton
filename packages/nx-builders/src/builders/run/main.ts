@@ -26,14 +26,14 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
         let instance: ExecaChildProcess
 
         if (this.builderOptions.node) {
-          checkNodeModulesExists(this.paths)
-
           instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
         } else {
           instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
         }
 
         if (this.builderOptions.interactive) {
+          this.logger.debug('This command is an interactive one, will hijack stdio.')
+
           await instance
         } else {
           await pipeProcessToLogger(this.context, instance, { start: true })
@@ -87,11 +87,18 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
 
     if (options.node && fs.existsSync(join(options.cwd, command))) {
       // the case where file name is given and it exists
+      this.logger.debug(`Command marked as node script: ${command}`)
+
       this.paths.command = command
     } else if (options.node) {
       // the case where a node binary like webpack or jest is given
+      this.logger.debug(`Command marked as node binary: ${command}`)
+
       this.paths.command = getNodeBinaryPath(command)
+
+      checkNodeModulesExists(this.paths)
     } else {
+      this.logger.debug(`Command marked as shell command: ${command}`)
       // the case where it will run any other shell command
       this.paths.command = command
     }

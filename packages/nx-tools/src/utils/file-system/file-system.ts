@@ -1,8 +1,9 @@
 import { BuilderContext } from '@angular-devkit/architect'
 import { workspaces } from '@angular-devkit/core'
-import { fs } from '@angular-devkit/core/node'
 import { Host } from '@angular-devkit/core/src/virtual-fs/host'
 import { Action, CreateFileAction, OverwriteFileAction, Tree } from '@angular-devkit/schematics'
+import fs from 'fs'
+import { EOL } from 'os'
 
 /**
  * Will return the workspace definition.
@@ -21,11 +22,17 @@ export async function getWorkspace (context: BuilderContext, host: Host): Promis
  * @param paths
  */
 export function checkNodeModulesExists (paths: Record<string, string>): void {
+  const errors: string[] = []
+
   Object.entries(paths).forEach(([ key, value ]) => {
-    if (!fs.isFile(value)) {
-      throw new Error(`File not found: "${key}"@"${value}"`)
+    if (!fs.existsSync(value) || !fs.statSync(value).isFile()) {
+      errors.push(`File not found: "${key}"@"${value}"`)
     }
   })
+
+  if (errors.length > 0) {
+    throw new Error(errors.join(EOL))
+  }
 }
 
 /**
