@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.2...@webundsoehne/nx-tools@3.2.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* error messages for node paths ([d1e27a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1e27a7979151bb34365b6d9e261a22475793030))
+
 ## @webundsoehne/nx-tools [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.1...@webundsoehne/nx-tools@3.2.2) (2021-06-23)
 
 
