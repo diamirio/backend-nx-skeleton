@@ -83,7 +83,9 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
     const extendedArgs = options.args.split(' ')
 
     const command = unparsedCommand.shift()
-    const args = [ ...unparsedCommand, ...extendedArgs ]
+    const args = [ ...unparsedCommand, ...extendedArgs ].filter(Boolean)
+
+    this.logger.debug(`Command, arguments: ${JSON.stringify(command, null, 2)}, ${JSON.stringify(args, null, 2)}`)
 
     if (options.node && fs.existsSync(join(options.cwd, command))) {
       // the case where file name is given and it exists
