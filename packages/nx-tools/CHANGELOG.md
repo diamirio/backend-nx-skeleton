@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.1...@webundsoehne/nx-tools@3.2.2) (2021-06-23)
+
+
+### Bug Fixes
+
+* object initation at base builder ([49a1fcc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/49a1fcc062bd32c44138505caae0a960654babe9))
+
 ## @webundsoehne/nx-tools [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.0...@webundsoehne/nx-tools@3.2.1) (2021-06-23)
 
 
