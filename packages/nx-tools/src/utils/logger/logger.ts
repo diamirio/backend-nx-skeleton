@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import figures from 'figures'
 import { EOL } from 'os'
 
-import { LogLevels, LoggerOptions } from './logger.interface'
+import { LoggerOptions, LogLevels } from './logger.interface'
 
 /**
  * A general logger that is wrapped around the angular-cli logger.
@@ -43,16 +43,20 @@ export class Logger {
       .split(EOL)
       .forEach((line) => {
         if (line !== '') {
-          if (isBuildContext(this.context)) {
-            this.context.logger.log(level, this.logColoring({ level, message: `[${this.context?.target.project}] ` }) + line, ...args)
-          } else {
-            this.context.logger.log(level, this.logColoring({ level, message: `[${level.toUpperCase()}] ` }) + line, ...args)
-          }
+          this.context.logger.log(
+            level,
+            this.logColoring({
+              level,
+              context: isBuildContext(this.context) ? this.context?.target.project : null,
+              message: line
+            }),
+            ...args
+          )
         }
       })
   }
 
-  private logColoring ({ level, message }: { level: LogLevels, message: string }): string {
+  private logColoring ({ level, message, context }: { level: LogLevels, message: string, context?: string }): string {
     let icon: string
 
     // do the coloring
@@ -103,7 +107,7 @@ export class Logger {
       icon = `[${level.toUpperCase()}]`
     }
 
-    return `${coloring(icon)} ${message}`
+    return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''} ${message}`
   }
 }
 
