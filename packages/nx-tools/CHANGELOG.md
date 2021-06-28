@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.5...@webundsoehne/nx-tools@3.2.6) (2021-06-28)
+
+
+### Bug Fixes
+
+* update dependencies ([eece57a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/eece57a8ce0206b31c16cdd0660954bddf2ad171))
+
 ## @webundsoehne/nx-tools [3.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.4...@webundsoehne/nx-tools@3.2.5) (2021-06-28)
 
 
