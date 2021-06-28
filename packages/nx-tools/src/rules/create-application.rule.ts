@@ -1,5 +1,4 @@
-import { filter, forEach, move, noop, Rule } from '@angular-devkit/schematics'
-import { applyPathTemplate } from '@angular-devkit/schematics/src/rules/template'
+import { filter, forEach, move, noop, Rule, applyPathTemplate } from '@angular-devkit/schematics'
 
 import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
 import { jinjaTemplate, multipleJinjaTemplate } from '@templates/template-engine'
