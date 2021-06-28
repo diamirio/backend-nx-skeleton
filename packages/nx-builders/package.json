@@ -31,13 +31,8 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",
@@ -48,9 +43,9 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1200.5",
-    "@angular-devkit/core": "^12.0.5",
-    "@angular-devkit/schematics": "^12.0.5",
+    "@angular-devkit/architect": "0.1201.0",
+    "@angular-devkit/core": "12.1.0",
+    "@angular-devkit/schematics": "12.1.0",
     "@nrwl/cli": "^12.3.5",
     "@webundsoehne/nx-tools": "*",
     "delay": "^5.0.0",

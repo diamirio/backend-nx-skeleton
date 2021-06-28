@@ -31,17 +31,12 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "dependencies": {
-    "@angular-devkit/core": "~12.0.5",
-    "@angular-devkit/schematics": "~12.0.5",
+    "@angular-devkit/core": "12.1.0",
+    "@angular-devkit/schematics": "12.1.0",
     "@nrwl/devkit": "^12.3.5",
     "@nrwl/workspace": "^12.3.5",
     "@webundsoehne/nx-tools": "*",
