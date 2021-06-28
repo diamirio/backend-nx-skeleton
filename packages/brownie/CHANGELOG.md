@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [2.0.14](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.13...@webundsoehne/brownie@2.0.14) (2021-06-28)
+
+
+### Bug Fixes
+
+* streaming download problems ([47ff9aa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/47ff9aa552c8dd055da3f2e8eb39fb7e63e3be42))
+
 ## @webundsoehne/brownie [2.0.13](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.12...@webundsoehne/brownie@2.0.13) (2021-06-28)
 
 
