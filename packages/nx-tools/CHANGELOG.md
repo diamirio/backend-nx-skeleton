@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [3.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.4...@webundsoehne/nx-tools@3.2.5) (2021-06-28)
+
+
+### Bug Fixes
+
+* missing file? ([f671374](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f6713740d55ec30ec2ef91a1cebfe9843799d30d))
+
 ## @webundsoehne/nx-tools [3.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.3...@webundsoehne/nx-tools@3.2.4) (2021-06-24)
 
 
