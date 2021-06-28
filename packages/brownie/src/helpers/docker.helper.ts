@@ -5,6 +5,8 @@ import globby from 'globby'
 import got, { Progress } from 'got'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
+import stream from 'stream'
+import { promisify } from 'util'
 import { v4 as uuidv4 } from 'uuid'
 
 import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
@@ -160,23 +162,20 @@ export class DockerHelper {
 
                               asset.from = volume.url
 
-                              const stream = got.stream(asset.from)
+                              const download = got.stream(asset.from, { retry: 5 })
 
-                              stream.on('downloadProgress', (progress: Progress) => {
-                                task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress?.percent ?? 0 * 100}% ]`
+                              download.on('downloadProgress', (progress: Progress) => {
+                                task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress.percent * 100}% ]`
                               })
 
-                              const file = fs.createWriteStream(asset.to)
+                              const pipeline = promisify(stream.pipeline)
 
-                              await new Promise((resolve, reject) => {
-                                stream.pipe(file)
-                                stream.on('close', () => resolve(null))
-                                stream.on('error', (err) => reject(err))
-                              })
+                              await pipeline(download, fs.createWriteStream(asset.to))
                             }
 
                             // set permissions
                             if (volume.perm) {
+                              this.cmd.logger.debug(`Setting asset permission ${asset.to}: ${volume.perm}`)
                               await fs.chmod(asset.to, volume.perm)
                             }
 
