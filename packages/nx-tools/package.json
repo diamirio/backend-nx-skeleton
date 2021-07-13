@@ -20,7 +20,7 @@
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
@@ -37,19 +37,20 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "0.1201.0",
-    "@angular-devkit/core": "12.1.0",
-    "@angular-devkit/schematics": "12.1.0",
-    "@nrwl/cli": "^12.3.5",
-    "@nrwl/devkit": "^12.3.5",
-    "@types/micromatch": "^4.0.1",
-    "@types/picomatch": "^2.2.4",
+    "@angular-devkit/architect": "0.1201.1",
+    "@angular-devkit/core": "12.1.1",
+    "@angular-devkit/schematics": "12.1.1",
+    "@nrwl/cli": "^12.5.8",
+    "@nrwl/devkit": "^12.5.8",
+    "@types/micromatch": "^4.0.2",
+    "@types/picomatch": "^2.2.5",
     "change-case": "^4.1.1",
+    "colorette": "^1.2.2",
     "deepmerge": "^4.2.2",
     "diff": "^5.0.0",
-    "eslint": "^7.27.0",
+    "eslint": "^7.30.0",
     "execa": "^5.0.1",
-    "figures": "^3.2.0",
+    "figures": "^4.0.0",
     "glob": "^7.1.7",
     "listr2": "^3.9.0",
     "micromatch": "^4.0.4",
@@ -61,10 +62,10 @@
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/diff": "^5.0.0",
-    "@types/eslint": "^7.2.12",
+    "@types/diff": "^5.0.1",
+    "@types/eslint": "^7.28.0",
     "@types/figures": "^3.0.1",
-    "@types/nunjucks": "^3.1.4",
-    "@types/prettier": "^2.2.3"
+    "@types/nunjucks": "^3.1.5",
+    "@types/prettier": "^2.3.2"
   }
 }

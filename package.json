@@ -8,19 +8,19 @@
   "scripts": {
     "ls": "lerna la",
     "clean": "lerna clean -y && rimraf node_modules yarn.lock",
-    "release": "lerna publish -y",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
+    "build": "yarn run command build --concurrency 1 --include-dependencies",
     "link-packages": "lerna link --force-local",
     "lint": "yarn command --concurrency 1 lint",
-    "lint:check": "yarn command --concurrency 1 lint:check",
+    "lint:check": "yarn command --parallel lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
-    "docs:jsdoc": "yarn command --no-bail docs:jsdoc",
     "scripts:link": "./scripts/link-packages.sh link",
     "scripts:unlink": "./scripts/link-packages.sh unlink",
     "scripts:workspace:link": "./scripts/link-packages-to-workspace.sh link",
     "scripts:workspace:unlink": "./scripts/link-packages-to-workspace.sh unlink",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+    "docs:toc": "markdown-toc README.md --bullets='-' -i",
+    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
   },
   "workspaces": {
     "packages": ["packages/*"],
@@ -33,36 +33,28 @@
     }
   },
   "resolutions": {
-    "**/rxjs": "6.6.7",
-    "**/@angular-devkit/architect": "0.1201.0",
-    "**/@angular-devkit/core": "12.1.0",
-    "**/@angular-devkit/schematics": "12.1.0"
+    "**/rxjs": "7.2.0",
+    "**/@angular-devkit/architect": "0.1201.1",
+    "**/@angular-devkit/core": "12.1.1",
+    "**/@angular-devkit/schematics": "12.1.1"
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.14.4",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/preset-typescript": "^7.13.0",
     "@cenk1cenk2/cz-cc": "^1.3.25",
-    "@nrwl/workspace": "^12.3.5",
+    "@nrwl/workspace": "^12.5.8",
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
     "husky-v4": "^4.3.8",
-    "jsdoc-babel": "^0.5.0",
-    "jsdoc-to-markdown": "^7.0.1",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^11.0.1",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.2.0",
     "tsc-watch": "^4.3.1",
     "tscpaths": "^0.0.9",
-    "typedoc": "^0.21.0",
-    "typedoc-plugin-markdown": "^3.10.0",
-    "typescript": "^4.3.2"
+    "typedoc": "^0.21.4",
+    "typedoc-plugin-markdown": "^3.10.3",
+    "typescript": "^4.3.5"
   },
   "config": {
     "commitizen": {

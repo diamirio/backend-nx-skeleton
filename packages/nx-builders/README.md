@@ -12,7 +12,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for customizing the build and serve process.
 
-- **[Read The API Documentation](./API.md)**
+- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->

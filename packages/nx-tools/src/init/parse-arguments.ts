@@ -1,13 +1,13 @@
-import chalk from 'chalk'
 import { ListrTaskWrapper } from 'listr2'
 
 import { ConvertToPromptType } from './parse-arguments.interface'
+import { color } from '@utils/logger'
 
 /**
  * @deprecated Now nx schema.json should be utilized better.
  *
  * Parses arguments coming from the cli.
- * The arguments can multiple seperated by commas or single.
+ * The arguments can multiple separated by commas or single.
  * The argument can be marked as required, which in that case will throw an error if not provided.
  * @param task
  * @param args
@@ -32,7 +32,7 @@ export function parseArguments<T> (
     if (isCorrectType<T>(parsedValidArgs, val)) {
       return [ ...o, val ]
     } else {
-      task.output = chalk.yellow(`Skipping "${val}" since it is not a valid entry.`)
+      task.output = color.yellow(`Skipping "${val}" since it is not a valid entry.`)
 
       return o
     }
@@ -48,7 +48,7 @@ export function parseArguments<T> (
     throw new Error(`Only select one of the given valid argument list of: "${parsedValidArgs}"`)
   }
 
-  return (parsedArgs as unknown) as T
+  return parsedArgs as unknown as T
 }
 
 export function isCorrectType<T> (keys: string[], value: any): value is T {

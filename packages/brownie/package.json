@@ -70,7 +70,7 @@
     "@cenk1cenk2/boilerplate-oclif": "^1.10.2",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
-    "@oclif/errors": "^1.3.4",
+    "@oclif/errors": "^1.3.5",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.5",
     "execa": "^5.0.1",
@@ -88,9 +88,9 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
-    "@types/fs-extra": "^9.0.11",
-    "@types/node": "^15.6.1",
+    "@types/fs-extra": "^9.0.12",
+    "@types/node": "^16.3.1",
     "@types/through": "^0.0.30",
-    "@types/update-notifier": "^5.0.0"
+    "@types/update-notifier": "^5.0.1"
   }
 }

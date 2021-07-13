@@ -27,14 +27,14 @@ install:
 lint:
   stage: lint
   script:
-    - yarn command --parallel lint:check
+    - yarn lint:check
   tags:
     - node
 
 build:
   stage: build
   script:
-    - yarn command build --concurrency 1 --include-dependencies
+    - yarn build
   artifacts:
     paths:
       - dist/

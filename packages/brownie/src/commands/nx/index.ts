@@ -1,6 +1,6 @@
 import { BaseCommand, LogLevels } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import chalk from 'chalk'
+import { color } from '@webundsoehne/nx-tools'
 import execa from 'execa'
 import { createPrompt, Listr } from 'listr2'
 import { EOL } from 'os'
@@ -46,7 +46,7 @@ export class NxCommand extends BaseCommand<Configuration> {
             choices: config.map((c) => ({
               name: c.pkg,
               message: c.pkg,
-              hint: chalk.yellow(c.description) + (c.registry ? chalk.dim(` ${c.registry}`) : '')
+              hint: color.yellow(c.description) + (c.registry ? color.dim(` ${c.registry}`) : '')
             }))
           })
 

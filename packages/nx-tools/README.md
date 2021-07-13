@@ -14,7 +14,7 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) some tools to be co
 
 All the functions are imported from the root of the project.
 
-- **[Read The API Documentation](./API.md)**
+- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
@@ -29,7 +29,7 @@ All the functions are imported from the root of the project.
 
 # Tools
 
-This library mostly comprimises of tools that are useful for generating schematics. All the generic methods and types that is usually used in schematics are exported from the root of the package. You can read the generated API documentation for further explanation of indivudual functionality.
+This library mostly compromises of tools that are useful for generating schematics. All the generic methods and types that is usually used in schematics are exported from the root of the package. You can read the generated API documentation for further explanation of individual functionality.
 
 # Schematics
 
@@ -37,14 +37,14 @@ This library mostly comprimises of tools that are useful for generating schemati
 
 This schematic can be used internally for other schematics to generate exports based on designated patterns.
 
-After parsing through your rules, you can add this as a indivudual role to go through all the files and match designated patterns and create TypeScript exported modules of matching files. All paths will be relative.
+After parsing through your rules, you can add this as an individual role to go through all the files and match designated patterns and create TypeScript exported modules of matching files. All paths will be relative.
 
 There is two use cases for this:
 
 - Internal processing
   > This will parse your files in your tree you defined and only export them, and does not care about the real files on host. To achieve this, this rule has to come before "mergeWith" function of tree with physical files.
 - External processing
-  > To achive this, this rule has to come after "mergeWith". Schematic will go through the whole real file base supplied as a tree and match the files on the physical file system as well.
+  > To achieve this, this rule has to come after "mergeWith". Schematic will go through the whole real file base supplied as a tree and match the files on the physical file system as well.
 
 **This schematic has no way to call from cli since it does not make much sense.**
 

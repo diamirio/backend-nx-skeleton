@@ -41,7 +41,9 @@ class Builder extends BaseBuilder<ExecuteBuilderOptions, NormalizedExecuteBuilde
   }
 
   public handleEvent (event: BuilderOutput): Observable<BuilderContext> {
-    return iif(() => !event.success || this.options.watch || this.options.keepAlive, this.manager.stop(), of(undefined)).pipe(tap(async () => await this.runProcess(event)))
+    return iif(() => !event.success || this.options.watch || this.options.keepAlive, this.manager.stop(), of(undefined)).pipe(
+      tap(async () => await this.runProcess(event))
+    ) as Observable<BuilderContext>
   }
 
   public async runProcess (event: BuilderOutput): Promise<void> {

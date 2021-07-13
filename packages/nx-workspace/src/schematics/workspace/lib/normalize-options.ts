@@ -1,7 +1,6 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { toFileName } from '@nrwl/workspace'
-import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
-import chalk from 'chalk'
+import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
@@ -41,7 +40,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
           ctx.directory = await task.prompt({
             type: 'Input',
             message: 'Please give a folder name to this repository.',
-            footer: chalk.dim(`Leave empty to use current folder: ${process.cwd()}`),
+            footer: color.dim(`Leave empty to use current folder: ${process.cwd()}`),
             format: (value) => {
               return toFileName(value)
             }
@@ -52,7 +51,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
               !await task.prompt({
                 type: 'Toggle',
                 message: 'Are you sure that you want to use current directory for the repository.',
-                footer: chalk.red('This will overwrite everything!')
+                footer: color.red('This will overwrite everything!')
               })
             ) {
               throw new Error('Cancelled creation of the repository.')
@@ -64,7 +63,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         task: (ctx, task): void => {
           ctx.root = ctx.directory
-          task.title = `Project root folder set as: ${chalk.yellow(join(process.cwd(), ctx.directory) ?? process.cwd())}`
+          task.title = `Project root folder set as: ${color.yellow(join(process.cwd(), ctx.directory) ?? process.cwd())}`
         }
       },
 

@@ -18,7 +18,9 @@
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+    "docs:toc": "markdown-toc README.md --bullets='-' -i",
+        "docs:jsdoc": "typedoc src/index.ts src/microservices.ts src/graphql.ts --readme none"
+
   },
   "husky": {
     "hooks": {
@@ -60,23 +62,23 @@
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.6.13",
-    "@nestjs/core": "^7.6.13",
-    "@nestjs/graphql": "^7.11.0",
-    "@nestjs/microservices": "^7.6.13",
-    "@nestjs/swagger": "^4.7.15",
-    "@nestjs/testing": "^7.6.13",
-    "@types/config": "^0.0.38",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^15.6.1",
+    "@nestjs/common": "^8.0.2",
+    "@nestjs/core": "^8.0.2",
+    "@nestjs/graphql": "^8.0.2",
+    "@nestjs/microservices": "^8.0.2",
+    "@nestjs/swagger": "^5.0.1",
+    "@nestjs/testing": "^8.0.2",
+    "@types/config": "^0.0.39",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.1",
     "@types/winston": "^2.4.4",
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.8.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "concurrently": "^6.2.0",
-    "fastify": "^3.17.0",
-    "fastify-swagger": "^4.3.3",
+    "fastify": "^3.19.1",
+    "fastify-swagger": "^4.8.3",
     "graphql": "^15.5.0",
     "nest-schedule": "^0.6.4",
     "prettier": "^2.3.0",
