@@ -84,7 +84,7 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@types/fs-extra": "^9.0.12",
-    "@types/node": "^16.3.1",
+    "@types/node": "^16.3.2",
     "@types/rewire": "^2.5.28",
     "@types/wrap-ansi": "^8.0.1"
   }

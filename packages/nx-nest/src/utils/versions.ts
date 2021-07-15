@@ -1,6 +1,6 @@
 import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
-import { VERSIONS } from './versions.constant'
+import { VERSIONS } from './versions.constants'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
 import { NormalizedSchema } from '@src/schematics/application/main.interface'
 
@@ -13,7 +13,7 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
 export function calculateDependencies (options: NormalizedSchema, builders?: boolean): PackageVersions {
   // only add builders
   if (builders) {
-    return VERSIONS.builder
+    return VERSIONS.base.builder
   }
 
   return dependencyCalculator([

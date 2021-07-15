@@ -4,6 +4,7 @@ import { APP_FILTER,{% if server == enum.server.RESTFUL %} APP_INTERCEPTOR,{% en
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 {% endif %}
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -73,9 +74,9 @@ export function createServerModule ({% if database is defined and database != en
         context: graphQLContextParser,
         formatError: graphQLErrorParser,
         useGlobalPrefix: true,
-        playground: true,
         introspection: true,
-        path: '/'
+        path: '/',
+        plugins: [ ApolloServerPluginLandingPageGraphQLPlayground ]
       }),
       ...Object.values(resolvers),{% endif %}
       {% if server == enum.server.RESTFUL %}

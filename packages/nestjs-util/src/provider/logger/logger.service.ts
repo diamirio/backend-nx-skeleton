@@ -1,7 +1,7 @@
 import { LoggerService as LoggerServiceCommon } from '@nestjs/common'
 import winston from 'winston'
 
-import { LogType, logLevel } from './logger.constants'
+import { LogType, LOG_LEVEL } from './logger.constants'
 import { Configurable, ConfigParam } from '@provider/config'
 
 const { format } = winston
@@ -12,7 +12,7 @@ export class LoggerService implements LoggerServiceCommon {
   constructor (private readonly context?: string) {}
 
   @Configurable()
-  private getLogger (@ConfigParam('logLevel', logLevel) level?: string): winston.Logger {
+  private getLogger (@ConfigParam('logLevel', LOG_LEVEL) level?: string): winston.Logger {
     if (!logger) {
       const loggingDisabled: boolean = level.toLowerCase() === 'none'
 

@@ -8,7 +8,7 @@ import { NormalizedSchema as WorkspaceNormalizedSchema } from '@src/schematics/w
 export function calculateDependencies (cli: WorkspaceNormalizedSchema['cli']): PackageVersions {
   return dependencyCalculator([
     {
-      deps: VERSIONS.base
+      deps: VERSIONS.base.default
     },
     {
       condition: cli === AvailableCLIs.NX,

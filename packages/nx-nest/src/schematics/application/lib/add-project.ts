@@ -75,11 +75,39 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.tests === AvailableTestsTypes.JEST) {
       architect.test = {
-        builder: '@nrwl/jest:jest',
+        builder: '@webundsoehne/nx-builders:run',
         options: {
-          jestConfig: join(normalize(options.root), 'test/jest.config.js'),
-          tsConfig: join(normalize(options.root), 'test/tsconfig.json'),
-          passWithNoTests: true
+          cwd: options.root,
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+          node: true,
+          watch: false,
+          command: 'jest --config ./test/jest.config.js --passWithNoTests --detectOpenHandles',
+          environment: {
+            DEBUG_PORT: 9229
+          }
+        },
+        configurations: {
+          cov: {
+            command: 'jest --config ./test/jest.config.js --passWithNoTests --coverage --detectOpenHandles',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+            node: true,
+            environment: {}
+          },
+
+          dev: {
+            command: 'jest --config ./test/jest.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
+            node: true,
+            interactive: true,
+            environment: {}
+          },
+
+          e2e: {
+            command: 'jest --config ./test/jest.e2e-config.js --passWithNoTests --runInBand --detectOpenHandles',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+            node: true,
+            environment: {}
+          }
         }
       }
     }

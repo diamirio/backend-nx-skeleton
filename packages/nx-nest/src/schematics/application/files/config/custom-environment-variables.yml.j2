@@ -39,6 +39,8 @@ database:
 
 {% if microservice is defined or enum.components.MICROSERVICE_CLIENT in components %}
 messageQueue:
-  urls: MESSAGE_QUEUE_URLS
+  urls:
+    __name: MESSAGE_QUEUE_URLS
+    __format: json
 {% endif %}
 
