@@ -75,13 +75,14 @@ export const VERSIONS: Versions = {
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
       '@nestjs/typeorm': '^8.0.1',
-      typeorm: '^0.2.34'
+      typeorm: '^0.2.34',
+      'typeorm-seeding': '^1.6.1'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       '@nestjs/mongoose': '^8.0.0',
-      mongoose: '^5.13.12'
+      mongoose: '^5.13.2'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {

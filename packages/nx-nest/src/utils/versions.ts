@@ -58,11 +58,11 @@ export function calculateDependencies (options: NormalizedSchema, builders?: boo
     },
     // db related stuff
     {
-      condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database),
+      condition: options.dbAdapters === AvailableDBAdapters.TYPEORM,
       deps: VERSIONS[AvailableDBAdapters.TYPEORM]
     },
     {
-      condition: [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database),
+      condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE,
       deps: VERSIONS[AvailableDBAdapters.MONGOOSE]
     },
     {

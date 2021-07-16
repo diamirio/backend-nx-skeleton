@@ -14,3 +14,6 @@ services:
     {% filter indent(4, true) %}
       {% include '../../base/volumes.yml.j2' %}
     {% endfilter %}
+
+    cap_add:
+      - sys_nice

@@ -35,7 +35,9 @@
     {% endif %}
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json"
+    "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
+    "backend:migrate": "./cli . npm run nx -- run-many --target migration --parallel --all",
+    "backend:seed": "./cli . npm run nx -- run-many --target seed --parallel --all"
   },
   "husky": {
     "hooks": {

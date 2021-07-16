@@ -1,12 +1,12 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
-import { NxProjectTypes, EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
+import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableTestsTypes } from '@interfaces/available.constants'
 
 /**
  * Add the project to the {workspace,angular}.json
@@ -29,6 +29,11 @@ export function addProject (options: NormalizedSchema): Rule {
             glob: '*',
             input: `${options.root}/config`,
             output: 'config'
+          },
+          {
+            glob: 'Dockerfile',
+            input: `${options.root}`,
+            output: '.'
           }
         ]
       }
@@ -108,6 +113,65 @@ export function addProject (options: NormalizedSchema): Rule {
             node: true,
             environment: {}
           }
+        }
+      }
+    }
+
+    if (options.components.includes(AvailableComponents.COMMAND)) {
+      architect.command = {
+        builder: '@webundsoehne/nx-builders:run',
+        options: {
+          cwd: options.root,
+          command: 'nestjs-command',
+          nodeOptions: '-r tsconfig-paths/register',
+          node: true,
+          watch: false,
+          interactive: true,
+          environment: {
+            CLI_PATH: './src/main.ts'
+          }
+        }
+      }
+    }
+
+    if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
+      architect.migration = {
+        builder: '@webundsoehne/nx-builders:run',
+        options: {
+          cwd: options.root,
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+          node: true,
+          watch: false,
+          environment: {}
+        },
+        configurations: {
+          run: {
+            command: 'typeorm migration:run --config=src/util/ormconfig.ts'
+          },
+          'mock-run': {
+            command: 'typeorm migration:run --config=src/util/mock-ormconfig.ts'
+          },
+          create: {
+            command: 'typeorm migration:create --config=src/util/ormconfig.ts -n'
+          },
+          generate: {
+            command: 'typeorm migration:generate --config=src/util/ormconfig.ts -n'
+          },
+          rollback: {
+            command: 'typeorm migration:revert --config=src/util/ormconfig.ts'
+          }
+        }
+      }
+
+      architect.seed = {
+        builder: '@webundsoehne/nx-builders:run',
+        options: {
+          cwd: options.root,
+          command: 'typeorm-seeding --configName=src/util/ormconfig.ts seed',
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+          node: true,
+          watch: false,
+          environment: {}
         }
       }
     }

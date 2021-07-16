@@ -15,6 +15,146 @@ This is a auto-generated custom workspace with [@nrwl/nx](https://www.npmjs.com/
 
 ---
 
+# Setup
+
+Everything is dockerized and it will run out of the box, without extra hassle.
+
+```bash
+docker-compose up -d
+```
+
+## Proxying Commands to Docker
+
+All the actions should be done inside the container to have proper access to databases and helper services.
+
+CLI script at the root of the repository is helpful in this case, where it proxies the commands in to the container.
+
+The first argument is the folder relative to the package root. `ws`, `root` and `.` is keywords for running it inside the root of the repository.
+
+```bash
+# Start a bash session inside the container
+./cli . bash
+
+# run something inside one package
+./cli apps/auth-server npm run start
+```
+
+## Build
+
+```bash
+# build all services
+./cli . npm run build
+
+# build a single service
+./cli . npm run build:one ${PACKAGE}
+
+# append --skip-nx-cache for disabling the cache
+
+# build only changed services
+./cli . npm run affected:build
+```
+
+## Lint
+
+```bash
+# lint whole project, with prettier first tslint/eslint later
+./cli . npm run lint
+
+# lint only affected part
+./cli . npm run affected:lint
+
+# check linting rules
+./cli . npm run lint:check
+```
+
+## Testing
+
+Testing actions of normal `testing`, `coverage`, `watch` mode and `e2e` is accessible by `@nrwl/nx`.
+
+### `@webundsoehne/nx-builders:run` to run jest
+
+```bash
+# run tests before committing
+./cli . npm run test
+./cli . npm run test:e2e
+
+# to run a test for a single service
+./cli . npm run nx -- test ${PACKAGE}
+
+# to run tests for all services, this is true for all the other actions
+./cli . npm run nx -- run-many --target test --all --parallel
+
+# to run a e2e test for a single service
+./cli . npm run nx -- test:e2e ${PACKAGE}
+
+# to run a coverage test for a single service
+./cli . npm run nx -- test:cov ${PACKAGE}
+
+# to run development mode for tests with watch mode in jest
+# this is intended to be ran in a one-at-a-time manner, because the output hijacks stdout and is interactive
+# a debug port in 9229 will be open
+./cli . npm run nx -- test:dev ${PACKAGE}
+
+# to change the debug port
+./cli . npm run nx -- test:dev ${PACKAGE} --debug-port 9300
+```
+
+### `@nrwl/jest` to run jest
+
+```bash
+# run tests before committing
+./cli . npm run test
+
+# to run a test for a single service
+./cli . npm run nx -- test ${PACKAGE}
+```
+
+## Backend Related
+
+### Seeding
+
+A fresh start requires the seeds to be run and this has to be repeated each time database containers are flushed.
+
+```bash
+# run all the seeds
+./cli . npm run nx -- seed ${PACKAGE}
+
+# to run seeds for all services
+./cli . npm run nx -- run-many --target seed -c run --all --parallel
+```
+
+### Migrations
+
+Migration actions of `run`, `mock-run`, `create`, `generate`, `rollback` is accessible by `@nrwl/nx`.
+
+```bash
+# to run a migration for a single service
+./cli . npm run nx -- migration:run ${PACKAGE}
+
+# to run migrations for all services, this is true for all the other actions
+./cli . npm run nx -- run-many --target migration -c run --all --parallel
+
+# mock migrations
+./cli . npm run nx -- migration:mock-run ${PACKAGE}
+
+# create migrations, you have to pass in --args flag for naming it
+./cli . npm run nx -- migration:create ${PACKAGE} --args ${MIGRATION_NAME}
+
+# generate migrations, you have to pass in --args flag for naming it
+./cli . npm run nx -- migration:generate ${PACKAGE} --args ${MIGRATION_NAME}
+
+# rollback migrations
+./cli . npm run nx -- migration:rollback ${PACKAGE}
+```
+
+### Running CLIs
+
+CLIs are accesible by NX. Arguments can be passed through `--args`.
+
+```bash
+# to run a cli
+./cli . npm run nx -- command ${PACKAGE} --args hello,user
+```
 
 ---
 

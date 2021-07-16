@@ -120,7 +120,7 @@ export class NodeHelper {
   // i will leave this as is and just use direct proxy
   // FIXME: when the issue is resolved and merge complete use the upstream one instead of fork
   // * https://github.com/yeoman/update-notifier/issues/100 open issue with the update check for global registry npmrc stuff
-  // FIXME: this is a bit wierd have to be improved up on
+  // FIXME: this is a bit weird have to be improved up on
   public async checkIfModuleInstalled (
     pkg: NodeDependency | NodeDependency[],
     options?: { global?: boolean, cwd?: string | string[], getVersion?: boolean, getUpdate?: boolean }

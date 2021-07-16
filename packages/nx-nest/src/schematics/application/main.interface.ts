@@ -42,7 +42,7 @@ export interface NormalizedSchema extends Schema {
   // prior configuration will be written to nx.json for further processing
   priorConfiguration: CommonPropertiesToSaveAndUse<true>
   // injecting enums since i want to compare this in jinja templates
-  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'> & Record<'dbAdapters', typeof AvailableDBAdapters>
+  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'>
 }
 
 interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
@@ -52,5 +52,6 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   microservice: Values extends true ? AvailableMicroserviceTypes : typeof AvailableMicroserviceTypes
   microserviceClient: string[]
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
+  dbAdapters: Values extends true ? AvailableDBAdapters : typeof AvailableDBAdapters
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
 }

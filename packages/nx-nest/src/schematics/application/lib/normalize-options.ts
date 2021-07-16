@@ -221,6 +221,10 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
           })
 
+          ctx.dbAdapters = [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(ctx.database)
+            ? AvailableDBAdapters.TYPEORM
+            : AvailableDBAdapters.MONGOOSE
+
           task.title = `Database selected as: ${ctx.database}`
         },
         options: {
