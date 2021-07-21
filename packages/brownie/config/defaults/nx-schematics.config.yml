@@ -8,6 +8,8 @@
       description: Generates default components depending on your application type.
     - name: microservice-provider
       description: Generate the microservice provider library.
+    - name: backend-interfaces
+      descriptions: Generate a common library for database interfaces.
 
 - pkg: '@webundsoehne-private/nx-workspace'
   registry: 'https://verdaccio.dev.webundsoehne.com'
@@ -22,4 +24,3 @@
     - name: library
       description: Create a library.
       forceArguments: true
-
