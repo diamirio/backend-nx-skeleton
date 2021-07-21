@@ -1,6 +1,5 @@
-import { AvailableLinterTypes, AvailableMicroserviceTypes } from '@interfaces/available.constants'
+import { AvailableDBAdapters, AvailableLinterTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
-import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
 
 /**
  * The options that it gets from angular-cli
@@ -10,7 +9,6 @@ export interface Schema extends CommonPropertiesToSaveAndUse {
   linter?: string
   skipFormat?: boolean
   silent?: boolean
-  microservice?: AvailableMicroserviceTypes
 }
 
 /**
@@ -24,16 +22,12 @@ export interface NormalizedSchema extends Schema {
   linter: AvailableLinterTypes
   constants: typeof SchematicConstants
   priorConfiguration: CommonPropertiesToSaveAndUse
+  enum: { dbAdapters: typeof AvailableDBAdapters }
 }
-
-/**
- * The templating bones of a single microservice.
- */
-export type ParsedMicroservice = GeneratedMicroserviceCasing
 
 /**
  * This properties are shared across the input, normalized and saved configurations.
  */
 interface CommonPropertiesToSaveAndUse {
-  microservices?: ParsedMicroservice[]
+  dbAdapters: AvailableDBAdapters[]
 }

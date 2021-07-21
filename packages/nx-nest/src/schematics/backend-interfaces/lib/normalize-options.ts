@@ -1,16 +1,15 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
-import { appsDir, libsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { isVerbose, readMicroserviceIntegration, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readBackendInterfaceIntegration, readNxIntegration, setSchemaDefaultsInContext, uniqueArrayFilter } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { SchematicConstants } from '@src/interfaces'
-import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
+import { AvailableDBAdapters, SchematicConstants } from '@src/interfaces'
 
-export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -21,8 +20,10 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             default: [
               {
                 sourceRoot: 'src',
-                name: SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE,
-                constants: SchematicConstants
+                name: SchematicConstants.BACKEND_INTERFACES_PACKAGE,
+                constants: SchematicConstants,
+                dbAdapters: [],
+                enum: { dbAdapters: AvailableDBAdapters }
               }
             ]
           })
@@ -80,28 +81,19 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 
       // parse microservices for templates
       {
-        title: 'Parsing all integrated microservices...',
+        title: 'Parsing all integrated backend applications...',
         task: (ctx, task): void => {
-          let microservices = readMicroserviceIntegration()
+          const backendInterfaces = readBackendInterfaceIntegration()
 
-          if (microservices.length === 0) {
-            task.title = 'No microservice integration has been found working in mock mode.'
-
-            microservices = [
-              {
-                name: 'mock',
-                microservice: 'unknown',
-                root: `${appsDir(host)}/unknown`,
-                sourceRoot: 'src'
-              }
-            ]
+          if (backendInterfaces.length === 0) {
+            task.title = 'No applications with databases has been found working in mock mode.'
           } else {
-            task.title = `Microservice servers found: ${microservices.map((m) => m.name).join(', ')}`
-          }
+            task.title = `Applications with databases has been found: ${backendInterfaces.map((m) => `${m.name}:${m.dbAdapter}`).join(', ')}`
 
-          ctx.microservices = microservices.map((microservice) => {
-            return generateMicroserviceCasing(microservice.name)
-          })
+            ctx.dbAdapters = backendInterfaces.map((m) => m.dbAdapter).filter(uniqueArrayFilter)
+
+            task.title = `DB Adapters used in the applications are: ${ctx.dbAdapters.join(', ')}`
+          }
         }
       }
     ],

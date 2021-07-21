@@ -18,17 +18,17 @@ export interface RunBuilderOptions extends JsonObject {
   args?: string | string[]
 
   /** run with interactive mode, will not parse through the logger */
-  interactive: boolean
+  interactive?: boolean
 
   /** run with node */
-  node: boolean
+  node?: boolean
 
   /** pass in node options when running as node */
   nodeOptions?: string
 
   /** keep alive the process if it crashes */
-  watch: boolean
+  watch?: boolean
 
   /** environment variables */
-  environment?: Record<string, string>
+  environment?: Record<string, string | number>
 }

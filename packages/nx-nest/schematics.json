@@ -28,6 +28,13 @@
       "schema": "./dist/schematics/microservice-provider/schema.json",
       "aliases": ["msp"],
       "description": "Generate microservice based library."
+    },
+
+    "backend-interfaces": {
+      "factory": "./dist/schematics/backend-interfaces/main",
+      "schema": "./dist/schematics/backend-interfaces/schema.json",
+      "aliases": ["bi"],
+      "description": "Generate backend-interfaces based library."
     }
   }
 }

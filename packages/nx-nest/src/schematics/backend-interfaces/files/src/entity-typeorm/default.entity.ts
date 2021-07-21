@@ -2,8 +2,8 @@ import { Column, Entity } from 'typeorm'
 
 import { BaseEntityWithPrimary } from './util'
 
-@Entity('DefaultEntity')
-export class DefaultEntity extends BaseEntityWithPrimary<DefaultEntity> {
+@Entity('DefaultTypeormEntity')
+export class DefaultTypeormEntity extends BaseEntityWithPrimary<DefaultTypeormEntity> {
   @Column('varchar', { length: 120 })
   dummy: string
 }

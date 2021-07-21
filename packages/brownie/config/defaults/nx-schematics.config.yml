@@ -9,7 +9,7 @@
     - name: microservice-provider
       description: Generate the microservice provider library.
     - name: backend-interfaces
-      descriptions: Generate a common library for database interfaces.
+      description: Generate a common library for database interfaces.
 
 - pkg: '@webundsoehne-private/nx-workspace'
   registry: 'https://verdaccio.dev.webundsoehne.com'
