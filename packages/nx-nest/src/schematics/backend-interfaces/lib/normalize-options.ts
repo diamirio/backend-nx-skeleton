@@ -85,14 +85,14 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         task: (ctx, task): void => {
           const backendInterfaces = readBackendInterfaceIntegration()
 
-          if (backendInterfaces.length === 0) {
-            task.title = 'No applications with databases has been found working in mock mode.'
-          } else {
-            task.title = `Applications with databases has been found: ${backendInterfaces.map((m) => `${m.name}:${m.dbAdapter}`).join(', ')}`
+          ctx.dbAdapters = backendInterfaces.flatMap((m) => m.dbAdapter).filter(uniqueArrayFilter)
 
-            ctx.dbAdapters = backendInterfaces.map((m) => m.dbAdapter).filter(uniqueArrayFilter)
-
+          if (ctx.dbAdapters.length > 0) {
             task.title = `DB Adapters used in the applications are: ${ctx.dbAdapters.join(', ')}`
+
+            task.output = `Applications with databases has been found: ${backendInterfaces.map((m) => `${m.name}:${m.dbAdapter}`).join(', ')}`
+          } else {
+            task.title = 'No applications with databases has been found working in mock mode.'
           }
         }
       }

@@ -19,6 +19,7 @@ import {
   AvailableComponents,
   AvailableDBAdapters,
   AvailableDBTypes,
+  AvailableExtensions,
   AvailableMicroserviceTypes,
   AvailableServerTypes,
   AvailableTestsTypes,
@@ -57,7 +58,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
                   database: AvailableDBTypes,
                   tests: AvailableTestsTypes,
                   microservice: AvailableMicroserviceTypes,
-                  dbAdapters: AvailableDBAdapters
+                  dbAdapters: AvailableDBAdapters,
+                  extensions: AvailableExtensions
                 }
               },
               {
@@ -226,6 +228,27 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             : AvailableDBAdapters.MONGOOSE
 
           task.title = `Database selected as: ${ctx.database}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
+      {
+        skip: (ctx): boolean => !!ctx.extensions && ctx.extensions.length > 0,
+        task: async (ctx, task): Promise<void> => {
+          const choices = mapPromptChoices<AvailableExtensions>(AvailableExtensions, PrettyNamesForAvailableThingies)
+
+          // there can be two selections of API servers here
+          ctx.extensions = await task.prompt<AvailableExtensions[]>({
+            type: 'MultiSelect',
+            message: 'Please select the extensions you want.',
+            choices,
+            initial: getInitialFromPriorConfiguration(ctx, 'extensions', choices)
+          })
+
+          task.title = `Extensions selected as: ${ctx.extensions}`
         },
         options: {
           bottomBar: Infinity,

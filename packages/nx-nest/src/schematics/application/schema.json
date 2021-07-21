@@ -24,7 +24,7 @@
       "x-prompt": "What name would you like to use for the application?"
     },
     "components": {
-      "description": "Components to be embeded.",
+      "description": "Components to be embedded.",
       "alias": "c",
       "items": {
         "manyOf": [
@@ -63,6 +63,17 @@
       "description": "Test runner to use for unit and e2e tests",
       "type": "string",
       "enum": ["jest", "none"]
+    },
+    "extensions": {
+      "description": "Enable extensions.",
+      "items": {
+        "manyOf": [
+          {
+            "type": "string",
+            "enum": ["external-backend-interfaces"]
+          }
+        ]
+      }
     }
   },
   "required": []

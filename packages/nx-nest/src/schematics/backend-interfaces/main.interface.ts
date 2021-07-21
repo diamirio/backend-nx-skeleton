@@ -29,5 +29,5 @@ export interface NormalizedSchema extends Schema {
  * This properties are shared across the input, normalized and saved configurations.
  */
 interface CommonPropertiesToSaveAndUse {
-  dbAdapters: AvailableDBAdapters[]
+  dbAdapters?: AvailableDBAdapters[]
 }

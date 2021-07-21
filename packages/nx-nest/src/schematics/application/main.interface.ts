@@ -8,7 +8,8 @@ import {
   AvailableTestsTypes,
   AvailableLinterTypes,
   AvailableMicroserviceTypes,
-  AvailableDBAdapters
+  AvailableDBAdapters,
+  AvailableExtensions
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
 
@@ -54,4 +55,5 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
   dbAdapters: Values extends true ? AvailableDBAdapters : typeof AvailableDBAdapters
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
+  extensions: Values extends true ? AvailableExtensions[] : typeof AvailableExtensions
 }
