@@ -59,9 +59,19 @@ export enum AvailableMicroserviceTypes {
 export type AvailableLinterTypes = Exclude<Linter, 'tslint'>
 
 /**
+ * Available extensions to further customize the application.
+ */
+export enum AvailableExtensions {
+  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces'
+}
+
+/**
  * Prettified names for components to use with prompts and such.
  */
-export const PrettyNamesForAvailableThingies: Record<AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes, string> = {
+export const PrettyNamesForAvailableThingies: Record<
+AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes | AvailableExtensions,
+string
+> = {
   [AvailableComponents.SERVER]: 'Server',
   [AvailableComponents.COMMAND]: 'Command',
   [AvailableComponents.BG_TASK]: 'Scheduler',
@@ -75,5 +85,6 @@ export const PrettyNamesForAvailableThingies: Record<AvailableComponents | Avail
   [AvailableDBTypes.MONGOOSE_MONGODB]: 'MongoDB with Mongoose',
   [AvailableTestsTypes.JEST]: 'Jest',
   [AvailableTestsTypes.NONE]: 'None',
-  [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ'
+  [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ',
+  [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library'
 }

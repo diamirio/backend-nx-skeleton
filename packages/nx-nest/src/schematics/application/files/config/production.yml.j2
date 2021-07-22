@@ -1,0 +1,7 @@
+{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions %}
+database:
+  directory:
+    entity: ./libs/{{ constants.BACKEND_INTERFACES_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
+    migration: migrations
+    seed: seeds
+{% endif %}

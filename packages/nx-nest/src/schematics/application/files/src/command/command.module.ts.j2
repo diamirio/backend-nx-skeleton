@@ -7,7 +7,13 @@ import { MongooseModule } from '@nestjs/mongoose'
 {% endif %}
 
 {% if database is defined and database != enum.database.NONE %}
+{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.TYPEORM %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-typeorm'
+{% elif enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.MONGOOSE %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-mongoose'
+{% else %}
 import { getDatabaseOptions } from '../util/database'
+{% endif %}
 {% endif %}
 import {
   ConfigService

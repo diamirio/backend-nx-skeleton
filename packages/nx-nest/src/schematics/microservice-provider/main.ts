@@ -1,5 +1,5 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { formatOrSkip, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintToTree, eslintJson, formatOrSkip, LINTER_VERSIONS, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -15,6 +15,9 @@ export default function (schema: Schema): Rule {
 
     return chain([
       runInRule(log.info.bind(log)(`Adding ${SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE} library to workspace.`)),
+
+      addEslintToTree(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope, override: {} }) }),
+
       addProject(options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
