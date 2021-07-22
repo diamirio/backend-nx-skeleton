@@ -11,7 +11,7 @@ import {
 
 import { getSchematicFiles } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableExtensions, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableServerTypes } from '@interfaces/available.constants'
 import { Schema as BackendInterfacesSchema } from '@src/schematics/backend-interfaces/main.interface'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
@@ -119,10 +119,16 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       })),
       // database related templates with __
       ...[
-        { match: AvailableDBAdapters.TYPEORM, condition: [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ] },
-        { match: AvailableDBAdapters.MONGOOSE, condition: [ AvailableDBTypes.MONGOOSE_MONGODB ] }
+        {
+          match: AvailableDBAdapters.TYPEORM,
+          condition: options.dbAdapters === AvailableDBAdapters.TYPEORM && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+        },
+        {
+          match: AvailableDBAdapters.MONGOOSE,
+          condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+        }
       ].map((a) => ({
-        condition: a.condition.includes(options.database),
+        condition: a.condition,
         match: a.match
       }))
     ]

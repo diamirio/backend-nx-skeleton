@@ -13,7 +13,13 @@ import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/micro
 
 import * as modules from './modules'
 {% if database is defined and database != enum.database.NONE %}
+{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.TYPEORM %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-typeorm'
+{% elif enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.MONGOOSE %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-mongoose'
+{% else %}
 import { getDatabaseOptions } from '../util/database'
+{% endif %}
 {% endif %}
 
 export function createMicroserviceModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {

@@ -248,7 +248,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             initial: getInitialFromPriorConfiguration(ctx, 'extensions', choices)
           })
 
-          task.title = `Extensions selected as: ${ctx.extensions}`
+          task.title = `Extensions selected as: ${ctx.extensions.length > 0 ? ctx.extensions.join(', ') : 'none'}`
         },
         options: {
           bottomBar: Infinity,

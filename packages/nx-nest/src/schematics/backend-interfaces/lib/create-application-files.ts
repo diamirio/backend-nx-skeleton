@@ -1,4 +1,4 @@
-import { apply, chain, externalSchematic, Rule, SchematicContext, url, noop } from '@angular-devkit/schematics'
+import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger } from '@webundsoehne/nx-tools'
 import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
@@ -21,37 +21,74 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
       context
     ),
 
-    options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE)
-      ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-        silent: true,
-        skipFormat: true,
-        templates: {
-          root: options.root,
-          templates: [
-            {
-              output: convertStringToDirPath(options.sourceRoot) + 'entity-mongoose/index.ts',
-              pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-mongoose/**/*.entity.ts'
+    ...createApplicationRule({
+      trigger: [
+        {
+          condition: options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
+          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+            silent: true,
+            skipFormat: true,
+            templates: {
+              root: options.root,
+              templates: [
+                {
+                  output: convertStringToDirPath(options.sourceRoot) + 'entity-mongoose/index.ts',
+                  pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-mongoose/**/*.entity.ts'
+                }
+              ]
             }
-          ]
+          })
+        },
+        {
+          condition: options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
+          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+            silent: true,
+            skipFormat: true,
+            templates: {
+              root: options.root,
+              templates: [
+                {
+                  output: convertStringToDirPath(options.sourceRoot) + 'entity-typeorm/index.ts',
+                  pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-typeorm/**/*.entity.ts'
+                }
+              ]
+            }
+          })
         }
-      })
-      : noop(),
+      ]
+    })
 
-    options.dbAdapters.includes(AvailableDBAdapters.TYPEORM)
-      ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-        silent: true,
-        skipFormat: true,
-        templates: {
-          root: options.root,
-          templates: [
-            {
-              output: convertStringToDirPath(options.sourceRoot) + 'entity-typeorm/index.ts',
-              pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-typeorm/**/*.entity.ts'
-            }
-          ]
-        }
-      })
-      : noop()
+    // options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE)
+    //   ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+    //     silent: true,
+    //     skipFormat: true,
+    //     templates: {
+    //       root: options.root,
+    //       templates: [
+    //         {
+    //           output: convertStringToDirPath(options.sourceRoot) + 'entity-mongoose/index.ts',
+    //           pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-mongoose/**/*.entity.ts'
+    //         }
+    //       ]
+    //     }
+    //   })
+    //   : noop(),
+
+    // options.dbAdapters.includes(AvailableDBAdapters.TYPEORM)
+    //   ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+    //     silent: true,
+    //     skipFormat: true,
+    //     templates: {
+    //       root: options.root,
+    //       templates: [
+    //         {
+    //           output: convertStringToDirPath(options.sourceRoot) + 'entity-typeorm/index.ts',
+    //           pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-typeorm/**/*.entity.ts'
+    //         }
+    //       ]
+    //     }
+    //   })
+    //   : noop()
   ])
 }
 
