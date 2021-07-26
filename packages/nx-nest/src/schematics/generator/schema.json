@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "nx-nest:generate",
+  "title": "Add a single file to existing nx-nest schematic.",
+  "examples": [],
+  "type": "object",
+  "properties": {
+    "parent": {
+      "description": "The name of parent application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What parent application do you want to run on?"
+    },
+    "directory": {
+      "description": "Relative directory to parent application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What parent application do you want to run on?"
+    },
+    "name": {
+      "description": "The name of the generated partial.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "What name do you want to give to your module?"
+    },
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}
