@@ -10,6 +10,8 @@
       description: Generate the microservice provider library.
     - name: backend-interfaces
       description: Generate a common library for database interfaces.
+    - name: generator
+      description: Creates a single component from the given template.
 
 - pkg: '@webundsoehne-private/nx-workspace'
   registry: 'https://verdaccio.dev.webundsoehne.com'

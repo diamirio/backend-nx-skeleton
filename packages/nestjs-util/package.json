@@ -68,7 +68,7 @@
     "@nestjs/swagger": "^5.0.3",
     "@nestjs/testing": "^8.0.2",
     "@types/config": "^0.0.39",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.3.2",
     "@types/winston": "^2.4.4",
     "amqp-connection-manager": "^3.2.2",

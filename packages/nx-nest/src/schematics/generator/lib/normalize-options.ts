@@ -52,14 +52,21 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
-          const scanDir = join(__dirname, 'files')
-          logger.debug('Current directory to scan for is: ', scanDir)
+          const scanDir = join(__dirname, '../files')
+
+          logger.debug('Template directory to scan for is: ', scanDir)
 
           const choices = await globby('*', {
             deep: 1,
             onlyDirectories: true,
-            cwd: join(scanDir, 'files')
+            cwd: scanDir
           })
+
+          logger.debug('Selectable choices are:', choices)
+
+          if (!choices || choices.length === 0) {
+            throw new Error(`Template directory is empty: ${scanDir}`)
+          }
 
           // select the base components
           // when options are not passed as an option to the command
@@ -81,7 +88,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       {
         title: 'Setting partial root directory.',
         task: async (ctx, task): Promise<void> => {
-          ctx.root = 'test'
+          ctx.root = process.cwd()
 
           task.title = `Generated item root directory is set as: ${ctx.root}`
         }

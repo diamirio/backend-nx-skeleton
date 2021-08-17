@@ -38,5 +38,5 @@ export function readNxIntegration<T> (name: string): T {
  * @param name
  */
 export function readWorkspaceJson (name: string): EnrichedWorkspaceJson['projects']['name'] {
-  return baseReadWorkspaceJson().projects[name]
+  return baseReadWorkspaceJson().projects[name] as EnrichedWorkspaceJson['projects']['name']
 }
