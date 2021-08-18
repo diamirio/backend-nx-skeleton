@@ -14,8 +14,6 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const log = new Logger(context)
     const options = await normalizeOptions(host, context, schema)
 
-    throw new Error('test')
-
     return chain([
       runInRule(log.info.bind(log)(`Creating "${options.type}" component files: ${options.name}@${options.root}`), !schema.silent),
       createApplicationFiles(options, context),

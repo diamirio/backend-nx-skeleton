@@ -25,19 +25,20 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
       context
     ),
 
-    externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-      silent: true,
-      skipFormat: true,
-      templates: {
-        root: options.root,
-        templates: [
-          {
-            cwd: options.root,
-            output: 'index.ts',
-            pattern: '**/*.module.ts'
-          }
-        ]
-      }
+    ...createApplicationRule({
+      trigger: [
+        {
+          condition: !!options.exports,
+          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+            silent: true,
+            skipFormat: false,
+            templates: {
+              root: options.root,
+              templates: options.exports
+            }
+          })
+        }
+      ]
     })
   ])
 }
@@ -53,7 +54,8 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
         match: 'default',
         rename: options.name
       }
-    ]
+    ],
+    omit: [ { condition: true, match: (file): boolean => !file.endsWith('description.txt') } ]
   }
 
   return createApplicationRule(template, options, { format: { prettier: true, eslint: true } })

@@ -11,12 +11,12 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   return {
     [AvailableDBAdapters.MONGOOSE]: {
       condition: options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
-      folders: [ 'entity-mongoose/' ]
+      folders: [ SchematicFilesMap[AvailableDBAdapters.MONGOOSE] ]
     },
 
     [AvailableDBAdapters.TYPEORM]: {
       condition: options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
-      folders: [ 'entity-typeorm/' ]
+      folders: [ SchematicFilesMap[AvailableDBAdapters.TYPEORM] ]
     },
 
     ENTITY_ROOT: {
@@ -25,4 +25,9 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
       folders: [ 'database' ]
     }
   }
+}
+
+export const SchematicFilesMap: Record<AvailableDBAdapters, string> = {
+  [AvailableDBAdapters.MONGOOSE]: 'entity-mongoose',
+  [AvailableDBAdapters.TYPEORM]: 'entity-typeorm'
 }

@@ -66,6 +66,16 @@ export enum AvailableExtensions {
 }
 
 /**
+ * Available through generating through the generator.
+ * Just typing it so that it can be called as an external schematic.
+ * It does not directly use these types since it globs the directory.
+ */
+export enum AvailableGenerators {
+  MONGOOSE_ENTITY_TIMESTAMPS = 'mongoose-entity-timestamps',
+  TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary'
+}
+
+/**
  * Prettified names for components to use with prompts and such.
  */
 export const PrettyNamesForAvailableThingies: Record<

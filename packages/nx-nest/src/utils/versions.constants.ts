@@ -69,7 +69,8 @@ export const VERSIONS: Versions = {
       '@nestjs/testing': '^8.0.3',
       jest: '^27.0.6',
       'ts-jest': '^27.0.3',
-      '@types/jest': '^26.0.24'
+      '@types/jest': '^26.0.24',
+      tsconfig: '^7.0.0'
     }
   },
   [AvailableDBAdapters.TYPEORM]: {

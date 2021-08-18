@@ -12,7 +12,7 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
     [AvailableTestsTypes.JEST]: {
       condition: options.tests === AvailableTestsTypes.JEST,
       files: [ '.spec.ts', 'e2e.spec.ts' ],
-      folders: [ 'tests/' ]
+      folders: [ 'test/' ]
     },
     [AvailableComponents.SERVER]: {
       condition: options.components.includes(AvailableComponents.SERVER),

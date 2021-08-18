@@ -5,30 +5,30 @@
   "examples": [],
   "type": "object",
   "properties": {
-    "parent": {
-      "description": "The name of parent application.",
+    "name": {
+      "description": "The name of the generated partial.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 0
-      }
+      },
+      "x-prompt": "What name do you want to give to your module?"
     },
-    "directory": {
-      "description": "Relative directory to parent application.",
+    "type": {
+      "description": "The type of the generated component.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 1
       }
     },
-    "name": {
-      "description": "The name of the generated partial.",
+    "directory": {
+      "description": "Directory where the component is getting generated.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 2
-      },
-      "x-prompt": "What name do you want to give to your module?"
+      }
     },
     "force": {
       "description": "Do not prompt for overwrites.",

@@ -1,11 +1,11 @@
-import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
 import { applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
 
-import { getSchematicFiles } from '../interfaces/file.constants'
+import { Schema as GeneratorSchema } from '../../generator/main.interface'
+import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableDBAdapters } from '@src/interfaces'
+import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
 
 export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
@@ -24,71 +24,42 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
     ...createApplicationRule({
       trigger: [
         {
-          condition: options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
-          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-            silent: true,
-            skipFormat: true,
-            templates: {
-              root: options.root,
-              templates: [
-                {
-                  output: convertStringToDirPath(options.sourceRoot) + 'entity-mongoose/index.ts',
-                  pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-mongoose/**/*.entity.ts'
-                }
-              ]
-            }
+          condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
+          rule: schematic<GeneratorSchema>('generator', {
+            silent: false,
+            skipFormat: false,
+            name: 'default',
+            type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
+            directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),
+            exports: [
+              {
+                output: 'index.ts',
+                pattern:
+                  convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + `${SchematicFilesMap[AvailableDBAdapters.MONGOOSE]}/**/*.entity.ts`
+              }
+            ]
           })
         },
+
         {
-          condition: options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
-          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-            silent: true,
-            skipFormat: true,
-            templates: {
-              root: options.root,
-              templates: [
-                {
-                  output: convertStringToDirPath(options.sourceRoot) + 'entity-typeorm/index.ts',
-                  pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-typeorm/**/*.entity.ts'
-                }
-              ]
-            }
+          condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
+          rule: schematic<GeneratorSchema>('generator', {
+            silent: false,
+            skipFormat: false,
+            name: 'default',
+            type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
+            directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.TYPEORM]),
+            exports: [
+              {
+                output: 'index.ts',
+                pattern:
+                  convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + `${SchematicFilesMap[AvailableDBAdapters.TYPEORM]}/**/*.entity.ts`
+              }
+            ]
           })
         }
       ]
     })
-
-    // options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE)
-    //   ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-    //     silent: true,
-    //     skipFormat: true,
-    //     templates: {
-    //       root: options.root,
-    //       templates: [
-    //         {
-    //           output: convertStringToDirPath(options.sourceRoot) + 'entity-mongoose/index.ts',
-    //           pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-mongoose/**/*.entity.ts'
-    //         }
-    //       ]
-    //     }
-    //   })
-    //   : noop(),
-
-    // options.dbAdapters.includes(AvailableDBAdapters.TYPEORM)
-    //   ? externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-    //     silent: true,
-    //     skipFormat: true,
-    //     templates: {
-    //       root: options.root,
-    //       templates: [
-    //         {
-    //           output: convertStringToDirPath(options.sourceRoot) + 'entity-typeorm/index.ts',
-    //           pattern: convertStringToDirPath(join(options.root, options.sourceRoot), { start: true, end: true }) + 'entity-typeorm/**/*.entity.ts'
-    //         }
-    //       ]
-    //     }
-    //   })
-    //   : noop()
   ])
 }
 

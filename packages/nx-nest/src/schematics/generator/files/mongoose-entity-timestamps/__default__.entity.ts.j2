@@ -3,9 +3,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { BaseDocumentWithTimestamps } from './util'
 
 @Schema({ timestamps: true })
-export class DefaultMongooseEntity extends BaseDocumentWithTimestamps {
+export class {{ casing.pascal }}Entity extends BaseDocumentWithTimestamps {
   @Prop()
   dummy: string
 }
 
-export const DefaultMongooseSchema = SchemaFactory.createForClass(DefaultMongooseEntity)
+export const {{ casing.pascal }}Schema = SchemaFactory.createForClass(DefaultMongooseEntity)

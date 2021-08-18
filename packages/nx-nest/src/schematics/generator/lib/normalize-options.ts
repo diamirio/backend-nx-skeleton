@@ -1,9 +1,10 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
-import { generateNameCases, isVerbose, Logger, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
+import { generateNameCases, isVerbose, Logger, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
 import globby from 'globby'
-import { Listr } from 'listr2'
-import { join } from 'path'
+import { Listr, PromptOptionsMap } from 'listr2'
+import { join, relative } from 'path'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 
@@ -23,7 +24,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'silent', 'mount' ] }
+            assign: { from: options, keys: [ 'name', 'directory', 'exports', 'type' ] }
           })
         }
       },
@@ -56,11 +57,21 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
 
           logger.debug('Template directory to scan for is: ', scanDir)
 
-          const choices = await globby('*', {
+          let choices: PromptOptionsMap['AutoComplete']['choices'] = await globby('*', {
             deep: 1,
             onlyDirectories: true,
             cwd: scanDir
           })
+
+          choices = await Promise.all(
+            choices.map(async (c) => {
+              return {
+                name: c,
+                message: c,
+                hint: color.yellow(readFileIfExisting(join(scanDir, c, 'description.txt')).trimEnd())
+              }
+            })
+          )
 
           logger.debug('Selectable choices are:', choices)
 
@@ -88,7 +99,11 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       {
         title: 'Setting partial root directory.',
         task: async (ctx, task): Promise<void> => {
-          ctx.root = process.cwd()
+          if (ctx.directory) {
+            ctx.root = relative(process.cwd(), ctx.directory)
+          } else {
+            ctx.root = '.'
+          }
 
           task.title = `Generated item root directory is set as: ${ctx.root}`
         }
