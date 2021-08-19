@@ -130,9 +130,8 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this will be the command
     await execa(
-      this.helpers.node.manager,
+      'npx',
       [
-        'run',
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,

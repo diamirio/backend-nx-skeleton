@@ -26,3 +26,9 @@
     - name: library
       description: Create a library.
       forceArguments: true
+
+- pkg: '@webundsoehne/nx-tools'
+  description: 'Some generic tools for nx.'
+  schematics:
+    - name: exports
+      description: export a glob pattern from the defined file. an easy index.ts creation.

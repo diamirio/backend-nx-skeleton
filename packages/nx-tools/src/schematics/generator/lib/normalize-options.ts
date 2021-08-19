@@ -1,12 +1,12 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
-import { generateNameCases, isVerbose, Logger, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
 import globby from 'globby'
 import { Listr, PromptOptionsMap } from 'listr2'
 import { join, relative } from 'path'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -15,8 +15,10 @@ import { NormalizedSchema, Schema } from '../main.interface'
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (files: string, _host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   const logger = new Logger(context)
+  const scanDir = files
+  logger.debug('Template directory to scan for is: ', scanDir)
 
   return new Listr<NormalizedSchema>(
     [
@@ -44,8 +46,11 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       // need package scope for imports and such
       {
         task: (ctx): void => {
-          const nxJson = readNxJson()
-          ctx.packageScope = `${nxJson.npmScope}`
+          try {
+            const nxJson = readNxJson()
+            ctx.packageScope = `${nxJson.npmScope}`
+            // eslint-disable-next-line no-empty
+          } catch {}
         }
       },
 
@@ -53,10 +58,6 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
-          const scanDir = join(__dirname, '../files')
-
-          logger.debug('Template directory to scan for is: ', scanDir)
-
           let choices: PromptOptionsMap['AutoComplete']['choices'] = await globby('*', {
             deep: 1,
             onlyDirectories: true,
@@ -102,7 +103,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
           if (ctx.directory) {
             ctx.root = relative(process.cwd(), ctx.directory)
           } else {
-            ctx.root = '.'
+            ctx.root = relativeToNxRoot(process.cwd())
           }
 
           task.title = `Generated item root directory is set as: ${ctx.root}`

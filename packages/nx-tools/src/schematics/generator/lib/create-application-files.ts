@@ -1,9 +1,10 @@
 import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
+import { Schema as ExportsSchema } from '@schematics/exports/main.interface'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface } from '@src/rules'
+import { Logger } from '@src/utils'
 
 /**
  * @param  {NormalizedSchema} options This should be the options parsed through.
@@ -11,10 +12,10 @@ import { NormalizedSchema } from '../main.interface'
  * @returns Promise
  * A function that can create the application files for the given schematic.
  */
-export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
+export function createApplicationFiles (files: string, options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)
   // source is always the same
-  const source = url(join('./files', options.type))
+  const source = url(join(files, options.type))
 
   return chain([
     applyOverwriteWithDiff(
