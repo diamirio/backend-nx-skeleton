@@ -1,3 +1,37 @@
+# @webundsoehne-private/nx-workspace [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.12...@webundsoehne-private/nx-workspace@3.0.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* update for v8, solve some little bugs ([9179be2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9179be23520148b5609ed5e6ce1a185dfbca33f3))
+* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
+
+
+### Features
+
+* update new version ([ea42e11](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea42e1161873e4d31a24a4292b27fc01d7a7fc80))
+
+
+### Performance Improvements
+
+* major version updates ([8a0c32a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8a0c32aa24a0a79c4c72ab5cfd19c68a8d20f6ef))
+* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
+
+
+### BREAKING CHANGES
+
+* Major changes.
+* updates nestjs to 8 and some breaking changes due to playground
+* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 4.0.0
+
 ## @webundsoehne-private/nx-workspace [2.0.12](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@2.0.11...@webundsoehne-private/nx-workspace@2.0.12) (2021-06-28)
 
 
