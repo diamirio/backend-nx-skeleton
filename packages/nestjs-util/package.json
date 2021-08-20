@@ -43,9 +43,9 @@
   "dependencies": {
     "config": "^3.3.6",
     "fs-extra": "^10.0.0",
-    "moment": "^2.28.0",
+    "moment": "^2.29.1",
     "reflect-metadata": "^0.1.13",
-    "winston": "^3.2.1"
+    "winston": "^3.3.3"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8 < 9",

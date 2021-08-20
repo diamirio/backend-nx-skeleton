@@ -5,7 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "removeComments": false,
     "noUnusedLocals": false,
     "emitDecoratorMetadata": true,

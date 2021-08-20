@@ -5,6 +5,7 @@
     "rootDir": "src",
     "baseUrl": "src",
     "strictNullChecks": false,
+    "sourceMap": true,
     "paths": {
       "@src/*": ["*"],
       "@commands/*": ["commands/*"],

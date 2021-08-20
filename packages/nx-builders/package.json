@@ -43,13 +43,13 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "0.1202.1",
-    "@angular-devkit/core": "12.2.1",
-    "@angular-devkit/schematics": "12.2.1",
-    "@nrwl/cli": "^12.6.2",
+    "@angular-devkit/architect": "0.1202.2",
+    "@angular-devkit/core": "12.2.2",
+    "@angular-devkit/schematics": "12.2.2",
+    "@nrwl/cli": "^12.7.2",
     "@webundsoehne/nx-tools": "*",
     "delay": "^5.0.0",
-    "execa": "^5.0.1",
+    "execa": "^5.1.1",
     "tree-kill": "^1.2.2"
   },
   "devDependencies": {
