@@ -34,7 +34,7 @@ export const VERSIONS: Versions = {
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
-      '@nestjs/graphql': '^8.0.3',
+      '@nestjs/graphql': '^8.0.2',
       '@nestjs/platform-fastify': '^8.0.6',
       'apollo-server-fastify': '^3.1.2',
       graphql: '^15.5.1',

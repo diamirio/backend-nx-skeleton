@@ -129,22 +129,26 @@ export class NodeHelper {
     if (options?.global) {
       // these are the global folders that modules can be found
       if (this.globalFolder.length === 0) {
-        if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
-          const yarnGlobalFolder = join(
-            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
-            'node_modules'
-          )
-          const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
-
-          this.globalFolder.push(yarnGlobalFolder, yarnLinkFolder)
-        }
-
-        if (!this.ctx.fail[AvailablePackageManagers.NPM]) {
+        if (!this.ctx.fail[AvailablePackageManagers.NPM] && this.manager === AvailablePackageManagers.NPM) {
           const npmGlobalFolder = join(
             (await execa(AvailablePackageManagers.NPM, [ PackageManagerCommands[AvailablePackageManagers.NPM][PackageManagerUsableCommands.GLOBAL], 'root' ])).stdout
           )
 
           this.globalFolder.push(npmGlobalFolder)
+        }
+
+        if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
+          const yarnGlobalFolder = join(
+            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
+            'node_modules'
+          )
+
+          // always add link folder, since this repository uses link to link stuff, important for testing through here
+          this.globalFolder.push(join(yarnGlobalFolder, '../../', 'link'))
+
+          if (this.manager === AvailablePackageManagers.YARN) {
+            this.globalFolder.push(yarnGlobalFolder)
+          }
         }
       }
 
@@ -172,15 +176,19 @@ export class NodeHelper {
 
         const o = { pkg: currentPkg.pkg, installed: false } as CheckIfModuleInstalled
 
-        let packagePath: string
-        let found: boolean
-        if (options.cwd) {
-          await Promise.all(
-            (options.cwd as string[]).map(async (v) => {
-              try {
-                packagePath = join(v, currentPkg.pkg)
-                found = statSync(packagePath).isDirectory()
+        if (options.cwd && options.cwd.length > 0) {
+          this.cmd.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
 
+          await Promise.all(
+            options.cwd.map(async (v) => {
+              try {
+                const packagePath = join(v, currentPkg.pkg)
+
+                statSync(packagePath)
+
+                o.path = packagePath
+
+                o.installed = true
                 // eslint-disable-next-line no-empty
               } catch {}
             })
@@ -188,60 +196,67 @@ export class NodeHelper {
         } else {
           // fallback method for non root directories
           try {
-            packagePath = dirname(require.resolve(join(currentPkg.pkg, 'package.json')))
-            found = statSync(packagePath).isDirectory()
+            this.cmd.logger.debug('Using local node package directory for package: %s', currentPkg.pkg)
+
+            const packagePath = dirname(require.resolve(join(currentPkg.pkg, 'package.json')))
+
+            statSync(packagePath)
+
+            o.path = packagePath
+
+            o.installed = true
             // eslint-disable-next-line no-empty
           } catch {}
         }
 
-        if (found) {
-          o.installed = true
-          o.path = packagePath
-
-          this.cmd.logger.debug('Package found in: %s -> %s', currentPkg.pkg, packagePath)
+        if (o.installed) {
+          this.cmd.logger.debug('Package found: %s -> %s', o.pkg, o.path)
 
           // get version from stuff
-          const packageJson = join(packagePath, 'package.json')
+          const packageJson = join(o.path, 'package.json')
+
           if (options.getVersion) {
             try {
               o.version = (await readJson(packageJson))?.version
             } catch {
-              this.cmd.message.warn(`Can not read package version of package: ${p}`)
+              this.cmd.message.warn('Can not read package version of package: %o', p)
             }
           }
-        }
 
-        // get updates if available
-        if (o?.version && options?.getUpdate) {
-          try {
-            // instead fetchinfo use checknpm old way
-            // trickery for console.log since this module is s*
-            // eslint-disable-next-line no-console
-            const mock = console.log
-            // eslint-disable-next-line no-console
-            console.log = (): void => null
-            const updatable = await notifier({ pkg: { name: currentPkg.pkg, version: o.version }, registryUrl: currentPkg?.registry }).checkNpm()
-            // eslint-disable-next-line no-console
-            console.log = mock
+          // get updates if available
+          if (o?.version && options?.getUpdate) {
+            try {
+              // instead fetchinfo use checknpm old way
+              // trickery for console.log since this module is s*
+              // eslint-disable-next-line no-console
+              const mock = console.log
+              // eslint-disable-next-line no-console
+              console.log = (): void => null
+              const updatable = await notifier({ pkg: { name: currentPkg.pkg, version: o.version }, registryUrl: currentPkg?.registry }).checkNpm()
+              // eslint-disable-next-line no-console
+              console.log = mock
 
-            if (updatable.type !== 'latest') {
-              o.hasUpdate = true
-              o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`
-              o.latest = updatable.latest
-            } else {
-              o.hasUpdate = false
+              if (updatable.type !== 'latest') {
+                o.hasUpdate = true
+                o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`
+                o.latest = updatable.latest
+              } else {
+                o.hasUpdate = false
+              }
+            } catch (e) {
+              this.cmd.message.warn(`Can not check for current version: ${currentPkg.pkg}`)
+              this.cmd.message.debug(e.message)
             }
-          } catch (e) {
-            this.cmd.message.warn(`Can not check for current version: ${currentPkg.pkg}`)
-            this.cmd.message.debug(e.message)
           }
+        } else {
+          this.cmd.message.debug('Package can not be found in cwd: %s', o.pkg)
         }
 
         o.parsable = {
           pkg: currentPkg.pkg,
-          registry: currentPkg.registry,
-          version: o.version,
-          latest: o.latest ?? 'latest'
+          registry: currentPkg?.registry,
+          version: o?.version,
+          latest: o?.latest ?? 'latest'
         }
 
         // idiomatic can sometimes happen if package not set

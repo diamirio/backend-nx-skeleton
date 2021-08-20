@@ -1,4 +1,4 @@
-image: node:14-alpine
+image: node:16-alpine
 
 stages:
   - install
@@ -9,7 +9,7 @@ stages:
 
 variables:
   PARENT_PIPELINE_ID: $CI_PIPELINE_ID
-  # Space seperated of yaml env files to injecting variables at build time
+  # Space delimited of yaml env files to injecting variables at build time
   INJECT_ENV_FILES: ''
 
 cache:

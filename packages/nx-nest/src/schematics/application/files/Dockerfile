@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 # Workdir for node package
 WORKDIR /data/app
