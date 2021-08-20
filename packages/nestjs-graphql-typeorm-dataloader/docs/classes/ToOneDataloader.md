@@ -7,8 +7,8 @@ A common loader to handle to one relations.
 ## Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
 ## Hierarchy
 
@@ -39,15 +39,15 @@ A common loader to handle to one relations.
 #### Type parameters
 
 | Name |
-| :--- |
-| `V`  |
+| :------ |
+| `V` |
 
 #### Parameters
 
-| Name         | Type               |
-| :----------- | :----------------- |
-| `relation`   | `RelationMetadata` |
-| `connection` | `Connection`       |
+| Name | Type |
+| :------ | :------ |
+| `relation` | `RelationMetadata` |
+| `connection` | `Connection` |
 
 #### Overrides
 
@@ -63,12 +63,13 @@ packages/nestjs-graphql-typeorm-dataloader/src/loaders/to-one.loader.ts:11
 
 ▸ **clear**(`key`): [`ToOneDataloader`](ToOneDataloader.md)<`V`\>
 
-Clears the value at `key` from the cache, if it exists. Returns itself for method chaining.
+Clears the value at `key` from the cache, if it exists. Returns itself for
+method chaining.
 
 #### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `key` | `any` |
 
 #### Returns
@@ -83,13 +84,15 @@ DataLoader.clear
 
 node_modules/dataloader/index.d.ts:46
 
----
+___
 
 ### clearAll
 
 ▸ **clearAll**(): [`ToOneDataloader`](ToOneDataloader.md)<`V`\>
 
-Clears the entire cache. To be used when some event results in unknown invalidations across this particular `DataLoader`. Returns itself for method chaining.
+Clears the entire cache. To be used when some event results in unknown
+invalidations across this particular `DataLoader`. Returns itself for
+method chaining.
 
 #### Returns
 
@@ -103,7 +106,7 @@ DataLoader.clearAll
 
 node_modules/dataloader/index.d.ts:53
 
----
+___
 
 ### load
 
@@ -113,8 +116,8 @@ Loads a key, returning a `Promise` for the value represented by that key.
 
 #### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `key` | `any` |
 
 #### Returns
@@ -129,7 +132,7 @@ DataLoader.load
 
 node_modules/dataloader/index.d.ts:25
 
----
+___
 
 ### loadMany
 
@@ -148,8 +151,8 @@ This is equivalent to the more verbose:
 
 #### Parameters
 
-| Name   | Type                |
-| :----- | :------------------ |
+| Name | Type |
+| :------ | :------ |
 | `keys` | `ArrayLike`<`any`\> |
 
 #### Returns
@@ -164,19 +167,20 @@ DataLoader.loadMany
 
 node_modules/dataloader/index.d.ts:40
 
----
+___
 
 ### prime
 
 ▸ **prime**(`key`, `value`): [`ToOneDataloader`](ToOneDataloader.md)<`V`\>
 
-Adds the provied key and value to the cache. If the key already exists, no change is made. Returns itself for method chaining.
+Adds the provied key and value to the cache. If the key already exists, no
+change is made. Returns itself for method chaining.
 
 #### Parameters
 
-| Name    | Type           |
-| :------ | :------------- |
-| `key`   | `any`          |
+| Name | Type |
+| :------ | :------ |
+| `key` | `any` |
 | `value` | `Error` \| `V` |
 
 #### Returns

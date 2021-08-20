@@ -24,8 +24,8 @@
 
 #### Parameters
 
-| Name       | Type                              |
-| :--------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options?` | `ApolloServerLoaderPluginOptions` |
 
 #### Defined in
@@ -40,10 +40,10 @@ packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.intercep
 
 #### Parameters
 
-| Name      | Type                  |
-| :-------- | :-------------------- |
-| `context` | `ExecutionContext`    |
-| `next`    | `CallHandler`<`any`\> |
+| Name | Type |
+| :------ | :------ |
+| `context` | `ExecutionContext` |
+| `next` | `CallHandler`<`any`\> |
 
 #### Returns
 

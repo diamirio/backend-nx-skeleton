@@ -24,8 +24,8 @@
 
 #### Parameters
 
-| Name       | Type                              |
-| :--------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options?` | `ApolloServerLoaderPluginOptions` |
 
 #### Defined in
