@@ -56,7 +56,10 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
         rename: options.name
       }
     ],
-    omit: [ { condition: true, match: (file): boolean => !file.endsWith('description.txt') } ]
+    omit: [
+      { condition: true, match: (file): boolean => !file.endsWith('description.txt') },
+      { condition: true, match: (file): boolean => !file.endsWith('prompts.json') }
+    ]
   }
 
   return createApplicationRule(template, options, { format: { prettier: true, eslint: true } })

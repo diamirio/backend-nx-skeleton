@@ -1,0 +1,4 @@
+[
+  { "type": "Input", "name": "test", "message": "test" },
+  { "type": "Input", "name": "test2", "message": "test" }
+]

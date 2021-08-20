@@ -76,3 +76,51 @@ export async function createApplicationFiles(options: NormalizedSchema, context:
 ```
 
 Through the cli it will prompt you to select an output file and and a pattern to automatically export everything with the given glob pattern.
+
+## Generic Generator
+
+Generic generator is a generic library that allows to create a basic generator library that can work in either in the root or current working directory. It will generate the files selected on the type.
+
+- Create your schema from the generator.
+
+  ```typescript
+  // main.ts
+  import { generateGenericGenerator } from '@webundsoehne/nx-tools/dist/schematics/generator/main'
+  import { join } from 'path'
+
+  /**
+   * @param  {Schema} schema
+   * The schematic itself.
+   */
+  export default generateGenericGenerator(join(__dirname, './files'))
+  ```
+
+- Extend the interfaces from the base rule.
+
+  ```typescript
+  // main.interface.ts
+  import { Schema as BaseSchema, NormalizedSchema as BaseNormalizedSchema } from '@webundsoehne/nx-tools/dist/schematics/generator/main.interface'
+
+  import { AvailableGenerators } from '@src/interfaces'
+
+  type TypedBaseSchema = BaseSchema<AvailableGenerators>
+  type TypedBaseNormalizedSchema = BaseNormalizedSchema<{ test: boolean }, AvailableGenerators>
+
+  export { TypedBaseSchema as Schema, TypedBaseNormalizedSchema as NormalizedSchema }
+  ```
+
+- Create your schema.json for nx.
+
+- Add your files in to the given files directory in subfolders with the names of generators.
+
+- Add `description.txt`, if you want to have hint in the type selection prompt.
+
+- Add extra prompts if you want to inject stuff to template. Prompt options are available [here](https://github.com/cenk1cenk2/listr2/blob/master/src/utils/prompt.interface.ts). Give every prompt `name` property to access it like `inject[name]` in jinja templating. If there is a single prompt it will be just on the `inject` property.
+
+  ```json
+  // prompts.json
+  [
+  { "type": "Input", "name": "test", "message": "test" },
+  { "type": "Input", "name": "test2", "message": "test" }
+  ]
+  ```

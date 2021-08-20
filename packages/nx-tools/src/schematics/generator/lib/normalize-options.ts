@@ -1,6 +1,9 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
+import { fileExists } from '@nrwl/workspace/src/utilities/fileutils'
+import { sync as findUp } from 'find-up'
+import fs from 'fs-extra'
 import globby from 'globby'
 import { Listr, PromptOptionsMap } from 'listr2'
 import { join, relative } from 'path'
@@ -17,8 +20,7 @@ import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchem
  */
 export async function normalizeOptions (files: string, _host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   const logger = new Logger(context)
-  const scanDir = files
-  logger.debug('Template directory to scan for is: ', scanDir)
+  logger.debug(`Template directory to scan in: ${files}`)
 
   return new Listr<NormalizedSchema>(
     [
@@ -45,9 +47,13 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
 
       // need package scope for imports and such
       {
-        task: (ctx): void => {
+        task: async (ctx): Promise<void> => {
+          const nxJsonPath = findUp('nx.json', { cwd: process.cwd(), type: 'file' })
+
+          logger.debug(`nx.json path found: ${nxJsonPath}`)
+
           try {
-            const nxJson = readNxJson()
+            const nxJson = await fs.readJSON(nxJsonPath)
             ctx.packageScope = `${nxJson.npmScope}`
             // eslint-disable-next-line no-empty
           } catch {}
@@ -56,12 +62,12 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
 
       // select partial type
       {
-        enabled: (ctx): boolean => ctx.type === undefined,
+        enabled: (ctx): boolean => !ctx.type,
         task: async (ctx, task): Promise<void> => {
           let choices: PromptOptionsMap['AutoComplete']['choices'] = await globby('*', {
             deep: 1,
             onlyDirectories: true,
-            cwd: scanDir
+            cwd: files
           })
 
           choices = await Promise.all(
@@ -69,7 +75,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
               return {
                 name: c,
                 message: c,
-                hint: color.yellow(readFileIfExisting(join(scanDir, c, 'description.txt')).trimEnd())
+                hint: color.yellow(readFileIfExisting(join(files, c, 'description.txt')).trimEnd())
               }
             })
           )
@@ -77,7 +83,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
           logger.debug('Selectable choices are:', choices)
 
           if (!choices || choices.length === 0) {
-            throw new Error(`Template directory is empty: ${scanDir}`)
+            throw new Error(`Template directory is empty: ${files}`)
           }
 
           // select the base components
@@ -107,6 +113,23 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
           }
 
           task.title = `Generated item root directory is set as: ${ctx.root}`
+        }
+      },
+
+      // get and process prompts
+      {
+        title: 'Extra prompts to extend the templates.',
+        skip: (ctx): boolean => !fs.existsSync(join(files, ctx.type, 'prompts.json')),
+        task: async (ctx, task): Promise<void> => {
+          task.title = 'Prompts file is found, now have some extra questions to inject to templates.'
+
+          const prompts = await fs.readJSON(join(files, ctx.type, 'prompts.json'))
+
+          ctx.inject = await task.prompt(prompts)
+
+          task.title = 'Injected extra variables to generator.'
+
+          logger.debug(`Injected extra variables through prompts: ${JSON.stringify(ctx.inject, null, 2)}`)
         }
       }
     ],
