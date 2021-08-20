@@ -1,7 +1,6 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { readNxJson, toFileName } from '@nrwl/workspace'
+import { toFileName } from '@nrwl/workspace'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
-import { fileExists } from '@nrwl/workspace/src/utilities/fileutils'
 import { sync as findUp } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
