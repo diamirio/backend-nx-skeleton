@@ -9,7 +9,7 @@ export const LINTER_VERSIONS: LinterVersions = {
     devDependencies: {
       eslint: '^7.32.0',
       '@nrwl/eslint-plugin-nx': '^12.7.2',
-      '@webundsoehne/eslint-config': '^3.0.2',
+      '@webundsoehne/eslint-config': '^4.0.0',
       '@typescript-eslint/eslint-plugin': '^4.29.2',
       'eslint-plugin-import': '^2.24.1'
     }
