@@ -1,3 +1,20 @@
+# @webundsoehne/eslint-config [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.2...@webundsoehne/eslint-config@4.0.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
+
+
+### Performance Improvements
+
+* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
+
+
+### BREAKING CHANGES
+
+* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
+
 ## @webundsoehne/eslint-config [3.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.1...@webundsoehne/eslint-config@3.0.2) (2021-06-01)
 
 
