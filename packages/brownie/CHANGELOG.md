@@ -1,3 +1,40 @@
+# @webundsoehne/brownie [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.14...@webundsoehne/brownie@3.0.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* update for v8, solve some little bugs ([9179be2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9179be23520148b5609ed5e6ce1a185dfbca33f3))
+* update package versions and add more to generator ([0cf3f0d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0cf3f0df6bebd573d35177564dc82ce49fe4295f))
+* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
+
+
+### Features
+
+* add external prompts for generic generator ([b800ace](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b800ace938b148ce4d792f81ecaa73e1adcc8184))
+* add generic generator ([4b4d8eb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4b4d8eb9107d27d44df4cb5b0cd1fe72a3e8e2ca))
+* adds backend-interfaces library properly ([8949013](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/894901340621b7872b24465b2a99d26fb2f9de50))
+* adss generator for generating some stuff ([72b00e8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/72b00e82f0605b70678fb7f6047873528a0e99b5))
+* update new version ([ea42e11](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea42e1161873e4d31a24a4292b27fc01d7a7fc80))
+
+
+### Performance Improvements
+
+* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
+
+
+### BREAKING CHANGES
+
+* updates nestjs to 8 and some breaking changes due to playground
+* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 4.0.0
+
 ## @webundsoehne/brownie [2.0.14](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@2.0.13...@webundsoehne/brownie@2.0.14) (2021-06-28)
 
 
