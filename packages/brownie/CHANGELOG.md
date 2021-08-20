@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [3.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.1...@webundsoehne/brownie@3.0.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* update node version for containers etc ([6863b55](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6863b55fa7e0d7f174c84f76030984eb2a1482bb))
+
 ## @webundsoehne/brownie [3.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.0...@webundsoehne/brownie@3.0.1) (2021-08-20)
 
 
