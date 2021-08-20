@@ -1,7 +1,7 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { pipeProcessThroughListr } from '@webundsoehne/nx-tools'
 import execa from 'execa'
-import { readJson, stat, statSync } from 'fs-extra'
+import { readJson, statSync } from 'fs-extra'
 import { Listr } from 'listr2'
 import { dirname, join } from 'path'
 import notifier from 'update-notifier2'
