@@ -22,6 +22,7 @@ All the functions are imported from the root of the project.
 - [Tools](#tools)
 - [Schematics](#schematics)
   - [Generate Exports](#generate-exports)
+  - [Generic Generator](#generic-generator)
 
 <!-- tocstop -->
 
