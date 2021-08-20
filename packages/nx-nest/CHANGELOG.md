@@ -1,3 +1,48 @@
+# @webundsoehne-private/nx-nest [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.22...@webundsoehne-private/nx-nest@3.0.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* testing configuration with paths etc. ([d9247d9](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d9247d9fc2b366f79fe0a3842e566cddea81dfc3))
+* update for v8, solve some little bugs ([9179be2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9179be23520148b5609ed5e6ce1a185dfbca33f3))
+* update integration more ([cb5fecb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cb5fecb1e4f5d5f44404a0566565965266c3b7db))
+* update package versions and add more to generator ([0cf3f0d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0cf3f0df6bebd573d35177564dc82ce49fe4295f))
+* update the application template with using backend interfaces ([2c30f51](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2c30f51ea557f770a76672557e524194715061a7))
+* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
+
+
+### Features
+
+* add external prompts for generic generator ([b800ace](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b800ace938b148ce4d792f81ecaa73e1adcc8184))
+* add generic generator ([4b4d8eb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4b4d8eb9107d27d44df4cb5b0cd1fe72a3e8e2ca))
+* add schematic generator and finalize it ([62fd7f6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/62fd7f6fd0c6e843aab0c741295c7a25973071c5))
+* adds backend-interfaces library properly ([8949013](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/894901340621b7872b24465b2a99d26fb2f9de50))
+* adss generator for generating some stuff ([72b00e8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/72b00e82f0605b70678fb7f6047873528a0e99b5))
+* finalize backend interfaces and generators, fix some extra bugs ([cbc79fd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cbc79fd4b5d73005738e795d6f546d5134654020))
+* update new version ([ea42e11](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea42e1161873e4d31a24a4292b27fc01d7a7fc80))
+
+
+### Performance Improvements
+
+* major version updates ([8a0c32a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8a0c32aa24a0a79c4c72ab5cfd19c68a8d20f6ef))
+* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
+
+
+### BREAKING CHANGES
+
+* Major changes.
+* updates nestjs to 8 and some breaking changes due to playground
+* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 4.0.0
+* **@webundsoehne/nx-tools:** upgraded to 4.0.0
+
 ## @webundsoehne-private/nx-nest [2.0.22](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@2.0.21...@webundsoehne-private/nx-nest@2.0.22) (2021-06-28)
 
 

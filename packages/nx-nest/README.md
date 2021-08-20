@@ -21,6 +21,8 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) schematics to gener
   - [Application](#application)
   - [Component](#component)
   - [Microservice Provider](#microservice-provider)
+  - [Backend Interfaces](#backend-interfaces)
+  - [Generator](#generator)
 - [Notes](#notes)
 
 <!-- tocstop -->
