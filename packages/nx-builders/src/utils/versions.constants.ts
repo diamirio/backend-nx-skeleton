@@ -7,13 +7,13 @@ export const VERSIONS: Versions = {
   [AvailableBuilders.TSC]: {
     devDeps: {
       tscpaths: '^0.0.9',
-      'tsc-watch': '^4.4.0'
+      'tsc-watch': '^4.5.0'
     }
   },
 
   [AvailableBuilders.TS_NODE_DEV]: {
     devDeps: {
-      'ts-node': '^10.1.0',
+      'ts-node': '^10.2.0',
       'ts-node-dev': '^1.1.8',
       'tsconfig-paths': '^3.10.1'
     }
