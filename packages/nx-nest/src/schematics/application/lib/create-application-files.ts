@@ -8,12 +8,14 @@ import {
   Logger,
   runInRule
 } from '@webundsoehne/nx-tools'
+import { join } from 'path'
 
-import { getSchematicFiles } from '../interfaces/file.constants'
+import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableGenerators, AvailableServerTypes } from '@interfaces/available.constants'
 import { Schema as BackendInterfacesSchema } from '@src/schematics/backend-interfaces/main.interface'
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
+import { Schema as GeneratorSchema } from '@src/schematics/generator/main.interface'
 import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
 
 /**
@@ -50,6 +52,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
 
     ...createApplicationRule({
       trigger: [
+        // default components
         {
           rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
         },
@@ -80,19 +83,47 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
             !options.priorConfiguration?.components?.includes(AvailableComponents.MICROSERVICE_SERVER) && options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
           rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableComponents.MICROSERVICE_SERVER })
         },
+
+        // backend-interfaces is extension selected
         {
           condition: options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
           rule: addSchematicTask<BackendInterfacesSchema>('backend-interfaces', {})
         },
+
+        // microservice-provider if microservice-server is defined
         {
           condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
           rule: addSchematicTask<MspSchema>('msp', {})
+        },
+
+        // generate default entities
+        {
+          condition:
+            options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
+            options.dbAdapters === AvailableDBAdapters.TYPEORM &&
+            !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+          rule: addSchematicTask<GeneratorSchema>('generator', {
+            name: 'default',
+            type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
+            directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.TYPEORM]),
+            exports: [ { output: 'index.ts', pattern: '**/*.entity.ts' } ]
+          })
+        },
+
+        {
+          condition:
+            options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.MONGOOSE &&
+            options.dbAdapters === AvailableDBAdapters.MONGOOSE &&
+            !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+          rule: addSchematicTask<GeneratorSchema>('generator', {
+            name: 'default',
+            type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
+            directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),
+            exports: [ { output: 'index.ts', pattern: '**/*.entity.ts' } ]
+          })
         }
       ]
     })
-
-    // @TODO: this was here before so i am not sure if it was here before i implemented trigger or it has a particular reason, needs to be tested
-    // options.components.includes(AvailableComponents.MICROSERVICE_SERVER) ? addSchematicTask<MspSchema>('msp', {}) : noop()
   ])
 }
 

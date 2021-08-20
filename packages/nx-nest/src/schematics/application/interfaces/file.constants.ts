@@ -1,7 +1,7 @@
 import { SchematicFiles } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableTestsTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableTestsTypes } from '@interfaces/available.constants'
 
 /**
  * This constant includes the files that are required for different components.
@@ -35,4 +35,9 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
       files: [ `${options.sourceRoot}/constants.ts` ]
     }
   }
+}
+
+export const SchematicFilesMap: Record<AvailableDBAdapters, string> = {
+  [AvailableDBAdapters.MONGOOSE]: 'entity',
+  [AvailableDBAdapters.TYPEORM]: 'entity'
 }

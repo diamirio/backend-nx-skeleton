@@ -325,9 +325,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 }
 
 function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof NormalizedSchema['priorConfiguration'], choices: ConvertToPromptType<any>): number[] | number {
-  if (key === 'components') {
+  if (ctx?.priorConfiguration?.[key] && Array.isArray(ctx.priorConfiguration[key])) {
     return (
-      ctx.priorConfiguration?.[key]?.reduce((o, val) => {
+      (ctx.priorConfiguration?.[key] as any[])?.reduce((o, val) => {
         choices.forEach((v, i) => {
           if (v.name === val) {
             o = [ ...o, i ]
@@ -337,7 +337,7 @@ function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof Nor
       }, []) ?? []
     )
   } else {
-    let value = 0
+    let value = -1
     choices.forEach((val, i) => {
       if (val.name === ctx.priorConfiguration?.[key]) {
         value = i

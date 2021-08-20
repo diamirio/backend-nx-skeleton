@@ -8,4 +8,4 @@ export class {{ casing.pascal }}Entity extends BaseDocumentWithTimestamps {
   dummy: string
 }
 
-export const {{ casing.pascal }}Schema = SchemaFactory.createForClass(DefaultMongooseEntity)
+export const {{ casing.pascal }}Schema = SchemaFactory.createForClass({{ casing.pascal }}Entity)

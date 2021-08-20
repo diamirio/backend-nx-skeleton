@@ -37,7 +37,7 @@ The first argument passed in to `nx g @webundsoehne-private/nx-nest:app ${APP_NA
 
 Follow through the interactive menu to generate a application with the components you need.
 
-Application will use `ts-node-dev` for development and `tsc` for distrubition.
+Application will use `ts-node-dev` for development and `tsc` for distribution.
 
 **To change the setup of the application and add/remove components in to it just rerun the command and follow through the prompt.** Application is memoryful therefore it will remember previous choices and try to diff-merge new components in to it without explicitly deleting your code. If merge for a file fails, it will take a backup of the current file.
 
@@ -57,7 +57,17 @@ To generate a microservice-provider that utilizes the `@webundsoehne/nestjs-util
 
 This will take no argument and will auto detect applications that are created with this plugin and have `microservice-server` selected as a component. If it fails to find any services it will run in mock mode for integration to legacy applications.
 
-This will create a new library called `microservice-provider` where the applications that utilize `microservice-client` to connect through. It will house the generic message queue names, patterns and request-response map for auto-compeletion.
+This will create a new library called `microservice-provider` where the applications that utilize `microservice-client` to connect through. It will house the generic message queue names, patterns and request-response map for completion.
+
+## Backend Interfaces
+
+Generates a common backend-interfaces library that can be used by the nest applications.
+
+This is also generated when the extension of backend interfaces is selected for the application. If the defined `nestjs` applications have a database adapter defined to them, it will auto generate the entities folders to responding adapter automatically.
+
+## Generator
+
+A basic generator that is usuable for generating a single file sets as in the case of `angular` or `nestjs` command line interfaces. This can scaffold a single component in a folder easily.
 
 # Notes
 

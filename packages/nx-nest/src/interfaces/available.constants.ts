@@ -71,7 +71,9 @@ export enum AvailableExtensions {
  * It does not directly use these types since it globs the directory.
  */
 export enum AvailableGenerators {
+  MONGOOSE_ENTITY = 'mongoose-entity',
   MONGOOSE_ENTITY_TIMESTAMPS = 'mongoose-entity-timestamps',
+  TYPEORM_ENTITY = 'typeorm-entity',
   TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary'
 }
 

@@ -35,7 +35,7 @@ This library mostly compromises of tools that are useful for generating schemati
 
 ## Generate Exports
 
-This schematic can be used internally for other schematics to generate exports based on designated patterns.
+This schematic can be used for other schematics to generate exports based on designated patterns.
 
 After parsing through your rules, you can add this as an individual role to go through all the files and match designated patterns and create TypeScript exported modules of matching files. All paths will be relative.
 
@@ -45,8 +45,6 @@ There is two use cases for this:
   > This will parse your files in your tree you defined and only export them, and does not care about the real files on host. To achieve this, this rule has to come before "mergeWith" function of tree with physical files.
 - External processing
   > To achieve this, this rule has to come after "mergeWith". Schematic will go through the whole real file base supplied as a tree and match the files on the physical file system as well.
-
-**This schematic has no way to call from cli since it does not make much sense.**
 
 **Example:**
 
@@ -76,3 +74,5 @@ export async function createApplicationFiles(options: NormalizedSchema, context:
   ])
 }
 ```
+
+Through the cli it will prompt you to select an output file and and a pattern to automatically export everything with the given glob pattern.

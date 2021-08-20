@@ -1,5 +1,13 @@
-import { apply, chain, Rule, schematic, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, deepMergeWithArrayOverwrite, Logger } from '@webundsoehne/nx-tools'
+import { apply, chain, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import {
+  addSchematicTask,
+  applyOverwriteWithDiff,
+  convertStringToDirPath,
+  createApplicationRule,
+  CreateApplicationRuleInterface,
+  deepMergeWithArrayOverwrite,
+  Logger
+} from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { Schema as GeneratorSchema } from '../../generator/main.interface'
@@ -25,7 +33,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
       trigger: [
         {
           condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
-          rule: schematic<GeneratorSchema>('generator', {
+          rule: addSchematicTask<GeneratorSchema>('generator', {
             silent: false,
             skipFormat: false,
             name: 'default',
@@ -43,7 +51,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
 
         {
           condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
-          rule: schematic<GeneratorSchema>('generator', {
+          rule: addSchematicTask<GeneratorSchema>('generator', {
             silent: false,
             skipFormat: false,
             name: 'default',
