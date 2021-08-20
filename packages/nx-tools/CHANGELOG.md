@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.0.0...@webundsoehne/nx-tools@4.0.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* change version for linter ([7efaac5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7efaac52c8da0ea6498845701c1b53e429d9a186))
+
 # @webundsoehne/nx-tools [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@3.2.6...@webundsoehne/nx-tools@4.0.0) (2021-08-20)
 
 
