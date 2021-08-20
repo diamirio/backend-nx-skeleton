@@ -6,4 +6,4 @@ export enum LogType {
   verbose = 'verbose'
 }
 
-export const logLevel: string = LogType.verbose
+export const LOG_LEVEL: string = LogType.verbose

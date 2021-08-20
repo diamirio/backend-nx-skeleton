@@ -8,9 +8,6 @@ import { Schema } from '@src/schematics/init/main.interface'
 export function calculateDependencies (options: Schema['items']): PackageVersions {
   return dependencyCalculator([
     {
-      deps: VERSIONS.base.default
-    },
-    {
       condition: options.includes(AvailableBuilders.TSC),
       deps: VERSIONS[AvailableBuilders.TSC]
     },

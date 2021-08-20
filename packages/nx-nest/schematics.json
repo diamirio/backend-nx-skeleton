@@ -23,11 +23,25 @@
       "description": "Generate a new component from schematic."
     },
 
+    "generator": {
+      "factory": "./dist/schematics/generator/main",
+      "schema": "./dist/schematics/generator/schema.json",
+      "aliases": ["g"],
+      "description": "Generate a new partial file from schematic."
+    },
+
     "microservice-provider": {
       "factory": "./dist/schematics/microservice-provider/main",
       "schema": "./dist/schematics/microservice-provider/schema.json",
       "aliases": ["msp"],
       "description": "Generate microservice based library."
+    },
+
+    "backend-interfaces": {
+      "factory": "./dist/schematics/backend-interfaces/main",
+      "schema": "./dist/schematics/backend-interfaces/schema.json",
+      "aliases": ["bi"],
+      "description": "Generate backend-interfaces based library."
     }
   }
 }

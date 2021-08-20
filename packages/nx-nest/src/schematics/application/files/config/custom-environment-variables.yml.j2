@@ -1,6 +1,9 @@
 {% if server is defined %}
+{% raw %}
 port: API_PORT
+{% endraw %}
 {% endif %}
+{% raw %}
 logLevel: LOG_LEVEL
 
 misc:
@@ -8,7 +11,9 @@ misc:
   lastUpdateFile: LAST_UPDATE_FILE
   maintenanceNotification: MAINTENANCE_MESSAGE
 
+{% endraw %}
 {% if server is defined %}
+{% raw %}
 url:
   basePath: BASE_URL
   apiPath: API_BASE_PATH
@@ -18,27 +23,38 @@ swagger:
     __name: USE_HTTPS
     __format: json
   basePath: API_BASE_PATH
+{% endraw %}
 {% endif %}
 
 {% if database is defined and database != enum.database.NONE %}
+{% raw %}
 database:
   host: DATABASE_HOST
   port: DATABASE_PORT
   database: DATABASE_NAME
-{% if enum.dbAdapters.TYPEORM in database %}
+{% endraw %}
+{% if enum.dbAdapters.TYPEORM == dbAdapters %}
+{% raw %}
   type: DATABASE_TYPE
   username: DATABASE_USER
   password: DATABASE_PASSWORD
   migrationsTableName: DATABASE_MIGRATIONS_TABLE
-{% elif enum.dbAdapters.MONGOOSE in database %}
+{% endraw %}
+{% elif enum.dbAdapters.MONGOOSE == dbAdapters %}
+{% raw %}
   authentication:
     username: DATABASE_USER
     password: DATABASE_PASSWORD
+{% endraw %}
 {% endif %}
 {% endif %}
 
 {% if microservice is defined or enum.components.MICROSERVICE_CLIENT in components %}
+{% raw %}
 messageQueue:
-  urls: MESSAGE_QUEUE_URLS
+  urls:
+    __name: MESSAGE_QUEUE_URLS
+    __format: json
+{% endraw %}
 {% endif %}
 

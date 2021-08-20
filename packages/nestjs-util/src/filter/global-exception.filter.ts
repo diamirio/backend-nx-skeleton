@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common'
-import { HttpAdapterHost } from '@nestjs/core'
-import { FastifyRequest } from 'fastify'
+import type { FastifyRequest, FastifyReply } from 'fastify'
 
 import { EnrichedException, EnrichedExceptionError } from './exception.interface'
 import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
@@ -8,8 +7,6 @@ import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
   private logger = new Logger(this.constructor.name)
-
-  constructor (private readonly httpAdapterHost: HttpAdapterHost) {}
 
   public static defaultPayload (exception: any): EnrichedException {
     return new EnrichedExceptionError({
@@ -23,6 +20,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   public catch (exception: Error, host: ArgumentsHost): void {
     const ctx = host.switchToHttp()
     const request: FastifyRequest = ctx.getRequest()
+    const response: FastifyReply = ctx.getResponse()
 
     const payload = this.payload(exception)
 
@@ -31,12 +29,11 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return
     }
 
-    if (request && this.httpAdapterHost?.httpAdapter) {
+    if (request && response?.send) {
       logErrorDebugMsg(this.logger, payload, exception.stack)
 
       // do not handle internal error mechanisms
-      const response = ctx.getResponse()
-      this.httpAdapterHost.httpAdapter.reply(response, payload, payload.statusCode)
+      response.code(payload.statusCode).send(payload)
     }
   }
 

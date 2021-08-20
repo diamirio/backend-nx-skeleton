@@ -47,7 +47,7 @@ export function installWorkspaceDependencies (options?: { root?: string }): Rule
 }
 
 /**
- * Add a install task to context to install the dependencies, ripped of from nx but it has the functionallity to chdir.
+ * Add a install task to context to install the dependencies, ripped of from nx but it has the functionality to chdir.
  * @param options
  */
 export function addInstallTask (options?: { skipInstall?: boolean, root?: string }): Rule {

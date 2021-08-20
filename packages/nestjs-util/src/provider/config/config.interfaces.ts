@@ -1,3 +1,1 @@
-export interface Config {
-  [key: string]: any
-}
+export type Config = Record<string, any>

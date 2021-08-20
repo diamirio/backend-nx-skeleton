@@ -21,6 +21,7 @@ This repository now uses conventional commits since it's monorepo structure. On 
 
 ## Modules
 
+- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->

@@ -19,6 +19,7 @@ import {
   AvailableComponents,
   AvailableDBAdapters,
   AvailableDBTypes,
+  AvailableExtensions,
   AvailableMicroserviceTypes,
   AvailableServerTypes,
   AvailableTestsTypes,
@@ -33,7 +34,7 @@ import { generateMicroserviceCasing } from '@src/utils'
  * @param context
  * @param options
  */
-export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -57,7 +58,8 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
                   database: AvailableDBTypes,
                   tests: AvailableTestsTypes,
                   microservice: AvailableMicroserviceTypes,
-                  dbAdapters: AvailableDBAdapters
+                  dbAdapters: AvailableDBAdapters,
+                  extensions: AvailableExtensions
                 }
               },
               {
@@ -221,7 +223,32 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
             initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
           })
 
+          ctx.dbAdapters = [ AvailableDBTypes.TYPEORM_MYSQL, AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(ctx.database)
+            ? AvailableDBAdapters.TYPEORM
+            : AvailableDBAdapters.MONGOOSE
+
           task.title = `Database selected as: ${ctx.database}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
+      {
+        skip: (ctx): boolean => !!ctx.extensions && ctx.extensions.length > 0,
+        task: async (ctx, task): Promise<void> => {
+          const choices = mapPromptChoices<AvailableExtensions>(AvailableExtensions, PrettyNamesForAvailableThingies)
+
+          // there can be two selections of API servers here
+          ctx.extensions = await task.prompt<AvailableExtensions[]>({
+            type: 'MultiSelect',
+            message: 'Please select the extensions you want.',
+            choices,
+            initial: getInitialFromPriorConfiguration(ctx, 'extensions', choices)
+          })
+
+          task.title = `Extensions selected as: ${ctx.extensions.length > 0 ? ctx.extensions.join(', ') : 'none'}`
         },
         options: {
           bottomBar: Infinity,
@@ -298,9 +325,9 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
 }
 
 function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof NormalizedSchema['priorConfiguration'], choices: ConvertToPromptType<any>): number[] | number {
-  if (key === 'components') {
+  if (ctx?.priorConfiguration?.[key] && Array.isArray(ctx.priorConfiguration[key])) {
     return (
-      ctx.priorConfiguration?.[key]?.reduce((o, val) => {
+      (ctx.priorConfiguration?.[key] as any[])?.reduce((o, val) => {
         choices.forEach((v, i) => {
           if (v.name === val) {
             o = [ ...o, i ]
@@ -310,7 +337,7 @@ function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof Nor
       }, []) ?? []
     )
   } else {
-    let value = 0
+    let value = -1
     choices.forEach((val, i) => {
       if (val.name === ctx.priorConfiguration?.[key]) {
         value = i

@@ -46,7 +46,7 @@ export interface CreateApplicationRuleInterface {
    */
   include?: SchematicFiles
   /**
-   * You can either enable or disable to format inside the rule, since this is moslty required for diff-merge capabilites to be sure that spacing of code does not cause problems.
+   * You can either enable or disable to format inside the rule, since this is moslty required for diff-merge capabilities to be sure that spacing of code does not cause problems.
    */
   format?: boolean
 }

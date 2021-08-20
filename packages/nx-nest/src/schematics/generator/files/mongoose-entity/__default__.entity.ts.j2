@@ -1,0 +1,11 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+
+import { BaseDocument } from './util'
+
+@Schema()
+export class {{ casing.pascal }}Entity extends BaseDocument {
+  @Prop()
+  dummy: string
+}
+
+export const {{ casing.pascal }}Schema = SchemaFactory.createForClass({{ casing.pascal }}Entity)

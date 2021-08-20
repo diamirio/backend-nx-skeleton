@@ -10,6 +10,18 @@ import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.con
  * @param options
  */
 export function updateIntegration (options: NormalizedSchema): Rule {
+  const integrationKeys: (keyof NormalizedSchema['priorConfiguration'])[] = [
+    'components',
+    'effectiveComponents',
+    'server',
+    'extensions',
+    'microservice',
+    'microserviceClient',
+    'database',
+    'dbAdapters',
+    'tests'
+  ]
+
   return chain([
     // create nx json entry
     updateNxJsonInTree((json) => {
@@ -18,15 +30,16 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add the components that needs to be known
-    updateNxIntegration<NormalizedSchema['priorConfiguration']>(options.name, {
-      components: options.components,
-      effectiveComponents: options.effectiveComponents,
-      server: options.server,
-      microservice: options.microservice,
-      database: options.database,
-      tests: options.tests,
-      microserviceClient: options.microserviceClient
-    }),
+    updateNxIntegration<NormalizedSchema['priorConfiguration']>(
+      options.name,
+      integrationKeys.reduce(
+        (o, key) => ({
+          ...o,
+          [key]: options[key]
+        }),
+        {} as NormalizedSchema['priorConfiguration']
+      )
+    ),
 
     // add nx container
     updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.NX ] }),

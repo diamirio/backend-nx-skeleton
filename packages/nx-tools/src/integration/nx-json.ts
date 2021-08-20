@@ -2,14 +2,12 @@ import { Rule } from '@angular-devkit/schematics'
 import { readNxJson, readWorkspaceJson as baseReadWorkspaceJson, updateJsonInTree } from '@nrwl/workspace'
 
 import { EnrichedNxJson, EnrichedWorkspaceJson } from '@interfaces/nx-json.interface'
-import { deepMergeWithUniqueMergeArray } from '@utils'
+import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@utils'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
- * @param name
- * @param options
  */
-export function updateNxIntegration<T> (name: string, options: T): Rule {
+export function updateNxIntegration<T> (name: string, data: T, options?: { arrayOverwrite?: boolean }): Rule {
   return updateJsonInTree('nx.json', (json) => {
     let nxJson = {} as T
 
@@ -21,7 +19,7 @@ export function updateNxIntegration<T> (name: string, options: T): Rule {
     }
 
     // write it back
-    json.projects[name].integration = deepMergeWithUniqueMergeArray(nxJson, options)
+    json.projects[name].integration = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(nxJson, data) : deepMergeWithUniqueMergeArray(nxJson, data)
 
     return json
   })
@@ -40,5 +38,5 @@ export function readNxIntegration<T> (name: string): T {
  * @param name
  */
 export function readWorkspaceJson (name: string): EnrichedWorkspaceJson['projects']['name'] {
-  return baseReadWorkspaceJson().projects[name]
+  return baseReadWorkspaceJson().projects[name] as EnrichedWorkspaceJson['projects']['name']
 }

@@ -21,7 +21,7 @@
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:jsdoc": "jsdoc2md --files './src/**' --configure './jsdoc2md.json' > ./API.md",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
@@ -35,13 +35,12 @@
     "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "dependencies": {
-    "@angular-devkit/core": "12.1.0",
-    "@angular-devkit/schematics": "12.1.0",
-    "@nrwl/devkit": "^12.3.5",
-    "@nrwl/workspace": "^12.3.5",
+    "@angular-devkit/core": "12.1.2",
+    "@angular-devkit/schematics": "12.1.2",
+    "@nrwl/devkit": "^12.7.2",
+    "@nrwl/workspace": "^12.7.2",
     "@webundsoehne/nx-tools": "*",
-    "chalk": "^4.1.1",
-    "enquirer": "^2.3.5",
-    "listr2": "^3.9.0"
+    "enquirer": "^2.3.6",
+    "listr2": "^3.11.0"
   }
 }

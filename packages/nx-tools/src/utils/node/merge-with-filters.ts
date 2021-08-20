@@ -25,7 +25,7 @@ export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>
 export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
   return s.reduce((o, val) => {
     return merge(o, val ?? {}, {
-      arrayMerge: (target, source) => [ ...target, ...source ].filter((item, index, array) => array.indexOf(item) === index)
+      arrayMerge: (target, source) => [ ...target, ...source ].filter(uniqueArrayFilter)
     })
   }, t) as T
 }
@@ -44,3 +44,8 @@ export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T
     })
   }, t) as T
 }
+
+/**
+ * A standard array filter for filtering it to unique items.
+ */
+export const uniqueArrayFilter = (item: any, index: number, array: any[]): boolean => array.indexOf(item) === index

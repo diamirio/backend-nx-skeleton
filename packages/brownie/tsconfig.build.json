@@ -5,6 +5,8 @@
     "rootDir": "src",
     "baseUrl": "src",
     "noUnusedLocals": true,
-    "incremental": false
+    "incremental": false,
+    "sourceMap": false,
+    "declaration": false
   }
 }

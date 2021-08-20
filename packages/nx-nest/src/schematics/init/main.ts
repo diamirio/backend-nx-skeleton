@@ -13,6 +13,7 @@ export default function (schema: NormalizedSchema): Rule {
   return chain([
     // add builder and its dependencies
     externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: [ AvailableBuilders.TSC, AvailableBuilders.TS_NODE_DEV ] }),
+
     addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {})
   ])
 }

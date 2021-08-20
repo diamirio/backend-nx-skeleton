@@ -1,4 +1,4 @@
-import { DocumentBuilder } from '@nestjs/swagger'
+import type { DocumentBuilder } from '@nestjs/swagger'
 
 export interface SwaggerConfig {
   useHttps: boolean

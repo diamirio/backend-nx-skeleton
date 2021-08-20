@@ -4,6 +4,7 @@ import { APP_FILTER,{% if server == enum.server.RESTFUL %} APP_INTERCEPTOR,{% en
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { graphQLContextParser, graphQLErrorParser } from './graphql-setup'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 {% endif %}
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -39,7 +40,13 @@ import * as modules from './modules'
 import * as resolvers from './resolvers'
 {% endif %}
 {% if database is defined and database != enum.database.NONE %}
+{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.TYPEORM %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-typeorm'
+{% elif enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.MONGOOSE %}
+import { getDatabaseOptions } from '@{{ packageScope }}/{{ constants.BACKEND_INTERFACES_PACKAGE }}/database/database-mongoose'
+{% else %}
 import { getDatabaseOptions } from '../util/database'
+{% endif %}
 {% endif %}
 
 export function createServerModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database is defined and database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
@@ -73,9 +80,9 @@ export function createServerModule ({% if database is defined and database != en
         context: graphQLContextParser,
         formatError: graphQLErrorParser,
         useGlobalPrefix: true,
-        playground: true,
         introspection: true,
-        path: '/'
+        path: '/',
+        plugins: [ ApolloServerPluginLandingPageGraphQLPlayground ]
       }),
       ...Object.values(resolvers),{% endif %}
       {% if server == enum.server.RESTFUL %}

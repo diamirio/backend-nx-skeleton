@@ -12,7 +12,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) workspace to generate base workspace. This extends the default `@nrwl/workspace` so all commands not defined inside of it is inherited from the base schematic.
 
-- **[Read The API Documentation](./API.md)**
+- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->

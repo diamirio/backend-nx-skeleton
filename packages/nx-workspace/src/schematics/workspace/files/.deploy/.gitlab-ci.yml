@@ -17,7 +17,7 @@ prepare:
   script:
     # greet
     - echo "${MICROSERVICE_NAME}@${MICROSERVICE_CWD}"
-    # introduce preleminary actions
+    # introduce preliminary actions
     - apk add --no-cache --no-progress -q curl unzip jq
     # Download artifacts from the parent pipeline
     - |

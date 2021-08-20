@@ -1,9 +1,9 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { pipeProcessThroughListr } from '@webundsoehne/nx-tools'
 import execa from 'execa'
-import { readJson, stat } from 'fs-extra'
+import { readJson, statSync } from 'fs-extra'
 import { Listr } from 'listr2'
-import { join } from 'path'
+import { dirname, join } from 'path'
 import notifier from 'update-notifier2'
 
 import {
@@ -120,10 +120,10 @@ export class NodeHelper {
   // i will leave this as is and just use direct proxy
   // FIXME: when the issue is resolved and merge complete use the upstream one instead of fork
   // * https://github.com/yeoman/update-notifier/issues/100 open issue with the update check for global registry npmrc stuff
-  // FIXME: this is a bit wierd have to be improved up on
+  // FIXME: this is a bit weird have to be improved up on
   public async checkIfModuleInstalled (
     pkg: NodeDependency | NodeDependency[],
-    options?: { global?: boolean, cwd?: string | string[], getVersion?: boolean, getUpdate?: boolean }
+    options?: { global?: boolean, cwd?: string[], getVersion?: boolean, getUpdate?: boolean }
   ): Promise<CheckIfModuleInstalled[]> {
     // get the global modules folder with trickery
     if (options?.global) {
@@ -151,16 +151,6 @@ export class NodeHelper {
       options.cwd = this.globalFolder
     }
 
-    // set default cwd
-    if (!options?.cwd) {
-      options.cwd = join(process.cwd(), 'node_modules')
-    }
-
-    // better to have cwd as array to look for multiple places
-    if (!Array.isArray(options.cwd)) {
-      options.cwd = [ options.cwd ]
-    }
-
     if (!Array.isArray(pkg)) {
       pkg = [ pkg ]
     }
@@ -182,29 +172,44 @@ export class NodeHelper {
 
         const o = { pkg: currentPkg.pkg, installed: false } as CheckIfModuleInstalled
 
-        await Promise.all(
-          (options.cwd as string[]).map(async (v) => {
+        let packagePath: string
+        let found: boolean
+        if (options.cwd) {
+          await Promise.all(
+            (options.cwd as string[]).map(async (v) => {
+              try {
+                packagePath = join(v, currentPkg.pkg)
+                found = statSync(packagePath).isDirectory()
+
+                // eslint-disable-next-line no-empty
+              } catch {}
+            })
+          )
+        } else {
+          // fallback method for non root directories
+          try {
+            packagePath = dirname(require.resolve(join(currentPkg.pkg, 'package.json')))
+            found = statSync(packagePath).isDirectory()
+            // eslint-disable-next-line no-empty
+          } catch {}
+        }
+
+        if (found) {
+          o.installed = true
+          o.path = packagePath
+
+          this.cmd.logger.debug('Package found in: %s -> %s', currentPkg.pkg, packagePath)
+
+          // get version from stuff
+          const packageJson = join(packagePath, 'package.json')
+          if (options.getVersion) {
             try {
-              const packagePath = join(v, currentPkg.pkg)
-
-              ;(await stat(packagePath)).isDirectory()
-              o.installed = true
-              o.path = packagePath
-
-              // get version from stuff
-              const packageJson = join(packagePath, 'package.json')
-              if (options.getVersion) {
-                try {
-                  o.version = (await readJson(packageJson))?.version
-                } catch {
-                  this.cmd.message.warn(`Can not read package version of package: ${p}`)
-                }
-              }
-              // dont care about the catch case since this will look at multiple cwds
-              // eslint-disable-next-line no-empty
-            } catch {}
-          })
-        )
+              o.version = (await readJson(packageJson))?.version
+            } catch {
+              this.cmd.message.warn(`Can not read package version of package: ${p}`)
+            }
+          }
+        }
 
         // get updates if available
         if (o?.version && options?.getUpdate) {

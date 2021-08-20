@@ -59,9 +59,31 @@ export enum AvailableMicroserviceTypes {
 export type AvailableLinterTypes = Exclude<Linter, 'tslint'>
 
 /**
+ * Available extensions to further customize the application.
+ */
+export enum AvailableExtensions {
+  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces'
+}
+
+/**
+ * Available through generating through the generator.
+ * Just typing it so that it can be called as an external schematic.
+ * It does not directly use these types since it globs the directory.
+ */
+export enum AvailableGenerators {
+  MONGOOSE_ENTITY = 'mongoose-entity',
+  MONGOOSE_ENTITY_TIMESTAMPS = 'mongoose-entity-timestamps',
+  TYPEORM_ENTITY = 'typeorm-entity',
+  TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary'
+}
+
+/**
  * Prettified names for components to use with prompts and such.
  */
-export const PrettyNamesForAvailableThingies: Record<AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes, string> = {
+export const PrettyNamesForAvailableThingies: Record<
+AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes | AvailableExtensions,
+string
+> = {
   [AvailableComponents.SERVER]: 'Server',
   [AvailableComponents.COMMAND]: 'Command',
   [AvailableComponents.BG_TASK]: 'Scheduler',
@@ -75,5 +97,6 @@ export const PrettyNamesForAvailableThingies: Record<AvailableComponents | Avail
   [AvailableDBTypes.MONGOOSE_MONGODB]: 'MongoDB with Mongoose',
   [AvailableTestsTypes.JEST]: 'Jest',
   [AvailableTestsTypes.NONE]: 'None',
-  [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ'
+  [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ',
+  [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library'
 }
