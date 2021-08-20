@@ -1,6 +1,6 @@
 const { join } = require('path')
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
-const { loadSync } = require('tsconfig')
+const load = require('tsconfig-loader')
 
 const TS_CONFIG_PATH = 'test/tsconfig.json'
 
@@ -17,7 +17,7 @@ module.exports = {
       tsconfig: join('<rootDir>', TS_CONFIG_PATH)
     }
   },
-  moduleNameMapper: pathsToModuleNameMapper(loadSync(process.cwd(), TS_CONFIG_PATH).compilerOptions.paths, {
+  moduleNameMapper: pathsToModuleNameMapper(load(process.cwd(), TS_CONFIG_PATH).tsConfig.compilerOptions.paths, {
     prefix: '<rootDir>/../../'
   })
 }

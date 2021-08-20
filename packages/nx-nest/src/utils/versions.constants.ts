@@ -70,7 +70,7 @@ export const VERSIONS: Versions = {
       jest: '^27.0.6',
       'ts-jest': '^27.0.3',
       '@types/jest': '^26.0.24',
-      tsconfig: '^7.0.0'
+      'tsconfig-loader': '^1.1.0'
     }
   },
   [AvailableDBAdapters.TYPEORM]: {
