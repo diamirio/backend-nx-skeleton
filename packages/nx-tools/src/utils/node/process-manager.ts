@@ -1,5 +1,6 @@
 import { BuilderContext } from '@angular-devkit/architect'
 import { SchematicContext } from '@angular-devkit/schematics'
+import { ExecutorContext } from '@nrwl/devkit'
 import { ExecaChildProcess } from 'execa'
 import pidtree from 'pidtree'
 
@@ -15,7 +16,7 @@ export class ProcessManager {
   private tasks: ExecaChildProcess[] = []
   private persistentTasks: ExecaChildProcess[] = []
 
-  constructor (context: BuilderContext | SchematicContext) {
+  constructor (context: BuilderContext | SchematicContext | ExecutorContext) {
     this.logger = new Logger(context)
   }
 

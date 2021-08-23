@@ -1,8 +1,10 @@
 import { BuilderContext } from '@angular-devkit/architect'
 import { SchematicContext } from '@angular-devkit/schematics'
+import { ExecutorContext, logger as nxLogger } from '@nrwl/devkit'
 import figures from 'figures'
 import { EOL } from 'os'
 
+import { isBuildContext, isExecutorContext } from '../schematics/is-context'
 import { color } from './colorette'
 import { LoggerOptions, LogLevels } from './logger.interface'
 
@@ -12,7 +14,11 @@ import { LoggerOptions, LogLevels } from './logger.interface'
  * It is not great but winston was not working that well in a amazingly stateless architecture.
  */
 export class Logger {
-  constructor (private context: BuilderContext | SchematicContext, private options?: LoggerOptions) {
+  private logger: BuilderContext['logger'] | SchematicContext['logger'] | typeof nxLogger
+
+  constructor (private context: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
+    this.logger = isExecutorContext(context) ? nxLogger : context.logger
+
     // set default options
     this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
   }
@@ -43,7 +49,7 @@ export class Logger {
       .split(EOL)
       .forEach((line) => {
         if (line !== '') {
-          this.context.logger.log(
+          this.logger.log(
             level,
             this.logColoring({
               level,
@@ -109,12 +115,4 @@ export class Logger {
 
     return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''} ${message}`
   }
-}
-
-function isBuildContext (context: BuilderContext | SchematicContext): context is BuilderContext {
-  if (context.hasOwnProperty('target')) {
-    return true
-  }
-
-  return false
 }
