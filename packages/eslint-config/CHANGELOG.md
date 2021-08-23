@@ -1,3 +1,10 @@
+## @webundsoehne/eslint-config [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.0...@webundsoehne/eslint-config@4.0.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* errors for parsing html templates on angular application ([4c2d1da](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c2d1dad3b7c86792e1412f5b0220236a07ca3a2))
+
 # @webundsoehne/eslint-config [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.2...@webundsoehne/eslint-config@4.0.0) (2021-08-20)
 
 
