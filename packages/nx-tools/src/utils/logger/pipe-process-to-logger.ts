@@ -1,4 +1,5 @@
 import { BuilderContext } from '@angular-devkit/architect'
+import { ExecutorContext } from '@nrwl/devkit'
 import { ExecaChildProcess } from 'execa'
 import through from 'through'
 
@@ -11,7 +12,7 @@ import { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
  * @param instance
  * @param options
  */
-export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChildProcess, options?: PipeProcessToLoggerOptions): ExecaChildProcess {
+export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, instance: ExecaChildProcess, options?: PipeProcessToLoggerOptions): ExecaChildProcess {
   const logger = new Logger(context)
 
   // default options
@@ -61,7 +62,7 @@ export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChi
         logger.info(exitMessage)
       }
 
-      // callback for compatability reasons with observable
+      // callback for compatibility reasons with observable
       if (options?.callback) {
         options.callback()
       }
@@ -71,7 +72,7 @@ export function pipeProcessToLogger (context: BuilderContext, instance: ExecaChi
   instance.on('error', (error) => {
     logger.fatal(error.message)
 
-    // callback for compatability reasons with observable
+    // callback for compatibility reasons with observable
     if (options?.callback) {
       options.callback(error)
     }

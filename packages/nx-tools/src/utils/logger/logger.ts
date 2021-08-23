@@ -4,6 +4,7 @@ import { ExecutorContext, logger as nxLogger } from '@nrwl/devkit'
 import figures from 'figures'
 import { EOL } from 'os'
 
+import { isVerbose } from '../schematics'
 import { isBuildContext, isExecutorContext } from '../schematics/is-context'
 import { color } from './colorette'
 import { LoggerOptions, LogLevels } from './logger.interface'
@@ -18,6 +19,11 @@ export class Logger {
 
   constructor (private context: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
     this.logger = isExecutorContext(context) ? nxLogger : context.logger
+
+    if (isExecutorContext(context) && !isVerbose()) {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      this.logger.debug = (): void => {}
+    }
 
     // set default options
     this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
@@ -49,8 +55,7 @@ export class Logger {
       .split(EOL)
       .forEach((line) => {
         if (line !== '') {
-          this.logger.log(
-            level,
+          this.logger[level](
             this.logColoring({
               level,
               context: isBuildContext(this.context) ? this.context?.target.project : null,

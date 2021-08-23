@@ -1,4 +1,5 @@
-import { ExecutorContext } from '@nrwl/devkit'
+import { BuilderOutput } from '@angular-devkit/architect'
+import { ExecutorContext, ProjectConfiguration } from '@nrwl/devkit'
 import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
 import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 
@@ -19,6 +20,7 @@ export abstract class BaseExecutor<
   public options: NormalizedExecutorOptions
   public paths: ProcessPaths
   public manager: ProcessManager
+  public project: ProjectConfiguration
 
   constructor (public builderOptions: ExecutorOptions, public context: ExecutorContext) {
     this.logger = new Logger(context)
@@ -30,6 +32,8 @@ export abstract class BaseExecutor<
     const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context.root, context.projectName, context.targetName, context.configurationName)
     this.projectTarget = target
     this.projectDependencies = dependencies
+
+    this.project = context.workspace.projects[context.projectName]
 
     // normalize options
     this.options = this.normalizeOptions(builderOptions)
@@ -51,7 +55,7 @@ export abstract class BaseExecutor<
   /**
    * The run command about what to do
    */
-  public abstract run (): Promise<{ success: boolean }>
+  public abstract run (): Promise<BuilderOutput>
 
   /**
    * Normalize the incoming options

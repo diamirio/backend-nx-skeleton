@@ -3,6 +3,7 @@ import { ExecutorContext } from '@nrwl/devkit'
 import { Workspaces } from '@nrwl/tao/src/shared/workspace'
 import { Observable } from 'rxjs'
 
+import { isVerbose } from '../schematics'
 import { toObservable } from '../schematics/to-observable'
 import { BaseExecutor } from './base-executor'
 
@@ -10,12 +11,13 @@ import { BaseExecutor } from './base-executor'
  * Run a designated builder that is extended from base builder in NX way.
  * @param Builder
  */
-export function runBuilder<
+export function runExecutor<
   T extends new (options: ExecutorOptions, context: ExecutorContext) => BaseExecutor<ExecutorOptions, any, any>,
   ExecutorOptions extends Record<string, any>
-> (Builder: T): () => BuilderOutput {
-  const builderFunction = (options: ExecutorOptions, builderContext: BuilderContext): Observable<any> => {
+> (Builder: T): (options: ExecutorOptions, builderContext: BuilderContext) => Observable<BuilderOutput> {
+  return (options: ExecutorOptions, builderContext: BuilderContext): Observable<BuilderOutput> => {
     const workspaceConfig = new Workspaces(builderContext.workspaceRoot).readWorkspaceConfiguration()
+
     const context: ExecutorContext = {
       root: builderContext.workspaceRoot,
       projectName: builderContext.target.project,
@@ -23,7 +25,7 @@ export function runBuilder<
       configurationName: builderContext.target.configuration,
       workspace: workspaceConfig,
       cwd: process.cwd(),
-      isVerbose: false
+      isVerbose: isVerbose()
     }
 
     if (builderContext.target && builderContext.target.project && builderContext.target.target) {
@@ -34,6 +36,4 @@ export function runBuilder<
 
     return toObservable(builder.run())
   }
-
-  return require('@angular-devkit/architect').createBuilder(builderFunction)
 }
