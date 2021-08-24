@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-nest [3.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.0.2...@webundsoehne-private/nx-nest@3.0.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* convert everything to executor due to rxjs7 problems ([f091cfd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f091cfd56d774975b0e4fcb5a4b5656df087b374))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 4.1.0
+* **@webundsoehne/nx-tools:** upgraded to 4.1.0
+
 ## @webundsoehne-private/nx-nest [3.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.0.1...@webundsoehne-private/nx-nest@3.0.2) (2021-08-20)
 
 
