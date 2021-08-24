@@ -9,6 +9,7 @@ import { BaseBuilder } from './base-builder'
 /**
  * Run a designated builder that is extended from base builder in NX way.
  * @param Builder
+ * @deprecated nx now uses executors instead of builders which are promise based instead of rxjs. please use runExecutor instead.
  */
 export function runBuilder<T extends new (options: BuilderOptions, context: BuilderContext) => BaseBuilder<BuilderOptions, any, any>, BuilderOptions extends Record<string, any>> (
   Builder: T

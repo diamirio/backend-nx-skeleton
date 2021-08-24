@@ -7,6 +7,7 @@ import { Logger, ProcessManager } from '@utils'
 
 /**
  * Base builder for extending from.
+ * @deprecated nx now uses executors instead of builders which are promise based instead of rxjs. please use BaseExecutor instead.
  */
 export abstract class BaseBuilder<
   BuilderOptions extends Record<PropertyKey, any>,
