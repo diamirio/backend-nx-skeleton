@@ -1,3 +1,16 @@
+# @webundsoehne/nx-tools [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.0.1...@webundsoehne/nx-tools@4.1.0) (2021-08-24)
+
+
+### Bug Fixes
+
+* convert everything to executor due to rxjs7 problems ([f091cfd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f091cfd56d774975b0e4fcb5a4b5656df087b374))
+* convert logger to support executor format ([24c68d0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/24c68d0112172944d90a9891645505a8e48a2e58))
+
+
+### Features
+
+* new method of builders for nx ([f198feb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f198febbf8259fae6cd053ae5187911333e492e3))
+
 ## @webundsoehne/nx-tools [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.0.0...@webundsoehne/nx-tools@4.0.1) (2021-08-20)
 
 
