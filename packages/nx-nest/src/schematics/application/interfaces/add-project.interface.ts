@@ -6,38 +6,38 @@ import { RunBuilderOptions, TscBuilderOptions, TsNodeBuilderOptions } from '@web
 export interface SchematicArchitect {
   [key: string]: any
   build: {
-    builder: '@webundsoehne/nx-builders:tsc'
+    executor: '@webundsoehne/nx-builders:tsc'
     options: TscBuilderOptions
   }
 
   serve: {
-    builder: '@webundsoehne/nx-builders:ts-node-dev'
+    executor: '@webundsoehne/nx-builders:ts-node-dev'
     options: TsNodeBuilderOptions
   }
 
   bgtask: {
-    builder: '@webundsoehne/nx-builders:ts-node-dev'
+    executor: '@webundsoehne/nx-builders:ts-node-dev'
     options: TsNodeBuilderOptions
   }
 
   migration: {
-    builder: '@webundsoehne/nx-builders:run'
+    executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
     configurations?: Record<PropertyKey, Partial<RunBuilderOptions>>
   }
 
   command: {
-    builder: '@webundsoehne/nx-builders:run'
+    executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
   }
 
   seed: {
-    builder: '@webundsoehne/nx-builders:run'
+    executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
   }
 
   test: {
-    builder: '@webundsoehne/nx-builders:run'
+    executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
     configurations?: Record<PropertyKey, Partial<RunBuilderOptions>>
   }

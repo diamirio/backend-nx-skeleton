@@ -1,37 +1,39 @@
-import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
+import { BuilderOutput } from '@angular-devkit/architect'
+import { ExecutorContext, ProjectConfiguration } from '@nrwl/devkit'
 import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
-import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils'
-import { Observable } from 'rxjs'
+import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 
 import { Logger, ProcessManager } from '@utils'
 
 /**
  * Base builder for extending from.
- * @deprecated nx now uses executors instead of builders which are promise based instead of rxjs. please use BaseExecutor instead.
  */
-export abstract class BaseBuilder<
-  BuilderOptions extends Record<PropertyKey, any>,
-  NormalizedBuilderOptions extends Record<PropertyKey, any>,
+export abstract class BaseExecutor<
+  ExecutorOptions extends Record<PropertyKey, any>,
+  NormalizedExecutorOptions extends Record<PropertyKey, any>,
   ProcessPaths extends Record<PropertyKey, string> = Record<PropertyKey, string>
 > {
   public logger: Logger
   public projectGraph: ProjectGraph
   public projectTarget: ProjectGraphNode<Record<string, unknown>>
   public projectDependencies: DependentBuildableProjectNode[]
-  public options: NormalizedBuilderOptions
+  public options: NormalizedExecutorOptions
   public paths: ProcessPaths
   public manager: ProcessManager
+  public project: ProjectConfiguration
 
-  constructor (public builderOptions: BuilderOptions, public context: BuilderContext) {
+  constructor (public builderOptions: ExecutorOptions, public context: ExecutorContext) {
     this.logger = new Logger(context)
 
     this.paths = {} as ProcessPaths
 
     // create dependency
     this.projectGraph = createProjectGraph()
-    const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context)
+    const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context.root, context.projectName, context.targetName, context.configurationName)
     this.projectTarget = target
     this.projectDependencies = dependencies
+
+    this.project = context.workspace.projects[context.projectName]
 
     // normalize options
     this.options = this.normalizeOptions(builderOptions)
@@ -53,11 +55,11 @@ export abstract class BaseBuilder<
   /**
    * The run command about what to do
    */
-  public abstract run (): Observable<BuilderOutput>
+  public abstract run (): Promise<BuilderOutput>
 
   /**
    * Normalize the incoming options
    * @param options
    */
-  public abstract normalizeOptions (options: BuilderOptions): NormalizedBuilderOptions
+  public abstract normalizeOptions (options: ExecutorOptions): NormalizedExecutorOptions
 }

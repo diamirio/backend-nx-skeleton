@@ -1,10 +1,9 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseBuilder, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runBuilder } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa, { ExecaChildProcess } from 'execa'
 import fs from 'fs'
 import { join } from 'path'
-import { Observable, Subscriber } from 'rxjs'
 
 import { RunBuilderOptions } from './main.interface'
 
@@ -13,52 +12,47 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: string }> {
-  public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
-    // have to be observable create because of async subscriber, it causes no probs dont worry
-    return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
-      const subscriber = injectSubscriber ?? sub
+class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command: string }> {
+  public async run (): Promise<BuilderOutput> {
+    try {
+      // stop all manager tasks
+      await this.manager.stop()
 
-      try {
-        // stop all manager tasks
-        await this.manager.stop()
+      let instance: ExecaChildProcess
 
-        let instance: ExecaChildProcess
-
-        if (this.builderOptions.node) {
-          instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
-        } else {
-          instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
-        }
-
-        if (this.builderOptions.interactive) {
-          this.logger.debug('This command is an interactive one, will hijack stdio.')
-
-          await instance
-        } else {
-          await pipeProcessToLogger(this.context, instance, { start: true })
-        }
-
-        subscriber.next({ success: true })
-      } catch (error) {
-        if (this.builderOptions.watch) {
-          // just restart it
-          this.logger.error(`${this.builderOptions.command} crashed restarting in 3 secs.`)
-          this.logger.debug(error)
-
-          await delay(3000)
-          await this.manager.stop()
-          await this.run(subscriber).toPromise()
-        }
-
-        subscriber.next({ success: false })
-      } finally {
-        // clean up the zombies!
-        await this.manager.stop()
-
-        subscriber.complete()
+      if (this.builderOptions.node) {
+        instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
+      } else {
+        instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
       }
-    })
+
+      if (this.builderOptions.interactive) {
+        this.logger.debug('This command is an interactive one, will hijack stdio.')
+
+        await instance
+      } else {
+        await pipeProcessToLogger(this.context, instance, { start: true })
+      }
+
+      return { success: true }
+    } catch (error) {
+      if (this.builderOptions.watch) {
+        // just restart it
+        this.logger.error(`${this.builderOptions.command} crashed restarting in 3 secs.`)
+        this.logger.debug(error)
+
+        await delay(3000)
+
+        await this.manager.stop()
+
+        return this.run()
+      }
+
+      return { success: false, error }
+    } finally {
+      // clean up the zombies!
+      await this.manager.stop()
+    }
   }
 
   public normalizeOptions (options: RunBuilderOptions): ExecaArguments {
@@ -122,4 +116,4 @@ class Builder extends BaseBuilder<RunBuilderOptions, ExecaArguments, { command: 
   }
 }
 
-export default createBuilder(runBuilder(Builder))
+export default createBuilder(runExecutor(Executor))

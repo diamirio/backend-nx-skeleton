@@ -1,10 +1,10 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
-import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils'
+import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import {
-  BaseBuilder,
+  BaseExecutor,
   checkNodeModulesExists,
   deepMerge,
   ExecaArguments,
@@ -14,14 +14,13 @@ import {
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runBuilder
+  runExecutor
 } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa from 'execa'
 import { copy, removeSync } from 'fs-extra'
 import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
-import { Observable, Subscriber } from 'rxjs'
 
 import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 
@@ -31,114 +30,110 @@ try {
 } catch (e) {}
 
 // i converted this to a class since it makes not to much sense to have separate functions with tons of same inputs
-class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
+class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
   public init (): void {
     // paths of the programs, more convient than using the api since tscpaths does not have api
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
       tscpaths: getNodeBinaryPath('tscpaths'),
       tscWatch: getNodeBinaryPath('tsc-watch'),
-      tsconfig: join(this.context.workspaceRoot, this.options.tsConfig ?? 'tsconfig.build.json')
+      tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }
 
-  public run (injectSubscriber?: Subscriber<BuilderOutput>): Observable<BuilderOutput> {
+  public async run (): Promise<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
-    return Observable.create(async (sub: Subscriber<BuilderOutput>): Promise<void> => {
-      const subscriber = injectSubscriber ?? sub
+    // Cleaning the /dist folder
+    removeSync(this.options.normalizedOutputPath)
 
-      // Cleaning the /dist folder
-      removeSync(this.options.normalizedOutputPath)
+    try {
+      // stop all manager tasks
+      await this.manager.stop()
 
-      try {
-        // stop all manager tasks
-        await this.manager.stop()
+      // check if needed tools are really installed
+      checkNodeModulesExists(this.paths)
 
-        // check if needed tools are really installed
-        checkNodeModulesExists(this.paths)
-
-        const libRoot = this.projectGraph.nodes[this.context.target.project].data.root
-        if (this.projectDependencies.length > 0) {
-          this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.workspaceRoot, libRoot, this.projectDependencies)
-        }
-
-        // add this after since we do not want to patch check it
-        this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
-
-        if (this.options.watch) {
-          this.logger.info('Starting TypeScript-Watch...')
-
-          this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
-
-          const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
-
-          const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
-
-          instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
-            switch (msg) {
-            case 'success':
-              await this.secondaryCompileActions()
-
-              if (this.options.runAfterWatch) {
-                await this.manager.kill()
-                const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
-
-                // we dont want errors from this since it can be killed
-                try {
-                  await pipeProcessToLogger(this.context, subInstance)
-                } catch (e) {
-                  this.logger.debug(e.message)
-                }
-              } else {
-                this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
-              }
-
-              break
-            default:
-              break
-            }
-          })
-
-          await pipeProcessToLogger(this.context, instance)
-        } else {
-          // the normal mode of compiling
-          this.logger.info('Transpiling TypeScript files...')
-
-          this.logger.debug(`typescript path: ${this.paths.typescript}`)
-
-          const { args, spawnOptions } = this.normalizeArguments('typescript')
-
-          const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
-
-          await pipeProcessToLogger(this.context, instance)
-
-          this.logger.info('Transpiling to TypeScript is done.')
-
-          // perform secondary actions
-          await this.secondaryCompileActions()
-        }
-
-        subscriber.next({ success: true, outputPath: this.options.normalizedOutputPath })
-      } catch (error) {
-        if (this.options.watch) {
-          // if in watch mode just restart it
-          this.logger.error('tsc-watch crashed restarting in 3 secs.')
-          this.logger.debug(error)
-
-          await delay(3000)
-          await this.manager.stop()
-          await this.run(subscriber).toPromise()
-        } else {
-          subscriber.error(new Error(`Transpiling process has been crashed.${EOL}${error}`))
-        }
-
-        subscriber.next({ success: false })
-      } finally {
-        // clean up the zombies!
-        await this.manager.stop()
-        subscriber.complete()
+      const libRoot = this.projectGraph.nodes[this.context.projectName].data.root
+      if (this.projectDependencies.length > 0) {
+        this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.root, libRoot, this.projectDependencies)
       }
-    })
+
+      // add this after since we do not want to patch check it
+      this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
+
+      if (this.options.watch) {
+        this.logger.info('Starting TypeScript-Watch...')
+
+        this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
+
+        const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
+
+        const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
+
+        instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
+          switch (msg) {
+          case 'success':
+            await this.secondaryCompileActions()
+
+            if (this.options.runAfterWatch) {
+              await this.manager.kill()
+              const subInstance = this.manager.add(execa.command(this.options.runAfterWatch, this.normalizeArguments('runAfterWatch').spawnOptions))
+
+              // we dont want errors from this since it can be killed
+              try {
+                await pipeProcessToLogger(this.context, subInstance)
+              } catch (e) {
+                this.logger.debug(e.message)
+              }
+            } else {
+              this.logger.warn('No option for "runAfterWatch" is defined for package. Doing nothing.')
+            }
+
+            break
+          default:
+            break
+          }
+        })
+
+        await pipeProcessToLogger(this.context, instance)
+      } else {
+        // the normal mode of compiling
+        this.logger.info('Transpiling TypeScript files...')
+
+        this.logger.debug(`typescript path: ${this.paths.typescript}`)
+
+        const { args, spawnOptions } = this.normalizeArguments('typescript')
+
+        const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
+
+        await pipeProcessToLogger(this.context, instance)
+
+        this.logger.info('Transpiling to TypeScript is done.')
+
+        // perform secondary actions
+        await this.secondaryCompileActions()
+      }
+
+      return { success: true, outputPath: this.options.normalizedOutputPath }
+    } catch (error) {
+      if (this.options.watch) {
+        // if in watch mode just restart it
+        this.logger.error('tsc-watch crashed restarting in 3 secs.')
+        this.logger.debug(error)
+
+        await delay(3000)
+        await this.manager.stop()
+
+        return this.run()
+      } else {
+        return { error: `Transpiling process has been crashed.${EOL}${error}`, success: false }
+      }
+
+      return { success: false, error }
+    } finally {
+      // clean up the zombies!
+      await this.manager.stop()
+    }
   }
 
   public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
@@ -147,13 +142,13 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       {
         outDir,
         cwd: options.cwd,
-        workspaceRoot: this.context.workspaceRoot
+        workspaceRoot: this.context.root
       },
       options.assets
     )
 
     // Relative path for the dist directory
-    const tsconfig = readJsonFile(join(this.context.workspaceRoot, options.tsConfig))
+    const tsconfig = readJsonFile(join(this.context.root, options.tsConfig))
     const rootDir = tsconfig.compilerOptions?.rootDir || ''
     const mainFileDir = dirname(options.main)
     const tsconfigDir = dirname(options.tsConfig)
@@ -168,7 +163,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       // parsed options
       files,
       relativeMainFileOutput,
-      normalizedOutputPath: join(this.context.workspaceRoot, options.outputPath)
+      normalizedOutputPath: join(this.context.root, options.outputPath)
     }
   }
 
@@ -191,7 +186,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       },
       {
         mode: [ 'tsc-watch' ],
-        rules: [ { args: { cwd: this.context.workspaceRoot } } ]
+        rules: [ { args: { cwd: this.context.root } } ]
       },
       {
         mode: [ 'runAfterWatch' ],
@@ -279,7 +274,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
       writeJsonFile(
         this.paths.tsconfigPaths,
         deepMerge(tsconfig, {
-          compilerOptions: { outDir: join(this.context.workspaceRoot, this.options.outputPath), baseUrl: join(this.context.workspaceRoot, this.options.outputPath) }
+          compilerOptions: { outDir: join(this.context.root, this.options.outputPath), baseUrl: join(this.context.root, this.options.outputPath) }
         })
       )
 
@@ -301,9 +296,7 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
   }
 
   private updatePackageJson (): void {
-    const packageJsonPath = this.options.packageJson
-      ? join(this.context.workspaceRoot, this.options.packageJson)
-      : join(this.context.workspaceRoot, this.options.cwd, 'package.json')
+    const packageJsonPath = this.options.packageJson ? join(this.context.root, this.options.packageJson) : join(this.context.root, this.options.cwd, 'package.json')
 
     this.logger.debug(`package.json path: ${packageJsonPath}`)
 
@@ -353,7 +346,14 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
 
     // this is the default behaviour, lets keep this.
     if (this.projectDependencies.length > 0) {
-      updateBuildableProjectPackageJsonDependencies(this.context, this.projectTarget, this.projectDependencies)
+      updateBuildableProjectPackageJsonDependencies(
+        this.context.root,
+        this.context.projectName,
+        this.context.targetName,
+        this.context.configurationName,
+        this.projectTarget,
+        this.projectDependencies
+      )
     }
 
     this.logger.info('Generated "package.json".')
@@ -385,4 +385,4 @@ class Builder extends BaseBuilder<TscBuilderOptions, NormalizedBuilderOptions, P
   }
 }
 
-export default createBuilder(runBuilder(Builder))
+export default createBuilder(runExecutor(Executor))
