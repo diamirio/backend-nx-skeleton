@@ -58,7 +58,7 @@ export class Logger {
           this.logger[level](
             this.logColoring({
               level,
-              context: isBuildContext(this.context) ? this.context?.target.project : null,
+              context: isExecutorContext(this.context) ? this.context.projectName : isBuildContext(this.context) ? this.context?.target.project : null,
               message: line
             }),
             ...args

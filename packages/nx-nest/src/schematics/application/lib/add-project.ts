@@ -17,7 +17,7 @@ export function addProject (options: NormalizedSchema): Rule {
     const architect: SchematicArchitect = {} as SchematicArchitect
 
     architect.build = {
-      builder: '@webundsoehne/nx-builders:tsc',
+      executor: '@webundsoehne/nx-builders:tsc',
       options: {
         cwd: options.root,
         main: `${options.root}/src/main.ts`,
@@ -42,7 +42,7 @@ export function addProject (options: NormalizedSchema): Rule {
     // prefer server mode
     if (options.components.includes(AvailableComponents.SERVER)) {
       architect.serve = {
-        builder: '@webundsoehne/nx-builders:ts-node-dev',
+        executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
           main: join(options.root, 'src/main.ts'),
@@ -54,7 +54,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     } else if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
       architect.serve = {
-        builder: '@webundsoehne/nx-builders:ts-node-dev',
+        executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
           main: join(options.root, 'src/main.ts'),
@@ -66,7 +66,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
     } else if (options.components.includes(AvailableComponents.BG_TASK)) {
       architect.serve = {
-        builder: '@webundsoehne/nx-builders:ts-node-dev',
+        executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
           main: join(options.root, 'src/main.ts'),
@@ -80,7 +80,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.tests === AvailableTestsTypes.JEST) {
       architect.test = {
-        builder: '@webundsoehne/nx-builders:run',
+        executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
@@ -119,7 +119,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.components.includes(AvailableComponents.COMMAND)) {
       architect.command = {
-        builder: '@webundsoehne/nx-builders:run',
+        executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
           command: 'nestjs-command',
@@ -136,7 +136,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
       architect.migration = {
-        builder: '@webundsoehne/nx-builders:run',
+        executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
@@ -164,7 +164,7 @@ export function addProject (options: NormalizedSchema): Rule {
       }
 
       architect.seed = {
-        builder: '@webundsoehne/nx-builders:run',
+        executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
           command: 'typeorm-seeding --configName=src/util/ormconfig.ts seed',

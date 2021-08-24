@@ -72,12 +72,12 @@ import { TscBuilderOptions, TsNodeBuilderOptions } from '@webundsoehne/nx-builde
 export interface SchematicArchitect {
   [key: string]: any
   build: {
-    builder: '@webundsoehne/nx-builders:tsc'
+    executor '@webundsoehne/nx-builders:tsc'
     options: TscBuilderOptions
   }
 
   serve: {
-    builder: '@webundsoehne/nx-builders:ts-node-dev'
+    executor '@webundsoehne/nx-builders:ts-node-dev'
     options: TsNodeBuilderOptions
   }
 }
@@ -99,7 +99,7 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 
 ```typescript
 architect.build = {
-  builder: '@webundsoehne/nx-builders:tsc',
+  executor '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -129,7 +129,7 @@ To run this in watch mode you can use `@nrwl/node` and change the serve command 
 
 ```typescript
 architect.build = {
-  builder: '@webundsoehne/nx-builders:tsc',
+  executor '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -148,7 +148,7 @@ architect.build = {
 }
 
 architect.serve = {
-      builder: '@webundsoehne/nx-builders:execute',
+      executor '@webundsoehne/nx-builders:execute',
       options: {
         buildTarget: '${options.name}:build'
           // this will inject options to the tsc-watch builder
@@ -169,7 +169,7 @@ architect.serve = {
 
 ```typescript
 architect.serve = {
-  builder: '@webundsoehne/nx-builders:tsc',
+  executor '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -201,7 +201,7 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 
 ```typescript
 architect.serve = {
-  builder: '@webundsoehne/nx-builders:ts-node-dev',
+  executor '@webundsoehne/nx-builders:ts-node-dev',
   options: {
     cwd: options.root,
     main: join(options.root, 'src/main.ts'),
@@ -225,7 +225,7 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 
 ```typescript
 architect.serve = {
-  builder: '@webundsoehne/nx-builders:run',
+  executor '@webundsoehne/nx-builders:run',
   options: {
     // ...
   }
@@ -281,7 +281,7 @@ This builder is a jumper to run another builders first then run a shell command 
 
 ```typescript
 architect.anything = {
-  builder: '@webundsoehne/nx-builders:execute',
+  executor '@webundsoehne/nx-builders:execute',
   options: {
     // ...
   }

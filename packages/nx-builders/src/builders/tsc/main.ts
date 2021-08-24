@@ -123,7 +123,8 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         await delay(3000)
         await this.manager.stop()
-        await this.run()
+
+        return this.run()
       } else {
         return { error: `Transpiling process has been crashed.${EOL}${error}`, success: false }
       }

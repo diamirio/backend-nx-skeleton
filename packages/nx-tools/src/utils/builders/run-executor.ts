@@ -9,12 +9,12 @@ import { BaseExecutor } from './base-executor'
 
 /**
  * Run a designated builder that is extended from base builder in NX way.
- * @param Builder
+ * @param Executor
  */
 export function runExecutor<
   T extends new (options: ExecutorOptions, context: ExecutorContext) => BaseExecutor<ExecutorOptions, any, any>,
   ExecutorOptions extends Record<string, any>
-> (Builder: T): (options: ExecutorOptions, builderContext: BuilderContext) => Observable<BuilderOutput> {
+> (Executor: T): (options: ExecutorOptions, builderContext: BuilderContext) => Observable<BuilderOutput> {
   return (options: ExecutorOptions, builderContext: BuilderContext): Observable<BuilderOutput> => {
     const workspaceConfig = new Workspaces(builderContext.workspaceRoot).readWorkspaceConfiguration()
 
@@ -32,8 +32,8 @@ export function runExecutor<
       context.target = workspaceConfig.projects[builderContext.target.project].targets[builderContext.target.target]
     }
 
-    const builder = new Builder(options, context)
+    const executor = new Executor(options, context)
 
-    return toObservable(builder.run())
+    return toObservable(executor.run())
   }
 }
