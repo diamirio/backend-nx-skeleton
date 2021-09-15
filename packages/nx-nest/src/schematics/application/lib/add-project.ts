@@ -5,8 +5,10 @@ import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
+import { SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableTestsTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableTestsTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@src/interfaces'
 
 /**
  * Add the project to the {workspace,angular}.json
@@ -135,6 +137,10 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
+      const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+        ? SchematicConstants.BACKEND_INTERFACES_PACKAGE
+        : join(options.sourceRoot, SchematicFilesMap.UTILS)
+
       architect.migration = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
@@ -146,19 +152,19 @@ export function addProject (options: NormalizedSchema): Rule {
         },
         configurations: {
           run: {
-            command: 'typeorm migration:run --config=src/util/ormconfig.ts'
+            command: `typeorm migration:run --config=${join(configurationBasePath, 'orm.config.ts')}`
           },
           'mock-run': {
-            command: 'typeorm migration:run --config=src/util/mock-ormconfig.ts'
+            command: `typeorm migration:run --config=${join(configurationBasePath, 'mock-orm.config.ts')}`
           },
           create: {
-            command: 'typeorm migration:create --config=src/util/ormconfig.ts -n'
+            command: `typeorm migration:create --config=${join(configurationBasePath, 'orm.config.ts')} -n`
           },
           generate: {
-            command: 'typeorm migration:generate --config=src/util/ormconfig.ts -n'
+            command: `typeorm migration:generate --config=${join(configurationBasePath, 'orm.config.ts')} -n`
           },
           rollback: {
-            command: 'typeorm migration:revert --config=src/util/ormconfig.ts'
+            command: `typeorm migration:revert --config=${join(configurationBasePath, 'orm.config.ts')}`
           }
         }
       }
@@ -167,7 +173,7 @@ export function addProject (options: NormalizedSchema): Rule {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
-          command: 'typeorm-seeding --configName=src/util/ormconfig.ts seed',
+          command: `typeorm-seeding --configName=${join(configurationBasePath, 'orm.config.ts')} seed`,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,

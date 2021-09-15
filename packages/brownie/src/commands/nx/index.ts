@@ -71,7 +71,7 @@ export class NxCommand extends BaseCommand<Configuration> {
             ctx.packages = [ ...ctx.packages, pkg.parsable ]
             task.title = `Package ${pkg.pkg} is not installed will install it.`
           } else if (pkg.hasUpdate) {
-            task.title = `Package ${pkg.pkg} already is installed. But you might consider updating it: ${pkg.updateType}`
+            task.title = `Package ${pkg.pkg} already is installed. ${color.yellow('But you should consider updating it:')} ${color.yellow(pkg.updateType)}`
           } else {
             task.title = `Package ${pkg.pkg} is installed and at latest version.`
           }

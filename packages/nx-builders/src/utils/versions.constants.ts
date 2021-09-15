@@ -13,9 +13,9 @@ export const VERSIONS: Versions = {
 
   [AvailableBuilders.TS_NODE_DEV]: {
     devDeps: {
-      'ts-node': '^10.2.0',
+      'ts-node': '^10.2.1',
       'ts-node-dev': '^1.1.8',
-      'tsconfig-paths': '^3.10.1'
+      'tsconfig-paths': '^3.11.0'
     }
   }
 }

@@ -37,7 +37,8 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   }
 }
 
-export const SchematicFilesMap: Record<AvailableDBAdapters, string> = {
+export const SchematicFilesMap: Record<AvailableDBAdapters | 'UTILS', string> = {
   [AvailableDBAdapters.MONGOOSE]: 'entity',
-  [AvailableDBAdapters.TYPEORM]: 'entity'
+  [AvailableDBAdapters.TYPEORM]: 'entity',
+  UTILS: 'util'
 }

@@ -28,17 +28,17 @@ export const VERSIONS: Versions = {
   [AvailableServerTypes.RESTFUL]: {
     deps: {
       '@nestjs/platform-fastify': '^8.0.6',
-      'fastify-swagger': '^4.9.0',
+      'fastify-swagger': '^4.11.0',
       '@nestjs/swagger': '^5.0.9'
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
-      '@nestjs/graphql': '^8.0.2',
+      '@nestjs/graphql': '^9.0.4',
       '@nestjs/platform-fastify': '^8.0.6',
-      'apollo-server-fastify': '^3.1.2',
-      graphql: '^15.5.1',
-      'graphql-tools': '^8.1.0'
+      'apollo-server-fastify': '^3.3.0',
+      graphql: '^15.5.3',
+      'graphql-tools': '^8.2.0'
     }
   },
   [AvailableComponents.BG_TASK]: {
@@ -48,26 +48,26 @@ export const VERSIONS: Versions = {
   },
   [AvailableComponents.COMMAND]: {
     deps: {
-      'nestjs-command': '^2.0.1'
+      'nestjs-command': '^3.0.2'
     }
   },
   // if the support for per message queue support added this has to be done in a more complicated way
   [AvailableComponents.MICROSERVICE_SERVER]: {
     deps: {
       amqplib: '^0.8.0',
-      'amqp-connection-manager': '^3.2.2'
+      'amqp-connection-manager': '^3.6.0'
     }
   },
   [AvailableComponents.MICROSERVICE_CLIENT]: {
     deps: {
       amqplib: '^0.8.0',
-      'amqp-connection-manager': '^3.2.2'
+      'amqp-connection-manager': '^3.6.0'
     }
   },
   [AvailableTestsTypes.JEST]: {
     devDeps: {
       '@nestjs/testing': '^8.0.6',
-      jest: '^27.0.6',
+      jest: '^27.2.0',
       'ts-jest': '^27.0.5',
       '@types/jest': '^27.0.1',
       'tsconfig-loader': '^1.1.0'
@@ -83,7 +83,7 @@ export const VERSIONS: Versions = {
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       '@nestjs/mongoose': '^8.0.1',
-      mongoose: '^5.13.7'
+      mongoose: '^6.0.5'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {

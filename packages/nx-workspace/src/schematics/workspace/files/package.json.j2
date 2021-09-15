@@ -39,10 +39,8 @@
     "backend:migrate": "./cli . npm run nx -- run-many --target migration --parallel --all",
     "backend:seed": "./cli . npm run nx -- run-many --target seed --parallel --all"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     {% if deps is defined and deps | length > 0 %}

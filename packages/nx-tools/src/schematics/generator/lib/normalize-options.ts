@@ -1,7 +1,7 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { toFileName } from '@nrwl/workspace'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
-import { sync as findUp } from 'find-up'
+import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
 import { Listr, PromptOptionsMap } from 'listr2'
@@ -47,7 +47,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       // need package scope for imports and such
       {
         task: async (ctx): Promise<void> => {
-          const nxJsonPath = findUp('nx.json', { cwd: process.cwd(), type: 'file' })
+          const nxJsonPath = findUpSync('nx.json', { cwd: process.cwd(), type: 'file' })
 
           logger.debug(`nx.json path found: ${nxJsonPath}`)
 
