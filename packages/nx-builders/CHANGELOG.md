@@ -1,431 +1,313 @@
-# @webundsoehne/nx-builders [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.0.1...@webundsoehne/nx-builders@4.1.0) (2021-08-24)
-
+## @webundsoehne/nx-builders [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.0...@webundsoehne/nx-builders@4.1.1) (2021-09-15)
 
 ### Bug Fixes
 
-* convert everything to executor due to rxjs7 problems ([f091cfd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f091cfd56d774975b0e4fcb5a4b5656df087b374))
-
-
-### Features
-
-* new method of builders for nx ([f198feb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f198febbf8259fae6cd053ae5187911333e492e3))
-
-
-
-
+- fix typeorm migration stuff, update versions ([c5cabbc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c5cabbcd5e27c39f625be7710a5f87ea38bc43b2))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 4.1.0
+- **@webundsoehne/nx-tools:** upgraded to 4.1.1
+
+# @webundsoehne/nx-builders [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.0.1...@webundsoehne/nx-builders@4.1.0) (2021-08-24)
+
+### Bug Fixes
+
+- convert everything to executor due to rxjs7 problems ([f091cfd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f091cfd56d774975b0e4fcb5a4b5656df087b374))
+
+### Features
+
+- new method of builders for nx ([f198feb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f198febbf8259fae6cd053ae5187911333e492e3))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.1.0
 
 ## @webundsoehne/nx-builders [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.0.0...@webundsoehne/nx-builders@4.0.1) (2021-08-20)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 4.0.1
+- **@webundsoehne/nx-tools:** upgraded to 4.0.1
 
 # @webundsoehne/nx-builders [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.9...@webundsoehne/nx-builders@4.0.0) (2021-08-20)
 
-
 ### Bug Fixes
 
-* update package versions and add more to generator ([0cf3f0d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0cf3f0df6bebd573d35177564dc82ce49fe4295f))
-* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
-
+- update package versions and add more to generator ([0cf3f0d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0cf3f0df6bebd573d35177564dc82ce49fe4295f))
+- update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
 
 ### Features
 
-* adds backend-interfaces library properly ([8949013](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/894901340621b7872b24465b2a99d26fb2f9de50))
-* adss generator for generating some stuff ([72b00e8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/72b00e82f0605b70678fb7f6047873528a0e99b5))
-* update new version ([ea42e11](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea42e1161873e4d31a24a4292b27fc01d7a7fc80))
-
+- adds backend-interfaces library properly ([8949013](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/894901340621b7872b24465b2a99d26fb2f9de50))
+- adss generator for generating some stuff ([72b00e8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/72b00e82f0605b70678fb7f6047873528a0e99b5))
+- update new version ([ea42e11](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea42e1161873e4d31a24a4292b27fc01d7a7fc80))
 
 ### Performance Improvements
 
-* major version updates ([8a0c32a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8a0c32aa24a0a79c4c72ab5cfd19c68a8d20f6ef))
-* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
-
+- major version updates ([8a0c32a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8a0c32aa24a0a79c4c72ab5cfd19c68a8d20f6ef))
+- update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
 
 ### BREAKING CHANGES
 
-* Major changes.
-* updates nestjs to 8 and some breaking changes due to playground
-* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
-
-
-
-
+- Major changes.
+- updates nestjs to 8 and some breaking changes due to playground
+- Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 4.0.0
+- **@webundsoehne/nx-tools:** upgraded to 4.0.0
 
 ## @webundsoehne/nx-builders [3.4.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.8...@webundsoehne/nx-builders@3.4.9) (2021-06-28)
 
-
 ### Bug Fixes
 
-* update dependencies ([eece57a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/eece57a8ce0206b31c16cdd0660954bddf2ad171))
-
-
-
-
+- update dependencies ([eece57a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/eece57a8ce0206b31c16cdd0660954bddf2ad171))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.6
+- **@webundsoehne/nx-tools:** upgraded to 3.2.6
 
 ## @webundsoehne/nx-builders [3.4.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.7...@webundsoehne/nx-builders@3.4.8) (2021-06-28)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.5
+- **@webundsoehne/nx-tools:** upgraded to 3.2.5
 
 ## @webundsoehne/nx-builders [3.4.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.6...@webundsoehne/nx-builders@3.4.7) (2021-06-24)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.4
+- **@webundsoehne/nx-tools:** upgraded to 3.2.4
 
 ## @webundsoehne/nx-builders [3.4.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.5...@webundsoehne/nx-builders@3.4.6) (2021-06-23)
 
-
 ### Bug Fixes
 
-* emtpy argument problem with typeorm-seeding in usermanager ([960da77](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/960da773e06a4bae759a6b199b2e97dd38d49cba))
+- emtpy argument problem with typeorm-seeding in usermanager ([960da77](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/960da773e06a4bae759a6b199b2e97dd38d49cba))
 
 ## @webundsoehne/nx-builders [3.4.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.4...@webundsoehne/nx-builders@3.4.5) (2021-06-23)
 
-
 ### Bug Fixes
 
-* error messages for node paths ([d1e27a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1e27a7979151bb34365b6d9e261a22475793030))
-
-
-
-
+- error messages for node paths ([d1e27a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1e27a7979151bb34365b6d9e261a22475793030))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.3
+- **@webundsoehne/nx-tools:** upgraded to 3.2.3
 
 ## @webundsoehne/nx-builders [3.4.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.3...@webundsoehne/nx-builders@3.4.4) (2021-06-23)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.2
+- **@webundsoehne/nx-tools:** upgraded to 3.2.2
 
 ## @webundsoehne/nx-builders [3.4.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.2...@webundsoehne/nx-builders@3.4.3) (2021-06-23)
 
-
 ### Bug Fixes
 
-* update builder for usermanager to run custom mongodb seeds ([baee83d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/baee83d9e0e6c55107d2a084312d37e4fb360110))
+- update builder for usermanager to run custom mongodb seeds ([baee83d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/baee83d9e0e6c55107d2a084312d37e4fb360110))
 
 ## @webundsoehne/nx-builders [3.4.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.1...@webundsoehne/nx-builders@3.4.2) (2021-06-23)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.1
+- **@webundsoehne/nx-tools:** upgraded to 3.2.1
 
 ## @webundsoehne/nx-builders [3.4.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.4.0...@webundsoehne/nx-builders@3.4.1) (2021-06-22)
 
-
 ### Bug Fixes
 
-* change templating engine ([4d2148b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d2148b0cf335bcd5f0e61c0600a8cb79cec5c33))
+- change templating engine ([4d2148b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d2148b0cf335bcd5f0e61c0600a8cb79cec5c33))
 
 # @webundsoehne/nx-builders [3.4.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.3.1...@webundsoehne/nx-builders@3.4.0) (2021-06-22)
 
-
 ### Features
 
-* add variable parsing for user-manager ([b99e735](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b99e735f754f1635d4d158326308d157fcf785cb))
+- add variable parsing for user-manager ([b99e735](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b99e735f754f1635d4d158326308d157fcf785cb))
 
 ## @webundsoehne/nx-builders [3.3.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.3.0...@webundsoehne/nx-builders@3.3.1) (2021-06-21)
 
-
 ### Bug Fixes
 
-* change arg injection for user manager ([f539119](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f539119b1b1abba05d618f536cc659eb288dad25))
+- change arg injection for user manager ([f539119](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f539119b1b1abba05d618f536cc659eb288dad25))
 
 # @webundsoehne/nx-builders [3.3.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.2...@webundsoehne/nx-builders@3.3.0) (2021-06-21)
 
-
 ### Features
 
-* further modify run builder for user manager tests, add interactive mode and run in shell ([d86f447](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d86f44777eb599b62979f0a8120ef76c392c84a1))
+- further modify run builder for user manager tests, add interactive mode and run in shell ([d86f447](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d86f44777eb599b62979f0a8120ef76c392c84a1))
 
 ## @webundsoehne/nx-builders [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.1...@webundsoehne/nx-builders@3.2.2) (2021-06-21)
 
-
 ### Bug Fixes
 
-* add ability to process args ([1316771](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1316771f5a1e909c0b4689a0e67e4b588a95fa35))
+- add ability to process args ([1316771](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1316771f5a1e909c0b4689a0e67e4b588a95fa35))
 
 ## @webundsoehne/nx-builders [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.2.0...@webundsoehne/nx-builders@3.2.1) (2021-06-21)
 
-
 ### Bug Fixes
 
-* env variable injection order ([33b5b73](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/33b5b73a840ed2e92f06c8ec9c11d8b1144a66d1))
+- env variable injection order ([33b5b73](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/33b5b73a840ed2e92f06c8ec9c11d8b1144a66d1))
 
 # @webundsoehne/nx-builders [3.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.6...@webundsoehne/nx-builders@3.2.0) (2021-06-21)
 
-
 ### Features
 
-* update builder for user-manager to run migrations and such ([1afcd03](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1afcd03550e68ef3264b4c222bc205e1dd9d6e7a))
-
-
-
-
+- update builder for user-manager to run migrations and such ([1afcd03](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1afcd03550e68ef3264b4c222bc205e1dd9d6e7a))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.2.0
+- **@webundsoehne/nx-tools:** upgraded to 3.2.0
 
 ## @webundsoehne/nx-builders [3.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.5...@webundsoehne/nx-builders@3.1.6) (2021-06-18)
 
-
 ### Bug Fixes
 
-* add online versions for scripts, faster package manager selection ([5e6e50d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5e6e50ddde97c2fd37226aa20d7f15f81a44380c))
-
-
-
-
+- add online versions for scripts, faster package manager selection ([5e6e50d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5e6e50ddde97c2fd37226aa20d7f15f81a44380c))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.1.4
+- **@webundsoehne/nx-tools:** upgraded to 3.1.4
 
 ## @webundsoehne/nx-builders [3.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.4...@webundsoehne/nx-builders@3.1.5) (2021-06-14)
 
-
 ### Bug Fixes
 
-* crashing when dependencies are not defined ([650d61f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/650d61f7d5c980e0ec47085a676676f9759c248c))
+- crashing when dependencies are not defined ([650d61f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/650d61f7d5c980e0ec47085a676676f9759c248c))
 
 ## @webundsoehne/nx-builders [3.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.3...@webundsoehne/nx-builders@3.1.4) (2021-06-14)
 
-
 ### Bug Fixes
 
-* add more verbosity for debugging ([2aef50f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2aef50f58e31c1398a2e261cceeea70f273d5e37))
+- add more verbosity for debugging ([2aef50f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2aef50f58e31c1398a2e261cceeea70f273d5e37))
 
 ## @webundsoehne/nx-builders [3.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.2...@webundsoehne/nx-builders@3.1.3) (2021-06-07)
 
-
 ### Bug Fixes
 
-* database initiater scripts ([8e96d91](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8e96d914abd78638b09d3044b19d5f26ca74ffbf))
-
-
-
-
+- database initiater scripts ([8e96d91](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8e96d914abd78638b09d3044b19d5f26ca74ffbf))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.1.3
+- **@webundsoehne/nx-tools:** upgraded to 3.1.3
 
 ## @webundsoehne/nx-builders [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.1...@webundsoehne/nx-builders@3.1.2) (2021-06-01)
 
-
 ### Bug Fixes
 
-* package dependency injection to remove npm: prefixes ([9ee680a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9ee680a30ad2e7f8b7f5c6f54b521cce11a88435))
-* update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
-
-
-
-
+- package dependency injection to remove npm: prefixes ([9ee680a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9ee680a30ad2e7f8b7f5c6f54b521cce11a88435))
+- update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.1.2
+- **@webundsoehne/nx-tools:** upgraded to 3.1.2
 
 ## @webundsoehne/nx-builders [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.1.0...@webundsoehne/nx-builders@3.1.1) (2021-05-27)
 
-
 ### Bug Fixes
 
-* fix database initiation scripts, type errors because of updates ([a4a114d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a4a114d6878217ac7cf84e113f3d10a43ba9c0cc))
-* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
-
-
-
-
+- fix database initiation scripts, type errors because of updates ([a4a114d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a4a114d6878217ac7cf84e113f3d10a43ba9c0cc))
+- update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.1.1
+- **@webundsoehne/nx-tools:** upgraded to 3.1.1
 
 # @webundsoehne/nx-builders [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@3.0.0...@webundsoehne/nx-builders@3.1.0) (2021-03-05)
 
-
 ### Features
 
-* add run builder for webpack hmr which did not go well ([c696ba0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c696ba04d2bda3a71aced1991a674f803c47d128))
-
-
-
-
+- add run builder for webpack hmr which did not go well ([c696ba0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c696ba04d2bda3a71aced1991a674f803c47d128))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.1.0
+- **@webundsoehne/nx-tools:** upgraded to 3.1.0
 
 # @webundsoehne/nx-builders [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.9...@webundsoehne/nx-builders@3.0.0) (2021-03-04)
 
-
 ### Bug Fixes
 
-* adds patching packages module, bump packages ([cac9597](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cac9597b2c3baab1396b2dc8ca3141e235508f00))
-
+- adds patching packages module, bump packages ([cac9597](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cac9597b2c3baab1396b2dc8ca3141e235508f00))
 
 ### Performance Improvements
 
-* update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
-
+- update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
 
 ### BREAKING CHANGES
 
-* There is ton of breaking changes due to angular, nx base libraries.
+- There is ton of breaking changes due to angular, nx base libraries.
 
-Fixed the bug with the apollo-server not liking fastify2 for playground by using beta.
-Updated everything to latest version therefore contains a lot of breaking changes.
-
-
-
-
+Fixed the bug with the apollo-server not liking fastify2 for playground by using beta. Updated everything to latest version therefore contains a lot of breaking changes.
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 3.0.0
+- **@webundsoehne/nx-tools:** upgraded to 3.0.0
 
 ## @webundsoehne/nx-builders [2.1.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.8...@webundsoehne/nx-builders@2.1.9) (2021-01-15)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.8
+- **@webundsoehne/nx-tools:** upgraded to 2.1.8
 
 ## @webundsoehne/nx-builders [2.1.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.7...@webundsoehne/nx-builders@2.1.8) (2021-01-15)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.7
+- **@webundsoehne/nx-tools:** upgraded to 2.1.7
 
 ## @webundsoehne/nx-builders [2.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.6...@webundsoehne/nx-builders@2.1.7) (2021-01-07)
 
-
 ### Bug Fixes
 
-* add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
-
-
-
-
+- add verbose output when in loglevel verbose or debug ([6ff3197](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6ff31973fb3ca04b4c4231fca3e375e3584366ea))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.6
+- **@webundsoehne/nx-tools:** upgraded to 2.1.6
 
 ## @webundsoehne/nx-builders [2.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.5...@webundsoehne/nx-builders@2.1.6) (2021-01-05)
 
-
 ### Bug Fixes
 
-* update dependencies and some little things ([e50dde8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50dde8aa83cd44871aad79ccf8d60d86e6bac23))
-
-
-
-
+- update dependencies and some little things ([e50dde8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50dde8aa83cd44871aad79ccf8d60d86e6bac23))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.5
+- **@webundsoehne/nx-tools:** upgraded to 2.1.5
 
 ## @webundsoehne/nx-builders [2.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.4...@webundsoehne/nx-builders@2.1.5) (2020-11-30)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.4
+- **@webundsoehne/nx-tools:** upgraded to 2.1.4
 
 ## @webundsoehne/nx-builders [2.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.3...@webundsoehne/nx-builders@2.1.4) (2020-11-30)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.3
+- **@webundsoehne/nx-tools:** upgraded to 2.1.3
 
 ## @webundsoehne/nx-builders [2.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.2...@webundsoehne/nx-builders@2.1.3) (2020-11-29)
 
-
 ### Bug Fixes
 
-* added execute builder as extra for tsc-watch ([05ebb68](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/05ebb682686e7f60ebda552d2f9e94ba070f3f2a))
+- added execute builder as extra for tsc-watch ([05ebb68](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/05ebb682686e7f60ebda552d2f9e94ba070f3f2a))
 
 ## @webundsoehne/nx-builders [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.1...@webundsoehne/nx-builders@2.1.2) (2020-11-27)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.2
+- **@webundsoehne/nx-tools:** upgraded to 2.1.2
 
 ## @webundsoehne/nx-builders [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.1.0...@webundsoehne/nx-builders@2.1.1) (2020-11-26)
 
-
 ### Bug Fixes
 
-* add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
-* cleanup and changelogs ([a44fc4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a44fc4b0e74b66c6a75109436f710dec803cd2e9))
-
-
-
-
+- add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
+- cleanup and changelogs ([a44fc4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a44fc4b0e74b66c6a75109436f710dec803cd2e9))
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 2.1.1
+- **@webundsoehne/nx-tools:** upgraded to 2.1.1
 
 # @webundsoehne/nx-builders [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@2.0.5...@webundsoehne/nx-builders@2.1.0) (2020-11-26)
 
