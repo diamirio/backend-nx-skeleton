@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.1...@webundsoehne/nx-tools@4.1.2) (2021-09-15)
+
+### Bug Fixes
+
+- rxjs breaking change ([88ab5a9](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/88ab5a9a7a2751505b12d673343db2288c2fea0a))
+
 ## @webundsoehne/nx-tools [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.0...@webundsoehne/nx-tools@4.1.1) (2021-09-15)
 
 ### Bug Fixes
