@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.0.0...@webundsoehne/nestjs-util@4.0.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* fix typeorm migration stuff, update versions ([c5cabbc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c5cabbcd5e27c39f625be7710a5f87ea38bc43b2))
+
 # @webundsoehne/nestjs-util [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@3.0.5...@webundsoehne/nestjs-util@4.0.0) (2021-08-20)
 
 
