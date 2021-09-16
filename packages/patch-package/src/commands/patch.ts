@@ -123,7 +123,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     )
 
     if (missingPatches.length > 0) {
-      this.logger.fatal(`Some of the patches you limit to is not appropirate: ${missingPatches.join(', ')}`)
+      this.logger.fatal(`Some of the patches you limit to is not appropriate: ${missingPatches.join(', ')}`)
 
       process.exit(127)
     }
