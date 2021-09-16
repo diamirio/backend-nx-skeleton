@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common'
 import { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
-import { asyncScheduler, throwError } from 'rxjs'
-import { timeoutWith } from 'rxjs/operators'
+import { asyncScheduler, firstValueFrom, Observable, throwError } from 'rxjs'
+import { timeout } from 'rxjs/operators'
 
 import {
   GetMicroserviceMessageRequestFromMap,
@@ -34,11 +34,11 @@ export class MicroserviceProviderService<
   }
 
   public onApplicationBootstrap (): void {
-    this.clients = (this.provider.reduce((o, c, i) => {
-      // this seems to be the only relaible way to inject the client names here
+    this.clients = this.provider.reduce((o, c, i) => {
+      // this seems to be the only reliable way to inject the client names here
       o[this.names[i]] = c
       return o
-    }, {} as Record<string, unknown>) as unknown) as Record<MessageQueues, ClientProxy>
+    }, {} as Record<string, unknown>) as unknown as Record<MessageQueues, ClientProxy>
   }
 
   // FIXME: this guys causes problems when typing the message request-respond types itself. only making the map a string map works.
@@ -71,6 +71,35 @@ export class MicroserviceProviderService<
     return this.execute('emit', queue, pattern, payload, options)
   }
 
+  public raw<
+    Queue extends MessageQueues,
+    Pattern extends MessageQueuePatterns[Queue],
+    Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
+    ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
+  >(
+    queue: Queue,
+    pattern: Pattern,
+    payload?: Payload,
+    options?: MicroserviceProviderServiceOptions
+  ): Observable<ReturnValue> {
+    const o = { ...this.options, ...options }
+
+    // it does not like ?.[]
+    if (!this.clients || !this.clients[queue]) {
+      throw new Error(
+        `"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`
+      )
+    }
+
+    return this.clients[queue].send(pattern, payload).pipe(
+      timeout({
+        each: o.timeout,
+        with: () => throwError(() => new TimeoutException(queue)),
+        scheduler: asyncScheduler
+      })
+    )
+  }
+
   private async execute<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
@@ -92,8 +121,14 @@ export class MicroserviceProviderService<
       )
     }
 
-    return this.clients[queue][command](pattern, payload)
-      .pipe(timeoutWith(o.timeout, throwError(new TimeoutException(queue)), asyncScheduler))
-      .toPromise()
+    return firstValueFrom<ReturnValue>(
+      this.clients[queue][command](pattern, payload).pipe(
+        timeout({
+          first: o.timeout,
+          with: () => throwError(() => new TimeoutException(queue)),
+          scheduler: asyncScheduler
+        })
+      )
+    )
   }
 }
