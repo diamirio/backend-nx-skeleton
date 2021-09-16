@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.2...@webundsoehne/nx-tools@4.1.3) (2021-09-16)
+
+### Bug Fixes
+
+- remove depreceated functions from rxjs stuff ([cf9f27f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf9f27f181b53b603a698a175868538c87e87481))
+
 ## @webundsoehne/nx-tools [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.1...@webundsoehne/nx-tools@4.1.2) (2021-09-15)
 
 ### Bug Fixes
