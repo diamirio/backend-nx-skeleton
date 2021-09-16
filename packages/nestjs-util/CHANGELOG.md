@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.0.1...@webundsoehne/nestjs-util@4.1.0) (2021-09-16)
+
+
+### Features
+
+* add support for microservice definition via function, fix nestjs-command update ([74ae249](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/74ae2490060a5153b2f18aed954f2e50aedc8934))
+
 ## @webundsoehne/nestjs-util [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.0.0...@webundsoehne/nestjs-util@4.0.1) (2021-09-15)
 
 
