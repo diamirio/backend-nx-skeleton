@@ -1,3 +1,9 @@
+# @webundsoehne-private/nx-nest [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.0.5...@webundsoehne-private/nx-nest@3.1.0) (2021-09-16)
+
+### Features
+
+- add support for microservice definition via function, fix nestjs-command update ([74ae249](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/74ae2490060a5153b2f18aed954f2e50aedc8934))
+
 ## @webundsoehne-private/nx-nest [3.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.0.4...@webundsoehne-private/nx-nest@3.0.5) (2021-09-15)
 
 ### Dependencies
