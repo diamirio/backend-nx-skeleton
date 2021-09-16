@@ -1,3 +1,9 @@
+## @webundsoehne/patch-package [2.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.0.1...@webundsoehne/patch-package@2.0.2) (2021-09-16)
+
+### Bug Fixes
+
+- use provided package instead of the custom one ([830f4da](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/830f4dab100fc6ff60baeac0da40e76140255abd))
+
 ## @webundsoehne/patch-package [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.0.0...@webundsoehne/patch-package@2.0.1) (2021-09-15)
 
 ### Bug Fixes
