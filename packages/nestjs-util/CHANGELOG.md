@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.1.0...@webundsoehne/nestjs-util@4.2.0) (2021-09-16)
+
+
+### Features
+
+* add raw connection to get the subscription from microservice ([9c47fe4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9c47fe4ddbadedb5ba2145825ca09a8894684ed5))
+
 # @webundsoehne/nestjs-util [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.0.1...@webundsoehne/nestjs-util@4.1.0) (2021-09-16)
 
 
