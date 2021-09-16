@@ -3,7 +3,7 @@ import * as diff from 'diff'
 import { createPrompt } from 'listr2'
 import { EOL } from 'os'
 import { dirname } from 'path'
-import { Observable } from 'rxjs'
+import { firstValueFrom, Observable } from 'rxjs'
 
 import { Logger } from '@utils'
 
@@ -36,7 +36,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
         async (): Promise<void> => {
           if (oldSource) {
             try {
-              oldTree = await ((oldSource(context) as unknown) as Observable<Tree>).toPromise()
+              oldTree = await firstValueFrom<Tree>(oldSource(context) as unknown as Observable<Tree>)
               log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
               // eslint-disable-next-line no-empty
             } catch {}
