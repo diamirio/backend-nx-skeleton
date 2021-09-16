@@ -1,6 +1,6 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
-import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
+import { generateProjectLint, readNxJson, updateWorkspaceInTree } from '@nrwl/workspace'
 import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
@@ -23,7 +23,7 @@ export function addProject (options: NormalizedSchema): Rule {
       options: {
         cwd: options.root,
         main: `${options.root}/src/main.ts`,
-        outputPath: `dist/${options.directory}`,
+        outputPath: `dist/${options.root}`,
         tsConfig: `${options.root}/tsconfig.build.json`,
         swapPaths: true,
         assets: [
@@ -35,6 +35,11 @@ export function addProject (options: NormalizedSchema): Rule {
           {
             glob: 'Dockerfile',
             input: `${options.root}`,
+            output: '.'
+          },
+          {
+            glob: 'package-lock.json',
+            input: '.',
             output: '.'
           }
         ]
@@ -138,7 +143,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
       const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
-        ? SchematicConstants.BACKEND_INTERFACES_PACKAGE
+        ? join(readNxJson().workspaceLayout.libsDir, SchematicConstants.BACKEND_INTERFACES_PACKAGE)
         : join(options.sourceRoot, SchematicFilesMap.UTILS)
 
       architect.migration = {

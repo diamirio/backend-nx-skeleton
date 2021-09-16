@@ -13,6 +13,6 @@ RUN printf "#!/bin/ash\nnpm run start" > /entrypoint.sh && \
   chmod +x /entrypoint.sh
 
 # Install Node packages, can not use lock file because of NX
-RUN npm i --production
+RUN npm ci --production --unsafe-perm
 
 ENTRYPOINT ["/sbin/tini", "-vg", "--", "/entrypoint.sh"]

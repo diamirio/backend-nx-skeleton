@@ -30,14 +30,16 @@ export type MicroserviceProviderClientOptions = RmqOptions['options']
  * This is the base format which a message queue maps for request responses can be supplied.
  */
 // FIXME: this needs fixing but, but can not type the patterns without typescript going crazy
-export type MicroserviceProviderBaseMessage<Pattern extends string | symbol | number> = {
+export type MicroserviceProviderBaseMessage<Pattern extends EnumKeys> = {
   [K in Pattern]: MicroserviceProviderMessage
 }
 
-export interface MicroserviceProviderMessage {
-  request?: any
-  response?: any
-}
+export type MicroserviceProviderMessage =
+  | {
+    request?: any
+    response?: any
+  }
+  | ((request?: any) => any)
 
 /**
  * Request type of an microservice message.
@@ -45,8 +47,16 @@ export interface MicroserviceProviderMessage {
 // this is a partial of any object since we want to make properties optional if we dont do this it will go mad
 export type GetMicroserviceMessageRequestFromMap<
   Event extends string,
-  Map extends Record<string, MicroserviceProviderMessage>
-> = Event extends keyof Map ? ('request' extends keyof Map[Event] ? Map[Event]['request'] : never) : never
+  Map extends Record<EnumKeys, MicroserviceProviderMessage>
+> = Event extends keyof Map
+  ? Map[Event] extends (request?: any) => any
+    ? Map[Event] extends (request?: infer P) => any
+      ? P
+      : never
+    : 'request' extends keyof Map[Event]
+      ? Map[Event]['request']
+      : never
+  : never
 
 /**
  * Response type of an microservice message.
@@ -54,8 +64,16 @@ export type GetMicroserviceMessageRequestFromMap<
 // this is a partial of any object since we want to make properties optional if we dont do this it will go mad
 export type GetMicroserviceMessageResponseFromMap<
   Event extends string,
-  Map extends Record<string, MicroserviceProviderMessage>
-> = Event extends keyof Map ? ('response' extends keyof Map[Event] ? Map[Event]['response'] : void) : never
+  Map extends Record<EnumKeys, MicroserviceProviderMessage>
+> = Event extends keyof Map
+  ? Map[Event] extends (request?: any) => any
+    ? Map[Event] extends (request?: any) => infer P
+      ? P
+      : never
+    : 'response' extends keyof Map[Event]
+      ? Map[Event]['response']
+      : never
+  : never
 
 /**
  * A timeout exception for message queue internally.
@@ -69,7 +87,7 @@ export class TimeoutException extends RuntimeException {
 /**
  * Shorthand for enum keys
  */
-export type EnumKeys = string | symbol | number
+export type EnumKeys = string | number
 
 /**
  * Type of a message queue patern thingy

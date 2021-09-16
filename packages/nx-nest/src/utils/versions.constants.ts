@@ -48,7 +48,11 @@ export const VERSIONS: Versions = {
   },
   [AvailableComponents.COMMAND]: {
     deps: {
-      'nestjs-command': '^3.0.2'
+      'nestjs-command': '^3.0.2',
+      yargs: '^17.1.1'
+    },
+    devDeps: {
+      '@types/yargs': '^17.0.2'
     }
   },
   // if the support for per message queue support added this has to be done in a more complicated way
