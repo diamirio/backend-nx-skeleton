@@ -179,20 +179,26 @@ export class NodeHelper {
         if (options.cwd && options.cwd.length > 0) {
           this.cmd.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
 
-          await Promise.all(
+          const found = await Promise.all(
             options.cwd.map(async (v) => {
               try {
                 const packagePath = join(v, currentPkg.pkg)
 
                 statSync(packagePath)
 
-                o.path = packagePath
-
-                o.installed = true
+                return { path: packagePath, installed: true }
                 // eslint-disable-next-line no-empty
               } catch {}
             })
           )
+
+          const foundIn = found.filter((f) => f.installed && f.path)
+
+          if (foundIn.length > 0) {
+            const firstOccurence = foundIn.shift()
+            o.path = firstOccurence.path
+            o.installed = firstOccurence.installed
+          }
         } else {
           // fallback method for non root directories
           try {
