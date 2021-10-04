@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [3.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.6...@webundsoehne/brownie@3.0.7) (2021-10-04)
+
+### Bug Fixes
+
+- update brownie dependency behaviour ([2b68861](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2b68861d4e8ae264e139a3414b113193869c7da2))
+
 ## @webundsoehne/brownie [3.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.5...@webundsoehne/brownie@3.0.6) (2021-09-16)
 
 ### Dependencies
