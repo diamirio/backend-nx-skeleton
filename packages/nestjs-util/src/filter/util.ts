@@ -12,7 +12,9 @@ function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {
 }
 
 export function isValidationError (exception: BadRequestException): exception is ClassValidatorException {
-  if (!exception.hasOwnProperty('validation')) {
+  if (typeof exception === 'object' && !exception.hasOwnProperty('validation')) {
+    return false
+  } else if (typeof exception !== 'object') {
     return false
   }
 
