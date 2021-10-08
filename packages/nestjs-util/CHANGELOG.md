@@ -1,3 +1,11 @@
+## @webundsoehne/nestjs-util [4.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.0...@webundsoehne/nestjs-util@4.2.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* error parser for express ([6578ed1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6578ed158b2d5ba4b18d2064667929d1e2c77ce7))
+* validation throw ([40f6044](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/40f604429442d01ebabbcc1e69d010e69601bd10))
+
 # @webundsoehne/nestjs-util [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-util@4.1.0...@webundsoehne/nestjs-util@4.2.0) (2021-09-16)
 
 
