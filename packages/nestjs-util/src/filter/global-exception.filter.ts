@@ -33,7 +33,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       logErrorDebugMsg(this.logger, payload, exception.stack)
 
       // do not handle internal error mechanisms
-      response.code(payload.statusCode).send(payload)
+      if (response.code) {
+        response.code(payload.statusCode).send(payload)
+      } else {
+        response.status(payload.statusCode)
+        response.send(payload)
+      }
     }
   }
 
