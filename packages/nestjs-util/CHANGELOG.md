@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [4.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.1...@webundsoehne/nestjs-util@4.2.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* bandaid fix for now and use for cs-present ([2c9fbb8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/2c9fbb8fd300a66759ecc5a51bceca82214e2549))
+
 ## @webundsoehne/nestjs-util [4.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.0...@webundsoehne/nestjs-util@4.2.1) (2021-10-08)
 
 
