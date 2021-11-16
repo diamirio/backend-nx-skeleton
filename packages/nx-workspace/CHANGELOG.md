@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-workspace [3.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.6...@webundsoehne-private/nx-workspace@3.0.7) (2021-11-16)
+
+### Bug Fixes
+
+- bandaid fix for now and use for cs-present ([2c9fbb8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2c9fbb8fd300a66759ecc5a51bceca82214e2549))
+
 ## @webundsoehne-private/nx-workspace [3.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.5...@webundsoehne-private/nx-workspace@3.0.6) (2021-09-16)
 
 ### Dependencies
