@@ -135,6 +135,8 @@ export class NodeHelper {
           )
 
           this.globalFolder.push(npmGlobalFolder)
+
+          this.cmd.logger.verbose('NPM global folder added to search: %s', npmGlobalFolder)
         }
 
         if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
@@ -144,10 +146,14 @@ export class NodeHelper {
           )
 
           // always add link folder, since this repository uses link to link stuff, important for testing through here
-          this.globalFolder.push(join(yarnGlobalFolder, '../../', 'link'))
+          const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
+          this.globalFolder.push(yarnLinkFolder)
+          this.cmd.logger.verbose('YARN link folder added to search: %s', yarnLinkFolder)
 
           if (this.manager === AvailablePackageManagers.YARN) {
             this.globalFolder.push(yarnGlobalFolder)
+
+            this.cmd.logger.verbose('YARN global folder added to search: %s', yarnGlobalFolder)
           }
         }
       }
@@ -162,7 +168,7 @@ export class NodeHelper {
     this.cmd.logger.debug(
       'Searching for deps %o in cwd %o.',
       pkg.map((p) => typeof p === 'string' ? p : p.pkg),
-      options.cwd
+      options.cwd ?? process.cwd()
     )
 
     // ugly function need refactoring
@@ -177,27 +183,33 @@ export class NodeHelper {
         const o = { pkg: currentPkg.pkg, installed: false } as CheckIfModuleInstalled
 
         if (options.cwd && options.cwd.length > 0) {
-          this.cmd.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
-
           const found = await Promise.all(
             options.cwd.map(async (v) => {
+              this.cmd.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
+
               try {
                 const packagePath = join(v, currentPkg.pkg)
 
                 statSync(packagePath)
 
+                this.cmd.logger.verbose('Package available in path: %s -> %s', currentPkg.pkg, packagePath)
+
                 return { path: packagePath, installed: true }
                 // eslint-disable-next-line no-empty
-              } catch {}
+              } catch (e) {
+                this.cmd.logger.verbose('Can not find package in global directory: %s -> %o', v, e.message)
+              }
             })
           )
 
-          const foundIn = found.filter((f) => f.installed && f.path)
+          const foundIn = found.filter((f) => f?.installed === true && f?.path)
 
           if (foundIn.length > 0) {
             const firstOccurence = foundIn.shift()
             o.path = firstOccurence.path
             o.installed = firstOccurence.installed
+
+            this.cmd.logger.verbose('Will use the first occurrence of the package: %s -> %s', currentPkg.pkg, firstOccurence.path)
           }
         } else {
           // fallback method for non root directories
@@ -211,8 +223,11 @@ export class NodeHelper {
             o.path = packagePath
 
             o.installed = true
-            // eslint-disable-next-line no-empty
-          } catch {}
+
+            this.cmd.logger.verbose('Package found in local directory: %s -> %o', currentPkg.pkg, o.path)
+          } catch (e) {
+            this.cmd.logger.verbose('Can not find package in local directory: %s -> %o', currentPkg.pkg, e.message)
+          }
         }
 
         if (o.installed) {
