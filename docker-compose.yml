@@ -5,22 +5,30 @@ services:
     environment:
       SYNC_WAIT: 15
       PROXY_PACKAGES_FOLDER: packages/
+      SERVICE_0_ENABLE: 'true'
       SERVICE_0_CWD: packages/nx-tools
       SERVICE_0_NAME: nx-tools
       SERVICE_0_SYNC: 'true'
+      SERVICE_1_ENABLE: 'true'
       SERVICE_1_CWD: packages/nx-builders
       SERVICE_1_NAME: nx-builders
       SERVICE_1_SYNC: 'true'
+      SERVICE_2_ENABLE: 'true'
       SERVICE_2_CWD: packages/brownie
       SERVICE_2_NAME: brownie
+      SERVICE_3_ENABLE: 'false'
       SERVICE_3_CWD: packages/nestjs-util
       SERVICE_3_NAME: nestjs-util
+      SERVICE_4_ENABLE: 'false'
       SERVICE_4_CWD: packages/nx-nest
       SERVICE_4_NAME: nx-nest
+      SERVICE_5_ENABLE: 'false'
       SERVICE_5_CWD: packages/patch-package
       SERVICE_5_NAME: patch-package
+      SERVICE_6_ENABLE: 'false'
       SERVICE_6_CWD: packages/nestjs-graphql-typeorm-dataloader
       SERVICE_6_NAME: nestjs-graphql-typeorm-dataloader
+      SERVICE_7_ENABLE: 'true'
       SERVICE_7_CWD: packages/nx-workspace
       SERVICE_7_NAME: nx-workspace
     volumes:

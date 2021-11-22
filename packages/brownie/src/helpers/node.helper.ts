@@ -26,15 +26,17 @@ export class NodeHelper {
   constructor (private readonly cmd: BaseCommand<Configuration>) {
     this.manager = cmd.constants.package_manager
 
-    try {
-      execa.sync(this.manager, [ '--version' ], {
-        shell: true,
-        stdio: [ 'ignore', 'ignore', 'ignore' ]
-      })
-    } catch {
-      cmd.logger.debug(`Package manager not found: ${this.manager}`)
-      this.ctx.fail[this.manager] = true
-    }
+    Object.values(AvailablePackageManagers).forEach((manager) => {
+      try {
+        execa.sync(manager, [ '--version' ], {
+          shell: true,
+          stdio: [ 'ignore', 'ignore', 'ignore' ]
+        })
+      } catch {
+        cmd.logger.debug(`Package manager not found: ${this.manager}`)
+        this.ctx.fail[manager] = true
+      }
+    })
 
     cmd.logger.debug(`NodeHelper initiated with package manager: ${this.manager}`)
   }

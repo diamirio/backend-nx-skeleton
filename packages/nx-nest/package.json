@@ -40,11 +40,11 @@
   },
   "dependencies": {
     "@angular-devkit/schematics": "12.1.2",
-    "@nestjs/schematics": "^8.0.2",
+    "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
-    "listr2": "^3.11.0"
+    "listr2": "^3.13.4"
   }
 }

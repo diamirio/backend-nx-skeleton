@@ -1,8 +1,7 @@
-import { BuilderContext, BuilderOutput, createBuilder, scheduleTargetAndForget, targetFromTargetString } from '@angular-devkit/architect'
-import { BaseBuilder, pipeProcessToLogger, runBuilder } from '@webundsoehne/nx-tools'
+import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import { parseTargetString, readTargetOptions, runExecutor as baseRunExecutor } from '@nrwl/devkit'
+import { BaseExecutor, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 import execa from 'execa'
-import { from, iif, Observable, of, zip } from 'rxjs'
-import { concatMap, filter, first, map, mapTo, tap } from 'rxjs/operators'
 
 import { ExecuteBuilderOptions, NormalizedExecuteBuilderOptions } from './main.interface'
 
@@ -11,8 +10,8 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-class Builder extends BaseBuilder<ExecuteBuilderOptions, NormalizedExecuteBuilderOptions, Record<string, never>> {
-  public run (): Observable<BuilderOutput> {
+class Executor extends BaseExecutor<ExecuteBuilderOptions, NormalizedExecuteBuilderOptions, Record<string, never>> {
+  public run (): Promise<BuilderOutput> {
     return this.handleBuild()
   }
 
@@ -20,37 +19,39 @@ class Builder extends BaseBuilder<ExecuteBuilderOptions, NormalizedExecuteBuilde
     return { watch: true, ...options }
   }
 
-  public handleBuild (): Observable<BuilderOutput> {
-    return this.runWaitUntilTargets().pipe(
-      concatMap((v) => {
-        if (!v.success) {
-          this.logger.error('One of the tasks specified in waitUntilTargets failed.')
-          return of({ success: false })
-        }
-        return this.startBuild().pipe(
-          concatMap((event: BuilderOutput) => {
-            if (!event.success) {
-              this.logger.error('There was an error with the build.')
-            }
+  public async handleBuild (): Promise<BuilderOutput> {
+    try {
+      const results = await this.runWaitUntilTargets()
 
-            return this.handleEvent(event).pipe(mapTo(event))
-          })
-        )
-      })
-    )
-  }
+      if (results.some((r) => r.success === false)) {
+        throw new Error('One of the tasks specified in waitUntilTargets failed.')
+      }
+    } catch (e) {
+      this.logger.error(e)
 
-  public handleEvent (event: BuilderOutput): Observable<BuilderContext> {
-    return iif(() => !event.success || this.options.watch || this.options.keepAlive, this.manager.stop(), of(undefined)).pipe(
-      tap(async () => await this.runProcess(event))
-    ) as Observable<BuilderContext>
-  }
-
-  public async runProcess (event: BuilderOutput): Promise<void> {
-    if (!event.success) {
-      return
+      return { success: false, error: e.message }
     }
 
+    try {
+      let event: BuilderOutput
+
+      while (!event.success || this.options.watch || this.options.keepAlive) {
+        event = await this.startBuild()
+
+        await this.manager.stop()
+
+        await this.runProcess()
+      }
+
+      return event
+    } catch (e) {
+      this.logger.error(e)
+
+      return { success: false, error: e.message }
+    }
+  }
+
+  public async runProcess (): Promise<void> {
     if (this.options.runAfter) {
       const instance = this.manager.addPersistent(
         execa.command(this.options.runAfter, { cwd: this.options.cwd ?? process.cwd(), env: { ...process.env, ...this.options.environment } })
@@ -60,42 +61,47 @@ class Builder extends BaseBuilder<ExecuteBuilderOptions, NormalizedExecuteBuilde
     }
   }
 
-  public startBuild (): Observable<BuilderOutput> {
-    const target = targetFromTargetString(this.options.buildTarget)
+  public async startBuild (): Promise<BuilderOutput> {
+    const target = parseTargetString(this.options.buildTarget)
+    const options = readTargetOptions(target, this.context)
 
-    return from(
-      Promise.all([ this.context.getTargetOptions(target), this.context.getBuilderNameForTarget(target) ]).then(([ options, builderName ]) =>
-        this.context.validateOptions(options, builderName)
-      )
-    ).pipe(
-      concatMap((options) =>
-        scheduleTargetAndForget(this.context, target, {
+    try {
+      await baseRunExecutor(
+        target,
+        {
           ...options,
           ...this.options.inject,
           watch: true
-        })
+        },
+        this.context
       )
-    )
+
+      return { success: true }
+    } catch (e) {
+      return { success: false, error: e.message }
+    }
   }
 
-  public runWaitUntilTargets (): Observable<BuilderOutput> {
+  public runWaitUntilTargets (): Promise<BuilderOutput[]> {
     if (!this.options.waitUntilTargets || this.options.waitUntilTargets.length === 0) {
-      return of({ success: true })
+      return
     }
 
-    return zip(
-      ...this.options.waitUntilTargets.map((b) => {
-        return scheduleTargetAndForget(this.context, targetFromTargetString(b)).pipe(
-          filter((e) => e.success !== undefined),
-          first()
-        )
-      })
-    ).pipe(
-      map((results) => {
-        return { success: !results.some((r) => !r.success) }
+    return Promise.all(
+      this.options.waitUntilTargets.map(async (waitUntilTarget) => {
+        const target = parseTargetString(waitUntilTarget)
+        const output = await baseRunExecutor(target, {}, this.context)
+
+        let event = await output.next()
+
+        while (!event.done) {
+          event = await output.next()
+        }
+
+        return event.value as { success: boolean }
       })
     )
   }
 }
 
-export default createBuilder(runBuilder(Builder))
+export default createBuilder(runExecutor(Executor))
