@@ -14,8 +14,7 @@ export class {{ casing.pascal }}Command {
 
   @Command({
     command: 'hello <name>',
-    describe: 'Prints hello <name>',
-    autoExit: true
+    describe: 'Prints hello <name>'
   })
   async helloWorld (
     @Positional({

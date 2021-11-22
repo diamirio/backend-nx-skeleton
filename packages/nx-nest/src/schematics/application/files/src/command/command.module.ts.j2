@@ -31,8 +31,7 @@ import * as modules from './modules'
 export function createCommandModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
 @Module({
   providers: [
-    ConfigService,
-    ...Object.values(modules)
+    ConfigService
     ],
   imports: [
     {% if database is defined and enum.dbAdapters.TYPEORM in database %}
@@ -43,7 +42,8 @@ export function createCommandModule ({% if database is defined and database != e
     {% if enum.components.MICROSERVICE_CLIENT in components %}
     MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
     {% endif %}
-    BaseCommandModule
+    BaseCommandModule,
+    ...Object.values(modules)
     ]
 })
   class CommandModule implements NestModule {
