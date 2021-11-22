@@ -5,7 +5,6 @@ import { formatOrSkip } from '@webundsoehne/nx-tools'
 import { checkDependencies } from './lib/check-dependencies'
 import { checkTargets } from './lib/check-targets'
 import { removeProject } from './lib/remove-project'
-import { updateNxJson } from './lib/update-nx-json'
 import { updateTsconfig } from './lib/update-tsconfig'
 import { updateWorkspace } from './lib/update-workspace'
 import { Schema } from './main.interface'
@@ -16,7 +15,6 @@ export default function (schema: Schema): Rule {
     checkDependencies(schema),
     checkTargets(schema),
     removeProject(schema) as any,
-    updateNxJson(schema),
     // will change this one
     updateTsconfig(schema),
     updateWorkspace(schema),

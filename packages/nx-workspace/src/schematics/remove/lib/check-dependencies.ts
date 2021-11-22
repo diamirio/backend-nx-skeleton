@@ -1,10 +1,5 @@
-import { Rule, Tree } from '@angular-devkit/schematics'
-import { FileData } from '@nrwl/workspace/src/core/file-utils'
-import { createProjectGraph, onlyWorkspaceProjects, ProjectGraph, reverse } from '@nrwl/workspace/src/core/project-graph'
-import { readNxJsonInTree, readWorkspace } from '@nrwl/workspace/src/utils/ast-utils'
-import { getWorkspacePath } from '@nrwl/workspace/src/utils/cli-config-utils'
-import ignore from 'ignore'
-import * as path from 'path'
+import { Rule } from '@angular-devkit/schematics'
+import { createProjectGraphAsync, ProjectGraph, reverse } from '@nrwl/workspace/src/core/project-graph'
 
 import { Schema } from '../main.interface'
 
@@ -15,45 +10,18 @@ import { Schema } from '../main.interface'
  *
  * @param schema The options provided to the schematic
  */
-export function checkDependencies (schema: Schema): Rule {
+export async function checkDependencies (schema: Schema): Promise<Rule> {
   if (schema.forceRemove) {
-    return (tree: Tree): Tree => tree
+    return
   }
 
-  let ig = ignore()
+  const graph: ProjectGraph = await createProjectGraphAsync()
 
-  return (tree: Tree): Tree => {
-    if (tree.exists('.gitignore')) {
-      ig = ig.add(tree.read('.gitignore').toString())
-    }
-    const files: FileData[] = []
-    const mtime = Date.now() // can't get mtime data from the tree :(
-    const workspaceDir = path.dirname(getWorkspacePath(tree))
+  const reverseGraph = reverse(graph)
 
-    for (const dir of tree.getDir('/').subdirs) {
-      if (ig.ignores(dir)) {
-        continue
-      }
+  const deps = reverseGraph.dependencies[schema.projectName] || []
 
-      tree.getDir(dir).visit((file: string) => {
-        files.push({
-          file: path.relative(workspaceDir, file),
-          ext: path.extname(file),
-          mtime
-        } as unknown as FileData)
-      })
-    }
-
-    const graph: ProjectGraph = createProjectGraph(readWorkspace(tree), readNxJsonInTree(tree), files)
-
-    const reverseGraph = onlyWorkspaceProjects(reverse(graph))
-
-    const deps = reverseGraph.dependencies[schema.projectName] || []
-
-    if (deps.length === 0) {
-      return tree
-    }
-
+  if (deps.length > 0) {
     throw new Error(`${schema.projectName} is still depended on by the following projects:\n${deps.map((x) => x.target).join('\n')}`)
   }
 }
