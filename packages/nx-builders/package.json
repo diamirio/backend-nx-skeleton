@@ -15,8 +15,8 @@
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist && cpy --cwd=src --parents --dot '**/*.json' ../dist/",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "postbuild": "tsconfig-replace-paths --project tsconfig.json && cpy --cwd=src --parents --dot '**/*.json' ../dist/",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && tsconfig-replace-paths --project tsconfig.json",
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
@@ -39,7 +39,7 @@
     "ts-node": ">= 8.10.0",
     "ts-node-dev": ">= 1.0.0",
     "tsc-watch": ">= 4.2.0",
-    "tscpaths": ">= 0.0.9",
+    "tsconfig-replace-paths": "^0.0.11",
     "typescript": ">= 3.9.0"
   },
   "dependencies": {

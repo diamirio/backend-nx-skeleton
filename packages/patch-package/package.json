@@ -16,7 +16,7 @@
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
+    "postbuild": "tsconfig-replace-paths --project tsconfig.json",
     "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
     "start": "./bin/run.js",
     "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",

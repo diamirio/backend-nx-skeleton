@@ -32,10 +32,9 @@ try {
 // i converted this to a class since it makes not to much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
   public init (): void {
-    // paths of the programs, more convient than using the api since tscpaths does not have api
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
-      tscpaths: getNodeBinaryPath('tscpaths'),
+      tsconfigPaths: getNodeBinaryPath('tsconfig-replace-paths'),
       tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
@@ -231,10 +230,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         ]
       },
       {
-        mode: [ 'tscpaths' ],
+        mode: [ 'tsconfigReplacePaths' ],
         rules: [
           {
-            args: [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
+            args: [ '-p', this.paths.tsconfigPaths ]
           },
           {
             condition: isVerbose(),
@@ -266,7 +265,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
 
-      this.logger.debug(`tscpaths path: ${this.paths.tscpaths}`)
+      this.logger.debug(`tsconfig-replace-paths path: ${this.paths.tsconfigReplacePaths}`)
 
       // create temporary tsconfig.paths
       const tsconfig = readJsonFile(this.paths.tsconfig)
@@ -278,9 +277,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         })
       )
 
-      const { args, spawnOptions } = this.normalizeArguments('tscpaths')
+      const { args, spawnOptions } = this.normalizeArguments('tsconfigReplacePaths')
 
-      const instance = this.manager.add(execa.node(this.paths.tscpaths, args, spawnOptions))
+      const instance = this.manager.add(execa.node(this.paths.tsconfigReplacePaths, args, spawnOptions))
 
       // we dont want errors from this it can be sig terminated
       try {

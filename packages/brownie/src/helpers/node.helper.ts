@@ -127,6 +127,21 @@ export class NodeHelper {
   ): Promise<CheckIfModuleInstalled[]> {
     // get the global modules folder with trickery
     if (options?.global) {
+      let yarnGlobalFolder: string
+
+      // yarn link folder should take predence over others, because that is what we use tho develop this library.
+      if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
+        yarnGlobalFolder = join(
+          (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
+          'node_modules'
+        )
+
+        // always add link folder, since this repository uses link to link stuff, important for testing through here
+        const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
+        this.globalFolder.push(yarnLinkFolder)
+        this.cmd.logger.verbose('YARN link folder added to search: %s', yarnLinkFolder)
+      }
+
       // these are the global folders that modules can be found
       if (this.globalFolder.length === 0) {
         if (!this.ctx.fail[AvailablePackageManagers.NPM] && this.manager === AvailablePackageManagers.NPM) {
@@ -139,22 +154,10 @@ export class NodeHelper {
           this.cmd.logger.verbose('NPM global folder added to search: %s', npmGlobalFolder)
         }
 
-        if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
-          const yarnGlobalFolder = join(
-            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
-            'node_modules'
-          )
+        if (!this.ctx.fail[AvailablePackageManagers.YARN] && this.manager === AvailablePackageManagers.YARN) {
+          this.globalFolder.push(yarnGlobalFolder)
 
-          // always add link folder, since this repository uses link to link stuff, important for testing through here
-          const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
-          this.globalFolder.push(yarnLinkFolder)
-          this.cmd.logger.verbose('YARN link folder added to search: %s', yarnLinkFolder)
-
-          if (this.manager === AvailablePackageManagers.YARN) {
-            this.globalFolder.push(yarnGlobalFolder)
-
-            this.cmd.logger.verbose('YARN global folder added to search: %s', yarnGlobalFolder)
-          }
+          this.cmd.logger.verbose('YARN global folder added to search: %s', yarnGlobalFolder)
         }
       }
 
