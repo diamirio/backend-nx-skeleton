@@ -16,7 +16,7 @@ services:
       SERVICE_2_ENABLE: 'true'
       SERVICE_2_CWD: packages/brownie
       SERVICE_2_NAME: brownie
-      SERVICE_3_ENABLE: 'false'
+      SERVICE_3_ENABLE: 'true'
       SERVICE_3_CWD: packages/nestjs-util
       SERVICE_3_NAME: nestjs-util
       SERVICE_4_ENABLE: 'false'

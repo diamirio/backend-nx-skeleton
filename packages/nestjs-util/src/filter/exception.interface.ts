@@ -1,4 +1,4 @@
-import { BadRequestException, ValidationError, HttpStatus } from '@nestjs/common'
+import { BadRequestException, HttpStatus, ValidationError } from '@nestjs/common'
 
 export class ClassValidatorException extends BadRequestException {
   public validation: Partial<ValidationError[]>

@@ -1,24 +1,25 @@
 import { HttpStatus, Logger } from '@nestjs/common'
 import { GraphQLError, GraphQLFormattedError } from 'graphql/error'
-import { EOL } from 'os'
 
-import { EnrichedException, EnrichedExceptionError } from './exception.interface'
+import { EnrichedExceptionError } from './exception.interface'
 import { GraphQLPreformattedException } from './graphql-exception.interface'
 import { formatValidationError, getErrorMessage, isValidationError, logErrorDebugMsg } from './util'
 
-export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedError<EnrichedException> {
+export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedError {
+  const e = exception as any
+
   let extensions = new EnrichedExceptionError({
     statusCode:
-      exception.extensions?.exception?.statusCode ??
-      exception.extensions?.exception?.response?.statusCode ??
+      e.extensions?.exception?.statusCode ??
+      e.extensions?.exception?.response?.statusCode ??
       HttpStatus.INTERNAL_SERVER_ERROR,
     error: exception?.name ?? exception?.message,
     message: getErrorMessage(exception),
-    service: exception.extensions?.exception?.response?.service
+    service: e.extensions?.exception?.response?.service
   })
 
-  if (isValidationError(exception?.extensions?.exception)) {
-    const errors = formatValidationError(exception.extensions.exception.validation)
+  if (isValidationError(e?.extensions?.exception)) {
+    const errors = formatValidationError(e.extensions.exception.validation)
 
     if (errors.length > 0) {
       extensions = {
@@ -28,15 +29,11 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
     }
   }
 
-  logErrorDebugMsg(
-    new Logger('GraphQLErrorParser'),
-    extensions,
-    exception?.extensions?.exception?.stacktrace?.join(EOL)
-  )
+  logErrorDebugMsg(new Logger('GraphQLErrorParser'), extensions, e?.extensions?.exception?.stacktrace)
 
   return new GraphQLPreformattedException({
     message: getErrorMessage(exception),
     path: exception.path,
-    extensions
+    extensions: extensions as any
   })
 }

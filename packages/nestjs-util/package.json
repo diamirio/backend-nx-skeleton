@@ -48,16 +48,16 @@
     "winston": "^3.3.3"
   },
   "peerDependencies": {
-    "@nestjs/common": ">= 8 < 9",
-    "@nestjs/core": ">= 8 < 9",
-    "@nestjs/graphql": ">= 8 < 9",
-    "@nestjs/microservices": ">= 8 < 9",
+    "@nestjs/common": ">= 8 < 10",
+    "@nestjs/core": ">= 8 < 10",
+    "@nestjs/graphql": ">= 8 < 10",
+    "@nestjs/microservices": ">= 8 < 10",
     "@nestjs/swagger": ">= 5 < 6",
     "class-transformer": ">= 0.4.0",
     "class-validator": ">= 0.13.0",
     "fastify": ">= 3",
     "fastify-swagger": ">= 4.0.0 < 5",
-    "graphql": ">= 15 < 16",
+    "graphql": ">= 16 < 17",
     "nest-schedule": ">= 0.6.0"
   },
   "devDependencies": {
@@ -73,7 +73,7 @@
     "@types/winston": "^2.4.4",
     "amqp-connection-manager": "^3.7.0",
     "amqplib": "^0.8.0",
-    "class-transformer": "^0.5.0",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "concurrently": "^6.4.0",
     "fastify": "^3.24.0",

@@ -127,25 +127,28 @@ export class NodeHelper {
     pkg: NodeDependency | NodeDependency[],
     options?: { global?: boolean, cwd?: string[], getVersion?: boolean, getUpdate?: boolean }
   ): Promise<CheckIfModuleInstalled[]> {
+    // we will later generate a log warn if we are using the linked folder since it shows we are in develop mode
+    let yarnLinkFolder: string
+
     // get the global modules folder with trickery
     if (options?.global) {
-      let yarnGlobalFolder: string
-
-      // yarn link folder should take predence over others, because that is what we use tho develop this library.
-      if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
-        yarnGlobalFolder = join(
-          (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
-          'node_modules'
-        )
-
-        // always add link folder, since this repository uses link to link stuff, important for testing through here
-        const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
-        this.globalFolder.push(yarnLinkFolder)
-        this.cmd.logger.verbose('YARN link folder added to search: %s', yarnLinkFolder)
-      }
-
-      // these are the global folders that modules can be found
       if (this.globalFolder.length === 0) {
+        let yarnGlobalFolder: string
+
+        // yarn link folder should take predence over others, because that is what we use tho develop this library.
+        if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
+          yarnGlobalFolder = join(
+            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
+            'node_modules'
+          )
+
+          // always add link folder, since this repository uses link to link stuff, important for testing through here
+          yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
+          this.globalFolder.push(yarnLinkFolder)
+          this.cmd.logger.verbose('Yarn link folder added to search: %s', yarnLinkFolder)
+        }
+
+        // these are the global folders that modules can be found
         if (!this.ctx.fail[AvailablePackageManagers.NPM] && this.manager === AvailablePackageManagers.NPM) {
           const npmGlobalFolder = join(
             (await execa(AvailablePackageManagers.NPM, [ PackageManagerCommands[AvailablePackageManagers.NPM][PackageManagerUsableCommands.GLOBAL], 'root' ])).stdout
@@ -164,6 +167,8 @@ export class NodeHelper {
       }
 
       options.cwd = this.globalFolder
+    } else {
+      this.cmd.logger.verbose('Global search folders have already been initiated in the prior run.')
     }
 
     if (!Array.isArray(pkg)) {
@@ -214,6 +219,10 @@ export class NodeHelper {
             o.path = firstOccurence.path
             o.installed = firstOccurence.installed
 
+            if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
+              this.cmd.logger.warn('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
+            }
+
             this.cmd.logger.verbose('Will use the first occurrence of the package: %s -> %s', currentPkg.pkg, firstOccurence.path)
           }
         } else {
@@ -262,7 +271,11 @@ export class NodeHelper {
               // eslint-disable-next-line no-console
               console.log = mock
 
-              if (updatable.type !== 'latest') {
+              if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
+                o.hasUpdate = false
+
+                this.cmd.logger.warn('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
+              } else if (updatable.type !== 'latest') {
                 o.hasUpdate = true
                 o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`
                 o.latest = updatable.latest
