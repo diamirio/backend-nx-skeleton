@@ -5,18 +5,18 @@ export const VERSIONS: Versions = {
   base: {
     default: {
       deps: {
-        '@nestjs/common': '^8.0.6',
-        '@nestjs/core': '^8.0.6',
-        rxjs: '^7.3.0',
+        '@nestjs/common': '^8.2.3',
+        '@nestjs/core': '^8.2.3',
+        rxjs: '^7.4.0',
         'reflect-metadata': '^0.1.13',
         '@webundsoehne/nestjs-util': '^4.0.0',
-        'class-transformer': '^0.4.0',
-        'class-validator': '^0.13.1'
+        'class-transformer': '^0.5.1',
+        'class-validator': '^0.13.2'
       }
     },
     microservice: {
       deps: {
-        '@nestjs/microservices': '^8.0.6'
+        '@nestjs/microservices': '^8.2.3'
       }
     },
     builder: {
@@ -27,17 +27,17 @@ export const VERSIONS: Versions = {
   },
   [AvailableServerTypes.RESTFUL]: {
     deps: {
-      '@nestjs/platform-fastify': '^8.0.6',
-      'fastify-swagger': '^4.11.0',
-      '@nestjs/swagger': '^5.0.9'
+      '@nestjs/platform-fastify': '^8.2.3',
+      'fastify-swagger': '^4.12.6',
+      '@nestjs/swagger': '^5.1.5'
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
-      '@nestjs/graphql': '^9.0.4',
-      '@nestjs/platform-fastify': '^8.0.6',
-      'apollo-server-fastify': '^3.3.0',
-      graphql: '^15.5.3',
+      '@nestjs/graphql': '^9.1.2',
+      '@nestjs/platform-fastify': '^8.2.3',
+      'apollo-server-fastify': '^3.5.0',
+      graphql: '^16.0.1',
       'graphql-tools': '^8.2.0'
     }
   },
@@ -48,51 +48,51 @@ export const VERSIONS: Versions = {
   },
   [AvailableComponents.COMMAND]: {
     deps: {
-      'nestjs-command': '^3.0.2',
-      yargs: '^17.1.1'
+      'nestjs-command': '^3.1.0',
+      yargs: '^17.2.1'
     },
     devDeps: {
-      '@types/yargs': '^17.0.2'
+      '@types/yargs': '^17.0.7'
     }
   },
   // if the support for per message queue support added this has to be done in a more complicated way
   [AvailableComponents.MICROSERVICE_SERVER]: {
     deps: {
       amqplib: '^0.8.0',
-      'amqp-connection-manager': '^3.6.0'
+      'amqp-connection-manager': '^3.7.0'
     }
   },
   [AvailableComponents.MICROSERVICE_CLIENT]: {
     deps: {
       amqplib: '^0.8.0',
-      'amqp-connection-manager': '^3.6.0'
+      'amqp-connection-manager': '^3.7.0'
     }
   },
   [AvailableTestsTypes.JEST]: {
     devDeps: {
-      '@nestjs/testing': '^8.0.6',
-      jest: '^27.2.0',
-      'ts-jest': '^27.0.5',
-      '@types/jest': '^27.0.1',
+      '@nestjs/testing': '^8.2.3',
+      jest: '^27.3.1',
+      'ts-jest': '^27.0.7',
+      '@types/jest': '^27.0.3',
       'tsconfig-loader': '^1.1.0'
     }
   },
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
       '@nestjs/typeorm': '^8.0.2',
-      typeorm: '^0.2.37',
+      typeorm: '^0.2.41',
       'typeorm-seeding': '^1.6.1'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
-      '@nestjs/mongoose': '^8.0.1',
-      mongoose: '^6.0.5'
+      '@nestjs/mongoose': '^9.0.1',
+      mongoose: '^6.0.13'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {
     deps: {
-      mysql2: '^2.3.0'
+      mysql2: '^2.3.3'
     }
   },
   [AvailableDBTypes.TYPEORM_POSTGRESQL]: {
