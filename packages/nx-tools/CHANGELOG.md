@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [4.1.4-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.3...@webundsoehne/nx-tools@4.1.4-beta.1) (2021-12-02)
+
+### Bug Fixes
+
+- typo ([be9b482](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/be9b4823ad04f11880ecba5654a36409b1c48bab))
+
 ## @webundsoehne/nx-tools [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.2...@webundsoehne/nx-tools@4.1.3) (2021-09-16)
 
 ### Bug Fixes
