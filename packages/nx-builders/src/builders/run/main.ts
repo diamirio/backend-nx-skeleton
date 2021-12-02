@@ -14,6 +14,8 @@ try {
 
 class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command: string }> {
   public async run (): Promise<BuilderOutput> {
+    let success = false
+    let error
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -34,12 +36,12 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
         await pipeProcessToLogger(this.context, instance, { start: true })
       }
 
-      return { success: true }
-    } catch (error) {
+      success = true
+    } catch (e) {
       if (this.builderOptions.watch) {
         // just restart it
         this.logger.error(`${this.builderOptions.command} crashed restarting in 3 secs.`)
-        this.logger.debug(error)
+        this.logger.debug(e)
 
         await delay(3000)
 
@@ -48,11 +50,13 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
         return this.run()
       }
 
-      return { success: false, error }
+      success = false
+      error = e
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
+    return { success, error }
   }
 
   public normalizeOptions (options: RunBuilderOptions): ExecaArguments {

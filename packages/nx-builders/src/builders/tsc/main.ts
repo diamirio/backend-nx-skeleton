@@ -29,10 +29,10 @@ try {
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-// i converted this to a class since it makes not to much sense to have separate functions with tons of same inputs
+// i converted this to a class since it makes not too much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
   public init (): void {
-    // paths of the programs, more convient than using the api since tscpaths does not have api
+    // paths of the programs, more convenient than using the api since tscpaths does not have api
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
       tscpaths: getNodeBinaryPath('tscpaths'),
@@ -46,6 +46,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     // Cleaning the /dist folder
     removeSync(this.options.normalizedOutputPath)
 
+    let success = false
+    let error
+    let outputPath
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -114,25 +117,33 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         await this.secondaryCompileActions()
       }
 
-      return { success: true, outputPath: this.options.normalizedOutputPath }
-    } catch (error) {
+      success = true
+      outputPath = this.options.normalizedOutputPath
+    } catch (e) {
       if (this.options.watch) {
         // if in watch mode just restart it
         this.logger.error('tsc-watch crashed restarting in 3 secs.')
-        this.logger.debug(error)
+        this.logger.debug(e)
 
         await delay(3000)
         await this.manager.stop()
 
         return this.run()
       } else {
-        return { error: `Transpiling process has been crashed.${EOL}${error}`, success: false }
+        success = false
+        error = `Transpiling process has been crashed.${EOL}${e}`
       }
 
-      return { success: false, error }
+      success = false
+      error = e
     } finally {
       // clean up the zombies!
       await this.manager.stop()
+    }
+    return {
+      success,
+      outputPath,
+      error
     }
   }
 

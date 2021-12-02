@@ -1,10 +1,9 @@
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
 import { ExecutorContext } from '@nrwl/devkit'
 import { Workspaces } from '@nrwl/tao/src/shared/workspace'
-import { Observable } from 'rxjs'
+import { from, Observable } from 'rxjs'
 
 import { isVerbose } from '../schematics'
-import { toObservable } from '../schematics/to-observable'
 import { BaseExecutor } from './base-executor'
 
 /**
@@ -33,7 +32,6 @@ export function runExecutor<
     }
 
     const executor = new Executor(options, context)
-
-    return toObservable(executor.run())
+    return from(executor.run())
   }
 }

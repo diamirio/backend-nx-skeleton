@@ -26,8 +26,6 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
 
       const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
       await pipeProcessToLogger(this.context, instance, { start: true })
-
-      return { success: true }
     } catch (error) {
       // just restart it
       this.logger.error('ts-node-dev crashed restarting in 3 secs.')
@@ -41,6 +39,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // clean up the zombies!
       await this.manager.stop()
     }
+    return { success: true }
   }
 
   public normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {
