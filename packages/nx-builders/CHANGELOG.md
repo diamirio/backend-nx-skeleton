@@ -1,3 +1,9 @@
+## @webundsoehne/nx-builders [4.1.4-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4-beta.1) (2021-12-02)
+
+### Bug Fixes
+
+- semantic commit ([a758401](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a758401ed9717de2c245dda078f0a3d00fd4402f))
+
 ## @webundsoehne/nx-builders [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.2...@webundsoehne/nx-builders@4.1.3) (2021-09-16)
 
 ### Dependencies
