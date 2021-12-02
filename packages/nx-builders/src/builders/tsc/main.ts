@@ -47,8 +47,8 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     removeSync(this.options.normalizedOutputPath)
 
     let success = false
-    let error
-    let outputPath
+    let error: string
+    let outputPath: string
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -135,11 +135,12 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
 
       success = false
-      error = e
+      error = e.message
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
+    this.logger.debug('tsc runner finished.')
     return {
       success,
       outputPath,

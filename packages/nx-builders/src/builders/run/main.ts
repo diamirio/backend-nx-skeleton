@@ -15,7 +15,7 @@ try {
 class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command: string }> {
   public async run (): Promise<BuilderOutput> {
     let success = false
-    let error
+    let error: string
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -30,7 +30,6 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
 
       if (this.builderOptions.interactive) {
         this.logger.debug('This command is an interactive one, will hijack stdio.')
-
         await instance
       } else {
         await pipeProcessToLogger(this.context, instance, { start: true })
@@ -51,11 +50,12 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
       }
 
       success = false
-      error = e
+      error = e.message
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
+    this.logger.debug('run runner finished.')
     return { success, error }
   }
 

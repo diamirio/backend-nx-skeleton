@@ -39,6 +39,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // clean up the zombies!
       await this.manager.stop()
     }
+    this.logger.debug('tsc-node-dev runner finished.')
     return { success: true }
   }
 
