@@ -51,7 +51,7 @@ export abstract class BaseBuilder<
   }
 
   /**
-   * The run command about what to do
+   * Then run command about what to do
    */
   public abstract run (): Observable<BuilderOutput>
 
