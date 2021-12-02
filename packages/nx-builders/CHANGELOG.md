@@ -1,3 +1,13 @@
+## @webundsoehne/nx-builders [4.1.4-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.4-beta.1...@webundsoehne/nx-builders@4.1.4-beta.2) (2021-12-02)
+
+### Bug Fixes
+
+- ensure runner error is string ([bdf314b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/bdf314b5da550687eda1a1a0facb4cfcabe28f82))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4-beta.1
+
 ## @webundsoehne/nx-builders [4.1.4-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4-beta.1) (2021-12-02)
 
 ### Bug Fixes
