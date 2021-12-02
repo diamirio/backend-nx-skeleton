@@ -293,7 +293,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       const instance = this.manager.add(execa.node(this.paths.tscpaths, args, spawnOptions))
 
-      // we dont want errors from this it can be sig terminated
+      // we dont want errors from this, it can be sig terminated
       try {
         await pipeProcessToLogger(this.context, instance, { stderr: true, stdout: false })
       } catch (e) {
