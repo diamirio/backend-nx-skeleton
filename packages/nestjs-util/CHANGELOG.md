@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [4.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.2...@webundsoehne/nestjs-util@4.2.3) (2021-12-10)
+
+
+### Bug Fixes
+
+* add explicit js-yaml dependency for config parsing ([7763775](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7763775636eec95f99473e8121988d83f6bb7361))
+
 ## @webundsoehne/nestjs-util [4.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.1...@webundsoehne/nestjs-util@4.2.2) (2021-11-16)
 
 
