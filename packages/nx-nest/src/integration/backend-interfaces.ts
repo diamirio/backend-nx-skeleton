@@ -1,16 +1,15 @@
-import { readNxJson, readWorkspaceJson } from '@nrwl/workspace'
+import { readWorkspaceJson } from '@webundsoehne/nx-tools'
 
 import { BackendInterfacesIntegrationInterface } from './backend-interfaces.interface'
-import { EnrichedNxJson } from '@interfaces/nx-json.interface'
+import { NxNestProjectIntegration } from './integration.interface'
 
 /**
  * Reads the backend interface integration part of the nx.json.
  */
 export function readBackendInterfaceIntegration (): BackendInterfacesIntegrationInterface[] {
-  const nxJson = readNxJson() as EnrichedNxJson
-  const workspaceJson = readWorkspaceJson()
+  const workspaceJson = readWorkspaceJson<NxNestProjectIntegration>()
 
-  return Object.entries(nxJson.projects).reduce((o, [ key, value ]) => {
+  return Object.entries(workspaceJson.projects).reduce((o, [ key, value ]) => {
     if (value.integration?.dbAdapters) {
       o = [
         ...o,

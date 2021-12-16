@@ -1,39 +1,34 @@
 import { NxProjectTypes } from '@constants/nx.constants'
-import { NxJsonConfiguration, NxJsonProjectConfiguration } from '@nrwl/devkit'
+import { NxJsonConfiguration } from '@nrwl/devkit'
 
-import { BrownieIntegrationInterface } from '@integration/brownie.interface'
-
-/**
- * Improved nx.json with integration stuff.
- */
-export interface EnrichedNxJson<T extends any = any> extends NxJsonConfiguration {
-  projects: {
-    [name: string]: NxJsonProjectConfiguration & {
-      integration: T
-      brownie: BrownieIntegrationInterface
-    }
-  }
-}
+import { BaseIntegration } from '..'
 
 /**
  * Nx does not import a type for workspace.json. This fills that gap.
  */
-export interface EnrichedWorkspaceJson {
+export interface EnrichedWorkspaceJson<T extends Record<string, any> = BaseIntegration> {
   version: number
   projects: {
-    [name: string]: EnrichedWorkspaceJsonProject
+    [name: string]: EnrichedWorkspaceJsonProject<T>
   }
-  cli: any
-  schematics: any
+  cli: Record<string, any>
+  schematics: Record<string, any>
 }
 
 /**
  * Per application settings in workspace.json
  */
-export interface EnrichedWorkspaceJsonProject {
+export interface EnrichedWorkspaceJsonProject<T extends Record<string, any> = BaseIntegration> {
   root: string
   sourceRoot: string
   projectType?: NxProjectTypes
-  schematics?: any
-  architect?: any
+  schematics?: Record<string, any>
+  architect?: Record<string, any>
+  integration?: T
 }
+
+/**
+ * nx.json interface expanded before, although nx has changed configuration now, that removes this need
+ * we may need in future, so instead of importing NxJson from nx we can still use ours.
+ */
+export type EnrichedNxJson = NxJsonConfiguration

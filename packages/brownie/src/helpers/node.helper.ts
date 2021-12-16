@@ -220,7 +220,7 @@ export class NodeHelper {
             o.installed = firstOccurence.installed
 
             if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
-              this.cmd.logger.warn('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
+              this.cmd.logger.verbose('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
             }
 
             this.cmd.logger.verbose('Will use the first occurrence of the package: %s -> %s', currentPkg.pkg, firstOccurence.path)
@@ -274,7 +274,7 @@ export class NodeHelper {
               if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
                 o.hasUpdate = false
 
-                this.cmd.logger.warn('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
+                this.cmd.logger.verbose('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
               } else if (updatable.type !== 'latest') {
                 o.hasUpdate = true
                 o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`

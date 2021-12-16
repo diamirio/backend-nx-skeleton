@@ -9,7 +9,7 @@ import merge from 'deepmerge'
  * @param t
  * @param s
  */
-export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
+export function deepMerge<T extends Record<PropertyKey, any>> (t: T, ...s: Partial<T>[]): T {
   return s.reduce((o, val) => {
     return merge(o, val ?? {})
   }, t) as T
@@ -22,7 +22,7 @@ export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>
  * @param t
  * @param s
  */
-export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
+export function deepMergeWithUniqueMergeArray<T extends Record<PropertyKey, any>> (t: T, ...s: Partial<T>[]): T {
   return s.reduce((o, val) => {
     return merge(o, val ?? {}, {
       arrayMerge: (target, source) => [ ...target, ...source ].filter(uniqueArrayFilter)
@@ -37,7 +37,7 @@ export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t:
  * @param t
  * @param s
  */
-export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
+export function deepMergeWithArrayOverwrite<T extends Record<PropertyKey, any>> (t: T, ...s: Partial<T>[]): T {
   return s.reduce((o, val) => {
     return merge(o, val ?? {}, {
       arrayMerge: (_, source) => source
