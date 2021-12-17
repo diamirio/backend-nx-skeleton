@@ -2,7 +2,8 @@
 
 # Class: KeycloakConnectModule
 
-KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client. This client is usually a private client with the token authentication flow in Keycloak.
+KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client.
+This client is usually a private client with the token authentication flow in Keycloak.
 
 ## Table of contents
 
@@ -42,8 +43,8 @@ connect/connect.module.ts:14
 
 #### Parameters
 
-| Name      | Type                                                                |
-| :-------- | :------------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`KeycloakConnectOptions`](../interfaces/KeycloakConnectOptions.md) |
 
 #### Returns

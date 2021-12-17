@@ -2,7 +2,8 @@
 
 # Class: KeycloakAdminModule
 
-KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any modification the Keycloak itself.
+KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any
+modification the Keycloak itself.
 
 ## Table of contents
 
@@ -42,9 +43,9 @@ admin/admin.module.ts:14
 
 #### Parameters
 
-| Name      | Type                   |
-| :-------- | :--------------------- |
-| `options` | `KeycloakAdminOptions` |
+| Name | Type |
+| :------ | :------ |
+| `options` | [`KeycloakAdminOptions`](../interfaces/KeycloakAdminOptions.md) |
 
 #### Returns
 

@@ -36,9 +36,9 @@ KeycloakAdminService manages the Keycloak RESTFUL API client.
 
 #### Parameters
 
-| Name      | Type                   |
-| :-------- | :--------------------- |
-| `options` | `KeycloakAdminOptions` |
+| Name | Type |
+| :------ | :------ |
+| `options` | [`KeycloakAdminOptions`](../interfaces/KeycloakAdminOptions.md) |
 
 #### Defined in
 
@@ -54,7 +54,7 @@ admin/admin.service.ts:14
 
 admin/admin.service.ts:12
 
----
+___
 
 ### logger
 
@@ -96,7 +96,7 @@ Creates and authorizes to the Keycloak REST API.
 
 admin/admin.service.ts:53
 
----
+___
 
 ### getClient
 
@@ -112,23 +112,23 @@ Creates a new client if it does not exists, returns the singleton instance if it
 
 admin/admin.service.ts:26
 
----
+___
 
 ### getOptions
 
-▸ **getOptions**(): `KeycloakAdminOptions`
+▸ **getOptions**(): [`KeycloakAdminOptions`](../interfaces/KeycloakAdminOptions.md)
 
 Returns the options that Keycloak REST API client is initiated with.
 
 #### Returns
 
-`KeycloakAdminOptions`
+[`KeycloakAdminOptions`](../interfaces/KeycloakAdminOptions.md)
 
 #### Defined in
 
 admin/admin.service.ts:46
 
----
+___
 
 ### isExpiredAccessToken
 
@@ -138,8 +138,8 @@ Checks whether the current authentication token to Keycloak REST API is expired.
 
 #### Parameters
 
-| Name          | Type     |
-| :------------ | :------- |
+| Name | Type |
+| :------ | :------ |
 | `accessToken` | `string` |
 
 #### Returns
@@ -150,7 +150,7 @@ Checks whether the current authentication token to Keycloak REST API is expired.
 
 admin/admin.service.ts:72
 
----
+___
 
 ### reloadClient
 
@@ -166,7 +166,7 @@ Recreates the client first before returning it.
 
 admin/admin.service.ts:37
 
----
+___
 
 ### validateClient
 

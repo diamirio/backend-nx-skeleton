@@ -31,7 +31,7 @@
 
 connect/connect.interfaces.ts:8
 
----
+___
 
 ### bearer-only
 
@@ -41,7 +41,7 @@ connect/connect.interfaces.ts:8
 
 connect/connect.interfaces.ts:10
 
----
+___
 
 ### confidential-port
 
@@ -51,7 +51,7 @@ connect/connect.interfaces.ts:10
 
 connect/connect.interfaces.ts:11
 
----
+___
 
 ### cookie-key
 
@@ -61,7 +61,7 @@ connect/connect.interfaces.ts:11
 
 connect/connect.interfaces.ts:12
 
----
+___
 
 ### credentials
 
@@ -69,15 +69,15 @@ connect/connect.interfaces.ts:12
 
 #### Type declaration
 
-| Name     | Type     |
-| :------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `secret` | `string` |
 
 #### Defined in
 
 connect/connect.interfaces.ts:5
 
----
+___
 
 ### exceptionMessages
 
@@ -87,7 +87,7 @@ connect/connect.interfaces.ts:5
 
 connect/connect.interfaces.ts:20
 
----
+___
 
 ### realm
 
@@ -97,7 +97,7 @@ connect/connect.interfaces.ts:20
 
 connect/connect.interfaces.ts:3
 
----
+___
 
 ### resource
 
@@ -107,7 +107,7 @@ connect/connect.interfaces.ts:3
 
 connect/connect.interfaces.ts:4
 
----
+___
 
 ### roles
 
@@ -117,7 +117,7 @@ connect/connect.interfaces.ts:4
 
 connect/connect.interfaces.ts:15
 
----
+___
 
 ### rolesRequired
 
@@ -127,7 +127,7 @@ connect/connect.interfaces.ts:15
 
 connect/connect.interfaces.ts:16
 
----
+___
 
 ### scopes
 
@@ -137,7 +137,7 @@ connect/connect.interfaces.ts:16
 
 connect/connect.interfaces.ts:17
 
----
+___
 
 ### scopesRequired
 
@@ -147,7 +147,7 @@ connect/connect.interfaces.ts:17
 
 connect/connect.interfaces.ts:18
 
----
+___
 
 ### scopesUnauthorized
 
@@ -157,7 +157,7 @@ connect/connect.interfaces.ts:18
 
 connect/connect.interfaces.ts:19
 
----
+___
 
 ### ssl-required
 
