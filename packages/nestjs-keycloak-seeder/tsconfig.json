@@ -10,7 +10,7 @@
       "@decorators/*": ["decorators/*"],
       "@interfaces/*": ["interfaces/*"],
       "@utils/*": ["utils/*"],
-      "@modules/*": ["modules/*"]
+      "@module/*": ["module/*"]
     }
   },
   "include": ["src"],

@@ -1,6 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common'
+import { Inject, Injectable, Logger } from '@nestjs/common'
 
+import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
 import { KeycloakSeed } from '@interfaces/keycloak-seed'
+import { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
 import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 
 /**
@@ -10,7 +12,7 @@ import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 export class KeycloakSeederService {
   protected readonly logger = new Logger(this.constructor.name)
 
-  constructor (protected readonly keycloak: KeycloakAdminSeederTools, protected readonly seeds: Record<PropertyKey, new (keycloak: KeycloakAdminSeederTools) => KeycloakSeed>) {}
+  constructor (protected readonly keycloak: KeycloakAdminSeederTools, @Inject(KEYCLOAK_SEEDER_SEEDS) protected readonly seeds: KeycloakSeeds) {}
 
   /**
    * Run all the seeds.
