@@ -103,10 +103,10 @@ This middleware checks and processes for the subfields of a parent entity that s
 
 #### Parameters
 
-| Name   | Type                                         |
-| :----- | :------------------------------------------- |
-| `ctx`  | `MiddlewareContext`<`any`, `any`, `Object`\> |
-| `next` | `NextFn`<`any`\>                             |
+| Name   | Type                                                              |
+| :----- | :---------------------------------------------------------------- |
+| `ctx`  | `MiddlewareContext`<`any`, `any`, { [argName: string]: `any`; }\> |
+| `next` | `NextFn`<`any`\>                                                  |
 
 #### Returns
 
@@ -149,10 +149,10 @@ This middleware checks and processes for the subfields of a parent entity that s
 
 #### Parameters
 
-| Name   | Type                                         |
-| :----- | :------------------------------------------- |
-| `ctx`  | `MiddlewareContext`<`any`, `any`, `Object`\> |
-| `next` | `NextFn`<`any`\>                             |
+| Name   | Type                                                              |
+| :----- | :---------------------------------------------------------------- |
+| `ctx`  | `MiddlewareContext`<`any`, `any`, { [argName: string]: `any`; }\> |
+| `next` | `NextFn`<`any`\>                                                  |
 
 #### Returns
 
