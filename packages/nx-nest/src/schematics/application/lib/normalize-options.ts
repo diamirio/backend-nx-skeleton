@@ -3,15 +3,6 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import {
-  ConvertToPromptType,
-  generateNameCases,
-  isVerbose,
-  mapPromptChoices,
-  readMicroserviceIntegration,
-  readNxIntegration,
-  setSchemaDefaultsInContext
-} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
@@ -27,6 +18,15 @@ import {
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@src/utils'
+import {
+  ConvertToPromptType,
+  generateNameCases,
+  isVerbose,
+  mapPromptChoices,
+  readMicroserviceIntegration,
+  readNxIntegration,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.

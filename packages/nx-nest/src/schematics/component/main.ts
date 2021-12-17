@@ -1,9 +1,9 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
+import { formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Schema} schema

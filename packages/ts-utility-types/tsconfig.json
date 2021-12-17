@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "paths": {
+      "@constant/*": ["constant/*"],
+      "@interface/*": ["interface/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

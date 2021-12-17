@@ -1,10 +1,10 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
+import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 
 export function addProject (options: NormalizedSchema): Rule {
   return updateWorkspaceInTree<EnrichedWorkspaceJson>((json) => {

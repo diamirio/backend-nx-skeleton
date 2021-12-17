@@ -1,11 +1,11 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa, { ExecaChildProcess } from 'execa'
 import fs from 'fs'
 import { join } from 'path'
 
 import { RunBuilderOptions } from './main.interface'
+import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()

@@ -1,5 +1,4 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { pipeProcessThroughListr } from '@webundsoehne/nx-tools'
 import execa from 'execa'
 import { readJson, statSync } from 'fs-extra'
 import { Listr } from 'listr2'
@@ -17,6 +16,7 @@ import {
 } from './node.helper.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeDependency } from '@src/interfaces/dependency.interface'
+import { pipeProcessThroughListr } from '@webundsoehne/nx-tools'
 
 export class NodeHelper {
   public globalFolder: string[] = []

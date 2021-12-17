@@ -3,6 +3,13 @@ import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
+import delay from 'delay'
+import execa from 'execa'
+import { copy, removeSync } from 'fs-extra'
+import { EOL } from 'os'
+import { basename, dirname, join, normalize, relative } from 'path'
+
+import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 import {
   BaseExecutor,
   checkNodeModulesExists,
@@ -16,13 +23,6 @@ import {
   pipeProcessToLogger,
   runExecutor
 } from '@webundsoehne/nx-tools'
-import delay from 'delay'
-import execa from 'execa'
-import { copy, removeSync } from 'fs-extra'
-import { EOL } from 'os'
-import { basename, dirname, join, normalize, relative } from 'path'
-
-import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()

@@ -1,6 +1,5 @@
 import { BaseCommand, LogLevels } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { color } from '@webundsoehne/nx-tools'
 import execa from 'execa'
 import { createPrompt, Listr } from 'listr2'
 import { EOL } from 'os'
@@ -10,6 +9,7 @@ import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
+import { color } from '@webundsoehne/nx-tools'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'

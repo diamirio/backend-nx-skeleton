@@ -1,9 +1,8 @@
-import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/nx-tools'
-
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import { EnrichedWorkspaceJsonProject, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed schema coming from the angular-schematics

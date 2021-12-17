@@ -37,6 +37,7 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
+    "@webundsoehne/deep-merge": "*",
     "@angular-devkit/architect": "0.1202.5",
     "@angular-devkit/core": "12.2.5",
     "@angular-devkit/schematics": "12.2.5",
@@ -46,7 +47,6 @@
     "@types/picomatch": "^2.2.6",
     "change-case": "^4.1.2",
     "colorette": "^1.4.0",
-    "deepmerge": "^4.2.2",
     "diff": "^5.0.0",
     "eslint": "^7.31.0",
     "execa": "^5.1.1",

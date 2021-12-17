@@ -2,15 +2,6 @@ import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson, toFileName } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import {
-  ConvertToPromptType,
-  EnrichedWorkspaceJsonProject,
-  generateNameCases,
-  isVerbose,
-  readNxIntegration,
-  readWorkspaceJson,
-  setSchemaDefaultsInContext
-} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
@@ -20,6 +11,15 @@ import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThing
 import { SchematicConstants } from '@src/interfaces'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 import { generateMicroserviceCasing } from '@src/utils'
+import {
+  ConvertToPromptType,
+  EnrichedWorkspaceJsonProject,
+  generateNameCases,
+  isVerbose,
+  readNxIntegration,
+  readWorkspaceJson,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Tree} host

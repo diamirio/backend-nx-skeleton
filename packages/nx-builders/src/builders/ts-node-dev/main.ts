@@ -1,9 +1,9 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa from 'execa'
 
 import { TsNodeBuilderOptions } from './main.interface'
+import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()

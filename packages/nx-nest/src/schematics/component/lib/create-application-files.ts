@@ -1,9 +1,9 @@
 import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 
 /**
  * @param  {NormalizedSchema} options This should be the options parsed through.

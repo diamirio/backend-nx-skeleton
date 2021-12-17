@@ -1,7 +1,6 @@
 import { normalize } from '@angular-devkit/core'
 import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint, readNxJson, updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 import { join } from 'path'
 
 import { SchematicArchitect } from '../interfaces/add-project.interface'
@@ -9,6 +8,7 @@ import { SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableTestsTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
+import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
 
 /**
  * Add the project to the {workspace,angular}.json

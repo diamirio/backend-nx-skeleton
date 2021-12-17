@@ -1,6 +1,5 @@
-import { PackageVersions } from '@webundsoehne/nx-tools'
-
 import { AvailableCLIs, AvailableFolderStructures } from '@interfaces/available.constants'
+import { PackageVersions } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed options list coming from angular-schematics

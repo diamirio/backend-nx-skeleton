@@ -1,8 +1,8 @@
 import { Rule, Tree } from '@angular-devkit/schematics'
 import { updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 
 import { Schema } from '../main.interface'
+import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 
 /**
  * Check whether the project to be removed has builders targetted by another project

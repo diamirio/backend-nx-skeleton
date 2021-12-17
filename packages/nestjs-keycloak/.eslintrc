@@ -1,0 +1,50 @@
+{
+  "extends": "../../.eslintrc.js",
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@src/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@constants/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@interfaces/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@admin/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@connect/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@webundsoehne/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@webundsoehne-private/**",
+            "group": "index"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "groups": [
+          ["builtin", "external"],
+          ["index", "parent", "sibling"]
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
