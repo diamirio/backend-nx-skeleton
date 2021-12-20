@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-util [4.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.1...@webundsoehne/nestjs-util@4.3.2) (2021-12-20)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 1.0.2
+
 ## @webundsoehne/nestjs-util [4.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.0...@webundsoehne/nestjs-util@4.3.1) (2021-12-20)
 
 
