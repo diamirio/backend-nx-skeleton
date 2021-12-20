@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.1...@webundsoehne/nestjs-keycloak@1.0.2) (2021-12-20)
+
+### Bug Fixes
+
+- publish configuration ([e6b13d7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e6b13d7cc0e8be02d3246c72c341d37fec7161db))
+
 ## @webundsoehne/nestjs-keycloak [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.0...@webundsoehne/nestjs-keycloak@1.0.1) (2021-12-20)
 
 ### Bug Fixes
