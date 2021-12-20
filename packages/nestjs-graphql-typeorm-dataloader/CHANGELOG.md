@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.0...@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.1) (2021-12-20)
+
+### Bug Fixes
+
+- publish configuration ([e6b13d7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e6b13d7cc0e8be02d3246c72c341d37fec7161db))
+
 # @webundsoehne/nestjs-graphql-typeorm-dataloader [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@2.0.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.0) (2021-12-17)
 
 ### Features
