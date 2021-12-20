@@ -2,8 +2,7 @@
 
 # Class: BaseAuthGuard
 
-Application AuthGuard for Keycloak applications.
-Base for extending it for multiple use cases.
+Application AuthGuard for Keycloak applications. Base for extending it for multiple use cases.
 
 ## Implements
 
@@ -38,15 +37,15 @@ Base for extending it for multiple use cases.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keycloak` | `Keycloak` |
+| Name              | Type                                                                |
+| :---------------- | :------------------------------------------------------------------ |
+| `keycloak`        | `Keycloak`                                                          |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/KeycloakConnectOptions.md) |
-| `reflector` | `Reflector` |
+| `reflector`       | `Reflector`                                                         |
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:18
+connect/guards/auth-base.guard.ts:23
 
 ## Properties
 
@@ -56,9 +55,9 @@ connect/guards/auth-base.guard.ts:18
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:16
+connect/guards/auth-base.guard.ts:21
 
-___
+---
 
 ### reflector
 
@@ -72,8 +71,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -86,9 +85,9 @@ CanActivate.canActivate
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:24
+connect/guards/auth-base.guard.ts:29
 
-___
+---
 
 ### extractBearerToken
 
@@ -96,8 +95,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type  |
+| :-------- | :---- |
 | `request` | `any` |
 
 #### Returns
@@ -106,9 +105,9 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:93
+connect/guards/auth-base.guard.ts:98
 
-___
+---
 
 ### fetchRoles
 
@@ -116,7 +115,7 @@ ___
 
 #### Parameters
 
-| Name | Type |
+| Name    | Type    |
 | :------ | :------ |
 | `grant` | `Grant` |
 
@@ -126,9 +125,9 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:105
+connect/guards/auth-base.guard.ts:110
 
-___
+---
 
 ### fetchScopes
 
@@ -136,9 +135,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `roles` | `string`[] |
+| Name               | Type                                        |
+| :----------------- | :------------------------------------------ |
+| `roles`            | `string`[]                                  |
 | `authorizedScopes` | [`ScopesOption`](../README.md#scopesoption) |
 
 #### Returns
@@ -147,9 +146,9 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:117
+connect/guards/auth-base.guard.ts:122
 
-___
+---
 
 ### getExceptionMessage
 
@@ -157,8 +156,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type     |
+| :-------- | :------- |
 | `message` | `string` |
 
 #### Returns
@@ -167,9 +166,9 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:89
+connect/guards/auth-base.guard.ts:94
 
-___
+---
 
 ### getRequest
 
@@ -177,8 +176,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -187,14 +186,14 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:141
+connect/guards/auth-base.guard.ts:146
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../README.md#enrichedfastifyrequest)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -203,14 +202,14 @@ connect/guards/auth-base.guard.ts:141
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:142
+connect/guards/auth-base.guard.ts:147
 
 ▸ `Abstract` **getRequest**(`context`): `any`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -219,9 +218,9 @@ connect/guards/auth-base.guard.ts:142
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:143
+connect/guards/auth-base.guard.ts:148
 
-___
+---
 
 ### validate
 
@@ -229,11 +228,11 @@ ___
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `key` | `string` | `undefined` |
-| `values` | `string`[] | `undefined` |
-| `authorizedValues` | `string`[] | `[]` |
+| Name               | Type       | Default value |
+| :----------------- | :--------- | :------------ |
+| `key`              | `string`   | `undefined`   |
+| `values`           | `string`[] | `undefined`   |
+| `authorizedValues` | `string`[] | `[]`          |
 
 #### Returns
 
@@ -241,4 +240,4 @@ ___
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:127
+connect/guards/auth-base.guard.ts:132
