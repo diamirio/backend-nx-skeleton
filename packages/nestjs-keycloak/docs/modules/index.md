@@ -448,15 +448,13 @@ Makes the controller route private and require Keycloak authentication.
 
 **`alias`** {KeyclaokPrivate, KeycloakProtected,Private,Protected}
 
-**`deprecated`** Use KeycloakPrivate instead because of the more generic naming scheme.
-
 #### Returns
 
 `CustomDecorator`<`symbol`\>
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:22
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:21
 
 ---
 
@@ -468,15 +466,13 @@ Makes the controller route private and require Keycloak authentication.
 
 **`alias`** {KeyclaokPrivate, KeycloakProtected,Private,Protected}
 
-**`deprecated`** Use KeycloakPrivate instead because of the more generic naming scheme.
-
 #### Returns
 
 `CustomDecorator`<`symbol`\>
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:29
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:27
 
 ---
 
@@ -488,15 +484,13 @@ Makes the controller route public and does not require Keycloak authentication.
 
 **`alias`** {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
 
-**`deprecated`** Use KeycloakPublic instead because of the more generic naming scheme.
-
 #### Returns
 
 `CustomDecorator`<`symbol`\>
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:22
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:21
 
 ---
 
@@ -560,12 +554,10 @@ Makes the controller route public and does not require Keycloak authentication.
 
 **`alias`** {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
 
-**`deprecated`** Use KeycloakPublic instead because of the more generic naming scheme.
-
 #### Returns
 
 `CustomDecorator`<`symbol`\>
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:29
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:27

@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [1.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.4...@webundsoehne/nestjs-keycloak@1.0.5) (2021-12-20)
+
+### Bug Fixes
+
+- remove some deprecations ([380b1b0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/380b1b0c81d50817c2a8f76084f36589a0ae6d7e))
+
 ## @webundsoehne/nestjs-keycloak [1.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.3...@webundsoehne/nestjs-keycloak@1.0.4) (2021-12-20)
 
 ### Bug Fixes
