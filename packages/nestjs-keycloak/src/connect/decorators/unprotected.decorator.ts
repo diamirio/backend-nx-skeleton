@@ -17,13 +17,11 @@ export const KeycloakUnprotected: typeof KeycloakPublic = KeycloakPublic
 /**
  * Makes the controller route public and does not require Keycloak authentication.
  * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
- * @deprecated Use KeycloakPublic instead because of the more generic naming scheme.
  */
 export const Public: typeof KeycloakPublic = KeycloakPublic
 
 /**
  * Makes the controller route public and does not require Keycloak authentication.
  * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
- * @deprecated Use KeycloakPublic instead because of the more generic naming scheme.
  */
 export const Unprotected: typeof KeycloakPublic = KeycloakPublic
