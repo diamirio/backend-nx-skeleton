@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-workspace [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.1.0...@webundsoehne-private/nx-workspace@3.1.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
 # @webundsoehne-private/nx-workspace [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.8...@webundsoehne-private/nx-workspace@3.1.0) (2021-12-20)
 
 ### Features
