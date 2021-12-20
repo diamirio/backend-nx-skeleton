@@ -10,7 +10,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 ## Description
 
-Deep merge objects.
+Helper tools for deep merge objects.
 
 - **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
