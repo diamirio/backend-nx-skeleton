@@ -41,7 +41,6 @@ export interface KeycloakConnectUser {
   email: string
   verified: boolean
   roles?: string[]
-  jurisdiction?: { role: string, restriction: string }[]
   groups?: string[]
   scopes?: string[] // todo: maybe that's not the correct type
 }
