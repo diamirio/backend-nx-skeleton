@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 
-import { KEYCLOAK_ADMIN_INSTANCE } from '../admin.constants'
+import { KEYCLOAK_ADMIN_INSTANCE } from '@admin/admin.constants'
 
 /**
  * Injects Keyclaok admin instance initiated to the service.

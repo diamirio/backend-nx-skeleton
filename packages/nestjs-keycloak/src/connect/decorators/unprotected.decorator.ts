@@ -1,6 +1,6 @@
 import { CustomDecorator, SetMetadata } from '@nestjs/common'
 
-import { KEYCLOAK_CONNECT_METADATA_UNPROTECTED } from '../connect.constants'
+import { KEYCLOAK_CONNECT_METADATA_UNPROTECTED } from '@connect/connect.constants'
 
 /**
  * Makes the controller route public and does not require Keycloak authentication.

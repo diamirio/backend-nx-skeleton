@@ -53,6 +53,7 @@
     "@nestjs/common": "^8.2.3"
   },
   "peerDependencies": {
-    "@nestjs/common": ">= 8"
+    "@nestjs/common": ">= 8",
+    "@webundsoehne/nestjs-keycloak": ">= 1"
   }
 }

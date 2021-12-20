@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 
-import { KEYCLOAK_CONNECT_INSTANCE, KEYCLOAK_CONNECT_OPTIONS } from '@connect/index'
+import { KEYCLOAK_CONNECT_INSTANCE, KEYCLOAK_CONNECT_OPTIONS } from '@connect/connect.constants'
 
 /**
  * Injects Keyclaok connect instance initiated to the service.

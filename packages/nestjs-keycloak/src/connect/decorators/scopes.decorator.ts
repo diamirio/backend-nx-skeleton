@@ -1,7 +1,7 @@
 import { CustomDecorator, SetMetadata } from '@nestjs/common'
 
-import { KEYCLOAK_CONNECT_METADATA_SCOPES } from '../connect.constants'
-import { ScopesOption } from '../connect.interfaces'
+import { KEYCLOAK_CONNECT_METADATA_SCOPES } from '@connect/connect.constants'
+import { ScopesOption } from '@connect/connect.interfaces'
 
 /**
  * Inject current Keycloak user client scopes in to a variable.
