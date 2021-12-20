@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [1.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.3...@webundsoehne/nestjs-keycloak@1.0.4) (2021-12-20)
+
+### Bug Fixes
+
+- update decorators ([3ce353b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3ce353bff71304107bdcee27519876cf78e568fa))
+
 ## @webundsoehne/nestjs-keycloak [1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.2...@webundsoehne/nestjs-keycloak@1.0.3) (2021-12-20)
 
 ### Bug Fixes
