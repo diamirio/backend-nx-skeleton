@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.2.0...@webundsoehne/nx-tools@4.2.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.1
+
 # @webundsoehne/nx-tools [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.4...@webundsoehne/nx-tools@4.2.0) (2021-12-20)
 
 ### Features
