@@ -10,7 +10,7 @@ import { EnrichedFastifyRequest, EnrichedExpressRequest } from '@interfaces/requ
  */
 @Injectable()
 export class AuthGuard extends BaseAuthGuard {
-  public getRequest (context: ExecutionContext): EnrichedFastifyRequest | EnrichedExpressRequest {
+  public getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
     return GqlExecutionContext.create(context).getContext().req ?? context.switchToHttp().getRequest()
   }
 }
