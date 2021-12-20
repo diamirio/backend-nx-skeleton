@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.0...@webundsoehne/nestjs-keycloak-seeder@1.0.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.1
+
 # @webundsoehne/nestjs-keycloak-seeder 1.0.0 (2021-12-20)
 
 ### Bug Fixes
