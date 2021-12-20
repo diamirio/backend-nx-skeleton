@@ -4,12 +4,26 @@ import { KEYCLOAK_CONNECT_METADATA_UNPROTECTED } from '@connect/connect.constant
 
 /**
  * Makes the controller route public and does not require Keycloak authentication.
- * @alias Public
+ * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
  */
-export const Unprotected: () => CustomDecorator<symbol> = () => SetMetadata(KEYCLOAK_CONNECT_METADATA_UNPROTECTED, true)
+export const KeycloakPublic: () => CustomDecorator<symbol> = () => SetMetadata(KEYCLOAK_CONNECT_METADATA_UNPROTECTED, true)
 
 /**
  * Makes the controller route public and does not require Keycloak authentication.
- * @alias Unprotected
+ * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
  */
-export const Public: () => CustomDecorator<symbol> = () => SetMetadata(KEYCLOAK_CONNECT_METADATA_UNPROTECTED, true)
+export const KeycloakUnprotected: typeof KeycloakPublic = KeycloakPublic
+
+/**
+ * Makes the controller route public and does not require Keycloak authentication.
+ * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
+ * @deprecated Use KeycloakPublic instead because of the more generic naming scheme.
+ */
+export const Public: typeof KeycloakPublic = KeycloakPublic
+
+/**
+ * Makes the controller route public and does not require Keycloak authentication.
+ * @alias {KeycloakPublic,KeycloakUnprotected,Public,Unprotected}
+ * @deprecated Use KeycloakPublic instead because of the more generic naming scheme.
+ */
+export const Unprotected: typeof KeycloakPublic = KeycloakPublic

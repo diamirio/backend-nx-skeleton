@@ -23,7 +23,7 @@
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "docs:jsdoc": "typedoc src/index.ts --readme none",
+    "docs:jsdoc": "typedoc src/index.ts src/graphql.ts src/restful.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {

@@ -5,20 +5,20 @@ import { GqlExecutionContext } from '@nestjs/graphql'
 import { EnrichedRequest } from '@interfaces/request.interface'
 
 /**
- * Inject the current Keycloak user to a variable.
+ * Fetch the current user access token from the request.
  * This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
- * @alias {GetUser,User}
+ * @alias {GetToken,Token}
  */
-export const GetUser = createParamDecorator((key: string, context: ExecutionContext) => {
+export const GetToken = createParamDecorator((_: never, context: ExecutionContext) => {
   const request: EnrichedRequest = GqlExecutionContext.create(context).getContext().req ?? context.switchToHttp().getRequest()
 
-  return (request?.user?.[key] ? request.user[key] : request?.user) ?? {}
+  return request?.accessToken
 })
 
 /**
- * Inject the current Keycloak user to a variable.
+ * Fetch the current user access token from the request.
  * This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
- * @alias {GetUser,User}
- * @deprecated Use GetUser instead because of the more generic naming scheme.
+ * @alias {GetToken,Token}
+ * @deprecated Use GetToken instead because of the more generic naming scheme.
  */
-export const User: typeof GetUser = GetUser
+export const Token: typeof GetToken = GetToken
