@@ -9,7 +9,6 @@
 - [email](KeycloakConnectUser.md#email)
 - [groups](KeycloakConnectUser.md#groups)
 - [id](KeycloakConnectUser.md#id)
-- [jurisdiction](KeycloakConnectUser.md#jurisdiction)
 - [roles](KeycloakConnectUser.md#roles)
 - [scopes](KeycloakConnectUser.md#scopes)
 - [username](KeycloakConnectUser.md#username)
@@ -25,7 +24,7 @@
 
 connect/connect.interfaces.ts:41
 
-___
+---
 
 ### groups
 
@@ -33,9 +32,9 @@ ___
 
 #### Defined in
 
-connect/connect.interfaces.ts:45
+connect/connect.interfaces.ts:44
 
-___
+---
 
 ### id
 
@@ -45,17 +44,7 @@ ___
 
 connect/connect.interfaces.ts:39
 
-___
-
-### jurisdiction
-
-• `Optional` **jurisdiction**: { `restriction`: `string` ; `role`: `string`  }[]
-
-#### Defined in
-
-connect/connect.interfaces.ts:44
-
-___
+---
 
 ### roles
 
@@ -65,7 +54,7 @@ ___
 
 connect/connect.interfaces.ts:43
 
-___
+---
 
 ### scopes
 
@@ -73,9 +62,9 @@ ___
 
 #### Defined in
 
-connect/connect.interfaces.ts:46
+connect/connect.interfaces.ts:45
 
-___
+---
 
 ### username
 
@@ -85,7 +74,7 @@ ___
 
 connect/connect.interfaces.ts:40
 
-___
+---
 
 ### verified
 

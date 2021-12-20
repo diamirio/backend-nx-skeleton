@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-keycloak [1.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.2...@webundsoehne/nestjs-keycloak@1.0.3) (2021-12-20)
+
+### Bug Fixes
+
+- make request type selectable ([0b87a4f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0b87a4f48826b1fa6bce242b8d86cfd8bbceed0f))
+- update old type ([7575fdc](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7575fdc981ce7055e15ab9a3c1405aba15b3c818))
+
 ## @webundsoehne/nestjs-keycloak [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.1...@webundsoehne/nestjs-keycloak@1.0.2) (2021-12-20)
 
 ### Bug Fixes
