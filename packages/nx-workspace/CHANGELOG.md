@@ -1,3 +1,13 @@
+# @webundsoehne-private/nx-workspace [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.8...@webundsoehne-private/nx-workspace@3.1.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
 ## @webundsoehne-private/nx-workspace [3.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.7...@webundsoehne-private/nx-workspace@3.0.8) (2021-12-03)
 
 ### Dependencies
