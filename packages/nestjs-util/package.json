@@ -41,6 +41,7 @@
     "util"
   ],
   "dependencies": {
+    "@webundsoehne/deep-merge": "*",
     "config": "^3.3.6",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.0.0",
