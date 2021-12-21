@@ -94,17 +94,25 @@ export abstract class BaseAuthGuard implements CanActivate {
   /**
    * Validate given condition to match the required values.
    */
-  protected validate (key: string, values: string[], authorizedValues: string[] = []): void {
+  protected validateRequirements (values: string[], required: string[] = []): boolean {
+    if (values?.length > 0) {
+      if (required?.length && required.length > 0) {
+        if (!values.some((value) => required.includes(value))) {
+          return false
+        }
+      }
+    }
+
+    return true
+  }
+
+  private validate (key: string, values: string[], authorizedValues: string[] = []): void {
     if (this.keycloakOptions?.[`${key}Required`] && values?.length === 0) {
       throw new ForbiddenException(this.getExceptionMessage(`${key}Missing`))
     }
 
-    if (values?.length > 0) {
-      if (authorizedValues?.length && authorizedValues.length > 0) {
-        if (!values.some((value) => authorizedValues.includes(value))) {
-          throw new ForbiddenException(this.getExceptionMessage(`${key}Unauthorized`))
-        }
-      }
+    if (!this.validateRequirements(values, authorizedValues)) {
+      throw new ForbiddenException(this.getExceptionMessage(`${key}Unauthorized`))
     }
   }
 
