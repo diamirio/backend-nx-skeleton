@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-keycloak [1.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.5...@webundsoehne/nestjs-keycloak@1.0.6) (2021-12-21)
+
+### Bug Fixes
+
+- expose a more generic validate ([e4b1375](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e4b137591280e58505e9327be51e8609a704290f))
+- make utility protected ([518dd67](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/518dd67c91e1570b19ea850c86cadbcd807db2b6))
+
 ## @webundsoehne/nestjs-keycloak [1.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.4...@webundsoehne/nestjs-keycloak@1.0.5) (2021-12-20)
 
 ### Bug Fixes

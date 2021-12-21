@@ -26,6 +26,7 @@ Application AuthGuard for Keycloak applications. This only works for GraphQL API
 
 - [canActivate](graphql.AuthGuard.md#canactivate)
 - [getRequest](graphql.AuthGuard.md#getrequest)
+- [validateRequirements](graphql.AuthGuard.md#validaterequirements)
 
 ## Constructors
 
@@ -112,3 +113,30 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/guards/auth-graphql.guard.ts:13
+
+---
+
+### validateRequirements
+
+▸ `Protected` **validateRequirements**(`values`, `required?`): `boolean`
+
+Validate given condition to match the required values.
+
+#### Parameters
+
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[BaseAuthGuard](index.BaseAuthGuard.md).[validateRequirements](index.BaseAuthGuard.md#validaterequirements)
+
+#### Defined in
+
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:97

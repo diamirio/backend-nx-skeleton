@@ -38,6 +38,7 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 - [getExceptionMessage](index.BaseAuthGuard.md#getexceptionmessage)
 - [getRequest](index.BaseAuthGuard.md#getrequest)
 - [validate](index.BaseAuthGuard.md#validate)
+- [validateRequirements](index.BaseAuthGuard.md#validaterequirements)
 
 ## Constructors
 
@@ -115,7 +116,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:98
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:123
 
 ---
 
@@ -135,7 +136,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:98
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:110
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:135
 
 ---
 
@@ -156,7 +157,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:110
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:122
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:147
 
 ---
 
@@ -176,7 +177,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:122
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:94
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:119
 
 ---
 
@@ -196,7 +197,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:94
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:146
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:157
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
@@ -212,7 +213,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:146
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:147
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:158
 
 ▸ `Abstract` **getRequest**(`context`): `any`
 
@@ -228,7 +229,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:147
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:148
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:159
 
 ---
 
@@ -250,4 +251,27 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:148
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:132
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:109
+
+---
+
+### validateRequirements
+
+▸ `Protected` **validateRequirements**(`values`, `required?`): `boolean`
+
+Validate given condition to match the required values.
+
+#### Parameters
+
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:97

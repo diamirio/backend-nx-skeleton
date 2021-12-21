@@ -26,6 +26,7 @@ Application AuthGuard for Keycloak applications. This only works for REST APIs.
 
 - [canActivate](restful.AuthGuard.md#canactivate)
 - [getRequest](restful.AuthGuard.md#getrequest)
+- [validateRequirements](restful.AuthGuard.md#validaterequirements)
 
 ## Constructors
 
@@ -112,3 +113,30 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:12
+
+---
+
+### validateRequirements
+
+▸ `Protected` **validateRequirements**(`values`, `required?`): `boolean`
+
+Validate given condition to match the required values.
+
+#### Parameters
+
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[BaseAuthGuard](index.BaseAuthGuard.md).[validateRequirements](index.BaseAuthGuard.md#validaterequirements)
+
+#### Defined in
+
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:97
