@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [3.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.6...@webundsoehne/brownie@3.1.7) (2021-12-21)
+
+### Bug Fixes
+
+- update deps ([5fec378](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fec378da5e4beea574bd9df24e71d0915f9212a))
+
 ## @webundsoehne/brownie [3.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.5...@webundsoehne/brownie@3.1.6) (2021-12-20)
 
 ### Bug Fixes

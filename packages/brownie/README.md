@@ -15,9 +15,10 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/brownie](#webundsoehnebrownie)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/brownie](#webundsoehnebrownie)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -25,12 +26,13 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`brownie config:workspace`](#brownie-configworkspace)
-* [`brownie docker`](#brownie-docker)
-* [`brownie gitlab`](#brownie-gitlab)
-* [`brownie help [COMMAND]`](#brownie-help-command)
-* [`brownie nx`](#brownie-nx)
-* [`brownie workspace`](#brownie-workspace)
+
+- [`brownie config:workspace`](#brownie-configworkspace)
+- [`brownie docker`](#brownie-docker)
+- [`brownie gitlab`](#brownie-gitlab)
+- [`brownie help [COMMAND]`](#brownie-help-command)
+- [`brownie nx`](#brownie-nx)
+- [`brownie workspace`](#brownie-workspace)
 
 ## `brownie config:workspace`
 
@@ -70,20 +72,20 @@ ALIASES
 
 ## `brownie help [COMMAND]`
 
-display help for brownie
+Display help for brownie.
 
 ```
 USAGE
   $ brownie help [COMMAND]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
 OPTIONS
-  --all  see all commands in CLI
+  -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.18/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -113,4 +115,5 @@ OPTIONS
 ALIASES
   $ brownie ws
 ```
+
 <!-- commandsstop -->
