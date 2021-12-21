@@ -91,6 +91,23 @@ export abstract class BaseAuthGuard implements CanActivate {
     }
   }
 
+  /**
+   * Validate given condition to match the required values.
+   */
+  protected validate (key: string, values: string[], authorizedValues: string[] = []): void {
+    if (this.keycloakOptions?.[`${key}Required`] && values?.length === 0) {
+      throw new ForbiddenException(this.getExceptionMessage(`${key}Missing`))
+    }
+
+    if (values?.length > 0) {
+      if (authorizedValues?.length && authorizedValues.length > 0) {
+        if (!values.some((value) => authorizedValues.includes(value))) {
+          throw new ForbiddenException(this.getExceptionMessage(`${key}Unauthorized`))
+        }
+      }
+    }
+  }
+
   private getExceptionMessage (message: string): string | undefined {
     return this.keycloakOptions?.exceptionMessages?.[message] || ExceptionMessagesFallback?.[message]
   }
@@ -127,20 +144,6 @@ export abstract class BaseAuthGuard implements CanActivate {
 
       return scopes
     }, [])
-  }
-
-  private validate (key: string, values: string[], authorizedValues: string[] = []): void {
-    if (this.keycloakOptions?.[`${key}Required`] && values?.length === 0) {
-      throw new ForbiddenException(this.getExceptionMessage(`${key}Missing`))
-    }
-
-    if (values?.length > 0) {
-      if (authorizedValues?.length && authorizedValues.length > 0) {
-        if (!values.some((value) => authorizedValues.includes(value))) {
-          throw new ForbiddenException(this.getExceptionMessage(`${key}Unauthorized`))
-        }
-      }
-    }
   }
 
   public abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest | EnrichedExpressRequest
