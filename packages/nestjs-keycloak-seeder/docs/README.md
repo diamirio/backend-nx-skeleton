@@ -13,7 +13,7 @@
 
 ### Variables
 
-- [KEYCLOAK_SEEDER_SEEDS](README.md#keycloak_seeder_seeds)
+- [KEYCLOAK\_SEEDER\_SEEDS](README.md#keycloak_seeder_seeds)
 
 ### Functions
 
@@ -22,9 +22,9 @@
 
 ## Variables
 
-### KEYCLOAK_SEEDER_SEEDS
+### KEYCLOAK\_SEEDER\_SEEDS
 
-• **KEYCLOAK_SEEDER_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
+• **KEYCLOAK\_SEEDER\_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
 
 #### Defined in
 
@@ -40,20 +40,20 @@ Returns the matched data.
 
 #### Type parameters
 
-| Name | Type                                      |
-| :--- | :---------------------------------------- |
-| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K`  | extends `string` \| `number` \| `symbol`  |
-| `P`  | extends `string` \| `number` \| `symbol`  |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K` | extends `string` \| `number` \| `symbol` |
+| `P` | extends `string` \| `number` \| `symbol` |
 
 #### Parameters
 
-| Name      | Type                             |
-| :-------- | :------------------------------- |
-| `data`    | `T`                              |
-| `compare` | `K`                              |
-| `values`  | `InferedObjectType`<`T`, `K`\>[] |
-| `fetch`   | `P`                              |
+| Name | Type |
+| :------ | :------ |
+| `data` | `T` |
+| `compare` | `K` |
+| `values` | `InferedObjectType`<`T`, `K`\>[] |
+| `fetch` | `P` |
 
 #### Returns
 
@@ -63,7 +63,7 @@ Returns the matched data.
 
 utils/keycloak-filter.ts:24
 
----
+___
 
 ### getMatchingPropertyFromData
 
@@ -73,20 +73,20 @@ Matchs a data and returns another property of the object.
 
 #### Type parameters
 
-| Name | Type                                      |
-| :--- | :---------------------------------------- |
-| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K`  | extends `string` \| `number` \| `symbol`  |
-| `P`  | extends `string` \| `number` \| `symbol`  |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K` | extends `string` \| `number` \| `symbol` |
+| `P` | extends `string` \| `number` \| `symbol` |
 
 #### Parameters
 
-| Name      | Type                           |
-| :-------- | :----------------------------- |
-| `data`    | `T`                            |
-| `compare` | `K`                            |
-| `value`   | `InferedObjectType`<`T`, `K`\> |
-| `fetch`   | `P`                            |
+| Name | Type |
+| :------ | :------ |
+| `data` | `T` |
+| `compare` | `K` |
+| `value` | `InferedObjectType`<`T`, `K`\> |
+| `fetch` | `P` |
 
 #### Returns
 

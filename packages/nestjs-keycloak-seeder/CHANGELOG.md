@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.7...@webundsoehne/nestjs-keycloak-seeder@1.0.8) (2021-12-22)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/ts-utility-types:** upgraded to 1.1.0
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.6...@webundsoehne/nestjs-keycloak-seeder@1.0.7) (2021-12-21)
 
 ### Dependencies
