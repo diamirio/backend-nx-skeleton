@@ -8,6 +8,7 @@
 
 - [ArrayElement](README.md#arrayelement)
 - [Await](README.md#await)
+- [ConfigEnvironmentVariables](README.md#configenvironmentvariables)
 - [DeepPartial](README.md#deeppartial)
 - [InferedObjectType](README.md#inferedobjecttype)
 - [ValueOf](README.md#valueof)
@@ -20,15 +21,15 @@
 
 #### Type parameters
 
-| Name        | Type                         |
-| :---------- | :--------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `ArrayType` | extends readonly `unknown`[] |
 
 #### Defined in
 
 array.ts:1
 
----
+___
 
 ### Await
 
@@ -37,14 +38,30 @@ array.ts:1
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Defined in
 
 function.ts:1
 
----
+___
+
+### ConfigEnvironmentVariables
+
+Ƭ **ConfigEnvironmentVariables**<`T`\>: { [P in keyof T]?: ConfigEnvironmentVariables<T[P]\> \| string \| Record<"\_\_name" \| "\_\_format", string\> }
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Defined in
+
+config.ts:1
+
+___
 
 ### DeepPartial
 
@@ -53,14 +70,14 @@ function.ts:1
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Defined in
 
 object.ts:7
 
----
+___
 
 ### InferedObjectType
 
@@ -68,16 +85,16 @@ object.ts:7
 
 #### Type parameters
 
-| Name | Type                                                         |
-| :--- | :----------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\>[]                         |
-| `K`  | extends keyof [`ArrayElement`](README.md#arrayelement)<`T`\> |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\>[] |
+| `K` | extends keyof [`ArrayElement`](README.md#arrayelement)<`T`\> |
 
 #### Defined in
 
 object.ts:3
 
----
+___
 
 ### ValueOf
 
@@ -86,8 +103,8 @@ object.ts:3
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Defined in
 
