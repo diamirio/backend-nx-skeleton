@@ -15,6 +15,7 @@ export class KeycloakSeederModule {
   static register (seeds: KeycloakSeeds): DynamicModule {
     return {
       module: KeycloakSeederModule,
+      global: true,
       providers: [
         KeycloakSeederService,
         KeycloakAdminSeederTools,

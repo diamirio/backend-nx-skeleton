@@ -14,6 +14,7 @@ export class KeycloakAdminModule {
   static register (options: KeycloakAdminOptions): DynamicModule {
     return {
       module: KeycloakAdminModule,
+      global: true,
       providers: [
         {
           provide: KEYCLOAK_ADMIN_OPTIONS,
@@ -25,7 +26,7 @@ export class KeycloakAdminModule {
           inject: [ KEYCLOAK_ADMIN_OPTIONS ]
         }
       ],
-      exports: [ KEYCLOAK_ADMIN_OPTIONS, KEYCLOAK_ADMIN_INSTANCE ]
+      exports: [ KEYCLOAK_ADMIN_INSTANCE ]
     }
   }
 }
