@@ -12,10 +12,6 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 - [constructor](index.KeycloakAdminModule.md#constructor)
 
-### Properties
-
-- [keycloakProvider](index.KeycloakAdminModule.md#keycloakprovider)
-
 ### Methods
 
 - [register](index.KeycloakAdminModule.md#register)
@@ -25,16 +21,6 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 ### constructor
 
 • **new KeycloakAdminModule**()
-
-## Properties
-
-### keycloakProvider
-
-▪ `Static` `Protected` **keycloakProvider**: `Provider`<`any`\>
-
-#### Defined in
-
-packages/nestjs-keycloak/src/admin/admin.module.ts:14
 
 ## Methods
 
@@ -54,4 +40,4 @@ packages/nestjs-keycloak/src/admin/admin.module.ts:14
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.module.ts:20
+packages/nestjs-keycloak/src/admin/admin.module.ts:14
