@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.10...@webundsoehne/nestjs-keycloak-seeder@1.0.11) (2022-01-05)
+
+### Bug Fixes
+
+- dont export options ([0beb3b7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0beb3b7b1a528736f783a3e98ca9757603b08a76))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-keycloak:** upgraded to 1.0.8
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.9...@webundsoehne/nestjs-keycloak-seeder@1.0.10) (2022-01-05)
 
 ### Dependencies
