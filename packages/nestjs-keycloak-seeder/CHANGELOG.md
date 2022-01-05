@@ -1,12 +1,14 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.8...@webundsoehne/nestjs-keycloak-seeder@1.0.9) (2022-01-05)
+
+### Bug Fixes
+
+- dont export admin tools ([873c916](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/873c9168e545e0ce55cc3b3df7899681030fea71))
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.7...@webundsoehne/nestjs-keycloak-seeder@1.0.8) (2021-12-22)
-
-
-
-
 
 ### Dependencies
 
-* **@webundsoehne/ts-utility-types:** upgraded to 1.1.0
+- **@webundsoehne/ts-utility-types:** upgraded to 1.1.0
 
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.6...@webundsoehne/nestjs-keycloak-seeder@1.0.7) (2021-12-21)
 
