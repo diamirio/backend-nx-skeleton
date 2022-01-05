@@ -23,7 +23,7 @@ export class KeycloakSeederModule {
           useValue: seeds
         }
       ],
-      exports: [ KeycloakSeederService, KeycloakAdminSeederTools ]
+      exports: [ KeycloakSeederService ]
     }
   }
 }
