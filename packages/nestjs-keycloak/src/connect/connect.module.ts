@@ -1,4 +1,4 @@
-import { DynamicModule, Global, Module, Provider } from '@nestjs/common'
+import { DynamicModule, Global, Module } from '@nestjs/common'
 import KeycloakConnect, { Keycloak } from 'keycloak-connect'
 
 import { KEYCLOAK_CONNECT_INSTANCE, KEYCLOAK_CONNECT_OPTIONS } from './connect.constants'
@@ -11,34 +11,34 @@ import { KeycloakConnectOptions } from './connect.interfaces'
 @Global()
 @Module({})
 export class KeycloakConnectModule {
-  protected static keycloakProvider: Provider = {
-    provide: KEYCLOAK_CONNECT_INSTANCE,
-    useFactory: (options: KeycloakConnectOptions) => {
-      const keycloak: Keycloak = new KeycloakConnect({}, options as any)
-
-      keycloak.accessDenied = (request: any, _response: any, next?: () => void): void => {
-        request.resourceDenied = true
-
-        if (typeof next === 'function') {
-          next()
-        }
-      }
-
-      return keycloak
-    },
-    inject: [ KEYCLOAK_CONNECT_OPTIONS ]
-  }
-
   static register (options: KeycloakConnectOptions): DynamicModule {
-    const providerOptions = {
-      provide: KEYCLOAK_CONNECT_OPTIONS,
-      useValue: options
-    }
-
     return {
       module: KeycloakConnectModule,
-      providers: [ providerOptions, this.keycloakProvider ],
-      exports: [ providerOptions, this.keycloakProvider ]
+      global: true,
+      providers: [
+        {
+          provide: KEYCLOAK_CONNECT_OPTIONS,
+          useValue: options
+        },
+        {
+          provide: KEYCLOAK_CONNECT_INSTANCE,
+          useFactory: (options: KeycloakConnectOptions): Keycloak => {
+            const keycloak: Keycloak = new KeycloakConnect({}, options as any)
+
+            keycloak.accessDenied = (request: any, _response: any, next?: () => void): void => {
+              request.resourceDenied = true
+
+              if (typeof next === 'function') {
+                next()
+              }
+            }
+
+            return keycloak
+          },
+          inject: [ KEYCLOAK_CONNECT_OPTIONS ]
+        }
+      ],
+      exports: [ KEYCLOAK_CONNECT_OPTIONS, KEYCLOAK_CONNECT_INSTANCE ]
     }
   }
 }

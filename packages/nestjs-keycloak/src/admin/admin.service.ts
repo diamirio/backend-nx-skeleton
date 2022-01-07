@@ -1,6 +1,7 @@
 import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
-import { Injectable, Logger } from '@nestjs/common'
+import { Inject, Injectable, Logger } from '@nestjs/common'
 
+import { KEYCLOAK_ADMIN_OPTIONS } from './admin.constants'
 import { KeycloakAdminOptions } from './admin.interfaces'
 
 /**
@@ -11,7 +12,7 @@ export class KeycloakAdminService {
   public readonly logger: Logger = new Logger(this.constructor.name)
   private keycloakAdminClient: KeycloakAdminClient
 
-  constructor (private readonly options: KeycloakAdminOptions) {}
+  constructor (@Inject(KEYCLOAK_ADMIN_OPTIONS) private readonly options: KeycloakAdminOptions) {}
 
   /**
    * Getter for the REST API client.
