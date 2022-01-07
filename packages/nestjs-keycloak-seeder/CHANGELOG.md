@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.15](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.14...@webundsoehne/nestjs-keycloak-seeder@1.0.15) (2022-01-07)
+
+### Bug Fixes
+
+- remove module injection ([455cc3a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/455cc3a85499dd18574ffb02386eab55e2d07467))
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.14](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.13...@webundsoehne/nestjs-keycloak-seeder@1.0.14) (2022-01-07)
 
 ### Bug Fixes
