@@ -4,7 +4,8 @@
 
 [graphql](../modules/graphql.md).AuthGuard
 
-Application AuthGuard for Keycloak applications. This only works for GraphQL APIs.
+Application AuthGuard for Keycloak applications.
+This only works for GraphQL APIs.
 
 ## Hierarchy
 
@@ -36,11 +37,11 @@ Application AuthGuard for Keycloak applications. This only works for GraphQL API
 
 #### Parameters
 
-| Name              | Type                                                                      |
-| :---------------- | :------------------------------------------------------------------------ |
-| `keycloak`        | `Keycloak`                                                                |
+| Name | Type |
+| :------ | :------ |
+| `keycloak` | `Keycloak` |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector`       | `Reflector`                                                               |
+| `reflector` | `Reflector` |
 
 #### Inherited from
 
@@ -68,8 +69,8 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -84,7 +85,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
----
+___
 
 ### getRequest
 
@@ -92,14 +93,14 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Type parameters
 
-| Name      | Type                                                                                       |
-| :-------- | :----------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `Request` | extends `unknown` = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -114,7 +115,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 packages/nestjs-keycloak/src/connect/guards/auth-graphql.guard.ts:13
 
----
+___
 
 ### validateRequirements
 
@@ -124,10 +125,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name       | Type       | Default value |
-| :--------- | :--------- | :------------ |
-| `values`   | `string`[] | `undefined`   |
-| `required` | `string`[] | `[]`          |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `values` | `string`[] | `undefined` |
+| `required` | `string`[] | `[]` |
 
 #### Returns
 
