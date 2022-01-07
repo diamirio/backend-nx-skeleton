@@ -1,9 +1,14 @@
-## @webundsoehne/nestjs-keycloak [1.0.12-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.11...@webundsoehne/nestjs-keycloak@1.0.12-beta.1) (2022-01-07)
-
+## @webundsoehne/nestjs-keycloak [1.0.12-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.12-beta.1...@webundsoehne/nestjs-keycloak@1.0.12-beta.2) (2022-01-07)
 
 ### Bug Fixes
 
-* add admin module to exports again ([0d13e0a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0d13e0a27419280a3bd74df1b53812446d263340))
+- rollback to half working version ([39dd1d7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/39dd1d73f073eabbf914580801d993c6c982e4b2))
+
+## @webundsoehne/nestjs-keycloak [1.0.12-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.11...@webundsoehne/nestjs-keycloak@1.0.12-beta.1) (2022-01-07)
+
+### Bug Fixes
+
+- add admin module to exports again ([0d13e0a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0d13e0a27419280a3bd74df1b53812446d263340))
 
 ## @webundsoehne/nestjs-keycloak [1.0.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.10...@webundsoehne/nestjs-keycloak@1.0.11) (2022-01-07)
 

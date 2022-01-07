@@ -38,13 +38,13 @@ KeycloakAdminService manages the Keycloak RESTFUL API client.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                                                  |
+| :-------- | :-------------------------------------------------------------------- |
 | `options` | [`KeycloakAdminOptions`](../interfaces/index.KeycloakAdminOptions.md) |
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:15
+packages/nestjs-keycloak/src/admin/admin.service.ts:14
 
 ## Properties
 
@@ -54,9 +54,9 @@ packages/nestjs-keycloak/src/admin/admin.service.ts:15
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:13
+packages/nestjs-keycloak/src/admin/admin.service.ts:12
 
-___
+---
 
 ### logger
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:12
+packages/nestjs-keycloak/src/admin/admin.service.ts:11
 
 ## Accessors
 
@@ -80,7 +80,7 @@ Getter for the REST API client.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:20
+packages/nestjs-keycloak/src/admin/admin.service.ts:19
 
 ## Methods
 
@@ -96,9 +96,9 @@ Creates and authorizes to the Keycloak REST API.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:54
+packages/nestjs-keycloak/src/admin/admin.service.ts:53
 
-___
+---
 
 ### getClient
 
@@ -112,9 +112,9 @@ Creates a new client if it does not exists, returns the singleton instance if it
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:27
+packages/nestjs-keycloak/src/admin/admin.service.ts:26
 
-___
+---
 
 ### getOptions
 
@@ -128,9 +128,9 @@ Returns the options that Keycloak REST API client is initiated with.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:47
+packages/nestjs-keycloak/src/admin/admin.service.ts:46
 
-___
+---
 
 ### isExpiredAccessToken
 
@@ -140,8 +140,8 @@ Checks whether the current authentication token to Keycloak REST API is expired.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name          | Type     |
+| :------------ | :------- |
 | `accessToken` | `string` |
 
 #### Returns
@@ -150,9 +150,9 @@ Checks whether the current authentication token to Keycloak REST API is expired.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:73
+packages/nestjs-keycloak/src/admin/admin.service.ts:72
 
-___
+---
 
 ### reloadClient
 
@@ -166,9 +166,9 @@ Recreates the client first before returning it.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:38
+packages/nestjs-keycloak/src/admin/admin.service.ts:37
 
-___
+---
 
 ### validateClient
 
@@ -182,4 +182,4 @@ Checks whether current client is expired.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.service.ts:64
+packages/nestjs-keycloak/src/admin/admin.service.ts:63
