@@ -25,7 +25,7 @@ export class KeycloakAdminModule {
           useClass: KeycloakAdminService
         }
       ],
-      exports: [ KEYCLOAK_ADMIN_INSTANCE ]
+      exports: [ KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS ]
     }
   }
 }
