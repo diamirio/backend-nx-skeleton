@@ -22,8 +22,7 @@ export class KeycloakAdminModule {
         },
         {
           provide: KEYCLOAK_ADMIN_INSTANCE,
-          useFactory: (options: KeycloakAdminOptions): KeycloakAdminService => new KeycloakAdminService(options),
-          inject: [ options as any ]
+          useClass: KeycloakAdminService
         }
       ],
       exports: [ KEYCLOAK_ADMIN_INSTANCE ]
