@@ -4,7 +4,6 @@ import { KeycloakSeederService } from './keycloak-seeder.service'
 import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
 import { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
 import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
-import { KeycloakAdminModule } from '@webundsoehne/nestjs-keycloak'
 
 /**
  * KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any
@@ -17,7 +16,6 @@ export class KeycloakSeederModule {
     return {
       module: KeycloakSeederModule,
       global: true,
-      imports: [ KeycloakAdminModule ],
       providers: [
         KeycloakSeederService,
         KeycloakAdminSeederTools,
