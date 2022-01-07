@@ -2,7 +2,8 @@
 
 # Class: KeycloakSeederModule
 
-KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any modification the Keycloak itself.
+KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any
+modification the Keycloak itself.
 
 ## Table of contents
 
@@ -28,8 +29,8 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 #### Parameters
 
-| Name    | Type            |
-| :------ | :-------------- |
+| Name | Type |
+| :------ | :------ |
 | `seeds` | `KeycloakSeeds` |
 
 #### Returns
