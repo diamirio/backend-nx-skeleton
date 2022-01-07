@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [1.0.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.10...@webundsoehne/nestjs-keycloak@1.0.11) (2022-01-07)
+
+### Bug Fixes
+
+- injection problem ([7ff4718](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7ff471801657d055f63aa3420696dbaf71c54aad))
+
 ## @webundsoehne/nestjs-keycloak [1.0.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.9...@webundsoehne/nestjs-keycloak@1.0.10) (2022-01-07)
 
 ### Bug Fixes
