@@ -12,10 +12,6 @@ KeycloakConnectModule provides the Keycloak API to validate user authentication 
 
 - [constructor](index.KeycloakConnectModule.md#constructor)
 
-### Properties
-
-- [keycloakProvider](index.KeycloakConnectModule.md#keycloakprovider)
-
 ### Methods
 
 - [register](index.KeycloakConnectModule.md#register)
@@ -25,16 +21,6 @@ KeycloakConnectModule provides the Keycloak API to validate user authentication 
 ### constructor
 
 • **new KeycloakConnectModule**()
-
-## Properties
-
-### keycloakProvider
-
-▪ `Static` `Protected` **keycloakProvider**: `Provider`<`any`\>
-
-#### Defined in
-
-packages/nestjs-keycloak/src/connect/connect.module.ts:14
 
 ## Methods
 
@@ -54,4 +40,4 @@ packages/nestjs-keycloak/src/connect/connect.module.ts:14
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/connect.module.ts:32
+packages/nestjs-keycloak/src/connect/connect.module.ts:14
