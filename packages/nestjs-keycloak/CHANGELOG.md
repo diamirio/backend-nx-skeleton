@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [1.0.12-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.12-beta.3...@webundsoehne/nestjs-keycloak@1.0.12-beta.4) (2022-01-10)
+
+### Bug Fixes
+
+- unglobal module ([4641b9d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4641b9d0e9fbce7802d208ed2e29da7dd45fd309))
+
 ## @webundsoehne/nestjs-keycloak [1.0.12-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.12-beta.2...@webundsoehne/nestjs-keycloak@1.0.12-beta.3) (2022-01-10)
 
 ### Bug Fixes
