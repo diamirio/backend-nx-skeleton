@@ -28,7 +28,7 @@ export class KeycloakAdminModule {
           inject: [ KEYCLOAK_ADMIN_OPTIONS ]
         }
       ],
-      exports: [ KEYCLOAK_ADMIN_INSTANCE ]
+      exports: [ KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS ]
     }
   }
 }
