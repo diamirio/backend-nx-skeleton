@@ -1,4 +1,4 @@
-import { DynamicModule, Global, Module } from '@nestjs/common'
+import { DynamicModule, Module } from '@nestjs/common'
 
 import { KeycloakSeederService } from './keycloak-seeder.service'
 import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
@@ -10,13 +10,11 @@ import { KeycloakAdminModule } from '@webundsoehne/nestjs-keycloak'
  * KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any
  * modification the Keycloak itself.
  */
-@Global()
 @Module({})
 export class KeycloakSeederModule {
   static register (seeds: KeycloakSeeds): DynamicModule {
     return {
       module: KeycloakSeederModule,
-      global: true,
       imports: [ KeycloakAdminModule ],
       providers: [
         KeycloakSeederService,

@@ -18,7 +18,7 @@ export class KeycloakAdminModule {
       providers: [
         {
           provide: KEYCLOAK_ADMIN_OPTIONS,
-          useValue: options
+          useValue: options ?? {}
         },
         {
           provide: KEYCLOAK_ADMIN_INSTANCE,
