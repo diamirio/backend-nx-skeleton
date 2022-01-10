@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.16-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.16-beta.2...@webundsoehne/nestjs-keycloak-seeder@1.0.16-beta.3) (2022-01-10)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-keycloak:** upgraded to 1.0.12-beta.3
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.16-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.16-beta.1...@webundsoehne/nestjs-keycloak-seeder@1.0.16-beta.2) (2022-01-07)
 
 ### Bug Fixes
