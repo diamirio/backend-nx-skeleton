@@ -24,6 +24,14 @@
           {
             "pattern": "@loader-handlers/**",
             "group": "index"
+          },
+          {
+            "pattern": "@webundsoehne/**",
+            "group": "index"
+          },
+          {
+            "pattern": "@webundsoehne-private/**",
+            "group": "index"
           }
         ],
         "pathGroupsExcludedImportTypes": ["builtin"],

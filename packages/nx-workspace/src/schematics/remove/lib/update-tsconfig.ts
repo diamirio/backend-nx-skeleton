@@ -1,11 +1,11 @@
 import { Tree } from '@angular-devkit/schematics'
 import { NxJsonConfiguration } from '@nrwl/devkit'
 import { getWorkspace, readJsonInTree, serializeJson } from '@nrwl/workspace'
-import { NxConstants } from '@webundsoehne/nx-tools'
 import { from, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { Schema } from '../main.interface'
+import { NxConstants } from '@webundsoehne/nx-tools'
 
 /**
  * Updates the tsconfig paths to remove the project.

@@ -1,3 +1,41 @@
+## @webundsoehne-private/nx-nest [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.2.1...@webundsoehne-private/nx-nest@3.2.2) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 4.2.2
+- **@webundsoehne/nx-tools:** upgraded to 4.2.2
+
+## @webundsoehne-private/nx-nest [3.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.2.0...@webundsoehne-private/nx-nest@3.2.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 4.2.1
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
+# @webundsoehne-private/nx-nest [3.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.1.2...@webundsoehne-private/nx-nest@3.2.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 4.2.0
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne-private/nx-nest [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.1.1...@webundsoehne-private/nx-nest@3.1.2) (2021-12-03)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 4.1.4
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4
+
+## @webundsoehne-private/nx-nest [3.1.2-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.1.1...@webundsoehne-private/nx-nest@3.1.2-beta.1) (2021-12-02)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 4.1.4-beta.1
+
 ## @webundsoehne-private/nx-nest [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.1.0...@webundsoehne-private/nx-nest@3.1.1) (2021-09-16)
 
 ### Dependencies

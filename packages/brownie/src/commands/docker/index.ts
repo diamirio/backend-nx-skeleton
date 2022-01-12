@@ -1,6 +1,5 @@
 import { ConfigBaseCommand, ConfigCommandChoices, ConfigRemove, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { BrownieAvailableContainers, readBrownieContainers } from '@webundsoehne/nx-tools'
 import * as fs from 'fs-extra'
 import { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
 import { dirname, join } from 'path'
@@ -10,6 +9,7 @@ import { DockerHelper } from '@helpers/docker.helper'
 import { DockerComposeFile } from '@helpers/docker.helper.interface'
 import { DockerNxCtx } from '@interfaces/commands/docker/nx'
 import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
+import { BrownieAvailableContainers, readBrownieContainers } from '@webundsoehne/nx-tools'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {

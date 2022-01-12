@@ -1,0 +1,59 @@
+{
+  "name": "@webundsoehne/nestjs-keycloak-seeder",
+  "description": "Keycloak seeder modules for Keycloak initiation.",
+  "version": "1.0.0",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nestjs",
+    "keycloak",
+    "seeder"
+  ],
+  "scripts": {
+    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "tsconfig-replace-paths --project tsconfig.json",
+    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
+    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "@webundsoehne/deep-merge": "*",
+    "@webundsoehne/ts-utility-types": "*"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^8.2.3"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">= 8",
+    "@webundsoehne/nestjs-keycloak": ">= 1"
+  }
+}

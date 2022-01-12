@@ -1,5 +1,3 @@
-import { GeneratedNameCases } from '@webundsoehne/nx-tools'
-
 import { GeneratedMicroserviceCasing } from './../../utils/generate-microservice-casing.interface'
 import {
   AvailableComponents,
@@ -12,6 +10,7 @@ import {
   AvailableExtensions
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
+import { GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed options list coming from angular-schematics

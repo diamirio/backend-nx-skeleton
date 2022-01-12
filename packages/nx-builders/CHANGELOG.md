@@ -1,3 +1,42 @@
+## @webundsoehne/nx-builders [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.1...@webundsoehne/nx-builders@4.2.2) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.2
+
+## @webundsoehne/nx-builders [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.0...@webundsoehne/nx-builders@4.2.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
+# @webundsoehne/nx-builders [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.4...@webundsoehne/nx-builders@4.2.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/nx-builders [4.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4) (2021-12-03)
+
+### Bug Fixes
+
+- ensure runner error is string ([bdf314b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/bdf314b5da550687eda1a1a0facb4cfcabe28f82))
+- semantic commit ([a758401](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a758401ed9717de2c245dda078f0a3d00fd4402f))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4
+
+## @webundsoehne/nx-builders [4.1.4-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4-beta.1) (2021-12-02)
+
+### Bug Fixes
+
+- semantic commit ([a758401](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a758401ed9717de2c245dda078f0a3d00fd4402f))
+
 ## @webundsoehne/nx-builders [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.2...@webundsoehne/nx-builders@4.1.3) (2021-09-16)
 
 ### Dependencies

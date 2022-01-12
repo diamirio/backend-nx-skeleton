@@ -1,9 +1,9 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa from 'execa'
 
 import { TsNodeBuilderOptions } from './main.interface'
+import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -26,8 +26,6 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
 
       const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
       await pipeProcessToLogger(this.context, instance, { start: true })
-
-      return { success: true }
     } catch (error) {
       // just restart it
       this.logger.error('ts-node-dev crashed restarting in 3 secs.')
@@ -41,6 +39,8 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // clean up the zombies!
       await this.manager.stop()
     }
+    this.logger.debug('tsc-node-dev runner finished.')
+    return { success: true }
   }
 
   public normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {

@@ -1,3 +1,21 @@
+## @webundsoehne/patch-package [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.1.1...@webundsoehne/patch-package@2.1.2) (2021-12-21)
+
+### Bug Fixes
+
+- update deps ([5fec378](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fec378da5e4beea574bd9df24e71d0915f9212a))
+
+## @webundsoehne/patch-package [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.1.0...@webundsoehne/patch-package@2.1.1) (2021-12-20)
+
+### Bug Fixes
+
+- publish configuration ([e6b13d7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e6b13d7cc0e8be02d3246c72c341d37fec7161db))
+
+# @webundsoehne/patch-package [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.0.2...@webundsoehne/patch-package@2.1.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
 ## @webundsoehne/patch-package [2.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.0.1...@webundsoehne/patch-package@2.0.2) (2021-09-16)
 
 ### Bug Fixes

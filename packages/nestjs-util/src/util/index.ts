@@ -30,7 +30,7 @@ export function registerExitListeners (moduleName = 'module'): void {
 
 export function getDuration (start: number, finish: number): number {
   // Since it is possible to do calculations with dates this weird type conversion is needed
-  return ((finish || ((new Date() as any) as number)) - start) / 1000
+  return ((finish || (new Date() as any as number)) - start) / 1000
 }
 
 export function requireNodeEnv (errorMessage = 'NODE_ENV environment variable is not set.'): void {

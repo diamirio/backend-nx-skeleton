@@ -1,9 +1,9 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { addGitTask, addInstallTask, formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
+import { addGitTask, addInstallTask, formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.

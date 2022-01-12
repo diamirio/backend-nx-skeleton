@@ -1,5 +1,4 @@
 import { BaseCommand, createDirIfNotExists, parseYaml, readFile, readRaw, tasksOverwritePrompt, writeFile } from '@cenk1cenk2/boilerplate-oclif'
-import { BrownieAvailableContainers, deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
 import fs from 'fs-extra'
 import globby from 'globby'
 import got, { Progress } from 'got'
@@ -12,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
 import { jinja } from '@helpers/jinja.helper'
 import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
+import { BrownieAvailableContainers, deepMergeWithArrayOverwrite } from '@webundsoehne/nx-tools'
 
 export class DockerHelper {
   public dockerConfigLocation: string = join(this.cmd.config.root, 'templates', 'containers')

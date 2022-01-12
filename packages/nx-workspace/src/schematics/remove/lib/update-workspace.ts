@@ -1,8 +1,8 @@
 import { Rule } from '@angular-devkit/schematics'
 import { updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 
 import { Schema } from '../main.interface'
+import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
 
 /**
  * Deletes the project from the workspace file

@@ -1,4 +1,10 @@
 import { apply, chain, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { join } from 'path'
+
+import { Schema as GeneratorSchema } from '../../generator/main.interface'
+import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
+import { NormalizedSchema } from '../main.interface'
+import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
 import {
   addSchematicTask,
   applyOverwriteWithDiff,
@@ -8,12 +14,6 @@ import {
   deepMergeWithArrayOverwrite,
   Logger
 } from '@webundsoehne/nx-tools'
-import { join } from 'path'
-
-import { Schema as GeneratorSchema } from '../../generator/main.interface'
-import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
-import { NormalizedSchema } from '../main.interface'
-import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
 
 export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)

@@ -29,7 +29,7 @@ export function formatFiles (
     return noop()
   }
 
-  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
     // get root path
     const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
@@ -107,5 +107,5 @@ export function formatFiles (
       }),
       map(() => host)
     )
-  }) as unknown) as Rule
+  }) as unknown as Rule
 }

@@ -1,9 +1,9 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
-import { updateBrownieIntegration, updateNxIntegration, BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
+import { updateBrownieIntegration, updateNxIntegration, BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 /**
  * Update integration with different interfaces.

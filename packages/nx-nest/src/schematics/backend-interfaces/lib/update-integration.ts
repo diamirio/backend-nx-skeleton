@@ -1,8 +1,8 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
-import { updateNxIntegration } from '@webundsoehne/nx-tools'
 
 import { NormalizedSchema } from '../main.interface'
+import { updateNxIntegration } from '@webundsoehne/nx-tools'
 
 export function updateIntegration (options: NormalizedSchema): Rule {
   return chain([

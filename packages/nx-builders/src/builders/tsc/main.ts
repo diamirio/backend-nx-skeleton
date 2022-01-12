@@ -3,6 +3,13 @@ import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
+import delay from 'delay'
+import execa from 'execa'
+import { copy, removeSync } from 'fs-extra'
+import { EOL } from 'os'
+import { basename, dirname, join, normalize, relative } from 'path'
+
+import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 import {
   BaseExecutor,
   checkNodeModulesExists,
@@ -16,20 +23,13 @@ import {
   pipeProcessToLogger,
   runExecutor
 } from '@webundsoehne/nx-tools'
-import delay from 'delay'
-import execa from 'execa'
-import { copy, removeSync } from 'fs-extra'
-import { EOL } from 'os'
-import { basename, dirname, join, normalize, relative } from 'path'
-
-import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-// i converted this to a class since it makes not to much sense to have separate functions with tons of same inputs
+// i converted this to a class since it makes not too much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
   public init (): void {
     this.paths = {
@@ -45,6 +45,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     // Cleaning the /dist folder
     removeSync(this.options.normalizedOutputPath)
 
+    let success = false
+    let error: string
+    let outputPath: string
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -113,25 +116,34 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         await this.secondaryCompileActions()
       }
 
-      return { success: true, outputPath: this.options.normalizedOutputPath }
-    } catch (error) {
+      success = true
+      outputPath = this.options.normalizedOutputPath
+    } catch (e) {
       if (this.options.watch) {
         // if in watch mode just restart it
         this.logger.error('tsc-watch crashed restarting in 3 secs.')
-        this.logger.debug(error)
+        this.logger.debug(e)
 
         await delay(3000)
         await this.manager.stop()
 
         return this.run()
       } else {
-        return { error: `Transpiling process has been crashed.${EOL}${error}`, success: false }
+        success = false
+        error = `Transpiling process has been crashed.${EOL}${e}`
       }
 
-      return { success: false, error }
+      success = false
+      error = e.message
     } finally {
       // clean up the zombies!
       await this.manager.stop()
+    }
+    this.logger.debug('tsc runner finished.')
+    return {
+      success,
+      outputPath,
+      error
     }
   }
 
@@ -281,7 +293,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       const instance = this.manager.add(execa.node(this.paths.tsconfigReplacePaths, args, spawnOptions))
 
-      // we dont want errors from this it can be sig terminated
+      // we dont want errors from this, it can be sig terminated
       try {
         await pipeProcessToLogger(this.context, instance, { stderr: true, stdout: false })
       } catch (e) {

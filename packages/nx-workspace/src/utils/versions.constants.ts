@@ -1,7 +1,6 @@
-import { LINTER_VERSIONS } from '@webundsoehne/nx-tools'
-
 import { Versions } from './versions.interface'
 import { AvailableCLIs } from '@interfaces/available.constants'
+import { LINTER_VERSIONS } from '@webundsoehne/nx-tools'
 
 export const VERSIONS: Versions = {
   base: {

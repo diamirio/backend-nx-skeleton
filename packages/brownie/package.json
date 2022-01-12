@@ -71,6 +71,7 @@
     "@oclif/command": "^1.8.3",
     "@oclif/config": "^1.17.1",
     "@oclif/errors": "^1.3.5",
+    "@oclif/plugin-help": "^5.1.10",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",

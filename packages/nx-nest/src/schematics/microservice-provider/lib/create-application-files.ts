@@ -1,9 +1,9 @@
 import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, deepMergeWithArrayOverwrite, convertStringToDirPath } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 import { join } from 'path'
 
 import { NormalizedSchema, ParsedMicroservice } from '../main.interface'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, deepMergeWithArrayOverwrite, convertStringToDirPath } from '@webundsoehne/nx-tools'
+import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 
 export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)

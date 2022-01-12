@@ -1,3 +1,65 @@
+## @webundsoehne/brownie [3.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.6...@webundsoehne/brownie@3.1.7) (2021-12-21)
+
+### Bug Fixes
+
+- update deps ([5fec378](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fec378da5e4beea574bd9df24e71d0915f9212a))
+
+## @webundsoehne/brownie [3.1.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.5...@webundsoehne/brownie@3.1.6) (2021-12-20)
+
+### Bug Fixes
+
+- publish configuration ([e6b13d7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e6b13d7cc0e8be02d3246c72c341d37fec7161db))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.2
+
+## @webundsoehne/brownie [3.1.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.4...@webundsoehne/brownie@3.1.5) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
+## @webundsoehne/brownie [3.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.3...@webundsoehne/brownie@3.1.4) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/brownie [3.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.2...@webundsoehne/brownie@3.1.3) (2021-12-17)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/brownie [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.1...@webundsoehne/brownie@3.1.2) (2021-12-17)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/brownie [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.0...@webundsoehne/brownie@3.1.1) (2021-12-17)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+# @webundsoehne/brownie [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.9...@webundsoehne/brownie@3.1.0) (2021-12-17)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/brownie [3.0.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.8...@webundsoehne/brownie@3.0.9) (2021-12-03)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4
+
 ## @webundsoehne/brownie [3.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.0.7...@webundsoehne/brownie@3.0.8) (2021-11-16)
 
 ### Bug Fixes

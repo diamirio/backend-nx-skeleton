@@ -1,5 +1,4 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { eslintJson, addEslintToTree, formatOrSkip, Logger, runInRule, updateTsconfigPaths, LINTER_VERSIONS } from '@webundsoehne/nx-tools'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -7,6 +6,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
+import { eslintJson, addEslintToTree, formatOrSkip, Logger, runInRule, updateTsconfigPaths, LINTER_VERSIONS } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.

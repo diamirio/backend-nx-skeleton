@@ -14,7 +14,7 @@ import { isVerbose, Logger } from '@utils'
  * @param options
  */
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
-  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
@@ -57,7 +57,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
       }),
       map(() => host)
     )
-  }) as unknown) as Rule
+  }) as unknown as Rule
 }
 
 /**
@@ -66,7 +66,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
  * @param options
  */
 export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, options: MultipleJinjaTemplateOptions<T>): Rule {
-  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
@@ -119,5 +119,5 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
       }),
       map(() => host)
     )
-  }) as unknown) as Rule
+  }) as unknown as Rule
 }

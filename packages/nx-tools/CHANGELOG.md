@@ -1,3 +1,27 @@
+## @webundsoehne/nx-tools [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.2.1...@webundsoehne/nx-tools@4.2.2) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.2
+
+## @webundsoehne/nx-tools [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.2.0...@webundsoehne/nx-tools@4.2.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.1
+
+# @webundsoehne/nx-tools [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.4...@webundsoehne/nx-tools@4.2.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+## @webundsoehne/nx-tools [4.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.3...@webundsoehne/nx-tools@4.1.4) (2021-12-03)
+
+### Bug Fixes
+
+- typo ([be9b482](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/be9b4823ad04f11880ecba5654a36409b1c48bab))
+
 ## @webundsoehne/nx-tools [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.1.2...@webundsoehne/nx-tools@4.1.3) (2021-09-16)
 
 ### Bug Fixes

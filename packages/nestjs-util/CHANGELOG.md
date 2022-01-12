@@ -1,3 +1,42 @@
+## @webundsoehne/nestjs-util [4.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.1...@webundsoehne/nestjs-util@4.3.2) (2021-12-20)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 1.0.2
+
+## @webundsoehne/nestjs-util [4.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.0...@webundsoehne/nestjs-util@4.3.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* deps ([bb36d52](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bb36d5225bf67543a34f30609ea9dafa2941e131))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 1.0.1
+
+# @webundsoehne/nestjs-util [4.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.3...@webundsoehne/nestjs-util@4.3.0) (2021-12-20)
+
+
+### Features
+
+* add keycloak packages ([581c003](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+## @webundsoehne/nestjs-util [4.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.2...@webundsoehne/nestjs-util@4.2.3) (2021-12-10)
+
+
+### Bug Fixes
+
+* add explicit js-yaml dependency for config parsing ([7763775](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7763775636eec95f99473e8121988d83f6bb7361))
+
 ## @webundsoehne/nestjs-util [4.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.2.1...@webundsoehne/nestjs-util@4.2.2) (2021-11-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nestjs-util",
-  "version": "1.1.1",
+  "version": "4.2.3",
   "description": "NestJS skeleton util library",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
@@ -41,8 +41,10 @@
     "util"
   ],
   "dependencies": {
+    "@webundsoehne/deep-merge": "*",
     "config": "^3.3.6",
     "fs-extra": "^10.0.0",
+    "js-yaml": "^4.0.0",
     "moment": "^2.29.1",
     "reflect-metadata": "^0.1.13",
     "winston": "^3.3.3"

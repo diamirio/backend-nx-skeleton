@@ -1,11 +1,11 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 import delay from 'delay'
 import execa, { ExecaChildProcess } from 'execa'
 import fs from 'fs'
 import { join } from 'path'
 
 import { RunBuilderOptions } from './main.interface'
+import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -14,6 +14,8 @@ try {
 
 class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command: string }> {
   public async run (): Promise<BuilderOutput> {
+    let success = false
+    let error: string
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -28,18 +30,17 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
 
       if (this.builderOptions.interactive) {
         this.logger.debug('This command is an interactive one, will hijack stdio.')
-
         await instance
       } else {
         await pipeProcessToLogger(this.context, instance, { start: true })
       }
 
-      return { success: true }
-    } catch (error) {
+      success = true
+    } catch (e) {
       if (this.builderOptions.watch) {
         // just restart it
         this.logger.error(`${this.builderOptions.command} crashed restarting in 3 secs.`)
-        this.logger.debug(error)
+        this.logger.debug(e)
 
         await delay(3000)
 
@@ -48,11 +49,14 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
         return this.run()
       }
 
-      return { success: false, error }
+      success = false
+      error = e.message
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
+    this.logger.debug('run runner finished.')
+    return { success, error }
   }
 
   public normalizeOptions (options: RunBuilderOptions): ExecaArguments {

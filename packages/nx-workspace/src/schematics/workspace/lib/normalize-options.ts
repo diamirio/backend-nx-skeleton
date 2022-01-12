@@ -1,12 +1,12 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { toFileName } from '@nrwl/workspace'
-import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 import { AvailableCLICommands, AvailableCLIs, AvailableFolderStructures, AvailableWorkspaceFiles, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
+import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.

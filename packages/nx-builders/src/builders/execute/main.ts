@@ -1,9 +1,9 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
 import { parseTargetString, readTargetOptions, runExecutor as baseRunExecutor } from '@nrwl/devkit'
-import { BaseExecutor, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 import execa from 'execa'
 
 import { ExecuteBuilderOptions, NormalizedExecuteBuilderOptions } from './main.interface'
+import { BaseExecutor, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()

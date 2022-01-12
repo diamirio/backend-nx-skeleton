@@ -1,8 +1,7 @@
-import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
-
 import { VERSIONS } from './versions.constants'
 import { AvailableCLIs } from '@interfaces/available.constants'
 import { NormalizedSchema as WorkspaceNormalizedSchema } from '@src/schematics/workspace/main.interface'
+import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies
 export function calculateDependencies (cli: WorkspaceNormalizedSchema['cli']): PackageVersions {
