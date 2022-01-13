@@ -10,10 +10,10 @@ import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
 import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
+import { deepMerge } from '@webundsoehne/deep-merge'
 import {
   BaseExecutor,
   checkNodeModulesExists,
-  deepMerge,
   ExecaArguments,
   FileInputOutput,
   generateBuilderAssets,
@@ -228,7 +228,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         rules: [
           { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
           {
-            condition: !!this.options.sourceMap,
+            condition: this.options.sourceMap,
             args: [ '--sourceMap' ]
           },
           {

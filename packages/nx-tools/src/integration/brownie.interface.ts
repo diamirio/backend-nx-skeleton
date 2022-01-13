@@ -1,7 +1,7 @@
 /**
  * To integrate a application with brownie for further processing.
  */
-export interface BrownieIntegrationInterface {
+export interface BrownieIntegration {
   /** Brownie available containers */
   containers?: BrownieAvailableContainers[]
 }

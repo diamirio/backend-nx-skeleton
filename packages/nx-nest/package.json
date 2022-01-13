@@ -42,6 +42,7 @@
     "@angular-devkit/schematics": "^13.0.3",
     "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/nx-builders": "*",
+    "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",

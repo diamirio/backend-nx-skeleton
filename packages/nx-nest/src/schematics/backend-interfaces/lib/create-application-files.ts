@@ -5,15 +5,8 @@ import { Schema as GeneratorSchema } from '../../generator/main.interface'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
 import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
-import {
-  addSchematicTask,
-  applyOverwriteWithDiff,
-  convertStringToDirPath,
-  createApplicationRule,
-  CreateApplicationRuleInterface,
-  deepMergeWithArrayOverwrite,
-  Logger
-} from '@webundsoehne/nx-tools'
+import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { addSchematicTask, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
 
 export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
   const log = new Logger(context)

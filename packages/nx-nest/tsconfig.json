@@ -8,6 +8,8 @@
     "paths": {
       "@src/*": ["*"],
       "@utils/*": ["utils/*"],
+      "@integration/*": ["integration/*"],
+      "@schematics/*": ["schematics/*"],
       "@interfaces/*": ["interfaces/*"]
     }
   },

@@ -1,22 +1,22 @@
-import { BackendInterfacesIntegration } from './backend-interfaces.interface'
 import { NxNestProjectIntegration } from './integration.interface'
+import { MicroserviceProviderIntegration } from './microservice-provider.interface'
 import { readWorkspaceJson } from '@webundsoehne/nx-tools'
 
 /**
- * Reads the backend interface integration part of the nx.json.
+ * Reads microservice integration part of the nx.json.
  */
-export function readBackendInterfaceIntegration (): BackendInterfacesIntegration[] {
+export function readMicroserviceIntegration (): MicroserviceProviderIntegration[] {
   const workspaceJson = readWorkspaceJson<NxNestProjectIntegration>()
 
   return Object.entries(workspaceJson.projects).reduce((o, [ key, value ]) => {
-    if (value.integration?.backendInterfaces?.dbAdapters) {
+    if (value.integration?.microserviceProvider) {
       o = [
         ...o,
         {
           name: key,
           root: value.root,
           sourceRoot: value.sourceRoot,
-          dbAdapters: value.integration.backendInterfaces.dbAdapters
+          microservice: value.integration.microserviceProvider
         }
       ]
     }

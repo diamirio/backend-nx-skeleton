@@ -3,7 +3,8 @@ import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
-import { ArrayElement, isVerbose, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { isVerbose, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { ArrayElement } from '@webundsoehne/ts-utility-types'
 
 /**
  * Normalize options for the schematic.

@@ -48,6 +48,7 @@
     "@angular-devkit/schematics": "^13.0.3",
     "@nrwl/cli": "^13.2.2",
     "@webundsoehne/nx-tools": "*",
+    "@webundsoehne/deep-merge": "*",
     "delay": "^5.0.0",
     "execa": "^5.1.1",
     "tree-kill": "^1.2.2"

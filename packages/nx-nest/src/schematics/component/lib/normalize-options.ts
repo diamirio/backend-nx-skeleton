@@ -17,7 +17,7 @@ import {
   generateNameCases,
   isVerbose,
   readNxIntegration,
-  readWorkspaceJson,
+  readWorkspaceJsonProject,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
@@ -66,7 +66,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
           // check parent configuration in workspace
           task.title = 'Looking for prior application configuration in "workspace.json".'
 
-          const workspace = readWorkspaceJson(ctx.parent)
+          const workspace = readWorkspaceJsonProject(ctx.parent)
 
           if (workspace && workspace.root && workspace.sourceRoot) {
             ctx.parentWsConfiguration = ([ 'root', 'sourceRoot' ] as (keyof EnrichedWorkspaceJsonProject)[]).reduce((o, item) => {

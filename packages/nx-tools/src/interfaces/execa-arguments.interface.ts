@@ -1,6 +1,6 @@
 import execa from 'execa'
 
-import { Writeable } from '@interfaces/helper-types.interface'
+import { Writeable } from '@webundsoehne/ts-utility-types'
 
 /**
  * Just some arguments to spawn execa.

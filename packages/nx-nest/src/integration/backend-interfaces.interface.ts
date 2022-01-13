@@ -1,8 +1,8 @@
 import { AvailableDBAdapters } from '@interfaces/available.constants'
 
-export interface BackendInterfacesIntegrationInterface {
+export interface BackendInterfacesIntegration {
   name: string
   root: string
   sourceRoot: string
-  dbAdapter: AvailableDBAdapters
+  dbAdapters: AvailableDBAdapters[]
 }

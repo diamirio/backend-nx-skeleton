@@ -3,7 +3,7 @@ import { readWorkspaceJson as baseReadWorkspaceJson, updateWorkspaceInTree } fro
 
 import { BaseIntegration } from './integration.interface'
 import { EnrichedWorkspaceJson } from '@interfaces/nx-json.interface'
-import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@utils'
+import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
@@ -29,9 +29,9 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
  * @param name
  */
 export function readNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (name: string): EnrichedWorkspaceJson<T>['projects']['name']['integration'] {
-  const workspace = baseReadWorkspaceJson() as EnrichedWorkspaceJson<T>
+  const project = readWorkspaceJsonProject<T>(name)
 
-  return workspace.projects?.[name]?.integration
+  return project?.integration
 }
 
 /**

@@ -11,6 +11,7 @@ import {
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
 import { GeneratedNameCases } from '@webundsoehne/nx-tools'
+import { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * This is the unparsed options list coming from angular-schematics
@@ -40,7 +41,7 @@ export interface NormalizedSchema extends Schema {
   microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
   // prior configuration will be written to nx.json for further processing
-  priorConfiguration: CommonPropertiesToSaveAndUse<true>
+  priorConfiguration: DeepPartial<CommonPropertiesToSaveAndUse<true>>
   // injecting enums since i want to compare this in jinja templates
   enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'>
 }

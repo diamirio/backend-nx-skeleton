@@ -1,5 +1,3 @@
 export * from './install-dependencies'
-export * from './parse-arguments'
-export * from './parse-arguments.interface'
 export * from './initialize-git'
 export * from './run-schematic-after'

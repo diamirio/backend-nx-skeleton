@@ -6,23 +6,11 @@
       {
         "pathGroups": [
           {
-            "pattern": "@src/**",
+            "pattern": "@{webundsoehne,webundsoehne-private,src,builders,interfaces,schematics,utils}/**",
             "group": "index"
           },
           {
-            "pattern": "@interfaces/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@utils/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne-private/**",
+            "pattern": "@{src,builders,interfaces,schematics,utils}",
             "group": "index"
           }
         ],

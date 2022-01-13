@@ -6,7 +6,8 @@ import { createApplicationRule } from './create-application.rule'
 import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
 import { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
-import { convertStringToDirPath, deepMergeWithUniqueMergeArray, Logger } from '@utils'
+import { convertStringToDirPath, Logger } from '@utils'
+import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
  * Generates from given template. Will search for multiple files that match the import case and will export them from root of the output file.

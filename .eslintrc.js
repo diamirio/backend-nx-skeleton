@@ -9,15 +9,7 @@ module.exports = {
       {
         pathGroups: [
           {
-            pattern: '@src/**',
-            group: 'index'
-          },
-          {
-            pattern: '@interfaces/**',
-            group: 'index'
-          },
-          {
-            pattern: '@utils/**',
+            pattern: '@{webundsoehne,webundsoehne-private}/**',
             group: 'index'
           }
         ],

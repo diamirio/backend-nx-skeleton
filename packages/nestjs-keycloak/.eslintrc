@@ -6,31 +6,11 @@
       {
         "pathGroups": [
           {
-            "pattern": "@src/**",
+            "pattern": "@{webundsoehne,webundsoehne-private,src,constants,interfaces,admin,connect,utils,modules}/**",
             "group": "index"
           },
           {
-            "pattern": "@constants/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@interfaces/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@admin/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@connect/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne-private/**",
+            "pattern": "@{src,constants,interfaces,admin,connect,utils,modules}",
             "group": "index"
           }
         ],

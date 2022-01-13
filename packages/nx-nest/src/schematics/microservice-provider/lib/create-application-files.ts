@@ -2,7 +2,8 @@ import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@a
 import { join } from 'path'
 
 import { NormalizedSchema, ParsedMicroservice } from '../main.interface'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, deepMergeWithArrayOverwrite, convertStringToDirPath } from '@webundsoehne/nx-tools'
+import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, convertStringToDirPath } from '@webundsoehne/nx-tools'
 import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 
 export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {

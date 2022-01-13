@@ -1,3 +1,5 @@
+import { NxProjectTypes } from '@src/constants/nx.constants'
+
 /**
  * workspace.json is where all of the nx data is stored.
  */
@@ -6,7 +8,7 @@ export type WorkspaceJSON<T extends Record<string, any> = any> = {
     [name: string]: {
       root: string
       sourceRoot: string
-      projectType: 'application' | 'library'
+      projectType: NxProjectTypes
       schematics: any
       architect: T
     }

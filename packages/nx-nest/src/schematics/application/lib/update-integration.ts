@@ -3,6 +3,7 @@ import { updateNxJsonInTree } from '@nrwl/workspace'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
+import { NxNestProjectIntegration } from '@src/integration'
 import { updateBrownieIntegration, updateNxIntegration, BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 /**
@@ -26,20 +27,20 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     // create nx json entry
     updateNxJsonInTree((json) => {
       json.projects[options.name] = { tags: [], implicitDependencies: [] }
+
       return json
     }),
 
     // add the components that needs to be known
-    updateNxIntegration<NormalizedSchema['priorConfiguration']>(
-      options.name,
-      integrationKeys.reduce(
+    updateNxIntegration<NxNestProjectIntegration>(options.name, {
+      nestjs: integrationKeys.reduce(
         (o, key) => ({
           ...o,
           [key]: options[key]
         }),
-        {} as NormalizedSchema['priorConfiguration']
+        {} as NxNestProjectIntegration['nestjs']
       )
-    ),
+    }),
 
     // add nx container
     updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.NX ] }),

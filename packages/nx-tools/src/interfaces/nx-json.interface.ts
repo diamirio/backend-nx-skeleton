@@ -1,7 +1,7 @@
 import { NxProjectTypes } from '@constants/nx.constants'
 import { NxJsonConfiguration } from '@nrwl/devkit'
 
-import { BaseIntegration } from '..'
+import { BaseIntegration } from '@integration/integration.interface'
 
 /**
  * Nx does not import a type for workspace.json. This fills that gap.

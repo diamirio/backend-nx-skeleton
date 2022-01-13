@@ -6,54 +6,13 @@
       {
         "pathGroups": [
           {
-            "pattern": "@filter",
+            "pattern": "@{webundsoehne,webundsoehne-private,src,filter,decorator,interface,module,provider,util}/**",
             "group": "index"
           },
           {
-            "pattern": "@filter/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@decorator",
-            "group": "index"
-          },
-          {
-            "pattern": "@decorator/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@interface",
-            "group": "index"
-          },
-          {
-            "pattern": "@module",
-            "group": "index"
-          },
-          {
-            "pattern": "@module/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@provider",
-            "group": "index"
-          },
-          {
-            "pattern": "@provider/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@util",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne-private/**",
+            "pattern": "@{src,filter,decorator,interface,module,provider,util}",
             "group": "index"
           }
-
         ],
         "pathGroupsExcludedImportTypes": ["builtin"],
         "groups": [

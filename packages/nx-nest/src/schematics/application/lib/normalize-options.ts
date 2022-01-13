@@ -16,17 +16,10 @@ import {
   AvailableTestsTypes,
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
+import { NxNestProjectIntegration, readMicroserviceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@src/utils'
-import {
-  ConvertToPromptType,
-  generateNameCases,
-  isVerbose,
-  mapPromptChoices,
-  readMicroserviceIntegration,
-  readNxIntegration,
-  setSchemaDefaultsInContext
-} from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, generateNameCases, isVerbose, mapPromptChoices, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -112,9 +105,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
-            if (integration) {
-              ctx.priorConfiguration = integration
+            const integration = readNxIntegration<NxNestProjectIntegration>(ctx.name)
+            if (integration?.nestjs) {
+              ctx.priorConfiguration = integration.nestjs
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {

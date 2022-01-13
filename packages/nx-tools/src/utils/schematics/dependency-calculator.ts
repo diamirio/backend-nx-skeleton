@@ -1,6 +1,6 @@
 import { DependencyCalculatorOptions } from './dependency-calculator.interface'
 import { PackageVersions } from '@interfaces/versions.interface'
-import { deepMerge } from '@utils'
+import { deepMerge } from '@webundsoehne/deep-merge'
 
 /**
  * Calculates the dependencies with a given condition, returns the package versions merged.

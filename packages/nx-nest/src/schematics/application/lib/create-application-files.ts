@@ -8,15 +8,8 @@ import { Schema as BackendInterfacesSchema } from '@src/schematics/backend-inter
 import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
 import { Schema as GeneratorSchema } from '@src/schematics/generator/main.interface'
 import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
-import {
-  addSchematicTask,
-  applyOverwriteWithDiff,
-  createApplicationRule,
-  CreateApplicationRuleInterface,
-  deepMergeWithArrayOverwrite,
-  Logger,
-  runInRule
-} from '@webundsoehne/nx-tools'
+import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { addSchematicTask, applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.

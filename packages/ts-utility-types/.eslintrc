@@ -6,23 +6,7 @@
       {
         "pathGroups": [
           {
-            "pattern": "@src/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@constants/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@interfaces/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne/**",
-            "group": "index"
-          },
-          {
-            "pattern": "@webundsoehne-private/**",
+            "pattern": "@{webundsoehne,webundsoehne-private}/**",
             "group": "index"
           }
         ],
