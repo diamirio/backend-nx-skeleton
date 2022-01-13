@@ -38,7 +38,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
             template.pattern = [ template.pattern ]
           }
 
-          if (micromatch.isMatch(file, template.pattern, { ...micromatchDefaultOptions, ...template.options })) {
+          if (micromatch.isMatch(file, [ ...template.pattern, '!' + template.output ], { ...micromatchDefaultOptions, ...template.options })) {
             log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
@@ -62,6 +62,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
 
     if (!output || Object.keys(output).length === 0) {
       log.warn('Can not generate exports, because there is no file matched.')
+
       return
     }
 

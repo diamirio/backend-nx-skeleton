@@ -1,3 +1,7 @@
+{% if files is defined and files is iterable and files | length > 0 %}
 {% for file in files %}
 export * from '{{file}}'
 {% endfor %}
+{% else %}
+export {}
+{% endif %}
