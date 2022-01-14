@@ -1,4 +1,5 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
 
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'

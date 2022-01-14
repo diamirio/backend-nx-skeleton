@@ -1,4 +1,5 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -27,13 +28,13 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       addEslintToTree(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope, override: {} }) }),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
-      addProject(options),
+      addProject(host, options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
       createApplicationFiles(options, context),
 
       runInRule(log.info.bind(log)('Updating integration.')),
-      updateIntegration(options),
+      updateIntegration(host, options),
 
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsconfigPaths(options),

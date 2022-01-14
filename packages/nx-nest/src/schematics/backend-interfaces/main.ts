@@ -1,4 +1,5 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -8,7 +9,7 @@ import { Schema } from './main.interface'
 import { SchematicConstants } from '@src/interfaces'
 import { addEslintToTree, eslintJson, formatOrSkip, LINTER_VERSIONS, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
-export default function (schema: Schema): Rule {
+export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
     const options = await normalizeOptions(host, context, schema)
@@ -18,13 +19,13 @@ export default function (schema: Schema): Rule {
 
       addEslintToTree(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope, override: {} }) }),
 
-      addProject(options),
+      addProject(host, options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
       createApplicationFiles(options, context),
 
       runInRule(log.info.bind(log)('Updating integration.')),
-      updateIntegration(options),
+      updateIntegration(host, options),
 
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsconfigPaths(options),

@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import { SchematicContext } from '@angular-devkit/schematics'
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit'
 import { readNxJson } from '@nrwl/workspace'
-import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
@@ -48,7 +48,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${libsDir(host)}/${ctx.name}`)
+          const layout = getWorkspaceLayout(host)
+
+          ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
 
           task.title = `Library root directory is set as "${ctx.root}".`
         }
@@ -63,7 +65,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
+            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(host, ctx.name)
             if (integration) {
               ctx.priorConfiguration = integration
 
@@ -85,7 +87,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Parsing all integrated backend applications...',
         task: (ctx, task): void => {
-          const backendInterfaces = readBackendInterfaceIntegration()
+          const backendInterfaces = readBackendInterfaceIntegration(host)
 
           ctx.dbAdapters = backendInterfaces.flatMap((m) => m.dbAdapters).filter(uniqueArrayFilter)
 

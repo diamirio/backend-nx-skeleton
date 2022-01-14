@@ -16,7 +16,7 @@ import {
 } from './node.helper.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeDependency } from '@src/interfaces/dependency.interface'
-import { pipeProcessThroughListr } from '@webundsoehne/nx-tools'
+import { pipeProcessThroughListr, findNxRoot } from '@webundsoehne/nx-tools'
 
 export class NodeHelper {
   public globalFolder: string[] = []
@@ -230,11 +230,11 @@ export class NodeHelper {
           try {
             this.cmd.logger.debug('Using local node package directory for package: %s', currentPkg.pkg)
 
-            const packagePath = dirname(require.resolve(join(currentPkg.pkg, 'package.json')))
+            const packagePath = join(findNxRoot(), 'node_modules', currentPkg.pkg, 'package.json')
 
             statSync(packagePath)
 
-            o.path = packagePath
+            o.path = dirname(packagePath)
 
             o.installed = true
 

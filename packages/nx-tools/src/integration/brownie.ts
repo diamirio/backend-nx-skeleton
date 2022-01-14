@@ -1,7 +1,9 @@
 import { Rule } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
+import { FsTree } from '@nrwl/tao/src/shared/tree'
 
 import { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
-import { readWorkspaceJson, readWorkspaceJsonProject, updateNxIntegration } from './integration'
+import { readProjectConfiguration, readWorkspaceProjects, updateNxIntegration } from './integration'
 import { BaseIntegration } from './integration.interface'
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
@@ -10,25 +12,26 @@ import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
  * @param name
  * @param options
  */
-export function updateBrownieIntegration (name: string, data: BrownieIntegration): Rule {
-  return updateNxIntegration<BaseIntegration>(name, { brownie: data }, { arrayOverwrite: false })
+export function updateBrownieIntegration (host: Tree, name: string, data: BrownieIntegration): Rule {
+  return updateNxIntegration<BaseIntegration>(host, name, { brownie: data }, { arrayOverwrite: false })
 }
 
 /**
  * Returns the brownie integration part of the nx.json.
  * @param name
  */
-export function readBrownieIntegration (name: string): BrownieIntegration {
-  return readWorkspaceJsonProject<BaseIntegration>(name).integration?.brownie
+export function readBrownieIntegration (host: Tree, name: string): BrownieIntegration {
+  return readProjectConfiguration<BaseIntegration>(host, name).integration?.brownie
 }
 
 /**
  * Returns sum of brownie containers read from nx.json.
  */
-export function readBrownieContainers (): BrownieAvailableContainers[] {
-  const nxJson = readWorkspaceJson<BaseIntegration>()
+export function readBrownieContainers (host?: Tree): BrownieAvailableContainers[] {
+  host = host ?? new FsTree(process.cwd(), false)
+  const projects = readWorkspaceProjects<BaseIntegration>(host)
 
-  return Object.values(nxJson.projects).reduce((o, value) => {
+  return Object.values(projects).reduce((o, value) => {
     if (value.integration?.brownie?.containers) {
       o = deepMergeWithUniqueMergeArray(o, value.integration.brownie.containers)
     }

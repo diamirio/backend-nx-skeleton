@@ -1,4 +1,5 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import { SchematicContext } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'

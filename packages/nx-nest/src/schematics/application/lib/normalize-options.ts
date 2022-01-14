@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { readNxJson, toFileName } from '@nrwl/workspace'
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
+import { SchematicContext } from '@angular-devkit/schematics'
+import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit'
+import { readNxJson } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
@@ -67,9 +67,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: (ctx): void => {
           if (options.directory) {
-            ctx.directory = `${toFileName(options.directory)}/${toFileName(options.name)}`
+            ctx.directory = `${names(options.directory).fileName}/${names(options.name).fileName}`
           } else {
-            ctx.directory = toFileName(options.name)
+            ctx.directory = names(options.name).fileName
           }
         }
       },
@@ -90,7 +90,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting project root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${appsDir(host)}/${ctx.directory}`)
+          const layout = getWorkspaceLayout(host)
+
+          ctx.root = normalize(`${layout.appsDir}/${ctx.directory}`)
 
           task.title = `Project root directory is set as "${ctx.root}".`
         }
@@ -105,7 +107,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NxNestProjectIntegration>(ctx.name)
+            const integration = readNxIntegration<NxNestProjectIntegration>(host, ctx.name)
             if (integration?.nestjs) {
               ctx.priorConfiguration = integration.nestjs
 
@@ -261,7 +263,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
         task: async (ctx, task): Promise<void> => {
-          const microservices = readMicroserviceIntegration().map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
+          const microservices = readMicroserviceIntegration(host).map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
 
           if (microservices?.length > 0) {
             // there can be two selections of API servers here

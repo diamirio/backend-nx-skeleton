@@ -1,16 +1,16 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics'
-import { updateNxJsonInTree } from '@nrwl/workspace'
+import { Tree } from '@nrwl/devkit'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
 import { NxNestProjectIntegration } from '@src/integration'
-import { updateBrownieIntegration, updateNxIntegration, BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+import { BrownieAvailableContainers, updateBrownieIntegration, updateNxIntegration } from '@webundsoehne/nx-tools'
 
 /**
  * Update integration with different interfaces.
  * @param options
  */
-export function updateIntegration (options: NormalizedSchema): Rule {
+export function updateIntegration (host: Tree, options: NormalizedSchema): Rule {
   const integrationKeys: (keyof NormalizedSchema['priorConfiguration'])[] = [
     'components',
     'effectiveComponents',
@@ -24,15 +24,8 @@ export function updateIntegration (options: NormalizedSchema): Rule {
   ]
 
   return chain([
-    // create nx json entry
-    updateNxJsonInTree((json) => {
-      json.projects[options.name] = { tags: [], implicitDependencies: [] }
-
-      return json
-    }),
-
     // add the components that needs to be known
-    updateNxIntegration<NxNestProjectIntegration>(options.name, {
+    updateNxIntegration<NxNestProjectIntegration>(host, options.name, {
       nestjs: integrationKeys.reduce(
         (o, key) => ({
           ...o,
@@ -43,18 +36,22 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add nx container
-    updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.NX ] }),
+    updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.NX ] }),
 
     // add mysql container
-    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.MYSQL ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.MYSQL ] }) : noop(),
 
     // add postgresql container
-    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.POSTGRESQL ] }) : noop(),
+    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database)
+      ? updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.POSTGRESQL ] })
+      : noop(),
 
     // add mongodb container
-    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
+    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
 
     // add message queue container
-    options.components?.includes(AvailableComponents.MICROSERVICE_SERVER) ? updateBrownieIntegration(options.name, { containers: [ BrownieAvailableContainers.RABBITMQ ] }) : noop()
+    options.components?.includes(AvailableComponents.MICROSERVICE_SERVER)
+      ? updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.RABBITMQ ] })
+      : noop()
   ])
 }

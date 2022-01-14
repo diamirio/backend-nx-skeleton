@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import { SchematicContext } from '@angular-devkit/schematics'
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit'
 import { readNxJson } from '@nrwl/workspace'
-import { appsDir, libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
@@ -46,7 +46,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${libsDir(host)}/${ctx.name}`)
+          const layout = getWorkspaceLayout(host)
+
+          ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
 
           task.title = `Library root directory is set as "${ctx.root}".`
         }
@@ -61,7 +63,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
+            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(host, ctx.name)
             if (integration) {
               ctx.priorConfiguration = integration
 
@@ -83,19 +85,10 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Parsing all integrated microservices...',
         task: (ctx, task): void => {
-          let microservices = readMicroserviceIntegration()
+          const microservices = readMicroserviceIntegration(host)
 
           if (microservices.length === 0) {
-            task.title = 'No microservice integration has been found working in mock mode.'
-
-            microservices = [
-              {
-                name: 'mock',
-                microservice: 'unknown',
-                root: `${appsDir(host)}/unknown`,
-                sourceRoot: 'src'
-              }
-            ]
+            task.skip('No microservice integration has been found.')
           } else {
             task.title = `Microservice servers found: ${microservices.map((m) => m.name).join(', ')}`
           }

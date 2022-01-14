@@ -1,11 +1,9 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import delay from 'delay'
 import execa from 'execa'
-import { copy, removeSync } from 'fs-extra'
+import { existsSync, copy, removeSync, readJsonSync, writeJsonSync } from 'fs-extra'
 import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
@@ -159,7 +157,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     )
 
     // Relative path for the dist directory
-    const tsconfig = readJsonFile(join(this.context.root, options.tsConfig))
+    const tsconfig = readJsonSync(join(this.context.root, options.tsConfig))
     const rootDir = tsconfig.compilerOptions?.rootDir || ''
     const mainFileDir = dirname(options.main)
     const tsconfigDir = dirname(options.tsConfig)
@@ -280,9 +278,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       this.logger.debug(`tsconfig-replace-paths path: ${this.paths.tsconfigReplacePaths}`)
 
       // create temporary tsconfig.paths
-      const tsconfig = readJsonFile(this.paths.tsconfig)
+      const tsconfig = readJsonSync(this.paths.tsconfig)
 
-      writeJsonFile(
+      writeJsonSync(
         this.paths.tsconfigPaths,
         deepMerge(tsconfig, {
           compilerOptions: { outDir: join(this.context.root, this.options.outputPath), baseUrl: join(this.context.root, this.options.outputPath) }
@@ -311,12 +309,12 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     this.logger.debug(`package.json path: ${packageJsonPath}`)
 
-    if (!fileExists(packageJsonPath)) {
+    if (!existsSync(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
     } else {
       this.logger.info('Processing "package.json"...')
 
-      const packageJson = readJsonFile(packageJsonPath)
+      const packageJson = readJsonSync(packageJsonPath)
 
       const mainFile = basename(this.options.main, '.ts')
       const globalPackageJson = readPackageJson()
@@ -352,7 +350,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
 
       // write file back
-      writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
+      writeJsonSync(`${this.options.normalizedOutputPath}/package.json`, packageJson)
     }
 
     // this is the default behaviour, lets keep this.

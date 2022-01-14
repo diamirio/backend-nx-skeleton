@@ -46,14 +46,14 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@keycloak/keycloak-admin-client": "^15.1.0",
-    "@nestjs/common": "^8.2.3",
-    "@nestjs/core": "^8.2.3",
+    "@keycloak/keycloak-admin-client": "^16.1.0",
+    "@nestjs/common": "^8.2.5",
+    "@nestjs/core": "^8.2.5",
     "@nestjs/graphql": "^9.0.4",
-    "express": "^4.17.1",
-    "fastify": "^3.25.0",
-    "keycloak-connect": "^15.1.0",
-    "graphql": "^15.5.0"
+    "express": "^4.17.2",
+    "fastify": "^3.25.3",
+    "graphql": "^15",
+    "keycloak-connect": "^16.1.0"
   },
   "peerDependencies": {
     "@keycloak/keycloak-admin-client": ">= 15",
@@ -62,8 +62,8 @@
     "@nestjs/graphql": ">= 8",
     "express": ">= 4",
     "fastify": ">= 3",
-    "keycloak-connect": ">= 15",
-    "graphql": ">= 15"
+    "graphql": ">= 15",
+    "keycloak-connect": ">= 15"
   },
   "peerDependenciesMeta": {
     "graphql": {

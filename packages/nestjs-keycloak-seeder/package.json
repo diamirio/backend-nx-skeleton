@@ -50,7 +50,7 @@
     "@webundsoehne/ts-utility-types": "*"
   },
   "devDependencies": {
-    "@nestjs/common": "^8.2.3"
+    "@nestjs/common": "^8.2.5"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8",

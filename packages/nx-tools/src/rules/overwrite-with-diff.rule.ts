@@ -3,7 +3,7 @@ import * as diff from 'diff'
 import { createPrompt } from 'listr2'
 import { EOL } from 'os'
 import { dirname } from 'path'
-import { firstValueFrom, Observable } from 'rxjs'
+import { Observable, firstValueFrom } from 'rxjs'
 
 import { Logger } from '@utils'
 
@@ -85,7 +85,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               filesToKeep = await createPrompt.bind(this)(
                 {
                   type: 'MultiSelect',
-                  message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
+                  message: 'These files are found to be unnecessary by comparing prior configuration to new configuration. Select the ones to keep.',
                   choices: filesToRemove
                 },
                 { error: false }

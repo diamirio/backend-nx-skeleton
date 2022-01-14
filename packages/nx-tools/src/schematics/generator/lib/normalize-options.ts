@@ -1,5 +1,5 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import { SchematicContext } from '@angular-devkit/schematics'
+import { Tree, names } from '@nrwl/devkit'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
 import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
@@ -36,7 +36,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = toFileName(options.name)
+          ctx.name = names(options.name).fileName
 
           ctx.casing = generateNameCases(ctx.name)
 

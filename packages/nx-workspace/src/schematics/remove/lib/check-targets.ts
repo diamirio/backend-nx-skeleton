@@ -2,7 +2,7 @@ import { Rule, Tree } from '@angular-devkit/schematics'
 import { updateWorkspaceInTree } from '@nrwl/workspace'
 
 import { Schema } from '../main.interface'
-import { EnrichedWorkspaceJson } from '@webundsoehne/nx-tools'
+import { EnrichedWorkspaceConfiguration } from '@webundsoehne/nx-tools'
 
 /**
  * Check whether the project to be removed has builders targetted by another project
@@ -16,7 +16,7 @@ export function checkTargets (schema: Schema): Rule {
     return (tree: Tree): Tree => tree
   }
 
-  return updateWorkspaceInTree<EnrichedWorkspaceJson>((workspace) => {
+  return updateWorkspaceInTree<EnrichedWorkspaceConfiguration>((workspace) => {
     const findTarget = new RegExp(`${schema.projectName}:`)
 
     const usedIn = []

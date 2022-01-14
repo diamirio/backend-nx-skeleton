@@ -1,5 +1,5 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import { names } from '@nrwl/devkit'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
@@ -42,7 +42,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             message: 'Please give a folder name to this repository.',
             footer: color.dim(`Leave empty to use current folder: ${process.cwd()}`),
             format: (value) => {
-              return toFileName(value)
+              return names(value).fileName
             }
           })
 
@@ -82,7 +82,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
               return true
             },
             format: (value) => {
-              return toFileName(value)
+              return names(value).fileName
             }
           })
         }

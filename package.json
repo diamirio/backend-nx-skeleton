@@ -31,10 +31,10 @@
     "prepare-commit-msg": "[ -t 1 ] && exec < /dev/tty && git cz --hook || true"
   },
   "resolutions": {
-    "**/rxjs": "7.4.0",
-    "**/@angular-devkit/architect": "0.1300.3",
-    "**/@angular-devkit/core": "13.0.3",
-    "**/@angular-devkit/schematics": "13.0.3"
+    "**/rxjs": "7.5.2",
+    "**/@angular-devkit/architect": "0.1301.3",
+    "**/@angular-devkit/core": "13.1.3",
+    "**/@angular-devkit/schematics": "13.1.3"
   },
   "dependencies": {},
   "devDependencies": {
@@ -45,13 +45,13 @@
     "lint-staged": "^11.0.1",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
+    "rxjs": "^7.5.2",
     "simple-git-hooks": "^2.7.0",
-    "tsc-watch": "^4.5.0",
+    "tsc-watch": "^4.6.0",
     "tsconfig-replace-paths": "^0.0.11",
-    "typedoc": "^0.22.9",
-    "typedoc-plugin-markdown": "^3.11.7",
-    "typescript": "^4.5.2"
+    "typedoc": "^0.22.10",
+    "typedoc-plugin-markdown": "^3.11.11",
+    "typescript": "^4.5.4"
   },
   "config": {
     "commitizen": {

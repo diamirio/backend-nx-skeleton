@@ -1,4 +1,5 @@
-import { chain, Rule, Tree } from '@angular-devkit/schematics'
+import { chain, Rule } from '@angular-devkit/schematics'
+import { Tree } from '@nrwl/devkit'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
 import { runInRule } from '@rules/run.rule'
