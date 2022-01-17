@@ -1,6 +1,5 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { getWorkspaceLayout, Tree } from '@nrwl/devkit'
+import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
@@ -9,7 +8,7 @@ import { NormalizedSchema, Schema } from '../main.interface'
 import { readMicroserviceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
-import { isVerbose, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readNxIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -46,7 +45,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          const layout = getWorkspaceLayout(host)
+          const layout = readWorkspaceLayout(host)
 
           ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
 

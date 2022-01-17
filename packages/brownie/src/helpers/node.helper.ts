@@ -16,7 +16,8 @@ import {
 } from './node.helper.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeDependency } from '@src/interfaces/dependency.interface'
-import { pipeProcessThroughListr, findNxRoot } from '@webundsoehne/nx-tools'
+import { findNxRoot } from '@webundsoehne/nx-tools/dist/utils/file-system/find-nx-root'
+import { pipeProcessThroughListr } from '@webundsoehne/nx-tools/dist/utils/logger/pipe-process-to-listr'
 
 export class NodeHelper {
   public globalFolder: string[] = []

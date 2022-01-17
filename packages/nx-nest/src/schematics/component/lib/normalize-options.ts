@@ -1,6 +1,6 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { Tree, names } from '@nrwl/devkit'
+import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import { names } from '@nrwl/devkit'
 import { readNxJson } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'

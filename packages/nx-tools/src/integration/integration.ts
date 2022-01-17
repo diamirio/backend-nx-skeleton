@@ -1,26 +1,35 @@
-import { Rule } from '@angular-devkit/schematics'
+import { Rule, Tree } from '@angular-devkit/schematics'
 import {
+  addProjectConfiguration,
   getProjects,
+  ProjectConfiguration,
   readProjectConfiguration as baseReadProjectConfiguration,
   readWorkspaceConfiguration as baseReadWorkspaceConfiguration,
-  Tree,
   updateProjectConfiguration,
   WorkspaceConfiguration
 } from '@nrwl/devkit'
+import { FsTree } from '@nrwl/tao/src/shared/tree'
 
 import { BaseIntegration } from './integration.interface'
+import { convertAngularTreeToNxTree } from './nx-integration'
 import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
-import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
  */
-export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, data: T, options?: { arrayOverwrite?: boolean }): Rule {
-  const project = readProjectConfiguration(host, name)
+// , options?: { arrayOverwrite?: boolean }
+export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T): Rule {
+  // const updated: EnrichedProjectConfiguration<T> = { integration } as EnrichedProjectConfiguration<T>
+  // try {
+  //   const project = readProjectConfiguration(nxHost, name)
 
-  const updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(project, { integration: data }) : deepMergeWithUniqueMergeArray(project, { integration: data })
+  // updated = options?.arrayOverwrite
+  //   ? (deepMergeWithArrayOverwrite<EnrichedProjectConfiguration<T>>(project, { integration }) as unknown as EnrichedProjectConfiguration<T>)
+  //   : (deepMergeWithUniqueMergeArray<EnrichedProjectConfiguration<T>>(project, { integration })) as unknown as EnrichedProjectConfiguration<T>)
+  // eslint-disable-next-line no-empty
+  // } catch {}
 
-  return (): void => updateProjectConfiguration(host, name, updated)
+  return (): void => updateProjectConfiguration(convertAngularTreeToNxTree(host), name, { integration } as unknown as ProjectConfiguration)
 }
 
 /**
@@ -35,14 +44,14 @@ export function readNxIntegration<T extends Record<PropertyKey, any> = BaseInteg
  * Returns the workspace.json with extended typings.
  */
 export function readWorkspaceConfiguration (host: Tree): WorkspaceConfiguration {
-  return baseReadWorkspaceConfiguration(host)
+  return baseReadWorkspaceConfiguration(convertAngularTreeToNxTree(host))
 }
 
 /**
  * Reads all the workspace projects.
  */
-export function readWorkspaceProjects<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree): Record<string, EnrichedProjectConfiguration<T>> {
-  return Object.fromEntries(getProjects(host))
+export function readWorkspaceProjects<T extends Record<PropertyKey, any> = BaseIntegration> (host?: Tree): Record<string, EnrichedProjectConfiguration<T>> {
+  return Object.fromEntries(getProjects(host ? convertAngularTreeToNxTree(host) : new FsTree(process.cwd(), false)))
 }
 
 /**
@@ -50,5 +59,18 @@ export function readWorkspaceProjects<T extends Record<PropertyKey, any> = BaseI
  * @param name
  */
 export function readProjectConfiguration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string): EnrichedProjectConfiguration<T> {
-  return baseReadProjectConfiguration(host, name)
+  return baseReadProjectConfiguration(convertAngularTreeToNxTree(host), name)
+}
+
+/**
+ * Creates a new project in the workspace.
+ */
+export function createWorkspaceProject<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, configuration: EnrichedProjectConfiguration<T>): void {
+  const nxHost = convertAngularTreeToNxTree(host)
+
+  try {
+    addProjectConfiguration(nxHost, name, configuration, true)
+  } catch (e) {
+    updateProjectConfiguration(nxHost, name, configuration)
+  }
 }

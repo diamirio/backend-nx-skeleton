@@ -1,5 +1,5 @@
-import { SchematicContext } from '@angular-devkit/schematics'
-import { Tree, names } from '@nrwl/devkit'
+import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import { names } from '@nrwl/devkit'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
 import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'

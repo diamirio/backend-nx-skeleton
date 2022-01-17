@@ -1,6 +1,6 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit'
+import { Tree } from '@angular-devkit/schematics'
+import { names } from '@nrwl/devkit'
 import { readNxJson } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
@@ -19,7 +19,7 @@ import {
 import { NxNestProjectIntegration, readMicroserviceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@src/utils'
-import { ConvertToPromptType, generateNameCases, isVerbose, mapPromptChoices, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, generateNameCases, isVerbose, mapPromptChoices, readNxIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -27,7 +27,7 @@ import { ConvertToPromptType, generateNameCases, isVerbose, mapPromptChoices, re
  * @param context
  * @param options
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -90,7 +90,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting project root directory.',
         task: (ctx, task): void => {
-          const layout = getWorkspaceLayout(host)
+          const layout = readWorkspaceLayout(host)
 
           ctx.root = normalize(`${layout.appsDir}/${ctx.directory}`)
 

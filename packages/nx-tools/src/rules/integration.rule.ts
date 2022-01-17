@@ -1,12 +1,16 @@
-import { Rule } from '@angular-devkit/schematics'
-import { addProjectConfiguration, Tree } from '@nrwl/devkit'
+import { Rule, Tree } from '@angular-devkit/schematics'
 
 import { BaseIntegration } from '@integration/integration.interface'
 import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import { createWorkspaceProject } from '@src/integration/integration'
 
 /**
  * Creates a new project in the workspace.
  */
-export function createWorkspaceProject<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, configuration: EnrichedProjectConfiguration<T>): Rule {
-  return (): void => addProjectConfiguration(host, name, configuration, true)
+export function createWorkspaceProjectRule<T extends Record<PropertyKey, any> = BaseIntegration> (name: string, configuration: EnrichedProjectConfiguration<T>): Rule {
+  return (host: Tree): Rule => {
+    createWorkspaceProject(host, name, configuration)
+
+    return
+  }
 }

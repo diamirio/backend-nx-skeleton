@@ -9,7 +9,7 @@ import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
-import { color } from '@webundsoehne/nx-tools'
+import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
@@ -135,7 +135,7 @@ export class NxCommand extends BaseCommand<Configuration> {
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
-        ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : [],
+        ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [],
         ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--', '--verbose' ] : []
       ],
       { stdio: 'inherit', shell: true }

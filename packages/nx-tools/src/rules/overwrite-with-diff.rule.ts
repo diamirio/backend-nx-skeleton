@@ -146,7 +146,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
   }
 }
 
-const context = 1
+const MERGE_CONTEXT = 1
 
 /**
  * Triple file merge will compare old with new file and apply the changes to the current file.
@@ -159,7 +159,7 @@ const context = 1
 export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
   let buffer: string
   // create difference-patch
-  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context })
+  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context: MERGE_CONTEXT })
 
   try {
     buffer = diff.applyPatch(currentFile, patch)
@@ -182,7 +182,7 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
  */
 export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
   let buffer: string
-  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context }), 'add')
+  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context: MERGE_CONTEXT }), 'add')
 
   try {
     buffer = diff.applyPatch(currentFile, newToCurrentPatch)

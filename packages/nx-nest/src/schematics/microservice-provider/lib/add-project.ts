@@ -1,11 +1,10 @@
 import { normalize } from '@angular-devkit/core'
-import { Rule } from '@angular-devkit/schematics'
-import { Tree } from '@nrwl/devkit'
+import { Rule, Tree } from '@angular-devkit/schematics'
 import { generateProjectLint } from '@nrwl/workspace'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
-import { createWorkspaceProject, NxProjectTypes } from '@webundsoehne/nx-tools'
+import { createWorkspaceProjectRule, NxProjectTypes } from '@webundsoehne/nx-tools'
 
 export function addProject (host: Tree, options: NormalizedSchema): Rule {
   // we dont need to enforce types here, since it is only going to be linting
@@ -23,5 +22,5 @@ export function addProject (host: Tree, options: NormalizedSchema): Rule {
     targets
   }
 
-  return createWorkspaceProject(host, options.name, project)
+  return createWorkspaceProjectRule(options.name, project)
 }

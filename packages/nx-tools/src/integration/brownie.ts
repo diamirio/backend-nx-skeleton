@@ -1,6 +1,4 @@
-import { Rule } from '@angular-devkit/schematics'
-import { Tree } from '@nrwl/devkit'
-import { FsTree } from '@nrwl/tao/src/shared/tree'
+import { Rule, Tree } from '@angular-devkit/schematics'
 
 import { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
 import { readProjectConfiguration, readWorkspaceProjects, updateNxIntegration } from './integration'
@@ -28,7 +26,6 @@ export function readBrownieIntegration (host: Tree, name: string): BrownieIntegr
  * Returns sum of brownie containers read from nx.json.
  */
 export function readBrownieContainers (host?: Tree): BrownieAvailableContainers[] {
-  host = host ?? new FsTree(process.cwd(), false)
   const projects = readWorkspaceProjects<BaseIntegration>(host)
 
   return Object.values(projects).reduce((o, value) => {

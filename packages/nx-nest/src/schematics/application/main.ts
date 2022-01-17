@@ -1,5 +1,4 @@
-import { chain, Rule, SchematicContext } from '@angular-devkit/schematics'
-import { Tree } from '@nrwl/devkit'
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -16,7 +15,7 @@ import { eslintJson, addEslintToTree, formatOrSkip, Logger, runInRule, updateTsc
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
-    const options = await normalizeOptions(host, context, schema)
+    const options = await normalizeOptions(host, schema)
 
     return chain([
       runInRule(log.info.bind(log)('Initiating workspace.')),

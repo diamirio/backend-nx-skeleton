@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit'
+import { Tree } from '@angular-devkit/schematics'
 
 import { BackendInterfacesIntegration } from './backend-interfaces.interface'
 import { NxNestProjectIntegration } from './integration.interface'

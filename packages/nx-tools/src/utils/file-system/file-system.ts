@@ -21,7 +21,7 @@ export async function getWorkspace (context: BuilderContext, host: Host): Promis
  * Check if file that is supposed to be executable is defined inside the node_modules folder.
  * @param paths
  */
-export function checkNodeModulesExists (paths: Record<string, string>): void {
+export function checkPathsExists (paths: Record<string, string>): void {
   const errors: string[] = []
 
   Object.entries(paths).forEach(([ key, value ]) => {

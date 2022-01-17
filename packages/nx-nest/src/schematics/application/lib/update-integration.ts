@@ -1,5 +1,4 @@
-import { chain, noop, Rule } from '@angular-devkit/schematics'
-import { Tree } from '@nrwl/devkit'
+import { chain, noop, Rule, Tree } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
@@ -47,6 +46,7 @@ export function updateIntegration (host: Tree, options: NormalizedSchema): Rule 
       : noop(),
 
     // add mongodb container
+    // eslint-disable-next-line max-len
     [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegration(host, options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
 
     // add message queue container

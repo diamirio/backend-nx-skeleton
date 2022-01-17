@@ -1,5 +1,4 @@
-import { chain, Rule } from '@angular-devkit/schematics'
-import { Tree } from '@nrwl/devkit'
+import { chain, Rule, Tree } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
 import { NxNestProjectIntegration } from '@src/integration'

@@ -5,7 +5,7 @@ import fs from 'fs'
 import { join } from 'path'
 
 import { RunBuilderOptions } from './main.interface'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -96,7 +96,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
 
       this.paths.command = getNodeBinaryPath(command)
 
-      checkNodeModulesExists(this.paths)
+      checkPathsExists(this.paths)
     } else {
       this.logger.debug(`Command marked as shell command: ${command}`)
       // the case where it will run any other shell command

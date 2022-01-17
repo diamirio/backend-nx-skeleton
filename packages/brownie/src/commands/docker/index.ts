@@ -9,7 +9,8 @@ import { DockerHelper } from '@helpers/docker.helper'
 import { DockerComposeFile } from '@helpers/docker.helper.interface'
 import { DockerNxCtx } from '@interfaces/commands/docker/nx'
 import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
-import { BrownieAvailableContainers, readBrownieContainers } from '@webundsoehne/nx-tools'
+import { readBrownieContainers } from '@webundsoehne/nx-tools/dist/integration/brownie'
+import { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {
@@ -198,7 +199,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
               tasks: [
                 {
                   title: 'Deleting volumes...',
-                  skip: (ctx): boolean => !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
+                  skip: (ctx): boolean =>
+                    !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
                   task: (ctx, task): Listr => {
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([ key, v ]) => ({
                       task: async (_, task): Promise<void> => {

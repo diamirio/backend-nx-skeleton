@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit'
+import { Tree } from '@angular-devkit/schematics'
 
 import { NxNestProjectIntegration } from './integration.interface'
 import { MicroserviceProviderIntegration } from './microservice-provider.interface'
