@@ -10,13 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "nestjs",
-    "graphql",
-    "typeorm",
-    "dataloader",
-    "data-loader"
-  ],
+  "keywords": ["nestjs", "graphql", "typeorm", "dataloader", "data-loader"],
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",
@@ -36,19 +30,14 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "apollo-server-plugin-base": "^3.5.0",
+    "apollo-server-plugin-base": "^3.5.1",
     "dataloader": "^2.0.0",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
@@ -56,13 +45,13 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/gateway": "^0.45.1",
+    "@apollo/gateway": "^0.46.0",
     "@nestjs/graphql": "^9.1.2",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
-    "@types/node": "^17.0.8",
+    "@types/node": "^17.0.10",
     "@types/uuid": "^8.3.4",
-    "apollo-server-fastify": "^3.6.1",
+    "apollo-server-fastify": "^3.6.2",
     "class-validator": "^0.13.2",
     "graphql": "^15",
     "graphql-request": "^3.7.0",

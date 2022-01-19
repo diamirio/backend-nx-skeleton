@@ -37,7 +37,7 @@ export const VERSIONS: Versions = {
       '@nestjs/graphql': '^9.1.2',
       '@nestjs/platform-fastify': '^8.2.3',
       'apollo-server-fastify': '^3.5.0',
-      graphql: '^16.0.1',
+      graphql: '^15',
       'graphql-tools': '^8.2.0'
     }
   },
