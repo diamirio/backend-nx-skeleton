@@ -1,8 +1,8 @@
-import { AvailableDBAdapters } from '@interfaces/available.constants'
+import { Schema as ApplicationSchema } from '@schematics/application/main.interface'
 
-export interface BackendInterfacesIntegration {
+export interface BackendInterfacesWorkspaceIntegration {
   name: string
   root: string
   sourceRoot: string
-  dbAdapters: AvailableDBAdapters[]
+  dbAdapters: ApplicationSchema['dbAdapters']
 }

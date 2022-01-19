@@ -5,10 +5,11 @@ import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { NxNestProjectIntegration } from '@src/integration'
 import { readBackendInterfaceIntegration } from '@src/integration/backend-interfaces'
 import { AvailableDBAdapters, SchematicConstants } from '@src/interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
-import { isVerbose, readNxIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -64,9 +65,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(host, ctx.name)
+            const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
             if (integration) {
-              ctx.priorConfiguration = integration
+              ctx.priorConfiguration = integration.backendInterfaces
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {

@@ -13,31 +13,54 @@ import { FsTree } from '@nrwl/tao/src/shared/tree'
 import { BaseIntegration } from './integration.interface'
 import { convertAngularTreeToNxTree } from './nx-integration'
 import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import { Logger } from '@utils'
+import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
  */
-// , options?: { arrayOverwrite?: boolean }
-export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T): Rule {
-  // const updated: EnrichedProjectConfiguration<T> = { integration } as EnrichedProjectConfiguration<T>
-  // try {
-  //   const project = readProjectConfiguration(nxHost, name)
+export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T, options?: { arrayOverwrite?: boolean }): Rule {
+  let updated: EnrichedProjectConfiguration<T> = { integration } as EnrichedProjectConfiguration<T>
+  let project: EnrichedProjectConfiguration<T>
+  try {
+    project = readProjectConfiguration<T>(host, name)
+  } catch (e) {
+    const logger = new Logger()
 
-  // updated = options?.arrayOverwrite
-  //   ? (deepMergeWithArrayOverwrite<EnrichedProjectConfiguration<T>>(project, { integration }) as unknown as EnrichedProjectConfiguration<T>)
-  //   : (deepMergeWithUniqueMergeArray<EnrichedProjectConfiguration<T>>(project, { integration })) as unknown as EnrichedProjectConfiguration<T>)
-  // eslint-disable-next-line no-empty
-  // } catch {}
+    logger.debug(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
+  }
 
-  return (): void => updateProjectConfiguration(convertAngularTreeToNxTree(host), name, { integration } as unknown as ProjectConfiguration)
+  if (project) {
+    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(project, { integration }) : deepMergeWithUniqueMergeArray(project, { integration })
+  }
+
+  return (): void => updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)
 }
 
 /**
- * Returns the integration filed of nx.json.
- * @param name
+ * Returns the integration filed of a single project in nx.json.
  */
-export function readNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string): EnrichedProjectConfiguration<T>['integration'] {
+export function readNxProjectIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string): EnrichedProjectConfiguration<T>['integration'] {
   return readProjectConfiguration<T>(host, name)?.integration
+}
+
+/**
+ * Returns the integration filed of a all the projects in nx.json.
+ */
+export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree): EnrichedProjectConfiguration<T>['integration'][] {
+  const projects = readWorkspaceProjects<T>(host)
+
+  const data = Object.values(projects).reduce((o, value) => {
+    const found = value?.integration
+
+    if (found) {
+      o = deepMergeWithUniqueMergeArray(o, [ found ])
+    }
+
+    return o
+  }, [] as EnrichedProjectConfiguration<T>['integration'][])
+
+  return data
 }
 
 /**

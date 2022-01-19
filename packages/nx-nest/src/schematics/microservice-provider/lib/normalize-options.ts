@@ -5,10 +5,10 @@ import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { readMicroserviceIntegration } from '@src/integration'
+import { NxNestProjectIntegration, readMicroserviceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
-import { isVerbose, readNxIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -62,9 +62,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(host, ctx.name)
-            if (integration) {
-              ctx.priorConfiguration = integration
+            const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
+            if (integration?.microserviceProvider) {
+              ctx.priorConfiguration = integration.microserviceProvider
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {

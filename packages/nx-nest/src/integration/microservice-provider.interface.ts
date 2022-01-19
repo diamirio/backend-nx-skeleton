@@ -1,8 +1,8 @@
-import { GeneratedMicroserviceCasing } from '@src/utils/generate-microservice-casing.interface'
+import { Schema as ApplicationSchema } from '@schematics/application/main.interface'
 
-export interface MicroserviceProviderIntegration {
+export interface MicroserviceProviderWorkspaceIntegration {
   name: string
   root: string
   sourceRoot: string
-  microservice: GeneratedMicroserviceCasing[]
+  microservice: ApplicationSchema['microservice']
 }

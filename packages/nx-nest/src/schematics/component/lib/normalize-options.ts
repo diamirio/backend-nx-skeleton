@@ -9,15 +9,15 @@ import { join } from 'path'
 import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
 import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { NxNestProjectIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
-import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
 import { generateMicroserviceCasing } from '@src/utils'
 import {
   ConvertToPromptType,
   EnrichedProjectConfiguration,
   generateNameCases,
   isVerbose,
-  readNxIntegration,
+  readNxProjectIntegration,
   readProjectConfiguration,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -54,10 +54,10 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           // if this is created with this schematic there should be a nx json
           task.title = 'Looking for prior application configuration in "nx.json".'
 
-          const parentConfiguration = readNxIntegration<ApplicationNormalizedSchema['priorConfiguration']>(host, ctx.parent)
+          const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.parent)
 
-          if (parentConfiguration) {
-            ctx.parentPriorConfiguration = parentConfiguration
+          if (integration.nestjs) {
+            ctx.parentPriorConfiguration = integration.nestjs
 
             task.title = 'Prior configuration successfully found in "nx.json".'
           } else {

@@ -8,7 +8,7 @@ export function updateIntegration (host: Tree, options: NormalizedSchema): Rule 
   return chain([
     // add the components that needs to be known
     updateNxIntegration<NxNestProjectIntegration>(host, options.name, {
-      microserviceProvider: { microservice: options.microservices }
+      microserviceProvider: { microservices: options.microservices }
     }),
 
     // add nx message queue container

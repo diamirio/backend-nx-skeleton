@@ -34,6 +34,6 @@ export type ParsedMicroservice = GeneratedMicroserviceCasing
 /**
  * This properties are shared across the input, normalized and saved configurations.
  */
-interface CommonPropertiesToSaveAndUse {
+export interface CommonPropertiesToSaveAndUse {
   microservices?: ParsedMicroservice[]
 }
