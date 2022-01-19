@@ -1,9 +1,7 @@
-import { JsonObject } from '@angular-devkit/core'
-
 /**
  * Options for execute
  */
-export interface ExecuteBuilderOptions extends JsonObject {
+export interface ExecuteBuilderOptions {
   /**
    * Run the command in a working directory
    */

@@ -23,6 +23,7 @@ export interface NormalizedSchema extends Schema {
   cliCmd: string
   deps: PackageVersions['deps']
   devDeps: PackageVersions['devDeps']
+  eslintConfig: Record<string, unknown>
   enum: CommonPropertiesToSaveAndUse
 }
 
