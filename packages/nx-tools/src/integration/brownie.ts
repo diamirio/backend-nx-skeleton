@@ -1,9 +1,9 @@
 import { Rule, Tree } from '@angular-devkit/schematics'
 
-import { readNxWorkspaceIntegration } from '.'
 import { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
-import { readProjectConfiguration, updateNxIntegration } from './integration'
+import { readNxWorkspaceIntegration, readProjectConfiguration } from './integration'
 import { BaseIntegration } from './integration.interface'
+import { updateNxIntegrationRule } from '@rules/integration.rule'
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
@@ -11,8 +11,8 @@ import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
  * @param name
  * @param options
  */
-export function updateBrownieIntegration (host: Tree, name: string, data: BrownieIntegration): Rule {
-  return updateNxIntegration<BaseIntegration>(host, name, { brownie: data }, { arrayOverwrite: false })
+export function updateBrownieIntegrationRule (name: string, data: BrownieIntegration): Rule {
+  return updateNxIntegrationRule<BaseIntegration>(name, { brownie: data }, { arrayOverwrite: false })
 }
 
 /**

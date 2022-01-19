@@ -1,4 +1,4 @@
-import { Rule, Tree } from '@angular-devkit/schematics'
+import { Tree } from '@angular-devkit/schematics'
 import {
   addProjectConfiguration,
   getProjects,
@@ -19,7 +19,7 @@ import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@web
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
  */
-export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T, options?: { arrayOverwrite?: boolean }): Rule {
+export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T, options?: { arrayOverwrite?: boolean }): void {
   let updated: EnrichedProjectConfiguration<T> = { integration } as EnrichedProjectConfiguration<T>
   let project: EnrichedProjectConfiguration<T>
   try {
@@ -34,7 +34,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
     updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(project, { integration }) : deepMergeWithUniqueMergeArray(project, { integration })
   }
 
-  return (): void => updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)
+  updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)
 }
 
 /**

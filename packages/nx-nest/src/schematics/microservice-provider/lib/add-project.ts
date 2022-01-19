@@ -1,12 +1,12 @@
 import { normalize } from '@angular-devkit/core'
-import { Rule, Tree } from '@angular-devkit/schematics'
+import { Rule } from '@angular-devkit/schematics'
 import { generateProjectLint } from '@nrwl/workspace'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
 import { createWorkspaceProjectRule, NxProjectTypes } from '@webundsoehne/nx-tools'
 
-export function addProject (host: Tree, options: NormalizedSchema): Rule {
+export function addProject (options: NormalizedSchema): Rule {
   // we dont need to enforce types here, since it is only going to be linting
   const targets: Record<string, any> = {}
 
