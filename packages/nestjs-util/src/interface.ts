@@ -1,13 +1,9 @@
 import type { FastifyRequest } from 'fastify'
 
-export interface AnyObject {
-  [prop: string]: any
-}
-
 interface State {
   [prop: string]: any
   setCacheLifetime?: (lifetime: number, useExpiresHeader: boolean) => void
-  tokenPayload?: AnyObject
+  tokenPayload?: Record<string, any>
 }
 
 export interface Request extends FastifyRequest {
