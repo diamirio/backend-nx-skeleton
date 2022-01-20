@@ -25,10 +25,7 @@ export class MaintenanceService {
   }
 
   @Configurable()
-  private prepareMessage (
-    @ConfigParam('misc.maintenanceNotification') message?: string,
-      @ConfigParam('url.basePath') basePath?: string
-  ): string {
+  private prepareMessage (@ConfigParam('misc.maintenanceNotification') message?: string, @ConfigParam('url.basePath') basePath?: string): string {
     return message || `${basePath} is currently down for maintenance`
   }
 

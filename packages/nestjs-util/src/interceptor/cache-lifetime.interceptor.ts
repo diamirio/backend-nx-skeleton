@@ -15,9 +15,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
   }
 
   @Configurable()
-  public getOptionsFromConfig (
-    @ConfigParam('cacheLifetime') cacheLifetimeOptions?: CacheLifetimeOptions
-  ): CacheLifetimeOptions {
+  public getOptionsFromConfig (@ConfigParam('cacheLifetime') cacheLifetimeOptions?: CacheLifetimeOptions): CacheLifetimeOptions {
     return cacheLifetimeOptions
   }
 
@@ -48,9 +46,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
         if (lifetime && !isNaN(lifetime) && lifetime > 0) {
           const headerName = useExpiresHeader ? this.options.expiresHeader : this.options.cacheControlHeader
 
-          const value = useExpiresHeader
-            ? `${moment().locale('en').add(lifetime, 'seconds').utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
-            : `max-age=${lifetime}`
+          const value = useExpiresHeader ? `${moment().locale('en').add(lifetime, 'seconds').utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT` : `max-age=${lifetime}`
 
           this.logger.verbose(`Cache lifetime is ${lifetime}sec -> setting "${headerName}" to ${value}`)
 

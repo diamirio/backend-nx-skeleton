@@ -10,9 +10,7 @@ export class InternalService {
   private logger = new Logger(InternalService.name)
 
   @Configurable()
-  async checkApiStatus (
-    @ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string
-  ): Promise<ApiStatus> {
+  async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
     let lastUpdate
 
     try {

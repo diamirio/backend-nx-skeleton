@@ -13,9 +13,7 @@ export class MicroserviceProviderModule {
    * @param options
    */
   static forRoot (options: MicroserviceProviderModuleOptions): DynamicModule {
-    const clients: FactoryProvider<ClientProxyFactory>[] = !options.provider
-      ? provideMessageQueueClient(options.queue, options.clientOptions)
-      : options.provider(options.queue)
+    const clients: FactoryProvider<ClientProxyFactory>[] = !options.provider ? provideMessageQueueClient(options.queue, options.clientOptions) : options.provider(options.queue)
 
     const tokens = clients.map((c) => c.provide)
 

@@ -48,12 +48,7 @@ export class MicroserviceProviderService<
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
     ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
-  >(
-    queue: Queue,
-    pattern: Pattern,
-    payload: Payload,
-    options?: MicroserviceProviderServiceOptions
-  ): Promise<ReturnValue> {
+  >(queue: Queue, pattern: Pattern, payload: Payload, options?: MicroserviceProviderServiceOptions): Promise<ReturnValue> {
     return this.execute('send', queue, pattern, payload, options)
   }
 
@@ -62,12 +57,7 @@ export class MicroserviceProviderService<
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
     ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
-  >(
-    queue: Queue,
-    pattern: Pattern,
-    payload?: Payload,
-    options?: MicroserviceProviderServiceOptions
-  ): Promise<ReturnValue> {
+  >(queue: Queue, pattern: Pattern, payload?: Payload, options?: MicroserviceProviderServiceOptions): Promise<ReturnValue> {
     return this.execute('emit', queue, pattern, payload, options)
   }
 
@@ -76,19 +66,12 @@ export class MicroserviceProviderService<
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
     ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
-  >(
-    queue: Queue,
-    pattern: Pattern,
-    payload?: Payload,
-    options?: MicroserviceProviderServiceOptions
-  ): Observable<ReturnValue> {
+  >(queue: Queue, pattern: Pattern, payload?: Payload, options?: MicroserviceProviderServiceOptions): Observable<ReturnValue> {
     const o = { ...this.options, ...options }
 
     // it does not like ?.[]
     if (!this.clients || !this.clients[queue]) {
-      throw new Error(
-        `"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`
-      )
+      throw new Error(`"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`)
     }
 
     return this.clients[queue].send(pattern, payload).pipe(
@@ -105,20 +88,12 @@ export class MicroserviceProviderService<
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
     ReturnValue extends GetMicroserviceMessageResponseFromMap<Pattern, MessageQueueMap[Queue]>
-  >(
-    command: 'send' | 'emit',
-    queue: Queue,
-    pattern: Pattern,
-    payload?: Payload,
-    options?: MicroserviceProviderServiceOptions
-  ): Promise<ReturnValue> {
+  >(command: 'send' | 'emit', queue: Queue, pattern: Pattern, payload?: Payload, options?: MicroserviceProviderServiceOptions): Promise<ReturnValue> {
     const o = { ...this.options, ...options }
 
     // it does not like ?.[]
     if (!this.clients || !this.clients[queue]) {
-      throw new Error(
-        `"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`
-      )
+      throw new Error(`"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`)
     }
 
     return firstValueFrom<ReturnValue>(

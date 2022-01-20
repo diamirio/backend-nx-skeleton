@@ -9,10 +9,7 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
   const e = exception as any
 
   let extensions = new EnrichedExceptionError({
-    statusCode:
-      e.extensions?.exception?.statusCode ??
-      e.extensions?.exception?.response?.statusCode ??
-      HttpStatus.INTERNAL_SERVER_ERROR,
+    statusCode: e.extensions?.exception?.statusCode ?? e.extensions?.exception?.response?.statusCode ?? HttpStatus.INTERNAL_SERVER_ERROR,
     error: exception?.name ?? exception?.message,
     message: getErrorMessage(exception),
     service: e.extensions?.exception?.response?.service

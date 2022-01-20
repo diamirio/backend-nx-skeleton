@@ -45,10 +45,7 @@ export type MicroserviceProviderMessage =
  * Request type of an microservice message.
  */
 // this is a partial of any object since we want to make properties optional if we dont do this it will go mad
-export type GetMicroserviceMessageRequestFromMap<
-  Event extends string,
-  Map extends Record<EnumKeys, MicroserviceProviderMessage>
-> = Event extends keyof Map
+export type GetMicroserviceMessageRequestFromMap<Event extends string, Map extends Record<EnumKeys, MicroserviceProviderMessage>> = Event extends keyof Map
   ? Map[Event] extends (request?: any) => any
     ? Map[Event] extends (request?: infer P) => any
       ? P
@@ -62,10 +59,7 @@ export type GetMicroserviceMessageRequestFromMap<
  * Response type of an microservice message.
  */
 // this is a partial of any object since we want to make properties optional if we dont do this it will go mad
-export type GetMicroserviceMessageResponseFromMap<
-  Event extends string,
-  Map extends Record<EnumKeys, MicroserviceProviderMessage>
-> = Event extends keyof Map
+export type GetMicroserviceMessageResponseFromMap<Event extends string, Map extends Record<EnumKeys, MicroserviceProviderMessage>> = Event extends keyof Map
   ? Map[Event] extends (request?: any) => any
     ? Map[Event] extends (request?: any) => infer P
       ? P
