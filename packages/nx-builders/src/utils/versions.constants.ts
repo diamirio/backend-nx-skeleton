@@ -7,7 +7,7 @@ export const VERSIONS: Versions = {
   [AvailableBuilders.TSC]: {
     devDeps: {
       'tsconfig-replace-paths': '^0.0.11',
-      'tsc-watch': '^4.5.0'
+      'tsc-watch': '^4.6.0'
     }
   },
 
