@@ -32,6 +32,11 @@ export function addProject (host: Tree, options: NormalizedSchema): Rule {
           output: 'config'
         },
         {
+          glob: '.dockerignore',
+          input: `${options.root}`,
+          output: '.'
+        },
+        {
           glob: 'Dockerfile',
           input: `${options.root}`,
           output: '.'

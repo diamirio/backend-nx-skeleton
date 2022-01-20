@@ -29,7 +29,7 @@ export function formatFiles (
     return noop()
   }
 
-  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
     // get root path
     const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
@@ -55,6 +55,9 @@ export function formatFiles (
       })
     }
 
+    // BUG: additional configuration for some weird bug fixes
+    const prettierIgnored = [ 'custom-environment-variables.yml' ]
+
     return from(files).pipe(
       filter((file) => host.exists(file.path)),
       mergeMap(async (file) => {
@@ -62,7 +65,7 @@ export function formatFiles (
 
         try {
           if (options.prettier) {
-            let config: any = {
+            let config: prettier.Options = {
               filepath: systemPath
             }
 
@@ -74,8 +77,8 @@ export function formatFiles (
               }
             }
 
-            const support = await prettier.getFileInfo(systemPath, config)
-            if (support.ignored || !support.inferredParser) {
+            const support = await prettier.getFileInfo(systemPath)
+            if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
               return
             }
 
@@ -101,11 +104,13 @@ export function formatFiles (
           }
 
           host.overwrite(file.path, file.content)
+
+          return
         } catch (e) {
           log.error(`Could not format ${file.path}:\n${e.message}`)
         }
       }),
       map(() => host)
     )
-  }) as unknown as Rule
+  }
 }
