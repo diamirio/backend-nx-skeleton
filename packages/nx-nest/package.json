@@ -31,20 +31,15 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^13.1.3",
+    "@angular-devkit/schematics": "^13.1.4",
     "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",

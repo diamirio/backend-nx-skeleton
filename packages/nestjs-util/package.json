@@ -78,7 +78,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "concurrently": "^7.0.0",
-    "fastify": "^3.26.0",
+    "fastify": "^3.27.0",
     "fastify-swagger": "^4.13.1",
     "graphql": "^15",
     "nest-schedule": "^0.6.4",

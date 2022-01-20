@@ -23,9 +23,7 @@
     "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
   },
   "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
+    "packages": ["packages/*"],
     "nohoist": []
   },
   "simple-git-hooks": {
@@ -34,9 +32,9 @@
   },
   "resolutions": {
     "**/rxjs": "7.5.2",
-    "**/@angular-devkit/architect": "0.1301.3",
-    "**/@angular-devkit/core": "13.1.3",
-    "**/@angular-devkit/schematics": "13.1.3"
+    "**/@angular-devkit/architect": "0.1301.4",
+    "**/@angular-devkit/core": "13.1.4",
+    "**/@angular-devkit/schematics": "13.1.4"
   },
   "dependencies": {},
   "devDependencies": {
