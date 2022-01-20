@@ -1,11 +1,9 @@
 import { BaseCommand, createDirIfNotExists, parseYaml, readFile, readRaw, tasksOverwritePrompt, writeFile } from '@cenk1cenk2/boilerplate-oclif'
+import axios from 'axios'
 import fs from 'fs-extra'
 import globby from 'globby'
-import got, { Progress } from 'got'
 import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
-import stream from 'stream'
-import { promisify } from 'util'
 import { v4 as uuidv4 } from 'uuid'
 
 import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
@@ -18,7 +16,10 @@ export class DockerHelper {
   public dockerConfigLocation: string = join(this.cmd.config.root, 'templates', 'containers')
   public templatesLocation: string = join(this.cmd.config.root, 'templates', 'base')
 
-  constructor (private readonly cmd: BaseCommand, private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, 'volumes-folder': string } }) {
+  constructor (
+    private readonly cmd: BaseCommand,
+    private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, expose?: boolean, 'volumes-folder': string, 'files-folder': string } }
+  ) {
     cmd.logger.debug('DockerHelper initiated.')
     this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
   }
@@ -144,13 +145,13 @@ export class DockerHelper {
                         }
 
                         if ([ VolumeModes.FILE, VolumeModes.URL ].includes(volume.mode)) {
+                          asset.to = join(ctx.context[name].dir, this.options.flags['files-folder'], volume.from)
+
                           // if this is a file copy it directly
                           this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
 
                           try {
                             await createDirIfNotExists(asset.to)
-
-                            asset.to = join(asset.to, volume.from)
 
                             if (volume.mode === VolumeModes.FILE) {
                               task.output = `Copying asset: ${asset.from} -> ${asset.to}`
@@ -163,22 +164,21 @@ export class DockerHelper {
 
                               asset.from = volume.url
 
-                              const download = got.stream(asset.from, { retry: 5 })
-
-                              download.on('downloadProgress', (progress: Progress) => {
-                                task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress.percent * 100}% ]`
+                              const download = await axios.get(asset.from, {
+                                onDownloadProgress: (progress) => {
+                                  task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress.percent * 100}% ]`
+                                }
                               })
 
-                              const pipeline = promisify(stream.pipeline)
-
-                              await pipeline(download, fs.createWriteStream(asset.to))
+                              await fs.writeFile(asset.to, download.data)
                             }
 
-                            // set permissions
-                            if (volume.perm) {
-                              this.cmd.logger.debug(`Setting asset permission ${asset.to}: ${volume.perm}`)
-                              await fs.chmod(asset.to, volume.perm)
-                            }
+                            // BUG: if we set to chmod the file it goes to hell and deletes the whole file? what a weird bug
+                            // // set permissions
+                            // if (volume.perm) {
+                            //   this.cmd.logger.debug(`Setting asset permission ${asset.to}: ${volume.perm}`)
+                            //   await fs.chmod(asset.to, volume.perm)
+                            // }
 
                             this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                               path: ctx.containers[name].name,
@@ -225,16 +225,16 @@ export class DockerHelper {
                           // we can add persistent volumes if you want to keep data
                           let prompt: boolean
 
+                          asset.to = join(asset.to, volume.from)
+
                           // only asks this with this flag
                           if (this.options.flags.volume) {
                             prompt = await task.prompt({
                               type: 'Toggle',
-                              message: `Do you want to add persistent volume for the container at "${volume.to}"?`,
+                              message: `Do you want to add persistent volume for the container "${name}" at "${asset.to} -> ${volume.to}"?`,
                               initial: true
                             })
                           }
-
-                          asset.to = join(asset.to, volume.from)
 
                           // it will clear out this entry
                           if (prompt) {
@@ -315,16 +315,57 @@ export class DockerHelper {
                   }
                 },
 
+                // processing exposed ports
+                {
+                  title: 'Processing exposed ports...',
+                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.ports) || !this.options.flags.expose,
+                  task: async (ctx, task): Promise<void> => {
+                    // add this to context
+
+                    // read the yaml template for one file
+                    const file = await this.readYamlTemplate<string[]>(ctx.containers[name].ports[0], ctx.context[name])
+
+                    // only asks this with this flag
+                    if (this.options.flags.expose) {
+                      const prompt = await task.prompt({
+                        type: 'Toggle',
+                        message: `Do you want to add exposed ports for the container "${name}" at "${file.join(', ')}"?`,
+                        initial: true
+                      })
+
+                      if (prompt) {
+                        ctx.context[name].ports = file
+                      }
+                    }
+
+                    task.title = 'Exposed ports.'
+                  }
+                },
+
                 // creating configuration
                 {
                   title: 'Creating configuration.',
                   task: async (ctx, task): Promise<void> => {
                     try {
-                      this.cmd.logger.debug(`Context for "${ctx.containers[name].path}":\n%o`, ctx.context[name])
-
                       // read the template
                       const base = await readFile<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
-                      const template = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
+
+                      ctx.context[name].config = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
+
+                      if (ctx.context[name].config?.image) {
+                        const { image, ...rest } = ctx.context[name].config
+
+                        ctx.context[name].config = rest
+                        ctx.context[name].image = image
+                      }
+
+                      if (Object.keys(ctx.context[name].config).length === 0) {
+                        delete ctx.context[name].config
+                      }
+
+                      this.cmd.logger.debug(`Context for "${name}":\n%o`, ctx.context[name])
+
+                      const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
 
                       // configuration can still be null which is not mergable
                       if (template) {
@@ -361,7 +402,7 @@ export class DockerHelper {
     return (
       await Promise.all(
         (
-          await globby([ '**/docker-compose.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })
+          await globby([ '**/config.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })
         ).map(async (item) => {
           const base = dirname(item)
           const name = relative(this.dockerConfigLocation, base)
@@ -391,11 +432,17 @@ export class DockerHelper {
               cwd: base,
               absolute: true,
               dot: true
+            }),
+
+            ports: await globby([ '**/ports.yml(.j2)?' ], {
+              cwd: base,
+              absolute: true,
+              dot: true
             })
           }
         })
       )
-    ).reduce((o, item) => ({ ...o, [item.name]: item }), {})
+    ).reduce((o, item) => ({ ...o, [item.name]: item }), {} as AvailableContainers)
   }
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
@@ -418,11 +465,11 @@ export class DockerHelper {
 
   private checkArrayIsExactlyOneInLength (array: any[]): boolean {
     // this is implemented to not handle more than file at the moment it is prune to change,
-    // when multi-file handling which i think is unnecassary atm is required
+    // when multi-file handling which i think is unnessary atm is required
     if (array.length === 1) {
       return true
     } else if (array.length > 1) {
-      // maybe i will add multiple later, even though it is unnecassary?
+      // maybe i will add multiple later, even though it is unnessary?
       this.cmd.logger.fatal(`Error in configuration. There should be one file per container.\n${JSON.stringify(array, null, 2)}`)
       process.exit(1)
     } else {

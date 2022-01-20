@@ -7,7 +7,7 @@ import { EOL } from 'os'
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
-import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
+import { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 
@@ -130,13 +130,15 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this will be the command
     await execa(
-      'npx',
+      PackageManagerUsableCommands[this.helpers.node.manager][PackageManagerUsableCommands.EXEC],
       [
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
         ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [],
-        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--', '--verbose' ] : []
+        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels)
+          ? [ ...this.helpers.node.manager === AvailablePackageManagers.NPM ? [ '--' ] : [], '--verbose' ]
+          : []
       ],
       { stdio: 'inherit', shell: true }
     )

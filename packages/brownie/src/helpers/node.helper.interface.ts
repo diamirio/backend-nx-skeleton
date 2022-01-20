@@ -28,11 +28,13 @@ export enum PackageManagerUsableCommands {
   REMOVE,
   REGISTRY,
   DEVELOPMENT,
-  FORCE
+  FORCE,
+  EXEC
 }
 
 export const PackageManagerCommands: Record<AvailablePackageManagers, Record<PackageManagerUsableCommands, string>> = {
   [AvailablePackageManagers.NPM]: {
+    [PackageManagerUsableCommands.EXEC]: 'npx',
     [PackageManagerUsableCommands.GLOBAL]: '-g',
     [PackageManagerUsableCommands.ADD]: 'install --legacy-peer-deps',
     [PackageManagerUsableCommands.REMOVE]: 'uninstall',
@@ -41,6 +43,7 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry'
   },
   [AvailablePackageManagers.YARN]: {
+    [PackageManagerUsableCommands.EXEC]: 'yarn exec',
     [PackageManagerUsableCommands.GLOBAL]: 'global',
     [PackageManagerUsableCommands.ADD]: 'add',
     [PackageManagerUsableCommands.REMOVE]: 'remove',

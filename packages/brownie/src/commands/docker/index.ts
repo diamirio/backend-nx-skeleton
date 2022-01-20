@@ -27,10 +27,19 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       char: 'v',
       description: 'Use optional persistent volumes with the containers.'
     }),
+    expose: flags.boolean({
+      char: 'e',
+      description: 'Expose ports from the container.'
+    }),
     'volumes-folder': flags.string({
       char: 'V',
       description: 'Output to volumes folder.',
       default: 'volumes'
+    }),
+    'files-folder': flags.string({
+      char: 'F',
+      description: 'Output to included folder.',
+      default: 'files'
     })
   }
 
@@ -51,7 +60,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
           force: flags.force,
           output: flags.output,
           volume: flags.volume,
-          'volumes-folder': flags['volumes-folder']
+          expose: flags.expose,
+          'volumes-folder': flags['volumes-folder'],
+          'files-folder': flags['files-folder']
         }
       })
     }
@@ -201,7 +212,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   title: 'Deleting volumes...',
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
-                  task: (ctx, task): Listr => {
+                  task: (_, task): Listr => {
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([ key, v ]) => ({
                       task: async (_, task): Promise<void> => {
                         const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
@@ -223,7 +234,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   title: 'Deleting configuration...',
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
-                  task: (ctx, task): Listr => {
+                  task: (_, task): Listr => {
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].configuration).map(([ key, v ]) => ({
                       task: async (_, task): Promise<void> => {
                         const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
@@ -303,10 +314,10 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
       {
         title: 'Checking general folders for clean-up.',
-        task: (ctx, task): Listr =>
+        task: (_, task): Listr =>
           task.newListr([
             {
-              task: async (ctx, task): Promise<void> => {
+              task: async (_, task): Promise<void> => {
                 try {
                   const dir = fs.readdirSync(join(process.cwd(), flags.output))
 
@@ -320,7 +331,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             },
 
             {
-              task: async (ctx, task): Promise<void> => {
+              task: async (_, task): Promise<void> => {
                 try {
                   const dir = fs.readdirSync(join(process.cwd(), flags['volumes-folder']))
 
@@ -387,7 +398,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         }
       }
     } else {
-      // if it does not already exists we want to unlock unnecassary key
+      // if it does not already exists we want to unlock unnecessary key
       return 'unlock'
     }
 

@@ -1,0 +1,3 @@
+image: mongo:5
+command: --directoryperdb
+test: 123
