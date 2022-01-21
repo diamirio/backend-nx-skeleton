@@ -1,6 +1,6 @@
 import { BuilderContext } from '@angular-devkit/architect'
 import { SchematicContext } from '@angular-devkit/schematics'
-import { ExecutorContext, logger as nxLogger } from '@nrwl/devkit'
+import { ExecutorContext, logger } from '@nrwl/devkit'
 import figures from 'figures'
 import { EOL } from 'os'
 
@@ -16,14 +16,14 @@ import { LoggerOptions, LogLevels } from './logger.interface'
  */
 export class Logger {
   static instance: Logger
-  private logger: BuilderContext['logger'] | SchematicContext['logger'] | typeof nxLogger
+  private logger: BuilderContext['logger'] | SchematicContext['logger'] | typeof logger
 
   constructor (private context?: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
     if (Logger.instance instanceof Logger) {
       return Logger.instance
     }
 
-    this.logger = isExecutorContext(context) || !context ? nxLogger : context.logger
+    this.logger = logger
 
     if (!isVerbose()) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
