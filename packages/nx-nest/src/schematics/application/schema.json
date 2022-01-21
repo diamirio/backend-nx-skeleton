@@ -18,10 +18,10 @@
     "mode": {
       "description": "Generator mode.",
       "type": "string",
-      "enum": ["create", "modify"],
       "$default": {
         "$source": "argv",
-        "index": 1
+        "index": 1,
+        "enum": ["create", "modify"]
       },
       "default": ""
     },
