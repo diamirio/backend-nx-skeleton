@@ -5,16 +5,13 @@
   "examples": [],
   "type": "object",
   "properties": {
-    "directory": {
-      "description": "Directory where the component is getting generated.",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 2
-      }
-    },
     "force": {
       "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
       "type": "boolean"
     }
   },

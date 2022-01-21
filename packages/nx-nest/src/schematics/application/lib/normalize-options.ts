@@ -44,10 +44,8 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
+            assign: { from: options, keys: [ 'skipFormat', 'mode', 'name', 'linter' ] },
             default: [
-              {
-                ...options
-              },
               {
                 sourceRoot: 'src'
               },

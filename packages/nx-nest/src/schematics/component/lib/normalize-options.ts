@@ -37,7 +37,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'parent', 'name', 'force', 'type', 'parentProjectConfiguration', 'silent', 'mount' ] },
+            assign: { from: options, keys: [ 'parent', 'name', 'force', 'type', 'parentProjectConfiguration', 'silent', 'mount', 'skipFormat' ] },
             default: [ { constants: SchematicConstants } ]
           })
         }

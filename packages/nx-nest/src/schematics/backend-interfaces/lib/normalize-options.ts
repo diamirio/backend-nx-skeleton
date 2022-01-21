@@ -18,7 +18,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: async (ctx): Promise<void> => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'linter' ] },
+            assign: { from: options, keys: [ 'name', 'dbAdapters', 'skipFormat' ] },
             default: [
               {
                 sourceRoot: 'src',
@@ -28,6 +28,17 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
                 enum: { dbAdapters: AvailableDBAdapters }
               }
             ]
+          })
+        }
+      },
+
+      // select application name
+      {
+        skip: (ctx): boolean => !!ctx.name,
+        task: async (ctx, task): Promise<void> => {
+          ctx.name = await task.prompt({
+            type: 'Input',
+            message: 'Give the library a name.'
           })
         }
       },

@@ -2,17 +2,18 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "nx-nest:application",
   "title": "Create a Nest application from skeleton with NX.",
-  "examples": [
-    {
-      "command": "g app myapp",
-      "description": "Initiate a application in interactive mode."
-    },
-    {
-      "command": "g app myapp -c server -c bgtask -s graphql",
-      "description": "Initiate GraphQL API with bgtask enabled."
-    }
-  ],
+  "examples": [],
   "type": "object",
-  "properties": {},
+  "properties": {
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
+    }
+  },
   "required": []
 }

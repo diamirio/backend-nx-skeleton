@@ -8,6 +8,11 @@
     "force": {
       "description": "Do not prompt for overwrites.",
       "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
     }
   },
   "required": []

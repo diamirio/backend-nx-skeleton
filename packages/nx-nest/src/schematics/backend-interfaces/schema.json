@@ -4,12 +4,11 @@
   "title": "Add a common backend interfaces library for databases and shared components with frontend.",
   "type": "object",
   "properties": {
-    "linter": {
-      "description": "The tool to use for running lint checks.",
-      "type": "string",
-      "enum": ["eslint"],
-      "default": "eslint"
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
     },
+
     "verbose": {
       "description": "Set this to debug mode.",
       "type": "boolean"
