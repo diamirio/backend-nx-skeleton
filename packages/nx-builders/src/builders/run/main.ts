@@ -4,15 +4,15 @@ import execa, { ExecaChildProcess } from 'execa'
 import fs from 'fs'
 import { join } from 'path'
 
-import { RunBuilderOptions } from './main.interface'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
+import { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
+import { BaseExecutor, checkPathsExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
   // eslint-disable-next-line no-empty
 } catch (e) {}
 
-class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command: string }> {
+class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptions, { command: string }> {
   public async run (): Promise<BuilderOutput> {
     let success = false
     let error: string
@@ -96,7 +96,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, ExecaArguments, { command
 
       this.paths.command = getNodeBinaryPath(command)
 
-      checkNodeModulesExists(this.paths)
+      checkPathsExists(this.paths)
     } else {
       this.logger.debug(`Command marked as shell command: ${command}`)
       // the case where it will run any other shell command

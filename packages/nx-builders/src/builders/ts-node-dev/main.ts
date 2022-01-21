@@ -3,7 +3,7 @@ import delay from 'delay'
 import execa from 'execa'
 
 import { TsNodeBuilderOptions } from './main.interface'
-import { BaseExecutor, checkNodeModulesExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -22,8 +22,15 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // stop all manager tasks
       await this.manager.stop()
 
-      checkNodeModulesExists(this.paths)
+      checkPathsExists(this.paths)
+    } catch (e) {
+      this.logger.fatal(e.message)
+      this.logger.debug(e.stack)
 
+      return { success: false, error: e.message }
+    }
+
+    try {
       const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
       await pipeProcessToLogger(this.context, instance, { start: true })
     } catch (error) {
@@ -39,7 +46,9 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // clean up the zombies!
       await this.manager.stop()
     }
-    this.logger.debug('tsc-node-dev runner finished.')
+
+    this.logger.debug('Executor finished.')
+
     return { success: true }
   }
 

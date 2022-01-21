@@ -13,7 +13,7 @@
     "build": "yarn run command build --concurrency 1 --include-dependencies",
     "link-packages": "lerna link --force-local",
     "lint": "yarn command --concurrency 1 lint",
-    "lint:check": "yarn command --parallel lint:check",
+    "lint:check": "yarn command --parallel --no-bail lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
     "scripts:link": "./scripts/link-packages.sh link",
     "scripts:unlink": "./scripts/link-packages.sh unlink",
@@ -23,7 +23,9 @@
     "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
   },
   "workspaces": {
-    "packages": ["packages/*"],
+    "packages": [
+      "packages/*"
+    ],
     "nohoist": []
   },
   "simple-git-hooks": {
@@ -31,10 +33,10 @@
     "prepare-commit-msg": "[ -t 1 ] && exec < /dev/tty && git cz --hook || true"
   },
   "resolutions": {
-    "**/rxjs": "7.4.0",
-    "**/@angular-devkit/architect": "0.1300.3",
-    "**/@angular-devkit/core": "13.0.3",
-    "**/@angular-devkit/schematics": "13.0.3"
+    "**/rxjs": "7.5.2",
+    "**/@angular-devkit/architect": "0.1301.4",
+    "**/@angular-devkit/core": "13.1.4",
+    "**/@angular-devkit/schematics": "13.1.4"
   },
   "dependencies": {},
   "devDependencies": {
@@ -45,13 +47,13 @@
     "lint-staged": "^11.0.1",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
+    "rxjs": "^7.5.2",
     "simple-git-hooks": "^2.7.0",
-    "tsc-watch": "^4.5.0",
+    "tsc-watch": "^4.6.0",
     "tsconfig-replace-paths": "^0.0.11",
-    "typedoc": "^0.22.9",
-    "typedoc-plugin-markdown": "^3.11.7",
-    "typescript": "^4.5.2"
+    "typedoc": "^0.22.11",
+    "typedoc-plugin-markdown": "^3.11.12",
+    "typescript": "^4.5.5"
   },
   "config": {
     "commitizen": {

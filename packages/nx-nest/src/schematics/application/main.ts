@@ -6,16 +6,16 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
-import { eslintJson, addEslintToTree, formatOrSkip, Logger, runInRule, updateTsconfigPaths, LINTER_VERSIONS } from '@webundsoehne/nx-tools'
+import { eslintJson, addEslintConfigRule, formatOrSkip, Logger, runInRule, updateTsconfigPaths, LINTER_VERSIONS, SchematicRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
  * @param schema
  */
-export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
+export default function (schema: Schema): SchematicRule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
-    const options = await normalizeOptions(host, context, schema)
+    const options = await normalizeOptions(host, schema)
 
     return chain([
       runInRule(log.info.bind(log)('Initiating workspace.')),
@@ -24,16 +24,16 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
         skipFormat: true
       }),
 
-      addEslintToTree(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope, override: {} }) }),
+      addEslintConfigRule(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
-      addProject(options),
+      addProject(host, options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
       createApplicationFiles(options, context),
 
       runInRule(log.info.bind(log)('Updating integration.')),
-      updateIntegration(options),
+      updateIntegration(host, options),
 
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsconfigPaths(options),

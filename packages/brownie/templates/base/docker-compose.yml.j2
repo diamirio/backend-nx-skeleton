@@ -1,0 +1,23 @@
+services:
+  {{ name }}:
+    {% filter indent(4, true) %}
+      {% include './image.yml.j2' %}
+    {% endfilter %}
+
+    {% filter indent(4, true) %}
+      {% include './env.yml.j2' %}
+    {% endfilter %}
+
+    {% filter indent(4, false) %}
+      {% if config is defined %}
+    {{ config | to_nice_yaml }}
+      {% endif %}
+    {% endfilter %}
+
+    {% filter indent(4, true) %}
+      {% include './ports.yml.j2' %}
+    {% endfilter %}
+
+    {% filter indent(4, true) %}
+      {% include './volumes.yml.j2' %}
+    {% endfilter %}

@@ -1,15 +1,14 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
-import { appsDir, libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { readMicroserviceIntegration } from '@src/integration'
+import { NxNestProjectIntegration, readMicroserviceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
-import { isVerbose, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -46,7 +45,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${libsDir(host)}/${ctx.name}`)
+          const layout = readWorkspaceLayout(host)
+
+          ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
 
           task.title = `Library root directory is set as "${ctx.root}".`
         }
@@ -61,9 +62,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
-            if (integration) {
-              ctx.priorConfiguration = integration
+            const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
+            if (integration?.microserviceProvider) {
+              ctx.priorConfiguration = integration.microserviceProvider
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -83,19 +84,10 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Parsing all integrated microservices...',
         task: (ctx, task): void => {
-          let microservices = readMicroserviceIntegration()
+          const microservices = readMicroserviceIntegration(host)
 
           if (microservices.length === 0) {
-            task.title = 'No microservice integration has been found working in mock mode.'
-
-            microservices = [
-              {
-                name: 'mock',
-                microservice: 'unknown',
-                root: `${appsDir(host)}/unknown`,
-                sourceRoot: 'src'
-              }
-            ]
+            task.skip('No microservice integration has been found.')
           } else {
             task.title = `Microservice servers found: ${microservices.map((m) => m.name).join(', ')}`
           }

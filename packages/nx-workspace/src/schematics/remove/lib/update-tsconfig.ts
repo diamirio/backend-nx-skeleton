@@ -1,6 +1,6 @@
 import { Tree } from '@angular-devkit/schematics'
-import { NxJsonConfiguration } from '@nrwl/devkit'
-import { getWorkspace, readJsonInTree, serializeJson } from '@nrwl/workspace'
+import { NxJsonConfiguration, serializeJson } from '@nrwl/devkit'
+import { getWorkspace, readJsonInTree } from '@nrwl/workspace'
 import { from, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 

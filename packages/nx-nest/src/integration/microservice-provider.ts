@@ -1,26 +1,28 @@
+import { Tree } from '@angular-devkit/schematics'
+
 import { NxNestProjectIntegration } from './integration.interface'
-import { MicroserviceProviderIntegration } from './microservice-provider.interface'
-import { readWorkspaceJson } from '@webundsoehne/nx-tools'
+import { MicroserviceProviderWorkspaceIntegration } from './microservice-provider.interface'
+import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 
 /**
  * Reads microservice integration part of the nx.json.
  */
-export function readMicroserviceIntegration (): MicroserviceProviderIntegration[] {
-  const workspaceJson = readWorkspaceJson<NxNestProjectIntegration>()
+export function readMicroserviceIntegration (host: Tree): MicroserviceProviderWorkspaceIntegration[] {
+  const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
-  return Object.entries(workspaceJson.projects).reduce((o, [ key, value ]) => {
-    if (value.integration?.microserviceProvider) {
+  return Object.entries(projects).reduce((o, [ key, value ]) => {
+    if (value.integration?.nestjs?.microservice) {
       o = [
         ...o,
         {
           name: key,
           root: value.root,
           sourceRoot: value.sourceRoot,
-          microservice: value.integration.microserviceProvider
+          microservice: value.integration?.nestjs?.microservice
         }
       ]
     }
 
     return o
-  }, [])
+  }, [] as MicroserviceProviderWorkspaceIntegration[])
 }

@@ -10,10 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "nestjs",
-    "keycloak"
-  ],
+  "keywords": ["nestjs", "keycloak"],
   "scripts": {
     "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
     "build": "tsc -p tsconfig.build.json",
@@ -33,27 +30,22 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "./**/*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
+    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "engines": {
     "node": ">=12.0.0"
   },
   "dependencies": {},
   "devDependencies": {
-    "@keycloak/keycloak-admin-client": "^15.1.0",
-    "@nestjs/common": "^8.2.3",
-    "@nestjs/core": "^8.2.3",
+    "@keycloak/keycloak-admin-client": "^16.1.0",
+    "@nestjs/common": "^8.2.6",
+    "@nestjs/core": "^8.2.6",
     "@nestjs/graphql": "^9.0.4",
-    "express": "^4.17.1",
-    "fastify": "^3.25.0",
-    "keycloak-connect": "^15.1.0",
-    "graphql": "^15.5.0"
+    "express": "^4.17.2",
+    "fastify": "^3.27.0",
+    "graphql": "^15",
+    "keycloak-connect": "^16.1.0"
   },
   "peerDependencies": {
     "@keycloak/keycloak-admin-client": ">= 15",
@@ -62,8 +54,8 @@
     "@nestjs/graphql": ">= 8",
     "express": ">= 4",
     "fastify": ">= 3",
-    "keycloak-connect": ">= 15",
-    "graphql": ">= 15"
+    "graphql": ">= 15",
+    "keycloak-connect": ">= 15"
   },
   "peerDependenciesMeta": {
     "graphql": {

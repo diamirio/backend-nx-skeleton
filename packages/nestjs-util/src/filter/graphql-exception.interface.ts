@@ -1,8 +1,6 @@
 import { GraphQLFormattedError } from 'graphql/error'
 
-export class GraphQLPreformattedException<T extends Record<string, any>>
-  extends Error
-  implements GraphQLFormattedError {
+export class GraphQLPreformattedException<T extends Record<string, any>> extends Error implements GraphQLFormattedError {
   public locations: ExtendedGraphQLFormattedError<T>['locations']
   public path: ExtendedGraphQLFormattedError<T>['path']
   public extensions: ExtendedGraphQLFormattedError<T>['extensions']

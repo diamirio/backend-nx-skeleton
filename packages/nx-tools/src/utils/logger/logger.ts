@@ -15,18 +15,27 @@ import { LoggerOptions, LogLevels } from './logger.interface'
  * It is not great but winston was not working that well in a amazingly stateless architecture.
  */
 export class Logger {
+  static instance: Logger
   private logger: BuilderContext['logger'] | SchematicContext['logger'] | typeof nxLogger
 
-  constructor (private context: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
-    this.logger = isExecutorContext(context) ? nxLogger : context.logger
+  constructor (private context?: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
+    if (Logger.instance instanceof Logger) {
+      return Logger.instance
+    }
 
-    if (isExecutorContext(context) && !isVerbose()) {
+    this.logger = isExecutorContext(context) || !context ? nxLogger : context.logger
+
+    if (!isVerbose()) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       this.logger.debug = (): void => {}
     }
 
     // set default options
-    this.options = { useIcons: process.stdout.isTTY ? true : false, ...options }
+    this.options = { useIcons: process.stdout.isTTY && true, ...options }
+
+    Logger.instance = this
+
+    return Logger.instance
   }
 
   public fatal (data: string | Buffer, ...args: any): void {

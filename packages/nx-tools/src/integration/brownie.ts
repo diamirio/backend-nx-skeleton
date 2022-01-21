@@ -1,8 +1,9 @@
-import { Rule } from '@angular-devkit/schematics'
+import { Rule, Tree } from '@angular-devkit/schematics'
 
 import { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
-import { readWorkspaceJson, readWorkspaceJsonProject, updateNxIntegration } from './integration'
+import { readNxWorkspaceIntegration, readProjectConfiguration } from './integration'
 import { BaseIntegration } from './integration.interface'
+import { updateNxIntegrationRule } from '@rules/integration.rule'
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
@@ -10,27 +11,27 @@ import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
  * @param name
  * @param options
  */
-export function updateBrownieIntegration (name: string, data: BrownieIntegration): Rule {
-  return updateNxIntegration<BaseIntegration>(name, { brownie: data }, { arrayOverwrite: false })
+export function updateBrownieIntegrationRule (name: string, data: BrownieIntegration): Rule {
+  return updateNxIntegrationRule<BaseIntegration>(name, { brownie: data }, { arrayOverwrite: false })
 }
 
 /**
  * Returns the brownie integration part of the nx.json.
  * @param name
  */
-export function readBrownieIntegration (name: string): BrownieIntegration {
-  return readWorkspaceJsonProject<BaseIntegration>(name).integration?.brownie
+export function readBrownieIntegration (host: Tree, name: string): BrownieIntegration {
+  return readProjectConfiguration<BaseIntegration>(host, name).integration?.brownie
 }
 
 /**
  * Returns sum of brownie containers read from nx.json.
  */
-export function readBrownieContainers (): BrownieAvailableContainers[] {
-  const nxJson = readWorkspaceJson<BaseIntegration>()
+export function readBrownieContainers (host?: Tree): BrownieAvailableContainers[] {
+  const integration = readNxWorkspaceIntegration(host)
 
-  return Object.values(nxJson.projects).reduce((o, value) => {
-    if (value.integration?.brownie?.containers) {
-      o = deepMergeWithUniqueMergeArray(o, value.integration.brownie.containers)
+  return Object.values(integration).reduce((o, value) => {
+    if (value?.brownie) {
+      o = deepMergeWithUniqueMergeArray(o, value.brownie.containers)
     }
 
     return o

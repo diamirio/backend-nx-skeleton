@@ -6,9 +6,9 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import { SchematicConstants } from '@src/interfaces'
-import { addEslintToTree, eslintJson, formatOrSkip, LINTER_VERSIONS, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintConfigRule, eslintJson, formatOrSkip, LINTER_VERSIONS, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
 
-export default function (schema: Schema): Rule {
+export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
     const options = await normalizeOptions(host, context, schema)
@@ -16,9 +16,9 @@ export default function (schema: Schema): Rule {
     return chain([
       runInRule(log.info.bind(log)(`Adding ${SchematicConstants.BACKEND_INTERFACES_PACKAGE} library to workspace.`)),
 
-      addEslintToTree(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope, override: {} }) }),
+      addEslintConfigRule(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
 
-      addProject(options),
+      addProject(host, options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
       createApplicationFiles(options, context),

@@ -5,6 +5,6 @@
   mode: url
   perm: 764
 
-- from: db
+- from: .
   to: /var/lib/postgresql/data
   mode: volume

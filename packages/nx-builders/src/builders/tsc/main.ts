@@ -1,19 +1,16 @@
 import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { readJsonFile } from '@nrwl/workspace'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import delay from 'delay'
 import execa from 'execa'
-import { copy, removeSync } from 'fs-extra'
+import { copy, existsSync, readJsonSync, removeSync, writeJsonSync } from 'fs-extra'
 import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
 import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
-import { deepMerge } from '@webundsoehne/deep-merge'
 import {
   BaseExecutor,
-  checkNodeModulesExists,
+  checkPathsExists,
   ExecaArguments,
   FileInputOutput,
   generateBuilderAssets,
@@ -34,7 +31,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   public init (): void {
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
-      tsconfigPaths: getNodeBinaryPath('tsconfig-replace-paths'),
+      tsconfigReplacePaths: getNodeBinaryPath('tsconfig-replace-paths'),
       tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
@@ -43,25 +40,29 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   public async run (): Promise<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     // Cleaning the /dist folder
+    this.logger.debug('Output path will be:', this.options.normalizedOutputPath)
     removeSync(this.options.normalizedOutputPath)
+
+    try {
+      // stop all manager tasks
+      await this.manager.stop()
+
+      checkPathsExists(this.paths)
+    } catch (e) {
+      this.logger.fatal(e.message)
+      this.logger.debug(e.stack)
+
+      return { success: false, error: e.message }
+    }
 
     let success = false
     let error: string
     let outputPath: string
     try {
-      // stop all manager tasks
-      await this.manager.stop()
-
-      // check if needed tools are really installed
-      checkNodeModulesExists(this.paths)
-
       const libRoot = this.projectGraph.nodes[this.context.projectName].data.root
       if (this.projectDependencies.length > 0) {
         this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.root, libRoot, this.projectDependencies)
       }
-
-      // add this after since we do not want to patch check it
-      this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
       if (this.options.watch) {
         this.logger.info('Starting TypeScript-Watch...')
@@ -122,7 +123,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (this.options.watch) {
         // if in watch mode just restart it
         this.logger.error('tsc-watch crashed restarting in 3 secs.')
-        this.logger.debug(e)
 
         await delay(3000)
         await this.manager.stop()
@@ -135,11 +135,16 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       success = false
       error = e.message
+
+      this.logger.fatal(e.message)
+      this.logger.debug(e.stack)
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
-    this.logger.debug('tsc runner finished.')
+
+    this.logger.debug('Executor finished.')
+
     return {
       success,
       outputPath,
@@ -159,7 +164,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     )
 
     // Relative path for the dist directory
-    const tsconfig = readJsonFile(join(this.context.root, options.tsConfig))
+    const tsconfig = readJsonSync(join(this.context.root, options.tsConfig))
     const rootDir = tsconfig.compilerOptions?.rootDir || ''
     const mainFileDir = dirname(options.main)
     const tsconfigDir = dirname(options.tsConfig)
@@ -228,10 +233,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         rules: [
           { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
           {
-            condition: this.options.sourceMap,
-            args: [ '--sourceMap' ]
-          },
-          {
             condition: isVerbose(),
             args: [ '--extendedDiagnostics', '--listEmittedFiles' ]
           },
@@ -245,7 +246,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         mode: [ 'tsconfigReplacePaths' ],
         rules: [
           {
-            args: [ '-p', this.paths.tsconfigPaths ]
+            args: [ '-p', this.paths.tsconfig ]
+          },
+          {
+            args: [ '-o', this.options.outputPath ]
           },
           {
             condition: isVerbose(),
@@ -279,16 +283,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       this.logger.debug(`tsconfig-replace-paths path: ${this.paths.tsconfigReplacePaths}`)
 
-      // create temporary tsconfig.paths
-      const tsconfig = readJsonFile(this.paths.tsconfig)
-
-      writeJsonFile(
-        this.paths.tsconfigPaths,
-        deepMerge(tsconfig, {
-          compilerOptions: { outDir: join(this.context.root, this.options.outputPath), baseUrl: join(this.context.root, this.options.outputPath) }
-        })
-      )
-
       const { args, spawnOptions } = this.normalizeArguments('tsconfigReplacePaths')
 
       const instance = this.manager.add(execa.node(this.paths.tsconfigReplacePaths, args, spawnOptions))
@@ -300,8 +294,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         this.logger.debug(e)
       }
 
-      removeSync(this.paths.tsconfigPaths)
-
       this.logger.info('Swapped TypeScript paths.')
     }
   }
@@ -311,12 +303,12 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     this.logger.debug(`package.json path: ${packageJsonPath}`)
 
-    if (!fileExists(packageJsonPath)) {
+    if (!existsSync(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
     } else {
       this.logger.info('Processing "package.json"...')
 
-      const packageJson = readJsonFile(packageJsonPath)
+      const packageJson = readJsonSync(packageJsonPath)
 
       const mainFile = basename(this.options.main, '.ts')
       const globalPackageJson = readPackageJson()
@@ -352,7 +344,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
 
       // write file back
-      writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
+      writeJsonSync(`${this.options.normalizedOutputPath}/package.json`, packageJson)
     }
 
     // this is the default behaviour, lets keep this.

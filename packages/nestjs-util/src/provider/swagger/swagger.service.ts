@@ -13,12 +13,7 @@ export class SwaggerService {
    * @param {SwaggerConfig} [config]
    */
   @Configurable()
-  static enable (
-    app: INestApplication,
-    options?: SwaggerOptions,
-    @ConfigParam('swagger') config?: SwaggerConfig,
-    @ConfigParam('url') url?: UrlConfig
-  ): void {
+  static enable (app: INestApplication, options?: SwaggerOptions, @ConfigParam('swagger') config?: SwaggerConfig, @ConfigParam('url') url?: UrlConfig): void {
     let builder = new DocumentBuilder()
       .setTitle(config?.title)
       .setDescription(config?.description)

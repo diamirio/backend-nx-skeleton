@@ -3,8 +3,9 @@ import { RunBuilderOptions, TscBuilderOptions, TsNodeBuilderOptions } from '@web
 /**
  * Interface setting builder settings
  */
-export interface SchematicArchitect {
+export interface SchematicTargets {
   [key: string]: any
+
   build: {
     executor: '@webundsoehne/nx-builders:tsc'
     options: TscBuilderOptions
@@ -15,28 +16,28 @@ export interface SchematicArchitect {
     options: TsNodeBuilderOptions
   }
 
-  bgtask: {
+  bgtask?: {
     executor: '@webundsoehne/nx-builders:ts-node-dev'
     options: TsNodeBuilderOptions
   }
 
-  migration: {
+  migration?: {
     executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
     configurations?: Record<PropertyKey, Partial<RunBuilderOptions>>
   }
 
-  command: {
+  command?: {
     executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
   }
 
-  seed: {
+  seed?: {
     executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
   }
 
-  test: {
+  test?: {
     executor: '@webundsoehne/nx-builders:run'
     options: Partial<RunBuilderOptions>
     configurations?: Record<PropertyKey, Partial<RunBuilderOptions>>

@@ -28,7 +28,7 @@ export function createApplicationFiles (options: NormalizedSchema, context: Sche
     mount: '/',
     silent: true,
     skipFormat: true,
-    parentWsConfiguration: {
+    parentProjectConfiguration: {
       root: options.root,
       sourceRoot: options.sourceRoot
     }

@@ -36,11 +36,8 @@ export interface TscBuilderOptions extends JsonObject {
    */
   watch?: boolean
 
-  /** command to run after complition when in watch mode */
+  /** command to run after completion when in watch mode */
   runAfterWatch?: string
-
-  /** export sourcemaps */
-  sourceMap?: boolean
 
   /**
    * copy assets
@@ -68,6 +65,6 @@ export interface NormalizedBuilderOptions extends TscBuilderOptions {
 
 export type OptionParserModes = 'typescript' | 'tsconfigReplacePaths' | 'tsc-watch' | 'runAfterWatch'
 
-export type OptionParser<T extends any> = { mode?: OptionParserModes[], rules?: { condition?: boolean, args: T }[] }[]
+export type OptionParser<T> = { mode?: OptionParserModes[], rules?: { condition?: boolean, args: T }[] }[]
 
-export type ProcessPaths = Partial<Record<'typescript' | 'tsconfigReplacePaths' | 'tscWatch' | 'tsconfig' | 'tsconfigPaths', string>>
+export type ProcessPaths = Record<'typescript' | 'tsconfigReplacePaths' | 'tscWatch' | 'tsconfig', string>

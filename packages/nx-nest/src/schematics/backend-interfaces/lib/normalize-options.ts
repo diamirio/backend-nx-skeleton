@@ -1,15 +1,15 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readNxJson } from '@nrwl/workspace'
-import { libsDir } from '@nrwl/workspace/src/utils/ast-utils'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { NxNestProjectIntegration } from '@src/integration'
 import { readBackendInterfaceIntegration } from '@src/integration/backend-interfaces'
 import { AvailableDBAdapters, SchematicConstants } from '@src/interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
-import { isVerbose, readNxIntegration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -48,7 +48,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Setting library root directory.',
         task: (ctx, task): void => {
-          ctx.root = normalize(`${libsDir(host)}/${ctx.name}`)
+          const layout = readWorkspaceLayout(host)
+
+          ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
 
           task.title = `Library root directory is set as "${ctx.root}".`
         }
@@ -63,9 +65,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = 'Looking for prior application configuration in "nx.json".'
 
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
+            const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
             if (integration) {
-              ctx.priorConfiguration = integration
+              ctx.priorConfiguration = integration.backendInterfaces
 
               task.title = 'Prior configuration successfully found in "nx.json".'
             } else {
@@ -85,7 +87,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Parsing all integrated backend applications...',
         task: (ctx, task): void => {
-          const backendInterfaces = readBackendInterfaceIntegration()
+          const backendInterfaces = readBackendInterfaceIntegration(host)
 
           ctx.dbAdapters = backendInterfaces.flatMap((m) => m.dbAdapters).filter(uniqueArrayFilter)
 
