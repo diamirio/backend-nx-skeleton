@@ -1,5 +1,4 @@
 import { Module, NestModule } from '@nestjs/common'
-import { CommandModule as BaseCommandModule } from 'nestjs-command'
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
 {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
@@ -25,9 +24,8 @@ import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/micro
 import * as modules from './modules'
 
 /**
- * Register all services under providers
+  * Utilizes (nestjs-commander)[https://docs.nestjs.com/recipes/nest-commander].
  */
-
 export function createCommandModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
 @Module({
   providers: [
@@ -42,7 +40,6 @@ export function createCommandModule ({% if database is defined and database != e
     {% if enum.components.MICROSERVICE_CLIENT in components %}
     MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
     {% endif %}
-    BaseCommandModule,
     ...Object.values(modules)
     ]
 })
@@ -53,4 +50,3 @@ export function createCommandModule ({% if database is defined and database != e
 
   return CommandModule
 }
-

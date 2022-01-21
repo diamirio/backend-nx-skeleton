@@ -8,7 +8,6 @@ export const VERSIONS: Versions = {
         '@nestjs/common': '^8.2.5',
         '@nestjs/core': '^8.2.5',
         rxjs: '^7.5.2',
-        'reflect-metadata': '^0.1.13',
         '@webundsoehne/nestjs-util': '^4.0.0',
         'class-transformer': '^0.5.1',
         'class-validator': '^0.13.2'
@@ -48,11 +47,7 @@ export const VERSIONS: Versions = {
   },
   [AvailableComponents.COMMAND]: {
     deps: {
-      'nestjs-command': '^3.1.1',
-      yargs: '^17.3.1'
-    },
-    devDeps: {
-      '@types/yargs': '^17.0.8'
+      'nest-commander': '^2.3.5'
     }
   },
   // if the support for per message queue support added this has to be done in a more complicated way

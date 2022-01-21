@@ -42,8 +42,8 @@ export enum AvailableDBAdapters {
  * Available test configurations.
  */
 export enum AvailableTestsTypes {
-  JEST = 'jest',
-  NONE = 'none'
+  NONE = 'none',
+  JEST = 'jest'
 }
 
 /**

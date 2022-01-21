@@ -9,15 +9,13 @@ import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
  * @param options
  * @param builders
  */
-export function calculateDependencies (options: NormalizedSchema, builders?: boolean): PackageVersions {
-  // only add builders
-  if (builders) {
-    return VERSIONS.base.builder
-  }
-
+export function calculateDependencies (options: NormalizedSchema): PackageVersions {
   return dependencyCalculator([
     {
       deps: VERSIONS.base.default
+    },
+    {
+      deps: VERSIONS.base.builder
     },
     // tests
     {
