@@ -11,8 +11,7 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      },
-      "x-prompt": "What name do you want to give to your module?"
+      }
     },
     "type": {
       "description": "The type of the generated component.",

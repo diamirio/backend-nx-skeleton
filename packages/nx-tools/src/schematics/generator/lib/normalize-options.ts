@@ -27,7 +27,18 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'directory', 'exports', 'type' ] }
+            assign: { from: options, keys: [ 'directory', 'exports', 'type' ] }
+          })
+        }
+      },
+
+      // prompt for generator component name
+      {
+        skip: !!options.name,
+        task: async (ctx, task): Promise<void> => {
+          ctx.name = await task.prompt({
+            type: 'Input',
+            message: 'Please give a name to will be generated component.'
           })
         }
       },

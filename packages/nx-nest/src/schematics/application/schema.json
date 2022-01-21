@@ -14,14 +14,29 @@
   ],
   "type": "object",
   "properties": {
-    "name": {
-      "description": "The name of the application.",
+    "mode": {
+      "description": "Generator mode.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use for the application?"
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": ["create", "modify"]
+          }
+        ]
+      }
+    },
+    "name": {
+      "description": "The name of the application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
     },
     "components": {
       "description": "Components to be embedded.",

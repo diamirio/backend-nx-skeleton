@@ -77,11 +77,16 @@ export enum AvailableGenerators {
   TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary'
 }
 
+export enum AvailableSchemaModes {
+  CREATE = 'create',
+  MODIFY = 'modify'
+}
+
 /**
  * Prettified names for components to use with prompts and such.
  */
 export const PrettyNamesForAvailableThingies: Record<
-AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes | AvailableExtensions,
+AvailableComponents | AvailableServerTypes | AvailableDBTypes | AvailableTestsTypes | AvailableMicroserviceTypes | AvailableExtensions | AvailableSchemaModes,
 string
 > = {
   [AvailableComponents.SERVER]: 'Server',
@@ -98,5 +103,7 @@ string
   [AvailableTestsTypes.JEST]: 'Jest',
   [AvailableTestsTypes.NONE]: 'None',
   [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ',
-  [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library'
+  [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library',
+  [AvailableSchemaModes.CREATE]: 'Create new application',
+  [AvailableSchemaModes.MODIFY]: 'Modify existing application'
 }

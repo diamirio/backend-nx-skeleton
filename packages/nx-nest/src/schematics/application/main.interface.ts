@@ -1,4 +1,3 @@
-import { GeneratedMicroserviceCasing } from './../../utils/generate-microservice-casing.interface'
 import {
   AvailableComponents,
   AvailableDBTypes,
@@ -7,9 +6,11 @@ import {
   AvailableLinterTypes,
   AvailableMicroserviceTypes,
   AvailableDBAdapters,
-  AvailableExtensions
+  AvailableExtensions,
+  AvailableSchemaModes
 } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
+import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
 import { GeneratedNameCases } from '@webundsoehne/nx-tools'
 import { DeepPartial } from '@webundsoehne/ts-utility-types'
 
@@ -19,6 +20,7 @@ import { DeepPartial } from '@webundsoehne/ts-utility-types'
 export interface Schema extends CommonPropertiesToSaveAndUse<true> {
   name: string
   // options for schematic
+  mode: AvailableSchemaModes
   directory: string
   linter: AvailableLinterTypes
   // injected options

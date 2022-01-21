@@ -12,6 +12,7 @@ import {
   AvailableDBTypes,
   AvailableExtensions,
   AvailableMicroserviceTypes,
+  AvailableSchemaModes,
   AvailableServerTypes,
   AvailableTestsTypes,
   PrettyNamesForAvailableThingies
@@ -26,6 +27,7 @@ import {
   mapPromptChoices,
   readNxProjectIntegration,
   readWorkspaceLayout,
+  readWorkspaceProjects,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
@@ -71,13 +73,57 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
         }
       },
 
+      // select generator mode
+      {
+        skip: !options.mode,
+        task: async (ctx, task): Promise<void> => {
+          const choices = mapPromptChoices<AvailableSchemaModes>(AvailableSchemaModes, PrettyNamesForAvailableThingies)
+
+          ctx.mode = await task.prompt({
+            type: 'Select',
+            message: 'Select the application mode.',
+            choices
+          })
+        }
+      },
+
+      // select application name
+      {
+        skip: options.mode !== AvailableSchemaModes.CREATE || !!options.name,
+        task: async (ctx, task): Promise<void> => {
+          ctx.name = await task.prompt({
+            type: 'Input',
+            message: 'Give the new application a name.'
+          })
+        }
+      },
+
+      {
+        skip: options.mode !== AvailableSchemaModes.MODIFY || !!options.name,
+        task: async (ctx, task): Promise<void> => {
+          const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
+
+          ctx.name = await task.prompt({
+            type: 'AutoComplete',
+            message: 'Please select an existing application.',
+            choices: Object.entries(projects).reduce((o, [ name, project ]) => {
+              if (project.integration?.nestjs) {
+                o = [ ...o, name ]
+              }
+
+              return o
+            }, [] as string[])
+          })
+        }
+      },
+
       // decide the application root directory
       {
         task: (ctx): void => {
           if (options.directory) {
-            ctx.directory = `${names(options.directory).fileName}/${names(options.name).fileName}`
+            ctx.directory = `${names(options.directory).fileName}/${names(ctx.name).fileName}`
           } else {
-            ctx.directory = names(options.name).fileName
+            ctx.directory = names(ctx.name).fileName
           }
         }
       },
