@@ -5,22 +5,6 @@
   "examples": [],
   "type": "object",
   "properties": {
-    "parent": {
-      "description": "The name of parent application.",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      }
-    },
-    "name": {
-      "description": "The name of the component.",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 1
-      }
-    },
     "force": {
       "description": "Do not prompt for overwrites.",
       "type": "boolean"

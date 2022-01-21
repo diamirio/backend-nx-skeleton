@@ -27,14 +27,14 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'directory', 'exports', 'type' ] }
+            assign: { from: options, keys: [ 'name', 'directory', 'exports', 'type' ] }
           })
         }
       },
 
       // prompt for generator component name
       {
-        skip: !!options.name,
+        skip: (ctx): boolean => !!ctx.name,
         task: async (ctx, task): Promise<void> => {
           ctx.name = await task.prompt({
             type: 'Input',
@@ -47,7 +47,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = names(options.name).fileName
+          ctx.name = names(ctx.name).fileName
 
           ctx.casing = generateNameCases(ctx.name)
 

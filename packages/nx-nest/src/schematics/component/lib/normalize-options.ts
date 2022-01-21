@@ -37,7 +37,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'force', 'type', 'parentProjectConfiguration', 'silent', 'mount' ] },
+            assign: { from: options, keys: [ 'parent', 'name', 'force', 'type', 'parentProjectConfiguration', 'silent', 'mount' ] },
             default: [ { constants: SchematicConstants } ]
           })
         }
@@ -45,11 +45,11 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
       // prompt parent application
       {
-        skip: !!options.parent,
+        skip: (ctx): boolean => !!ctx.parent,
         task: async (ctx, task): Promise<void> => {
           const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
-          ctx.name = await task.prompt({
+          ctx.parent = await task.prompt({
             type: 'AutoComplete',
             message: 'Please select an existing application as the parent.',
             choices: Object.entries(projects).reduce((o, [ name, project ]) => {
@@ -65,7 +65,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
       // prompt for component name
       {
-        skip: !!options.name,
+        skip: (ctx): boolean => !!ctx.name,
         task: async (ctx, task): Promise<void> => {
           ctx.name = await task.prompt({
             type: 'Input',
@@ -115,7 +115,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = names(options.name).fileName
+          ctx.name = names(ctx.name).fileName
 
           ctx.casing = {
             ...generateNameCases(ctx.name),

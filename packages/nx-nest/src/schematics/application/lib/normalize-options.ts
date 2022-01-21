@@ -75,7 +75,7 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
 
       // select generator mode
       {
-        skip: !options.mode,
+        skip: (ctx): boolean => !!ctx.mode,
         task: async (ctx, task): Promise<void> => {
           const choices = mapPromptChoices<AvailableSchemaModes>(AvailableSchemaModes, PrettyNamesForAvailableThingies)
 
@@ -89,7 +89,7 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
 
       // select application name
       {
-        skip: options.mode !== AvailableSchemaModes.CREATE || !!options.name,
+        skip: (ctx): boolean => !(ctx.mode === AvailableSchemaModes.CREATE && !ctx.name),
         task: async (ctx, task): Promise<void> => {
           ctx.name = await task.prompt({
             type: 'Input',
@@ -99,7 +99,7 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
       },
 
       {
-        skip: options.mode !== AvailableSchemaModes.MODIFY || !!options.name,
+        skip: (ctx): boolean => !(ctx.mode === AvailableSchemaModes.MODIFY && !ctx.name),
         task: async (ctx, task): Promise<void> => {
           const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
