@@ -6,7 +6,7 @@ import { SchematicConstants } from '@src/interfaces'
  */
 export interface Schema extends CommonPropertiesToSaveAndUse {
   name?: string
-  linter?: string
+  linter?: AvailableLinterTypes
   skipFormat?: boolean
   silent?: boolean
 }

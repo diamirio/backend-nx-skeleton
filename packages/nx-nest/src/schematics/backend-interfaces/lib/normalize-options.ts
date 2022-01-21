@@ -18,8 +18,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: async (ctx): Promise<void> => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'dbAdapters', 'skipFormat' ] },
             default: [
+              options,
               {
                 sourceRoot: 'src',
                 name: SchematicConstants.BACKEND_INTERFACES_PACKAGE,

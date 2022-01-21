@@ -44,8 +44,8 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'skipFormat', 'mode', 'name', 'linter' ] },
             default: [
+              options,
               {
                 sourceRoot: 'src'
               },
@@ -163,9 +163,9 @@ export async function normalizeOptions (host: Tree, options: Schema): Promise<No
             if (integration?.nestjs) {
               ctx.priorConfiguration = integration.nestjs
 
-              task.title = 'Prior configuration successfully found in "nx.json".'
+              task.title = 'Prior configuration successfully read.'
             } else {
-              throw new Error('Can not read prior configuration from "nx.json".')
+              throw new Error('Can not read the prior configuration.')
             }
           } else {
             task.title = 'This is the initial configuration of the package.'

@@ -4,6 +4,23 @@
   "title": "Add a common backend interfaces library for databases and shared components with frontend.",
   "type": "object",
   "properties": {
+    "linter": {
+      "description": "Linter for the application.",
+      "type": "string",
+      "enum": ["eslint", "none"],
+      "default": "eslint"
+    },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean"
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
     "force": {
       "description": "Do not prompt for overwrites.",
       "type": "boolean"

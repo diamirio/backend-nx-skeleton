@@ -10,6 +10,22 @@
       "enum": ["eslint"],
       "default": "eslint"
     },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean"
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
     "verbose": {
       "description": "Set this to debug mode.",
       "type": "boolean"

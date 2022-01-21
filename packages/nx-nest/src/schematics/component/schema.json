@@ -5,6 +5,36 @@
   "examples": [],
   "type": "object",
   "properties": {
+    "parent": {
+      "description": "Project name of the parent application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "default": ""
+    },
+
+    "name": {
+      "description": "Name of the generated component.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "default": ""
+    },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean"
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
     "force": {
       "description": "Do not prompt for overwrites.",
       "type": "boolean"

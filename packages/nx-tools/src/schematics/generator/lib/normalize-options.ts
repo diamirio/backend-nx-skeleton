@@ -38,7 +38,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
         task: async (ctx, task): Promise<void> => {
           ctx.name = await task.prompt({
             type: 'Input',
-            message: 'Please give a name to will be generated component.'
+            message: 'Please give a name to the soon to be generated component.'
           })
         }
       },

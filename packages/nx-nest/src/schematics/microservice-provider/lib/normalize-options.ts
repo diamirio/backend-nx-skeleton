@@ -17,8 +17,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: async (ctx): Promise<void> => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'linter' ] },
             default: [
+              options,
               {
                 sourceRoot: 'src',
                 name: SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE,

@@ -5,8 +5,46 @@
   "examples": [],
   "type": "object",
   "properties": {
+    "name": {
+      "description": "Name of the application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "default": ""
+    },
+
+    "mode": {
+      "description": "Generator mode.",
+      "type": "string",
+      "enum": ["create", "modify"],
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "default": ""
+    },
+
+    "directory": {
+      "description": "Subdirectory for the application.",
+      "type": "string"
+    },
+
+    "linter": {
+      "description": "Linter for the application.",
+      "type": "string",
+      "enum": ["eslint", "none"],
+      "default": "eslint"
+    },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean"
+    },
+
     "force": {
-      "description": "Do not prompt for overwrites.",
+      "description": "Do not prompt the user.",
       "type": "boolean"
     },
 

@@ -7,7 +7,7 @@ import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing
  */
 export interface Schema extends CommonPropertiesToSaveAndUse {
   name?: string
-  linter?: string
+  linter?: AvailableLinterTypes
   skipFormat?: boolean
   silent?: boolean
   microservice?: AvailableMicroserviceTypes
