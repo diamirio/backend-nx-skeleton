@@ -7,7 +7,7 @@ import { EOL } from 'os'
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
-import { AvailablePackageManagers, PackageManagerCommands, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
+import { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 
@@ -116,7 +116,18 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--', '--help' ], { shell: true })
+      const help = await execa(
+        this.helpers.node.manager,
+        [
+          ...this.helpers.node.packageManagerCommand(PackageManagerUsableCommands.EXEC),
+          'nx',
+          'g',
+          `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
+          '--',
+          '--help'
+        ],
+        { shell: true }
+      )
       this.logger.direct(help.stdout)
 
       try {
@@ -130,8 +141,9 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this will be the command
     await execa(
-      PackageManagerCommands[this.helpers.node.manager][PackageManagerUsableCommands.EXEC],
+      this.helpers.node.manager,
       [
+        ...this.helpers.node.packageManagerCommand(PackageManagerUsableCommands.EXEC),
         'nx',
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,

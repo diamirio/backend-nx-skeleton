@@ -265,6 +265,40 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                 },
 
                 {
+                  title: 'Deleting files...',
+                  skip: (ctx): boolean =>
+                    !ctx.prompt.purge.includes(DockerHelperLock.FILES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
+                  task: (_, task): Listr => {
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].files).map(([ key, v ]) => ({
+                      task: async (_, task): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
+
+                        if (deleted || deleted === 'unlock') {
+                          // unlock directories from local lock file
+                          this.locker.addUnlock({
+                            path: `${name}.${DockerHelperLock.FILES}.${key}`
+                          })
+                        }
+                      }
+                    }))
+
+                    return task.newListr([
+                      {
+                        task: async (): Promise<void> => {
+                          await this.configLock.unlock([
+                            {
+                              path: `services.${name}`,
+                              root: true
+                            }
+                          ])
+                        }
+                      },
+                      ...subtasks
+                    ])
+                  }
+                },
+
+                {
                   title: 'Updating lock file...',
                   task: async (): Promise<void> => {
                     // ensure lock file entries are not empty
@@ -380,14 +414,17 @@ export class DockerContainerCommand extends ConfigBaseCommand {
           if (fs.statSync(path).isDirectory()) {
             await fs.emptyDir(path)
             await fs.remove(path)
+
             task.title = `Deleted folder: ${path}`
           } else if (fs.statSync(path).isFile()) {
             await fs.remove(path)
+
             task.title = `Deleted file: ${path}`
           }
 
           if (fs.readdirSync(dirname(path)).length === 0) {
             this.logger.debug(`After removing ${path}, folder is empty, will remove it as well.`)
+
             await fs.remove(dirname(path))
           }
 

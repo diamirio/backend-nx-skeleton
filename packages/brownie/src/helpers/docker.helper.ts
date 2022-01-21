@@ -183,7 +183,7 @@ export class DockerHelper {
                             this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                               path: ctx.containers[name].name,
                               data: {
-                                [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: asset.to }
+                                [DockerHelperLock.FILES]: { [uuidv4()]: asset.to }
                               },
                               merge: true
                             })

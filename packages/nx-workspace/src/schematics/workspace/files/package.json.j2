@@ -42,8 +42,9 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
+    "backend:command:one": "npm run nx -- command"
     "backend:seed": "npm run nx -- run-many --target seed --parallel --all",
-    "backend:seed:one": "npm run nx -- run-many --target seed --parallel --all"
+    "backend:seed:one": "npm run nx -- seed"
     "backend:migrate": "npm run nx -- run-many --target migration --parallel --all",
     "backend:migrate:one": "npm run nx -- migration",
     "backend:migrate:mock": "npm run nx -- run-many --target migration:mock-run --parallel --all",

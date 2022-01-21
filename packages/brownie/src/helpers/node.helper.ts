@@ -43,6 +43,19 @@ export class NodeHelper {
   }
 
   /**
+   * Returns the selected commands from the current package manager.
+   */
+  public packageManagerCommand (commands: PackageManagerUsableCommands | PackageManagerUsableCommands[]): string[] {
+    if (!Array.isArray(commands)) {
+      commands = [ commands ]
+    }
+
+    return commands.map((command) => {
+      return PackageManagerCommands[this.manager][command]
+    })
+  }
+
+  /**
    * This gets ctx.packages as input to perform the required operation
    * @param options
    */
