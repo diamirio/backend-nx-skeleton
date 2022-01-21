@@ -7,7 +7,7 @@ import { EOL } from 'os'
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { Configuration } from '@interfaces/default-config.interface'
 import { NodeHelper } from '@src/helpers/node.helper'
-import { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
+import { AvailablePackageManagers, PackageManagerCommands, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 
@@ -130,7 +130,7 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this will be the command
     await execa(
-      PackageManagerUsableCommands[this.helpers.node.manager][PackageManagerUsableCommands.EXEC],
+      PackageManagerCommands[this.helpers.node.manager][PackageManagerUsableCommands.EXEC],
       [
         'nx',
         'g',

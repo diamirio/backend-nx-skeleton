@@ -38,15 +38,19 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
             template.pattern = [ template.pattern ]
           }
 
-          if (micromatch.all(file, [ ...template.pattern, '!' + template.output ], { ...micromatchDefaultOptions, ...template.options })) {
-            log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
+          const root = template?.cwd ?? options.root
+
+          const pattern = [ ...template.pattern, '!/' + join(root, template.output) ]
+
+          if (micromatch.all(file, pattern, { ...micromatchDefaultOptions, ...template.options })) {
+            log.debug(`Generate export pattern "${pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
               [template.output]: [
                 './' +
                   join(
                     relative(
-                      convertStringToDirPath(dirname(join(template?.cwd ?? options.root, template.output)), { start: true, end: false }),
+                      convertStringToDirPath(dirname(join(root, template.output)), { start: true, end: false }),
                       convertStringToDirPath(dirname(file), { start: true, end: false })
                     ),
                     parse(file).name
@@ -61,9 +65,20 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
     })
 
     if (!output || Object.keys(output).length === 0) {
-      log.warn('Can not generate exports, because there is no file matched.')
+      log.warn('Nothing to export no file has been matched with the given pattern.')
 
-      return
+      output = deepMergeWithUniqueMergeArray(
+        output,
+        options.templates.reduce((o, template) => {
+          log.debug(`Generate empty export file: "${template.output}"`)
+
+          o = deepMergeWithUniqueMergeArray(o, {
+            [template.output]: []
+          })
+
+          return o
+        }, {} as Record<string, string[]>)
+      )
     }
 
     return applyOverwriteWithDiff(
