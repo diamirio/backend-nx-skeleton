@@ -1,8 +1,4 @@
-import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { names } from '@nrwl/devkit'
-import { readNxJson } from '@nrwl/workspace'
-import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
@@ -14,8 +10,10 @@ import {
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  readNxProjectIntegration,
-  readWorkspaceLayout,
+  normalizePackageJsonScopeTask,
+  normalizePriorConfigurationTask,
+  normalizeRootDirectoryTask,
+  NxProjectTypes,
   readWorkspaceProjects,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -87,67 +85,14 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      // decide the application root directory
-      {
-        task: (ctx): void => {
-          if (options.directory) {
-            ctx.directory = `${names(options.directory).fileName}/${names(ctx.name).fileName}`
-          } else {
-            ctx.directory = names(ctx.name).fileName
-          }
-        }
-      },
-
       // normalize package json scope
-      {
-        title: 'Normalizing package.json project name.',
-        task: (ctx, task): void => {
-          const nxJson = readNxJson()
-          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
-          ctx.packageScope = `${nxJson.npmScope}`
-
-          task.title = `Project package name set as "${ctx.packageName}".`
-        }
-      },
+      normalizePackageJsonScopeTask<NormalizedSchema>(host),
 
       // set project root directory
-      {
-        title: 'Setting project root directory.',
-        task: (ctx, task): void => {
-          const layout = readWorkspaceLayout(host)
-
-          ctx.root = normalize(`${layout.libsDir}/${ctx.directory}`)
-
-          task.title = `Project root directory is set as "${ctx.root}".`
-        }
-      },
+      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      {
-        title: 'Checking if the application is configured before.',
-        task: (ctx, task): void => {
-          if (directoryExists(ctx.root)) {
-            task.output = `Project root directory is not empty at: "${ctx.root}"`
-
-            task.title = 'Looking for prior library configuration.'
-
-            const integration = readNxProjectIntegration<NxWorkspaceIntegration>(host, ctx.name)
-            if (integration?.library) {
-              ctx.priorConfiguration = integration.library
-
-              task.title = 'Prior configuration successfully read.'
-            } else {
-              throw new Error('Can not read the prior configuration.')
-            }
-          } else {
-            task.title = 'This is the initial configuration of the package.'
-          }
-        },
-        options: {
-          persistentOutput: true,
-          bottomBar: false
-        }
-      },
+      normalizePriorConfigurationTask<NormalizedSchema, NxWorkspaceIntegration>(host, 'library'),
 
       // select library type
       {
@@ -162,7 +107,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableLibraryTypes>(ctx, 'type', choices)
           })
 
-          task.title = `Library type selected as: ${ctx.tests}`
+          task.title = `Library type selected as: ${ctx.type}`
         },
         options: {
           bottomBar: Infinity,

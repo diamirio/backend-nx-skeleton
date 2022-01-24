@@ -2,7 +2,7 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { Schema, NormalizedSchema } from '../main.interface'
-import { readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { readProjectConfiguration, readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -45,6 +45,18 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           type: 'Input',
           message: 'Please give a new name to the project.'
         })
+      }
+    },
+
+    {
+      task: async (ctx): Promise<void> => {
+        ctx.project = readProjectConfiguration(host, ctx.projectName)
+      }
+    },
+
+    {
+      task: async (ctx): Promise<void> => {
+        ctx.project = readProjectConfiguration(host, ctx.projectName)
       }
     }
   ]).run()

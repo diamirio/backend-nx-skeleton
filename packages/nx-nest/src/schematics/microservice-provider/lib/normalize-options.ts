@@ -1,14 +1,18 @@
-import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { readNxJson } from '@nrwl/workspace'
-import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
-import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import {
+  isVerbose,
+  normalizePackageJsonScopeTask,
+  normalizePriorConfigurationTask,
+  normalizeRootDirectoryTask,
+  NxProjectTypes,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -30,55 +34,13 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // normalize package json scope
-      {
-        title: 'Normalizing package.json library name.',
-        task: (ctx, task): void => {
-          const nxJson = readNxJson()
-          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
-          ctx.packageScope = `@${nxJson.npmScope}/${ctx.name}`
-
-          task.title = `Library package name set as "${ctx.packageName}".`
-        }
-      },
+      normalizePackageJsonScopeTask<NormalizedSchema>(host),
 
       // set project root directory
-      {
-        title: 'Setting library root directory.',
-        task: (ctx, task): void => {
-          const layout = readWorkspaceLayout(host)
-
-          ctx.root = normalize(`${layout.libsDir}/${ctx.name}`)
-
-          task.title = `Library root directory is set as "${ctx.root}".`
-        }
-      },
+      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      {
-        title: 'Checking if the application is configured before.',
-        task: (ctx, task): void => {
-          if (directoryExists(ctx.root)) {
-            task.output = `Project root directory is not empty at: "${ctx.root}"`
-
-            task.title = 'Looking for prior application configuration.'
-
-            const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
-            if (integration?.microserviceProvider) {
-              ctx.priorConfiguration = integration.microserviceProvider
-
-              task.title = 'Prior configuration successfully found.'
-            } else {
-              throw new Error('Can not read prior configuration.')
-            }
-          } else {
-            task.title = 'This is the initial configuration of the package.'
-          }
-        },
-        options: {
-          persistentOutput: true,
-          bottomBar: false
-        }
-      },
+      normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'microserviceProvider'),
 
       // parse microservices for templates
       {

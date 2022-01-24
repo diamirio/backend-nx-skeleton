@@ -22,7 +22,6 @@ export interface Schema extends CommonPropertiesToSaveAndUse<true> {
  * It can not extend the default schema because types are different after parsed
  */
 export interface NormalizedSchema extends Schema {
-  name: string
   // parsed internally
   packageName: string
   packageScope: string

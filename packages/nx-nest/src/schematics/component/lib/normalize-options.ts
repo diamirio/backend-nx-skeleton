@@ -12,16 +12,7 @@ import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThing
 import { NxNestProjectIntegration } from '@src/integration'
 import { SchematicConstants } from '@src/interfaces'
 import { generateMicroserviceCasing } from '@src/utils'
-import {
-  ConvertToPromptType,
-  EnrichedProjectConfiguration,
-  generateNameCases,
-  isVerbose,
-  readNxProjectIntegration,
-  readProjectConfiguration,
-  readWorkspaceProjects,
-  setSchemaDefaultsInContext
-} from '@webundsoehne/nx-tools'
+import { ConvertToPromptType, generateNameCases, isVerbose, normalizeParentConfigurationTask, readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Tree} host
@@ -77,42 +68,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      // check for prior configuration
-      {
-        title: 'Checking for parent application.',
-        /**
-         * if parent configuration is not injected through schematic we will parse it ourselves
-         * this should be for cases that the schematic is not run internally and run through cli
-         */
-        enabled: (ctx): boolean => ctx.parentProjectConfiguration === undefined,
-        task: (ctx, task): void => {
-          // if this is created with this schematic there should be a nx json
-          task.title = 'Looking for prior application configuration.'
-
-          const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.parent)
-
-          if (integration.nestjs) {
-            ctx.parentPriorConfiguration = integration.nestjs
-
-            task.title = 'Prior configuration successfully found.'
-          } else {
-            throw new Error('Can not read prior configuration.')
-          }
-
-          // check parent configuration in workspace
-          task.title = 'Looking for prior application configuration in "workspace.json".'
-
-          const workspace = readProjectConfiguration(host, ctx.parent)
-
-          if (workspace && workspace.root && workspace.sourceRoot) {
-            ctx.parentProjectConfiguration = ([ 'root', 'sourceRoot' ] as (keyof EnrichedProjectConfiguration)[]).reduce((o, item) => {
-              return { ...o, [item]: workspace[item] }
-            }, {} as EnrichedProjectConfiguration)
-          } else {
-            throw new Error('Can not read application configuration from "workspace.json".')
-          }
-        }
-      },
+      // check for parent application configuration
+      normalizeParentConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs', [ 'root', 'sourceRoot' ]),
 
       // parse component name and convert casings to use in template
       {
