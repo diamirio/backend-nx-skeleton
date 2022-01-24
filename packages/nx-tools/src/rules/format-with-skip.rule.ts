@@ -1,7 +1,7 @@
-import { chain, noop, Rule } from '@angular-devkit/schematics'
+import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 
 import { runInRule } from './run.rule'
-import { Logger, formatFiles, FormatFilesOptions } from '@utils'
+import { Logger, formatFilesRule, FormatFilesOptions } from '@utils'
 
 /**
  * Returns a general prettier-eslint format rule for schematics.
@@ -9,6 +9,17 @@ import { Logger, formatFiles, FormatFilesOptions } from '@utils'
  * @param skip
  * @param options
  */
-export function formatOrSkip (log: Logger, skip?: boolean, options: FormatFilesOptions = { eslint: true, prettier: true }): Rule {
-  return !skip ? chain([ runInRule(log.info.bind(log)('Formatting and linting files.')), formatFiles(options) ]) : noop()
+export function formatTreeRule (options?: FormatFilesOptions): Rule {
+  return (_host: Tree, context: SchematicContext): Rule => {
+    options = {
+      skip: false,
+      prettier: true,
+      eslint: true,
+      ...options
+    }
+
+    const log = new Logger(context)
+
+    return !options.skip ? chain([ runInRule(log.info.bind(log)('Formatting and linting files.')), formatFilesRule(options) ]) : noop()
+  }
 }

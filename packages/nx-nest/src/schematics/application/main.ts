@@ -6,7 +6,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import init from '@src/schematics/init/main'
-import { eslintJson, addEslintConfigRule, formatOrSkip, Logger, runInRule, updateTsconfigPaths, LINTER_VERSIONS, SchematicRule } from '@webundsoehne/nx-tools'
+import { eslintJson, addEslintConfigRule, formatTreeRule, Logger, runInRule, updateTsConfigPathsRule, LINTER_VERSIONS, SchematicRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
@@ -15,7 +15,7 @@ import { eslintJson, addEslintConfigRule, formatOrSkip, Logger, runInRule, updat
 export default function (schema: Schema): SchematicRule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
-    const options = await normalizeOptions(host, schema)
+    const options = await normalizeOptions(host, context, schema)
 
     return chain([
       runInRule(log.info.bind(log)('Initiating workspace.')),
@@ -24,21 +24,21 @@ export default function (schema: Schema): SchematicRule {
         skipFormat: true
       }),
 
-      addEslintConfigRule(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
-      addProject(host, options),
+      addProject(options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
-      createApplicationFiles(options, context),
+      createApplicationFiles(options),
 
       runInRule(log.info.bind(log)('Updating integration.')),
-      updateIntegration(host, options),
+      updateIntegration(options),
 
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
-      updateTsconfigPaths(options),
+      updateTsConfigPathsRule(options),
 
-      formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })
+      formatTreeRule({ skip: options.skipFormat })
     ])
   }
 }

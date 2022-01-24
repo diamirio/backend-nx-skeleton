@@ -1,5 +1,6 @@
 import { Versions } from './versions.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 export const VERSIONS: Versions = {
   base: {

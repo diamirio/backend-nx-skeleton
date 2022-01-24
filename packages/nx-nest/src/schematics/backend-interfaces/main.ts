@@ -6,7 +6,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
 import { SchematicConstants } from '@src/interfaces'
-import { addEslintConfigRule, eslintJson, formatOrSkip, LINTER_VERSIONS, Logger, runInRule, updateTsconfigPaths } from '@webundsoehne/nx-tools'
+import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -16,20 +16,20 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     return chain([
       runInRule(log.info.bind(log)(`Adding ${SchematicConstants.BACKEND_INTERFACES_PACKAGE} library to workspace.`)),
 
-      addEslintConfigRule(host, log, options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
 
-      addProject(host, options),
+      addProject(options),
 
       runInRule(log.info.bind(log)('Creating application files.')),
-      createApplicationFiles(options, context),
+      createApplicationFiles(options),
 
       runInRule(log.info.bind(log)('Updating integration.')),
       updateIntegration(options),
 
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
-      updateTsconfigPaths(options),
+      updateTsConfigPathsRule(options),
 
-      formatOrSkip(log, schema?.skipFormat, { eslint: true, prettier: true })
+      formatTreeRule({ skip: options.skipFormat })
     ])
   }
 }

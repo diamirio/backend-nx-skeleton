@@ -3,7 +3,7 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { addGitTask, addInstallTask, formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
+import { addGitTask, addInstallTask, formatTreeRule, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
@@ -16,7 +16,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
 
     return chain([
       runInRule(log.info.bind(log)('Creating workspace files.')),
-      createApplicationFiles(options, context),
+      createApplicationFiles(options),
 
       addGitTask({
         skipGit: options?.skipGit,
@@ -26,7 +26,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
 
       addInstallTask({ skipInstall: options.skipInstall, root: options.root }),
 
-      formatOrSkip(log, false, { eslint: false, prettier: true })
+      formatTreeRule()
     ])
   }
 }

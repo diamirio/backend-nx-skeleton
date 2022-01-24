@@ -7,7 +7,7 @@ import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 /**
  * Reads the backend interface integration part of the nx.json.
  */
-export function readBackendInterfaceIntegration (host: Tree): BackendInterfacesWorkspaceIntegration[] {
+export function readBackendInterfacesWorkspaceIntegration (host: Tree): BackendInterfacesWorkspaceIntegration[] {
   const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
   return Object.entries(projects).reduce((o, [ key, value ]) => {

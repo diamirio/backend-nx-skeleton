@@ -8,7 +8,10 @@
     "paths": {
       "@src/*": ["*"],
       "@utils/*": ["utils/*"],
-      "@interfaces/*": ["interfaces/*"]
+      "@interfaces/*": ["interfaces/*"],
+      "@constants/*": ["constants/*"],
+      "@integration/*": ["integration/*"],
+      "@schematics/*": ["schematics/*"]
     }
   },
   "include": ["src"],

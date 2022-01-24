@@ -2,7 +2,7 @@ import { filter, forEach, move, noop, Rule, applyPathTemplate } from '@angular-d
 
 import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
 import { jinjaTemplate, multipleJinjaTemplate } from '@templates/template-engine'
-import { formatFiles } from '@utils/file-system/format-files'
+import { formatFilesRule } from '@utils/file-system/format-files'
 
 /**
  * Returns a general application rule that can be used in schematics.
@@ -110,9 +110,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      */
     // need to format files before putting them through difference, or else it goes crazy.
     rules.format
-      ? formatFiles({
-        eslint: true,
-        prettier: true,
+      ? formatFilesRule({
         ...ruleOptions?.format
       })
       : noop(),

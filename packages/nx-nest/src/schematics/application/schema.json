@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-nest:application",
-  "title": "Create a Nest application from skeleton with NX.",
+  "$id": "@webundsoehne-private/nx-nest/application",
+  "title": "@webundsoehne-private/nx-nest/application",
+  "description": "Generate nestjs application.",
   "examples": [],
   "type": "object",
   "properties": {
@@ -40,7 +41,8 @@
 
     "skipFormat": {
       "description": "Skip formatting after the initiation.",
-      "type": "boolean"
+      "type": "boolean",
+      "aliases": ["skip-format"]
     },
 
     "force": {

@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "backend-interfaces",
-  "title": "Add a common backend interfaces library for databases and shared components with frontend.",
+  "$id": "@webundsoehne-private/nx-nest/backend-interfaces",
+  "title": "@webundsoehne-private/nx-nest/backend-interfaces",
+  "description": "Generate a common library for nestjs interfaces.",
   "type": "object",
   "properties": {
     "linter": {
@@ -13,7 +14,8 @@
 
     "skipFormat": {
       "description": "Skip formatting after the initiation.",
-      "type": "boolean"
+      "type": "boolean",
+      "aliases": ["skip-format"]
     },
 
     "silent": {

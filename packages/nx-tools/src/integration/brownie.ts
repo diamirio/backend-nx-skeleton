@@ -26,7 +26,7 @@ export function readBrownieIntegration (host: Tree, name: string): BrownieIntegr
 /**
  * Returns sum of brownie containers read from nx.json.
  */
-export function readBrownieContainers (host?: Tree): BrownieAvailableContainers[] {
+export function readBrownieWorkspaceContainers (host?: Tree): BrownieAvailableContainers[] {
   const integration = readNxWorkspaceIntegration(host)
 
   return Object.values(integration).reduce((o, value) => {

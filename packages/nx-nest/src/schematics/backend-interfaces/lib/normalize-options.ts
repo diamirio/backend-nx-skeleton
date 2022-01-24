@@ -6,7 +6,7 @@ import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 import { NxNestProjectIntegration } from '@src/integration'
-import { readBackendInterfaceIntegration } from '@src/integration/backend-interfaces'
+import { readBackendInterfacesWorkspaceIntegration } from '@src/integration/backend-interfaces'
 import { AvailableDBAdapters, SchematicConstants } from '@src/interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
 import { isVerbose, readNxProjectIntegration, readWorkspaceLayout, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
@@ -74,15 +74,15 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           if (directoryExists(ctx.root)) {
             task.output = `Project root directory is not empty at: "${ctx.root}"`
 
-            task.title = 'Looking for prior application configuration in "nx.json".'
+            task.title = 'Looking for prior application configuration.'
 
             const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.name)
             if (integration) {
               ctx.priorConfiguration = integration.backendInterfaces
 
-              task.title = 'Prior configuration successfully found in "nx.json".'
+              task.title = 'Prior configuration successfully found.'
             } else {
-              throw new Error('Can not read prior configuration from "nx.json".')
+              throw new Error('Can not read prior configuration.')
             }
           } else {
             task.title = 'This is the initial configuration of the package.'
@@ -98,7 +98,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         title: 'Parsing all integrated backend applications...',
         task: (ctx, task): void => {
-          const backendInterfaces = readBackendInterfaceIntegration(host)
+          const backendInterfaces = readBackendInterfacesWorkspaceIntegration(host)
 
           ctx.dbAdapters = backendInterfaces.flatMap((m) => m.dbAdapters).filter(uniqueArrayFilter)
 

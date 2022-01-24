@@ -7,7 +7,7 @@ import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 /**
  * Reads microservice integration part of the nx.json.
  */
-export function readMicroserviceIntegration (host: Tree): MicroserviceProviderWorkspaceIntegration[] {
+export function readMicroserviceProviderWorkspaceIntegration (host: Tree): MicroserviceProviderWorkspaceIntegration[] {
   const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
   return Object.entries(projects).reduce((o, [ key, value ]) => {

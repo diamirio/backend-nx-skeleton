@@ -1,26 +1,24 @@
 import { normalize } from '@angular-devkit/core'
-import { Rule, Tree } from '@angular-devkit/schematics'
-import { generateProjectLint } from '@nrwl/workspace'
+import { Rule } from '@angular-devkit/schematics'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
-import { createWorkspaceProjectRule, NxProjectTypes } from '@webundsoehne/nx-tools'
+import { createWorkspaceProjectRule, generateProjectLintTarget, NxProjectTypes } from '@webundsoehne/nx-tools'
 
-export function addProject (host: Tree, options: NormalizedSchema): Rule {
-  // we dont need to enforce types here, since it is only going to be linting
-  const targets: Record<string, any> = {}
+export function addProject (options: NormalizedSchema): Rule {
+  return (): Rule => {
+    // we dont need to enforce types here, since it is only going to be linting
+    const targets: Record<string, any> = {}
 
-  targets.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter, [
-    `${options.root}/**/*.ts`,
-    `${options.root}/**/*.js`
-  ])
+    targets.lint = generateProjectLintTarget(options)
 
-  const project = {
-    root: normalize(options.root),
-    sourceRoot: join(normalize(options.root), options.sourceRoot),
-    projectType: NxProjectTypes.LIB,
-    targets
+    const project = {
+      root: normalize(options.root),
+      sourceRoot: join(normalize(options.root), options.sourceRoot),
+      projectType: NxProjectTypes.LIB,
+      targets
+    }
+
+    return createWorkspaceProjectRule(options.name, project)
   }
-
-  return createWorkspaceProjectRule(options.name, project)
 }

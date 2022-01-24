@@ -1,4 +1,4 @@
-import { apply, branchAndMerge, chain, mergeWith, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, branchAndMerge, chain, mergeWith, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
 import { getSchematicFiles } from '@interfaces/file.constants'
@@ -9,17 +9,19 @@ import { createApplicationRule, CreateApplicationRuleInterface, Logger } from '@
  * @param options
  * @param context
  */
-export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
-  const log = new Logger(context)
-  // source is always the same
-  const source = url('./files')
+export function createApplicationFiles (options: NormalizedSchema): Rule {
+  return (_host: Tree, context: SchematicContext): Rule => {
+    const log = new Logger(context)
+    // source is always the same
+    const source = url('./files')
 
-  return chain([
-    branchAndMerge(
-      // just needs the url the rest it will do it itself
-      mergeWith(apply(source, generateRules(options, log)))
-    )
-  ])
+    return chain([
+      branchAndMerge(
+        // just needs the url the rest it will do it itself
+        mergeWith(apply(source, generateRules(options, log)))
+      )
+    ])
+  }
 }
 
 /**

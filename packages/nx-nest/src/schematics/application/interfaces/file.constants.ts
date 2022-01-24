@@ -1,6 +1,6 @@
 import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableTestsTypes } from '@interfaces/available.constants'
-import { SchematicFiles } from '@webundsoehne/nx-tools'
+import { AvailableComponents, AvailableDBAdapters } from '@interfaces/available.constants'
+import { AvailableTestsTypes, SchematicFiles } from '@webundsoehne/nx-tools'
 
 /**
  * This constant includes the files that are required for different components.

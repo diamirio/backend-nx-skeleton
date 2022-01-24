@@ -17,7 +17,7 @@ import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchem
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (files: string, _host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema, files: string): Promise<NormalizedSchema> {
   const logger = new Logger(context)
   logger.debug(`Template directory to scan in: ${files}`)
 

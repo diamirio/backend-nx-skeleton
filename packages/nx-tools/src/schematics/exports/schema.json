@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-tools:exports",
-  "title": "Add exports with regex pattern.",
+  "$id": "@webundsoehne-private/nx-tools/exports",
+  "title": "@webundsoehne-private/nx-tools/exports",
+  "description": "Export the Typescript files from a common file.",
   "examples": [],
   "type": "object",
   "required": []

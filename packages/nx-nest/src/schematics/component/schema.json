@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-nest:component",
-  "title": "Add a component to existing nx-nest schematic.",
+  "$id": "@webundsoehne-private/nx-nest/component",
+  "title": "@webundsoehne-private/nx-nest/compontent",
+  "description": "Generate nestjs components.",
   "examples": [],
   "type": "object",
   "properties": {
@@ -27,7 +28,8 @@
 
     "skipFormat": {
       "description": "Skip formatting after the initiation.",
-      "type": "boolean"
+      "type": "boolean",
+      "aliases": ["skip-format"]
     },
 
     "silent": {

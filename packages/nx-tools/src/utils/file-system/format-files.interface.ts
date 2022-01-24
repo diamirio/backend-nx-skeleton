@@ -7,7 +7,7 @@
  */
 export interface FormatFilesOptions {
   /** A condition that can skip the formatting. */
-  skipFormat?: boolean
+  skip?: boolean
   /** Use prettier */
   prettier?: boolean
   /** Use eslint */

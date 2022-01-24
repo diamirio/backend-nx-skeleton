@@ -1,4 +1,4 @@
-import { apply, chain, externalSchematic, Rule, SchematicContext, url } from '@angular-devkit/schematics'
+import { apply, chain, externalSchematic, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
@@ -12,36 +12,38 @@ import { Logger } from '@src/utils'
  * @returns Promise
  * A function that can create the application files for the given schematic.
  */
-export function createApplicationFiles (files: string, options: NormalizedSchema, context: SchematicContext): Rule {
-  const log = new Logger(context)
-  // source is always the same
-  const source = url(join(files, options.type))
+export function createApplicationFiles (files: string, options: NormalizedSchema): Rule {
+  return (_host: Tree, context: SchematicContext): Rule => {
+    const log = new Logger(context)
+    // source is always the same
+    const source = url(join(files, options.type))
 
-  return chain([
-    applyOverwriteWithDiff(
-      // just needs the url the rest it will do it itself
-      apply(source, generateRules(options, log)),
-      // needs the rule applied files, representing the prior configuration
-      null,
-      context
-    ),
+    return chain([
+      applyOverwriteWithDiff(
+        // just needs the url the rest it will do it itself
+        apply(source, generateRules(options, log)),
+        // needs the rule applied files, representing the prior configuration
+        null,
+        context
+      ),
 
-    ...createApplicationRule({
-      trigger: [
-        {
-          condition: !!options.exports,
-          rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
-            silent: true,
-            skipFormat: false,
-            templates: {
-              root: options.root,
-              templates: options.exports
-            }
-          })
-        }
-      ]
-    })
-  ])
+      ...createApplicationRule({
+        trigger: [
+          {
+            condition: !!options.exports,
+            rule: externalSchematic<ExportsSchema>('@webundsoehne/nx-tools', 'exports', {
+              silent: true,
+              skipFormat: false,
+              templates: {
+                root: options.root,
+                templates: options.exports
+              }
+            })
+          }
+        ]
+      })
+    ])
+  }
 }
 
 function generateRules (options: NormalizedSchema, log: Logger): Rule[] {

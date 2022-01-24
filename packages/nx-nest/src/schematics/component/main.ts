@@ -3,7 +3,7 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { formatOrSkip, Logger, runInRule } from '@webundsoehne/nx-tools'
+import { formatTreeRule, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Schema} schema
@@ -16,9 +16,9 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
 
     return chain([
       runInRule(log.info.bind(log)(`Creating "${options.type}" component files: ${options.name}@${options.root}`), !schema.silent),
-      createApplicationFiles(options, context),
+      createApplicationFiles(options),
 
-      formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true })
+      formatTreeRule({ skip: options.skipFormat })
     ])
   }
 }

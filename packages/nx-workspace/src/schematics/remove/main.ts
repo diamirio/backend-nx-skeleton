@@ -1,23 +1,19 @@
-import { chain, Rule } from '@angular-devkit/schematics'
-import { checkProjectExists } from '@nrwl/workspace/src/utils/rules/check-project-exists'
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 
-import { checkDependencies } from './lib/check-dependencies'
-import { checkTargets } from './lib/check-targets'
-import { removeProject } from './lib/remove-project'
-import { updateTsconfig } from './lib/update-tsconfig'
-import { updateWorkspace } from './lib/update-workspace'
-import { Schema } from './main.interface'
-import { formatOrSkip } from '@webundsoehne/nx-tools'
+import { normalizeOptions } from './lib/normalize-options'
+import { NormalizedSchema, Schema } from './main.interface'
+import { formatTreeRule, removeTsconfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): Rule {
-  return chain([
-    checkProjectExists(schema),
-    checkDependencies(schema),
-    checkTargets(schema),
-    removeProject(schema) as any,
-    // will change this one
-    updateTsconfig(schema),
-    updateWorkspace(schema),
-    formatOrSkip(null, schema.skipFormat, { eslint: true, prettier: true })
-  ])
+  return async (host: Tree, context: SchematicContext): Promise<Rule> => {
+    const options = await normalizeOptions(host, context, schema)
+
+    return chain([
+      externalSchematic<NormalizedSchema>('@nrwl/workspace', 'remove', options),
+
+      removeTsconfigPathsRule({ packageName: options.projectName }),
+
+      formatTreeRule({ skip: options.skipFormat })
+    ])
+  }
 }

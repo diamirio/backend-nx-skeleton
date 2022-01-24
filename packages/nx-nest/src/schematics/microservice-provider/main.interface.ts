@@ -1,6 +1,7 @@
-import { AvailableLinterTypes, AvailableMicroserviceTypes } from '@interfaces/available.constants'
+import { AvailableMicroserviceTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import { AvailableLinterTypes } from '@webundsoehne/nx-tools'
 
 /**
  * The options that it gets from angular-cli

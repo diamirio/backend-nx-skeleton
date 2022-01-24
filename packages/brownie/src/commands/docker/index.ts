@@ -9,7 +9,7 @@ import { DockerHelper } from '@helpers/docker.helper'
 import { DockerComposeFile } from '@helpers/docker.helper.interface'
 import { DockerNxCtx } from '@interfaces/commands/docker/nx'
 import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
-import { readBrownieContainers } from '@webundsoehne/nx-tools/dist/integration/brownie'
+import { readBrownieWorkspaceContainers } from '@webundsoehne/nx-tools/dist/integration/brownie'
 import { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
@@ -77,7 +77,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       {
         title: 'Reading integration...',
         task: (ctx, task): void => {
-          ctx.prompt = readBrownieContainers()
+          ctx.prompt = readBrownieWorkspaceContainers()
 
           task.title = `Found containers: ${ctx.prompt.join(', ')}`
         }

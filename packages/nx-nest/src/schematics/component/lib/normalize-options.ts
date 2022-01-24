@@ -48,6 +48,10 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         task: async (ctx, task): Promise<void> => {
           const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
+          if (Object.keys(projects).length === 0) {
+            throw new Error('No project has been found in the workspace.')
+          }
+
           ctx.parent = await task.prompt({
             type: 'AutoComplete',
             message: 'Please select an existing application as the parent.',
@@ -83,16 +87,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         enabled: (ctx): boolean => ctx.parentProjectConfiguration === undefined,
         task: (ctx, task): void => {
           // if this is created with this schematic there should be a nx json
-          task.title = 'Looking for prior application configuration in "nx.json".'
+          task.title = 'Looking for prior application configuration.'
 
           const integration = readNxProjectIntegration<NxNestProjectIntegration>(host, ctx.parent)
 
           if (integration.nestjs) {
             ctx.parentPriorConfiguration = integration.nestjs
 
-            task.title = 'Prior configuration successfully found in "nx.json".'
+            task.title = 'Prior configuration successfully found.'
           } else {
-            throw new Error('Can not read prior configuration from "nx.json".')
+            throw new Error('Can not read prior configuration.')
           }
 
           // check parent configuration in workspace

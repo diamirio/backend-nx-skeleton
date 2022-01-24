@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-nest:generate",
-  "title": "Add a single file to existing nx-nest schematic.",
+  "$id": "@webundsoehne-private/nx-nest/generator",
+  "title": "@webundsoehne-private/nx-nest/generator",
+  "description": "Generate nestjs partials.",
   "examples": [],
   "type": "object",
   "properties": {

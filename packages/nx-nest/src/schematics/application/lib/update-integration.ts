@@ -1,4 +1,4 @@
-import { chain, noop, Rule, Tree } from '@angular-devkit/schematics'
+import { chain, noop, Rule } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
@@ -9,7 +9,7 @@ import { BrownieAvailableContainers, updateBrownieIntegrationRule, updateNxInteg
  * Update integration with different interfaces.
  * @param options
  */
-export function updateIntegration (host: Tree, options: NormalizedSchema): Rule {
+export function updateIntegration (options: NormalizedSchema): Rule {
   const integrationKeys: (keyof NormalizedSchema['priorConfiguration'])[] = [
     'components',
     'effectiveComponents',

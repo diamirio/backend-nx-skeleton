@@ -1,5 +1,6 @@
-import { AvailableDBAdapters, AvailableLinterTypes } from '@interfaces/available.constants'
+import { AvailableDBAdapters } from '@interfaces/available.constants'
 import { SchematicConstants } from '@src/interfaces'
+import { AvailableLinterTypes } from '@webundsoehne/nx-tools'
 
 /**
  * The options that it gets from angular-cli

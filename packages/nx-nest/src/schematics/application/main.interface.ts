@@ -1,17 +1,7 @@
-import {
-  AvailableComponents,
-  AvailableDBTypes,
-  AvailableServerTypes,
-  AvailableTestsTypes,
-  AvailableLinterTypes,
-  AvailableMicroserviceTypes,
-  AvailableDBAdapters,
-  AvailableExtensions,
-  AvailableSchemaModes
-} from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBTypes, AvailableServerTypes, AvailableMicroserviceTypes, AvailableDBAdapters, AvailableExtensions } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
-import { GeneratedNameCases } from '@webundsoehne/nx-tools'
+import { AvailableLinterTypes, AvailableSchemaModes, AvailableTestsTypes, GeneratedNameCases } from '@webundsoehne/nx-tools'
 import { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**

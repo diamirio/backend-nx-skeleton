@@ -17,15 +17,16 @@ import { Logger } from '@utils'
  * Will use prettier first, others after.
  * @param options
  */
-export function formatFiles (
-  options: FormatFilesOptions = {
-    skipFormat: false,
+export function formatFilesRule (options: FormatFilesOptions): Rule {
+  options = {
+    skip: false,
     prettier: true,
-    eslint: false
+    eslint: true,
+    ...options
   }
-): Rule {
+
   // insanity check
-  if (options.skipFormat || !(options.prettier && options.eslint)) {
+  if (options.skip || !(options.prettier && options.eslint)) {
     return noop()
   }
 
