@@ -35,7 +35,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
     const files = new Set(
       host.actions
-        .filter((action) => action.kind !== 'd')
+        .filter((action) => action.kind !== 'd' && action.kind !== 'r')
         .map((action: OverwriteFileAction | CreateFileAction) => ({
           path: action.path,
           content: action.content.toString()
