@@ -182,6 +182,9 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     ).find((c) => c.pkg === ctx.workspace.pkg)
 
     // this will be the command
-    await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null ], { stdio: 'inherit', shell: true })
+    await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null, this.isDebug ? '--verbose' : null ], {
+      stdio: 'inherit',
+      shell: true
+    })
   }
 }

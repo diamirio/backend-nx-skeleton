@@ -1,5 +1,5 @@
 import { NormalizedSchema as WorkspaceNormalizedSchema } from '../schematics/workspace/main.interface'
-import { AvailableCLIs, AvailableFolderStructures } from './available.constants'
+import { AvailableFolderStructures } from './available.constants'
 import { SchematicFiles } from '@webundsoehne/nx-tools'
 
 /**
@@ -8,10 +8,6 @@ import { SchematicFiles } from '@webundsoehne/nx-tools'
  */
 export function getSchematicFiles (options: WorkspaceNormalizedSchema): SchematicFiles {
   return {
-    [AvailableCLIs.ANGULAR]: {
-      condition: options.cli === AvailableCLIs.ANGULAR,
-      files: [ 'decorate-angular-cli.js' ]
-    },
     [AvailableFolderStructures.MULTIPLE]: {
       condition: options.layout === AvailableFolderStructures.MULTIPLE,
       folders: [ 'apps', 'libs' ]

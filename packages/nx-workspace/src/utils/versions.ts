@@ -12,10 +12,6 @@ export function calculateDependencies (cli: WorkspaceNormalizedSchema['cli']): P
     {
       condition: cli === AvailableCLIs.NX,
       deps: VERSIONS[AvailableCLIs.NX]
-    },
-    {
-      condition: cli === AvailableCLIs.ANGULAR,
-      deps: VERSIONS[AvailableCLIs.ANGULAR]
     }
   ])
 }

@@ -18,15 +18,15 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
       runInRule(log.info.bind(log)('Creating workspace files.')),
       createApplicationFiles(options),
 
+      formatTreeRule(),
+
       addGitTask({
         skipGit: options?.skipGit,
         root: options.root,
         commit: options?.commit
       }),
 
-      addInstallTask({ skipInstall: options.skipInstall, root: options.root }),
-
-      formatTreeRule()
+      addInstallTask({ skipInstall: options.skipInstall, root: options.root })
     ])
   }
 }

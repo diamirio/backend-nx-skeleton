@@ -17,7 +17,7 @@ import { Logger } from '@utils'
  * Will use prettier first, others after.
  * @param options
  */
-export function formatFilesRule (options: FormatFilesOptions): Rule {
+export function formatFilesRule (options?: FormatFilesOptions): Rule {
   options = {
     skip: false,
     prettier: true,
@@ -32,12 +32,10 @@ export function formatFilesRule (options: FormatFilesOptions): Rule {
 
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
-    // get root path
-    const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
 
     const files = new Set(
       host.actions
-        .filter((action) => action.kind !== 'd' && action.kind !== 'r')
+        .filter((action) => action.kind !== 'd')
         .map((action: OverwriteFileAction | CreateFileAction) => ({
           path: action.path,
           content: action.content.toString()
@@ -47,6 +45,11 @@ export function formatFilesRule (options: FormatFilesOptions): Rule {
     if (files.size === 0) {
       return host
     }
+
+    // get root path
+    const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
+
+    log.debug(`Application root path: ${appRootPath}`)
 
     let eslint: ESLint
     if (options.eslint) {

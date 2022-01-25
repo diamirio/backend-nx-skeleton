@@ -16,10 +16,8 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
     const source = url('./files')
 
     return chain([
-      branchAndMerge(
-        // just needs the url the rest it will do it itself
-        mergeWith(apply(source, generateRules(options, log)))
-      )
+      // just needs the url the rest it will do it itself
+      mergeWith(apply(source, generateRules(options, log)))
     ])
   }
 }
@@ -38,14 +36,7 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
 
   const template: CreateApplicationRuleInterface = {
     format: false,
-    include: getSchematicFiles(options),
-    templates: [
-      {
-        condition: true,
-        match: 'workspace',
-        rename: options.workspaceFile
-      }
-    ]
+    include: getSchematicFiles(options)
   }
 
   return createApplicationRule(template, options)

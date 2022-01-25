@@ -3,7 +3,7 @@ import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { AvailableCLICommands, AvailableCLIs, AvailableFolderStructures, AvailableWorkspaceFiles, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import { AvailableCLIs, AvailableFolderStructures, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
 import { color, eslintJson, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
@@ -94,22 +94,6 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         }
       },
 
-      // set project cli
-      {
-        skip: (ctx): boolean => !!ctx.cli,
-        task: async (ctx, task): Promise<void> => {
-          const choices = mapPromptChoices<AvailableCLIs>(AvailableCLIs, PrettyNamesForAvailableThingies)
-
-          ctx.cli = await task.prompt<AvailableCLIs>({
-            type: 'Select',
-            message: 'Please select a CLI to use.',
-            choices
-          })
-
-          task.title = `CLI set as: ${ctx.cli}`
-        }
-      },
-
       // set project folder structure
       {
         skip: (ctx): boolean => !!ctx.layout,
@@ -130,9 +114,6 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         title: 'Setting workspace constants...',
         task: async (ctx, task): Promise<void> => {
-          ctx.workspaceFile = AvailableWorkspaceFiles[ctx.cli]
-          ctx.cliCmd = AvailableCLICommands[ctx.cli]
-
           const deps = calculateDependencies(ctx.cli)
           ctx.deps = deps.deps
           ctx.devDeps = deps.devDeps

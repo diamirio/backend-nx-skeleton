@@ -5,27 +5,23 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    {% if cli == enum.cli.ANGULAR %}
-    "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js",
-    {% endif %}
     "nx": "nx",
-    "start": "{{ cliCmd }} run-many --target serve --parallel 1000 --all",
-    "start:one": "{{ cliCmd }} serve",
-    "build": "{{ cliCmd }} run-many --target build --all",
-    "build:one": "{{ cliCmd }} build",
+    "start": "nx run-many --target serve --parallel 1000 --all",
+    "start:one": "nx serve",
+    "build": "nx run-many --target build --all",
+    "build:one": "nx build",
     "build:nocache": "npm run build -- --skip-nx-cache",
-    "test": "{{ cliCmd }} run-many --target test --parallel 10 --all",
-    "test:one": "{{ cliCmd }} test",
-    "test:e2e": "{{ cliCmd }} run-many --target test:e2e --parallel 10 --all",
-    "test:e2e:one": "{{ cliCmd }} test:e2e",
-    "test:cov": "{{ cliCmd }} run-many --target test:cov --parallel 10 --all",
-    "test:cov:one": "{{ cliCmd }} test:cov",
-    "test:dev:dev": "{{ cliCmd }} test:dev",
-    "e2e": "{{ cliCmd }} run-many --target e2e --parallel 10 --all",
-    "e2e:one": "{{ cliCmd }} e2e",
-    "lint": "{{ cliCmd }} format:write --all && nx workspace-lint && npm run lint:check -- --fix",
-    "lint:check": "{{ cliCmd }} run-many --parallel 10 --target lint --all --",
+    "test": "nx run-many --target test --parallel 10 --all",
+    "test:one": "nx test",
+    "test:e2e": "nx run-many --target test:e2e --parallel 10 --all",
+    "test:e2e:one": "nx test:e2e",
+    "test:cov": "nx run-many --target test:cov --parallel 10 --all",
+    "test:cov:one": "nx test:cov",
+    "test:dev:dev": "nx test:dev",
+    "e2e": "nx run-many --target e2e --parallel 10 --all",
+    "e2e:one": "nx e2e",
+    "lint": "nx format:write --all && nx workspace-lint && npm run lint:check -- --fix",
+    "lint:check": "nx run-many --parallel 10 --target lint --all --",
     "affected": "nx affected",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -33,12 +29,7 @@
     "affected:test": "nx affected:test",
     "affected:lint": "nx format:write && nx affected:lint --parallel 10 --fix",
     "affected:dep-graph": "nx affected:dep-graph",
-    {% if cli == enum.cli.ANGULAR %}
-    "update": "ng update @nrwl/workspace",
-    {% endif %}
-    {% if cli == enum.cli.NX %}
     "update": "nx migrate latest",
-    {% endif %}
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
@@ -52,7 +43,7 @@
     "backend:migrate:rollback": "npm run nx -- run-many --target migration:rollback --parallel --all",
     "backend:migrate:rollback:one": "npm run nx -- migration:rollback",
     "backend:migrations:create:one": "npm run nx -- migration:create",
-    "backend:migrations:generate:one": "npm run nx -- migration:generate",
+    "backend:migrations:generate:one": "npm run nx -- migration:generate"
   },
   "simple-git-hooks": {
     "pre-commit": "lint-staged"

@@ -110,7 +110,6 @@ export class Logger {
 
     case 'info':
       if (this.options?.useIcons) {
-        coloring = color.green
         icon = figures.pointerSmall
       }
       break
@@ -118,7 +117,7 @@ export class Logger {
     case 'debug':
       if (this.options?.useIcons) {
         coloring = color.dim
-        icon = figures.play
+        icon = ''
       }
       break
     }

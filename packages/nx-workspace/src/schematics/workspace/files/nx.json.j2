@@ -1,7 +1,7 @@
 {
   "npmScope": "{{ packageScope }}",
   "implicitDependencies": {
-    "{{ workspaceFile }}.json": "*",
+    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
@@ -12,7 +12,8 @@
     ".eslintrc.json": "*",
     "nx.json": "*",
     "**/config/**": "*",
-    "**/assets/**": "*"
+    "**/assets/**": "*",
+    "**/public/**": "*"
   },
   "tasksRunnerOptions": {
     "runner": "@nrwl/workspace/tasks-runners/default",

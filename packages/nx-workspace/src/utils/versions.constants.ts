@@ -26,9 +26,5 @@ export const VERSIONS: Versions = {
 
   [AvailableCLIs.NX]: {
     devDeps: {}
-  },
-
-  [AvailableCLIs.ANGULAR]: {
-    devDeps: {}
   }
 }
