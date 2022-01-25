@@ -35,6 +35,12 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
               options,
               {
                 sourceRoot: 'src'
+              },
+              {
+                enum: {
+                  type: AvailableLibraryTypes,
+                  tests: AvailableTestsTypes
+                }
               }
             ]
           })

@@ -11,7 +11,12 @@ export interface Schema extends BaseSchema, BaseSchemaModes, CommonPropertiesToS
  * This is the parsed options after normalizing options.
  * It can not extend the default schema because types are different after parsed
  */
-export interface NormalizedSchema extends BaseNormalizedSchema, Schema, SchemaPriorConfiguration<DeepPartial<CommonPropertiesToSaveAndUse<true>>> {}
+export interface NormalizedSchema extends BaseNormalizedSchema, Schema, SchemaPriorConfiguration<DeepPartial<CommonPropertiesToSaveAndUse<true>>> {
+  enum: {
+    type: typeof AvailableLibraryTypes
+    tests: typeof AvailableTestsTypes
+  }
+}
 
 interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   type: Values extends true ? AvailableLibraryTypes : typeof AvailableLibraryTypes

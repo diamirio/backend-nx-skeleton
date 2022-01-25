@@ -51,14 +51,12 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           // ensure that git is installed
           {
             title: 'Being sure that GIT is installed.',
-            task: async (ctx, task): Promise<void> => {
+            task: async (_, task): Promise<void> => {
               try {
                 const gitVersion = await execa('git', [ '--version' ])
                 task.title = `Found git version: ${gitVersion.stdout}`
-              } catch (e) {
-                this.logger.debug(e)
-                this.logger.fail('GIT not available on the sytem or can not reach it!. Quitting.')
-                process.exit(10)
+              } catch {
+                throw new Error('GIT not available on the system or can not reach it!. Quitting.')
               }
             }
           }

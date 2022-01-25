@@ -17,12 +17,12 @@
   registry: 'https://verdaccio.webundsoehne.com'
   description: 'General purpose workspace schematic extended from the default.'
   schematics:
+    - name: library
+      description: Create a library.
     - name: move
       description: Move a project under a different name.
     - name: remove
       description: Remove a project from the workspace.
-    - name: library
-      description: Create a library.
 
 - pkg: '@webundsoehne/nx-tools'
   description: 'Some generic tools for nx.'
