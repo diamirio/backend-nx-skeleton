@@ -36,7 +36,6 @@ export function normalizePackageJsonNameForParentTask<Ctx extends BaseSchemaPare
     ...normalizeWorkspacePackageScopeTask(host),
 
     {
-      title: 'Generating package.json name.',
       task: (ctx): void => {
         ctx.packageName = `@${ctx.packageScope}/${ctx.parent}`
       }
