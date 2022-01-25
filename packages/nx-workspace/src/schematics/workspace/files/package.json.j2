@@ -14,7 +14,7 @@
     "start:one": "{{ cliCmd }} serve",
     "build": "{{ cliCmd }} run-many --target build --all",
     "build:one": "{{ cliCmd }} build",
-    "build:nocache": "yarn build --skip-nx-cache",
+    "build:nocache": "npm run build -- --skip-nx-cache",
     "test": "{{ cliCmd }} run-many --target test --parallel 10 --all",
     "test:one": "{{ cliCmd }} test",
     "test:e2e": "{{ cliCmd }} run-many --target test:e2e --parallel 10 --all",
@@ -42,9 +42,9 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
-    "backend:command:one": "npm run nx -- command"
+    "backend:command:one": "npm run nx -- command",
     "backend:seed": "npm run nx -- run-many --target seed --parallel --all",
-    "backend:seed:one": "npm run nx -- seed"
+    "backend:seed:one": "npm run nx -- seed",
     "backend:migrate": "npm run nx -- run-many --target migration --parallel --all",
     "backend:migrate:one": "npm run nx -- migration",
     "backend:migrate:mock": "npm run nx -- run-many --target migration:mock-run --parallel --all",
