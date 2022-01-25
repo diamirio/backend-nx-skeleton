@@ -1,36 +1,27 @@
+import { NxNestProjectIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
-import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
+import { NormalizedSchema as ApplicationNormalizedSchema } from '@schematics/application/main.interface'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
-import { EnrichedProjectConfiguration, GeneratedNameCases } from '@webundsoehne/nx-tools'
+import { BaseNormalizedSchemaWithParent, BaseSchemaWithParent, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed schema coming from the angular-schematics
  */
-export interface Schema {
-  name: string
-  parent: string
-  skipFormat: boolean
+export interface Schema extends BaseSchemaWithParent<NxNestProjectIntegration> {
   type: AvailableComponentsSelection
-  force: boolean
-  silent: boolean
-  mount?: string
-  parentProjectConfiguration: EnrichedProjectConfiguration
 }
 
 /**
  * This is the parsed schema through normalize options.
  */
-export interface NormalizedSchema extends Schema {
-  root: string
-  packageScope: string
+export interface NormalizedSchema extends Schema, BaseNormalizedSchemaWithParent<ApplicationNormalizedSchema['priorConfiguration']> {
   casing: GeneratedNameCases & {
     injected: {
       microservices: GeneratedMicroserviceCasing
     }
   }
   constants: typeof SchematicConstants
-  parentPriorConfiguration: ApplicationNormalizedSchema['priorConfiguration']
 }
 
 /**

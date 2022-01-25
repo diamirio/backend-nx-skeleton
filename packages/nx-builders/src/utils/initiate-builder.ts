@@ -1,7 +1,7 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 import { addDepsToPackageJson } from '@nrwl/workspace'
 
-import { Schema } from '@src/schematics/init/main.interface'
+import { Schema } from '@schematics/init/main.interface'
 import { calculateDependencies } from '@utils/versions'
 
 /**

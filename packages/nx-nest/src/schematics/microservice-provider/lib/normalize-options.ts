@@ -2,12 +2,12 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@src/integration'
-import { SchematicConstants } from '@src/interfaces'
+import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 import {
   isVerbose,
-  normalizePackageJsonScopeTask,
+  normalizePackageJsonNameTask,
   normalizePriorConfigurationTask,
   normalizeRootDirectoryTask,
   NxProjectTypes,
@@ -34,13 +34,13 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // normalize package json scope
-      normalizePackageJsonScopeTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
 
       // set project root directory
-      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'microserviceProvider'),
+      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'microserviceProvider'),
 
       // parse microservices for templates
       {

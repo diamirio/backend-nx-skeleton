@@ -5,7 +5,7 @@ import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
-import init from '@src/schematics/init/main'
+import init from '@schematics/init/main'
 import { eslintJson, addEslintConfigRule, formatTreeRule, Logger, runInRule, updateTsConfigPathsRule, LINTER_VERSIONS, SchematicRule } from '@webundsoehne/nx-tools'
 
 /**

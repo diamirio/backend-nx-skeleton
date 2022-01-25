@@ -1,8 +1,8 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { AvailableLinterTypes } from '@constants/available.constants'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
 import { runInRule } from '@rules/run.rule'
-import { AvailableLinterTypes } from '@src/constants/available.constants'
 import { Logger } from '@utils'
 
 /**

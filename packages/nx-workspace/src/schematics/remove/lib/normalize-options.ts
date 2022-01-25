@@ -1,8 +1,8 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { Schema, NormalizedSchema } from '../main.interface'
-import { readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { NormalizedSchema, Schema } from '../main.interface'
+import { normalizeParentApplicationTask, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -21,21 +21,6 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       }
     },
 
-    {
-      skip: (ctx): boolean => !!ctx.projectName,
-      task: async (ctx, task): Promise<void> => {
-        const projects = readWorkspaceProjects(host)
-
-        if (Object.keys(projects).length === 0) {
-          throw new Error('No project has been found in the workspace.')
-        }
-
-        ctx.projectName = await task.prompt({
-          type: 'AutoComplete',
-          message: 'Please select an existing application.',
-          choices: Object.keys(projects)
-        })
-      }
-    }
+    ...normalizeParentApplicationTask<NormalizedSchema, never>(host)
   ]).run()
 }

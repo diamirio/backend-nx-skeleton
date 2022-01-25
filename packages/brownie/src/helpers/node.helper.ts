@@ -15,7 +15,7 @@ import {
   PackageManagerUsableCommands
 } from './node.helper.interface'
 import { Configuration } from '@interfaces/default-config.interface'
-import { NodeDependency } from '@src/interfaces/dependency.interface'
+import { NodeDependency } from '@interfaces/dependency.interface'
 import { findNxRoot } from '@webundsoehne/nx-tools/dist/utils/file-system/find-nx-root'
 import { pipeProcessThroughListr } from '@webundsoehne/nx-tools/dist/utils/logger/pipe-process-to-listr'
 

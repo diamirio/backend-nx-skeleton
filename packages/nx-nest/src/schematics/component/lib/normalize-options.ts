@@ -1,18 +1,24 @@
 import { normalize } from '@angular-devkit/core'
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { names } from '@nrwl/devkit'
-import { readNxJson } from '@nrwl/workspace'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
 import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
+import { NxNestProjectIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
-import { NxNestProjectIntegration } from '@src/integration'
-import { SchematicConstants } from '@src/interfaces'
-import { generateMicroserviceCasing } from '@src/utils'
-import { ConvertToPromptType, generateNameCases, isVerbose, normalizeParentConfigurationTask, readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { generateMicroserviceCasing } from '@utils'
+import {
+  ConvertToPromptType,
+  generateNameCases,
+  isVerbose,
+  normalizeNameWithParentApplicationTask,
+  normalizeParentConfigurationTask,
+  normalizeWorkspacePackageScopeTask,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Tree} host
@@ -33,66 +39,33 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      // prompt parent application
-      {
-        skip: (ctx): boolean => !!ctx.parent,
-        task: async (ctx, task): Promise<void> => {
-          const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
-
-          if (Object.keys(projects).length === 0) {
-            throw new Error('No project has been found in the workspace.')
-          }
-
-          ctx.parent = await task.prompt({
-            type: 'AutoComplete',
-            message: 'Please select an existing application as the parent.',
-            choices: Object.entries(projects).reduce((o, [ name, project ]) => {
-              if (project.integration?.nestjs) {
-                o = [ ...o, name ]
-              }
-
-              return o
-            }, [] as string[])
-          })
+      ...normalizeNameWithParentApplicationTask<NormalizedSchema, NxNestProjectIntegration>(host, (name, project) => {
+        if (project.integration?.nestjs) {
+          return true
         }
-      },
-
-      // prompt for component name
-      {
-        skip: (ctx): boolean => !!ctx.name,
-        task: async (ctx, task): Promise<void> => {
-          ctx.name = await task.prompt({
-            type: 'Input',
-            message: 'Please give a name to will be generated component.'
-          })
-        }
-      },
+      }),
 
       // check for parent application configuration
-      normalizeParentConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs', [ 'root', 'sourceRoot' ]),
+      ...normalizeParentConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+
+      // need package scope for imports and such
+      ...normalizeWorkspacePackageScopeTask(host),
 
       // parse component name and convert casings to use in template
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = names(ctx.name).fileName
+          const names = generateNameCases(ctx.name)
+          ctx.name = names.kebab
 
           ctx.casing = {
-            ...generateNameCases(ctx.name),
+            ...names,
             injected: {
               microservices: generateMicroserviceCasing(ctx.parent)
             }
           }
 
           task.title = `Component name is set as "${ctx.name}".`
-        }
-      },
-
-      // need package scope for imports and such
-      {
-        task: (ctx): void => {
-          const nxJson = readNxJson()
-          ctx.packageScope = `${nxJson.npmScope}`
         }
       },
 
@@ -161,12 +134,12 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
       // ask for controller root when server
       {
-        enabled: (ctx): boolean => ctx.mount === undefined,
+        enabled: (ctx): boolean => ctx.directory === undefined,
         skip: (ctx): boolean => ctx.type !== AvailableServerTypes.RESTFUL,
         task: async (ctx, task): Promise<void> => {
-          ctx.mount = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
+          ctx.directory = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
 
-          task.title = `Component mount point set as: ${ctx.mount}`
+          task.title = `Component mount point set as: ${ctx.directory}`
         }
       }
     ],

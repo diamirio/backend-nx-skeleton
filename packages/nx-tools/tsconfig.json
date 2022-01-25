@@ -6,7 +6,6 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["*"],
       "@constants/*": ["constants/*"],
       "@integration/*": ["integration/*"],
       "@interfaces/*": ["interfaces/*"],
@@ -14,8 +13,15 @@
       "@schematics/*": ["schematics/*"],
       "@templates/*": ["templates/*"],
       "@tasks/*": ["tasks/*"],
-      "@utils": ["utils/index"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@constants": ["constants"],
+      "@integration": ["integration"],
+      "@interfaces": ["interfaces"],
+      "@rules": ["rules"],
+      "@schematics": ["schematics"],
+      "@templates": ["templates"],
+      "@tasks": ["tasks"],
+      "@utils": ["utils"]
     }
   },
   "include": ["src"],

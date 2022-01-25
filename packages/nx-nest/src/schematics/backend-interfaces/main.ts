@@ -5,7 +5,7 @@ import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
-import { SchematicConstants } from '@src/interfaces'
+import { SchematicConstants } from '@interfaces'
 import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {

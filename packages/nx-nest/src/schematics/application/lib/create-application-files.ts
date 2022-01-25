@@ -4,10 +4,10 @@ import { join } from 'path'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableGenerators, AvailableServerTypes } from '@interfaces/available.constants'
-import { Schema as BackendInterfacesSchema } from '@src/schematics/backend-interfaces/main.interface'
-import { Schema as ComponentSchema } from '@src/schematics/component/main.interface'
-import { Schema as GeneratorSchema } from '@src/schematics/generator/main.interface'
-import { Schema as MspSchema } from '@src/schematics/microservice-provider/main.interface'
+import { Schema as BackendInterfacesSchema } from '@schematics/backend-interfaces/main.interface'
+import { Schema as ComponentSchema } from '@schematics/component/main.interface'
+import { Schema as GeneratorSchema } from '@schematics/generator/main.interface'
+import { Schema as MspSchema } from '@schematics/microservice-provider/main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
 import { addSchematicTask, applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
 
@@ -26,7 +26,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
       force: true,
       name: 'default',
       parent: options.name,
-      mount: '/',
+      directory: '/',
       silent: true,
       skipFormat: true,
       parentProjectConfiguration: {

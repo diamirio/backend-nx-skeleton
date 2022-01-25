@@ -1,6 +1,6 @@
 import { VERSIONS } from './versions.constants'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
-import { NormalizedSchema } from '@src/schematics/application/main.interface'
+import { NormalizedSchema } from '@schematics/application/main.interface'
 import { PackageVersions, dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 /**

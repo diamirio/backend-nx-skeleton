@@ -1,4 +1,4 @@
-import { NxProjectTypes } from '@src/constants/nx.constants'
+import { NxProjectTypes } from '@constants/nx.constants'
 
 /**
  * workspace.json is where all of the nx data is stored.

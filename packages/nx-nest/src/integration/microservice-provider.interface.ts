@@ -1,8 +1,8 @@
-import { Schema as ApplicationSchema } from '@schematics/application/main.interface'
+import { NormalizedSchema as ApplicationNormalizedSchema } from '@schematics/application/main.interface'
 
 export interface MicroserviceProviderWorkspaceIntegration {
   name: string
   root: string
   sourceRoot: string
-  microservice: ApplicationSchema['microservice']
+  microservice: ApplicationNormalizedSchema['microservice']
 }

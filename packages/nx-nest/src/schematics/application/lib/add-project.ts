@@ -4,8 +4,8 @@ import { join } from 'path'
 import { SchematicTargets } from '../interfaces/add-project.interface'
 import { SchematicFilesMap } from '../interfaces/file.constants'
 import { NormalizedSchema } from '../main.interface'
+import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
 import {
   AvailableTestsTypes,
   createWorkspaceProjectRule,

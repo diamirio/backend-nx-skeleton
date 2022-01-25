@@ -3,7 +3,7 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { formatTreeRule, runInRule } from '@src/rules'
+import { formatTreeRule, runInRule } from '@rules'
 import { Logger } from '@utils'
 
 /**

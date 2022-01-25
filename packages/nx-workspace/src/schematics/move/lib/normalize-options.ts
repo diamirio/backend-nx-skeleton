@@ -1,8 +1,8 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { Schema, NormalizedSchema } from '../main.interface'
-import { readProjectConfiguration, readWorkspaceProjects, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { NormalizedSchema, Schema } from '../main.interface'
+import { normalizeNameWithParentAndDestinationTask, readProjectConfiguration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -21,42 +21,11 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       }
     },
 
-    {
-      skip: (ctx): boolean => !!ctx.projectName,
-      task: async (ctx, task): Promise<void> => {
-        const projects = readWorkspaceProjects(host)
-
-        if (Object.keys(projects).length === 0) {
-          throw new Error('No project has been found in the workspace.')
-        }
-
-        ctx.projectName = await task.prompt({
-          type: 'AutoComplete',
-          message: 'Please select an existing application.',
-          choices: Object.keys(projects)
-        })
-      }
-    },
-
-    {
-      skip: (ctx): boolean => !!ctx.destination,
-      task: async (ctx, task): Promise<void> => {
-        ctx.destination = await task.prompt({
-          type: 'Input',
-          message: 'Please give a new name to the project.'
-        })
-      }
-    },
+    ...normalizeNameWithParentAndDestinationTask<NormalizedSchema, never>(host),
 
     {
       task: async (ctx): Promise<void> => {
-        ctx.project = readProjectConfiguration(host, ctx.projectName)
-      }
-    },
-
-    {
-      task: async (ctx): Promise<void> => {
-        ctx.project = readProjectConfiguration(host, ctx.projectName)
+        ctx.project = readProjectConfiguration(host, ctx.parent)
       }
     }
   ]).run()

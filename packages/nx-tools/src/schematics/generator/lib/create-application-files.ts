@@ -2,9 +2,9 @@ import { apply, chain, externalSchematic, Rule, SchematicContext, Tree, url } fr
 import { join } from 'path'
 
 import { NormalizedSchema } from '../main.interface'
+import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface } from '@rules'
 import { Schema as ExportsSchema } from '@schematics/exports/main.interface'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface } from '@src/rules'
-import { Logger } from '@src/utils'
+import { Logger } from '@utils'
 
 /**
  * @param  {NormalizedSchema} options This should be the options parsed through.

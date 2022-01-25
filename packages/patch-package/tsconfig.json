@@ -6,7 +6,6 @@
     "baseUrl": "src",
     "strictNullChecks": false,
     "paths": {
-      "@src/*": ["*"],
       "@commands/*": ["commands/*"],
       "@helpers/*": ["helpers/*"],
       "@interfaces/*": ["interfaces/*"],

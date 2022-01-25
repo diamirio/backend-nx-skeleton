@@ -6,6 +6,17 @@
   "examples": [],
   "type": "object",
   "properties": {
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean",
+      "aliases": ["skip-format"]
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
     "force": {
       "description": "Do not prompt for overwrites.",
       "type": "boolean"

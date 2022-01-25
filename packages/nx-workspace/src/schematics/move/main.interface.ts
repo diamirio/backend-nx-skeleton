@@ -1,16 +1,10 @@
-import { Schema as BaseSchema } from '@nrwl/workspace/src/generators/move/schema'
+import { BaseSchemaWithParentAndDestination, EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
 
-import { EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
-
-export interface Schema {
-  projectName: string
-  destination: string
+export interface Schema extends BaseSchemaWithParentAndDestination {
   importPath?: string
-  updateImportPath: boolean
-  skipFormat?: boolean
+  updateImportPath?: boolean
 }
 
-export interface NormalizedSchema extends BaseSchema {
+export interface NormalizedSchema extends Schema {
   project: EnrichedProjectConfiguration
-  packageName: string
 }

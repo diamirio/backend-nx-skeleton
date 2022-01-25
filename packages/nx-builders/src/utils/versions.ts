@@ -1,6 +1,6 @@
 import { VERSIONS } from './versions.constants'
 import { AvailableBuilders } from '@interfaces/available.constants'
-import { Schema } from '@src/schematics/init/main.interface'
+import { Schema } from '@schematics/init/main.interface'
 import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies

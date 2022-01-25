@@ -11,7 +11,7 @@ import { join, resolve, isAbsolute, basename } from 'path'
 import rewire from 'rewire'
 import tmp from 'tmp-promise'
 
-import { ApplicationConfiguration } from '@src/interfaces/config.interface'
+import { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false

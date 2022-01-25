@@ -1,12 +1,11 @@
 import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { names } from '@nrwl/devkit'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { NormalizedSchema, Schema } from '../main.interface'
 import { AvailableCLICommands, AvailableCLIs, AvailableFolderStructures, AvailableWorkspaceFiles, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
-import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext, color, eslintJson } from '@webundsoehne/nx-tools'
+import { color, eslintJson, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -42,7 +41,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             message: 'Please give a folder name to this repository.',
             footer: color.dim(`Leave empty to use current folder: ${process.cwd()}`),
             format: (value) => {
-              return names(value).fileName
+              return generateNameCases(value).kebab
             }
           })
 
@@ -82,7 +81,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
               return true
             },
             format: (value) => {
-              return names(value).fileName
+              return generateNameCases(value).kebab
             }
           })
         }

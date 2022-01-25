@@ -1,9 +1,5 @@
-import { Schema as BaseSchema } from '@nrwl/workspace/src/generators/remove/schema'
+import { BaseSchemaWithParent } from '@webundsoehne/nx-tools'
 
-export interface Schema {
-  projectName: string
-  skipFormat: boolean
-  forceRemove: boolean
-}
+export type Schema = BaseSchemaWithParent
 
-export type NormalizedSchema = BaseSchema
+export type NormalizedSchema = Schema

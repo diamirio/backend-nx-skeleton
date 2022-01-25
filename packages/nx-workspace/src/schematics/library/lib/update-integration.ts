@@ -1,8 +1,8 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
-import { NxWorkspaceIntegration } from '@src/integration'
-import { AvailableLibraryTypes } from '@src/interfaces'
+import { NxWorkspaceIntegration } from '@integration'
+import { AvailableLibraryTypes } from '@interfaces'
 import { BrownieAvailableContainers, updateBrownieIntegrationRule, updateNxIntegrationRule } from '@webundsoehne/nx-tools'
 
 /**

@@ -1,7 +1,7 @@
 import { chain, Rule } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
-import { NxNestProjectIntegration } from '@src/integration'
+import { NxNestProjectIntegration } from '@integration'
 import { updateNxIntegrationRule } from '@webundsoehne/nx-tools'
 
 export function updateIntegration (options: NormalizedSchema): Rule {

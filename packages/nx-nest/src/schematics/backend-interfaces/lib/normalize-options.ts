@@ -2,17 +2,18 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration } from '@src/integration'
-import { readBackendInterfacesWorkspaceIntegration } from '@src/integration/backend-interfaces'
-import { AvailableDBAdapters, SchematicConstants } from '@src/interfaces'
+import { NxNestProjectIntegration } from '@integration'
+import { readBackendInterfacesWorkspaceIntegration } from '@integration/backend-interfaces'
+import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
 import {
   isVerbose,
-  normalizePackageJsonScopeTask,
+  normalizeWorkspacePackageScopeTask,
   normalizePriorConfigurationTask,
   normalizeRootDirectoryTask,
   NxProjectTypes,
-  setSchemaDefaultsInContext
+  setSchemaDefaultsInContext,
+  normalizeNameTask
 } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
@@ -37,24 +38,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // select application name
-      {
-        skip: (ctx): boolean => !!ctx.name,
-        task: async (ctx, task): Promise<void> => {
-          ctx.name = await task.prompt({
-            type: 'Input',
-            message: 'Give the library a name.'
-          })
-        }
-      },
+      ...normalizeNameTask<NormalizedSchema>(),
 
       // normalize package json scope
-      normalizePackageJsonScopeTask<NormalizedSchema>(host),
+      ...normalizeWorkspacePackageScopeTask<NormalizedSchema>(host),
 
       // set project root directory
-      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'backendInterfaces'),
+      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'backendInterfaces'),
 
       // parse microservices for templates
       {

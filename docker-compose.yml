@@ -3,7 +3,7 @@ services:
   monorepo:
     image: cenk1cenk2/node-fnm:latest
     environment:
-      SYNC_WAIT: 12
+      SYNC_WAIT: 15
       PROXY_PACKAGES_FOLDER: packages/
       SERVICE_0_CWD: packages/ts-utility-types
       SERVICE_0_NAME: ts-utility-types
@@ -31,6 +31,7 @@ services:
       SERVICE_9_NAME: nx-workspace
       SERVICE_10_CWD: packages/nestjs-keycloak
       SERVICE_10_NAME: nestjs-keycloak
+      SERVICE_10_SYNC: 'true'
       SERVICE_11_CWD: packages/nestjs-keycloak-seeder
       SERVICE_11_NAME: nestjs-keycloak-seeder
     volumes:

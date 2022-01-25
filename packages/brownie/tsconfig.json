@@ -7,7 +7,6 @@
     "strictNullChecks": false,
     "sourceMap": true,
     "paths": {
-      "@src/*": ["*"],
       "@commands/*": ["commands/*"],
       "@helpers/*": ["helpers/*"],
       "@interfaces/*": ["interfaces/*"],

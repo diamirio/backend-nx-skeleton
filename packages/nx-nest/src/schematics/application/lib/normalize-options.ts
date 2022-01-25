@@ -2,6 +2,8 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import {
   AvailableComponents,
   AvailableDBAdapters,
@@ -11,21 +13,18 @@ import {
   AvailableServerTypes,
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
-import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@src/integration'
-import { SchematicConstants } from '@src/interfaces'
-import { generateMicroserviceCasing } from '@src/utils'
+import { generateMicroserviceCasing } from '@utils'
 import {
-  AvailableSchemaModes,
   AvailableTestsTypes,
   generateNameCases,
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  normalizePackageJsonScopeTask,
+  normalizeNameWithApplicationModeTask,
+  normalizePackageJsonNameTask,
   normalizePriorConfigurationTask,
   normalizeRootDirectoryTask,
   NxProjectTypes,
-  readWorkspaceProjects,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
@@ -69,58 +68,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      // select generator mode
-      {
-        skip: (ctx): boolean => !!ctx.mode,
-        task: async (ctx, task): Promise<void> => {
-          const choices = mapPromptChoices<AvailableSchemaModes>(AvailableSchemaModes, PrettyNamesForAvailableThingies)
-
-          ctx.mode = await task.prompt({
-            type: 'Select',
-            message: 'Select the generator mode.',
-            choices
-          })
-        }
-      },
-
-      // select application name
-      {
-        skip: (ctx): boolean => !(ctx.mode === AvailableSchemaModes.CREATE && !ctx.name),
-        task: async (ctx, task): Promise<void> => {
-          ctx.name = await task.prompt({
-            type: 'Input',
-            message: 'Give the new application a name.'
-          })
-        }
-      },
-
-      {
-        skip: (ctx): boolean => !(ctx.mode === AvailableSchemaModes.MODIFY && !ctx.name),
-        task: async (ctx, task): Promise<void> => {
-          const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
-
-          ctx.name = await task.prompt({
-            type: 'AutoComplete',
-            message: 'Please select an existing application.',
-            choices: Object.entries(projects).reduce((o, [ name, project ]) => {
-              if (project.integration?.nestjs) {
-                o = [ ...o, name ]
-              }
-
-              return o
-            }, [] as string[])
-          })
-        }
-      },
+      ...normalizeNameWithApplicationModeTask<NormalizedSchema, NxNestProjectIntegration>(host, (_, project) => !!project.integration?.nestjs),
 
       // normalize package json scope
-      normalizePackageJsonScopeTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
 
       // set project root directory
-      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.APP),
+      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.APP),
 
       // check for prior configuration
-      normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
 
       // select server functionality
       {
@@ -314,6 +271,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: async (ctx): Promise<void> => {
           const casing = generateNameCases(ctx.name)
+
           ctx.casing = casing
         }
       }

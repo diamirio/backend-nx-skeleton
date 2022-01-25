@@ -2,15 +2,15 @@ import { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import { NormalizedSchema, Schema } from '../main.interface'
+import { NxWorkspaceIntegration } from '@integration'
 import { AvailableLibraryTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
-import { NxWorkspaceIntegration } from '@src/integration'
 import {
   AvailableSchemaModes,
   AvailableTestsTypes,
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  normalizePackageJsonScopeTask,
+  normalizePackageJsonNameTask,
   normalizePriorConfigurationTask,
   normalizeRootDirectoryTask,
   NxProjectTypes,
@@ -86,13 +86,13 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // normalize package json scope
-      normalizePackageJsonScopeTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
 
       // set project root directory
-      normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      normalizePriorConfigurationTask<NormalizedSchema, NxWorkspaceIntegration>(host, 'library'),
+      ...normalizePriorConfigurationTask<NormalizedSchema, NxWorkspaceIntegration>(host, 'library'),
 
       // select library type
       {

@@ -6,9 +6,14 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["*"],
+      "@builders/*": ["builders/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@schematics/*": ["schematics/*"],
       "@utils/*": ["utils/*"],
-      "@interfaces/*": ["interfaces/*"]
+      "@builders": ["builders"],
+      "@interfaces": ["interfaces"],
+      "@schematics": ["schematics"],
+      "@utils": ["utils"]
     }
   },
   "include": ["src"],

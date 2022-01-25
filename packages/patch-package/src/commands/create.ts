@@ -6,7 +6,7 @@ import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
 import { makePatch } from 'patch-package/dist/makePatch'
 import { isAbsolute } from 'path'
 
-import { ApplicationConfiguration } from '@src/interfaces/config.interface'
+import { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false

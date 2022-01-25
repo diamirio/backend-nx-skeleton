@@ -1,4 +1,4 @@
-import { CommonNodeDependency } from '@src/interfaces/dependency.interface'
+import { CommonNodeDependency } from '@interfaces/dependency.interface'
 
 export interface NodeHelperCtx {
   fail: Partial<Record<AvailablePackageManagers, boolean>>

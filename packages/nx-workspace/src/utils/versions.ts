@@ -1,6 +1,6 @@
 import { VERSIONS } from './versions.constants'
 import { AvailableCLIs } from '@interfaces/available.constants'
-import { NormalizedSchema as WorkspaceNormalizedSchema } from '@src/schematics/workspace/main.interface'
+import { NormalizedSchema as WorkspaceNormalizedSchema } from '@schematics/workspace/main.interface'
 import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies

@@ -6,12 +6,16 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["*"],
       "@utils/*": ["utils/*"],
       "@interfaces/*": ["interfaces/*"],
       "@constants/*": ["constants/*"],
       "@integration/*": ["integration/*"],
-      "@schematics/*": ["schematics/*"]
+      "@schematics/*": ["schematics/*"],
+      "@utils": ["utils"],
+      "@interfaces": ["interfaces"],
+      "@constants": ["constants"],
+      "@integration": ["integration"],
+      "@schematics": ["schematics"]
     }
   },
   "include": ["src"],
