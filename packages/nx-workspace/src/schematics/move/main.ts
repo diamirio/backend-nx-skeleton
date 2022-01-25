@@ -3,7 +3,7 @@ import { Schema as NrwlSchema } from '@nrwl/workspace/src/generators/move/schema
 
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { formatTreeRule, removeTsconfigPathsRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
+import { formatTreeRule, removeTsConfigPathsRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): Rule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -18,10 +18,10 @@ export default function (schema: Schema): Rule {
         skipFormat: options.skipFormat
       }),
 
-      removeTsconfigPathsRule({ packageName: options.parent }),
+      removeTsConfigPathsRule({ packageName: options.packageName }),
 
       updateTsConfigPathsRule({
-        packageName: options.parent,
+        packageName: options.packageName,
         root: options.project.root,
         sourceRoot: options.project.sourceRoot
       }),

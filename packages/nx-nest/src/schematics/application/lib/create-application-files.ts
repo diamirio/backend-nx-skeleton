@@ -26,7 +26,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
       force: true,
       name: 'default',
       parent: options.name,
-      directory: '/',
+      mount: '/',
       silent: true,
       skipFormat: true,
       parentProjectConfiguration: {

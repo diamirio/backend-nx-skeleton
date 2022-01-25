@@ -134,12 +134,12 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
       // ask for controller root when server
       {
-        enabled: (ctx): boolean => ctx.directory === undefined,
+        enabled: (ctx): boolean => ctx.mount === undefined,
         skip: (ctx): boolean => ctx.type !== AvailableServerTypes.RESTFUL,
         task: async (ctx, task): Promise<void> => {
-          ctx.directory = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
+          ctx.mount = await task.prompt({ type: 'Input', message: 'Please give a mount point to this component.' })
 
-          task.title = `Component mount point set as: ${ctx.directory}`
+          task.title = `Component mount point set as: ${ctx.mount}`
         }
       }
     ],

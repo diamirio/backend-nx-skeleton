@@ -10,6 +10,7 @@ import { BaseNormalizedSchemaWithParent, BaseSchemaWithParent, GeneratedNameCase
  */
 export interface Schema extends BaseSchemaWithParent<NxNestProjectIntegration> {
   type: AvailableComponentsSelection
+  mount?: string
 }
 
 /**
