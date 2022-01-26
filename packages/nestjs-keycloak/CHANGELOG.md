@@ -1,3 +1,11 @@
+## @webundsoehne/nestjs-keycloak [1.0.13-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.12...@webundsoehne/nestjs-keycloak@1.0.13-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
 ## @webundsoehne/nestjs-keycloak [1.0.12](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@1.0.11...@webundsoehne/nestjs-keycloak@1.0.12) (2022-01-10)
 
 ### Bug Fixes
