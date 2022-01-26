@@ -7,7 +7,8 @@ import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
 import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 import { Configuration } from '@interfaces/default-config.interface'
-import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
+import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
+import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
@@ -22,6 +23,11 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       description: 'Force override for schematic.',
       default: false,
       char: 'f'
+    }),
+    develop: flags.boolean({
+      description: 'Puts the underlying schematics to development mode, if they support it.',
+      default: false,
+      char: 'd'
     })
   }
 
@@ -35,6 +41,12 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   public async run (): Promise<void> {
     // get oclif parameters
     const { flags } = this.parse(WorkspaceCreateCommand)
+
+    if (flags.develop) {
+      setDevelopmentMode()
+
+      this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
+    }
 
     // initiate variables
     this.tasks.ctx = new WorkspaceCreateCommandCtx()

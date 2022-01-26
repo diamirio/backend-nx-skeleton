@@ -1,6 +1,7 @@
 export * from './defaults'
 export * from './is-context'
 export * from './is-verbose'
+export * from './is-development-mode'
 export * from './generate-name-cases'
 export * from './generate-name-cases.interface'
 export * from './dependency-calculator'

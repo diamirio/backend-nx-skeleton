@@ -10,6 +10,7 @@ import { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.inte
 import { Configuration } from '@interfaces/default-config.interface'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
+import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
@@ -20,7 +21,12 @@ export class NxCommand extends BaseCommand<Configuration> {
       default: false,
       char: 's'
     }),
-    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' })
+    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }),
+    develop: flags.boolean({
+      description: 'Puts the underlying schematics to development mode, if they support it.',
+      default: false,
+      char: 'd'
+    })
   }
 
   private helpers: { node: NodeHelper }
@@ -31,6 +37,13 @@ export class NxCommand extends BaseCommand<Configuration> {
 
   public async run (): Promise<void> {
     const { flags } = this.parse(NxCommand)
+
+    if (flags.develop) {
+      setDevelopmentMode()
+
+      this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
+    }
+
     // get config
     const { config } = await this.getConfig<NxSchematicsConfig[]>('nx-schematics.config.yml')
 
