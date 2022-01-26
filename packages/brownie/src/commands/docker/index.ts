@@ -54,6 +54,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   public async construct (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
+
     this.helpers = {
       docker: new DockerHelper(this, {
         flags: {

@@ -17,7 +17,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
 
     return chain([
       // just needs the url the rest it will do it itself
-      mergeWith(apply(source, generateRules(options, log)))
+      branchAndMerge(mergeWith(apply(source, generateRules(options, log))))
     ])
   }
 }

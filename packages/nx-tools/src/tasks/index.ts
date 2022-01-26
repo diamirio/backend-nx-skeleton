@@ -1,3 +1,6 @@
 export * from './install-dependencies'
 export * from './initialize-git'
 export * from './run-schematic-after'
+export * from './run-workspace-script'
+export * from './manage-multiple-tasks'
+export * from './manage-multiple-tasks.interface'

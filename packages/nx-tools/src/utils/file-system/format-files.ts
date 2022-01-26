@@ -1,13 +1,13 @@
-import { CreateFileAction, noop, OverwriteFileAction, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { findWorkspaceRoot } from '@nrwl/cli/lib/find-workspace-root'
+import { noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { ESLint } from 'eslint'
 import * as path from 'path'
 import prettier from 'prettier'
 import { from, Observable } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
+import { getFilesInTree } from '.'
 import { FormatFilesOptions } from './format-files.interface'
-import { Logger } from '@utils'
+import { findNxRoot, Logger } from '@utils'
 
 /**
  * Format files as a rule in a tree.
@@ -33,23 +33,16 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
-    const files = new Set(
-      host.actions
-        .filter((action) => action.kind !== 'd' && action.kind !== 'r')
-        .map((action: OverwriteFileAction | CreateFileAction) => ({
-          path: action.path,
-          content: action.content.toString()
-        }))
-    )
+    const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
 
     if (files.size === 0) {
       return host
     }
 
     // get root path
-    const appRootPath = findWorkspaceRoot(process.cwd())?.dir ?? '/'
+    const appRootPath = findNxRoot({ throw: false }) ?? '/'
 
-    log.debug(`Application root path: ${appRootPath}`)
+    log.debug(`Application root path for linting: ${appRootPath}`)
 
     let eslint: ESLint
     if (options.eslint) {

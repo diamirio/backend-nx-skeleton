@@ -1,4 +1,4 @@
-import { Rule } from '@angular-devkit/schematics'
+import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks'
 
 /**
@@ -6,9 +6,13 @@ import { RunSchematicTask } from '@angular-devkit/schematics/tasks'
  * @param name
  * @param options
  */
-export function addSchematicTask<T> (name: string, options: T): Rule {
-  return (_, context): void => {
-    context.addTask(new RunSchematicTask<T>(name, options))
+export function addSchematicTask<T> (context: SchematicContext, name: string, options: T, dependencies?: TaskId[]): TaskId {
+  return context.addTask(new RunSchematicTask<T>(name, options), dependencies)
+}
+
+export function addSchematicTaskRule<T> (name: string, options: T, dependencies?: TaskId[]): Rule {
+  return (_: Tree, context: SchematicContext): void => {
+    addSchematicTask(context, name, options, dependencies)
   }
 }
 
@@ -18,8 +22,12 @@ export function addSchematicTask<T> (name: string, options: T): Rule {
  * @param name
  * @param options
  */
-export function addExternalSchematicTask<T> (pkg: string, name: string, options: T): Rule {
-  return (_, context): void => {
-    context.addTask(new RunSchematicTask<T>(pkg, name, options))
+export function addExternalSchematicTask<T> (context: SchematicContext, pkg: string, name: string, options: T, dependencies?: TaskId[]): TaskId {
+  return context.addTask(new RunSchematicTask<T>(pkg, name, options), dependencies)
+}
+
+export function addExternalSchematicTaskRule<T> (pkg: string, name: string, options: T, dependencies?: TaskId[]): Rule {
+  return (_: Tree, context: SchematicContext): void => {
+    addExternalSchematicTask(context, pkg, name, options, dependencies)
   }
 }

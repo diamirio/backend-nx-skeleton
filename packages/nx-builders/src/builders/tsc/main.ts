@@ -40,7 +40,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   public async run (): Promise<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     // Cleaning the /dist folder
-    this.logger.debug('Output path will be:', this.options.normalizedOutputPath)
+    this.logger.debug('Output path will be: %s', this.options.normalizedOutputPath)
     removeSync(this.options.normalizedOutputPath)
 
     try {

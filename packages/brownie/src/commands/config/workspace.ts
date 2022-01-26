@@ -8,7 +8,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   protected configName = 'workspace.config.yml'
   protected configType = ConfigTypes.general
 
-  async configAdd (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
+  public async configAdd (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
     // prompt user for details
     const response = await this.prompt(config)
 
@@ -23,7 +23,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     return config
   }
 
-  async configEdit (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
+  public async configEdit (config: WorkspaceConfig[]): Promise<WorkspaceConfig[]> {
     // prompt user for which keys to edit
     const select = await promptUser({
       type: 'Select',
@@ -44,7 +44,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     return config
   }
 
-  async configShow (config: WorkspaceConfig[]): Promise<void> {
+  public async configShow (config: WorkspaceConfig[]): Promise<void> {
     if (config.length > 0) {
       this.logger.info(
         createTable(
@@ -59,7 +59,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  async configRemove (config: WorkspaceConfig[]): Promise<ConfigRemove<WorkspaceConfig[]>> {
+  public async configRemove (config: WorkspaceConfig[]): Promise<ConfigRemove<WorkspaceConfig[]>> {
     return {
       keys: config.map((c) => c.pkg),
       removeFunction: async (config, userInput): Promise<WorkspaceConfig[]> => {

@@ -1,4 +1,4 @@
-import { BaseCommand, LogLevels } from '@cenk1cenk2/boilerplate-oclif'
+import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import execa from 'execa'
 import { createPrompt, Listr } from 'listr2'
@@ -6,9 +6,9 @@ import { EOL } from 'os'
 
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@helpers/node.helper.interface'
 import { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
 import { Configuration } from '@interfaces/default-config.interface'
+import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 
 export class NxCommand extends BaseCommand<Configuration> {
@@ -84,7 +84,7 @@ export class NxCommand extends BaseCommand<Configuration> {
           this.helpers.node.packageManager(
             {
               action: PackageManagerUsableCommands.ADD,
-              force: true,
+              // force: true,
               useLatest: true,
               type: PackageManagerDependencyTypes.DEVELOPMENT
             },
@@ -116,18 +116,13 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const help = await execa(
-        this.helpers.node.manager,
-        [
-          ...this.helpers.node.packageManagerCommand(PackageManagerUsableCommands.EXEC),
-          'nx',
-          'g',
-          `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
-          '--',
-          '--help'
-        ],
-        { shell: true }
-      )
+      const { manager, args, env } = this.helpers.node.packageManagerCommandParser({
+        action: PackageManagerUsableCommands.EXEC,
+        command: 'nx',
+        args: [ 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help', ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
+      })
+
+      const help = await execa(manager, args, { shell: true, env })
       this.logger.direct(help.stdout)
 
       try {
@@ -139,20 +134,22 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     this.logger.module('Now will start running the schematic...')
 
-    // this will be the command
-    await execa(
-      this.helpers.node.manager,
-      [
-        ...this.helpers.node.packageManagerCommand(PackageManagerUsableCommands.EXEC),
-        'nx',
+    const { manager, args, env } = this.helpers.node.packageManagerCommandParser({
+      action: PackageManagerUsableCommands.EXEC,
+      command: 'nx',
+      args: [
         'g',
         `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
         ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [],
-        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels)
-          ? [ ...this.helpers.node.manager === AvailablePackageManagers.NPM ? [ '--' ] : [], '--verbose' ]
-          : []
-      ],
-      { stdio: 'inherit', shell: true }
-    )
+        ...this.isVerbose || this.isDebug ? [ '--verbose' ] : []
+      ]
+    })
+
+    // this will be the command
+    await execa(manager, args, {
+      stdio: 'inherit',
+      shell: true,
+      env
+    })
   }
 }

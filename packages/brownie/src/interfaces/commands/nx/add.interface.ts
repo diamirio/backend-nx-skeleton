@@ -1,6 +1,5 @@
-import { CheckIfModuleInstalled } from '@helpers/node.helper.interface'
 import { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
-import { CommonNodeDependency } from '@interfaces/dependency.interface'
+import { CheckIfModuleInstalled, CommonNodeDependency } from '@webundsoehne/nx-tools'
 
 export class NxAddCommandCtx {
   public prompts: {

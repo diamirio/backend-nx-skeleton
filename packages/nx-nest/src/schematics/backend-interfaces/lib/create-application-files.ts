@@ -6,7 +6,7 @@ import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constan
 import { NormalizedSchema } from '../main.interface'
 import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { addSchematicTask, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import { addSchematicTaskRule, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   return (_host: Tree, context: SchematicContext): Rule => {
@@ -27,7 +27,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         trigger: [
           {
             condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
-            rule: addSchematicTask<GeneratorSchema>('generator', {
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               silent: false,
               skipFormat: false,
               name: 'default',
@@ -46,7 +46,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
 
           {
             condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
-            rule: addSchematicTask<GeneratorSchema>('generator', {
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               silent: false,
               skipFormat: false,
               name: 'default',

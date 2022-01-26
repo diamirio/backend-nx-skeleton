@@ -82,17 +82,19 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      */
 
     // FIXME: This trickery is required in some of the stupid stuff, having two template engines and history merging
-    // forEach((entry) => {
-    //   if (!entry.path.includes('node_modules')) {
-    //     return applyPathTemplate(
-    //       rules.templates?.reduce((o, val) => {
-    //         return val.condition ? { ...o, [String(val.match)]: val?.rename ?? '' } : o
-    //       }, {})
-    //     )(entry)
-    //   } else {
-    //     return entry
-    //   }
-    // }),
+    // future note: this clears the __ from the names of the paths coming from angular schematics
+    // node_modules check is required because the host might include it in the virtual filesystem
+    forEach((entry) => {
+      if (!entry.path.includes('node_modules')) {
+        return applyPathTemplate(
+          rules.templates?.reduce((o, val) => {
+            return val.condition ? { ...o, [String(val.match)]: val?.rename ?? '' } : o
+          }, {})
+        )(entry)
+      } else {
+        return entry
+      }
+    }),
 
     /**
      * Trigger some additional rules

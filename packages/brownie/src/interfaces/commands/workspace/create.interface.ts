@@ -1,6 +1,5 @@
-import { CheckIfModuleInstalled } from '@helpers/node.helper.interface'
 import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import { NodeDependency } from '@interfaces/dependency.interface'
+import { CheckIfModuleInstalled, NodeDependency } from '@webundsoehne/nx-tools'
 
 export class WorkspaceCreateCommandCtx {
   public prompts: {

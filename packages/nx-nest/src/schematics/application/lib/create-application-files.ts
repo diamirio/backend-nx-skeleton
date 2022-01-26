@@ -9,7 +9,7 @@ import { Schema as ComponentSchema } from '@schematics/component/main.interface'
 import { Schema as GeneratorSchema } from '@schematics/generator/main.interface'
 import { Schema as MspSchema } from '@schematics/microservice-provider/main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { addSchematicTask, applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
+import { addSchematicTaskRule, applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.
@@ -81,13 +81,13 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
           // backend-interfaces is extension selected
           {
             condition: options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
-            rule: addSchematicTask<BackendInterfacesSchema>('backend-interfaces', {})
+            rule: addSchematicTaskRule<BackendInterfacesSchema>('backend-interfaces', {})
           },
 
           // microservice-provider if microservice-server is defined
           {
             condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
-            rule: addSchematicTask<MspSchema>('msp', {})
+            rule: addSchematicTaskRule<MspSchema>('msp', {})
           },
 
           // generate default entities
@@ -96,7 +96,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
               options.dbAdapters === AvailableDBAdapters.TYPEORM &&
               !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
-            rule: addSchematicTask<GeneratorSchema>('generator', {
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.TYPEORM]),
@@ -109,7 +109,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.MONGOOSE &&
               options.dbAdapters === AvailableDBAdapters.MONGOOSE &&
               !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
-            rule: addSchematicTask<GeneratorSchema>('generator', {
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),

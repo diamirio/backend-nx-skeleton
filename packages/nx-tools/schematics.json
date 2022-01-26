@@ -7,6 +7,13 @@
       "schema": "./dist/schematics/exports/schema.json",
       "aliases": ["ex"],
       "description": "Export files a default module with regex patterns."
+    },
+
+    "package-script": {
+      "factory": "./dist/schematics/package-script/main",
+      "schema": "./dist/schematics/package-script/schema.json",
+      "aliases": ["script"],
+      "description": "Run a package.json script."
     }
   }
 }

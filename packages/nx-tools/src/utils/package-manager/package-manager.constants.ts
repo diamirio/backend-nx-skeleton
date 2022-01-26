@@ -1,17 +1,3 @@
-import { CommonNodeDependency } from '@interfaces/dependency.interface'
-
-export interface NodeHelperCtx {
-  fail: Partial<Record<AvailablePackageManagers, boolean>>
-}
-
-export interface PackageManagerActions {
-  action: PackageManagerUsableCommands.ADD | PackageManagerUsableCommands.REMOVE
-  type?: PackageManagerDependencyTypes
-  global?: boolean
-  force?: boolean
-  useLatest?: boolean
-}
-
 export enum AvailablePackageManagers {
   YARN = 'yarn',
   NPM = 'npm'
@@ -23,13 +9,16 @@ export enum PackageManagerDependencyTypes {
 }
 
 export enum PackageManagerUsableCommands {
-  GLOBAL,
-  ADD,
-  REMOVE,
-  REGISTRY,
-  DEVELOPMENT,
-  FORCE,
-  EXEC
+  GLOBAL = 'GLOBAL',
+  ADD = 'ADD',
+  REMOVE = 'REMOVE',
+  REGISTRY = 'REGISTRY',
+  DEVELOPMENT = 'DEVELOPMENT',
+  FORCE = 'FORCE',
+  EXEC = 'EXEC',
+  INSTALL = 'INSTALL',
+  RUN = 'RUN',
+  RUN_ARGS = 'RUN_ARGS'
 }
 
 export const PackageManagerCommands: Record<AvailablePackageManagers, Record<PackageManagerUsableCommands, string>> = {
@@ -40,7 +29,10 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REMOVE]: 'uninstall',
     [PackageManagerUsableCommands.DEVELOPMENT]: '--save-dev',
     [PackageManagerUsableCommands.FORCE]: '--force',
-    [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry'
+    [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry',
+    [PackageManagerUsableCommands.INSTALL]: 'install',
+    [PackageManagerUsableCommands.RUN]: 'run',
+    [PackageManagerUsableCommands.RUN_ARGS]: '--'
   },
   [AvailablePackageManagers.YARN]: {
     [PackageManagerUsableCommands.EXEC]: 'exec',
@@ -49,17 +41,9 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REMOVE]: 'remove',
     [PackageManagerUsableCommands.DEVELOPMENT]: '-D',
     [PackageManagerUsableCommands.FORCE]: '--force',
-    [PackageManagerUsableCommands.REGISTRY]: 'YARN_REGISTRY'
+    [PackageManagerUsableCommands.REGISTRY]: 'YARN_REGISTRY',
+    [PackageManagerUsableCommands.INSTALL]: 'install',
+    [PackageManagerUsableCommands.RUN]: 'run',
+    [PackageManagerUsableCommands.RUN_ARGS]: ''
   }
-}
-
-export interface CheckIfModuleInstalled {
-  pkg: string
-  installed: boolean
-  version?: string
-  hasUpdate?: boolean
-  updateType?: string
-  path?: string
-  latest?: string
-  parsable: CommonNodeDependency
 }

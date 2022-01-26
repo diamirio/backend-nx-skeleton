@@ -10,6 +10,7 @@ export const VERSIONS: Versions = {
         '@nrwl/workspace': '^13.4.6',
         '@nrwl/tao': '^13.4.6',
         '@webundsoehne-private/nx-workspace': '^3.0.0',
+        '@webundsoehne/nx-tools': '^3.0.0',
         typescript: '^4.5.4',
         '@types/node': '^16',
         dotenv: '^14.2.0',

@@ -5,9 +5,9 @@ import { Listr } from 'listr2'
 
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import { PackageManagerUsableCommands } from '@helpers/node.helper.interface'
 import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 import { Configuration } from '@interfaces/default-config.interface'
+import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
@@ -156,7 +156,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
                 {
                   action: PackageManagerUsableCommands.ADD,
                   global: true,
-                  force: true,
+                  // force: true,
                   useLatest: true
                 },
                 ctx.packages
@@ -182,9 +182,13 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     ).find((c) => c.pkg === ctx.workspace.pkg)
 
     // this will be the command
-    await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null, this.isDebug ? '--verbose' : null ], {
-      stdio: 'inherit',
-      shell: true
-    })
+    await execa(
+      'ng',
+      [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...flags.force ? [ '-f' ] : [], ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ],
+      {
+        stdio: 'inherit',
+        shell: true
+      }
+    )
   }
 }
