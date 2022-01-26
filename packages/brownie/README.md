@@ -52,7 +52,9 @@ USAGE
   $ brownie docker
 
 OPTIONS
+  -F, --files-folder=files-folder      [default: files] Output to included folder.
   -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
+  -e, --expose                         Expose ports from the container.
   -f, --force                          Force overwrites.
   -o, --output=output                  [default: .docker] Output folder for the Docker files.
   -v, --volume                         Use optional persistent volumes with the containers.
