@@ -10,14 +10,18 @@
 - [Await](README.md#await)
 - [ConfigEnvironmentVariables](README.md#configenvironmentvariables)
 - [DeepPartial](README.md#deeppartial)
+- [DeepWriteable](README.md#deepwriteable)
 - [InferedObjectType](README.md#inferedobjecttype)
 - [ValueOf](README.md#valueof)
+- [Writeable](README.md#writeable)
 
 ## Type aliases
 
 ### ArrayElement
 
 Ƭ **ArrayElement**<`ArrayType`\>: `ArrayType` extends readonly infer ElementType[] ? `ElementType` : `never`
+
+Fetches a single element from the array if array is homogeneous in types.
 
 #### Type parameters
 
@@ -27,7 +31,7 @@
 
 #### Defined in
 
-array.ts:1
+array.ts:4
 
 ---
 
@@ -35,6 +39,8 @@ array.ts:1
 
 Ƭ **Await**<`T`\>: `T` extends `PromiseLike`<infer U\> ? `U` : `T`
 
+Since Awaited is missing from older Typescript versions, this takes in place to infer a function after the asynchronity is resolved.
+
 #### Type parameters
 
 | Name |
@@ -43,7 +49,7 @@ array.ts:1
 
 #### Defined in
 
-function.ts:1
+function.ts:4
 
 ---
 
@@ -51,6 +57,8 @@ function.ts:1
 
 Ƭ **ConfigEnvironmentVariables**<`T`\>: { [P in keyof T]?: ConfigEnvironmentVariables<T[P]\> \| string \| Record<"\_\_name" \| "\_\_format", string\> }
 
+Updates every key to support node-config environment variable format and makes it DeepPartial.
+
 #### Type parameters
 
 | Name |
@@ -59,7 +67,7 @@ function.ts:1
 
 #### Defined in
 
-config.ts:1
+config.ts:4
 
 ---
 
@@ -67,6 +75,8 @@ config.ts:1
 
 Ƭ **DeepPartial**<`T`\>: { [P in keyof T]?: DeepPartial<T[P]\> }
 
+Makes the object deep partial.
+
 #### Type parameters
 
 | Name |
@@ -75,13 +85,33 @@ config.ts:1
 
 #### Defined in
 
-object.ts:7
+object.ts:16
+
+---
+
+### DeepWriteable
+
+Ƭ **DeepWriteable**<`T`\>: { -readonly [P in keyof T]: DeepWriteable<T[P]\> }
+
+Removes the readonly properties from the object recursively.
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Defined in
+
+object.ts:28
 
 ---
 
 ### InferedObjectType
 
 Ƭ **InferedObjectType**<`T`, `K`\>: [`ArrayElement`](README.md#arrayelement)<`T`\>[`K`] extends infer ObjectProperty ? `ObjectProperty` : `never`
+
+Infers the object type.
 
 #### Type parameters
 
@@ -92,13 +122,15 @@ object.ts:7
 
 #### Defined in
 
-object.ts:3
+object.ts:6
 
 ---
 
 ### ValueOf
 
 Ƭ **ValueOf**<`T`\>: `T`[keyof `T`]
+
+Fetches the type of value of an object property if object is homogeneous.
 
 #### Type parameters
 
@@ -108,4 +140,22 @@ object.ts:3
 
 #### Defined in
 
-object.ts:5
+object.ts:11
+
+---
+
+### Writeable
+
+Ƭ **Writeable**<`T`\>: { -readonly [P in keyof T]: T[P] }
+
+Removes the readonly properties from the object.
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Defined in
+
+object.ts:23
