@@ -14,7 +14,7 @@ export type PackageManagerPackageAction = {
 } & PackageManagerCommonAction
 
 export type PackageManagerWithoutCommandAction = {
-  action: PackageManagerUsableCommands.INSTALL
+  action: PackageManagerUsableCommands.INSTALL | PackageManagerUsableCommands.ROOT
 } & PackageManagerCommonAction
 
 export type PackageManagerWithCommandAction = {
@@ -43,15 +43,24 @@ export interface CommonNodeDependency {
   latest?: string
 }
 
-export interface CheckIfModuleInstalled {
+export interface LocalNodeModule {
   pkg: string
   installed: boolean
+  linked?: boolean
   version?: string
   hasUpdate?: boolean
   updateType?: string
   path?: string
   latest?: string
   parsable: CommonNodeDependency
+}
+
+export interface CheckNodeModuleInstalledOptions {
+  global?: boolean
+  onlyLinked?
+  cwd?: string[]
+  getVersion?: boolean
+  getUpdate?: boolean
 }
 
 export type PackageManagerArgumentParser = { condition: boolean, command?: PackageManagerUsableCommands, args?: string | string[] }[]

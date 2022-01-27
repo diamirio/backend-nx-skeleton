@@ -18,7 +18,8 @@ export enum PackageManagerUsableCommands {
   EXEC = 'EXEC',
   INSTALL = 'INSTALL',
   RUN = 'RUN',
-  RUN_ARGS = 'RUN_ARGS'
+  RUN_ARGS = 'RUN_ARGS',
+  ROOT = 'ROOT'
 }
 
 export const PackageManagerCommands: Record<AvailablePackageManagers, Record<PackageManagerUsableCommands, string>> = {
@@ -32,7 +33,8 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry',
     [PackageManagerUsableCommands.INSTALL]: 'install',
     [PackageManagerUsableCommands.RUN]: 'run',
-    [PackageManagerUsableCommands.RUN_ARGS]: '--'
+    [PackageManagerUsableCommands.RUN_ARGS]: '--',
+    [PackageManagerUsableCommands.ROOT]: 'root'
   },
   [AvailablePackageManagers.YARN]: {
     [PackageManagerUsableCommands.EXEC]: 'exec',
@@ -44,6 +46,7 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.REGISTRY]: 'YARN_REGISTRY',
     [PackageManagerUsableCommands.INSTALL]: 'install',
     [PackageManagerUsableCommands.RUN]: 'run',
-    [PackageManagerUsableCommands.RUN_ARGS]: ''
+    [PackageManagerUsableCommands.RUN_ARGS]: '',
+    [PackageManagerUsableCommands.ROOT]: 'dir'
   }
 }

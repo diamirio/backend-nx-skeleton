@@ -89,6 +89,12 @@ A wrapper around the `patch-package` libraray which can automatically apply pred
 
 Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder due to templating and all the options that can be added to the schematics itself.
 
+Using the scripts link all the packages to your global link directory.
+
+You can use the `-d` or `--develop` flag in `brownie` commands `workspace` and `nx` to put schematics in development mode. This will do some additional tasks to ensure that it will work in a development environment. For dependencies it will only install the linked versions.
+
+You can use the `--debug` flag for `brownie`, which will activate the debug log level for both the schematics that it runs and the `brownie` itself.
+
 ## Docker Setup
 
 This repository includes a Docker-Compose stack for automatically compiling `SERVICES` variable defined. It will first compile the `RUN_IN_BAND` packages sequentially and after that it will compile everything else defined in the `SERVICES` variable in parallel.

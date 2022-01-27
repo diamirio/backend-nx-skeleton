@@ -4,7 +4,7 @@ import { TaskTokens } from './constants'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import { addGitTask, addInstallTask, addMultipleDependentTasksRule, addRunWorkspaceScriptTask, Logger, PackageManagerUsableCommands, runInRule } from '@webundsoehne/nx-tools'
+import { addGitTask, addInstallTask, addMultipleDependentTasksRule, isDevelopmentMode, Logger, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
@@ -26,6 +26,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
         },
 
         {
+          condition: !isDevelopmentMode(),
           token: TaskTokens.GIT_INIT,
           fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) =>
             addGitTask(
@@ -37,33 +38,25 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
               },
               dependencies
             )
-        },
-
-        {
-          token: TaskTokens.PACKAGE_SCRIPT_LINT,
-          fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) =>
-            addRunWorkspaceScriptTask(
-              context,
-              {
-                root: options.root,
-                action: {
-                  action: PackageManagerUsableCommands.RUN,
-                  command: 'lint'
-                }
-              },
-              dependencies
-            ),
-          dependsOn: [ TaskTokens.NPM_INSTALL ]
         }
-      ])
 
-      // addInstallTask({ skipInstall: options.skipInstall, root: options.root }),
-      //
-      // addGitTask({
-      //   skipGit: options?.skipGit,
-      //   root: options.root,
-      //   commit: options?.commit
-      // })
+        // {
+        //   token: TaskTokens.PACKAGE_SCRIPT_LINT,
+        //   fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) =>
+        //     addRunWorkspaceScriptTask(
+        //       context,
+        //       {
+        //         root: options.root,
+        //         action: {
+        //           action: PackageManagerUsableCommands.RUN,
+        //           command: 'lint'
+        //         }
+        //       },
+        //       dependencies
+        //     ),
+        //   dependsOn: [ TaskTokens.NPM_INSTALL ]
+        // }
+      ])
     ])
   }
 }

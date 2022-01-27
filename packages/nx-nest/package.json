@@ -39,7 +39,7 @@
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^13.1.4",
+    "@angular-devkit/schematics": "^13.2.0",
     "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",

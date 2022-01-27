@@ -4,13 +4,13 @@ import { NormalizedSchema as WorkspaceNormalizedSchema } from '@schematics/works
 import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies
-export function calculateDependencies (cli: WorkspaceNormalizedSchema['cli']): PackageVersions {
+export async function calculateDependencies (options: WorkspaceNormalizedSchema): Promise<PackageVersions> {
   return dependencyCalculator([
     {
       deps: VERSIONS.base.default
     },
     {
-      condition: cli === AvailableCLIs.NX,
+      condition: options.cli === AvailableCLIs.NX,
       deps: VERSIONS[AvailableCLIs.NX]
     }
   ])

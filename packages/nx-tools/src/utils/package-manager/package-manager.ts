@@ -5,8 +5,9 @@ import notifier from 'update-notifier2'
 
 import { AvailablePackageManagers, PackageManagerCommands, PackageManagerDependencyTypes, PackageManagerUsableCommands } from './package-manager.constants'
 import {
-  CheckIfModuleInstalled,
+  LocalNodeModule,
   NodeDependency,
+  CheckNodeModuleInstalledOptions,
   PackageManagerActions,
   PackageManagerArgumentParser,
   PackageManagerCtx,
@@ -22,6 +23,7 @@ import { Logger } from '@utils/logger'
 export class PackageManager {
   static instance: PackageManager
   public globalFolder: string[] = []
+  public globalLinkFolder: string[] = []
   public manager: AvailablePackageManagers
   private ctx: PackageManagerCtx = { fail: {} }
   private logger: Logger
@@ -63,21 +65,15 @@ export class PackageManager {
   /**
    * Returns the selected commands from the current package manager.
    */
-  public packageManagerCommand (commands: PackageManagerUsableCommands | PackageManagerUsableCommands[]): string[] {
-    if (!Array.isArray(commands)) {
-      commands = [ commands ]
-    }
-
-    return commands.map((command) => {
-      return PackageManagerCommands[this.manager][command]
-    })
+  public command (command: PackageManagerUsableCommands, manager?: AvailablePackageManagers): string {
+    return PackageManagerCommands[manager ?? this.manager][command]
   }
 
   /**
    * This gets ctx.packages as input to perform the required operation
    * @param actions
    */
-  public packageManagerCommandParser (action: PackageManagerActions): PackageManagerParsedCommand {
+  public parser (action: PackageManagerActions): PackageManagerParsedCommand {
     const argumentParser: PackageManagerArgumentParser = [
       // common arguments
       { condition: action.global === true, command: PackageManagerUsableCommands.GLOBAL },
@@ -120,7 +116,8 @@ export class PackageManager {
     } else if (this.isPackageManagerPackageWithoutCommandAction(action)) {
       argumentParser.push(
         // arguments for install
-        { condition: action.action === PackageManagerUsableCommands.INSTALL, command: PackageManagerUsableCommands.INSTALL }
+        { condition: action.action === PackageManagerUsableCommands.INSTALL, command: PackageManagerUsableCommands.INSTALL },
+        { condition: action.action === PackageManagerUsableCommands.INSTALL, command: PackageManagerUsableCommands.ROOT }
       )
     } else {
       throw new Error('Can not resolve the package manager task.')
@@ -167,35 +164,56 @@ export class PackageManager {
   // FIXME: when the issue is resolved and merge complete use the upstream one instead of fork
   // * https://github.com/yeoman/update-notifier/issues/100 open issue with the update check for global registry npmrc stuff
   // FIXME: this is a bit weird have to be improved up on
-  public async checkIfModuleInstalled (
-    pkg: NodeDependency | NodeDependency[],
-    options?: { global?: boolean, cwd?: string[], getVersion?: boolean, getUpdate?: boolean }
-  ): Promise<CheckIfModuleInstalled[]> {
+  public async checkIfModuleInstalled (pkg: NodeDependency | NodeDependency[], options?: CheckNodeModuleInstalledOptions): Promise<LocalNodeModule[]> {
     // we will later generate a log warn if we are using the linked folder since it shows we are in develop mode
-    let yarnLinkFolder: string
+    let yarnGlobalFolder: string
 
-    // get the global modules folder with trickery
-    if (options?.global) {
-      if (this.globalFolder.length === 0) {
-        let yarnGlobalFolder: string
-
+    if (options?.onlyLinked || options?.global) {
+      if (this.globalLinkFolder.length === 0) {
         // yarn link folder should take predence over others, because that is what we use tho develop this library.
         if (!this.ctx.fail[AvailablePackageManagers.YARN]) {
           yarnGlobalFolder = join(
-            (await execa(AvailablePackageManagers.YARN, [ PackageManagerCommands[AvailablePackageManagers.YARN][PackageManagerUsableCommands.GLOBAL], 'dir' ])).stdout,
+            (
+              await execa(AvailablePackageManagers.YARN, [
+                this.command(PackageManagerUsableCommands.GLOBAL, AvailablePackageManagers.YARN),
+                this.command(PackageManagerUsableCommands.ROOT, AvailablePackageManagers.YARN)
+              ])
+            ).stdout,
             'node_modules'
           )
 
           // always add link folder, since this repository uses link to link stuff, important for testing through here
-          yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
-          this.globalFolder.push(yarnLinkFolder)
+          const yarnLinkFolder = join(yarnGlobalFolder, '../../', 'link')
+
+          this.globalLinkFolder.push(yarnLinkFolder)
+
           this.logger.debug(`Yarn link folder added to search: ${yarnLinkFolder}`)
+        }
+      } else {
+        this.logger.debug('Global linked search folders have already been initiated in the prior run.')
+      }
+
+      if (options?.onlyLinked) {
+        options.cwd = this.globalLinkFolder
+      }
+    }
+
+    // get the global modules folder with trickery
+    if (options?.global) {
+      if (this.globalFolder.length === 0) {
+        if (this.globalLinkFolder.length > 0) {
+          this.globalFolder.push(...this.globalLinkFolder)
         }
 
         // these are the global folders that modules can be found
         if (!this.ctx.fail[AvailablePackageManagers.NPM] && this.manager === AvailablePackageManagers.NPM) {
           const npmGlobalFolder = join(
-            (await execa(AvailablePackageManagers.NPM, [ PackageManagerCommands[AvailablePackageManagers.NPM][PackageManagerUsableCommands.GLOBAL], 'root' ])).stdout
+            (
+              await execa(AvailablePackageManagers.NPM, [
+                this.command(PackageManagerUsableCommands.GLOBAL, AvailablePackageManagers.NPM),
+                this.command(PackageManagerUsableCommands.ROOT, AvailablePackageManagers.NPM)
+              ])
+            ).stdout
           )
 
           this.globalFolder.push(npmGlobalFolder)
@@ -208,11 +226,11 @@ export class PackageManager {
 
           this.logger.debug(`YARN global folder added to search: ${yarnGlobalFolder}`)
         }
+      } else {
+        this.logger.debug('Global search folders have already been initiated in the prior run.')
       }
 
       options.cwd = this.globalFolder
-    } else {
-      this.logger.debug('Global search folders have already been initiated in the prior run.')
     }
 
     if (!Array.isArray(pkg)) {
@@ -234,7 +252,7 @@ export class PackageManager {
         }
         // can be string legacy or the object so have to parse it manually
 
-        const o = { pkg: currentPkg.pkg, installed: false } as CheckIfModuleInstalled
+        const o = { pkg: currentPkg.pkg, installed: false } as LocalNodeModule
 
         if (options.cwd && options.cwd.length > 0) {
           this.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
@@ -263,8 +281,10 @@ export class PackageManager {
             o.path = firstOccurence.path
             o.installed = firstOccurence.installed
 
-            if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
+            if (this.globalLinkFolder.length > 0 && this.globalLinkFolder.some((path) => o.path.startsWith(path))) {
               this.logger.debug('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
+
+              o.linked = true
             }
 
             this.logger.debug('Will use the first occurrence of the package: %s -> %s', currentPkg.pkg, firstOccurence.path)
@@ -315,7 +335,7 @@ export class PackageManager {
               // eslint-disable-next-line no-console
               console.log = mock
 
-              if (yarnLinkFolder && o.path.startsWith(yarnLinkFolder)) {
+              if (o.linked) {
                 o.hasUpdate = false
 
                 this.logger.debug('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
@@ -335,11 +355,18 @@ export class PackageManager {
           this.logger.debug('Package can not be found in cwd: %s', o.pkg)
         }
 
-        o.parsable = {
-          pkg: currentPkg.pkg,
-          registry: currentPkg?.registry,
-          version: o?.version,
-          latest: o?.latest ?? 'latest'
+        if (!o.linked) {
+          o.parsable = {
+            pkg: currentPkg.pkg,
+            registry: currentPkg?.registry,
+            version: o?.version,
+            latest: o?.latest ?? 'latest'
+          }
+        } else {
+          o.parsable = {
+            pkg: o.path,
+            version: o?.version
+          }
         }
 
         // idiomatic can sometimes happen if package not set
@@ -369,7 +396,7 @@ export class PackageManager {
   }
 
   private isPackageManagerPackageWithoutCommandAction (data: PackageManagerActions): data is PackageManagerWithoutCommandAction {
-    if ([ PackageManagerUsableCommands.INSTALL ].includes(data.action)) {
+    if ([ PackageManagerUsableCommands.INSTALL, PackageManagerUsableCommands.ROOT ].includes(data.action)) {
       return true
     }
 

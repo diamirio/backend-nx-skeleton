@@ -26,7 +26,7 @@ export class NodeHelper extends PackageManager {
               packages.map((p) => ({
                 title: `Working on: ${typeof p === 'string' ? p : p.pkg}`,
                 task: async (_, task): Promise<void> => {
-                  const { manager, args, env } = this.packageManagerCommandParser({ ...options, package: p })
+                  const { manager, args, env } = this.parser({ ...options, package: p })
 
                   this.cmd.logger.debug('Running command: %s with args %o, env: %o for package %o', manager, args, env, p)
 

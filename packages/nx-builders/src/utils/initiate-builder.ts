@@ -9,7 +9,9 @@ import { calculateDependencies } from '@utils/versions'
  * @param options
  */
 export function initiateBuilderDependencies (options: Schema['items']): Rule {
-  const dependencies = calculateDependencies(options)
+  return async function (): Promise<Rule> {
+    const dependencies = await calculateDependencies(options)
 
-  return chain([ addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}) ])
+    return chain([ addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}) ])
+  }
 }

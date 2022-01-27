@@ -10,7 +10,7 @@ import { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.inte
 import { Configuration } from '@interfaces/default-config.interface'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
-import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
+import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
@@ -80,6 +80,26 @@ export class NxCommand extends BaseCommand<Configuration> {
             })
           ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
 
+          if (isDevelopmentMode()) {
+            task.title = color.yellow('Overriding the default package check behaviour with development mode!')
+
+            const link = (
+              await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, {
+                getVersion: true,
+                getUpdate: false,
+                onlyLinked: true
+              })
+            ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
+
+            if (link.installed && !pkg.installed) {
+              ctx.packages = [ ...ctx.packages, link.parsable ]
+
+              task.title = color.yellow(`Package ${link.pkg} is linked!`)
+
+              return
+            }
+          }
+
           if (!pkg.installed) {
             ctx.packages = [ ...ctx.packages, pkg.parsable ]
             task.title = `Package ${pkg.pkg} is not installed will install it.`
@@ -98,7 +118,7 @@ export class NxCommand extends BaseCommand<Configuration> {
             {
               action: PackageManagerUsableCommands.ADD,
               // force: true,
-              useLatest: true,
+              useLatest: !isDevelopmentMode() && true,
               type: PackageManagerDependencyTypes.DEVELOPMENT
             },
             ctx.packages
@@ -129,7 +149,7 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const { manager, args, env } = this.helpers.node.packageManagerCommandParser({
+      const { manager, args, env } = this.helpers.node.parser({
         action: PackageManagerUsableCommands.EXEC,
         command: 'nx',
         args: [ 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help', ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
@@ -147,7 +167,7 @@ export class NxCommand extends BaseCommand<Configuration> {
 
     this.logger.module('Now will start running the schematic...')
 
-    const { manager, args, env } = this.helpers.node.packageManagerCommandParser({
+    const { manager, args, env } = this.helpers.node.parser({
       action: PackageManagerUsableCommands.EXEC,
       command: 'nx',
       args: [

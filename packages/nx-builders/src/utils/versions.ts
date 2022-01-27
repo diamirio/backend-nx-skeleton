@@ -4,7 +4,7 @@ import { Schema } from '@schematics/init/main.interface'
 import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies
-export function calculateDependencies (options: Schema['items']): PackageVersions {
+export async function calculateDependencies (options: Schema['items']): Promise<PackageVersions> {
   return dependencyCalculator([
     {
       condition: options.includes(AvailableBuilders.TSC),

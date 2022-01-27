@@ -38,14 +38,14 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@keycloak/keycloak-admin-client": "^16.1.0",
+    "@keycloak/keycloak-admin-client": "^16.1.1",
     "@nestjs/common": "^8.2.6",
     "@nestjs/core": "^8.2.6",
     "@nestjs/graphql": "^9.0.4",
     "express": "^4.17.2",
     "fastify": "^3.27.0",
     "graphql": "^15",
-    "keycloak-connect": "^16.1.0"
+    "keycloak-connect": "^16.1.1"
   },
   "peerDependencies": {
     "@keycloak/keycloak-admin-client": ">= 15",

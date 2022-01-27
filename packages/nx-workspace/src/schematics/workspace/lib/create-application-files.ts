@@ -1,4 +1,4 @@
-import { apply, branchAndMerge, chain, mergeWith, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import { apply, chain, mergeWith, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
 
 import { NormalizedSchema } from '../main.interface'
 import { getSchematicFiles } from '@interfaces/file.constants'
@@ -17,7 +17,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
 
     return chain([
       // just needs the url the rest it will do it itself
-      branchAndMerge(mergeWith(apply(source, generateRules(options, log))))
+      mergeWith(apply(source, generateRules(options, log)))
     ])
   }
 }

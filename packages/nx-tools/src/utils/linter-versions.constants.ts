@@ -11,6 +11,7 @@ export const LINTER_VERSIONS: LinterVersions = {
       '@nrwl/eslint-plugin-nx': '^13.4.6',
       '@webundsoehne/eslint-config': '^4.0.0',
       '@typescript-eslint/eslint-plugin': '^5.10.0',
+      '@typescript-eslint/parser': '^5.10.1',
       'eslint-plugin-import': '^2.25.4'
     }
   }

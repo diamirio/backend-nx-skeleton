@@ -35,10 +35,10 @@
     "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "dependencies": {
-    "@angular-devkit/core": "^13.1.4",
-    "@angular-devkit/schematics": "^13.1.4",
-    "@nrwl/devkit": "^13.4.6",
-    "@nrwl/workspace": "^13.4.6",
+    "@angular-devkit/core": "^13.2.0",
+    "@angular-devkit/schematics": "^13.2.0",
+    "@nrwl/devkit": "^13.5.3",
+    "@nrwl/workspace": "^13.5.3",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "listr2": "^4.0.1"

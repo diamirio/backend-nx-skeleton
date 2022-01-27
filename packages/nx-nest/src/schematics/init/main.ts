@@ -7,12 +7,14 @@ import { AvailableBuilders } from '@webundsoehne/nx-builders/dist/interfaces/ava
 import { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/schematics/init/main.interface'
 
 export default function (schema: NormalizedSchema): Rule {
-  // const builders = calculateDependencies(schema, true)
-  const dependencies = calculateDependencies(schema)
+  return async function (): Promise<Rule> {
+    // const builders = calculateDependencies(schema, true)
+    const dependencies = await calculateDependencies(schema)
 
-  return chain([
-    addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}),
+    return chain([
+      addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}),
 
-    externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: [ AvailableBuilders.TSC, AvailableBuilders.TS_NODE_DEV ] })
-  ])
+      externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: [ AvailableBuilders.TSC, AvailableBuilders.TS_NODE_DEV ] })
+    ])
+  }
 }

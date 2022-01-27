@@ -114,7 +114,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         title: 'Setting workspace constants...',
         task: async (ctx, task): Promise<void> => {
-          const deps = calculateDependencies(ctx.cli)
+          const deps = await calculateDependencies(ctx)
           ctx.deps = deps.deps
           ctx.devDeps = deps.devDeps
 

@@ -11,7 +11,8 @@ export const VERSIONS: Versions = {
         rxjs: '^7.5.2',
         '@webundsoehne/nestjs-util': '^4.0.0',
         'class-transformer': '^0.5.1',
-        'class-validator': '^0.13.2'
+        'class-validator': '^0.13.2',
+        'reflect-metadata': '^0.1.13'
       }
     },
     microservice: {

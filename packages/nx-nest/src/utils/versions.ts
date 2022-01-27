@@ -9,7 +9,7 @@ import { PackageVersions, dependencyCalculator, AvailableTestsTypes } from '@web
  * @param options
  * @param builders
  */
-export function calculateDependencies (options: NormalizedSchema): PackageVersions {
+export async function calculateDependencies (options: NormalizedSchema): Promise<PackageVersions> {
   return dependencyCalculator([
     {
       deps: VERSIONS.base.default

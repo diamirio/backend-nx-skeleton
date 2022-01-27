@@ -16,7 +16,7 @@ export function runCommand (options: NormalizedSchema): Rule {
     await new Listr([
       {
         task: async (_, task): Promise<void> => {
-          const { manager, args, env } = packageManager.packageManagerCommandParser(options.action)
+          const { manager, args, env } = packageManager.parser(options.action)
 
           task.title = `Running workspace command: ${[ manager, args.join(' ') ].join(' ')} in ${options.root}`
 
