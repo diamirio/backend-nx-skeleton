@@ -13,7 +13,7 @@ export function eslintJson (options: { packageScope?: string, override?: Record<
           {
             pathGroups: [
               {
-                pattern: '@{webundsoehne,webundsoehne-private,${packageScope}}/**',
+                pattern: `@{webundsoehne,webundsoehne-private,${options.packageScope}}/**`,
                 group: 'index'
               }
             ],

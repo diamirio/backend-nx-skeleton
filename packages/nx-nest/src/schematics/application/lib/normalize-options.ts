@@ -237,7 +237,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
           } else {
-            task.title = 'No microservice clients are found running in mock mode.'
+            task.title = 'No microservice clients are found.'
           }
         },
         options: {

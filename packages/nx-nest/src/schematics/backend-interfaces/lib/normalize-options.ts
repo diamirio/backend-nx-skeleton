@@ -8,12 +8,12 @@ import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
 import {
   isVerbose,
-  normalizeWorkspacePackageScopeTask,
+  normalizeNameTask,
+  normalizePackageJsonNameTask,
   normalizePriorConfigurationTask,
   normalizeRootDirectoryTask,
   NxProjectTypes,
-  setSchemaDefaultsInContext,
-  normalizeNameTask
+  setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
@@ -41,7 +41,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       ...normalizeNameTask<NormalizedSchema>(),
 
       // normalize package json scope
-      ...normalizeWorkspacePackageScopeTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
 
       // set project root directory
       ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
@@ -62,7 +62,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
 
             task.output = `Applications with databases has been found: ${backendInterfaces.map((m) => `${m.name}:${m.dbAdapters}`).join(', ')}`
           } else {
-            task.title = 'No applications with databases has been found working in mock mode.'
+            task.title = 'No applications with databases has been found.'
           }
         }
       }

@@ -16,7 +16,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     return chain([
       runInRule(log.info.bind(log)(`Adding ${SchematicConstants.BACKEND_INTERFACES_PACKAGE} library to workspace.`)),
 
-      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ override: {} }) }),
 
       addProject(options),
 

@@ -24,7 +24,7 @@ export default function (schema: Schema): SchematicRule {
         skipFormat: true
       }),
 
-      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ override: {} }) }),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
       addProject(options),
