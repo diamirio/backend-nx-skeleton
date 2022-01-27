@@ -117,7 +117,7 @@ export class PackageManager {
       argumentParser.push(
         // arguments for install
         { condition: action.action === PackageManagerUsableCommands.INSTALL, command: PackageManagerUsableCommands.INSTALL },
-        { condition: action.action === PackageManagerUsableCommands.INSTALL, command: PackageManagerUsableCommands.ROOT }
+        { condition: action.action === PackageManagerUsableCommands.ROOT, command: PackageManagerUsableCommands.ROOT }
       )
     } else {
       throw new Error('Can not resolve the package manager task.')

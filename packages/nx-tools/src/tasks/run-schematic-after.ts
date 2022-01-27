@@ -3,31 +3,31 @@ import { RunSchematicTask } from '@angular-devkit/schematics/tasks'
 
 /**
  * Add a schematic task to run after the actions finish.
- * @param name
+ * @param schematic
  * @param options
  */
-export function addSchematicTask<T> (context: SchematicContext, name: string, options: T, dependencies?: TaskId[]): TaskId {
-  return context.addTask(new RunSchematicTask<T>(name, options), dependencies)
+export function addSchematicTask<T> (context: SchematicContext, schematic: string, options: T, dependencies?: TaskId[]): TaskId {
+  return context.addTask(new RunSchematicTask<T>(schematic, options), dependencies)
 }
 
-export function addSchematicTaskRule<T> (name: string, options: T, dependencies?: TaskId[]): Rule {
+export function addSchematicTaskRule<T> (schematic: string, options: T, dependencies?: TaskId[]): Rule {
   return (_: Tree, context: SchematicContext): void => {
-    addSchematicTask(context, name, options, dependencies)
+    addSchematicTask(context, schematic, options, dependencies)
   }
 }
 
 /**
  * Add a external schmatic task to run after the actions finish.
- * @param pkg
- * @param name
+ * @param collection
+ * @param schematic
  * @param options
  */
-export function addExternalSchematicTask<T> (context: SchematicContext, pkg: string, name: string, options: T, dependencies?: TaskId[]): TaskId {
-  return context.addTask(new RunSchematicTask<T>(pkg, name, options), dependencies)
+export function addExternalSchematicTask<T> (context: SchematicContext, collection: string, schematic: string, options: T, dependencies?: TaskId[]): TaskId {
+  return context.addTask(new RunSchematicTask<T>(collection, schematic, options), dependencies)
 }
 
-export function addExternalSchematicTaskRule<T> (pkg: string, name: string, options: T, dependencies?: TaskId[]): Rule {
+export function addExternalSchematicTaskRule<T> (collection: string, schematic: string, options: T, dependencies?: TaskId[]): Rule {
   return (_: Tree, context: SchematicContext): void => {
-    addExternalSchematicTask(context, pkg, name, options, dependencies)
+    addExternalSchematicTask(context, collection, schematic, options, dependencies)
   }
 }

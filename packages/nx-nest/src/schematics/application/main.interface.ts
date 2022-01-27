@@ -23,9 +23,8 @@ export interface NormalizedSchema
   injectedCasing?: { microservice?: GeneratedMicroserviceCasing }
   microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
-  packageJsonScripts: Record<string, string>
   // injecting enums since i want to compare this in jinja templates
-  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'>
+  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents' | 'packageJsonScripts'>
 }
 
 interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
@@ -38,4 +37,5 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   dbAdapters: Values extends true ? AvailableDBAdapters : typeof AvailableDBAdapters
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
   extensions: Values extends true ? AvailableExtensions[] : typeof AvailableExtensions
+  packageJsonScripts: Record<string, string>
 }

@@ -1,11 +1,10 @@
 import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks'
 
-import { AvailablePackageManagers } from '@utils/package-manager/package-manager.constants'
+import { RunWorkspaceCommandTask } from '.'
+import { PackageManagerUsableCommands } from '@utils/package-manager/package-manager.constants'
 
 interface TaskOptions {
-  packageManager?: AvailablePackageManagers
-  skipInstall?: boolean
+  skip?: boolean
   root?: string
 }
 /**
@@ -13,12 +12,11 @@ interface TaskOptions {
  * @param options
  */
 export function addInstallTask (context: SchematicContext, options?: TaskOptions, dependencies?: TaskId[]): TaskId {
-  if (!options.skipInstall) {
+  if (!options.skip) {
     return context.addTask(
-      new NodePackageInstallTask({
-        workingDirectory: options.root,
-        hideOutput: true,
-        packageManager: options.packageManager
+      new RunWorkspaceCommandTask({
+        root: options.root,
+        action: { action: PackageManagerUsableCommands.INSTALL }
       }),
       dependencies
     )

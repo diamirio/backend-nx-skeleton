@@ -16,11 +16,8 @@ export async function dependencyCalculator (options: DependencyCalculatorOptions
 
     logger.warn('dependencyCalculator is running in development mode.')
     logger.warn('It will use the linked packages if they are available.')
-    logger.warn('Development mode can be much slower due to additional operations.')
 
     const deps = options.flatMap((pkg) => Object.values(pkg.deps).flatMap((v) => Object.keys(v)))
-
-    logger.debug('%o', deps)
 
     const linked = await packageManager.checkIfModuleInstalled(deps, { onlyLinked: true })
 
