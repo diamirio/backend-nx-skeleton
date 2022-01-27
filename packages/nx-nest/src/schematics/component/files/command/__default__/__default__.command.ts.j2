@@ -2,13 +2,15 @@ import { Logger } from '@nestjs/common'
 import { Command, CommandRunner, Option } from 'nest-commander'
 
 @Command({ name: '{{ casing.kebab }}', description: 'Command to {{ casing.pascal }}.' })
-export class {{ casing.pascal }}Command {
+export class {{ casing.pascal }}Command implements CommandRunner {
   private logger: Logger = new Logger(this.constructor.name)
 
   public async run(
     parameters: string[],
     options?: Record<string, any>,
   ): Promise<void> {
-      return
+    this.logger.info('Running the default command.')
+
+    return
   }
 }

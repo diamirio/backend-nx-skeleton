@@ -49,6 +49,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
   const template: CreateApplicationRuleInterface = {
     multipleTemplates: [
       {
+        condition: options.microservices.length > 0,
         templates: options.microservices.map((microservice) => ({
           path: new RegExp('src/patterns/__pattern__.constants.ts.j2'),
           output: `src/patterns/${microservice.names.file}.constants.ts`,
@@ -59,6 +60,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
       },
 
       {
+        condition: options.microservices.length > 0,
         templates: options.microservices.map((microservice) => ({
           path: new RegExp('src/interfaces/__interface__.interface.ts.j2'),
           output: `src/interfaces/${microservice.names.file}.interface.ts`,

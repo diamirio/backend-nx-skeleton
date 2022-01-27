@@ -5,9 +5,7 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "repository": "https://gitlab.tailored-apps.com/",
-  "scripts": {
-    "start": "node ./{{ root }}/src/main.js"
-  },
+  "scripts": {{ packageJsonScripts | dump(4) }},
   "engines": {
     "node": ">=16"
   },

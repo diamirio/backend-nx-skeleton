@@ -139,13 +139,13 @@ export function addProject (options: NormalizedSchema): Rule {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
-          command: 'nestjs-command',
-          nodeOptions: '-r tsconfig-paths/register',
+          command: './src/main.ts',
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,
           interactive: true,
           environment: {
-            CLI_PATH: './src/main.ts'
+            NODE_SERVICE: 'cli'
           }
         }
       }

@@ -23,6 +23,7 @@ export interface NormalizedSchema
   injectedCasing?: { microservice?: GeneratedMicroserviceCasing }
   microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
+  packageJsonScripts: Record<string, string>
   // injecting enums since i want to compare this in jinja templates
   enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'>
 }

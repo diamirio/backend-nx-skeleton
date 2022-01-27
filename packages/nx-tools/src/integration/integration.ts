@@ -27,7 +27,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
   } catch (e) {
     const logger = new Logger()
 
-    logger.debug(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
+    logger.fatal(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
   }
 
   if (project) {
@@ -90,10 +90,29 @@ export function readProjectConfiguration<T extends Record<PropertyKey, any> = Ba
  */
 export function createWorkspaceProject<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, configuration: EnrichedProjectConfiguration<T>): void {
   const nxHost = convertAngularTreeToNxTree(host)
+  const log = new Logger()
 
   try {
     addProjectConfiguration(nxHost, name, configuration, true)
   } catch (e) {
-    updateProjectConfiguration(nxHost, name, configuration)
+    // FIXME: not really sure why nx acts this way but, whenever i try to use the update function directly
+    // it goes a bit ham overwriting the default workspace.json
+    // and ignoring the project.json of the given project
+    log.debug('Project already exists: %s -> %s', name, e.message)
+    let project: EnrichedProjectConfiguration<T>
+
+    try {
+      project = readProjectConfiguration<T>(host, name)
+    } catch (e) {
+      const logger = new Logger()
+
+      logger.fatal(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
+    }
+
+    if (project) {
+      project = { ...project, ...configuration }
+    }
+
+    updateProjectConfiguration(convertAngularTreeToNxTree(host), name, project as unknown as ProjectConfiguration)
   }
 }

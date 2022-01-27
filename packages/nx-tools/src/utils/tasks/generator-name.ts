@@ -92,12 +92,18 @@ export function normalizeNameWithApplicationModeTask<
       task: async (ctx, task): Promise<void> => {
         const projects = readWorkspaceProjects<Integration>(host)
 
+        const choices = Object.entries(projects)
+          .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
+          .map(([ name ]) => name)
+
+        if (choices.length === 0) {
+          throw new Error('No project has been found in the workspace.')
+        }
+
         ctx.name = await task.prompt({
           type: 'AutoComplete',
           message: 'Please select an existing application.',
-          choices: Object.entries(projects)
-            .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
-            .map(([ name ]) => name)
+          choices
         })
 
         task.title = `Name: ${ctx.name}`
@@ -139,16 +145,18 @@ export function normalizeParentApplicationTask<Ctx extends BaseSchemaParent, Int
       task: async (ctx, task): Promise<void> => {
         const projects = readWorkspaceProjects<Integration>(host)
 
-        if (Object.keys(projects).length === 0) {
+        const choices = Object.entries(projects)
+          .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
+          .map(([ name ]) => name)
+
+        if (choices.length === 0) {
           throw new Error('No project has been found in the workspace.')
         }
 
         ctx.parent = await task.prompt({
           type: 'AutoComplete',
           message: 'Please select an existing application as the parent.',
-          choices: Object.entries(projects)
-            .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
-            .map(([ name ]) => name)
+          choices
         })
 
         task.title = `Parent application: ${ctx.parent}`

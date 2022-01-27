@@ -91,7 +91,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
                 { error: false }
               )
             } catch {
-              log.error('Cancelled prompt.')
+              log.fatal('Cancelled prompt.')
               process.exit(127)
             }
           }
@@ -156,10 +156,10 @@ const MERGE_CONTEXT = 1
  * @param newFile
  * @param log
  */
-export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
+export function tripleFileMerge (name: string, currentFile: string, _oldFile: string, _newFile: string, log: Logger): string | boolean {
   let buffer: string
   // create difference-patch
-  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context: MERGE_CONTEXT })
+  const patch: string = diff.createPatch(name, '', '', '', '', { context: MERGE_CONTEXT })
 
   try {
     buffer = diff.applyPatch(currentFile, patch)
@@ -168,7 +168,10 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
     return false
   }
 
-  log.debug(patch)
+  // empty patches has 5 lines, so no need to show them
+  if (patch.split(EOL).length > 5) {
+    log.debug(patch)
+  }
 
   return buffer
 }
@@ -180,9 +183,9 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
  * @param currentFile
  * @param log
  */
-export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
+export function doubleFileMerge (name: string, _newFile: string, currentFile: string, log: Logger): string | boolean {
   let buffer: string
-  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context: MERGE_CONTEXT }), 'add')
+  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, '', '', '', '', { context: MERGE_CONTEXT }), 'add')
 
   try {
     buffer = diff.applyPatch(currentFile, newToCurrentPatch)
