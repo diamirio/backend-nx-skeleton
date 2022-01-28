@@ -17,7 +17,7 @@ import {
   updateTsConfigPathsRule,
   LINTER_VERSIONS,
   SchematicRule,
-  addPackageJsonImplicitDependenciesForProjectRule
+  updatePackageJsonForProjectRule
 } from '@webundsoehne/nx-tools'
 
 /**
@@ -49,7 +49,7 @@ export default function (schema: Schema): SchematicRule {
       updateTsConfigPathsRule(options),
 
       addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}),
-      addPackageJsonImplicitDependenciesForProjectRule(options, dependencies.implicitDeps),
+      updatePackageJsonForProjectRule(options, { implicitDependencies: dependencies.implicitDeps, scripts: options.packageJsonScripts }),
 
       formatTreeRule({ skip: options.skipFormat })
     ])

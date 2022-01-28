@@ -213,8 +213,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             // generate the microservice names
             await Promise.all(ctx.microserviceClient.map(async (m) => ctx.microserviceCasing[m] = generateMicroserviceCasing(m)))
 
-            // select the components to inject these microservice-clients to
-            // TODO: not sure if this is required a trivial case
+            // TODO: select the components to inject these microservice-clients to
+            // not sure if this is required a trivial case
 
             task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
           } else {
