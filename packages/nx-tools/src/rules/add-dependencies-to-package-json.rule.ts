@@ -5,10 +5,10 @@ import { updatePackageJsonForProjectRule } from './update-package-json.rule'
 import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
 import { PackageVersions } from '@interfaces/versions.interface'
 
-export function addDependenciesToProjectPackageJson<T extends BaseNormalizedSchemaRoot> (options: T, data: PackageVersions): Rule {
-  return chain([ updatePackageJsonForProjectRule(options, { implicitDependencies: data.implicitDeps }), addDependenciesToPackageJson(data) ])
+export function addDependenciesToProjectPackageJsonRule<T extends BaseNormalizedSchemaRoot> (options: T, data: PackageVersions): Rule {
+  return chain([ updatePackageJsonForProjectRule(options, { implicitDependencies: data.implicitDeps }), addDependenciesToPackageJsonRule(data) ])
 }
 
-export function addDependenciesToPackageJson (data: PackageVersions): Rule {
+export function addDependenciesToPackageJsonRule (data: PackageVersions): Rule {
   return addDepsToPackageJson(data.deps ?? {}, data.devDeps ?? {})
 }

@@ -8,7 +8,7 @@ import { Schema } from './main.interface'
 import init from '@schematics/init/main'
 import { calculateDependencies } from '@utils/versions'
 import {
-  addDependenciesToProjectPackageJson,
+  addDependenciesToProjectPackageJsonRule,
   addEslintConfigRule,
   eslintJson,
   formatTreeRule,
@@ -48,7 +48,7 @@ export default function (schema: Schema): SchematicRule {
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsConfigPathsRule(options),
 
-      addDependenciesToProjectPackageJson(options, dependencies),
+      addDependenciesToProjectPackageJsonRule(options, dependencies),
       updatePackageJsonForProjectRule(options, { scripts: options.packageJsonScripts }),
 
       formatTreeRule({ skip: options.skipFormat })
