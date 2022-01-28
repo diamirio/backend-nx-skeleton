@@ -8,10 +8,10 @@ import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
 import {
   isVerbose,
-  normalizeNameTask,
-  normalizePackageJsonNameTask,
-  normalizePriorConfigurationTask,
-  normalizeRootDirectoryTask,
+  normalizeNamePrompt,
+  normalizePackageJsonNamePrompt,
+  normalizePriorConfigurationPrompt,
+  normalizeRootDirectoryPrompt,
   NxProjectTypes,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -38,16 +38,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // select application name
-      ...normalizeNameTask<NormalizedSchema>(),
+      ...normalizeNamePrompt<NormalizedSchema>(),
 
       // normalize package json scope
-      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNamePrompt<NormalizedSchema>(host),
 
       // set project root directory
-      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'backendInterfaces'),
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'backendInterfaces'),
 
       // parse microservices for templates
       {

@@ -9,6 +9,7 @@ import {
   AvailableDBAdapters,
   AvailableDBTypes,
   AvailableExtensions,
+  AvailableExtensionsMap,
   AvailableMicroserviceTypes,
   AvailableServerTypes,
   PrettyNamesForAvailableThingies
@@ -20,10 +21,11 @@ import {
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  normalizeNameWithApplicationModeTask,
-  normalizePackageJsonNameTask,
-  normalizePriorConfigurationTask,
-  normalizeRootDirectoryTask,
+  normalizeExtensionsPrompt,
+  normalizeNameWithApplicationModePrompt,
+  normalizePackageJsonNamePrompt,
+  normalizePriorConfigurationPrompt,
+  normalizeRootDirectoryPrompt,
   NxProjectTypes,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -68,16 +70,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      ...normalizeNameWithApplicationModeTask<NormalizedSchema, NxNestProjectIntegration>(host, (_, project) => !!project.integration?.nestjs),
+      ...normalizeNameWithApplicationModePrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_, project) => !!project.integration?.nestjs),
 
       // normalize package json scope
-      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNamePrompt<NormalizedSchema>(host),
 
       // set project root directory
-      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.APP),
+      ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.APP),
 
       // check for prior configuration
-      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
 
       // select server functionality
       {
@@ -192,27 +194,6 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      {
-        skip: (ctx): boolean => !!ctx.extensions && ctx.extensions.length > 0,
-        task: async (ctx, task): Promise<void> => {
-          const choices = mapPromptChoices<AvailableExtensions>(AvailableExtensions, PrettyNamesForAvailableThingies)
-
-          // there can be two selections of API servers here
-          ctx.extensions = await task.prompt<AvailableExtensions[]>({
-            type: 'MultiSelect',
-            message: 'Please select the extensions you want.',
-            choices,
-            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableExtensions>(ctx, 'extensions', choices)
-          })
-
-          task.title = `Extensions selected as: ${ctx.extensions.length > 0 ? ctx.extensions.join(', ') : 'none'}`
-        },
-        options: {
-          bottomBar: Infinity,
-          persistentOutput: true
-        }
-      },
-
       // microservice-client options
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
@@ -266,6 +247,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           persistentOutput: true
         }
       },
+
+      ...normalizeExtensionsPrompt<AvailableExtensions, typeof AvailableExtensions, NormalizedSchema>(AvailableExtensionsMap, PrettyNamesForAvailableThingies),
 
       // generate casing
       {

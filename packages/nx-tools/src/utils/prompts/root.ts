@@ -3,10 +3,10 @@ import { Tree } from '@angular-devkit/schematics'
 import { NxProjectTypes } from '@constants'
 import { ListrTask } from 'listr2'
 
-import { generateNameCases } from '..'
 import { readWorkspaceLayout } from '@integration'
+import { generateNameCases } from '@utils/schematics'
 
-export function normalizeRootDirectoryTask<Ctx extends Partial<{ name: string, root: string, directory: string, packageScope: string }>> (
+export function normalizeRootDirectoryPrompt<Ctx extends Partial<{ name: string, root: string, directory: string, packageScope: string }>> (
   host: Tree,
   projectType: NxProjectTypes
 ): ListrTask<Ctx>[] {

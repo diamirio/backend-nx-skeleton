@@ -1,7 +1,7 @@
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableExtensions, AvailableMicroserviceTypes, AvailableServerTypes } from '@interfaces/available.constants'
 import { SchematicConstants } from '@interfaces/constants'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
-import { AvailableTestsTypes, BaseNormalizedSchema, BaseSchema, BaseSchemaModes, GeneratedNameCases, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
+import { AvailableTestsTypes, BaseNormalizedSchema, BaseSchema, BaseSchemaModes, GeneratedNameCases, SchemaExtensions, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
 import { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
@@ -27,7 +27,7 @@ export interface NormalizedSchema
   enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents' | 'packageJsonScripts'>
 }
 
-interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
+interface CommonPropertiesToSaveAndUse<Values extends boolean = false> extends SchemaExtensions<AvailableExtensions, typeof AvailableExtensions, Values> {
   components: Values extends true ? AvailableComponents[] : typeof AvailableComponents
   effectiveComponents: number
   server: Values extends true ? AvailableServerTypes : typeof AvailableServerTypes
@@ -36,6 +36,5 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
   dbAdapters: Values extends true ? AvailableDBAdapters : typeof AvailableDBAdapters
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
-  extensions: Values extends true ? AvailableExtensions[] : typeof AvailableExtensions
   packageJsonScripts: Record<string, string>
 }

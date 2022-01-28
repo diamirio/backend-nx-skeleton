@@ -17,7 +17,7 @@ import {
   SelectParentApplicationFn
 } from '@interfaces/base-schemas.interface'
 
-export function normalizeNameTask<Ctx extends BaseSchema> (): ListrTask<Ctx>[] {
+export function normalizeNamePrompt<Ctx extends BaseSchema> (): ListrTask<Ctx>[] {
   return [
     {
       skip: (ctx): boolean => !!ctx.name,
@@ -33,12 +33,12 @@ export function normalizeNameTask<Ctx extends BaseSchema> (): ListrTask<Ctx>[] {
   ]
 }
 
-export function normalizeNameWithParentAndDestinationTask<Ctx extends BaseSchemaWithParentAndDestination, Integration extends Record<string, any>> (
+export function normalizeNameWithParentAndDestinationPrompt<Ctx extends BaseSchemaWithParentAndDestination, Integration extends Record<string, any>> (
   host: Tree,
   select?: (name: string, project: EnrichedProjectConfiguration<Integration>) => boolean
 ): ListrTask<Ctx>[] {
   return [
-    ...normalizeParentApplicationTask<Ctx, Integration>(host, select),
+    ...normalizeParentApplicationPrompt<Ctx, Integration>(host, select),
 
     {
       skip: (ctx): boolean => !!ctx.destination,
@@ -54,7 +54,7 @@ export function normalizeNameWithParentAndDestinationTask<Ctx extends BaseSchema
   ]
 }
 
-export function normalizeNameWithApplicationModeTask<
+export function normalizeNameWithApplicationModePrompt<
   Ctx extends BaseSchema & BaseNormalizedSchema & BaseSchemaModes & SchemaPriorConfiguration<Integration>,
   Integration extends Record<string, any>
 > (host: Tree, select?: (name: string, project: EnrichedProjectConfiguration<Integration>) => boolean): ListrTask<Ctx>[] {
@@ -112,12 +112,12 @@ export function normalizeNameWithApplicationModeTask<
   ]
 }
 
-export function normalizeNameWithParentApplicationTask<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
+export function normalizeNameWithParentApplicationPrompt<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
   host: Tree,
   select?: SelectParentApplicationFn<Integration>
 ): ListrTask<Ctx>[] {
   return [
-    ...normalizeParentApplicationTask<Ctx, Integration>(host, select),
+    ...normalizeParentApplicationPrompt<Ctx, Integration>(host, select),
 
     // prompt for generator name
     {
@@ -134,7 +134,7 @@ export function normalizeNameWithParentApplicationTask<Ctx extends BaseSchemaWit
   ]
 }
 
-export function normalizeParentApplicationTask<Ctx extends BaseSchemaParent, Integration extends Record<string, any>> (
+export function normalizeParentApplicationPrompt<Ctx extends BaseSchemaParent, Integration extends Record<string, any>> (
   host: Tree,
   select?: SelectParentApplicationFn<Integration>
 ): ListrTask<Ctx>[] {

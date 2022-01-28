@@ -9,10 +9,10 @@ import {
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  normalizeNameWithApplicationModeTask,
-  normalizePackageJsonNameTask,
-  normalizePriorConfigurationTask,
-  normalizeRootDirectoryTask,
+  normalizeNameWithApplicationModePrompt,
+  normalizePackageJsonNamePrompt,
+  normalizePriorConfigurationPrompt,
+  normalizeRootDirectoryPrompt,
   NxProjectTypes,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -47,16 +47,16 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // select generator mode
-      ...normalizeNameWithApplicationModeTask<NormalizedSchema, NxWorkspaceIntegration>(host, (_, project) => !!project.integration?.library),
+      ...normalizeNameWithApplicationModePrompt<NormalizedSchema, NxWorkspaceIntegration>(host, (_, project) => !!project.integration?.library),
 
       // normalize package json scope
-      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNamePrompt<NormalizedSchema>(host),
 
       // set project root directory
-      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      ...normalizePriorConfigurationTask<NormalizedSchema, NxWorkspaceIntegration>(host, 'library'),
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxWorkspaceIntegration>(host, 'library'),
 
       // select library type
       {

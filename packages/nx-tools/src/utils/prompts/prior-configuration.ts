@@ -5,7 +5,7 @@ import { ListrTask } from 'listr2'
 import { readNxProjectIntegration, readProjectConfiguration } from '@integration'
 import { BaseNormalizedSchema, BaseNormalizedSchemaWithParent, BaseSchema, BaseSchemaWithParent, SchemaPriorConfiguration } from '@interfaces/base-schemas.interface'
 
-export function normalizePriorConfigurationTask<Ctx extends BaseSchema & BaseNormalizedSchema & SchemaPriorConfiguration<Integration>, Integration extends Record<string, any>> (
+export function normalizePriorConfigurationPrompt<Ctx extends BaseSchema & BaseNormalizedSchema & SchemaPriorConfiguration<Integration>, Integration extends Record<string, any>> (
   host: Tree,
   integrationKey: keyof Integration
 ): ListrTask<Ctx>[] {
@@ -38,7 +38,7 @@ export function normalizePriorConfigurationTask<Ctx extends BaseSchema & BaseNor
   ]
 }
 
-export function normalizeParentConfigurationTask<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
+export function normalizeParentConfigurationPrompt<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
   host: Tree,
   integrationKey: keyof Integration
 ): ListrTask<Ctx>[] {

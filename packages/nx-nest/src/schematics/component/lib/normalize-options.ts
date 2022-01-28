@@ -14,9 +14,9 @@ import {
   ConvertToPromptType,
   generateNameCases,
   isVerbose,
-  normalizeNameWithParentApplicationTask,
-  normalizeParentConfigurationTask,
-  normalizeWorkspacePackageScopeTask,
+  normalizeNameWithParentApplicationPrompt,
+  normalizeParentConfigurationPrompt,
+  normalizeWorkspacePackageScopePrompt,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
@@ -39,17 +39,17 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      ...normalizeNameWithParentApplicationTask<NormalizedSchema, NxNestProjectIntegration>(host, (name, project) => {
+      ...normalizeNameWithParentApplicationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, (name, project) => {
         if (project.integration?.nestjs) {
           return true
         }
       }),
 
       // check for parent application configuration
-      ...normalizeParentConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+      ...normalizeParentConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
 
       // need package scope for imports and such
-      ...normalizeWorkspacePackageScopeTask(host),
+      ...normalizeWorkspacePackageScopePrompt(host),
 
       // parse component name and convert casings to use in template
       {

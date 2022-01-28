@@ -7,9 +7,9 @@ import { SchematicConstants } from '@interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 import {
   isVerbose,
-  normalizePackageJsonNameTask,
-  normalizePriorConfigurationTask,
-  normalizeRootDirectoryTask,
+  normalizePackageJsonNamePrompt,
+  normalizePriorConfigurationPrompt,
+  normalizeRootDirectoryPrompt,
   NxProjectTypes,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -34,13 +34,13 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       },
 
       // normalize package json scope
-      ...normalizePackageJsonNameTask<NormalizedSchema>(host),
+      ...normalizePackageJsonNamePrompt<NormalizedSchema>(host),
 
       // set project root directory
-      ...normalizeRootDirectoryTask<NormalizedSchema>(host, NxProjectTypes.LIB),
+      ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      ...normalizePriorConfigurationTask<NormalizedSchema, NxNestProjectIntegration>(host, 'microserviceProvider'),
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'microserviceProvider'),
 
       // parse microservices for templates
       {

@@ -4,7 +4,7 @@ import { ListrTask } from 'listr2'
 import { readWorkspaceLayout } from '@integration'
 import { BaseNormalizedSchemaPackageName, BaseNormalizedSchemaPackageScope, BaseSchema, BaseSchemaParent } from '@interfaces/base-schemas.interface'
 
-export function normalizeWorkspacePackageScopeTask<Ctx extends BaseSchema & BaseNormalizedSchemaPackageScope> (host: Tree): ListrTask<Ctx>[] {
+export function normalizeWorkspacePackageScopePrompt<Ctx extends BaseSchema & BaseNormalizedSchemaPackageScope> (host: Tree): ListrTask<Ctx>[] {
   return [
     {
       task: (ctx): void => {
@@ -16,9 +16,9 @@ export function normalizeWorkspacePackageScopeTask<Ctx extends BaseSchema & Base
   ]
 }
 
-export function normalizePackageJsonNameTask<Ctx extends BaseSchema & BaseNormalizedSchemaPackageName> (host: Tree): ListrTask<Ctx>[] {
+export function normalizePackageJsonNamePrompt<Ctx extends BaseSchema & BaseNormalizedSchemaPackageName> (host: Tree): ListrTask<Ctx>[] {
   return [
-    ...normalizeWorkspacePackageScopeTask(host),
+    ...normalizeWorkspacePackageScopePrompt(host),
 
     {
       title: 'Generating package.json name.',
@@ -31,9 +31,9 @@ export function normalizePackageJsonNameTask<Ctx extends BaseSchema & BaseNormal
   ]
 }
 
-export function normalizePackageJsonNameForParentTask<Ctx extends BaseSchemaParent & BaseNormalizedSchemaPackageName> (host: Tree): ListrTask<Ctx>[] {
+export function normalizePackageJsonNameForParentPrompt<Ctx extends BaseSchemaParent & BaseNormalizedSchemaPackageName> (host: Tree): ListrTask<Ctx>[] {
   return [
-    ...normalizeWorkspacePackageScopeTask(host),
+    ...normalizeWorkspacePackageScopePrompt(host),
 
     {
       task: (ctx): void => {

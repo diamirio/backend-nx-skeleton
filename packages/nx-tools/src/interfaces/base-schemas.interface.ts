@@ -84,4 +84,6 @@ export type SchemaPriorConfiguration<T extends Record<PropertyKey, any>> = Recor
 
 export type SchemaParentPriorConfiguration<T extends Record<PropertyKey, any>> = Record<'parentPriorConfiguration', T>
 
+export type SchemaExtensions<Extensions, ExtensionsType, Values extends boolean = false> = Partial<Record<'extensions', Values extends true ? Extensions[] : ExtensionsType>>
+
 export type SelectParentApplicationFn<Integration extends Record<string, any>> = (name: string, project: EnrichedProjectConfiguration<Integration>) => boolean
