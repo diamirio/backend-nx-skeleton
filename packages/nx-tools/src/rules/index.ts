@@ -1,3 +1,4 @@
+export * from './add-dependencies-to-package-json.rule'
 export * from './add-nx-implicit-dependencies.rule'
 export * from './overwrite-with-diff.rule'
 export * from './add-eslint.rule'

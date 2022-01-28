@@ -1,5 +1,4 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { addDepsToPackageJson } from '@nrwl/workspace'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
@@ -9,15 +8,16 @@ import { Schema } from './main.interface'
 import init from '@schematics/init/main'
 import { calculateDependencies } from '@utils/versions'
 import {
-  eslintJson,
+  addDependenciesToProjectPackageJson,
   addEslintConfigRule,
+  eslintJson,
   formatTreeRule,
+  LINTER_VERSIONS,
   Logger,
   runInRule,
-  updateTsConfigPathsRule,
-  LINTER_VERSIONS,
   SchematicRule,
-  updatePackageJsonForProjectRule
+  updatePackageJsonForProjectRule,
+  updateTsConfigPathsRule
 } from '@webundsoehne/nx-tools'
 
 /**
@@ -48,8 +48,8 @@ export default function (schema: Schema): SchematicRule {
       runInRule(log.info.bind(log)('Updating tsconfig files.')),
       updateTsConfigPathsRule(options),
 
-      addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}),
-      updatePackageJsonForProjectRule(options, { implicitDependencies: dependencies.implicitDeps, scripts: options.packageJsonScripts }),
+      addDependenciesToProjectPackageJson(options, dependencies),
+      updatePackageJsonForProjectRule(options, { scripts: options.packageJsonScripts }),
 
       formatTreeRule({ skip: options.skipFormat })
     ])
