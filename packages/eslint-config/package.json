@@ -26,12 +26,18 @@
     "./**/*.{json,md}": ["prettier --loglevel warn --write"]
   },
   "peerDependencies": {
-    "eslint": ">= 7.5.0",
     "@typescript-eslint/eslint-plugin": ">= 5",
     "@typescript-eslint/parser": ">= 5",
+    "eslint": ">= 7.5.0",
     "eslint-config-react": ">= 1",
     "eslint-plugin-import": ">= 2",
     "eslint-plugin-react-hooks": ">= 4"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  }
 }
