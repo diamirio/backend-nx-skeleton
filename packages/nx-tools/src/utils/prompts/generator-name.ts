@@ -10,8 +10,8 @@ import {
   BaseNormalizedSchemaWithParent,
   BaseSchema,
   BaseSchemaModes,
-  BaseSchemaWithParentAndDestination,
-  BaseSchemaWithParent,
+  BaseSchemaWithParentAndConfigurationAndDestination,
+  BaseSchemaWithParentAndConfiguration,
   SchemaPriorConfiguration,
   BaseSchemaParent,
   SelectParentApplicationFn
@@ -33,7 +33,7 @@ export function normalizeNamePrompt<Ctx extends BaseSchema> (): ListrTask<Ctx>[]
   ]
 }
 
-export function normalizeNameWithParentAndDestinationPrompt<Ctx extends BaseSchemaWithParentAndDestination, Integration extends Record<string, any>> (
+export function normalizeNameWithParentAndDestinationPrompt<Ctx extends BaseSchemaWithParentAndConfigurationAndDestination, Integration extends Record<string, any>> (
   host: Tree,
   select?: (name: string, project: EnrichedProjectConfiguration<Integration>) => boolean
 ): ListrTask<Ctx>[] {
@@ -112,10 +112,10 @@ export function normalizeNameWithApplicationModePrompt<
   ]
 }
 
-export function normalizeNameWithParentApplicationPrompt<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
-  host: Tree,
-  select?: SelectParentApplicationFn<Integration>
-): ListrTask<Ctx>[] {
+export function normalizeNameWithParentApplicationPrompt<
+  Ctx extends BaseSchemaWithParentAndConfiguration & BaseNormalizedSchemaWithParent<Integration>,
+  Integration extends Record<string, any>
+> (host: Tree, select?: SelectParentApplicationFn<Integration>): ListrTask<Ctx>[] {
   return [
     ...normalizeParentApplicationPrompt<Ctx, Integration>(host, select),
 

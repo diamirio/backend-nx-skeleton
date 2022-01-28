@@ -2,8 +2,9 @@ import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular
 import { Schema as NxSchema } from '@nrwl/workspace/src/generators/remove/schema'
 
 import { normalizeOptions } from './lib/normalize-options'
+import { updateIntegration } from './lib/update-integration'
 import { Schema } from './main.interface'
-import { formatTreeRule, removeTsConfigPathsRule } from '@webundsoehne/nx-tools'
+import { formatTreeRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): Rule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -16,7 +17,7 @@ export default function (schema: Schema): Rule {
         forceRemove: options.force
       }),
 
-      removeTsConfigPathsRule({ packageName: options.packageName }),
+      updateIntegration(options),
 
       formatTreeRule({ skip: options.skipFormat })
     ])

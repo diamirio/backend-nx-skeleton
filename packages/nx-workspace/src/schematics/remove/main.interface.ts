@@ -1,5 +1,5 @@
-import { BaseNormalizedSchemaPackageName, BaseSchemaWithParent } from '@webundsoehne/nx-tools'
+import { BaseNormalizedSchemaPackageName, BaseSchemaWithParentAndConfiguration } from '@webundsoehne/nx-tools'
 
-export type Schema = BaseSchemaWithParent
+export type Schema = BaseSchemaWithParentAndConfiguration
 
 export interface NormalizedSchema extends Schema, BaseNormalizedSchemaPackageName {}

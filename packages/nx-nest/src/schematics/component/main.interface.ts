@@ -3,12 +3,12 @@ import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 import { NormalizedSchema as ApplicationNormalizedSchema } from '@schematics/application/main.interface'
 import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
-import { BaseNormalizedSchemaWithParent, BaseSchemaWithParent, GeneratedNameCases } from '@webundsoehne/nx-tools'
+import { BaseNormalizedSchemaWithParent, BaseSchemaWithParentAndConfiguration, GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed schema coming from the angular-schematics
  */
-export interface Schema extends BaseSchemaWithParent<NxNestProjectIntegration> {
+export interface Schema extends BaseSchemaWithParentAndConfiguration<NxNestProjectIntegration> {
   type: AvailableComponentsSelection
   mount?: string
 }

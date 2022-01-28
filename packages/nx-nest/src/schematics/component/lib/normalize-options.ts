@@ -15,7 +15,7 @@ import {
   generateNameCases,
   isVerbose,
   normalizeNameWithParentApplicationPrompt,
-  normalizeParentConfigurationPrompt,
+  normalizeParentPriorConfigurationPrompt,
   normalizeWorkspacePackageScopePrompt,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
@@ -46,7 +46,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       }),
 
       // check for parent application configuration
-      ...normalizeParentConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+      ...normalizeParentPriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
 
       // need package scope for imports and such
       ...normalizeWorkspacePackageScopePrompt(host),

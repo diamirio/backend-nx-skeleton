@@ -9,7 +9,7 @@ export class {{ casing.pascal }}Command implements CommandRunner {
     parameters: string[],
     options?: Record<string, any>,
   ): Promise<void> {
-    this.logger.info('Running the default command.')
+    this.logger.log('Running the default command.')
 
     return
   }

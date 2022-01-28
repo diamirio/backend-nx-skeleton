@@ -1,6 +1,6 @@
-import { BaseNormalizedSchemaPackageName, BaseSchemaWithParentAndDestination, EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
+import { BaseNormalizedSchemaPackageName, BaseSchemaWithParentAndConfigurationAndDestination, EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
 
-export interface Schema extends BaseSchemaWithParentAndDestination {
+export interface Schema extends BaseSchemaWithParentAndConfigurationAndDestination {
   importPath?: string
   updateImportPath?: boolean
 }

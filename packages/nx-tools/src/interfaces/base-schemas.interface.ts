@@ -31,9 +31,7 @@ export interface BaseSchemaDestination {
 
 export interface BarebonesSchemaWithName extends BarebonesSchema, BaseSchemaName {}
 
-export interface BaseSchemaWithParent extends BarebonesSchema, BaseSchemaParent {}
-
-export interface BaseSchemaWithParentAndDestination extends BaseSchemaWithParent, BaseSchemaDestination {}
+export interface BaseSchemaWithParentAndConfigurationAndDestination extends BaseSchemaWithParentAndConfiguration, BaseSchemaDestination {}
 
 export interface BaseSchema extends BarebonesSchema, BaseSchemaName {
   /** Directory of the project, if it is assigned to a subfolder. */
@@ -43,7 +41,9 @@ export interface BaseSchema extends BarebonesSchema, BaseSchemaName {
   linter?: AvailableLinterTypes
 }
 
-export interface BaseSchemaWithParent<Integration extends Record<string, any> = BaseIntegration> extends BaseSchema, BaseSchemaParent {
+export interface BaseSchemaWithParent extends BaseSchema, BaseSchemaParent {}
+
+export interface BaseSchemaWithParentAndConfiguration<Integration extends Record<string, any> = BaseIntegration> extends BaseSchemaWithParent {
   /** Name of the parent project. */
   parentProjectConfiguration?: EnrichedProjectConfiguration<Integration>
 }

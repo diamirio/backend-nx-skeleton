@@ -3,7 +3,13 @@ import { directoryExists } from '@nrwl/workspace/src/utilities/fileutils'
 import { ListrTask } from 'listr2'
 
 import { readNxProjectIntegration, readProjectConfiguration } from '@integration'
-import { BaseNormalizedSchema, BaseNormalizedSchemaWithParent, BaseSchema, BaseSchemaWithParent, SchemaPriorConfiguration } from '@interfaces/base-schemas.interface'
+import {
+  BaseNormalizedSchema,
+  BaseNormalizedSchemaWithParent,
+  BaseSchema,
+  BaseSchemaWithParentAndConfiguration,
+  SchemaPriorConfiguration
+} from '@interfaces/base-schemas.interface'
 
 export function normalizePriorConfigurationPrompt<Ctx extends BaseSchema & BaseNormalizedSchema & SchemaPriorConfiguration<Integration>, Integration extends Record<string, any>> (
   host: Tree,
@@ -38,10 +44,37 @@ export function normalizePriorConfigurationPrompt<Ctx extends BaseSchema & BaseN
   ]
 }
 
-export function normalizeParentConfigurationPrompt<Ctx extends BaseSchemaWithParent & BaseNormalizedSchemaWithParent<Integration>, Integration extends Record<string, any>> (
-  host: Tree,
-  integrationKey: keyof Integration
-): ListrTask<Ctx>[] {
+export function normalizeParentConfigurationPrompt<Ctx extends BaseSchemaWithParentAndConfiguration<any>> (host: Tree): ListrTask<Ctx>[] {
+  return [
+    {
+      title: 'Checking for the parent project configuration...',
+      /**
+       * if parent configuration is not injected through schematic we will parse it ourselves
+       * this should be for cases that the schematic is not run internally and run through cli
+       */
+      enabled: (ctx): boolean => ctx.parentProjectConfiguration === undefined,
+      task: (ctx, task): void => {
+        // if this is created with this schematic there should be a nx json
+        task.title = 'Searching for prior configuration of parent project...'
+
+        const project = readProjectConfiguration(host, ctx.parent)
+
+        if (project) {
+          ctx.parentProjectConfiguration = project
+        } else {
+          throw new Error('Can not read application configuration.')
+        }
+
+        task.title = 'Parent project configuration has been recovered.'
+      }
+    }
+  ]
+}
+
+export function normalizeParentPriorConfigurationPrompt<
+  Ctx extends BaseSchemaWithParentAndConfiguration & BaseNormalizedSchemaWithParent<Integration>,
+  Integration extends Record<string, any>
+> (host: Tree, integrationKey: keyof Integration): ListrTask<Ctx>[] {
   return [
     {
       title: 'Checking for the parent project configuration...',
