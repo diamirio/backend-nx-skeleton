@@ -147,12 +147,14 @@ export class NxCommand extends BaseCommand<Configuration> {
     // run finally prematurely
     const { ctx } = await this.finally<NxAddCommandCtx>()
 
+    const schematic = `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`
+
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
       const { manager, args, env } = this.helpers.node.parser({
         action: PackageManagerUsableCommands.EXEC,
         command: 'nx',
-        args: [ 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--help', ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
+        args: [ 'g', schematic, '--help', ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
       })
 
       const help = await execa(manager, args, { shell: true, env })
@@ -165,17 +167,12 @@ export class NxCommand extends BaseCommand<Configuration> {
       }
     }
 
-    this.logger.module('Now will start running the schematic...')
+    this.logger.module('Now will start running the schematic: %s', schematic)
 
     const { manager, args, env } = this.helpers.node.parser({
       action: PackageManagerUsableCommands.EXEC,
       command: 'nx',
-      args: [
-        'g',
-        `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
-        ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [],
-        ...this.isVerbose || this.isDebug ? [ '--verbose' ] : []
-      ]
+      args: [ 'g', schematic, ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [], ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
     })
 
     // this will be the command

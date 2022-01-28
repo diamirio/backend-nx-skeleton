@@ -110,7 +110,7 @@ export class PackageManager {
         { condition: action.action === PackageManagerUsableCommands.RUN, command: PackageManagerUsableCommands.RUN },
         { condition: action.action === PackageManagerUsableCommands.EXEC, command: PackageManagerUsableCommands.EXEC },
         { condition: true, args: action.command },
-        { condition: this.manager === AvailablePackageManagers.NPM, command: PackageManagerUsableCommands.RUN_ARGS },
+        { condition: this.manager === AvailablePackageManagers.NPM && action.args?.length > 0, command: PackageManagerUsableCommands.RUN_ARGS },
         { condition: true, args: action.args }
       )
     } else if (this.isPackageManagerPackageWithoutCommandAction(action)) {
@@ -282,7 +282,7 @@ export class PackageManager {
             o.installed = firstOccurence.installed
 
             if (this.globalLinkFolder.length > 0 && this.globalLinkFolder.some((path) => o.path.startsWith(path))) {
-              this.logger.debug('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
+              this.logger.warn('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
 
               o.linked = true
             }
@@ -338,7 +338,7 @@ export class PackageManager {
               if (o.linked) {
                 o.hasUpdate = false
 
-                this.logger.debug('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
+                this.logger.warn('Updates disabled for the package since it is linked: %s', currentPkg.pkg)
               } else if (updatable.type !== 'latest') {
                 o.hasUpdate = true
                 o.updateType = `${updatable.type}: ${updatable.current} -> ${updatable.latest}`

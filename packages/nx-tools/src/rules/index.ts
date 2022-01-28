@@ -1,3 +1,5 @@
+export * from './add-package-json-implicit-deps.rule'
+export * from './add-nx-implicit-dependencies.rule'
 export * from './overwrite-with-diff.rule'
 export * from './add-eslint.rule'
 export * from './create-application.rule'

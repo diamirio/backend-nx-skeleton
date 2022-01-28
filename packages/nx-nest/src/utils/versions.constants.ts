@@ -8,11 +8,11 @@ export const VERSIONS: Versions = {
       deps: {
         '@nestjs/common': '^8.2.5',
         '@nestjs/core': '^8.2.5',
-        rxjs: '^7.5.2',
+        rxjs: { version: '^7.5.2', implicit: true },
         '@webundsoehne/nestjs-util': '^4.0.0',
-        'class-transformer': '^0.5.1',
-        'class-validator': '^0.13.2',
-        'reflect-metadata': '^0.1.13'
+        'class-transformer': { version: '^0.5.1', implicit: true },
+        'class-validator': { version: '^0.13.2', implicit: true },
+        'reflect-metadata': { version: '^0.1.13', implicit: true }
       }
     },
     microservice: {
@@ -29,7 +29,7 @@ export const VERSIONS: Versions = {
   [AvailableServerTypes.RESTFUL]: {
     deps: {
       '@nestjs/platform-fastify': '^8.2.5',
-      'fastify-swagger': '^4.13.1',
+      'fastify-swagger': { version: '^4.13.1', implicit: true },
       '@nestjs/swagger': '^5.1.5'
     }
   },
@@ -37,9 +37,9 @@ export const VERSIONS: Versions = {
     deps: {
       '@nestjs/graphql': '^9.1.2',
       '@nestjs/platform-fastify': '^8.2.5',
-      'apollo-server-fastify': '^3.6.2',
-      graphql: '^15',
-      'graphql-tools': '^8.2.0'
+      'apollo-server-fastify': { version: '^3.6.2', implicit: true },
+      graphql: { version: '^15', implicit: true },
+      'graphql-tools': { version: '^8.2.0', implicit: true }
     }
   },
   [AvailableComponents.BG_TASK]: {
@@ -55,14 +55,14 @@ export const VERSIONS: Versions = {
   // if the support for per message queue support added this has to be done in a more complicated way
   [AvailableComponents.MICROSERVICE_SERVER]: {
     deps: {
-      amqplib: '^0.8.0',
-      'amqp-connection-manager': '^4.0.0'
+      amqplib: { version: '^0.8.0', implicit: true },
+      'amqp-connection-manager': { version: '^4.0.0', implicit: true }
     }
   },
   [AvailableComponents.MICROSERVICE_CLIENT]: {
     deps: {
-      amqplib: '^0.8.0',
-      'amqp-connection-manager': '^4.0.0'
+      amqplib: { version: '^0.8.0', implicit: true },
+      'amqp-connection-manager': { version: '^4.0.0', implicit: true }
     }
   },
   [AvailableTestsTypes.JEST]: {
@@ -77,24 +77,24 @@ export const VERSIONS: Versions = {
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
       '@nestjs/typeorm': '^8.0.3',
-      typeorm: '^0.2.41',
-      'typeorm-seeding': '^1.6.1'
+      typeorm: { version: '^0.2.41', implicit: true },
+      'typeorm-seeding': { version: '^1.6.1', implicit: true }
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       '@nestjs/mongoose': '^9.0.2',
-      mongoose: '^6.0.17'
+      mongoose: { version: '^6.0.17', implicit: true }
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {
     deps: {
-      mysql2: '^2.3.3'
+      mysql2: { version: '^2.3.3', implicit: true }
     }
   },
   [AvailableDBTypes.TYPEORM_POSTGRESQL]: {
     deps: {
-      pg: '^8.7.1'
+      pg: { version: '^8.7.1', implicit: true }
     }
   },
   [AvailableDBTypes.MONGOOSE_MONGODB]: {}

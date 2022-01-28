@@ -1,6 +1,6 @@
 import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 
-import { RunWorkspaceCommandTask } from '.'
+import { RunPackageManagerTask } from '.'
 import { PackageManagerUsableCommands } from '@utils/package-manager/package-manager.constants'
 
 interface TaskOptions {
@@ -14,7 +14,7 @@ interface TaskOptions {
 export function addInstallTask (context: SchematicContext, options?: TaskOptions, dependencies?: TaskId[]): TaskId {
   if (!options.skip) {
     return context.addTask(
-      new RunWorkspaceCommandTask({
+      new RunPackageManagerTask({
         root: options.root,
         action: { action: PackageManagerUsableCommands.INSTALL }
       }),

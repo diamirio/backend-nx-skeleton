@@ -1,6 +1,6 @@
-import { PackageVersions } from '@interfaces/versions.interface'
+import { DependencyCalculatorPackage } from '@interfaces/versions.interface'
 
 export type DependencyCalculatorOptions = {
   condition?: boolean
-  deps: PackageVersions
+  deps: DependencyCalculatorPackage
 }[]

@@ -9,7 +9,15 @@ import { Schema as ComponentSchema } from '@schematics/component/main.interface'
 import { Schema as GeneratorSchema } from '@schematics/generator/main.interface'
 import { Schema as MspSchema } from '@schematics/microservice-provider/main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { addSchematicTaskRule, applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, runInRule } from '@webundsoehne/nx-tools'
+import {
+  addNxImplicitDependenciesRule,
+  addSchematicTaskRule,
+  applyOverwriteWithDiff,
+  createApplicationRule,
+  CreateApplicationRuleInterface,
+  Logger,
+  runInRule
+} from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.
@@ -43,6 +51,8 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite(options, options.priorConfiguration), log, { silent: true })) : null,
         context
       ),
+
+      addNxImplicitDependenciesRule({ [join(options.root, 'config', '**')]: [ options.name ] }),
 
       ...createApplicationRule({
         trigger: [

@@ -9,11 +9,11 @@
       "description": "Export files a default module with regex patterns."
     },
 
-    "package-script": {
-      "factory": "./dist/schematics/package-script/main",
-      "schema": "./dist/schematics/package-script/schema.json",
-      "aliases": ["script"],
-      "description": "Run a package.json script."
+    "package-manager": {
+      "factory": "./dist/schematics/package-manager/main",
+      "schema": "./dist/schematics/package-manager/schema.json",
+      "aliases": ["manager"],
+      "description": "Run a package manager script."
     }
   }
 }

@@ -2,6 +2,7 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { AvailableLinterTypes } from '@constants/available.constants'
 import { addLintFiles, Linter } from '@nrwl/workspace'
 
+import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
 import { runInRule } from '@rules/run.rule'
 import { Logger } from '@utils'
 
@@ -14,7 +15,7 @@ import { Logger } from '@utils'
  * @param  {any}} deps
  * @returns Rule
  */
-export function addEslintConfigRule<T extends { root: string }> (options: T, eslint: { json: any, deps: any }): Rule {
+export function addEslintConfigRule<T extends BaseNormalizedSchemaRoot> (options: T, eslint: { json: any, deps: any }): Rule {
   return (host: Tree, context: SchematicContext): Rule => {
     const log = new Logger(context)
 

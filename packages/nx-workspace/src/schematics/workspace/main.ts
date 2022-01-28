@@ -4,16 +4,7 @@ import { TaskTokens } from './constants'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { Schema } from './main.interface'
-import {
-  addGitTask,
-  addInstallTask,
-  addMultipleDependentTasksRule,
-  addRunWorkspaceScriptTask,
-  isDevelopmentMode,
-  Logger,
-  PackageManagerUsableCommands,
-  runInRule
-} from '@webundsoehne/nx-tools'
+import { addGitTask, addInstallTask, addMultipleDependentTasksRule, addRunWorkspaceScriptTask, Logger, PackageManagerUsableCommands, runInRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
@@ -30,12 +21,6 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
 
       addMultipleDependentTasksRule<typeof TaskTokens>([
         {
-          token: TaskTokens.NPM_INSTALL,
-          fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) => addInstallTask(context, { skip: options.skipInstall, root: options.root }, dependencies)
-        },
-
-        {
-          condition: !isDevelopmentMode(),
           token: TaskTokens.GIT_INIT,
           fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) =>
             addGitTask(
@@ -47,6 +32,12 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
               },
               dependencies
             )
+        },
+
+        {
+          token: TaskTokens.NPM_INSTALL,
+          fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) => addInstallTask(context, { skip: options.skipInstall, root: options.root }, dependencies),
+          dependsOn: [ TaskTokens.GIT_INIT ]
         },
 
         {
