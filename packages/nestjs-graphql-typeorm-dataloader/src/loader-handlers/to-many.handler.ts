@@ -1,8 +1,8 @@
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 import { handler } from './callback-handler.handler'
-import { Context } from '@interfaces/context.interface'
-import { ForeignKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
+import type { Context } from '@interfaces/context.interface'
+import type { ForeignKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
 import { ToManyDataloader } from '@loaders/to-many.loader'
 
 export async function handleToMany<V> (foreignKeyFunc: ForeignKeyFunc, parent: any, context: Context, relation: RelationMetadata): Promise<any> {

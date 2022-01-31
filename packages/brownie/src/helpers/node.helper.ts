@@ -1,9 +1,10 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
+import type { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import execa from 'execa'
-import { Listr } from 'listr2'
+import type { Listr } from 'listr2'
 
-import { Configuration } from '@interfaces/default-config.interface'
-import { NodeDependency, PackageManager, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
+import type { Configuration } from '@interfaces/default-config.interface'
+import type { NodeDependency, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
+import { PackageManager } from '@webundsoehne/nx-tools'
 import { pipeProcessThroughListr } from '@webundsoehne/nx-tools/dist/utils/logger/pipe-process-to-listr'
 
 export class NodeHelper extends PackageManager {

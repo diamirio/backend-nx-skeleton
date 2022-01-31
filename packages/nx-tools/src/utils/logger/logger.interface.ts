@@ -1,5 +1,5 @@
-import { LoggerApi } from '@angular-devkit/core/src/logger'
-import { Logger as WinstonLogger, LeveledLogMethod } from 'winston'
+import type { LoggerApi } from '@angular-devkit/core/src/logger'
+import type { Logger as WinstonLogger, LeveledLogMethod } from 'winston'
 
 export type AvailableLogLevels = keyof Omit<LoggerApi, 'createChild' | 'log'>
 

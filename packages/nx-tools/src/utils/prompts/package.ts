@@ -1,8 +1,8 @@
-import { Tree } from '@angular-devkit/schematics'
-import { ListrTask } from 'listr2'
+import type { Tree } from '@angular-devkit/schematics'
+import type { ListrTask } from 'listr2'
 
 import { readWorkspaceLayout } from '@integration'
-import { BaseNormalizedSchemaPackageName, BaseNormalizedSchemaPackageScope, BaseSchema, BaseSchemaParent } from '@interfaces/base-schemas.interface'
+import type { BaseNormalizedSchemaPackageName, BaseNormalizedSchemaPackageScope, BaseSchema, BaseSchemaParent } from '@interfaces/base-schemas.interface'
 
 export function normalizeWorkspacePackageScopePrompt<Ctx extends BaseSchema & BaseNormalizedSchemaPackageScope> (host: Tree): ListrTask<Ctx>[] {
   return [

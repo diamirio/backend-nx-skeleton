@@ -1,6 +1,6 @@
-import { BaseNormalizedSchemaPackageScope, BaseNormalizedSchemaRoot, BaseSchema } from '@interfaces/base-schemas.interface'
-import { GenerateExportsJinjaTemplateOptions } from '@rules'
-import { GeneratedNameCases } from '@utils'
+import type { BaseNormalizedSchemaPackageScope, BaseNormalizedSchemaRoot, BaseSchema } from '@interfaces/base-schemas.interface'
+import type { GenerateExportsJinjaTemplateOptions } from '@rules'
+import type { GeneratedNameCases } from '@utils'
 
 /**
  * This is the unparsed schema coming from the angular-schematics

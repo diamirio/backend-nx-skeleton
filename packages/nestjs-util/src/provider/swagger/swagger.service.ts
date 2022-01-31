@@ -1,7 +1,7 @@
-import { INestApplication } from '@nestjs/common'
+import type { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-import { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
+import type { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
 import { Configurable, ConfigParam } from '@provider/config'
 
 export class SwaggerService {
@@ -13,7 +13,7 @@ export class SwaggerService {
    * @param {SwaggerConfig} [config]
    */
   @Configurable()
-  static enable (app: INestApplication, options?: SwaggerOptions, @ConfigParam('swagger') config?: SwaggerConfig, @ConfigParam('url') url?: UrlConfig): void {
+  public static enable (app: INestApplication, options?: SwaggerOptions, @ConfigParam('swagger') config?: SwaggerConfig, @ConfigParam('url') url?: UrlConfig): void {
     let builder = new DocumentBuilder()
       .setTitle(config?.title)
       .setDescription(config?.description)

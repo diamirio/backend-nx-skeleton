@@ -1,7 +1,7 @@
 import { normalize } from '@angular-devkit/core'
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
 import { NxProjectTypes } from '@constants'
-import { ListrTask } from 'listr2'
+import type { ListrTask } from 'listr2'
 
 import { readWorkspaceLayout } from '@integration'
 import { generateNameCases } from '@utils/schematics'

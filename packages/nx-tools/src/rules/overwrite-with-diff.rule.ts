@@ -1,9 +1,11 @@
-import { apply, FileEntry, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import type { FileEntry, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply, forEach, mergeWith } from '@angular-devkit/schematics'
 import * as diff from 'diff'
 import { createPrompt } from 'listr2'
 import { EOL } from 'os'
 import { dirname } from 'path'
-import { Observable, firstValueFrom } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { firstValueFrom } from 'rxjs'
 
 import { Logger } from '@utils'
 
@@ -60,11 +62,13 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
 
             // add this to file changes, return null since we did the operation directly
             fileChanges = [ ...fileChanges, file.path ]
+
             return null
           }
 
           // vanilla mode
           fileChanges = [ ...fileChanges, file.path ]
+
           return file
         }),
 
@@ -104,6 +108,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
             filesToRemove = filesToRemove.reduce((o, val) => {
               // angular normalizes even path arrays defined outside!
               o = [ ...o, (val as any).path ]
+
               return o
             }, [])
 
@@ -165,6 +170,7 @@ export function tripleFileMerge (name: string, currentFile: string, _oldFile: st
     buffer = diff.applyPatch(currentFile, patch)
   } catch (e) {
     log.debug(`Error while triple-merging: ${e}`)
+
     return false
   }
 
@@ -191,6 +197,7 @@ export function doubleFileMerge (name: string, _newFile: string, currentFile: st
     buffer = diff.applyPatch(currentFile, newToCurrentPatch)
   } catch (e) {
     log.debug(`Error while double-merging: ${e}`)
+
     return false
   }
   // const currentToNewPatch = diff.structuredPatch(name, name, file, currentFile, '', '', { context })

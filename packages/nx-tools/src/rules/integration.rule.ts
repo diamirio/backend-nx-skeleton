@@ -1,8 +1,8 @@
-import { Rule, Tree } from '@angular-devkit/schematics'
+import type { Rule, Tree } from '@angular-devkit/schematics'
 
 import { createWorkspaceProject, updateNxIntegration } from '@integration/integration'
-import { BaseIntegration } from '@integration/integration.interface'
-import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import type { BaseIntegration } from '@integration/integration.interface'
+import type { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 
 /**
  * Creates a new project in the workspace.

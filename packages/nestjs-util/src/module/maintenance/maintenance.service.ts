@@ -4,37 +4,26 @@ import path from 'path'
 
 import { Configurable, ConfigParam } from '@provider/config'
 
-let MaintenanceServiceInstance: MaintenanceService
-
 @Injectable()
 export class MaintenanceService {
+  static instance: MaintenanceService
   public readonly message: string
   private readonly logger = new Logger(this.constructor.name)
   private readonly lockfile: string
   private readonly tasks: string[] = []
 
   constructor () {
-    if (!MaintenanceServiceInstance) {
+    if (!MaintenanceService.instance) {
       this.message = this.prepareMessage()
       this.lockfile = this.prepareLockfile()
 
-      MaintenanceServiceInstance = this
+      MaintenanceService.instance = this
     }
 
-    return MaintenanceServiceInstance
+    return MaintenanceService.instance
   }
 
-  @Configurable()
-  private prepareMessage (@ConfigParam('misc.maintenanceNotification') message?: string, @ConfigParam('url.basePath') basePath?: string): string {
-    return message || `${basePath} is currently down for maintenance`
-  }
-
-  @Configurable()
-  private prepareLockfile (@ConfigParam('misc.lockfile', 'maintenance.lock') lockfile?: string): string {
-    return path.resolve(lockfile)
-  }
-
-  async enable (task = 'unknown-task'): Promise<void> {
+  public async enable (task = 'unknown-task'): Promise<void> {
     // add task to running tasks
     this.tasks.push(task)
 
@@ -49,7 +38,7 @@ export class MaintenanceService {
     }
   }
 
-  async disable (task = 'unknown-task'): Promise<void> {
+  public async disable (task = 'unknown-task'): Promise<void> {
     // remove task from running tasks
     this.tasks.splice(this.tasks.indexOf(task), 1)
 
@@ -64,7 +53,7 @@ export class MaintenanceService {
     }
   }
 
-  async isEnabled (): Promise<boolean> {
+  public async isEnabled (): Promise<boolean> {
     try {
       await fs.access(this.lockfile)
     } catch (error) {
@@ -74,7 +63,17 @@ export class MaintenanceService {
     return true
   }
 
-  throwException (): void {
+  public throwException (): void {
     throw new ServiceUnavailableException(this.message)
+  }
+
+  @Configurable()
+  private prepareMessage (@ConfigParam('misc.maintenanceNotification') message?: string, @ConfigParam('url.basePath') basePath?: string): string {
+    return message || `${basePath} is currently down for maintenance`
+  }
+
+  @Configurable()
+  private prepareLockfile (@ConfigParam('misc.lockfile', 'maintenance.lock') lockfile?: string): string {
+    return path.resolve(lockfile)
   }
 }

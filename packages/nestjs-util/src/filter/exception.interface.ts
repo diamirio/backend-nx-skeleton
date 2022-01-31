@@ -1,10 +1,12 @@
-import { BadRequestException, HttpStatus, ValidationError } from '@nestjs/common'
+import type { HttpStatus, ValidationError } from '@nestjs/common'
+import { BadRequestException } from '@nestjs/common'
 
 export class ClassValidatorException extends BadRequestException {
   public validation: Partial<ValidationError[]>
 
   constructor (validation: Partial<ValidationError[]>) {
     const error = super()
+
     Object.assign(this, error, { validation })
   }
 }
@@ -22,6 +24,7 @@ export class EnrichedExceptionError extends Error implements EnrichedException {
 
   constructor (error: EnrichedException) {
     const err = super()
+
     Object.assign(this, err, error)
   }
 }

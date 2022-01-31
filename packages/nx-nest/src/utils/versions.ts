@@ -1,7 +1,8 @@
 import { VERSIONS } from './versions.constants'
 import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
-import { NormalizedSchema } from '@schematics/application/main.interface'
-import { PackageVersions, dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tools'
+import type { NormalizedSchema } from '@schematics/application/main.interface'
+import type { PackageVersions } from '@webundsoehne/nx-tools'
+import { dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 /**
  * Will calculate the dependencies depending on the components selected.

@@ -1,8 +1,9 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@integration'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
+import { readMicroserviceProviderWorkspaceIntegration } from '@integration'
 import { SchematicConstants } from '@interfaces'
 import {
   AvailableComponents,
@@ -177,12 +178,17 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           switch (ctx.database) {
           case AvailableDBTypes.TYPEORM_MYSQL:
             ctx.dbAdapters = AvailableDBAdapters.TYPEORM
+
             break
+
           case AvailableDBTypes.TYPEORM_POSTGRESQL:
             ctx.dbAdapters = AvailableDBAdapters.TYPEORM
+
             break
+
           case AvailableDBTypes.MONGOOSE_MONGODB:
             ctx.dbAdapters = AvailableDBAdapters.MONGOOSE
+
             break
           }
 

@@ -1,8 +1,8 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { NxWorkspaceIntegration } from '@integration'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { NxWorkspaceIntegration } from '@integration'
 import { AvailableLibraryTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import {
   AvailableTestsTypes,

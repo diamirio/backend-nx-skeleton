@@ -1,13 +1,14 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import execa from 'execa'
-import { createPrompt, Listr } from 'listr2'
+import type { Listr } from 'listr2'
+import { createPrompt } from 'listr2'
 import { EOL } from 'os'
 
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
-import { Configuration } from '@interfaces/default-config.interface'
+import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
+import type { Configuration } from '@interfaces/default-config.interface'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
@@ -158,6 +159,7 @@ export class NxCommand extends BaseCommand<Configuration> {
       })
 
       const help = await execa(manager, args, { shell: true, env })
+
       this.logger.direct(help.stdout)
 
       try {

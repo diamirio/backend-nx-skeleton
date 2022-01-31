@@ -1,4 +1,5 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import { createBuilder } from '@angular-devkit/architect'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 import delay from 'delay'
@@ -7,19 +8,9 @@ import { copy, existsSync, readJsonSync, removeSync, writeJsonSync } from 'fs-ex
 import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
-import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
-import {
-  BaseExecutor,
-  checkPathsExists,
-  ExecaArguments,
-  FileInputOutput,
-  generateBuilderAssets,
-  getNodeBinaryPath,
-  isVerbose,
-  mergeDependencies,
-  pipeProcessToLogger,
-  runExecutor
-} from '@webundsoehne/nx-tools'
+import type { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
+import type { ExecaArguments, FileInputOutput } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, generateBuilderAssets, getNodeBinaryPath, isVerbose, mergeDependencies, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -58,8 +49,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     let success = false
     let error: string
     let outputPath: string
+
     try {
       const libRoot = this.projectGraph.nodes[this.context.projectName].data.root
+
       if (this.projectDependencies.length > 0) {
         this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.root, libRoot, this.projectDependencies)
       }
@@ -93,6 +86,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
             }
 
             break
+
           default:
             break
           }
@@ -187,6 +181,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
     let args: string[] = []
     let spawnOptions: ExecaArguments['spawnOptions']
+
     spawnOptions = {
       stdio: 'pipe',
       env: {

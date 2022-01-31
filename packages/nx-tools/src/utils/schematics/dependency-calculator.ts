@@ -1,8 +1,9 @@
-import { DependencyCalculatorOptions } from './dependency-calculator.interface'
+import type { DependencyCalculatorOptions } from './dependency-calculator.interface'
 import { isDevelopmentMode } from './is-development-mode'
-import { Dependency, DependencyCalculatorPackage, PackageVersions } from '@interfaces/versions.interface'
+import type { Dependency, DependencyCalculatorPackage, PackageVersions } from '@interfaces/versions.interface'
 import { Logger } from '@utils/logger/logger'
-import { LocalNodeModule, PackageManager } from '@utils/package-manager'
+import type { LocalNodeModule } from '@utils/package-manager'
+import { PackageManager } from '@utils/package-manager'
 import { deepMerge } from '@webundsoehne/deep-merge'
 
 /**

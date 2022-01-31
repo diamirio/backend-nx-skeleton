@@ -1,9 +1,11 @@
-import { apply, chain, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { apply, chain, url } from '@angular-devkit/schematics'
 
 import { getSchematicFiles } from '../interfaces/file.constants'
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
+import { applyOverwriteWithDiff, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.

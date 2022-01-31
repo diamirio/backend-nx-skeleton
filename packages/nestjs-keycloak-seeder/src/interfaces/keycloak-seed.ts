@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common'
 
-import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
+import type { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 
 /**
  * A singular seed that should be extended from, for seeding Keycloak.

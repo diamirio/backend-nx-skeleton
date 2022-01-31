@@ -1,7 +1,8 @@
-import { ConfigBaseCommand, promptUser, createTable, ConfigRemove, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
+import type { ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
+import { ConfigBaseCommand, promptUser, createTable, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
 
-import { WorkspacePrompt } from '@context/config/workspace.config.interface'
-import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
+import type { WorkspacePrompt } from '@context/config/workspace.config.interface'
+import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 
 export class WorkspaceConfigCommand extends ConfigBaseCommand {
   static description = 'Edit available workspace skeletons through a user interface.'
@@ -14,6 +15,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
 
     // userInput user if name already exists
     const index = config.findIndex((c) => c.pkg === response.pkg)
+
     if (index >= 0 && await promptUser({ type: 'Toggle', message: `"${response?.pkg}" already exists in local configuration. Do you want to overwrite?` })) {
       config[index] = response
     } else {
@@ -76,6 +78,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     if (value.pkg === '') {
       return 'Package field can not be left empty.'
     }
+
     return true
   }
 

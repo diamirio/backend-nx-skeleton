@@ -1,11 +1,14 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
-import execa, { ExecaChildProcess } from 'execa'
+import type { ExecaChildProcess } from 'execa'
+import execa from 'execa'
 import fs from 'fs'
 import { join } from 'path'
 
-import { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
-import { BaseExecutor, checkPathsExists, ExecaArguments, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
+import type { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
+import type { ExecaArguments } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, getJinjaDefaults, getNodeBinaryPath, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -16,6 +19,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
   public async run (): Promise<BuilderOutput> {
     let success = false
     let error: string
+
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -56,6 +60,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
       await this.manager.stop()
     }
     this.logger.debug('run runner finished.')
+
     return { success, error }
   }
 
@@ -73,6 +78,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     // interpolate with jinja
     options.command = jinja.renderString(options.command, ctx)
     options.args = jinja.renderString(Array.isArray(options.args) ? options.args.join(' ') : options.args, ctx)
+
     if (options.nodeOptions) {
       options.nodeOptions = jinja.renderString(options.nodeOptions, ctx)
     }

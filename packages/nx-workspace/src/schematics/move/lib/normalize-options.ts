@@ -1,7 +1,7 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
+import type { NormalizedSchema, Schema } from '../main.interface'
 import { normalizeNameWithParentAndDestinationPrompt, normalizePackageJsonNameForParentPrompt, readProjectConfiguration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**

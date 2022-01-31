@@ -1,5 +1,5 @@
-import { AvailableCLIs, AvailableFolderStructures } from '@interfaces/available.constants'
-import { BaseNormalizedSchemaPackageScope, BaseNormalizedSchemaRoot, BaseSchema, PackageVersions } from '@webundsoehne/nx-tools'
+import type { AvailableCLIs, AvailableFolderStructures } from '@interfaces/available.constants'
+import type { BaseNormalizedSchemaPackageScope, BaseNormalizedSchemaRoot, BaseSchema, PackageVersions } from '@webundsoehne/nx-tools'
 
 /**
  * This is the unparsed options list coming from angular-schematics

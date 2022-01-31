@@ -1,4 +1,4 @@
-import { Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
 import { updateNxJsonInTree } from '@nrwl/workspace'
 
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'

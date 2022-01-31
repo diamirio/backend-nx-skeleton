@@ -1,4 +1,5 @@
-import { ArgumentMetadata, Injectable, ValidationError, ValidationPipe, ValidationPipeOptions } from '@nestjs/common'
+import type { ArgumentMetadata, ValidationError, ValidationPipeOptions } from '@nestjs/common'
+import { Injectable, ValidationPipe } from '@nestjs/common'
 
 import { ClassValidatorException } from '@filter/exception.interface'
 
@@ -12,7 +13,7 @@ export class ExtendedValidationPipe extends ValidationPipe {
     })
   }
 
-  async transform (value: any, metadata: ArgumentMetadata): Promise<any> {
+  public async transform (value: any, metadata: ArgumentMetadata): Promise<any> {
     // run transform
     const result = super.transform(value, metadata)
 

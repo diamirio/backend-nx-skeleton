@@ -1,8 +1,8 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration } from '@integration'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
 import { readBackendInterfacesWorkspaceIntegration } from '@integration/backend-interfaces'
 import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'

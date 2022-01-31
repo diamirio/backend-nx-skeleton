@@ -1,8 +1,8 @@
 import { normalize } from '@angular-devkit/core'
-import { Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
 import { join } from 'path'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { createWorkspaceProjectRule, generateProjectLintTarget, NxProjectTypes } from '@webundsoehne/nx-tools'
 
 export function addProject (options: NormalizedSchema): Rule {

@@ -1,16 +1,19 @@
-import { ConfigBaseCommand, ConfigCommandChoices, ConfigRemove, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
+import type { ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
+import { ConfigBaseCommand, ConfigCommandChoices, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import * as fs from 'fs-extra'
-import { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
+import type { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
 import { dirname, join } from 'path'
 
-import { DockerContainerAddCtx, DockerContainersPurgeCtx } from '@context/docker/containers'
+import type { DockerContainerAddCtx } from '@context/docker/containers'
+import { DockerContainersPurgeCtx } from '@context/docker/containers'
 import { DockerHelper } from '@helpers/docker.helper'
-import { DockerComposeFile } from '@helpers/docker.helper.interface'
-import { DockerNxCtx } from '@interfaces/commands/docker/nx'
-import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
+import type { DockerComposeFile } from '@helpers/docker.helper.interface'
+import type { DockerNxCtx } from '@interfaces/commands/docker/nx'
+import type { LocalLockFile } from '@interfaces/lock-file.interface'
+import { DockerHelperLock, LocalLockPaths } from '@interfaces/lock-file.interface'
 import { readBrownieWorkspaceContainers } from '@webundsoehne/nx-tools/dist/integration/brownie'
-import { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
+import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
 
 export class DockerContainerCommand extends ConfigBaseCommand {
   static flags = {
@@ -160,6 +163,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             delete config.services[k]
           })
         )
+
         return config
       }
     }
@@ -392,6 +396,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             o = [ ...o, i ]
           }
         })
+
         return o
       }, [])
       : []
@@ -402,6 +407,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
     if (fs.existsSync(path)) {
       let prompt: boolean = flags.force
+
       if (!prompt) {
         prompt = await task.prompt({
           type: 'Toggle',

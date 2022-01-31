@@ -1,8 +1,8 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import execa from 'execa'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { Logger, pipeProcessThroughListr } from '@utils/logger'
 import { PackageManager } from '@utils/package-manager'
 

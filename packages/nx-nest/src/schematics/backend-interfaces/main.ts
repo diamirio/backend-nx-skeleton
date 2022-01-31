@@ -1,10 +1,11 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
-import { Schema } from './main.interface'
+import type { Schema } from './main.interface'
 import { SchematicConstants } from '@interfaces'
 import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 

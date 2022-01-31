@@ -1,6 +1,7 @@
-import { chain, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { removeNxJsonImplicitDependencies, removeTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 /**

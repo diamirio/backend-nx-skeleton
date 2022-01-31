@@ -1,6 +1,6 @@
 // import { PackageVersions } from '@interfaces/versions.interface'
 
-import { LinterDependencies } from '@interfaces/linter-dependencies.interface'
+import type { LinterDependencies } from '@interfaces/linter-dependencies.interface'
 
 /**
  * Version constants that is shared through multiple places.

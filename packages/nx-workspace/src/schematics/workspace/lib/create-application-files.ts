@@ -1,8 +1,10 @@
-import { apply, chain, mergeWith, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { apply, chain, mergeWith, url } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { getSchematicFiles } from '@interfaces/file.constants'
-import { createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
+import { createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.

@@ -1,5 +1,5 @@
 import { HttpStatus, Logger } from '@nestjs/common'
-import { GraphQLError, GraphQLFormattedError } from 'graphql/error'
+import type { GraphQLError, GraphQLFormattedError } from 'graphql/error'
 
 import { EnrichedExceptionError } from './exception.interface'
 import { GraphQLPreformattedException } from './graphql-exception.interface'

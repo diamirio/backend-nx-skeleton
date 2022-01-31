@@ -1,6 +1,7 @@
-import { filter, forEach, move, noop, Rule, applyPathTemplate } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { filter, forEach, move, noop, applyPathTemplate } from '@angular-devkit/schematics'
 
-import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
+import type { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
 import { jinjaTemplate, multipleJinjaTemplate } from '@templates/template-engine'
 import { formatFilesRule } from '@utils/file-system/format-files'
 

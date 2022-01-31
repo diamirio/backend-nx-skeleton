@@ -1,9 +1,10 @@
-import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/common'
+import type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common'
+import { Logger } from '@nestjs/common'
 import moment from 'moment'
-import { Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
-import { CacheLifetimeOptions, Request } from '@interface'
+import type { CacheLifetimeOptions, Request } from '@interface'
 import { ConfigParam, Configurable } from '@provider/config'
 
 export class CacheLifetimeHelperInterceptor implements NestInterceptor {

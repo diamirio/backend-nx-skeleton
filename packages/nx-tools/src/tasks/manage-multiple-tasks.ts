@@ -1,6 +1,7 @@
-import { chain, Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
-import { Task } from './manage-multiple-tasks.interface'
+import type { Task } from './manage-multiple-tasks.interface'
 import { registerCustomTaskRunnersRule } from '@rules/register-custom-task-runners.rule'
 import { Logger } from '@utils/logger'
 

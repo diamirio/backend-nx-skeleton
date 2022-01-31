@@ -1,4 +1,4 @@
-import { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from './package-manager.constants'
+import type { AvailablePackageManagers, PackageManagerDependencyTypes, PackageManagerUsableCommands } from './package-manager.constants'
 
 export interface PackageManagerCtx {
   fail: Partial<Record<AvailablePackageManagers, boolean>>

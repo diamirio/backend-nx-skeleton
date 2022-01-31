@@ -1,4 +1,4 @@
-import { RunBuilderOptions, TscBuilderOptions } from '@webundsoehne/nx-builders'
+import type { RunBuilderOptions, TscBuilderOptions } from '@webundsoehne/nx-builders'
 
 /**
  * Interface setting builder settings

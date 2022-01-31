@@ -1,9 +1,9 @@
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
 import { directoryExists } from '@nrwl/workspace/src/utilities/fileutils'
-import { ListrTask } from 'listr2'
+import type { ListrTask } from 'listr2'
 
 import { readNxProjectIntegration, readProjectConfiguration } from '@integration'
-import {
+import type {
   BaseNormalizedSchema,
   BaseNormalizedSchemaWithParent,
   BaseSchema,
@@ -25,6 +25,7 @@ export function normalizePriorConfigurationPrompt<Ctx extends BaseSchema & BaseN
           task.title = 'Searching for prior configuration...'
 
           const integration = readNxProjectIntegration<Integration>(host, ctx.name)
+
           if (integration?.[integrationKey]) {
             ctx.priorConfiguration = integration[integrationKey]
 

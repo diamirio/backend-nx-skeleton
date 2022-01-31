@@ -1,7 +1,7 @@
-import { AvailableLinterTypes, AvailableSchemaModes } from '@constants/available.constants'
+import type { AvailableLinterTypes, AvailableSchemaModes } from '@constants/available.constants'
 
-import { BaseIntegration } from '@integration/integration.interface'
-import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import type { BaseIntegration } from '@integration/integration.interface'
+import type { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 
 export interface BarebonesSchema {
   /** Skip formatting action after initiation. */

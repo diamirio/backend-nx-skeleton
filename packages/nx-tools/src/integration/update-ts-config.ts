@@ -1,4 +1,4 @@
-import { Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
 import { NxConstants } from '@constants/nx.constants'
 import { updateJsonInTree } from '@nrwl/workspace'
 
@@ -11,11 +11,13 @@ export function updateTsConfigPathsRule (options: { packageName: string, root?: 
     if (!json.compilerOptions) {
       json.compilerOptions = {}
     }
+
     if (!json.compilerOptions.paths) {
       json.compilerOptions.paths = {}
     }
 
     let path: string
+
     if (options.root) {
       path = options.root
     }

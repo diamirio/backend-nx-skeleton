@@ -1,4 +1,4 @@
-import { Versions } from './versions.interface'
+import type { Versions } from './versions.interface'
 import { AvailableBuilders } from '@interfaces/available.constants'
 
 export const VERSIONS: Versions = {

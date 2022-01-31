@@ -1,4 +1,4 @@
-import { GraphQLFormattedError } from 'graphql/error'
+import type { GraphQLFormattedError } from 'graphql/error'
 
 export class GraphQLPreformattedException<T extends Record<string, any>> extends Error implements GraphQLFormattedError {
   public locations: ExtendedGraphQLFormattedError<T>['locations']
@@ -7,6 +7,7 @@ export class GraphQLPreformattedException<T extends Record<string, any>> extends
 
   constructor (error: ExtendedGraphQLFormattedError<T>) {
     const err = super()
+
     Object.assign(this, err, error)
   }
 }

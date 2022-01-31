@@ -1,7 +1,8 @@
-import { ExecutionContext, Injectable } from '@nestjs/common'
+import type { ExecutionContext } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 
 import { BaseAuthGuard } from './auth-base.guard'
-import { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
+import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
 
 /**
  * Application AuthGuard for Keycloak applications.

@@ -1,4 +1,4 @@
-import { AvailableBuilders } from '@interfaces/available.constants'
-import { VersionsMap } from '@webundsoehne/nx-tools'
+import type { AvailableBuilders } from '@interfaces/available.constants'
+import type { VersionsMap } from '@webundsoehne/nx-tools'
 
 export type Versions = VersionsMap<Partial<AvailableBuilders>, never>

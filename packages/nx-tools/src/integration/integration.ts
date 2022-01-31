@@ -1,18 +1,17 @@
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
+import type { ProjectConfiguration, WorkspaceConfiguration } from '@nrwl/devkit'
 import {
   addProjectConfiguration,
   getProjects,
-  ProjectConfiguration,
   readProjectConfiguration as baseReadProjectConfiguration,
   readWorkspaceConfiguration as baseReadWorkspaceConfiguration,
-  updateProjectConfiguration,
-  WorkspaceConfiguration
+  updateProjectConfiguration
 } from '@nrwl/devkit'
 import { FsTree } from '@nrwl/tao/src/shared/tree'
 
-import { BaseIntegration } from './integration.interface'
+import type { BaseIntegration } from './integration.interface'
 import { convertAngularTreeToNxTree } from './nx-integration'
-import { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import type { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 import { Logger } from '@utils'
 import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
@@ -22,6 +21,7 @@ import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@web
 export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string, integration: T, options?: { arrayOverwrite?: boolean }): void {
   let updated: EnrichedProjectConfiguration<T> = { integration } as EnrichedProjectConfiguration<T>
   let project: EnrichedProjectConfiguration<T>
+
   try {
     project = readProjectConfiguration<T>(host, name)
   } catch (e) {

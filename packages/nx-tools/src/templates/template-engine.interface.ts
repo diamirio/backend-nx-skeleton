@@ -1,4 +1,4 @@
-import { ConfigureOptions } from 'nunjucks'
+import type { ConfigureOptions } from 'nunjucks'
 
 /**
  * Generate templates ending with extension as jinja templates.

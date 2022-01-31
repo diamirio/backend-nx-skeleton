@@ -1,8 +1,23 @@
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableExtensions, AvailableMicroserviceTypes, AvailableServerTypes } from '@interfaces/available.constants'
-import { SchematicConstants } from '@interfaces/constants'
-import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
-import { AvailableTestsTypes, BaseNormalizedSchema, BaseSchema, BaseSchemaModes, GeneratedNameCases, SchemaExtensions, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
-import { DeepPartial } from '@webundsoehne/ts-utility-types'
+import type {
+  AvailableComponents,
+  AvailableDBAdapters,
+  AvailableDBTypes,
+  AvailableExtensions,
+  AvailableMicroserviceTypes,
+  AvailableServerTypes
+} from '@interfaces/available.constants'
+import type { SchematicConstants } from '@interfaces/constants'
+import type { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import type {
+  AvailableTestsTypes,
+  BaseNormalizedSchema,
+  BaseSchema,
+  BaseSchemaModes,
+  GeneratedNameCases,
+  SchemaExtensions,
+  SchemaPriorConfiguration
+} from '@webundsoehne/nx-tools'
+import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * This is the unparsed options list coming from angular-schematics

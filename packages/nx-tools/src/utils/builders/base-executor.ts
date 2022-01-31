@@ -1,7 +1,8 @@
-import { BuilderOutput } from '@angular-devkit/architect'
-import { ExecutorContext, ProjectConfiguration, ProjectGraph, ProjectGraphNode } from '@nrwl/devkit'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import type { ExecutorContext, ProjectConfiguration, ProjectGraph, ProjectGraphNode } from '@nrwl/devkit'
 import { readCachedProjectGraph } from '@nrwl/workspace/src/core/project-graph'
-import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
+import type { DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
+import { calculateProjectDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 
 import { Logger, ProcessManager } from '@utils'
 
@@ -30,6 +31,7 @@ export abstract class BaseExecutor<
     // create dependency
     this.projectGraph = readCachedProjectGraph()
     const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context.root, context.projectName, context.targetName, context.configurationName)
+
     this.projectTarget = target
     this.projectDependencies = dependencies
 

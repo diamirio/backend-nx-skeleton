@@ -1,8 +1,8 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
-import { NormalizedSchema, Schema } from '../main.interface'
+import type { NormalizedSchema, Schema } from '../main.interface'
 import { AvailableCLIs, AvailableFolderStructures, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
 import { color, eslintJson, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
@@ -115,6 +115,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         title: 'Setting workspace constants...',
         task: async (ctx, task): Promise<void> => {
           const deps = await calculateDependencies(ctx)
+
           ctx.deps = deps.deps
           ctx.devDeps = deps.devDeps
 

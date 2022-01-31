@@ -1,12 +1,14 @@
-import { noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { noop } from '@angular-devkit/schematics'
 import { ESLint } from 'eslint'
 import * as path from 'path'
 import prettier from 'prettier'
-import { from, Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { from } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { getFilesInTree } from '.'
-import { FormatFilesOptions } from './format-files.interface'
+import type { FormatFilesOptions } from './format-files.interface'
 import { findNxRoot, Logger } from '@utils'
 
 /**
@@ -45,6 +47,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     log.debug(`Application root path for linting: ${appRootPath}`)
 
     let eslint: ESLint
+
     if (options.eslint) {
       // create new eslint instance
       eslint = new ESLint({
@@ -67,6 +70,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
             }
 
             const localConfig = await prettier.resolveConfig(systemPath)
+
             if (localConfig) {
               config = {
                 ...config,
@@ -75,6 +79,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
             }
 
             const support = await prettier.getFileInfo(systemPath)
+
             if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
               return
             }

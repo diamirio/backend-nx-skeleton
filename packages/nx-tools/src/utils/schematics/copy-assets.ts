@@ -1,7 +1,7 @@
 import globby from 'globby'
 import { join } from 'path'
 
-import { AssetGlob, FileInputOutput } from '@interfaces/assets.interface'
+import type { AssetGlob, FileInputOutput } from '@interfaces/assets.interface'
 import { removePathRoot } from '@utils'
 
 export function generateBuilderAssets (options: { workspaceRoot: string, outDir: string, cwd?: string }, assets: (AssetGlob | string)[]): FileInputOutput[] {

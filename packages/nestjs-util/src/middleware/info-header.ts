@@ -1,4 +1,4 @@
-import { NestMiddleware } from '@nestjs/common'
+import type { NestMiddleware } from '@nestjs/common'
 import type { FastifyRequest } from 'fastify'
 
 export class SetApiInfoHeaderMiddleware implements NestMiddleware {

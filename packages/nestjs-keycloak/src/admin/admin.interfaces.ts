@@ -1,5 +1,5 @@
-import { ConnectionConfig } from '@keycloak/keycloak-admin-client/lib/client'
-import { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
+import type { ConnectionConfig } from '@keycloak/keycloak-admin-client/lib/client'
+import type { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
 
 /**
  * Options for creating a Keycloak admin client.

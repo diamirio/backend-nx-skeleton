@@ -1,7 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common'
+import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common'
+import { Catch, HttpStatus, Logger } from '@nestjs/common'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
-import { EnrichedException, EnrichedExceptionError } from './exception.interface'
+import type { EnrichedException } from './exception.interface'
+import { EnrichedExceptionError } from './exception.interface'
 import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
 
 @Catch()

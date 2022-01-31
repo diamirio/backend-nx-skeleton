@@ -1,10 +1,10 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { ExecutorContext } from '@nrwl/devkit'
-import { ExecaChildProcess } from 'execa'
+import type { BuilderContext } from '@angular-devkit/architect'
+import type { ExecutorContext } from '@nrwl/devkit'
+import type { ExecaChildProcess } from 'execa'
 import through from 'through'
 
 import { Logger } from './logger'
-import { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
+import type { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
 
 /**
  * Given the instance it will pipe process output through the logger to append prefixes such as the application name.

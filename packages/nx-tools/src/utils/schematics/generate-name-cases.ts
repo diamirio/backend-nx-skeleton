@@ -1,6 +1,6 @@
 import { camelCase, constantCase, paramCase, pascalCase, snakeCase } from 'change-case'
 
-import { GeneratedNameCases } from './generate-name-cases.interface'
+import type { GeneratedNameCases } from './generate-name-cases.interface'
 
 export function generateNameCases (name: string): GeneratedNameCases {
   return {

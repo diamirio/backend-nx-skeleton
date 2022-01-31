@@ -1,8 +1,10 @@
-import { DynamicModule, Global, Module } from '@nestjs/common'
-import KeycloakConnect, { Keycloak } from 'keycloak-connect'
+import type { DynamicModule } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
+import type { Keycloak } from 'keycloak-connect'
+import KeycloakConnect from 'keycloak-connect'
 
 import { KEYCLOAK_CONNECT_INSTANCE, KEYCLOAK_CONNECT_OPTIONS } from './connect.constants'
-import { KeycloakConnectOptions } from './connect.interfaces'
+import type { KeycloakConnectOptions } from './connect.interfaces'
 
 /**
  * KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client.
@@ -11,7 +13,7 @@ import { KeycloakConnectOptions } from './connect.interfaces'
 @Global()
 @Module({})
 export class KeycloakConnectModule {
-  static register (options: KeycloakConnectOptions): DynamicModule {
+  public static register (options: KeycloakConnectOptions): DynamicModule {
     return {
       module: KeycloakConnectModule,
       global: true,

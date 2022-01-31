@@ -1,12 +1,12 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import execa from 'execa'
-import { Listr } from 'listr2'
+import type { Listr } from 'listr2'
 
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import { Configuration } from '@interfaces/default-config.interface'
+import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
+import type { Configuration } from '@interfaces/default-config.interface'
 import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
 import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
@@ -66,6 +66,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
             task: async (_, task): Promise<void> => {
               try {
                 const gitVersion = await execa('git', [ '--version' ])
+
                 task.title = `Found git version: ${gitVersion.stdout}`
               } catch {
                 throw new Error('GIT not available on the system or can not reach it!. Quitting.')

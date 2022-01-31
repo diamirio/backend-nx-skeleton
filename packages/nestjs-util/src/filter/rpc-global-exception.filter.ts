@@ -1,8 +1,10 @@
-import { ArgumentsHost, Catch, HttpException, Logger, RpcExceptionFilter } from '@nestjs/common'
+import type { ArgumentsHost, RpcExceptionFilter } from '@nestjs/common'
+import { Catch, HttpException, Logger } from '@nestjs/common'
 import { RpcException } from '@nestjs/microservices'
 import { throwError } from 'rxjs'
 
-import { EnrichedException, EnrichedExceptionError } from './exception.interface'
+import type { EnrichedException } from './exception.interface'
+import { EnrichedExceptionError } from './exception.interface'
 import { GlobalExceptionFilter } from './global-exception.filter'
 import { logErrorDebugMsg } from './util'
 

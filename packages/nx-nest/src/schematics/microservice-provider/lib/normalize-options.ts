@@ -1,8 +1,9 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration, readMicroserviceProviderWorkspaceIntegration } from '@integration'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
+import { readMicroserviceProviderWorkspaceIntegration } from '@integration'
 import { SchematicConstants } from '@interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 import {

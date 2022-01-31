@@ -1,12 +1,13 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
 import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
-import { Listr, PromptOptionsMap } from 'listr2'
+import type { PromptOptionsMap } from 'listr2'
+import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
-import { NormalizedSchema, Schema } from '../main.interface'
+import type { NormalizedSchema, Schema } from '../main.interface'
 import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
@@ -18,6 +19,7 @@ import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchem
  */
 export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema, files: string): Promise<NormalizedSchema> {
   const logger = new Logger(context)
+
   logger.debug(`Template directory to scan in: ${files}`)
 
   return new Listr<NormalizedSchema>(
@@ -62,6 +64,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
 
           try {
             const nxJson = await fs.readJSON(nxJsonPath)
+
             ctx.packageScope = `${nxJson.npmScope}`
             // eslint-disable-next-line no-empty
           } catch {}

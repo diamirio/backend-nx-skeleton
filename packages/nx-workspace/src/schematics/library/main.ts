@@ -1,13 +1,15 @@
-import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, noop } from '@angular-devkit/schematics'
 import { join } from 'path'
 
 import { addProject } from './lib/add-project'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
-import { Schema } from './main.interface'
+import type { Schema } from './main.interface'
 import { AvailableLibraryTypes } from '@interfaces/available.constants'
-import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, SchematicRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
+import type { SchematicRule } from '@webundsoehne/nx-tools'
+import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.

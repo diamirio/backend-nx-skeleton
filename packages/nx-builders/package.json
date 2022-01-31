@@ -46,7 +46,7 @@
     "@angular-devkit/architect": "^0.1302.0",
     "@angular-devkit/core": "^13.2.0",
     "@angular-devkit/schematics": "^13.2.0",
-    "@nrwl/cli": "^13.6.1",
+    "@nrwl/cli": "^13.7.1",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-tools": "*",
     "delay": "^5.0.0",

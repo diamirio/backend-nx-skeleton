@@ -1,5 +1,5 @@
-import { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
-import { LocalNodeModule, CommonNodeDependency } from '@webundsoehne/nx-tools'
+import type { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
+import type { LocalNodeModule, CommonNodeDependency } from '@webundsoehne/nx-tools'
 
 export class NxAddCommandCtx {
   public prompts: {

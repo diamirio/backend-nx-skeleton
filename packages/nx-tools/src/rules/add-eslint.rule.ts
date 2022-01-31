@@ -1,8 +1,10 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 import { AvailableLinterTypes } from '@constants/available.constants'
-import { addLintFiles, Linter } from '@nrwl/workspace'
+import type { Linter } from '@nrwl/workspace'
+import { addLintFiles } from '@nrwl/workspace'
 
-import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
+import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
 import { runInRule } from '@rules/run.rule'
 import { Logger } from '@utils'
 

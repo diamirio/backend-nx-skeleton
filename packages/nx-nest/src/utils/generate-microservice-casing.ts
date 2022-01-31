@@ -1,4 +1,4 @@
-import { GeneratedMicroserviceCasing } from './generate-microservice-casing.interface'
+import type { GeneratedMicroserviceCasing } from './generate-microservice-casing.interface'
 import { generateNameCases } from '@webundsoehne/nx-tools'
 
 export function generateMicroserviceCasing (name: string): GeneratedMicroserviceCasing {

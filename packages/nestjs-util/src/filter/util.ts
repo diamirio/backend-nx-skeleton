@@ -1,14 +1,14 @@
-import { BadRequestException, Logger, ValidationError } from '@nestjs/common'
+import type { BadRequestException, Logger, ValidationError } from '@nestjs/common'
 import { EOL } from 'os'
 
-import { ClassValidatorError, ClassValidatorException, EnrichedException } from './exception.interface'
-
-export function getErrorMessage (error: string | Error): string | undefined {
-  return typeof error === 'string' ? error : typeof error?.message === 'string' ? error.message : JSON.stringify(error)
-}
+import type { ClassValidatorError, ClassValidatorException, EnrichedException } from './exception.interface'
 
 function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {
   return keys.every((key) => Object.keys(message).includes(key))
+}
+
+export function getErrorMessage (error: string | Error): string | undefined {
+  return typeof error === 'string' ? error : typeof error?.message === 'string' ? error.message : JSON.stringify(error)
 }
 
 export function isValidationError (exception: BadRequestException): exception is ClassValidatorException {

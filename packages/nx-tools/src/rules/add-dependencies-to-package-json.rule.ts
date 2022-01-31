@@ -1,9 +1,10 @@
-import { chain, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 import { addDepsToPackageJson } from '@nrwl/workspace/src/utils/ast-utils'
 
 import { updatePackageJsonForProjectRule } from './update-package-json.rule'
-import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
-import { PackageVersions } from '@interfaces/versions.interface'
+import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
+import type { PackageVersions } from '@interfaces/versions.interface'
 
 export function addDependenciesToProjectPackageJsonRule<T extends BaseNormalizedSchemaRoot> (options: T, data: PackageVersions): Rule {
   return chain([ updatePackageJsonForProjectRule(options, { implicitDependencies: data.implicitDeps }), addDependenciesToPackageJsonRule(data) ])

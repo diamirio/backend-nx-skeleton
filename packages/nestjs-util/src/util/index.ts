@@ -12,6 +12,7 @@ export async function setEnvironmentVariables (packageFile = 'package.json'): Pr
 
 export function registerExitListeners (moduleName = 'module'): void {
   const logger = new Logger('ExitListener')
+
   function getListener (sig) {
     return (): never => {
       logger.verbose(`---- ${moduleName} exiting via ${sig} ----`)

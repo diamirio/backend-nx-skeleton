@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 
 import { RunPackageManagerTask } from '.'
 import { PackageManagerUsableCommands } from '@utils/package-manager/package-manager.constants'

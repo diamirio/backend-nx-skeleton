@@ -1,4 +1,4 @@
-import { ArrayElement } from './array'
+import type { ArrayElement } from './array'
 
 /**
  * Infers the object type.

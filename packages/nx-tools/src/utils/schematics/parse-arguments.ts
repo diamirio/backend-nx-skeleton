@@ -1,4 +1,4 @@
-import { ConvertToPromptType } from './parse-arguments.interface'
+import type { ConvertToPromptType } from './parse-arguments.interface'
 
 /**
  * Converts the set of choices from an array of names to prettyfiying their names from the second object.

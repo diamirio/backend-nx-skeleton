@@ -1,6 +1,6 @@
-import { NormalizedSchema as WorkspaceNormalizedSchema } from '../schematics/workspace/main.interface'
+import type { NormalizedSchema as WorkspaceNormalizedSchema } from '../schematics/workspace/main.interface'
 import { AvailableFolderStructures } from './available.constants'
-import { SchematicFiles } from '@webundsoehne/nx-tools'
+import type { SchematicFiles } from '@webundsoehne/nx-tools'
 
 /**
  * This constant includes the files that are required for different components.

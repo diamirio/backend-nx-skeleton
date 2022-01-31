@@ -1,9 +1,9 @@
-import { Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
 import { updateJsonInTree } from '@nrwl/workspace'
 import { join } from 'path'
 
-import { UpdatePackageJsonForProjectRuleOptions } from './update-package-json.rule.interface'
-import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
+import type { UpdatePackageJsonForProjectRuleOptions } from './update-package-json.rule.interface'
+import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
 import { deepMerge } from '@webundsoehne/deep-merge'
 
 export function updatePackageJsonForProjectRule<T extends BaseNormalizedSchemaRoot> (options: T, data: UpdatePackageJsonForProjectRuleOptions): Rule {

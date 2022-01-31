@@ -1,7 +1,7 @@
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
 
-import { BackendInterfacesWorkspaceIntegration } from './backend-interfaces.interface'
-import { NxNestProjectIntegration } from './integration.interface'
+import type { BackendInterfacesWorkspaceIntegration } from './backend-interfaces.interface'
+import type { NxNestProjectIntegration } from './integration.interface'
 import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 
 /**

@@ -1,8 +1,9 @@
-import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/common'
-import { Observable } from 'rxjs'
+import type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common'
+import { Logger } from '@nestjs/common'
+import type { Observable } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
-import { Request } from '@interface'
+import type { Request } from '@interface'
 import { getDuration } from '@util'
 
 export class RequestProfilerInterceptor implements NestInterceptor {

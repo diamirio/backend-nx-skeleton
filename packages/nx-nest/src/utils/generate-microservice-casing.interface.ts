@@ -1,4 +1,4 @@
-import { GeneratedNameCases } from '@webundsoehne/nx-tools'
+import type { GeneratedNameCases } from '@webundsoehne/nx-tools'
 
 export interface GeneratedMicroserviceCasing {
   name: string

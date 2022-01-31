@@ -1,19 +1,13 @@
-import { Rule, Tree } from '@angular-devkit/schematics'
+import type { Rule, Tree } from '@angular-devkit/schematics'
 import { join } from 'path'
 
-import { SchematicTargets } from '../interfaces/add-project.interface'
+import type { SchematicTargets } from '../interfaces/add-project.interface'
 import { SchematicFilesMap } from '../interfaces/file.constants'
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions } from '@interfaces/available.constants'
-import {
-  AvailableTestsTypes,
-  createWorkspaceProjectRule,
-  EnrichedProjectConfiguration,
-  generateProjectLintTarget,
-  NxProjectTypes,
-  readWorkspaceLayout
-} from '@webundsoehne/nx-tools'
+import type { EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
+import { AvailableTestsTypes, createWorkspaceProjectRule, generateProjectLintTarget, NxProjectTypes, readWorkspaceLayout } from '@webundsoehne/nx-tools'
 
 /**
  * Add the project to the {workspace,angular}.json

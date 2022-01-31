@@ -1,4 +1,4 @@
-import { DependencyCalculatorPackage } from '@interfaces/versions.interface'
+import type { DependencyCalculatorPackage } from '@interfaces/versions.interface'
 
 export type DependencyCalculatorOptions = {
   condition?: boolean

@@ -1,8 +1,9 @@
-import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Schema as NrwlSchema } from '@nrwl/workspace/src/generators/move/schema'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, externalSchematic } from '@angular-devkit/schematics'
+import type { Schema as NrwlSchema } from '@nrwl/workspace/src/generators/move/schema'
 
 import { normalizeOptions } from './lib/normalize-options'
-import { Schema } from './main.interface'
+import type { Schema } from './main.interface'
 import { formatTreeRule, removeTsConfigPathsRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): Rule {

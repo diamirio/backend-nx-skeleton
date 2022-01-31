@@ -12,7 +12,7 @@
     "command": "lerna run --stream",
     "build": "yarn run command build --concurrency 1 --include-dependencies",
     "link-packages": "lerna link --force-local",
-    "lint": "yarn command --concurrency 1 lint",
+    "lint": "yarn command --concurrency 1 --no-bail lint",
     "lint:check": "yarn command --parallel --no-bail lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
     "scripts:link": "./scripts/link-packages.sh link",

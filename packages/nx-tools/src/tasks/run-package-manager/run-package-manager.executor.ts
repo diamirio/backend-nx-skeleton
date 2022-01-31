@@ -1,6 +1,7 @@
-import { EmptyTree, SchematicContext, TaskExecutor } from '@angular-devkit/schematics'
+import type { SchematicContext, TaskExecutor } from '@angular-devkit/schematics'
+import { EmptyTree } from '@angular-devkit/schematics'
 
-import { RunPackageManagerTaskOptions } from './run-package-manager.interface'
+import type { RunPackageManagerTaskOptions } from './run-package-manager.interface'
 import { runCommand } from '@schematics/package-manager/lib/run-command'
 
 export function runPackageManagerTaskExecutor (

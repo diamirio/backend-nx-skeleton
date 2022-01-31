@@ -1,4 +1,4 @@
-import { NormalizedSchema as ApplicationNormalizedSchema } from '@schematics/application/main.interface'
+import type { NormalizedSchema as ApplicationNormalizedSchema } from '@schematics/application/main.interface'
 
 export interface BackendInterfacesWorkspaceIntegration {
   name: string

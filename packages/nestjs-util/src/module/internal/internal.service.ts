@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import fs from 'fs-extra'
 import moment from 'moment'
 
-import { ApiStatus } from './internal.interface'
+import type { ApiStatus } from './internal.interface'
 import { ConfigParam, Configurable } from '@provider/config'
 
 @Injectable()
@@ -10,7 +10,7 @@ export class InternalService {
   private logger = new Logger(InternalService.name)
 
   @Configurable()
-  async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
+  public async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
     let lastUpdate
 
     try {
@@ -28,7 +28,7 @@ export class InternalService {
   }
 
   @Configurable()
-  async getChangelog (@ConfigParam('misc.changelogFile', 'CHANGELOG.md') changelogFilePath?: string): Promise<string> {
+  public async getChangelog (@ConfigParam('misc.changelogFile', 'CHANGELOG.md') changelogFilePath?: string): Promise<string> {
     this.logger.verbose('Retrieving changelog')
 
     return fs.readFile(changelogFilePath, { encoding: 'utf8' })

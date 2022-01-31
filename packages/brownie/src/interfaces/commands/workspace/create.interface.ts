@@ -1,5 +1,5 @@
-import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import { LocalNodeModule, NodeDependency } from '@webundsoehne/nx-tools'
+import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
+import type { LocalNodeModule, NodeDependency } from '@webundsoehne/nx-tools'
 
 export class WorkspaceCreateCommandCtx {
   public prompts: {

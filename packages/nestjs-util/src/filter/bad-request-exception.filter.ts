@@ -1,6 +1,6 @@
 import { BadRequestException, Catch } from '@nestjs/common'
 
-import { EnrichedException } from './exception.interface'
+import type { EnrichedException } from './exception.interface'
 import { GlobalExceptionFilter } from './global-exception.filter'
 import { formatValidationError, isValidationError } from './util'
 

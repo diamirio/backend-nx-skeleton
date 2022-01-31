@@ -1,11 +1,11 @@
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
 import { AvailableSchemaModes, PrettyNamesDefault } from '@constants'
-import { ListrTask } from 'listr2'
+import type { ListrTask } from 'listr2'
 
 import { mapPromptChoices } from '../schematics/parse-arguments'
 import { readWorkspaceProjects } from '@integration'
-import { EnrichedProjectConfiguration } from '@interfaces'
-import {
+import type { EnrichedProjectConfiguration } from '@interfaces'
+import type {
   BaseNormalizedSchema,
   BaseNormalizedSchemaWithParent,
   BaseSchema,

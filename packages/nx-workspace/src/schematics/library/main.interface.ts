@@ -1,6 +1,6 @@
-import { AvailableLibraryTypes } from '@interfaces/available.constants'
-import { AvailableTestsTypes, BaseNormalizedSchema, BaseSchema, BaseSchemaModes, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
-import { DeepPartial } from '@webundsoehne/ts-utility-types'
+import type { AvailableLibraryTypes } from '@interfaces/available.constants'
+import type { AvailableTestsTypes, BaseNormalizedSchema, BaseSchema, BaseSchemaModes, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
+import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * This is the unparsed options list coming from angular-schematics

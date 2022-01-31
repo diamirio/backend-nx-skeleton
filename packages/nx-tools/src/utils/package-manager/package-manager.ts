@@ -4,7 +4,7 @@ import { dirname, join } from 'path'
 import notifier from 'update-notifier2'
 
 import { AvailablePackageManagers, PackageManagerCommands, PackageManagerDependencyTypes, PackageManagerUsableCommands } from './package-manager.constants'
-import {
+import type {
   LocalNodeModule,
   NodeDependency,
   CheckNodeModuleInstalledOptions,
@@ -278,6 +278,7 @@ export class PackageManager {
 
           if (foundIn.length > 0) {
             const firstOccurence = foundIn.shift()
+
             o.path = firstOccurence.path
             o.installed = firstOccurence.installed
 
@@ -329,9 +330,11 @@ export class PackageManager {
               // trickery for console.log since this module is s*
               // eslint-disable-next-line no-console
               const mock = console.log
+
               // eslint-disable-next-line no-console
               console.log = (): void => null
               const updatable = await notifier({ pkg: { name: currentPkg.pkg, version: o.version }, registryUrl: currentPkg?.registry }).checkNpm()
+
               // eslint-disable-next-line no-console
               console.log = mock
 

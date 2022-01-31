@@ -1,4 +1,4 @@
-import { ImplicitDependencies } from '@interfaces/versions.interface'
+import type { ImplicitDependencies } from '@interfaces/versions.interface'
 
 export interface UpdatePackageJsonForProjectRuleOptions {
   implicitDependencies?: ImplicitDependencies

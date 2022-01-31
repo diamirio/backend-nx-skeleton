@@ -1,7 +1,8 @@
-import { chain, externalSchematic, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain, externalSchematic } from '@angular-devkit/schematics'
 
 import { AvailableBuilders } from '@webundsoehne/nx-builders/dist/interfaces/available.constants'
-import { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/schematics/init/main.interface'
+import type { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/schematics/init/main.interface'
 
 export default function (): Rule {
   return async function (): Promise<Rule> {

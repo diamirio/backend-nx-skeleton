@@ -8,7 +8,7 @@ import { join } from 'path'
 import rewire from 'rewire'
 import wrap from 'wrap-ansi'
 
-import { ApplicationConfiguration } from '@interfaces/config.interface'
+import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class ListCommand extends BaseCommand<ApplicationConfiguration> {
   static description = 'Lists all the static entities that are shipped with this module.'

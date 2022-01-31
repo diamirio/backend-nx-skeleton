@@ -1,7 +1,8 @@
-import { DynamicModule, Global, Module } from '@nestjs/common'
+import type { DynamicModule } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 
 import { KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS } from './admin.constants'
-import { KeycloakAdminOptions } from './admin.interfaces'
+import type { KeycloakAdminOptions } from './admin.interfaces'
 import { KeycloakAdminService } from './admin.service'
 
 /**
@@ -11,7 +12,7 @@ import { KeycloakAdminService } from './admin.service'
 @Global()
 @Module({})
 export class KeycloakAdminModule {
-  static register (options: KeycloakAdminOptions): DynamicModule {
+  public static register (options: KeycloakAdminOptions): DynamicModule {
     return {
       module: KeycloakAdminModule,
       global: true,

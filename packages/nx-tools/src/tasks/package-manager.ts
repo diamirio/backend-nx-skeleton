@@ -1,6 +1,7 @@
-import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 
-import { RunPackageManagerTask, RunPackageManagerTaskOptions } from './run-package-manager'
+import type { RunPackageManagerTaskOptions } from './run-package-manager'
+import { RunPackageManagerTask } from './run-package-manager'
 
 /**
  * Add a schematic task to run after the actions finish.

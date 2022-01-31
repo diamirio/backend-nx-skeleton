@@ -1,5 +1,5 @@
 import { normalize } from '@angular-devkit/core'
-import { AvailableLinterTypes } from '@constants'
+import type { AvailableLinterTypes } from '@constants'
 import { generateProjectLint, Linter } from '@nrwl/workspace/src/utils/lint'
 import { join } from 'path'
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags as Flags } from '@oclif/command'
-import { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
+import type { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
 import fs from 'fs-extra'
 import globby from 'globby'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
@@ -11,7 +11,7 @@ import { join, resolve, isAbsolute, basename } from 'path'
 import rewire from 'rewire'
 import tmp from 'tmp-promise'
 
-import { ApplicationConfiguration } from '@interfaces/config.interface'
+import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false
@@ -146,6 +146,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     // apply patches
     let shouldTerminate = false
+
     try {
       await this.applyPatchesForApp({
         appPath: flags?.path,

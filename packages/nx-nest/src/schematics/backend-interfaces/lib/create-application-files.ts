@@ -1,12 +1,14 @@
-import { apply, chain, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { apply, chain, url } from '@angular-devkit/schematics'
 import { join } from 'path'
 
-import { Schema as GeneratorSchema } from '../../generator/main.interface'
+import type { Schema as GeneratorSchema } from '../../generator/main.interface'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { addSchematicTaskRule, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
+import { addSchematicTaskRule, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   return (_host: Tree, context: SchematicContext): Rule => {

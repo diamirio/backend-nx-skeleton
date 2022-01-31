@@ -1,4 +1,4 @@
-import { ConvertToPromptType } from './parse-arguments.interface'
+import type { ConvertToPromptType } from './parse-arguments.interface'
 
 export function getInitialFromPriorConfiguration<T extends Record<PropertyKey, any> & Record<'priorConfiguration', any>, K> (
   ctx: T,
@@ -13,11 +13,13 @@ export function getInitialFromPriorConfiguration<T extends Record<PropertyKey, a
             o = [ ...o, i ]
           }
         })
+
         return o
       }, []) ?? []
     )
   } else {
     let value = -1
+
     choices.forEach((val, i) => {
       if (val.name === ctx.priorConfiguration?.[key]) {
         value = i

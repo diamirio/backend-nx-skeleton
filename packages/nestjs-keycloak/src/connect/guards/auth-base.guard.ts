@@ -1,6 +1,7 @@
-import { CanActivate, ExecutionContext, ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
-import { Reflector } from '@nestjs/core'
-import { Grant, Keycloak } from 'keycloak-connect'
+import type { CanActivate, ExecutionContext } from '@nestjs/common'
+import { ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
+import type { Reflector } from '@nestjs/core'
+import type { Grant, Keycloak } from 'keycloak-connect'
 
 import {
   KEYCLOAK_CONNECT_METADATA_GROUPS,
@@ -8,9 +9,10 @@ import {
   KEYCLOAK_CONNECT_METADATA_SCOPES,
   KEYCLOAK_CONNECT_METADATA_UNPROTECTED
 } from '@connect/connect.constants'
-import { ExceptionMessagesFallback, KeycloakConnectOptions, KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
+import type { KeycloakConnectOptions, KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
+import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
-import { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
+import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
 
 /**
  * Application AuthGuard for Keycloak applications.
@@ -26,8 +28,9 @@ export abstract class BaseAuthGuard implements CanActivate {
     public readonly reflector: Reflector
   ) {}
 
-  async canActivate (context: ExecutionContext): Promise<boolean> {
+  public async canActivate (context: ExecutionContext): Promise<boolean> {
     const isUnprotected = this.reflector.get<boolean>(KEYCLOAK_CONNECT_METADATA_UNPROTECTED, context.getHandler())
+
     if (isUnprotected) {
       // allow if path is marked as unprotected
       return true
@@ -45,21 +48,25 @@ export abstract class BaseAuthGuard implements CanActivate {
     try {
       // create generic grant and user, async to make it faster
       const [ grant, user ] = await Promise.all([
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         this.keycloak.grantManager.createGrant({ access_token: token as any }),
         this.keycloak.grantManager.userInfo<string, KeycloakConnectUserInfo>(token)
       ])
 
       // groups
       const groups = user?.groups as unknown as string[]
+
       this.validate('groups', groups, this.reflector.get<string[]>(KEYCLOAK_CONNECT_METADATA_GROUPS, context.getHandler()))
 
       // roles
       const roles = await this.fetchRoles(grant)
+
       // first check meta-data from route-handler-method, if none, check parent-class (resolver, controller)
       this.validate('roles', roles, this.reflector.getAllAndOverride<string[]>(KEYCLOAK_CONNECT_METADATA_ROLES, [ context.getHandler(), context.getClass() ]))
 
       // scopes
       const scopes = this.fetchScopes(roles, this.reflector.get<ScopesOption>(KEYCLOAK_CONNECT_METADATA_SCOPES, context.getHandler()))
+
       this.validate(
         'scopes',
         scopes,

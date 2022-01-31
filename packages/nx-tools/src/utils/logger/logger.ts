@@ -1,6 +1,6 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { ExecutorContext } from '@nrwl/devkit'
+import type { BuilderContext } from '@angular-devkit/architect'
+import type { SchematicContext } from '@angular-devkit/schematics'
+import type { ExecutorContext } from '@nrwl/devkit'
 import figures from 'figures'
 import { EOL } from 'os'
 import winston, { format, transports } from 'winston'
@@ -8,7 +8,8 @@ import winston, { format, transports } from 'winston'
 import { isVerbose } from '../schematics'
 import { isBuildContext, isExecutorContext } from '../schematics/is-context'
 import { color } from './colorette'
-import { LoggerFormat, LoggerOptions, LogLevels, Winston, WINSTON_INSTANCE } from './logger.interface'
+import type { LoggerFormat, LoggerOptions, Winston } from './logger.interface'
+import { LogLevels, WINSTON_INSTANCE } from './logger.interface'
 
 /**
  * A general logger that is wrapped around the angular-cli logger.
@@ -139,6 +140,7 @@ export class Logger {
         coloring = color.yellow
         icon = figures.warning
       }
+
       break
 
     case LogLevels.INFO:
@@ -146,6 +148,7 @@ export class Logger {
         coloring = color.green
         icon = figures.pointerSmall
       }
+
       break
 
     case LogLevels.DEBUG:
@@ -154,6 +157,7 @@ export class Logger {
         msgColoring = color.dim
         icon = ''
       }
+
       break
     }
 

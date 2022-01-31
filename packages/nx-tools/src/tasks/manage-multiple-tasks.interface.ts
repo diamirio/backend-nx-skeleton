@@ -1,6 +1,6 @@
-import { SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 
-import { ValueOf } from '@webundsoehne/ts-utility-types'
+import type { ValueOf } from '@webundsoehne/ts-utility-types'
 
 export interface Task<T extends Record<string, string>> {
   condition?: boolean

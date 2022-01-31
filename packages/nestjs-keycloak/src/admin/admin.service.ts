@@ -1,7 +1,7 @@
 import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
 import { Injectable, Logger } from '@nestjs/common'
 
-import { KeycloakAdminOptions } from './admin.interfaces'
+import type { KeycloakAdminOptions } from './admin.interfaces'
 
 /**
  * KeycloakAdminService manages the Keycloak RESTFUL API client.
@@ -72,6 +72,7 @@ export class KeycloakAdminService {
   private isExpiredAccessToken (accessToken: string): boolean {
     try {
       const tokenPayload = JSON.parse(Buffer.from(accessToken.split('.')[1], 'base64').toString())
+
       if (!tokenPayload?.exp) {
         return false
       }

@@ -1,6 +1,6 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { ExecutorContext } from '@nrwl/devkit'
+import type { BuilderContext } from '@angular-devkit/architect'
+import type { SchematicContext } from '@angular-devkit/schematics'
+import type { ExecutorContext } from '@nrwl/devkit'
 
 /**
  * Returns whether this is the new type of context nx has old legacy context.

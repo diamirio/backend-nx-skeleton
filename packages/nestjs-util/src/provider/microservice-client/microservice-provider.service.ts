@@ -1,14 +1,12 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common'
-import { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
-import { asyncScheduler, firstValueFrom, Observable, throwError } from 'rxjs'
+import type { OnApplicationBootstrap } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
+import type { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
+import type { Observable } from 'rxjs'
+import { asyncScheduler, firstValueFrom, throwError } from 'rxjs'
 import { timeout } from 'rxjs/operators'
 
-import {
-  GetMicroserviceMessageRequestFromMap,
-  GetMicroserviceMessageResponseFromMap,
-  MicroserviceProviderServiceOptions,
-  TimeoutException
-} from './microservice-provider.interface'
+import type { GetMicroserviceMessageRequestFromMap, GetMicroserviceMessageResponseFromMap, MicroserviceProviderServiceOptions } from './microservice-provider.interface'
+import { TimeoutException } from './microservice-provider.interface'
 import { ConfigService } from '@provider/config/config.service'
 
 /**
@@ -26,6 +24,7 @@ export class MicroserviceProviderService<
 
   constructor (private readonly provider: ClientProviderOptions[], private readonly names: MessageQueues[]) {
     const options = ConfigService.get('messageQueue')?.serviceOptions
+
     this.options = {
       // default timeout is 1 hours
       timeout: 3600000,
@@ -37,6 +36,7 @@ export class MicroserviceProviderService<
     this.clients = this.provider.reduce((o, c, i) => {
       // this seems to be the only reliable way to inject the client names here
       o[this.names[i]] = c
+
       return o
     }, {} as Record<string, unknown>) as unknown as Record<MessageQueues, ClientProxy>
   }

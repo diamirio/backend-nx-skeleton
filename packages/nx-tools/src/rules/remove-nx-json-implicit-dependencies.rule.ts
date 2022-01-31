@@ -1,8 +1,8 @@
-import { Rule } from '@angular-devkit/schematics'
-import { NxJsonConfiguration } from '@nrwl/devkit'
+import type { Rule } from '@angular-devkit/schematics'
+import type { NxJsonConfiguration } from '@nrwl/devkit'
 import { updateNxJsonInTree } from '@nrwl/workspace'
 
-import { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
+import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
 
 export function removeNxJsonImplicitDependencies<T extends BaseNormalizedSchemaRoot> (options: T): Rule {
   return updateNxJsonInTree((json) => {

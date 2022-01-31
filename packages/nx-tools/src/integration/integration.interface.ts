@@ -1,4 +1,4 @@
-import { BrownieIntegration } from './brownie.interface'
+import type { BrownieIntegration } from './brownie.interface'
 
 interface Integration {
   brownie?: BrownieIntegration

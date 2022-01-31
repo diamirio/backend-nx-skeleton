@@ -1,10 +1,12 @@
-import { apply, chain, externalSchematic, Rule, SchematicContext, Tree, url } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { apply, chain, externalSchematic, url } from '@angular-devkit/schematics'
 import { join } from 'path'
 
-import { NormalizedSchema, ParsedMicroservice } from '../main.interface'
+import type { NormalizedSchema, ParsedMicroservice } from '../main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { applyOverwriteWithDiff, createApplicationRule, CreateApplicationRuleInterface, Logger, convertStringToDirPath } from '@webundsoehne/nx-tools'
-import { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
+import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
+import { applyOverwriteWithDiff, createApplicationRule, Logger, convertStringToDirPath } from '@webundsoehne/nx-tools'
+import type { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   return (_host: Tree, context: SchematicContext): Rule => {

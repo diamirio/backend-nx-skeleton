@@ -1,4 +1,4 @@
-import { CommonNodeDependency } from '@webundsoehne/nx-tools'
+import type { CommonNodeDependency } from '@webundsoehne/nx-tools'
 
 export interface NxSchematicsConfig extends CommonNodeDependency {
   description?: string

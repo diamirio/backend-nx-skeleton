@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import { Tree as AngularTree } from '@angular-devkit/schematics'
-import { getWorkspaceLayout, Tree as NxTree } from '@nrwl/devkit'
+import type { Tree as AngularTree } from '@angular-devkit/schematics'
+import type { Tree as NxTree } from '@nrwl/devkit'
+import { getWorkspaceLayout } from '@nrwl/devkit'
 import rewire from 'rewire'
 
 const base = rewire('@nrwl/devkit/src/utils/invoke-nx-generator')

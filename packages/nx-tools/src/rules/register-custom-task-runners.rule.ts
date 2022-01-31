@@ -1,7 +1,8 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
-import { NodeModulesEngineHost } from '@angular-devkit/schematics/tools/node-module-engine-host'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { NodeModulesEngineHost } from '@angular-devkit/schematics/tools/node-module-engine-host'
 
-import { RunPackageManagerTaskOptions, RUN_PACKAGE_MANAGER_TASK_NAME } from '@tasks/run-package-manager'
+import type { RunPackageManagerTaskOptions } from '@tasks/run-package-manager'
+import { RUN_PACKAGE_MANAGER_TASK_NAME } from '@tasks/run-package-manager'
 
 /**
  * Creates a new project in the workspace.
@@ -9,7 +10,7 @@ import { RunPackageManagerTaskOptions, RUN_PACKAGE_MANAGER_TASK_NAME } from '@ta
 export function registerCustomTaskRunnersRule (): Rule {
   return (host: Tree, context: SchematicContext): Tree => {
     // eslint-disable-next-line no-underscore-dangle
-    const privateHost = <NodeModulesEngineHost>(<any>context.engine)._host // this line is not supported
+    const privateHost = (context.engine as any)._host as NodeModulesEngineHost // this line is not supported
 
     privateHost.registerTaskExecutor<RunPackageManagerTaskOptions>({
       name: RUN_PACKAGE_MANAGER_TASK_NAME,

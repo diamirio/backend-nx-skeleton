@@ -1,8 +1,8 @@
-import { Rule, Tree } from '@angular-devkit/schematics'
+import type { Rule, Tree } from '@angular-devkit/schematics'
 
-import { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
+import type { BrownieAvailableContainers, BrownieIntegration } from './brownie.interface'
 import { readNxWorkspaceIntegration, readProjectConfiguration } from './integration'
-import { BaseIntegration } from './integration.interface'
+import type { BaseIntegration } from './integration.interface'
 import { updateNxIntegrationRule } from '@rules/integration.rule'
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 

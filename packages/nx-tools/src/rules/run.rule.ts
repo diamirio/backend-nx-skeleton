@@ -1,4 +1,4 @@
-import { Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
 
 /**
  * Run something in a rule. It is just a empty function runs on condition. Just added to make everything look cleaner.

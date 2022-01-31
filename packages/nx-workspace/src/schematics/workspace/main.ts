@@ -1,9 +1,10 @@
-import { chain, Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
 import { TaskTokens } from './constants'
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
-import { Schema } from './main.interface'
+import type { Schema } from './main.interface'
 import { addGitTask, addInstallTask, addMultipleDependentTasksRule, addRunWorkspaceScriptTask, Logger, PackageManagerUsableCommands, runInRule } from '@webundsoehne/nx-tools'
 
 /**

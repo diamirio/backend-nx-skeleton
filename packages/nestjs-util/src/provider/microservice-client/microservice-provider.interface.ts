@@ -1,6 +1,6 @@
-import { FactoryProvider } from '@nestjs/common'
+import type { FactoryProvider } from '@nestjs/common'
 import { RuntimeException } from '@nestjs/core/errors/exceptions/runtime.exception'
-import { ClientProxyFactory, RmqOptions } from '@nestjs/microservices'
+import type { ClientProxyFactory, RmqOptions } from '@nestjs/microservices'
 
 export interface MicroserviceProviderModuleOptions {
   /** give a inject token of your desire  */

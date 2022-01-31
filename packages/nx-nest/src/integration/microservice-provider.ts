@@ -1,7 +1,7 @@
-import { Tree } from '@angular-devkit/schematics'
+import type { Tree } from '@angular-devkit/schematics'
 
-import { NxNestProjectIntegration } from './integration.interface'
-import { MicroserviceProviderWorkspaceIntegration } from './microservice-provider.interface'
+import type { NxNestProjectIntegration } from './integration.interface'
+import type { MicroserviceProviderWorkspaceIntegration } from './microservice-provider.interface'
 import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 
 /**

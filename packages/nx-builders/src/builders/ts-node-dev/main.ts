@@ -1,9 +1,11 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
 import execa from 'execa'
 
-import { TsNodeBuilderOptions } from './main.interface'
-import { BaseExecutor, checkPathsExists, ExecaArguments, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
+import type { TsNodeBuilderOptions } from './main.interface'
+import type { ExecaArguments } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -32,6 +34,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
 
     try {
       const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
+
       await pipeProcessToLogger(this.context, instance, { start: true })
     } catch (error) {
       // just restart it

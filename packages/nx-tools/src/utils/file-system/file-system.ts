@@ -1,4 +1,4 @@
-import { Action, CreateFileAction, OverwriteFileAction, Tree } from '@angular-devkit/schematics'
+import type { Action, CreateFileAction, OverwriteFileAction, Tree } from '@angular-devkit/schematics'
 import fs from 'fs'
 import { EOL } from 'os'
 

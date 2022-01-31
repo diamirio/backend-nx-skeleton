@@ -22,8 +22,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": ">= 5",
@@ -33,9 +38,11 @@
     "eslint-plugin-import": ">= 2",
     "eslint-plugin-react-hooks": ">= 4"
   },
-  "devDependencies": {
+  "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1"
+  },
+  "devDependencies": {
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-react-hooks": "^4.2.0"

@@ -1,16 +1,19 @@
-import { BaseCommand, createDirIfNotExists, parseYaml, readFile, readRaw, tasksOverwritePrompt, writeFile } from '@cenk1cenk2/boilerplate-oclif'
+import type { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
+import { createDirIfNotExists, parseYaml, readFile, readRaw, tasksOverwritePrompt, writeFile } from '@cenk1cenk2/boilerplate-oclif'
 import axios from 'axios'
 import fs from 'fs-extra'
 import globby from 'globby'
-import { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
+import type { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, extname, join, relative } from 'path'
 import { v4 as uuidv4 } from 'uuid'
 
-import { AvailableContainers, DockerComposeFile, DockerHelperCtx, VolumeModes } from './docker.helper.interface'
+import type { AvailableContainers, DockerComposeFile, DockerHelperCtx } from './docker.helper.interface'
+import { VolumeModes } from './docker.helper.interface'
 import { jinja } from '@helpers/jinja.helper'
-import { DockerHelperLock, LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
+import type { LocalLockFile } from '@interfaces/lock-file.interface'
+import { DockerHelperLock, LocalLockPaths } from '@interfaces/lock-file.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 export class DockerHelper {
   public dockerConfigLocation: string = join(this.cmd.config.root, 'templates', 'containers')
@@ -62,6 +65,7 @@ export class DockerHelper {
 
           // fail safe
           const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
+
           if (templateCheck.length > 0) {
             this.cmd.message.fail(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
           }
@@ -447,6 +451,7 @@ export class DockerHelper {
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
     const rawTemplate = await this.readTemplate(path, context)
+
     this.cmd.logger.debug(`Parsing template "${path}":\n%s`, rawTemplate)
 
     return parseYaml<T>(rawTemplate)

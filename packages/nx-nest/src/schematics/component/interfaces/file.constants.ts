@@ -1,4 +1,4 @@
-import { NormalizedSchema } from './../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableServerTypes } from '@interfaces/available.constants'
 
 export const ComponentLocationsMap: Record<NormalizedSchema['type'], string[]> = {

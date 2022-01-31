@@ -1,6 +1,7 @@
-import { chain, Rule, url } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain, url } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { generateExportsRule } from '@rules/generate-exports.rule'
 
 /**

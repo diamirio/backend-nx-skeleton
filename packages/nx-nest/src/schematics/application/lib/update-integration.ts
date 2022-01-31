@@ -1,7 +1,8 @@
-import { chain, noop, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain, noop } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
-import { NxNestProjectIntegration } from '@integration'
+import type { NormalizedSchema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
 import { AvailableComponents, AvailableDBTypes } from '@interfaces/available.constants'
 import { BrownieAvailableContainers, updateBrownieIntegrationRule, updateNxIntegrationRule } from '@webundsoehne/nx-tools'
 

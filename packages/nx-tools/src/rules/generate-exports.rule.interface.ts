@@ -1,5 +1,5 @@
-import * as micromatch from 'micromatch'
-import { ConfigureOptions } from 'nunjucks'
+import type * as micromatch from 'micromatch'
+import type { ConfigureOptions } from 'nunjucks'
 
 /**
  * Generates exports from matching patterns in to a output file like index.ts

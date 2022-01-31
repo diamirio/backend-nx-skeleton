@@ -1,8 +1,8 @@
-import { FactoryProvider } from '@nestjs/common'
+import type { FactoryProvider } from '@nestjs/common'
 import { ClientProxyFactory } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices/enums/transport.enum'
 
-import { MicroserviceProviderClientOptions } from '../microservice-provider.interface'
+import type { MicroserviceProviderClientOptions } from '../microservice-provider.interface'
 import { ConfigService } from '@provider/config/config.service'
 
 /**

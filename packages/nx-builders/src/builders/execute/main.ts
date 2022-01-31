@@ -1,8 +1,9 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import { createBuilder } from '@angular-devkit/architect'
 import { parseTargetString, readTargetOptions, runExecutor as baseRunExecutor } from '@nrwl/devkit'
 import execa from 'execa'
 
-import { ExecuteBuilderOptions, NormalizedExecuteBuilderOptions } from './main.interface'
+import type { ExecuteBuilderOptions, NormalizedExecuteBuilderOptions } from './main.interface'
 import { BaseExecutor, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {

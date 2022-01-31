@@ -1,4 +1,4 @@
-import { LinterVersions } from './linter-versions.interface'
+import type { LinterVersions } from './linter-versions.interface'
 
 /**
  * Version constants that is shared through multiple places.
@@ -12,7 +12,8 @@ export const LINTER_VERSIONS: LinterVersions = {
       '@webundsoehne/eslint-config': '^4.0.0',
       '@typescript-eslint/eslint-plugin': '^5.10.0',
       '@typescript-eslint/parser': '^5.10.1',
-      'eslint-plugin-import': '^2.25.4'
+      'eslint-plugin-import': '^2.25.4',
+      'eslint-module-utils': '^2.7.3'
     }
   }
 }

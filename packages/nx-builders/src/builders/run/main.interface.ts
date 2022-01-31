@@ -1,4 +1,4 @@
-import { ExecaArguments } from '@webundsoehne/nx-tools'
+import type { ExecaArguments } from '@webundsoehne/nx-tools'
 
 /**
  * Options for run builder

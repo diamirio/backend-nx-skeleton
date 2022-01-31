@@ -1,17 +1,17 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
-import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
-import { NxNestProjectIntegration } from '@integration'
+import type { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
 import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { generateMicroserviceCasing } from '@utils'
+import type { ConvertToPromptType } from '@webundsoehne/nx-tools'
 import {
-  ConvertToPromptType,
   generateNameCases,
   isVerbose,
   normalizeNameWithParentApplicationPrompt,
@@ -39,7 +39,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      ...normalizeNameWithParentApplicationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, (name, project) => {
+      ...normalizeNameWithParentApplicationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_name, project) => {
         if (project.integration?.nestjs) {
           return true
         }
@@ -56,6 +56,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
           const names = generateNameCases(ctx.name)
+
           ctx.name = names.kebab
 
           ctx.casing = {

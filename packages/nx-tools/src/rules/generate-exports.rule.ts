@@ -1,11 +1,12 @@
-import { apply, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply } from '@angular-devkit/schematics'
 import * as micromatch from 'micromatch'
 import { dirname, join, parse, relative } from 'path'
 
 import { createApplicationRule } from './create-application.rule'
-import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
+import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
-import { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
+import type { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
 import { convertStringToDirPath, Logger } from '@utils'
 import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 

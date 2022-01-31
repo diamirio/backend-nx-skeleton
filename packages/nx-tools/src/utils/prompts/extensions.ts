@@ -1,7 +1,7 @@
-import { ListrTask } from 'listr2'
+import type { ListrTask } from 'listr2'
 
-import { SchemaExtensions, SchemaPriorConfiguration } from '@interfaces/base-schemas.interface'
-import { ExtensionsMap } from '@interfaces/extensions.interface'
+import type { SchemaExtensions, SchemaPriorConfiguration } from '@interfaces/base-schemas.interface'
+import type { ExtensionsMap } from '@interfaces/extensions.interface'
 import { getInitialFromPriorConfiguration, mapPromptChoices } from '@utils/schematics'
 
 export function normalizeExtensionsPrompt<

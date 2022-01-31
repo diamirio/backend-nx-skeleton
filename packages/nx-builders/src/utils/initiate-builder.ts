@@ -1,6 +1,7 @@
-import { chain, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
-import { Schema } from '@schematics/init/main.interface'
+import type { Schema } from '@schematics/init/main.interface'
 import { calculateDependencies } from '@utils/versions'
 import { addDependenciesToPackageJsonRule } from '@webundsoehne/nx-tools'
 

@@ -1,11 +1,13 @@
-import { ConnectionConfig, KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
-import { RoleMappingPayload } from '@keycloak/keycloak-admin-client/lib/defs/roleRepresentation'
-import { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
+import type { ConnectionConfig } from '@keycloak/keycloak-admin-client/lib/client'
+import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
+import type { RoleMappingPayload } from '@keycloak/keycloak-admin-client/lib/defs/roleRepresentation'
+import type { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
 import { Injectable, Logger } from '@nestjs/common'
 
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { KeycloakAdminOptions, KeycloakAdminService, InjectKeycloak } from '@webundsoehne/nestjs-keycloak'
-import { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
+import type { KeycloakAdminOptions, KeycloakAdminService } from '@webundsoehne/nestjs-keycloak'
+import { InjectKeycloak } from '@webundsoehne/nestjs-keycloak'
+import type { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * Extended Keycloak client specific for seeding operations.

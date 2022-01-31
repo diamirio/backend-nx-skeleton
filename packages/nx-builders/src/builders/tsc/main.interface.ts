@@ -1,10 +1,9 @@
-import { JsonObject } from '@angular-devkit/core'
+import type { AvailableAssetGlob, FileInputOutput } from '@webundsoehne/nx-tools'
 
-import { FileInputOutput, AvailableAssetGlob } from '@webundsoehne/nx-tools'
 /**
  * TSC Builder options
  */
-export interface TscBuilderOptions extends JsonObject {
+export interface TscBuilderOptions {
   /**
    * process current working directory
    *

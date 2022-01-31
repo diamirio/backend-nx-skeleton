@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, TaskId, Tree } from '@angular-devkit/schematics'
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks'
 
 /**
