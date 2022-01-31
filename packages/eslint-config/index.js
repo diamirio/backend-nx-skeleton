@@ -65,7 +65,8 @@ module.exports = {
         arraysInArrays: true
       }
     ],
-    complexity: [ 'error', 20 ],
+    curly: [ 'error', 'all' ],
+    complexity: [ 'error', 25 ],
     'constructor-super': 'error',
     'dot-notation': 'error',
     eqeqeq: [ 'error', 'smart' ],
