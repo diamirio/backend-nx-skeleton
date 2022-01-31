@@ -1,7 +1,7 @@
-import type { INestApplication } from '@nestjs/common'
+import { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-import type { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
+import { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
 import { Configurable, ConfigParam } from '@provider/config'
 
 export class SwaggerService {
@@ -23,6 +23,7 @@ export class SwaggerService {
       builder = options.customize(builder)
     }
 
+    // FIXME: this is a bug with fastify, if we use the global prefix, it ignors it while using fastify but express works just fine
     SwaggerModule.setup(
       `${url?.apiPath}${config.path}`,
       app,

@@ -1,7 +1,8 @@
 import type { CanActivate, ExecutionContext } from '@nestjs/common'
 import { ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
-import type { Reflector } from '@nestjs/core'
-import type { Grant, Keycloak } from 'keycloak-connect'
+import { Reflector } from '@nestjs/core'
+import { Keycloak } from 'keycloak-connect'
+import type { Grant } from 'keycloak-connect'
 
 import {
   KEYCLOAK_CONNECT_METADATA_GROUPS,
@@ -9,8 +10,8 @@ import {
   KEYCLOAK_CONNECT_METADATA_SCOPES,
   KEYCLOAK_CONNECT_METADATA_UNPROTECTED
 } from '@connect/connect.constants'
-import type { KeycloakConnectOptions, KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
-import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
+import type { KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
+import { ExceptionMessagesFallback, KeycloakConnectOptions } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
 import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
 

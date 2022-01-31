@@ -18,6 +18,21 @@
       "aliases": ["skip-format"],
       "description": "Skip formatting files.",
       "default": false
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
     }
   },
   "required": []

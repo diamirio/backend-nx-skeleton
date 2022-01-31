@@ -27,7 +27,7 @@
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:test": "nx affected:test",
-    "affected:lint": "nx format:write && nx affected:lint --parallel 10 --fix",
+    "affected:lint": "nx affected:lint --base=$(git branch --show-current) --parallel 10 --fix",
     "affected:dep-graph": "nx affected:dep-graph",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
@@ -46,7 +46,7 @@
     "backend:migrations:generate:one": "npm run nx -- migration:generate"
   },
   "simple-git-hooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "npm exec lint-staged"
   },
   "dependencies": {
     {% if deps is defined and deps | length > 0 %}

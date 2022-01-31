@@ -37,6 +37,10 @@ import * as modules from './modules'
 {% endif %}
 {% if server == enum.server.GRAPHQL %}
 import * as resolvers from './resolvers'
+import {
+  ApolloServerPluginLandingPageProductionDefault,
+  ApolloServerPluginLandingPageLocalDefault
+} from 'apollo-server-core'
 {% endif %}
 {% if database is defined and database != enum.database.NONE %}
 {% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.TYPEORM %}
@@ -81,7 +85,12 @@ export function createServerModule ({% if database is defined and database != en
         useGlobalPrefix: true,
         introspection: true,
         path: '/',
-        playground: true
+        playground: false,
+        plugins: [
+          process.env.NODE_ENV === 'production'
+            ? ApolloServerPluginLandingPageProductionDefault({ footer: false })
+            : ApolloServerPluginLandingPageLocalDefault({ footer: false })
+        ]
       }),
       ...Object.values(resolvers),{% endif %}
       {% if server == enum.server.RESTFUL %}

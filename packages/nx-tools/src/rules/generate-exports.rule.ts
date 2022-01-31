@@ -34,7 +34,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
       output = deepMergeWithUniqueMergeArray(
         output,
-        options.templates.reduce((o, template) => {
+        options.templates.reduce<Record<string, string[]>>((o, template) => {
           if (!Array.isArray(template.pattern)) {
             template.pattern = [ template.pattern ]
           }
@@ -61,7 +61,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           }
 
           return o
-        }, {} as Record<string, string[]>)
+        }, {})
       )
     })
 
@@ -70,7 +70,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
 
       output = deepMergeWithUniqueMergeArray(
         output,
-        options.templates.reduce((o, template) => {
+        options.templates.reduce<Record<string, string[]>>((o, template) => {
           log.debug(`Generate empty export file: "${template.output}"`)
 
           o = deepMergeWithUniqueMergeArray(o, {
@@ -78,7 +78,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           })
 
           return o
-        }, {} as Record<string, string[]>)
+        }, {})
       )
     }
 

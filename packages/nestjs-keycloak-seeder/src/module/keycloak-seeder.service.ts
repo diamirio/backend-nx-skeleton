@@ -2,8 +2,8 @@ import { Inject, Injectable, Logger } from '@nestjs/common'
 
 import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
 import { KeycloakSeed } from '@interfaces/keycloak-seed'
-import type { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
-import type { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
+import { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
+import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 
 /**
  * Seeder service to run all the seeds that has been passed to it.

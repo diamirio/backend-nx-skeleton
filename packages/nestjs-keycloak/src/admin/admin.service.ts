@@ -1,7 +1,7 @@
 import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
 import { Injectable, Logger } from '@nestjs/common'
 
-import type { KeycloakAdminOptions } from './admin.interfaces'
+import { KeycloakAdminOptions } from './admin.interfaces'
 
 /**
  * KeycloakAdminService manages the Keycloak RESTFUL API client.

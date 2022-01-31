@@ -66,7 +66,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
 
-        instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
+        void instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
           switch (msg) {
           case 'success':
             await this.secondaryCompileActions()

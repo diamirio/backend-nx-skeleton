@@ -1,7 +1,9 @@
-{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions %}
+{% if database is defined and database != enum.database.NONE %}
+{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and enum.dbAdapters.TYPEORM == dbAdapters %}
 database:
   directory:
     entity: ./libs/{{ constants.BACKEND_INTERFACES_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
+{% endif %}
 {% endif %}

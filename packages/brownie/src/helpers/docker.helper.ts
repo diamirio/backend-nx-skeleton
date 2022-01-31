@@ -52,7 +52,7 @@ export class DockerHelper {
       // be sure that necassary folders are created
       {
         title: 'Creating output directory.',
-        task: async (): Promise<void> => await createDirIfNotExists(this.options.flags.output)
+        task: async (): Promise<void> => createDirIfNotExists(this.options.flags.output)
       },
 
       // find selected container
@@ -446,7 +446,7 @@ export class DockerHelper {
           }
         })
       )
-    ).reduce((o, item) => ({ ...o, [item.name]: item }), {} as AvailableContainers)
+    ).reduce<AvailableContainers>((o, item) => ({ ...o, [item.name]: item }), {})
   }
 
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {

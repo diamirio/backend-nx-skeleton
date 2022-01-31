@@ -6,6 +6,7 @@ import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constan
 import type { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableGenerators, AvailableServerTypes } from '@interfaces/available.constants'
 import type { Schema as BackendInterfacesSchema } from '@schematics/backend-interfaces/main.interface'
+import { ComponentLocationsMap } from '@schematics/component/interfaces/file.constants'
 import type { Schema as ComponentSchema } from '@schematics/component/main.interface'
 import type { Schema as GeneratorSchema } from '@schematics/generator/main.interface'
 import type { Schema as MspSchema } from '@schematics/microservice-provider/main.interface'
@@ -19,7 +20,7 @@ import { addNxImplicitDependenciesRule, addSchematicTaskRule, applyOverwriteWith
  * @param context
  */
 export function createApplicationFiles (options: NormalizedSchema): Rule {
-  return (_host: Tree, context: SchematicContext): Rule => {
+  return (host: Tree, context: SchematicContext): Rule => {
     const log = new Logger(context)
     // source is always the same
     const source = url('./files')
@@ -56,16 +57,18 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
           },
           {
             condition:
-              !options.priorConfiguration?.components?.includes(AvailableComponents.SERVER) &&
+              !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
               options.components.includes(AvailableComponents.SERVER) &&
-              options?.server === AvailableServerTypes.RESTFUL,
+              options?.server === AvailableServerTypes.RESTFUL &&
+              !ComponentLocationsMap[AvailableServerTypes.RESTFUL].some((location) => host.exists(join(options.root, location, 'index.ts'))),
             rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.RESTFUL })
           },
           {
             condition:
-              !options.priorConfiguration?.components?.includes(AvailableComponents.SERVER) &&
+              !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
               options.components.includes(AvailableComponents.SERVER) &&
-              options?.server === AvailableServerTypes.GRAPHQL,
+              options?.server === AvailableServerTypes.GRAPHQL &&
+              !ComponentLocationsMap[AvailableServerTypes.GRAPHQL].some((location) => host.exists(join(options.root, location, 'index.ts'))),
             rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.GRAPHQL })
           },
           {

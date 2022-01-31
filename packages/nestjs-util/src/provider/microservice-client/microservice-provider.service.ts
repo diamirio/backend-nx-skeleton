@@ -33,12 +33,12 @@ export class MicroserviceProviderService<
   }
 
   onApplicationBootstrap (): void {
-    this.clients = this.provider.reduce((o, c, i) => {
+    this.clients = this.provider.reduce<Record<string, unknown>>((o, c, i) => {
       // this seems to be the only reliable way to inject the client names here
       o[this.names[i]] = c
 
       return o
-    }, {} as Record<string, unknown>) as unknown as Record<MessageQueues, ClientProxy>
+    }, {}) as unknown as Record<MessageQueues, ClientProxy>
   }
 
   // FIXME: this guys causes problems when typing the message request-respond types itself. only making the map a string map works.

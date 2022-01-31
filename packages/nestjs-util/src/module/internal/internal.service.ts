@@ -11,7 +11,7 @@ export class InternalService {
 
   @Configurable()
   async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
-    let lastUpdate
+    let lastUpdate: string
 
     try {
       const { mtime } = await fs.stat(lastUpdateFilePath)

@@ -36,10 +36,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
       // do not handle internal error mechanisms
       if (response.code) {
-        response.code(payload.statusCode).send(payload)
+        void response.code(payload.statusCode).send(payload)
       } else {
-        response.status(payload.statusCode)
-        response.send(payload)
+        void response.status(payload.statusCode)
+        void response.send(payload)
       }
     }
   }

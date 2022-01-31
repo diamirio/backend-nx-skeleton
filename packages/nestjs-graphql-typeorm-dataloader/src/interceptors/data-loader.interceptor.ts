@@ -7,7 +7,7 @@ import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
-import type { ApolloServerLoaderPluginOptions } from '@interfaces/apollo-server-plugin.interface'
+import { ApolloServerLoaderPluginOptions } from '@interfaces/apollo-server-plugin.interface'
 import type { Context } from '@interfaces/context.interface'
 
 @Injectable()

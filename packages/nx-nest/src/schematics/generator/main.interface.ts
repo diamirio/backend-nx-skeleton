@@ -5,4 +5,4 @@ type TypedBaseSchema = GeneratorBaseSchema<AvailableGenerators>
 
 type TypedBaseNormalizedSchema = GeneratorBaseNormalizedSchema<never, AvailableGenerators>
 
-export { TypedBaseSchema as Schema, TypedBaseNormalizedSchema as NormalizedSchema }
+export type { TypedBaseSchema as Schema, TypedBaseNormalizedSchema as NormalizedSchema }

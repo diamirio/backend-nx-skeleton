@@ -17,12 +17,12 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     return chain([
       // add the components that needs to be known
       updateNxIntegrationRule<NxWorkspaceIntegration>(options.name, {
-        library: integrationKeys.reduce(
+        library: integrationKeys.reduce<NxWorkspaceIntegration['library']>(
           (o, key) => ({
             ...o,
             [key]: options[key]
           }),
-          {} as NxWorkspaceIntegration['library']
+          {}
         )
       }),
 

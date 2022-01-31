@@ -99,11 +99,11 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
         await Promise.all(
           options.templates.map(async (template) => {
             try {
-              log.debug(`Generating template from ${matched}: ${template.output}`)
+              const output: string = template.root ? join(template.root, template.output) : template.output
+
+              log.debug(`Generating template from ${matched} to: ${output}`)
 
               const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
-
-              const output: string = template.root ? join(template.root, template.output) : template.output
 
               host.create(output, content)
             } catch (e) {

@@ -1,15 +1,12 @@
 module.exports = {
-  extends: [ './packages/eslint-config/index', './packages/eslint-config/typescript' ],
-  parserOptions: {
-    ecmaVersion: 2020
-  },
+  extends: [ './packages/eslint-config/typescript-dynamic' ],
   rules: {
     'import/order': [
       'error',
       {
         pathGroups: [
           {
-            pattern: '@{webundsoehne,webundsoehne-private}/**',
+            pattern: '@{webundsoehne,webundsoehne-private,src,interfaces,utils}/**',
             group: 'index'
           }
         ],

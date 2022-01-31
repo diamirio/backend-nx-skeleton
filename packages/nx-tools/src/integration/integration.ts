@@ -50,7 +50,7 @@ export function readNxProjectIntegration<T extends Record<PropertyKey, any> = Ba
 export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree): EnrichedProjectConfiguration<T>['integration'][] {
   const projects = readWorkspaceProjects<T>(host)
 
-  const data = Object.values(projects).reduce((o, value) => {
+  const data = Object.values(projects).reduce<EnrichedProjectConfiguration<T>['integration'][]>((o, value) => {
     const found = value?.integration
 
     if (found) {
@@ -58,7 +58,7 @@ export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = 
     }
 
     return o
-  }, [] as EnrichedProjectConfiguration<T>['integration'][])
+  }, [])
 
   return data
 }
@@ -99,6 +99,7 @@ export function createWorkspaceProject<T extends Record<PropertyKey, any> = Base
     // it goes a bit ham overwriting the default workspace.json
     // and ignoring the project.json of the given project
     log.debug('Project already exists: %s -> %s', name, e.message)
+    log.debug('Will update the project instead: %s', name)
     let project: EnrichedProjectConfiguration<T>
 
     try {

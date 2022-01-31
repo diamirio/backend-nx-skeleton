@@ -53,7 +53,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
   }
 
   if (options.exitCode) {
-    instance.on('exit', (code, signal) => {
+    void instance.on('exit', (code, signal) => {
       const exitMessage = `Process ended with code ${code}${signal ? ` and signal ${signal}` : ''}.`
 
       if (code > 0) {
@@ -69,7 +69,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
     })
   }
 
-  instance.on('error', (error) => {
+  void instance.on('error', (error) => {
     logger.fatal(error.message)
 
     // callback for compatibility reasons with observable

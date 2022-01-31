@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode } from '@nestjs/common'
 import { ApiOperation, ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { ApiStatus } from './internal.interface'
-import type { InternalService } from './internal.service'
+import { InternalService } from './internal.service'
 
 @ApiTags('Developer')
 @Controller('internal')

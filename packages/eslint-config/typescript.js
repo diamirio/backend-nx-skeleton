@@ -6,10 +6,7 @@ module.exports = {
       files: [ '*.ts', '*.tsx' ],
       plugins: [ '@typescript-eslint' ],
       extends: [ 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended' ],
-      parserOptions: {
-        ecmaVersion: 'esnext',
-        sourceType: 'module'
-      },
+      parserOptions: {},
       rules: {
         // this is a bit buggy at the moment
         '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -216,7 +213,14 @@ module.exports = {
           {
             selector: 'parameter',
             format: [ 'camelCase', 'PascalCase' ],
-            leadingUnderscore: 'allow'
+            leadingUnderscore: 'forbid'
+          },
+
+          {
+            selector: 'parameter',
+            format: [ 'camelCase', 'PascalCase' ],
+            modifiers: [ 'unused' ],
+            leadingUnderscore: 'require'
           },
 
           {
@@ -239,13 +243,6 @@ module.exports = {
           {
             selector: 'typeLike',
             format: [ 'PascalCase' ]
-          },
-
-          {
-            selector: 'parameter',
-            format: [ 'camelCase', 'PascalCase' ],
-            modifiers: [ 'unused' ],
-            leadingUnderscore: 'require'
           }
         ],
         '@typescript-eslint/no-parameter-properties': 'off',
@@ -282,13 +279,6 @@ module.exports = {
           { assertionStyle: 'as', objectLiteralTypeAssertions: 'allow' }
         ],
         '@typescript-eslint/consistent-type-definitions': [ 'error', 'interface' ],
-        '@typescript-eslint/consistent-type-imports': [
-          'error',
-          {
-            prefer: 'type-imports',
-            disallowTypeAnnotations: true
-          }
-        ],
         '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
         '@typescript-eslint/no-empty-interface': [
           'error',

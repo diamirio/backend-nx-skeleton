@@ -26,12 +26,12 @@ export function updateIntegration (options: NormalizedSchema): Rule {
   return chain([
     // add the components that needs to be known
     updateNxIntegrationRule<NxNestProjectIntegration>(options.name, {
-      nestjs: integrationKeys.reduce(
+      nestjs: integrationKeys.reduce<NxNestProjectIntegration['nestjs']>(
         (o, key) => ({
           ...o,
           [key]: options[key]
         }),
-        {} as NxNestProjectIntegration['nestjs']
+        {}
       )
     }),
 

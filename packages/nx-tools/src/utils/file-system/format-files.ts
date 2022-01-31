@@ -5,7 +5,6 @@ import * as path from 'path'
 import prettier from 'prettier'
 import type { Observable } from 'rxjs'
 import { from } from 'rxjs'
-import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { getFilesInTree } from '.'
 import type { FormatFilesOptions } from './format-files.interface'
@@ -44,7 +43,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     // get root path
     const appRootPath = findNxRoot({ throw: false }) ?? '/'
 
-    log.debug(`Application root path for linting: ${appRootPath}`)
+    log.debug('Formatting and linting: tree %s in %s, running with options %o', host.root.path, appRootPath, options)
 
     let eslint: ESLint
 
@@ -58,61 +57,138 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     // BUG: additional configuration for some weird bug fixes
     const prettierIgnored = [ 'custom-environment-variables.yml' ]
 
-    return from(files).pipe(
-      filter((file) => host.exists(file.path)),
-      mergeMap(async (file) => {
-        const systemPath = path.join(appRootPath, file.path)
-
-        try {
-          if (options.prettier) {
-            let config: prettier.Options = {
-              filepath: systemPath
+    // this should be much faster than the observable approach that angular directly supports
+    // things were getting slow with it
+    return from(
+      (async (): Promise<Tree> => {
+        await Promise.all(
+          Array.from(files.values()).map(async (file) => {
+            if (!host.exists(file.path)) {
+              return
             }
 
-            const localConfig = await prettier.resolveConfig(systemPath)
+            const systemPath = path.join(appRootPath, file.path)
 
-            if (localConfig) {
-              config = {
-                ...config,
-                ...localConfig
+            try {
+              if (options.prettier) {
+                let config: prettier.Options = {
+                  filepath: systemPath
+                }
+
+                const localConfig = await prettier.resolveConfig(systemPath)
+
+                if (localConfig) {
+                  config = {
+                    ...config,
+                    ...localConfig
+                  }
+                }
+
+                const support = await prettier.getFileInfo(systemPath)
+
+                if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
+                  return
+                }
+
+                // dont remove await, eventhough it is not marked as promise it is
+                // eslint-disable-next-line @typescript-eslint/await-thenable
+                file.content = await prettier.format(file.content, config)
+
+                log.debug('Prettier format: %s', file.path)
               }
-            }
 
-            const support = await prettier.getFileInfo(systemPath)
+              if (options.eslint) {
+                const config: any = {
+                  filePath: systemPath
+                }
 
-            if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
+                // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
+                if (await eslint.isPathIgnored(systemPath)) {
+                  return
+                }
+
+                const results = await eslint.lintText(file.content, config)
+
+                if (results?.[0]?.output) {
+                  file.content = results[0].output
+
+                  log.debug('Eslint lint: %s', file.path)
+                }
+              }
+
+              host.overwrite(file.path, file.content)
+
               return
+            } catch (e) {
+              log.error(`Could not format ${file.path}:\n${e.message}`)
             }
+          })
+        )
 
-            // dont remove await, eventhough it is not marked as promise it is
-            file.content = await prettier.format(file.content, config)
-          }
-
-          if (options.eslint) {
-            const config: any = {
-              filePath: systemPath
-            }
-
-            // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
-            if (await eslint.isPathIgnored(systemPath)) {
-              return
-            }
-
-            const results = await eslint.lintText(file.content, config)
-
-            if (results?.[0]?.output) {
-              file.content = results[0].output
-            }
-          }
-
-          host.overwrite(file.path, file.content)
-
-          return
-        } catch (e) {
-          log.error(`Could not format ${file.path}:\n${e.message}`)
-        }
-      }),
-      map(() => host)
+        return host
+      })()
     )
+
+    // return from(files).pipe(
+    //   filter((file) => host.exists(file.path)),
+    //   mergeMap(async (file) => {
+    //     const systemPath = path.join(appRootPath, file.path)
+    //
+    //     try {
+    //       if (options.prettier) {
+    //         let config: prettier.Options = {
+    //           filepath: systemPath
+    //         }
+    //
+    //         const localConfig = await prettier.resolveConfig(systemPath)
+    //
+    //         if (localConfig) {
+    //           config = {
+    //             ...config,
+    //             ...localConfig
+    //           }
+    //         }
+    //
+    //         const support = await prettier.getFileInfo(systemPath)
+    //
+    //         if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
+    //           return
+    //         }
+    //
+    //         // dont remove await, eventhough it is not marked as promise it is
+    //         // eslint-disable-next-line @typescript-eslint/await-thenable
+    //         file.content = await prettier.format(file.content, config)
+    //
+    //         log.debug('Prettier format: %s', file.path)
+    //       }
+    //
+    //       if (options.eslint) {
+    //         const config: any = {
+    //           filePath: systemPath
+    //         }
+    //
+    //         // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
+    //         if (await eslint.isPathIgnored(systemPath)) {
+    //           return
+    //         }
+    //
+    //         const results = await eslint.lintText(file.content, config)
+    //
+    //         if (results?.[0]?.output) {
+    //           file.content = results[0].output
+    //
+    //           log.debug('Eslint lint: %s', file.path)
+    //         }
+    //       }
+    //
+    //       host.overwrite(file.path, file.content)
+    //
+    //       return
+    //     } catch (e) {
+    //       log.error(`Could not format ${file.path}:\n${e.message}`)
+    //     }
+    //   }),
+    //   map(() => host)
+    // )
   }
 }

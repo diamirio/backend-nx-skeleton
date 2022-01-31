@@ -10,7 +10,7 @@ import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 export function readMicroserviceProviderWorkspaceIntegration (host: Tree): MicroserviceProviderWorkspaceIntegration[] {
   const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
-  return Object.entries(projects).reduce((o, [ key, value ]) => {
+  return Object.entries(projects).reduce<MicroserviceProviderWorkspaceIntegration[]>((o, [ key, value ]) => {
     if (value.integration?.nestjs?.microservice) {
       o = [
         ...o,
@@ -24,5 +24,5 @@ export function readMicroserviceProviderWorkspaceIntegration (host: Tree): Micro
     }
 
     return o
-  }, [] as MicroserviceProviderWorkspaceIntegration[])
+  }, [])
 }

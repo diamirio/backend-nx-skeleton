@@ -4,7 +4,8 @@ import moment from 'moment'
 import type { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
-import type { CacheLifetimeOptions, Request } from '@interface'
+import { CacheLifetimeOptions } from '@interface'
+import type { Request } from '@interface'
 import { ConfigParam, Configurable } from '@provider/config'
 
 export class CacheLifetimeHelperInterceptor implements NestInterceptor {

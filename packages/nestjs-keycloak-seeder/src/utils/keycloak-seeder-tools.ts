@@ -5,8 +5,8 @@ import type { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth
 import { Injectable, Logger } from '@nestjs/common'
 
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import type { KeycloakAdminOptions, KeycloakAdminService } from '@webundsoehne/nestjs-keycloak'
-import { InjectKeycloak } from '@webundsoehne/nestjs-keycloak'
+import type { KeycloakAdminOptions } from '@webundsoehne/nestjs-keycloak'
+import { InjectKeycloak, KeycloakAdminService } from '@webundsoehne/nestjs-keycloak'
 import type { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
@@ -70,12 +70,13 @@ export class KeycloakAdminSeederTools {
     const client = await this.getClient(options?.realm)
     const data = await client[context].find()
 
-    return (data as any[]).reduce(
+    return (data as any[]).reduce<Record<K, Await<ReturnType<KeycloakAdminClient[T]['find']>>>>(
       (o, d) => ({
         ...o,
         [d[options.groupBy]]: d
       }),
-      {} as Record<K, Await<ReturnType<KeycloakAdminClient[T]['find']>>>
+      // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+      {} as any
     )
   }
 
@@ -83,25 +84,25 @@ export class KeycloakAdminSeederTools {
    * Swap the keys of an object to ids of the given group or role.
    */
   swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
-    return Object.entries(map).reduce((o, [ name, d ]) => {
+    return Object.entries(map).reduce<Record<string, T>>((o, [ name, d ]) => {
       const id = this.getIdFromMappedData(data, name)
 
       return {
         ...o,
         [id]: d
       }
-    }, {} as Record<string, T>)
+    }, {})
   }
 
   /*
    * Swap a array of names to the mapping.
    */
   swapNamesToMapping<T extends string[], K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: T): RoleMappingPayload[] {
-    return map.reduce((o, name) => {
+    return map.reduce<RoleMappingPayload[]>((o, name) => {
       const id = this.getIdFromMappedData(data, name as unknown as string)
 
       return [ ...o, { name, id } ] as RoleMappingPayload[]
-    }, [] as RoleMappingPayload[])
+    }, [])
   }
 
   /**
