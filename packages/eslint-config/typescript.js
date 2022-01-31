@@ -32,7 +32,7 @@ module.exports = {
             overrides: {
               accessors: 'off',
               constructors: 'no-public',
-              methods: 'explicit',
+              methods: 'no-public',
               properties: 'off',
               parameterProperties: 'off'
             }

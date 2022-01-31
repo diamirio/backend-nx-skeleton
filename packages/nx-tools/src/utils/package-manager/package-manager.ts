@@ -65,7 +65,7 @@ export class PackageManager {
   /**
    * Returns the selected commands from the current package manager.
    */
-  public command (command: PackageManagerUsableCommands, manager?: AvailablePackageManagers): string {
+  command (command: PackageManagerUsableCommands, manager?: AvailablePackageManagers): string {
     return PackageManagerCommands[manager ?? this.manager][command]
   }
 
@@ -73,7 +73,7 @@ export class PackageManager {
    * This gets ctx.packages as input to perform the required operation
    * @param actions
    */
-  public parser (action: PackageManagerActions): PackageManagerParsedCommand {
+  parser (action: PackageManagerActions): PackageManagerParsedCommand {
     const argumentParser: PackageManagerArgumentParser = [
       // common arguments
       { condition: action.global === true, command: PackageManagerUsableCommands.GLOBAL },
@@ -164,7 +164,7 @@ export class PackageManager {
   // FIXME: when the issue is resolved and merge complete use the upstream one instead of fork
   // * https://github.com/yeoman/update-notifier/issues/100 open issue with the update check for global registry npmrc stuff
   // FIXME: this is a bit weird have to be improved up on
-  public async checkIfModuleInstalled (pkg: NodeDependency | NodeDependency[], options?: CheckNodeModuleInstalledOptions): Promise<LocalNodeModule[]> {
+  async checkIfModuleInstalled (pkg: NodeDependency | NodeDependency[], options?: CheckNodeModuleInstalledOptions): Promise<LocalNodeModule[]> {
     // we will later generate a log warn if we are using the linked folder since it shows we are in develop mode
     let yarnGlobalFolder: string
 

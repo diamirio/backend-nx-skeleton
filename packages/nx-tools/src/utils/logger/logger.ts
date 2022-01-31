@@ -40,23 +40,23 @@ export class Logger {
     }
   }
 
-  public fatal (data: string | Buffer, ...args: any): void {
+  fatal (data: string | Buffer, ...args: any): void {
     return this.parseMessage(LogLevels.FATAL, data, args)
   }
 
-  public error (data: string | Buffer, ...args: any): void {
+  error (data: string | Buffer, ...args: any): void {
     return this.parseMessage(LogLevels.ERROR, data, args)
   }
 
-  public warn (data: string | Buffer, ...args: any): void {
+  warn (data: string | Buffer, ...args: any): void {
     return this.parseMessage(LogLevels.WARN, data, args)
   }
 
-  public info (data: string | Buffer, ...args: any): void {
+  info (data: string | Buffer, ...args: any): void {
     return this.parseMessage(LogLevels.INFO, data, args)
   }
 
-  public debug (data: string | Buffer, ...args: any): void {
+  debug (data: string | Buffer, ...args: any): void {
     return this.parseMessage(LogLevels.DEBUG, data, args)
   }
 

@@ -12,15 +12,15 @@ try {
 } catch (e) {}
 
 class Executor extends BaseExecutor<ExecuteBuilderOptions, NormalizedExecuteBuilderOptions, Record<string, never>> {
-  public run (): Promise<BuilderOutput> {
+  run (): Promise<BuilderOutput> {
     return this.handleBuild()
   }
 
-  public normalizeOptions (options: ExecuteBuilderOptions): NormalizedExecuteBuilderOptions {
+  normalizeOptions (options: ExecuteBuilderOptions): NormalizedExecuteBuilderOptions {
     return { watch: true, ...options }
   }
 
-  public async handleBuild (): Promise<BuilderOutput> {
+  async handleBuild (): Promise<BuilderOutput> {
     try {
       const results = await this.runWaitUntilTargets()
 
@@ -52,7 +52,7 @@ class Executor extends BaseExecutor<ExecuteBuilderOptions, NormalizedExecuteBuil
     }
   }
 
-  public async runProcess (): Promise<void> {
+  async runProcess (): Promise<void> {
     if (this.options.runAfter) {
       const instance = this.manager.addPersistent(
         execa.command(this.options.runAfter, { cwd: this.options.cwd ?? process.cwd(), env: { ...process.env, ...this.options.environment } })
@@ -62,7 +62,7 @@ class Executor extends BaseExecutor<ExecuteBuilderOptions, NormalizedExecuteBuil
     }
   }
 
-  public async startBuild (): Promise<BuilderOutput> {
+  async startBuild (): Promise<BuilderOutput> {
     const target = parseTargetString(this.options.buildTarget)
     const options = readTargetOptions(target, this.context)
 
@@ -83,7 +83,7 @@ class Executor extends BaseExecutor<ExecuteBuilderOptions, NormalizedExecuteBuil
     }
   }
 
-  public runWaitUntilTargets (): Promise<BuilderOutput[]> {
+  runWaitUntilTargets (): Promise<BuilderOutput[]> {
     if (!this.options.waitUntilTargets || this.options.waitUntilTargets.length === 0) {
       return
     }

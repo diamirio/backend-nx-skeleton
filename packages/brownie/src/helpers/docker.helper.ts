@@ -27,7 +27,7 @@ export class DockerHelper {
     this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
   }
 
-  public generateGetContainerTasks (): Listr {
+  generateGetContainerTasks (): Listr {
     return this.cmd.tasks.newListr<DockerHelperCtx>([
       // get available containers
       {
@@ -47,7 +47,7 @@ export class DockerHelper {
     ])
   }
 
-  public generateDockerTasks (containers: BrownieAvailableContainers[]): Listr {
+  generateDockerTasks (containers: BrownieAvailableContainers[]): Listr {
     return this.cmd.tasks.newListr<DockerHelperCtx>([
       // be sure that necassary folders are created
       {
@@ -401,7 +401,7 @@ export class DockerHelper {
     ])
   }
 
-  public async getAvailableContainers (): Promise<AvailableContainers> {
+  async getAvailableContainers (): Promise<AvailableContainers> {
     // some trickery to make it async
     return (
       await Promise.all(

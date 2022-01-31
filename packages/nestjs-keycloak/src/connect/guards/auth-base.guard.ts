@@ -28,7 +28,7 @@ export abstract class BaseAuthGuard implements CanActivate {
     public readonly reflector: Reflector
   ) {}
 
-  public async canActivate (context: ExecutionContext): Promise<boolean> {
+  async canActivate (context: ExecutionContext): Promise<boolean> {
     const isUnprotected = this.reflector.get<boolean>(KEYCLOAK_CONNECT_METADATA_UNPROTECTED, context.getHandler())
 
     if (isUnprotected) {
@@ -161,7 +161,7 @@ export abstract class BaseAuthGuard implements CanActivate {
     }, [])
   }
 
-  public abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest | EnrichedExpressRequest
-  public abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest
-  public abstract getRequest (context: ExecutionContext): EnrichedExpressRequest
+  abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest | EnrichedExpressRequest
+  abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest
+  abstract getRequest (context: ExecutionContext): EnrichedExpressRequest
 }

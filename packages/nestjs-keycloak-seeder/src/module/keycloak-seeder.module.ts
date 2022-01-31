@@ -13,7 +13,7 @@ import { KeycloakAdminModule } from '@webundsoehne/nestjs-keycloak'
  */
 @Module({})
 export class KeycloakSeederModule {
-  public static register (seeds: KeycloakSeeds): DynamicModule {
+  static register (seeds: KeycloakSeeds): DynamicModule {
     return {
       module: KeycloakSeederModule,
       imports: [ KeycloakAdminModule ],

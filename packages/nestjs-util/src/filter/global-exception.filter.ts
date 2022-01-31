@@ -10,7 +10,7 @@ import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
 export class GlobalExceptionFilter implements ExceptionFilter {
   private logger = new Logger(this.constructor.name)
 
-  public static defaultPayload (exception: any): EnrichedException {
+  static defaultPayload (exception: any): EnrichedException {
     return new EnrichedExceptionError({
       statusCode: typeof exception?.status === 'number' ? exception?.status : HttpStatus.INTERNAL_SERVER_ERROR,
       error: exception?.error ?? exception.message,
@@ -19,7 +19,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     })
   }
 
-  public catch (exception: Error, host: ArgumentsHost): void {
+  catch (exception: Error, host: ArgumentsHost): void {
     const ctx = host.switchToHttp()
     const request: FastifyRequest = ctx.getRequest()
     const response: FastifyReply = ctx.getResponse()

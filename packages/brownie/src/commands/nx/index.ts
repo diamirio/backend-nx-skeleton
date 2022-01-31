@@ -32,11 +32,11 @@ export class NxCommand extends BaseCommand<Configuration> {
 
   private helpers: { node: NodeHelper }
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     this.helpers = { node: new NodeHelper(this) }
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     const { flags } = this.parse(NxCommand)
 
     if (flags.develop) {

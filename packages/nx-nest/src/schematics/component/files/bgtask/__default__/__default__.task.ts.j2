@@ -11,7 +11,7 @@ export class {{ casing.pascal }}Task extends NestSchedule {
   private logger: Logger = new Logger(this.constructor.name)
 
   @Interval(1000)
-  public defaultJob (): void {
+  defaultJob (): void {
     this.logger.debug('Another Message')
   }
 }

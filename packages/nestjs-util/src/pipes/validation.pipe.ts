@@ -13,7 +13,7 @@ export class ExtendedValidationPipe extends ValidationPipe {
     })
   }
 
-  public async transform (value: any, metadata: ArgumentMetadata): Promise<any> {
+  async transform (value: any, metadata: ArgumentMetadata): Promise<any> {
     // run transform
     const result = super.transform(value, metadata)
 

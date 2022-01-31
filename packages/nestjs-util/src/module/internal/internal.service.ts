@@ -10,7 +10,7 @@ export class InternalService {
   private logger = new Logger(InternalService.name)
 
   @Configurable()
-  public async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
+  async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
     let lastUpdate
 
     try {
@@ -28,7 +28,7 @@ export class InternalService {
   }
 
   @Configurable()
-  public async getChangelog (@ConfigParam('misc.changelogFile', 'CHANGELOG.md') changelogFilePath?: string): Promise<string> {
+  async getChangelog (@ConfigParam('misc.changelogFile', 'CHANGELOG.md') changelogFilePath?: string): Promise<string> {
     this.logger.verbose('Retrieving changelog')
 
     return fs.readFile(changelogFilePath, { encoding: 'utf8' })

@@ -16,7 +16,7 @@ export class NodeHelper extends PackageManager {
    * This gets ctx.packages as input to perform the required operation
    * @param options
    */
-  public packageManager (options: Omit<PackageManagerPackageAction, 'package'>, packages: NodeDependency[]): Listr {
+  packageManager (options: Omit<PackageManagerPackageAction, 'package'>, packages: NodeDependency[]): Listr {
     return this.cmd.tasks.newListr(
       [
         {

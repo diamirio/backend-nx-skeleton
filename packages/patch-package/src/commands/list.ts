@@ -16,7 +16,7 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
 
   private rewire: Record<'findPatchFiles', any> = {} as any
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     // since the underlying application is not exposing any of these methods, run time rewire is required
     this.logger.debug('Rewiring underlying module...')
 
@@ -29,7 +29,7 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
     )
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     this.logger.module('Listing all the available patches in this module.')
 
     const directories = await globby('*', {

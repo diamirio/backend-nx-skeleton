@@ -19,7 +19,7 @@ try {
 
 // i converted this to a class since it makes not too much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
-  public init (): void {
+  init (): void {
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
       tsconfigReplacePaths: getNodeBinaryPath('tsconfig-replace-paths'),
@@ -28,7 +28,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     }
   }
 
-  public async run (): Promise<BuilderOutput> {
+  async run (): Promise<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     // Cleaning the /dist folder
     this.logger.debug('Output path will be: %s', this.options.normalizedOutputPath)
@@ -146,7 +146,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     }
   }
 
-  public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
+  normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = generateBuilderAssets(
       {
@@ -178,7 +178,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   }
 
   // so complicated maybe simplify this?
-  public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
+  normalizeArguments (mode?: OptionParserModes): ExecaArguments {
     let args: string[] = []
     let spawnOptions: ExecaArguments['spawnOptions']
 

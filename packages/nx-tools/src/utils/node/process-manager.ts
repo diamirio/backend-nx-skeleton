@@ -21,27 +21,27 @@ export class ProcessManager {
   }
 
   /** Add a new task that is killable. */
-  public add (instance: ExecaChildProcess): ExecaChildProcess {
+  add (instance: ExecaChildProcess): ExecaChildProcess {
     this.tasks = [ ...this.tasks, instance ]
 
     return instance
   }
 
   /** Add a persistent task that should not be killed until everything finishes. */
-  public addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
+  addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
     this.persistentTasks = [ ...this.persistentTasks, instance ]
 
     return instance
   }
 
   /** Kill all non-persistent tasks. */
-  public async kill (): Promise<void | void[]> {
+  async kill (): Promise<void | void[]> {
     await this.killProcesses(this.tasks)
     this.tasks = []
   }
 
   /** Stop the processes compeletely. */
-  public async stop (): Promise<void | void[]> {
+  async stop (): Promise<void | void[]> {
     await this.kill()
     await this.killProcesses(this.persistentTasks)
     this.persistentTasks = []

@@ -12,7 +12,7 @@ import { KeycloakAdminService } from './admin.service'
 @Global()
 @Module({})
 export class KeycloakAdminModule {
-  public static register (options: KeycloakAdminOptions): DynamicModule {
+  static register (options: KeycloakAdminOptions): DynamicModule {
     return {
       module: KeycloakAdminModule,
       global: true,

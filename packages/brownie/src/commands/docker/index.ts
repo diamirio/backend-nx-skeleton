@@ -55,7 +55,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   private helpers: { docker: DockerHelper }
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
 
     this.helpers = {
@@ -72,7 +72,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     }
   }
 
-  public async nxConfig (): Promise<void> {
+  async nxConfig (): Promise<void> {
     this.tasks.add<DockerNxCtx>([
       {
         task: (): Listr => this.helpers.docker.generateGetContainerTasks()
@@ -104,7 +104,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     ])
   }
 
-  public async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
+  async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
     this.tasks.ctx = { config }
     this.tasks.add<DockerContainerAddCtx>([
       {
@@ -135,11 +135,11 @@ export class DockerContainerCommand extends ConfigBaseCommand {
   }
 
   // have to add this it is abstract :/
-  public async configEdit (): Promise<null> {
+  async configEdit (): Promise<null> {
     return
   }
 
-  public async configShow (config: DockerComposeFile): Promise<void> {
+  async configShow (config: DockerComposeFile): Promise<void> {
     if (config?.services ? Object.keys(config.services).length > 0 : false) {
       this.logger.info(
         createTable(
@@ -154,7 +154,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     this.logger.module('Configuration file is listed.')
   }
 
-  public async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
+  async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
     return {
       keys: config?.services ? Object.keys(config.services) : [],
       removeFunction: async (config, key): Promise<DockerComposeFile> => {
@@ -169,7 +169,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     }
   }
 
-  public async purgeConfig (): Promise<void> {
+  async purgeConfig (): Promise<void> {
     const { flags } = this.parse(DockerContainerCommand)
     const lock = await this.locker.getLockFile<LocalLockFile>()
     const containers = lock[LocalLockPaths.DOCKER_HELPER]

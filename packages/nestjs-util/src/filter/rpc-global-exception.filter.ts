@@ -12,7 +12,7 @@ import { logErrorDebugMsg } from './util'
 export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
   private logger = new Logger(this.constructor.name)
 
-  public static defaultPayload (exception: RpcException | HttpException, host: ArgumentsHost): EnrichedException {
+  static defaultPayload (exception: RpcException | HttpException, host: ArgumentsHost): EnrichedException {
     return new EnrichedExceptionError({
       ...GlobalExceptionFilter.defaultPayload(exception),
       service: host
@@ -23,7 +23,7 @@ export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
     })
   }
 
-  public catch (exception: RpcException | HttpException, host: ArgumentsHost): any {
+  catch (exception: RpcException | HttpException, host: ArgumentsHost): any {
     const payload = this.payload(exception, host)
 
     logErrorDebugMsg(this.logger, payload, exception.stack)

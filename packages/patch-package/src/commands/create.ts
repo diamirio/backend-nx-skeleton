@@ -44,7 +44,7 @@ export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
     })
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     // parse arguments
     const { argv, flags } = this.parse(CreateCommand)
 

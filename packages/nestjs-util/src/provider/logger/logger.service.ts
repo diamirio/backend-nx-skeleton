@@ -11,7 +11,7 @@ let logger: winston.Logger
 export class LoggerService implements LoggerServiceCommon {
   constructor (private readonly context?: string) {}
 
-  public error (message: any, trace?: string, context?: string): void {
+  error (message: any, trace?: string, context?: string): void {
     this.logMessage({
       type: LogType.error,
       message,
@@ -20,7 +20,7 @@ export class LoggerService implements LoggerServiceCommon {
     })
   }
 
-  public log (message: any, context?: string): void {
+  log (message: any, context?: string): void {
     this.logMessage({
       type: LogType.log,
       message,
@@ -28,7 +28,7 @@ export class LoggerService implements LoggerServiceCommon {
     })
   }
 
-  public warn (message: any, context?: string): void {
+  warn (message: any, context?: string): void {
     this.logMessage({
       type: LogType.warn,
       message,
@@ -36,7 +36,7 @@ export class LoggerService implements LoggerServiceCommon {
     })
   }
 
-  public debug (message: any, context?: string): void {
+  debug (message: any, context?: string): void {
     this.logMessage({
       type: LogType.debug,
       message,
@@ -44,7 +44,7 @@ export class LoggerService implements LoggerServiceCommon {
     })
   }
 
-  public verbose (message: any, context?: string): void {
+  verbose (message: any, context?: string): void {
     this.logMessage({
       type: LogType.verbose,
       message,

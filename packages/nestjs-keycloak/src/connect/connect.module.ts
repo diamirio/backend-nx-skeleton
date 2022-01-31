@@ -13,7 +13,7 @@ import type { KeycloakConnectOptions } from './connect.interfaces'
 @Global()
 @Module({})
 export class KeycloakConnectModule {
-  public static register (options: KeycloakConnectOptions): DynamicModule {
+  static register (options: KeycloakConnectOptions): DynamicModule {
     return {
       module: KeycloakConnectModule,
       global: true,

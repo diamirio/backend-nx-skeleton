@@ -9,17 +9,17 @@ export class MaintenanceLocker implements ILocker {
   private readonly maintenance: MaintenanceService = new MaintenanceService()
   private key: string
 
-  public init (key: string, config: IScheduleConfig): void {
+  init (key: string, config: IScheduleConfig): void {
     this.logger.debug(`Maintenance mode enabled for ${key}, with properties: ${JSON.stringify(config)}`)
 
     this.key = key
   }
 
-  public async release (): Promise<void> {
+  async release (): Promise<void> {
     await this.maintenance.disable(this.key)
   }
 
-  public async tryLock (): Promise<boolean> {
+  async tryLock (): Promise<boolean> {
     try {
       await this.maintenance.enable(this.key)
 

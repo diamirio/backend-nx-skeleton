@@ -9,7 +9,7 @@ import { getDuration } from '@util'
 export class RequestProfilerInterceptor implements NestInterceptor {
   private readonly logger = new Logger(this.constructor.name)
 
-  public requestProfilerLog (context: ExecutionContext, method: string, url: string, start: number, end: number): void {
+  requestProfilerLog (context: ExecutionContext, method: string, url: string, start: number, end: number): void {
     const httpContext = context.switchToHttp()
     const response: Request = httpContext.getResponse()
     const statusCode = (response as any)?.statusCode ?? response?.raw?.statusCode ?? 'UNDEF'
@@ -17,7 +17,7 @@ export class RequestProfilerInterceptor implements NestInterceptor {
     this.logger.log(`${method} ${url} finished - ${statusCode} - took: ${getDuration(start, end).toFixed(3)} sec`)
   }
 
-  public intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
     const httpContext = context.switchToHttp()
     const request: Request = httpContext.getRequest()
 

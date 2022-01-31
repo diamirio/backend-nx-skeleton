@@ -10,5 +10,5 @@ export abstract class KeycloakSeed {
 
   constructor (protected keycloak: KeycloakAdminSeederTools) {}
 
-  public abstract run (): Promise<void>
+  abstract run (): Promise<void>
 }

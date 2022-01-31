@@ -16,11 +16,11 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
   }
 
   @Configurable()
-  public getOptionsFromConfig (@ConfigParam('cacheLifetime') cacheLifetimeOptions?: CacheLifetimeOptions): CacheLifetimeOptions {
+  getOptionsFromConfig (@ConfigParam('cacheLifetime') cacheLifetimeOptions?: CacheLifetimeOptions): CacheLifetimeOptions {
     return cacheLifetimeOptions
   }
 
-  public intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
     const httpContext = context.switchToHttp()
 
     const request: Request = httpContext.getRequest()

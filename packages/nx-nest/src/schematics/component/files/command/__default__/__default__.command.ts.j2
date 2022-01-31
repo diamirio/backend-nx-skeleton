@@ -5,7 +5,7 @@ import { Command, CommandRunner, Option } from 'nest-commander'
 export class {{ casing.pascal }}Command implements CommandRunner {
   private logger: Logger = new Logger(this.constructor.name)
 
-  public async run(
+  async run(
     parameters: string[],
     options?: Record<string, any>,
   ): Promise<void> {

@@ -6,7 +6,7 @@ export class GitlabCiCommand extends BaseCommand<Configuration> {
   static description = 'Create a gitlab ci configuration from known NX configuration.'
   static aliases = [ 'ci' ]
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     this.logger.warn('Gitlab-ci generation will go here.')
   }
 }

@@ -16,7 +16,7 @@ try {
 } catch (e) {}
 
 class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptions, { command: string }> {
-  public async run (): Promise<BuilderOutput> {
+  async run (): Promise<BuilderOutput> {
     let success = false
     let error: string
 
@@ -64,7 +64,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     return { success, error }
   }
 
-  public normalizeOptions (options: RunBuilderOptions): ExecaArguments {
+  normalizeOptions (options: RunBuilderOptions): ExecaArguments {
     const jinja = getJinjaDefaults()
 
     const env = {

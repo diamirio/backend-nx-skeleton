@@ -50,18 +50,18 @@ export abstract class BaseExecutor<
   /**
    * Initiate the builder first.
    */
-  public init (): void {
+  init (): void {
     return
   }
 
   /**
    * The run command about what to do
    */
-  public abstract run (): Promise<BuilderOutput>
+  abstract run (): Promise<BuilderOutput>
 
   /**
    * Normalize the incoming options
    * @param options
    */
-  public abstract normalizeOptions (options: ExecutorOptions): NormalizedExecutorOptions
+  abstract normalizeOptions (options: ExecutorOptions): NormalizedExecutorOptions
 }

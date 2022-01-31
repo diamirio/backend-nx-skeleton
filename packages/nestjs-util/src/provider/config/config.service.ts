@@ -12,7 +12,7 @@ export class ConfigService {
    * @param {any} defaultValue
    * @returns {any}
    */
-  public static get<T = any>(path: string, defaultValue?: T): T {
+  static get<T = any>(path: string, defaultValue?: T): T {
     let configValue
 
     try {
@@ -30,7 +30,7 @@ export class ConfigService {
    * @param {string} path
    * @returns {boolean}
    */
-  public static has (path: string): boolean {
+  static has (path: string): boolean {
     return config.has(path)
   }
 
@@ -48,19 +48,19 @@ export class ConfigService {
    * @param {Config} moduleConfig
    * @returns {void}
    */
-  public static setModuleConfig (moduleName: string, moduleConfig: Config): void {
+  static setModuleConfig (moduleName: string, moduleConfig: Config): void {
     config.util.setModuleDefaults(moduleName, moduleConfig)
   }
 
-  public has (path: string): boolean {
+  has (path: string): boolean {
     return ConfigService.has(path)
   }
 
-  public get<T = any>(path: string, defaultValue?: T): T {
+  get<T = any>(path: string, defaultValue?: T): T {
     return ConfigService.get<T>(path, defaultValue)
   }
 
-  public setModuleConfig (moduleName: string, moduleConfig: Config): void {
+  setModuleConfig (moduleName: string, moduleConfig: Config): void {
     return ConfigService.setModuleConfig(moduleName, moduleConfig)
   }
 }

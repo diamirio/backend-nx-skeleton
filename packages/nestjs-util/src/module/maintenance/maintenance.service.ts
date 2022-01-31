@@ -23,7 +23,7 @@ export class MaintenanceService {
     return MaintenanceService.instance
   }
 
-  public async enable (task = 'unknown-task'): Promise<void> {
+  async enable (task = 'unknown-task'): Promise<void> {
     // add task to running tasks
     this.tasks.push(task)
 
@@ -38,7 +38,7 @@ export class MaintenanceService {
     }
   }
 
-  public async disable (task = 'unknown-task'): Promise<void> {
+  async disable (task = 'unknown-task'): Promise<void> {
     // remove task from running tasks
     this.tasks.splice(this.tasks.indexOf(task), 1)
 
@@ -53,7 +53,7 @@ export class MaintenanceService {
     }
   }
 
-  public async isEnabled (): Promise<boolean> {
+  async isEnabled (): Promise<boolean> {
     try {
       await fs.access(this.lockfile)
     } catch (error) {
@@ -63,7 +63,7 @@ export class MaintenanceService {
     return true
   }
 
-  public throwException (): void {
+  throwException (): void {
     throw new ServiceUnavailableException(this.message)
   }
 

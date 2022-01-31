@@ -18,7 +18,7 @@ export class ApolloServerDataLoaderPlugin implements ApolloServerPlugin {
   constructor (private options?: ApolloServerLoaderPluginOptions) {}
 
   // for graphql 16+ this expect a return of promise for each case
-  public async requestDidStart (): Promise<GraphQLRequestListener<BaseContext>> {
+  async requestDidStart (): Promise<GraphQLRequestListener<BaseContext>> {
     const options = this.options
 
     return {

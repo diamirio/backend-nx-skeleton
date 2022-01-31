@@ -13,13 +13,13 @@ try {
 } catch (e) {}
 
 class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNodeDev: string }> {
-  public async init (): Promise<void> {
+  async init (): Promise<void> {
     this.paths = {
       tsNodeDev: getNodeBinaryPath('ts-node-dev')
     }
   }
 
-  public async run (): Promise<BuilderOutput> {
+  async run (): Promise<BuilderOutput> {
     try {
       // stop all manager tasks
       await this.manager.stop()
@@ -55,7 +55,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     return { success: true }
   }
 
-  public normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {
+  normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {
     const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
     // default options

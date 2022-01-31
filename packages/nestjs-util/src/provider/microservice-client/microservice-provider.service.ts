@@ -32,7 +32,7 @@ export class MicroserviceProviderService<
     }
   }
 
-  public onApplicationBootstrap (): void {
+  onApplicationBootstrap (): void {
     this.clients = this.provider.reduce((o, c, i) => {
       // this seems to be the only reliable way to inject the client names here
       o[this.names[i]] = c
@@ -43,7 +43,7 @@ export class MicroserviceProviderService<
 
   // FIXME: this guys causes problems when typing the message request-respond types itself. only making the map a string map works.
   // generic enum can also be symbol so you can not address object with it, cause of tserror
-  public async send<
+  async send<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
@@ -52,7 +52,7 @@ export class MicroserviceProviderService<
     return this.execute('send', queue, pattern, payload, options)
   }
 
-  public async emit<
+  async emit<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,
@@ -61,7 +61,7 @@ export class MicroserviceProviderService<
     return this.execute('emit', queue, pattern, payload, options)
   }
 
-  public raw<
+  raw<
     Queue extends MessageQueues,
     Pattern extends MessageQueuePatterns[Queue],
     Payload extends GetMicroserviceMessageRequestFromMap<Pattern, MessageQueueMap[Queue]>,

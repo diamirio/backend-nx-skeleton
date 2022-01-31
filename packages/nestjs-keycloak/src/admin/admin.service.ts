@@ -23,7 +23,7 @@ export class KeycloakAdminService {
   /**
    * Creates a new client if it does not exists, returns the singleton instance if it does.
    */
-  public async getClient (): Promise<KeycloakAdminClient> {
+  async getClient (): Promise<KeycloakAdminClient> {
     if (!this.validateClient()) {
       await this.createClient()
     }
@@ -34,7 +34,7 @@ export class KeycloakAdminService {
   /**
    * Recreates the client first before returning it.
    */
-  public async reloadClient (): Promise<KeycloakAdminClient> {
+  async reloadClient (): Promise<KeycloakAdminClient> {
     await this.createClient()
 
     return this.keycloakAdminClient
@@ -43,7 +43,7 @@ export class KeycloakAdminService {
   /**
    * Returns the options that Keycloak REST API client is initiated with.
    */
-  public getOptions (): KeycloakAdminOptions {
+  getOptions (): KeycloakAdminOptions {
     return this.options
   }
 

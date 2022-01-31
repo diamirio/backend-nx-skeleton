@@ -20,7 +20,7 @@ export class KeycloakAdminSeederTools {
 
   constructor (@InjectKeycloak() private keycloak: KeycloakAdminService) {}
 
-  public async getClient (realm?: string): Promise<KeycloakAdminClient> {
+  async getClient (realm?: string): Promise<KeycloakAdminClient> {
     if (!(this.client instanceof KeycloakAdminClient)) {
       this.client = await this.keycloak.getClient()
     }
@@ -36,7 +36,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async createClient (realm: string, options?: DeepPartial<KeycloakAdminOptions>): Promise<KeycloakAdminClient> {
+  async createClient (realm: string, options?: DeepPartial<KeycloakAdminOptions>): Promise<KeycloakAdminClient> {
     if (!(this.clients?.[realm] instanceof KeycloakAdminClient)) {
       this.logger.debug(`Creating a new Keycloak API client for realm: ${realm}`)
 
@@ -55,7 +55,7 @@ export class KeycloakAdminSeederTools {
     return this.clients[realm]
   }
 
-  public async getAll<
+  async getAll<
     K extends PropertyKey,
     T extends Extract<keyof KeycloakAdminClient, 'roles' | 'groups' | 'clients' | 'realms'> = Extract<keyof KeycloakAdminClient, 'roles' | 'groups' | 'clients' | 'realms'>
   >(
@@ -82,7 +82,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Swap the keys of an object to ids of the given group or role.
    */
-  public swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
+  swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
     return Object.entries(map).reduce((o, [ name, d ]) => {
       const id = this.getIdFromMappedData(data, name)
 
@@ -96,7 +96,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Swap a array of names to the mapping.
    */
-  public swapNamesToMapping<T extends string[], K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: T): RoleMappingPayload[] {
+  swapNamesToMapping<T extends string[], K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: T): RoleMappingPayload[] {
     return map.reduce((o, name) => {
       const id = this.getIdFromMappedData(data, name as unknown as string)
 
@@ -107,7 +107,7 @@ export class KeycloakAdminSeederTools {
   /**
    * Internal function to get the id of named Keycloak entitiy from the given parsed map.
    */
-  public getIdFromMappedData<K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, name: string, identifier = 'id'): string {
+  getIdFromMappedData<K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, name: string, identifier = 'id'): string {
     const id = (data as any)?.[name]?.[identifier]
 
     if (!id) {
@@ -120,7 +120,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Creates a new Keycloak entity in the given scope.
    */
-  public async createNewKeycloakEntities<
+  async createNewKeycloakEntities<
     T extends Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>,
     K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>
   >(
@@ -192,7 +192,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Creates a new Keycloak entity in the given scope.
    */
-  public async updateKeycloakEntities<T extends Extract<keyof KeycloakAdminClient, 'groups' | 'clients' | 'realms'>, K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>>(
+  async updateKeycloakEntities<T extends Extract<keyof KeycloakAdminClient, 'groups' | 'clients' | 'realms'>, K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>>(
     context: T,
     input: K,
     options?: {
@@ -243,7 +243,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async flushKeycloakEntities<
+  async flushKeycloakEntities<
     T extends Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>,
     K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>
   >(context: T, input: Await<ReturnType<KeycloakAdminClient[T]['find']>>, options?: { identifier?: keyof ArrayElement<K>, realm?: string }): Promise<void> {
@@ -298,7 +298,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async assignRolesToGroup (map: Record<string, string[]>, options?: { flushUnknown?: boolean, silent?: boolean, realm?: string }): Promise<void> {
+  async assignRolesToGroup (map: Record<string, string[]>, options?: { flushUnknown?: boolean, silent?: boolean, realm?: string }): Promise<void> {
     const client = await this.getClient(options?.realm)
 
     const groups = this.swapMapKeysToIds(await this.getAll('groups', { groupBy: 'name', realm: options?.realm }), map)
@@ -363,7 +363,7 @@ export class KeycloakAdminSeederTools {
    *
    * Will not throw out already exists messages, because we mostly do not care about them.
    */
-  public parseSeedError (err: any, options?: { context?: string, return?: boolean, log?: boolean }): void | never | string {
+  parseSeedError (err: any, options?: { context?: string, return?: boolean, log?: boolean }): void | never | string {
     if (!this.isAlreadyExistsError(err)) {
       err = err?.response?.data?.errorMessage ?? err
 
@@ -381,7 +381,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public isAlreadyExistsError (err: any): boolean {
+  isAlreadyExistsError (err: any): boolean {
     return err?.response?.data?.errorMessage?.includes('already exists') || err?.response?.data?.errorMessage?.includes('Conflict detected') ? true : false
   }
 }

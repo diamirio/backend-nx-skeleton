@@ -14,7 +14,7 @@ import type { Context } from '@interfaces/context.interface'
 export class DataLoaderInterceptor implements NestInterceptor {
   constructor (private options?: ApolloServerLoaderPluginOptions) {}
 
-  public intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx: Context = GqlExecutionContext.create(context).getContext()
 
     if (!ctx) {
