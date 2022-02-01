@@ -1,5 +1,6 @@
-import { KeycloakSeederService } from '@module/keycloak-seeder.service'
 import { Inject } from '@nestjs/common'
+
+import { KeycloakSeederService } from '@module/keycloak-seeder.service'
 
 /**
  * Injects Keyclaok admin instance initiated to the service.

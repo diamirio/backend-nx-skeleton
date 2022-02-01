@@ -1,5 +1,5 @@
 module.exports = {
-  extends: [ './packages/eslint-config/typescript-dynamic' ],
+  extends: '../../.eslintrc.js',
   rules: {
     ...require('@webundsoehne/eslint-config/utils').generateImportGroups({ tsconfigDir: __dirname })
   }

@@ -1,6 +1,7 @@
 import type { Rule } from '@angular-devkit/schematics'
-import { NxConstants } from '@constants/nx.constants'
 import { updateJsonInTree } from '@nrwl/workspace'
+
+import { NxConstants } from '@constants/nx.constants'
 
 /**
  * Updates tsconfig paths in the tsconfig.json

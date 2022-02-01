@@ -40,7 +40,8 @@
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1"
+    "@typescript-eslint/parser": "^5.10.1",
+    "load-tsconfig": "^0.2.3"
   },
   "devDependencies": {
     "eslint-config-react": "^1.1.7",

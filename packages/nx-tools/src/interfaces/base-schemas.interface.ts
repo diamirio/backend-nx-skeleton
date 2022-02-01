@@ -1,5 +1,4 @@
 import type { AvailableLinterTypes, AvailableSchemaModes } from '@constants/available.constants'
-
 import type { BaseIntegration } from '@integration/integration.interface'
 import type { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 

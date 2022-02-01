@@ -1,8 +1,8 @@
 import type { Tree } from '@angular-devkit/schematics'
-import { AvailableSchemaModes, PrettyNamesDefault } from '@constants'
 import type { ListrTask } from 'listr2'
 
 import { mapPromptChoices } from '../schematics/parse-arguments'
+import { AvailableSchemaModes, PrettyNamesDefault } from '@constants'
 import { readWorkspaceProjects } from '@integration'
 import type { EnrichedProjectConfiguration } from '@interfaces'
 import type {
