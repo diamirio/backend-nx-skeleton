@@ -22,7 +22,7 @@ export function addEslintConfigRule<T extends BaseNormalizedSchemaRoot> (options
     const log = new Logger(context)
 
     return chain([
-      !host.exists(`${options.root}/.eslintrc`) && !host.exists(`${options.root}/.eslintrc.json`)
+      !host.exists(`${options.root}/.eslintrc`) && !host.exists(`${options.root}/.eslintrc.json`) && !host.exists(`${options.root}/.eslintrc.js`)
         ? chain([
           runInRule(log.info.bind(log)('Adding eslint configuration.')),
 

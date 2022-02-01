@@ -1,5 +1,7 @@
 const { loadTsConfig } = require('load-tsconfig')
 
+const { ALL_KNOWN_JAVASCRIPT_FILE_EXTENSIONS } = require('./constants')
+
 /**
  * @param {{ paths?: string[] tsconfig?: string, tsconfigDir?: string}} options
  * @returns {import("eslint").Linter.Config['rules']}
@@ -68,4 +70,18 @@ function generateImportGroups (options) {
   }
 }
 
-module.exports = { generateImportGroups }
+/**
+ * @param {{ paths?: string[] tsconfig?: string, tsconfigDir?: string}} options
+ * @returns {import("eslint").Linter.ConfigOverride}
+ */
+function generateImportGroupsWithOverride (options) {
+  return [
+    {
+      files: ALL_KNOWN_JAVASCRIPT_FILE_EXTENSIONS,
+      plugins: [ 'import' ],
+      rules: generateImportGroups(options)
+    }
+  ]
+}
+
+module.exports = { generateImportGroups, generateImportGroupsWithOverride }

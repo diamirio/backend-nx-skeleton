@@ -1,7 +1,15 @@
+const { ALL_KNOWN_JAVASCRIPT_FILE_EXTENSIONS } = require('./constants')
+
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  rules: {
-    'import/no-extraneous-dependencies': 'error',
-    'import/exports-last': 'error'
-  }
+  overrides: [
+    {
+      files: ALL_KNOWN_JAVASCRIPT_FILE_EXTENSIONS,
+      plugins: [ 'import' ],
+      rules: {
+        'import/no-extraneous-dependencies': 'error',
+        'import/exports-last': 'error'
+      }
+    }
+  ]
 }
