@@ -27,7 +27,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
 
     // parse the host tree first generate which files to output
     host.getDir(options.root).visit((file) => {
-      if (micromatch.isMatch(file, [ '**/node_modules/**/*' ], micromatchDefaultOptions)) {
+      if (micromatch.isMatch(file, ['**/node_modules/**/*'], micromatchDefaultOptions)) {
         return
       }
 
@@ -36,12 +36,12 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
         output,
         options.templates.reduce<Record<string, string[]>>((o, template) => {
           if (!Array.isArray(template.pattern)) {
-            template.pattern = [ template.pattern ]
+            template.pattern = [template.pattern]
           }
 
           const root = template?.cwd ?? options.root
 
-          const pattern = [ ...template.pattern, '!/' + join(root, template.output) ]
+          const pattern = [...template.pattern, '!/' + join(root, template.output)]
 
           if (micromatch.all(file, pattern, { ...micromatchDefaultOptions, ...template.options })) {
             log.debug(`Generate export pattern "${pattern.join(', ')}" matches: "${file}"`)
@@ -88,7 +88,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           {
             multipleTemplates: [
               {
-                templates: Object.entries(output).map(([ output, files ]) => ({
+                templates: Object.entries(output).map(([output, files]) => ({
                   output,
                   path: templatePath,
                   factory: (): Record<string, unknown> => ({ files })

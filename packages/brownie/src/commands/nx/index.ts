@@ -93,7 +93,7 @@ export class NxCommand extends BaseCommand<Configuration> {
             ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
 
             if (link.installed && !pkg.installed) {
-              ctx.packages = [ ...ctx.packages, link.parsable ]
+              ctx.packages = [...ctx.packages, link.parsable]
 
               task.title = color.yellow(`Package ${link.pkg} is linked!`)
 
@@ -102,7 +102,7 @@ export class NxCommand extends BaseCommand<Configuration> {
           }
 
           if (!pkg.installed) {
-            ctx.packages = [ ...ctx.packages, pkg.parsable ]
+            ctx.packages = [...ctx.packages, pkg.parsable]
             task.title = `Package ${pkg.pkg} is not installed will install it.`
           } else if (pkg.hasUpdate) {
             task.title = `Package ${pkg.pkg} already is installed. ${color.yellow('But you should consider updating it:')} ${color.yellow(pkg.updateType)}`
@@ -155,7 +155,7 @@ export class NxCommand extends BaseCommand<Configuration> {
       const { manager, args, env } = this.helpers.node.parser({
         action: PackageManagerUsableCommands.EXEC,
         command: 'nx',
-        args: [ 'g', schematic, '--help', ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
+        args: ['g', schematic, '--help', ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
       })
 
       const help = await execa(manager, args, { shell: true, env })
@@ -174,7 +174,7 @@ export class NxCommand extends BaseCommand<Configuration> {
     const { manager, args, env } = this.helpers.node.parser({
       action: PackageManagerUsableCommands.EXEC,
       command: 'nx',
-      args: [ 'g', schematic, ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [], ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ]
+      args: ['g', schematic, ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [], ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
     })
 
     // this will be the command

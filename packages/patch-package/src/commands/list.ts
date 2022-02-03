@@ -12,7 +12,7 @@ import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class ListCommand extends BaseCommand<ApplicationConfiguration> {
   static description = 'Lists all the static entities that are shipped with this module.'
-  static aliases = [ 'ls' ]
+  static aliases = ['ls']
 
   private rewire: Record<'findPatchFiles', any> = {} as any
 
@@ -23,7 +23,7 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
     const applyPatches = rewire('patch-package/dist/applyPatches')
 
     await Promise.all(
-      [ 'findPatchFiles' ].map(async (method) => {
+      ['findPatchFiles'].map(async (method) => {
         this.rewire[method] = applyPatches.__get__(method)
       })
     )
@@ -65,10 +65,10 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
           })
         )
 
-        table.push([ dir, wrap(description.toString(), 60), subtable.join(EOL) ])
+        table.push([dir, wrap(description.toString(), 60), subtable.join(EOL)])
       })
     )
 
-    this.logger.direct(createTable([ 'name', 'description', 'patches' ], table))
+    this.logger.direct(createTable(['name', 'description', 'patches'], table))
   }
 }

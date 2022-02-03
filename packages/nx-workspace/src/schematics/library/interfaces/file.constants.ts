@@ -11,13 +11,13 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   return {
     [AvailableTestsTypes.JEST]: {
       condition: options.tests === AvailableTestsTypes.JEST,
-      files: [ '.spec.ts', 'e2e.spec.ts' ],
-      folders: [ 'test/' ]
+      files: ['.spec.ts', 'e2e.spec.ts'],
+      folders: ['test/']
     },
 
     [AvailableLibraryTypes.BUILDABLE]: {
       condition: options.type === AvailableLibraryTypes.BUILDABLE,
-      files: [ 'package.json', 'tsconfig.build.json' ]
+      files: ['package.json', 'tsconfig.build.json']
     }
   }
 }

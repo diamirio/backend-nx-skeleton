@@ -148,7 +148,7 @@ export class DockerHelper {
                           to: join(ctx.context[name].volumeDir)
                         }
 
-                        if ([ VolumeModes.FILE, VolumeModes.URL ].includes(volume.mode)) {
+                        if ([VolumeModes.FILE, VolumeModes.URL].includes(volume.mode)) {
                           asset.to = join(ctx.context[name].dir, this.options.flags['files-folder'], volume.from)
 
                           // if this is a file copy it directly
@@ -292,11 +292,11 @@ export class DockerHelper {
                     const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
 
                     // parse environment variables, this is more reasonable than jinja
-                    const buffer = Object.entries(file).reduce((o, [ key, val ]) => {
+                    const buffer = Object.entries(file).reduce((o, [key, val]) => {
                       if (val) {
-                        return [ ...o, `${key}=${val}` ]
+                        return [...o, `${key}=${val}`]
                       } else {
-                        return [ ...o, `${key}=` ]
+                        return [...o, `${key}=`]
                       }
                     }, [])
 
@@ -406,7 +406,7 @@ export class DockerHelper {
     return (
       await Promise.all(
         (
-          await globby([ '**/config.yml(.j2)?' ], { cwd: this.dockerConfigLocation, absolute: true })
+          await globby(['**/config.yml(.j2)?'], { cwd: this.dockerConfigLocation, absolute: true })
         ).map(async (item) => {
           const base = dirname(item)
           const name = relative(this.dockerConfigLocation, base)
@@ -420,25 +420,25 @@ export class DockerHelper {
 
             path: item,
 
-            dockerfile: await globby([ '**/Dockerfile(.j2)?', '**/dockerfile(.j2)?' ], {
+            dockerfile: await globby(['**/Dockerfile(.j2)?', '**/dockerfile(.j2)?'], {
               cwd: base,
               absolute: true,
               dot: true
             }),
 
-            env: await globby([ '**/env.yml(.j2)?' ], {
+            env: await globby(['**/env.yml(.j2)?'], {
               cwd: base,
               absolute: true,
               dot: true
             }),
 
-            volumes: await globby([ '**/volumes.yml(.j2)?' ], {
+            volumes: await globby(['**/volumes.yml(.j2)?'], {
               cwd: base,
               absolute: true,
               dot: true
             }),
 
-            ports: await globby([ '**/ports.yml(.j2)?' ], {
+            ports: await globby(['**/ports.yml(.j2)?'], {
               cwd: base,
               absolute: true,
               dot: true

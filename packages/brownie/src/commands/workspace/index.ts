@@ -12,7 +12,7 @@ import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
-  static aliases = [ 'ws' ]
+  static aliases = ['ws']
   static flags = {
     'skip-updates': flags.boolean({
       description: 'Skip the dependency updates.',
@@ -65,7 +65,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
             title: 'Being sure that GIT is installed.',
             task: async (_, task): Promise<void> => {
               try {
-                const gitVersion = await execa('git', [ '--version' ])
+                const gitVersion = await execa('git', ['--version'])
 
                 task.title = `Found git version: ${gitVersion.stdout}`
               } catch {
@@ -99,7 +99,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
-              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.workspace ], {
+              ctx.deps = await this.helpers.node.checkIfModuleInstalled([...this.constants.workspace.requiredDependencies, ctx.workspace], {
                 getVersion: true,
                 global: true,
                 getUpdate: true
@@ -131,7 +131,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
                 const parsedToUpdate = updatable.filter((d) => updateDeps.includes(d.pkg)).map((u) => u.parsable)
 
-                ctx.packages = [ ...ctx.packages, ...parsedToUpdate ]
+                ctx.packages = [...ctx.packages, ...parsedToUpdate]
 
                 this.logger.debug('Dependencies in update queue: %o', parsedToUpdate)
 
@@ -151,7 +151,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
               if (shouldBeInstalled.length > 0) {
                 const parsedToInstall = shouldBeInstalled.map((i) => i.parsable)
 
-                ctx.packages = [ ...ctx.packages, ...parsedToInstall ]
+                ctx.packages = [...ctx.packages, ...parsedToInstall]
 
                 this.logger.debug('Dependencies in install queue: %o', parsedToInstall)
 
@@ -187,7 +187,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     this.logger.module('Now will start generating the workspace: %s', ctx.workspace.collection)
 
     const workspace = (
-      await this.helpers.node.checkIfModuleInstalled([ ctx.workspace ], {
+      await this.helpers.node.checkIfModuleInstalled([ctx.workspace], {
         getVersion: true,
         global: true,
         getUpdate: true
@@ -197,7 +197,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     // this will be the command
     await execa(
       'ng',
-      [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...flags.force ? [ '-f' ] : [], ...this.isVerbose || this.isDebug ? [ '--verbose' ] : [] ],
+      ['new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...flags.force ? ['-f'] : [], ...this.isVerbose || this.isDebug ? ['--verbose'] : []],
       {
         stdio: 'inherit',
         shell: true

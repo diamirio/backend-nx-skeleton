@@ -43,9 +43,9 @@ export class PackageManager {
 
     Object.values(AvailablePackageManagers).forEach((manager) => {
       try {
-        execa.sync(manager, [ '--version' ], {
+        execa.sync(manager, ['--version'], {
           shell: true,
-          stdio: [ 'ignore', 'ignore', 'ignore' ]
+          stdio: ['ignore', 'ignore', 'ignore']
         })
       } catch {
         this.logger.debug(`Package manager not found: ${this.manager}`)
@@ -128,13 +128,13 @@ export class PackageManager {
         if (a.command) {
           const cmd = PackageManagerCommands[this.manager][a.command]
 
-          o = [ ...o, cmd ]
+          o = [...o, cmd]
         }
 
         if (a.args) {
-          a.args = Array.isArray(a.args) ? a.args : [ a.args ]
+          a.args = Array.isArray(a.args) ? a.args : [a.args]
 
-          o = [ ...o, ...a.args ]
+          o = [...o, ...a.args]
         }
       }
 
@@ -234,7 +234,7 @@ export class PackageManager {
     }
 
     if (!Array.isArray(pkg)) {
-      pkg = [ pkg ]
+      pkg = [pkg]
     }
 
     this.logger.debug(
@@ -383,7 +383,7 @@ export class PackageManager {
   }
 
   private isPackageManagerPackageAction (data: PackageManagerActions): data is PackageManagerPackageAction {
-    if ([ PackageManagerUsableCommands.ADD, PackageManagerUsableCommands.REMOVE ].includes(data.action)) {
+    if ([PackageManagerUsableCommands.ADD, PackageManagerUsableCommands.REMOVE].includes(data.action)) {
       return true
     }
 
@@ -391,7 +391,7 @@ export class PackageManager {
   }
 
   private isPackageManagerPackageWithCommandAction (data: PackageManagerActions): data is PackageManagerWithCommandAction {
-    if ([ PackageManagerUsableCommands.RUN, PackageManagerUsableCommands.EXEC ].includes(data.action)) {
+    if ([PackageManagerUsableCommands.RUN, PackageManagerUsableCommands.EXEC].includes(data.action)) {
       return true
     }
 
@@ -399,7 +399,7 @@ export class PackageManager {
   }
 
   private isPackageManagerPackageWithoutCommandAction (data: PackageManagerActions): data is PackageManagerWithoutCommandAction {
-    if ([ PackageManagerUsableCommands.INSTALL, PackageManagerUsableCommands.ROOT ].includes(data.action)) {
+    if ([PackageManagerUsableCommands.INSTALL, PackageManagerUsableCommands.ROOT].includes(data.action)) {
       return true
     }
 

@@ -36,23 +36,23 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add nx container
-    updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.NX ] }),
+    updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.NX] }),
 
     // add mysql container
-    [ AvailableDBTypes.TYPEORM_MYSQL ].includes(options.database) ? updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.MYSQL ] }) : noop(),
+    [AvailableDBTypes.TYPEORM_MYSQL].includes(options.database) ? updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.MYSQL] }) : noop(),
 
     // add postgresql container
-    [ AvailableDBTypes.TYPEORM_POSTGRESQL ].includes(options.database)
-      ? updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.POSTGRESQL ] })
+    [AvailableDBTypes.TYPEORM_POSTGRESQL].includes(options.database)
+      ? updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.POSTGRESQL] })
       : noop(),
 
     // add mongodb container
     // eslint-disable-next-line max-len
-    [ AvailableDBTypes.MONGOOSE_MONGODB ].includes(options.database) ? updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.MONGODB ] }) : noop(),
+    [AvailableDBTypes.MONGOOSE_MONGODB].includes(options.database) ? updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.MONGODB] }) : noop(),
 
     // add message queue container
     options.components?.includes(AvailableComponents.MICROSERVICE_SERVER)
-      ? updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.RABBITMQ ] })
+      ? updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.RABBITMQ] })
       : noop()
   ])
 }

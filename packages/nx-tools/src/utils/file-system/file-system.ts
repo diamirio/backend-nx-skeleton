@@ -9,7 +9,7 @@ import { EOL } from 'os'
 export function checkPathsExists (paths: Record<string, string>): void {
   const errors: string[] = []
 
-  Object.entries(paths).forEach(([ key, value ]) => {
+  Object.entries(paths).forEach(([key, value]) => {
     if (!fs.existsSync(value) || !fs.statSync(value).isFile()) {
       errors.push(`File not found: "${key}"@"${value}"`)
     }

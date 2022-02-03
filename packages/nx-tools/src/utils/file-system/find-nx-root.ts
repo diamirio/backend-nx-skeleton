@@ -1,7 +1,7 @@
 import { sync as findUpSync } from 'find-up'
 import { dirname, relative } from 'path'
 
-const NX_ROOT_PATTERNS = [ 'nx.json', 'workspace.json', 'angular.json' ]
+const NX_ROOT_PATTERNS = ['nx.json', 'workspace.json', 'angular.json']
 
 /**
  * Finds the root directory of nx through nx.json, workspace.json or angular.json

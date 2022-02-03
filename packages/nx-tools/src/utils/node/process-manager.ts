@@ -22,14 +22,14 @@ export class ProcessManager {
 
   /** Add a new task that is killable. */
   add (instance: ExecaChildProcess): ExecaChildProcess {
-    this.tasks = [ ...this.tasks, instance ]
+    this.tasks = [...this.tasks, instance]
 
     return instance
   }
 
   /** Add a persistent task that should not be killed until everything finishes. */
   addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
-    this.persistentTasks = [ ...this.persistentTasks, instance ]
+    this.persistentTasks = [...this.persistentTasks, instance]
 
     return instance
   }

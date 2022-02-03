@@ -34,7 +34,7 @@ export async function calculateDependencies (options: NormalizedSchema): Promise
     },
     // microservices
     {
-      condition: [ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c)),
+      condition: [AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT].some((c) => options.components.includes(c)),
       deps: VERSIONS.base.microservice
     },
     {

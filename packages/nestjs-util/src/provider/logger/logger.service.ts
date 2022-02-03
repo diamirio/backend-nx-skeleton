@@ -62,7 +62,7 @@ export class LoggerService implements LoggerServiceCommon {
         transports: [
           new winston.transports.Console({
             silent: loggingDisabled,
-            stderrLevels: [ 'error' ]
+            stderrLevels: ['error']
           })
         ],
         format: format.combine(
@@ -77,7 +77,7 @@ export class LoggerService implements LoggerServiceCommon {
   }
 
   private logMessage ({ type, message: rawMessage, context, trace }: { type: string, message: any, context?: string, trace?: any }): void {
-    const [ message, ...splat ] = Array.isArray(rawMessage) ? rawMessage : [ rawMessage ]
+    const [message, ...splat] = Array.isArray(rawMessage) ? rawMessage : [rawMessage]
 
     this.getLogger()[type]({
       context: context || this.context || this.constructor.name,

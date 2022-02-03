@@ -10,18 +10,18 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   return {
     [AvailableDBAdapters.MONGOOSE]: {
       condition: options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
-      folders: [ SchematicFilesMap[AvailableDBAdapters.MONGOOSE] ]
+      folders: [SchematicFilesMap[AvailableDBAdapters.MONGOOSE]]
     },
 
     [AvailableDBAdapters.TYPEORM]: {
       condition: options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
-      folders: [ SchematicFilesMap[AvailableDBAdapters.TYPEORM] ]
+      folders: [SchematicFilesMap[AvailableDBAdapters.TYPEORM]]
     },
 
     ENTITY_ROOT: {
       condition: options.dbAdapters.length > 0,
-      files: [ 'entity.ts.j2' ],
-      folders: [ 'database' ]
+      files: ['entity.ts.j2'],
+      folders: ['database']
     }
   }
 }

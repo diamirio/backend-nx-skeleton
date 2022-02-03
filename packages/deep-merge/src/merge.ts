@@ -25,7 +25,7 @@ export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>
 export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
   return s.reduce((o, val) => {
     return merge(o, val ?? {}, {
-      arrayMerge: (target, source) => [ ...target, ...source ].filter(uniqueArrayFilter)
+      arrayMerge: (target, source) => [...target, ...source].filter(uniqueArrayFilter)
     })
   }, t) as T
 }

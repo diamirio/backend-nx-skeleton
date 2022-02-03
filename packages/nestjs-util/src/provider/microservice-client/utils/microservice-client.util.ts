@@ -11,7 +11,7 @@ import { ConfigService } from '@provider/config/config.service'
  * @param queue
  */
 export function provideMessageQueueClient (queue: string | string[], options?: MicroserviceProviderClientOptions): FactoryProvider<ClientProxyFactory>[] {
-  queue = !Array.isArray(queue) ? [ queue ] : queue
+  queue = !Array.isArray(queue) ? [queue] : queue
   options = options ? options : ConfigService.get('messageQueue.clientOptions')
   const urls = options?.urls ? options?.urls : ConfigService.get('messageQueue.urls')
 

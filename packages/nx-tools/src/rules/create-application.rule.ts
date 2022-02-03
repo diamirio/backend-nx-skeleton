@@ -74,7 +74,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
         ...options ?? {}
         // offsetFromRoot: offsetFromRoot(options.root)
       },
-      { templates: [ '.j2' ] }
+      { templates: ['.j2'] }
     ),
 
     /**
@@ -103,7 +103,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
 
     ...rules.trigger
       ?.map((val) => {
-        return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [ val.rule ] : noop()
+        return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [val.rule] : noop()
       })
       .flat() ?? [],
 

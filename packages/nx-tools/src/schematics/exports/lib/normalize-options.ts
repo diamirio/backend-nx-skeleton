@@ -18,7 +18,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          setSchemaDefaultsInContext(ctx, { default: [ options ] })
+          setSchemaDefaultsInContext(ctx, { default: [options] })
         }
       },
 
@@ -44,7 +44,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             }
           ])
 
-          ctx.templates = { templates: [ prompt ], root: relativeToNxRoot(process.cwd()) }
+          ctx.templates = { templates: [prompt], root: relativeToNxRoot(process.cwd()) }
         }
       }
     ],

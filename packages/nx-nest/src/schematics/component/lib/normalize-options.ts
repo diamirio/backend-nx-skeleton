@@ -34,7 +34,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            default: [ options, { constants: SchematicConstants } ]
+            default: [options, { constants: SchematicConstants }]
           })
         }
       },
@@ -76,12 +76,12 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components
             .map((c) => {
-              if ([ AvailableComponents.SERVER ].includes(c)) {
+              if ([AvailableComponents.SERVER].includes(c)) {
                 return [
                   { name: AvailableServerTypes.RESTFUL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.RESTFUL] },
                   { name: AvailableServerTypes.GRAPHQL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.GRAPHQL] }
                 ]
-              } else if ([ AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+              } else if ([AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER].includes(c)) {
                 return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
               }
             })

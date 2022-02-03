@@ -7,7 +7,7 @@ import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interfac
 import type { PackageVersions } from '@interfaces/versions.interface'
 
 export function addDependenciesToProjectPackageJsonRule<T extends BaseNormalizedSchemaRoot> (options: T, data: PackageVersions): Rule {
-  return chain([ updatePackageJsonForProjectRule(options, { implicitDependencies: data.implicitDeps }), addDependenciesToPackageJsonRule(data) ])
+  return chain([updatePackageJsonForProjectRule(options, { implicitDependencies: data.implicitDeps }), addDependenciesToPackageJsonRule(data)])
 }
 
 export function addDependenciesToPackageJsonRule (data: PackageVersions): Rule {

@@ -16,7 +16,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
     {
       task: (ctx): void => {
         setSchemaDefaultsInContext(ctx, {
-          default: [ options, { root: process.cwd() } ]
+          default: [options, { root: process.cwd() }]
         })
       }
     }

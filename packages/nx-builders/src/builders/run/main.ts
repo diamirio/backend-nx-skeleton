@@ -87,7 +87,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     const extendedArgs = options.args.split(' ')
 
     const command = unparsedCommand.shift()
-    const args = [ ...unparsedCommand, ...extendedArgs ].filter(Boolean)
+    const args = [...unparsedCommand, ...extendedArgs].filter(Boolean)
 
     this.logger.debug(`Command, arguments: ${JSON.stringify(command, null, 2)}, ${JSON.stringify(args, null, 2)}`)
 

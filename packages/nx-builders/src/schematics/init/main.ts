@@ -9,5 +9,5 @@ import { initiateBuilderDependencies } from '@utils/initiate-builder'
  * @param schema
  */
 export default function (schema: Schema): Rule {
-  return chain([ initiateBuilderDependencies(schema.items) ])
+  return chain([initiateBuilderDependencies(schema.items)])
 }

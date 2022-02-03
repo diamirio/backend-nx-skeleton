@@ -27,8 +27,8 @@ export function updateTsConfigPathsRule (options: { packageName: string, root?: 
       path = `${path}/${options.sourceRoot}`
     }
 
-    json.compilerOptions.paths[options.packageName] = [ path ]
-    json.compilerOptions.paths[`${options.packageName}/*`] = [ `${path}/*` ]
+    json.compilerOptions.paths[options.packageName] = [path]
+    json.compilerOptions.paths[`${options.packageName}/*`] = [`${path}/*`]
 
     return json
   })

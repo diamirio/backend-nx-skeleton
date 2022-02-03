@@ -4,8 +4,8 @@ import { InternalController } from './internal.controller'
 import { InternalService } from './internal.service'
 
 @Module({
-  controllers: [ InternalController ],
-  providers: [ InternalService ],
-  exports: [ InternalService ]
+  controllers: [InternalController],
+  providers: [InternalService],
+  exports: [InternalService]
 })
 export class InternalModule {}

@@ -92,7 +92,7 @@ export class Logger {
       }, {}),
       transports: [
         new transports.Console({
-          stderrLevels: [ LogLevels.FATAL, LogLevels.ERROR ]
+          stderrLevels: [LogLevels.FATAL, LogLevels.ERROR]
         })
       ]
     })

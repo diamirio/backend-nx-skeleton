@@ -48,7 +48,7 @@ export abstract class BaseAuthGuard implements CanActivate {
 
     try {
       // create generic grant and user, async to make it faster
-      const [ grant, user ] = await Promise.all([
+      const [grant, user] = await Promise.all([
         // eslint-disable-next-line @typescript-eslint/naming-convention
         this.keycloak.grantManager.createGrant({ access_token: token as any }),
         this.keycloak.grantManager.userInfo<string, KeycloakConnectUserInfo>(token)
@@ -63,7 +63,7 @@ export abstract class BaseAuthGuard implements CanActivate {
       const roles = await this.fetchRoles(grant)
 
       // first check meta-data from route-handler-method, if none, check parent-class (resolver, controller)
-      this.validate('roles', roles, this.reflector.getAllAndOverride<string[]>(KEYCLOAK_CONNECT_METADATA_ROLES, [ context.getHandler(), context.getClass() ]))
+      this.validate('roles', roles, this.reflector.getAllAndOverride<string[]>(KEYCLOAK_CONNECT_METADATA_ROLES, [context.getHandler(), context.getClass()]))
 
       // scopes
       const scopes = this.fetchScopes(roles, this.reflector.get<ScopesOption>(KEYCLOAK_CONNECT_METADATA_SCOPES, context.getHandler()))
@@ -130,7 +130,7 @@ export abstract class BaseAuthGuard implements CanActivate {
 
   private extractBearerToken (request: EnrichedExpressRequest | EnrichedFastifyRequest): string {
     if (request?.headers?.authorization) {
-      const [ type, token ] = (request.headers.authorization as string).split(' ')
+      const [type, token] = (request.headers.authorization as string).split(' ')
 
       if (type.toLowerCase() === 'bearer') {
         return token

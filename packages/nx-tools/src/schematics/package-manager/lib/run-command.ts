@@ -21,7 +21,7 @@ export function runCommand (options: NormalizedSchema): Rule {
 
           log.debug('Project root: %s', options.root)
 
-          task.title = `Running in workspace: ${[ manager, args.join(' ') ].join(' ')}`
+          task.title = `Running in workspace: ${[manager, args.join(' ')].join(' ')}`
 
           await pipeProcessThroughListr(
             task,

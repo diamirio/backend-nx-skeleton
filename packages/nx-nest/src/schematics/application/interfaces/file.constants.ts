@@ -11,28 +11,28 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   return {
     [AvailableTestsTypes.JEST]: {
       condition: options.tests === AvailableTestsTypes.JEST,
-      files: [ '.spec.ts', 'e2e.spec.ts' ],
-      folders: [ 'test/' ]
+      files: ['.spec.ts', 'e2e.spec.ts'],
+      folders: ['test/']
     },
     [AvailableComponents.SERVER]: {
       condition: options.components.includes(AvailableComponents.SERVER),
-      folders: [ `${options.sourceRoot}/server/` ]
+      folders: [`${options.sourceRoot}/server/`]
     },
     [AvailableComponents.BG_TASK]: {
       condition: options.components.includes(AvailableComponents.BG_TASK),
-      folders: [ `${options.sourceRoot}/task/` ]
+      folders: [`${options.sourceRoot}/task/`]
     },
     [AvailableComponents.COMMAND]: {
       condition: options.components.includes(AvailableComponents.COMMAND),
-      folders: [ `${options.sourceRoot}/command/` ]
+      folders: [`${options.sourceRoot}/command/`]
     },
     [AvailableComponents.MICROSERVICE_SERVER]: {
       condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
-      folders: [ `${options.sourceRoot}/microservice/` ]
+      folders: [`${options.sourceRoot}/microservice/`]
     },
     CONSTANTS: {
       condition: options.effectiveComponents > 1,
-      files: [ `${options.sourceRoot}/constants.ts` ]
+      files: [`${options.sourceRoot}/constants.ts`]
     }
   }
 }

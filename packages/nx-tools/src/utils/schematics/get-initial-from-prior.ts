@@ -10,7 +10,7 @@ export function getInitialFromPriorConfiguration<T extends Record<PropertyKey, a
       (ctx.priorConfiguration?.[key] as unknown as any[])?.reduce((o, val) => {
         choices.forEach((v, i) => {
           if (v.name === val) {
-            o = [ ...o, i ]
+            o = [...o, i]
           }
         })
 

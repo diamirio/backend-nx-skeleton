@@ -47,7 +47,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         context
       ),
 
-      addNxImplicitDependenciesRule({ [join(options.root, 'config', '**')]: [ options.name ] }),
+      addNxImplicitDependenciesRule({ [join(options.root, 'config', '**')]: [options.name] }),
 
       ...createApplicationRule({
         trigger: [
@@ -107,7 +107,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               name: 'default',
               type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.TYPEORM]),
-              exports: [ { output: 'index.ts', pattern: '**/*.entity.ts' } ]
+              exports: [{ output: 'index.ts', pattern: '**/*.entity.ts' }]
             })
           },
 
@@ -120,7 +120,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               name: 'default',
               type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),
-              exports: [ { output: 'index.ts', pattern: '**/*.entity.ts' } ]
+              exports: [{ output: 'index.ts', pattern: '**/*.entity.ts' }]
             })
           }
         ]
@@ -146,7 +146,7 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
     include: getSchematicFiles(options),
     templates: [
       // server related templates with __
-      ...[ AvailableServerTypes.RESTFUL, AvailableServerTypes.GRAPHQL ].map((a) => ({
+      ...[AvailableServerTypes.RESTFUL, AvailableServerTypes.GRAPHQL].map((a) => ({
         condition: options?.server === a,
         match: a
       })),

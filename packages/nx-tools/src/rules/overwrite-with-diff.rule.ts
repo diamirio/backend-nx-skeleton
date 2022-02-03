@@ -63,13 +63,13 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               }
 
               // add this to file changes, return null since we did the operation directly
-              fileChanges = [ ...fileChanges, file.path ]
+              fileChanges = [...fileChanges, file.path]
 
               return null
             }
 
             // vanilla mode
-            fileChanges = [ ...fileChanges, file.path ]
+            fileChanges = [...fileChanges, file.path]
 
             return file
           }),
@@ -79,7 +79,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
             oldTree?.visit((path) => {
               // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
               if (host.exists(path) && !fileChanges.includes(path)) {
-                filesToRemove = [ ...filesToRemove, path ]
+                filesToRemove = [...filesToRemove, path]
               }
             })
           },
@@ -112,7 +112,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               // get which files to remove
               filesToRemove = filesToRemove.reduce((o, val) => {
                 // angular normalizes even path arrays defined outside!
-                o = [ ...o, (val as any).path ]
+                o = [...o, (val as any).path]
 
                 return o
               }, [])
@@ -234,10 +234,10 @@ export function selectivePatch (patch: diff.ParsedDiff, select: 'add' | 'remove'
         const lines = p.lines.reduce((o, l) => {
           if (select === 'add') {
             // linechanges--
-            return [ ...o, replaceFirstChars(l, '-', ' ') ]
+            return [...o, replaceFirstChars(l, '-', ' ')]
           } else if (select === 'remove') {
             // linechanges++
-            return [ ...o, replaceFirstChars(l, '+', ' ') ]
+            return [...o, replaceFirstChars(l, '+', ' ')]
           }
         }, [])
 

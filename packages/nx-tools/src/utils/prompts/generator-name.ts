@@ -93,8 +93,8 @@ export function normalizeNameWithApplicationModePrompt<
         const projects = readWorkspaceProjects<Integration>(host)
 
         const choices = Object.entries(projects)
-          .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
-          .map(([ name ]) => name)
+          .filter(([name, project]) => typeof select === 'function' ? select(name, project) : Boolean)
+          .map(([name]) => name)
 
         if (choices.length === 0) {
           throw new Error('No project has been found in the workspace.')
@@ -146,8 +146,8 @@ export function normalizeParentApplicationPrompt<Ctx extends BaseSchemaParent, I
         const projects = readWorkspaceProjects<Integration>(host)
 
         const choices = Object.entries(projects)
-          .filter(([ name, project ]) => typeof select === 'function' ? select(name, project) : Boolean)
-          .map(([ name ]) => name)
+          .filter(([name, project]) => typeof select === 'function' ? select(name, project) : Boolean)
+          .map(([name]) => name)
 
         if (choices.length === 0) {
           throw new Error('No project has been found in the workspace.')

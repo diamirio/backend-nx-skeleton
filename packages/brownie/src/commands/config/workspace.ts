@@ -50,8 +50,8 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     if (config.length > 0) {
       this.logger.info(
         createTable(
-          [ 'Package', 'Registry' ],
-          config.map((c) => [ c.pkg, c.registry ])
+          ['Package', 'Registry'],
+          config.map((c) => [c.pkg, c.registry])
         )
       )
     } else {

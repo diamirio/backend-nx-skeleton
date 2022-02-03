@@ -270,11 +270,11 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         task: async (ctx): Promise<void> => {
           ctx.packageJsonScripts = {}
 
-          if ([ AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.MICROSERVICE_SERVER ].some((component) => ctx.components.includes(component))) {
+          if ([AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.MICROSERVICE_SERVER].some((component) => ctx.components.includes(component))) {
             ctx.packageJsonScripts.start = `node ./${ctx.root}/main.js`
           }
 
-          if ([ AvailableComponents.COMMAND ].some((component) => ctx.components.includes(component))) {
+          if ([AvailableComponents.COMMAND].some((component) => ctx.components.includes(component))) {
             ctx.packageJsonScripts.command = `NODE_SERVICE='cli' node ./${ctx.root}/main.js`
           }
         }

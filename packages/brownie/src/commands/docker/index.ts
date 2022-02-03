@@ -48,7 +48,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   static description = 'Create docker-compose configuration from boilerplates.'
 
-  public choices: (ConfigCommandChoices | string)[] = [ 'Nx', ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge' ]
+  public choices: (ConfigCommandChoices | string)[] = ['Nx', ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge']
 
   protected configName = 'docker-compose.yml'
   protected configType = ConfigTypes.localRoot
@@ -143,8 +143,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
     if (config?.services ? Object.keys(config.services).length > 0 : false) {
       this.logger.info(
         createTable(
-          [ 'Container', 'Image' ],
-          Object.entries(config.services).map(([ service, val ]) => [ service, val.image ?? val.build ])
+          ['Container', 'Image'],
+          Object.entries(config.services).map(([service, val]) => [service, val.image ?? val.build])
         )
       )
     } else {
@@ -218,7 +218,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
                   task: (_, task): Listr => {
-                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([ key, v ]) => ({
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([key, v]) => ({
                       task: async (_, task): Promise<void> => {
                         const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
 
@@ -240,7 +240,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
                   task: (_, task): Listr => {
-                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].configuration).map(([ key, v ]) => ({
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].configuration).map(([key, v]) => ({
                       task: async (_, task): Promise<void> => {
                         const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
 
@@ -274,7 +274,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.FILES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
                   task: (_, task): Listr => {
-                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].files).map(([ key, v ]) => ({
+                    const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].files).map(([key, v]) => ({
                       task: async (_, task): Promise<void> => {
                         const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
 
@@ -393,7 +393,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       ? Object.keys(config?.services).reduce((o, val) => {
         choices.forEach((v, i) => {
           if (v === val) {
-            o = [ ...o, i ]
+            o = [...o, i]
           }
         })
 

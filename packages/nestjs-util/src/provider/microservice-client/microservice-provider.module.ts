@@ -27,22 +27,22 @@ export class MicroserviceProviderModule {
           // can not get the provider name in here so we have to inject it a bit stupidly
           return new MicroserviceProviderService(clients, tokens as string[])
         },
-        inject: [ ...tokens ]
+        inject: [...tokens]
       }
 
       return {
         global: true,
         module: MicroserviceProviderModule,
-        providers: [ clientServices, ...clients ],
-        exports: [ clientServices.provide, ...clients.map((p) => p.provide) ]
+        providers: [clientServices, ...clients],
+        exports: [clientServices.provide, ...clients.map((p) => p.provide)]
       }
     }
 
     return {
       global: true,
       module: MicroserviceProviderModule,
-      providers: [ ...clients ],
-      exports: [ ...clients.map((p) => p.provide) ]
+      providers: [...clients],
+      exports: [...clients.map((p) => p.provide)]
     }
   }
 }

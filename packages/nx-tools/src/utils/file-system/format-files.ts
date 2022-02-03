@@ -55,7 +55,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     }
 
     // BUG: additional configuration for some weird bug fixes
-    const prettierIgnored = [ 'custom-environment-variables.yml' ]
+    const prettierIgnored = ['custom-environment-variables.yml']
 
     // this should be much faster than the observable approach that angular directly supports
     // things were getting slow with it

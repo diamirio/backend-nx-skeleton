@@ -13,6 +13,6 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     }),
 
     // add nx message queue container
-    updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.NX ] })
+    updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.NX] })
   ])
 }

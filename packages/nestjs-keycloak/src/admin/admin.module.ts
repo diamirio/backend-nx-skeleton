@@ -26,10 +26,10 @@ export class KeycloakAdminModule {
           useFactory: (options: KeycloakAdminOptions): KeycloakAdminService => {
             return new KeycloakAdminService(options)
           },
-          inject: [ KEYCLOAK_ADMIN_OPTIONS ]
+          inject: [KEYCLOAK_ADMIN_OPTIONS]
         }
       ],
-      exports: [ KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS ]
+      exports: [KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS]
     }
   }
 }

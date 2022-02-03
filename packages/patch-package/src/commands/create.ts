@@ -11,7 +11,7 @@ import type { ApplicationConfiguration } from '@interfaces/config.interface'
 export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false
   static description = 'Creates a new patch from scratch, just point the applications you want as package name.'
-  static examples = [ 'Create a patch for given package: patch-package create graphql' ]
+  static examples = ['Create a patch for given package: patch-package create graphql']
   static flags: Record<'directory' | 'path', IOptionFlag<string>> & Record<'include' | 'exclude', IOptionFlag<string[]>> = {
     directory: Flags.string({
       char: 'd',
@@ -34,13 +34,13 @@ export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
       char: 'i',
       description: 'Include given regex patterns.',
       multiple: true,
-      default: [ '.*' ]
+      default: ['.*']
     }),
     exclude: Flags.string({
       char: 'e',
       description: 'Exclude given regex patterns.',
       multiple: true,
-      default: [ 'package.json' ]
+      default: ['package.json']
     })
   }
 

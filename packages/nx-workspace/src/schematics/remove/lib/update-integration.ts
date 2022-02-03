@@ -9,5 +9,5 @@ import { removeNxJsonImplicitDependencies, removeTsConfigPathsRule } from '@webu
  * @param options
  */
 export function updateIntegration (options: NormalizedSchema): Rule {
-  return chain([ removeTsConfigPathsRule({ packageName: options.packageName }), removeNxJsonImplicitDependencies({ root: options.parentProjectConfiguration.root }) ])
+  return chain([removeTsConfigPathsRule({ packageName: options.packageName }), removeNxJsonImplicitDependencies({ root: options.parentProjectConfiguration.root })])
 }

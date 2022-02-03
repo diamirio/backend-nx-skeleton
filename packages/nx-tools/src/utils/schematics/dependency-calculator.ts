@@ -54,11 +54,11 @@ export function convertDependencyCalculatorPackage (deps: DependencyCalculatorPa
   const implicitDeps: PackageVersions['implicitDeps'] = []
 
   const parsedDeps = Object.fromEntries(
-    Object.entries(deps).map(([ key, value ]) => {
+    Object.entries(deps).map(([key, value]) => {
       return [
         key,
 
-        Object.entries(value).reduce((o, [ dep, details ]) => {
+        Object.entries(value).reduce((o, [dep, details]) => {
           if (typeof details === 'string') {
             return { ...o, [dep]: details }
           } else {
@@ -83,7 +83,7 @@ export function convertDependencyCalculatorPackage (deps: DependencyCalculatorPa
  */
 export function useLinkedVersionOfDependencies (linked: LocalNodeModule[], deps: PackageVersions): PackageVersions {
   return Object.fromEntries(
-    Object.entries(deps).map(([ key, value ]) => {
+    Object.entries(deps).map(([key, value]) => {
       return [
         key,
 

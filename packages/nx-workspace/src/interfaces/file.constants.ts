@@ -10,11 +10,11 @@ export function getSchematicFiles (options: WorkspaceNormalizedSchema): Schemati
   return {
     [AvailableFolderStructures.MULTIPLE]: {
       condition: options.layout === AvailableFolderStructures.MULTIPLE,
-      folders: [ 'apps', 'libs' ]
+      folders: ['apps', 'libs']
     },
     [AvailableFolderStructures.SINGLE]: {
       condition: options.layout === AvailableFolderStructures.SINGLE,
-      folders: [ 'packages' ]
+      folders: ['packages']
     }
   }
 }

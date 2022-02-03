@@ -10,15 +10,15 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  extends: [ 'eslint:recommended', './import' ],
+  extends: ['eslint:recommended', './import'],
   rules: {
-    semi: [ 'error', 'never' ],
-    'linebreak-style': [ 'error', 'unix' ],
+    semi: ['error', 'never'],
+    'linebreak-style': ['error', 'unix'],
     'sort-imports': 'off',
-    indent: [ 'error', 2 ],
-    'brace-style': [ 'error', '1tbs', { allowSingleLine: true } ],
-    'comma-spacing': [ 'error', { before: false, after: true } ],
-    'func-call-spacing': [ 'error', 'never' ],
+    indent: ['error', 2],
+    'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    'comma-spacing': ['error', { before: false, after: true }],
+    'func-call-spacing': ['error', 'never'],
     'max-len': [
       'error',
       {
@@ -53,25 +53,25 @@ module.exports = {
         }
       }
     ],
-    'object-curly-spacing': [ 'error', 'always' ],
-    'comma-dangle': [ 'error', 'never' ],
-    'array-element-newline': [ 'error', 'consistent' ],
-    'array-bracket-newline': [ 'error', 'consistent' ],
+    'object-curly-spacing': ['error', 'always'],
+    'comma-dangle': ['error', 'never'],
+    'array-element-newline': ['error', 'consistent'],
+    'array-bracket-newline': ['error', 'consistent'],
     'array-bracket-spacing': [
       'error',
-      'always',
+      'never',
       {
-        objectsInArrays: true,
-        arraysInArrays: true
+        objectsInArrays: false,
+        arraysInArrays: false
       }
     ],
-    curly: [ 'error', 'all' ],
-    complexity: [ 'error', 25 ],
+    curly: ['error', 'all'],
+    complexity: ['error', 25],
     'constructor-super': 'error',
     'dot-notation': 'error',
-    eqeqeq: [ 'error', 'smart' ],
-    quotes: [ 'error', 'single' ],
-    'quote-props': [ 'error', 'as-needed' ],
+    eqeqeq: ['error', 'smart'],
+    quotes: ['error', 'single'],
+    'quote-props': ['error', 'as-needed'],
     'guard-for-in': 'error',
     'id-blacklist': 'off',
     'id-match': 'off',
@@ -100,13 +100,13 @@ module.exports = {
     'no-unused-expressions': 'warn',
     'no-unused-vars': 'error',
     'object-shorthand': 'error',
-    'one-var': [ 'error', 'never' ],
-    'template-curly-spacing': [ 'error', 'never' ],
+    'one-var': ['error', 'never'],
+    'template-curly-spacing': ['error', 'never'],
     radix: 'error',
     'spaced-comment': 'error',
     'use-isnan': 'error',
     'valid-typeof': 'warn',
-    'arrow-parens': [ 'error', 'always' ],
+    'arrow-parens': ['error', 'always'],
     'keyword-spacing': 'error',
     'lines-between-class-members': 'off',
     'padding-line-between-statements': [
@@ -118,23 +118,23 @@ module.exports = {
       },
       {
         blankLine: 'always',
-        prev: [ 'const', 'let', 'var' ],
+        prev: ['const', 'let', 'var'],
         next: '*'
       },
       {
         blankLine: 'any',
-        prev: [ 'const', 'let', 'var' ],
-        next: [ 'const', 'let', 'var' ]
+        prev: ['const', 'let', 'var'],
+        next: ['const', 'let', 'var']
       },
       {
         blankLine: 'always',
-        prev: [ 'case', 'default' ],
+        prev: ['case', 'default'],
         next: '*'
       },
       {
         blankLine: 'always',
         prev: '*',
-        next: [ 'function', 'if', 'try', 'break', 'class', 'for', 'while', 'do' ]
+        next: ['function', 'if', 'try', 'break', 'class', 'for', 'while', 'do']
       }
     ]
   }

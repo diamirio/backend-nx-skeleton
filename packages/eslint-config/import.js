@@ -5,7 +5,7 @@ module.exports = {
   overrides: [
     {
       files: ALL_KNOWN_JAVASCRIPT_FILE_EXTENSIONS,
-      plugins: [ 'import' ],
+      plugins: ['import'],
       rules: {
         'sort-imports': 'off',
         'import/first': 'error',
@@ -28,10 +28,10 @@ module.exports = {
                 group: 'index'
               }
             ],
-            pathGroupsExcludedImportTypes: [ 'builtin' ],
+            pathGroupsExcludedImportTypes: ['builtin'],
             groups: [
-              [ 'builtin', 'external' ],
-              [ 'index', 'parent', 'sibling' ]
+              ['builtin', 'external'],
+              ['index', 'parent', 'sibling']
             ],
             'newlines-between': 'always',
             alphabetize: {

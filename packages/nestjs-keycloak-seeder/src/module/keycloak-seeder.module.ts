@@ -16,7 +16,7 @@ export class KeycloakSeederModule {
   static register (seeds: KeycloakSeeds): DynamicModule {
     return {
       module: KeycloakSeederModule,
-      imports: [ KeycloakAdminModule ],
+      imports: [KeycloakAdminModule],
       providers: [
         KeycloakSeederService,
         KeycloakAdminSeederTools,
@@ -25,7 +25,7 @@ export class KeycloakSeederModule {
           useValue: seeds
         }
       ],
-      exports: [ KeycloakSeederService, KeycloakAdminSeederTools ]
+      exports: [KeycloakSeederService, KeycloakAdminSeederTools]
     }
   }
 }

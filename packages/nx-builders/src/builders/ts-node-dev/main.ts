@@ -59,19 +59,19 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
 
     // default options
-    let args = [ '-r', 'tsconfig-paths/register' ]
+    let args = ['-r', 'tsconfig-paths/register']
 
     const argParser: { condition: boolean, args: string[] }[] = [
-      { condition: !!tsConfig, args: [ '--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig ] },
-      { condition: !!debounce, args: [ '--debounce', `${debounce}` ] },
-      { condition: !!interval, args: [ '--interval', `${interval}` ] },
-      { condition: !!debug, args: [ '--debug' ] },
-      { condition: !!inspect, args: [ `--inspect=0.0.0.0:${options.inspect}` ] }
+      { condition: !!tsConfig, args: ['--project', cwd ? removePathRoot(tsConfig, cwd) : tsConfig] },
+      { condition: !!debounce, args: ['--debounce', `${debounce}`] },
+      { condition: !!interval, args: ['--interval', `${interval}`] },
+      { condition: !!debug, args: ['--debug'] },
+      { condition: !!inspect, args: [`--inspect=0.0.0.0:${options.inspect}`] }
     ]
 
     argParser.forEach((a) => {
       if (a.condition) {
-        args = [ ...args, ...a.args ]
+        args = [...args, ...a.args]
       }
     })
 
@@ -82,7 +82,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     }
 
     // run path
-    args = [ ...args, cwd ? removePathRoot(main, cwd) : main ]
+    args = [...args, cwd ? removePathRoot(main, cwd) : main]
 
     const spawnOptions: ExecaArguments['spawnOptions'] = {
       env: {

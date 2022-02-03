@@ -13,5 +13,5 @@ import { generateExportsRule } from '@rules/generate-exports.rule'
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   const source = url('./files')
 
-  return chain([ generateExportsRule(source, options.templates, 'exports.ts.j2') ])
+  return chain([generateExportsRule(source, options.templates, 'exports.ts.j2')])
 }

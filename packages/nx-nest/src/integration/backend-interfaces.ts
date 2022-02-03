@@ -10,7 +10,7 @@ import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 export function readBackendInterfacesWorkspaceIntegration (host: Tree): BackendInterfacesWorkspaceIntegration[] {
   const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
-  return Object.entries(projects).reduce((o, [ key, value ]) => {
+  return Object.entries(projects).reduce((o, [key, value]) => {
     if (value.integration?.nestjs?.dbAdapters) {
       o = [
         ...o,

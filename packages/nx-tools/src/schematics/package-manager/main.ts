@@ -9,6 +9,6 @@ export default function (schema: Schema): Rule {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const options = await normalizeOptions(host, context, schema)
 
-    return chain([ runCommand(options) ])
+    return chain([runCommand(options)])
   }
 }

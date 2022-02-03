@@ -1,11 +1,11 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: [ './index' ],
+  extends: ['./index'],
   overrides: [
     {
-      files: [ '*.ts', '*.tsx' ],
-      plugins: [ '@typescript-eslint' ],
-      extends: [ 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended' ],
+      files: ['*.ts', '*.tsx'],
+      plugins: ['@typescript-eslint'],
+      extends: ['plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended'],
       parserOptions: {},
       rules: {
         // this is a bit buggy at the moment
@@ -191,69 +191,69 @@ module.exports = {
           'error',
           {
             selector: 'default',
-            format: [ 'camelCase', 'PascalCase' ]
+            format: ['camelCase', 'PascalCase']
           },
 
           {
             selector: 'variable',
-            modifiers: [ 'const' ],
-            format: [ 'camelCase', 'UPPER_CASE', 'PascalCase' ]
+            modifiers: ['const'],
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase']
           },
 
           {
             selector: 'variable',
-            format: [ 'camelCase' ]
+            format: ['camelCase']
           },
 
           {
             selector: 'function',
-            format: [ 'camelCase', 'PascalCase' ]
+            format: ['camelCase', 'PascalCase']
           },
 
           {
             selector: 'parameter',
-            format: [ 'camelCase', 'PascalCase' ],
+            format: ['camelCase', 'PascalCase'],
             leadingUnderscore: 'forbid'
           },
 
           {
             selector: 'parameter',
-            format: [ 'camelCase', 'PascalCase' ],
-            modifiers: [ 'unused' ],
+            format: ['camelCase', 'PascalCase'],
+            modifiers: ['unused'],
             leadingUnderscore: 'require'
           },
 
           {
             selector: 'property',
-            format: [ 'camelCase', 'UPPER_CASE', 'snake_case' ]
+            format: ['camelCase', 'UPPER_CASE', 'snake_case']
           },
 
           {
             selector: 'memberLike',
-            modifiers: [ 'private' ],
-            format: [ 'camelCase' ],
+            modifiers: ['private'],
+            format: ['camelCase'],
             leadingUnderscore: 'forbid'
           },
 
           {
             selector: 'enumMember',
-            format: [ 'UPPER_CASE', 'camelCase' ]
+            format: ['UPPER_CASE', 'camelCase']
           },
 
           {
             selector: 'typeLike',
-            format: [ 'PascalCase' ]
+            format: ['PascalCase']
           }
         ],
         '@typescript-eslint/no-parameter-properties': 'off',
         'func-call-spacing': 'off',
-        '@typescript-eslint/func-call-spacing': [ 'error' ],
+        '@typescript-eslint/func-call-spacing': ['error'],
         '@typescript-eslint/prefer-for-of': 'warn',
         '@typescript-eslint/prefer-function-type': 'error',
         'space-before-function-paren': 'off',
-        '@typescript-eslint/space-before-function-paren': [ 'error' ],
+        '@typescript-eslint/space-before-function-paren': ['error'],
         'no-extra-parens': 'off',
-        '@typescript-eslint/no-extra-parens': [ 'error' ],
+        '@typescript-eslint/no-extra-parens': ['error'],
         '@typescript-eslint/comma-spacing': [
           'error',
           {
@@ -268,25 +268,22 @@ module.exports = {
             ignoreComments: false
           }
         ],
-        '@typescript-eslint/quotes': [ 'error', 'single' ],
-        '@typescript-eslint/semi': [ 'error', 'never' ],
+        '@typescript-eslint/quotes': ['error', 'single'],
+        '@typescript-eslint/semi': ['error', 'never'],
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/no-use-before-define': 'off',
-        '@typescript-eslint/array-type': [ 'error', { default: 'array' } ],
-        '@typescript-eslint/consistent-indexed-object-style': [ 'error', 'record' ],
-        '@typescript-eslint/consistent-type-assertions': [
-          'error',
-          { assertionStyle: 'as', objectLiteralTypeAssertions: 'allow' }
-        ],
-        '@typescript-eslint/consistent-type-definitions': [ 'error', 'interface' ],
-        '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
+        '@typescript-eslint/array-type': ['error', { default: 'array' }],
+        '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
+        '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'as', objectLiteralTypeAssertions: 'allow' }],
+        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+        '@typescript-eslint/method-signature-style': ['error', 'property'],
         '@typescript-eslint/no-empty-interface': [
           'error',
           {
             allowSingleExtends: true
           }
         ],
-        '@typescript-eslint/no-extra-non-null-assertion': [ 'error' ],
+        '@typescript-eslint/no-extra-non-null-assertion': ['error'],
         '@typescript-eslint/no-extraneous-class': [
           'error',
           {
@@ -300,9 +297,9 @@ module.exports = {
         '@typescript-eslint/no-misused-new': 'error',
         '@typescript-eslint/prefer-enum-initializers': 'error',
         'keyword-spacing': 'off',
-        '@typescript-eslint/keyword-spacing': [ 'error' ],
+        '@typescript-eslint/keyword-spacing': ['error'],
         'lines-between-class-members': 'off',
-        '@typescript-eslint/lines-between-class-members': [ 'off' ],
+        '@typescript-eslint/lines-between-class-members': ['off'],
         'padding-line-between-statements': 'off',
         '@typescript-eslint/padding-line-between-statements': [
           'error',
@@ -313,28 +310,28 @@ module.exports = {
           },
           {
             blankLine: 'always',
-            prev: [ 'const', 'let', 'var' ],
+            prev: ['const', 'let', 'var'],
             next: '*'
           },
           {
             blankLine: 'any',
-            prev: [ 'const', 'let', 'var' ],
-            next: [ 'const', 'let', 'var' ]
+            prev: ['const', 'let', 'var'],
+            next: ['const', 'let', 'var']
           },
           {
             blankLine: 'always',
-            prev: [ 'case', 'default' ],
+            prev: ['case', 'default'],
             next: '*'
           },
           {
             blankLine: 'always',
             prev: '*',
-            next: [ 'interface', 'type' ]
+            next: ['interface', 'type']
           },
           {
             blankLine: 'always',
             prev: '*',
-            next: [ 'function', 'if', 'try', 'break', 'class', 'for', 'while', 'do' ]
+            next: ['function', 'if', 'try', 'break', 'class', 'for', 'while', 'do']
           }
         ]
       }

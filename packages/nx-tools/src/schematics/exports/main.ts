@@ -14,6 +14,6 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const options = await normalizeOptions(host, context, schema)
 
-    return chain([ createApplicationFiles(options), formatTreeRule({ skip: options.skipFormat }) ])
+    return chain([createApplicationFiles(options), formatTreeRule({ skip: options.skipFormat })])
   }
 }

@@ -84,7 +84,7 @@ export class KeycloakAdminSeederTools {
    * Swap the keys of an object to ids of the given group or role.
    */
   swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
-    return Object.entries(map).reduce<Record<string, T>>((o, [ name, d ]) => {
+    return Object.entries(map).reduce<Record<string, T>>((o, [name, d]) => {
       const id = this.getIdFromMappedData(data, name)
 
       return {
@@ -101,7 +101,7 @@ export class KeycloakAdminSeederTools {
     return map.reduce<RoleMappingPayload[]>((o, name) => {
       const id = this.getIdFromMappedData(data, name as unknown as string)
 
-      return [ ...o, { name, id } ] as RoleMappingPayload[]
+      return [...o, { name, id }] as RoleMappingPayload[]
     }, [])
   }
 
@@ -168,12 +168,12 @@ export class KeycloakAdminSeederTools {
 
           created.push(data[options.identifier])
         } catch (err) {
-          if (options.fallbackToUpdate && [ 'groups', 'clients', 'realms' ].includes(context)) {
+          if (options.fallbackToUpdate && ['groups', 'clients', 'realms'].includes(context)) {
             this.logger.warn(
               `Creating new ${context} failed, falling back to updating existing ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
             )
 
-            await this.updateKeycloakEntities(context as any, [ data ] as any, { identifier: options.identifier, realm: options?.realm } as any)
+            await this.updateKeycloakEntities(context as any, [data] as any, { identifier: options.identifier, realm: options?.realm } as any)
           } else {
             this.parseSeedError(err, {
               context: `Error while creating Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
@@ -254,7 +254,7 @@ export class KeycloakAdminSeederTools {
     }
 
     const shouldBeIgnored: Partial<Record<Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>, string[]>> = {
-      roles: [ 'offline_access', 'uma_authorization' ]
+      roles: ['offline_access', 'uma_authorization']
     }
 
     const deleteFuncKey: keyof KeycloakAdminClient[T] = (context === 'groups' ? 'del' : 'delById') as keyof KeycloakAdminClient[T]
@@ -308,7 +308,7 @@ export class KeycloakAdminSeederTools {
     if (options?.flushUnknown) {
       try {
         await Promise.all(
-          Object.entries(groups).map(async ([ id, role ]) => {
+          Object.entries(groups).map(async ([id, role]) => {
             const currentRoles = (await client.groups.listRoleMappings({ id })).realmMappings
 
             if (!currentRoles || currentRoles?.length === 0) {
@@ -325,7 +325,7 @@ export class KeycloakAdminSeederTools {
             await Promise.all(
               current.map(async (c) => {
                 if (!role.includes(c.name)) {
-                  await client.groups.delRealmRoleMappings({ id, roles: [ c ] })
+                  await client.groups.delRealmRoleMappings({ id, roles: [c] })
 
                   deleted.push(c.name)
                 }
@@ -343,7 +343,7 @@ export class KeycloakAdminSeederTools {
     }
 
     await Promise.all(
-      Object.entries(groups).map(async ([ id, role ]) => {
+      Object.entries(groups).map(async ([id, role]) => {
         try {
           // delete unknown mappings
 

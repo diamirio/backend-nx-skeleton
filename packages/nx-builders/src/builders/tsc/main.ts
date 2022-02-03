@@ -192,15 +192,15 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     const spawnOptionsParser: OptionParser<Record<string, any>> = [
       {
-        mode: [ 'typescript', 'tsc-watch' ],
-        rules: [ { condition: !!this.options.cwd, args: { cwd: this.options.cwd } } ]
+        mode: ['typescript', 'tsc-watch'],
+        rules: [{ condition: !!this.options.cwd, args: { cwd: this.options.cwd } }]
       },
       {
-        mode: [ 'tsc-watch' ],
-        rules: [ { args: { cwd: this.context.root } } ]
+        mode: ['tsc-watch'],
+        rules: [{ args: { cwd: this.context.root } }]
       },
       {
-        mode: [ 'runAfterWatch' ],
+        mode: ['runAfterWatch'],
         rules: [
           {
             args: {
@@ -224,31 +224,31 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     const argumentParser: OptionParser<string[]> = [
       {
-        mode: [ 'typescript', 'tsc-watch' ],
+        mode: ['typescript', 'tsc-watch'],
         rules: [
-          { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
+          { args: ['-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath] },
           {
             condition: isVerbose(),
-            args: [ '--extendedDiagnostics', '--listEmittedFiles' ]
+            args: ['--extendedDiagnostics', '--listEmittedFiles']
           },
           {
             condition: mode === 'tsc-watch',
-            args: [ '--noClear', '--sourceMap' ]
+            args: ['--noClear', '--sourceMap']
           }
         ]
       },
       {
-        mode: [ 'tsconfigReplacePaths' ],
+        mode: ['tsconfigReplacePaths'],
         rules: [
           {
-            args: [ '-p', this.paths.tsconfig ]
+            args: ['-p', this.paths.tsconfig]
           },
           {
-            args: [ '-o', this.options.outputPath ]
+            args: ['-o', this.options.outputPath]
           },
           {
             condition: isVerbose(),
-            args: [ '--verbose' ]
+            args: ['--verbose']
           }
         ]
       }
@@ -258,7 +258,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (typeof o.mode === 'undefined' ? true : o.mode.includes(mode)) {
         o.rules.forEach((r) => {
           if (typeof r.condition === 'undefined' ? true : r.condition) {
-            args = [ ...args, ...r.args ]
+            args = [...args, ...r.args]
           }
         })
       }
@@ -268,7 +268,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   }
 
   private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
-    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
+    return Promise.all([this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles()])
   }
 
   private async swapPaths (): Promise<void> {
@@ -323,7 +323,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (packageJson?.implicitDependencies && Object.keys(packageJson.implicitDependencies).length > 0) {
         this.logger.info('Processing "package.json" implicit dependencies...')
 
-        Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+        Object.entries(packageJson.implicitDependencies).forEach(([name, version]) => {
           if (version === true && !globalPackageJson.dependencies[name]) {
             throw new Error(`Package can be not listed as an implicit dependency since it does not exists on global package.json: ${name}`)
           }

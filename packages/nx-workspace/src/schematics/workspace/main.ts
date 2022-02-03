@@ -38,7 +38,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
         {
           token: TaskTokens.NPM_INSTALL,
           fn: (_host: Tree, context: SchematicContext, dependencies: TaskId[]) => addInstallTask(context, { skip: options.skipInstall, root: options.root }, dependencies),
-          dependsOn: [ TaskTokens.GIT_INIT ]
+          dependsOn: [TaskTokens.GIT_INIT]
         },
 
         {
@@ -55,7 +55,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
               },
               dependencies
             ),
-          dependsOn: [ TaskTokens.NPM_INSTALL ]
+          dependsOn: [TaskTokens.NPM_INSTALL]
         }
       ])
     ])

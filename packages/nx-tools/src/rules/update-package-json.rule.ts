@@ -9,7 +9,7 @@ import { deepMerge } from '@webundsoehne/deep-merge'
 export function updatePackageJsonForProjectRule<T extends BaseNormalizedSchemaRoot> (options: T, data: UpdatePackageJsonForProjectRuleOptions): Rule {
   return updateJsonInTree(join(options.root, 'package.json'), (json) => {
     if (data.implicitDependencies?.length > 0) {
-      json.implicitDependencies = Object.fromEntries(data.implicitDependencies.map((dep) => [ dep, true ]))
+      json.implicitDependencies = Object.fromEntries(data.implicitDependencies.map((dep) => [dep, true]))
     }
 
     if (data.scripts && Object.keys(data.scripts).length > 0) {

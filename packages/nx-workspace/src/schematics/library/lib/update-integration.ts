@@ -12,7 +12,7 @@ import { BrownieAvailableContainers, updateBrownieIntegrationRule, updateNxInteg
  */
 export function updateIntegration (options: NormalizedSchema): Rule {
   return (): Rule => {
-    const integrationKeys: (keyof NormalizedSchema['priorConfiguration'])[] = [ 'tests', 'type' ]
+    const integrationKeys: (keyof NormalizedSchema['priorConfiguration'])[] = ['tests', 'type']
 
     return chain([
       // add the components that needs to be known
@@ -27,7 +27,7 @@ export function updateIntegration (options: NormalizedSchema): Rule {
       }),
 
       // add nx container
-      [ AvailableLibraryTypes.BUILDABLE ].includes(options.type) ? updateBrownieIntegrationRule(options.name, { containers: [ BrownieAvailableContainers.NX ] }) : noop()
+      [AvailableLibraryTypes.BUILDABLE].includes(options.type) ? updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.NX] }) : noop()
     ])
   }
 }

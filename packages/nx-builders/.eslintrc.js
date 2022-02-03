@@ -1,3 +1,4 @@
+/** @type {import("eslint").Linter } */
 module.exports = {
   extends: '../../.eslintrc.js',
   rules: {

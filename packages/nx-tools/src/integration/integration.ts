@@ -54,7 +54,7 @@ export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = 
     const found = value?.integration
 
     if (found) {
-      o = deepMergeWithUniqueMergeArray(o, [ found ])
+      o = deepMergeWithUniqueMergeArray(o, [found])
     }
 
     return o

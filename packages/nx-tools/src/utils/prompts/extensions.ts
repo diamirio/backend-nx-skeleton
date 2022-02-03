@@ -15,7 +15,7 @@ export function normalizeExtensionsPrompt<
       task: async (ctx, task): Promise<void> => {
         const parsed = (
           await Promise.all(
-            Object.entries(extensions).map(async ([ name, properties ]) => {
+            Object.entries(extensions).map(async ([name, properties]) => {
               if (typeof (properties as any).condition === 'function' && await (properties as any).condition(ctx)) {
                 return name
               } else if (typeof (properties as any).condition === 'boolean' && (properties as any).condition) {

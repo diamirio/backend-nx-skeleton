@@ -13,6 +13,6 @@ export function initiateBuilderDependencies (options: Schema['items']): Rule {
   return async function (): Promise<Rule> {
     const dependencies = await calculateDependencies(options)
 
-    return chain([ addDependenciesToPackageJsonRule(dependencies) ])
+    return chain([addDependenciesToPackageJsonRule(dependencies)])
   }
 }

@@ -23,7 +23,7 @@ export function formatTreeRule (options?: FormatFilesOptions): Rule {
     const log = new Logger(context)
 
     return options.skip === true
-      ? chain([ runInRule(log.debug.bind(log)('Ignoring to format and lint files, since skip is set: %o', options)) ])
-      : chain([ runInRule(log.info.bind(log)('Formatting and linting files.')), formatFilesRule(options) ])
+      ? chain([runInRule(log.debug.bind(log)('Ignoring to format and lint files, since skip is set: %o', options))])
+      : chain([runInRule(log.info.bind(log)('Formatting and linting files.')), formatFilesRule(options)])
   }
 }

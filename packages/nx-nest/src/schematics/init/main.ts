@@ -6,6 +6,6 @@ import type { Schema as BuilderSchema } from '@webundsoehne/nx-builders/dist/sch
 
 export default function (): Rule {
   return async function (): Promise<Rule> {
-    return chain([ externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: [ AvailableBuilders.TSC, AvailableBuilders.TS_NODE_DEV ] }) ])
+    return chain([externalSchematic<BuilderSchema>('@webundsoehne/nx-builders', 'init', { items: [AvailableBuilders.TSC, AvailableBuilders.TS_NODE_DEV] })])
   }
 }
