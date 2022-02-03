@@ -19,7 +19,7 @@ Database adapters, these are not selectable but used in internal scripts.
 
 #### Defined in
 
-interfaces/available.constants.ts:38
+interfaces/available.constants.ts:48
 
 ---
 
@@ -29,4 +29,4 @@ interfaces/available.constants.ts:38
 
 #### Defined in
 
-interfaces/available.constants.ts:37
+interfaces/available.constants.ts:47

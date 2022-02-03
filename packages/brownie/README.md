@@ -87,7 +87,7 @@ OPTIONS
   -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -99,6 +99,7 @@ USAGE
 
 OPTIONS
   -a, --arguments     Enable prompt for passing in arguments.
+  -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -s, --skip-updates  Skip the dependency updates.
 ```
 
@@ -111,6 +112,7 @@ USAGE
   $ brownie workspace
 
 OPTIONS
+  -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -f, --force         Force override for schematic.
   -s, --skip-updates  Skip the dependency updates.
 

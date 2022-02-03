@@ -27,7 +27,7 @@ This is a collection of useful modules on creating a [Nest](https://github.com/n
   - [Info-Header](#info-header)
 - [Modules](#modules)
   - [Maintenance](#maintenance)
-- [Provider](#provider)
+- [Providers](#providers)
   - [Config](#config)
   - [Logger](#logger)
 - [Pipes](#pipes)

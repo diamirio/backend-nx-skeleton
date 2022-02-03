@@ -56,7 +56,7 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
 
 ## Properties
 
@@ -66,7 +66,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:21
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:24
 
 ---
 
@@ -96,7 +96,7 @@ CanActivate.canActivate
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:32
 
 ---
 
@@ -106,9 +106,9 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Parameters
 
-| Name      | Type  |
-| :-------- | :---- |
-| `request` | `any` |
+| Name      | Type                                                                                                                                             |
+| :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request` | [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
 
 #### Returns
 
@@ -116,7 +116,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:123
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:131
 
 ---
 
@@ -136,7 +136,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:123
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:135
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:143
 
 ---
 
@@ -157,7 +157,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:135
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:147
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:155
 
 ---
 
@@ -177,13 +177,13 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:147
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:119
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:127
 
 ---
 
 ### getRequest
 
-▸ `Abstract` **getRequest**(`context`): `any`
+▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
 #### Parameters
 
@@ -193,11 +193,11 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:119
 
 #### Returns
 
-`any`
+[`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:157
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:165
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
@@ -213,9 +213,9 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:157
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:158
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:166
 
-▸ `Abstract` **getRequest**(`context`): `any`
+▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
 #### Parameters
 
@@ -225,11 +225,11 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:158
 
 #### Returns
 
-`any`
+[`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:159
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
 
 ---
 
@@ -251,7 +251,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:159
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:109
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:117
 
 ---
 
@@ -274,4 +274,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:97
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:105

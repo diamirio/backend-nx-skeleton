@@ -4,12 +4,6 @@
 
 Options for ts-node-dev
 
-## Hierarchy
-
-- `JsonObject`
-
-  ↳ **`TsNodeBuilderOptions`**
-
 ## Table of contents
 
 ### Properties
@@ -35,7 +29,7 @@ this will spawn the process from the current working directory so most of the pl
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:12
+builders/ts-node-dev/main.interface.ts:10
 
 ---
 
@@ -47,7 +41,7 @@ ts-node-dev debounce in ms
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:24
+builders/ts-node-dev/main.interface.ts:22
 
 ---
 
@@ -59,7 +53,7 @@ node debug port enable
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:30
+builders/ts-node-dev/main.interface.ts:28
 
 ---
 
@@ -71,7 +65,7 @@ environment variables
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:36
+builders/ts-node-dev/main.interface.ts:34
 
 ---
 
@@ -83,7 +77,7 @@ inspect port that should be opened when debugging
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:33
+builders/ts-node-dev/main.interface.ts:31
 
 ---
 
@@ -95,7 +89,7 @@ ts-node-dev interval in ms
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:27
+builders/ts-node-dev/main.interface.ts:25
 
 ---
 
@@ -107,7 +101,7 @@ entrypoint for the application which ts-node will run
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:15
+builders/ts-node-dev/main.interface.ts:13
 
 ---
 
@@ -119,4 +113,4 @@ tsconfig file that is used will default to tsconfig.json
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:21
+builders/ts-node-dev/main.interface.ts:19

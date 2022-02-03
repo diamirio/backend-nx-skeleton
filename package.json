@@ -19,8 +19,10 @@
     "scripts:unlink": "./scripts/link-packages.sh unlink",
     "scripts:workspace:link": "./scripts/link-packages-to-workspace.sh link",
     "scripts:workspace:unlink": "./scripts/link-packages-to-workspace.sh unlink",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i",
-    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
+    "docs": "yarn run docs:readme && yarn run docs:jsdoc && yarn run docs:toc",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i && yarn command --no-bail docs:toc",
+    "docs:jsdoc": "yarn command --no-bail docs:jsdoc",
+    "docs:readme": "yarn command --no-bail docs:readme"
   },
   "workspaces": {
     "packages": [

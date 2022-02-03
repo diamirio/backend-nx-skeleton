@@ -4,12 +4,6 @@
 
 Options for run builder
 
-## Hierarchy
-
-- `JsonObject`
-
-  ↳ **`RunBuilderOptions`**
-
 ## Table of contents
 
 ### Properties
@@ -65,7 +59,7 @@ builders/run/main.interface.ts:12
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `Record`<`string`, `string` \| `number`\>
 
 environment variables
 
@@ -77,7 +71,7 @@ builders/run/main.interface.ts:33
 
 ### interactive
 
-• **interactive**: `boolean`
+• `Optional` **interactive**: `boolean`
 
 run with interactive mode, will not parse through the logger
 
@@ -89,7 +83,7 @@ builders/run/main.interface.ts:21
 
 ### node
 
-• **node**: `boolean`
+• `Optional` **node**: `boolean`
 
 run with node
 
@@ -113,7 +107,7 @@ builders/run/main.interface.ts:27
 
 ### watch
 
-• **watch**: `boolean`
+• `Optional` **watch**: `boolean`
 
 keep alive the process if it crashes
 

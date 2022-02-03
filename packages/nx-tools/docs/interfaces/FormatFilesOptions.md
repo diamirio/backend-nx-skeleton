@@ -14,7 +14,7 @@ Will use prettier first, others after.
 
 - [eslint](FormatFilesOptions.md#eslint)
 - [prettier](FormatFilesOptions.md#prettier)
-- [skipFormat](FormatFilesOptions.md#skipformat)
+- [skip](FormatFilesOptions.md#skip)
 
 ## Properties
 
@@ -42,9 +42,9 @@ packages/nx-tools/src/utils/file-system/format-files.interface.ts:12
 
 ---
 
-### skipFormat
+### skip
 
-• `Optional` **skipFormat**: `boolean`
+• `Optional` **skip**: `boolean`
 
 A condition that can skip the formatting.
 

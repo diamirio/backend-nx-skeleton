@@ -22,7 +22,7 @@ Available containers that is known by brownie. It is here instead of brownie sin
 
 #### Defined in
 
-packages/nx-tools/src/integration/brownie.interface.ts:18
+packages/nx-tools/src/integration/brownie.interface.ts:17
 
 ---
 
@@ -32,7 +32,7 @@ packages/nx-tools/src/integration/brownie.interface.ts:18
 
 #### Defined in
 
-packages/nx-tools/src/integration/brownie.interface.ts:17
+packages/nx-tools/src/integration/brownie.interface.ts:16
 
 ---
 
@@ -42,7 +42,7 @@ packages/nx-tools/src/integration/brownie.interface.ts:17
 
 #### Defined in
 
-packages/nx-tools/src/integration/brownie.interface.ts:15
+packages/nx-tools/src/integration/brownie.interface.ts:14
 
 ---
 
@@ -52,7 +52,7 @@ packages/nx-tools/src/integration/brownie.interface.ts:15
 
 #### Defined in
 
-packages/nx-tools/src/integration/brownie.interface.ts:16
+packages/nx-tools/src/integration/brownie.interface.ts:15
 
 ---
 
@@ -62,4 +62,4 @@ packages/nx-tools/src/integration/brownie.interface.ts:16
 
 #### Defined in
 
-packages/nx-tools/src/integration/brownie.interface.ts:19
+packages/nx-tools/src/integration/brownie.interface.ts:18

@@ -334,7 +334,7 @@ Makes the controller route private and require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:9
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:10
 
 ---
 
@@ -352,7 +352,7 @@ Makes the controller route private and require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:15
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:16
 
 ---
 
@@ -370,7 +370,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:9
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:10
 
 ---
 
@@ -394,7 +394,7 @@ Inject current Keycloak users roles in to a variable.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:9
+packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:10
 
 ---
 
@@ -418,7 +418,7 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:10
+packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:11
 
 ---
 
@@ -436,7 +436,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:15
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:16
 
 ---
 
@@ -454,7 +454,7 @@ Makes the controller route private and require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:21
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:22
 
 ---
 
@@ -472,7 +472,7 @@ Makes the controller route private and require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:27
+packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:28
 
 ---
 
@@ -490,7 +490,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:21
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:22
 
 ---
 
@@ -516,7 +516,7 @@ Inject current Keycloak users roles in to a variable.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:16
+packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:17
 
 ---
 
@@ -542,7 +542,7 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:21
+packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:22
 
 ---
 
@@ -560,4 +560,4 @@ Makes the controller route public and does not require Keycloak authentication.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:27
+packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:28

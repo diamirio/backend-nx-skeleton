@@ -34,13 +34,13 @@ You can add long-living and short-living process to keep track of processes spaw
 
 #### Parameters
 
-| Name      | Type                                   |
-| :-------- | :------------------------------------- |
-| `context` | `BuilderContext` \| `SchematicContext` |
+| Name      | Type                                                        |
+| :-------- | :---------------------------------------------------------- |
+| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:18
+packages/nx-tools/src/utils/node/process-manager.ts:19
 
 ## Properties
 
@@ -50,7 +50,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:18
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:14
+packages/nx-tools/src/utils/node/process-manager.ts:15
 
 ---
 
@@ -60,7 +60,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:14
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:16
+packages/nx-tools/src/utils/node/process-manager.ts:17
 
 ---
 
@@ -70,7 +70,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:16
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:15
+packages/nx-tools/src/utils/node/process-manager.ts:16
 
 ## Methods
 
@@ -92,7 +92,7 @@ Add a new task that is killable.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:23
+packages/nx-tools/src/utils/node/process-manager.ts:24
 
 ---
 
@@ -114,7 +114,7 @@ Add a persistent task that should not be killed until everything finishes.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:29
+packages/nx-tools/src/utils/node/process-manager.ts:31
 
 ---
 
@@ -130,7 +130,7 @@ Kill all non-persistent tasks.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:35
+packages/nx-tools/src/utils/node/process-manager.ts:38
 
 ---
 
@@ -152,7 +152,7 @@ Tree kill proceseses.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:48
+packages/nx-tools/src/utils/node/process-manager.ts:51
 
 ---
 
@@ -168,4 +168,4 @@ Stop the processes compeletely.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:41
+packages/nx-tools/src/utils/node/process-manager.ts:44

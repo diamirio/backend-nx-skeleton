@@ -21,7 +21,7 @@ Generates application rules for many of the scheematics.
 
 • `Optional` **format**: `boolean`
 
-You can either enable or disable to format inside the rule, since this is moslty required for diff-merge capabilites to be sure that spacing of code does not cause problems.
+You can either enable or disable to format inside the rule, since this is moslty required for diff-merge capabilities to be sure that spacing of code does not cause problems.
 
 #### Defined in
 
@@ -31,7 +31,7 @@ packages/nx-tools/src/rules/create-application.rule.interface.ts:51
 
 ### include
 
-• `Optional` **include**: [`SchematicFiles`](SchematicFiles.md)
+• `Optional` **include**: [`SchematicFiles`](../README.md#schematicfiles)
 
 Schematic files and folders to include based on condition
 

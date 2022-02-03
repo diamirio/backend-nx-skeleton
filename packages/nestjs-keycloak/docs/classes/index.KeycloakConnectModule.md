@@ -40,4 +40,4 @@ KeycloakConnectModule provides the Keycloak API to validate user authentication 
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/connect.module.ts:14
+packages/nestjs-keycloak/src/connect/connect.module.ts:16

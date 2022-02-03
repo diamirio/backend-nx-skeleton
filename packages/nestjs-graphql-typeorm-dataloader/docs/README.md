@@ -202,4 +202,4 @@ A shared component for handling the end result of the query.
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:8
+packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:9

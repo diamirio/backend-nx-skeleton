@@ -6,9 +6,9 @@ Options for multiple jinja templates.
 
 ## Type parameters
 
-| Name | Type                                                         |
-| :--- | :----------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\>`Record`<`string`, `any`\> |
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> = `Record`<`string`, `any`\> |
 
 ## Table of contents
 

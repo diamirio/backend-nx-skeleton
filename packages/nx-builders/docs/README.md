@@ -19,6 +19,7 @@
 ### Type aliases
 
 - [NormalizedExecuteBuilderOptions](README.md#normalizedexecutebuilderoptions)
+- [NormalizedRunBuilderOptions](README.md#normalizedrunbuilderoptions)
 - [OptionParser](README.md#optionparser)
 - [OptionParserModes](README.md#optionparsermodes)
 - [ProcessPaths](README.md#processpaths)
@@ -35,7 +36,17 @@
 
 #### Defined in
 
-builders/execute/main.interface.ts:41
+builders/execute/main.interface.ts:39
+
+---
+
+### NormalizedRunBuilderOptions
+
+Ƭ **NormalizedRunBuilderOptions**: `ExecaArguments`
+
+#### Defined in
+
+builders/run/main.interface.ts:36
 
 ---
 
@@ -45,33 +56,33 @@ builders/execute/main.interface.ts:41
 
 #### Type parameters
 
-| Name | Type          |
-| :--- | :------------ |
-| `T`  | extends `any` |
+| Name |
+| :--- |
+| `T`  |
 
 #### Defined in
 
-builders/tsc/main.interface.ts:70
+builders/tsc/main.interface.ts:67
 
 ---
 
 ### OptionParserModes
 
-Ƭ **OptionParserModes**: `"typescript"` \| `"tscpaths"` \| `"tsc-watch"` \| `"runAfterWatch"`
+Ƭ **OptionParserModes**: `"typescript"` \| `"tsconfigReplacePaths"` \| `"tsc-watch"` \| `"runAfterWatch"`
 
 #### Defined in
 
-builders/tsc/main.interface.ts:68
+builders/tsc/main.interface.ts:65
 
 ---
 
 ### ProcessPaths
 
-Ƭ **ProcessPaths**: `Partial`<`Record`<`"typescript"` \| `"tscpaths"` \| `"tscWatch"` \| `"tsconfig"` \| `"tsconfigPaths"`, `string`\>\>
+Ƭ **ProcessPaths**: `Record`<`"typescript"` \| `"tsconfigReplacePaths"` \| `"tscWatch"` \| `"tsconfig"`, `string`\>
 
 #### Defined in
 
-builders/tsc/main.interface.ts:72
+builders/tsc/main.interface.ts:69
 
 ## Functions
 
@@ -83,9 +94,9 @@ A function to initiate builder depdencies. It may be wiser to call it via schema
 
 #### Parameters
 
-| Name      | Type                  |
-| :-------- | :-------------------- |
-| `options` | `Schema`[``"items"``] |
+| Name      | Type                                                |
+| :-------- | :-------------------------------------------------- |
+| `options` | [`AvailableBuilders`](enums/AvailableBuilders.md)[] |
 
 #### Returns
 
@@ -93,4 +104,4 @@ A function to initiate builder depdencies. It may be wiser to call it via schema
 
 #### Defined in
 
-utils/initiate-builder.ts:11
+utils/initiate-builder.ts:12

@@ -40,4 +40,4 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 #### Defined in
 
-packages/nestjs-keycloak/src/admin/admin.module.ts:14
+packages/nestjs-keycloak/src/admin/admin.module.ts:15

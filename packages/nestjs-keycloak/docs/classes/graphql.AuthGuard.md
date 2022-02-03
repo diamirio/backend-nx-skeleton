@@ -48,7 +48,7 @@ Application AuthGuard for Keycloak applications. This only works for GraphQL API
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
 
 ## Properties
 
@@ -82,7 +82,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:23
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:32
 
 ---
 
@@ -92,9 +92,9 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Type parameters
 
-| Name      | Type                                                                                       |
-| :-------- | :----------------------------------------------------------------------------------------- |
-| `Request` | extends `unknown` = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
+| Name | Type |
+| :-- | :-- |
+| `Request` | extends [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
 
 #### Parameters
 
@@ -112,7 +112,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-graphql.guard.ts:13
+packages/nestjs-keycloak/src/connect/guards/auth-graphql.guard.ts:14
 
 ---
 
@@ -139,4 +139,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:97
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:105

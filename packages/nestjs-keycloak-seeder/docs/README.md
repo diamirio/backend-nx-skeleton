@@ -17,6 +17,7 @@
 
 ### Functions
 
+- [InjectKeycloakSeederService](README.md#injectkeycloakseederservice)
 - [filterMatchingPropertyFromData](README.md#filtermatchingpropertyfromdata)
 - [getMatchingPropertyFromData](README.md#getmatchingpropertyfromdata)
 
@@ -31,6 +32,38 @@
 constants/injection.constants.ts:1
 
 ## Functions
+
+### InjectKeycloakSeederService
+
+▸ **InjectKeycloakSeederService**(): (`target`: `Record`<`string`, `unknown`\>, `key`: `string` \| `symbol`, `index?`: `number`) => `void`
+
+Injects Keyclaok admin instance initiated to the service.
+
+#### Returns
+
+`fn`
+
+▸ (`target`, `key`, `index?`): `void`
+
+Injects Keyclaok admin instance initiated to the service.
+
+##### Parameters
+
+| Name     | Type                           |
+| :------- | :----------------------------- |
+| `target` | `Record`<`string`, `unknown`\> |
+| `key`    | `string` \| `symbol`           |
+| `index?` | `number`                       |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+module/decorators/inject.decorator.ts:8
+
+---
 
 ### filterMatchingPropertyFromData
 

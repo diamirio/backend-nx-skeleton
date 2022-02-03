@@ -27,7 +27,7 @@ packages/nx-tools/src/interfaces/execa-arguments.interface.ts:10
 
 ### spawnOptions
 
-• **spawnOptions**: [`Writeable`](../README.md#writeable)<`Options`<`string`\> \| `NodeOptions`<`string`\>\>
+• **spawnOptions**: `Writeable`<`Options`<`string`\> \| `NodeOptions`<`string`\>\>
 
 While these are the execa options
 

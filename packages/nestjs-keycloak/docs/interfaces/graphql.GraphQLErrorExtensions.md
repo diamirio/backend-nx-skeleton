@@ -25,4 +25,4 @@
 
 #### Defined in
 
-node_modules/apollo-server-core/node_modules/apollo-server-errors/dist/index.d.ts:4
+node_modules/apollo-server-errors/dist/index.d.ts:4

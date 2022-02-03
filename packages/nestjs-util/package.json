@@ -20,7 +20,7 @@
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "docs:toc": "markdown-toc README.md --bullets='-' -i",
-    "docs:jsdoc": "typedoc src/index.ts src/microservices.ts src/graphql.ts --readme none"
+    "docs:jsdoc": "typedoc src/index.ts --readme none"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
