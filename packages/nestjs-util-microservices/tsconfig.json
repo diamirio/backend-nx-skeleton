@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "removeComments": false,
+    "outDir": "./dist",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "paths": {
+      "@filter": ["filter/index"],
+      "@filter/*": ["filter/*"],
+      "@decorator": ["decorator/index"],
+      "@decorator/*": ["decorator/*"],
+      "@interface": ["interface"],
+      "@module": ["module/index"],
+      "@module/*": ["module/*"],
+      "@provider": ["provider/index"],
+      "@provider/*": ["provider/*"],
+      "@util": ["util/index"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

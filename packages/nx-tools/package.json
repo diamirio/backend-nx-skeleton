@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nx-tools",
-  "version": "2.0.1",
+  "version": "1.0.0",
   "description": "Common tools for NX.",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "main": "dist/index.js",
@@ -30,8 +30,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*"

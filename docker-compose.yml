@@ -21,6 +21,7 @@ services:
       SERVICE_4_NAME: brownie
       SERVICE_5_CWD: packages/nestjs-util
       SERVICE_5_NAME: nestjs-util
+      SERVICE_5_SYNC: 'true'
       SERVICE_6_CWD: packages/nx-nest
       SERVICE_6_NAME: nx-nest
       SERVICE_7_CWD: packages/patch-package
@@ -34,5 +35,11 @@ services:
       SERVICE_10_SYNC: 'true'
       SERVICE_11_CWD: packages/nestjs-keycloak-seeder
       SERVICE_11_NAME: nestjs-keycloak-seeder
+      SERVICE_12_CWD: packages/nestjs-util-graphql
+      SERVICE_12_NAME: nestjs-util-graphql
+      SERVICE_13_CWD: packages/nestjs-util-microservices
+      SERVICE_13_NAME: nestjs-util-microservices
+      SERVICE_14_CWD: packages/nestjs-util-restful
+      SERVICE_14_NAME: nestjs-util-restful
     volumes:
       - .:/data

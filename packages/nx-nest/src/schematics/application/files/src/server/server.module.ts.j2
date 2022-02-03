@@ -14,19 +14,21 @@ import {
   ConfigService,
   BadRequestExceptionFilter,
   GlobalExceptionFilter,
-  InternalModule,
   MaintenanceMiddleware,
   MaintenanceModule,
-  {% if server == enum.server.RESTFUL %}
-  CacheLifetimeHelperInterceptor,
-  RequestProfilerInterceptor,
-  {% endif %}
   SetApiInfoHeaderMiddleware,
   setEnvironmentVariables,
   ExtendedValidationPipe
 } from '@webundsoehne/nestjs-util'
+{% if server == enum.server.RESTFUL %}
+import {
+  CacheLifetimeHelperInterceptor,
+  InternalModule,
+  RequestProfilerInterceptor,
+} from '@webundsoehne/nestjs-util-restful'
+{% endif %}
 {% if enum.components.MICROSERVICE_CLIENT in components %}
-import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util/dist/microservices'
+import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util-microservices'
 {% endif %}
 {% if enum.components.MICROSERVICE_CLIENT in components %}
 import { MessageQueues } from '@{{ packageScope }}/{{ constants.MICROSERVICE_PROVIDER_PACKAGE }}'
@@ -104,7 +106,9 @@ export function createServerModule ({% if database is defined and database != en
       {% if enum.components.MICROSERVICE_CLIENT in components %}
       MicroserviceProviderModule.forRoot({ queue: [ {% for client in microserviceClient %}MessageQueues.{{ microserviceCasing[client].names.queue }}{% endfor %} ] }),
       {% endif %}
+      {% if server == enum.server.RESTFUL %}
       InternalModule,
+      {% endif %}
       MaintenanceModule
       ]
   })
