@@ -5,12 +5,6 @@
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {

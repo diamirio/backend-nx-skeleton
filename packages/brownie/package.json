@@ -5,13 +5,6 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "bin": {
     "brownie": "bin/run.js"
   },

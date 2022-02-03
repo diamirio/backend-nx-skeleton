@@ -5,15 +5,8 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "bin": {
-    "patch-package": "bin/run.js"
+    "ws-patch-package": "bin/run.js"
   },
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
@@ -50,7 +43,7 @@
   ],
   "oclif": {
     "commands": "./dist/commands",
-    "bin": "patch-package",
+    "bin": "ws-patch-package",
     "plugins": [
       "@oclif/plugin-help"
     ],
