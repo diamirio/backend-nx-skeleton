@@ -1,5 +1,5 @@
 import { Module, NestModule } from '@nestjs/common'
-import { ScheduleModule } from 'nest-schedule'
+import { ScheduleModule } from '@nestjs/schedule'
 {% if database is defined and enum.dbAdapters.TYPEORM in database %}
 import { TypeOrmModule } from '@nestjs/typeorm'
 {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}
@@ -28,10 +28,11 @@ import * as tasks from './modules'
 
 export function createTaskModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
   @Module({
-    providers: [],
+    providers: [
+        ConfigService,
+    ],
     imports: [
-      ScheduleModule.register(),
-      ConfigService,
+      ScheduleModule.forRoot(),
       {% if database is defined and enum.dbAdapters.TYPEORM in database %}
       TypeOrmModule.forRoot(getDatabaseOptions(mock)),
       {% elif database is defined and enum.dbAdapters.MONGOOSE in database %}

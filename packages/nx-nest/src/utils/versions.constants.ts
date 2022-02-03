@@ -44,7 +44,10 @@ export const VERSIONS: Versions = {
   },
   [AvailableComponents.BG_TASK]: {
     deps: {
-      'nest-schedule': '^0.6.4'
+      '@nestjs/schedule': '^1.0.2'
+    },
+    devDeps: {
+      '@types/cron': '^1.7.3'
     }
   },
   [AvailableComponents.COMMAND]: {

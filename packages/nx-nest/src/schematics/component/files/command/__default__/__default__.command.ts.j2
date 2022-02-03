@@ -1,6 +1,11 @@
 import { Logger } from '@nestjs/common'
 import { Command, CommandRunner, Option } from 'nest-commander'
 
+/**
+ * Register your cli commands in this component.
+ * Documentation: https://docs.nestjs.com/recipes/nest-commander#nest-commander
+ */
+
 @Command({ name: '{{ casing.kebab }}', description: 'Command to {{ casing.pascal }}.' })
 export class {{ casing.pascal }}Command implements CommandRunner {
   private logger: Logger = new Logger(this.constructor.name)
