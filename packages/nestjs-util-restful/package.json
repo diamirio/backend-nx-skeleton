@@ -38,7 +38,8 @@
     "fastify": ">= 3",
     "fastify-swagger": ">= 4 < 5",
     "express": ">= 4 < 5",
-    "swagger-ui-express": ">= 4 < 5"
+    "swagger-ui-express": ">= 4 < 5",
+    "@webundsoehne/nestjs-util": ">= 5"
   },
   "peerDependenciesMeta": {
     "fastify": {
@@ -56,6 +57,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@webundsoehne/nestjs-util": "*",
     "@nestjs/common": "^8.2.6",
     "@nestjs/core": "^8.2.6",
     "@nestjs/swagger": "^5.2.0",
