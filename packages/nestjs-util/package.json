@@ -28,11 +28,11 @@
     }
   },
   "lint-staged": {
-    "./src/*.{ts,js,tsx,jsx}": [
+    "*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./src/*.{json,md}": [
+    "*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },
