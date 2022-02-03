@@ -1,11 +1,10 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
-    "strictNullChecks": false,
-    "sourceMap": true,
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "paths": {
       "@commands/*": ["commands/*"],
       "@helpers/*": ["helpers/*"],

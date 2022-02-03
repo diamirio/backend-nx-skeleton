@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "Common tools for NX.",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
@@ -12,22 +18,14 @@
   },
   "schematics": "./schematics.json",
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tsconfig-replace-paths --project tsconfig.json && cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
   },
   "lint-staged": {
     "./**/*.{ts,js,tsx,jsx}": [
@@ -42,9 +40,9 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1302.0",
-    "@angular-devkit/core": "^13.2.0",
-    "@angular-devkit/schematics": "^13.2.0",
+    "@angular-devkit/architect": "^0.1302.2",
+    "@angular-devkit/core": "^13.2.2",
+    "@angular-devkit/schematics": "^13.2.2",
     "@nrwl/cli": "^13.7.1",
     "@nrwl/devkit": "^13.7.1",
     "@types/micromatch": "^4.0.2",
@@ -73,5 +71,8 @@
     "@types/figures": "^3.0.1",
     "@types/nunjucks": "^3.2.1",
     "@types/prettier": "^2.4.3"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

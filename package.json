@@ -23,7 +23,9 @@
     "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
   },
   "workspaces": {
-    "packages": ["packages/*"],
+    "packages": [
+      "packages/*"
+    ],
     "nohoist": []
   },
   "simple-git-hooks": {
@@ -32,12 +34,13 @@
   },
   "resolutions": {
     "**/rxjs": "7.5.2",
-    "**/@angular-devkit/architect": "0.1302.0",
-    "**/@angular-devkit/core": "13.2.0",
-    "**/@angular-devkit/schematics": "13.2.0"
+    "**/@angular-devkit/architect": "0.1302.2",
+    "**/@angular-devkit/core": "13.2.2",
+    "**/@angular-devkit/schematics": "13.2.2"
   },
   "dependencies": {},
   "devDependencies": {
+    "@anatine/esbuild-decorators": "^0.2.18",
     "@cenk1cenk2/cz-cc": "^1.4.11",
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
@@ -49,9 +52,10 @@
     "simple-git-hooks": "^2.7.0",
     "tsc-watch": "^4.6.0",
     "tsconfig-replace-paths": "^0.0.11",
+    "tsup": "^5.11.13",
     "typedoc": "^0.22.11",
     "typedoc-plugin-markdown": "^3.11.12",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.0-dev.20220203"
   },
   "config": {
     "commitizen": {

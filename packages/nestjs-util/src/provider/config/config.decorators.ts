@@ -23,7 +23,8 @@ export function ConfigParam (path: string, defaultValue?: any): ParameterDecorat
 }
 
 export function Configurable (): MethodDecorator {
-  return (target: Record<string, unknown>, key: string | symbol, descriptor: PropertyDescriptor): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  return (target: Object, key: string | symbol, descriptor: PropertyDescriptor): void => {
     const originalMethod = descriptor.value
 
     descriptor.value = function (...args: any[]): void {

@@ -25,7 +25,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
     const httpContext = context.switchToHttp()
 
     const request: Request = httpContext.getRequest()
-    const response: Response = httpContext.getResponse()
+    const response: any = httpContext.getResponse()
 
     if (!request.state) {
       request.state = {}

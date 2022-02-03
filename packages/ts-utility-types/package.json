@@ -6,6 +6,12 @@
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
     "access": "public"
@@ -15,11 +21,8 @@
     "keycloak"
   ],
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tsconfig-replace-paths --project tsconfig.json",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -41,9 +44,9 @@
       "prettier --loglevel warn --write"
     ]
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 16"
+  }
 }

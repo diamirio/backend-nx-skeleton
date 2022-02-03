@@ -17,7 +17,8 @@ export const VERSIONS: Versions = {
     },
     microservice: {
       deps: {
-        '@nestjs/microservices': '^8.2.5'
+        '@nestjs/microservices': '^8.2.5',
+        '@webundsoehne/nestjs-util-microservices': '^1.0.0'
       }
     },
     builder: {
@@ -30,7 +31,8 @@ export const VERSIONS: Versions = {
     deps: {
       '@nestjs/platform-fastify': '^8.2.5',
       'fastify-swagger': { version: '^4.13.1', implicit: true },
-      '@nestjs/swagger': '^5.1.5'
+      '@nestjs/swagger': '^5.1.5',
+      '@webundsoehne/nestjs-util-restful': '^1.0.0'
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
@@ -39,7 +41,8 @@ export const VERSIONS: Versions = {
       '@nestjs/platform-fastify': '^8.2.5',
       'apollo-server-fastify': { version: '^3.6.2', implicit: true },
       graphql: { version: '^15', implicit: true },
-      'graphql-tools': { version: '^8.2.0', implicit: true }
+      'graphql-tools': { version: '^8.2.0', implicit: true },
+      '@webundsoehne/nestjs-util-graphql': '^1.0.0'
     }
   },
   [AvailableComponents.BG_TASK]: {

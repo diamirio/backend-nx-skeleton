@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "paths": {
       "@constants/*": ["constants/*"],
       "@integration/*": ["integration/*"],

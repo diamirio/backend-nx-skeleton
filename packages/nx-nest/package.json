@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "Nest Plugin for Nx",
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
@@ -13,33 +19,30 @@
   },
   "schematics": "./schematics.json",
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tsconfig-replace-paths --project tsconfig.json && cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
+    "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "docs:toc": "markdown-toc README.md --bullets='-' -i",
     "docs:jsdoc": "typedoc src/index.ts --readme none"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@webundsoehne/nx-builders": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^13.2.0",
+    "@angular-devkit/schematics": "^13.2.2",
     "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
@@ -47,5 +50,8 @@
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
     "listr2": "^4.0.1"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

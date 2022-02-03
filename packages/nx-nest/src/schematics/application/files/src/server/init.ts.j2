@@ -3,7 +3,7 @@ import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
 
 import { createServerModule } from './server.module'
-import { LoggerService, SwaggerService, ConfigService } from '@webundsoehne/nestjs-util'
+import { LoggerService, ConfigService } from '@webundsoehne/nestjs-util'
 {% if server == enum.server.RESTFUL %}
 import { SwaggerService } from '@webundsoehne/nestjs-util-restful'
 {% endif %}

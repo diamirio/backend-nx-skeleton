@@ -1,17 +1,19 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
-    "strictNullChecks": false,
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "paths": {
       "@constants/*": ["constants/*"],
       "@decorators/*": ["decorators/*"],
       "@interfaces/*": ["interfaces/*"],
       "@loader-handlers/*": ["loader-handlers/*"],
       "@loaders/*": ["loaders/*"],
-      "@plugins/*": ["plugins/*"]
+      "@plugins/*": ["plugins/*"],
+      "@interceptors/*": ["interceptors/*"],
+      "@middleware/*": ["middleware/*"]
     }
   },
   "include": ["src"],

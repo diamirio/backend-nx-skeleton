@@ -135,8 +135,8 @@ export abstract class BaseAuthGuard implements CanActivate {
       if (type.toLowerCase() === 'bearer') {
         return token
       }
-    } else if (request?.query?.token) {
-      return request.query.token as string
+    } else if ((request?.query as any)?.token) {
+      return (request.query as any)?.token as string
     }
   }
 

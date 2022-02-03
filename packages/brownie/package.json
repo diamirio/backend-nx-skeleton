@@ -6,6 +6,12 @@
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "bin": {
     "brownie": "bin/run.js"
   },
@@ -13,12 +19,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "oclif",
+    "brownie"
+  ],
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tsconfig-replace-paths --project tsconfig.json",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -26,31 +33,33 @@
     "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
     "docs:readme": "yarn oclif-dev readme"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": ["prettier --loglevel warn --write", "eslint --fix"],
-    "./**/*.{json,md}": ["prettier --loglevel warn --write"]
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
   },
-  "files": ["bin/", "config/", "dist/", "templates/"],
+  "files": [
+    "bin/",
+    "config/",
+    "dist/",
+    "templates/"
+  ],
   "oclif": {
     "commands": "./dist/commands",
     "bin": "brownie",
-    "plugins": ["@oclif/plugin-help"],
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
     "hooks": {
       "init": "./dist/hooks/init.hook",
       "command_not_found": "./dist/hooks/not-found.hook",
       "prerun": "./dist/hooks/prerun.hook"
     }
   },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "keywords": ["oclif", "brownie"],
   "dependencies": {
     "@cenk1cenk2/boilerplate-oclif": "^1.10.6",
     "@oclif/command": "^1.8.16",
@@ -80,5 +89,8 @@
     "@types/through": "^0.0.30",
     "@types/update-notifier": "^5.0.1",
     "source-map-support": "^0.5.21"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

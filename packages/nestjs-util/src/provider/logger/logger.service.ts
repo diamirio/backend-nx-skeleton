@@ -58,7 +58,7 @@ export class LoggerService implements LoggerServiceCommon {
       const loggingDisabled: boolean = level.toLowerCase() === 'none'
 
       logger = winston.createLogger({
-        level: level as winston.level,
+        level,
         transports: [
           new winston.transports.Console({
             silent: loggingDisabled,

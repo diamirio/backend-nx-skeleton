@@ -16,8 +16,8 @@ import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
 import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 export class DockerHelper {
-  public dockerConfigLocation: string = join(this.cmd.config.root, 'templates', 'containers')
-  public templatesLocation: string = join(this.cmd.config.root, 'templates', 'base')
+  public dockerConfigLocation: string
+  public templatesLocation: string
 
   constructor (
     private readonly cmd: BaseCommand,
@@ -25,6 +25,9 @@ export class DockerHelper {
   ) {
     cmd.logger.debug('DockerHelper initiated.')
     this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
+
+    this.dockerConfigLocation = join(this.cmd.config.root, 'templates', 'containers')
+    this.templatesLocation = join(this.cmd.config.root, 'templates', 'base')
   }
 
   generateGetContainerTasks (): Listr {
