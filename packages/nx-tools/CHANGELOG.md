@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [5.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.5...@webundsoehne/nx-tools@5.0.6) (2022-02-04)
+
+### Bug Fixes
+
+- update internal dependencies ([0a943b0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0a943b0e7ac94809be69af68fc59b006ca2733f9))
+
 ## @webundsoehne/nx-tools [5.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.4...@webundsoehne/nx-tools@5.0.5) (2022-02-04)
 
 ### Bug Fixes

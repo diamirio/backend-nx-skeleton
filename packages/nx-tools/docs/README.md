@@ -111,11 +111,11 @@
 
 ### Variables
 
-- [LINTER\_VERSIONS](README.md#linter_versions)
+- [LINTER_VERSIONS](README.md#linter_versions)
 - [PackageManagerCommands](README.md#packagemanagercommands)
 - [PrettyNamesDefault](README.md#prettynamesdefault)
-- [RUN\_PACKAGE\_MANAGER\_TASK\_NAME](README.md#run_package_manager_task_name)
-- [WINSTON\_INSTANCE](README.md#winston_instance)
+- [RUN_PACKAGE_MANAGER_TASK_NAME](README.md#run_package_manager_task_name)
+- [WINSTON_INSTANCE](README.md#winston_instance)
 - [color](README.md#color)
 
 ### Functions
@@ -215,13 +215,13 @@
 
 ### AssetGlob
 
-Ƭ **AssetGlob**: [`FileInputOutput`](interfaces/FileInputOutput.md) & { `glob`: `string` ; `ignore?`: `string`[]  }
+Ƭ **AssetGlob**: [`FileInputOutput`](interfaces/FileInputOutput.md) & { `glob`: `string` ; `ignore?`: `string`[] }
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/assets.interface.ts:8
 
-___
+---
 
 ### AvailableAssetGlob
 
@@ -231,111 +231,110 @@ ___
 
 packages/nx-tools/src/interfaces/assets.interface.ts:1
 
-___
+---
 
 ### AvailableLogLevels
 
-Ƭ **AvailableLogLevels**: keyof `Omit`<`LoggerApi`, ``"createChild"`` \| ``"log"``\>
+Ƭ **AvailableLogLevels**: keyof `Omit`<`LoggerApi`, `"createChild"` \| `"log"`\>
 
 #### Defined in
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:4
 
-___
+---
 
 ### BaseIntegration
 
-Ƭ **BaseIntegration**<`T`\>: `T` extends ``null`` ? `Partial`<`Integration`\> : `Partial`<`T`\> & `Partial`<`Integration`\>
+Ƭ **BaseIntegration**<`T`\>: `T` extends `null` ? `Partial`<`Integration`\> : `Partial`<`T`\> & `Partial`<`Integration`\>
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `unknown`\> \| ``null`` = ``null`` |
+| Name | Type                                                      |
+| :--- | :-------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `unknown`\> \| `null` = `null` |
 
 #### Defined in
 
 packages/nx-tools/src/integration/integration.interface.ts:8
 
-___
+---
 
 ### ConvertToPromptType
 
-Ƭ **ConvertToPromptType**<`T`\>: { [name: string]: `any`; `message`: `string` ; `name`: `T`  }[]
+Ƭ **ConvertToPromptType**<`T`\>: { [name: string]: `any`; `message`: `string` ; `name`: `T` }[]
 
 Converts a input type into the prompt type that is consumed by enquirer.
 
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/parse-arguments.interface.ts:4
 
-___
+---
 
 ### Dependency
 
-Ƭ **Dependency**: `Record`<`string`, `string` \| { `implicit?`: `boolean` ; `version`: `string`  }\>
+Ƭ **Dependency**: `Record`<`string`, `string` \| { `implicit?`: `boolean` ; `version`: `string` }\>
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/versions.interface.ts:1
 
-___
+---
 
 ### DependencyCalculatorOptions
 
-Ƭ **DependencyCalculatorOptions**: { `condition?`: `boolean` ; `deps`: [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md)  }[]
+Ƭ **DependencyCalculatorOptions**: { `condition?`: `boolean` ; `deps`: [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md) }[]
 
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/dependency-calculator.interface.ts:3
 
-___
+---
 
 ### EnrichedNxConfiguration
 
 Ƭ **EnrichedNxConfiguration**: `NxJsonConfiguration`
 
-nx.json interface expanded before, although nx has changed configuration now, that removes this need
-we may need in future, so instead of importing NxJson from nx we can still use ours.
+nx.json interface expanded before, although nx has changed configuration now, that removes this need we may need in future, so instead of importing NxJson from nx we can still use ours.
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:23
 
-___
+---
 
 ### ExtensionsMap
 
-Ƭ **ExtensionsMap**<`ExtensionsType`, `Options`\>: `Record`<`ValueOf`<`ExtensionsType`\>, { `condition?`: `boolean` \| (`options`: `Options`) => `boolean`  }\>
+Ƭ **ExtensionsMap**<`ExtensionsType`, `Options`\>: `Record`<`ValueOf`<`ExtensionsType`\>, { `condition?`: `boolean` \| (`options`: `Options`) => `boolean` }\>
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `ExtensionsType` | extends `Record`<`string`, `any`\> |
-| `Options` | extends `Record`<`PropertyKey`, `any`\> |
+| Name             | Type                                    |
+| :--------------- | :-------------------------------------- |
+| `ExtensionsType` | extends `Record`<`string`, `any`\>      |
+| `Options`        | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/extensions.interface.ts:3
 
-___
+---
 
 ### GeneratedNameCases
 
-Ƭ **GeneratedNameCases**: `Record`<``"camel"`` \| ``"kebab"`` \| ``"snake"`` \| ``"upper"`` \| ``"pascal"``, `string`\>
+Ƭ **GeneratedNameCases**: `Record`<`"camel"` \| `"kebab"` \| `"snake"` \| `"upper"` \| `"pascal"`, `string`\>
 
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/generate-name-cases.interface.ts:1
 
-___
+---
 
 ### ImplicitDependencies
 
@@ -345,11 +344,11 @@ ___
 
 packages/nx-tools/src/interfaces/versions.interface.ts:2
 
-___
+---
 
 ### LinterVersions
 
-Ƭ **LinterVersions**: `Record`<``"eslint"``, [`LinterDependencies`](interfaces/LinterDependencies.md)\>
+Ƭ **LinterVersions**: `Record`<`"eslint"`, [`LinterDependencies`](interfaces/LinterDependencies.md)\>
 
 Version constants that is shared through multiple places.
 
@@ -357,7 +356,7 @@ Version constants that is shared through multiple places.
 
 packages/nx-tools/src/utils/linter-versions.interface.ts:9
 
-___
+---
 
 ### NodeDependency
 
@@ -367,7 +366,7 @@ ___
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:37
 
-___
+---
 
 ### PackageManagerActions
 
@@ -377,57 +376,57 @@ ___
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:7
 
-___
+---
 
 ### PackageManagerArgumentParser
 
-Ƭ **PackageManagerArgumentParser**: { `args?`: `string` \| `string`[] ; `command?`: [`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md) ; `condition`: `boolean`  }[]
+Ƭ **PackageManagerArgumentParser**: { `args?`: `string` \| `string`[] ; `command?`: [`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md) ; `condition`: `boolean` }[]
 
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:66
 
-___
+---
 
 ### PackageManagerEnvironmentParser
 
-Ƭ **PackageManagerEnvironmentParser**: { `args?`: `string` ; `command?`: [`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md) ; `condition`: `boolean` ; `value`: `string`  }[]
+Ƭ **PackageManagerEnvironmentParser**: { `args?`: `string` ; `command?`: [`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md) ; `condition`: `boolean` ; `value`: `string` }[]
 
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:67
 
-___
+---
 
 ### PackageManagerPackageAction
 
-Ƭ **PackageManagerPackageAction**: { `action`: [`ADD`](enums/PackageManagerUsableCommands.md#add) \| [`REMOVE`](enums/PackageManagerUsableCommands.md#remove) ; `package`: [`NodeDependency`](README.md#nodedependency) ; `type?`: [`PackageManagerDependencyTypes`](enums/PackageManagerDependencyTypes.md) ; `useLatest?`: `boolean`  } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
+Ƭ **PackageManagerPackageAction**: { `action`: [`ADD`](enums/PackageManagerUsableCommands.md#add) \| [`REMOVE`](enums/PackageManagerUsableCommands.md#remove) ; `package`: [`NodeDependency`](README.md#nodedependency) ; `type?`: [`PackageManagerDependencyTypes`](enums/PackageManagerDependencyTypes.md) ; `useLatest?`: `boolean` } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
 
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:9
 
-___
+---
 
 ### PackageManagerWithCommandAction
 
-Ƭ **PackageManagerWithCommandAction**: { `action`: [`RUN`](enums/PackageManagerUsableCommands.md#run) \| [`EXEC`](enums/PackageManagerUsableCommands.md#exec) ; `args?`: `string`[] ; `command`: `string`  } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
+Ƭ **PackageManagerWithCommandAction**: { `action`: [`RUN`](enums/PackageManagerUsableCommands.md#run) \| [`EXEC`](enums/PackageManagerUsableCommands.md#exec) ; `args?`: `string`[] ; `command`: `string` } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
 
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:20
 
-___
+---
 
 ### PackageManagerWithoutCommandAction
 
-Ƭ **PackageManagerWithoutCommandAction**: { `action`: [`INSTALL`](enums/PackageManagerUsableCommands.md#install) \| [`ROOT`](enums/PackageManagerUsableCommands.md#root)  } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
+Ƭ **PackageManagerWithoutCommandAction**: { `action`: [`INSTALL`](enums/PackageManagerUsableCommands.md#install) \| [`ROOT`](enums/PackageManagerUsableCommands.md#root) } & [`PackageManagerCommonAction`](interfaces/PackageManagerCommonAction.md)
 
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:16
 
-___
+---
 
 ### PrettyNames
 
@@ -435,15 +434,15 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `string` = `never` |
+| Name | Type                       |
+| :--- | :------------------------- |
+| `T`  | extends `string` = `never` |
 
 #### Defined in
 
 packages/nx-tools/src/constants/available.constants.ts:25
 
-___
+---
 
 ### RunPackageManagerTaskOptions
 
@@ -453,61 +452,61 @@ ___
 
 packages/nx-tools/src/tasks/run-package-manager/run-package-manager.interface.ts:5
 
-___
+---
 
 ### SchemaExtensions
 
-Ƭ **SchemaExtensions**<`Extensions`, `ExtensionsType`, `Values`\>: `Partial`<`Record`<``"extensions"``, `Values` extends ``true`` ? `Extensions`[] : `ExtensionsType`\>\>
+Ƭ **SchemaExtensions**<`Extensions`, `ExtensionsType`, `Values`\>: `Partial`<`Record`<`"extensions"`, `Values` extends `true` ? `Extensions`[] : `ExtensionsType`\>\>
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Extensions` | `Extensions` |
-| `ExtensionsType` | `ExtensionsType` |
-| `Values` | extends `boolean` = ``false`` |
+| Name             | Type                        |
+| :--------------- | :-------------------------- |
+| `Extensions`     | `Extensions`                |
+| `ExtensionsType` | `ExtensionsType`            |
+| `Values`         | extends `boolean` = `false` |
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:86
 
-___
+---
 
 ### SchemaParentPriorConfiguration
 
-Ƭ **SchemaParentPriorConfiguration**<`T`\>: `Record`<``"parentPriorConfiguration"``, `T`\>
+Ƭ **SchemaParentPriorConfiguration**<`T`\>: `Record`<`"parentPriorConfiguration"`, `T`\>
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> |
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:84
 
-___
+---
 
 ### SchemaPriorConfiguration
 
-Ƭ **SchemaPriorConfiguration**<`T`\>: `Record`<``"priorConfiguration"``, `T`\>
+Ƭ **SchemaPriorConfiguration**<`T`\>: `Record`<`"priorConfiguration"`, `T`\>
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> |
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:82
 
-___
+---
 
 ### SchematicFiles
 
-Ƭ **SchematicFiles**: `Record`<`string`, { `condition?`: `boolean` ; `files?`: `string`[] ; `folders?`: `string`[]  }\>
+Ƭ **SchematicFiles**: `Record`<`string`, { `condition?`: `boolean` ; `files?`: `string`[] ; `folders?`: `string`[] }\>
 
 Schematic files to store conditional file and folder locations, where they can be part of the include statement in createApplicationRule.
 
@@ -515,7 +514,7 @@ Schematic files to store conditional file and folder locations, where they can b
 
 packages/nx-tools/src/interfaces/schematic-files.interface.ts:4
 
-___
+---
 
 ### SchematicRule
 
@@ -527,9 +526,9 @@ ___
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type               |
+| :-------- | :----------------- |
+| `host`    | `Tree`             |
 | `context` | `SchematicContext` |
 
 ##### Returns
@@ -540,7 +539,7 @@ ___
 
 packages/nx-tools/src/interfaces/schematic.interface.ts:3
 
-___
+---
 
 ### SelectParentApplicationFn
 
@@ -548,8 +547,8 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name          | Type                               |
+| :------------ | :--------------------------------- |
 | `Integration` | extends `Record`<`string`, `any`\> |
 
 #### Type declaration
@@ -558,9 +557,9 @@ ___
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
+| Name      | Type                                                                                         |
+| :-------- | :------------------------------------------------------------------------------------------- |
+| `name`    | `string`                                                                                     |
 | `project` | [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`Integration`\> |
 
 ##### Returns
@@ -571,26 +570,26 @@ ___
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:88
 
-___
+---
 
 ### VersionsMap
 
-Ƭ **VersionsMap**<`T`, `K`\>: `Record`<``"base"``, `Record`<`K`, [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md)\>\> & `Partial`<`Record`<`T`, [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md)\>\>
+Ƭ **VersionsMap**<`T`, `K`\>: `Record`<`"base"`, `Record`<`K`, [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md)\>\> & `Partial`<`Record`<`T`, [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md)\>\>
 
 For defining a version constant object that is used to install dependencies.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `PropertyKey` |
-| `K` | extends `PropertyKey` |
+| Name | Type                  |
+| :--- | :-------------------- |
+| `T`  | extends `PropertyKey` |
+| `K`  | extends `PropertyKey` |
 
 #### Defined in
 
 packages/nx-tools/src/interfaces/versions.interface.ts:21
 
-___
+---
 
 ### Winston
 
@@ -602,9 +601,9 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:24
 
 ## Variables
 
-### LINTER\_VERSIONS
+### LINTER_VERSIONS
 
-• **LINTER\_VERSIONS**: [`LinterVersions`](README.md#linterversions)
+• **LINTER_VERSIONS**: [`LinterVersions`](README.md#linterversions)
 
 Version constants that is shared through multiple places.
 
@@ -612,7 +611,7 @@ Version constants that is shared through multiple places.
 
 packages/nx-tools/src/utils/linter-versions.constants.ts:6
 
-___
+---
 
 ### PackageManagerCommands
 
@@ -622,7 +621,7 @@ ___
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:25
 
-___
+---
 
 ### PrettyNamesDefault
 
@@ -634,27 +633,27 @@ Prettified names for components to use with prompts and such.
 
 packages/nx-tools/src/constants/available.constants.ts:30
 
-___
+---
 
-### RUN\_PACKAGE\_MANAGER\_TASK\_NAME
+### RUN_PACKAGE_MANAGER_TASK_NAME
 
-• **RUN\_PACKAGE\_MANAGER\_TASK\_NAME**: ``"run-package-manager-task"``
+• **RUN_PACKAGE_MANAGER_TASK_NAME**: `"run-package-manager-task"`
 
 #### Defined in
 
 packages/nx-tools/src/tasks/run-package-manager/run-package-manager.interface.ts:3
 
-___
+---
 
-### WINSTON\_INSTANCE
+### WINSTON_INSTANCE
 
-• **WINSTON\_INSTANCE**: ``"WINSTON_DEFAULT_LOGGER"``
+• **WINSTON_INSTANCE**: `"WINSTON_DEFAULT_LOGGER"`
 
 #### Defined in
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
-___
+---
 
 ### color
 
@@ -672,8 +671,8 @@ packages/nx-tools/src/utils/logger/colorette.ts:3
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type                                               |
+| :----- | :------------------------------------------------- |
 | `data` | [`PackageVersions`](interfaces/PackageVersions.md) |
 
 #### Returns
@@ -682,9 +681,9 @@ packages/nx-tools/src/utils/logger/colorette.ts:3
 
 #### Defined in
 
-packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:13
+packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:14
 
-___
+---
 
 ### addDependenciesToProjectPackageJsonRule
 
@@ -692,16 +691,16 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
+| Name | Type                                                                         |
+| :--- | :--------------------------------------------------------------------------- |
+| `T`  | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `T` |
-| `data` | [`PackageVersions`](interfaces/PackageVersions.md) |
+| Name      | Type                                               |
+| :-------- | :------------------------------------------------- |
+| `options` | `T`                                                |
+| `data`    | [`PackageVersions`](interfaces/PackageVersions.md) |
 
 #### Returns
 
@@ -709,9 +708,9 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:9
+packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:10
 
-___
+---
 
 ### addEslintConfigRule
 
@@ -721,18 +720,18 @@ Adding eslint to workspace
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
+| Name | Type                                                                         |
+| :--- | :--------------------------------------------------------------------------- |
+| `T`  | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `T` |
-| `eslint` | `Object` |
-| `eslint.deps` | `any` |
-| `eslint.json` | `any` |
+| Name          | Type     |
+| :------------ | :------- |
+| `options`     | `T`      |
+| `eslint`      | `Object` |
+| `eslint.deps` | `any`    |
+| `eslint.json` | `any`    |
 
 #### Returns
 
@@ -744,7 +743,7 @@ Rule
 
 packages/nx-tools/src/rules/add-eslint.rule.ts:20
 
-___
+---
 
 ### addExternalSchematicTask
 
@@ -755,18 +754,18 @@ Add a external schmatic task to run after the actions finish.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `SchematicContext` |
-| `collection` | `string` |
-| `schematic` | `string` |
-| `options` | `T` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `collection`    | `string`           |
+| `schematic`     | `string`           |
+| `options`       | `T`                |
+| `dependencies?` | `TaskId`[]         |
 
 #### Returns
 
@@ -776,7 +775,7 @@ Add a external schmatic task to run after the actions finish.
 
 packages/nx-tools/src/tasks/run-schematic-after.ts:25
 
-___
+---
 
 ### addExternalSchematicTaskRule
 
@@ -785,16 +784,16 @@ ___
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `collection` | `string` |
-| `schematic` | `string` |
-| `options` | `T` |
+| Name            | Type       |
+| :-------------- | :--------- |
+| `collection`    | `string`   |
+| `schematic`     | `string`   |
+| `options`       | `T`        |
 | `dependencies?` | `TaskId`[] |
 
 #### Returns
@@ -805,7 +804,7 @@ ___
 
 packages/nx-tools/src/tasks/run-schematic-after.ts:29
 
-___
+---
 
 ### addGitTask
 
@@ -815,11 +814,11 @@ Add a git init task to context to install the dependencies, ripped of from nx bu
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `SchematicContext` |
-| `options?` | `TaskOptions` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `options?`      | `TaskOptions`      |
+| `dependencies?` | `TaskId`[]         |
 
 #### Returns
 
@@ -829,7 +828,7 @@ Add a git init task to context to install the dependencies, ripped of from nx bu
 
 packages/nx-tools/src/tasks/initialize-git.ts:13
 
-___
+---
 
 ### addGitTaskRule
 
@@ -837,10 +836,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options?` | `TaskOptions` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type          |
+| :-------------- | :------------ |
+| `options?`      | `TaskOptions` |
+| `dependencies?` | `TaskId`[]    |
 
 #### Returns
 
@@ -850,7 +849,7 @@ ___
 
 packages/nx-tools/src/tasks/initialize-git.ts:19
 
-___
+---
 
 ### addInstallTask
 
@@ -860,11 +859,11 @@ Add a install task to context to install the dependencies, ripped of from nx but
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `SchematicContext` |
-| `options?` | `TaskOptions` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `options?`      | `TaskOptions`      |
+| `dependencies?` | `TaskId`[]         |
 
 #### Returns
 
@@ -874,7 +873,7 @@ Add a install task to context to install the dependencies, ripped of from nx but
 
 packages/nx-tools/src/tasks/install-dependencies.ts:14
 
-___
+---
 
 ### addInstallTaskRule
 
@@ -882,10 +881,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options?` | `TaskOptions` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type          |
+| :-------------- | :------------ |
+| `options?`      | `TaskOptions` |
+| `dependencies?` | `TaskId`[]    |
 
 #### Returns
 
@@ -895,7 +894,7 @@ ___
 
 packages/nx-tools/src/tasks/install-dependencies.ts:26
 
-___
+---
 
 ### addMultipleDependentTasksRule
 
@@ -903,14 +902,14 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `string`\> |
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `T`  | extends `Record`<`string`, `string`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type                                 |
+| :------ | :----------------------------------- |
 | `tasks` | [`Task`](interfaces/Task.md)<`T`\>[] |
 
 #### Returns
@@ -921,7 +920,7 @@ ___
 
 packages/nx-tools/src/tasks/manage-multiple-tasks.ts:8
 
-___
+---
 
 ### addNxImplicitDependenciesRule
 
@@ -929,8 +928,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type                            |
+| :----- | :------------------------------ |
 | `deps` | `Record`<`string`, `string`[]\> |
 
 #### Returns
@@ -941,7 +940,7 @@ ___
 
 packages/nx-tools/src/rules/add-nx-implicit-dependencies.rule.ts:6
 
-___
+---
 
 ### addRunWorkspaceScriptTask
 
@@ -951,11 +950,11 @@ Add a schematic task to run after the actions finish.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `SchematicContext` |
-| `options` | `Schema` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `options`       | `Schema`           |
+| `dependencies?` | `TaskId`[]         |
 
 #### Returns
 
@@ -965,7 +964,7 @@ Add a schematic task to run after the actions finish.
 
 packages/nx-tools/src/tasks/package-manager.ts:11
 
-___
+---
 
 ### addRunWorkspaceScriptTaskRule
 
@@ -973,9 +972,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Schema` |
+| Name            | Type       |
+| :-------------- | :--------- |
+| `options`       | `Schema`   |
 | `dependencies?` | `TaskId`[] |
 
 #### Returns
@@ -986,7 +985,7 @@ ___
 
 packages/nx-tools/src/tasks/package-manager.ts:15
 
-___
+---
 
 ### addSchematicTask
 
@@ -997,17 +996,17 @@ Add a schematic task to run after the actions finish.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `SchematicContext` |
-| `schematic` | `string` |
-| `options` | `T` |
-| `dependencies?` | `TaskId`[] |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `schematic`     | `string`           |
+| `options`       | `T`                |
+| `dependencies?` | `TaskId`[]         |
 
 #### Returns
 
@@ -1017,7 +1016,7 @@ Add a schematic task to run after the actions finish.
 
 packages/nx-tools/src/tasks/run-schematic-after.ts:9
 
-___
+---
 
 ### addSchematicTaskRule
 
@@ -1026,15 +1025,15 @@ ___
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `schematic` | `string` |
-| `options` | `T` |
+| Name            | Type       |
+| :-------------- | :--------- |
+| `schematic`     | `string`   |
+| `options`       | `T`        |
 | `dependencies?` | `TaskId`[] |
 
 #### Returns
@@ -1045,7 +1044,7 @@ ___
 
 packages/nx-tools/src/tasks/run-schematic-after.ts:13
 
-___
+---
 
 ### applyOverwriteWithDiff
 
@@ -1059,11 +1058,11 @@ NX have a problem with its internal overwriting data mechanism so it is generate
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `source` | `Source` |
+| Name        | Type               |
+| :---------- | :----------------- |
+| `source`    | `Source`           |
 | `oldSource` | `void` \| `Source` |
-| `context` | `SchematicContext` |
+| `context`   | `SchematicContext` |
 
 #### Returns
 
@@ -1073,7 +1072,7 @@ NX have a problem with its internal overwriting data mechanism so it is generate
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:23
 
-___
+---
 
 ### checkPathsExists
 
@@ -1083,8 +1082,8 @@ Check if file that is supposed to be executable is defined inside the node_modul
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type                          |
+| :------ | :---------------------------- |
 | `paths` | `Record`<`string`, `string`\> |
 
 #### Returns
@@ -1095,7 +1094,7 @@ Check if file that is supposed to be executable is defined inside the node_modul
 
 packages/nx-tools/src/utils/file-system/file-system.ts:9
 
-___
+---
 
 ### convertAngularTreeToNxTree
 
@@ -1103,9 +1102,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name    | Type     |
+| :------ | :------- |
+| `host`  | `Tree`   |
 | `root?` | `string` |
 
 #### Returns
@@ -1116,7 +1115,7 @@ ___
 
 packages/nx-tools/src/integration/nx-integration.ts:11
 
-___
+---
 
 ### convertDependencyCalculatorPackage
 
@@ -1126,8 +1125,8 @@ Reorders the package dependencies to move out the implicit ones in to a separate
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type                                                                       |
+| :----- | :------------------------------------------------------------------------- |
 | `deps` | [`DependencyCalculatorPackage`](interfaces/DependencyCalculatorPackage.md) |
 
 #### Returns
@@ -1138,7 +1137,7 @@ Reorders the package dependencies to move out the implicit ones in to a separate
 
 packages/nx-tools/src/utils/schematics/dependency-calculator.ts:53
 
-___
+---
 
 ### convertStringToDirPath
 
@@ -1146,11 +1145,11 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `dir` | `string` |
-| `options` | `Object` |
-| `options.end?` | `boolean` |
+| Name             | Type      |
+| :--------------- | :-------- |
+| `dir`            | `string`  |
+| `options`        | `Object`  |
+| `options.end?`   | `boolean` |
 | `options.start?` | `boolean` |
 
 #### Returns
@@ -1161,7 +1160,7 @@ ___
 
 packages/nx-tools/src/utils/file-system/general.ts:1
 
-___
+---
 
 ### createApplicationRule
 
@@ -1171,17 +1170,17 @@ Returns a general application rule that can be used in schematics.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`BaseCreateApplicationFilesOptions`](interfaces/BaseCreateApplicationFilesOptions.md) |
+| Name | Type                                                                                           |
+| :--- | :--------------------------------------------------------------------------------------------- |
+| `T`  | extends [`BaseCreateApplicationFilesOptions`](interfaces/BaseCreateApplicationFilesOptions.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `rules` | [`CreateApplicationRuleInterface`](interfaces/CreateApplicationRuleInterface.md) |
-| `options?` | `T` |
-| `ruleOptions?` | [`CreateApplicationRuleOptions`](interfaces/CreateApplicationRuleOptions.md) |
+| Name           | Type                                                                             |
+| :------------- | :------------------------------------------------------------------------------- |
+| `rules`        | [`CreateApplicationRuleInterface`](interfaces/CreateApplicationRuleInterface.md) |
+| `options?`     | `T`                                                                              |
+| `ruleOptions?` | [`CreateApplicationRuleOptions`](interfaces/CreateApplicationRuleOptions.md)     |
 
 #### Returns
 
@@ -1191,7 +1190,7 @@ Returns a general application rule that can be used in schematics.
 
 packages/nx-tools/src/rules/create-application.rule.ts:14
 
-___
+---
 
 ### createFileBackup
 
@@ -1201,11 +1200,11 @@ Creates a file backup in tree.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
-| `file` | `FileEntry` |
-| `log` | [`Logger`](classes/Logger.md) |
+| Name   | Type                          |
+| :----- | :---------------------------- |
+| `host` | `Tree`                        |
+| `file` | `FileEntry`                   |
+| `log`  | [`Logger`](classes/Logger.md) |
 
 #### Returns
 
@@ -1215,7 +1214,7 @@ Creates a file backup in tree.
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:297
 
-___
+---
 
 ### createWorkspaceProject
 
@@ -1225,16 +1224,16 @@ Creates a new project in the workspace.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
-| `name` | `string` |
+| Name            | Type                                                                               |
+| :-------------- | :--------------------------------------------------------------------------------- |
+| `host`          | `Tree`                                                                             |
+| `name`          | `string`                                                                           |
 | `configuration` | [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`T`\> |
 
 #### Returns
@@ -1245,7 +1244,7 @@ Creates a new project in the workspace.
 
 packages/nx-tools/src/integration/integration.ts:91
 
-___
+---
 
 ### createWorkspaceProjectRule
 
@@ -1255,15 +1254,15 @@ Creates a new project in the workspace.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
+| Name            | Type                                                                               |
+| :-------------- | :--------------------------------------------------------------------------------- |
+| `name`          | `string`                                                                           |
 | `configuration` | [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`T`\> |
 
 #### Returns
@@ -1274,7 +1273,7 @@ Creates a new project in the workspace.
 
 packages/nx-tools/src/rules/integration.rule.ts:10
 
-___
+---
 
 ### dependencyCalculator
 
@@ -1284,8 +1283,8 @@ Calculates the dependencies with a given condition, returns the package versions
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                                                   |
+| :-------- | :--------------------------------------------------------------------- |
 | `options` | [`DependencyCalculatorOptions`](README.md#dependencycalculatoroptions) |
 
 #### Returns
@@ -1296,7 +1295,7 @@ Calculates the dependencies with a given condition, returns the package versions
 
 packages/nx-tools/src/utils/schematics/dependency-calculator.ts:12
 
-___
+---
 
 ### doubleFileMerge
 
@@ -1306,12 +1305,12 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
-| `newFile` | `string` |
-| `currentFile` | `string` |
-| `log` | [`Logger`](classes/Logger.md) |
+| Name          | Type                          |
+| :------------ | :---------------------------- |
+| `name`        | `string`                      |
+| `newFile`     | `string`                      |
+| `currentFile` | `string`                      |
+| `log`         | [`Logger`](classes/Logger.md) |
 
 #### Returns
 
@@ -1321,7 +1320,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:199
 
-___
+---
 
 ### ensureNxRootListrTask
 
@@ -1335,7 +1334,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/nx-root.ts:6
 
-___
+---
 
 ### eslintJson
 
@@ -1345,11 +1344,11 @@ Default eslint configuration to inject to repository.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Object` |
-| `options.override?` | `Record`<`string`, `any`\> |
-| `options.packageScope?` | `string` |
+| Name                    | Type                       |
+| :---------------------- | :------------------------- |
+| `options`               | `Object`                   |
+| `options.override?`     | `Record`<`string`, `any`\> |
+| `options.packageScope?` | `string`                   |
 
 #### Returns
 
@@ -1359,7 +1358,7 @@ Default eslint configuration to inject to repository.
 
 packages/nx-tools/src/constants/lint.constants.ts:4
 
-___
+---
 
 ### findNxRoot
 
@@ -1369,9 +1368,9 @@ Finds the root directory of nx through nx.json, workspace.json or angular.json
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options?` | `Object` |
+| Name             | Type      |
+| :--------------- | :-------- |
+| `options?`       | `Object`  |
 | `options.throw?` | `boolean` |
 
 #### Returns
@@ -1382,7 +1381,7 @@ Finds the root directory of nx through nx.json, workspace.json or angular.json
 
 packages/nx-tools/src/utils/file-system/find-nx-root.ts:9
 
-___
+---
 
 ### formatFilesRule
 
@@ -1396,8 +1395,8 @@ Will use prettier first, others after.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                     |
+| :--------- | :------------------------------------------------------- |
 | `options?` | [`FormatFilesOptions`](interfaces/FormatFilesOptions.md) |
 
 #### Returns
@@ -1408,7 +1407,7 @@ Will use prettier first, others after.
 
 packages/nx-tools/src/utils/file-system/format-files.ts:21
 
-___
+---
 
 ### formatTreeRule
 
@@ -1418,8 +1417,8 @@ Returns a general prettier-eslint format rule for schematics.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                     |
+| :--------- | :------------------------------------------------------- |
 | `options?` | [`FormatFilesOptions`](interfaces/FormatFilesOptions.md) |
 
 #### Returns
@@ -1430,7 +1429,7 @@ Returns a general prettier-eslint format rule for schematics.
 
 packages/nx-tools/src/rules/format-with-skip.rule.ts:14
 
-___
+---
 
 ### generateBuilderAssets
 
@@ -1438,13 +1437,13 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Object` |
-| `options.cwd?` | `string` |
-| `options.outDir` | `string` |
-| `options.workspaceRoot` | `string` |
-| `assets` | (`string` \| [`AssetGlob`](README.md#assetglob))[] |
+| Name                    | Type                                               |
+| :---------------------- | :------------------------------------------------- |
+| `options`               | `Object`                                           |
+| `options.cwd?`          | `string`                                           |
+| `options.outDir`        | `string`                                           |
+| `options.workspaceRoot` | `string`                                           |
+| `assets`                | (`string` \| [`AssetGlob`](README.md#assetglob))[] |
 
 #### Returns
 
@@ -1454,7 +1453,7 @@ ___
 
 packages/nx-tools/src/utils/schematics/copy-assets.ts:7
 
-___
+---
 
 ### generateExportsRule
 
@@ -1464,11 +1463,11 @@ Generates from given template. Will search for multiple files that match the imp
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `source` | `Source` |
-| `options` | [`GenerateExportsJinjaTemplateOptions`](interfaces/GenerateExportsJinjaTemplateOptions.md) |
-| `templatePath` | `string` \| `RegExp` |
+| Name           | Type                                                                                       |
+| :------------- | :----------------------------------------------------------------------------------------- |
+| `source`       | `Source`                                                                                   |
+| `options`      | [`GenerateExportsJinjaTemplateOptions`](interfaces/GenerateExportsJinjaTemplateOptions.md) |
+| `templatePath` | `string` \| `RegExp`                                                                       |
 
 #### Returns
 
@@ -1478,7 +1477,7 @@ Generates from given template. Will search for multiple files that match the imp
 
 packages/nx-tools/src/rules/generate-exports.rule.ts:19
 
-___
+---
 
 ### generateNameCases
 
@@ -1486,8 +1485,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type     |
+| :----- | :------- |
 | `name` | `string` |
 
 #### Returns
@@ -1498,7 +1497,7 @@ ___
 
 packages/nx-tools/src/utils/schematics/generate-name-cases.ts:5
 
-___
+---
 
 ### generateProjectLintTarget
 
@@ -1506,11 +1505,11 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Object` |
+| Name              | Type                                                    |
+| :---------------- | :------------------------------------------------------ |
+| `options`         | `Object`                                                |
 | `options.linter?` | [`AvailableLinterTypes`](enums/AvailableLinterTypes.md) |
-| `options.root` | `string` |
+| `options.root`    | `string`                                                |
 
 #### Returns
 
@@ -1520,30 +1519,30 @@ ___
 
 packages/nx-tools/src/utils/schematics/generate-project-lint-target.ts:7
 
-___
+---
 
 ### getFilesInTree
 
-▸ **getFilesInTree**(`host`, `filter?`): `Set`<{ `content?`: `string` ; `kind`: ``"c"`` \| ``"o"`` \| ``"r"`` \| ``"d"`` ; `path`: `string`  }\>
+▸ **getFilesInTree**(`host`, `filter?`): `Set`<{ `content?`: `string` ; `kind`: `"c"` \| `"o"` \| `"r"` \| `"d"` ; `path`: `string` }\>
 
 Will return the files in the given source tree applying the filters.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type                              |
+| :-------- | :-------------------------------- |
+| `host`    | `Tree`                            |
 | `filter?` | (`action`: `Action`) => `boolean` |
 
 #### Returns
 
-`Set`<{ `content?`: `string` ; `kind`: ``"c"`` \| ``"o"`` \| ``"r"`` \| ``"d"`` ; `path`: `string`  }\>
+`Set`<{ `content?`: `string` ; `kind`: `"c"` \| `"o"` \| `"r"` \| `"d"` ; `path`: `string` }\>
 
 #### Defined in
 
 packages/nx-tools/src/utils/file-system/file-system.ts:28
 
-___
+---
 
 ### getInitialFromPriorConfiguration
 
@@ -1551,17 +1550,17 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> & `Record`<``"priorConfiguration"``, `any`\> |
-| `K` | `K` |
+| Name | Type                                                                               |
+| :--- | :--------------------------------------------------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> & `Record`<`"priorConfiguration"`, `any`\> |
+| `K`  | `K`                                                                                |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `ctx` | `T` |
-| `key` | keyof `T`[``"priorConfiguration"``] |
+| Name      | Type                                                         |
+| :-------- | :----------------------------------------------------------- |
+| `ctx`     | `T`                                                          |
+| `key`     | keyof `T`[``"priorConfiguration"``]                          |
 | `choices` | [`ConvertToPromptType`](README.md#converttoprompttype)<`K`\> |
 
 #### Returns
@@ -1572,7 +1571,7 @@ ___
 
 packages/nx-tools/src/utils/schematics/get-initial-from-prior.ts:3
 
-___
+---
 
 ### getJinjaDefaults
 
@@ -1582,8 +1581,8 @@ Default settings for jinja compatible nunjucks.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type               |
+| :--------- | :----------------- |
 | `options?` | `ConfigureOptions` |
 
 #### Returns
@@ -1594,7 +1593,7 @@ typeof `nunjucks`
 
 packages/nx-tools/src/templates/jinja-defaults.ts:7
 
-___
+---
 
 ### getNodeBinaryPath
 
@@ -1606,8 +1605,8 @@ Returns the binary path for a given cli in node_modules.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type     |
+| :----- | :------- |
 | `bin?` | `string` |
 
 #### Returns
@@ -1618,7 +1617,7 @@ Returns the binary path for a given cli in node_modules.
 
 packages/nx-tools/src/utils/file-system/node-bin.ts:11
 
-___
+---
 
 ### isBuildContext
 
@@ -1628,8 +1627,8 @@ Returns whether this given context is a run type of context or a build type of c
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                                        |
+| :-------- | :---------------------------------------------------------- |
 | `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
 
 #### Returns
@@ -1640,7 +1639,7 @@ context is BuilderContext
 
 packages/nx-tools/src/utils/schematics/is-context.ts:19
 
-___
+---
 
 ### isDevelopmentMode
 
@@ -1656,7 +1655,7 @@ Returns if angular cli is running with development flag.
 
 packages/nx-tools/src/utils/schematics/is-development-mode.ts:6
 
-___
+---
 
 ### isExecutorContext
 
@@ -1666,8 +1665,8 @@ Returns whether this is the new type of context nx has old legacy context.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                                        |
+| :-------- | :---------------------------------------------------------- |
 | `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
 
 #### Returns
@@ -1678,7 +1677,7 @@ context is ExecutorContext
 
 packages/nx-tools/src/utils/schematics/is-context.ts:8
 
-___
+---
 
 ### isVerbose
 
@@ -1694,7 +1693,7 @@ Returns if angular cli is running with verbose flag.s
 
 packages/nx-tools/src/utils/schematics/is-verbose.ts:6
 
-___
+---
 
 ### jinjaTemplate
 
@@ -1704,9 +1703,9 @@ Generates jinja templates with given context.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `ctx` | `Record`<`string`, `any`\> |
+| Name      | Type                                                         |
+| :-------- | :----------------------------------------------------------- |
+| `ctx`     | `Record`<`string`, `any`\>                                   |
 | `options` | [`JinjaTemplateOptions`](interfaces/JinjaTemplateOptions.md) |
 
 #### Returns
@@ -1717,7 +1716,7 @@ Generates jinja templates with given context.
 
 packages/nx-tools/src/templates/template-engine.ts:17
 
-___
+---
 
 ### mapPromptChoices
 
@@ -1728,14 +1727,14 @@ Converts the set of choices from an array of names to prettyfiying their names f
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keys` | `any` |
+| Name    | Type                          |
+| :------ | :---------------------------- |
+| `keys`  | `any`                         |
 | `names` | `Record`<`string`, `string`\> |
 
 #### Returns
@@ -1746,7 +1745,7 @@ Converts the set of choices from an array of names to prettyfiying their names f
 
 packages/nx-tools/src/utils/schematics/parse-arguments.ts:10
 
-___
+---
 
 ### mergeDependencies
 
@@ -1756,8 +1755,8 @@ Merge multiple set of dependencies together.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                     | Type                            |
+| :----------------------- | :------------------------------ |
 | `...dependenciesObjects` | `Record`<`string`, `string`\>[] |
 
 #### Returns
@@ -1768,7 +1767,7 @@ Merge multiple set of dependencies together.
 
 packages/nx-tools/src/utils/node/dependency-resolver.ts:5
 
-___
+---
 
 ### mergeFiles
 
@@ -1778,12 +1777,12 @@ Merges files the common part.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
-| `file` | `FileEntry` |
-| `mergedFiles` | `string` \| `boolean` |
-| `log` | [`Logger`](classes/Logger.md) |
+| Name          | Type                          |
+| :------------ | :---------------------------- |
+| `host`        | `Tree`                        |
+| `file`        | `FileEntry`                   |
+| `mergedFiles` | `string` \| `boolean`         |
+| `log`         | [`Logger`](classes/Logger.md) |
 
 #### Returns
 
@@ -1793,7 +1792,7 @@ Merges files the common part.
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:275
 
-___
+---
 
 ### multipleJinjaTemplate
 
@@ -1803,15 +1802,15 @@ Generates multiple files from single template with dynamic context.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `ctx` | `T` |
+| Name      | Type                                                                               |
+| :-------- | :--------------------------------------------------------------------------------- |
+| `ctx`     | `T`                                                                                |
 | `options` | [`MultipleJinjaTemplateOptions`](interfaces/MultipleJinjaTemplateOptions.md)<`T`\> |
 
 #### Returns
@@ -1822,7 +1821,7 @@ Generates multiple files from single template with dynamic context.
 
 packages/nx-tools/src/templates/template-engine.ts:70
 
-___
+---
 
 ### normalizeExtensionsPrompt
 
@@ -1831,17 +1830,17 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Extensions` | extends `string` |
 | `ExtensionsType` | extends `Record`<`PropertyKey`, `any`\> |
-| `Ctx` | extends `Partial`<`Record`<``"extensions"``, `Extensions`[]\>\> & [`SchemaPriorConfiguration`](README.md#schemapriorconfiguration)<`Partial`<`Record`<``"extensions"``, `Extensions`[]\>\>\> |
+| `Ctx` | extends `Partial`<`Record`<`"extensions"`, `Extensions`[]\>\> & [`SchemaPriorConfiguration`](README.md#schemapriorconfiguration)<`Partial`<`Record`<`"extensions"`, `Extensions`[]\>\>\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `extensions` | [`ExtensionsMap`](README.md#extensionsmap)<`ExtensionsType`, `Ctx`\> |
-| `prettyNames` | `Record`<`string`, `string`\> |
+| Name          | Type                                                                 |
+| :------------ | :------------------------------------------------------------------- |
+| `extensions`  | [`ExtensionsMap`](README.md#extensionsmap)<`ExtensionsType`, `Ctx`\> |
+| `prettyNames` | `Record`<`string`, `string`\>                                        |
 
 #### Returns
 
@@ -1851,7 +1850,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/extensions.ts:7
 
-___
+---
 
 ### normalizeNamePrompt
 
@@ -1859,8 +1858,8 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type                                             |
+| :---- | :----------------------------------------------- |
 | `Ctx` | extends [`BaseSchema`](interfaces/BaseSchema.md) |
 
 #### Returns
@@ -1871,7 +1870,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/generator-name.ts:20
 
-___
+---
 
 ### normalizeNameWithApplicationModePrompt
 
@@ -1880,15 +1879,15 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Ctx` | extends [`BaseSchema`](interfaces/BaseSchema.md) & [`BaseNormalizedSchema`](interfaces/BaseNormalizedSchema.md) & [`BaseSchemaModes`](interfaces/BaseSchemaModes.md) & [`SchemaPriorConfiguration`](README.md#schemapriorconfiguration)<`Integration`\> |
 | `Integration` | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type                                                                                                                                     |
+| :-------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`    | `Tree`                                                                                                                                   |
 | `select?` | (`name`: `string`, `project`: [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`Integration`\>) => `boolean` |
 
 #### Returns
@@ -1899,7 +1898,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/generator-name.ts:57
 
-___
+---
 
 ### normalizeNameWithParentAndDestinationPrompt
 
@@ -1907,16 +1906,16 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Ctx` | extends [`BaseSchemaWithParentAndConfigurationAndDestination`](interfaces/BaseSchemaWithParentAndConfigurationAndDestination.md)<`Ctx`\> |
-| `Integration` | extends `Record`<`string`, `any`\> |
+| Name          | Type                                                                                                                                     |
+| :------------ | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| `Ctx`         | extends [`BaseSchemaWithParentAndConfigurationAndDestination`](interfaces/BaseSchemaWithParentAndConfigurationAndDestination.md)<`Ctx`\> |
+| `Integration` | extends `Record`<`string`, `any`\>                                                                                                       |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type                                                                                                                                     |
+| :-------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`    | `Tree`                                                                                                                                   |
 | `select?` | (`name`: `string`, `project`: [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`Integration`\>) => `boolean` |
 
 #### Returns
@@ -1927,7 +1926,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/generator-name.ts:36
 
-___
+---
 
 ### normalizeNameWithParentApplicationPrompt
 
@@ -1936,15 +1935,15 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Ctx` | extends [`BaseSchemaWithParentAndConfiguration`](interfaces/BaseSchemaWithParentAndConfiguration.md)<`Partial`<`Integration`\>, `Ctx`\> & [`BaseNormalizedSchemaWithParent`](interfaces/BaseNormalizedSchemaWithParent.md)<`Integration`, `Ctx`\> |
 | `Integration` | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type                                                                               |
+| :-------- | :--------------------------------------------------------------------------------- |
+| `host`    | `Tree`                                                                             |
 | `select?` | [`SelectParentApplicationFn`](README.md#selectparentapplicationfn)<`Integration`\> |
 
 #### Returns
@@ -1955,7 +1954,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/generator-name.ts:115
 
-___
+---
 
 ### normalizePackageJsonNameForParentPrompt
 
@@ -1963,14 +1962,14 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type                                                                                                                                              |
+| :---- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `Ctx` | extends [`BaseSchemaParent`](interfaces/BaseSchemaParent.md) & [`BaseNormalizedSchemaPackageName`](interfaces/BaseNormalizedSchemaPackageName.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -1981,7 +1980,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/package.ts:34
 
-___
+---
 
 ### normalizePackageJsonNamePrompt
 
@@ -1989,14 +1988,14 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type                                                                                                                                  |
+| :---- | :------------------------------------------------------------------------------------------------------------------------------------ |
 | `Ctx` | extends [`BaseSchema`](interfaces/BaseSchema.md) & [`BaseNormalizedSchemaPackageName`](interfaces/BaseNormalizedSchemaPackageName.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2007,7 +2006,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/package.ts:19
 
-___
+---
 
 ### normalizeParentApplicationPrompt
 
@@ -2015,16 +2014,16 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Ctx` | extends [`BaseSchemaParent`](interfaces/BaseSchemaParent.md) |
-| `Integration` | extends `Record`<`string`, `any`\> |
+| Name          | Type                                                         |
+| :------------ | :----------------------------------------------------------- |
+| `Ctx`         | extends [`BaseSchemaParent`](interfaces/BaseSchemaParent.md) |
+| `Integration` | extends `Record`<`string`, `any`\>                           |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name      | Type                                                                               |
+| :-------- | :--------------------------------------------------------------------------------- |
+| `host`    | `Tree`                                                                             |
 | `select?` | [`SelectParentApplicationFn`](README.md#selectparentapplicationfn)<`Integration`\> |
 
 #### Returns
@@ -2035,7 +2034,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/generator-name.ts:137
 
-___
+---
 
 ### normalizeParentConfigurationPrompt
 
@@ -2043,14 +2042,14 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type                                                                                                                |
+| :---- | :------------------------------------------------------------------------------------------------------------------ |
 | `Ctx` | extends [`BaseSchemaWithParentAndConfiguration`](interfaces/BaseSchemaWithParentAndConfiguration.md)<`any`, `Ctx`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2061,7 +2060,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/prior-configuration.ts:48
 
-___
+---
 
 ### normalizeParentPriorConfigurationPrompt
 
@@ -2070,15 +2069,15 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Ctx` | extends [`BaseSchemaWithParentAndConfiguration`](interfaces/BaseSchemaWithParentAndConfiguration.md)<`Partial`<`Integration`\>, `Ctx`\> & [`BaseNormalizedSchemaWithParent`](interfaces/BaseNormalizedSchemaWithParent.md)<`Integration`, `Ctx`\> |
 | `Integration` | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name             | Type                |
+| :--------------- | :------------------ |
+| `host`           | `Tree`              |
 | `integrationKey` | keyof `Integration` |
 
 #### Returns
@@ -2089,7 +2088,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/prior-configuration.ts:75
 
-___
+---
 
 ### normalizePriorConfigurationPrompt
 
@@ -2098,15 +2097,15 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Ctx` | extends [`BaseSchema`](interfaces/BaseSchema.md) & [`BaseNormalizedSchema`](interfaces/BaseNormalizedSchema.md) & [`SchemaPriorConfiguration`](README.md#schemapriorconfiguration)<`Integration`\> |
 | `Integration` | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name             | Type                |
+| :--------------- | :------------------ |
+| `host`           | `Tree`              |
 | `integrationKey` | keyof `Integration` |
 
 #### Returns
@@ -2117,7 +2116,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/prior-configuration.ts:14
 
-___
+---
 
 ### normalizeRootDirectoryPrompt
 
@@ -2125,15 +2124,15 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Ctx` | extends `Partial`<{ `directory`: `string` ; `name`: `string` ; `packageScope`: `string` ; `root`: `string`  }\> |
+| Name  | Type                                                                                                           |
+| :---- | :------------------------------------------------------------------------------------------------------------- |
+| `Ctx` | extends `Partial`<{ `directory`: `string` ; `name`: `string` ; `packageScope`: `string` ; `root`: `string` }\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name          | Type                                        |
+| :------------ | :------------------------------------------ |
+| `host`        | `Tree`                                      |
 | `projectType` | [`NxProjectTypes`](enums/NxProjectTypes.md) |
 
 #### Returns
@@ -2144,7 +2143,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/root.ts:9
 
-___
+---
 
 ### normalizeWorkspacePackageScopePrompt
 
@@ -2152,14 +2151,14 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type                                                                                                                                    |
+| :---- | :-------------------------------------------------------------------------------------------------------------------------------------- |
 | `Ctx` | extends [`BaseSchema`](interfaces/BaseSchema.md) & [`BaseNormalizedSchemaPackageScope`](interfaces/BaseNormalizedSchemaPackageScope.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2170,7 +2169,7 @@ ___
 
 packages/nx-tools/src/utils/prompts/package.ts:7
 
-___
+---
 
 ### pipeProcessThroughListr
 
@@ -2178,9 +2177,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `task` | `TaskWrapper`<`any`, `any`\> |
+| Name       | Type                           |
+| :--------- | :----------------------------- |
+| `task`     | `TaskWrapper`<`any`, `any`\>   |
 | `instance` | `ExecaChildProcess`<`string`\> |
 
 #### Returns
@@ -2191,7 +2190,7 @@ ___
 
 packages/nx-tools/src/utils/logger/pipe-process-to-listr.ts:5
 
-___
+---
 
 ### pipeProcessToLogger
 
@@ -2201,10 +2200,10 @@ Given the instance it will pipe process output through the logger to append pref
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `BuilderContext` \| `ExecutorContext` |
-| `instance` | `ExecaChildProcess`<`string`\> |
+| Name       | Type                                                                     |
+| :--------- | :----------------------------------------------------------------------- |
+| `context`  | `BuilderContext` \| `ExecutorContext`                                    |
+| `instance` | `ExecaChildProcess`<`string`\>                                           |
 | `options?` | [`PipeProcessToLoggerOptions`](interfaces/PipeProcessToLoggerOptions.md) |
 
 #### Returns
@@ -2215,7 +2214,7 @@ Given the instance it will pipe process output through the logger to append pref
 
 packages/nx-tools/src/utils/logger/pipe-process-to-logger.ts:15
 
-___
+---
 
 ### readBrownieIntegration
 
@@ -2225,9 +2224,9 @@ Returns the brownie integration part of the nx.json.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name   | Type     |
+| :----- | :------- |
+| `host` | `Tree`   |
 | `name` | `string` |
 
 #### Returns
@@ -2238,7 +2237,7 @@ Returns the brownie integration part of the nx.json.
 
 packages/nx-tools/src/integration/brownie.ts:22
 
-___
+---
 
 ### readBrownieWorkspaceContainers
 
@@ -2248,8 +2247,8 @@ Returns sum of brownie containers read from nx.json.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type   |
+| :------ | :----- |
 | `host?` | `Tree` |
 
 #### Returns
@@ -2260,7 +2259,7 @@ Returns sum of brownie containers read from nx.json.
 
 packages/nx-tools/src/integration/brownie.ts:29
 
-___
+---
 
 ### readNxProjectIntegration
 
@@ -2270,15 +2269,15 @@ Returns the integration filed of a single project in nx.json.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name   | Type     |
+| :----- | :------- |
+| `host` | `Tree`   |
 | `name` | `string` |
 
 #### Returns
@@ -2289,7 +2288,7 @@ Returns the integration filed of a single project in nx.json.
 
 packages/nx-tools/src/integration/integration.ts:43
 
-___
+---
 
 ### readNxWorkspaceIntegration
 
@@ -2299,14 +2298,14 @@ Returns the integration filed of a all the projects in nx.json.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2317,7 +2316,7 @@ Returns the integration filed of a all the projects in nx.json.
 
 packages/nx-tools/src/integration/integration.ts:50
 
-___
+---
 
 ### readProjectConfiguration
 
@@ -2327,15 +2326,15 @@ Returns the workspace.json configuration for a given application.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
+| Name   | Type     |
+| :----- | :------- |
+| `host` | `Tree`   |
 | `name` | `string` |
 
 #### Returns
@@ -2346,7 +2345,7 @@ Returns the workspace.json configuration for a given application.
 
 packages/nx-tools/src/integration/integration.ts:84
 
-___
+---
 
 ### readWorkspaceConfiguration
 
@@ -2356,8 +2355,8 @@ Returns the workspace.json with extended typings.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2368,7 +2367,7 @@ Returns the workspace.json with extended typings.
 
 packages/nx-tools/src/integration/integration.ts:69
 
-___
+---
 
 ### readWorkspaceLayout
 
@@ -2376,8 +2375,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type   |
+| :----- | :----- |
 | `host` | `Tree` |
 
 #### Returns
@@ -2388,7 +2387,7 @@ ___
 
 packages/nx-tools/src/integration/nx-integration.ts:15
 
-___
+---
 
 ### readWorkspaceProjects
 
@@ -2398,14 +2397,14 @@ Reads all the workspace projects.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type   |
+| :------ | :----- |
 | `host?` | `Tree` |
 
 #### Returns
@@ -2416,7 +2415,7 @@ Reads all the workspace projects.
 
 packages/nx-tools/src/integration/integration.ts:76
 
-___
+---
 
 ### registerCustomTaskRunnersRule
 
@@ -2432,7 +2431,7 @@ Creates a new project in the workspace.
 
 packages/nx-tools/src/rules/register-custom-task-runners.rule.ts:10
 
-___
+---
 
 ### relativeToNxRoot
 
@@ -2442,8 +2441,8 @@ Returns the relative path from the nx root.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name   | Type     |
+| :----- | :------- |
 | `path` | `string` |
 
 #### Returns
@@ -2454,7 +2453,7 @@ Returns the relative path from the nx root.
 
 packages/nx-tools/src/utils/file-system/find-nx-root.ts:26
 
-___
+---
 
 ### removeNxJsonImplicitDependencies
 
@@ -2462,15 +2461,15 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
+| Name | Type                                                                         |
+| :--- | :--------------------------------------------------------------------------- |
+| `T`  | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `T` |
+| Name      | Type |
+| :-------- | :--- |
+| `options` | `T`  |
 
 #### Returns
 
@@ -2480,7 +2479,7 @@ ___
 
 packages/nx-tools/src/rules/remove-nx-json-implicit-dependencies.rule.ts:7
 
-___
+---
 
 ### removePathRoot
 
@@ -2490,9 +2489,9 @@ Removes the source root from the given path.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `filename` | `string` |
+| Name         | Type     |
+| :----------- | :------- |
+| `filename`   | `string` |
 | `sourceRoot` | `string` |
 
 #### Returns
@@ -2503,7 +2502,7 @@ Removes the source root from the given path.
 
 packages/nx-tools/src/utils/file-system/path-operations.ts:23
 
-___
+---
 
 ### removeTsConfigPathsRule
 
@@ -2513,11 +2512,11 @@ Removes tsconfig paths in the tsconfig.json
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Object` |
+| Name                  | Type     |
+| :-------------------- | :------- |
+| `options`             | `Object` |
 | `options.packageName` | `string` |
-| `options.tsconfig?` | `string` |
+| `options.tsconfig?`   | `string` |
 
 #### Returns
 
@@ -2527,7 +2526,7 @@ Removes tsconfig paths in the tsconfig.json
 
 packages/nx-tools/src/integration/update-ts-config.ts:41
 
-___
+---
 
 ### replaceExtension
 
@@ -2537,9 +2536,9 @@ Replaces given extension.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `path` | `string` |
+| Name        | Type     |
+| :---------- | :------- |
+| `path`      | `string` |
 | `extension` | `string` |
 
 #### Returns
@@ -2550,7 +2549,7 @@ Replaces given extension.
 
 packages/nx-tools/src/utils/file-system/path-operations.ts:8
 
-___
+---
 
 ### runExecutor
 
@@ -2560,16 +2559,16 @@ Run a designated builder that is extended from base builder in NX way.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends (`options`: `ExecutorOptions`, `context`: `ExecutorContext`) => [`BaseExecutor`](classes/BaseExecutor.md)<`ExecutorOptions`, `any`, `any`\> |
-| `ExecutorOptions` | extends `Record`<`string`, `any`\> |
+| Name              | Type                                                                                                                                                |
+| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `T`               | extends (`options`: `ExecutorOptions`, `context`: `ExecutorContext`) => [`BaseExecutor`](classes/BaseExecutor.md)<`ExecutorOptions`, `any`, `any`\> |
+| `ExecutorOptions` | extends `Record`<`string`, `any`\>                                                                                                                  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Executor` | `T` |
+| Name       | Type |
+| :--------- | :--- |
+| `Executor` | `T`  |
 
 #### Returns
 
@@ -2581,10 +2580,10 @@ Run a designated builder that is extended from base builder in NX way.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `ExecutorOptions` |
-| `builderContext` | `BuilderContext` |
+| Name             | Type              |
+| :--------------- | :---------------- |
+| `options`        | `ExecutorOptions` |
+| `builderContext` | `BuilderContext`  |
 
 ##### Returns
 
@@ -2594,7 +2593,7 @@ Run a designated builder that is extended from base builder in NX way.
 
 packages/nx-tools/src/utils/builders/run-executor.ts:14
 
-___
+---
 
 ### runInRule
 
@@ -2604,10 +2603,10 @@ Run something in a rule. It is just a empty function runs on condition. Just add
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `run` | (...`args`: `any`[]) => `void` | `undefined` |
-| `condition` | `boolean` | `true` |
+| Name        | Type                           | Default value |
+| :---------- | :----------------------------- | :------------ |
+| `run`       | (...`args`: `any`[]) => `void` | `undefined`   |
+| `condition` | `boolean`                      | `true`        |
 
 #### Returns
 
@@ -2617,7 +2616,7 @@ Run something in a rule. It is just a empty function runs on condition. Just add
 
 packages/nx-tools/src/rules/run.rule.ts:8
 
-___
+---
 
 ### runPackageManagerTaskExecutor
 
@@ -2625,8 +2624,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name              | Type     |
+| :---------------- | :------- |
 | `_factoryOptions` | `Schema` |
 
 #### Returns
@@ -2637,7 +2636,7 @@ ___
 
 packages/nx-tools/src/tasks/run-package-manager/run-package-manager.executor.ts:7
 
-___
+---
 
 ### selectivePatch
 
@@ -2647,10 +2646,10 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `patch` | `ParsedDiff` |
-| `select` | ``"add"`` \| ``"remove"`` |
+| Name     | Type                  |
+| :------- | :-------------------- |
+| `patch`  | `ParsedDiff`          |
+| `select` | `"add"` \| `"remove"` |
 
 #### Returns
 
@@ -2660,7 +2659,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:227
 
-___
+---
 
 ### setDevelopmentMode
 
@@ -2674,32 +2673,31 @@ ___
 
 packages/nx-tools/src/utils/schematics/is-development-mode.ts:10
 
-___
+---
 
 ### setSchemaDefaultsInContext
 
 ▸ **setSchemaDefaultsInContext**<`T`, `K`\>(`ctx`, `options`): `void`
 
-Given the context it initiates default keys and keys transfered over from the angular-schematics.
-Will mutate the object! That is the idea.
+Given the context it initiates default keys and keys transfered over from the angular-schematics. Will mutate the object! That is the idea.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | `Record`<`string`, `any`\> |
-| `K` | `Record`<`string`, `any`\> |
+| Name | Type                       |
+| :--- | :------------------------- |
+| `T`  | `Record`<`string`, `any`\> |
+| `K`  | `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `ctx` | `T` |  |
-| `options` | `Object` | While it will assign the keys directly in assign, it will set the defaults. |
-| `options.assign?` | `Object` | - |
-| `options.assign.from` | `K` | - |
-| `options.assign.keys` | keyof `K`[] | - |
-| `options.default?` | `Partial`<`T`\>[] | - |
+| Name                  | Type              | Description                                                                 |
+| :-------------------- | :---------------- | :-------------------------------------------------------------------------- |
+| `ctx`                 | `T`               |                                                                             |
+| `options`             | `Object`          | While it will assign the keys directly in assign, it will set the defaults. |
+| `options.assign?`     | `Object`          | -                                                                           |
+| `options.assign.from` | `K`               | -                                                                           |
+| `options.assign.keys` | keyof `K`[]       | -                                                                           |
+| `options.default?`    | `Partial`<`T`\>[] | -                                                                           |
 
 #### Returns
 
@@ -2709,7 +2707,7 @@ Will mutate the object! That is the idea.
 
 packages/nx-tools/src/utils/schematics/defaults.ts:7
 
-___
+---
 
 ### tripleFileMerge
 
@@ -2719,13 +2717,13 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
-| `currentFile` | `string` |
-| `oldFile` | `string` |
-| `newFile` | `string` |
-| `log` | [`Logger`](classes/Logger.md) |
+| Name          | Type                          |
+| :------------ | :---------------------------- |
+| `name`        | `string`                      |
+| `currentFile` | `string`                      |
+| `oldFile`     | `string`                      |
+| `newFile`     | `string`                      |
+| `log`         | [`Logger`](classes/Logger.md) |
 
 #### Returns
 
@@ -2735,7 +2733,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:171
 
-___
+---
 
 ### updateBrownieIntegrationRule
 
@@ -2745,9 +2743,9 @@ Updates brownie integration by wiriting data to nx.json
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
+| Name   | Type                                                     |
+| :----- | :------------------------------------------------------- |
+| `name` | `string`                                                 |
 | `data` | [`BrownieIntegration`](interfaces/BrownieIntegration.md) |
 
 #### Returns
@@ -2758,7 +2756,7 @@ Updates brownie integration by wiriting data to nx.json
 
 packages/nx-tools/src/integration/brownie.ts:14
 
-___
+---
 
 ### updateNxIntegration
 
@@ -2768,18 +2766,18 @@ Updates nx integration by saving values like prior configuration or so for havin
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `Tree` |
-| `name` | `string` |
-| `integration` | `T` |
-| `options?` | `Object` |
+| Name                      | Type      |
+| :------------------------ | :-------- |
+| `host`                    | `Tree`    |
+| `name`                    | `string`  |
+| `integration`             | `T`       |
+| `options?`                | `Object`  |
 | `options.arrayOverwrite?` | `boolean` |
 
 #### Returns
@@ -2790,7 +2788,7 @@ Updates nx integration by saving values like prior configuration or so for havin
 
 packages/nx-tools/src/integration/integration.ts:21
 
-___
+---
 
 ### updateNxIntegrationRule
 
@@ -2798,17 +2796,17 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
+| Name | Type                                                                |
+| :--- | :------------------------------------------------------------------ |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = `Partial`<`Integration`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
-| `integration` | `T` |
-| `options?` | `Object` |
+| Name                      | Type      |
+| :------------------------ | :-------- |
+| `name`                    | `string`  |
+| `integration`             | `T`       |
+| `options?`                | `Object`  |
 | `options.arrayOverwrite?` | `boolean` |
 
 #### Returns
@@ -2819,7 +2817,7 @@ ___
 
 packages/nx-tools/src/rules/integration.rule.ts:18
 
-___
+---
 
 ### updatePackageJsonForProjectRule
 
@@ -2827,16 +2825,16 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
+| Name | Type                                                                         |
+| :--- | :--------------------------------------------------------------------------- |
+| `T`  | extends [`BaseNormalizedSchemaRoot`](interfaces/BaseNormalizedSchemaRoot.md) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `T` |
-| `data` | [`UpdatePackageJsonForProjectRuleOptions`](interfaces/UpdatePackageJsonForProjectRuleOptions.md) |
+| Name      | Type                                                                                             |
+| :-------- | :----------------------------------------------------------------------------------------------- |
+| `options` | `T`                                                                                              |
+| `data`    | [`UpdatePackageJsonForProjectRuleOptions`](interfaces/UpdatePackageJsonForProjectRuleOptions.md) |
 
 #### Returns
 
@@ -2846,7 +2844,7 @@ ___
 
 packages/nx-tools/src/rules/update-package-json.rule.ts:9
 
-___
+---
 
 ### updateTsConfigPathsRule
 
@@ -2856,13 +2854,13 @@ Updates tsconfig paths in the tsconfig.json
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `options` | `Object` |
+| Name                  | Type     |
+| :-------------------- | :------- |
+| `options`             | `Object` |
 | `options.packageName` | `string` |
-| `options.root?` | `string` |
+| `options.root?`       | `string` |
 | `options.sourceRoot?` | `string` |
-| `options.tsconfig?` | `string` |
+| `options.tsconfig?`   | `string` |
 
 #### Returns
 
@@ -2872,7 +2870,7 @@ Updates tsconfig paths in the tsconfig.json
 
 packages/nx-tools/src/integration/update-ts-config.ts:10
 
-___
+---
 
 ### useLinkedVersionOfDependencies
 
@@ -2882,10 +2880,10 @@ Use linked versions of the given packages if they are available. This is used fo
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                                                 |
+| :------- | :--------------------------------------------------- |
 | `linked` | [`LocalNodeModule`](interfaces/LocalNodeModule.md)[] |
-| `deps` | [`PackageVersions`](interfaces/PackageVersions.md) |
+| `deps`   | [`PackageVersions`](interfaces/PackageVersions.md)   |
 
 #### Returns
 
