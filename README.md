@@ -188,6 +188,6 @@ What it does is:
 - Goes through all the packages analyzes the commits and generate changelogs and decide next version for each.
 - Writes cross-dependency versions as pinned to avoid dependency problems to each package.
 - Release packages that have relevant commits on it filtering the commits to their own folder.
-- Closes issues dependending on the commits, comments them if they have been released in which version.
+- Closes issues depending on the commits, comments them if they have been released in which version.
 
 `semantic-release` relies on [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/) commit format to decide through these changes. This is enforced through a `git` `prepare-commit-msg` hook to create a interactive menu to help you through the process.
