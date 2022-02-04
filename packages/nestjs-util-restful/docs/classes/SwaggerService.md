@@ -28,12 +28,12 @@ Enables a swagger route to the application
 
 #### Parameters
 
-| Name       | Type               |
-| :--------- | :----------------- |
-| `app`      | `INestApplication` |
-| `options?` | `SwaggerOptions`   |
-| `config?`  | `SwaggerConfig`    |
-| `url?`     | `UrlConfig`        |
+| Name | Type |
+| :------ | :------ |
+| `app` | `INestApplication` |
+| `options?` | `SwaggerOptions` |
+| `config?` | `SwaggerConfig` |
+| `url?` | `UrlConfig` |
 
 #### Returns
 
