@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-nest [4.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.0.7...@webundsoehne-private/nx-nest@4.0.8) (2022-02-04)
+
+### Bug Fixes
+
+- update db address ([88cbb64](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/88cbb6480b84c6529bc4297f7299412d66eb9969))
+
 ## @webundsoehne-private/nx-nest [4.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.0.6...@webundsoehne-private/nx-nest@4.0.7) (2022-02-04)
 
 ### Bug Fixes
