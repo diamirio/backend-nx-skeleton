@@ -39,8 +39,8 @@ Extended Keycloak client specific for seeding operations.
 
 #### Parameters
 
-| Name       | Type                   |
-| :--------- | :--------------------- |
+| Name | Type |
+| :------ | :------ |
 | `keycloak` | `KeycloakAdminService` |
 
 #### Defined in
@@ -57,7 +57,7 @@ utils/keycloak-seeder-tools.ts:21
 
 utils/keycloak-seeder-tools.ts:18
 
----
+___
 
 ### clients
 
@@ -67,7 +67,7 @@ utils/keycloak-seeder-tools.ts:18
 
 utils/keycloak-seeder-tools.ts:19
 
----
+___
 
 ### logger
 
@@ -85,13 +85,13 @@ utils/keycloak-seeder-tools.ts:17
 
 #### Parameters
 
-| Name                    | Type                            |
-| :---------------------- | :------------------------------ |
-| `map`                   | `Record`<`string`, `string`[]\> |
-| `options?`              | `Object`                        |
-| `options.flushUnknown?` | `boolean`                       |
-| `options.realm?`        | `string`                        |
-| `options.silent?`       | `boolean`                       |
+| Name | Type |
+| :------ | :------ |
+| `map` | `Record`<`string`, `string`[]\> |
+| `options?` | `Object` |
+| `options.flushUnknown?` | `boolean` |
+| `options.realm?` | `string` |
+| `options.silent?` | `boolean` |
 
 #### Returns
 
@@ -101,7 +101,7 @@ utils/keycloak-seeder-tools.ts:17
 
 utils/keycloak-seeder-tools.ts:302
 
----
+___
 
 ### createClient
 
@@ -109,9 +109,9 @@ utils/keycloak-seeder-tools.ts:302
 
 #### Parameters
 
-| Name       | Type                                   |
-| :--------- | :------------------------------------- |
-| `realm`    | `string`                               |
+| Name | Type |
+| :------ | :------ |
+| `realm` | `string` |
 | `options?` | `DeepPartial`<`KeycloakAdminOptions`\> |
 
 #### Returns
@@ -122,7 +122,7 @@ utils/keycloak-seeder-tools.ts:302
 
 utils/keycloak-seeder-tools.ts:39
 
----
+___
 
 ### createNewKeycloakEntities
 
@@ -130,23 +130,23 @@ utils/keycloak-seeder-tools.ts:39
 
 #### Type parameters
 
-| Name | Type                                                             |
-| :--- | :--------------------------------------------------------------- |
-| `T`  | extends `"groups"` \| `"roles"` \| `"clients"` \| `"realms"`     |
-| `K`  | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
+| `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
-| Name                        | Type                                                                                   |
-| :-------------------------- | :------------------------------------------------------------------------------------- |
-| `context`                   | `T`                                                                                    |
-| `input`                     | `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>                        |
-| `options?`                  | `Object`                                                                               |
-| `options.fallbackToUpdate?` | `boolean`                                                                              |
-| `options.flush?`            | `boolean`                                                                              |
-| `options.flushUnknown?`     | `boolean`                                                                              |
-| `options.identifier?`       | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
-| `options.realm?`            | `string`                                                                               |
+| Name | Type |
+| :------ | :------ |
+| `context` | `T` |
+| `input` | `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
+| `options?` | `Object` |
+| `options.fallbackToUpdate?` | `boolean` |
+| `options.flush?` | `boolean` |
+| `options.flushUnknown?` | `boolean` |
+| `options.identifier?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
+| `options.realm?` | `string` |
 
 #### Returns
 
@@ -156,7 +156,7 @@ utils/keycloak-seeder-tools.ts:39
 
 utils/keycloak-seeder-tools.ts:124
 
----
+___
 
 ### flushKeycloakEntities
 
@@ -164,20 +164,20 @@ utils/keycloak-seeder-tools.ts:124
 
 #### Type parameters
 
-| Name | Type                                                             |
-| :--- | :--------------------------------------------------------------- |
-| `T`  | extends `"groups"` \| `"roles"` \| `"clients"` \| `"realms"`     |
-| `K`  | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
+| `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
-| Name                  | Type                                                            |
-| :-------------------- | :-------------------------------------------------------------- |
-| `context`             | `T`                                                             |
-| `input`               | `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
-| `options?`            | `Object`                                                        |
-| `options.identifier?` | keyof `ArrayElement`<`K`\>                                      |
-| `options.realm?`      | `string`                                                        |
+| Name | Type |
+| :------ | :------ |
+| `context` | `T` |
+| `input` | `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
+| `options?` | `Object` |
+| `options.identifier?` | keyof `ArrayElement`<`K`\> |
+| `options.realm?` | `string` |
 
 #### Returns
 
@@ -187,7 +187,7 @@ utils/keycloak-seeder-tools.ts:124
 
 utils/keycloak-seeder-tools.ts:247
 
----
+___
 
 ### getAll
 
@@ -195,19 +195,19 @@ utils/keycloak-seeder-tools.ts:247
 
 #### Type parameters
 
-| Name | Type                                                                                                                |
-| :--- | :------------------------------------------------------------------------------------------------------------------ |
-| `K`  | extends `PropertyKey`                                                                                               |
-| `T`  | extends `"groups"` \| `"roles"` \| `"clients"` \| `"realms"` = `"groups"` \| `"roles"` \| `"clients"` \| `"realms"` |
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` = ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
 
 #### Parameters
 
-| Name               | Type                                                                                   |
-| :----------------- | :------------------------------------------------------------------------------------- |
-| `context`          | `T`                                                                                    |
-| `options?`         | `Object`                                                                               |
+| Name | Type |
+| :------ | :------ |
+| `context` | `T` |
+| `options?` | `Object` |
 | `options.groupBy?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
-| `options.realm?`   | `string`                                                                               |
+| `options.realm?` | `string` |
 
 #### Returns
 
@@ -217,7 +217,7 @@ utils/keycloak-seeder-tools.ts:247
 
 utils/keycloak-seeder-tools.ts:58
 
----
+___
 
 ### getClient
 
@@ -225,8 +225,8 @@ utils/keycloak-seeder-tools.ts:58
 
 #### Parameters
 
-| Name     | Type     |
-| :------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `realm?` | `string` |
 
 #### Returns
@@ -237,7 +237,7 @@ utils/keycloak-seeder-tools.ts:58
 
 utils/keycloak-seeder-tools.ts:23
 
----
+___
 
 ### getIdFromMappedData
 
@@ -247,17 +247,17 @@ Internal function to get the id of named Keycloak entitiy from the given parsed 
 
 #### Type parameters
 
-| Name | Type                                                                                       |
-| :--- | :----------------------------------------------------------------------------------------- |
-| `K`  | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
-| Name         | Type     | Default value |
-| :----------- | :------- | :------------ |
-| `data`       | `K`      | `undefined`   |
-| `name`       | `string` | `undefined`   |
-| `identifier` | `string` | `'id'`        |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `data` | `K` | `undefined` |
+| `name` | `string` | `undefined` |
+| `identifier` | `string` | `'id'` |
 
 #### Returns
 
@@ -267,7 +267,7 @@ Internal function to get the id of named Keycloak entitiy from the given parsed 
 
 utils/keycloak-seeder-tools.ts:111
 
----
+___
 
 ### isAlreadyExistsError
 
@@ -275,8 +275,8 @@ utils/keycloak-seeder-tools.ts:111
 
 #### Parameters
 
-| Name  | Type  |
-| :---- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `err` | `any` |
 
 #### Returns
@@ -287,7 +287,7 @@ utils/keycloak-seeder-tools.ts:111
 
 utils/keycloak-seeder-tools.ts:385
 
----
+___
 
 ### parseSeedError
 
@@ -295,13 +295,13 @@ utils/keycloak-seeder-tools.ts:385
 
 #### Parameters
 
-| Name               | Type      |
-| :----------------- | :-------- |
-| `err`              | `any`     |
-| `options?`         | `Object`  |
-| `options.context?` | `string`  |
-| `options.log?`     | `boolean` |
-| `options.return?`  | `boolean` |
+| Name | Type |
+| :------ | :------ |
+| `err` | `any` |
+| `options?` | `Object` |
+| `options.context?` | `string` |
+| `options.log?` | `boolean` |
+| `options.return?` | `boolean` |
 
 #### Returns
 
@@ -311,7 +311,7 @@ utils/keycloak-seeder-tools.ts:385
 
 utils/keycloak-seeder-tools.ts:367
 
----
+___
 
 ### swapMapKeysToIds
 
@@ -319,17 +319,17 @@ utils/keycloak-seeder-tools.ts:367
 
 #### Type parameters
 
-| Name | Type                                                                                       |
-| :--- | :----------------------------------------------------------------------------------------- |
-| `T`  | `T`                                                                                        |
-| `K`  | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
-| Name   | Type                     |
-| :----- | :----------------------- |
-| `data` | `K`                      |
-| `map`  | `Record`<`string`, `T`\> |
+| Name | Type |
+| :------ | :------ |
+| `data` | `K` |
+| `map` | `Record`<`string`, `T`\> |
 
 #### Returns
 
@@ -339,7 +339,7 @@ utils/keycloak-seeder-tools.ts:367
 
 utils/keycloak-seeder-tools.ts:86
 
----
+___
 
 ### swapNamesToMapping
 
@@ -347,17 +347,17 @@ utils/keycloak-seeder-tools.ts:86
 
 #### Type parameters
 
-| Name | Type                                                                                       |
-| :--- | :----------------------------------------------------------------------------------------- |
-| `T`  | extends `string`[]                                                                         |
-| `K`  | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `string`[] |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
-| Name   | Type |
-| :----- | :--- |
-| `data` | `K`  |
-| `map`  | `T`  |
+| Name | Type |
+| :------ | :------ |
+| `data` | `K` |
+| `map` | `T` |
 
 #### Returns
 
@@ -367,7 +367,7 @@ utils/keycloak-seeder-tools.ts:86
 
 utils/keycloak-seeder-tools.ts:100
 
----
+___
 
 ### updateKeycloakEntities
 
@@ -375,21 +375,21 @@ utils/keycloak-seeder-tools.ts:100
 
 #### Type parameters
 
-| Name | Type                                              |
-| :--- | :------------------------------------------------ |
-| `T`  | extends `"groups"` \| `"clients"` \| `"realms"`   |
-| `K`  | extends `default`[] \| `default`[] \| `default`[] |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
+| `K` | extends `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
-| Name                  | Type                                                                                   |
-| :-------------------- | :------------------------------------------------------------------------------------- |
-| `context`             | `T`                                                                                    |
-| `input`               | `K`                                                                                    |
-| `options?`            | `Object`                                                                               |
+| Name | Type |
+| :------ | :------ |
+| `context` | `T` |
+| `input` | `K` |
+| `options?` | `Object` |
 | `options.identifier?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
-| `options.realm?`      | `string`                                                                               |
-| `options.silent?`     | `boolean`                                                                              |
+| `options.realm?` | `string` |
+| `options.silent?` | `boolean` |
 
 #### Returns
 
