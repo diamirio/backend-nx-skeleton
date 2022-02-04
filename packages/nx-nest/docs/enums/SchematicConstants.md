@@ -6,24 +6,24 @@
 
 ### Enumeration members
 
-- [BACKEND_INTERFACES_PACKAGE](SchematicConstants.md#backend_interfaces_package)
-- [MICROSERVICE_PROVIDER_PACKAGE](SchematicConstants.md#microservice_provider_package)
+- [BACKEND\_INTERFACES\_PACKAGE](SchematicConstants.md#backend_interfaces_package)
+- [MICROSERVICE\_PROVIDER\_PACKAGE](SchematicConstants.md#microservice_provider_package)
 
 ## Enumeration members
 
-### BACKEND_INTERFACES_PACKAGE
+### BACKEND\_INTERFACES\_PACKAGE
 
-• **BACKEND_INTERFACES_PACKAGE** = `"backend-interfaces"`
+• **BACKEND\_INTERFACES\_PACKAGE** = `"backend-interfaces"`
 
 #### Defined in
 
 interfaces/constants.ts:3
 
----
+___
 
-### MICROSERVICE_PROVIDER_PACKAGE
+### MICROSERVICE\_PROVIDER\_PACKAGE
 
-• **MICROSERVICE_PROVIDER_PACKAGE** = `"microservice-provider"`
+• **MICROSERVICE\_PROVIDER\_PACKAGE** = `"microservice-provider"`
 
 #### Defined in
 

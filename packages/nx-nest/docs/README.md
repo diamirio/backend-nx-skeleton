@@ -39,7 +39,7 @@
 
 interfaces/available.constants.ts:65
 
----
+___
 
 ### PrettyNamesForAvailableThingies
 
@@ -59,8 +59,8 @@ interfaces/available.constants.ts:87
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `name` | `string` |
 
 #### Returns

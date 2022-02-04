@@ -21,7 +21,7 @@ Database adapters, these are not selectable but used in internal scripts.
 
 interfaces/available.constants.ts:48
 
----
+___
 
 ### TYPEORM
 

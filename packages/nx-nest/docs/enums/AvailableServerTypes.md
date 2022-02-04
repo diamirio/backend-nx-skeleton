@@ -21,7 +21,7 @@ If server component is selected, these are the options to serve as a server.
 
 interfaces/available.constants.ts:21
 
----
+___
 
 ### RESTFUL
 

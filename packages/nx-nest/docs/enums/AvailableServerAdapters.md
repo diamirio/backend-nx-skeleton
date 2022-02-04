@@ -21,7 +21,7 @@ If server component is selected, these are the options to use as an adapter.
 
 interfaces/available.constants.ts:28
 
----
+___
 
 ### FASTIFY
 

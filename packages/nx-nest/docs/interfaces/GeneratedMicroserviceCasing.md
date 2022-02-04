@@ -20,7 +20,7 @@
 
 utils/generate-microservice-casing.interface.ts:5
 
----
+___
 
 ### name
 
@@ -30,11 +30,11 @@ utils/generate-microservice-casing.interface.ts:5
 
 utils/generate-microservice-casing.interface.ts:4
 
----
+___
 
 ### names
 
-• **names**: `Record`<`"queue"` \| `"file"` \| `"pattern"` \| `"interface"` \| `"default"`, `string`\>
+• **names**: `Record`<``"queue"`` \| ``"file"`` \| ``"pattern"`` \| ``"interface"`` \| ``"default"``, `string`\>
 
 #### Defined in
 

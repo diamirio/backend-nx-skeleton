@@ -8,13 +8,13 @@ Available extensions to further customize the application.
 
 ### Enumeration members
 
-- [EXTERNAL_BACKEND_INTERFACES](AvailableExtensions.md#external_backend_interfaces)
+- [EXTERNAL\_BACKEND\_INTERFACES](AvailableExtensions.md#external_backend_interfaces)
 
 ## Enumeration members
 
-### EXTERNAL_BACKEND_INTERFACES
+### EXTERNAL\_BACKEND\_INTERFACES
 
-• **EXTERNAL_BACKEND_INTERFACES** = `"external-backend-interfaces"`
+• **EXTERNAL\_BACKEND\_INTERFACES** = `"external-backend-interfaces"`
 
 #### Defined in
 
