@@ -47,10 +47,10 @@
 
 #### Parameters
 
-| Name            | Type     |
-| :-------------- | :------- |
-| `path`          | `string` |
-| `defaultValue?` | `any`    |
+| Name | Type |
+| :------ | :------ |
+| `path` | `string` |
+| `defaultValue?` | `any` |
 
 #### Returns
 
@@ -60,7 +60,7 @@
 
 packages/nestjs-util/src/provider/config/config.decorators.ts:6
 
----
+___
 
 ### Configurable
 
@@ -74,7 +74,7 @@ packages/nestjs-util/src/provider/config/config.decorators.ts:6
 
 packages/nestjs-util/src/provider/config/config.decorators.ts:25
 
----
+___
 
 ### InjectConfig
 
@@ -88,11 +88,11 @@ packages/nestjs-util/src/provider/config/config.decorators.ts:25
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -102,7 +102,7 @@ packages/nestjs-util/src/provider/config/config.decorators.ts:25
 
 packages/nestjs-util/src/provider/config/config.decorators.ts:42
 
----
+___
 
 ### InjectMaintenanceService
 
@@ -120,11 +120,11 @@ Injects maintenance service instance initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -134,7 +134,7 @@ Injects maintenance service instance initiated to the service.
 
 packages/nestjs-util/src/module/maintenance/decorators/inject.decorator.ts:8
 
----
+___
 
 ### Retry
 
@@ -142,8 +142,8 @@ packages/nestjs-util/src/module/maintenance/decorators/inject.decorator.ts:8
 
 #### Parameters
 
-| Name      | Type                                               |
-| :-------- | :------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`UseRetryOptions`](interfaces/UseRetryOptions.md) |
 
 #### Returns
@@ -154,7 +154,7 @@ packages/nestjs-util/src/module/maintenance/decorators/inject.decorator.ts:8
 
 packages/nestjs-util/src/decorator/retry.decorator.ts:4
 
----
+___
 
 ### UseMaintenanceLocker
 
@@ -168,7 +168,7 @@ packages/nestjs-util/src/decorator/retry.decorator.ts:4
 
 packages/nestjs-util/src/module/maintenance/decorators/locker.decorator.ts:4
 
----
+___
 
 ### getDuration
 
@@ -176,9 +176,9 @@ packages/nestjs-util/src/module/maintenance/decorators/locker.decorator.ts:4
 
 #### Parameters
 
-| Name     | Type     |
-| :------- | :------- |
-| `start`  | `number` |
+| Name | Type |
+| :------ | :------ |
+| `start` | `number` |
 | `finish` | `number` |
 
 #### Returns
@@ -189,7 +189,7 @@ packages/nestjs-util/src/module/maintenance/decorators/locker.decorator.ts:4
 
 packages/nestjs-util/src/util/time.ts:1
 
----
+___
 
 ### registerExitListeners
 
@@ -197,9 +197,9 @@ packages/nestjs-util/src/util/time.ts:1
 
 #### Parameters
 
-| Name         | Type     | Default value |
-| :----------- | :------- | :------------ |
-| `moduleName` | `string` | `'module'`    |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `moduleName` | `string` | `'module'` |
 
 #### Returns
 
@@ -209,7 +209,7 @@ packages/nestjs-util/src/util/time.ts:1
 
 packages/nestjs-util/src/util/process.ts:3
 
----
+___
 
 ### requireNodeEnv
 
@@ -217,8 +217,8 @@ packages/nestjs-util/src/util/process.ts:3
 
 #### Parameters
 
-| Name           | Type     | Default value                                 |
-| :------------- | :------- | :-------------------------------------------- |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
 | `errorMessage` | `string` | `'NODE_ENV environment variable is not set.'` |
 
 #### Returns
@@ -229,7 +229,7 @@ packages/nestjs-util/src/util/process.ts:3
 
 packages/nestjs-util/src/util/environment.ts:12
 
----
+___
 
 ### setEnvironmentVariables
 
@@ -237,8 +237,8 @@ packages/nestjs-util/src/util/environment.ts:12
 
 #### Parameters
 
-| Name          | Type     | Default value    |
-| :------------ | :------- | :--------------- |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
 | `packageFile` | `string` | `'package.json'` |
 
 #### Returns
@@ -249,7 +249,7 @@ packages/nestjs-util/src/util/environment.ts:12
 
 packages/nestjs-util/src/util/environment.ts:3
 
----
+___
 
 ### useRetry
 
@@ -258,14 +258,14 @@ packages/nestjs-util/src/util/environment.ts:3
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Parameters
 
-| Name       | Type                                               |
-| :--------- | :------------------------------------------------- |
-| `callback` | () => `T`                                          |
+| Name | Type |
+| :------ | :------ |
+| `callback` | () => `T` |
 | `options?` | [`UseRetryOptions`](interfaces/UseRetryOptions.md) |
 
 #### Returns

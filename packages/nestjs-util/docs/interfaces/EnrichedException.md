@@ -27,7 +27,7 @@
 
 packages/nestjs-util/src/filter/exception.interface.ts:34
 
----
+___
 
 ### errors
 
@@ -37,7 +37,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:34
 
 packages/nestjs-util/src/filter/exception.interface.ts:36
 
----
+___
 
 ### message
 
@@ -47,7 +47,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:36
 
 packages/nestjs-util/src/filter/exception.interface.ts:35
 
----
+___
 
 ### service
 
@@ -57,7 +57,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:35
 
 packages/nestjs-util/src/filter/exception.interface.ts:37
 
----
+___
 
 ### stacktrace
 
@@ -67,7 +67,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:37
 
 packages/nestjs-util/src/filter/exception.interface.ts:38
 
----
+___
 
 ### statusCode
 

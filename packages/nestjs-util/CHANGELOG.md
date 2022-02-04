@@ -1,3 +1,55 @@
+# @webundsoehne/nestjs-util [5.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.2...@webundsoehne/nestjs-util@5.0.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+* deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+* eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+* exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+* fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+* rule issues ([80afa54](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80afa5453a58ea16b636cf054337504ec5e00cae))
+* swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+* update dependencies ([f569b85](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+* update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+
+### Features
+
+* add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+* add more decorators for missing scheduler features ([ea37cbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ea37cbedaacd25db7506cdf9a181925f4a9653ba))
+* some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
+
+
+### Performance Improvements
+
+* swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+* **nestjs-util:** split in to smaller packages ([39bf50e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/39bf50e771cb39665cabc9f8c8aae3cee02626c5))
+* linting rules ([48134e6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
+* stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
+
+
+### BREAKING CHANGES
+
+* drops anything less than node16, strictly commonjs still, transpiled to es2021
+* **nestjs-util:** this will break older packages due to import points being different
+* make everything non-public
+* stricter linting rules may cause libraries to not work
+for typescript version that are older than 4 because of the import type
+  and export type statements. what advantage that it provides is that it
+  wont crash anymore for any of the missing dependencies that are only
+  types
+* drops the builders completely due to they being not avaiable in nx anymore
+* might break older configurations do to library change
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.0.0
+
 # @webundsoehne/nestjs-util [5.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.2...@webundsoehne/nestjs-util@5.0.0-beta.1) (2022-01-26)
 
 

@@ -52,10 +52,10 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:11
 
 #### Parameters
 
-| Name        | Type            |
-| :---------- | :-------------- |
-| `exception` | `Error`         |
-| `host`      | `ArgumentsHost` |
+| Name | Type |
+| :------ | :------ |
+| `exception` | `Error` |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 
@@ -69,7 +69,7 @@ ExceptionFilter.catch
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
----
+___
 
 ### payload
 
@@ -77,8 +77,8 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
 #### Parameters
 
-| Name         | Type    |
-| :----------- | :------ |
+| Name | Type |
+| :------ | :------ |
 | `exception?` | `Error` |
 
 #### Returns
@@ -89,7 +89,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:47
 
----
+___
 
 ### defaultPayload
 
@@ -97,8 +97,8 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:47
 
 #### Parameters
 
-| Name        | Type  |
-| :---------- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `any` |
 
 #### Returns

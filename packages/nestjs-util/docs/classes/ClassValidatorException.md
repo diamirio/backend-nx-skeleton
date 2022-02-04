@@ -41,8 +41,8 @@
 
 #### Parameters
 
-| Name         | Type                |
-| :----------- | :------------------ |
+| Name | Type |
+| :------ | :------ |
 | `validation` | `ValidationError`[] |
 
 #### Overrides
@@ -67,7 +67,7 @@ BadRequestException.cause
 
 node_modules/typescript/lib/lib.es2022.error.d.ts:26
 
----
+___
 
 ### message
 
@@ -81,7 +81,7 @@ BadRequestException.message
 
 node_modules/typescript/lib/lib.es5.d.ts:1023
 
----
+___
 
 ### name
 
@@ -95,7 +95,7 @@ BadRequestException.name
 
 node_modules/typescript/lib/lib.es5.d.ts:1022
 
----
+___
 
 ### stack
 
@@ -109,7 +109,7 @@ BadRequestException.stack
 
 node_modules/typescript/lib/lib.es5.d.ts:1024
 
----
+___
 
 ### validation
 
@@ -119,7 +119,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1024
 
 packages/nestjs-util/src/filter/exception.interface.ts:5
 
----
+___
 
 ### prepareStackTrace
 
@@ -135,9 +135,9 @@ Optional override for formatting stack traces
 
 ##### Parameters
 
-| Name          | Type         |
-| :------------ | :----------- |
-| `err`         | `Error`      |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Error` |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -152,7 +152,7 @@ BadRequestException.prepareStackTrace
 
 node_modules/@types/node/globals.d.ts:11
 
----
+___
 
 ### stackTraceLimit
 
@@ -184,7 +184,7 @@ BadRequestException.getResponse
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:40
 
----
+___
 
 ### getStatus
 
@@ -202,7 +202,7 @@ BadRequestException.getStatus
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:41
 
----
+___
 
 ### initMessage
 
@@ -220,7 +220,7 @@ BadRequestException.initMessage
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:38
 
----
+___
 
 ### initName
 
@@ -238,7 +238,7 @@ BadRequestException.initName
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:39
 
----
+___
 
 ### captureStackTrace
 
@@ -248,9 +248,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name              | Type       |
-| :---------------- | :--------- |
-| `targetObject`    | `object`   |
+| Name | Type |
+| :------ | :------ |
+| `targetObject` | `object` |
 | `constructorOpt?` | `Function` |
 
 #### Returns
@@ -265,7 +265,7 @@ BadRequestException.captureStackTrace
 
 node_modules/@types/node/globals.d.ts:4
 
----
+___
 
 ### createBody
 
@@ -273,11 +273,11 @@ node_modules/@types/node/globals.d.ts:4
 
 #### Parameters
 
-| Name            | Type                 |
-| :-------------- | :------------------- |
+| Name | Type |
+| :------ | :------ |
 | `objectOrError` | `string` \| `object` |
-| `description?`  | `string`             |
-| `statusCode?`   | `number`             |
+| `description?` | `string` |
+| `statusCode?` | `number` |
 
 #### Returns
 

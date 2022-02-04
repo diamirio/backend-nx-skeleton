@@ -20,7 +20,7 @@
 
 packages/nestjs-util/src/util/use-retry.interface.ts:3
 
----
+___
 
 ### name
 
@@ -30,7 +30,7 @@ packages/nestjs-util/src/util/use-retry.interface.ts:3
 
 packages/nestjs-util/src/util/use-retry.interface.ts:4
 
----
+___
 
 ### retry
 

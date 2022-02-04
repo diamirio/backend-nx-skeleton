@@ -31,16 +31,16 @@
 
 #### Type parameters
 
-| Name | Type  |
-| :--- | :---- |
-| `T`  | `any` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `any` |
 
 #### Parameters
 
-| Name            | Type     |
-| :-------------- | :------- |
-| `path`          | `string` |
-| `defaultValue?` | `T`      |
+| Name | Type |
+| :------ | :------ |
+| `path` | `string` |
+| `defaultValue?` | `T` |
 
 #### Returns
 
@@ -50,7 +50,7 @@
 
 packages/nestjs-util/src/provider/config/config.service.ts:59
 
----
+___
 
 ### has
 
@@ -58,8 +58,8 @@ packages/nestjs-util/src/provider/config/config.service.ts:59
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `path` | `string` |
 
 #### Returns
@@ -70,7 +70,7 @@ packages/nestjs-util/src/provider/config/config.service.ts:59
 
 packages/nestjs-util/src/provider/config/config.service.ts:55
 
----
+___
 
 ### setModuleConfig
 
@@ -78,9 +78,9 @@ packages/nestjs-util/src/provider/config/config.service.ts:55
 
 #### Parameters
 
-| Name           | Type     |
-| :------------- | :------- |
-| `moduleName`   | `string` |
+| Name | Type |
+| :------ | :------ |
+| `moduleName` | `string` |
 | `moduleConfig` | `Config` |
 
 #### Returns
@@ -91,7 +91,7 @@ packages/nestjs-util/src/provider/config/config.service.ts:55
 
 packages/nestjs-util/src/provider/config/config.service.ts:63
 
----
+___
 
 ### get
 
@@ -101,16 +101,16 @@ Get the config or use default value
 
 #### Type parameters
 
-| Name | Type  |
-| :--- | :---- |
-| `T`  | `any` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `any` |
 
 #### Parameters
 
-| Name            | Type     |
-| :-------------- | :------- |
-| `path`          | `string` |
-| `defaultValue?` | `T`      |
+| Name | Type |
+| :------ | :------ |
+| `path` | `string` |
+| `defaultValue?` | `T` |
 
 #### Returns
 
@@ -120,7 +120,7 @@ Get the config or use default value
 
 packages/nestjs-util/src/provider/config/config.service.ts:15
 
----
+___
 
 ### has
 
@@ -130,8 +130,8 @@ Check if the config exists
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `path` | `string` |
 
 #### Returns
@@ -142,7 +142,7 @@ Check if the config exists
 
 packages/nestjs-util/src/provider/config/config.service.ts:33
 
----
+___
 
 ### setModuleConfig
 
@@ -150,13 +150,14 @@ packages/nestjs-util/src/provider/config/config.service.ts:33
 
 Set module config value at runtime
 
-**Note:** This only works if the "ALLOW_CONFIG_MUTATIONS" environment variable is set
+__Note:__
+This only works if the "ALLOW_CONFIG_MUTATIONS" environment variable is set
 
 #### Parameters
 
-| Name           | Type     |
-| :------------- | :------- |
-| `moduleName`   | `string` |
+| Name | Type |
+| :------ | :------ |
+| `moduleName` | `string` |
 | `moduleConfig` | `Config` |
 
 #### Returns

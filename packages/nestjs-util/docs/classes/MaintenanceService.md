@@ -45,7 +45,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:15
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:12
 
----
+___
 
 ### logger
 
@@ -55,7 +55,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:12
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:11
 
----
+___
 
 ### message
 
@@ -65,7 +65,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:11
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:10
 
----
+___
 
 ### tasks
 
@@ -75,7 +75,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:10
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:13
 
----
+___
 
 ### instance
 
@@ -93,8 +93,8 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:9
 
 #### Parameters
 
-| Name   | Type     | Default value    |
-| :----- | :------- | :--------------- |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
 | `task` | `string` | `'unknown-task'` |
 
 #### Returns
@@ -105,7 +105,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:9
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:42
 
----
+___
 
 ### enable
 
@@ -113,8 +113,8 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:42
 
 #### Parameters
 
-| Name   | Type     | Default value    |
-| :----- | :------- | :--------------- |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
 | `task` | `string` | `'unknown-task'` |
 
 #### Returns
@@ -125,7 +125,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:42
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:26
 
----
+___
 
 ### isEnabled
 
@@ -139,7 +139,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:26
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:57
 
----
+___
 
 ### prepareLockfile
 
@@ -147,8 +147,8 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:57
 
 #### Parameters
 
-| Name        | Type     |
-| :---------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `lockfile?` | `string` |
 
 #### Returns
@@ -159,7 +159,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:57
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:77
 
----
+___
 
 ### prepareMessage
 
@@ -167,9 +167,9 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:77
 
 #### Parameters
 
-| Name        | Type     |
-| :---------- | :------- |
-| `message?`  | `string` |
+| Name | Type |
+| :------ | :------ |
+| `message?` | `string` |
 | `basePath?` | `string` |
 
 #### Returns
@@ -180,7 +180,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:77
 
 packages/nestjs-util/src/module/maintenance/maintenance.service.ts:72
 
----
+___
 
 ### throwException
 

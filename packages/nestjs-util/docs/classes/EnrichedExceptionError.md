@@ -46,8 +46,8 @@ Mostly required for making instanceof check of graphql valid after version 15.0.
 
 #### Parameters
 
-| Name    | Type                                                      |
-| :------ | :-------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `error` | [`EnrichedException`](../interfaces/EnrichedException.md) |
 
 #### Overrides
@@ -72,7 +72,7 @@ Error.cause
 
 node_modules/typescript/lib/lib.es2022.error.d.ts:26
 
----
+___
 
 ### error
 
@@ -86,7 +86,7 @@ node_modules/typescript/lib/lib.es2022.error.d.ts:26
 
 packages/nestjs-util/src/filter/exception.interface.ts:19
 
----
+___
 
 ### errors
 
@@ -100,7 +100,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:19
 
 packages/nestjs-util/src/filter/exception.interface.ts:21
 
----
+___
 
 ### message
 
@@ -118,7 +118,7 @@ Error.message
 
 packages/nestjs-util/src/filter/exception.interface.ts:20
 
----
+___
 
 ### name
 
@@ -132,7 +132,7 @@ Error.name
 
 node_modules/typescript/lib/lib.es5.d.ts:1022
 
----
+___
 
 ### service
 
@@ -146,7 +146,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1022
 
 packages/nestjs-util/src/filter/exception.interface.ts:22
 
----
+___
 
 ### stack
 
@@ -160,7 +160,7 @@ Error.stack
 
 node_modules/typescript/lib/lib.es5.d.ts:1024
 
----
+___
 
 ### stacktrace
 
@@ -174,7 +174,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1024
 
 packages/nestjs-util/src/filter/exception.interface.ts:23
 
----
+___
 
 ### statusCode
 
@@ -188,7 +188,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:23
 
 packages/nestjs-util/src/filter/exception.interface.ts:18
 
----
+___
 
 ### prepareStackTrace
 
@@ -204,9 +204,9 @@ Optional override for formatting stack traces
 
 ##### Parameters
 
-| Name          | Type         |
-| :------------ | :----------- |
-| `err`         | `Error`      |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Error` |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -221,7 +221,7 @@ Error.prepareStackTrace
 
 node_modules/@types/node/globals.d.ts:11
 
----
+___
 
 ### stackTraceLimit
 
@@ -245,9 +245,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name              | Type       |
-| :---------------- | :--------- |
-| `targetObject`    | `object`   |
+| Name | Type |
+| :------ | :------ |
+| `targetObject` | `object` |
 | `constructorOpt?` | `Function` |
 
 #### Returns

@@ -38,10 +38,10 @@
 
 #### Parameters
 
-| Name        | Type            |
-| :---------- | :-------------- |
-| `exception` | `Error`         |
-| `host`      | `ArgumentsHost` |
+| Name | Type |
+| :------ | :------ |
+| `exception` | `Error` |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 
@@ -55,7 +55,7 @@
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
----
+___
 
 ### payload
 
@@ -63,8 +63,8 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
 #### Parameters
 
-| Name        | Type                  |
-| :---------- | :-------------------- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `BadRequestException` |
 
 #### Returns
@@ -79,7 +79,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:22
 
 packages/nestjs-util/src/filter/bad-request-exception.filter.ts:9
 
----
+___
 
 ### defaultPayload
 
@@ -87,8 +87,8 @@ packages/nestjs-util/src/filter/bad-request-exception.filter.ts:9
 
 #### Parameters
 
-| Name        | Type  |
-| :---------- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `any` |
 
 #### Returns
