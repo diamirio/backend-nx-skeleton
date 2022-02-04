@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-workspace [4.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.5...@webundsoehne-private/nx-workspace@4.0.6) (2022-02-04)
+
+### Bug Fixes
+
+- update tao dependency ([b6644fe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b6644fe416f7a074e59fc4f6a2c113a7074ae828))
+
 ## @webundsoehne-private/nx-workspace [4.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.4...@webundsoehne-private/nx-workspace@4.0.5) (2022-02-04)
 
 ### Bug Fixes
