@@ -10,23 +10,23 @@ A set of schematics and tools that provides the basis for fast template scaffold
 
 <!-- toc -->
 
-  - [Packages](#packages)
-    - [brownie - @webundsoehne/brownie](#brownie---webundsoehnebrownie)
-    - [deep-merge - @webundsoehne/deep-merge](#deep-merge---webundsoehnedeep-merge)
-    - [eslint-config - @webundsoehne/eslint-config](#eslint-config---webundsoehneeslint-config)
-    - [nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader](#nestjs-graphql-typeorm-dataloader---webundsoehnenestjs-graphql-typeorm-dataloader)
-    - [nestjs-keycloak - @webundsoehne/nestjs-keycloak](#nestjs-keycloak---webundsoehnenestjs-keycloak)
-    - [nestjs-keycloak-seeder - @webundsoehne/nestjs-keycloak-seeder](#nestjs-keycloak-seeder---webundsoehnenestjs-keycloak-seeder)
-    - [nestjs-util - @webundsoehne/nestjs-util](#nestjs-util---webundsoehnenestjs-util)
-    - [nestjs-util-graphql - @webundsoehne/nestjs-util-graphql](#nestjs-util-graphql---webundsoehnenestjs-util-graphql)
-    - [nestjs-util-microservices - @webundsoehne/nestjs-util-microservices](#nestjs-util-microservices---webundsoehnenestjs-util-microservices)
-    - [nestjs-util-restful - @webundsoehne/nestjs-util-restful](#nestjs-util-restful---webundsoehnenestjs-util-restful)
-    - [nx-builders - @webundsoehne/nx-builders](#nx-builders---webundsoehnenx-builders)
-    - [nx-nest - @webundsoehne-private/nx-nest](#nx-nest---webundsoehne-privatenx-nest)
-    - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
-    - [nx-workspace - @webundsoehne-private/nx-workspace](#nx-workspace---webundsoehne-privatenx-workspace)
-    - [patch-package - @webundsoehne-private/patch-package](#patch-package---webundsoehne-privatepatch-package)
-    - [ts-utility-types - @webundsoehne-private/ts-utility-types](#ts-utility-types---webundsoehne-privatets-utility-types)
+- [Packages](#packages)
+  - [brownie - @webundsoehne/brownie](#brownie---webundsoehnebrownie)
+  - [deep-merge - @webundsoehne/deep-merge](#deep-merge---webundsoehnedeep-merge)
+  - [eslint-config - @webundsoehne/eslint-config](#eslint-config---webundsoehneeslint-config)
+  - [nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader](#nestjs-graphql-typeorm-dataloader---webundsoehnenestjs-graphql-typeorm-dataloader)
+  - [nestjs-keycloak - @webundsoehne/nestjs-keycloak](#nestjs-keycloak---webundsoehnenestjs-keycloak)
+  - [nestjs-keycloak-seeder - @webundsoehne/nestjs-keycloak-seeder](#nestjs-keycloak-seeder---webundsoehnenestjs-keycloak-seeder)
+  - [nestjs-util - @webundsoehne/nestjs-util](#nestjs-util---webundsoehnenestjs-util)
+  - [nestjs-util-graphql - @webundsoehne/nestjs-util-graphql](#nestjs-util-graphql---webundsoehnenestjs-util-graphql)
+  - [nestjs-util-microservices - @webundsoehne/nestjs-util-microservices](#nestjs-util-microservices---webundsoehnenestjs-util-microservices)
+  - [nestjs-util-restful - @webundsoehne/nestjs-util-restful](#nestjs-util-restful---webundsoehnenestjs-util-restful)
+  - [nx-builders - @webundsoehne/nx-builders](#nx-builders---webundsoehnenx-builders)
+  - [nx-nest - @webundsoehne-private/nx-nest](#nx-nest---webundsoehne-privatenx-nest)
+  - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
+  - [nx-workspace - @webundsoehne-private/nx-workspace](#nx-workspace---webundsoehne-privatenx-workspace)
+  - [patch-package - @webundsoehne-private/patch-package](#patch-package---webundsoehne-privatepatch-package)
+  - [ts-utility-types - @webundsoehne-private/ts-utility-types](#ts-utility-types---webundsoehne-privatets-utility-types)
 - [Further Development](#further-development)
   - [Docker Setup](#docker-setup)
     - [CLI-Script](#cli-script)
@@ -166,11 +166,11 @@ The image uses s6-overlay to monitor the crashes and will run `dev:start` for ea
 
 There are couple of scripts in the scripts folder:
 
-- `./scripts/link-packages.sh [link | unlink]`
+- `./scripts/link-packages.sh [link | unlink]` This can also be accessed through: `yarn run scripts:link` `yarn run scripts:unlink`
 
   > Will link all the packages inside the packages folder.
 
-- `./link-packages-to-workspace.sh \${PWD_OF_MOCK_PROJECT} [link | unlink]`
+- `./link-packages-to-workspace.sh [link | unlink] \${PWD_OF_MOCK_PROJECT}` This can also be accessed through: `yarn run scripts:workspace:link` `yarn run scripts:workspace:unlink`
   > Copy this script to somewhere else for easily creating a new empty workspace in the designated folder to test out the schematics.
 
 ## Package Manager
