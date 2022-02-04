@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 
+export * from './decorator'
 export * from './interface'
 export * from './filter'
 export * from './middleware'

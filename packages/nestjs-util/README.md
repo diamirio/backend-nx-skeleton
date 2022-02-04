@@ -36,6 +36,48 @@ This is a collection of useful modules on creating a [Nest](https://github.com/n
 
 <!-- tocstop -->
 
+## Decorators
+
+### Retry Decorator
+
+Wrap a class method with this decorator to retry it couple of more times. Useful for external service dependent tasks.
+
+```typescript
+@Timeout(MigrationTask.name, 0)
+@Retry({
+  name: MigrationTask.name,
+  retry: 24,
+  interval: 3 * 1000
+})
+async migrate(): Promise<void> {
+  try {
+    await this.connection.runMigrations({ transaction: 'all' })
+  } catch (error) {
+    this.logger.error(error.message)
+
+    throw error
+  }
+}
+```
+
+### UseMaintenanceLocker Decorator
+
+Whenever the given class method fires, it will also activate the maintenance mode through `MaintenanceModule`. For this `MaintenanceModule` should be injected in to the context of the given module.
+
+```typescript
+@Timeout(MigrationTask.name, 0)
+@UseMaintenanceLocker(MigrationTask.name)
+async migrate(): Promise<void> {
+  try {
+    await this.connection.runMigrations({ transaction: 'all' })
+  } catch (error) {
+    this.logger.error(error.message)
+
+    throw error
+  }
+}
+```
+
 ## Filters
 
 We implemented a generic `ExceptionFilter` called `GlobalExceptionFilter`, which catches all errors and set the payload to am user friendly information. The real exception will be just logged in `debug` logger mode.

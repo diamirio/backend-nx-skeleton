@@ -2,7 +2,13 @@ import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { normalizeNameWithParentAndDestinationPrompt, normalizePackageJsonNameForParentPrompt, readProjectConfiguration, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import {
+  ensureNxRootListrTask,
+  normalizeNameWithParentAndDestinationPrompt,
+  normalizePackageJsonNameForParentPrompt,
+  readProjectConfiguration,
+  setSchemaDefaultsInContext
+} from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -20,6 +26,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         })
       }
     },
+
+    ...ensureNxRootListrTask(),
 
     ...normalizeNameWithParentAndDestinationPrompt<NormalizedSchema, never>(host),
 

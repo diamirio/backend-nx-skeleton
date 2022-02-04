@@ -8,7 +8,6 @@ import { updateIntegration } from './lib/update-integration'
 import type { Schema } from './main.interface'
 import init from '@schematics/init/main'
 import { calculateDependencies } from '@utils/versions'
-import type { SchematicRule } from '@webundsoehne/nx-tools'
 import {
   addDependenciesToProjectPackageJsonRule,
   addEslintConfigRule,
@@ -20,6 +19,7 @@ import {
   updatePackageJsonForProjectRule,
   updateTsConfigPathsRule
 } from '@webundsoehne/nx-tools'
+import type { SchematicRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.

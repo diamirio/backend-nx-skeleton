@@ -18,6 +18,7 @@ import {
 import { generateMicroserviceCasing } from '@utils'
 import {
   AvailableTestsTypes,
+  ensureNxRootListrTask,
   generateNameCases,
   getInitialFromPriorConfiguration,
   isVerbose,
@@ -70,6 +71,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           })
         }
       },
+
+      ...ensureNxRootListrTask(),
 
       ...normalizeNameWithApplicationModePrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_, project) => !!project.integration?.nestjs),
 

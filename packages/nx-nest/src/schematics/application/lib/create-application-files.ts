@@ -122,6 +122,19 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),
               exports: [{ output: 'index.ts', pattern: '**/*.entity.ts' }]
             })
+          },
+
+          {
+            condition:
+              options.components.includes(AvailableComponents.BG_TASK) &&
+              options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
+              options.dbAdapters === AvailableDBAdapters.TYPEORM,
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
+              name: 'migration',
+              type: AvailableGenerators.TYPEORM_MIGRATION_TASK_MODULE,
+              directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableComponents.BG_TASK], SchematicFilesMap.MODULES),
+              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }]
+            })
           }
         ]
       })

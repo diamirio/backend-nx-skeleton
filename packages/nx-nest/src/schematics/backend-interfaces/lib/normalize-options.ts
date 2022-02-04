@@ -13,7 +13,8 @@ import {
   normalizePriorConfigurationPrompt,
   normalizeRootDirectoryPrompt,
   NxProjectTypes,
-  setSchemaDefaultsInContext
+  setSchemaDefaultsInContext,
+  ensureNxRootListrTask
 } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
@@ -36,6 +37,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           })
         }
       },
+
+      ...ensureNxRootListrTask(),
 
       // select application name
       ...normalizeNamePrompt<NormalizedSchema>(),

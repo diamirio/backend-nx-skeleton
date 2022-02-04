@@ -6,6 +6,7 @@ import type { NxWorkspaceIntegration } from '@integration'
 import { AvailableLibraryTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import {
   AvailableTestsTypes,
+  ensureNxRootListrTask,
   getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
@@ -45,6 +46,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           })
         }
       },
+
+      ...ensureNxRootListrTask(),
 
       // select generator mode
       ...normalizeNameWithApplicationModePrompt<NormalizedSchema, NxWorkspaceIntegration>(host, (_, project) => !!project.integration?.library),

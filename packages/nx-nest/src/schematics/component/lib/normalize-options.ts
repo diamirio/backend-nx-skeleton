@@ -17,7 +17,8 @@ import {
   normalizeNameWithParentApplicationPrompt,
   normalizeParentPriorConfigurationPrompt,
   normalizeWorkspacePackageScopePrompt,
-  setSchemaDefaultsInContext
+  setSchemaDefaultsInContext,
+  ensureNxRootListrTask
 } from '@webundsoehne/nx-tools'
 
 /**
@@ -38,6 +39,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           })
         }
       },
+
+      ...ensureNxRootListrTask(),
 
       ...normalizeNameWithParentApplicationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_name, project) => {
         if (project.integration?.nestjs) {

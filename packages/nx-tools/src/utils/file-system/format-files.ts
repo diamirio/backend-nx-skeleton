@@ -8,7 +8,7 @@ import { from } from 'rxjs'
 
 import { getFilesInTree } from '.'
 import type { FormatFilesOptions } from './format-files.interface'
-import { findNxRoot, Logger } from '@utils'
+import { findNxRoot, isVerbose, Logger } from '@utils'
 
 /**
  * Format files as a rule in a tree.
@@ -30,6 +30,14 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
   if (options.skip || !(options.prettier && options.eslint)) {
     return noop()
   }
+
+  const processed = {
+    ignored: [],
+    prettier: { formatted: [], ignored: [] },
+    eslint: { formatted: [], ignored: [] }
+  }
+
+  const isDebug = isVerbose()
 
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
@@ -64,6 +72,10 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
         await Promise.all(
           Array.from(files.values()).map(async (file) => {
             if (!host.exists(file.path)) {
+              if (isDebug) {
+                processed.ignored.push(file.path)
+              }
+
               return
             }
 
@@ -87,6 +99,10 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
                 const support = await prettier.getFileInfo(systemPath)
 
                 if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
+                  if (isDebug) {
+                    processed.prettier.ignored.push(file.path)
+                  }
+
                   return
                 }
 
@@ -94,7 +110,9 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
                 // eslint-disable-next-line @typescript-eslint/await-thenable
                 file.content = await prettier.format(file.content, config)
 
-                log.debug('Prettier format: %s', file.path)
+                if (isDebug) {
+                  processed.prettier.formatted.push(file.path)
+                }
               }
 
               if (options.eslint) {
@@ -104,6 +122,10 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
                 // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
                 if (await eslint.isPathIgnored(systemPath)) {
+                  if (isDebug) {
+                    processed.eslint.ignored.push(file.path)
+                  }
+
                   return
                 }
 
@@ -112,7 +134,9 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
                 if (results?.[0]?.output) {
                   file.content = results[0].output
 
-                  log.debug('Eslint lint: %s', file.path)
+                  if (isDebug) {
+                    processed.eslint.formatted.push(file.path)
+                  }
                 }
               }
 
@@ -124,6 +148,8 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
             }
           })
         )
+
+        log.debug('Formatted and linted files: %o', processed)
 
         return host
       })()

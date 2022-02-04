@@ -9,6 +9,7 @@ import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
 import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
 import type { Configuration } from '@interfaces/default-config.interface'
+import type { LocalNodeModule } from '@webundsoehne/nx-tools'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
@@ -81,10 +82,12 @@ export class NxCommand extends BaseCommand<Configuration> {
             })
           ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
 
+          let link: LocalNodeModule
+
           if (isDevelopmentMode()) {
             task.title = color.yellow('Overriding the default package check behaviour with development mode!')
 
-            const link = (
+            link = (
               await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, {
                 getVersion: true,
                 getUpdate: false,
@@ -95,8 +98,6 @@ export class NxCommand extends BaseCommand<Configuration> {
             if (link.installed && !pkg.installed) {
               ctx.packages = [...ctx.packages, link.parsable]
 
-              task.title = color.yellow(`Package ${link.pkg} is linked!`)
-
               return
             }
           }
@@ -104,6 +105,8 @@ export class NxCommand extends BaseCommand<Configuration> {
           if (!pkg.installed) {
             ctx.packages = [...ctx.packages, pkg.parsable]
             task.title = `Package ${pkg.pkg} is not installed will install it.`
+          } else if (link?.installed) {
+            task.title = color.yellow(`Package ${link.pkg} is linked!`)
           } else if (pkg.hasUpdate) {
             task.title = `Package ${pkg.pkg} already is installed. ${color.yellow('But you should consider updating it:')} ${color.yellow(pkg.updateType)}`
           } else {

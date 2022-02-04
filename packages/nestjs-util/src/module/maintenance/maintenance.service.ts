@@ -26,6 +26,7 @@ export class MaintenanceService {
   async enable (task = 'unknown-task'): Promise<void> {
     // add task to running tasks
     this.tasks.push(task)
+    this.logger.debug(`Task added to maintenance queue: ${task}`)
 
     if (!await this.isEnabled()) {
       this.logger.verbose(`Enabling maintenance mode (lockfile is ${this.lockfile})`)

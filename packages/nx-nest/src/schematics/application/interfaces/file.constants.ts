@@ -16,19 +16,19 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
     },
     [AvailableComponents.SERVER]: {
       condition: options.components.includes(AvailableComponents.SERVER),
-      folders: [`${options.sourceRoot}/server/`]
+      folders: [`${options.sourceRoot}/${SchematicFilesMap[AvailableComponents.SERVER]}/`]
     },
     [AvailableComponents.BG_TASK]: {
       condition: options.components.includes(AvailableComponents.BG_TASK),
-      folders: [`${options.sourceRoot}/task/`]
+      folders: [`${options.sourceRoot}/${SchematicFilesMap[AvailableComponents.BG_TASK]}/`]
     },
     [AvailableComponents.COMMAND]: {
       condition: options.components.includes(AvailableComponents.COMMAND),
-      folders: [`${options.sourceRoot}/command/`]
+      folders: [`${options.sourceRoot}/${SchematicFilesMap[AvailableComponents.COMMAND]}/`]
     },
     [AvailableComponents.MICROSERVICE_SERVER]: {
       condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
-      folders: [`${options.sourceRoot}/microservice/`]
+      folders: [`${options.sourceRoot}/${SchematicFilesMap[AvailableComponents.MICROSERVICE_SERVER]}/`]
     },
     CONSTANTS: {
       condition: options.effectiveComponents > 1,
@@ -37,8 +37,13 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
   }
 }
 
-export const SchematicFilesMap: Record<AvailableDBAdapters | 'UTILS', string> = {
+export const SchematicFilesMap: Record<AvailableDBAdapters | Exclude<AvailableComponents, AvailableComponents.MICROSERVICE_CLIENT> | 'UTILS' | 'MODULES', string> = {
+  [AvailableComponents.SERVER]: 'server',
+  [AvailableComponents.BG_TASK]: 'task',
+  [AvailableComponents.COMMAND]: 'command',
+  [AvailableComponents.MICROSERVICE_SERVER]: 'microservice',
   [AvailableDBAdapters.MONGOOSE]: 'entity',
   [AvailableDBAdapters.TYPEORM]: 'entity',
-  UTILS: 'util'
+  UTILS: 'util',
+  MODULES: 'modules'
 }
