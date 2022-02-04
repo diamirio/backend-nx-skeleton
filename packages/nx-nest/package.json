@@ -32,8 +32,7 @@
     ]
   },
   "peerDependencies": {
-    "@nrwl/workspace": "*",
-    "@webundsoehne/nx-builders": "*"
+    "@nrwl/workspace": "*"
   },
   "dependencies": {
     "@angular-devkit/schematics": "^13.2.2",

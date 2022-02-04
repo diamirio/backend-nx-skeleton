@@ -5,7 +5,7 @@ import { join } from 'path'
 import type { NormalizedSchema, Schema } from '../main.interface'
 import { AvailableCLIs, AvailableFolderStructures, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
-import { color, eslintJson, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { color, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -41,7 +41,10 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             message: 'Please give a folder name to this repository.',
             footer: color.dim(`Leave empty to use current folder: ${process.cwd()}`),
             format: (value) => {
-              return generateNameCases(value).kebab
+              return generateNameCases(value).kebab.trim()
+            },
+            validate: (value) => {
+              return new RegExp(/[A-Za-z0-9-]*/).test(value)
             }
           })
 
@@ -118,8 +121,6 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
 
           ctx.deps = deps.deps
           ctx.devDeps = deps.devDeps
-
-          ctx.eslintConfig = eslintJson({ packageScope: ctx.packageScope })
 
           task.title = 'Constants set for the project.'
         }

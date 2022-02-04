@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@webundsoehne/deep-merge": "*",
+    "@webundsoehne/nx-builders": "*",
     "@angular-devkit/core": "^13.2.2",
     "@angular-devkit/schematics": "^13.2.2",
     "@nrwl/devkit": "^13.7.1",

@@ -17,8 +17,6 @@ export interface Schema extends BaseSchema, CommonPropertiesToSaveAndUse<true> {
 export interface NormalizedSchema extends Schema, BaseNormalizedSchemaRoot, BaseNormalizedSchemaPackageScope {
   enum: CommonPropertiesToSaveAndUse
 
-  eslintConfig: Record<string, unknown>
-
   deps: PackageVersions['deps']
   devDeps: PackageVersions['devDeps']
 }

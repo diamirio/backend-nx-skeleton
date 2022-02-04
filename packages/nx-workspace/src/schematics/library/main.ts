@@ -8,6 +8,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import type { Schema } from './main.interface'
 import { AvailableLibraryTypes } from '@interfaces/available.constants'
+import init from '@schematics/init/main'
 import type { SchematicRule } from '@webundsoehne/nx-tools'
 import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
@@ -22,6 +23,8 @@ export default function (schema: Schema): SchematicRule {
 
     return chain([
       addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+
+      options.type === AvailableLibraryTypes.BUILDABLE ? init() : noop(),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
       addProject(options),

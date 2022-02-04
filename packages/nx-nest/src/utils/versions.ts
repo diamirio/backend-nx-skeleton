@@ -13,9 +13,11 @@ import { dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tool
 export async function calculateDependencies (options: NormalizedSchema): Promise<PackageVersions> {
   return dependencyCalculator([
     {
+      condition: true,
       deps: VERSIONS.base.default
     },
     {
+      condition: true,
       deps: VERSIONS.base.builder
     },
     // tests

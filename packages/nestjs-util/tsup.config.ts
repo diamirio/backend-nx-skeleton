@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { esbuildDecorators } from '@anatine/esbuild-decorators'
 import { defineConfig } from 'tsup'
 

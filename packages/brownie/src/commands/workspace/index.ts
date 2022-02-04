@@ -184,7 +184,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     // run finally prematurely
     const { ctx } = await this.finally<WorkspaceCreateCommandCtx>()
 
-    this.logger.module('Now will start generating the workspace: %s', ctx.workspace.collection)
+    this.logger.module('Now will start generating the workspace: %s', ctx.workspace.pkg)
 
     const workspace = (
       await this.helpers.node.checkIfModuleInstalled([ctx.workspace], {

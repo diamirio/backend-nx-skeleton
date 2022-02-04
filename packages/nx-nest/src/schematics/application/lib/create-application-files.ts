@@ -60,7 +60,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
               options.components.includes(AvailableComponents.SERVER) &&
               options?.server === AvailableServerTypes.RESTFUL &&
-              !ComponentLocationsMap[AvailableServerTypes.RESTFUL].some((location) => host.exists(join(options.root, location, 'index.ts'))),
+              !ComponentLocationsMap[AvailableServerTypes.RESTFUL].some((location) => host.exists(join(options.root, options.sourceRoot, location, 'index.ts'))),
             rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.RESTFUL })
           },
           {
@@ -68,7 +68,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
               !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
               options.components.includes(AvailableComponents.SERVER) &&
               options?.server === AvailableServerTypes.GRAPHQL &&
-              !ComponentLocationsMap[AvailableServerTypes.GRAPHQL].some((location) => host.exists(join(options.root, location, 'index.ts'))),
+              !ComponentLocationsMap[AvailableServerTypes.GRAPHQL].some((location) => host.exists(join(options.root, options.sourceRoot, location, 'index.ts'))),
             rule: schematic<ComponentSchema>('component', { ...componentSchematicDefaultOptions, type: AvailableServerTypes.GRAPHQL })
           },
           {
