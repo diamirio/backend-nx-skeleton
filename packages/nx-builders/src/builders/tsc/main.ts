@@ -320,15 +320,15 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       // update implicit dependencies
       const implicitDependencies = {}
 
-      if (packageJson?.implicitDependencies && Object.keys(packageJson.implicitDependencies).length > 0) {
+      if (packageJson?.implicitDependencies && packageJson.implicitDependencies.length > 0) {
         this.logger.info('Processing "package.json" implicit dependencies...')
 
-        Object.entries(packageJson.implicitDependencies).forEach(([name, version]) => {
-          if (version === true && !globalPackageJson.dependencies[name]) {
+        packageJson.implicitDependencies.forEach((name: string) => {
+          if (!globalPackageJson.dependencies[name]) {
             throw new Error(`Package can be not listed as an implicit dependency since it does not exists on global package.json: ${name}`)
           }
 
-          implicitDependencies[name] = version === true ? globalPackageJson.dependencies[name] : version
+          implicitDependencies[name] = globalPackageJson.dependencies[name]
         })
       }
 
