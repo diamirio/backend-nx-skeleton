@@ -38,7 +38,7 @@
 
 builders/execute/main.interface.ts:39
 
----
+___
 
 ### NormalizedRunBuilderOptions
 
@@ -48,37 +48,37 @@ builders/execute/main.interface.ts:39
 
 builders/run/main.interface.ts:36
 
----
+___
 
 ### OptionParser
 
-Ƭ **OptionParser**<`T`\>: { `mode?`: [`OptionParserModes`](README.md#optionparsermodes)[] ; `rules?`: { `args`: `T` ; `condition?`: `boolean` }[] }[]
+Ƭ **OptionParser**<`T`\>: { `mode?`: [`OptionParserModes`](README.md#optionparsermodes)[] ; `rules?`: { `args`: `T` ; `condition?`: `boolean`  }[]  }[]
 
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Defined in
 
 builders/tsc/main.interface.ts:67
 
----
+___
 
 ### OptionParserModes
 
-Ƭ **OptionParserModes**: `"typescript"` \| `"tsconfigReplacePaths"` \| `"tsc-watch"` \| `"runAfterWatch"`
+Ƭ **OptionParserModes**: ``"typescript"`` \| ``"tsconfigReplacePaths"`` \| ``"tsc-watch"`` \| ``"runAfterWatch"``
 
 #### Defined in
 
 builders/tsc/main.interface.ts:65
 
----
+___
 
 ### ProcessPaths
 
-Ƭ **ProcessPaths**: `Record`<`"typescript"` \| `"tsconfigReplacePaths"` \| `"tscWatch"` \| `"tsconfig"`, `string`\>
+Ƭ **ProcessPaths**: `Record`<``"typescript"`` \| ``"tsconfigReplacePaths"`` \| ``"tscWatch"`` \| ``"tsconfig"``, `string`\>
 
 #### Defined in
 
@@ -94,8 +94,8 @@ A function to initiate builder depdencies. It may be wiser to call it via schema
 
 #### Parameters
 
-| Name      | Type                                                |
-| :-------- | :-------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`AvailableBuilders`](enums/AvailableBuilders.md)[] |
 
 #### Returns

@@ -31,7 +31,7 @@ this will spawn the process from the current working directory so most of the pl
 
 builders/ts-node-dev/main.interface.ts:10
 
----
+___
 
 ### debounce
 
@@ -43,7 +43,7 @@ ts-node-dev debounce in ms
 
 builders/ts-node-dev/main.interface.ts:22
 
----
+___
 
 ### debug
 
@@ -55,7 +55,7 @@ node debug port enable
 
 builders/ts-node-dev/main.interface.ts:28
 
----
+___
 
 ### environment
 
@@ -67,7 +67,7 @@ environment variables
 
 builders/ts-node-dev/main.interface.ts:34
 
----
+___
 
 ### inspect
 
@@ -79,7 +79,7 @@ inspect port that should be opened when debugging
 
 builders/ts-node-dev/main.interface.ts:31
 
----
+___
 
 ### interval
 
@@ -91,7 +91,7 @@ ts-node-dev interval in ms
 
 builders/ts-node-dev/main.interface.ts:25
 
----
+___
 
 ### main
 
@@ -103,13 +103,14 @@ entrypoint for the application which ts-node will run
 
 builders/ts-node-dev/main.interface.ts:13
 
----
+___
 
 ### tsConfig
 
 • `Optional` **tsConfig**: `string`
 
-tsconfig file that is used will default to tsconfig.json
+tsconfig file that is used
+will default to tsconfig.json
 
 #### Defined in
 

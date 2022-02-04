@@ -44,7 +44,7 @@ copy assets
 
 builders/tsc/main.interface.ts:45
 
----
+___
 
 ### cwd
 
@@ -62,7 +62,7 @@ this will spawn the process from the current working directory so most of the pl
 
 builders/tsc/main.interface.ts:12
 
----
+___
 
 ### environment
 
@@ -78,7 +78,7 @@ inject environment variables to build process
 
 builders/tsc/main.interface.ts:56
 
----
+___
 
 ### files
 
@@ -88,7 +88,7 @@ builders/tsc/main.interface.ts:56
 
 builders/tsc/main.interface.ts:60
 
----
+___
 
 ### main
 
@@ -104,7 +104,7 @@ entrypoint for the application which ts-node will run
 
 builders/tsc/main.interface.ts:15
 
----
+___
 
 ### normalizedOutputPath
 
@@ -114,7 +114,7 @@ builders/tsc/main.interface.ts:15
 
 builders/tsc/main.interface.ts:61
 
----
+___
 
 ### outputPath
 
@@ -130,13 +130,14 @@ dist folder for generated common.js files
 
 builders/tsc/main.interface.ts:24
 
----
+___
 
 ### packageJson
 
 • `Optional` **packageJson**: `string`
 
-package.json name to process defaults to package.json
+package.json name to process
+defaults to package.json
 
 #### Inherited from
 
@@ -146,7 +147,7 @@ package.json name to process defaults to package.json
 
 builders/tsc/main.interface.ts:51
 
----
+___
 
 ### relativeMainFileOutput
 
@@ -156,7 +157,7 @@ builders/tsc/main.interface.ts:51
 
 builders/tsc/main.interface.ts:62
 
----
+___
 
 ### runAfterWatch
 
@@ -172,13 +173,14 @@ command to run after completion when in watch mode
 
 builders/tsc/main.interface.ts:39
 
----
+___
 
 ### swapPaths
 
 • `Optional` **swapPaths**: `boolean`
 
-swap paths after the tsc finished defaults to true
+swap paths after the tsc finished
+defaults to true
 
 #### Inherited from
 
@@ -188,13 +190,14 @@ swap paths after the tsc finished defaults to true
 
 builders/tsc/main.interface.ts:30
 
----
+___
 
 ### tsConfig
 
 • **tsConfig**: `string`
 
-tsconfig file that is used will default to tsconfig.build.json
+tsconfig file that is used
+will default to tsconfig.build.json
 
 #### Inherited from
 
@@ -204,13 +207,14 @@ tsconfig file that is used will default to tsconfig.build.json
 
 builders/tsc/main.interface.ts:21
 
----
+___
 
 ### watch
 
 • `Optional` **watch**: `boolean`
 
-enable watch functionality with tsc-watch runAfterWatch has to be defined
+enable watch functionality with tsc-watch
+runAfterWatch has to be defined
 
 #### Inherited from
 

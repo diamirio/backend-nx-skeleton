@@ -29,7 +29,7 @@ append arguments to the command
 
 builders/run/main.interface.ts:18
 
----
+___
 
 ### command
 
@@ -41,7 +41,7 @@ command
 
 builders/run/main.interface.ts:15
 
----
+___
 
 ### cwd
 
@@ -55,7 +55,7 @@ this will spawn the process from the current working directory so most of the pl
 
 builders/run/main.interface.ts:12
 
----
+___
 
 ### environment
 
@@ -67,7 +67,7 @@ environment variables
 
 builders/run/main.interface.ts:33
 
----
+___
 
 ### interactive
 
@@ -79,7 +79,7 @@ run with interactive mode, will not parse through the logger
 
 builders/run/main.interface.ts:21
 
----
+___
 
 ### node
 
@@ -91,7 +91,7 @@ run with node
 
 builders/run/main.interface.ts:24
 
----
+___
 
 ### nodeOptions
 
@@ -103,7 +103,7 @@ pass in node options when running as node
 
 builders/run/main.interface.ts:27
 
----
+___
 
 ### watch
 
