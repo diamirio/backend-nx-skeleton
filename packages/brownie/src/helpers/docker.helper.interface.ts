@@ -25,6 +25,7 @@ export interface ParsedContainers {
   output: string
   dir: string
   volumeDir: string
+  fileDir: string
   config?: DockerComposeService
   image?: string
   dockerfile?: string

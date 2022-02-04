@@ -89,7 +89,8 @@ export class DockerHelper {
                       dir: join(this.options.flags.output, ctx.containers[name].name),
                       path: ctx.containers[name].path,
                       output: this.options.flags.output,
-                      volumeDir: join(this.options.flags['volumes-folder'], ctx.containers[name].name)
+                      volumeDir: join(this.options.flags['volumes-folder'], ctx.containers[name].name),
+                      fileDir: join(this.options.flags.output, ctx.containers[name].name, this.options.flags['files-folder'])
                     }
 
                     task.title = 'Initialization complete.'
@@ -152,7 +153,7 @@ export class DockerHelper {
                         }
 
                         if ([VolumeModes.FILE, VolumeModes.URL].includes(volume.mode)) {
-                          asset.to = join(ctx.context[name].dir, this.options.flags['files-folder'], volume.from)
+                          asset.to = join(ctx.context[name].fileDir, volume.from)
 
                           // if this is a file copy it directly
                           this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
