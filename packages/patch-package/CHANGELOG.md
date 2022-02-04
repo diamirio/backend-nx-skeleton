@@ -1,3 +1,41 @@
+# @webundsoehne/patch-package [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.1.2...@webundsoehne/patch-package@3.0.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+* deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+* eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+* fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+* swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+* update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+* update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+
+### Features
+
+* add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+
+
+### Performance Improvements
+
+* linting rules ([48134e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
+* stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
+* swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+
+
+### BREAKING CHANGES
+
+* drops anything less than node16, strictly commonjs still, transpiled to es2021
+* make everything non-public
+* stricter linting rules may cause libraries to not work
+for typescript version that are older than 4 because of the import type
+  and export type statements. what advantage that it provides is that it
+  wont crash anymore for any of the missing dependencies that are only
+  types
+* drops the builders completely due to they being not avaiable in nx anymore
+* might break older configurations do to library change
+
 # @webundsoehne/patch-package [3.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/patch-package@2.1.2...@webundsoehne/patch-package@3.0.0-beta.1) (2022-01-26)
 
 ### Bug Fixes

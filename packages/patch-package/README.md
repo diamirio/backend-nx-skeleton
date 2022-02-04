@@ -15,10 +15,9 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/patch-package](#webundsoehnepatch-package)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/patch-package](#webundsoehnepatch-package)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -26,11 +25,10 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 # Commands
 
 <!-- commands -->
-
-- [`ws-patch-package `](#ws-patch-package-)
-- [`ws-patch-package create`](#ws-patch-package-create)
-- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
-- [`ws-patch-package patch`](#ws-patch-package-patch)
+* [`ws-patch-package `](#ws-patch-package-)
+* [`ws-patch-package create`](#ws-patch-package-create)
+* [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+* [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
 
@@ -52,8 +50,8 @@ OPTIONS
   -e, --exclude=exclude      [default: package.json] Exclude given regex patterns.
   -i, --include=include      [default: .*] Include given regex patterns.
 
-  -p, --path=path            [default: /home/cenk/development/work/nx-test/packages/patch-package] Directory to take
-                             root as the application.
+  -p, --path=path            [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to take root as the
+                             application.
 
 EXAMPLE
   Create a patch for given package: patch-package create graphql
@@ -87,10 +85,7 @@ USAGE
 OPTIONS
   -d, --directory=directory  Directory to apply the patches from.
   -e, --exitOnError          Whether to exit on error if the patching process fails or not.
-
-  -p, --path=path            [default: /home/cenk/development/work/nx-test/packages/patch-package] Directory to apply
-                             patches to.
-
+  -p, --path=path            [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
   -r, --reverse              Reverses the patches, if they were applied before.
 
 ALIASES
@@ -100,5 +95,4 @@ EXAMPLES
   Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0
   Use extended glob patterns: patch-package patch "graphql*"
 ```
-
 <!-- commandsstop -->
