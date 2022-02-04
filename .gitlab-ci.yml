@@ -2,9 +2,7 @@ image: node:16-alpine
 
 stages:
   - install
-  - lint
   - build
-  - docs
   - publish
 
 cache:
@@ -25,7 +23,7 @@ install:
     - node
 
 lint:
-  stage: lint
+  stage: build
   script:
     - yarn lint:check
   tags:
@@ -43,7 +41,7 @@ build:
     - node
 
 docs:
-  stage: docs
+  stage: build
   script:
     - yarn docs
   artifacts:
