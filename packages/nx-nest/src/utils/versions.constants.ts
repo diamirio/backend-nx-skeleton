@@ -9,7 +9,7 @@ export const VERSIONS: Versions = {
         '@nestjs/common': '^8.2.5',
         '@nestjs/core': '^8.2.5',
         rxjs: { version: '^7.5.2', implicit: true },
-        '@webundsoehne/nestjs-util': '^4.0.0',
+        '@webundsoehne/nestjs-util': '^5.0.1',
         'class-transformer': { version: '^0.5.1', implicit: true },
         'class-validator': { version: '^0.13.2', implicit: true },
         'reflect-metadata': { version: '^0.1.13', implicit: true }
@@ -23,7 +23,7 @@ export const VERSIONS: Versions = {
     },
     builder: {
       devDeps: {
-        '@webundsoehne/nx-builders': '^4.0.0'
+        '@webundsoehne/nx-builders': '^5.0.5'
       }
     }
   },
