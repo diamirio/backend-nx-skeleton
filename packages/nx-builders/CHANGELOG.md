@@ -1,3 +1,9 @@
+## @webundsoehne/nx-builders [5.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.5...@webundsoehne/nx-builders@5.0.6) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.6
+
 ## @webundsoehne/nx-builders [5.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.4...@webundsoehne/nx-builders@5.0.5) (2022-02-04)
 
 ### Bug Fixes
