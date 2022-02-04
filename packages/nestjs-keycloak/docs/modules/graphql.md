@@ -25,14 +25,15 @@
 
 ▸ `Const` **GetToken**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Fetch the current user access token from the request.
+This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetToken,Token}
 
 #### Parameters
 
-| Name             | Type                                                                          |
-| :--------------- | :---------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -43,20 +44,21 @@ Fetch the current user access token from the request. This only works for GraphQ
 
 packages/nestjs-keycloak/src/connect/decorators/token-graphql.decorator.ts:12
 
----
+___
 
 ### GetUser
 
 ▸ `Const` **GetUser**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Inject the current Keycloak user to a variable.
+This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetUser,User}
 
 #### Parameters
 
-| Name             | Type                                                                                      |
-| :--------------- | :---------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -67,13 +69,14 @@ Inject the current Keycloak user to a variable. This only works for GraphQL appl
 
 packages/nestjs-keycloak/src/connect/decorators/user-graphql.decorator.ts:12
 
----
+___
 
 ### Token
 
 ▸ `Const` **Token**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Fetch the current user access token from the request.
+This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetToken,Token}
 
@@ -81,8 +84,8 @@ Fetch the current user access token from the request. This only works for GraphQ
 
 #### Parameters
 
-| Name             | Type                                                                          |
-| :--------------- | :---------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -93,13 +96,14 @@ Fetch the current user access token from the request. This only works for GraphQ
 
 packages/nestjs-keycloak/src/connect/decorators/token-graphql.decorator.ts:24
 
----
+___
 
 ### User
 
 ▸ `Const` **User**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Inject the current Keycloak user to a variable.
+This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetUser,User}
 
@@ -107,8 +111,8 @@ Inject the current Keycloak user to a variable. This only works for GraphQL appl
 
 #### Parameters
 
-| Name             | Type                                                                                      |
-| :--------------- | :---------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns

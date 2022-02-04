@@ -33,16 +33,16 @@
 
 ### Variables
 
-- [KEYCLOAK_ADMIN_INSTANCE](index.md#keycloak_admin_instance)
-- [KEYCLOAK_ADMIN_OPTIONS](index.md#keycloak_admin_options)
-- [KEYCLOAK_CONNECT_INSTANCE](index.md#keycloak_connect_instance)
-- [KEYCLOAK_CONNECT_METADATA_GROUPS](index.md#keycloak_connect_metadata_groups)
-- [KEYCLOAK_CONNECT_METADATA_PROTECTED](index.md#keycloak_connect_metadata_protected)
-- [KEYCLOAK_CONNECT_METADATA_ROLES](index.md#keycloak_connect_metadata_roles)
-- [KEYCLOAK_CONNECT_METADATA_SCOPES](index.md#keycloak_connect_metadata_scopes)
-- [KEYCLOAK_CONNECT_METADATA_UNPROTECTED](index.md#keycloak_connect_metadata_unprotected)
-- [KEYCLOAK_CONNECT_METADATA_USER](index.md#keycloak_connect_metadata_user)
-- [KEYCLOAK_CONNECT_OPTIONS](index.md#keycloak_connect_options)
+- [KEYCLOAK\_ADMIN\_INSTANCE](index.md#keycloak_admin_instance)
+- [KEYCLOAK\_ADMIN\_OPTIONS](index.md#keycloak_admin_options)
+- [KEYCLOAK\_CONNECT\_INSTANCE](index.md#keycloak_connect_instance)
+- [KEYCLOAK\_CONNECT\_METADATA\_GROUPS](index.md#keycloak_connect_metadata_groups)
+- [KEYCLOAK\_CONNECT\_METADATA\_PROTECTED](index.md#keycloak_connect_metadata_protected)
+- [KEYCLOAK\_CONNECT\_METADATA\_ROLES](index.md#keycloak_connect_metadata_roles)
+- [KEYCLOAK\_CONNECT\_METADATA\_SCOPES](index.md#keycloak_connect_metadata_scopes)
+- [KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED](index.md#keycloak_connect_metadata_unprotected)
+- [KEYCLOAK\_CONNECT\_METADATA\_USER](index.md#keycloak_connect_metadata_user)
+- [KEYCLOAK\_CONNECT\_OPTIONS](index.md#keycloak_connect_options)
 
 ### Functions
 
@@ -72,7 +72,7 @@
 
 packages/nestjs-keycloak/src/interfaces/request.interface.ts:11
 
----
+___
 
 ### EnrichedFastifyRequest
 
@@ -82,7 +82,7 @@ packages/nestjs-keycloak/src/interfaces/request.interface.ts:11
 
 packages/nestjs-keycloak/src/interfaces/request.interface.ts:12
 
----
+___
 
 ### EnrichedRequest
 
@@ -92,17 +92,17 @@ packages/nestjs-keycloak/src/interfaces/request.interface.ts:12
 
 packages/nestjs-keycloak/src/interfaces/request.interface.ts:14
 
----
+___
 
 ### KeycloakConnectUserInfo
 
-Ƭ **KeycloakConnectUserInfo**: `Record`<`string`, `string` \| `number` \| `boolean` \| `null`\>
+Ƭ **KeycloakConnectUserInfo**: `Record`<`string`, `string` \| `number` \| `boolean` \| ``null``\>
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:36
 
----
+___
 
 ### RolesOption
 
@@ -112,7 +112,7 @@ packages/nestjs-keycloak/src/connect/connect.interfaces.ts:36
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:23
 
----
+___
 
 ### ScopesOption
 
@@ -124,99 +124,99 @@ packages/nestjs-keycloak/src/connect/connect.interfaces.ts:25
 
 ## Variables
 
-### KEYCLOAK_ADMIN_INSTANCE
+### KEYCLOAK\_ADMIN\_INSTANCE
 
-• **KEYCLOAK_ADMIN_INSTANCE**: typeof [`KEYCLOAK_ADMIN_INSTANCE`](index.md#keycloak_admin_instance)
+• **KEYCLOAK\_ADMIN\_INSTANCE**: typeof [`KEYCLOAK_ADMIN_INSTANCE`](index.md#keycloak_admin_instance)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/admin/admin.constants.ts:2
 
----
+___
 
-### KEYCLOAK_ADMIN_OPTIONS
+### KEYCLOAK\_ADMIN\_OPTIONS
 
-• **KEYCLOAK_ADMIN_OPTIONS**: typeof [`KEYCLOAK_ADMIN_OPTIONS`](index.md#keycloak_admin_options)
+• **KEYCLOAK\_ADMIN\_OPTIONS**: typeof [`KEYCLOAK_ADMIN_OPTIONS`](index.md#keycloak_admin_options)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/admin/admin.constants.ts:1
 
----
+___
 
-### KEYCLOAK_CONNECT_INSTANCE
+### KEYCLOAK\_CONNECT\_INSTANCE
 
-• **KEYCLOAK_CONNECT_INSTANCE**: typeof [`KEYCLOAK_CONNECT_INSTANCE`](index.md#keycloak_connect_instance)
+• **KEYCLOAK\_CONNECT\_INSTANCE**: typeof [`KEYCLOAK_CONNECT_INSTANCE`](index.md#keycloak_connect_instance)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:2
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_GROUPS
+### KEYCLOAK\_CONNECT\_METADATA\_GROUPS
 
-• **KEYCLOAK_CONNECT_METADATA_GROUPS**: typeof [`KEYCLOAK_CONNECT_METADATA_GROUPS`](index.md#keycloak_connect_metadata_groups)
+• **KEYCLOAK\_CONNECT\_METADATA\_GROUPS**: typeof [`KEYCLOAK_CONNECT_METADATA_GROUPS`](index.md#keycloak_connect_metadata_groups)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:6
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_PROTECTED
+### KEYCLOAK\_CONNECT\_METADATA\_PROTECTED
 
-• **KEYCLOAK_CONNECT_METADATA_PROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_PROTECTED`](index.md#keycloak_connect_metadata_protected)
+• **KEYCLOAK\_CONNECT\_METADATA\_PROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_PROTECTED`](index.md#keycloak_connect_metadata_protected)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:5
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_ROLES
+### KEYCLOAK\_CONNECT\_METADATA\_ROLES
 
-• **KEYCLOAK_CONNECT_METADATA_ROLES**: typeof [`KEYCLOAK_CONNECT_METADATA_ROLES`](index.md#keycloak_connect_metadata_roles)
+• **KEYCLOAK\_CONNECT\_METADATA\_ROLES**: typeof [`KEYCLOAK_CONNECT_METADATA_ROLES`](index.md#keycloak_connect_metadata_roles)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:7
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_SCOPES
+### KEYCLOAK\_CONNECT\_METADATA\_SCOPES
 
-• **KEYCLOAK_CONNECT_METADATA_SCOPES**: typeof [`KEYCLOAK_CONNECT_METADATA_SCOPES`](index.md#keycloak_connect_metadata_scopes)
+• **KEYCLOAK\_CONNECT\_METADATA\_SCOPES**: typeof [`KEYCLOAK_CONNECT_METADATA_SCOPES`](index.md#keycloak_connect_metadata_scopes)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:8
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_UNPROTECTED
+### KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED
 
-• **KEYCLOAK_CONNECT_METADATA_UNPROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_UNPROTECTED`](index.md#keycloak_connect_metadata_unprotected)
+• **KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_UNPROTECTED`](index.md#keycloak_connect_metadata_unprotected)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:4
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_USER
+### KEYCLOAK\_CONNECT\_METADATA\_USER
 
-• **KEYCLOAK_CONNECT_METADATA_USER**: typeof [`KEYCLOAK_CONNECT_METADATA_USER`](index.md#keycloak_connect_metadata_user)
+• **KEYCLOAK\_CONNECT\_METADATA\_USER**: typeof [`KEYCLOAK_CONNECT_METADATA_USER`](index.md#keycloak_connect_metadata_user)
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.constants.ts:9
 
----
+___
 
-### KEYCLOAK_CONNECT_OPTIONS
+### KEYCLOAK\_CONNECT\_OPTIONS
 
-• **KEYCLOAK_CONNECT_OPTIONS**: typeof [`KEYCLOAK_CONNECT_OPTIONS`](index.md#keycloak_connect_options)
+• **KEYCLOAK\_CONNECT\_OPTIONS**: typeof [`KEYCLOAK_CONNECT_OPTIONS`](index.md#keycloak_connect_options)
 
 #### Defined in
 
@@ -240,11 +240,11 @@ Injects Keyclaok admin instance initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -254,7 +254,7 @@ Injects Keyclaok admin instance initiated to the service.
 
 packages/nestjs-keycloak/src/admin/decorators/inject.decorator.ts:8
 
----
+___
 
 ### InjectKeycloakConnect
 
@@ -272,11 +272,11 @@ Injects Keyclaok connect instance initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -286,7 +286,7 @@ Injects Keyclaok connect instance initiated to the service.
 
 packages/nestjs-keycloak/src/connect/decorators/inject.decorator.ts:8
 
----
+___
 
 ### InjectKeycloakConnectOptions
 
@@ -304,11 +304,11 @@ Injects Keyclaok connect instance options initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -318,7 +318,7 @@ Injects Keyclaok connect instance options initiated to the service.
 
 packages/nestjs-keycloak/src/connect/decorators/inject.decorator.ts:15
 
----
+___
 
 ### KeycloakPrivate
 
@@ -336,7 +336,7 @@ Makes the controller route private and require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:10
 
----
+___
 
 ### KeycloakProtected
 
@@ -354,7 +354,7 @@ Makes the controller route private and require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:16
 
----
+___
 
 ### KeycloakPublic
 
@@ -372,7 +372,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:10
 
----
+___
 
 ### KeycloakRoles
 
@@ -384,8 +384,8 @@ Inject current Keycloak users roles in to a variable.
 
 #### Parameters
 
-| Name       | Type       |
-| :--------- | :--------- |
+| Name | Type |
+| :------ | :------ |
 | `...roles` | `string`[] |
 
 #### Returns
@@ -396,7 +396,7 @@ Inject current Keycloak users roles in to a variable.
 
 packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:10
 
----
+___
 
 ### KeycloakScopes
 
@@ -408,8 +408,8 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Parameters
 
-| Name      | Type                                      |
-| :-------- | :---------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...list` | [`ScopesOption`](index.md#scopesoption)[] |
 
 #### Returns
@@ -420,7 +420,7 @@ Inject current Keycloak user client scopes in to a variable.
 
 packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:11
 
----
+___
 
 ### KeycloakUnprotected
 
@@ -438,7 +438,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:16
 
----
+___
 
 ### Private
 
@@ -456,7 +456,7 @@ Makes the controller route private and require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:22
 
----
+___
 
 ### Protected
 
@@ -474,7 +474,7 @@ Makes the controller route private and require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/protected.decorator.ts:28
 
----
+___
 
 ### Public
 
@@ -492,7 +492,7 @@ Makes the controller route public and does not require Keycloak authentication.
 
 packages/nestjs-keycloak/src/connect/decorators/unprotected.decorator.ts:22
 
----
+___
 
 ### Roles
 
@@ -506,8 +506,8 @@ Inject current Keycloak users roles in to a variable.
 
 #### Parameters
 
-| Name       | Type       |
-| :--------- | :--------- |
+| Name | Type |
+| :------ | :------ |
 | `...roles` | `string`[] |
 
 #### Returns
@@ -518,7 +518,7 @@ Inject current Keycloak users roles in to a variable.
 
 packages/nestjs-keycloak/src/connect/decorators/roles.decorator.ts:17
 
----
+___
 
 ### Scopes
 
@@ -532,8 +532,8 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Parameters
 
-| Name      | Type                                      |
-| :-------- | :---------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...list` | [`ScopesOption`](index.md#scopesoption)[] |
 
 #### Returns
@@ -544,7 +544,7 @@ Inject current Keycloak user client scopes in to a variable.
 
 packages/nestjs-keycloak/src/connect/decorators/scopes.decorator.ts:22
 
----
+___
 
 ### Unprotected
 

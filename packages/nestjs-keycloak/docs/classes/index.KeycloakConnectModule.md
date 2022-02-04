@@ -4,7 +4,8 @@
 
 [index](../modules/index.md).KeycloakConnectModule
 
-KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client. This client is usually a private client with the token authentication flow in Keycloak.
+KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client.
+This client is usually a private client with the token authentication flow in Keycloak.
 
 ## Table of contents
 
@@ -30,8 +31,8 @@ KeycloakConnectModule provides the Keycloak API to validate user authentication 
 
 #### Parameters
 
-| Name      | Type                                                                      |
-| :-------- | :------------------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
 
 #### Returns
