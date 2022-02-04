@@ -1,17 +1,18 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
 import execa from 'execa'
-import { Listr } from 'listr2'
+import type { Listr } from 'listr2'
 
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import { PackageManagerUsableCommands } from '@helpers/node.helper.interface'
-import { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import { Configuration } from '@interfaces/default-config.interface'
+import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
+import type { Configuration } from '@interfaces/default-config.interface'
+import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
+import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
-  static aliases = [ 'ws' ]
+  static aliases = ['ws']
   static flags = {
     'skip-updates': flags.boolean({
       description: 'Skip the dependency updates.',
@@ -22,19 +23,30 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       description: 'Force override for schematic.',
       default: false,
       char: 'f'
+    }),
+    develop: flags.boolean({
+      description: 'Puts the underlying schematics to development mode, if they support it.',
+      default: false,
+      char: 'd'
     })
   }
 
   private helpers: { node: NodeHelper }
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     // can not initiate helpers as private since this is initiated by oclif
     this.helpers = { node: new NodeHelper(this) }
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     // get oclif parameters
     const { flags } = this.parse(WorkspaceCreateCommand)
+
+    if (flags.develop) {
+      setDevelopmentMode()
+
+      this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
+    }
 
     // initiate variables
     this.tasks.ctx = new WorkspaceCreateCommandCtx()
@@ -51,14 +63,13 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           // ensure that git is installed
           {
             title: 'Being sure that GIT is installed.',
-            task: async (ctx, task): Promise<void> => {
+            task: async (_, task): Promise<void> => {
               try {
-                const gitVersion = await execa('git', [ '--version' ])
+                const gitVersion = await execa('git', ['--version'])
+
                 task.title = `Found git version: ${gitVersion.stdout}`
-              } catch (e) {
-                this.logger.debug(e)
-                this.logger.fail('GIT not available on the sytem or can not reach it!. Quitting.')
-                process.exit(10)
+              } catch {
+                throw new Error('GIT not available on the system or can not reach it!. Quitting.')
               }
             }
           }
@@ -88,7 +99,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
-              ctx.deps = await this.helpers.node.checkIfModuleInstalled([ ...this.constants.workspace.requiredDependencies, ctx.workspace ], {
+              ctx.deps = await this.helpers.node.checkIfModuleInstalled([...this.constants.workspace.requiredDependencies, ctx.workspace], {
                 getVersion: true,
                 global: true,
                 getUpdate: true
@@ -120,7 +131,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
 
                 const parsedToUpdate = updatable.filter((d) => updateDeps.includes(d.pkg)).map((u) => u.parsable)
 
-                ctx.packages = [ ...ctx.packages, ...parsedToUpdate ]
+                ctx.packages = [...ctx.packages, ...parsedToUpdate]
 
                 this.logger.debug('Dependencies in update queue: %o', parsedToUpdate)
 
@@ -140,7 +151,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
               if (shouldBeInstalled.length > 0) {
                 const parsedToInstall = shouldBeInstalled.map((i) => i.parsable)
 
-                ctx.packages = [ ...ctx.packages, ...parsedToInstall ]
+                ctx.packages = [...ctx.packages, ...parsedToInstall]
 
                 this.logger.debug('Dependencies in install queue: %o', parsedToInstall)
 
@@ -158,7 +169,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
                 {
                   action: PackageManagerUsableCommands.ADD,
                   global: true,
-                  force: true,
+                  // force: true,
                   useLatest: true
                 },
                 ctx.packages
@@ -173,10 +184,10 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     // run finally prematurely
     const { ctx } = await this.finally<WorkspaceCreateCommandCtx>()
 
-    this.logger.module('Now will start generating the workspace...')
+    this.logger.module('Now will start generating the workspace: %s', ctx.workspace.collection)
 
     const workspace = (
-      await this.helpers.node.checkIfModuleInstalled([ ctx.workspace ], {
+      await this.helpers.node.checkIfModuleInstalled([ctx.workspace], {
         getVersion: true,
         global: true,
         getUpdate: true
@@ -184,6 +195,13 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     ).find((c) => c.pkg === ctx.workspace.pkg)
 
     // this will be the command
-    await execa('ng', [ 'new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, flags.force ? '-f' : null ], { stdio: 'inherit', shell: true })
+    await execa(
+      'ng',
+      ['new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...flags.force ? ['-f'] : [], ...this.isVerbose || this.isDebug ? ['--verbose'] : []],
+      {
+        stdio: 'inherit',
+        shell: true
+      }
+    )
   }
 }

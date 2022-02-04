@@ -1,13 +1,13 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
 import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
-import { Listr, PromptOptionsMap } from 'listr2'
+import type { PromptOptionsMap } from 'listr2'
+import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
-import { NormalizedSchema, Schema } from '../main.interface'
+import type { NormalizedSchema, Schema } from '../main.interface'
 import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
@@ -17,8 +17,9 @@ import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchem
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (files: string, _host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema, files: string): Promise<NormalizedSchema> {
   const logger = new Logger(context)
+
   logger.debug(`Template directory to scan in: ${files}`)
 
   return new Listr<NormalizedSchema>(
@@ -27,7 +28,18 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'directory', 'exports', 'type' ] }
+            default: [options]
+          })
+        }
+      },
+
+      // prompt for generator component name
+      {
+        skip: (ctx): boolean => !!ctx.name,
+        task: async (ctx, task): Promise<void> => {
+          ctx.name = await task.prompt({
+            type: 'Input',
+            message: 'Please give a name to the soon to be generated component.'
           })
         }
       },
@@ -36,9 +48,8 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = toFileName(options.name)
-
           ctx.casing = generateNameCases(ctx.name)
+          ctx.name = ctx.casing.kebab
 
           task.title = `Generated item name is set as "${ctx.name}".`
         }
@@ -53,6 +64,7 @@ export async function normalizeOptions (files: string, _host: Tree, context: Sch
 
           try {
             const nxJson = await fs.readJSON(nxJsonPath)
+
             ctx.packageScope = `${nxJson.npmScope}`
             // eslint-disable-next-line no-empty
           } catch {}

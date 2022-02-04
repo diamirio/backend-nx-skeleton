@@ -1,3 +1,30 @@
+# @webundsoehne/nestjs-util [5.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.2...@webundsoehne/nestjs-util@5.0.0-beta.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+* deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+* exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+* rule issues ([80afa54](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80afa5453a58ea16b636cf054337504ec5e00cae))
+* swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+* update dependencies ([f569b85](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+* update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+
+### BREAKING CHANGES
+
+* drops the builders completely due to they being not avaiable in nx anymore
+* might break older configurations do to library change
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 1.0.3-beta.1
+
 ## @webundsoehne/nestjs-util [4.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@4.3.1...@webundsoehne/nestjs-util@4.3.2) (2021-12-20)
 
 

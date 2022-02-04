@@ -16,4 +16,4 @@
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.interface.ts:6
+packages/nx-tools/src/utils/logger/logger.interface.ts:7

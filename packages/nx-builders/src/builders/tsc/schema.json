@@ -1,6 +1,8 @@
 {
-  "title": "Node Library Package Target",
-  "description": "Packages a Node library using TypeScript",
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@webundsoehne/nx-builders/tsc",
+  "title": "@webundsoehne/nx-builders/tsc",
+  "description": "Run Typescript compiler as builder.",
   "type": "object",
   "properties": {
     "cwd": {

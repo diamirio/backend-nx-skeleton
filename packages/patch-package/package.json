@@ -5,33 +5,26 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "bin": {
-    "patch-package": "bin/run.js"
+    "ws-patch-package": "bin/run.js"
   },
   "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "oclif",
+    "patch-package"
+  ],
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "start": "./bin/run.js",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
-    "oclif": "oclif $command",
+    "oclif": "oclif",
     "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
     "docs:readme": "yarn oclif-dev readme"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
   },
   "lint-staged": {
     "./**/*.{ts,js,tsx,jsx}": [
@@ -50,7 +43,7 @@
   ],
   "oclif": {
     "commands": "./dist/commands",
-    "bin": "patch-package",
+    "bin": "ws-patch-package",
     "plugins": [
       "@oclif/plugin-help"
     ],
@@ -60,33 +53,29 @@
       "prerun": "./dist/hooks/prerun.hook"
     }
   },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "keywords": [
-    "oclif",
-    "patch-package"
-  ],
   "dependencies": {
-    "@cenk1cenk2/boilerplate-oclif": "^1.10.4",
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
+    "@cenk1cenk2/boilerplate-oclif": "^1.10.6",
+    "@oclif/command": "^1.8.16",
+    "@oclif/config": "^1.18.2",
     "@oclif/errors": "^1.3.5",
     "@oclif/plugin-help": "^5.1.10",
     "fs-extra": "^10.0.0",
     "globby": "^11.0.3",
-    "listr2": "^3.12.1",
+    "listr2": "^4.0.1",
     "patch-package": "^6.4.7",
-    "rewire": "^5.0.0",
-    "tmp-promise": "^3.0.2",
+    "rewire": "^6.0.0",
+    "tmp-promise": "^3.0.3",
     "tslib": "^2.3.1",
     "wrap-ansi": "^8.0.1"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.22.2",
-    "@types/fs-extra": "^9.0.12",
-    "@types/node": "^16.3.2",
+    "@oclif/dev-cli": "^1.26.10",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^17.0.13",
     "@types/rewire": "^2.5.28",
     "@types/wrap-ansi": "^8.0.1"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

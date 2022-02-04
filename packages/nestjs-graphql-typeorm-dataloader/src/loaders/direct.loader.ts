@@ -1,6 +1,7 @@
-import { Dictionary, keyBy } from 'lodash'
-import { Connection } from 'typeorm'
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { Dictionary } from 'lodash'
+import { keyBy } from 'lodash'
+import type { Connection } from 'typeorm'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 /**
  * A shared component for handling the end result of the query.

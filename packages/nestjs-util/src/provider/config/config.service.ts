@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import config from 'config'
 
-import { Config } from './config.interfaces'
+import type { Config } from './config.interfaces'
 
 @Injectable()
 export class ConfigService {
@@ -12,7 +12,7 @@ export class ConfigService {
    * @param {any} defaultValue
    * @returns {any}
    */
-  static get<T extends any = any>(path: string, defaultValue?: T): T {
+  static get<T = any>(path: string, defaultValue?: T): T {
     let configValue
 
     try {
@@ -52,15 +52,15 @@ export class ConfigService {
     config.util.setModuleDefaults(moduleName, moduleConfig)
   }
 
-  public has (path: string): boolean {
+  has (path: string): boolean {
     return ConfigService.has(path)
   }
 
-  public get<T extends any = any>(path: string, defaultValue?: T): T {
+  get<T = any>(path: string, defaultValue?: T): T {
     return ConfigService.get<T>(path, defaultValue)
   }
 
-  public setModuleConfig (moduleName: string, moduleConfig: Config): void {
+  setModuleConfig (moduleName: string, moduleConfig: Config): void {
     return ConfigService.setModuleConfig(moduleName, moduleConfig)
   }
 }

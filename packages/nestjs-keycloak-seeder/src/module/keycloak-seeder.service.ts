@@ -17,10 +17,10 @@ export class KeycloakSeederService {
   /**
    * Run all the seeds.
    */
-  public async init (): Promise<void> {
+  async init (): Promise<void> {
     await this.keycloak.getClient()
 
-    for (const [ name, Seed ] of Object.entries(this.seeds)) {
+    for (const [name, Seed] of Object.entries(this.seeds)) {
       const seed = new Seed(this.keycloak)
 
       if (!(seed instanceof KeycloakSeed)) {

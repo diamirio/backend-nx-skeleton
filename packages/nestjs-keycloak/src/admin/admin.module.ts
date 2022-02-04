@@ -1,7 +1,8 @@
-import { DynamicModule, Global, Module } from '@nestjs/common'
+import type { DynamicModule } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 
 import { KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS } from './admin.constants'
-import { KeycloakAdminOptions } from './admin.interfaces'
+import type { KeycloakAdminOptions } from './admin.interfaces'
 import { KeycloakAdminService } from './admin.service'
 
 /**
@@ -25,10 +26,10 @@ export class KeycloakAdminModule {
           useFactory: (options: KeycloakAdminOptions): KeycloakAdminService => {
             return new KeycloakAdminService(options)
           },
-          inject: [ KEYCLOAK_ADMIN_OPTIONS ]
+          inject: [KEYCLOAK_ADMIN_OPTIONS]
         }
       ],
-      exports: [ KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS ]
+      exports: [KEYCLOAK_ADMIN_INSTANCE, KEYCLOAK_ADMIN_OPTIONS]
     }
   }
 }

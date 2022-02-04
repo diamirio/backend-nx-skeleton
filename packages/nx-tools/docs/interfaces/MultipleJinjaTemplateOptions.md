@@ -6,9 +6,9 @@ Generate multiple outputs from single jinja template with dynamic context.
 
 ## Type parameters
 
-| Name | Type                                                         |
-| :--- | :----------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\>`Record`<`string`, `any`\> |
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> = `Record`<`string`, `any`\> |
 
 ## Table of contents
 

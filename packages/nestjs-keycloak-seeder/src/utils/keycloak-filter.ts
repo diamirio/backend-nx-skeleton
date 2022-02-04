@@ -1,4 +1,4 @@
-import { ArrayElement, InferedObjectType } from '@webundsoehne/ts-utility-types'
+import type { ArrayElement, InferedObjectType } from '@webundsoehne/ts-utility-types'
 
 /**
  * Matchs a data and returns another property of the object.

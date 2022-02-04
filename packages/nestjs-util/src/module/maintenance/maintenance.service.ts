@@ -4,42 +4,29 @@ import path from 'path'
 
 import { Configurable, ConfigParam } from '@provider/config'
 
-let MaintenanceServiceInstance: MaintenanceService
-
 @Injectable()
 export class MaintenanceService {
+  static instance: MaintenanceService
   public readonly message: string
   private readonly logger = new Logger(this.constructor.name)
   private readonly lockfile: string
   private readonly tasks: string[] = []
 
   constructor () {
-    if (!MaintenanceServiceInstance) {
+    if (!MaintenanceService.instance) {
       this.message = this.prepareMessage()
       this.lockfile = this.prepareLockfile()
 
-      MaintenanceServiceInstance = this
+      MaintenanceService.instance = this
     }
 
-    return MaintenanceServiceInstance
-  }
-
-  @Configurable()
-  private prepareMessage (
-    @ConfigParam('misc.maintenanceNotification') message?: string,
-      @ConfigParam('url.basePath') basePath?: string
-  ): string {
-    return message || `${basePath} is currently down for maintenance`
-  }
-
-  @Configurable()
-  private prepareLockfile (@ConfigParam('misc.lockfile', 'maintenance.lock') lockfile?: string): string {
-    return path.resolve(lockfile)
+    return MaintenanceService.instance
   }
 
   async enable (task = 'unknown-task'): Promise<void> {
     // add task to running tasks
     this.tasks.push(task)
+    this.logger.debug(`Task added to maintenance queue: ${task}`)
 
     if (!await this.isEnabled()) {
       this.logger.verbose(`Enabling maintenance mode (lockfile is ${this.lockfile})`)
@@ -79,5 +66,15 @@ export class MaintenanceService {
 
   throwException (): void {
     throw new ServiceUnavailableException(this.message)
+  }
+
+  @Configurable()
+  private prepareMessage (@ConfigParam('misc.maintenanceNotification') message?: string, @ConfigParam('url.basePath') basePath?: string): string {
+    return message || `${basePath} is currently down for maintenance`
+  }
+
+  @Configurable()
+  private prepareLockfile (@ConfigParam('misc.lockfile', 'maintenance.lock') lockfile?: string): string {
+    return path.resolve(lockfile)
   }
 }

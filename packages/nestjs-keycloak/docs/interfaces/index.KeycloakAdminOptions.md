@@ -26,7 +26,7 @@ Administration user credentials and client.
 
 packages/nestjs-keycloak/src/admin/admin.interfaces.ts:11
 
-___
+---
 
 ### configuration
 
@@ -38,7 +38,7 @@ Realm to be managed.
 
 packages/nestjs-keycloak/src/admin/admin.interfaces.ts:13
 
-___
+---
 
 ### initialize
 

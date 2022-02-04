@@ -1,12 +1,14 @@
-import { apply, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply } from '@angular-devkit/schematics'
 import * as micromatch from 'micromatch'
 import { dirname, join, parse, relative } from 'path'
 
 import { createApplicationRule } from './create-application.rule'
-import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
+import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
-import { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
-import { convertStringToDirPath, deepMergeWithUniqueMergeArray, Logger } from '@utils'
+import type { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
+import { convertStringToDirPath, Logger } from '@utils'
+import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
 /**
  * Generates from given template. Will search for multiple files that match the import case and will export them from root of the output file.
@@ -25,27 +27,31 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
 
     // parse the host tree first generate which files to output
     host.getDir(options.root).visit((file) => {
-      if (micromatch.isMatch(file, [ '**/node_modules/**/*' ], micromatchDefaultOptions)) {
+      if (micromatch.isMatch(file, ['**/node_modules/**/*'], micromatchDefaultOptions)) {
         return
       }
 
       // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
       output = deepMergeWithUniqueMergeArray(
         output,
-        options.templates.reduce((o, template) => {
+        options.templates.reduce<Record<string, string[]>>((o, template) => {
           if (!Array.isArray(template.pattern)) {
-            template.pattern = [ template.pattern ]
+            template.pattern = [template.pattern]
           }
 
-          if (micromatch.isMatch(file, template.pattern, { ...micromatchDefaultOptions, ...template.options })) {
-            log.debug(`Generate export pattern "${template.pattern.join(', ')}" matches: "${file}"`)
+          const root = template?.cwd ?? options.root
+
+          const pattern = [...template.pattern, '!/' + join(root, template.output)]
+
+          if (micromatch.all(file, pattern, { ...micromatchDefaultOptions, ...template.options })) {
+            log.debug(`Generate export pattern "${pattern.join(', ')}" matches: "${file}"`)
 
             o = deepMergeWithUniqueMergeArray(o, {
               [template.output]: [
                 './' +
                   join(
                     relative(
-                      convertStringToDirPath(dirname(join(template?.cwd ?? options.root, template.output)), { start: true, end: false }),
+                      convertStringToDirPath(dirname(join(root, template.output)), { start: true, end: false }),
                       convertStringToDirPath(dirname(file), { start: true, end: false })
                     ),
                     parse(file).name
@@ -55,13 +61,25 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           }
 
           return o
-        }, {} as Record<string, string[]>)
+        }, {})
       )
     })
 
     if (!output || Object.keys(output).length === 0) {
-      log.warn('Can not generate exports, because there is no file matched.')
-      return
+      log.warn('Nothing to export no file has been matched with the given pattern.')
+
+      output = deepMergeWithUniqueMergeArray(
+        output,
+        options.templates.reduce<Record<string, string[]>>((o, template) => {
+          log.debug(`Generate empty export file: "${template.output}"`)
+
+          o = deepMergeWithUniqueMergeArray(o, {
+            [template.output]: []
+          })
+
+          return o
+        }, {})
+      )
     }
 
     return applyOverwriteWithDiff(
@@ -70,7 +88,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           {
             multipleTemplates: [
               {
-                templates: Object.entries(output).map(([ output, files ]) => ({
+                templates: Object.entries(output).map(([output, files]) => ({
                   output,
                   path: templatePath,
                   factory: (): Record<string, unknown> => ({ files })

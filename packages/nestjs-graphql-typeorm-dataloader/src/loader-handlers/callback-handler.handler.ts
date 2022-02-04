@@ -1,11 +1,11 @@
-import DataLoader from 'dataloader'
+import type DataLoader from 'dataloader'
 import Container from 'typedi'
 import type { Connection } from 'typeorm'
-import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata'
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
-import { Context } from '@interfaces/context.interface'
+import type { Context } from '@interfaces/context.interface'
 
 /**
  * Handles the all data loader handlers common functionality to check the connection and
@@ -25,6 +25,7 @@ export async function handler<V> (
   const serviceId = `${DATA_LOADER_CONTEXT_KEY}#${relation.entityMetadata.tableName}#${relation.propertyName}`
 
   const container = Container.of(context[DATA_LOADER_CONTEXT_KEY].requestId)
+
   if (!container.has(serviceId)) {
     container.set(serviceId, newDataloader(context[DATA_LOADER_CONTEXT_KEY].typeormGetConnection()))
   }

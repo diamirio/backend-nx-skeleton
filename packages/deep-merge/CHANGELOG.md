@@ -1,3 +1,9 @@
+## @webundsoehne/deep-merge [1.0.3-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/deep-merge@1.0.2...@webundsoehne/deep-merge@1.0.3-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
 ## @webundsoehne/deep-merge [1.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/deep-merge@1.0.1...@webundsoehne/deep-merge@1.0.2) (2021-12-20)
 
 ### Bug Fixes

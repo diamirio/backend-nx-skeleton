@@ -1,7 +1,8 @@
-import { ExecutionContext, Injectable } from '@nestjs/common'
+import type { ExecutionContext } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 
 import { BaseAuthGuard } from './auth-base.guard'
-import { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
+import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
 
 /**
  * Application AuthGuard for Keycloak applications.
@@ -9,7 +10,7 @@ import { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/requ
  */
 @Injectable()
 export class AuthGuard extends BaseAuthGuard {
-  public getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
+  getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
     return context.switchToHttp().getRequest()
   }
 }

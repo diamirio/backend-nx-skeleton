@@ -45,10 +45,7 @@ build:
 docs:
   stage: docs
   script:
-    - yarn command docs:readme
-    - yarn command docs:jsdoc
-    - yarn command docs:toc
-    - yarn docs:toc
+    - yarn docs
   artifacts:
     paths:
       - packages/*/README.md

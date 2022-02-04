@@ -1,6 +1,8 @@
 {
-  "title": "Schema for Executing NodeJS apps",
-  "description": "NodeJS execution options",
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@webundsoehne/nx-builders/execute",
+  "title": "@webundsoehne/nx-builders/execute",
+  "description": "Execute multiple builders with hiearachy.",
   "type": "object",
   "properties": {
     "cwd": {

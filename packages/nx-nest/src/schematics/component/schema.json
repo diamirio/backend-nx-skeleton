@@ -1,30 +1,49 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-nest:component",
-  "title": "Add a component to existing nx-nest schematic.",
+  "$id": "@webundsoehne-private/nx-nest/component",
+  "title": "@webundsoehne-private/nx-nest/compontent",
+  "description": "Generate nestjs components.",
   "examples": [],
   "type": "object",
   "properties": {
     "parent": {
-      "description": "The name of parent application.",
+      "description": "Project name of the parent application.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What parent application do you want to run on?"
+      "default": ""
     },
+
     "name": {
-      "description": "The name of the component.",
+      "description": "Name of the generated component.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 1
       },
-      "x-prompt": "What name do you want to give to your module?"
+      "default": ""
     },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean",
+      "aliases": ["skip-format"]
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
     "force": {
       "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
       "type": "boolean"
     }
   },

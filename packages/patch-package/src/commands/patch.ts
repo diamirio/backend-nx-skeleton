@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags as Flags } from '@oclif/command'
-import { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
+import type { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
 import fs from 'fs-extra'
 import globby from 'globby'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
@@ -11,13 +11,13 @@ import { join, resolve, isAbsolute, basename } from 'path'
 import rewire from 'rewire'
 import tmp from 'tmp-promise'
 
-import { ApplicationConfiguration } from '@src/interfaces/config.interface'
+import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false
   static description = 'Patches or reserves given patches in a directory.'
-  static examples = [ 'Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0', 'Use extended glob patterns: patch-package patch "graphql*"' ]
-  static aliases = [ 'apply' ]
+  static examples = ['Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0', 'Use extended glob patterns: patch-package patch "graphql*"']
+  static aliases = ['apply']
   static flags: Record<'path' | 'directory', IOptionFlag<string>> & Record<'exitOnError' | 'reverse', IBooleanFlag<boolean>> = {
     directory: Flags.string({
       char: 'd',
@@ -53,7 +53,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
   any
   > = {} as any
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     // since the underlying application is not exposing any of these methods, run time rewire is required
     this.logger.debug('Rewiring underlying module...')
 
@@ -75,7 +75,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     )
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     // get arguments
     const { flags, argv } = this.parse(PatchCommand)
 
@@ -88,7 +88,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     this.logger.module(`${flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, flags.path)
 
-    const limit = argv.length === 0 ? [ '*' ] : argv
+    const limit = argv.length === 0 ? ['*'] : argv
 
     // check for missing patches when limited to
     let matched = []
@@ -146,6 +146,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     // apply patches
     let shouldTerminate = false
+
     try {
       await this.applyPatchesForApp({
         appPath: flags?.path,

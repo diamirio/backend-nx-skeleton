@@ -1,3 +1,39 @@
+# @webundsoehne/brownie [4.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.7...@webundsoehne/brownie@4.0.0-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+- issues with brownie and template generation ([5c771be](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c771be9c80696e0da5cc717c74b9ce2760db6ad)), closes [#15](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/15)
+- npm execute package problem with new npm ([95a8ec0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/95a8ec0b0a8a39474e4d5549ed92a38d742a15aa))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- tsconfig problems in libraries ([ca93c28](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ca93c286a8192ac609f4621623998b00b1611ae4))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update workspace scripts and brownie accordingly ([d3287d8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d3287d882e649254423a2cac56de1da8ab641142))
+
+### Features
+
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- create bridge for new nx ([c2bb65c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c2bb65cc98c5385d51ff60250e4f30fe6fe19d84))
+
+### BREAKING CHANGES
+
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- NX now utilizes its own HostTree, the old angular one is now converted through the bridge whenever it is required. Because this repositories compatibility is strictly with Angular builders. Else it would require a rewrite.
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.3-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0-beta.1
+
 ## @webundsoehne/brownie [3.1.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@3.1.6...@webundsoehne/brownie@3.1.7) (2021-12-21)
 
 ### Bug Fixes

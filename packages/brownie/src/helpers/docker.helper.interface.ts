@@ -5,17 +5,19 @@ export interface DockerComposeFile {
 
 export type DockerComposeService = Record<string, any>
 
-export interface AvailableContainers {
-  [name: string]: {
-    name: string
-    base: string
-    files: string
-    path: string
-    dockerfile: string[]
-    env: string[]
-    volumes: string[]
-  }
+export type AvailableContainers = Record<
+string,
+{
+  name: string
+  base: string
+  files: string
+  path: string
+  dockerfile: string[]
+  env: string[]
+  volumes: string[]
+  ports: string[]
 }
+>
 
 export interface ParsedContainers {
   name: string
@@ -23,6 +25,9 @@ export interface ParsedContainers {
   output: string
   dir: string
   volumeDir: string
+  fileDir: string
+  config?: DockerComposeService
+  image?: string
   dockerfile?: string
   env?: string
   volumes?: {
@@ -31,9 +36,10 @@ export interface ParsedContainers {
     url?: string
     options?: string
     mode?: VolumeModes
-    perm?: string
+    perm?: number
     exact?: boolean
   }[]
+  ports?: string[]
 }
 
 export enum VolumeModes {

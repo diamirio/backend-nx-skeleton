@@ -1,6 +1,6 @@
-import { DockerHelperCtx } from '@helpers/docker.helper.interface'
-import { DockerHelperLock } from '@interfaces/lock-file.interface'
-import { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
+import type { DockerHelperCtx } from '@helpers/docker.helper.interface'
+import type { DockerHelperLock } from '@interfaces/lock-file.interface'
+import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
 
 export interface DockerContainerAddCtx extends DockerHelperCtx {
   prompt: BrownieAvailableContainers[]

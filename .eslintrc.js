@@ -1,37 +1,7 @@
+/** @type {import("eslint").Linter} */
 module.exports = {
-  extends: [ './packages/eslint-config/index', './packages/eslint-config/typescript' ],
-  parserOptions: {
-    ecmaVersion: 2020
-  },
+  extends: ['./packages/eslint-config/typescript-dynamic'],
   rules: {
-    'import/order': [
-      'error',
-      {
-        pathGroups: [
-          {
-            pattern: '@src/**',
-            group: 'index'
-          },
-          {
-            pattern: '@interfaces/**',
-            group: 'index'
-          },
-          {
-            pattern: '@utils/**',
-            group: 'index'
-          }
-        ],
-        pathGroupsExcludedImportTypes: [ 'builtin' ],
-        groups: [
-          [ 'builtin', 'external' ],
-          [ 'index', 'parent', 'sibling' ]
-        ],
-        'newlines-between': 'always',
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true
-        }
-      }
-    ]
+    ...require('@webundsoehne/eslint-config/utils').generateImportGroups({ tsconfigDir: __dirname })
   }
 }

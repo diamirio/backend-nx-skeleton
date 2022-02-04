@@ -1,4 +1,4 @@
-import { CommonNodeDependency } from '@interfaces/dependency.interface'
+import type { CommonNodeDependency } from '@webundsoehne/nx-tools'
 
 export interface WorkspaceConfig extends CommonNodeDependency {
   collection: string

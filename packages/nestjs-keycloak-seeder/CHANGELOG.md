@@ -1,3 +1,16 @@
+## @webundsoehne/nestjs-keycloak-seeder [1.0.17-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.16...@webundsoehne/nestjs-keycloak-seeder@1.0.17-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.3-beta.1
+- **@webundsoehne/ts-utility-types:** upgraded to 1.1.1-beta.1
+- **@webundsoehne/nestjs-keycloak:** upgraded to 1.0.13-beta.1
+
 ## @webundsoehne/nestjs-keycloak-seeder [1.0.16](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@1.0.15...@webundsoehne/nestjs-keycloak-seeder@1.0.16) (2022-01-10)
 
 ### Bug Fixes

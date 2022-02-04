@@ -1,28 +1,16 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect'
-import { readJsonFile } from '@nrwl/workspace'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import { createBuilder } from '@angular-devkit/architect'
 import { readPackageJson } from '@nrwl/workspace/src/core/file-utils'
 import { createTmpTsConfig, updateBuildableProjectPackageJsonDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils'
 import delay from 'delay'
 import execa from 'execa'
-import { copy, removeSync } from 'fs-extra'
+import { copy, existsSync, readJsonSync, removeSync, writeJsonSync } from 'fs-extra'
 import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
-import { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
-import {
-  BaseExecutor,
-  checkNodeModulesExists,
-  deepMerge,
-  ExecaArguments,
-  FileInputOutput,
-  generateBuilderAssets,
-  getNodeBinaryPath,
-  isVerbose,
-  mergeDependencies,
-  pipeProcessToLogger,
-  runExecutor
-} from '@webundsoehne/nx-tools'
+import type { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
+import type { ExecaArguments, FileInputOutput } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, generateBuilderAssets, getNodeBinaryPath, isVerbose, mergeDependencies, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -31,38 +19,43 @@ try {
 
 // i converted this to a class since it makes not too much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
-  public init (): void {
-    // paths of the programs, more convenient than using the api since tscpaths does not have api
+  init (): void {
     this.paths = {
       typescript: getNodeBinaryPath('tsc'),
-      tscpaths: getNodeBinaryPath('tscpaths'),
+      tsconfigReplacePaths: getNodeBinaryPath('tsconfig-replace-paths'),
       tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }
 
-  public async run (): Promise<BuilderOutput> {
+  async run (): Promise<BuilderOutput> {
     // have to be observable create because of async subscriber, it causes no probs dont worry
     // Cleaning the /dist folder
+    this.logger.debug('Output path will be: %s', this.options.normalizedOutputPath)
     removeSync(this.options.normalizedOutputPath)
 
-    let success = false
-    let error: string
-    let outputPath: string
     try {
       // stop all manager tasks
       await this.manager.stop()
 
-      // check if needed tools are really installed
-      checkNodeModulesExists(this.paths)
+      checkPathsExists(this.paths)
+    } catch (e) {
+      this.logger.fatal(e.message)
+      this.logger.debug(e.stack)
 
+      return { success: false, error: e.message }
+    }
+
+    let success = false
+    let error: string
+    let outputPath: string
+
+    try {
       const libRoot = this.projectGraph.nodes[this.context.projectName].data.root
+
       if (this.projectDependencies.length > 0) {
         this.paths.tsconfig = createTmpTsConfig(this.paths.tsconfig, this.context.root, libRoot, this.projectDependencies)
       }
-
-      // add this after since we do not want to patch check it
-      this.paths.tsconfigPaths = `${dirname(this.paths.tsconfig)}/${basename(this.paths.tsconfig, '.json')}.paths.json`
 
       if (this.options.watch) {
         this.logger.info('Starting TypeScript-Watch...')
@@ -73,7 +66,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
 
-        instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
+        void instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
           switch (msg) {
           case 'success':
             await this.secondaryCompileActions()
@@ -93,6 +86,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
             }
 
             break
+
           default:
             break
           }
@@ -123,7 +117,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (this.options.watch) {
         // if in watch mode just restart it
         this.logger.error('tsc-watch crashed restarting in 3 secs.')
-        this.logger.debug(e)
 
         await delay(3000)
         await this.manager.stop()
@@ -136,11 +129,16 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       success = false
       error = e.message
+
+      this.logger.fatal(e.message)
+      this.logger.debug(e.stack)
     } finally {
       // clean up the zombies!
       await this.manager.stop()
     }
-    this.logger.debug('tsc runner finished.')
+
+    this.logger.debug('Executor finished.')
+
     return {
       success,
       outputPath,
@@ -148,7 +146,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     }
   }
 
-  public normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
+  normalizeOptions (options: TscBuilderOptions): NormalizedBuilderOptions {
     const outDir = options.outputPath
     const files: FileInputOutput[] = generateBuilderAssets(
       {
@@ -160,7 +158,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     )
 
     // Relative path for the dist directory
-    const tsconfig = readJsonFile(join(this.context.root, options.tsConfig))
+    const tsconfig = readJsonSync(join(this.context.root, options.tsConfig))
     const rootDir = tsconfig.compilerOptions?.rootDir || ''
     const mainFileDir = dirname(options.main)
     const tsconfigDir = dirname(options.tsConfig)
@@ -180,9 +178,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   }
 
   // so complicated maybe simplify this?
-  public normalizeArguments (mode?: OptionParserModes): ExecaArguments {
+  normalizeArguments (mode?: OptionParserModes): ExecaArguments {
     let args: string[] = []
     let spawnOptions: ExecaArguments['spawnOptions']
+
     spawnOptions = {
       stdio: 'pipe',
       env: {
@@ -193,15 +192,15 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     const spawnOptionsParser: OptionParser<Record<string, any>> = [
       {
-        mode: [ 'typescript', 'tsc-watch' ],
-        rules: [ { condition: !!this.options.cwd, args: { cwd: this.options.cwd } } ]
+        mode: ['typescript', 'tsc-watch'],
+        rules: [{ condition: !!this.options.cwd, args: { cwd: this.options.cwd } }]
       },
       {
-        mode: [ 'tsc-watch' ],
-        rules: [ { args: { cwd: this.context.root } } ]
+        mode: ['tsc-watch'],
+        rules: [{ args: { cwd: this.context.root } }]
       },
       {
-        mode: [ 'runAfterWatch' ],
+        mode: ['runAfterWatch'],
         rules: [
           {
             args: {
@@ -225,32 +224,31 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     const argumentParser: OptionParser<string[]> = [
       {
-        mode: [ 'typescript', 'tsc-watch' ],
+        mode: ['typescript', 'tsc-watch'],
         rules: [
-          { args: [ '-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath ] },
-          {
-            condition: !!this.options.sourceMap,
-            args: [ '--sourceMap' ]
-          },
+          { args: ['-p', this.paths.tsconfig, '--outDir', this.options.normalizedOutputPath] },
           {
             condition: isVerbose(),
-            args: [ '--extendedDiagnostics', '--listEmittedFiles' ]
+            args: ['--extendedDiagnostics', '--listEmittedFiles']
           },
           {
             condition: mode === 'tsc-watch',
-            args: [ '--noClear', '--sourceMap' ]
+            args: ['--noClear', '--sourceMap']
           }
         ]
       },
       {
-        mode: [ 'tscpaths' ],
+        mode: ['tsconfigReplacePaths'],
         rules: [
           {
-            args: [ '-p', this.paths.tsconfigPaths, '-s', this.options.outputPath, '-o', this.options.outputPath ]
+            args: ['-p', this.paths.tsconfig]
+          },
+          {
+            args: ['-o', this.options.outputPath]
           },
           {
             condition: isVerbose(),
-            args: [ '--verbose' ]
+            args: ['--verbose']
           }
         ]
       }
@@ -260,7 +258,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (typeof o.mode === 'undefined' ? true : o.mode.includes(mode)) {
         o.rules.forEach((r) => {
           if (typeof r.condition === 'undefined' ? true : r.condition) {
-            args = [ ...args, ...r.args ]
+            args = [...args, ...r.args]
           }
         })
       }
@@ -270,7 +268,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   }
 
   private async secondaryCompileActions (): Promise<[void, void, BuilderOutput]> {
-    return Promise.all([ this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles() ])
+    return Promise.all([this.swapPaths(), this.updatePackageJson(), this.copyAssetFiles()])
   }
 
   private async swapPaths (): Promise<void> {
@@ -278,21 +276,11 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
 
-      this.logger.debug(`tscpaths path: ${this.paths.tscpaths}`)
+      this.logger.debug(`tsconfig-replace-paths path: ${this.paths.tsconfigReplacePaths}`)
 
-      // create temporary tsconfig.paths
-      const tsconfig = readJsonFile(this.paths.tsconfig)
+      const { args, spawnOptions } = this.normalizeArguments('tsconfigReplacePaths')
 
-      writeJsonFile(
-        this.paths.tsconfigPaths,
-        deepMerge(tsconfig, {
-          compilerOptions: { outDir: join(this.context.root, this.options.outputPath), baseUrl: join(this.context.root, this.options.outputPath) }
-        })
-      )
-
-      const { args, spawnOptions } = this.normalizeArguments('tscpaths')
-
-      const instance = this.manager.add(execa.node(this.paths.tscpaths, args, spawnOptions))
+      const instance = this.manager.add(execa.node(this.paths.tsconfigReplacePaths, args, spawnOptions))
 
       // we dont want errors from this, it can be sig terminated
       try {
@@ -300,8 +288,6 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       } catch (e) {
         this.logger.debug(e)
       }
-
-      removeSync(this.paths.tsconfigPaths)
 
       this.logger.info('Swapped TypeScript paths.')
     }
@@ -312,12 +298,12 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
     this.logger.debug(`package.json path: ${packageJsonPath}`)
 
-    if (!fileExists(packageJsonPath)) {
+    if (!existsSync(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
     } else {
       this.logger.info('Processing "package.json"...')
 
-      const packageJson = readJsonFile(packageJsonPath)
+      const packageJson = readJsonSync(packageJsonPath)
 
       const mainFile = basename(this.options.main, '.ts')
       const globalPackageJson = readPackageJson()
@@ -337,7 +323,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (packageJson?.implicitDependencies && Object.keys(packageJson.implicitDependencies).length > 0) {
         this.logger.info('Processing "package.json" implicit dependencies...')
 
-        Object.entries(packageJson.implicitDependencies).forEach(([ name, version ]) => {
+        Object.entries(packageJson.implicitDependencies).forEach(([name, version]) => {
           if (version === true && !globalPackageJson.dependencies[name]) {
             throw new Error(`Package can be not listed as an implicit dependency since it does not exists on global package.json: ${name}`)
           }
@@ -353,7 +339,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
 
       // write file back
-      writeJsonFile(`${this.options.normalizedOutputPath}/package.json`, packageJson)
+      writeJsonSync(`${this.options.normalizedOutputPath}/package.json`, packageJson)
     }
 
     // this is the default behaviour, lets keep this.

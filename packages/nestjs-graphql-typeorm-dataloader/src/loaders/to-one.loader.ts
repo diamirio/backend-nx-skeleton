@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader'
 import type { Connection } from 'typeorm'
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 import { directLoader } from './direct.loader'
 

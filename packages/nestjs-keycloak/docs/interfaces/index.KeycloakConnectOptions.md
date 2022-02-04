@@ -33,7 +33,7 @@
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:8
 
-___
+---
 
 ### bearer-only
 
@@ -43,7 +43,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:10
 
-___
+---
 
 ### confidential-port
 
@@ -53,7 +53,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:11
 
-___
+---
 
 ### cookie-key
 
@@ -63,7 +63,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:12
 
-___
+---
 
 ### credentials
 
@@ -71,15 +71,15 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type     |
+| :------- | :------- |
 | `secret` | `string` |
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:5
 
-___
+---
 
 ### exceptionMessages
 
@@ -89,7 +89,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:20
 
-___
+---
 
 ### realm
 
@@ -99,7 +99,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:3
 
-___
+---
 
 ### resource
 
@@ -109,7 +109,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:4
 
-___
+---
 
 ### roles
 
@@ -119,7 +119,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:15
 
-___
+---
 
 ### rolesRequired
 
@@ -129,7 +129,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:16
 
-___
+---
 
 ### scopes
 
@@ -139,7 +139,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:17
 
-___
+---
 
 ### scopesRequired
 
@@ -149,7 +149,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:18
 
-___
+---
 
 ### scopesUnauthorized
 
@@ -159,7 +159,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:19
 
-___
+---
 
 ### ssl-required
 

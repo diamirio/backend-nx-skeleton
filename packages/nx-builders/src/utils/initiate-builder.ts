@@ -1,15 +1,18 @@
-import { chain, Rule } from '@angular-devkit/schematics'
-import { addDepsToPackageJson } from '@nrwl/workspace'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
-import { Schema } from '@src/schematics/init/main.interface'
+import type { Schema } from '@schematics/init/main.interface'
 import { calculateDependencies } from '@utils/versions'
+import { addDependenciesToPackageJsonRule } from '@webundsoehne/nx-tools'
 
 /**
  * A function to initiate builder depdencies. It may be wiser to call it via schematic.
  * @param options
  */
 export function initiateBuilderDependencies (options: Schema['items']): Rule {
-  const dependencies = calculateDependencies(options)
+  return async function (): Promise<Rule> {
+    const dependencies = await calculateDependencies(options)
 
-  return chain([ addDepsToPackageJson(dependencies.deps ?? {}, dependencies.devDeps ?? {}) ])
+    return chain([addDependenciesToPackageJsonRule(dependencies)])
+  }
 }

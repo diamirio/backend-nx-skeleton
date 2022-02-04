@@ -1,5 +1,5 @@
-import execa from 'execa'
-import { ListrTaskWrapper } from 'listr2'
+import type execa from 'execa'
+import type { ListrTaskWrapper } from 'listr2'
 import through from 'through'
 
 export function pipeProcessThroughListr (task: ListrTaskWrapper<any, any>, instance: execa.ExecaChildProcess): execa.ExecaChildProcess {

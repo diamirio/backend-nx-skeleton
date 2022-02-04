@@ -6,7 +6,8 @@ export interface LocalLockFile {
 
 export enum DockerHelperLock {
   DIRECTORIES = 'configuration',
-  VOLUMES = 'volumes'
+  VOLUMES = 'volumes',
+  FILES = 'files'
 }
 
 export enum LocalLockPaths {

@@ -7,6 +7,13 @@
       "schema": "./dist/schematics/exports/schema.json",
       "aliases": ["ex"],
       "description": "Export files a default module with regex patterns."
+    },
+
+    "package-manager": {
+      "factory": "./dist/schematics/package-manager/main",
+      "schema": "./dist/schematics/package-manager/schema.json",
+      "aliases": ["manager"],
+      "description": "Run a package manager script."
     }
   }
 }

@@ -1,11 +1,13 @@
-import { ConnectionConfig, KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
-import { RoleMappingPayload } from '@keycloak/keycloak-admin-client/lib/defs/roleRepresentation'
-import { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
+import type { ConnectionConfig } from '@keycloak/keycloak-admin-client/lib/client'
+import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
+import type { RoleMappingPayload } from '@keycloak/keycloak-admin-client/lib/defs/roleRepresentation'
+import type { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
 import { Injectable, Logger } from '@nestjs/common'
 
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
-import { KeycloakAdminOptions, KeycloakAdminService, InjectKeycloak } from '@webundsoehne/nestjs-keycloak'
-import { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
+import type { KeycloakAdminOptions } from '@webundsoehne/nestjs-keycloak'
+import { InjectKeycloak, KeycloakAdminService } from '@webundsoehne/nestjs-keycloak'
+import type { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * Extended Keycloak client specific for seeding operations.
@@ -18,7 +20,7 @@ export class KeycloakAdminSeederTools {
 
   constructor (@InjectKeycloak() private keycloak: KeycloakAdminService) {}
 
-  public async getClient (realm?: string): Promise<KeycloakAdminClient> {
+  async getClient (realm?: string): Promise<KeycloakAdminClient> {
     if (!(this.client instanceof KeycloakAdminClient)) {
       this.client = await this.keycloak.getClient()
     }
@@ -34,7 +36,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async createClient (realm: string, options?: DeepPartial<KeycloakAdminOptions>): Promise<KeycloakAdminClient> {
+  async createClient (realm: string, options?: DeepPartial<KeycloakAdminOptions>): Promise<KeycloakAdminClient> {
     if (!(this.clients?.[realm] instanceof KeycloakAdminClient)) {
       this.logger.debug(`Creating a new Keycloak API client for realm: ${realm}`)
 
@@ -53,7 +55,7 @@ export class KeycloakAdminSeederTools {
     return this.clients[realm]
   }
 
-  public async getAll<
+  async getAll<
     K extends PropertyKey,
     T extends Extract<keyof KeycloakAdminClient, 'roles' | 'groups' | 'clients' | 'realms'> = Extract<keyof KeycloakAdminClient, 'roles' | 'groups' | 'clients' | 'realms'>
   >(
@@ -68,44 +70,45 @@ export class KeycloakAdminSeederTools {
     const client = await this.getClient(options?.realm)
     const data = await client[context].find()
 
-    return (data as any[]).reduce(
+    return (data as any[]).reduce<Record<K, Await<ReturnType<KeycloakAdminClient[T]['find']>>>>(
       (o, d) => ({
         ...o,
         [d[options.groupBy]]: d
       }),
-      {} as Record<K, Await<ReturnType<KeycloakAdminClient[T]['find']>>>
+      // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+      {} as any
     )
   }
 
   /*
    * Swap the keys of an object to ids of the given group or role.
    */
-  public swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
-    return Object.entries(map).reduce((o, [ name, d ]) => {
+  swapMapKeysToIds<T, K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: Record<string, T>): Record<string, T> {
+    return Object.entries(map).reduce<Record<string, T>>((o, [name, d]) => {
       const id = this.getIdFromMappedData(data, name)
 
       return {
         ...o,
         [id]: d
       }
-    }, {} as Record<string, T>)
+    }, {})
   }
 
   /*
    * Swap a array of names to the mapping.
    */
-  public swapNamesToMapping<T extends string[], K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: T): RoleMappingPayload[] {
-    return map.reduce((o, name) => {
+  swapNamesToMapping<T extends string[], K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, map: T): RoleMappingPayload[] {
+    return map.reduce<RoleMappingPayload[]>((o, name) => {
       const id = this.getIdFromMappedData(data, name as unknown as string)
 
-      return [ ...o, { name, id } ] as RoleMappingPayload[]
-    }, [] as RoleMappingPayload[])
+      return [...o, { name, id }] as RoleMappingPayload[]
+    }, [])
   }
 
   /**
    * Internal function to get the id of named Keycloak entitiy from the given parsed map.
    */
-  public getIdFromMappedData<K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, name: string, identifier = 'id'): string {
+  getIdFromMappedData<K extends Await<ReturnType<KeycloakAdminSeederTools['getAll']>>>(data: K, name: string, identifier = 'id'): string {
     const id = (data as any)?.[name]?.[identifier]
 
     if (!id) {
@@ -118,7 +121,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Creates a new Keycloak entity in the given scope.
    */
-  public async createNewKeycloakEntities<
+  async createNewKeycloakEntities<
     T extends Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>,
     K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>
   >(
@@ -165,12 +168,12 @@ export class KeycloakAdminSeederTools {
 
           created.push(data[options.identifier])
         } catch (err) {
-          if (options.fallbackToUpdate && [ 'groups', 'clients', 'realms' ].includes(context)) {
+          if (options.fallbackToUpdate && ['groups', 'clients', 'realms'].includes(context)) {
             this.logger.warn(
               `Creating new ${context} failed, falling back to updating existing ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
             )
 
-            await this.updateKeycloakEntities(context as any, [ data ] as any, { identifier: options.identifier, realm: options?.realm } as any)
+            await this.updateKeycloakEntities(context as any, [data] as any, { identifier: options.identifier, realm: options?.realm } as any)
           } else {
             this.parseSeedError(err, {
               context: `Error while creating Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
@@ -190,7 +193,7 @@ export class KeycloakAdminSeederTools {
   /*
    * Creates a new Keycloak entity in the given scope.
    */
-  public async updateKeycloakEntities<T extends Extract<keyof KeycloakAdminClient, 'groups' | 'clients' | 'realms'>, K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>>(
+  async updateKeycloakEntities<T extends Extract<keyof KeycloakAdminClient, 'groups' | 'clients' | 'realms'>, K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>>(
     context: T,
     input: K,
     options?: {
@@ -241,7 +244,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async flushKeycloakEntities<
+  async flushKeycloakEntities<
     T extends Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>,
     K extends Await<ReturnType<KeycloakAdminClient[T]['find']>>
   >(context: T, input: Await<ReturnType<KeycloakAdminClient[T]['find']>>, options?: { identifier?: keyof ArrayElement<K>, realm?: string }): Promise<void> {
@@ -251,7 +254,7 @@ export class KeycloakAdminSeederTools {
     }
 
     const shouldBeIgnored: Partial<Record<Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>, string[]>> = {
-      roles: [ 'offline_access', 'uma_authorization' ]
+      roles: ['offline_access', 'uma_authorization']
     }
 
     const deleteFuncKey: keyof KeycloakAdminClient[T] = (context === 'groups' ? 'del' : 'delById') as keyof KeycloakAdminClient[T]
@@ -296,7 +299,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public async assignRolesToGroup (map: Record<string, string[]>, options?: { flushUnknown?: boolean, silent?: boolean, realm?: string }): Promise<void> {
+  async assignRolesToGroup (map: Record<string, string[]>, options?: { flushUnknown?: boolean, silent?: boolean, realm?: string }): Promise<void> {
     const client = await this.getClient(options?.realm)
 
     const groups = this.swapMapKeysToIds(await this.getAll('groups', { groupBy: 'name', realm: options?.realm }), map)
@@ -305,7 +308,7 @@ export class KeycloakAdminSeederTools {
     if (options?.flushUnknown) {
       try {
         await Promise.all(
-          Object.entries(groups).map(async ([ id, role ]) => {
+          Object.entries(groups).map(async ([id, role]) => {
             const currentRoles = (await client.groups.listRoleMappings({ id })).realmMappings
 
             if (!currentRoles || currentRoles?.length === 0) {
@@ -322,7 +325,7 @@ export class KeycloakAdminSeederTools {
             await Promise.all(
               current.map(async (c) => {
                 if (!role.includes(c.name)) {
-                  await client.groups.delRealmRoleMappings({ id, roles: [ c ] })
+                  await client.groups.delRealmRoleMappings({ id, roles: [c] })
 
                   deleted.push(c.name)
                 }
@@ -340,7 +343,7 @@ export class KeycloakAdminSeederTools {
     }
 
     await Promise.all(
-      Object.entries(groups).map(async ([ id, role ]) => {
+      Object.entries(groups).map(async ([id, role]) => {
         try {
           // delete unknown mappings
 
@@ -361,7 +364,7 @@ export class KeycloakAdminSeederTools {
    *
    * Will not throw out already exists messages, because we mostly do not care about them.
    */
-  public parseSeedError (err: any, options?: { context?: string, return?: boolean, log?: boolean }): void | never | string {
+  parseSeedError (err: any, options?: { context?: string, return?: boolean, log?: boolean }): void | never | string {
     if (!this.isAlreadyExistsError(err)) {
       err = err?.response?.data?.errorMessage ?? err
 
@@ -379,7 +382,7 @@ export class KeycloakAdminSeederTools {
     }
   }
 
-  public isAlreadyExistsError (err: any): boolean {
+  isAlreadyExistsError (err: any): boolean {
     return err?.response?.data?.errorMessage?.includes('already exists') || err?.response?.data?.errorMessage?.includes('Conflict detected') ? true : false
   }
 }

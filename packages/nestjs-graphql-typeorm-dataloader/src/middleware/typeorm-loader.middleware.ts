@@ -1,9 +1,9 @@
-import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql'
+import type { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql'
 
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
 import { TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
-import { Context } from '@interfaces/context.interface'
-import { Extensions } from '@interfaces/extensions.interface'
+import type { Context } from '@interfaces/context.interface'
+import type { Extensions } from '@interfaces/extensions.interface'
 import { handleOneToManyWithSelfKey, handleOneToOneNotOwnerWithSelfKey, handleToMany, handleToOne } from '@loader-handlers/index'
 
 /**

@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-builders:init",
-  "title": "Call initiate component for the builders.",
+  "$id": "@webundsoehne/nx-builders/init",
+  "title": "@webundsoehne/nx-builders/init",
+  "description": "Call the initate component for builders to install dependencies.",
   "examples": [],
   "type": "object",
   "properties": {

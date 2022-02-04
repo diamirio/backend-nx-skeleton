@@ -18,22 +18,13 @@
     "data-loader"
   ],
   "scripts": {
-    "prebuild": "rimraf tsconfig*.tsbuildinfo && rimraf dist/",
-    "build": "tsc -p tsconfig.build.json",
-    "postbuild": "tscpaths -p tsconfig.paths.json -s ./dist -o ./dist",
-    "dev:build": "yarn prebuild && tsc -p tsconfig.json && yarn postbuild",
-    "dev:start": "yarn dev:build && tsc-watch --noClear --onSuccess \"yarn postbuild\"",
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
     "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
   },
   "lint-staged": {
     "./**/*.{ts,js,tsx,jsx}": [
@@ -44,11 +35,8 @@
       "prettier --loglevel warn --write"
     ]
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
   "dependencies": {
-    "apollo-server-plugin-base": "^3.1.1",
+    "apollo-server-plugin-base": "^3.5.1",
     "dataloader": "^2.0.0",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
@@ -56,19 +44,22 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/gateway": "^0.41.0",
-    "@nestjs/graphql": "^9.0.4",
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.171",
-    "@types/node": "^16.3.2",
-    "@types/uuid": "^8.3.1",
-    "apollo-server-fastify": "^3.0.0",
-    "class-validator": "^0.13.1",
-    "graphql": "^15.5.0",
-    "graphql-request": "^3.4.0",
-    "mikro-orm": "^4.5.7",
+    "@apollo/gateway": "^0.46.0",
+    "@nestjs/graphql": "^9.1.2",
+    "@types/jest": "^27.4.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.13",
+    "@types/uuid": "^8.3.4",
+    "apollo-server-fastify": "^3.6.2",
+    "class-validator": "^0.13.2",
+    "graphql": "^15",
+    "graphql-request": "^3.7.0",
+    "mikro-orm": "^4.5.10",
     "rimraf": "^3.0.2",
     "sqlite3": "^5.0.2",
-    "typeorm": "^0.2.32"
+    "typeorm": "^0.2.41"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

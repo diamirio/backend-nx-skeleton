@@ -1,70 +1,70 @@
-## @webundsoehne/eslint-config [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.0...@webundsoehne/eslint-config@4.0.1) (2021-08-23)
-
+# @webundsoehne/eslint-config [5.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.1...@webundsoehne/eslint-config@5.0.0-beta.1) (2022-01-26)
 
 ### Bug Fixes
 
-* errors for parsing html templates on angular application ([4c2d1da](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c2d1dad3b7c86792e1412f5b0220236a07ca3a2))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+
+### BREAKING CHANGES
+
+- drops the builders completely due to they being not avaiable in nx anymore
+
+## @webundsoehne/eslint-config [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.0...@webundsoehne/eslint-config@4.0.1) (2021-08-23)
+
+### Bug Fixes
+
+- errors for parsing html templates on angular application ([4c2d1da](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4c2d1dad3b7c86792e1412f5b0220236a07ca3a2))
 
 # @webundsoehne/eslint-config [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.2...@webundsoehne/eslint-config@4.0.0) (2021-08-20)
 
-
 ### Bug Fixes
 
-* update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
-
+- update workspace dependencies ([3375252](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3375252e45fb8d6efddf5f7ab9bced978f0b13c1))
 
 ### Performance Improvements
 
-* update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
-
+- update all dependencies ([560f30a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/560f30a9d667cd96118028f0e47657c86d704cd8))
 
 ### BREAKING CHANGES
 
-* Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
+- Adds breaking changes because of the nestjs 8 update and rxjs 7 updates.
 
 ## @webundsoehne/eslint-config [3.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.1...@webundsoehne/eslint-config@3.0.2) (2021-06-01)
 
-
 ### Bug Fixes
 
-* update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
+- update dependencies and type errors yet again ([968ce16](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/968ce1697140b9651fa520cf19598bb48ed3e089))
 
 ## @webundsoehne/eslint-config [3.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@3.0.0...@webundsoehne/eslint-config@3.0.1) (2021-05-27)
 
-
 ### Bug Fixes
 
-* update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
+- update nx dependencies only ([6780b6d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6780b6d3042714d6a83b76072c0a8c2fdddeb997))
 
 # @webundsoehne/eslint-config [3.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.2...@webundsoehne/eslint-config@3.0.0) (2021-03-04)
 
-
 ### Performance Improvements
 
-* update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
-
+- update all the packages ([59d13d4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/59d13d4e3ba351f8876522f6c723350e953756dc))
 
 ### BREAKING CHANGES
 
-* There is ton of breaking changes due to angular, nx base libraries.
+- There is ton of breaking changes due to angular, nx base libraries.
 
-Fixed the bug with the apollo-server not liking fastify2 for playground by using beta.
-Updated everything to latest version therefore contains a lot of breaking changes.
+Fixed the bug with the apollo-server not liking fastify2 for playground by using beta. Updated everything to latest version therefore contains a lot of breaking changes.
 
 ## @webundsoehne/eslint-config [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.1...@webundsoehne/eslint-config@2.1.2) (2021-02-09)
 
-
 ### Bug Fixes
 
-* bump packages of eslint that is failing ([839f06a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/839f06a7d903b3894a0d2e0eb8f6ee798ff00d38))
+- bump packages of eslint that is failing ([839f06a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/839f06a7d903b3894a0d2e0eb8f6ee798ff00d38))
 
 ## @webundsoehne/eslint-config [2.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.1.0...@webundsoehne/eslint-config@2.1.1) (2020-11-26)
 
-
 ### Bug Fixes
 
-* add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
-* cleanup and changelogs ([a44fc4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a44fc4b0e74b66c6a75109436f710dec803cd2e9))
+- add gitlab releases ([df1f1fa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df1f1fae5a87a8ea65b26608999c9de3b988e429))
+- cleanup and changelogs ([a44fc4b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a44fc4b0e74b66c6a75109436f710dec803cd2e9))
 
 # @webundsoehne/eslint-config [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@2.0.0...@webundsoehne/eslint-config@2.1.0) (2020-11-26)
 

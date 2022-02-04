@@ -24,13 +24,13 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                              |
+| :--------- | :-------------------------------- |
 | `options?` | `ApolloServerLoaderPluginOptions` |
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:14
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:15
 
 ## Methods
 
@@ -40,10 +40,10 @@ packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.intercep
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `ExecutionContext` |
-| `next` | `CallHandler`<`any`\> |
+| Name      | Type                  |
+| :-------- | :-------------------- |
+| `context` | `ExecutionContext`    |
+| `next`    | `CallHandler`<`any`\> |
 
 #### Returns
 
@@ -55,4 +55,4 @@ NestInterceptor.intercept
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:17

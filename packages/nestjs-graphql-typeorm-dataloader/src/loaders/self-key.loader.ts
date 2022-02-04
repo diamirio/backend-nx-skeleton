@@ -1,9 +1,9 @@
 import DataLoader from 'dataloader'
 import { groupBy } from 'lodash'
 import type { Connection } from 'typeorm'
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
-import { SelfKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
+import type { SelfKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
 
 /**
  * A common loader for loading entities by their own key.

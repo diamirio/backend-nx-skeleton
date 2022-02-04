@@ -1,5 +1,5 @@
-export interface Schema {
-  projectName: string
-  skipFormat: boolean
-  forceRemove: boolean
-}
+import type { BaseNormalizedSchemaPackageName, BaseSchemaWithParentAndConfiguration } from '@webundsoehne/nx-tools'
+
+export type Schema = BaseSchemaWithParentAndConfiguration
+
+export interface NormalizedSchema extends Schema, BaseNormalizedSchemaPackageName {}

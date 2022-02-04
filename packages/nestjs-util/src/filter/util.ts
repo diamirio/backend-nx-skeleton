@@ -1,14 +1,14 @@
-import { BadRequestException, Logger, ValidationError } from '@nestjs/common'
+import type { BadRequestException, Logger, ValidationError } from '@nestjs/common'
 import { EOL } from 'os'
 
-import { ClassValidatorError, ClassValidatorException, EnrichedException } from './exception.interface'
-
-export function getErrorMessage (error: string | Error): string | undefined {
-  return typeof error === 'string' ? error : typeof error?.message === 'string' ? error.message : JSON.stringify(error)
-}
+import type { ClassValidatorError, ClassValidatorException, EnrichedException } from './exception.interface'
 
 function hasAllKeys (message: Record<string, any>, keys: string[]): boolean {
   return keys.every((key) => Object.keys(message).includes(key))
+}
+
+export function getErrorMessage (error: string | Error): string | undefined {
+  return typeof error === 'string' ? error : typeof error?.message === 'string' ? error.message : JSON.stringify(error)
 }
 
 export function isValidationError (exception: BadRequestException): exception is ClassValidatorException {
@@ -21,7 +21,7 @@ export function isValidationError (exception: BadRequestException): exception is
   const validatorException = exception as ClassValidatorException
 
   // note: 'constraints' is only included on leaves of tree
-  const keys: (keyof ValidationError)[] = [ 'target', 'value', 'property', 'children' ]
+  const keys: (keyof ValidationError)[] = ['target', 'value', 'property', 'children']
 
   const messages = validatorException.validation
 
@@ -49,7 +49,7 @@ export function formatValidationError (errors: ValidationError[]): ClassValidato
 
 // ignore some errors that you do not want to log
 export function ignoreErrors (exception: Error): boolean {
-  const ignoredErrors = [ 'favicon.ico' ]
+  const ignoredErrors = ['favicon.ico']
 
   if (exception.message) {
     return ignoredErrors.some((err) => exception.message.match(err))

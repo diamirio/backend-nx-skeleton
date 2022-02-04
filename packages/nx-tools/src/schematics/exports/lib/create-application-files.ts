@@ -1,6 +1,7 @@
-import { chain, Rule, url } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain, url } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { generateExportsRule } from '@rules/generate-exports.rule'
 
 /**
@@ -12,5 +13,5 @@ import { generateExportsRule } from '@rules/generate-exports.rule'
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   const source = url('./files')
 
-  return chain([ generateExportsRule(source, options.templates, 'exports.ts.j2') ])
+  return chain([generateExportsRule(source, options.templates, 'exports.ts.j2')])
 }

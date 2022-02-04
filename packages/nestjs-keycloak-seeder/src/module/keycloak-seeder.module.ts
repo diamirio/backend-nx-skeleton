@@ -1,8 +1,9 @@
-import { DynamicModule, Module } from '@nestjs/common'
+import type { DynamicModule } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 
 import { KeycloakSeederService } from './keycloak-seeder.service'
 import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
-import { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
+import type { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
 import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 import { KeycloakAdminModule } from '@webundsoehne/nestjs-keycloak'
 
@@ -15,7 +16,7 @@ export class KeycloakSeederModule {
   static register (seeds: KeycloakSeeds): DynamicModule {
     return {
       module: KeycloakSeederModule,
-      imports: [ KeycloakAdminModule ],
+      imports: [KeycloakAdminModule],
       providers: [
         KeycloakSeederService,
         KeycloakAdminSeederTools,
@@ -24,7 +25,7 @@ export class KeycloakSeederModule {
           useValue: seeds
         }
       ],
-      exports: [ KeycloakSeederService, KeycloakAdminSeederTools ]
+      exports: [KeycloakSeederService, KeycloakAdminSeederTools]
     }
   }
 }

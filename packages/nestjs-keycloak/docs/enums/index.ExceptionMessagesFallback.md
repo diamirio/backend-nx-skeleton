@@ -25,7 +25,7 @@
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:54
 
-___
+---
 
 ### rolesMissing
 
@@ -35,7 +35,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:50
 
-___
+---
 
 ### rolesUnauthorized
 
@@ -45,7 +45,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:51
 
-___
+---
 
 ### scopesMissing
 
@@ -55,7 +55,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:52
 
-___
+---
 
 ### scopesUnauthorized
 
@@ -65,7 +65,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/connect.interfaces.ts:53
 
-___
+---
 
 ### tokenMissing
 

@@ -1,4 +1,4 @@
-import { Versions } from './versions.interface'
+import type { Versions } from './versions.interface'
 import { AvailableBuilders } from '@interfaces/available.constants'
 
 export const VERSIONS: Versions = {
@@ -6,16 +6,16 @@ export const VERSIONS: Versions = {
 
   [AvailableBuilders.TSC]: {
     devDeps: {
-      tscpaths: '^0.0.9',
-      'tsc-watch': '^4.5.0'
+      'tsconfig-replace-paths': '^0.0.11',
+      'tsc-watch': '^4.6.0'
     }
   },
 
   [AvailableBuilders.TS_NODE_DEV]: {
     devDeps: {
-      'ts-node': '^10.2.1',
+      'ts-node': '^10.4.0',
       'ts-node-dev': '^1.1.8',
-      'tsconfig-paths': '^3.11.0'
+      'tsconfig-paths': '^3.12.0'
     }
   }
 }

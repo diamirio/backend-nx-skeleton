@@ -1,9 +1,9 @@
-import { JsonObject } from '@angular-devkit/core'
+import type { ExecaArguments } from '@webundsoehne/nx-tools'
 
 /**
  * Options for run builder
  */
-export interface RunBuilderOptions extends JsonObject {
+export interface RunBuilderOptions {
   /**
    * process current working directory
    *
@@ -32,3 +32,5 @@ export interface RunBuilderOptions extends JsonObject {
   /** environment variables */
   environment?: Record<string, string | number>
 }
+
+export type NormalizedRunBuilderOptions = ExecaArguments

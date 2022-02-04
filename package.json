@@ -12,18 +12,22 @@
     "command": "lerna run --stream",
     "build": "yarn run command build --concurrency 1 --include-dependencies",
     "link-packages": "lerna link --force-local",
-    "lint": "yarn command --concurrency 1 lint",
-    "lint:check": "yarn command --parallel lint:check",
+    "lint": "yarn command --concurrency 1 --no-bail lint",
+    "lint:check": "yarn command --parallel --no-bail lint:check",
     "lint:staged": "yarn command --concurrency 1 lint:staged",
     "scripts:link": "./scripts/link-packages.sh link",
     "scripts:unlink": "./scripts/link-packages.sh unlink",
     "scripts:workspace:link": "./scripts/link-packages-to-workspace.sh link",
     "scripts:workspace:unlink": "./scripts/link-packages-to-workspace.sh unlink",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i",
-    "docs:jsdoc": "yarn command --no-bail docs:jsdoc"
+    "docs": "yarn run docs:readme && yarn run docs:jsdoc && yarn run docs:toc",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i && yarn command --no-bail --parallel docs:toc",
+    "docs:jsdoc": "yarn command --no-bail --parallel docs:jsdoc",
+    "docs:readme": "yarn command --no-bail --parallel docs:readme"
   },
   "workspaces": {
-    "packages": ["packages/*"],
+    "packages": [
+      "packages/*"
+    ],
     "nohoist": []
   },
   "simple-git-hooks": {
@@ -31,29 +35,29 @@
     "prepare-commit-msg": "[ -t 1 ] && exec < /dev/tty && git cz --hook || true"
   },
   "resolutions": {
-    "**/rxjs": "7.3.0",
-    "**/@angular-devkit/architect": "0.1202.5",
-    "**/@angular-devkit/core": "12.2.5",
-    "**/@angular-devkit/schematics": "12.2.5"
+    "**/rxjs": "7.5.2",
+    "**/@angular-devkit/architect": "0.1302.2",
+    "**/@angular-devkit/core": "13.2.2",
+    "**/@angular-devkit/schematics": "13.2.2"
   },
   "dependencies": {},
   "devDependencies": {
-    "@cenk1cenk2/cz-cc": "^1.3.25",
-    "@nrwl/workspace": "^12.9.0",
+    "@anatine/esbuild-decorators": "^0.2.18",
+    "@cenk1cenk2/cz-cc": "^1.4.11",
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.1",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
-    "simple-git-hooks": "^2.6.1",
-    "tsc-watch": "^4.5.0",
-    "tscpaths": "^0.0.9",
+    "rxjs": "^7.5.2",
+    "simple-git-hooks": "^2.7.0",
+    "tsc-watch": "^4.6.0",
     "tsconfig-replace-paths": "^0.0.11",
-    "typedoc": "^0.22.3",
-    "typedoc-plugin-markdown": "^3.10.3",
-    "typescript": "^4.3.5"
+    "tsup": "^5.11.13",
+    "typedoc": "^0.22.11",
+    "typedoc-plugin-markdown": "^3.11.12",
+    "typescript": "^4.6.0-dev.20220203"
   },
   "config": {
     "commitizen": {

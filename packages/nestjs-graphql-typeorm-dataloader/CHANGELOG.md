@@ -1,10 +1,23 @@
-## @webundsoehne/nestjs-graphql-typeorm-dataloader [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.2) (2021-12-23)
-
+# @webundsoehne/nestjs-graphql-typeorm-dataloader [3.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.2...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.0.0-beta.1) (2022-01-26)
 
 ### Bug Fixes
 
-* force publish ([8235127](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8235127b5be35b15c6355b50a690e9074abcc277))
-* loaderr update bug ([f92e4d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f92e4d6c57d36297455d769a6639a3dd4f6d9560))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+### BREAKING CHANGES
+
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [2.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@2.1.2) (2021-12-23)
+
+### Bug Fixes
+
+- force publish ([8235127](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8235127b5be35b15c6355b50a690e9074abcc277))
+- loaderr update bug ([f92e4d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f92e4d6c57d36297455d769a6639a3dd4f6d9560))
 
 ## deploy
 

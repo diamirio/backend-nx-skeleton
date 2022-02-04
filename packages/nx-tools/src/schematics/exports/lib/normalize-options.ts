@@ -1,9 +1,10 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
-import { ArrayElement, isVerbose, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
+import { isVerbose, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import type { ArrayElement } from '@webundsoehne/ts-utility-types'
 
 /**
  * Normalize options for the schematic.
@@ -17,7 +18,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       // assign options to parsed schema
       {
         task: (ctx): void => {
-          setSchemaDefaultsInContext(ctx, { assign: { from: options, keys: [ 'templates' ] } })
+          setSchemaDefaultsInContext(ctx, { default: [options] })
         }
       },
 
@@ -43,7 +44,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             }
           ])
 
-          ctx.templates = { templates: [ prompt ], root: relativeToNxRoot(process.cwd()) }
+          ctx.templates = { templates: [prompt], root: relativeToNxRoot(process.cwd()) }
         }
       }
     ],

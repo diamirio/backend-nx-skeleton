@@ -5,42 +5,48 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    {% if cli == enum.cli.ANGULAR %}
-    "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js",
-    {% endif %}
     "nx": "nx",
-    "start": "{{ cliCmd }} run-many --target=serve --parallel --maxParallel=1000 --all",
-    "start:one": "{{ cliCmd }} serve",
-    "build": "{{ cliCmd }} run-many --target=build --all",
-    "build:one": "{{ cliCmd }} build",
-    "build:nocache": "yarn build --skip-nx-cache",
-    "test": "{{ cliCmd }} run-many --target=test --parallel --maxParallel=1000 --all",
-    "test:one": "{{ cliCmd }} test",
-    "test:e2e": "{{ cliCmd }} run-many --target=e2e --parallel --maxParallel=1000 --all",
-    "lint": "{{ cliCmd }} format:write --all && nx workspace-lint && yarn lint:check --fix",
-    "lint:check": "{{ cliCmd }} run-many --parallel --maxParallel=5 --target=lint --all --",
+    "start": "nx run-many --target serve --parallel 1000 --all",
+    "start:one": "nx serve",
+    "build": "nx run-many --target build --all",
+    "build:one": "nx build",
+    "build:nocache": "npm run build -- --skip-nx-cache",
+    "test": "nx run-many --target test --parallel 10 --all",
+    "test:one": "nx test",
+    "test:e2e": "nx run-many --target test:e2e --parallel 10 --all",
+    "test:e2e:one": "nx test:e2e",
+    "test:cov": "nx run-many --target test:cov --parallel 10 --all",
+    "test:cov:one": "nx test:cov",
+    "test:dev:dev": "nx test:dev",
+    "e2e": "nx run-many --target e2e --parallel 10 --all",
+    "e2e:one": "nx e2e",
+    "lint": "nx format:write --all && nx workspace-lint && npm run lint:check -- --fix",
+    "lint:check": "nx run-many --parallel 10 --target lint --all --",
     "affected": "nx affected",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:test": "nx affected:test",
-    "affected:lint": "nx format:write --base=$(git branch --show-current) && nx affected:lint --parallel --maxParallel=5 --fix --base=$(git branch --show-current) --skip-nx-cache",
+    "affected:lint": "nx affected:lint --base=$(git branch --show-current) --parallel 10 --fix",
     "affected:dep-graph": "nx affected:dep-graph",
-    {% if cli == enum.cli.ANGULAR %}
-    "update": "ng update @nrwl/workspace",
-    {% endif %}
-    {% if cli == enum.cli.NX %}
     "update": "nx migrate latest",
-    {% endif %}
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "clean": "rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json",
-    "backend:migrate": "./cli . npm run nx -- run-many --target migration --parallel --all",
-    "backend:seed": "./cli . npm run nx -- run-many --target seed --parallel --all"
+    "backend:command:one": "npm run nx -- command",
+    "backend:seed": "npm run nx -- run-many --target seed --parallel --all",
+    "backend:seed:one": "npm run nx -- seed",
+    "backend:migrate": "npm run nx -- run-many --target migration --parallel --all",
+    "backend:migrate:one": "npm run nx -- migration",
+    "backend:migrate:mock": "npm run nx -- run-many --target migration:mock-run --parallel --all",
+    "backend:migrate:mock:one": "npm run nx -- migration:mock-run",
+    "backend:migrate:rollback": "npm run nx -- run-many --target migration:rollback --parallel --all",
+    "backend:migrate:rollback:one": "npm run nx -- migration:rollback",
+    "backend:migrations:create:one": "npm run nx -- migration:create",
+    "backend:migrations:generate:one": "npm run nx -- migration:generate"
   },
   "simple-git-hooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "npm exec lint-staged"
   },
   "dependencies": {
     {% if deps is defined and deps | length > 0 %}

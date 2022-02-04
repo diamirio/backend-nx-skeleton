@@ -1,15 +1,13 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
     "strictNullChecks": false,
-    "skipLibCheck": true,
-    "paths": {
-      "@constant/*": ["constant/*"],
-      "@interface/*": ["interface/*"]
-    }
+    "incremental": true,
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
+    "paths": {}
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

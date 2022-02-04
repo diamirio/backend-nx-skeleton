@@ -1,9 +1,14 @@
-# @webundsoehne/ts-utility-types [1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@1.0.1...@webundsoehne/ts-utility-types@1.1.0) (2021-12-22)
+## @webundsoehne/ts-utility-types [1.1.1-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@1.1.0...@webundsoehne/ts-utility-types@1.1.1-beta.1) (2022-01-26)
 
+### Bug Fixes
+
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+# @webundsoehne/ts-utility-types [1.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@1.0.1...@webundsoehne/ts-utility-types@1.1.0) (2021-12-22)
 
 ### Features
 
-* add new variable for node-config ([e25123b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e25123b176a1129c3cf5c20f4d852b84dd5b13c6))
+- add new variable for node-config ([e25123b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e25123b176a1129c3cf5c20f4d852b84dd5b13c6))
 
 ## @webundsoehne/ts-utility-types [1.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@1.0.0...@webundsoehne/ts-utility-types@1.0.1) (2021-12-20)
 

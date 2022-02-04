@@ -1,0 +1,10 @@
+/** @type {import("eslint").Linter } */
+module.exports = {
+  root: true,
+  plugins: [ '@nrwl/nx' ],
+  extends: [ '@webundsoehne/eslint-config/typescript-dynamic' ],
+  rules: {},
+  overrides: [
+    ...require('@webundsoehne/eslint-config/utils').generateImportGroupsWithOverride({ tsconfigDir: __dirname })
+  ]
+}

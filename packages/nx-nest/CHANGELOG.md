@@ -1,3 +1,51 @@
+# @webundsoehne-private/nx-nest [4.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.2.2...@webundsoehne-private/nx-nest@4.0.0-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- command module update problems ([e462064](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e462064f0f69a3e7323e4530bad70af72c1fa5dd)), closes [#9](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/9)
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- disable angular cli input which was going mental ([e50478f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50478f162fa1d9f89ff8b9a9cdf41524a477586))
+- docker build problems ([fa904e5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fa904e59c9e0b1977964f4e647b150f5630f340c)), closes [#15](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/15)
+- fix workspace schematics ([5a719ed](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a719edbca3eb39adfa800f225a619dc60531cb1))
+- integration problems with the other applications ([0da7854](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0da7854791ed5d22d8a9aca474e7f4e13c3d5520))
+- listen instead of listenasync ([f8e9039](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f8e9039c450fcbdd148aac9c6d877bba98071f94)), closes [#11](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/11)
+- move the enum field ([8d3c130](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8d3c130fd01f838863327dc4fb7d816ae511be8b))
+- nx argument parsing ([245cf1c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/245cf1caa8c09a421888a0aa6592c4f797bf2703))
+- rule issues ([80afa54](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/80afa5453a58ea16b636cf054337504ec5e00cae))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update flags ([fae6cf6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fae6cf6a8d041c326ea6ca0b11726415875725ee))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+
+### Features
+
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+- change the ui a bit to not use inquerer from angular because it is pretty slow ([7f48627](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7f48627385d8fffac7057db89fc9273601936127))
+- move commonly used normalize options to a common place ([cf39af3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf39af3992a1495fcd906928a5227c31d1c5d4cc))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- create bridge for new nx ([c2bb65c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c2bb65cc98c5385d51ff60250e4f30fe6fe19d84))
+- swap deprecated nestjs-command for officially supported package ([1876678](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1876678cb032fa394fe76c4b0553c2ebc39a6425))
+- upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+### BREAKING CHANGES
+
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- changes the underlying package and the structure
+- NX now utilizes its own HostTree, the old angular one is now converted through the bridge whenever it is required. Because this repositories compatibility is strictly with Angular builders. Else it would require a rewrite.
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.3-beta.1
+- **@webundsoehne/nx-builders:** upgraded to 5.0.0-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0-beta.1
+
 ## @webundsoehne-private/nx-nest [3.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@3.2.1...@webundsoehne-private/nx-nest@3.2.2) (2021-12-20)
 
 ### Dependencies

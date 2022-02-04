@@ -22,7 +22,6 @@
 - [packageJson](NormalizedBuilderOptions.md#packagejson)
 - [relativeMainFileOutput](NormalizedBuilderOptions.md#relativemainfileoutput)
 - [runAfterWatch](NormalizedBuilderOptions.md#runafterwatch)
-- [sourceMap](NormalizedBuilderOptions.md#sourcemap)
 - [swapPaths](NormalizedBuilderOptions.md#swappaths)
 - [tsConfig](NormalizedBuilderOptions.md#tsconfig)
 - [watch](NormalizedBuilderOptions.md#watch)
@@ -43,7 +42,7 @@ copy assets
 
 #### Defined in
 
-builders/tsc/main.interface.ts:48
+builders/tsc/main.interface.ts:45
 
 ---
 
@@ -77,7 +76,7 @@ inject environment variables to build process
 
 #### Defined in
 
-builders/tsc/main.interface.ts:59
+builders/tsc/main.interface.ts:56
 
 ---
 
@@ -87,7 +86,7 @@ builders/tsc/main.interface.ts:59
 
 #### Defined in
 
-builders/tsc/main.interface.ts:63
+builders/tsc/main.interface.ts:60
 
 ---
 
@@ -113,7 +112,7 @@ builders/tsc/main.interface.ts:15
 
 #### Defined in
 
-builders/tsc/main.interface.ts:64
+builders/tsc/main.interface.ts:61
 
 ---
 
@@ -145,7 +144,7 @@ package.json name to process defaults to package.json
 
 #### Defined in
 
-builders/tsc/main.interface.ts:54
+builders/tsc/main.interface.ts:51
 
 ---
 
@@ -155,7 +154,7 @@ builders/tsc/main.interface.ts:54
 
 #### Defined in
 
-builders/tsc/main.interface.ts:65
+builders/tsc/main.interface.ts:62
 
 ---
 
@@ -163,7 +162,7 @@ builders/tsc/main.interface.ts:65
 
 • `Optional` **runAfterWatch**: `string`
 
-command to run after complition when in watch mode
+command to run after completion when in watch mode
 
 #### Inherited from
 
@@ -172,22 +171,6 @@ command to run after complition when in watch mode
 #### Defined in
 
 builders/tsc/main.interface.ts:39
-
----
-
-### sourceMap
-
-• `Optional` **sourceMap**: `boolean`
-
-export sourcemaps
-
-#### Inherited from
-
-[TscBuilderOptions](TscBuilderOptions.md).[sourceMap](TscBuilderOptions.md#sourcemap)
-
-#### Defined in
-
-builders/tsc/main.interface.ts:42
 
 ---
 

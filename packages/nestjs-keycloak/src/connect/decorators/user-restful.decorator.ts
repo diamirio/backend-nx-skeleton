@@ -1,7 +1,7 @@
 import { createParamDecorator } from '@nestjs/common'
-import { ExecutionContext } from '@nestjs/common/interfaces/features/execution-context.interface'
+import type { ExecutionContext } from '@nestjs/common/interfaces/features/execution-context.interface'
 
-import { EnrichedRequest } from '@interfaces/request.interface'
+import type { EnrichedRequest } from '@interfaces/request.interface'
 
 /**
  * Inject the current Keycloak user to a variable.

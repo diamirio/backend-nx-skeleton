@@ -27,8 +27,8 @@ A singular seed that should be extended from, for seeding Keycloak.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
 | `keycloak` | [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md) |
 
 #### Defined in
@@ -41,7 +41,7 @@ interfaces/keycloak-seed.ts:11
 
 • `Protected` **keycloak**: [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md)
 
-___
+---
 
 ### logger
 

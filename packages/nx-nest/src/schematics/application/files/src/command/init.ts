@@ -1,13 +1,8 @@
-import { NestFactory } from '@nestjs/core'
-import { LoggerService } from '@webundsoehne/nestjs-util'
-import { CommandModule, CommandService } from 'nestjs-command'
+import { CommandFactory } from 'nest-commander'
 
 import { createCommandModule } from './command.module'
+import { LoggerService } from '@webundsoehne/nestjs-util'
 
 export async function createApplication(): Promise<void> {
-  const app = await NestFactory.createApplicationContext(createCommandModule(), {
-    logger: new LoggerService()
-  })
-
-  app.select(CommandModule).get(CommandService).exec()
+  await CommandFactory.run(createCommandModule(), new LoggerService())
 }

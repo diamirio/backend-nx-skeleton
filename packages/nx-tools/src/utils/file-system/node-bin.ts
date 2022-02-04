@@ -9,7 +9,7 @@ import { join } from 'path'
  * @returns  {string}
  */
 export function getNodeBinaryPath (bin?: string): string {
-  const binaryPath = execa.sync('npm', [ 'bin' ]).stdout
+  const binaryPath = execa.sync('npm', ['bin']).stdout
 
   return bin ? join(binaryPath, bin) : binaryPath
 }

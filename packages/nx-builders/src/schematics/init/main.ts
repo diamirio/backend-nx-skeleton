@@ -1,6 +1,7 @@
-import { chain, Rule } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
-import { Schema } from './main.interface'
+import type { Schema } from './main.interface'
 import { initiateBuilderDependencies } from '@utils/initiate-builder'
 
 /**
@@ -8,5 +9,5 @@ import { initiateBuilderDependencies } from '@utils/initiate-builder'
  * @param schema
  */
 export default function (schema: Schema): Rule {
-  return chain([ initiateBuilderDependencies(schema.items) ])
+  return chain([initiateBuilderDependencies(schema.items)])
 }

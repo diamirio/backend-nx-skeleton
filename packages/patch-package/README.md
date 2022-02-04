@@ -27,45 +27,45 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 <!-- commands -->
 
-- [`patch-package `](#patch-package-)
-- [`patch-package create`](#patch-package-create)
-- [`patch-package help [COMMAND]`](#patch-package-help-command)
-- [`patch-package patch`](#patch-package-patch)
+- [`ws-patch-package `](#ws-patch-package-)
+- [`ws-patch-package create`](#ws-patch-package-create)
+- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+- [`ws-patch-package patch`](#ws-patch-package-patch)
 
-## `patch-package `
+## `ws-patch-package `
 
 ```
 USAGE
-  $ patch-package
+  $ ws-patch-package
 ```
 
-## `patch-package create`
+## `ws-patch-package create`
 
 Creates a new patch from scratch, just point the applications you want as package name.
 
 ```
 USAGE
-  $ patch-package create
+  $ ws-patch-package create
 
 OPTIONS
   -d, --directory=directory  [default: patches] Directory for outputing the patch files.
   -e, --exclude=exclude      [default: package.json] Exclude given regex patterns.
   -i, --include=include      [default: .*] Include given regex patterns.
 
-  -p, --path=path            [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to take root as the
-                             application.
+  -p, --path=path            [default: /home/cenk/development/work/nx-test/packages/patch-package] Directory to take
+                             root as the application.
 
 EXAMPLE
   Create a patch for given package: patch-package create graphql
 ```
 
-## `patch-package help [COMMAND]`
+## `ws-patch-package help [COMMAND]`
 
-Display help for patch-package.
+Display help for ws-patch-package.
 
 ```
 USAGE
-  $ patch-package help [COMMAND]
+  $ ws-patch-package help [COMMAND]
 
 ARGUMENTS
   COMMAND  Command to show help for.
@@ -74,24 +74,27 @@ OPTIONS
   -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
 
-## `patch-package patch`
+## `ws-patch-package patch`
 
 Patches or reserves given patches in a directory.
 
 ```
 USAGE
-  $ patch-package patch
+  $ ws-patch-package patch
 
 OPTIONS
   -d, --directory=directory  Directory to apply the patches from.
   -e, --exitOnError          Whether to exit on error if the patching process fails or not.
-  -p, --path=path            [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
+
+  -p, --path=path            [default: /home/cenk/development/work/nx-test/packages/patch-package] Directory to apply
+                             patches to.
+
   -r, --reverse              Reverses the patches, if they were applied before.
 
 ALIASES
-  $ patch-package apply
+  $ ws-patch-package apply
 
 EXAMPLES
   Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0

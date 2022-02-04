@@ -4,13 +4,13 @@
   "description": "Tailored NestJS NX Based Application Skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
-  "repository": "<<---REPOSITORYHERE--->>",
-  "scripts": {
-    "start": "node ./{{ root }}/src/main.js"
-  },
+  "repository": "https://gitlab.tailored-apps.com/",
+  "scripts": {{ packageJsonScripts | dump(4) }},
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "implicitDependencies": {
+    "rxjs": true,
+    "fastify-swagger": true
   }
 }

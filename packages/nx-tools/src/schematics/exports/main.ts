@@ -1,10 +1,10 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain } from '@angular-devkit/schematics'
 
 import { createApplicationFiles } from './lib/create-application-files'
 import { normalizeOptions } from './lib/normalize-options'
-import { Schema } from './main.interface'
-import { formatOrSkip } from '@rules/format-with-skip.rule'
-import { Logger } from '@utils'
+import type { Schema } from './main.interface'
+import { formatTreeRule } from '@rules/format-with-skip.rule'
 
 /**
  * Default entrypoint for the schematic.
@@ -12,9 +12,8 @@ import { Logger } from '@utils'
  */
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
-    const log = new Logger(context)
     const options = await normalizeOptions(host, context, schema)
 
-    return chain([ createApplicationFiles(options), formatOrSkip(log, schema.skipFormat, { eslint: true, prettier: true }) ])
+    return chain([createApplicationFiles(options), formatTreeRule({ skip: options.skipFormat })])
   }
 }

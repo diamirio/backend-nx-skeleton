@@ -21,7 +21,7 @@ Database can be selected for various parts of the application. This is the datab
 
 #### Defined in
 
-interfaces/available.constants.ts:30
+interfaces/available.constants.ts:40
 
 ---
 
@@ -31,7 +31,7 @@ interfaces/available.constants.ts:30
 
 #### Defined in
 
-interfaces/available.constants.ts:27
+interfaces/available.constants.ts:37
 
 ---
 
@@ -41,7 +41,7 @@ interfaces/available.constants.ts:27
 
 #### Defined in
 
-interfaces/available.constants.ts:28
+interfaces/available.constants.ts:38
 
 ---
 
@@ -51,4 +51,4 @@ interfaces/available.constants.ts:28
 
 #### Defined in
 
-interfaces/available.constants.ts:29
+interfaces/available.constants.ts:39

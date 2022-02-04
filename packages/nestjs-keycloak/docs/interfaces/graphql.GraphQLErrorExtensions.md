@@ -18,9 +18,9 @@
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `code?` | `string` |
+| Name          | Type                |
+| :------------ | :------------------ |
+| `code?`       | `string`            |
 | `stacktrace?` | readonly `string`[] |
 
 #### Defined in

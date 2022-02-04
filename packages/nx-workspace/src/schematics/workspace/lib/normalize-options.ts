@@ -1,12 +1,11 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { toFileName } from '@nrwl/workspace'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
-import { NormalizedSchema, Schema } from '../main.interface'
-import { AvailableCLICommands, AvailableCLIs, AvailableFolderStructures, AvailableWorkspaceFiles, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import { AvailableCLIs, AvailableFolderStructures, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
-import { isVerbose, mapPromptChoices, setSchemaDefaultsInContext, color } from '@webundsoehne/nx-tools'
+import { color, eslintJson, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -42,7 +41,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
             message: 'Please give a folder name to this repository.',
             footer: color.dim(`Leave empty to use current folder: ${process.cwd()}`),
             format: (value) => {
-              return toFileName(value)
+              return generateNameCases(value).kebab
             }
           })
 
@@ -82,7 +81,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
               return true
             },
             format: (value) => {
-              return toFileName(value)
+              return generateNameCases(value).kebab
             }
           })
         }
@@ -92,22 +91,6 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         task: (ctx, task): void => {
           ctx.packageScope = `${ctx.name}`
           task.title = `Project scope set as: @${ctx.name}/*`
-        }
-      },
-
-      // set project cli
-      {
-        skip: (ctx): boolean => !!ctx.cli,
-        task: async (ctx, task): Promise<void> => {
-          const choices = mapPromptChoices<AvailableCLIs>(AvailableCLIs, PrettyNamesForAvailableThingies)
-
-          ctx.cli = await task.prompt<AvailableCLIs>({
-            type: 'Select',
-            message: 'Please select a CLI to use.',
-            choices
-          })
-
-          task.title = `CLI set as: ${ctx.cli}`
         }
       },
 
@@ -129,14 +112,14 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
 
       // set workspacefile
       {
-        title: 'Setting constants...',
+        title: 'Setting workspace constants...',
         task: async (ctx, task): Promise<void> => {
-          ctx.workspaceFile = AvailableWorkspaceFiles[ctx.cli]
-          ctx.cliCmd = AvailableCLICommands[ctx.cli]
+          const deps = await calculateDependencies(ctx)
 
-          const deps = calculateDependencies(ctx.cli)
           ctx.deps = deps.deps
           ctx.devDeps = deps.devDeps
+
+          ctx.eslintConfig = eslintJson({ packageScope: ctx.packageScope })
 
           task.title = 'Constants set for the project.'
         }

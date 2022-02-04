@@ -1,7 +1,7 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { SchematicContext } from '@angular-devkit/schematics'
-import { ExecutorContext } from '@nrwl/devkit'
-import { ExecaChildProcess } from 'execa'
+import type { BuilderContext } from '@angular-devkit/architect'
+import type { SchematicContext } from '@angular-devkit/schematics'
+import type { ExecutorContext } from '@nrwl/devkit'
+import type { ExecaChildProcess } from 'execa'
 import pidtree from 'pidtree'
 
 import { Logger } from '@utils'
@@ -21,25 +21,27 @@ export class ProcessManager {
   }
 
   /** Add a new task that is killable. */
-  public add (instance: ExecaChildProcess): ExecaChildProcess {
-    this.tasks = [ ...this.tasks, instance ]
+  add (instance: ExecaChildProcess): ExecaChildProcess {
+    this.tasks = [...this.tasks, instance]
+
     return instance
   }
 
   /** Add a persistent task that should not be killed until everything finishes. */
-  public addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
-    this.persistentTasks = [ ...this.persistentTasks, instance ]
+  addPersistent (instance: ExecaChildProcess): ExecaChildProcess {
+    this.persistentTasks = [...this.persistentTasks, instance]
+
     return instance
   }
 
   /** Kill all non-persistent tasks. */
-  public async kill (): Promise<void | void[]> {
+  async kill (): Promise<void | void[]> {
     await this.killProcesses(this.tasks)
     this.tasks = []
   }
 
   /** Stop the processes compeletely. */
-  public async stop (): Promise<void | void[]> {
+  async stop (): Promise<void | void[]> {
     await this.kill()
     await this.killProcesses(this.persistentTasks)
     this.persistentTasks = []
@@ -56,6 +58,7 @@ export class ProcessManager {
 
           if (typeof instance.exitCode !== 'number') {
             let pids: number[]
+
             try {
               pids = await pidtree(instance.pid, { root: true })
             } catch (e) {

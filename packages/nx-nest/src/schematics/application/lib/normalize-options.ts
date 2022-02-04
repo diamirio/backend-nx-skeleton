@@ -1,30 +1,34 @@
-import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { readNxJson, toFileName } from '@nrwl/workspace'
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils'
-import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
-import { NormalizedSchema, Schema } from '../main.interface'
+import type { NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
+import { readMicroserviceProviderWorkspaceIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import {
   AvailableComponents,
   AvailableDBAdapters,
   AvailableDBTypes,
   AvailableExtensions,
+  AvailableExtensionsMap,
   AvailableMicroserviceTypes,
   AvailableServerTypes,
-  AvailableTestsTypes,
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
-import { generateMicroserviceCasing } from '@src/utils'
+import { generateMicroserviceCasing } from '@utils'
 import {
-  ConvertToPromptType,
+  AvailableTestsTypes,
+  ensureNxRootListrTask,
   generateNameCases,
+  getInitialFromPriorConfiguration,
   isVerbose,
   mapPromptChoices,
-  readMicroserviceIntegration,
-  readNxIntegration,
+  normalizeExtensionsPrompt,
+  normalizeNameWithApplicationModePrompt,
+  normalizePackageJsonNamePrompt,
+  normalizePriorConfigurationPrompt,
+  normalizeRootDirectoryPrompt,
+  NxProjectTypes,
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
@@ -42,9 +46,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
             default: [
-              {
-                ...options
-              },
+              options,
               {
                 sourceRoot: 'src'
               },
@@ -70,65 +72,18 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      // decide the application root directory
-      {
-        task: (ctx): void => {
-          if (options.directory) {
-            ctx.directory = `${toFileName(options.directory)}/${toFileName(options.name)}`
-          } else {
-            ctx.directory = toFileName(options.name)
-          }
-        }
-      },
+      ...ensureNxRootListrTask(),
+
+      ...normalizeNameWithApplicationModePrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_, project) => !!project.integration?.nestjs),
 
       // normalize package json scope
-      {
-        title: 'Normalizing package.json project name.',
-        task: (ctx, task): void => {
-          const nxJson = readNxJson()
-          ctx.packageName = `@${nxJson.npmScope}/${ctx.name}`
-          ctx.packageScope = `${nxJson.npmScope}`
-
-          task.title = `Project package name set as "${ctx.packageName}".`
-        }
-      },
+      ...normalizePackageJsonNamePrompt<NormalizedSchema>(host),
 
       // set project root directory
-      {
-        title: 'Setting project root directory.',
-        task: (ctx, task): void => {
-          ctx.root = normalize(`${appsDir(host)}/${ctx.directory}`)
-
-          task.title = `Project root directory is set as "${ctx.root}".`
-        }
-      },
+      ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.APP),
 
       // check for prior configuration
-      {
-        title: 'Checking if the application is configured before.',
-        task: (ctx, task): void => {
-          if (directoryExists(ctx.root)) {
-            task.output = `Project root directory is not empty at: "${ctx.root}"`
-
-            task.title = 'Looking for prior application configuration in "nx.json".'
-
-            const integration = readNxIntegration<NormalizedSchema['priorConfiguration']>(ctx.name)
-            if (integration) {
-              ctx.priorConfiguration = integration
-
-              task.title = 'Prior configuration successfully found in "nx.json".'
-            } else {
-              throw new Error('Can not read prior configuration from "nx.json".')
-            }
-          } else {
-            task.title = 'This is the initial configuration of the package.'
-          }
-        },
-        options: {
-          persistentOutput: true,
-          bottomBar: false
-        }
-      },
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
 
       // select server functionality
       {
@@ -152,7 +107,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
                 return 'At least one component must be included.'
               }
             },
-            initial: getInitialFromPriorConfiguration(ctx, 'components', choices)
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableComponents>(ctx, 'components', choices)
           })
 
           ctx.effectiveComponents = ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT) ? ctx.components.length - 1 : ctx.components.length
@@ -175,7 +130,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             type: 'Select',
             message: 'Please select the API server type.',
             choices,
-            initial: getInitialFromPriorConfiguration(ctx, 'server', choices)
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableServerTypes>(ctx, 'server', choices)
           })
 
           task.title = `Server type selected as: ${ctx.server}`
@@ -196,7 +151,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             type: 'Select',
             message: 'Please select the microservice server type.',
             choices,
-            initial: getInitialFromPriorConfiguration(ctx, 'microservice', choices)
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableMicroserviceTypes>(ctx, 'microservice', choices)
           })
 
           ctx.injectedCasing.microservice = generateMicroserviceCasing(ctx.name)
@@ -220,18 +175,23 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             type: 'Select',
             message: 'Please select the database type.',
             choices,
-            initial: getInitialFromPriorConfiguration(ctx, 'database', choices)
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableDBTypes>(ctx, 'database', choices)
           })
 
           switch (ctx.database) {
           case AvailableDBTypes.TYPEORM_MYSQL:
             ctx.dbAdapters = AvailableDBAdapters.TYPEORM
+
             break
+
           case AvailableDBTypes.TYPEORM_POSTGRESQL:
             ctx.dbAdapters = AvailableDBAdapters.TYPEORM
+
             break
+
           case AvailableDBTypes.MONGOOSE_MONGODB:
             ctx.dbAdapters = AvailableDBAdapters.MONGOOSE
+
             break
           }
 
@@ -243,32 +203,11 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
-      {
-        skip: (ctx): boolean => !!ctx.extensions && ctx.extensions.length > 0,
-        task: async (ctx, task): Promise<void> => {
-          const choices = mapPromptChoices<AvailableExtensions>(AvailableExtensions, PrettyNamesForAvailableThingies)
-
-          // there can be two selections of API servers here
-          ctx.extensions = await task.prompt<AvailableExtensions[]>({
-            type: 'MultiSelect',
-            message: 'Please select the extensions you want.',
-            choices,
-            initial: getInitialFromPriorConfiguration(ctx, 'extensions', choices)
-          })
-
-          task.title = `Extensions selected as: ${ctx.extensions.length > 0 ? ctx.extensions.join(', ') : 'none'}`
-        },
-        options: {
-          bottomBar: Infinity,
-          persistentOutput: true
-        }
-      },
-
       // microservice-client options
       {
         skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT),
         task: async (ctx, task): Promise<void> => {
-          const microservices = readMicroserviceIntegration().map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
+          const microservices = readMicroserviceProviderWorkspaceIntegration(host).map((m) => ({ name: m.name, message: `${m.name} from ${m.root}` }))
 
           if (microservices?.length > 0) {
             // there can be two selections of API servers here
@@ -276,19 +215,19 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
               type: 'MultiSelect',
               message: 'Please select which microservice-servers you want to include.',
               choices: microservices,
-              initial: getInitialFromPriorConfiguration(ctx, 'microserviceClient', microservices)
+              initial: getInitialFromPriorConfiguration<NormalizedSchema, string>(ctx, 'microserviceClient', microservices)
             })
 
             ctx.microserviceCasing = {}
             // generate the microservice names
             await Promise.all(ctx.microserviceClient.map(async (m) => ctx.microserviceCasing[m] = generateMicroserviceCasing(m)))
 
-            // select the components to inject these microservice-clients to
-            // TODO: not sure if this is required a trivial case
+            // TODO: select the components to inject these microservice-clients to
+            // not sure if this is required a trivial case
 
             task.title = `Microservice clients selected as: ${ctx.microserviceClient.join(', ')}`
           } else {
-            task.title = 'No microservice clients are found running in mock mode.'
+            task.title = 'No microservice clients are found.'
           }
         },
         options: {
@@ -307,7 +246,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             type: 'Select',
             message: 'Please select the test runner type.',
             choices,
-            initial: getInitialFromPriorConfiguration(ctx, 'tests', choices)
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableTestsTypes>(ctx, 'tests', choices)
           })
 
           task.title = `Test runner selected as: ${ctx.tests}`
@@ -318,11 +257,29 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       },
 
+      ...normalizeExtensionsPrompt<AvailableExtensions, typeof AvailableExtensions, NormalizedSchema>(AvailableExtensionsMap, PrettyNamesForAvailableThingies),
+
       // generate casing
       {
         task: async (ctx): Promise<void> => {
           const casing = generateNameCases(ctx.name)
+
           ctx.casing = casing
+        }
+      },
+
+      // generate package.json scripts
+      {
+        task: async (ctx): Promise<void> => {
+          ctx.packageJsonScripts = {}
+
+          if ([AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.MICROSERVICE_SERVER].some((component) => ctx.components.includes(component))) {
+            ctx.packageJsonScripts.start = `node ./${ctx.root}/main.js`
+          }
+
+          if ([AvailableComponents.COMMAND].some((component) => ctx.components.includes(component))) {
+            ctx.packageJsonScripts.command = `NODE_SERVICE='cli' node ./${ctx.root}/main.js`
+          }
         }
       }
     ],
@@ -330,28 +287,4 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       rendererFallback: isVerbose()
     }
   ).run()
-}
-
-function getInitialFromPriorConfiguration (ctx: NormalizedSchema, key: keyof NormalizedSchema['priorConfiguration'], choices: ConvertToPromptType<any>): number[] | number {
-  if (ctx?.priorConfiguration?.[key] && Array.isArray(ctx.priorConfiguration[key])) {
-    return (
-      (ctx.priorConfiguration?.[key] as any[])?.reduce((o, val) => {
-        choices.forEach((v, i) => {
-          if (v.name === val) {
-            o = [ ...o, i ]
-          }
-        })
-        return o
-      }, []) ?? []
-    )
-  } else {
-    let value = -1
-    choices.forEach((val, i) => {
-      if (val.name === ctx.priorConfiguration?.[key]) {
-        value = i
-      }
-    })
-
-    return value
-  }
 }

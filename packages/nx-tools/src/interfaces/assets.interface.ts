@@ -1,6 +1,6 @@
 export type AvailableAssetGlob = (AssetGlob | string)[]
 
-export type FileInputOutput = {
+export interface FileInputOutput {
   input: string
   output: string
 }

@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@webundsoehne-private/nx-workspace/package-manager",
+  "title": "@webundsoehne-private/nx-workspace/package-manager",
+  "description": "Runs a package.json script.",
+  "type": "object",
+  "examples": [],
+  "properties": {
+    "forceRemove": {
+      "type": "boolean",
+      "aliases": ["force-remove"],
+      "description": "When true, forces removal even if the project is still in use.",
+      "default": false
+    },
+
+    "skipFormat": {
+      "type": "boolean",
+      "aliases": ["skip-format"],
+      "description": "Skip formatting files.",
+      "default": false
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

@@ -1,79 +1,58 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-nest:application",
-  "title": "Create a Nest application from skeleton with NX.",
-  "examples": [
-    {
-      "command": "g app myapp",
-      "description": "Initiate a application in interactive mode."
-    },
-    {
-      "command": "g app myapp -c server -c bgtask -s graphql",
-      "description": "Initiate GraphQL API with bgtask enabled."
-    }
-  ],
+  "$id": "@webundsoehne-private/nx-nest/application",
+  "title": "@webundsoehne-private/nx-nest/application",
+  "description": "Generate nestjs application.",
+  "examples": [],
   "type": "object",
   "properties": {
     "name": {
-      "description": "The name of the application.",
+      "description": "Name of the application.",
       "type": "string",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use for the application?"
+      "default": ""
     },
-    "components": {
-      "description": "Components to be embedded.",
-      "alias": "c",
-      "items": {
-        "manyOf": [
-          {
-            "type": "string",
-            "enum": ["server", "microservice-server", "microservice-client", "bgtask", "command"]
-          }
-        ]
-      }
-    },
-    "server": {
-      "description": "If server component is selected, specifies the type.",
+
+    "mode": {
+      "description": "Generator mode.",
       "type": "string",
-      "alias": "s",
-      "enum": ["graphql", "restful"]
+      "$default": {
+        "$source": "argv",
+        "index": 1,
+        "enum": ["create", "modify"]
+      },
+      "default": ""
     },
-    "microservice": {
-      "description": "If microservices component is selected, specifies the type.",
-      "type": "string",
-      "alias": "m",
-      "enum": ["rabbitmq"]
+
+    "directory": {
+      "description": "Subdirectory for the application.",
+      "type": "string"
     },
-    "database": {
-      "description": "Database that is desired to be used.",
-      "type": "string",
-      "alias": "db",
-      "enum": ["none", "typeorm-mysql", "typeorm-postgresql", "mongoose-mongodb"]
-    },
+
     "linter": {
-      "description": "The tool to use for running lint checks.",
+      "description": "Linter for the application.",
       "type": "string",
-      "enum": ["eslint"],
+      "enum": ["eslint", "none"],
       "default": "eslint"
     },
-    "tests": {
-      "description": "Test runner to use for unit and e2e tests",
-      "type": "string",
-      "enum": ["jest", "none"]
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean",
+      "aliases": ["skip-format"]
     },
-    "extensions": {
-      "description": "Enable extensions.",
-      "items": {
-        "manyOf": [
-          {
-            "type": "string",
-            "enum": ["external-backend-interfaces"]
-          }
-        ]
-      }
+
+    "force": {
+      "description": "Do not prompt the user.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
     }
   },
   "required": []

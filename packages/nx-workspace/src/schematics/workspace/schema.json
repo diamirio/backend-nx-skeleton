@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "nx-workspace:workspace",
-  "title": "Create an empty workspace. This can only be called with @nrwl/tao",
+  "$id": "@webundsoehne-private/nx-workspace/workspace",
+  "title": "@webundsoehne-private/nx-workspace/workspace",
+  "description": "Creates a new workspace through @nrwl/tao.",
   "type": "object",
   "properties": {
     "name": {

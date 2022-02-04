@@ -1,9 +1,7 @@
-import { JsonObject } from '@angular-devkit/core'
-
 /**
  * Options for ts-node-dev
  */
-export interface TsNodeBuilderOptions extends JsonObject {
+export interface TsNodeBuilderOptions {
   /**
    * process current working directory
    *

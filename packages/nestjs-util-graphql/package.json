@@ -1,0 +1,53 @@
+{
+  "name": "@webundsoehne/nestjs-util-graphql",
+  "version": "1.0.0",
+  "description": "NestJS skeleton util library for graphql applications.",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nestjs",
+    "util"
+  ],
+  "scripts": {
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i",
+    "docs:jsdoc": "typedoc src/index.ts --readme none"
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": ">= 8 < 10",
+    "@nestjs/core": ">= 8 < 10",
+    "@nestjs/graphql": ">= 8 < 10",
+    "graphql": ">= 15 < 16",
+    "@webundsoehne/nestjs-util": ">= 5"
+  },
+  "devDependencies": {
+    "@webundsoehne/nestjs-util": "*",
+    "@nestjs/common": "^8.2.6",
+    "@nestjs/core": "^8.2.6",
+    "@nestjs/graphql": "^9.1.2",
+    "@types/node": "^17.0.13",
+    "graphql": "^15"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

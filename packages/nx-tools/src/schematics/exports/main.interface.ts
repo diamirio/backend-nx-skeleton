@@ -1,9 +1,8 @@
-import { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
+import type { BarebonesSchema } from '@interfaces/base-schemas.interface'
+import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
 
 // this is the one gets inputted from the command line
-export interface Schema {
-  skipFormat?: boolean
-  silent?: boolean
+export interface Schema extends BarebonesSchema {
   templates: GenerateExportsJinjaTemplateOptions
 }
 

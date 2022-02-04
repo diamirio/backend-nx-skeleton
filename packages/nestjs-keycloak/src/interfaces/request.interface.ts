@@ -1,7 +1,7 @@
 import type { Request } from 'express'
 import type { FastifyRequest } from 'fastify'
 
-import { KeycloakConnectUser } from '@connect/connect.interfaces'
+import type { KeycloakConnectUser } from '@connect/connect.interfaces'
 
 interface RequestWithAuthentication {
   user?: KeycloakConnectUser

@@ -3,6 +3,8 @@
   {% set current_volume = './' + volumeDir + '/' + volume.from + ':' + volume.to %}
   {% if volume.mode == 'mount' %}
     {% set current_volume = volume.from + ':' + volume.to %}
+  {% elif volume.mode == 'file' or volume.mode == 'url' %}
+    {% set current_volume = './' + fileDir + '/' + volume.from + ':' + volume.to %}
   {% endif %}
   {% if 'options' in volume %}
     {% set current_volume = current_volume + ':' + volume.options %}

@@ -8,28 +8,28 @@ import { join } from 'path'
 import rewire from 'rewire'
 import wrap from 'wrap-ansi'
 
-import { ApplicationConfiguration } from '@src/interfaces/config.interface'
+import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class ListCommand extends BaseCommand<ApplicationConfiguration> {
   static description = 'Lists all the static entities that are shipped with this module.'
-  static aliases = [ 'ls' ]
+  static aliases = ['ls']
 
   private rewire: Record<'findPatchFiles', any> = {} as any
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     // since the underlying application is not exposing any of these methods, run time rewire is required
     this.logger.debug('Rewiring underlying module...')
 
     const applyPatches = rewire('patch-package/dist/applyPatches')
 
     await Promise.all(
-      [ 'findPatchFiles' ].map(async (method) => {
+      ['findPatchFiles'].map(async (method) => {
         this.rewire[method] = applyPatches.__get__(method)
       })
     )
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     this.logger.module('Listing all the available patches in this module.')
 
     const directories = await globby('*', {
@@ -65,10 +65,10 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
           })
         )
 
-        table.push([ dir, wrap(description.toString(), 60), subtable.join(EOL) ])
+        table.push([dir, wrap(description.toString(), 60), subtable.join(EOL)])
       })
     )
 
-    this.logger.direct(createTable([ 'name', 'description', 'patches' ], table))
+    this.logger.direct(createTable(['name', 'description', 'patches'], table))
   }
 }

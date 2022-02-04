@@ -38,4 +38,4 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 #### Defined in
 
-module/keycloak-seeder.module.ts:15
+module/keycloak-seeder.module.ts:16

@@ -1,8 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "https://json-schema.org/draft-07/schema",
-  "title": "@webundsoehne-private/nx-nest:serve",
-  "description": "",
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@webundsoehne/nx-builders/ts-node-dev",
+  "title": "@webundsoehne/nx-builders/ts-node-dev",
+  "description": "Run ts-node-dev as a builder.",
   "type": "object",
   "properties": {
     "cwd": {

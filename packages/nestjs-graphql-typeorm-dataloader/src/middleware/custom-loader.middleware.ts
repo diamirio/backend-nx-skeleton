@@ -1,11 +1,11 @@
-import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql'
+import type { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql'
 import DataLoader from 'dataloader'
 import Container from 'typedi'
 
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
 import { CUSTOM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
-import { Context } from '@interfaces/context.interface'
-import { Extensions } from '@interfaces/extensions.interface'
+import type { Context } from '@interfaces/context.interface'
+import type { Extensions } from '@interfaces/extensions.interface'
 
 /**
  * This middleware checks and processes for the subfields of a parent entity that should be resolved by the data loader.
@@ -25,6 +25,7 @@ export const CustomLoaderMiddleware: FieldMiddleware = async ({ context, info }:
   const { requestId } = context[DATA_LOADER_CONTEXT_KEY]
 
   const container = Container.of(requestId)
+
   if (!container.has(serviceId)) {
     container.set(serviceId, new DataLoader((keys) => args.batchLoadFn(keys, { context }), args?.options))
   }

@@ -8,6 +8,7 @@
 
 - [AvailableCLIs](enums/AvailableCLIs.md)
 - [AvailableFolderStructures](enums/AvailableFolderStructures.md)
+- [AvailableLibraryTypes](enums/AvailableLibraryTypes.md)
 
 ### Variables
 
@@ -19,30 +20,30 @@
 
 ### AvailableCLICommands
 
-• `Const` **AvailableCLICommands**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
+• **AvailableCLICommands**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
 
 #### Defined in
 
-interfaces/available.constants.ts:19
+interfaces/available.constants.ts:20
 
 ---
 
 ### AvailableWorkspaceFiles
 
-• `Const` **AvailableWorkspaceFiles**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
+• **AvailableWorkspaceFiles**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
 
 #### Defined in
 
-interfaces/available.constants.ts:14
+interfaces/available.constants.ts:16
 
 ---
 
 ### PrettyNamesForAvailableThingies
 
-• `Const` **PrettyNamesForAvailableThingies**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md) \| [`AvailableFolderStructures`](enums/AvailableFolderStructures.md), `string`\>
+• **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableCLIs`](enums/AvailableCLIs.md) \| [`AvailableFolderStructures`](enums/AvailableFolderStructures.md)\>
 
 Prettified names for components to use with prompts and such.
 
 #### Defined in
 
-interfaces/available.constants.ts:27
+interfaces/available.constants.ts:32

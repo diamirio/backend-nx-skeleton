@@ -1,8 +1,8 @@
-import { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
+import type { RelationMetadata } from 'typeorm/metadata/RelationMetadata'
 
 import { handler } from './callback-handler.handler'
-import { Context } from '@interfaces/context.interface'
-import { SelfKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
+import type { Context } from '@interfaces/context.interface'
+import type { SelfKeyFunc } from '@interfaces/typeorm-loader-handler.interface'
 import { SelfKeyDataloader } from '@loaders/self-key.loader'
 
 export async function handleOneToOneNotOwnerWithSelfKey<V> (selfKeyFunc: SelfKeyFunc, parent: any, context: Context, relation: RelationMetadata): Promise<any> {
@@ -12,7 +12,7 @@ export async function handleOneToOneNotOwnerWithSelfKey<V> (selfKeyFunc: SelfKey
     relation.entityMetadata.primaryColumns,
     (connection) => new SelfKeyDataloader<V>(relation, connection, selfKeyFunc),
     async (dataloader, columns) => {
-      return dataloader.load(columns[0].getEntityValue(parent))[0] ?? null
+      return (dataloader as any).load(columns[0].getEntityValue(parent))[0] ?? null
     }
   )
 }

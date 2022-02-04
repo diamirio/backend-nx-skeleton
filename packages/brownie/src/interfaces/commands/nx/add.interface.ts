@@ -1,6 +1,5 @@
-import { CheckIfModuleInstalled } from '@helpers/node.helper.interface'
-import { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
-import { CommonNodeDependency } from '@interfaces/dependency.interface'
+import type { SchematicConfig, NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
+import type { LocalNodeModule, CommonNodeDependency } from '@webundsoehne/nx-tools'
 
 export class NxAddCommandCtx {
   public prompts: {
@@ -8,7 +7,7 @@ export class NxAddCommandCtx {
     toRunSchematic?: SchematicConfig
     arguments?: string
   }
-  public deps: CheckIfModuleInstalled[]
+  public deps: LocalNodeModule[]
   public packages: CommonNodeDependency[]
   constructor () {
     this.prompts = {}
