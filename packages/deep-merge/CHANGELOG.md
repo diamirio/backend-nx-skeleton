@@ -1,3 +1,22 @@
+# @webundsoehne/deep-merge [2.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/deep-merge@1.0.2...@webundsoehne/deep-merge@2.0.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+* fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+* update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+
+
+### Performance Improvements
+
+* swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+
+
+### BREAKING CHANGES
+
+* drops anything less than node16, strictly commonjs still, transpiled to es2021
+
 ## @webundsoehne/deep-merge [1.0.3-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/deep-merge@1.0.2...@webundsoehne/deep-merge@1.0.3-beta.1) (2022-01-26)
 
 ### Bug Fixes
