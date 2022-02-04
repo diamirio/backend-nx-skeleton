@@ -1,3 +1,9 @@
+## @webundsoehne/ts-utility-types [2.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@2.0.1...@webundsoehne/ts-utility-types@2.0.2) (2022-02-04)
+
+### Bug Fixes
+
+- initiating builder dependencies ([d2b9617](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d2b961712580fbed82de82058976dfd58b841457))
+
 ## @webundsoehne/ts-utility-types [2.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/ts-utility-types@2.0.0...@webundsoehne/ts-utility-types@2.0.1) (2022-02-04)
 
 ### Bug Fixes
