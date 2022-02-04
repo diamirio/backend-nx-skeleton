@@ -35,7 +35,8 @@
     "@nestjs/common": ">= 8 < 10",
     "@nestjs/core": ">= 8 < 10",
     "@nestjs/microservices": ">= 8 < 10",
-    "@webundsoehne/nestjs-util": ">= 5"
+    "@webundsoehne/nestjs-util": ">= 5",
+    "rxjs": ">= 7 < 8"
   },
   "dependencies": {},
   "devDependencies": {

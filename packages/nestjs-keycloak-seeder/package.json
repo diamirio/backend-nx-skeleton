@@ -42,7 +42,9 @@
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8",
-    "@webundsoehne/nestjs-keycloak": ">= 1"
+    "@webundsoehne/nestjs-keycloak": ">= 1",
+    "@keycloak/keycloak-admin-client": ">= 15",
+    "keycloak-connect": ">= 15"
   },
   "engines": {
     "node": ">= 16"

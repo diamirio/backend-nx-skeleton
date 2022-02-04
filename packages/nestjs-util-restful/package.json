@@ -39,7 +39,8 @@
     "fastify-swagger": ">= 4 < 5",
     "express": ">= 4 < 5",
     "swagger-ui-express": ">= 4 < 5",
-    "@webundsoehne/nestjs-util": ">= 5"
+    "@webundsoehne/nestjs-util": ">= 5",
+    "rxjs": ">= 7 < 8"
   },
   "peerDependenciesMeta": {
     "fastify": {
@@ -55,7 +56,10 @@
       "optional": true
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.29.1",
+    "fs-extra": "^10.0.0"
+  },
   "devDependencies": {
     "@webundsoehne/nestjs-util": "*",
     "@nestjs/common": "^8.2.6",
@@ -63,6 +67,7 @@
     "@nestjs/swagger": "^5.2.0",
     "@types/config": "^0.0.41",
     "@types/node": "^17.0.13",
+    "@types/fs-extra": "^9.0.13",
     "fastify": "^3.27.0",
     "fastify-swagger": "^4.13.1",
     "express": "^4.17.2",

@@ -35,6 +35,11 @@
       "prettier --loglevel warn --write"
     ]
   },
+  "peerDependencies": {
+    "@nestjs/common": ">= 8 < 10",
+    "@nestjs/core": ">= 8 < 10",
+    "rxjs": ">= 7 < 8"
+  },
   "dependencies": {
     "apollo-server-plugin-base": "^3.5.1",
     "dataloader": "^2.0.0",

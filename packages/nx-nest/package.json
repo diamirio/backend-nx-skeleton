@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@angular-devkit/schematics": "^13.2.2",
+    "@angular-devkit/core": "^13.2.2",
     "@nestjs/schematics": "^8.0.5",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
