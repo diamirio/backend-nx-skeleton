@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [5.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.2...@webundsoehne/nx-tools@5.0.3) (2022-02-04)
+
+### Bug Fixes
+
+- update missing deps ([cdc26f4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cdc26f4b3d547ae3ed5a100766bf96d8600de489))
+
 ## @webundsoehne/nx-tools [5.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.1...@webundsoehne/nx-tools@5.0.2) (2022-02-04)
 
 ### Bug Fixes
