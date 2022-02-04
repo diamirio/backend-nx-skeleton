@@ -1,3 +1,14 @@
+## @webundsoehne/brownie [4.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.0.2...@webundsoehne/brownie@4.0.3) (2022-02-04)
+
+### Bug Fixes
+
+- missing deps ([382c102](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/382c102ef2637e65ce00d0416acc969581e86b5b))
+- update missing deps ([cdc26f4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cdc26f4b3d547ae3ed5a100766bf96d8600de489))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.3
+
 ## @webundsoehne/brownie [4.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.0.1...@webundsoehne/brownie@4.0.2) (2022-02-04)
 
 ### Dependencies
