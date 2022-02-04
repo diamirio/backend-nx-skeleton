@@ -38,8 +38,8 @@ A timeout exception for message queue internally.
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `name` | `string` |
 
 #### Overrides
@@ -64,7 +64,7 @@ RuntimeException.cause
 
 node_modules/typescript/lib/lib.es2022.error.d.ts:26
 
----
+___
 
 ### message
 
@@ -78,7 +78,7 @@ RuntimeException.message
 
 node_modules/typescript/lib/lib.es5.d.ts:1023
 
----
+___
 
 ### name
 
@@ -92,7 +92,7 @@ RuntimeException.name
 
 node_modules/typescript/lib/lib.es5.d.ts:1022
 
----
+___
 
 ### stack
 
@@ -106,7 +106,7 @@ RuntimeException.stack
 
 node_modules/typescript/lib/lib.es5.d.ts:1024
 
----
+___
 
 ### prepareStackTrace
 
@@ -122,9 +122,9 @@ Optional override for formatting stack traces
 
 ##### Parameters
 
-| Name          | Type         |
-| :------------ | :----------- |
-| `err`         | `Error`      |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Error` |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -139,7 +139,7 @@ RuntimeException.prepareStackTrace
 
 node_modules/@types/node/globals.d.ts:11
 
----
+___
 
 ### stackTraceLimit
 
@@ -171,7 +171,7 @@ RuntimeException.what
 
 node_modules/@nestjs/core/errors/exceptions/runtime.exception.d.ts:3
 
----
+___
 
 ### captureStackTrace
 
@@ -181,9 +181,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name              | Type       |
-| :---------------- | :--------- |
-| `targetObject`    | `object`   |
+| Name | Type |
+| :------ | :------ |
+| `targetObject` | `object` |
 | `constructorOpt?` | `Function` |
 
 #### Returns

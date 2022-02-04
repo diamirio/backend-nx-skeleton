@@ -46,10 +46,10 @@ packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:12
 
 #### Parameters
 
-| Name        | Type                              |
-| :---------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `HttpException` \| `RpcException` |
-| `host`      | `ArgumentsHost`                   |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 
@@ -63,7 +63,7 @@ RpcExceptionFilter.catch
 
 packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:25
 
----
+___
 
 ### payload
 
@@ -71,10 +71,10 @@ packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:25
 
 #### Parameters
 
-| Name        | Type                              |
-| :---------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `HttpException` \| `RpcException` |
-| `host`      | `ArgumentsHost`                   |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 
@@ -84,7 +84,7 @@ packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:25
 
 packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:33
 
----
+___
 
 ### defaultPayload
 
@@ -92,10 +92,10 @@ packages/nestjs-util-microservices/src/filter/rpc-global-exception.filter.ts:33
 
 #### Parameters
 
-| Name        | Type                              |
-| :---------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `HttpException` \| `RpcException` |
-| `host`      | `ArgumentsHost`                   |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 

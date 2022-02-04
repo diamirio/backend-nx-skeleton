@@ -2,15 +2,16 @@
 
 # Class: MicroserviceProviderService<MessageQueues, MessageQueuePatterns, MessageQueueMap\>
 
-You have to supply the types for MessageQueue enum, MessageQueuePatterns available for all queues and the map of request response types that is expanded from MicroserviceProviderBaseMessage
+You have to supply the types for MessageQueue enum, MessageQueuePatterns available for all queues and the map of request response types
+that is expanded from MicroserviceProviderBaseMessage
 
 ## Type parameters
 
-| Name                   | Type                                              |
-| :--------------------- | :------------------------------------------------ |
-| `MessageQueues`        | extends `string` = `any`                          |
+| Name | Type |
+| :------ | :------ |
+| `MessageQueues` | extends `string` = `any` |
 | `MessageQueuePatterns` | extends `Record`<`MessageQueues`, `any`\> = `any` |
-| `MessageQueueMap`      | extends `Record`<`MessageQueues`, `any`\> = `any` |
+| `MessageQueueMap` | extends `Record`<`MessageQueues`, `any`\> = `any` |
 
 ## Implements
 
@@ -43,18 +44,18 @@ You have to supply the types for MessageQueue enum, MessageQueuePatterns availab
 
 #### Type parameters
 
-| Name                   | Type                                              |
-| :--------------------- | :------------------------------------------------ |
-| `MessageQueues`        | extends `string` = `any`                          |
+| Name | Type |
+| :------ | :------ |
+| `MessageQueues` | extends `string` = `any` |
 | `MessageQueuePatterns` | extends `Record`<`MessageQueues`, `any`\> = `any` |
-| `MessageQueueMap`      | extends `Record`<`MessageQueues`, `any`\> = `any` |
+| `MessageQueueMap` | extends `Record`<`MessageQueues`, `any`\> = `any` |
 
 #### Parameters
 
-| Name       | Type                      |
-| :--------- | :------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `provider` | `ClientProviderOptions`[] |
-| `names`    | `MessageQueues`[]         |
+| `names` | `MessageQueues`[] |
 
 #### Defined in
 
@@ -70,7 +71,7 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:22
 
----
+___
 
 ### options
 
@@ -88,20 +89,20 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 #### Type parameters
 
-| Name          | Type             |
-| :------------ | :--------------- |
-| `Queue`       | extends `string` |
-| `Pattern`     | extends `any`    |
-| `Payload`     | extends `any`    |
-| `ReturnValue` | extends `any`    |
+| Name | Type |
+| :------ | :------ |
+| `Queue` | extends `string` |
+| `Pattern` | extends `any` |
+| `Payload` | extends `any` |
+| `ReturnValue` | extends `any` |
 
 #### Parameters
 
-| Name       | Type                                                                                        |
-| :--------- | :------------------------------------------------------------------------------------------ |
-| `queue`    | `Queue`                                                                                     |
-| `pattern`  | `Pattern`                                                                                   |
-| `payload?` | `Payload`                                                                                   |
+| Name | Type |
+| :------ | :------ |
+| `queue` | `Queue` |
+| `pattern` | `Pattern` |
+| `payload?` | `Payload` |
 | `options?` | [`MicroserviceProviderServiceOptions`](../interfaces/MicroserviceProviderServiceOptions.md) |
 
 #### Returns
@@ -112,7 +113,7 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:55
 
----
+___
 
 ### execute
 
@@ -120,21 +121,21 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 #### Type parameters
 
-| Name          | Type             |
-| :------------ | :--------------- |
-| `Queue`       | extends `string` |
-| `Pattern`     | extends `any`    |
-| `Payload`     | extends `any`    |
-| `ReturnValue` | extends `any`    |
+| Name | Type |
+| :------ | :------ |
+| `Queue` | extends `string` |
+| `Pattern` | extends `any` |
+| `Payload` | extends `any` |
+| `ReturnValue` | extends `any` |
 
 #### Parameters
 
-| Name       | Type                                                                                        |
-| :--------- | :------------------------------------------------------------------------------------------ |
-| `command`  | `"send"` \| `"emit"`                                                                        |
-| `queue`    | `Queue`                                                                                     |
-| `pattern`  | `Pattern`                                                                                   |
-| `payload?` | `Payload`                                                                                   |
+| Name | Type |
+| :------ | :------ |
+| `command` | ``"send"`` \| ``"emit"`` |
+| `queue` | `Queue` |
+| `pattern` | `Pattern` |
+| `payload?` | `Payload` |
 | `options?` | [`MicroserviceProviderServiceOptions`](../interfaces/MicroserviceProviderServiceOptions.md) |
 
 #### Returns
@@ -145,7 +146,7 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:86
 
----
+___
 
 ### onApplicationBootstrap
 
@@ -163,7 +164,7 @@ OnApplicationBootstrap.onApplicationBootstrap
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:35
 
----
+___
 
 ### raw
 
@@ -171,20 +172,20 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 #### Type parameters
 
-| Name          | Type             |
-| :------------ | :--------------- |
-| `Queue`       | extends `string` |
-| `Pattern`     | extends `any`    |
-| `Payload`     | extends `any`    |
-| `ReturnValue` | extends `any`    |
+| Name | Type |
+| :------ | :------ |
+| `Queue` | extends `string` |
+| `Pattern` | extends `any` |
+| `Payload` | extends `any` |
+| `ReturnValue` | extends `any` |
 
 #### Parameters
 
-| Name       | Type                                                                                        |
-| :--------- | :------------------------------------------------------------------------------------------ |
-| `queue`    | `Queue`                                                                                     |
-| `pattern`  | `Pattern`                                                                                   |
-| `payload?` | `Payload`                                                                                   |
+| Name | Type |
+| :------ | :------ |
+| `queue` | `Queue` |
+| `pattern` | `Pattern` |
+| `payload?` | `Payload` |
 | `options?` | [`MicroserviceProviderServiceOptions`](../interfaces/MicroserviceProviderServiceOptions.md) |
 
 #### Returns
@@ -195,7 +196,7 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:64
 
----
+___
 
 ### send
 
@@ -203,20 +204,20 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 #### Type parameters
 
-| Name          | Type             |
-| :------------ | :--------------- |
-| `Queue`       | extends `string` |
-| `Pattern`     | extends `any`    |
-| `Payload`     | extends `any`    |
-| `ReturnValue` | extends `any`    |
+| Name | Type |
+| :------ | :------ |
+| `Queue` | extends `string` |
+| `Pattern` | extends `any` |
+| `Payload` | extends `any` |
+| `ReturnValue` | extends `any` |
 
 #### Parameters
 
-| Name       | Type                                                                                        |
-| :--------- | :------------------------------------------------------------------------------------------ |
-| `queue`    | `Queue`                                                                                     |
-| `pattern`  | `Pattern`                                                                                   |
-| `payload`  | `Payload`                                                                                   |
+| Name | Type |
+| :------ | :------ |
+| `queue` | `Queue` |
+| `pattern` | `Pattern` |
+| `payload` | `Payload` |
 | `options?` | [`MicroserviceProviderServiceOptions`](../interfaces/MicroserviceProviderServiceOptions.md) |
 
 #### Returns

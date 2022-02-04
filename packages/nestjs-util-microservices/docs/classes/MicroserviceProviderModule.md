@@ -28,8 +28,8 @@ Provides a message queue client and a service to the whole application.
 
 #### Parameters
 
-| Name      | Type                                                                                      |
-| :-------- | :---------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`MicroserviceProviderModuleOptions`](../interfaces/MicroserviceProviderModuleOptions.md) |
 
 #### Returns

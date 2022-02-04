@@ -25,26 +25,26 @@ client options, if you dont want to use default config.js key of messageQueue.cl
 
 #### Type declaration
 
-| Name                     | Type                          |
-| :----------------------- | :---------------------------- |
-| `deserializer?`          | `Deserializer`<`any`, `any`\> |
-| `headers?`               | `Record`<`string`, `string`\> |
-| `isGlobalPrefetchCount?` | `boolean`                     |
-| `noAck?`                 | `boolean`                     |
-| `persistent?`            | `boolean`                     |
-| `prefetchCount?`         | `number`                      |
-| `queue?`                 | `string`                      |
-| `queueOptions?`          | `any`                         |
-| `replyQueue?`            | `string`                      |
-| `serializer?`            | `Serializer`<`any`, `any`\>   |
-| `socketOptions?`         | `any`                         |
-| `urls?`                  | `string`[] \| `RmqUrl`[]      |
+| Name | Type |
+| :------ | :------ |
+| `deserializer?` | `Deserializer`<`any`, `any`\> |
+| `headers?` | `Record`<`string`, `string`\> |
+| `isGlobalPrefetchCount?` | `boolean` |
+| `noAck?` | `boolean` |
+| `persistent?` | `boolean` |
+| `prefetchCount?` | `number` |
+| `queue?` | `string` |
+| `queueOptions?` | `any` |
+| `replyQueue?` | `string` |
+| `serializer?` | `Serializer`<`any`, `any`\> |
+| `socketOptions?` | `any` |
+| `urls?` | `string`[] \| `RmqUrl`[] |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:13
 
----
+___
 
 ### disableService
 
@@ -56,7 +56,7 @@ disable service itself, just provide the client
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:15
 
----
+___
 
 ### name
 
@@ -68,7 +68,7 @@ give a inject token of your desire
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:7
 
----
+___
 
 ### queue
 
@@ -90,8 +90,8 @@ if you want to override the default provider
 
 #### Parameters
 
-| Name     | Type       |
-| :------- | :--------- |
+| Name | Type |
+| :------ | :------ |
 | `queue?` | `string`[] |
 
 #### Returns
