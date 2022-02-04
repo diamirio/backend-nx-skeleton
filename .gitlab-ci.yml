@@ -3,6 +3,7 @@ image: node:16-alpine
 stages:
   - install
   - build
+  - docs
   - publish
 
 cache:
@@ -41,7 +42,7 @@ build:
     - node
 
 docs:
-  stage: build
+  stage: docs
   script:
     - yarn docs
   artifacts:
