@@ -131,6 +131,8 @@
 - [addInstallTaskRule](README.md#addinstalltaskrule)
 - [addMultipleDependentTasksRule](README.md#addmultipledependenttasksrule)
 - [addNxImplicitDependenciesRule](README.md#addnximplicitdependenciesrule)
+- [addNxInstallRule](README.md#addnxinstallrule)
+- [addNxInstallTask](README.md#addnxinstalltask)
 - [addRunWorkspaceScriptTask](README.md#addrunworkspacescripttask)
 - [addRunWorkspaceScriptTaskRule](README.md#addrunworkspacescripttaskrule)
 - [addSchematicTask](README.md#addschematictask)
@@ -681,7 +683,7 @@ packages/nx-tools/src/utils/logger/colorette.ts:3
 
 #### Defined in
 
-packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:14
+packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:13
 
 ---
 
@@ -708,7 +710,7 @@ packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:14
 
 #### Defined in
 
-packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:10
+packages/nx-tools/src/rules/add-dependencies-to-package-json.rule.ts:9
 
 ---
 
@@ -871,7 +873,7 @@ Add a install task to context to install the dependencies, ripped of from nx but
 
 #### Defined in
 
-packages/nx-tools/src/tasks/install-dependencies.ts:14
+packages/nx-tools/src/tasks/install-dependencies.ts:32
 
 ---
 
@@ -892,7 +894,7 @@ packages/nx-tools/src/tasks/install-dependencies.ts:14
 
 #### Defined in
 
-packages/nx-tools/src/tasks/install-dependencies.ts:26
+packages/nx-tools/src/tasks/install-dependencies.ts:44
 
 ---
 
@@ -939,6 +941,51 @@ packages/nx-tools/src/tasks/manage-multiple-tasks.ts:8
 #### Defined in
 
 packages/nx-tools/src/rules/add-nx-implicit-dependencies.rule.ts:6
+
+---
+
+### addNxInstallRule
+
+▸ **addNxInstallRule**(`options?`, `dependencies?`): `Rule`
+
+#### Parameters
+
+| Name            | Type          |
+| :-------------- | :------------ |
+| `options?`      | `TaskOptions` |
+| `dependencies?` | `TaskId`[]    |
+
+#### Returns
+
+`Rule`
+
+#### Defined in
+
+packages/nx-tools/src/tasks/install-dependencies.ts:22
+
+---
+
+### addNxInstallTask
+
+▸ **addNxInstallTask**(`context`, `options?`, `dependencies?`): `TaskId`
+
+Add a install task to context to install the dependencies, ripped of from nx but it has the functionality to chdir.
+
+#### Parameters
+
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `context`       | `SchematicContext` |
+| `options?`      | `TaskOptions`      |
+| `dependencies?` | `TaskId`[]         |
+
+#### Returns
+
+`TaskId`
+
+#### Defined in
+
+packages/nx-tools/src/tasks/install-dependencies.ts:16
 
 ---
 
