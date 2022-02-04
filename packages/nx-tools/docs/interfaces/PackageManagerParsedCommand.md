@@ -20,7 +20,7 @@
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:33
 
----
+___
 
 ### env
 
@@ -30,7 +30,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:33
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:34
 
----
+___
 
 ### manager
 

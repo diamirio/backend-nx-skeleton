@@ -6,9 +6,9 @@ workspace.json is where all of the nx data is stored.
 
 ## Type parameters
 
-| Name | Type                                       |
-| :--- | :----------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\> = `any` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\> = `any` |
 
 ## Table of contents
 
@@ -27,11 +27,11 @@ workspace.json is where all of the nx data is stored.
 
 packages/nx-tools/src/interfaces/add-project.interface.ts:17
 
----
+___
 
 ### projects
 
-• **projects**: `Record`<`string`, { `architect`: `T` ; `projectType`: [`NxProjectTypes`](../enums/NxProjectTypes.md) ; `root`: `string` ; `schematics`: `any` ; `sourceRoot`: `string` }\>
+• **projects**: `Record`<`string`, { `architect`: `T` ; `projectType`: [`NxProjectTypes`](../enums/NxProjectTypes.md) ; `root`: `string` ; `schematics`: `any` ; `sourceRoot`: `string`  }\>
 
 #### Defined in
 

@@ -34,8 +34,8 @@ You can add long-living and short-living process to keep track of processes spaw
 
 #### Parameters
 
-| Name      | Type                                                        |
-| :-------- | :---------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
 
 #### Defined in
@@ -52,7 +52,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:19
 
 packages/nx-tools/src/utils/node/process-manager.ts:15
 
----
+___
 
 ### persistentTasks
 
@@ -62,7 +62,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:15
 
 packages/nx-tools/src/utils/node/process-manager.ts:17
 
----
+___
 
 ### tasks
 
@@ -82,8 +82,8 @@ Add a new task that is killable.
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `instance` | `ExecaChildProcess`<`string`\> |
 
 #### Returns
@@ -94,7 +94,7 @@ Add a new task that is killable.
 
 packages/nx-tools/src/utils/node/process-manager.ts:24
 
----
+___
 
 ### addPersistent
 
@@ -104,8 +104,8 @@ Add a persistent task that should not be killed until everything finishes.
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `instance` | `ExecaChildProcess`<`string`\> |
 
 #### Returns
@@ -116,7 +116,7 @@ Add a persistent task that should not be killed until everything finishes.
 
 packages/nx-tools/src/utils/node/process-manager.ts:31
 
----
+___
 
 ### kill
 
@@ -132,7 +132,7 @@ Kill all non-persistent tasks.
 
 packages/nx-tools/src/utils/node/process-manager.ts:38
 
----
+___
 
 ### killProcesses
 
@@ -142,8 +142,8 @@ Tree kill proceseses.
 
 #### Parameters
 
-| Name    | Type                             |
-| :------ | :------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `tasks` | `ExecaChildProcess`<`string`\>[] |
 
 #### Returns
@@ -154,7 +154,7 @@ Tree kill proceseses.
 
 packages/nx-tools/src/utils/node/process-manager.ts:51
 
----
+___
 
 ### stop
 

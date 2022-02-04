@@ -21,7 +21,7 @@
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:43
 
----
+___
 
 ### pkg
 
@@ -31,7 +31,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:43
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:40
 
----
+___
 
 ### registry
 
@@ -41,7 +41,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:40
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:41
 
----
+___
 
 ### version
 

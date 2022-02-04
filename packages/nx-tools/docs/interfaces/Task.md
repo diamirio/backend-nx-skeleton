@@ -4,9 +4,9 @@
 
 ## Type parameters
 
-| Name | Type                                  |
-| :--- | :------------------------------------ |
-| `T`  | extends `Record`<`string`, `string`\> |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `string`\> |
 
 ## Table of contents
 
@@ -30,7 +30,7 @@
 
 packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:6
 
----
+___
 
 ### dependsOn
 
@@ -40,7 +40,7 @@ packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:6
 
 packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:9
 
----
+___
 
 ### token
 
@@ -58,11 +58,11 @@ packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:7
 
 #### Parameters
 
-| Name           | Type               |
-| :------------- | :----------------- |
-| `host`         | `Tree`             |
-| `context`      | `SchematicContext` |
-| `dependencies` | `TaskId`[]         |
+| Name | Type |
+| :------ | :------ |
+| `host` | `Tree` |
+| `context` | `SchematicContext` |
+| `dependencies` | `TaskId`[] |
 
 #### Returns
 

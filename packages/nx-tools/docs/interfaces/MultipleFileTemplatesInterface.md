@@ -29,7 +29,7 @@ BaseWithCondition.condition
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:80
 
----
+___
 
 ### templates
 

@@ -27,7 +27,7 @@ You can either enable or disable to format inside the rule, since this is moslty
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:51
 
----
+___
 
 ### include
 
@@ -39,7 +39,7 @@ Schematic files and folders to include based on condition
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:47
 
----
+___
 
 ### multipleTemplates
 
@@ -57,7 +57,7 @@ The file will be outputted to the path you designated.
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:35
 
----
+___
 
 ### omit
 
@@ -69,13 +69,14 @@ This will evaluate the condition and if the condition is matched it will omit fi
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:39
 
----
+___
 
 ### templates
 
 • `Optional` **templates**: [`FileTemplatesInterface`](FileTemplatesInterface.md)[]
 
-Templates are used for generating templates. Template names should be appended with **${NAME}** to reduce confusion.
+Templates are used for generating templates.
+Template names should be appended with __${NAME}__ to reduce confusion.
 
 Templates can be generated depending on the condition and if the condition is not met template will be skipped.
 
@@ -83,13 +84,14 @@ If the template extension ends with jinja2 (".j2"), it will be evaluated as jinj
 
 If the template is a single file it will only be evaluated for condition and omitted if condition is not met.
 
-Templates can also be renamed on demand, where the field inside the underscores will be changed to whatever is designated, elsewise the whole contraption of **${NAME}** will be removed.
+Templates can also be renamed on demand, where the field inside the underscores will be changed to whatever is designated,
+elsewise the whole contraption of __${NAME}__ will be removed.
 
 #### Defined in
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:25
 
----
+___
 
 ### trigger
 

@@ -21,7 +21,7 @@ Nx application types
 
 packages/nx-tools/src/constants/nx.constants.ts:13
 
----
+___
 
 ### LIB
 

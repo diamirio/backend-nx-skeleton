@@ -22,7 +22,7 @@
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:15
 
----
+___
 
 ### ERROR
 
@@ -32,7 +32,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:15
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:12
 
----
+___
 
 ### FATAL
 
@@ -42,7 +42,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:12
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:11
 
----
+___
 
 ### INFO
 
@@ -52,7 +52,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:11
 
 packages/nx-tools/src/utils/logger/logger.interface.ts:14
 
----
+___
 
 ### WARN
 

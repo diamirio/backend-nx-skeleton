@@ -1,3 +1,87 @@
+# @webundsoehne/nx-tools [5.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.2.2...@webundsoehne/nx-tools@5.0.0) (2022-02-04)
+
+
+### Bug Fixes
+
+* add implicit dependencies for package json ([5f2cf9b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5f2cf9b1e33fcbbd08e20593e57ba98ccbe9e7de)), closes [#15](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/15)
+* add mechanism to remove implicit dependencies after remove ([e722281](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e722281b34af261ea6ea9e9f6c1c8ff0b7ffaa52))
+* adding project dependencies ([7c98f0c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7c98f0ce9982a91680c7b6967b17b5951448aa70))
+* all linting problems and use it commonly with requires ([e1ed351](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e1ed351a5ff8a9e48d90d71feb82fe8a17d28665))
+* always ignore self while generating template ([dcba42a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/dcba42a71af21456209e07dd8d80f37f382e0ac5))
+* brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+* command generator and merge problems ([57ee27d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/57ee27da701f18439a9a644b923eef0bf6ddbcdd))
+* deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+* directory manipulation for install ([ebcb841](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ebcb8414454147c8071a86a8c8b480c048fbf48b))
+* disable angular cli input which was going mental ([e50478f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e50478f162fa1d9f89ff8b9a9cdf41524a477586))
+* docker build problems ([fa904e5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fa904e59c9e0b1977964f4e647b150f5630f340c)), closes [#15](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/15)
+* eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+* exports rule to do empty exports ([cd6fbb2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cd6fbb2a52e8db8172c3592d51d82711eb6207b4))
+* fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+* fix workspace schematics ([5a719ed](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a719edbca3eb39adfa800f225a619dc60531cb1))
+* integration problems with the other applications ([0da7854](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0da7854791ed5d22d8a9aca474e7f4e13c3d5520))
+* minor issue with visibility ([9af3440](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9af3440d209fe05e9f13f08188444bbd8f790183))
+* minor templating issues ([84bd637](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/84bd63750133e53e20c54fcd8aa54785cd9a7575))
+* nx argument parsing ([245cf1c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/245cf1caa8c09a421888a0aa6592c4f797bf2703))
+* package json scripts injection ([9f3a693](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/9f3a6930ce032ce1d1e0a8df132132e8b2090a45))
+* problems with extensions and make extensions generic too ([83df337](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/83df337db74741f0f1c1a1d6d20bb35da81b963d))
+* rule issues ([80afa54](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/80afa5453a58ea16b636cf054337504ec5e00cae))
+* swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+* templates ([a705b60](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a705b60d670816e0d5fc6cae817d912762341570))
+* tsconfig problems in libraries ([ca93c28](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ca93c286a8192ac609f4621623998b00b1611ae4))
+* update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+* update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+* update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+
+
+### Features
+
+* add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+* add development mode for internal linking ([afc7d1b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/afc7d1b4b542896c2601fd15175ee7c2dc422396))
+* add more decorators for missing scheduler features ([ea37cbe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea37cbedaacd25db7506cdf9a181925f4a9653ba))
+* change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+* change the ui a bit to not use inquerer from angular because it is pretty slow ([7f48627](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7f48627385d8fffac7057db89fc9273601936127))
+* move commonly used normalize options to a common place ([cf39af3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf39af3992a1495fcd906928a5227c31d1c5d4cc))
+* some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
+* update custom tasks and linting inside the initial workspace ([fe4b505](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fe4b505acf00cc5f974cf68a6d599bdd1d5f7e2c))
+
+
+### Performance Improvements
+
+* swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+* **nestjs-util:** split in to smaller packages ([39bf50e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/39bf50e771cb39665cabc9f8c8aae3cee02626c5))
+* cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+* create bridge for new nx ([c2bb65c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c2bb65cc98c5385d51ff60250e4f30fe6fe19d84))
+* linting rules ([48134e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
+* stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
+* upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+
+### BREAKING CHANGES
+
+* drops anything less than node16, strictly commonjs still, transpiled to es2021
+* **nestjs-util:** this will break older packages due to import points being different
+* make everything non-public
+* stricter linting rules may cause libraries to not work
+for typescript version that are older than 4 because of the import type
+  and export type statements. what advantage that it provides is that it
+  wont crash anymore for any of the missing dependencies that are only
+  types
+* this definitely includes many breaking changes while cleaning up old nx rules to
+have directly inject the three and context
+* NX now utilizes its own HostTree, the old angular one is now converted through the
+bridge whenever it is required. Because this repositories compatibility is strictly with Angular
+builders. Else it would require a rewrite.
+* drops the builders completely due to they being not avaiable in nx anymore
+* might break older configurations do to library change
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.0.0
+
 # @webundsoehne/nx-tools [5.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@4.2.2...@webundsoehne/nx-tools@5.0.0-beta.1) (2022-01-26)
 
 ### Bug Fixes

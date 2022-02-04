@@ -28,7 +28,7 @@ Use eslint
 
 packages/nx-tools/src/utils/file-system/format-files.interface.ts:14
 
----
+___
 
 ### prettier
 
@@ -40,7 +40,7 @@ Use prettier
 
 packages/nx-tools/src/utils/file-system/format-files.interface.ts:12
 
----
+___
 
 ### skip
 

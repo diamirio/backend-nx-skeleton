@@ -21,7 +21,7 @@ Available Linters
 
 packages/nx-tools/src/constants/available.constants.ts:21
 
----
+___
 
 ### NONE
 

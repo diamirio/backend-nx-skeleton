@@ -2,7 +2,8 @@
 
 # Interface: LinterDependencies
 
-To add linter dependencies to project. This has no optional properties since NX goes crazy with current version of angular-cli ~10.
+To add linter dependencies to project.
+This has no optional properties since NX goes crazy with current version of angular-cli ~10.
 
 ## Table of contents
 
@@ -21,7 +22,7 @@ To add linter dependencies to project. This has no optional properties since NX 
 
 packages/nx-tools/src/interfaces/linter-dependencies.interface.ts:6
 
----
+___
 
 ### devDependencies
 

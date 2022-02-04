@@ -40,7 +40,7 @@ Name of the project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:28
 
----
+___
 
 ### directory
 
@@ -56,7 +56,7 @@ Directory of the project, if it is assigned to a subfolder.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:37
 
----
+___
 
 ### force
 
@@ -72,7 +72,7 @@ Force without user prompts wherever possible.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:10
 
----
+___
 
 ### linter
 
@@ -88,7 +88,7 @@ Preffered linter for the project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:40
 
----
+___
 
 ### name
 
@@ -104,7 +104,7 @@ Name of the project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:18
 
----
+___
 
 ### parent
 
@@ -120,7 +120,7 @@ Name of the parent project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:23
 
----
+___
 
 ### parentProjectConfiguration
 
@@ -136,7 +136,7 @@ Name of the parent project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:47
 
----
+___
 
 ### silent
 
@@ -152,7 +152,7 @@ Put the generator to the silent mode.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:13
 
----
+___
 
 ### skipFormat
 

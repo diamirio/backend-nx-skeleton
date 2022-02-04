@@ -19,7 +19,7 @@
 
 packages/nx-tools/src/rules/update-package-json.rule.interface.ts:4
 
----
+___
 
 ### scripts
 

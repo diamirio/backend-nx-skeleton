@@ -39,7 +39,7 @@ Generated package name.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:62
 
----
+___
 
 ### packageScope
 
@@ -55,7 +55,7 @@ Fetched package scope from workspace configuration.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:57
 
----
+___
 
 ### root
 
@@ -71,7 +71,7 @@ Root directory for the generator.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:67
 
----
+___
 
 ### sourceRoot
 

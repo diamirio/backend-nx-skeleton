@@ -34,9 +34,9 @@
 
 #### Parameters
 
-| Name               | Type                                                               |
-| :----------------- | :----------------------------------------------------------------- |
-| `options?`         | `Object`                                                           |
+| Name | Type |
+| :------ | :------ |
+| `options?` | `Object` |
 | `options.manager?` | [`AvailablePackageManagers`](../enums/AvailablePackageManagers.md) |
 
 #### Defined in
@@ -53,7 +53,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:31
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:28
 
----
+___
 
 ### globalFolder
 
@@ -63,7 +63,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:28
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:25
 
----
+___
 
 ### globalLinkFolder
 
@@ -73,7 +73,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:25
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:26
 
----
+___
 
 ### logger
 
@@ -83,7 +83,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:26
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:29
 
----
+___
 
 ### manager
 
@@ -93,7 +93,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:29
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:27
 
----
+___
 
 ### instance
 
@@ -111,10 +111,10 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:24
 
 #### Parameters
 
-| Name       | Type                                                                                                 |
-| :--------- | :--------------------------------------------------------------------------------------------------- |
-| `pkg`      | [`NodeDependency`](../README.md#nodedependency) \| [`NodeDependency`](../README.md#nodedependency)[] |
-| `options?` | [`CheckNodeModuleInstalledOptions`](../interfaces/CheckNodeModuleInstalledOptions.md)                |
+| Name | Type |
+| :------ | :------ |
+| `pkg` | [`NodeDependency`](../README.md#nodedependency) \| [`NodeDependency`](../README.md#nodedependency)[] |
+| `options?` | [`CheckNodeModuleInstalledOptions`](../interfaces/CheckNodeModuleInstalledOptions.md) |
 
 #### Returns
 
@@ -124,7 +124,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:24
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:167
 
----
+___
 
 ### command
 
@@ -134,10 +134,10 @@ Returns the selected commands from the current package manager.
 
 #### Parameters
 
-| Name       | Type                                                                       |
-| :--------- | :------------------------------------------------------------------------- |
-| `command`  | [`PackageManagerUsableCommands`](../enums/PackageManagerUsableCommands.md) |
-| `manager?` | [`AvailablePackageManagers`](../enums/AvailablePackageManagers.md)         |
+| Name | Type |
+| :------ | :------ |
+| `command` | [`PackageManagerUsableCommands`](../enums/PackageManagerUsableCommands.md) |
+| `manager?` | [`AvailablePackageManagers`](../enums/AvailablePackageManagers.md) |
 
 #### Returns
 
@@ -147,7 +147,7 @@ Returns the selected commands from the current package manager.
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:68
 
----
+___
 
 ### isPackageManagerPackageAction
 
@@ -155,8 +155,8 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:68
 
 #### Parameters
 
-| Name   | Type                                                          |
-| :----- | :------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `data` | [`PackageManagerActions`](../README.md#packagemanageractions) |
 
 #### Returns
@@ -167,7 +167,7 @@ data is PackageManagerPackageAction
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:385
 
----
+___
 
 ### isPackageManagerPackageWithCommandAction
 
@@ -175,8 +175,8 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:385
 
 #### Parameters
 
-| Name   | Type                                                          |
-| :----- | :------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `data` | [`PackageManagerActions`](../README.md#packagemanageractions) |
 
 #### Returns
@@ -187,7 +187,7 @@ data is PackageManagerWithCommandAction
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:393
 
----
+___
 
 ### isPackageManagerPackageWithoutCommandAction
 
@@ -195,8 +195,8 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:393
 
 #### Parameters
 
-| Name   | Type                                                          |
-| :----- | :------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `data` | [`PackageManagerActions`](../README.md#packagemanageractions) |
 
 #### Returns
@@ -207,7 +207,7 @@ data is PackageManagerWithoutCommandAction
 
 packages/nx-tools/src/utils/package-manager/package-manager.ts:401
 
----
+___
 
 ### parser
 
@@ -217,8 +217,8 @@ This gets ctx.packages as input to perform the required operation
 
 #### Parameters
 
-| Name     | Type                                                          |
-| :------- | :------------------------------------------------------------ |
+| Name | Type |
+| :------ | :------ |
 | `action` | [`PackageManagerActions`](../README.md#packagemanageractions) |
 
 #### Returns

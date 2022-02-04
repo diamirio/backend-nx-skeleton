@@ -40,8 +40,8 @@ packages/nx-tools/src/rules/create-application.rule.interface.ts:80
 
 #### Parameters
 
-| Name   | Type   |
-| :----- | :----- |
+| Name | Type |
+| :------ | :------ |
 | `file` | `Path` |
 
 #### Returns

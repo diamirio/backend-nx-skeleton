@@ -16,7 +16,7 @@
 - [REMOVE](PackageManagerUsableCommands.md#remove)
 - [ROOT](PackageManagerUsableCommands.md#root)
 - [RUN](PackageManagerUsableCommands.md#run)
-- [RUN_ARGS](PackageManagerUsableCommands.md#run_args)
+- [RUN\_ARGS](PackageManagerUsableCommands.md#run_args)
 
 ## Enumeration members
 
@@ -28,7 +28,7 @@
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:13
 
----
+___
 
 ### DEVELOPMENT
 
@@ -38,7 +38,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:13
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:16
 
----
+___
 
 ### EXEC
 
@@ -48,7 +48,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:16
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:18
 
----
+___
 
 ### FORCE
 
@@ -58,7 +58,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:18
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:17
 
----
+___
 
 ### GLOBAL
 
@@ -68,7 +68,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:17
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:12
 
----
+___
 
 ### INSTALL
 
@@ -78,7 +78,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:12
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:19
 
----
+___
 
 ### REGISTRY
 
@@ -88,7 +88,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:19
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:15
 
----
+___
 
 ### REMOVE
 
@@ -98,7 +98,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:15
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:14
 
----
+___
 
 ### ROOT
 
@@ -108,7 +108,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:14
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:22
 
----
+___
 
 ### RUN
 
@@ -118,11 +118,11 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:22
 
 packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:20
 
----
+___
 
-### RUN_ARGS
+### RUN\_ARGS
 
-• **RUN_ARGS** = `"RUN_ARGS"`
+• **RUN\_ARGS** = `"RUN_ARGS"`
 
 #### Defined in
 

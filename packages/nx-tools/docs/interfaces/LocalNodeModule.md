@@ -26,7 +26,7 @@
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:51
 
----
+___
 
 ### installed
 
@@ -36,7 +36,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:51
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:48
 
----
+___
 
 ### latest
 
@@ -46,7 +46,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:48
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:54
 
----
+___
 
 ### linked
 
@@ -56,7 +56,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:54
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:49
 
----
+___
 
 ### parsable
 
@@ -66,7 +66,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:49
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:55
 
----
+___
 
 ### path
 
@@ -76,7 +76,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:55
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:53
 
----
+___
 
 ### pkg
 
@@ -86,7 +86,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:53
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:47
 
----
+___
 
 ### updateType
 
@@ -96,7 +96,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:47
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:52
 
----
+___
 
 ### version
 

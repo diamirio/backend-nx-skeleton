@@ -22,7 +22,7 @@ Versions for npm packages.
 
 packages/nx-tools/src/interfaces/versions.interface.ts:8
 
----
+___
 
 ### devDeps
 
@@ -32,7 +32,7 @@ packages/nx-tools/src/interfaces/versions.interface.ts:8
 
 packages/nx-tools/src/interfaces/versions.interface.ts:9
 
----
+___
 
 ### implicitDeps
 

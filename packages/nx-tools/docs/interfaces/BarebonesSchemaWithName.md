@@ -35,7 +35,7 @@ Force without user prompts wherever possible.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:10
 
----
+___
 
 ### name
 
@@ -51,7 +51,7 @@ Name of the project.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:18
 
----
+___
 
 ### silent
 
@@ -67,7 +67,7 @@ Put the generator to the silent mode.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:13
 
----
+___
 
 ### skipFormat
 

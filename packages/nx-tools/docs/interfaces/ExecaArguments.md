@@ -23,7 +23,7 @@ These are the input arguments
 
 packages/nx-tools/src/interfaces/execa-arguments.interface.ts:10
 
----
+___
 
 ### spawnOptions
 

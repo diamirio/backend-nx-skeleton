@@ -21,7 +21,7 @@ Available generator modes.
 
 packages/nx-tools/src/constants/available.constants.ts:5
 
----
+___
 
 ### MODIFY
 

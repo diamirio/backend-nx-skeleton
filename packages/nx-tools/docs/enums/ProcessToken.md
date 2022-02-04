@@ -6,24 +6,24 @@
 
 ### Enumeration members
 
-- [DEBUG_MODE](ProcessToken.md#debug_mode)
-- [DEVELOPMENT_MODE](ProcessToken.md#development_mode)
+- [DEBUG\_MODE](ProcessToken.md#debug_mode)
+- [DEVELOPMENT\_MODE](ProcessToken.md#development_mode)
 
 ## Enumeration members
 
-### DEBUG_MODE
+### DEBUG\_MODE
 
-• **DEBUG_MODE** = `"NG_DEBUG"`
+• **DEBUG\_MODE** = `"NG_DEBUG"`
 
 #### Defined in
 
 packages/nx-tools/src/constants/token.constants.ts:2
 
----
+___
 
-### DEVELOPMENT_MODE
+### DEVELOPMENT\_MODE
 
-• **DEVELOPMENT_MODE** = `"NG_DEVELOP"`
+• **DEVELOPMENT\_MODE** = `"NG_DEVELOP"`
 
 #### Defined in
 

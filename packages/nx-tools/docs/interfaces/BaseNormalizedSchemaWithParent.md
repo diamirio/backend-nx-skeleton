@@ -4,8 +4,8 @@
 
 ## Type parameters
 
-| Name                       | Type                                    |
-| :------------------------- | :-------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `ParentPriorConfiguration` | extends `Record`<`PropertyKey`, `any`\> |
 
 ## Hierarchy
@@ -42,7 +42,7 @@ Fetched package scope from workspace configuration.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:57
 
----
+___
 
 ### parentPriorConfiguration
 
@@ -52,7 +52,7 @@ packages/nx-tools/src/interfaces/base-schemas.interface.ts:57
 
 SchemaParentPriorConfiguration.parentPriorConfiguration
 
----
+___
 
 ### root
 

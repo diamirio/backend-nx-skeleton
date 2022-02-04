@@ -22,7 +22,7 @@
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:61
 
----
+___
 
 ### getUpdate
 
@@ -32,7 +32,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:61
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:63
 
----
+___
 
 ### getVersion
 
@@ -42,7 +42,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:63
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:62
 
----
+___
 
 ### global
 
@@ -52,7 +52,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:62
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:59
 
----
+___
 
 ### onlyLinked
 

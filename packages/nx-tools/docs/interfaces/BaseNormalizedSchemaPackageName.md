@@ -29,7 +29,7 @@ Generated package name.
 
 packages/nx-tools/src/interfaces/base-schemas.interface.ts:62
 
----
+___
 
 ### packageScope
 
