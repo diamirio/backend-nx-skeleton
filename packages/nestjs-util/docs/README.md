@@ -23,6 +23,7 @@
 - [ClassValidatorError](interfaces/ClassValidatorError.md)
 - [EnrichedException](interfaces/EnrichedException.md)
 - [Request](interfaces/Request.md)
+- [UseRetryOptions](interfaces/UseRetryOptions.md)
 
 ### Functions
 
@@ -30,10 +31,13 @@
 - [Configurable](README.md#configurable)
 - [InjectConfig](README.md#injectconfig)
 - [InjectMaintenanceService](README.md#injectmaintenanceservice)
+- [Retry](README.md#retry)
+- [UseMaintenanceLocker](README.md#usemaintenancelocker)
 - [getDuration](README.md#getduration)
 - [registerExitListeners](README.md#registerexitlisteners)
 - [requireNodeEnv](README.md#requirenodeenv)
 - [setEnvironmentVariables](README.md#setenvironmentvariables)
+- [useRetry](README.md#useretry)
 
 ## Functions
 
@@ -132,6 +136,40 @@ packages/nestjs-util/src/module/maintenance/decorators/inject.decorator.ts:8
 
 ---
 
+### Retry
+
+▸ **Retry**(`options`): `MethodDecorator`
+
+#### Parameters
+
+| Name      | Type                                               |
+| :-------- | :------------------------------------------------- |
+| `options` | [`UseRetryOptions`](interfaces/UseRetryOptions.md) |
+
+#### Returns
+
+`MethodDecorator`
+
+#### Defined in
+
+packages/nestjs-util/src/decorator/retry.decorator.ts:4
+
+---
+
+### UseMaintenanceLocker
+
+▸ **UseMaintenanceLocker**(): `MethodDecorator`
+
+#### Returns
+
+`MethodDecorator`
+
+#### Defined in
+
+packages/nestjs-util/src/module/maintenance/decorators/locker.decorator.ts:4
+
+---
+
 ### getDuration
 
 ▸ **getDuration**(`start`, `finish`): `number`
@@ -149,7 +187,7 @@ packages/nestjs-util/src/module/maintenance/decorators/inject.decorator.ts:8
 
 #### Defined in
 
-packages/nestjs-util/src/util/index.ts:32
+packages/nestjs-util/src/util/time.ts:1
 
 ---
 
@@ -169,7 +207,7 @@ packages/nestjs-util/src/util/index.ts:32
 
 #### Defined in
 
-packages/nestjs-util/src/util/index.ts:13
+packages/nestjs-util/src/util/process.ts:3
 
 ---
 
@@ -189,7 +227,7 @@ packages/nestjs-util/src/util/index.ts:13
 
 #### Defined in
 
-packages/nestjs-util/src/util/index.ts:37
+packages/nestjs-util/src/util/environment.ts:12
 
 ---
 
@@ -209,4 +247,31 @@ packages/nestjs-util/src/util/index.ts:37
 
 #### Defined in
 
-packages/nestjs-util/src/util/index.ts:4
+packages/nestjs-util/src/util/environment.ts:3
+
+---
+
+### useRetry
+
+▸ **useRetry**<`T`\>(`callback`, `options?`): `Promise`<`T`\>
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name       | Type                                               |
+| :--------- | :------------------------------------------------- |
+| `callback` | () => `T`                                          |
+| `options?` | [`UseRetryOptions`](interfaces/UseRetryOptions.md) |
+
+#### Returns
+
+`Promise`<`T`\>
+
+#### Defined in
+
+packages/nestjs-util/src/util/use-retry.ts:5

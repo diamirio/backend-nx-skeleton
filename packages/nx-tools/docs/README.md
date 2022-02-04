@@ -146,6 +146,7 @@
 - [createWorkspaceProjectRule](README.md#createworkspaceprojectrule)
 - [dependencyCalculator](README.md#dependencycalculator)
 - [doubleFileMerge](README.md#doublefilemerge)
+- [ensureNxRootListrTask](README.md#ensurenxrootlistrtask)
 - [eslintJson](README.md#eslintjson)
 - [findNxRoot](README.md#findnxroot)
 - [formatFilesRule](README.md#formatfilesrule)
@@ -1318,6 +1319,20 @@ Double file merge only adds changes on the new file to the current file. No dele
 #### Defined in
 
 packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:199
+
+---
+
+### ensureNxRootListrTask
+
+▸ **ensureNxRootListrTask**(): `ListrTask`[]
+
+#### Returns
+
+`ListrTask`[]
+
+#### Defined in
+
+packages/nx-tools/src/utils/prompts/nx-root.ts:6
 
 ---
 

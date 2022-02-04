@@ -20,6 +20,9 @@ This is a collection of useful modules on creating a [Nest](https://github.com/n
 
 <!-- toc -->
 
+- [Decorators](#decorators)
+  - [Retry Decorator](#retry-decorator)
+  - [UseMaintenanceLocker Decorator](#usemaintenancelocker-decorator)
 - [Filters](#filters)
   - [Http](#http)
   - [Bad-Request](#bad-request)

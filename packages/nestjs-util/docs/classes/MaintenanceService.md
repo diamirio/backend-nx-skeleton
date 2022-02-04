@@ -103,7 +103,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:9
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:41
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:42
 
 ---
 
@@ -137,7 +137,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:26
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:56
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:57
 
 ---
 
@@ -157,7 +157,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:56
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:76
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:77
 
 ---
 
@@ -178,7 +178,7 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:76
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:71
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:72
 
 ---
 
@@ -192,4 +192,4 @@ packages/nestjs-util/src/module/maintenance/maintenance.service.ts:71
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:66
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:67

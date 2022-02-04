@@ -12,6 +12,7 @@ Available through generating through the generator. Just typing it so that it ca
 - [MONGOOSE_ENTITY_TIMESTAMPS](AvailableGenerators.md#mongoose_entity_timestamps)
 - [TYPEORM_ENTITY](AvailableGenerators.md#typeorm_entity)
 - [TYPEORM_ENTITY_PRIMARY](AvailableGenerators.md#typeorm_entity_primary)
+- [TYPEORM_MIGRATION_TASK_MODULE](AvailableGenerators.md#typeorm_migration_task_module)
 
 ## Enumeration members
 
@@ -52,3 +53,13 @@ interfaces/available.constants.ts:79
 #### Defined in
 
 interfaces/available.constants.ts:80
+
+---
+
+### TYPEORM_MIGRATION_TASK_MODULE
+
+• **TYPEORM_MIGRATION_TASK_MODULE** = `"typeorm-migration-task-module"`
+
+#### Defined in
+
+interfaces/available.constants.ts:81
