@@ -15,10 +15,9 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/brownie](#webundsoehnebrownie)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/brownie](#webundsoehnebrownie)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -26,13 +25,12 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-
-- [`brownie config:workspace`](#brownie-configworkspace)
-- [`brownie docker`](#brownie-docker)
-- [`brownie gitlab`](#brownie-gitlab)
-- [`brownie help [COMMAND]`](#brownie-help-command)
-- [`brownie nx`](#brownie-nx)
-- [`brownie workspace`](#brownie-workspace)
+* [`brownie config:workspace`](#brownie-configworkspace)
+* [`brownie docker`](#brownie-docker)
+* [`brownie gitlab`](#brownie-gitlab)
+* [`brownie help [COMMAND]`](#brownie-help-command)
+* [`brownie nx`](#brownie-nx)
+* [`brownie workspace`](#brownie-workspace)
 
 ## `brownie config:workspace`
 
@@ -119,5 +117,4 @@ OPTIONS
 ALIASES
   $ brownie ws
 ```
-
 <!-- commandsstop -->
