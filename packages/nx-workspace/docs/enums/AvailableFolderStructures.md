@@ -19,7 +19,7 @@
 
 interfaces/available.constants.ts:12
 
----
+___
 
 ### SINGLE
 
