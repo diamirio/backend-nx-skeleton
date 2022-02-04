@@ -1,3 +1,15 @@
+## @webundsoehne-private/nx-workspace [4.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.7...@webundsoehne-private/nx-workspace@4.0.8) (2022-02-04)
+
+### Bug Fixes
+
+- initiating builder dependencies ([d2b9617](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d2b961712580fbed82de82058976dfd58b841457))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.2
+- **@webundsoehne/nx-builders:** upgraded to 5.0.7
+- **@webundsoehne/nx-tools:** upgraded to 5.0.7
+
 ## @webundsoehne-private/nx-workspace [4.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.6...@webundsoehne-private/nx-workspace@4.0.7) (2022-02-04)
 
 ### Bug Fixes
