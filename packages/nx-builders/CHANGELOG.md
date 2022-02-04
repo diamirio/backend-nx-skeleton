@@ -1,3 +1,14 @@
+## @webundsoehne/nx-builders [5.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.4...@webundsoehne/nx-builders@5.0.5) (2022-02-04)
+
+### Bug Fixes
+
+- update all unresolved deps ([4d78589](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d7858994fae5835df5fb44f89e8b0dd1afc6bdb))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.5
+
 ## @webundsoehne/nx-builders [5.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.3...@webundsoehne/nx-builders@5.0.4) (2022-02-04)
 
 ### Dependencies
