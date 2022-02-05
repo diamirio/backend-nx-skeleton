@@ -1,3 +1,13 @@
+# @webundsoehne/nestjs-util-graphql [1.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.0.2...@webundsoehne/nestjs-util-graphql@1.1.0) (2022-02-05)
+
+### Features
+
+- dont lint whenever there is no prior configuration, fix builders install ([2cac426](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/2cac4262018cbad0ae0bb172275fcbe31b981fae)), closes [#21](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/21) [#22](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/22)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 5.1.0
+
 ## @webundsoehne/nestjs-util-graphql [1.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.0.1...@webundsoehne/nestjs-util-graphql@1.0.2) (2022-02-04)
 
 ### Bug Fixes
