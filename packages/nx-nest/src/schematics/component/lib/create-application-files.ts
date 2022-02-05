@@ -60,5 +60,5 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
     ]
   }
 
-  return createApplicationRule(template, options, { format: { prettier: false, eslint: false } })
+  return createApplicationRule(template, options)
 }

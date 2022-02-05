@@ -158,7 +158,9 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
   }
 }
 
-const patchOptions: diff.PatchOptions = { context: 1 }
+const patchOptions: diff.PatchOptions = {
+  context: 2
+}
 
 /**
  * Triple file merge will compare old with new file and apply the changes to the current file.
@@ -174,7 +176,7 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
   const patch: string = diff.createPatch(name, oldFile, newFile, '', '', patchOptions)
 
   try {
-    buffer = diff.applyPatch(currentFile, patch)
+    buffer = diff.applyPatch(currentFile, patch, { fuzzFactor: 1 })
   } catch (e) {
     log.debug(`Error while triple-merging: ${e}`)
 

@@ -40,7 +40,6 @@
     "**/@angular-devkit/core": "13.2.2",
     "**/@angular-devkit/schematics": "13.2.2"
   },
-  "dependencies": {},
   "devDependencies": {
     "@anatine/esbuild-decorators": "^0.2.18",
     "@cenk1cenk2/cz-cc": "^1.4.11",

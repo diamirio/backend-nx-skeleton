@@ -107,6 +107,9 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
       })
       .flat() ?? [],
 
+    // move all the files to package root
+    options?.root ? move(options.root) : noop(),
+
     /**
      * Format
      * May be required for diff-merge rules
@@ -114,11 +117,8 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
     // need to format files before putting them through difference, or else it goes crazy.
     rules.format
       ? formatFilesRule({
-        ...ruleOptions?.format
+        ...ruleOptions?.format ?? {}
       })
-      : noop(),
-
-    // move all the files to package root
-    options?.root ? move(options.root) : noop()
+      : noop()
   ]
 }

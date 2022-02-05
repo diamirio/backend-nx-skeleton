@@ -11,7 +11,6 @@ import { calculateDependencies } from '@utils/versions'
 import {
   addDependenciesToProjectPackageJsonRule,
   addEslintConfigRule,
-  eslintJson,
   formatTreeRule,
   LINTER_VERSIONS,
   Logger,
@@ -35,7 +34,7 @@ export default function (schema: Schema): SchematicRule {
       runInRule(log.info.bind(log)('Initiating workspace.')),
       init(),
 
-      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ override: {} }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: {} }),
 
       runInRule(log.info.bind(log)('Adding project to workspace.')),
       addProject(options),

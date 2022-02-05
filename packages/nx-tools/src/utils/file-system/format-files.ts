@@ -34,7 +34,11 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
   const processed = {
     ignored: [],
     prettier: { formatted: [], ignored: [] },
-    eslint: { formatted: [], ignored: [] }
+    eslint: {
+      formatted: [],
+      ignored: [],
+      clean: []
+    }
   }
 
   const isDebug = isVerbose()
@@ -69,6 +73,8 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     // things were getting slow with it
     return from(
       (async (): Promise<Tree> => {
+        const start = Date.now()
+
         await Promise.all(
           Array.from(files.values()).map(async (file) => {
             if (!host.exists(file.path)) {
@@ -83,6 +89,8 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
             try {
               if (options.prettier) {
+                const start = Date.now()
+
                 let config: prettier.Options = {
                   filepath: systemPath
                 }
@@ -100,7 +108,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
                 if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
                   if (isDebug) {
-                    processed.prettier.ignored.push(file.path)
+                    processed.prettier.ignored.push({ path: file.path, time: Date.now() - start })
                   }
 
                   return
@@ -111,32 +119,32 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
                 file.content = await prettier.format(file.content, config)
 
                 if (isDebug) {
-                  processed.prettier.formatted.push(file.path)
+                  processed.prettier.formatted.push({ path: file.path, time: Date.now() - start })
                 }
               }
 
               if (options.eslint) {
-                const config: any = {
-                  filePath: systemPath
-                }
+                const start = Date.now()
 
                 // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
                 if (await eslint.isPathIgnored(systemPath)) {
                   if (isDebug) {
-                    processed.eslint.ignored.push(file.path)
+                    processed.eslint.ignored.push({ path: file.path, time: Date.now() - start })
                   }
 
                   return
                 }
 
-                const results = await eslint.lintText(file.content, config)
+                const results = await eslint.lintText(file.content, { filePath: systemPath })
 
                 if (results?.[0]?.output) {
                   file.content = results[0].output
 
                   if (isDebug) {
-                    processed.eslint.formatted.push(file.path)
+                    processed.eslint.formatted.push({ path: file.path, time: Date.now() - start })
                   }
+                } else if (isDebug) {
+                  processed.eslint.clean.push({ path: file.path, time: Date.now() - start })
                 }
               }
 
@@ -149,7 +157,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
           })
         )
 
-        log.debug('Formatted and linted files: %o', processed)
+        log.debug('Formatted and linted files: %o in %ss', processed, (Date.now() - start) / 1000)
 
         return host
       })()

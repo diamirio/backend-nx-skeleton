@@ -7,7 +7,7 @@ import { normalizeOptions } from './lib/normalize-options'
 import { updateIntegration } from './lib/update-integration'
 import type { Schema } from './main.interface'
 import { SchematicConstants } from '@interfaces'
-import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
+import { addEslintConfigRule, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
@@ -17,7 +17,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     return chain([
       runInRule(log.info.bind(log)(`Adding ${SchematicConstants.MICROSERVICE_PROVIDER_PACKAGE} library to workspace.`)),
 
-      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ override: {} }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: {} }),
 
       addProject(options),
 

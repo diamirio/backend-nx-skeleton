@@ -31,7 +31,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.MONGOOSE),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               silent: false,
-              skipFormat: false,
+              skipFormat: true,
               name: 'default',
               type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.MONGOOSE]),
@@ -50,7 +50,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition: !options?.priorConfiguration && options.dbAdapters.includes(AvailableDBAdapters.TYPEORM),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               silent: false,
-              skipFormat: false,
+              skipFormat: true,
               name: 'default',
               type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableDBAdapters.TYPEORM]),

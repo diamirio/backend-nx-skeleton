@@ -9,8 +9,8 @@ import { updateIntegration } from './lib/update-integration'
 import type { Schema } from './main.interface'
 import { AvailableLibraryTypes } from '@interfaces/available.constants'
 import init from '@schematics/init/main'
+import { addEslintConfigRule, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 import type { SchematicRule } from '@webundsoehne/nx-tools'
-import { addEslintConfigRule, eslintJson, formatTreeRule, LINTER_VERSIONS, Logger, runInRule, updateTsConfigPathsRule } from '@webundsoehne/nx-tools'
 
 /**
  * Entrypoint to the schematic.
@@ -22,7 +22,7 @@ export default function (schema: Schema): SchematicRule {
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: eslintJson({ packageScope: options.packageScope }) }),
+      addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: {} }),
 
       options.type === AvailableLibraryTypes.BUILDABLE ? init() : noop(),
 
