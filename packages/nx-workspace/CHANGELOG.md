@@ -1,3 +1,16 @@
+# @webundsoehne-private/nx-workspace [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.8...@webundsoehne-private/nx-workspace@4.1.0) (2022-02-05)
+
+### Features
+
+- better merge, better linting ([82b62c1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/82b62c1b27926313b85f437e9cc8bff62d861167))
+- dont lint whenever there is no prior configuration, fix builders install ([2cac426](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2cac4262018cbad0ae0bb172275fcbe31b981fae)), closes [#21](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/21) [#22](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/22)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.1.0
+- **@webundsoehne/nx-builders:** upgraded to 5.1.0
+- **@webundsoehne/nx-tools:** upgraded to 5.1.0
+
 ## @webundsoehne-private/nx-workspace [4.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.7...@webundsoehne-private/nx-workspace@4.0.8) (2022-02-04)
 
 ### Bug Fixes
