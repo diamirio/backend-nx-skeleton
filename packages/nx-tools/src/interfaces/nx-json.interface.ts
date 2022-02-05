@@ -1,6 +1,6 @@
 import type { NxJsonConfiguration, ProjectConfiguration, WorkspaceConfiguration } from '@nrwl/devkit'
 
-import type { BaseIntegration } from '@integration/integration.interface'
+import type { BaseIntegration, BaseNxJsonIntegration } from '@integration/integration.interface'
 
 /**
  * Nx does not import a type for workspace.json. This fills that gap.
@@ -20,4 +20,6 @@ export interface EnrichedProjectConfiguration<T extends Record<string, any> = Ba
  * nx.json interface expanded before, although nx has changed configuration now, that removes this need
  * we may need in future, so instead of importing NxJson from nx we can still use ours.
  */
-export type EnrichedNxConfiguration = NxJsonConfiguration
+export interface EnrichedNxConfiguration<T extends Record<string, any> = BaseNxJsonIntegration> extends NxJsonConfiguration {
+  integration?: T
+}

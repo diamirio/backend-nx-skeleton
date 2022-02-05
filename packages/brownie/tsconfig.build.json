@@ -6,8 +6,6 @@
     "baseUrl": "src",
     "noUnusedLocals": true,
     "sourceMap": false,
-    "declaration": false,
-    "incremental": false,
-    "tsBuildInfoFile": null
+    "declaration": false
   }
 }

@@ -4,9 +4,9 @@
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
-    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "paths": {
       "@builders/*": ["builders/*"],
+      "@integration/*": ["integration/*"],
       "@interfaces/*": ["interfaces/*"],
       "@schematics/*": ["schematics/*"],
       "@utils/*": ["utils/*"],

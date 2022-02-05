@@ -86,6 +86,8 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       apply(source, [
         ...createApplicationRule(
           {
+            format: false,
+
             multipleTemplates: [
               {
                 templates: Object.entries(output).map(([output, files]) => ({

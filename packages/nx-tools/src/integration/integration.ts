@@ -1,4 +1,4 @@
-import type { Tree } from '@angular-devkit/schematics'
+import type { Rule, Tree } from '@angular-devkit/schematics'
 import type { ProjectConfiguration, WorkspaceConfiguration } from '@nrwl/devkit'
 import {
   addProjectConfiguration,
@@ -7,11 +7,13 @@ import {
   readWorkspaceConfiguration as baseReadWorkspaceConfiguration,
   updateProjectConfiguration
 } from '@nrwl/devkit'
+import { readNxJson } from '@nrwl/devkit/src/generators/project-configuration'
 import { FsTree } from '@nrwl/tao/src/shared/tree'
+import { updateNxJsonInTree } from '@nrwl/workspace'
 
-import type { BaseIntegration } from './integration.interface'
+import type { BaseIntegration, BaseNxJsonIntegration } from './integration.interface'
 import { convertAngularTreeToNxTree } from './nx-integration'
-import type { EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
+import type { EnrichedNxConfiguration, EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 import { Logger } from '@utils'
 import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
 
@@ -38,14 +40,49 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
 }
 
 /**
- * Returns the integration filed of a single project in nx.json.
+ * Returns the integration field of a single project in project.json.
  */
 export function readNxProjectIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree, name: string): EnrichedProjectConfiguration<T>['integration'] {
   return readProjectConfiguration<T>(host, name)?.integration
 }
 
 /**
- * Returns the integration filed of a all the projects in nx.json.
+ * Updates nx integration by saving common values. Since every project now has its own json, nx.json is used for common values, that do not relate to any project.
+ */
+export function updateNxJsonIntegrationRule<T extends Record<PropertyKey, any> = BaseNxJsonIntegration> (host: Tree, integration: T, options?: { arrayOverwrite?: boolean }): Rule {
+  let updated: EnrichedNxConfiguration<T>['integration'] = integration
+  let current: EnrichedNxConfiguration<T>['integration']
+
+  try {
+    current = readNxJsonIntegration<T>(host)
+  } catch (e) {
+    const logger = new Logger()
+
+    logger.fatal('Can not read the nx.json integration for workspace.')
+  }
+
+  if (current) {
+    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(current, integration) : deepMergeWithUniqueMergeArray(current, integration)
+  }
+
+  return updateNxJsonInTree((json) => {
+    const manipulated: EnrichedNxConfiguration<T> = json as EnrichedNxConfiguration<T>
+
+    manipulated.integration = updated
+
+    return manipulated
+  })
+}
+
+/**
+ * Returns the integration field in nx.json.
+ */
+export function readNxJsonIntegration<T extends Record<PropertyKey, any> = BaseNxJsonIntegration> (host: Tree): EnrichedNxConfiguration<T>['integration'] {
+  return (readNxJson(convertAngularTreeToNxTree(host)) as EnrichedNxConfiguration<T>)?.integration ?? ({} as EnrichedNxConfiguration<T>['integration'])
+}
+
+/**
+ * Returns the integration field of a all the projects in nx.json.
  */
 export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = BaseIntegration> (host: Tree): EnrichedProjectConfiguration<T>['integration'][] {
   const projects = readWorkspaceProjects<T>(host)

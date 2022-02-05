@@ -49,6 +49,8 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
   log.debug(JSON.stringify(options, null, 2))
 
   const template: CreateApplicationRuleInterface = {
+    format: !!options.priorConfiguration,
+
     multipleTemplates: [
       {
         condition: options.microservices.length > 0,

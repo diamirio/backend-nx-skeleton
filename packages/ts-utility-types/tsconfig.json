@@ -5,8 +5,6 @@
     "rootDir": "src",
     "baseUrl": "src",
     "strictNullChecks": false,
-    "incremental": true,
-    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "paths": {}
   },
   "include": ["src"],

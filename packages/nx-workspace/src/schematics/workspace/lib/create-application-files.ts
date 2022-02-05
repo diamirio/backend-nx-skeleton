@@ -38,6 +38,7 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
 
   const template: CreateApplicationRuleInterface = {
     format: false,
+
     include: getSchematicFiles(options)
   }
 

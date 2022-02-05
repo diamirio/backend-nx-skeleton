@@ -74,8 +74,10 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
   log.debug(JSON.stringify(options, null, 2))
 
   const template: CreateApplicationRuleInterface = {
-    format: true,
+    format: !!options.priorConfiguration,
+
     include: getSchematicFiles(options),
+
     templates: [
       // server related templates with __
       ...Object.values(AvailableDBAdapters).map((a) => ({

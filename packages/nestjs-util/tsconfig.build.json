@@ -5,8 +5,6 @@
     "rootDir": "src",
     "baseUrl": "src",
     "noUnusedLocals": true,
-    "sourceMap": false,
-    "incremental": false,
-    "tsBuildInfoFile": null
+    "sourceMap": false
   }
 }
