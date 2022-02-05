@@ -51,6 +51,7 @@
 - [CreateApplicationRuleInterface](interfaces/CreateApplicationRuleInterface.md)
 - [CreateApplicationRuleOptions](interfaces/CreateApplicationRuleOptions.md)
 - [DependencyCalculatorPackage](interfaces/DependencyCalculatorPackage.md)
+- [EnrichedNxConfiguration](interfaces/EnrichedNxConfiguration.md)
 - [EnrichedProjectConfiguration](interfaces/EnrichedProjectConfiguration.md)
 - [EnrichedWorkspaceConfiguration](interfaces/EnrichedWorkspaceConfiguration.md)
 - [ExecaArguments](interfaces/ExecaArguments.md)
@@ -83,10 +84,10 @@
 - [AvailableAssetGlob](README.md#availableassetglob)
 - [AvailableLogLevels](README.md#availableloglevels)
 - [BaseIntegration](README.md#baseintegration)
+- [BaseNxJsonIntegration](README.md#basenxjsonintegration)
 - [ConvertToPromptType](README.md#converttoprompttype)
 - [Dependency](README.md#dependency)
 - [DependencyCalculatorOptions](README.md#dependencycalculatoroptions)
-- [EnrichedNxConfiguration](README.md#enrichednxconfiguration)
 - [ExtensionsMap](README.md#extensionsmap)
 - [GeneratedNameCases](README.md#generatednamecases)
 - [ImplicitDependencies](README.md#implicitdependencies)
@@ -187,6 +188,7 @@
 - [pipeProcessToLogger](README.md#pipeprocesstologger)
 - [readBrownieIntegration](README.md#readbrownieintegration)
 - [readBrownieWorkspaceContainers](README.md#readbrownieworkspacecontainers)
+- [readNxJsonIntegration](README.md#readnxjsonintegration)
 - [readNxProjectIntegration](README.md#readnxprojectintegration)
 - [readNxWorkspaceIntegration](README.md#readnxworkspaceintegration)
 - [readProjectConfiguration](README.md#readprojectconfiguration)
@@ -209,6 +211,7 @@
 - [updateBrownieIntegrationRule](README.md#updatebrownieintegrationrule)
 - [updateNxIntegration](README.md#updatenxintegration)
 - [updateNxIntegrationRule](README.md#updatenxintegrationrule)
+- [updateNxJsonIntegrationRule](README.md#updatenxjsonintegrationrule)
 - [updatePackageJsonForProjectRule](README.md#updatepackagejsonforprojectrule)
 - [updateTsConfigPathsRule](README.md#updatetsconfigpathsrule)
 - [useLinkedVersionOfDependencies](README.md#uselinkedversionofdependencies)
@@ -261,6 +264,22 @@ packages/nx-tools/src/integration/integration.interface.ts:8
 
 ---
 
+### BaseNxJsonIntegration
+
+Ƭ **BaseNxJsonIntegration**<`T`\>: `T` extends `null` ? {} : `Partial`<`T`\>
+
+#### Type parameters
+
+| Name | Type                                                      |
+| :--- | :-------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `unknown`\> \| `null` = `null` |
+
+#### Defined in
+
+packages/nx-tools/src/integration/integration.interface.ts:11
+
+---
+
 ### ConvertToPromptType
 
 Ƭ **ConvertToPromptType**<`T`\>: { [name: string]: `any`; `message`: `string` ; `name`: `T` }[]
@@ -296,18 +315,6 @@ packages/nx-tools/src/interfaces/versions.interface.ts:1
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/dependency-calculator.interface.ts:3
-
----
-
-### EnrichedNxConfiguration
-
-Ƭ **EnrichedNxConfiguration**: `NxJsonConfiguration`
-
-nx.json interface expanded before, although nx has changed configuration now, that removes this need we may need in future, so instead of importing NxJson from nx we can still use ours.
-
-#### Defined in
-
-packages/nx-tools/src/interfaces/nx-json.interface.ts:23
 
 ---
 
@@ -1259,7 +1266,7 @@ Creates a file backup in tree.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:297
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:299
 
 ---
 
@@ -1289,7 +1296,7 @@ Creates a new project in the workspace.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:91
+packages/nx-tools/src/integration/integration.ts:128
 
 ---
 
@@ -1365,7 +1372,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:199
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:201
 
 ---
 
@@ -1837,7 +1844,7 @@ Merges files the common part.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:275
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:277
 
 ---
 
@@ -2308,11 +2315,39 @@ packages/nx-tools/src/integration/brownie.ts:29
 
 ---
 
+### readNxJsonIntegration
+
+▸ **readNxJsonIntegration**<`T`\>(`host`): [`EnrichedNxConfiguration`](interfaces/EnrichedNxConfiguration.md)<`T`\>[``"integration"``]
+
+Returns the integration field in nx.json.
+
+#### Type parameters
+
+| Name | Type                                         |
+| :--- | :------------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = {} |
+
+#### Parameters
+
+| Name   | Type   |
+| :----- | :----- |
+| `host` | `Tree` |
+
+#### Returns
+
+[`EnrichedNxConfiguration`](interfaces/EnrichedNxConfiguration.md)<`T`\>[``"integration"``]
+
+#### Defined in
+
+packages/nx-tools/src/integration/integration.ts:80
+
+---
+
 ### readNxProjectIntegration
 
 ▸ **readNxProjectIntegration**<`T`\>(`host`, `name`): [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`T`\>[``"integration"``]
 
-Returns the integration filed of a single project in nx.json.
+Returns the integration field of a single project in project.json.
 
 #### Type parameters
 
@@ -2333,7 +2368,7 @@ Returns the integration filed of a single project in nx.json.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:43
+packages/nx-tools/src/integration/integration.ts:45
 
 ---
 
@@ -2341,7 +2376,7 @@ packages/nx-tools/src/integration/integration.ts:43
 
 ▸ **readNxWorkspaceIntegration**<`T`\>(`host`): [`EnrichedProjectConfiguration`](interfaces/EnrichedProjectConfiguration.md)<`T`\>[``"integration"``][]
 
-Returns the integration filed of a all the projects in nx.json.
+Returns the integration field of a all the projects in nx.json.
 
 #### Type parameters
 
@@ -2361,7 +2396,7 @@ Returns the integration filed of a all the projects in nx.json.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:50
+packages/nx-tools/src/integration/integration.ts:87
 
 ---
 
@@ -2390,7 +2425,7 @@ Returns the workspace.json configuration for a given application.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:84
+packages/nx-tools/src/integration/integration.ts:121
 
 ---
 
@@ -2412,7 +2447,7 @@ Returns the workspace.json with extended typings.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:69
+packages/nx-tools/src/integration/integration.ts:106
 
 ---
 
@@ -2460,7 +2495,7 @@ Reads all the workspace projects.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:76
+packages/nx-tools/src/integration/integration.ts:113
 
 ---
 
@@ -2704,7 +2739,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:227
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:229
 
 ---
 
@@ -2778,7 +2813,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:171
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:173
 
 ---
 
@@ -2833,7 +2868,7 @@ Updates nx integration by saving values like prior configuration or so for havin
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:21
+packages/nx-tools/src/integration/integration.ts:23
 
 ---
 
@@ -2863,6 +2898,37 @@ packages/nx-tools/src/integration/integration.ts:21
 #### Defined in
 
 packages/nx-tools/src/rules/integration.rule.ts:18
+
+---
+
+### updateNxJsonIntegrationRule
+
+▸ **updateNxJsonIntegrationRule**<`T`\>(`host`, `integration`, `options?`): `Rule`
+
+Updates nx integration by saving common values. Since every project now has its own json, nx.json is used for common values, that do not relate to any project.
+
+#### Type parameters
+
+| Name | Type                                         |
+| :--- | :------------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> = {} |
+
+#### Parameters
+
+| Name                      | Type      |
+| :------------------------ | :-------- |
+| `host`                    | `Tree`    |
+| `integration`             | `T`       |
+| `options?`                | `Object`  |
+| `options.arrayOverwrite?` | `boolean` |
+
+#### Returns
+
+`Rule`
+
+#### Defined in
+
+packages/nx-tools/src/integration/integration.ts:52
 
 ---
 

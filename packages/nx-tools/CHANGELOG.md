@@ -1,3 +1,14 @@
+# @webundsoehne/nx-tools [5.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.7...@webundsoehne/nx-tools@5.1.0) (2022-02-05)
+
+### Features
+
+- better merge, better linting ([82b62c1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/82b62c1b27926313b85f437e9cc8bff62d861167))
+- dont lint whenever there is no prior configuration, fix builders install ([2cac426](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2cac4262018cbad0ae0bb172275fcbe31b981fae)), closes [#21](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/21) [#22](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/22)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.1.0
+
 ## @webundsoehne/nx-tools [5.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.0.6...@webundsoehne/nx-tools@5.0.7) (2022-02-04)
 
 ### Bug Fixes
