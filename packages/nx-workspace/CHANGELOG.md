@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.0...@webundsoehne-private/nx-workspace@4.1.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* update wrong dependency version ([fc1c9ad](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fc1c9adaa572f2a1cb358ebe6582efff3ceae222))
+
 # @webundsoehne-private/nx-workspace [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.8...@webundsoehne-private/nx-workspace@4.1.0) (2022-02-05)
 
 ### Features
