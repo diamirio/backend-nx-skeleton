@@ -12,7 +12,7 @@ export const VERSIONS: Versions = {
         '@angular-devkit/architect': '^0.1302.0',
         '@angular-devkit/core': '^13.2.0',
         '@angular-devkit/schematics': '^13.2.0',
-        '@webundsoehne-private/nx-workspace': '^3.0.0',
+        '@webundsoehne-private/nx-workspace': '^4.0.0',
         '@webundsoehne/nx-tools': '^5.0.5',
         typescript: '^4.5.5',
         '@types/node': '^16',
