@@ -1,16 +1,20 @@
-## @webundsoehne-private/nx-workspace [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.1...@webundsoehne-private/nx-workspace@4.1.2) (2022-02-12)
-
+## @webundsoehne-private/nx-workspace [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.2...@webundsoehne-private/nx-workspace@4.1.3) (2022-02-12)
 
 ### Bug Fixes
 
-* update gitignore template to not ignore docker envs ([1b28692](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1b286922ade1a073d0884c0b6bfdb7b228807b74))
+- problem with import plugin to use the nx tsconfig ([3a5b4c5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3a5b4c5e897e71f3628070a36a770fc819a6ed00))
+
+## @webundsoehne-private/nx-workspace [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.1...@webundsoehne-private/nx-workspace@4.1.2) (2022-02-12)
+
+### Bug Fixes
+
+- update gitignore template to not ignore docker envs ([1b28692](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1b286922ade1a073d0884c0b6bfdb7b228807b74))
 
 ## @webundsoehne-private/nx-workspace [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.0...@webundsoehne-private/nx-workspace@4.1.1) (2022-02-07)
 
-
 ### Bug Fixes
 
-* update wrong dependency version ([fc1c9ad](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fc1c9adaa572f2a1cb358ebe6582efff3ceae222))
+- update wrong dependency version ([fc1c9ad](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fc1c9adaa572f2a1cb358ebe6582efff3ceae222))
 
 # @webundsoehne-private/nx-workspace [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.8...@webundsoehne-private/nx-workspace@4.1.0) (2022-02-05)
 
