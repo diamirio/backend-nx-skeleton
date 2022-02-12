@@ -4,6 +4,6 @@ module.exports = {
   extends: [ '@webundsoehne/eslint-config/typescript-dynamic' ],
   rules: {},
   overrides: [
-    ...require('@webundsoehne/eslint-config/utils').generateImportGroupsWithOverride({ tsconfigDir: __dirname })
+    ...require('@webundsoehne/eslint-config/utils').generateImportGroupsWithOverride({ tsconfigDir: __dirname, tsconfig: 'tsconfig.base.json' })
   ]
 }
