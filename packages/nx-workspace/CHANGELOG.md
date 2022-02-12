@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.1...@webundsoehne-private/nx-workspace@4.1.2) (2022-02-12)
+
+
+### Bug Fixes
+
+* update gitignore template to not ignore docker envs ([1b28692](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1b286922ade1a073d0884c0b6bfdb7b228807b74))
+
 ## @webundsoehne-private/nx-workspace [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.0...@webundsoehne-private/nx-workspace@4.1.1) (2022-02-07)
 
 
