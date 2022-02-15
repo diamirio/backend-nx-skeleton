@@ -10,7 +10,7 @@
     "clean": "lerna clean -y && rimraf node_modules yarn.lock",
     "exec": "lerna exec --stream",
     "command": "lerna run --stream",
-    "build": "yarn run command build --concurrency 1 --include-dependencies",
+    "build": "yarn run command build --include-dependencies",
     "link-packages": "lerna link --force-local",
     "lint": "yarn command --concurrency 1 --no-bail lint",
     "lint:check": "yarn command --parallel --no-bail lint:check",

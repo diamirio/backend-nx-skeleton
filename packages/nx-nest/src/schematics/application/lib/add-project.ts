@@ -99,7 +99,7 @@ export function addProject (options: NormalizedSchema): Rule {
           watch: false,
           command: 'jest --config ./test/jest.config.js --passWithNoTests --detectOpenHandles',
           environment: {
-            DEBUG_PORT: 9229
+            DEBUG_PORT: '9229'
           }
         },
         configurations: {
