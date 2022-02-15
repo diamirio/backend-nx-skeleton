@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [5.2.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.1.0...@webundsoehne/nestjs-util@5.2.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
 # @webundsoehne/nestjs-util [5.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.0.2...@webundsoehne/nestjs-util@5.1.0) (2022-02-05)
 
 ### Features
