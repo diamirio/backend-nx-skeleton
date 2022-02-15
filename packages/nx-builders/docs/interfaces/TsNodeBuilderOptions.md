@@ -29,9 +29,9 @@ this will spawn the process from the current working directory so most of the pl
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:10
+builders/ts-node-dev/main.interface.ts:12
 
-___
+---
 
 ### debounce
 
@@ -41,9 +41,9 @@ ts-node-dev debounce in ms
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:22
+builders/ts-node-dev/main.interface.ts:24
 
-___
+---
 
 ### debug
 
@@ -53,21 +53,21 @@ node debug port enable
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:28
+builders/ts-node-dev/main.interface.ts:30
 
-___
+---
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 environment variables
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:34
+builders/ts-node-dev/main.interface.ts:36
 
-___
+---
 
 ### inspect
 
@@ -77,9 +77,9 @@ inspect port that should be opened when debugging
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:31
+builders/ts-node-dev/main.interface.ts:33
 
-___
+---
 
 ### interval
 
@@ -89,9 +89,9 @@ ts-node-dev interval in ms
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:25
+builders/ts-node-dev/main.interface.ts:27
 
-___
+---
 
 ### main
 
@@ -101,17 +101,16 @@ entrypoint for the application which ts-node will run
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:13
+builders/ts-node-dev/main.interface.ts:15
 
-___
+---
 
 ### tsConfig
 
 • `Optional` **tsConfig**: `string`
 
-tsconfig file that is used
-will default to tsconfig.json
+tsconfig file that is used will default to tsconfig.json
 
 #### Defined in
 
-builders/ts-node-dev/main.interface.ts:19
+builders/ts-node-dev/main.interface.ts:21

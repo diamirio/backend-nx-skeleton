@@ -27,9 +27,9 @@ The target to build before starting the process
 
 #### Defined in
 
-builders/execute/main.interface.ts:12
+builders/execute/main.interface.ts:14
 
-___
+---
 
 ### cwd
 
@@ -39,21 +39,21 @@ Run the command in a working directory
 
 #### Defined in
 
-builders/execute/main.interface.ts:8
+builders/execute/main.interface.ts:10
 
-___
+---
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 Inject env variables to the run after build
 
 #### Defined in
 
-builders/execute/main.interface.ts:36
+builders/execute/main.interface.ts:38
 
-___
+---
 
 ### inject
 
@@ -63,9 +63,9 @@ inject schematic options to the target
 
 #### Defined in
 
-builders/execute/main.interface.ts:28
+builders/execute/main.interface.ts:30
 
-___
+---
 
 ### keepAlive
 
@@ -75,9 +75,9 @@ keep alive the process
 
 #### Defined in
 
-builders/execute/main.interface.ts:32
+builders/execute/main.interface.ts:34
 
-___
+---
 
 ### runAfter
 
@@ -87,9 +87,9 @@ Run after the tasks has been finished building
 
 #### Defined in
 
-builders/execute/main.interface.ts:16
+builders/execute/main.interface.ts:18
 
-___
+---
 
 ### waitUntilTargets
 
@@ -99,9 +99,9 @@ Wait until targets to finish before executing
 
 #### Defined in
 
-builders/execute/main.interface.ts:20
+builders/execute/main.interface.ts:22
 
-___
+---
 
 ### watch
 
@@ -111,4 +111,4 @@ Watch parameter for passing in to the target
 
 #### Defined in
 
-builders/execute/main.interface.ts:24
+builders/execute/main.interface.ts:26
