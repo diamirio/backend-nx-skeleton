@@ -8,10 +8,6 @@
 
 - [AuthGuard](../classes/graphql.AuthGuard.md)
 
-### Interfaces
-
-- [GraphQLErrorExtensions](../interfaces/graphql.GraphQLErrorExtensions.md)
-
 ### Functions
 
 - [GetToken](graphql.md#gettoken)
@@ -25,15 +21,14 @@
 
 ▸ `Const` **GetToken**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request.
-This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetToken,Token}
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name             | Type                                                                          |
+| :--------------- | :---------------------------------------------------------------------------- |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -42,23 +37,22 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/token-graphql.decorator.ts:12
+connect/decorators/token-graphql.decorator.ts:12
 
-___
+---
 
 ### GetUser
 
 ▸ `Const` **GetUser**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable.
-This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetUser,User}
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name             | Type                                                                                      |
+| :--------------- | :---------------------------------------------------------------------------------------- |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -67,16 +61,15 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/user-graphql.decorator.ts:12
+connect/decorators/user-graphql.decorator.ts:12
 
-___
+---
 
 ### Token
 
 ▸ `Const` **Token**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request.
-This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetToken,Token}
 
@@ -84,8 +77,8 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name             | Type                                                                          |
+| :--------------- | :---------------------------------------------------------------------------- |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -94,16 +87,15 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/token-graphql.decorator.ts:24
+connect/decorators/token-graphql.decorator.ts:24
 
-___
+---
 
 ### User
 
 ▸ `Const` **User**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable.
-This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
+Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
 **`alias`** {GetUser,User}
 
@@ -111,8 +103,8 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name             | Type                                                                                      |
+| :--------------- | :---------------------------------------------------------------------------------------- |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -121,4 +113,4 @@ This only works for GraphQL applications, please check the alternative one if yo
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/decorators/user-graphql.decorator.ts:24
+connect/decorators/user-graphql.decorator.ts:24

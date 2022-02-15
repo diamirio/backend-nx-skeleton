@@ -4,8 +4,7 @@
 
 [index](../modules/index.md).KeycloakConnectModule
 
-KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client.
-This client is usually a private client with the token authentication flow in Keycloak.
+KeycloakConnectModule provides the Keycloak API to validate user authentication through a backend client. This client is usually a private client with the token authentication flow in Keycloak.
 
 ## Table of contents
 
@@ -31,8 +30,8 @@ This client is usually a private client with the token authentication flow in Ke
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                                                      |
+| :-------- | :------------------------------------------------------------------------ |
 | `options` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
 
 #### Returns
@@ -41,4 +40,4 @@ This client is usually a private client with the token authentication flow in Ke
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/connect.module.ts:16
+connect/connect.module.ts:16

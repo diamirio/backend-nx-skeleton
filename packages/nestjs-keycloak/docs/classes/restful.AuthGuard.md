@@ -4,8 +4,7 @@
 
 [restful](../modules/restful.md).AuthGuard
 
-Application AuthGuard for Keycloak applications.
-This only works for REST APIs.
+Application AuthGuard for Keycloak applications. This only works for REST APIs.
 
 ## Hierarchy
 
@@ -37,11 +36,11 @@ This only works for REST APIs.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keycloak` | `Keycloak` |
+| Name              | Type                                                                      |
+| :---------------- | :------------------------------------------------------------------------ |
+| `keycloak`        | `Keycloak`                                                                |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector` | `Reflector` |
+| `reflector`       | `Reflector`                                                               |
 
 #### Inherited from
 
@@ -49,7 +48,7 @@ This only works for REST APIs.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
+connect/guards/auth-base.guard.ts:26
 
 ## Properties
 
@@ -69,8 +68,8 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -83,9 +82,9 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:32
+connect/guards/auth-base.guard.ts:32
 
-___
+---
 
 ### getRequest
 
@@ -94,13 +93,13 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
+| :-- | :-- |
 | `Request` | extends [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -113,9 +112,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:13
+connect/guards/auth-restful.guard.ts:13
 
-___
+---
 
 ### validateRequirements
 
@@ -125,10 +124,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `values` | `string`[] | `undefined` |
-| `required` | `string`[] | `[]` |
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
 
 #### Returns
 
@@ -140,4 +139,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:105
+connect/guards/auth-base.guard.ts:105
