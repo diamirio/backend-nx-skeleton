@@ -1,3 +1,18 @@
+# @webundsoehne-private/nx-nest [4.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.1.0...@webundsoehne-private/nx-nest@4.2.0-beta.1) (2022-02-15)
+
+### Bug Fixes
+
+- update environment variables to always be string ([110cb57](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/110cb574aeab31576c347ebe55cbaea73282664c))
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
 # @webundsoehne-private/nx-nest [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.0.8...@webundsoehne-private/nx-nest@4.1.0) (2022-02-05)
 
 ### Features
