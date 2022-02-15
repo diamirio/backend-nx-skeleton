@@ -49,12 +49,12 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/gateway": "^0.47.0",
+    "@apollo/gateway": "^0.48.1",
     "@nestjs/graphql": "^9.1.2",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.4",
-    "apollo-server-fastify": "^3.6.2",
+    "apollo-server-fastify": "^3.6.3",
     "class-validator": "^0.13.2",
     "graphql": "^15",
     "graphql-request": "^3.7.0",

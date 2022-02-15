@@ -83,7 +83,9 @@ export function addProject (options: NormalizedSchema): Rule {
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
             interactive: true,
-            environment: {}
+            environment: {
+              DEBUG_PORT: 9229
+            }
           }
         }
       }

@@ -1,3 +1,5 @@
+import type { EnvironmentVariables } from '@webundsoehne/nx-tools'
+
 /**
  * Options for execute
  */
@@ -33,7 +35,7 @@ export interface ExecuteBuilderOptions {
   /**
    * Inject env variables to the run after build
    */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }
 
 export type NormalizedExecuteBuilderOptions = ExecuteBuilderOptions

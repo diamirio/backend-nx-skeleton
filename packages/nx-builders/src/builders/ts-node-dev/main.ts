@@ -4,8 +4,8 @@ import delay from 'delay'
 import execa from 'execa'
 
 import type { TsNodeBuilderOptions } from './main.interface'
-import type { ExecaArguments } from '@webundsoehne/nx-tools'
-import { BaseExecutor, checkPathsExists, getNodeBinaryPath, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
+import { BaseExecutor, checkPathsExists, getNodeBinaryPathExtensions, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
+import type { ExecaArguments, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -13,9 +13,13 @@ try {
 } catch (e) {}
 
 class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNodeDev: string }> {
-  async init (): Promise<void> {
+  pathExtensions: NodeBinaryPathExtensions
+
+  init (): void {
+    this.pathExtensions = getNodeBinaryPathExtensions()
+
     this.paths = {
-      tsNodeDev: getNodeBinaryPath('ts-node-dev')
+      tsNodeDev: 'ts-node-dev'
     }
   }
 
@@ -24,7 +28,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
       // stop all manager tasks
       await this.manager.stop()
 
-      checkPathsExists(this.paths)
+      checkPathsExists(this.paths, this.pathExtensions.path)
     } catch (e) {
       this.logger.fatal(e.message)
       this.logger.debug(e.stack)
@@ -33,7 +37,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     }
 
     try {
-      const instance = this.manager.addPersistent(execa.node(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
+      const instance = this.manager.addPersistent(execa(this.paths.tsNodeDev, this.options.args, this.options.spawnOptions))
 
       await pipeProcessToLogger(this.context, instance, { start: true })
     } catch (error) {
@@ -87,7 +91,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     const spawnOptions: ExecaArguments['spawnOptions'] = {
       env: {
         NODE_ENV: 'develop',
-        ...environment,
+        ...environment ?? {},
         ...process.env
       }
     }
@@ -95,6 +99,13 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     if (cwd) {
       spawnOptions.cwd = cwd
     }
+
+    if (this.pathExtensions?.key) {
+      spawnOptions.env[this.pathExtensions.key] = this.pathExtensions.path
+    }
+
+    this.logger.debug('Arguments: %o', args)
+    this.logger.debug('Spawn options: %o', spawnOptions)
 
     return { args, spawnOptions }
   }

@@ -1,4 +1,4 @@
-import type { ExecaArguments } from '@webundsoehne/nx-tools'
+import type { EnvironmentVariables, ExecaArguments } from '@webundsoehne/nx-tools'
 
 /**
  * Options for run builder
@@ -30,7 +30,7 @@ export interface RunBuilderOptions {
   watch?: boolean
 
   /** environment variables */
-  environment?: Record<string, string | number>
+  environment?: EnvironmentVariables
 }
 
 export type NormalizedRunBuilderOptions = ExecaArguments

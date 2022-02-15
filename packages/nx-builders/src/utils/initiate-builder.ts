@@ -17,10 +17,12 @@ export function initiateBuilderDependencies (options: Schema['items']): Rule {
     const dependencies = await calculateDependencies(options)
 
     if (options?.length > 0) {
-      log.debug('Initiating nx-builders builder dependencies: %o', dependencies)
+      log.info('Initiating nx-builders builder dependencies: %o', dependencies)
 
       return chain([addDependenciesToPackageJsonRule(dependencies), updateNxBuildersWorkspaceIntegrationRule(host, { available: options }), addNxInstallRule()])
     } else {
+      log.debug('nx-builders already has been initiated.')
+
       return chain([])
     }
   }
