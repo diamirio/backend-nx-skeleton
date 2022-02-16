@@ -23,6 +23,9 @@ export interface RunBuilderOptions {
   /** run with node */
   node?: boolean
 
+  /** strictly execute this with node eventhough it can be a node binary as well */
+  executeWithNode?: boolean
+
   /** pass in node options when running as node */
   nodeOptions?: string
 

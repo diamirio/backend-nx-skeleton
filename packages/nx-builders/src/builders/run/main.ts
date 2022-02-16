@@ -3,11 +3,11 @@ import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
 import type { ExecaChildProcess } from 'execa'
 import execa from 'execa'
-import fs from 'fs'
 import { pathExistsSync } from 'fs-extra'
 import { join } from 'path'
 
 import type { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
+import type { ExecaArguments, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 import {
   BaseExecutor,
   checkPathsExists,
@@ -15,9 +15,9 @@ import {
   getNodeBinaryPathExtensions,
   pipeProcessToLogger,
   runExecutor,
-  setNodeOptionsEnvironmentVariables
+  setNodeOptionsEnvironmentVariables,
+  getNodeBinaryPath
 } from '@webundsoehne/nx-tools'
-import type { ExecaArguments, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -41,7 +41,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
 
       let instance: ExecaChildProcess
 
-      if (this.builderOptions?.node && pathExistsSync(this.paths.command)) {
+      if (this.builderOptions.executeWithNode) {
         // node script inside the repo should be run with node
         instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
       } else {
@@ -92,7 +92,10 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
       ...options.environment
     }
 
-    const ctx = { ...options, environment: env }
+    const ctx: RunBuilderOptions = {
+      ...options,
+      environment: env
+    }
 
     // interpolate with jinja
     options.command = jinja.renderString(options.command, ctx)
@@ -110,18 +113,29 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     const command = unparsedCommand.shift()
     const args = [...unparsedCommand, ...extendedArgs].filter(Boolean)
 
-    if (options.node && fs.existsSync(join(options.cwd, command))) {
+    if (options.node && pathExistsSync(join(options.cwd, command))) {
       // the case where file name is given and it exists
       this.logger.debug(`Command marked as node script: ${command}`)
 
+      options.executeWithNode = true
+
       this.paths.command = command
     } else if (options.node) {
-      // the case where a node binary like webpack or jest is given
-      this.logger.debug(`Command marked as node binary: ${command}`)
+      if (options.executeWithNode) {
+        // the case where a node binary but should be executed with node
+        this.logger.debug(`Command marked as node binary but will be executed with node: ${command}`)
 
-      this.paths.command = command
+        this.paths.command = getNodeBinaryPath(command)
 
-      checkPathsExists(this.paths, this.pathExtensions?.path)
+        checkPathsExists(this.paths)
+      } else {
+        // the case where a node binary like webpack or jest is given
+        this.logger.debug(`Command marked as node binary: ${command}`)
+
+        this.paths.command = command
+
+        checkPathsExists(this.paths, this.pathExtensions?.path)
+      }
     } else {
       this.logger.debug(`Command marked as shell command: ${command}`)
       // the case where it will run any other shell command
@@ -145,6 +159,8 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     if (this.pathExtensions?.key) {
       spawnOptions.env[this.pathExtensions.key] = this.pathExtensions.path
     }
+
+    this.builderOptions = ctx
 
     this.logger.debug('Arguments: %o', args)
     this.logger.debug('Spawn options: %o', spawnOptions)
