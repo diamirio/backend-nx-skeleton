@@ -84,7 +84,7 @@ export const VERSIONS: Versions = {
     deps: {
       '@nestjs/typeorm': '^8.0.3',
       typeorm: { version: '^0.2.41', implicit: true },
-      'typeorm-seeding': { version: '^1.6.1', implicit: true }
+      '@jorgebodega/typeorm-seeding': { version: '^3.2.0', implicit: true }
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
