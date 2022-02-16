@@ -12,6 +12,7 @@ Options for run builder
 - [command](RunBuilderOptions.md#command)
 - [cwd](RunBuilderOptions.md#cwd)
 - [environment](RunBuilderOptions.md#environment)
+- [executeWithNode](RunBuilderOptions.md#executewithnode)
 - [interactive](RunBuilderOptions.md#interactive)
 - [node](RunBuilderOptions.md#node)
 - [nodeOptions](RunBuilderOptions.md#nodeoptions)
@@ -65,7 +66,19 @@ environment variables
 
 #### Defined in
 
-builders/run/main.interface.ts:33
+builders/run/main.interface.ts:36
+
+---
+
+### executeWithNode
+
+• `Optional` **executeWithNode**: `boolean`
+
+strictly execute this with node eventhough it can be a node binary as well
+
+#### Defined in
+
+builders/run/main.interface.ts:27
 
 ---
 
@@ -101,7 +114,7 @@ pass in node options when running as node
 
 #### Defined in
 
-builders/run/main.interface.ts:27
+builders/run/main.interface.ts:30
 
 ---
 
@@ -113,4 +126,4 @@ keep alive the process if it crashes
 
 #### Defined in
 
-builders/run/main.interface.ts:30
+builders/run/main.interface.ts:33
