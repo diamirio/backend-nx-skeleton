@@ -1,8 +1,10 @@
 import type { BuilderOutput } from '@angular-devkit/architect'
 import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
+import type { ExecaChildProcess } from 'execa'
 import execa from 'execa'
 import fs from 'fs'
+import { pathExistsSync } from 'fs-extra'
 import { join } from 'path'
 
 import type { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
@@ -37,7 +39,15 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
       // stop all manager tasks
       await this.manager.stop()
 
-      const instance = this.manager.addPersistent(execa(this.paths.command, this.options.args, this.options.spawnOptions))
+      let instance: ExecaChildProcess
+
+      if (this.builderOptions?.node && pathExistsSync(this.paths.command)) {
+        // node script inside the repo should be run with node
+        instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
+      } else {
+        // any kind of global binary or node binary should be run with a child process
+        instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
+      }
 
       if (this.builderOptions.interactive) {
         this.logger.debug('This command is an interactive one, will hijack stdio.')
