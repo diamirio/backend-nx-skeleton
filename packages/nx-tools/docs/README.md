@@ -164,6 +164,7 @@
 - [getFilesInTree](README.md#getfilesintree)
 - [getInitialFromPriorConfiguration](README.md#getinitialfrompriorconfiguration)
 - [getJinjaDefaults](README.md#getjinjadefaults)
+- [getNodeBinaryPath](README.md#getnodebinarypath)
 - [getNodeBinaryPathExtensions](README.md#getnodebinarypathextensions)
 - [isBuildContext](README.md#isbuildcontext)
 - [isDevelopmentMode](README.md#isdevelopmentmode)
@@ -1664,6 +1665,30 @@ packages/nx-tools/src/templates/jinja-defaults.ts:7
 
 ---
 
+### getNodeBinaryPath
+
+▸ **getNodeBinaryPath**(`bin`): `string`
+
+Returns the binary path for a given cli in node_modules.
+
+**`export`**
+
+#### Parameters
+
+| Name  | Type     |
+| :---- | :------- |
+| `bin` | `string` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+packages/nx-tools/src/utils/file-system/node-bin.ts:20
+
+---
+
 ### getNodeBinaryPathExtensions
 
 ▸ **getNodeBinaryPathExtensions**(`options?`): [`NodeBinaryPathExtensions`](interfaces/NodeBinaryPathExtensions.md) \| `undefined`
@@ -1680,7 +1705,7 @@ packages/nx-tools/src/templates/jinja-defaults.ts:7
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/node-bin.ts:10
+packages/nx-tools/src/utils/file-system/node-bin.ts:28
 
 ---
 
@@ -2784,7 +2809,7 @@ packages/nx-tools/src/utils/schematics/is-development-mode.ts:10
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/node-bin.ts:18
+packages/nx-tools/src/utils/file-system/node-bin.ts:36
 
 ---
 

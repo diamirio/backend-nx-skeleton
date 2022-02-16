@@ -1,3 +1,9 @@
+# @webundsoehne/nx-tools [5.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.0-beta.1...@webundsoehne/nx-tools@5.2.0-beta.2) (2022-02-16)
+
+### Bug Fixes
+
+- add force node flag for builder for oebb ([23a97ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/23a97ce8b1de40d3dd98f05ffbd8ed88282d7327))
+
 # @webundsoehne/nx-tools [5.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.1.0...@webundsoehne/nx-tools@5.2.0-beta.1) (2022-02-15)
 
 ### Features
