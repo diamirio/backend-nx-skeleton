@@ -1,3 +1,9 @@
+# @webundsoehne-private/nx-nest [4.2.0-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.0-beta.3...@webundsoehne-private/nx-nest@4.2.0-beta.4) (2022-02-16)
+
+### Bug Fixes
+
+- swap typeorm-seeding for the supported version ([2a2edaa](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2a2edaa3e649afbf1c51788bcdf2f24857ed41e5))
+
 # @webundsoehne-private/nx-nest [4.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.0-beta.2...@webundsoehne-private/nx-nest@4.2.0-beta.3) (2022-02-16)
 
 ### Dependencies
