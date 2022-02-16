@@ -1,3 +1,9 @@
+# @webundsoehne-private/nx-workspace [4.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.1...@webundsoehne-private/nx-workspace@4.2.0-beta.2) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.2
+
 # @webundsoehne-private/nx-workspace [4.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.3...@webundsoehne-private/nx-workspace@4.2.0-beta.1) (2022-02-15)
 
 ### Bug Fixes
