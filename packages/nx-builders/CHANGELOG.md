@@ -1,3 +1,9 @@
+# @webundsoehne/nx-builders [5.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.1...@webundsoehne/nx-builders@5.2.0-beta.2) (2022-02-16)
+
+### Bug Fixes
+
+- support node scripts again ([480dbe5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/480dbe594aab5edf62bc39633e7a4b505dc635f3))
+
 # @webundsoehne/nx-builders [5.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.1.0...@webundsoehne/nx-builders@5.2.0-beta.1) (2022-02-15)
 
 ### Features
