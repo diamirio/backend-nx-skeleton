@@ -1,3 +1,43 @@
+# @webundsoehne/nx-builders [5.2.0-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.3...@webundsoehne/nx-builders@5.2.0-beta.4) (2022-02-17)
+
+### Bug Fixes
+
+- add some extra debug messages ([93dfdbe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/93dfdbe77c6facf801cd9eeec78039315d9b67dd))
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.3
+
+# @webundsoehne/nx-builders [5.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.2...@webundsoehne/nx-builders@5.2.0-beta.3) (2022-02-16)
+
+### Bug Fixes
+
+- add force node flag for builder for oebb ([23a97ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/23a97ce8b1de40d3dd98f05ffbd8ed88282d7327))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne/nx-builders [5.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.1...@webundsoehne/nx-builders@5.2.0-beta.2) (2022-02-16)
+
+### Bug Fixes
+
+- support node scripts again ([480dbe5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/480dbe594aab5edf62bc39633e7a4b505dc635f3))
+
+# @webundsoehne/nx-builders [5.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.1.0...@webundsoehne/nx-builders@5.2.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
 # @webundsoehne/nx-builders [5.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.7...@webundsoehne/nx-builders@5.1.0) (2022-02-05)
 
 ### Features

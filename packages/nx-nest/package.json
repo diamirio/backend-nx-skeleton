@@ -35,15 +35,15 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^13.2.2",
-    "@angular-devkit/core": "^13.2.2",
-    "@nestjs/schematics": "^8.0.5",
+    "@angular-devkit/core": "^13.2.3",
+    "@angular-devkit/schematics": "^13.2.3",
+    "@nestjs/schematics": "^8.0.6",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
-    "listr2": "^4.0.1"
+    "listr2": "^4.0.4"
   },
   "engines": {
     "node": ">= 16"

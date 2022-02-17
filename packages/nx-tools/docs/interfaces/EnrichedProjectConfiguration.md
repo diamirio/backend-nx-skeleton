@@ -6,9 +6,9 @@ Per application settings in workspace.json
 
 ## Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
+| Name | Type                                                                                   |
+| :--- | :------------------------------------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
 
 ## Hierarchy
 
@@ -54,7 +54,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { [generatorName: string]: `any`;  }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
 
 #### Inherited from
 
@@ -64,7 +64,7 @@ ProjectConfiguration.generators
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:74
 
-___
+---
 
 ### implicitDependencies
 
@@ -80,7 +80,7 @@ ProjectConfiguration.implicitDependencies
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:82
 
-___
+---
 
 ### integration
 
@@ -90,7 +90,7 @@ ___
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:16
 
-___
+---
 
 ### name
 
@@ -106,7 +106,7 @@ ProjectConfiguration.name
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:38
 
-___
+---
 
 ### projectType
 
@@ -122,7 +122,7 @@ ProjectConfiguration.projectType
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:56
 
-___
+---
 
 ### root
 
@@ -138,7 +138,7 @@ ProjectConfiguration.root
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:48
 
-___
+---
 
 ### sourceRoot
 
@@ -154,7 +154,7 @@ ProjectConfiguration.sourceRoot
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:52
 
-___
+---
 
 ### tags
 
@@ -170,7 +170,7 @@ ProjectConfiguration.tags
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:86
 
-___
+---
 
 ### targets
 

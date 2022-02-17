@@ -99,7 +99,7 @@ export function addProject (options: NormalizedSchema): Rule {
           watch: false,
           command: 'jest --config ./test/jest.config.js --passWithNoTests --detectOpenHandles',
           environment: {
-            DEBUG_PORT: 9229
+            DEBUG_PORT: '9229'
           }
         },
         configurations: {
@@ -185,6 +185,7 @@ export function addProject (options: NormalizedSchema): Rule {
           command: `typeorm-seeding --configName=${join(configurationBasePath, 'orm.config.ts')} seed`,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
+          executeWithNode: true,
           watch: false,
           environment: {}
         }

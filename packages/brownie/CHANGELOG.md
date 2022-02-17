@@ -1,3 +1,25 @@
+# @webundsoehne/brownie [4.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.2.0-beta.2...@webundsoehne/brownie@4.2.0-beta.3) (2022-02-17)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.3
+
+# @webundsoehne/brownie [4.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.2.0-beta.1...@webundsoehne/brownie@4.2.0-beta.2) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne/brownie [4.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.1.0...@webundsoehne/brownie@4.2.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
 # @webundsoehne/brownie [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.0.7...@webundsoehne/brownie@4.1.0) (2022-02-05)
 
 ### Features

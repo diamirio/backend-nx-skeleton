@@ -6,9 +6,9 @@ Nx does not import a type for workspace.json. This fills that gap.
 
 ## Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
+| Name | Type                                                                                   |
+| :--- | :------------------------------------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
 
 ## Hierarchy
 
@@ -50,7 +50,7 @@ WorkspaceConfiguration.affected
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:38
 
-___
+---
 
 ### cli
 
@@ -60,10 +60,10 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `defaultCollection?` | `string` |
-| `packageManager?` | `PackageManager` |
+| Name                 | Type             |
+| :------------------- | :--------------- |
+| `defaultCollection?` | `string`         |
+| `packageManager?`    | `PackageManager` |
 
 #### Inherited from
 
@@ -73,14 +73,13 @@ WorkspaceConfiguration.cli
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:86
 
-___
+---
 
 ### defaultProject
 
 • `Optional` **defaultProject**: `string`
 
-Default project. When project isn't provided, the default project
-will be used. Convenient for small workspaces with one main application.
+Default project. When project isn't provided, the default project will be used. Convenient for small workspaces with one main application.
 
 #### Inherited from
 
@@ -90,7 +89,7 @@ WorkspaceConfiguration.defaultProject
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:98
 
-___
+---
 
 ### extends
 
@@ -106,7 +105,7 @@ WorkspaceConfiguration.extends
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:22
 
-___
+---
 
 ### generators
 
@@ -130,7 +129,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { [generatorName: string]: `any`;  }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
 
 #### Inherited from
 
@@ -140,11 +139,11 @@ WorkspaceConfiguration.generators
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:78
 
-___
+---
 
 ### implicitDependencies
 
-• `Optional` **implicitDependencies**: `ImplicitDependencyEntry`<`string`[] \| ``"*"``\>
+• `Optional` **implicitDependencies**: `ImplicitDependencyEntry`<`string`[] \| `"*"`\>
 
 Map of files to projects that implicitly depend on them
 
@@ -156,7 +155,7 @@ WorkspaceConfiguration.implicitDependencies
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:26
 
-___
+---
 
 ### npmScope
 
@@ -172,7 +171,7 @@ WorkspaceConfiguration.npmScope
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:34
 
-___
+---
 
 ### plugins
 
@@ -188,7 +187,7 @@ WorkspaceConfiguration.plugins
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:93
 
-___
+---
 
 ### projects
 
@@ -198,7 +197,7 @@ ___
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:9
 
-___
+---
 
 ### targetDependencies
 
@@ -214,7 +213,7 @@ WorkspaceConfiguration.targetDependencies
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:30
 
-___
+---
 
 ### tasksRunnerOptions
 
@@ -224,7 +223,7 @@ Available Task Runners
 
 #### Index signature
 
-▪ [tasksRunnerName: `string`]: { `options?`: `any` ; `runner`: `string`  }
+▪ [tasksRunnerName: `string`]: { `options?`: `any` ; `runner`: `string` }
 
 #### Inherited from
 
@@ -234,7 +233,7 @@ WorkspaceConfiguration.tasksRunnerOptions
 
 node_modules/@nrwl/tao/src/shared/nx.d.ts:49
 
-___
+---
 
 ### version
 
@@ -250,7 +249,7 @@ WorkspaceConfiguration.version
 
 node_modules/@nrwl/tao/src/shared/workspace.d.ts:14
 
-___
+---
 
 ### workspaceLayout
 
@@ -260,8 +259,8 @@ Where new apps + libs should be placed
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type     |
+| :-------- | :------- |
 | `appsDir` | `string` |
 | `libsDir` | `string` |
 

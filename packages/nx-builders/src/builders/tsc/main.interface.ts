@@ -1,4 +1,4 @@
-import type { AvailableAssetGlob, FileInputOutput } from '@webundsoehne/nx-tools'
+import type { AvailableAssetGlob, EnvironmentVariables, FileInputOutput } from '@webundsoehne/nx-tools'
 
 /**
  * TSC Builder options
@@ -53,7 +53,7 @@ export interface TscBuilderOptions {
   /**
    * inject environment variables to build process
    */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }
 
 export interface NormalizedBuilderOptions extends TscBuilderOptions {

@@ -41,8 +41,8 @@
     "rxjs": ">= 7 < 8"
   },
   "devDependencies": {
-    "@nestjs/common": "^8.2.6",
-    "@nestjs/core": "^8.2.6",
+    "@nestjs/common": "^8.3.1",
+    "@nestjs/core": "^8.3.1",
     "@nestjs/graphql": "^9.1.2",
     "@webundsoehne/nestjs-util": "*",
     "graphql": "^15"

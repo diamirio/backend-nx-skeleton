@@ -1,3 +1,42 @@
+# @webundsoehne-private/nx-workspace [4.2.0-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.3...@webundsoehne-private/nx-workspace@4.2.0-beta.4) (2022-02-17)
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.4
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.3
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.2...@webundsoehne-private/nx-workspace@4.2.0-beta.3) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.3
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.1...@webundsoehne-private/nx-workspace@4.2.0-beta.2) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.3...@webundsoehne-private/nx-workspace@4.2.0-beta.1) (2022-02-15)
+
+### Bug Fixes
+
+- update environment variables to always be string ([110cb57](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/110cb574aeab31576c347ebe55cbaea73282664c))
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
 ## @webundsoehne-private/nx-workspace [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.2...@webundsoehne-private/nx-workspace@4.1.3) (2022-02-12)
 
 ### Bug Fixes

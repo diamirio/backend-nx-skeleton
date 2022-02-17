@@ -12,6 +12,7 @@ Options for run builder
 - [command](RunBuilderOptions.md#command)
 - [cwd](RunBuilderOptions.md#cwd)
 - [environment](RunBuilderOptions.md#environment)
+- [executeWithNode](RunBuilderOptions.md#executewithnode)
 - [interactive](RunBuilderOptions.md#interactive)
 - [node](RunBuilderOptions.md#node)
 - [nodeOptions](RunBuilderOptions.md#nodeoptions)
@@ -29,7 +30,7 @@ append arguments to the command
 
 builders/run/main.interface.ts:18
 
-___
+---
 
 ### command
 
@@ -41,7 +42,7 @@ command
 
 builders/run/main.interface.ts:15
 
-___
+---
 
 ### cwd
 
@@ -55,19 +56,31 @@ this will spawn the process from the current working directory so most of the pl
 
 builders/run/main.interface.ts:12
 
-___
+---
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string` \| `number`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 environment variables
 
 #### Defined in
 
-builders/run/main.interface.ts:33
+builders/run/main.interface.ts:36
 
-___
+---
+
+### executeWithNode
+
+• `Optional` **executeWithNode**: `boolean`
+
+strictly execute this with node eventhough it can be a node binary as well
+
+#### Defined in
+
+builders/run/main.interface.ts:27
+
+---
 
 ### interactive
 
@@ -79,7 +92,7 @@ run with interactive mode, will not parse through the logger
 
 builders/run/main.interface.ts:21
 
-___
+---
 
 ### node
 
@@ -91,7 +104,7 @@ run with node
 
 builders/run/main.interface.ts:24
 
-___
+---
 
 ### nodeOptions
 
@@ -101,9 +114,9 @@ pass in node options when running as node
 
 #### Defined in
 
-builders/run/main.interface.ts:27
+builders/run/main.interface.ts:30
 
-___
+---
 
 ### watch
 
@@ -113,4 +126,4 @@ keep alive the process if it crashes
 
 #### Defined in
 
-builders/run/main.interface.ts:30
+builders/run/main.interface.ts:33

@@ -128,7 +128,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { [generatorName: string]: `any`; }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
 
 #### Inherited from
 

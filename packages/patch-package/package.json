@@ -61,7 +61,7 @@
     "@oclif/plugin-help": "^5.1.10",
     "fs-extra": "^10.0.0",
     "globby": "^11.0.3",
-    "listr2": "^4.0.1",
+    "listr2": "^4.0.4",
     "patch-package": "^6.4.7",
     "rewire": "^6.0.0",
     "tmp-promise": "^3.0.3",

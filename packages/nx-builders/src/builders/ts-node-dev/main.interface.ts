@@ -1,3 +1,5 @@
+import type { EnvironmentVariables } from '@webundsoehne/nx-tools'
+
 /**
  * Options for ts-node-dev
  */
@@ -31,5 +33,5 @@ export interface TsNodeBuilderOptions {
   inspect?: number
 
   /** environment variables */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }

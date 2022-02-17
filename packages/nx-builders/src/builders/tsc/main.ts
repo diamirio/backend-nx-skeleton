@@ -9,8 +9,17 @@ import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
 import type { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
-import type { ExecaArguments, FileInputOutput } from '@webundsoehne/nx-tools'
-import { BaseExecutor, checkPathsExists, generateBuilderAssets, getNodeBinaryPath, isVerbose, mergeDependencies, pipeProcessToLogger, runExecutor } from '@webundsoehne/nx-tools'
+import {
+  BaseExecutor,
+  checkPathsExists,
+  generateBuilderAssets,
+  getNodeBinaryPathExtensions,
+  isVerbose,
+  mergeDependencies,
+  pipeProcessToLogger,
+  runExecutor
+} from '@webundsoehne/nx-tools'
+import type { ExecaArguments, FileInputOutput, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -19,11 +28,15 @@ try {
 
 // i converted this to a class since it makes not too much sense to have separate functions with tons of same inputs
 class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions, ProcessPaths> {
+  pathExtensions: NodeBinaryPathExtensions
+
   init (): void {
+    this.pathExtensions = getNodeBinaryPathExtensions()
+
     this.paths = {
-      typescript: getNodeBinaryPath('tsc'),
-      tsconfigReplacePaths: getNodeBinaryPath('tsconfig-replace-paths'),
-      tscWatch: getNodeBinaryPath('tsc-watch'),
+      typescript: 'tsc',
+      tsconfigReplacePaths: 'tsconfig-replace-paths',
+      tscWatch: 'tsc-watch',
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }
@@ -38,7 +51,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       // stop all manager tasks
       await this.manager.stop()
 
-      checkPathsExists(this.paths)
+      checkPathsExists(this.paths, this.pathExtensions.path)
     } catch (e) {
       this.logger.fatal(e.message)
       this.logger.debug(e.stack)
@@ -64,7 +77,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
 
-        const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
+        const instance = this.manager.addPersistent(execa(this.paths.tscWatch, args, spawnOptions))
 
         void instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
           switch (msg) {
@@ -92,7 +105,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
           }
         })
 
-        await pipeProcessToLogger(this.context, instance)
+        await pipeProcessToLogger(this.context, instance, { start: true })
       } else {
         // the normal mode of compiling
         this.logger.info('Transpiling TypeScript files...')
@@ -101,9 +114,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         const { args, spawnOptions } = this.normalizeArguments('typescript')
 
-        const instance = this.manager.addPersistent(execa.node(this.paths.typescript, args, spawnOptions))
+        const instance = this.manager.addPersistent(execa(this.paths.typescript, args, spawnOptions))
 
-        await pipeProcessToLogger(this.context, instance)
+        await pipeProcessToLogger(this.context, instance, { start: true })
 
         this.logger.info('Transpiling to TypeScript is done.')
 
@@ -190,6 +203,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
     }
 
+    if (this.pathExtensions?.key) {
+      spawnOptions.env[this.pathExtensions.key] = this.pathExtensions.path
+    }
+
     const spawnOptionsParser: OptionParser<Record<string, any>> = [
       {
         mode: ['typescript', 'tsc-watch'],
@@ -264,6 +281,9 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       }
     })
 
+    this.logger.debug('Arguments: %o', args)
+    this.logger.debug('Spawn options: %o', spawnOptions)
+
     return { args, spawnOptions }
   }
 
@@ -280,7 +300,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       const { args, spawnOptions } = this.normalizeArguments('tsconfigReplacePaths')
 
-      const instance = this.manager.add(execa.node(this.paths.tsconfigReplacePaths, args, spawnOptions))
+      const instance = this.manager.add(execa(this.paths.tsconfigReplacePaths, args, spawnOptions))
 
       // we dont want errors from this, it can be sig terminated
       try {
@@ -311,10 +331,21 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       // made this optional since it was not alway strue
       if (!packageJson?.main) {
         packageJson.main = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`)
+
+        this.logger.debug('Infered the package.json main entrypoint since it was not found on the provided in the package.')
       }
 
       if (!packageJson?.types) {
         packageJson.types = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
+
+        this.logger.debug('Infered the package.json type entrypoint since it was not found on the provided in the package.')
+      }
+
+      // if the current package does not have a version use workspace version
+      if (!packageJson?.version) {
+        packageJson.version = globalPackageJson?.version ?? '1.0.0'
+
+        this.logger.debug('Infered the package.json version since it was not found on the provided in the package.')
       }
 
       // update implicit dependencies
@@ -375,6 +406,8 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         success: true
       }
     } catch (err) {
+      this.logger.warn('Can not copy some assets: %s', err.message)
+
       return {
         error: err.message,
         success: false

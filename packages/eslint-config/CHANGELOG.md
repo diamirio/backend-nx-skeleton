@@ -1,37 +1,41 @@
-# @webundsoehne/eslint-config [5.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.1...@webundsoehne/eslint-config@5.0.0) (2022-02-04)
-
-
-### Bug Fixes
-
-* all linting problems and use it commonly with requires ([e1ed351](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e1ed351a5ff8a9e48d90d71feb82fe8a17d28665))
-* deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
-* eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
-* update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
-* update rule ([8254c2a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8254c2a5ca699ea043030551b46165852d0b0e16))
-
+# @webundsoehne/eslint-config [5.1.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.1.0-beta.1...@webundsoehne/eslint-config@5.1.0-beta.2) (2022-02-17)
 
 ### Features
 
-* add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
-* add import helper ([6137288](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6137288a575e66a98652457273a79743d2952fc4))
-* some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
 
+# @webundsoehne/eslint-config [5.1.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.0.0...@webundsoehne/eslint-config@5.1.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+# @webundsoehne/eslint-config [5.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.1...@webundsoehne/eslint-config@5.0.0) (2022-02-04)
+
+### Bug Fixes
+
+- all linting problems and use it commonly with requires ([e1ed351](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e1ed351a5ff8a9e48d90d71feb82fe8a17d28665))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update rule ([8254c2a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8254c2a5ca699ea043030551b46165852d0b0e16))
+
+### Features
+
+- add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+- add import helper ([6137288](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6137288a575e66a98652457273a79743d2952fc4))
+- some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
 
 ### Performance Improvements
 
-* linting rules ([48134e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
-* stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
-
+- linting rules ([48134e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
+- stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
 
 ### BREAKING CHANGES
 
-* make everything non-public
-* stricter linting rules may cause libraries to not work
-for typescript version that are older than 4 because of the import type
-  and export type statements. what advantage that it provides is that it
-  wont crash anymore for any of the missing dependencies that are only
-  types
-* drops the builders completely due to they being not avaiable in nx anymore
+- make everything non-public
+- stricter linting rules may cause libraries to not work for typescript version that are older than 4 because of the import type and export type statements. what advantage that it provides is that it wont crash anymore for any of the missing dependencies that are only types
+- drops the builders completely due to they being not avaiable in nx anymore
 
 # @webundsoehne/eslint-config [5.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@4.0.1...@webundsoehne/eslint-config@5.0.0-beta.1) (2022-01-26)
 

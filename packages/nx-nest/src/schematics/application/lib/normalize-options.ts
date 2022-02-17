@@ -274,11 +274,11 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           ctx.packageJsonScripts = {}
 
           if ([AvailableComponents.SERVER, AvailableComponents.BG_TASK, AvailableComponents.MICROSERVICE_SERVER].some((component) => ctx.components.includes(component))) {
-            ctx.packageJsonScripts.start = `node ./${ctx.root}/main.js`
+            ctx.packageJsonScripts.start = `node ./${ctx.root}/${ctx.sourceRoot}/main.js`
           }
 
           if ([AvailableComponents.COMMAND].some((component) => ctx.components.includes(component))) {
-            ctx.packageJsonScripts.command = `NODE_SERVICE='cli' node ./${ctx.root}/main.js`
+            ctx.packageJsonScripts.command = `NODE_SERVICE='cli' node ./${ctx.root}/${ctx.sourceRoot}/main.js`
           }
         }
       }

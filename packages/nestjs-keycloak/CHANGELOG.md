@@ -1,3 +1,15 @@
+# @webundsoehne/nestjs-keycloak [2.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@2.2.0-beta.1...@webundsoehne/nestjs-keycloak@2.2.0-beta.2) (2022-02-17)
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
+# @webundsoehne/nestjs-keycloak [2.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@2.1.0...@webundsoehne/nestjs-keycloak@2.2.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
 # @webundsoehne/nestjs-keycloak [2.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak@2.0.2...@webundsoehne/nestjs-keycloak@2.1.0) (2022-02-05)
 
 ### Features

@@ -67,6 +67,8 @@
 - [MultipleFileTemplatesInterface](interfaces/MultipleFileTemplatesInterface.md)
 - [MultipleJinjaTemplateOptions](interfaces/MultipleJinjaTemplateOptions.md)
 - [MultipleJinjaTemplateTemplates](interfaces/MultipleJinjaTemplateTemplates.md)
+- [NodeBinaryPathExtensions](interfaces/NodeBinaryPathExtensions.md)
+- [NodeBinaryPathExtensionsOptions](interfaces/NodeBinaryPathExtensionsOptions.md)
 - [OmitInterface](interfaces/OmitInterface.md)
 - [PackageManagerCommonAction](interfaces/PackageManagerCommonAction.md)
 - [PackageManagerCtx](interfaces/PackageManagerCtx.md)
@@ -88,6 +90,7 @@
 - [ConvertToPromptType](README.md#converttoprompttype)
 - [Dependency](README.md#dependency)
 - [DependencyCalculatorOptions](README.md#dependencycalculatoroptions)
+- [EnvironmentVariables](README.md#environmentvariables)
 - [ExtensionsMap](README.md#extensionsmap)
 - [GeneratedNameCases](README.md#generatednamecases)
 - [ImplicitDependencies](README.md#implicitdependencies)
@@ -162,6 +165,7 @@
 - [getInitialFromPriorConfiguration](README.md#getinitialfrompriorconfiguration)
 - [getJinjaDefaults](README.md#getjinjadefaults)
 - [getNodeBinaryPath](README.md#getnodebinarypath)
+- [getNodeBinaryPathExtensions](README.md#getnodebinarypathextensions)
 - [isBuildContext](README.md#isbuildcontext)
 - [isDevelopmentMode](README.md#isdevelopmentmode)
 - [isExecutorContext](README.md#isexecutorcontext)
@@ -206,6 +210,7 @@
 - [runPackageManagerTaskExecutor](README.md#runpackagemanagertaskexecutor)
 - [selectivePatch](README.md#selectivepatch)
 - [setDevelopmentMode](README.md#setdevelopmentmode)
+- [setNodeOptionsEnvironmentVariables](README.md#setnodeoptionsenvironmentvariables)
 - [setSchemaDefaultsInContext](README.md#setschemadefaultsincontext)
 - [tripleFileMerge](README.md#triplefilemerge)
 - [updateBrownieIntegrationRule](README.md#updatebrownieintegrationrule)
@@ -282,7 +287,7 @@ packages/nx-tools/src/integration/integration.interface.ts:11
 
 ### ConvertToPromptType
 
-Ƭ **ConvertToPromptType**<`T`\>: { [name: string]: `any`; `message`: `string` ; `name`: `T` }[]
+Ƭ **ConvertToPromptType**<`T`\>: { `[name: string]`: `any`; `message`: `string` ; `name`: `T` }[]
 
 Converts a input type into the prompt type that is consumed by enquirer.
 
@@ -315,6 +320,16 @@ packages/nx-tools/src/interfaces/versions.interface.ts:1
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/dependency-calculator.interface.ts:3
+
+---
+
+### EnvironmentVariables
+
+Ƭ **EnvironmentVariables**: `Record`<`string`, `string`\>
+
+#### Defined in
+
+packages/nx-tools/src/interfaces/environment-variables.interface.ts:1
 
 ---
 
@@ -1130,15 +1145,16 @@ packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:23
 
 ### checkPathsExists
 
-▸ **checkPathsExists**(`paths`): `void`
+▸ **checkPathsExists**(`paths`, `pathExtensions?`): `void`
 
 Check if file that is supposed to be executable is defined inside the node_modules folder.
 
 #### Parameters
 
-| Name    | Type                          |
-| :------ | :---------------------------- |
-| `paths` | `Record`<`string`, `string`\> |
+| Name              | Type                          |
+| :---------------- | :---------------------------- |
+| `paths`           | `Record`<`string`, `string`\> |
+| `pathExtensions?` | `string`                      |
 
 #### Returns
 
@@ -1146,7 +1162,7 @@ Check if file that is supposed to be executable is defined inside the node_modul
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/file-system.ts:9
+packages/nx-tools/src/utils/file-system/file-system.ts:12
 
 ---
 
@@ -1594,7 +1610,7 @@ Will return the files in the given source tree applying the filters.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/file-system.ts:28
+packages/nx-tools/src/utils/file-system/file-system.ts:45
 
 ---
 
@@ -1651,7 +1667,7 @@ packages/nx-tools/src/templates/jinja-defaults.ts:7
 
 ### getNodeBinaryPath
 
-▸ **getNodeBinaryPath**(`bin?`): `string`
+▸ **getNodeBinaryPath**(`bin`): `string`
 
 Returns the binary path for a given cli in node_modules.
 
@@ -1659,9 +1675,9 @@ Returns the binary path for a given cli in node_modules.
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
-| `bin?` | `string` |
+| Name  | Type     |
+| :---- | :------- |
+| `bin` | `string` |
 
 #### Returns
 
@@ -1669,7 +1685,27 @@ Returns the binary path for a given cli in node_modules.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/node-bin.ts:11
+packages/nx-tools/src/utils/file-system/node-bin.ts:20
+
+---
+
+### getNodeBinaryPathExtensions
+
+▸ **getNodeBinaryPathExtensions**(`options?`): [`NodeBinaryPathExtensions`](interfaces/NodeBinaryPathExtensions.md) \| `undefined`
+
+#### Parameters
+
+| Name       | Type                                                                               |
+| :--------- | :--------------------------------------------------------------------------------- |
+| `options?` | [`NodeBinaryPathExtensionsOptions`](interfaces/NodeBinaryPathExtensionsOptions.md) |
+
+#### Returns
+
+[`NodeBinaryPathExtensions`](interfaces/NodeBinaryPathExtensions.md) \| `undefined`
+
+#### Defined in
+
+packages/nx-tools/src/utils/file-system/node-bin.ts:28
 
 ---
 
@@ -2754,6 +2790,26 @@ packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:229
 #### Defined in
 
 packages/nx-tools/src/utils/schematics/is-development-mode.ts:10
+
+---
+
+### setNodeOptionsEnvironmentVariables
+
+▸ **setNodeOptionsEnvironmentVariables**(`env`): [`EnvironmentVariables`](README.md#environmentvariables)
+
+#### Parameters
+
+| Name  | Type                                                    |
+| :---- | :------------------------------------------------------ |
+| `env` | `string` \| `Record`<`string`, `string`\> \| `string`[] |
+
+#### Returns
+
+[`EnvironmentVariables`](README.md#environmentvariables)
+
+#### Defined in
+
+packages/nx-tools/src/utils/file-system/node-bin.ts:36
 
 ---
 

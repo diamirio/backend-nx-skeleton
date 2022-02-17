@@ -67,7 +67,7 @@ export function addProject (options: NormalizedSchema): Rule {
           watch: false,
           command: 'jest --config ./test/jest.config.js --passWithNoTests --detectOpenHandles',
           environment: {
-            DEBUG_PORT: 9229
+            DEBUG_PORT: '9229'
           }
         },
         configurations: {
@@ -83,7 +83,9 @@ export function addProject (options: NormalizedSchema): Rule {
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
             interactive: true,
-            environment: {}
+            environment: {
+              DEBUG_PORT: '9229'
+            }
           }
         }
       }
