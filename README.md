@@ -146,6 +146,50 @@ You can use the `-d` or `--develop` flag in `brownie` commands `workspace` and `
 
 You can use the `--debug` flag for `brownie`, which will activate the debug log level for both the schematics that it runs and the `brownie` itself.
 
+## Development Process
+
+This is a brief walkthrough, you can find more information in the following sections.
+
+- Install the dependencies with `yarn`.
+- Run the docker-compose stack. All the packages will be built locally.
+- Link all the packages to your global link folder. You can use `yarn run scripts:link` to link them all at once.
+- Create a mock NX workspace with `brownie`. You should definitely use `-d` flag to put `brownie` and some schematics in to development mode and can always use `--debug` flag for more output.
+- You can then just run `brownie` as you wish to test things out. But always remember to put it in to development mode with `-d` flag.
+
+## Warnings
+
+- If you have a new or updated NPM module added to one of the packages, you might need to install it again from root. Because `yarn workspaces` and `resolutions` field do not play nice. But do not worry since the install will only fix the resolutions and not take much of time.
+
+## Versioning Process
+
+This is a brief walkthrough, you can find more information in the following sections.
+
+Repository has `git commit` hook to ensure the commit format.
+
+- fix -> will publish new patch version for the package that the commits apply to
+- feat -> will publish new minor version for the package that the commits apply to
+- perf with breaking changes selected -> will publish new major version for the package that the commits apply to
+
+`semantic-release` decides to publish the packages or not depending on whether the new commits since the last known tag has been made to the given package.
+
+So it is better to commit often for little things to ensure that your final version matches what you expect.
+
+To give an example to this lets say we will do changes in 2 packages, `nx-nest` and `nx-tools`.
+
+`nx-nest` will have just a bug fix. So after changing the related files, we can just commit with `fix` to ensure that it will publish a patch version. `nx-tools` will have a new feature that is not breaking. So again after changing the related files, we can just commit with `feat` to ensure that it will publish a minor version.
+
+So even though we will publish them at the same time, they will get individually versioned depending on what commits have been made to them.
+
+The other options that are inside the `git commit` hook, which uses a interactive selection for commitizen is:
+
+- scope -> you can scope your changes to a package, so when you are searching through commits its easier to find them. We currently have no convention for this.
+- long description -> will append the description to the issues replied and the commit itself
+- resolves issues -> will automatically respond to related issues and close them if specified
+- breaking changes -> breaking changes is required to publish a major version, it will also append it in the changelogs
+- skip ci -> if you are sure that the ci does not have to be run after this commit and everything lints and builds fine and there is no publishing needed you can select this to save ci resources
+
+The other commit types like `refactor`, `build`, `ci`, `style` does not affect versioning in anyway. But it helps to identify the changes made to the repository.
+
 ## Docker Setup
 
 This repository includes a Docker-Compose stack for automatically compiling `SERVICES` variable defined. It will first compile the `RUN_IN_BAND` packages sequentially and after that it will compile everything else defined in the `SERVICES` variable in parallel.
