@@ -1,3 +1,13 @@
+# @webundsoehne/nestjs-util [5.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.2.0...@webundsoehne/nestjs-util@5.3.0) (2022-02-17)
+
+### Bug Fixes
+
+- swap dependency for colorette for forcing color on nx ([8224a31](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/8224a3177eb5c91daa81cd3a234164191a510cda))
+
+### Features
+
+- allow multiple winston-transports next to console ([ad117d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ad117d69280c8fe78ef50ec0a85937baebc8b92c))
+
 # @webundsoehne/nestjs-util [5.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.1.0...@webundsoehne/nestjs-util@5.2.0) (2022-02-17)
 
 ### Features
