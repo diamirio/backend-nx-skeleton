@@ -61,7 +61,7 @@
     "mikro-orm": "^4.5.10",
     "rimraf": "^3.0.2",
     "sqlite3": "^5.0.2",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.42"
   },
   "engines": {
     "node": ">= 16"

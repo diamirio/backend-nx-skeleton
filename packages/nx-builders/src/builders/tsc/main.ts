@@ -337,6 +337,11 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         packageJson.types = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
       }
 
+      // if the current package does not have a version use workspace version
+      if (!packageJson?.version) {
+        packageJson.version = globalPackageJson?.version ?? '1.0.0'
+      }
+
       // update implicit dependencies
       const implicitDependencies = {}
 
