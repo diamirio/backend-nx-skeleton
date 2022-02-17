@@ -33,12 +33,14 @@
   },
   "dependencies": {
     "@webundsoehne/deep-merge": "*",
+    "colorette": "^2.0.16",
     "config": "^3.3.7",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.0.0",
     "moment": "^2.29.1",
     "reflect-metadata": "^0.1.13",
-    "winston": "^3.6.0"
+    "winston": "^3.6.0",
+    "winston-transport": "^4.5.0"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8 < 10",
