@@ -1,3 +1,9 @@
+# @webundsoehne/eslint-config [5.1.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.1.0-beta.1...@webundsoehne/eslint-config@5.1.0-beta.2) (2022-02-17)
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
 # @webundsoehne/eslint-config [5.1.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.0.0...@webundsoehne/eslint-config@5.1.0-beta.1) (2022-02-15)
 
 ### Features
