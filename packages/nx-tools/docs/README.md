@@ -287,7 +287,7 @@ packages/nx-tools/src/integration/integration.interface.ts:11
 
 ### ConvertToPromptType
 
-Ƭ **ConvertToPromptType**<`T`\>: { [name: string]: `any`; `message`: `string` ; `name`: `T` }[]
+Ƭ **ConvertToPromptType**<`T`\>: { `[name: string]`: `any`; `message`: `string` ; `name`: `T` }[]
 
 Converts a input type into the prompt type that is consumed by enquirer.
 
