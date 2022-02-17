@@ -1,3 +1,9 @@
+## @webundsoehne/nx-builders [5.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0...@webundsoehne/nx-builders@5.2.1) (2022-02-17)
+
+### Bug Fixes
+
+- swap dependency for colorette for forcing color on nx ([8224a31](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8224a3177eb5c91daa81cd3a234164191a510cda))
+
 # @webundsoehne/nx-builders [5.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.1.0...@webundsoehne/nx-builders@5.2.0) (2022-02-17)
 
 ### Bug Fixes
