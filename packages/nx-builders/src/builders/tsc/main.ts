@@ -331,15 +331,21 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       // made this optional since it was not alway strue
       if (!packageJson?.main) {
         packageJson.main = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`)
+
+        this.logger.debug('Infered the package.json main entrypoint since it was not found on the provided in the package.')
       }
 
       if (!packageJson?.types) {
         packageJson.types = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.d.ts`)
+
+        this.logger.debug('Infered the package.json type entrypoint since it was not found on the provided in the package.')
       }
 
       // if the current package does not have a version use workspace version
       if (!packageJson?.version) {
         packageJson.version = globalPackageJson?.version ?? '1.0.0'
+
+        this.logger.debug('Infered the package.json version since it was not found on the provided in the package.')
       }
 
       // update implicit dependencies
