@@ -91,6 +91,7 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     const spawnOptions: ExecaArguments['spawnOptions'] = {
       env: {
         NODE_ENV: 'develop',
+        FORCE_COLOR: '1',
         ...environment ?? {},
         ...process.env
       }

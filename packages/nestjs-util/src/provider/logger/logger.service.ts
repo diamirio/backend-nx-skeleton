@@ -5,9 +5,9 @@ import Transport from 'winston-transport'
 import { ColorSchema, LogType, LOG_LEVEL } from './logger.constants'
 import { ConfigParam, Configurable } from '@provider/config'
 
-let logger: winston.Logger
-
 export class LoggerService implements LoggerServiceCommon {
+  static instance: winston.Logger
+
   private transports: Transport[] = [
     new winston.transports.Console({
       stderrLevels: ['error'],
@@ -80,10 +80,10 @@ export class LoggerService implements LoggerServiceCommon {
 
   @Configurable()
   private getLogger (@ConfigParam('logLevel', LOG_LEVEL) logLevel?: string): winston.Logger {
-    if (!logger) {
+    if (!LoggerService.instance) {
       const level = LogType[logLevel.toLowerCase()] || LOG_LEVEL
 
-      logger = winston.createLogger({
+      LoggerService.instance = winston.createLogger({
         level,
         transports: this.transports.map((transport) => {
           transport.level = transport.level || level
@@ -94,7 +94,7 @@ export class LoggerService implements LoggerServiceCommon {
       })
     }
 
-    return logger
+    return LoggerService.instance
   }
 
   private logMessage ({ type, message: rawMessage, context, trace }: { type: string, message: any, context?: string, trace?: any }): void {

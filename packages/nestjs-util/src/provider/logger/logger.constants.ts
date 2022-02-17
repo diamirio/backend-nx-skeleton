@@ -1,4 +1,4 @@
-import colors from 'cli-color'
+import * as colors from 'colorette'
 
 export enum LogType {
   error = 'error',
@@ -13,9 +13,9 @@ export enum LogType {
 export const LOG_LEVEL: string = LogType.verbose
 
 export const ColorSchema = {
-  [LogType.log]: colors.greenBright,
+  [LogType.log]: colors.green,
   [LogType.error]: colors.red,
   [LogType.warn]: colors.yellow,
-  [LogType.debug]: colors.magentaBright,
-  [LogType.verbose]: colors.cyanBright
+  [LogType.debug]: colors.magenta,
+  [LogType.verbose]: colors.cyan
 }
