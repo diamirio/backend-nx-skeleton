@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-keycloak-seeder [2.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@2.2.0...@webundsoehne/nestjs-keycloak-seeder@2.2.1) (2022-02-19)
+
+
+### Bug Fixes
+
+* add realm check to flush unknown ([a81929d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a81929db0377e42be598ef3c44ce9ed06731a4e6))
+
 # @webundsoehne/nestjs-keycloak-seeder [2.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@2.1.0...@webundsoehne/nestjs-keycloak-seeder@2.2.0) (2022-02-17)
 
 ### Features
