@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-keycloak-seeder [2.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@2.2.1...@webundsoehne/nestjs-keycloak-seeder@2.2.2) (2022-02-19)
+
+
+### Bug Fixes
+
+* update ignore cases to not fail on groups ([3e71c52](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3e71c52d5c773b89ee057751c693fe8f5ab49948))
+
 ## @webundsoehne/nestjs-keycloak-seeder [2.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nestjs-keycloak-seeder@2.2.0...@webundsoehne/nestjs-keycloak-seeder@2.2.1) (2022-02-19)
 
 
