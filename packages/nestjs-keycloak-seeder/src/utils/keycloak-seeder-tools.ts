@@ -155,7 +155,7 @@ export class KeycloakAdminSeederTools {
       const unknown = (current as any[]).filter((o) => !(input as any).map((m: ArrayElement<K>) => m[options.identifier]).includes(o[options.identifier]))
 
       if (unknown.length > 0) {
-        await this.flushKeycloakEntities(context, unknown as K)
+        await this.flushKeycloakEntities(context, unknown as K, { realm: options.realm })
 
         this.logger.warn(`Flushed unknown Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}.`)
       }
