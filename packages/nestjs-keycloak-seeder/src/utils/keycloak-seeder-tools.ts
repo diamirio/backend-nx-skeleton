@@ -254,7 +254,7 @@ export class KeycloakAdminSeederTools {
     }
 
     const shouldBeIgnored: Partial<Record<Extract<keyof KeycloakAdminClient, 'groups' | 'roles' | 'clients' | 'realms'>, string[]>> = {
-      roles: ['offline_access', 'uma_authorization']
+      roles: ['offline_access', 'uma_authorization', `default-roles-${options.realm ?? 'master'}`]
     }
 
     const deleteFuncKey: keyof KeycloakAdminClient[T] = (context === 'groups' ? 'del' : 'delById') as keyof KeycloakAdminClient[T]
@@ -268,7 +268,7 @@ export class KeycloakAdminSeederTools {
         try {
           const name = m[options.identifier] as unknown as string
 
-          if (shouldBeIgnored?.[context].includes(name as unknown as string)) {
+          if (shouldBeIgnored[context] && shouldBeIgnored[context].includes(name as unknown as string)) {
             ignored.push(name)
 
             return
