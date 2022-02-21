@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-workspace [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.1...@webundsoehne-private/nx-workspace@4.2.2) (2022-02-21)
+
+### Bug Fixes
+
+- update template for migration to host the subtarget ([160a17a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/160a17ab7e9f9c2efa594c1b1987131e05c585c0))
+
 ## @webundsoehne-private/nx-workspace [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0...@webundsoehne-private/nx-workspace@4.2.1) (2022-02-17)
 
 ### Dependencies
