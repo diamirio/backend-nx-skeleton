@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [4.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.3...@webundsoehne-private/nx-workspace@4.2.4) (2022-02-21)
+
+### Bug Fixes
+
+- add nx to eslint ([c9ef8c8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c9ef8c87872346919bc4570d26cf7959682c4ad1))
+- update eslitn config ([63de9cd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/63de9cd575a06bfe90bbd6e7a616025955e854b1))
+
 ## @webundsoehne-private/nx-workspace [4.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.2...@webundsoehne-private/nx-workspace@4.2.3) (2022-02-21)
 
 ### Bug Fixes
