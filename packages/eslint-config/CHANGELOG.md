@@ -1,3 +1,9 @@
+## @webundsoehne/eslint-config [5.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.1.0...@webundsoehne/eslint-config@5.1.1) (2022-02-21)
+
+### Bug Fixes
+
+- update for stephans style ([43c719f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/43c719f61bef41a5c84d18be2a259b37975f1306))
+
 # @webundsoehne/eslint-config [5.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/eslint-config@5.0.0...@webundsoehne/eslint-config@5.1.0) (2022-02-17)
 
 ### Features
