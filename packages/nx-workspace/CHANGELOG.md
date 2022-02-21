@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [4.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.2...@webundsoehne-private/nx-workspace@4.2.3) (2022-02-21)
+
+### Bug Fixes
+
+- more target based strings ([681f765](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/681f7657e27dd9b5882ecd7446b174ec135a183e))
+- package.json scripts ([df50eda](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df50edad0a4db09481a6682cf2125de5eb3ab45a))
+
 ## @webundsoehne-private/nx-workspace [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.1...@webundsoehne-private/nx-workspace@4.2.2) (2022-02-21)
 
 ### Bug Fixes
