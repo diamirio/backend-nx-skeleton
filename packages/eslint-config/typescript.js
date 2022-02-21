@@ -237,7 +237,7 @@ module.exports = {
 
           {
             selector: 'enumMember',
-            format: ['UPPER_CASE', 'camelCase']
+            format: ['UPPER_CASE', 'camelCase', 'PascalCase']
           },
 
           {
