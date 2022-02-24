@@ -17,7 +17,7 @@ export function getSchematicFiles (options: NormalizedSchema): SchematicFiles {
 
     [AvailableLibraryTypes.BUILDABLE]: {
       condition: options.type === AvailableLibraryTypes.BUILDABLE,
-      files: ['package.json', 'tsconfig.build.json']
+      files: ['tsconfig.build.json']
     }
   }
 }

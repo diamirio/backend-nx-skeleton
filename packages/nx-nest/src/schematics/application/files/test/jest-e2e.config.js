@@ -8,7 +8,7 @@ const TS_CONFIG_PATH = 'test/tsconfig.json'
 module.exports = {
   preset: 'ts-jest',
   rootDir: '../',
-  testRegex: '(/src/.*).spec.tsx?$',
+  testRegex: '(/test/.*).(e2e-)?spec.tsx?$',
   globals: {
     'ts-jest': {
       tsconfig: join('<rootDir>', TS_CONFIG_PATH)

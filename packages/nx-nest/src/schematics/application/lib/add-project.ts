@@ -119,7 +119,14 @@ export function addProject (options: NormalizedSchema): Rule {
           },
 
           e2e: {
-            command: 'jest --config ./test/jest.e2e-config.js --passWithNoTests --runInBand --detectOpenHandles',
+            command: 'jest --config ./test/jest-e2e.config.js --passWithNoTests --runInBand --detectOpenHandles',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+            node: true,
+            environment: {}
+          },
+
+          'e2e-dev': {
+            command: 'jest --config ./test/jest-e2e.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles',
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
             node: true,
             environment: {}

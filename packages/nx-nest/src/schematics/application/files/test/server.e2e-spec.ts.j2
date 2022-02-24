@@ -8,14 +8,15 @@ describe('ServerController (e2e)', () => {
 
   beforeAll(async () => {
     const ServerModule = createServerModule({% if database is defined and database != enum.database.NONE %}true{% endif %})
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+
+    const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [
         ServerModule
       ]
     }).compile()
+    app = moduleRef.createNestApplication(new FastifyAdapter(), { logger: [ 'error' ] })
 
-    app = moduleFixture.createNestApplication(new FastifyAdapter(), { logger: [ 'error' ] })
-    await app.init()
+    await app.getHttpAdapter().getInstance().ready()
   })
 
   afterAll(async () => {
@@ -24,12 +25,5 @@ describe('ServerController (e2e)', () => {
 
   it('should be defined', async () => {
     expect(app).toBeDefined()
-  })
-
-  it('/ (GET)', async () => {
-    const response = await app.inject({ url: '/', method: 'GET' })
-
-    return expect(response.body)
-      .toBe('Hello World')
   })
 })
