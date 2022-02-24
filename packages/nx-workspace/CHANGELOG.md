@@ -1,9 +1,14 @@
-## @webundsoehne-private/nx-workspace [4.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.4...@webundsoehne-private/nx-workspace@4.2.5) (2022-02-24)
-
+## @webundsoehne-private/nx-workspace [4.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.5...@webundsoehne-private/nx-workspace@4.2.6) (2022-02-24)
 
 ### Bug Fixes
 
-* update testing configuration to seperate e2e and unit ([da9037c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9037c55234c006a099bfb9d860d4154aaf62f8))
+- update documentation for readme ([3b1d489](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b1d4899ac39da169b5a1e2fa0b32b80f957c322))
+
+## @webundsoehne-private/nx-workspace [4.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.4...@webundsoehne-private/nx-workspace@4.2.5) (2022-02-24)
+
+### Bug Fixes
+
+- update testing configuration to seperate e2e and unit ([da9037c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9037c55234c006a099bfb9d860d4154aaf62f8))
 
 ## @webundsoehne-private/nx-workspace [4.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.3...@webundsoehne-private/nx-workspace@4.2.4) (2022-02-21)
 
