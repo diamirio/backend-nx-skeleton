@@ -31,14 +31,9 @@ All the actions should be done inside the container to have proper access to dat
 
 CLI script at the root of the repository is helpful in this case, where it proxies the commands in to the container.
 
-The first argument is the folder relative to the package root. `ws`, `root` and `.` is keywords for running it inside the root of the repository.
-
 ```bash
 # Start a bash session inside the container
 ./cli bash
-
-# run something inside one package
-./clipps/auth-server npm run start
 ```
 
 ## Build
