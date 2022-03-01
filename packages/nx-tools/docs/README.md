@@ -681,11 +681,11 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
 ### color
 
-• **color**: `__module` = `colorette`
+• **color**: `Colorette`
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/colorette.ts:5
+packages/nx-tools/src/utils/logger/colorette.ts:3
 
 ## Functions
 

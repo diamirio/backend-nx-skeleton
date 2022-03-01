@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [5.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.1...@webundsoehne/nx-tools@5.2.2) (2022-03-01)
+
+### Bug Fixes
+
+- force colors again ([055a213](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/055a21372567cf2841021b098e35fddcae3eda7e))
+
 ## @webundsoehne/nx-tools [5.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.0...@webundsoehne/nx-tools@5.2.1) (2022-03-01)
 
 ### Bug Fixes
