@@ -1,7 +1,5 @@
 import * as colorette from 'colorette'
 
-process.env.FORCE_COLOR = '3'
-
-const color = colorette
+const color = colorette.createColors({ useColor: true })
 
 export { color }
