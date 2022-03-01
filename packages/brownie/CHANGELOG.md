@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.2.0...@webundsoehne/brownie@4.2.1) (2022-03-01)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.1
+
 # @webundsoehne/brownie [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/brownie@4.1.0...@webundsoehne/brownie@4.2.0) (2022-02-17)
 
 ### Features
