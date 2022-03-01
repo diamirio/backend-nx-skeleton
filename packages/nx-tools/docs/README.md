@@ -685,7 +685,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/colorette.ts:3
+packages/nx-tools/src/utils/logger/colorette.ts:5
 
 ## Functions
 

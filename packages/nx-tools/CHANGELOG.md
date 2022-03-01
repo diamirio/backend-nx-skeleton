@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [5.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.0...@webundsoehne/nx-tools@5.2.1) (2022-03-01)
+
+### Bug Fixes
+
+- force color always for shorter messages ([c6d1f28](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c6d1f28ab91fa3946ad05251990a521e2c2f8729))
+
 # @webundsoehne/nx-tools [5.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.1.0...@webundsoehne/nx-tools@5.2.0) (2022-02-17)
 
 ### Bug Fixes
