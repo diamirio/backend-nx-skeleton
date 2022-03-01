@@ -23,7 +23,7 @@ export class Logger {
 
   constructor (private context?: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
     // set default options
-    this.options = { useIcons: process.stdout.isTTY && true, ...options }
+    this.options = { useIcons: true, ...options }
 
     if (isVerbose()) {
       this.logLevel = LogLevels.DEBUG
