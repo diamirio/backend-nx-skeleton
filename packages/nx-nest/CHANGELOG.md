@@ -1,9 +1,15 @@
-## @webundsoehne-private/nx-nest [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.1...@webundsoehne-private/nx-nest@4.2.2) (2022-02-24)
+## @webundsoehne-private/nx-nest [4.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.2...@webundsoehne-private/nx-nest@4.2.3) (2022-03-01)
 
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.2
+- **@webundsoehne/nx-tools:** upgraded to 5.2.1
+
+## @webundsoehne-private/nx-nest [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.1...@webundsoehne-private/nx-nest@4.2.2) (2022-02-24)
 
 ### Bug Fixes
 
-* update testing configuration to seperate e2e and unit ([da9037c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9037c55234c006a099bfb9d860d4154aaf62f8))
+- update testing configuration to seperate e2e and unit ([da9037c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9037c55234c006a099bfb9d860d4154aaf62f8))
 
 ## @webundsoehne-private/nx-nest [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.0...@webundsoehne-private/nx-nest@4.2.1) (2022-02-17)
 
