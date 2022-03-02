@@ -20,10 +20,13 @@ export class Logger {
   static instance: Winston
   public logLevel: LogLevels
   private logger: Winston
+  private context: string
 
-  constructor (private context?: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
+  constructor (context?: BuilderContext | SchematicContext | ExecutorContext, private options?: LoggerOptions) {
     // set default options
     this.options = { useIcons: true, ...options }
+
+    this.context = context && (isExecutorContext(context) ? context?.projectName : isBuildContext(context) ? context?.target.project : null)
 
     if (isVerbose()) {
       this.logLevel = LogLevels.DEBUG
@@ -74,7 +77,7 @@ export class Logger {
         return this.logColoring({
           level,
           message: msg,
-          context: context ?? (isExecutorContext(this.context) ? this.context?.projectName : isBuildContext(this.context) ? this.context?.target.project : null)
+          context
         })
       })
 
@@ -103,7 +106,7 @@ export class Logger {
   }
 
   private parseMessage (level: LogLevels, data: string | Buffer, args: any[]): void {
-    this.logger.log(level, data.toString(), ...args)
+    this.logger.log(level, data.toString(), ...args, { context: this.context })
   }
 
   private logColoring ({ level, message, context }: { level: LogLevels, message: string, context?: string }): string {

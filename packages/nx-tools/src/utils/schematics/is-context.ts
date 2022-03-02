@@ -6,7 +6,7 @@ import type { ExecutorContext } from '@nrwl/devkit'
  * Returns whether this is the new type of context nx has old legacy context.
  */
 export function isExecutorContext (context: BuilderContext | SchematicContext | ExecutorContext): context is ExecutorContext {
-  if (!context || context.hasOwnProperty('logger')) {
+  if (!context || !context.hasOwnProperty('projectName')) {
     return false
   }
 
@@ -18,6 +18,14 @@ export function isExecutorContext (context: BuilderContext | SchematicContext | 
  */
 export function isBuildContext (context: BuilderContext | SchematicContext | ExecutorContext): context is BuilderContext {
   if (context && context.hasOwnProperty('target')) {
+    return true
+  }
+
+  return false
+}
+
+export function hasProjectName (context: BuilderContext | SchematicContext | ExecutorContext): context is ExecutorContext {
+  if (context && context.hasOwnProperty('projectName')) {
     return true
   }
 
