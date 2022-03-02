@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [5.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.2...@webundsoehne/nx-tools@5.2.3) (2022-03-02)
+
+### Bug Fixes
+
+- update logger not displaying instance names ([c61d4e7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c61d4e7c7693f0920c9363eaac62e97c331cf38a))
+
 ## @webundsoehne/nx-tools [5.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-tools@5.2.1...@webundsoehne/nx-tools@5.2.2) (2022-03-01)
 
 ### Bug Fixes

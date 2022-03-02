@@ -166,6 +166,7 @@
 - [getJinjaDefaults](README.md#getjinjadefaults)
 - [getNodeBinaryPath](README.md#getnodebinarypath)
 - [getNodeBinaryPathExtensions](README.md#getnodebinarypathextensions)
+- [hasProjectName](README.md#hasprojectname)
 - [isBuildContext](README.md#isbuildcontext)
 - [isDevelopmentMode](README.md#isdevelopmentmode)
 - [isExecutorContext](README.md#isexecutorcontext)
@@ -1706,6 +1707,26 @@ packages/nx-tools/src/utils/file-system/node-bin.ts:20
 #### Defined in
 
 packages/nx-tools/src/utils/file-system/node-bin.ts:28
+
+---
+
+### hasProjectName
+
+▸ **hasProjectName**(`context`): context is ExecutorContext
+
+#### Parameters
+
+| Name      | Type                                                        |
+| :-------- | :---------------------------------------------------------- |
+| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+
+#### Returns
+
+context is ExecutorContext
+
+#### Defined in
+
+packages/nx-tools/src/utils/schematics/is-context.ts:27
 
 ---
 
