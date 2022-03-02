@@ -1,9 +1,15 @@
-## @webundsoehne-private/nx-workspace [4.2.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.8...@webundsoehne-private/nx-workspace@4.2.9) (2022-03-02)
+## @webundsoehne-private/nx-workspace [4.2.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.9...@webundsoehne-private/nx-workspace@4.2.10) (2022-03-02)
 
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.4
+- **@webundsoehne/nx-tools:** upgraded to 5.2.3
+
+## @webundsoehne-private/nx-workspace [4.2.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.8...@webundsoehne-private/nx-workspace@4.2.9) (2022-03-02)
 
 ### Bug Fixes
 
-* copy paste error ([0a92259](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0a9225980a433e8151c002b91a32a1886f412eca))
+- copy paste error ([0a92259](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0a9225980a433e8151c002b91a32a1886f412eca))
 
 ## @webundsoehne-private/nx-workspace [4.2.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.7...@webundsoehne-private/nx-workspace@4.2.8) (2022-03-01)
 
