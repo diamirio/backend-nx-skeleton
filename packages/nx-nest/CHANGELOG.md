@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-nest [4.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.5...@webundsoehne-private/nx-nest@4.2.6) (2022-03-02)
+
+### Bug Fixes
+
+- update default task interval ([0b661e1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0b661e19ffd41c17b1d6167b35d37d7c514eb1c3))
+
 ## @webundsoehne-private/nx-nest [4.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.4...@webundsoehne-private/nx-nest@4.2.5) (2022-03-02)
 
 ### Dependencies
