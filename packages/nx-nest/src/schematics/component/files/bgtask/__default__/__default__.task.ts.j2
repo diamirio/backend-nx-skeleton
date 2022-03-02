@@ -10,7 +10,7 @@ import { Interval } from '@nestjs/schedule'
 export class {{ casing.pascal }}Task {
   private logger: Logger = new Logger(this.constructor.name)
 
-  @Interval(5000)
+  @Interval(86400)
   defaultJob (): void {
     this.logger.debug('Background task is active.')
   }
