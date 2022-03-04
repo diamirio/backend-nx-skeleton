@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [5.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.0...@webundsoehne/nestjs-util@5.3.1) (2022-03-04)
+
+### Bug Fixes
+
+- logger error method signature ([aa443e8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/aa443e80c922706d4318d0d9552bb267ffcab173))
+
 # @webundsoehne/nestjs-util [5.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.2.0...@webundsoehne/nestjs-util@5.3.0) (2022-02-17)
 
 ### Bug Fixes

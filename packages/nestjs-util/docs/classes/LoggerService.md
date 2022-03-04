@@ -113,15 +113,15 @@ packages/nestjs-util/src/provider/logger/logger.service.ts:65
 
 ### error
 
-▸ **error**(`message`, `trace?`, `context?`): `void`
+▸ **error**(`message`, `context?`, `trace?`): `void`
 
 #### Parameters
 
 | Name       | Type     |
 | :--------- | :------- |
 | `message`  | `any`    |
-| `trace?`   | `string` |
 | `context?` | `string` |
+| `trace?`   | `string` |
 
 #### Returns
 
