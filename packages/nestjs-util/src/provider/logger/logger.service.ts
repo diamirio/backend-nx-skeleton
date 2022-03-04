@@ -37,7 +37,7 @@ export class LoggerService implements LoggerServiceCommon {
     return this
   }
 
-  error (message: any, trace?: string, context?: string): void {
+  error (message: any, context?: string, trace?: string): void {
     this.logMessage({
       type: LogType.error,
       message,
