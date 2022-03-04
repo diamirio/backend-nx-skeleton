@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-nest [4.2.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.7...@webundsoehne-private/nx-nest@4.2.8) (2022-03-04)
+
+
+### Bug Fixes
+
+* test configuration ([65731d5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/65731d5d3d3b3eb4a23dc94e1175a77c42ca58d6))
+
 ## @webundsoehne-private/nx-nest [4.2.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-nest@4.2.6...@webundsoehne-private/nx-nest@4.2.7) (2022-03-04)
 
 ### Bug Fixes
