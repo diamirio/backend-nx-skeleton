@@ -111,11 +111,13 @@ export function addProject (options: NormalizedSchema): Rule {
           },
 
           dev: {
-            command: 'jest --config ./test/jest.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles',
+            command: 'jest --config ./test/jest.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles --verbose',
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
             interactive: true,
-            environment: {}
+            environment: {
+              DEBUG_PORT: '9229'
+            }
           },
 
           e2e: {
@@ -126,10 +128,13 @@ export function addProject (options: NormalizedSchema): Rule {
           },
 
           'e2e-dev': {
-            command: 'jest --config ./test/jest-e2e.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles',
-            nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+            command: 'jest --config ./test/jest-e2e.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles --verbose',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
-            environment: {}
+            interactive: true,
+            environment: {
+              DEBUG_PORT: '9229'
+            }
           }
         }
       }
