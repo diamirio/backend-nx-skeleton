@@ -1,3 +1,9 @@
+## @webundsoehne-private/nx-workspace [4.2.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.10...@webundsoehne-private/nx-workspace@4.2.11) (2022-03-04)
+
+### Bug Fixes
+
+- jest configuration ([eb1aa4e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/eb1aa4e7c6ebd22657246fee0327b61007e360ba))
+
 ## @webundsoehne-private/nx-workspace [4.2.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.9...@webundsoehne-private/nx-workspace@4.2.10) (2022-03-02)
 
 ### Dependencies
