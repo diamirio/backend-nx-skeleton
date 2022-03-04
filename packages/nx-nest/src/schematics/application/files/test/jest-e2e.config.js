@@ -1,5 +1,5 @@
 const { join } = require('path')
-const { pathsToModuleNameMapper } = require('ts-jest')
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const { default: tsconfigLoader } = require('tsconfig-loader')
 
 const TS_CONFIG_PATH = 'test/tsconfig.json'
