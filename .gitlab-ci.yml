@@ -102,7 +102,7 @@ sync:
     - mkdir -p ~/.ssh/
     - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
   script:
-    - export GIT_SSH_COMMAND="ssh -o -o StrictHostKeyChecking=no"
+    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
     - git push git@github.com:tailoredmedia/backend-nx-skeleton.git HEAD:$CI_COMMIT_BRANCH
   only:
     - master
