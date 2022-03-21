@@ -98,8 +98,8 @@ sync:
   image: bitnami/git:alpine
   before_script:
     - git config --global user.name "backend"
-    - git config --global user.email "backend@webundsoehne.com"
-    - echo "$GITHUB_DEPLOY_KEY" > /root/.ssh/id_rsa
+    - git config --global user.email "$NPM_WS_EMAIL"
+    - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
   script:
     - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
     - git checkout $CI_COMMIT_BRANCH
@@ -109,3 +109,5 @@ sync:
     - git push git@github.com:tailoredmedia/backend-nx-skeleton.git HEAD:$CI_COMMIT_BRANCH
   only:
     - master
+  tags:
+    - docker
