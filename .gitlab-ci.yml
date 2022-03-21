@@ -91,3 +91,20 @@ publish:
     - alpha
   tags:
     - node
+
+sync:
+  stage: sync
+  image: bitnami/git:alpine
+  before_script:
+    - git config --global user.name "backend"
+    - git config --global user.email "backend@webundsoehne.com"
+    - echo "$GITHUB_DEPLOY_KEY" > /root/.ssh/id_rsa
+  script:
+    - git remote add github $REMOTE_REPOSITORY_URL
+    - git checkout $CI_COMMIT_BRANCH
+    - git pull origin $CI_COMMIT_BRANCH
+    - git pull github $CI_COMMIT_BRANCH
+    - git status
+    - git push git@github.com:tailoredmedia/backend-nx-skeleton.git HEAD:$CI_COMMIT_BRANCH
+  only:
+    - master
