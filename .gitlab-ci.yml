@@ -95,7 +95,7 @@ publish:
 
 sync:
   stage: sync
-  image: bitnami/git:alpine
+  image: bitnami/git:latest
   before_script:
     - git config --global user.name "backend"
     - git config --global user.email "$NPM_WS_EMAIL"
