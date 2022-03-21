@@ -104,8 +104,6 @@ sync:
   script:
     - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
     - git checkout $CI_COMMIT_BRANCH
-    - git pull origin $CI_COMMIT_BRANCH
-    - git pull github $CI_COMMIT_BRANCH
     - git status
     - git push git@github.com:tailoredmedia/backend-nx-skeleton.git HEAD:$CI_COMMIT_BRANCH
   only:
