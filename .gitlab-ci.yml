@@ -99,6 +99,7 @@ sync:
   before_script:
     - git config --global user.name "backend"
     - git config --global user.email "$NPM_WS_EMAIL"
+    - mkdir -p ~/.ssh/
     - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
   script:
     - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
