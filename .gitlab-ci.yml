@@ -106,6 +106,7 @@ sync:
     - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
     - git remote remove github || true
     - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
+    - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
     - git pull github $CI_COMMIT_BRANCH
     - git status
