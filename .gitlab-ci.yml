@@ -104,7 +104,8 @@ sync:
     - chmod 600 ~/.ssh/id_rsa
   script:
     - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
-    - git push git@github.com:tailoredmedia/backend-nx-skeleton.git HEAD:$CI_COMMIT_BRANCH
+    - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
+    - git push -u github $CI_COMMIT_BRANCH
   only:
     - master
   tags:
