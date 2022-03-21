@@ -101,7 +101,7 @@ sync:
     - git config --global user.email "backend@webundsoehne.com"
     - echo "$GITHUB_DEPLOY_KEY" > /root/.ssh/id_rsa
   script:
-    - git remote add github $REMOTE_REPOSITORY_URL
+    - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
     - git pull github $CI_COMMIT_BRANCH
