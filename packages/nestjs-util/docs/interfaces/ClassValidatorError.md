@@ -18,9 +18,9 @@
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:43
+packages/nestjs-util/src/filter/exception.interface.ts:41
 
-___
+---
 
 ### messages
 
@@ -28,9 +28,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:44
+packages/nestjs-util/src/filter/exception.interface.ts:42
 
-___
+---
 
 ### property
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:42
+packages/nestjs-util/src/filter/exception.interface.ts:40
