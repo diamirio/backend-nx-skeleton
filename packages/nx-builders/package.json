@@ -2,7 +2,7 @@
   "name": "@webundsoehne/nx-builders",
   "version": "1.0.0",
   "description": "TSC compiler for NX.",
-  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",

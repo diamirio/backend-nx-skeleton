@@ -2,7 +2,7 @@
   "name": "@webundsoehne-private/nx-nest",
   "version": "1.0.0",
   "description": "Nest Plugin for Nx",
-  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "author": "Backend <backend@webundsoehne.com>",

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Eslint configuration for Web&Söhne applications.",
   "main": "index.js",
-  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {

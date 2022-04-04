@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Tailored NestJS NX Based Application Skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "MIT",

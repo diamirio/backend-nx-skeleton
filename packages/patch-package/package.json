@@ -8,7 +8,7 @@
   "bin": {
     "ws-patch-package": "bin/run.js"
   },
-  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "publishConfig": {
     "access": "public"
   },
