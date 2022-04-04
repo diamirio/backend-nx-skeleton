@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [5.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.1...@webundsoehne/nestjs-util@5.3.2-beta.1) (2022-04-04)
+
+### Bug Fixes
+
+- do not derive EnrichedHttpException from Error, otherwise fastify rethrows the error ([efce2de](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/efce2de069d1a5a8379321652126fca6a3e344e4))
+
 ## @webundsoehne/nestjs-util [5.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.0...@webundsoehne/nestjs-util@5.3.1) (2022-03-04)
 
 ### Bug Fixes
