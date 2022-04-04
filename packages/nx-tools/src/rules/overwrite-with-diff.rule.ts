@@ -1,11 +1,13 @@
-import { apply, FileEntry, forEach, mergeWith, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import type { FileEntry, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
+import { apply, branchAndMerge, forEach, MergeStrategy, mergeWith } from '@angular-devkit/schematics'
 import * as diff from 'diff'
-import { createPrompt } from 'listr2'
+import { Listr } from 'listr2'
 import { EOL } from 'os'
 import { dirname } from 'path'
-import { firstValueFrom, Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { firstValueFrom } from 'rxjs'
 
-import { Logger } from '@utils'
+import { isVerbose, Logger } from '@utils'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 /**
@@ -30,123 +32,135 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
   let filesToKeep: string[] = []
 
   return (host: Tree): Rule => {
-    return mergeWith(
-      apply(source, [
-        // recover old tree first
-        async (): Promise<void> => {
-          if (oldSource) {
-            try {
-              oldTree = await firstValueFrom<Tree>(oldSource(context) as unknown as Observable<Tree>)
-              log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
-              // eslint-disable-next-line no-empty
-            } catch {}
-          }
-        },
+    return branchAndMerge(
+      mergeWith(
+        apply(source, [
+          // recover old tree first
+          async (): Promise<void> => {
+            if (oldSource) {
+              try {
+                oldTree = await firstValueFrom<Tree>(oldSource(context) as unknown as Observable<Tree>)
 
-        // merge files for each file
-        forEach((file) => {
-          if (host.exists(file.path)) {
-            const currentFile = host.read(file.path).toString()
-            const newFile = file.content.toString()
+                log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
+                // eslint-disable-next-line no-empty
+              } catch {}
+            }
+          },
 
-            if (oldTree?.exists(file.path)) {
-              // check if this file is part of old application
-              const oldFile = oldTree.read(file.path).toString()
+          // merge files for each file
+          forEach((file) => {
+            if (host.exists(file.path)) {
+              const currentFile = host.read(file.path).toString()
+              const newFile = file.content.toString()
 
-              mergeFiles(host, file, tripleFileMerge(file.path, currentFile, oldFile, newFile, log), log)
-            } else {
-              mergeFiles(host, file, doubleFileMerge(file.path, newFile, currentFile, log), log)
+              if (oldTree?.exists(file.path)) {
+                // check if this file is part of old application
+                const oldFile = oldTree.read(file.path).toString()
+
+                mergeFiles(host, file, tripleFileMerge(file.path, currentFile, oldFile, newFile, log), log)
+              } else {
+                mergeFiles(host, file, doubleFileMerge(file.path, newFile, currentFile, log), log)
+              }
+
+              // add this to file changes, return null since we did the operation directly
+              fileChanges = [...fileChanges, file.path]
+
+              return null
             }
 
-            // add this to file changes, return null since we did the operation directly
-            fileChanges = [ ...fileChanges, file.path ]
-            return null
-          }
+            // vanilla mode
+            fileChanges = [...fileChanges, file.path]
 
-          // vanilla mode
-          fileChanges = [ ...fileChanges, file.path ]
-          return file
-        }),
+            return file
+          }),
 
-        // compare current and old configuration to get not needed files
-        (): void => {
-          oldTree?.visit((path) => {
-            // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
-            if (host.exists(path) && !fileChanges.includes(path)) {
-              filesToRemove = [ ...filesToRemove, path ]
+          // compare current and old configuration to get not needed files
+          (): void => {
+            oldTree?.visit((path) => {
+              // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
+              if (host.exists(path) && !fileChanges.includes(path)) {
+                filesToRemove = [...filesToRemove, path]
+              }
+            })
+          },
+
+          // ask user if he/she wants to keep files that are not needed anymore
+          async (): Promise<void> => {
+            if (filesToRemove.length > 0) {
+              filesToKeep = (
+                await new Listr(
+                  [
+                    {
+                      task: async (ctx, task): Promise<void> => {
+                        ctx.keep = await task.prompt({
+                          type: 'MultiSelect',
+                          message: 'These files are found to be unnecessary by comparing prior configuration to new configuration. Select the ones to keep.',
+                          choices: filesToRemove
+                        })
+                      }
+                    }
+                  ],
+                  { rendererFallback: isVerbose() }
+                ).run()
+              ).keep
             }
-          })
-        },
+          },
 
-        // ask user if he/she wants to keep files that are not needed anymore
-        async (): Promise<void> => {
-          if (filesToRemove.length > 0) {
-            try {
-              filesToKeep = await createPrompt.bind(this)(
-                {
-                  type: 'MultiSelect',
-                  message: 'These files are found to be unnecassary by comparing prior configuration to new configuration. Select the ones to keep.',
-                  choices: filesToRemove
-                },
-                { error: false }
+          // delete not needed files from changing setup
+          async (): Promise<void> => {
+            if (filesToRemove.length > 0) {
+              // get which files to remove
+              filesToRemove = filesToRemove.reduce((o, val) => {
+                // angular normalizes even path arrays defined outside!
+                o = [...o, (val as any).path]
+
+                return o
+              }, [])
+
+              // remove that file
+              await Promise.all(
+                filesToRemove.map((file) => {
+                  if (!filesToKeep.includes(file)) {
+                    log.debug(`Deleting not-needed file: "${file}"`)
+                    host.delete(file)
+                  } else {
+                    log.debug(`Keeping not-needed file: "${file}"`)
+                  }
+                })
               )
-            } catch {
-              log.error('Cancelled prompt.')
-              process.exit(127)
+            }
+          },
+
+          // delete empty directories after changes
+          async (): Promise<void> => {
+            if (filesToRemove.length > 0) {
+              // get all directory names of files to remove
+              const directories = filesToRemove.map((path) => dirname(path)).filter((item, index, array) => array.indexOf(item) === index)
+
+              // check and delete empty directories
+              await Promise.all(
+                directories.map(async (directory) => {
+                  if (host.getDir(directory)?.subfiles?.length === 0 && !(host.getDir(directory)?.subdirs?.length > 0)) {
+                    log.debug(`Deleting not-needed empty directory: "${directory}"`)
+                    host.delete(directory)
+                  } else if (host.getDir(directory)?.subdirs?.length > 0) {
+                    // dont delete if has subdirectories
+                    log.debug(`Still has subdirectories: "${directory}"`)
+                  }
+                })
+              )
             }
           }
-        },
-
-        // delete not needed files from changing setup
-        async (): Promise<void> => {
-          if (filesToRemove.length > 0) {
-            // get which files to remove
-            filesToRemove = filesToRemove.reduce((o, val) => {
-              // angular normalizes even path arrays defined outside!
-              o = [ ...o, (val as any).path ]
-              return o
-            }, [])
-
-            // remove that file
-            await Promise.all(
-              filesToRemove.map((file) => {
-                if (!filesToKeep.includes(file)) {
-                  log.debug(`Deleting not-needed file: "${file}"`)
-                  host.delete(file)
-                } else {
-                  log.debug(`Keeping not-needed file: "${file}"`)
-                }
-              })
-            )
-          }
-        },
-
-        // delete empty directories after changes
-        async (): Promise<void> => {
-          if (filesToRemove.length > 0) {
-            // get all directory names of files to remove
-            const directories = filesToRemove.map((path) => dirname(path)).filter((item, index, array) => array.indexOf(item) === index)
-
-            // check and delete empty directories
-            await Promise.all(
-              directories.map(async (directory) => {
-                if (host.getDir(directory)?.subfiles?.length === 0 && !(host.getDir(directory)?.subdirs?.length > 0)) {
-                  log.debug(`Deleting not-needed empty directory: "${directory}"`)
-                  host.delete(directory)
-                } else if (host.getDir(directory)?.subdirs?.length > 0) {
-                  // dont delete if has subdirectories
-                  log.debug(`Still has subdirectories: "${directory}"`)
-                }
-              })
-            )
-          }
-        }
-      ])
+        ]),
+        MergeStrategy.AllowOverwriteConflict
+      )
     )
   }
 }
 
-const context = 1
+const patchOptions: diff.PatchOptions = {
+  context: 2
+}
 
 /**
  * Triple file merge will compare old with new file and apply the changes to the current file.
@@ -159,16 +173,20 @@ const context = 1
 export function tripleFileMerge (name: string, currentFile: string, oldFile: string, newFile: string, log: Logger): string | boolean {
   let buffer: string
   // create difference-patch
-  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', { context })
+  const patch: string = diff.createPatch(name, oldFile, newFile, '', '', patchOptions)
 
   try {
-    buffer = diff.applyPatch(currentFile, patch)
+    buffer = diff.applyPatch(currentFile, patch, { fuzzFactor: 1 })
   } catch (e) {
     log.debug(`Error while triple-merging: ${e}`)
+
     return false
   }
 
-  log.debug(patch)
+  // empty patches has 5 lines, so no need to show them
+  if (patch.split(EOL).length > 5) {
+    log.debug(patch)
+  }
 
   return buffer
 }
@@ -182,12 +200,13 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
  */
 export function doubleFileMerge (name: string, newFile: string, currentFile: string, log: Logger): string | boolean {
   let buffer: string
-  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', { context }), 'add')
+  const newToCurrentPatch = selectivePatch(diff.structuredPatch(name, name, currentFile, newFile, '', '', patchOptions), 'add')
 
   try {
     buffer = diff.applyPatch(currentFile, newToCurrentPatch)
   } catch (e) {
     log.debug(`Error while double-merging: ${e}`)
+
     return false
   }
   // const currentToNewPatch = diff.structuredPatch(name, name, file, currentFile, '', '', { context })
@@ -216,11 +235,11 @@ export function selectivePatch (patch: diff.ParsedDiff, select: 'add' | 'remove'
         // let linechanges = 0
         const lines = p.lines.reduce((o, l) => {
           if (select === 'add') {
-            // linechanges++
-            return [ ...o, replaceFirstChars(l, '-', ' ') ]
+            // linechanges--
+            return [...o, replaceFirstChars(l, '-', ' ')]
           } else if (select === 'remove') {
             // linechanges++
-            return [ ...o, replaceFirstChars(l, '+', ' ') ]
+            return [...o, replaceFirstChars(l, '+', ' ')]
           }
         }, [])
 

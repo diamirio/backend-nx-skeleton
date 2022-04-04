@@ -1,12 +1,262 @@
-## @webundsoehne/nx-builders [4.1.4-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.4-beta.1...@webundsoehne/nx-builders@4.1.4-beta.2) (2021-12-02)
+## @webundsoehne/nx-builders [5.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.3...@webundsoehne/nx-builders@5.2.4) (2022-03-02)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.3
+
+## @webundsoehne/nx-builders [5.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.2...@webundsoehne/nx-builders@5.2.3) (2022-03-01)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.2
+
+## @webundsoehne/nx-builders [5.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.1...@webundsoehne/nx-builders@5.2.2) (2022-03-01)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.1
+
+## @webundsoehne/nx-builders [5.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0...@webundsoehne/nx-builders@5.2.1) (2022-02-17)
+
+### Bug Fixes
+
+- swap dependency for colorette for forcing color on nx ([8224a31](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/8224a3177eb5c91daa81cd3a234164191a510cda))
+
+# @webundsoehne/nx-builders [5.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.1.0...@webundsoehne/nx-builders@5.2.0) (2022-02-17)
+
+### Bug Fixes
+
+- add force node flag for builder for oebb ([23a97ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/23a97ce8b1de40d3dd98f05ffbd8ed88282d7327))
+- add some extra debug messages ([93dfdbe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/93dfdbe77c6facf801cd9eeec78039315d9b67dd))
+- support node scripts again ([480dbe5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/480dbe594aab5edf62bc39633e7a4b505dc635f3))
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0
+
+# @webundsoehne/nx-builders [5.2.0-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.3...@webundsoehne/nx-builders@5.2.0-beta.4) (2022-02-17)
+
+### Bug Fixes
+
+- add some extra debug messages ([93dfdbe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/93dfdbe77c6facf801cd9eeec78039315d9b67dd))
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.3
+
+# @webundsoehne/nx-builders [5.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.2...@webundsoehne/nx-builders@5.2.0-beta.3) (2022-02-16)
+
+### Bug Fixes
+
+- add force node flag for builder for oebb ([23a97ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/23a97ce8b1de40d3dd98f05ffbd8ed88282d7327))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne/nx-builders [5.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.2.0-beta.1...@webundsoehne/nx-builders@5.2.0-beta.2) (2022-02-16)
+
+### Bug Fixes
+
+- support node scripts again ([480dbe5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/480dbe594aab5edf62bc39633e7a4b505dc635f3))
+
+# @webundsoehne/nx-builders [5.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.1.0...@webundsoehne/nx-builders@5.2.0-beta.1) (2022-02-15)
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
+# @webundsoehne/nx-builders [5.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.7...@webundsoehne/nx-builders@5.1.0) (2022-02-05)
+
+### Features
+
+- dont lint whenever there is no prior configuration, fix builders install ([2cac426](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2cac4262018cbad0ae0bb172275fcbe31b981fae)), closes [#21](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/21) [#22](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/22)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.1.0
+- **@webundsoehne/nx-tools:** upgraded to 5.1.0
+
+## @webundsoehne/nx-builders [5.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.6...@webundsoehne/nx-builders@5.0.7) (2022-02-04)
+
+### Bug Fixes
+
+- initiating builder dependencies ([d2b9617](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d2b961712580fbed82de82058976dfd58b841457))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.2
+- **@webundsoehne/nx-tools:** upgraded to 5.0.7
+
+## @webundsoehne/nx-builders [5.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.5...@webundsoehne/nx-builders@5.0.6) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.6
+
+## @webundsoehne/nx-builders [5.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.4...@webundsoehne/nx-builders@5.0.5) (2022-02-04)
+
+### Bug Fixes
+
+- update all unresolved deps ([4d78589](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d7858994fae5835df5fb44f89e8b0dd1afc6bdb))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.5
+
+## @webundsoehne/nx-builders [5.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.3...@webundsoehne/nx-builders@5.0.4) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.4
+
+## @webundsoehne/nx-builders [5.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.2...@webundsoehne/nx-builders@5.0.3) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.3
+
+## @webundsoehne/nx-builders [5.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.1...@webundsoehne/nx-builders@5.0.2) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.2
+
+## @webundsoehne/nx-builders [5.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@5.0.0...@webundsoehne/nx-builders@5.0.1) (2022-02-04)
+
+### Bug Fixes
+
+- update implicit dependencies and fix missing dep bug for brownie ([bd75add](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/bd75add196fd60d79ef41e8cc967eaa10345ffd3))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.1
+
+# @webundsoehne/nx-builders [5.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.2...@webundsoehne/nx-builders@5.0.0) (2022-02-04)
+
+### Bug Fixes
+
+- adding project dependencies ([7c98f0c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/7c98f0ce9982a91680c7b6967b17b5951448aa70))
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+- fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- templating issues ([d96029f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d96029f4e0a3079f0b9517b3199b597831c0f28f))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+
+### Features
+
+- add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+- some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- create bridge for new nx ([c2bb65c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c2bb65cc98c5385d51ff60250e4f30fe6fe19d84))
+- linting rules ([48134e6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/48134e6b81fe366dad82ef980ce592ef3895686e))
+- stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
+- swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+- upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+### BREAKING CHANGES
+
+- drops anything less than node16, strictly commonjs still, transpiled to es2021
+- make everything non-public
+- stricter linting rules may cause libraries to not work for typescript version that are older than 4 because of the import type and export type statements. what advantage that it provides is that it wont crash anymore for any of the missing dependencies that are only types
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- NX now utilizes its own HostTree, the old angular one is now converted through the bridge whenever it is required. Because this repositories compatibility is strictly with Angular builders. Else it would require a rewrite.
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.0
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0
+
+# @webundsoehne/nx-builders [5.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.2...@webundsoehne/nx-builders@5.0.0-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- templating issues ([d96029f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d96029f4e0a3079f0b9517b3199b597831c0f28f))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+
+### Features
+
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- create bridge for new nx ([c2bb65c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c2bb65cc98c5385d51ff60250e4f30fe6fe19d84))
+- upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+### BREAKING CHANGES
+
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- NX now utilizes its own HostTree, the old angular one is now converted through the bridge whenever it is required. Because this repositories compatibility is strictly with Angular builders. Else it would require a rewrite.
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 1.0.3-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0-beta.1
+
+## @webundsoehne/nx-builders [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.1...@webundsoehne/nx-builders@4.2.2) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.2
+
+## @webundsoehne/nx-builders [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.2.0...@webundsoehne/nx-builders@4.2.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
+# @webundsoehne/nx-builders [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.4...@webundsoehne/nx-builders@4.2.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne/nx-builders [4.1.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4) (2021-12-03)
 
 ### Bug Fixes
 
 - ensure runner error is string ([bdf314b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/bdf314b5da550687eda1a1a0facb4cfcabe28f82))
+- semantic commit ([a758401](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a758401ed9717de2c245dda078f0a3d00fd4402f))
 
 ### Dependencies
 
-- **@webundsoehne/nx-tools:** upgraded to 4.1.4-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4
 
 ## @webundsoehne/nx-builders [4.1.4-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne/nx-builders@4.1.3...@webundsoehne/nx-builders@4.1.4-beta.1) (2021-12-02)
 

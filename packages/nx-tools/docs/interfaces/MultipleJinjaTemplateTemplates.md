@@ -6,9 +6,9 @@ Options for multiple jinja templates.
 
 ## Type parameters
 
-| Name | Type                                                         |
-| :--- | :----------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\>`Record`<`string`, `any`\> |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\> = `Record`<`string`, `any`\> |
 
 ## Table of contents
 
@@ -34,7 +34,7 @@ Output path for generating multiple templates.
 
 packages/nx-tools/src/templates/template-engine.interface.ts:29
 
----
+___
 
 ### path
 
@@ -46,7 +46,7 @@ Path of the template that will be used.
 
 packages/nx-tools/src/templates/template-engine.interface.ts:27
 
----
+___
 
 ### root
 
@@ -68,9 +68,9 @@ Since everytemplate is indivudual, the template context can be generated through
 
 #### Parameters
 
-| Name      | Type     |
-| :-------- | :------- |
-| `ctx?`    | `T`      |
+| Name | Type |
+| :------ | :------ |
+| `ctx?` | `T` |
 | `output?` | `string` |
 
 #### Returns

@@ -30,7 +30,7 @@ BaseWithCondition.condition
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:80
 
----
+___
 
 ### match
 
@@ -40,7 +40,7 @@ packages/nx-tools/src/rules/create-application.rule.interface.ts:80
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:55
 
----
+___
 
 ### rename
 

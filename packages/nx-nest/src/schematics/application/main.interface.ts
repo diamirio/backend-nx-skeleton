@@ -1,52 +1,50 @@
-import { GeneratedNameCases } from '@webundsoehne/nx-tools'
-
-import { GeneratedMicroserviceCasing } from './../../utils/generate-microservice-casing.interface'
-import {
+import type {
   AvailableComponents,
-  AvailableDBTypes,
-  AvailableServerTypes,
-  AvailableTestsTypes,
-  AvailableLinterTypes,
-  AvailableMicroserviceTypes,
   AvailableDBAdapters,
-  AvailableExtensions
+  AvailableDBTypes,
+  AvailableExtensions,
+  AvailableMicroserviceTypes,
+  AvailableServerTypes
 } from '@interfaces/available.constants'
-import { SchematicConstants } from '@interfaces/constants'
+import type { SchematicConstants } from '@interfaces/constants'
+import type { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import type {
+  AvailableTestsTypes,
+  BaseNormalizedSchema,
+  BaseSchema,
+  BaseSchemaModes,
+  GeneratedNameCases,
+  SchemaExtensions,
+  SchemaPriorConfiguration
+} from '@webundsoehne/nx-tools'
+import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 /**
  * This is the unparsed options list coming from angular-schematics
  */
-export interface Schema extends CommonPropertiesToSaveAndUse<true> {
-  name: string
-  // options for schematic
-  directory: string
-  linter: AvailableLinterTypes
-  // injected options
-  skipFormat: boolean
-}
+export interface Schema extends BaseSchema, BaseSchemaModes {}
 
 /**
  * This is the parsed options after normalizing options.
  * It can not extend the default schema because types are different after parsed
  */
-export interface NormalizedSchema extends Schema {
-  name: string
+export interface NormalizedSchema
+  extends Schema,
+  BaseNormalizedSchema,
+  CommonPropertiesToSaveAndUse<true>,
+  SchemaPriorConfiguration<DeepPartial<CommonPropertiesToSaveAndUse<true>>> {
   // parsed internally
-  packageName: string
-  packageScope: string
-  root: string
-  sourceRoot: string
   casing: GeneratedNameCases
   injectedCasing?: { microservice?: GeneratedMicroserviceCasing }
   microserviceCasing?: Record<string, GeneratedMicroserviceCasing>
   constants: typeof SchematicConstants
-  // prior configuration will be written to nx.json for further processing
-  priorConfiguration: CommonPropertiesToSaveAndUse<true>
+  // some additional properties that does not to be saved
+  packageJsonScripts: Record<string, string>
   // injecting enums since i want to compare this in jinja templates
-  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents'>
+  enum: Omit<CommonPropertiesToSaveAndUse<false>, 'microserviceClient' | 'effectiveComponents' | 'packageJsonScripts'>
 }
 
-interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
+interface CommonPropertiesToSaveAndUse<Values extends boolean = false> extends SchemaExtensions<AvailableExtensions, typeof AvailableExtensions, Values> {
   components: Values extends true ? AvailableComponents[] : typeof AvailableComponents
   effectiveComponents: number
   server: Values extends true ? AvailableServerTypes : typeof AvailableServerTypes
@@ -55,5 +53,4 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> {
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes
   dbAdapters: Values extends true ? AvailableDBAdapters : typeof AvailableDBAdapters
   tests: Values extends true ? AvailableTestsTypes : typeof AvailableTestsTypes
-  extensions: Values extends true ? AvailableExtensions[] : typeof AvailableExtensions
 }

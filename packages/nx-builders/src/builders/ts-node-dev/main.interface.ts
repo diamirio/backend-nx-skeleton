@@ -1,9 +1,9 @@
-import { JsonObject } from '@angular-devkit/core'
+import type { EnvironmentVariables } from '@webundsoehne/nx-tools'
 
 /**
  * Options for ts-node-dev
  */
-export interface TsNodeBuilderOptions extends JsonObject {
+export interface TsNodeBuilderOptions {
   /**
    * process current working directory
    *
@@ -33,5 +33,5 @@ export interface TsNodeBuilderOptions extends JsonObject {
   inspect?: number
 
   /** environment variables */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }

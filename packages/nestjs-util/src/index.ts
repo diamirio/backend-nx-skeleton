@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
+export * from './decorator'
 export * from './interface'
 export * from './filter'
-export * from './interceptor'
 export * from './middleware'
 export * from './module'
 export * from './pipes'

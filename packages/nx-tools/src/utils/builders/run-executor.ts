@@ -1,10 +1,11 @@
-import { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
-import { ExecutorContext } from '@nrwl/devkit'
+import type { BuilderContext, BuilderOutput } from '@angular-devkit/architect'
+import type { ExecutorContext } from '@nrwl/devkit'
 import { Workspaces } from '@nrwl/tao/src/shared/workspace'
-import { from, Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { from } from 'rxjs'
 
 import { isVerbose } from '../schematics'
-import { BaseExecutor } from './base-executor'
+import type { BaseExecutor } from './base-executor'
 
 /**
  * Run a designated builder that is extended from base builder in NX way.
@@ -32,6 +33,7 @@ export function runExecutor<
     }
 
     const executor = new Executor(options, context)
+
     return from(executor.run())
   }
 }

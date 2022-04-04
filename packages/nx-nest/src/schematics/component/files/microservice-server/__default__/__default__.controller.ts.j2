@@ -13,7 +13,7 @@ export class {{ casing.pascal }}Microcontroller {
   constructor (private readonly {{ casing.camel }}Microservice: {{ casing.pascal }}Microservice) {}
 
   @MessagePattern({{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }})
-  public default (
+  default (
     options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
   ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {
     return this.{{ casing.camel }}Microservice.default(options)

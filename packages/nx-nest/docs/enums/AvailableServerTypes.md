@@ -19,9 +19,9 @@ If server component is selected, these are the options to serve as a server.
 
 #### Defined in
 
-interfaces/available.constants.ts:19
+interfaces/available.constants.ts:21
 
----
+___
 
 ### RESTFUL
 
@@ -29,4 +29,4 @@ interfaces/available.constants.ts:19
 
 #### Defined in
 
-interfaces/available.constants.ts:18
+interfaces/available.constants.ts:20

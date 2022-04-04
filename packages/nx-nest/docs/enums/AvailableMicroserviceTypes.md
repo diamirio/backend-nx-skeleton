@@ -18,4 +18,4 @@ Available microservice types after selecting microservice-server as component.
 
 #### Defined in
 
-interfaces/available.constants.ts:53
+interfaces/available.constants.ts:55

@@ -1,8 +1,341 @@
-## @webundsoehne-private/nx-workspace [3.0.8-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.7...@webundsoehne-private/nx-workspace@3.0.8-beta.1) (2021-12-02)
+## @webundsoehne-private/nx-workspace [4.2.11](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.10...@webundsoehne-private/nx-workspace@4.2.11) (2022-03-04)
+
+### Bug Fixes
+
+- jest configuration ([eb1aa4e](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/eb1aa4e7c6ebd22657246fee0327b61007e360ba))
+
+## @webundsoehne-private/nx-workspace [4.2.10](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.9...@webundsoehne-private/nx-workspace@4.2.10) (2022-03-02)
 
 ### Dependencies
 
-- **@webundsoehne/nx-tools:** upgraded to 4.1.4-beta.1
+- **@webundsoehne/nx-builders:** upgraded to 5.2.4
+- **@webundsoehne/nx-tools:** upgraded to 5.2.3
+
+## @webundsoehne-private/nx-workspace [4.2.9](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.8...@webundsoehne-private/nx-workspace@4.2.9) (2022-03-02)
+
+### Bug Fixes
+
+- copy paste error ([0a92259](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0a9225980a433e8151c002b91a32a1886f412eca))
+
+## @webundsoehne-private/nx-workspace [4.2.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.7...@webundsoehne-private/nx-workspace@4.2.8) (2022-03-01)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.3
+- **@webundsoehne/nx-tools:** upgraded to 5.2.2
+
+## @webundsoehne-private/nx-workspace [4.2.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.6...@webundsoehne-private/nx-workspace@4.2.7) (2022-03-01)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.2
+- **@webundsoehne/nx-tools:** upgraded to 5.2.1
+
+## @webundsoehne-private/nx-workspace [4.2.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.5...@webundsoehne-private/nx-workspace@4.2.6) (2022-02-24)
+
+### Bug Fixes
+
+- update documentation for readme ([3b1d489](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3b1d4899ac39da169b5a1e2fa0b32b80f957c322))
+
+## @webundsoehne-private/nx-workspace [4.2.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.4...@webundsoehne-private/nx-workspace@4.2.5) (2022-02-24)
+
+### Bug Fixes
+
+- update testing configuration to seperate e2e and unit ([da9037c](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9037c55234c006a099bfb9d860d4154aaf62f8))
+
+## @webundsoehne-private/nx-workspace [4.2.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.3...@webundsoehne-private/nx-workspace@4.2.4) (2022-02-21)
+
+### Bug Fixes
+
+- add nx to eslint ([c9ef8c8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c9ef8c87872346919bc4570d26cf7959682c4ad1))
+- update eslitn config ([63de9cd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/63de9cd575a06bfe90bbd6e7a616025955e854b1))
+
+## @webundsoehne-private/nx-workspace [4.2.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.2...@webundsoehne-private/nx-workspace@4.2.3) (2022-02-21)
+
+### Bug Fixes
+
+- more target based strings ([681f765](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/681f7657e27dd9b5882ecd7446b174ec135a183e))
+- package.json scripts ([df50eda](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/df50edad0a4db09481a6682cf2125de5eb3ab45a))
+
+## @webundsoehne-private/nx-workspace [4.2.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.1...@webundsoehne-private/nx-workspace@4.2.2) (2022-02-21)
+
+### Bug Fixes
+
+- update template for migration to host the subtarget ([160a17a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/160a17ab7e9f9c2efa594c1b1987131e05c585c0))
+
+## @webundsoehne-private/nx-workspace [4.2.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0...@webundsoehne-private/nx-workspace@4.2.1) (2022-02-17)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.1
+
+# @webundsoehne-private/nx-workspace [4.2.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.3...@webundsoehne-private/nx-workspace@4.2.0) (2022-02-17)
+
+### Bug Fixes
+
+- update environment variables to always be string ([110cb57](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/110cb574aeab31576c347ebe55cbaea73282664c))
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.3...@webundsoehne-private/nx-workspace@4.2.0-beta.4) (2022-02-17)
+
+### Features
+
+- infer package version from the workspace version ([76fbd98](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/76fbd986936e62e6da735194649fd1a38de38061))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.4
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.3
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.2...@webundsoehne-private/nx-workspace@4.2.0-beta.3) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.3
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.2.0-beta.1...@webundsoehne-private/nx-workspace@4.2.0-beta.2) (2022-02-16)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.2
+
+# @webundsoehne-private/nx-workspace [4.2.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.3...@webundsoehne-private/nx-workspace@4.2.0-beta.1) (2022-02-15)
+
+### Bug Fixes
+
+- update environment variables to always be string ([110cb57](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/110cb574aeab31576c347ebe55cbaea73282664c))
+
+### Features
+
+- use npx or yarn exec like paths instead of hardcoding for windows ([d1172a7](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d1172a7ebe345347ba72b8ffa24f544cfeef56c1))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.2.0-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 5.2.0-beta.1
+
+## @webundsoehne-private/nx-workspace [4.1.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.2...@webundsoehne-private/nx-workspace@4.1.3) (2022-02-12)
+
+### Bug Fixes
+
+- problem with import plugin to use the nx tsconfig ([3a5b4c5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/3a5b4c5e897e71f3628070a36a770fc819a6ed00))
+
+## @webundsoehne-private/nx-workspace [4.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.1...@webundsoehne-private/nx-workspace@4.1.2) (2022-02-12)
+
+### Bug Fixes
+
+- update gitignore template to not ignore docker envs ([1b28692](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/1b286922ade1a073d0884c0b6bfdb7b228807b74))
+
+## @webundsoehne-private/nx-workspace [4.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.1.0...@webundsoehne-private/nx-workspace@4.1.1) (2022-02-07)
+
+### Bug Fixes
+
+- update wrong dependency version ([fc1c9ad](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fc1c9adaa572f2a1cb358ebe6582efff3ceae222))
+
+# @webundsoehne-private/nx-workspace [4.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.8...@webundsoehne-private/nx-workspace@4.1.0) (2022-02-05)
+
+### Features
+
+- better merge, better linting ([82b62c1](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/82b62c1b27926313b85f437e9cc8bff62d861167))
+- dont lint whenever there is no prior configuration, fix builders install ([2cac426](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/2cac4262018cbad0ae0bb172275fcbe31b981fae)), closes [#21](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/21) [#22](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/22)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.1.0
+- **@webundsoehne/nx-builders:** upgraded to 5.1.0
+- **@webundsoehne/nx-tools:** upgraded to 5.1.0
+
+## @webundsoehne-private/nx-workspace [4.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.7...@webundsoehne-private/nx-workspace@4.0.8) (2022-02-04)
+
+### Bug Fixes
+
+- initiating builder dependencies ([d2b9617](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d2b961712580fbed82de82058976dfd58b841457))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.2
+- **@webundsoehne/nx-builders:** upgraded to 5.0.7
+- **@webundsoehne/nx-tools:** upgraded to 5.0.7
+
+## @webundsoehne-private/nx-workspace [4.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.6...@webundsoehne-private/nx-workspace@4.0.7) (2022-02-04)
+
+### Bug Fixes
+
+- update internal dependencies ([0a943b0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/0a943b0e7ac94809be69af68fc59b006ca2733f9))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.6
+
+## @webundsoehne-private/nx-workspace [4.0.6](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.5...@webundsoehne-private/nx-workspace@4.0.6) (2022-02-04)
+
+### Bug Fixes
+
+- update tao dependency ([b6644fe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b6644fe416f7a074e59fc4f6a2c113a7074ae828))
+
+## @webundsoehne-private/nx-workspace [4.0.5](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.4...@webundsoehne-private/nx-workspace@4.0.5) (2022-02-04)
+
+### Bug Fixes
+
+- update all unresolved deps ([4d78589](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d7858994fae5835df5fb44f89e8b0dd1afc6bdb))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.0.1
+- **@webundsoehne/nx-tools:** upgraded to 5.0.5
+
+## @webundsoehne-private/nx-workspace [4.0.4](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.3...@webundsoehne-private/nx-workspace@4.0.4) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.4
+
+## @webundsoehne-private/nx-workspace [4.0.3](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.2...@webundsoehne-private/nx-workspace@4.0.3) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.3
+
+## @webundsoehne-private/nx-workspace [4.0.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.1...@webundsoehne-private/nx-workspace@4.0.2) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.2
+
+## @webundsoehne-private/nx-workspace [4.0.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@4.0.0...@webundsoehne-private/nx-workspace@4.0.1) (2022-02-04)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.1
+
+# @webundsoehne-private/nx-workspace [4.0.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.1.2...@webundsoehne-private/nx-workspace@4.0.0) (2022-02-04)
+
+### Bug Fixes
+
+- add implicit dependencies for package json ([5f2cf9b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5f2cf9b1e33fcbbd08e20593e57ba98ccbe9e7de)), closes [#15](https://gitlab.tailored-apps.com/ckilic/nx-test/issues/15)
+- add mechanism to remove implicit dependencies after remove ([e722281](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e722281b34af261ea6ea9e9f6c1c8ff0b7ffaa52))
+- all linting problems and use it commonly with requires ([e1ed351](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e1ed351a5ff8a9e48d90d71feb82fe8a17d28665))
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- command generator and merge problems ([57ee27d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/57ee27da701f18439a9a644b923eef0bf6ddbcdd))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- eslint config utils to auto isolate tsconfig paths ([e71a2a2](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/e71a2a29cd05677bf635ab580842bf4e57aeac21))
+- fix cjs exporting, not use esm in anyplace because of package.json ([b182968](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/b182968fc9ec27c8f3e985b9b6fe011da8c0d64b))
+- fix workspace schematics ([5a719ed](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a719edbca3eb39adfa800f225a619dc60531cb1))
+- npm execute package problem with new npm ([95a8ec0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/95a8ec0b0a8a39474e4d5549ed92a38d742a15aa))
+- problems with extensions and make extensions generic too ([83df337](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/83df337db74741f0f1c1a1d6d20bb35da81b963d))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- templates ([a705b60](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a705b60d670816e0d5fc6cae817d912762341570))
+- templating issues ([d96029f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d96029f4e0a3079f0b9517b3199b597831c0f28f))
+- tsconfig problems in libraries ([ca93c28](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ca93c286a8192ac609f4621623998b00b1611ae4))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update unused remove functionality for ts errors ([6fba0eb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6fba0ebe34c065a574d961c3975c490f046e7ef1))
+- update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+- update workspace scripts and brownie accordingly ([d3287d8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d3287d882e649254423a2cac56de1da8ab641142))
+
+### Features
+
+- add development mode for autolinking packages, fixes some bugs ([c104f33](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/c104f33ede397268d06200a2d230314f1bfb2fa6))
+- add more decorators for missing scheduler features ([ea37cbe](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ea37cbedaacd25db7506cdf9a181925f4a9653ba))
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+- move commonly used normalize options to a common place ([cf39af3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf39af3992a1495fcd906928a5227c31d1c5d4cc))
+- some performance improvements with major bug fixes of initiation and formatting ([5fa68c4](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5fa68c4bdaf7304d0817def307c7115d71f97081))
+- update custom tasks and linting inside the initial workspace ([fe4b505](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/fe4b505acf00cc5f974cf68a6d599bdd1d5f7e2c))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- stricter linting rules ([6206f94](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6206f94c7dd0be4b9fee2be21559bcae3afc0949))
+- swap the build system because of 24gb ram usage xd ([4d51c36](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/4d51c36c266ae64c82c4387190a72077d8a0976c))
+- upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+### BREAKING CHANGES
+
+- drops anything less than node16, strictly commonjs still, transpiled to es2021
+- stricter linting rules may cause libraries to not work for typescript version that are older than 4 because of the import type and export type statements. what advantage that it provides is that it wont crash anymore for any of the missing dependencies that are only types
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0
+
+# @webundsoehne-private/nx-workspace [4.0.0-beta.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.1.2...@webundsoehne-private/nx-workspace@4.0.0-beta.1) (2022-01-26)
+
+### Bug Fixes
+
+- brownie installation issues ([cf62dd5](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf62dd5b68f00db995c8a3be6fce0e005d448268))
+- deprecetad builder entry for executor ([01681ce](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/01681ce79f455af0123ccf0d19434f55a16871bb))
+- fix workspace schematics ([5a719ed](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a719edbca3eb39adfa800f225a619dc60531cb1))
+- npm execute package problem with new npm ([95a8ec0](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/95a8ec0b0a8a39474e4d5549ed92a38d742a15aa))
+- swap out tsconfig paths ([6b3be3b](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6b3be3b6de7a4990ca4a5837512e5b508ae5b6c3))
+- templates ([a705b60](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/a705b60d670816e0d5fc6cae817d912762341570))
+- templating issues ([d96029f](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d96029f4e0a3079f0b9517b3199b597831c0f28f))
+- tsconfig problems in libraries ([ca93c28](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/ca93c286a8192ac609f4621623998b00b1611ae4))
+- update dependencies ([f569b85](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/f569b85eb955e8e9b23d48b17493e4c6e9d361d2))
+- update integration for new project based nx ([5a7dd4a](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5a7dd4a938b2755c2c209c55581a6b7eced41ab5))
+- update unused remove functionality for ts errors ([6fba0eb](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/6fba0ebe34c065a574d961c3975c490f046e7ef1))
+- update workspace dependencies ([04cd45d](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/04cd45dafe2635a60b12ef2d68076624c4d0e812))
+- update workspace scripts and brownie accordingly ([d3287d8](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/d3287d882e649254423a2cac56de1da8ab641142))
+
+### Features
+
+- change repository initiation method ([08166dd](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/08166dd144516dcf75b5c1ce15aa4c0ae6197153))
+- move commonly used normalize options to a common place ([cf39af3](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/cf39af3992a1495fcd906928a5227c31d1c5d4cc))
+
+### Performance Improvements
+
+- cleans up old angular stuff auto injects to rules, adds more generators ([5c375d6](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/5c375d6215d9afee3e202200b034567cd1f2ef55))
+- upgrade versions ([da9db99](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/da9db993bd2e59b4c9c1a6906725dbe00d79c2d1))
+
+### BREAKING CHANGES
+
+- this definitely includes many breaking changes while cleaning up old nx rules to have directly inject the three and context
+- drops the builders completely due to they being not avaiable in nx anymore
+- might break older configurations do to library change
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.0.0-beta.1
+
+## @webundsoehne-private/nx-workspace [3.1.2](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.1.1...@webundsoehne-private/nx-workspace@3.1.2) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.2
+
+## @webundsoehne-private/nx-workspace [3.1.1](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.1.0...@webundsoehne-private/nx-workspace@3.1.1) (2021-12-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.1
+
+# @webundsoehne-private/nx-workspace [3.1.0](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.8...@webundsoehne-private/nx-workspace@3.1.0) (2021-12-20)
+
+### Features
+
+- add keycloak packages ([581c003](https://gitlab.tailored-apps.com/ckilic/nx-test/commit/581c0037f2367c366e92360ce15a4867fd078907))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.2.0
+
+## @webundsoehne-private/nx-workspace [3.0.8](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.7...@webundsoehne-private/nx-workspace@3.0.8) (2021-12-03)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 4.1.4
 
 ## @webundsoehne-private/nx-workspace [3.0.7](https://gitlab.tailored-apps.com/ckilic/nx-test/compare/@webundsoehne-private/nx-workspace@3.0.6...@webundsoehne-private/nx-workspace@3.0.7) (2021-11-16)
 

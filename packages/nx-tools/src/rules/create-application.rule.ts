@@ -1,17 +1,18 @@
-import { filter, forEach, move, noop, Rule, applyPathTemplate } from '@angular-devkit/schematics'
+import type { Rule } from '@angular-devkit/schematics'
+import { filter, forEach, move, noop, applyPathTemplate } from '@angular-devkit/schematics'
 
-import { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
+import type { BaseCreateApplicationFilesOptions, CreateApplicationRuleInterface, CreateApplicationRuleOptions } from '@rules/create-application.rule.interface'
 import { jinjaTemplate, multipleJinjaTemplate } from '@templates/template-engine'
-import { formatFiles } from '@utils/file-system/format-files'
+import { formatFilesRule } from '@utils/file-system/format-files'
 
 /**
  * Returns a general application rule that can be used in schematics.
- * @param appRule
+ * @param rules
  * @param options
  * @param ruleOptions
  */
 export function createApplicationRule<T extends BaseCreateApplicationFilesOptions> (
-  appRule: CreateApplicationRuleInterface,
+  rules: CreateApplicationRuleInterface,
   options?: T,
   ruleOptions?: CreateApplicationRuleOptions
 ): Rule[] {
@@ -20,14 +21,14 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      * Include files and folders depending on the SchematicFolder infastructure
      * This is mostly for conditional imports of files.
      */
-    ...appRule.include
-      ? Object.values(appRule.include)?.map((val) => {
+    ...rules.include && typeof rules.include === 'object'
+      ? Object.values(rules.include).map((val) => {
         return val.condition ?? true ? noop() : filter((file) => !val.files?.some((f) => file.match(f)))
       })
       : [],
 
-    ...appRule.include
-      ? Object.values(appRule.include)?.map((val) => {
+    ...rules.include && typeof rules.include === 'object'
+      ? Object.values(rules.include).map((val) => {
         return val.condition ?? true ? noop() : filter((file) => !val.folders?.some((f) => file.match(f)))
       })
       : [],
@@ -38,12 +39,12 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      */
 
     // clean up unwanted folders from tree
-    ...appRule.templates?.map((val) => {
+    ...rules.templates?.map((val) => {
       return !val.condition ?? false ? filter((file) => !file.match(`__${val.match}__`)) : noop()
     }) ?? [],
 
     // omit some folders
-    ...appRule.omit?.map((val) => {
+    ...rules.omit?.map((val) => {
       return val.condition ?? false ? filter((file) => val.match(file)) : noop()
     }) ?? [],
 
@@ -53,7 +54,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      */
 
     // interpolate multiple templates first because we want to remove the jinja file
-    ...appRule.multipleTemplates?.map((val) => {
+    ...rules.multipleTemplates?.map((val) => {
       return val.condition ?? true
         ? multipleJinjaTemplate<Record<string, any>>(
           {
@@ -73,7 +74,7 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
         ...options ?? {}
         // offsetFromRoot: offsetFromRoot(options.root)
       },
-      { templates: [ '.j2' ] }
+      { templates: ['.j2'] }
     ),
 
     /**
@@ -82,10 +83,12 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      */
 
     // FIXME: This trickery is required in some of the stupid stuff, having two template engines and history merging
+    // future note: this clears the __ from the names of the paths coming from angular schematics
+    // node_modules check is required because the host might include it in the virtual filesystem
     forEach((entry) => {
       if (!entry.path.includes('node_modules')) {
         return applyPathTemplate(
-          appRule.templates?.reduce((o, val) => {
+          rules.templates?.reduce((o, val) => {
             return val.condition ? { ...o, [String(val.match)]: val?.rename ?? '' } : o
           }, {})
         )(entry)
@@ -98,26 +101,24 @@ export function createApplicationRule<T extends BaseCreateApplicationFilesOption
      * Trigger some additional rules
      */
 
-    ...appRule.trigger
+    ...rules.trigger
       ?.map((val) => {
-        return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [ val.rule ] : noop()
+        return val.condition ?? true ? Array.isArray(val.rule) ? val.rule : [val.rule] : noop()
       })
       .flat() ?? [],
+
+    // move all the files to package root
+    options?.root ? move(options.root) : noop(),
 
     /**
      * Format
      * May be required for diff-merge rules
      */
     // need to format files before putting them through difference, or else it goes crazy.
-    appRule.format
-      ? formatFiles({
-        eslint: true,
-        prettier: true,
-        ...ruleOptions?.format
+    rules.format
+      ? formatFilesRule({
+        ...ruleOptions?.format ?? {}
       })
-      : noop(),
-
-    // move all the files to package root
-    options?.root ? move(options.root) : noop()
+      : noop()
   ]
 }

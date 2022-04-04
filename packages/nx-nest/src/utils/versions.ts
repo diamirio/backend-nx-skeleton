@@ -1,8 +1,8 @@
-import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
-
 import { VERSIONS } from './versions.constants'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
-import { NormalizedSchema } from '@src/schematics/application/main.interface'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import type { NormalizedSchema } from '@schematics/application/main.interface'
+import type { PackageVersions } from '@webundsoehne/nx-tools'
+import { dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 /**
  * Will calculate the dependencies depending on the components selected.
@@ -10,15 +10,15 @@ import { NormalizedSchema } from '@src/schematics/application/main.interface'
  * @param options
  * @param builders
  */
-export function calculateDependencies (options: NormalizedSchema, builders?: boolean): PackageVersions {
-  // only add builders
-  if (builders) {
-    return VERSIONS.base.builder
-  }
-
+export async function calculateDependencies (options: NormalizedSchema): Promise<PackageVersions> {
   return dependencyCalculator([
     {
+      condition: true,
       deps: VERSIONS.base.default
+    },
+    {
+      condition: true,
+      deps: VERSIONS.base.builder
     },
     // tests
     {
@@ -36,7 +36,7 @@ export function calculateDependencies (options: NormalizedSchema, builders?: boo
     },
     // microservices
     {
-      condition: [ AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT ].some((c) => options.components.includes(c)),
+      condition: [AvailableComponents.MICROSERVICE_SERVER, AvailableComponents.MICROSERVICE_CLIENT].some((c) => options.components.includes(c)),
       deps: VERSIONS.base.microservice
     },
     {

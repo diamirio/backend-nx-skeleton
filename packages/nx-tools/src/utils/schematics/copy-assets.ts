@@ -1,7 +1,7 @@
-import glob from 'glob'
+import globby from 'globby'
 import { join } from 'path'
 
-import { AssetGlob, FileInputOutput } from '@interfaces/assets.interface'
+import type { AssetGlob, FileInputOutput } from '@interfaces/assets.interface'
 import { removePathRoot } from '@utils'
 
 export function generateBuilderAssets (options: { workspaceRoot: string, outDir: string, cwd?: string }, assets: (AssetGlob | string)[]): FileInputOutput[] {
@@ -9,9 +9,9 @@ export function generateBuilderAssets (options: { workspaceRoot: string, outDir:
 
   // globbing some files
   const globbedFiles = (pattern: string, input = '', ignore: string[] = []): string[] => {
-    return glob.sync(pattern, {
+    return globby.sync(pattern, {
       cwd: input,
-      nodir: true,
+      onlyFiles: true,
       ignore
     })
   }

@@ -1,14 +1,19 @@
 {
-  "extends": "../../tsconfig",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@src/*": ["*"],
+      "@builders/*": ["builders/*"],
+      "@integration/*": ["integration/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@schematics/*": ["schematics/*"],
       "@utils/*": ["utils/*"],
-      "@interfaces/*": ["interfaces/*"]
+      "@builders": ["builders"],
+      "@interfaces": ["interfaces"],
+      "@schematics": ["schematics"],
+      "@utils": ["utils"]
     }
   },
   "include": ["src"],

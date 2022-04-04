@@ -1,12 +1,13 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { join } from 'path'
-import { from, Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { from } from 'rxjs'
 import { filter, map, mergeMap } from 'rxjs/operators'
 
 import { getJinjaDefaults } from './jinja-defaults'
-import { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
-import { getFilesInTree } from '@src/utils/file-system/file-system'
+import type { JinjaTemplateOptions, MultipleJinjaTemplateOptions } from './template-engine.interface'
 import { isVerbose, Logger } from '@utils'
+import { getFilesInTree } from '@utils/file-system/file-system'
 
 /**
  * Generates jinja templates with given context.
@@ -14,7 +15,7 @@ import { isVerbose, Logger } from '@utils'
  * @param options
  */
 export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateOptions): Rule {
-  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
@@ -29,6 +30,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
       filter((file) => host.exists(file.path)),
       mergeMap(async (file) => {
         let matched: string
+
         await Promise.all(
           options.templates?.map(async (template) => {
             if (file.path.match(template)) {
@@ -57,7 +59,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
       }),
       map(() => host)
     )
-  }) as unknown) as Rule
+  }) as unknown as Rule
 }
 
 /**
@@ -66,7 +68,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
  * @param options
  */
 export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, options: MultipleJinjaTemplateOptions<T>): Rule {
-  return (((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  return ((host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
@@ -80,6 +82,7 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
     return from(files).pipe(
       mergeMap(async (file) => {
         let matched: string
+
         await Promise.all(
           options.templates?.map(async (template) => {
             if (file.path.match(template.path)) {
@@ -96,11 +99,11 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
         await Promise.all(
           options.templates.map(async (template) => {
             try {
-              log.debug(`Generating template from ${matched}: ${template.output}`)
+              const output: string = template.root ? join(template.root, template.output) : template.output
+
+              log.debug(`Generating template from ${matched} to: ${output}`)
 
               const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
-
-              const output: string = template.root ? join(template.root, template.output) : template.output
 
               host.create(output, content)
             } catch (e) {
@@ -119,5 +122,5 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
       }),
       map(() => host)
     )
-  }) as unknown) as Rule
+  }) as unknown as Rule
 }

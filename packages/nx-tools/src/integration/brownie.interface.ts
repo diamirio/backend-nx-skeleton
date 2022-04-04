@@ -1,8 +1,7 @@
 /**
  * To integrate a application with brownie for further processing.
  */
-export interface BrownieIntegrationInterface {
-  // @TODO: will have to convert this to enum and get this from brownie
+export interface BrownieIntegration {
   /** Brownie available containers */
   containers?: BrownieAvailableContainers[]
 }

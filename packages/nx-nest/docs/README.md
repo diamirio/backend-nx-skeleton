@@ -9,50 +9,47 @@
 - [AvailableComponents](enums/AvailableComponents.md)
 - [AvailableDBAdapters](enums/AvailableDBAdapters.md)
 - [AvailableDBTypes](enums/AvailableDBTypes.md)
+- [AvailableExtensions](enums/AvailableExtensions.md)
+- [AvailableGenerators](enums/AvailableGenerators.md)
 - [AvailableMicroserviceTypes](enums/AvailableMicroserviceTypes.md)
+- [AvailableServerAdapters](enums/AvailableServerAdapters.md)
 - [AvailableServerTypes](enums/AvailableServerTypes.md)
-- [AvailableTestsTypes](enums/AvailableTestsTypes.md)
 - [SchematicConstants](enums/SchematicConstants.md)
 
 ### Interfaces
 
 - [GeneratedMicroserviceCasing](interfaces/GeneratedMicroserviceCasing.md)
 
-### Type aliases
-
-- [AvailableLinterTypes](README.md#availablelintertypes)
-
 ### Variables
 
+- [AvailableExtensionsMap](README.md#availableextensionsmap)
 - [PrettyNamesForAvailableThingies](README.md#prettynamesforavailablethingies)
 
 ### Functions
 
 - [generateMicroserviceCasing](README.md#generatemicroservicecasing)
 
-## Type aliases
+## Variables
 
-### AvailableLinterTypes
+### AvailableExtensionsMap
 
-Ƭ **AvailableLinterTypes**: `Exclude`<`Linter`, `"tslint"`\>
-
-Available Linters
+• **AvailableExtensionsMap**: `ExtensionsMap`<typeof [`AvailableExtensions`](enums/AvailableExtensions.md), `ApplicationNormalizedSchema`\>
 
 #### Defined in
 
-interfaces/available.constants.ts:59
+interfaces/available.constants.ts:65
 
-## Variables
+___
 
 ### PrettyNamesForAvailableThingies
 
-• `Const` **PrettyNamesForAvailableThingies**: `Record`<[`AvailableComponents`](enums/AvailableComponents.md) \| [`AvailableServerTypes`](enums/AvailableServerTypes.md) \| [`AvailableDBTypes`](enums/AvailableDBTypes.md) \| [`AvailableTestsTypes`](enums/AvailableTestsTypes.md) \| [`AvailableMicroserviceTypes`](enums/AvailableMicroserviceTypes.md), `string`\>
+• **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableComponents`](enums/AvailableComponents.md) \| [`AvailableServerTypes`](enums/AvailableServerTypes.md) \| [`AvailableServerAdapters`](enums/AvailableServerAdapters.md) \| [`AvailableDBTypes`](enums/AvailableDBTypes.md) \| [`AvailableMicroserviceTypes`](enums/AvailableMicroserviceTypes.md) \| [`AvailableExtensions`](enums/AvailableExtensions.md)\>
 
 Prettified names for components to use with prompts and such.
 
 #### Defined in
 
-interfaces/available.constants.ts:64
+interfaces/available.constants.ts:87
 
 ## Functions
 
@@ -62,8 +59,8 @@ interfaces/available.constants.ts:64
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `name` | `string` |
 
 #### Returns
@@ -72,4 +69,4 @@ interfaces/available.constants.ts:64
 
 #### Defined in
 
-utils/generate-microservice-casing.ts:5
+utils/generate-microservice-casing.ts:4

@@ -1,0 +1,74 @@
+{
+  "name": "@webundsoehne/nestjs-keycloak",
+  "description": "Keycloak modules for token verification and administration of Keycloak.",
+  "version": "1.0.0",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nestjs",
+    "keycloak"
+  ],
+  "scripts": {
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "typedoc src/index.ts src/graphql.ts src/restful.ts --readme none",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+  },
+  "lint-staged": {
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@keycloak/keycloak-admin-client": "^16.1.1",
+    "@nestjs/common": "^8.3.1",
+    "@nestjs/core": "^8.3.1",
+    "@nestjs/graphql": "^9.0.4",
+    "@types/express": "^4.17.3",
+    "express": "^4.17.3",
+    "fastify": "^3.27.0",
+    "graphql": "^15",
+    "keycloak-connect": "^16.1.1"
+  },
+  "peerDependencies": {
+    "@keycloak/keycloak-admin-client": ">= 15",
+    "@nestjs/common": ">= 8",
+    "@nestjs/core": ">= 8",
+    "@nestjs/graphql": ">= 8",
+    "express": ">= 4",
+    "fastify": ">= 3",
+    "graphql": ">= 15",
+    "keycloak-connect": ">= 15"
+  },
+  "peerDependenciesMeta": {
+    "graphql": {
+      "optional": true
+    },
+    "express": {
+      "optional": true
+    },
+    "fastify": {
+      "optional": true
+    },
+    "@nestjs/graphql": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

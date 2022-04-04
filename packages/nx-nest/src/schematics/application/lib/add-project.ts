@@ -1,24 +1,23 @@
-import { normalize } from '@angular-devkit/core'
-import { Rule } from '@angular-devkit/schematics'
-import { generateProjectLint, readNxJson, updateWorkspaceInTree } from '@nrwl/workspace'
-import { EnrichedWorkspaceJson, NxProjectTypes } from '@webundsoehne/nx-tools'
+import type { Rule, Tree } from '@angular-devkit/schematics'
 import { join } from 'path'
 
-import { SchematicArchitect } from '../interfaces/add-project.interface'
+import type { SchematicTargets } from '../interfaces/add-project.interface'
 import { SchematicFilesMap } from '../interfaces/file.constants'
-import { NormalizedSchema } from '../main.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableTestsTypes } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
+import type { NormalizedSchema } from '../main.interface'
+import { SchematicConstants } from '@interfaces'
+import { AvailableComponents, AvailableDBAdapters, AvailableExtensions } from '@interfaces/available.constants'
+import type { EnrichedProjectConfiguration } from '@webundsoehne/nx-tools'
+import { AvailableTestsTypes, createWorkspaceProjectRule, generateProjectLintTarget, NxProjectTypes, readWorkspaceLayout } from '@webundsoehne/nx-tools'
 
 /**
  * Add the project to the {workspace,angular}.json
  * @param options Parsed schema
  */
 export function addProject (options: NormalizedSchema): Rule {
-  return updateWorkspaceInTree<EnrichedWorkspaceJson>((json) => {
-    const architect: SchematicArchitect = {} as SchematicArchitect
+  return (host: Tree): Rule => {
+    const targets: SchematicTargets = {} as SchematicTargets
 
-    architect.build = {
+    targets.build = {
       executor: '@webundsoehne/nx-builders:tsc',
       options: {
         cwd: options.root,
@@ -31,6 +30,11 @@ export function addProject (options: NormalizedSchema): Rule {
             glob: '*',
             input: `${options.root}/config`,
             output: 'config'
+          },
+          {
+            glob: '.dockerignore',
+            input: `${options.root}`,
+            output: '.'
           },
           {
             glob: 'Dockerfile',
@@ -48,7 +52,7 @@ export function addProject (options: NormalizedSchema): Rule {
 
     // prefer server mode
     if (options.components.includes(AvailableComponents.SERVER)) {
-      architect.serve = {
+      targets.serve = {
         executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
@@ -60,7 +64,7 @@ export function addProject (options: NormalizedSchema): Rule {
         }
       }
     } else if (options.components.includes(AvailableComponents.MICROSERVICE_SERVER)) {
-      architect.serve = {
+      targets.serve = {
         executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
@@ -72,7 +76,7 @@ export function addProject (options: NormalizedSchema): Rule {
         }
       }
     } else if (options.components.includes(AvailableComponents.BG_TASK)) {
-      architect.serve = {
+      targets.serve = {
         executor: '@webundsoehne/nx-builders:ts-node-dev',
         options: {
           cwd: options.root,
@@ -86,7 +90,7 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     if (options.tests === AvailableTestsTypes.JEST) {
-      architect.test = {
+      targets.test = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
@@ -95,7 +99,7 @@ export function addProject (options: NormalizedSchema): Rule {
           watch: false,
           command: 'jest --config ./test/jest.config.js --passWithNoTests --detectOpenHandles',
           environment: {
-            DEBUG_PORT: 9229
+            DEBUG_PORT: '9229'
           }
         },
         configurations: {
@@ -107,35 +111,47 @@ export function addProject (options: NormalizedSchema): Rule {
           },
 
           dev: {
-            command: 'jest --config ./test/jest.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles',
+            command: 'jest --config ./test/jest.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles --verbose',
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
             interactive: true,
-            environment: {}
+            environment: {
+              DEBUG_PORT: '9229'
+            }
           },
 
           e2e: {
-            command: 'jest --config ./test/jest.e2e-config.js --passWithNoTests --runInBand --detectOpenHandles',
+            command: 'jest --config ./test/jest-e2e.config.js --passWithNoTests --runInBand --detectOpenHandles',
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
             node: true,
             environment: {}
+          },
+
+          'e2e-dev': {
+            command: 'jest --config ./test/jest-e2e.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles --verbose',
+            nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
+            node: true,
+            interactive: true,
+            environment: {
+              DEBUG_PORT: '9229'
+            }
           }
         }
       }
     }
 
     if (options.components.includes(AvailableComponents.COMMAND)) {
-      architect.command = {
+      targets.command = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
-          command: 'nestjs-command',
-          nodeOptions: '-r tsconfig-paths/register',
+          command: './src/main.ts',
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,
           interactive: true,
           environment: {
-            CLI_PATH: './src/main.ts'
+            NODE_SERVICE: 'cli'
           }
         }
       }
@@ -143,10 +159,10 @@ export function addProject (options: NormalizedSchema): Rule {
 
     if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
       const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
-        ? join(readNxJson().workspaceLayout.libsDir, SchematicConstants.BACKEND_INTERFACES_PACKAGE)
+        ? join(readWorkspaceLayout(host).libsDir, SchematicConstants.BACKEND_INTERFACES_PACKAGE)
         : join(options.sourceRoot, SchematicFilesMap.UTILS)
 
-      architect.migration = {
+      targets.migration = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
@@ -174,32 +190,29 @@ export function addProject (options: NormalizedSchema): Rule {
         }
       }
 
-      architect.seed = {
+      targets.seed = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
           command: `typeorm-seeding --configName=${join(configurationBasePath, 'orm.config.ts')} seed`,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
+          executeWithNode: true,
           watch: false,
           environment: {}
         }
       }
     }
 
-    architect.lint = generateProjectLint(normalize(options.root), join(normalize(options.root), 'tsconfig.json'), options.linter, [
-      `${options.root}/**/*.ts`,
-      `${options.root}/**/*.js`
-    ])
+    targets.lint = generateProjectLintTarget(options)
 
-    json.projects[options.name] = {
+    const project: EnrichedProjectConfiguration = {
       root: options.root,
       sourceRoot: options.sourceRoot,
       projectType: NxProjectTypes.APP,
-      schematics: {},
-      architect
+      targets
     }
 
-    return json
-  })
+    return createWorkspaceProjectRule(options.name, project)
+  }
 }

@@ -1,17 +1,17 @@
 import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags as Flags } from '@oclif/command'
-import { IOptionFlag } from '@oclif/parser/lib/flags'
+import type { IOptionFlag } from '@oclif/parser/lib/flags'
 import { detectPackageManager } from 'patch-package/dist/detectPackageManager'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
 import { makePatch } from 'patch-package/dist/makePatch'
 import { isAbsolute } from 'path'
 
-import { ApplicationConfiguration } from '@src/interfaces/config.interface'
+import type { ApplicationConfiguration } from '@interfaces/config.interface'
 
 export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
   static strict = false
   static description = 'Creates a new patch from scratch, just point the applications you want as package name.'
-  static examples = [ 'Create a patch for given package: patch-package create graphql' ]
+  static examples = ['Create a patch for given package: patch-package create graphql']
   static flags: Record<'directory' | 'path', IOptionFlag<string>> & Record<'include' | 'exclude', IOptionFlag<string[]>> = {
     directory: Flags.string({
       char: 'd',
@@ -21,6 +21,7 @@ export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
         if (isAbsolute(input)) {
           throw new Error('Patch directory must be relative to the path.')
         }
+
         return input
       }
     }),
@@ -33,17 +34,17 @@ export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
       char: 'i',
       description: 'Include given regex patterns.',
       multiple: true,
-      default: [ '.*' ]
+      default: ['.*']
     }),
     exclude: Flags.string({
       char: 'e',
       description: 'Exclude given regex patterns.',
       multiple: true,
-      default: [ 'package.json' ]
+      default: ['package.json']
     })
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     // parse arguments
     const { argv, flags } = this.parse(CreateCommand)
 

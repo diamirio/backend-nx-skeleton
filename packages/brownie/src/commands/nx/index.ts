@@ -1,15 +1,18 @@
-import { BaseCommand, LogLevels } from '@cenk1cenk2/boilerplate-oclif'
+import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
 import { flags } from '@oclif/command'
-import { color } from '@webundsoehne/nx-tools'
 import execa from 'execa'
-import { createPrompt, Listr } from 'listr2'
+import type { Listr } from 'listr2'
+import { createPrompt } from 'listr2'
 import { EOL } from 'os'
 
 import { NxAddCommandCtx } from '@context/nx/add.interface'
-import { Configuration } from '@interfaces/default-config.interface'
-import { NodeHelper } from '@src/helpers/node.helper'
-import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@src/helpers/node.helper.interface'
-import { NxSchematicsConfig } from '@src/interfaces/config/nx-schematics.config.interface'
+import { NodeHelper } from '@helpers/node.helper'
+import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
+import type { Configuration } from '@interfaces/default-config.interface'
+import type { LocalNodeModule } from '@webundsoehne/nx-tools'
+import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
+import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
+import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
@@ -20,17 +23,29 @@ export class NxCommand extends BaseCommand<Configuration> {
       default: false,
       char: 's'
     }),
-    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' })
+    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }),
+    develop: flags.boolean({
+      description: 'Puts the underlying schematics to development mode, if they support it.',
+      default: false,
+      char: 'd'
+    })
   }
 
   private helpers: { node: NodeHelper }
 
-  public async construct (): Promise<void> {
+  async construct (): Promise<void> {
     this.helpers = { node: new NodeHelper(this) }
   }
 
-  public async run (): Promise<void> {
+  async run (): Promise<void> {
     const { flags } = this.parse(NxCommand)
+
+    if (flags.develop) {
+      setDevelopmentMode()
+
+      this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
+    }
+
     // get config
     const { config } = await this.getConfig<NxSchematicsConfig[]>('nx-schematics.config.yml')
 
@@ -67,9 +82,31 @@ export class NxCommand extends BaseCommand<Configuration> {
             })
           ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
 
+          let link: LocalNodeModule
+
+          if (isDevelopmentMode()) {
+            task.title = color.yellow('Overriding the default package check behaviour with development mode!')
+
+            link = (
+              await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, {
+                getVersion: true,
+                getUpdate: false,
+                onlyLinked: true
+              })
+            ).find((p) => p.pkg === ctx.prompts.schematic.pkg)
+
+            if (link.installed && !pkg.installed) {
+              ctx.packages = [...ctx.packages, link.parsable]
+
+              return
+            }
+          }
+
           if (!pkg.installed) {
-            ctx.packages = [ ...ctx.packages, pkg.parsable ]
+            ctx.packages = [...ctx.packages, pkg.parsable]
             task.title = `Package ${pkg.pkg} is not installed will install it.`
+          } else if (link?.installed) {
+            task.title = color.yellow(`Package ${link.pkg} is linked!`)
           } else if (pkg.hasUpdate) {
             task.title = `Package ${pkg.pkg} already is installed. ${color.yellow('But you should consider updating it:')} ${color.yellow(pkg.updateType)}`
           } else {
@@ -84,8 +121,8 @@ export class NxCommand extends BaseCommand<Configuration> {
           this.helpers.node.packageManager(
             {
               action: PackageManagerUsableCommands.ADD,
-              force: true,
-              useLatest: true,
+              // force: true,
+              useLatest: !isDevelopmentMode() && true,
               type: PackageManagerDependencyTypes.DEVELOPMENT
             },
             ctx.packages
@@ -114,9 +151,18 @@ export class NxCommand extends BaseCommand<Configuration> {
     // run finally prematurely
     const { ctx } = await this.finally<NxAddCommandCtx>()
 
+    const schematic = `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`
+
     // this is here because long prompts corrupt listr
     if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
-      const help = await execa(this.helpers.node.manager, [ 'run', 'nx', 'g', `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`, '--', '--help' ], { shell: true })
+      const { manager, args, env } = this.helpers.node.parser({
+        action: PackageManagerUsableCommands.EXEC,
+        command: 'nx',
+        args: ['g', schematic, '--help', ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
+      })
+
+      const help = await execa(manager, args, { shell: true, env })
+
       this.logger.direct(help.stdout)
 
       try {
@@ -126,19 +172,19 @@ export class NxCommand extends BaseCommand<Configuration> {
       }
     }
 
-    this.logger.module('Now will start running the schematic...')
+    this.logger.module('Now will start running the schematic: %s', schematic)
+
+    const { manager, args, env } = this.helpers.node.parser({
+      action: PackageManagerUsableCommands.EXEC,
+      command: 'nx',
+      args: ['g', schematic, ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [], ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
+    })
 
     // this will be the command
-    await execa(
-      'npx',
-      [
-        'nx',
-        'g',
-        `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`,
-        ...ctx.prompts?.arguments?.split(' ').length > 0 ? ctx.prompts?.arguments?.split(' ') : [],
-        ...[ LogLevels.verbose, LogLevels.debug ].includes(this.constants.loglevel as LogLevels) ? [ '--', '--verbose' ] : []
-      ],
-      { stdio: 'inherit', shell: true }
-    )
+    await execa(manager, args, {
+      stdio: 'inherit',
+      shell: true,
+      env
+    })
   }
 }

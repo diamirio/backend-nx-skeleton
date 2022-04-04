@@ -1,3 +1,5 @@
-import colorette from 'colorette'
+import * as colorette from 'colorette'
 
-export { colorette as color }
+const color = colorette.createColors({ useColor: true })
+
+export { color }

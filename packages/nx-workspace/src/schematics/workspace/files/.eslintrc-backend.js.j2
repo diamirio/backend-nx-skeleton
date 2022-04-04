@@ -1,0 +1,9 @@
+/** @type {import("eslint").Linter } */
+module.exports = {
+  root: true,
+  extends: [ '@webundsoehne/eslint-config/typescript-dynamic' ],
+  rules: {},
+  overrides: [
+    ...require('@webundsoehne/eslint-config/utils').generateImportGroupsWithOverride({ tsconfigDir: __dirname, tsconfig: 'tsconfig.base.json' })
+  ]
+}

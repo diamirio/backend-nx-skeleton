@@ -1,7 +1,6 @@
-import { BaseConfig } from '@cenk1cenk2/boilerplate-oclif'
+import type { BaseConfig } from '@cenk1cenk2/boilerplate-oclif'
 
-import { NodeDependency } from './dependency.interface'
-import { AvailablePackageManagers } from '@src/helpers/node.helper.interface'
+import type { AvailablePackageManagers, NodeDependency } from '@webundsoehne/nx-tools'
 
 export interface Configuration extends BaseConfig {
   package_manager: AvailablePackageManagers

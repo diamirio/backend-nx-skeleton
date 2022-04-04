@@ -5,22 +5,22 @@ export function eslintJson (options: { packageScope?: string, override?: Record<
   return (
     options.override ?? {
       root: true,
-      plugins: [ '@nrwl/nx' ],
-      extends: [ '@webundsoehne/eslint-config/index', '@webundsoehne/eslint-config/typescript' ],
+      plugins: ['@nrwl/nx'],
+      extends: ['@webundsoehne/eslint-config/typescript-dynamic'],
       rules: {
         'import/order': [
           'error',
           {
             pathGroups: [
               {
-                pattern: '@${packageScope}/**',
+                pattern: `@{webundsoehne,webundsoehne-private,${options.packageScope}}/**`,
                 group: 'index'
               }
             ],
-            pathGroupsExcludedImportTypes: [ 'builtin' ],
+            pathGroupsExcludedImportTypes: ['builtin'],
             groups: [
-              [ 'builtin', 'external' ],
-              [ 'index', 'parent', 'sibling' ]
+              ['builtin', 'external'],
+              ['index', 'parent', 'sibling']
             ],
             'newlines-between': 'always',
             alphabetize: {

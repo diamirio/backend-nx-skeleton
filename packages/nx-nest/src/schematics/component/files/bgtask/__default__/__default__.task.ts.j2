@@ -1,17 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { Interval, NestSchedule } from 'nest-schedule'
+import { Interval } from '@nestjs/schedule'
 
 /**
- * Register your BgTasks here! (both sync and async functions are fine)
- * All possible schedule decorators: https://github.com/miaowing/nest-schedule
+ * Register your bgtask in this component.
+ * Documentation: https://docs.nestjs.com/techniques/task-scheduling
  */
 
 @Injectable()
-export class {{ casing.pascal }}Task extends NestSchedule {
+export class {{ casing.pascal }}Task {
   private logger: Logger = new Logger(this.constructor.name)
 
-  @Interval(1000)
-  public defaultJob (): void {
-    this.logger.debug('Another Message')
+  @Interval(86400)
+  defaultJob (): void {
+    this.logger.debug('Background task is active.')
   }
 }

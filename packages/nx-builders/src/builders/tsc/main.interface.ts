@@ -1,9 +1,9 @@
-import { JsonObject } from '@angular-devkit/core'
-import { FileInputOutput, AvailableAssetGlob } from '@webundsoehne/nx-tools'
+import type { AvailableAssetGlob, EnvironmentVariables, FileInputOutput } from '@webundsoehne/nx-tools'
+
 /**
  * TSC Builder options
  */
-export interface TscBuilderOptions extends JsonObject {
+export interface TscBuilderOptions {
   /**
    * process current working directory
    *
@@ -35,11 +35,8 @@ export interface TscBuilderOptions extends JsonObject {
    */
   watch?: boolean
 
-  /** command to run after complition when in watch mode */
+  /** command to run after completion when in watch mode */
   runAfterWatch?: string
-
-  /** export sourcemaps */
-  sourceMap?: boolean
 
   /**
    * copy assets
@@ -56,7 +53,7 @@ export interface TscBuilderOptions extends JsonObject {
   /**
    * inject environment variables to build process
    */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }
 
 export interface NormalizedBuilderOptions extends TscBuilderOptions {
@@ -65,8 +62,8 @@ export interface NormalizedBuilderOptions extends TscBuilderOptions {
   relativeMainFileOutput: string
 }
 
-export type OptionParserModes = 'typescript' | 'tscpaths' | 'tsc-watch' | 'runAfterWatch'
+export type OptionParserModes = 'typescript' | 'tsconfigReplacePaths' | 'tsc-watch' | 'runAfterWatch'
 
-export type OptionParser<T extends any> = { mode?: OptionParserModes[], rules?: { condition?: boolean, args: T }[] }[]
+export type OptionParser<T> = { mode?: OptionParserModes[], rules?: { condition?: boolean, args: T }[] }[]
 
-export type ProcessPaths = Partial<Record<'typescript' | 'tscpaths' | 'tscWatch' | 'tsconfig' | 'tsconfigPaths', string>>
+export type ProcessPaths = Record<'typescript' | 'tsconfigReplacePaths' | 'tscWatch' | 'tsconfig', string>

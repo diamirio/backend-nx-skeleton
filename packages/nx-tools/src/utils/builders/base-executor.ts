@@ -1,7 +1,8 @@
-import { BuilderOutput } from '@angular-devkit/architect'
-import { ExecutorContext, ProjectConfiguration } from '@nrwl/devkit'
-import { createProjectGraph, ProjectGraph, ProjectGraphNode } from '@nrwl/workspace/src/core/project-graph'
-import { calculateProjectDependencies, DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
+import type { BuilderOutput } from '@angular-devkit/architect'
+import type { ExecutorContext, ProjectConfiguration, ProjectGraph, ProjectGraphProjectNode } from '@nrwl/devkit'
+import { readCachedProjectGraph } from '@nrwl/workspace/src/core/project-graph'
+import type { DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
+import { calculateProjectDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 
 import { Logger, ProcessManager } from '@utils'
 
@@ -15,7 +16,7 @@ export abstract class BaseExecutor<
 > {
   public logger: Logger
   public projectGraph: ProjectGraph
-  public projectTarget: ProjectGraphNode<Record<string, unknown>>
+  public projectTarget: ProjectGraphProjectNode<any>
   public projectDependencies: DependentBuildableProjectNode[]
   public options: NormalizedExecutorOptions
   public paths: ProcessPaths
@@ -28,8 +29,9 @@ export abstract class BaseExecutor<
     this.paths = {} as ProcessPaths
 
     // create dependency
-    this.projectGraph = createProjectGraph()
+    this.projectGraph = readCachedProjectGraph()
     const { target, dependencies } = calculateProjectDependencies(this.projectGraph, context.root, context.projectName, context.targetName, context.configurationName)
+
     this.projectTarget = target
     this.projectDependencies = dependencies
 
@@ -48,18 +50,18 @@ export abstract class BaseExecutor<
   /**
    * Initiate the builder first.
    */
-  public init (): void {
+  init (): void {
     return
   }
 
   /**
    * The run command about what to do
    */
-  public abstract run (): Promise<BuilderOutput>
+  abstract run (): Promise<BuilderOutput>
 
   /**
    * Normalize the incoming options
    * @param options
    */
-  public abstract normalizeOptions (options: ExecutorOptions): NormalizedExecutorOptions
+  abstract normalizeOptions (options: ExecutorOptions): NormalizedExecutorOptions
 }

@@ -1,6 +1,5 @@
-import { VersionsMap } from '@webundsoehne/nx-tools'
-
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableMicroserviceTypes, AvailableServerTypes, AvailableTestsTypes } from '@interfaces/available.constants'
+import type { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableMicroserviceTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import type { AvailableTestsTypes, VersionsMap } from '@webundsoehne/nx-tools'
 
 export type Versions = VersionsMap<
 Exclude<AvailableComponents, AvailableComponents.SERVER> | AvailableServerTypes | AvailableDBTypes | AvailableDBAdapters | AvailableTestsTypes | AvailableMicroserviceTypes,

@@ -1,0 +1,45 @@
+{
+  "name": "@webundsoehne/deep-merge",
+  "description": "Generic object deepmerge.",
+  "version": "1.0.0",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://gitlab.tailored-apps.com/ckilic/nx-test",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nestjs",
+    "object",
+    "deep-merge"
+  ],
+  "scripts": {
+    "build": "tsup-node",
+    "dev:start": "tsup-node --watch",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+  },
+  "lint-staged": {
+    "./**/*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "./**/*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

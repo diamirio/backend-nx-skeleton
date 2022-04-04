@@ -27,7 +27,7 @@ Will log the exit code when process finishes.
 
 packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:5
 
----
+___
 
 ### start
 
@@ -39,7 +39,7 @@ Will log the command when the process starts.
 
 packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:3
 
----
+___
 
 ### stderr
 
@@ -51,7 +51,7 @@ enable/disable stderrr
 
 packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:9
 
----
+___
 
 ### stdout
 
@@ -73,8 +73,8 @@ will callback on error in the instance
 
 #### Parameters
 
-| Name     | Type    |
-| :------- | :------ |
+| Name | Type |
+| :------ | :------ |
 | `error?` | `Error` |
 
 #### Returns

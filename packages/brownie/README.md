@@ -50,7 +50,9 @@ USAGE
   $ brownie docker
 
 OPTIONS
+  -F, --files-folder=files-folder      [default: files] Output to included folder.
   -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
+  -e, --expose                         Expose ports from the container.
   -f, --force                          Force overwrites.
   -o, --output=output                  [default: .docker] Output folder for the Docker files.
   -v, --volume                         Use optional persistent volumes with the containers.
@@ -70,20 +72,20 @@ ALIASES
 
 ## `brownie help [COMMAND]`
 
-display help for brownie
+Display help for brownie.
 
 ```
 USAGE
   $ brownie help [COMMAND]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
 OPTIONS
-  --all  see all commands in CLI
+  -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.3/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -95,6 +97,7 @@ USAGE
 
 OPTIONS
   -a, --arguments     Enable prompt for passing in arguments.
+  -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -s, --skip-updates  Skip the dependency updates.
 ```
 
@@ -107,6 +110,7 @@ USAGE
   $ brownie workspace
 
 OPTIONS
+  -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -f, --force         Force override for schematic.
   -s, --skip-updates  Skip the dependency updates.
 

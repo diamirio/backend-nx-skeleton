@@ -1,29 +1,20 @@
-import { AvailableLinterTypes, AvailableMicroserviceTypes } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
-import { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import type { SchematicConstants } from '@interfaces'
+import type { AvailableMicroserviceTypes } from '@interfaces/available.constants'
+import type { GeneratedMicroserviceCasing } from '@utils/generate-microservice-casing.interface'
+import type { BaseNormalizedSchema, BaseSchema, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
 
 /**
  * The options that it gets from angular-cli
  */
-export interface Schema extends CommonPropertiesToSaveAndUse {
-  name?: string
-  linter?: string
-  skipFormat?: boolean
-  silent?: boolean
+export interface Schema extends BaseSchema, CommonPropertiesToSaveAndUse {
   microservice?: AvailableMicroserviceTypes
 }
 
 /**
  * After the options has been normalized.
  */
-export interface NormalizedSchema extends Schema {
-  packageName: string
-  packageScope: string
-  root: string
-  sourceRoot: string
-  linter: AvailableLinterTypes
+export interface NormalizedSchema extends Schema, BaseNormalizedSchema, SchemaPriorConfiguration<CommonPropertiesToSaveAndUse> {
   constants: typeof SchematicConstants
-  priorConfiguration: CommonPropertiesToSaveAndUse
 }
 
 /**
@@ -34,6 +25,6 @@ export type ParsedMicroservice = GeneratedMicroserviceCasing
 /**
  * This properties are shared across the input, normalized and saved configurations.
  */
-interface CommonPropertiesToSaveAndUse {
+export interface CommonPropertiesToSaveAndUse {
   microservices?: ParsedMicroservice[]
 }

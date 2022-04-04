@@ -1,9 +1,9 @@
-import { JsonObject } from '@angular-devkit/core'
+import type { EnvironmentVariables } from '@webundsoehne/nx-tools'
 
 /**
  * Options for execute
  */
-export interface ExecuteBuilderOptions extends JsonObject {
+export interface ExecuteBuilderOptions {
   /**
    * Run the command in a working directory
    */
@@ -35,7 +35,7 @@ export interface ExecuteBuilderOptions extends JsonObject {
   /**
    * Inject env variables to the run after build
    */
-  environment?: Record<string, string>
+  environment?: EnvironmentVariables
 }
 
 export type NormalizedExecuteBuilderOptions = ExecuteBuilderOptions

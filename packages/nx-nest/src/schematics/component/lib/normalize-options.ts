@@ -1,25 +1,25 @@
 import { normalize } from '@angular-devkit/core'
-import { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { readNxJson, toFileName } from '@nrwl/workspace'
+import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import {
-  ConvertToPromptType,
-  EnrichedWorkspaceJsonProject,
-  generateNameCases,
-  isVerbose,
-  readNxIntegration,
-  readWorkspaceJson,
-  setSchemaDefaultsInContext
-} from '@webundsoehne/nx-tools'
 import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
-import { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
+import type { AvailableComponentsSelection, NormalizedSchema, Schema } from '../main.interface'
+import type { NxNestProjectIntegration } from '@integration'
+import { SchematicConstants } from '@interfaces'
 import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
-import { SchematicConstants } from '@src/interfaces'
-import { NormalizedSchema as ApplicationNormalizedSchema } from '@src/schematics/application/main.interface'
-import { generateMicroserviceCasing } from '@src/utils'
+import { generateMicroserviceCasing } from '@utils'
+import type { ConvertToPromptType } from '@webundsoehne/nx-tools'
+import {
+  generateNameCases,
+  isVerbose,
+  normalizeNameWithParentApplicationPrompt,
+  normalizeParentPriorConfigurationPrompt,
+  normalizeWorkspacePackageScopePrompt,
+  setSchemaDefaultsInContext,
+  ensureNxRootListrTask
+} from '@webundsoehne/nx-tools'
 
 /**
  * @param  {Tree} host
@@ -28,64 +28,42 @@ import { generateMicroserviceCasing } from '@src/utils'
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
         task: (ctx): void => {
           setSchemaDefaultsInContext(ctx, {
-            assign: { from: options, keys: [ 'name', 'parent', 'force', 'type', 'parentWsConfiguration', 'silent', 'mount' ] },
-            default: [ { constants: SchematicConstants } ]
+            default: [options, { constants: SchematicConstants }]
           })
         }
       },
 
-      // check for prior configuration
-      {
-        title: 'Checking for parent application.',
-        /**
-         * if parent configuration is not injected through schematic we will parse it ourselves
-         * this should be for cases that the schematic is not run internally and run through cli
-         */
-        enabled: (ctx): boolean => ctx.parentWsConfiguration === undefined,
-        task: (ctx, task): void => {
-          // if this is created with this schematic there should be a nx json
-          task.title = 'Looking for prior application configuration in "nx.json".'
+      ...ensureNxRootListrTask(),
 
-          const parentConfiguration = readNxIntegration<ApplicationNormalizedSchema['priorConfiguration']>(ctx.parent)
-
-          if (parentConfiguration) {
-            ctx.parentPriorConfiguration = parentConfiguration
-
-            task.title = 'Prior configuration successfully found in "nx.json".'
-          } else {
-            throw new Error('Can not read prior configuration from "nx.json".')
-          }
-
-          // check parent configuration in workspace
-          task.title = 'Looking for prior application configuration in "workspace.json".'
-
-          const workspace = readWorkspaceJson(ctx.parent)
-
-          if (workspace && workspace.root && workspace.sourceRoot) {
-            ctx.parentWsConfiguration = ([ 'root', 'sourceRoot' ] as (keyof EnrichedWorkspaceJsonProject)[]).reduce((o, item) => {
-              return { ...o, [item]: workspace[item] }
-            }, {} as EnrichedWorkspaceJsonProject)
-          } else {
-            throw new Error('Can not read application configuration from "workspace.json".')
-          }
+      ...normalizeNameWithParentApplicationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, (_name, project) => {
+        if (project.integration?.nestjs) {
+          return true
         }
-      },
+      }),
+
+      // check for parent application configuration
+      ...normalizeParentPriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'nestjs'),
+
+      // need package scope for imports and such
+      ...normalizeWorkspacePackageScopePrompt(host),
 
       // parse component name and convert casings to use in template
       {
         title: 'Normalizing component name.',
         task: (ctx, task): void => {
-          ctx.name = toFileName(options.name)
+          const names = generateNameCases(ctx.name)
+
+          ctx.name = names.kebab
 
           ctx.casing = {
-            ...generateNameCases(ctx.name),
+            ...names,
             injected: {
               microservices: generateMicroserviceCasing(ctx.parent)
             }
@@ -95,26 +73,18 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         }
       },
 
-      // need package scope for imports and such
-      {
-        task: (ctx): void => {
-          const nxJson = readNxJson()
-          ctx.packageScope = `${nxJson.npmScope}`
-        }
-      },
-
       // select comnponent type
       {
         enabled: (ctx): boolean => ctx.type === undefined,
         task: async (ctx, task): Promise<void> => {
           const choices: ConvertToPromptType<AvailableComponentsSelection> = ctx.parentPriorConfiguration.components
             .map((c) => {
-              if ([ AvailableComponents.SERVER ].includes(c)) {
+              if ([AvailableComponents.SERVER].includes(c)) {
                 return [
                   { name: AvailableServerTypes.RESTFUL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.RESTFUL] },
                   { name: AvailableServerTypes.GRAPHQL, message: PrettyNamesForAvailableThingies[AvailableServerTypes.GRAPHQL] }
                 ]
-              } else if ([ AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER ].includes(c)) {
+              } else if ([AvailableComponents.BG_TASK, AvailableComponents.COMMAND, AvailableComponents.MICROSERVICE_SERVER].includes(c)) {
                 return { name: c as AvailableComponentsSelection, message: PrettyNamesForAvailableThingies[c] }
               }
             })
@@ -141,7 +111,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
       {
         title: 'Setting component root directory.',
         task: async (ctx, task): Promise<void> => {
-          const basePath = join(ctx.parentWsConfiguration.root, ctx.parentWsConfiguration.sourceRoot)
+          const basePath = join(ctx.parentProjectConfiguration.root, ctx.parentProjectConfiguration.sourceRoot)
           const root = ComponentLocationsMap[ctx.type].find((t) => directoryExists(join(process.cwd(), basePath, t)))
 
           if (root) {

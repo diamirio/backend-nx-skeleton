@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "NxNestSkeleton",
-  "title": "Create a Nest application from skeleton with NX",
+  "$id": "@webundsoehne-private/nx-nest/microservice-provider",
+  "title": "@webundsoehne-private/nx-nest/microservice-provider",
+  "description": "Generate a common library for nestjs microservice-provider.",
   "type": "object",
   "properties": {
     "linter": {
@@ -10,6 +11,23 @@
       "enum": ["eslint"],
       "default": "eslint"
     },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean",
+      "aliases": ["skip-format"]
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
     "verbose": {
       "description": "Set this to debug mode.",
       "type": "boolean"

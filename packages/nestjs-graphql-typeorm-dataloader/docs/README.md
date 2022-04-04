@@ -103,10 +103,10 @@ This middleware checks and processes for the subfields of a parent entity that s
 
 #### Parameters
 
-| Name   | Type                                         |
-| :----- | :------------------------------------------- |
-| `ctx`  | `MiddlewareContext`<`any`, `any`, `Object`\> |
-| `next` | `NextFn`<`any`\>                             |
+| Name   | Type                                                                |
+| :----- | :------------------------------------------------------------------ |
+| `ctx`  | `MiddlewareContext`<`any`, `any`, { `[argName: string]`: `any`; }\> |
+| `next` | `NextFn`<`any`\>                                                    |
 
 #### Returns
 
@@ -149,10 +149,10 @@ This middleware checks and processes for the subfields of a parent entity that s
 
 #### Parameters
 
-| Name   | Type                                         |
-| :----- | :------------------------------------------- |
-| `ctx`  | `MiddlewareContext`<`any`, `any`, `Object`\> |
-| `next` | `NextFn`<`any`\>                             |
+| Name   | Type                                                                |
+| :----- | :------------------------------------------------------------------ |
+| `ctx`  | `MiddlewareContext`<`any`, `any`, { `[argName: string]`: `any`; }\> |
+| `next` | `NextFn`<`any`\>                                                    |
 
 #### Returns
 
@@ -166,7 +166,7 @@ packages/nestjs-graphql-typeorm-dataloader/src/middleware/typeorm-loader.middlew
 
 ### directLoader
 
-▸ **directLoader**<`V`\>(`relation`, `connection`): (`ids`: readonly `any`[]) => `Promise`<`V`[]\>
+▸ **directLoader**<`V`\>(`relation`, `connection`, `grouper`): (`ids`: readonly `any`[]) => `Promise`<`V`[]\>
 
 A shared component for handling the end result of the query.
 
@@ -178,10 +178,11 @@ A shared component for handling the end result of the query.
 
 #### Parameters
 
-| Name         | Type               |
-| :----------- | :----------------- |
-| `relation`   | `RelationMetadata` |
-| `connection` | `Connection`       |
+| Name         | Type                                 |
+| :----------- | :----------------------------------- |
+| `relation`   | `RelationMetadata`                   |
+| `connection` | `Connection`                         |
+| `grouper`    | `string` \| (`entity`: `V`) => `any` |
 
 #### Returns
 
@@ -201,4 +202,4 @@ A shared component for handling the end result of the query.
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:7
+packages/nestjs-graphql-typeorm-dataloader/src/loaders/direct.loader.ts:9

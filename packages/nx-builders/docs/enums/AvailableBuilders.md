@@ -9,7 +9,7 @@ Available Builders
 ### Enumeration members
 
 - [TSC](AvailableBuilders.md#tsc)
-- [TS_NODE_DEV](AvailableBuilders.md#ts_node_dev)
+- [TS\_NODE\_DEV](AvailableBuilders.md#ts_node_dev)
 
 ## Enumeration members
 
@@ -21,11 +21,11 @@ Available Builders
 
 interfaces/available.constants.ts:3
 
----
+___
 
-### TS_NODE_DEV
+### TS\_NODE\_DEV
 
-• **TS_NODE_DEV** = `"ts-node-dev"`
+• **TS\_NODE\_DEV** = `"ts-node-dev"`
 
 #### Defined in
 

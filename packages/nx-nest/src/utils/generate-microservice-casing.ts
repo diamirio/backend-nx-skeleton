@@ -1,6 +1,5 @@
+import type { GeneratedMicroserviceCasing } from './generate-microservice-casing.interface'
 import { generateNameCases } from '@webundsoehne/nx-tools'
-
-import { GeneratedMicroserviceCasing } from './generate-microservice-casing.interface'
 
 export function generateMicroserviceCasing (name: string): GeneratedMicroserviceCasing {
   const casing = generateNameCases(name)

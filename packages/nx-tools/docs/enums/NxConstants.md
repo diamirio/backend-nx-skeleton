@@ -2,19 +2,20 @@
 
 # Enumeration: NxConstants
 
-Some NX constants. They seem to change every minor patch XD
+Some NX constants.
+They seem to change every minor patch XD
 
 ## Table of contents
 
 ### Enumeration members
 
-- [TS_CONFIG_PATH](NxConstants.md#ts_config_path)
+- [TS\_CONFIG\_PATH](NxConstants.md#ts_config_path)
 
 ## Enumeration members
 
-### TS_CONFIG_PATH
+### TS\_CONFIG\_PATH
 
-• **TS_CONFIG_PATH** = `"tsconfig.base.json"`
+• **TS\_CONFIG\_PATH** = `"tsconfig.base.json"`
 
 #### Defined in
 

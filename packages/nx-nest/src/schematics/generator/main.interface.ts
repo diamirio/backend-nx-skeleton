@@ -1,8 +1,8 @@
-import { Schema as BaseSchema, NormalizedSchema as BaseNormalizedSchema } from '@webundsoehne/nx-tools/dist/schematics/generator/main.interface'
+import type { AvailableGenerators } from '@interfaces'
+import type { Schema as GeneratorBaseSchema, NormalizedSchema as GeneratorBaseNormalizedSchema } from '@webundsoehne/nx-tools/dist/schematics/generator/main.interface'
 
-import { AvailableGenerators } from '@src/interfaces'
+type TypedBaseSchema = GeneratorBaseSchema<AvailableGenerators>
 
-type TypedBaseSchema = BaseSchema<AvailableGenerators>
-type TypedBaseNormalizedSchema = BaseNormalizedSchema<{ test: boolean }, AvailableGenerators>
+type TypedBaseNormalizedSchema = GeneratorBaseNormalizedSchema<never, AvailableGenerators>
 
-export { TypedBaseSchema as Schema, TypedBaseNormalizedSchema as NormalizedSchema }
+export type { TypedBaseSchema as Schema, TypedBaseNormalizedSchema as NormalizedSchema }

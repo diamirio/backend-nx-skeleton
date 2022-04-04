@@ -17,9 +17,9 @@
 
 #### Defined in
 
-interfaces/available.constants.ts:10
+interfaces/available.constants.ts:12
 
----
+___
 
 ### SINGLE
 
@@ -27,4 +27,4 @@ interfaces/available.constants.ts:10
 
 #### Defined in
 
-interfaces/available.constants.ts:11
+interfaces/available.constants.ts:13

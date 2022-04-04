@@ -1,7 +1,6 @@
-import { SchematicFiles } from '@webundsoehne/nx-tools'
-
-import { NormalizedSchema as WorkspaceNormalizedSchema } from '../schematics/workspace/main.interface'
-import { AvailableCLIs, AvailableFolderStructures } from './available.constants'
+import type { NormalizedSchema as WorkspaceNormalizedSchema } from '../schematics/workspace/main.interface'
+import { AvailableFolderStructures } from './available.constants'
+import type { SchematicFiles } from '@webundsoehne/nx-tools'
 
 /**
  * This constant includes the files that are required for different components.
@@ -9,17 +8,13 @@ import { AvailableCLIs, AvailableFolderStructures } from './available.constants'
  */
 export function getSchematicFiles (options: WorkspaceNormalizedSchema): SchematicFiles {
   return {
-    [AvailableCLIs.ANGULAR]: {
-      condition: options.cli === AvailableCLIs.ANGULAR,
-      files: [ 'decorate-angular-cli.js' ]
-    },
     [AvailableFolderStructures.MULTIPLE]: {
       condition: options.layout === AvailableFolderStructures.MULTIPLE,
-      folders: [ 'apps', 'libs' ]
+      folders: ['apps', 'libs']
     },
     [AvailableFolderStructures.SINGLE]: {
       condition: options.layout === AvailableFolderStructures.SINGLE,
-      folders: [ 'packages' ]
+      folders: ['packages']
     }
   }
 }

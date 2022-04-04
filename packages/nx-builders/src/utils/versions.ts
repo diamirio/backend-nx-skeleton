@@ -1,11 +1,11 @@
-import { PackageVersions, dependencyCalculator } from '@webundsoehne/nx-tools'
-
 import { VERSIONS } from './versions.constants'
 import { AvailableBuilders } from '@interfaces/available.constants'
-import { Schema } from '@src/schematics/init/main.interface'
+import type { Schema } from '@schematics/init/main.interface'
+import type { PackageVersions } from '@webundsoehne/nx-tools'
+import { dependencyCalculator } from '@webundsoehne/nx-tools'
 
 // calculate dependencies
-export function calculateDependencies (options: Schema['items']): PackageVersions {
+export async function calculateDependencies (options: Schema['items']): Promise<PackageVersions> {
   return dependencyCalculator([
     {
       condition: options.includes(AvailableBuilders.TSC),

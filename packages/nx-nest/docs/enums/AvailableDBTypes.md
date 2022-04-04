@@ -2,28 +2,29 @@
 
 # Enumeration: AvailableDBTypes
 
-Database can be selected for various parts of the application. This is the database available that can be automatically injected.
+Database can be selected for various parts of the application.
+This is the database available that can be automatically injected.
 
 ## Table of contents
 
 ### Enumeration members
 
-- [MONGOOSE_MONGODB](AvailableDBTypes.md#mongoose_mongodb)
+- [MONGOOSE\_MONGODB](AvailableDBTypes.md#mongoose_mongodb)
 - [NONE](AvailableDBTypes.md#none)
-- [TYPEORM_MYSQL](AvailableDBTypes.md#typeorm_mysql)
-- [TYPEORM_POSTGRESQL](AvailableDBTypes.md#typeorm_postgresql)
+- [TYPEORM\_MYSQL](AvailableDBTypes.md#typeorm_mysql)
+- [TYPEORM\_POSTGRESQL](AvailableDBTypes.md#typeorm_postgresql)
 
 ## Enumeration members
 
-### MONGOOSE_MONGODB
+### MONGOOSE\_MONGODB
 
-• **MONGOOSE_MONGODB** = `"mongoose-mongodb"`
+• **MONGOOSE\_MONGODB** = `"mongoose-mongodb"`
 
 #### Defined in
 
-interfaces/available.constants.ts:30
+interfaces/available.constants.ts:40
 
----
+___
 
 ### NONE
 
@@ -31,24 +32,24 @@ interfaces/available.constants.ts:30
 
 #### Defined in
 
-interfaces/available.constants.ts:27
+interfaces/available.constants.ts:37
 
----
+___
 
-### TYPEORM_MYSQL
+### TYPEORM\_MYSQL
 
-• **TYPEORM_MYSQL** = `"typeorm-mysql"`
-
-#### Defined in
-
-interfaces/available.constants.ts:28
-
----
-
-### TYPEORM_POSTGRESQL
-
-• **TYPEORM_POSTGRESQL** = `"typeorm-postgresql"`
+• **TYPEORM\_MYSQL** = `"typeorm-mysql"`
 
 #### Defined in
 
-interfaces/available.constants.ts:29
+interfaces/available.constants.ts:38
+
+___
+
+### TYPEORM\_POSTGRESQL
+
+• **TYPEORM\_POSTGRESQL** = `"typeorm-postgresql"`
+
+#### Defined in
+
+interfaces/available.constants.ts:39

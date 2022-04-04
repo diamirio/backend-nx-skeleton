@@ -1,25 +1,27 @@
-import { apply, branchAndMerge, chain, mergeWith, Rule, SchematicContext, url } from '@angular-devkit/schematics'
-import { createApplicationRule, CreateApplicationRuleInterface, Logger } from '@webundsoehne/nx-tools'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { apply, chain, mergeWith, url } from '@angular-devkit/schematics'
 
-import { NormalizedSchema } from '../main.interface'
+import type { NormalizedSchema } from '../main.interface'
 import { getSchematicFiles } from '@interfaces/file.constants'
+import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
+import { createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
 /**
  * Create application files in tree.
  * @param options
  * @param context
  */
-export function createApplicationFiles (options: NormalizedSchema, context: SchematicContext): Rule {
-  const log = new Logger(context)
-  // source is always the same
-  const source = url('./files')
+export function createApplicationFiles (options: NormalizedSchema): Rule {
+  return (_host: Tree, context: SchematicContext): Rule => {
+    const log = new Logger(context)
+    // source is always the same
+    const source = url('./files')
 
-  return chain([
-    branchAndMerge(
+    return chain([
       // just needs the url the rest it will do it itself
       mergeWith(apply(source, generateRules(options, log)))
-    )
-  ])
+    ])
+  }
 }
 
 /**
@@ -36,14 +38,8 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
 
   const template: CreateApplicationRuleInterface = {
     format: false,
-    include: getSchematicFiles(options),
-    templates: [
-      {
-        condition: true,
-        match: 'workspace',
-        rename: options.workspaceFile
-      }
-    ]
+
+    include: getSchematicFiles(options)
   }
 
   return createApplicationRule(template, options)

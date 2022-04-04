@@ -38,3 +38,4 @@ tsconfig.tsbuildinfo
 # Node Package Manager
 .npm
 **/package-lock.json
+**/.swc

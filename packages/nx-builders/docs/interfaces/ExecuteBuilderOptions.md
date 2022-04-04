@@ -4,12 +4,6 @@
 
 Options for execute
 
-## Hierarchy
-
-- `JsonObject`
-
-  ↳ **`ExecuteBuilderOptions`**
-
 ## Table of contents
 
 ### Properties
@@ -51,7 +45,7 @@ builders/execute/main.interface.ts:10
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 Inject env variables to the run after build
 

@@ -4,12 +4,6 @@
 
 Options for ts-node-dev
 
-## Hierarchy
-
-- `JsonObject`
-
-  ↳ **`TsNodeBuilderOptions`**
-
 ## Table of contents
 
 ### Properties
@@ -65,7 +59,7 @@ builders/ts-node-dev/main.interface.ts:30
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 environment variables
 

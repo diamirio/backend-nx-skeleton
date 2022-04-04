@@ -34,13 +34,13 @@ You can add long-living and short-living process to keep track of processes spaw
 
 #### Parameters
 
-| Name      | Type                                   |
-| :-------- | :------------------------------------- |
-| `context` | `BuilderContext` \| `SchematicContext` |
+| Name | Type |
+| :------ | :------ |
+| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:18
+packages/nx-tools/src/utils/node/process-manager.ts:19
 
 ## Properties
 
@@ -50,9 +50,9 @@ packages/nx-tools/src/utils/node/process-manager.ts:18
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:14
+packages/nx-tools/src/utils/node/process-manager.ts:15
 
----
+___
 
 ### persistentTasks
 
@@ -60,9 +60,9 @@ packages/nx-tools/src/utils/node/process-manager.ts:14
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:16
+packages/nx-tools/src/utils/node/process-manager.ts:17
 
----
+___
 
 ### tasks
 
@@ -70,7 +70,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:16
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:15
+packages/nx-tools/src/utils/node/process-manager.ts:16
 
 ## Methods
 
@@ -82,8 +82,8 @@ Add a new task that is killable.
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `instance` | `ExecaChildProcess`<`string`\> |
 
 #### Returns
@@ -92,9 +92,9 @@ Add a new task that is killable.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:23
+packages/nx-tools/src/utils/node/process-manager.ts:24
 
----
+___
 
 ### addPersistent
 
@@ -104,8 +104,8 @@ Add a persistent task that should not be killed until everything finishes.
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `instance` | `ExecaChildProcess`<`string`\> |
 
 #### Returns
@@ -114,9 +114,9 @@ Add a persistent task that should not be killed until everything finishes.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:29
+packages/nx-tools/src/utils/node/process-manager.ts:31
 
----
+___
 
 ### kill
 
@@ -130,9 +130,9 @@ Kill all non-persistent tasks.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:35
+packages/nx-tools/src/utils/node/process-manager.ts:38
 
----
+___
 
 ### killProcesses
 
@@ -142,8 +142,8 @@ Tree kill proceseses.
 
 #### Parameters
 
-| Name    | Type                             |
-| :------ | :------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `tasks` | `ExecaChildProcess`<`string`\>[] |
 
 #### Returns
@@ -152,9 +152,9 @@ Tree kill proceseses.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:48
+packages/nx-tools/src/utils/node/process-manager.ts:51
 
----
+___
 
 ### stop
 
@@ -168,4 +168,4 @@ Stop the processes compeletely.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:41
+packages/nx-tools/src/utils/node/process-manager.ts:44

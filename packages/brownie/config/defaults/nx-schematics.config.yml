@@ -9,7 +9,7 @@
     - name: microservice-provider
       description: Generate the microservice provider library.
     - name: backend-interfaces
-      description: Generate a common library for database interfaces.
+      description: Generate a common library for backend interfaces.
     - name: generator
       description: Creates a single component from the given template.
 
@@ -17,15 +17,12 @@
   registry: 'https://verdaccio.webundsoehne.com'
   description: 'General purpose workspace schematic extended from the default.'
   schematics:
-    - name: move
-      description: Move an application or library to another folder.
-      forceArguments: true
-    - name: remove
-      description: Remove an application or library.
-      forceArguments: true
     - name: library
       description: Create a library.
-      forceArguments: true
+    - name: move
+      description: Move a project under a different name.
+    - name: remove
+      description: Remove a project from the workspace.
 
 - pkg: '@webundsoehne/nx-tools'
   description: 'Some generic tools for nx.'

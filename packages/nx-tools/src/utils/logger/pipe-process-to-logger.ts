@@ -1,10 +1,10 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { ExecutorContext } from '@nrwl/devkit'
-import { ExecaChildProcess } from 'execa'
+import type { BuilderContext } from '@angular-devkit/architect'
+import type { ExecutorContext } from '@nrwl/devkit'
+import type { ExecaChildProcess } from 'execa'
 import through from 'through'
 
 import { Logger } from './logger'
-import { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
+import type { PipeProcessToLoggerOptions } from './pipe-process-to-logger.interface'
 
 /**
  * Given the instance it will pipe process output through the logger to append prefixes such as the application name.
@@ -53,7 +53,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
   }
 
   if (options.exitCode) {
-    instance.on('exit', (code, signal) => {
+    void instance.on('exit', (code, signal) => {
       const exitMessage = `Process ended with code ${code}${signal ? ` and signal ${signal}` : ''}.`
 
       if (code > 0) {
@@ -69,7 +69,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
     })
   }
 
-  instance.on('error', (error) => {
+  void instance.on('error', (error) => {
     logger.fatal(error.message)
 
     // callback for compatibility reasons with observable

@@ -1,28 +1,21 @@
-import { Injectable, Logger } from '@nestjs/common'
-import { Command, Positional } from 'nestjs-command'
+import { Logger } from '@nestjs/common'
+import { Command, CommandRunner, Option } from 'nest-commander'
 
 /**
- * Register your Commands here! (both sync and async functions are fine)
- * All possible settings: https://www.npmjs.com/package/nestjs-command
+ * Register your cli commands in this component.
+ * Documentation: https://docs.nestjs.com/recipes/nest-commander#nest-commander
  */
 
-@Injectable()
-export class {{ casing.pascal }}Command {
+@Command({ name: '{{ casing.kebab }}', description: 'Command to {{ casing.pascal }}.' })
+export class {{ casing.pascal }}Command implements CommandRunner {
   private logger: Logger = new Logger(this.constructor.name)
 
-  constructor () {}
-
-  @Command({
-    command: 'hello <name>',
-    describe: 'Prints hello <name>',
-    autoExit: true
-  })
-  async helloWorld (
-    @Positional({
-      name: 'name'
-    })
-      name: string
+  async run(
+    parameters: string[],
+    options?: Record<string, any>,
   ): Promise<void> {
-    this.logger.log(`Hello ${name}`)
+    this.logger.log('Running the default command.')
+
+    return
   }
 }

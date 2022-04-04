@@ -1,4 +1,5 @@
-import { Inject, NestMiddleware } from '@nestjs/common'
+import type { NestMiddleware } from '@nestjs/common'
+import { Inject } from '@nestjs/common'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
 import { MaintenanceService } from '@module/maintenance/maintenance.service'

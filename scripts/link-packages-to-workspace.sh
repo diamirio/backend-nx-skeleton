@@ -12,11 +12,11 @@ fi
 
 [ ! -d "$2" ] && echo "Directory $2 not found."
 
+PACKAGES=packages/*/package.json
+
 echo "Running against directory: $2"
-cd "$2" || exit 127
 
-declare -a PACKAGES=(@webundsoehne-private/nx-nest @webundsoehne/nx-builders @webundsoehne/nx-tools @webundsoehne-private/nx-workspace @webundsoehne/eslint-config @webundsoehne/nestjs-util @webundsoehne/patch-package @webundsoehne/nestjs-graphql-typeorm-dataloader)
-
-for i in "${PACKAGES[@]}"; do
-	yarn $1 $i
+for PACKAGE in "${PACKAGES[@]}"; do
+	PKG_NAME=$(cat $PACKAGE | jq -r .name)
+	(cd "$2" && yarn $1 $PKG_NAME)
 done

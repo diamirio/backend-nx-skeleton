@@ -1,9 +1,19 @@
-import DataLoader from 'dataloader'
+import type DataLoader from 'dataloader'
 
-import { BatchLoadFn } from './batch-loader.interface'
-import { KeyFunc } from './typeorm-loader-handler.interface'
-import { TypeormLoaderOptions } from './typeorm-loader.interface'
-import { CUSTOM_DATALOADER_EXTENSION_FIELD, TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
+import type { BatchLoadFn } from './batch-loader.interface'
+import type { KeyFunc } from './typeorm-loader-handler.interface'
+import type { TypeormLoaderOptions } from './typeorm-loader.interface'
+import type { CUSTOM_DATALOADER_EXTENSION_FIELD, TYPEORM_DATALOADER_EXTENSION_FIELD } from '@constants/extension-field.constants'
+
+/**
+ * A generic type to extend from for nestjs extensions.
+ */
+interface ExtensionType<T> {
+  args: T
+  key: string | symbol
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  target: Function | object
+}
 
 /**
  * Extension field definition for nest.js to store metadata of decorators.
@@ -17,14 +27,4 @@ export interface Extensions {
     batchLoadFn: BatchLoadFn<any, any>
     options?: DataLoader.Options<any, any, any>
   }>
-}
-
-/**
- * A generic type to extend from for nestjs extensions.
- */
-interface ExtensionType<T> {
-  args: T
-  key: string | symbol
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  target: Function | object
 }

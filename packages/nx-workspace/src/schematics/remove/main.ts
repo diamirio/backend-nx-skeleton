@@ -1,25 +1,26 @@
-import { chain, Rule } from '@angular-devkit/schematics'
-import { checkProjectExists } from '@nrwl/workspace/src/utils/rules/check-project-exists'
-import { formatOrSkip } from '@webundsoehne/nx-tools'
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { chain, externalSchematic } from '@angular-devkit/schematics'
+import type { Schema as NxSchema } from '@nrwl/workspace/src/generators/remove/schema'
 
-import { checkDependencies } from './lib/check-dependencies'
-import { checkTargets } from './lib/check-targets'
-import { removeProject } from './lib/remove-project'
-import { updateNxJson } from './lib/update-nx-json'
-import { updateTsconfig } from './lib/update-tsconfig'
-import { updateWorkspace } from './lib/update-workspace'
-import { Schema } from './main.interface'
+import { normalizeOptions } from './lib/normalize-options'
+import { updateIntegration } from './lib/update-integration'
+import type { Schema } from './main.interface'
+import { formatTreeRule } from '@webundsoehne/nx-tools'
 
 export default function (schema: Schema): Rule {
-  return chain([
-    checkProjectExists(schema),
-    checkDependencies(schema),
-    checkTargets(schema),
-    removeProject(schema) as any,
-    updateNxJson(schema),
-    // will change this one
-    updateTsconfig(schema),
-    updateWorkspace(schema),
-    formatOrSkip(null, schema.skipFormat, { eslint: true, prettier: true })
-  ])
+  return async (host: Tree, context: SchematicContext): Promise<Rule> => {
+    const options = await normalizeOptions(host, context, schema)
+
+    return chain([
+      externalSchematic<NxSchema>('@nrwl/workspace', 'remove', {
+        projectName: options.parent,
+        skipFormat: options.skipFormat,
+        forceRemove: options.force
+      }),
+
+      updateIntegration(options),
+
+      formatTreeRule({ skip: options.skipFormat })
+    ])
+  }
 }

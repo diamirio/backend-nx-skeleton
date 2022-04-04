@@ -10,7 +10,7 @@ export class {{ casing.pascal }}Resolver {
   constructor (private {{ casing.camel }}Service: {{ casing.pascal }}Service) {}
 
   @Query(() => {{ casing.pascal }}Output)
-  public hello (@Args() args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
+  hello (@Args() args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
     return this.{{ casing.camel }}Service.default(args)
   }
 }

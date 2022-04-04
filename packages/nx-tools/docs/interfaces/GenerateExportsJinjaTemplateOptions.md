@@ -22,7 +22,7 @@ Generates exports from matching patterns in to a output file like index.ts
 
 packages/nx-tools/src/rules/generate-exports.rule.interface.ts:19
 
----
+___
 
 ### root
 
@@ -34,11 +34,11 @@ It will move the template to given root after it is generated.
 
 packages/nx-tools/src/rules/generate-exports.rule.interface.ts:9
 
----
+___
 
 ### templates
 
-• **templates**: { `cwd?`: `string` ; `options?`: `Options` ; `output`: `string` ; `pattern`: `string` \| `string`[] }[]
+• **templates**: { `cwd?`: `string` ; `options?`: `Options` ; `output`: `string` ; `pattern`: `string` \| `string`[]  }[]
 
 #### Defined in
 

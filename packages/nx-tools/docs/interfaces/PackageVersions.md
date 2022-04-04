@@ -10,6 +10,7 @@ Versions for npm packages.
 
 - [deps](PackageVersions.md#deps)
 - [devDeps](PackageVersions.md#devdeps)
+- [implicitDeps](PackageVersions.md#implicitdeps)
 
 ## Properties
 
@@ -19,9 +20,9 @@ Versions for npm packages.
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:5
+packages/nx-tools/src/interfaces/versions.interface.ts:8
 
----
+___
 
 ### devDeps
 
@@ -29,4 +30,14 @@ packages/nx-tools/src/interfaces/versions.interface.ts:5
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:6
+packages/nx-tools/src/interfaces/versions.interface.ts:9
+
+___
+
+### implicitDeps
+
+• `Optional` **implicitDeps**: [`ImplicitDependencies`](../README.md#implicitdependencies)
+
+#### Defined in
+
+packages/nx-tools/src/interfaces/versions.interface.ts:10

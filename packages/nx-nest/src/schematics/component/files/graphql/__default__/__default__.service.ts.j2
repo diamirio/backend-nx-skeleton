@@ -9,7 +9,7 @@ export class {{ casing.pascal }}Service {
 
   constructor () {}
 
-  public async default (args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
+  async default (args: {{ casing.pascal }}Input): Promise<{{ casing.pascal }}Output> {
     return { response: `Hello ${args?.name}.` }
   }
 }

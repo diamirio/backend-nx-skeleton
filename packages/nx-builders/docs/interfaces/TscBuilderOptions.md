@@ -6,11 +6,9 @@ TSC Builder options
 
 ## Hierarchy
 
-- `JsonObject`
+- **`TscBuilderOptions`**
 
-  ↳ **`TscBuilderOptions`**
-
-  ↳↳ [`NormalizedBuilderOptions`](NormalizedBuilderOptions.md)
+  ↳ [`NormalizedBuilderOptions`](NormalizedBuilderOptions.md)
 
 ## Table of contents
 
@@ -23,7 +21,6 @@ TSC Builder options
 - [outputPath](TscBuilderOptions.md#outputpath)
 - [packageJson](TscBuilderOptions.md#packagejson)
 - [runAfterWatch](TscBuilderOptions.md#runafterwatch)
-- [sourceMap](TscBuilderOptions.md#sourcemap)
 - [swapPaths](TscBuilderOptions.md#swappaths)
 - [tsConfig](TscBuilderOptions.md#tsconfig)
 - [watch](TscBuilderOptions.md#watch)
@@ -40,7 +37,7 @@ copy assets
 
 #### Defined in
 
-builders/tsc/main.interface.ts:48
+builders/tsc/main.interface.ts:45
 
 ---
 
@@ -60,13 +57,13 @@ builders/tsc/main.interface.ts:12
 
 ### environment
 
-• `Optional` **environment**: `Record`<`string`, `string`\>
+• `Optional` **environment**: `EnvironmentVariables`
 
 inject environment variables to build process
 
 #### Defined in
 
-builders/tsc/main.interface.ts:59
+builders/tsc/main.interface.ts:56
 
 ---
 
@@ -102,7 +99,7 @@ package.json name to process defaults to package.json
 
 #### Defined in
 
-builders/tsc/main.interface.ts:54
+builders/tsc/main.interface.ts:51
 
 ---
 
@@ -110,23 +107,11 @@ builders/tsc/main.interface.ts:54
 
 • `Optional` **runAfterWatch**: `string`
 
-command to run after complition when in watch mode
+command to run after completion when in watch mode
 
 #### Defined in
 
 builders/tsc/main.interface.ts:39
-
----
-
-### sourceMap
-
-• `Optional` **sourceMap**: `boolean`
-
-export sourcemaps
-
-#### Defined in
-
-builders/tsc/main.interface.ts:42
 
 ---
 
