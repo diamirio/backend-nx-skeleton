@@ -17,8 +17,6 @@ Helper tools for deep merge objects.
 
 <!-- toc -->
 
-
-
 <!-- tocstop -->
 
 ---

@@ -121,7 +121,7 @@ Generic generator is a generic library that allows to create a basic generator l
   ```json
   // prompts.json
   [
-  { "type": "Input", "name": "test", "message": "test" },
-  { "type": "Input", "name": "test2", "message": "test" }
+    { "type": "Input", "name": "test", "message": "test" },
+    { "type": "Input", "name": "test2", "message": "test" }
   ]
   ```

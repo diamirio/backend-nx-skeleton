@@ -15,9 +15,10 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/patch-package](#webundsoehnepatch-package)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/patch-package](#webundsoehnepatch-package)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -25,10 +26,11 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 # Commands
 
 <!-- commands -->
-* [`ws-patch-package `](#ws-patch-package-)
-* [`ws-patch-package create`](#ws-patch-package-create)
-* [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
-* [`ws-patch-package patch`](#ws-patch-package-patch)
+
+- [`ws-patch-package `](#ws-patch-package-)
+- [`ws-patch-package create`](#ws-patch-package-create)
+- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+- [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
 
@@ -95,4 +97,5 @@ EXAMPLES
   Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0
   Use extended glob patterns: patch-package patch "graphql*"
 ```
+
 <!-- commandsstop -->
