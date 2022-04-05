@@ -1,6 +1,7 @@
 {
   "name": "@webundsoehne/patch-package",
   "description": "A wrapper CLI for patching packages for certain applications.",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
@@ -8,7 +9,6 @@
   "bin": {
     "ws-patch-package": "bin/run.js"
   },
-  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "publishConfig": {
     "access": "public"
   },

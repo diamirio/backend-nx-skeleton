@@ -2,11 +2,11 @@
   "name": "@webundsoehne/nestjs-keycloak",
   "description": "Keycloak modules for token verification and administration of Keycloak.",
   "version": "1.0.0",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "publishConfig": {
     "access": "public"
   },
