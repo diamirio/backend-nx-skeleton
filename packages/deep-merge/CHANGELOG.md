@@ -1,3 +1,9 @@
+## @webundsoehne/deep-merge [2.1.1-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.1.0...@webundsoehne/deep-merge@2.1.1-beta.1) (2022-04-05)
+
+### Bug Fixes
+
+- housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+
 # @webundsoehne/deep-merge [2.1.0](https://github.com/tailoredmedia/backend-nx-skeleton/compare/@webundsoehne/deep-merge@2.0.2...@webundsoehne/deep-merge@2.1.0) (2022-02-05)
 
 ### Features
