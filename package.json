@@ -50,7 +50,7 @@
     "lint-staged": "^11.2.6",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.5.5",
+    "rxjs": "^7.5.4",
     "simple-git-hooks": "^2.7.0",
     "tsc-watch": "^4.6.2",
     "tsconfig-replace-paths": "^0.0.11",
