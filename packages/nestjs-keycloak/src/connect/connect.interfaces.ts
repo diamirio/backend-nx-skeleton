@@ -5,11 +5,11 @@ export interface KeycloakConnectOptions {
   credentials: {
     secret: string
   }
-  'auth-server-url': string
-  'ssl-required': string
-  'bearer-only': boolean
-  'confidential-port': number
-  'cookie-key'?: string
+  ['auth-server-url']: string
+  ['ssl-required']: string
+  ['bearer-only']: boolean
+  ['confidential-port']: number
+  ['cookie-key']?: string
 
   // keycloak module config
   roles?: RolesOption

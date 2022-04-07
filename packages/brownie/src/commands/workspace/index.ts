@@ -14,7 +14,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
   static description = 'Create a new workspace with NX.'
   static aliases = ['ws']
   static flags = {
-    'skip-updates': flags.boolean({
+    ['skip-updates']: flags.boolean({
       description: 'Skip the dependency updates.',
       default: false,
       char: 's'

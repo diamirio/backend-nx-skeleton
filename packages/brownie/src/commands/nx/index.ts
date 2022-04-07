@@ -18,7 +18,7 @@ export class NxCommand extends BaseCommand<Configuration> {
   static description = 'Configure NX modules.'
 
   static flags = {
-    'skip-updates': flags.boolean({
+    ['skip-updates']: flags.boolean({
       description: 'Skip the dependency updates.',
       default: false,
       char: 's'

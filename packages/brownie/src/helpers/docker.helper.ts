@@ -21,7 +21,7 @@ export class DockerHelper {
 
   constructor (
     private readonly cmd: BaseCommand,
-    private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, expose?: boolean, 'volumes-folder': string, 'files-folder': string } }
+    private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, expose?: boolean, ['volumes-folder']: string, ['files-folder']: string } }
   ) {
     cmd.logger.debug('DockerHelper initiated.')
     this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
