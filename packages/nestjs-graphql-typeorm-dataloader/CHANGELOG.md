@@ -1,3 +1,11 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.2.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.2...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.3-beta.1) (2022-04-07)
+
+### Bug Fixes
+
+- fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+- janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+- republish packages ([3f2b2e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3f2b2e339fc78c4e11263981fc78d787034472ff))
+
 ## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.2) (2022-04-05)
 
 ### Bug Fixes
