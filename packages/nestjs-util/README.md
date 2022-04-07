@@ -3,9 +3,7 @@
     <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
   </a>
 </p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
+Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
 # @webundsoehne/nestjs-util
 
@@ -13,7 +11,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ## Description
 
-This is a collection of useful modules for creating a [NestJS](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
+This is a collection of useful modules on creating a [Nest](https://github.com/nestjs/nest) project. Mostly all of this modules are used by the in-house boilerplate of Web & Söhne.
 
 ## Modules
 
@@ -85,7 +83,7 @@ async migrate(): Promise<void> {
 
 ## Filters
 
-We implemented a generic `ExceptionFilter` called `GlobalExceptionFilter`, which catches all errors and sets the payload to a userfriendly information. The real exception and stacktrace will be just logged in `debug` logger mode.
+We implemented a generic `ExceptionFilter` called `GlobalExceptionFilter`, which catches all errors and set the payload to am user friendly information. The real exception will be just logged in `debug` logger mode.
 
 **Usage**
 
@@ -131,11 +129,11 @@ class ServerModule implements NestModule {}
 
 The `BadRequestExceptionFilter` extends from the `GlobalExceptionFilter` and just catches `BadRequestException` errors. This will handle the complex validation error messages (`ValidationError`) in the overwritten `payload()` method, which just happens on `BadRequestException` errors.
 
-We don't handle them in the normal `HttpExceptionFilter` because of performance reasons.
+We don't handle them in the normal `HttpExceptionFilter`, because of performance reasons.
 
 **Usage**
 
-> I hope you recognized that the order of the exception filters is relevant and required.
+> I hope you recognized that the order of the exception filters, is required.
 
 ```typescript
 import { BadRequestExceptionFilter, HttpExceptionFilter, GlobalExceptionFilter } from '@webundsoehne/nestjs-util'
@@ -161,7 +159,7 @@ class ServerModule implements NestModule {}
 
 ## Middleware
 
-The middleware of the maintenance module uses directly the `MaintenanceService` to check if there exists a lock file and raises the correct exception. You will see the implementation in the usage block above.
+The middleware of the maintenance module, uses directly the `MaintenanceService`, to check if there exists a lock file and raises the correct exception. You will see the implementation in the usage block above.
 
 ### Info-Header
 
@@ -185,7 +183,7 @@ class ServerModule implements NestModule {
 
 ### Maintenance
 
-The maintenance module gives you the possibility to generate and remove a lock file, as well as checking if the lock file exists and throwing a preconfigured `ServiceUnavailableException` error. You may use the maintenance module anywhere in your project, e.g. for database migrations.
+The maintenance module gives you the possibility to generete and remove a lock file, as well as checking if the lock file exists and throwing a preconfigured `ServiceUnavailableException` error. You may use the maintenance module anywhere in your project, e.g. for database migrations.
 
 **Usage**
 
@@ -225,7 +223,7 @@ class ServerModule implements NestModule {
 
 ### Config
 
-This is a NestJS service which allows you to use the great [config](https://github.com/lorenwest/node-config) library with decorators. For scripts or in common no classes, you can use it normally too.
+This is a NestJS service, which allows you to uses the great [config](https://github.com/lorenwest/node-config) library with decorators. But for scripts or in common no classes, you can use it normally too.
 
 **Important**
 
@@ -260,7 +258,7 @@ Customized logger service, which uses [winston](https://github.com/winstonjs/win
 
 **Usage**
 
-Set an instance of the logger to the application during creation as part of the `NestApplicationOptions`.
+Set an instance of the logger to the application during creation, as part of the `NestApplicationOptions`.
 
 ```typescript
 import { LoggerService } from '@webundsoehne/nestjs-util'
@@ -270,7 +268,7 @@ const app = await NestFactory.create<INestApplication>(ServerModule, new Fastify
 })
 ```
 
-After the logger got set to the application, all NestJS logging output will be handled by our customized logger.
+After the logger got set to the application, all NestJS logging output, will be handled by our customized logger.
 
 ```typescript
 import { Logger } from '@nestjs/common'
@@ -295,7 +293,7 @@ class CustomService {
 
 ## Pipes
 
-Extended pipes provide capabilities over the default ones for better interacting with this library.
+Extended pipes provide capabilities over the default ones for interacting with this library better.
 
 ### Validation Pipe
 
@@ -303,7 +301,7 @@ This validation pipe extends the default pipe for `class-validator` while it als
 
 **Usage**
 
-This can either be used with a `useClass` or to extend the options `useFactory`. The default `ValidationPipeOptions` are `{ whitelist: true }`.
+This can either used with a `useClass` or to extend the options `useFactory`. The default `ValidationPipeOptions` are `{ whitelist: true }`.
 
 ```typescript
 import { Module } from '@nestjs/common'

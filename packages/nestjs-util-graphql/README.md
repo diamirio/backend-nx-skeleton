@@ -3,9 +3,7 @@
     <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
   </a>
 </p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
+Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
 # @webundsoehne/nestjs-util-graphql
 
@@ -13,7 +11,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ## Description
 
-This is a collection of useful modules for creating a [NestJS](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
+This is a collection of useful modules on creating a [Nest](https://github.com/nestjs/nest) project. Mostly all of this modules are used by the in-house boilerplate of Web & Söhne.
 
 ## Modules
 
@@ -32,7 +30,7 @@ This is a collection of useful modules for creating a [NestJS](https://github.co
 
 ### GraphQL Error Parser
 
-Since `nest.js` lets `GraphQL` handle its errors in its own way, `graphqlErrorParser` is just a function instead of a filter. This will format the errors in the same way of the HTTP errors, so you can also throw `HTTP_STATUS` errors instead of plain `GraphQLError` for more distinction and using the status code directly in the frontend. It will also add the GraphQL error field of which field this error is coming from.
+Since `nest.js` lets `GraphQL` handle its errors its own way, `graphqlErrorParser` is just a function instead of a filter. This will format the errors in the same way of the HTTP errors so you can also throw `HTTP_STATUS` errors instead of plain `GraphQLError` for more distinction and using the status code directly in the frontend. It will also add the GraphQL error field of which field this error is coming from.
 
 **Usage**
 

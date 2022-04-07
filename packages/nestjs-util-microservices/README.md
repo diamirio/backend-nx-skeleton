@@ -3,9 +3,7 @@
     <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
   </a>
 </p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
+Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
 # @webundsoehne/nestjs-util-microservices
 
@@ -13,7 +11,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ## Description
 
-This is a collection of useful modules for creating a [NestJS](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
+This is a collection of useful modules on creating a [Nest](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
 
 ## Modules
 
@@ -34,7 +32,7 @@ This is a collection of useful modules for creating a [NestJS](https://github.co
 
 ### RPC Global Exception
 
-This filter will handle errors from microservices. If you use `GlobalExceptionFilter` up front, it will format the errors in the same way as the RESTFUL API filter, so you can also throw `HTTP_STATUS` exceptions. This filter will also output which microservice this error is coming from for debugging convenience.
+This filter will handle errors from microservices. If you use `GlobalExceptionFilter` on front of it will format the errors in the same way as the RESTFUL API and you can also throw `HTTP_STATUS` exceptions. This filter will also output which microservice this error is coming from for convienece of debugging.
 
 **Usage**
 
@@ -58,6 +56,7 @@ import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util/dist/microse
     imports: [ ...Object.values(modules) ]
   })
   class MicroservicesModule implements NestModule {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     async configure (): Promise<any> {}
   }
 
@@ -69,7 +68,7 @@ import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util/dist/microse
 
 ### Microservice-Client Provider
 
-Microservice client provider is a way to provide multiple microservice clients globally, as well as accessing them through one common service with auto-typing to make things more convenient.
+Microservice client provider is a way to provide multiple microservice clients globally as well as accessing them through one common service with auto-typing to make things more convenient.
 
 **Currently only supports RabbitMQ out-of-the-box.**
 
@@ -218,9 +217,9 @@ export class ServerModule {}
 
 - This will automatically create a client service, `MicroserviceProviderService`, with the specified clients embedded inside.
 
-- Then you can use the client in any service by injecting it. Everything will be auto-typed if you use the helper type as well.
+- Then you can use the client in any service by injecting it. Everything will be autotyped if you use the helper type as well.
 
-  - You can inject the client service through its class.
+  - You can inject client service through its class.
 
   ```typescript
   import { MicroserviceClient, MicroserviceResponse, MicroserviceProviderService } from '@my-scope/my-common-package'
@@ -236,7 +235,7 @@ export class ServerModule {}
   }
   ```
 
-  - You can inject the client service with a token of your choice that you can define while initializing the module.
+  - You can inject client service with a token of your choice that you can define while initializing the module.
 
   ```typescript
   // the service

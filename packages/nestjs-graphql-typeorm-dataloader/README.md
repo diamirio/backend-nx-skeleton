@@ -1,9 +1,6 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
+
+Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
 
 ---
 
@@ -98,9 +95,9 @@ export class ServerModule {}
 
 Field middleware can either be injected to `Field`, `FieldResolver`, or globally.
 
-Unfortunately `nest.js` does not allow to tamper with the `GraphQL` set up, so I could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
+Unfortunately `nest.js` does not allow to tamper with the `GraphQL` set up so I could not overwrite the `middleware` field while you are decorating the field with `extension` so this stayed as a manual process.
 
-This is due to `graphql` resolvers and field-resolvers inside the `nest.js` only registered once, therefore you can not lazily register metadata afterward, this behavior as I understand it can be seen in [field decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/field.decorator.ts#L86) and [field resolver decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/resolve-field.decorator.ts#L96) and following the behavior to add [metadata for resolvers](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/schema-builder/storages/type-metadata.storage.ts#L196).
+This is due to `graphql` resolvers and field-resolvers inside the `nest.js` only registered once. Therefore you can not lazily register metadata afterward, this behavior as I understand it can be seen in [field decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/field.decorator.ts#L86) and [field resolver decorator](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/decorators/resolve-field.decorator.ts#L96) and following the behavior to add [metadata for resolvers](https://github.com/nestjs/graphql/blob/853d76b52d49a637ff44651fd922994d14da9ed4/lib/schema-builder/storages/type-metadata.storage.ts#L196).
 
 ### Injecting to a Specific Field
 
@@ -141,7 +138,7 @@ The only critical thing here is getting the relation ids of the relation. Since 
 
 You can either use these decorators in the entity, DTO, or resolver. But the intention is to keep this in the DTOs or entities to define resolving them generically. You can also further process the output result, the GraphQL way.
 
-**If you define the resolver and extensions at the entity or DTO level, you do not need to define any field resolvers for a given field, and it will be resolved automatically.**
+**If you define the resolver and extensions at the entity or DTO level, you do not need to define any field resolvers for a given field and it will be resolved automatically.**
 
 **Please do not forget to set the middleware per field if you did not set it globally, else it won't work at all.**
 
@@ -213,7 +210,7 @@ export class CompanyEntity extends BaseEntityWithPrimary<CompanyEntity> {
 
 ### Using Relation Directly
 
-If the other option does not work out, or you don't have the foreign key joined to the column, you can use the relation id directly.
+If the other option does not work out or you don't have the foreign key joined to the column, you can use the relation id directly.
 
 ```typescript
 import { TypeormLoaderExtension, TypeormLoaderMiddleware } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
