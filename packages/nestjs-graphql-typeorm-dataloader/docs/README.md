@@ -30,7 +30,7 @@
 
 ### CUSTOM_DATALOADER_EXTENSION_FIELD
 
-• **CUSTOM_DATALOADER_EXTENSION_FIELD**: `"CUSTOM_DATALOADER_EXTENSION_FIELD"`
+• `Const` **CUSTOM_DATALOADER_EXTENSION_FIELD**: `"CUSTOM_DATALOADER_EXTENSION_FIELD"`
 
 Custom data loader extension data key for the field, that is stored inside the nestjs typestore. No different then @Extension decorator of nestjs for graphql, just a wrapper for types.
 
@@ -42,7 +42,7 @@ packages/nestjs-graphql-typeorm-dataloader/src/constants/extension-field.constan
 
 ### DATA_LOADER_CONTEXT_KEY
 
-• **DATA_LOADER_CONTEXT_KEY**: `"DATA_LOADER_CONTEXT"`
+• `Const` **DATA_LOADER_CONTEXT_KEY**: `"DATA_LOADER_CONTEXT"`
 
 The context key of data-loader plugin per key injected by the interceptor or apollo-server plugin. This will be appended to the context instead of the request to ensure compatibility between two.
 
@@ -54,7 +54,7 @@ packages/nestjs-graphql-typeorm-dataloader/src/constants/context.constants.ts:5
 
 ### TYPEORM_DATALOADER_EXTENSION_FIELD
 
-• **TYPEORM_DATALOADER_EXTENSION_FIELD**: `"TYPEORM_DATALOADER_EXTENSION_FIELD"`
+• `Const` **TYPEORM_DATALOADER_EXTENSION_FIELD**: `"TYPEORM_DATALOADER_EXTENSION_FIELD"`
 
 Typeorm data loader extension data key for the field, that is stored inside the nestjs typestore. No different then @Extension decorator of nestjs for graphql, just a wrapper for types.
 
@@ -97,7 +97,7 @@ packages/nestjs-graphql-typeorm-dataloader/src/decorators/custom-loader.decorato
 
 ### CustomLoaderMiddleware
 
-▸ `Const` **CustomLoaderMiddleware**(`ctx`, `next`): `any`
+▸ **CustomLoaderMiddleware**(`ctx`, `next`): `any`
 
 This middleware checks and processes for the subfields of a parent entity that should be resolved by the data loader. It will automatically run the function that is embedded inside the DATA_LOADER extension field.
 
@@ -143,7 +143,7 @@ packages/nestjs-graphql-typeorm-dataloader/src/decorators/typeorm-loader.decorat
 
 ### TypeormLoaderMiddleware
 
-▸ `Const` **TypeormLoaderMiddleware**(`ctx`, `next`): `any`
+▸ **TypeormLoaderMiddleware**(`ctx`, `next`): `any`
 
 This middleware checks and processes for the subfields of a parent entity that should be resolved by the data loader. It will automatically parse the subfield with the given decorator according to the relation type given.
 
