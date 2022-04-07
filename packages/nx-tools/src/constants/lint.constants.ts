@@ -8,7 +8,7 @@ export function eslintJson (options: { packageScope?: string, override?: Record<
       plugins: ['@nrwl/nx'],
       extends: ['@webundsoehne/eslint-config/typescript-dynamic'],
       rules: {
-        'import/order': [
+        ['import/order']: [
           'error',
           {
             pathGroups: [
@@ -22,7 +22,7 @@ export function eslintJson (options: { packageScope?: string, override?: Record<
               ['builtin', 'external'],
               ['index', 'parent', 'sibling']
             ],
-            'newlines-between': 'always',
+            ['newlines-between']: 'always',
             alphabetize: {
               order: 'asc',
               caseInsensitive: true

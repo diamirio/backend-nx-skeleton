@@ -3,12 +3,12 @@
   "description": "A CLI that automatically merges the desired skeleton and generates the docker-compose to run on development versions.",
   "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "main": "./dist/index.js",
   "bin": {
     "brownie": "bin/run.js"
   },
-  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "publishConfig": {
     "access": "public"
   },

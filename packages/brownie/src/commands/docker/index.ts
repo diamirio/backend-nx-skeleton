@@ -34,12 +34,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       char: 'e',
       description: 'Expose ports from the container.'
     }),
-    'volumes-folder': flags.string({
+    ['volumes-folder']: flags.string({
       char: 'V',
       description: 'Output to volumes folder.',
       default: 'volumes'
     }),
-    'files-folder': flags.string({
+    ['files-folder']: flags.string({
       char: 'F',
       description: 'Output to included folder.',
       default: 'files'
@@ -65,8 +65,8 @@ export class DockerContainerCommand extends ConfigBaseCommand {
           output: flags.output,
           volume: flags.volume,
           expose: flags.expose,
-          'volumes-folder': flags['volumes-folder'],
-          'files-folder': flags['files-folder']
+          ['volumes-folder']: flags['volumes-folder'],
+          ['files-folder']: flags['files-folder']
         }
       })
     }

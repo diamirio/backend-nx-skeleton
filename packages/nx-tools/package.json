@@ -1,8 +1,8 @@
 {
   "name": "@webundsoehne/nx-tools",
   "version": "1.0.0",
-  "description": "Common tools for NX.",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
+  "description": "Common tools for NX.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "author": "Backend <backend@webundsoehne.com>",

@@ -1,12 +1,12 @@
 {
   "name": "@webundsoehne/ts-utility-types",
   "description": "Some generic utility types that are used in more than one place now.",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "publishConfig": {
     "access": "public"
   },

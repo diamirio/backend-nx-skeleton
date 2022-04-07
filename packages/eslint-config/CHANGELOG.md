@@ -1,3 +1,21 @@
+## @webundsoehne/eslint-config [5.1.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.1.3...@webundsoehne/eslint-config@5.1.4) (2022-04-07)
+
+### Bug Fixes
+
+- fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+
+## @webundsoehne/eslint-config [5.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.1.2...@webundsoehne/eslint-config@5.1.3) (2022-04-07)
+
+### Bug Fixes
+
+- janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+
+## @webundsoehne/eslint-config [5.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.1.1...@webundsoehne/eslint-config@5.1.2) (2022-04-05)
+
+### Bug Fixes
+
+- housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+
 ## @webundsoehne/eslint-config [5.1.1](https://github.com/tailoredmedia/backend-nx-skeleton/compare/@webundsoehne/eslint-config@5.1.0...@webundsoehne/eslint-config@5.1.1) (2022-02-21)
 
 ### Bug Fixes

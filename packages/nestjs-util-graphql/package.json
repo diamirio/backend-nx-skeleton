@@ -2,6 +2,7 @@
   "name": "@webundsoehne/nestjs-util-graphql",
   "version": "1.0.0",
   "description": "NestJS skeleton util library for graphql applications.",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "main": "./dist/index.js",

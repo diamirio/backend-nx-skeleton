@@ -127,7 +127,7 @@ export function addProject (options: NormalizedSchema): Rule {
             environment: {}
           },
 
-          'e2e-dev': {
+          ['e2e-dev']: {
             command: 'jest --config ./test/jest-e2e.config.js --watchAll --passWithNoTests --runInBand --detectOpenHandles --verbose',
             nodeOptions: '-r ts-node/register -r tsconfig-paths/register --inspect=0.0.0.0:{{ debugPort | default(environment.DEBUG_PORT) }}',
             node: true,
@@ -175,7 +175,7 @@ export function addProject (options: NormalizedSchema): Rule {
           run: {
             command: `typeorm migration:run --config=${join(configurationBasePath, 'orm.config.ts')}`
           },
-          'mock-run': {
+          ['mock-run']: {
             command: `typeorm migration:run --config=${join(configurationBasePath, 'mock-orm.config.ts')}`
           },
           create: {
