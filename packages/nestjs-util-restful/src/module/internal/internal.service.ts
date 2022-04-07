@@ -21,6 +21,8 @@ export class InternalService {
       this.logger.warn(`Error while attempting to access last update file ${lastUpdateFilePath}`)
     }
 
+    this.logger.debug('Everything fine')
+
     return {
       apiVersion: process.env.PACKAGE_VERSION,
       lastUpdate
