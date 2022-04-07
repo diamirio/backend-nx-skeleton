@@ -1,6 +1,9 @@
-[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
-
-Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
+<p align="center">
+  <a href="https://webundsoehne.com" target="blank">
+    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
+  </a>
+</p>
+Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
 
 ---
 
@@ -10,7 +13,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 # Description
 
-Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compatabile with internal Web&Söhne projects, generate basic docker configuration and gitlab-ci configuration.
+Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compatible with internal Web&Söhne projects, generate basic docker configuration and gitlab-ci configuration.
 
 - [Changelog](./CHANGELOG.md)
 

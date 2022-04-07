@@ -1,6 +1,9 @@
-[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
-
-Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
+<p align="center">
+  <a href="https://webundsoehne.com" target="blank">
+    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
+  </a>
+</p>
+Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
 
 ---
 
@@ -10,7 +13,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 # Description
 
-`eslint` configuration for company wild projects to ensure code quality and code readability.
+`eslint` configuration for company-wide projects to ensure code quality and code readability.
 
 - [Changelog](./CHANGELOG.md)
 

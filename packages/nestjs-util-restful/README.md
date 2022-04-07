@@ -3,7 +3,9 @@
     <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
   </a>
 </p>
-Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
+Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+
+---
 
 # @webundsoehne/nestjs-util-restful
 
@@ -11,7 +13,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 
 ## Description
 
-This is a collection of useful modules on creating a [Nest](https://github.com/nestjs/nest) project. Mostly all of this modules are used by the in-house boilerplate of Web & Söhne.
+This is a collection of useful modules for creating a [NestJS](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
 
 ## Modules
 
@@ -37,9 +39,9 @@ This is a collection of useful modules on creating a [Nest](https://github.com/n
 
 ### Cache-Lifetime
 
-The interceptor sets the cache-lifetime information of the response as it was configured. The configuration depends normally by project and environment.
+The interceptor sets the cache-lifetime information of the response as it was configured. The configuration depends normally on project and environment.
 
-It will add a function to the request state `request.state.setCacheLifetime()`, with that you can set a customize lifetime for each request.
+It will add a function to the request state `request.state.setCacheLifetime()`, with that you can set a customized lifetime for each request.
 
 **Usage**
 
@@ -79,7 +81,7 @@ This function takes 2 parameters, where the second one is optional.
 
 ### Request-Profiler
 
-On `debug` logger level the request profile informs you when an request got started and when it was finished. It also logs down the information, how many seconds the request took.
+On `debug` logger level the request profile informs you when a request got started and when it was finished. It also logs down the response code information and how many seconds the request round-trip took.
 
 **Usage**
 
@@ -101,7 +103,7 @@ class ServerModule implements NestModule {}
 
 ```text
 [2020-01-01T12:00:00.000Z] [debug] [RequestProfilerInterceptor] - GET /v1/hello/world starting
-[2020-01-01T12:00:00.025Z] [debug] [RequestProfilerInterceptor] - GET /v1/hello/world finished - took: 0.0250 sec
+[2020-01-01T12:00:00.025Z] [debug] [RequestProfilerInterceptor] - GET /v1/hello/world finished - 200 - took: 0.0250 sec
 ```
 
 ## Providers
@@ -179,7 +181,7 @@ The status endpoint returns the current API version set during the process envir
 
 #### Changelog
 
-This endpoint simply reads and response the `CHANGELOG.md` from your root directory. You can change the filepath with the configuration value `misc.changelogFile`.
+This endpoint simply reads and responds with the `CHANGELOG.md` from your root directory. You can change the filepath with the configuration value `misc.changelogFile`.
 
 ## Stay in touch
 
