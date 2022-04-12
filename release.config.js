@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   repositoryUrl: 'https://gitlab.tailored-apps.com/bdsm/nx-skeleton',
   branches: [
     'master',
