@@ -4,6 +4,7 @@
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Tailored NestJS NX Based Application Skeleton",
   "author": "Backend <backend@webundsoehne.com>",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "ls": "lerna la",
@@ -35,10 +36,10 @@
     "prepare-commit-msg": "[ -t 1 ] && exec < /dev/tty && git cz --hook || true"
   },
   "resolutions": {
-    "**/rxjs": "7.5.4",
-    "**/@angular-devkit/architect": "0.1302.3",
-    "**/@angular-devkit/core": "13.2.3",
-    "**/@angular-devkit/schematics": "13.2.3"
+    "**/rxjs": "7.5.5",
+    "**/@angular-devkit/architect": "0.1303.2",
+    "**/@angular-devkit/core": "13.3.2",
+    "**/@angular-devkit/schematics": "13.3.2"
   },
   "devDependencies": {
     "@anatine/esbuild-decorators": "^0.2.18",
@@ -47,16 +48,16 @@
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.2.6",
+    "lint-staged": "^12.3.7",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.5.4",
+    "rxjs": "^7.5.5",
     "simple-git-hooks": "^2.7.0",
-    "tsc-watch": "^4.6.2",
+    "tsc-watch": "^5.0.3",
     "tsconfig-replace-paths": "^0.0.11",
-    "tsup": "^5.12.4",
-    "typedoc": "^0.22.11",
-    "typedoc-plugin-markdown": "^3.11.14",
+    "tsup": "5.11.12",
+    "typedoc": "^0.22.15",
+    "typedoc-plugin-markdown": "^3.12.0",
     "typescript": "^4.6.3"
   },
   "config": {

@@ -14,7 +14,7 @@
   "schematics": "./schematics.json",
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
+    "dev:start": "tsup-node --silent --watch",
     "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
@@ -23,11 +23,11 @@
     "docs:jsdoc": "typedoc src/index.ts --readme none"
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
+    "*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./**/*.{json,md}": [
+    "*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },
@@ -35,8 +35,8 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/core": "^13.2.3",
-    "@angular-devkit/schematics": "^13.2.3",
+    "@angular-devkit/core": "^13.3.2",
+    "@angular-devkit/schematics": "^13.3.2",
     "@nestjs/schematics": "^8.0.6",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",

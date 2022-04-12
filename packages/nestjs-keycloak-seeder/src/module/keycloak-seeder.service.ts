@@ -2,7 +2,8 @@ import { Inject, Injectable, Logger } from '@nestjs/common'
 
 import { KEYCLOAK_SEEDER_SEEDS } from '@constants/injection.constants'
 import { KeycloakSeed } from '@interfaces/keycloak-seed'
-import { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { KeycloakSeeds } from '@interfaces/keycloak-seed.interface'
 import { KeycloakAdminSeederTools } from '@utils/keycloak-seeder-tools'
 
 /**

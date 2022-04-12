@@ -1,7 +1,8 @@
 import { KeycloakAdminClient } from '@keycloak/keycloak-admin-client/lib/client'
 import { Injectable, Logger } from '@nestjs/common'
 
-import { KeycloakAdminOptions } from './admin.interfaces'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { KeycloakAdminOptions } from './admin.interfaces'
 
 /**
  * KeycloakAdminService manages the Keycloak RESTFUL API client.
