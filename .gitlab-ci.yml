@@ -75,6 +75,7 @@ publish:
     # PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
     NPM_RC: $NPM_RC
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
+    PLUGIN_USE_LOCAL_RC: 'true'
   before_script:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
