@@ -80,7 +80,7 @@ publish:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
-    - echo -e "${NPM_RC}" > ~/.npmrc
+    - echo -e "${NPM_RC}" >> .npmrc
   script:
     - /semantic-release/release.sh
   after_script:
