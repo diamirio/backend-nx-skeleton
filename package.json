@@ -45,7 +45,7 @@
     "commitizen": "^4.2.4",
     "cpy-cli": "^3.1.1",
     "lerna": "^4.0.0",
-    "lint-staged": "^11",
+    "lint-staged": "^12",
     "markdown-toc": "^1.2.0",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
