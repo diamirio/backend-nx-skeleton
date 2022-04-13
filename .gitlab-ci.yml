@@ -64,7 +64,7 @@ publish:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: release
     PLUGIN_ADD_MODULES: '@qiwi/multi-semantic-release @semantic-release/gitlab'
-    PLUGIN_OVERRIDE: multi-semantic-release --sequential-init
+    PLUGIN_OVERRIDE: multi-semantic-release --debug
     PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
     PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
     PLUGIN_UPDATE_README_TOC: 'false'
@@ -76,7 +76,6 @@ publish:
     NPM_RC: $NPM_RC
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
     PLUGIN_USE_LOCAL_RC: 'true'
-    PLUGIN_ARGUMENTS: --debug
   before_script:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
