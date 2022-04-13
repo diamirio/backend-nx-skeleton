@@ -59,7 +59,7 @@ docs:
 
 publish:
   stage: publish
-  image: cenk1cenk2/drone-semantic-release
+  image: cenk1cenk2/drone-semantic-release:edge
   variables:
     PLUGIN_GIT_METHOD: gl
     PLUGIN_MODE: release
@@ -82,8 +82,7 @@ publish:
     - cd /drone/src
     - echo -e "${NPM_RC}" > .npmrc
   script:
-    - node --version
-    - NODE_OPTIONS="--experimental-modules" /semantic-release/release.sh
+    - /semantic-release/release.sh
   after_script:
     - rsync -a /drone/src/ $CI_PROJECT_DIR/
   only:
