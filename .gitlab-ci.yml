@@ -82,7 +82,8 @@ publish:
     - cd /drone/src
     - echo -e "${NPM_RC}" > .npmrc
   script:
-    - /semantic-release/release.sh
+    - node --version
+    - NODE_OPTIONS="--experimental-modules" /semantic-release/release.sh
   after_script:
     - rsync -a /drone/src/ $CI_PROJECT_DIR/
   only:
