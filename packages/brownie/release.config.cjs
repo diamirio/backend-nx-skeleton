@@ -13,7 +13,6 @@ module.exports = {
     [
       '@semantic-release/gitlab',
       {
-        gitlabUrl: 'https://gitlab.tailored-apps.com',
         assets: []
       }
     ],
