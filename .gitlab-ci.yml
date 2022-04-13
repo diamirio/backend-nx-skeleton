@@ -72,7 +72,7 @@ publish:
     # PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
     PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL
     # npm_config_loglevel: verbose
-    PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
+    # PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
     NPM_RC: $NPM_RC
     DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
     PLUGIN_USE_LOCAL_RC: 'true'
@@ -80,7 +80,7 @@ publish:
     - apk add --no-cache --no-progress rsync
     - rsync -a $CI_PROJECT_DIR/ /drone/src/
     - cd /drone/src
-    - echo -e "${NPM_RC}" > .npmrc
+    - echo -e "${NPM_RC}" > ~/.npmrc
   script:
     - /semantic-release/release.sh
   after_script:
