@@ -25,12 +25,9 @@
     "docs:jsdoc": "yarn command --no-bail --parallel docs:jsdoc",
     "docs:readme": "yarn command --no-bail --parallel docs:readme"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": []
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "simple-git-hooks": {
     "pre-commit": "yarn run lint:staged",
     "prepare-commit-msg": "[ -t 1 ] && exec < /dev/tty && git cz --hook || true"
