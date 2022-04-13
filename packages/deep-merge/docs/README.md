@@ -108,7 +108,7 @@ ___
 
 ### uniqueArrayFilter
 
-▸ `Const` **uniqueArrayFilter**(`item`, `index`, `array`): `boolean`
+▸ **uniqueArrayFilter**(`item`, `index`, `array`): `boolean`
 
 A standard array filter for filtering it to unique items.
 
