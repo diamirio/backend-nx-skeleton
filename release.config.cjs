@@ -15,5 +15,5 @@ module.exports = {
       prerelease: true
     }
   ],
-  verifyConditions: ['@semantic-release/changelog', '@semantic-release/git']
+  verifyConditions: ['@semantic-release/changelog']
 }
