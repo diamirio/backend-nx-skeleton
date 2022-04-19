@@ -1,3 +1,10 @@
+## @webundsoehne/deep-merge [2.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.0...@webundsoehne/deep-merge@2.2.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
 # @webundsoehne/deep-merge [2.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.1.0...@webundsoehne/deep-merge@2.2.0) (2022-04-19)
 
 
