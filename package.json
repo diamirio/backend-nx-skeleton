@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
+  "repository": "https://gitlab.tailored-apps.com/bdsm/nx-skeleton.git",
   "description": "Tailored NestJS NX Based Application Skeleton",
   "author": "Backend <backend@webundsoehne.com>",
   "type": "module",

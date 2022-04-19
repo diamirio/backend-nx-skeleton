@@ -1,5 +1,5 @@
 module.exports = {
-  repositoryUrl: 'git@gitlab.tailored-apps.com:bdsm/nx-skeleton.git',
+  repositoryUrl: 'https://gitlab.tailored-apps.com/bdsm/nx-skeleton.git',
   branches: [
     'main',
     'master',
