@@ -1,3 +1,18 @@
+## @webundsoehne/nestjs-util-graphql [1.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.3.0...@webundsoehne/nestjs-util-graphql@1.3.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* disable gitlab while releasing for now ([e30a432](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e30a43247f725b38fd59a7634c71c85d52331291))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 5.4.2
+
 # @webundsoehne/nestjs-util-graphql [1.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.2.2...@webundsoehne/nestjs-util-graphql@1.3.0) (2022-04-19)
 
 
