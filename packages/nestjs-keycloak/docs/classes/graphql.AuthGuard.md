@@ -4,7 +4,8 @@
 
 [graphql](../modules/graphql.md).AuthGuard
 
-Application AuthGuard for Keycloak applications. This only works for GraphQL APIs.
+Application AuthGuard for Keycloak applications.
+This only works for GraphQL APIs.
 
 ## Hierarchy
 
@@ -36,11 +37,11 @@ Application AuthGuard for Keycloak applications. This only works for GraphQL API
 
 #### Parameters
 
-| Name              | Type                                                                      |
-| :---------------- | :------------------------------------------------------------------------ |
-| `keycloak`        | `Keycloak`                                                                |
+| Name | Type |
+| :------ | :------ |
+| `keycloak` | `Keycloak` |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector`       | `Reflector`                                                               |
+| `reflector` | `Reflector` |
 
 #### Inherited from
 
@@ -48,7 +49,7 @@ Application AuthGuard for Keycloak applications. This only works for GraphQL API
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:26
+connect/guards/auth-base.guard.ts:27
 
 ## Properties
 
@@ -68,8 +69,8 @@ connect/guards/auth-base.guard.ts:26
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -82,9 +83,9 @@ connect/guards/auth-base.guard.ts:26
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:32
+connect/guards/auth-base.guard.ts:33
 
----
+___
 
 ### getRequest
 
@@ -93,13 +94,13 @@ connect/guards/auth-base.guard.ts:32
 #### Type parameters
 
 | Name | Type |
-| :-- | :-- |
+| :------ | :------ |
 | `Request` | extends [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -114,7 +115,7 @@ connect/guards/auth-base.guard.ts:32
 
 connect/guards/auth-graphql.guard.ts:14
 
----
+___
 
 ### validateRequirements
 
@@ -124,10 +125,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name       | Type       | Default value |
-| :--------- | :--------- | :------------ |
-| `values`   | `string`[] | `undefined`   |
-| `required` | `string`[] | `[]`          |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `values` | `string`[] | `undefined` |
+| `required` | `string`[] | `[]` |
 
 #### Returns
 
@@ -139,4 +140,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:105
+connect/guards/auth-base.guard.ts:106
