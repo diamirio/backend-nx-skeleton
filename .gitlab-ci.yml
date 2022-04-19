@@ -67,8 +67,6 @@ publish:
     GIT_AUTHOR_EMAIL: $BANDAID_API_USER_EMAIL
     GIT_COMMITTER_NAME: semantic-release [bot]
     GIT_COMMITTER_EMAIL: $BANDAID_API_USER_EMAIL
-    # semantic-release does not like having a npmrc file at the root directory anymore, do to our publishing and repository fields not matching
-    NPM_NPMRC_FILE: .npmrc,packages/brownie/.npmrc,packages/deep-merge/.npmrc,packages/eslint-config/.npmrc,packages/nestjs-graphql-typeorm-dataloader/.npmrc,packages/nestjs-keycloak/.npmrc,packages/nestjs-keycloak-seeder/.npmrc,packages/nestjs-util/.npmrc,packages/nestjs-util-graphql/.npmrc,packages/nestjs-util-microservices/.npmrc,packages/nestjs-util-restful/.npmrc,packages/nx-builders/.npmrc,packages/nx-nest/.npmrc,packages/nx-tools/.npmrc,packages/nx-workspace/.npmrc,packages/patch-package/.npmrc,packages/ts-utility-types/.npmrc
     NPM_LOGIN: $NPM_LOGIN
     RUN_MULTI: 'true'
   script:
