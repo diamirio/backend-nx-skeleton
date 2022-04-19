@@ -30,7 +30,7 @@
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:15
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16
 
 ## Methods
 
@@ -55,4 +55,4 @@ NestInterceptor.intercept
 
 #### Defined in
 
-packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:17
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:18

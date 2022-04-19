@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
+    "dev:start": "tsup-node --silent --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -71,7 +71,7 @@
     "@webundsoehne/nestjs-util": "*",
     "express": "^4.17.3",
     "fastify": "^3.27.0",
-    "fastify-swagger": "^4.15.0",
+    "fastify-swagger": "^5.1.0",
     "swagger-ui-express": "^4.1.5"
   },
   "engines": {

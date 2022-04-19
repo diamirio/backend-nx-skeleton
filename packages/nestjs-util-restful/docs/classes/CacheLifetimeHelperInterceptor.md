@@ -30,7 +30,7 @@
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:15
+interceptor/cache-lifetime.interceptor.ts:16
 
 ## Properties
 
@@ -40,7 +40,7 @@ interceptor/cache-lifetime.interceptor.ts:15
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:12
+interceptor/cache-lifetime.interceptor.ts:13
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:13
+interceptor/cache-lifetime.interceptor.ts:14
 
 ## Methods
 
@@ -70,7 +70,7 @@ interceptor/cache-lifetime.interceptor.ts:13
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:20
+interceptor/cache-lifetime.interceptor.ts:21
 
 ___
 
@@ -95,4 +95,4 @@ NestInterceptor.intercept
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:24
+interceptor/cache-lifetime.interceptor.ts:25

@@ -1,7 +1,8 @@
 import { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-import { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
 import { Configurable, ConfigParam } from '@webundsoehne/nestjs-util'
 
 export class SwaggerService {

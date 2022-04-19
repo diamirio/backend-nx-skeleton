@@ -32,7 +32,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`\> |
+| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`, `FastifyLoggerInstance`\> |
 | `res` | `any` |
 | `next` | () => `any` |
 

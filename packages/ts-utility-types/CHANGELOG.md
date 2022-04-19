@@ -1,3 +1,18 @@
+# @webundsoehne/ts-utility-types [2.2.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.1.0...@webundsoehne/ts-utility-types@2.2.0-beta.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* bump release ([ab310c3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ab310c3c2f0db48bdbf9fff9c31ff4f171055e01))
+* bump release ([252a36e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/252a36ee2e5f7847eb4d01138c32a82cf3614054))
+* housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+* update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+
+### Features
+
+* get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
 # @webundsoehne/ts-utility-types [2.1.0](https://github.com/tailoredmedia/backend-nx-skeleton/compare/@webundsoehne/ts-utility-types@2.0.2...@webundsoehne/ts-utility-types@2.1.0) (2022-02-05)
 
 ### Features

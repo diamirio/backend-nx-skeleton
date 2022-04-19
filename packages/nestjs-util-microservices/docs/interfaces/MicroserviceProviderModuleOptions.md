@@ -9,7 +9,7 @@
 - [clientOptions](MicroserviceProviderModuleOptions.md#clientoptions)
 - [disableService](MicroserviceProviderModuleOptions.md#disableservice)
 - [name](MicroserviceProviderModuleOptions.md#name)
-- [queue](MicroserviceProviderModuleOptions.md#queue)
+- [queue](MicroserviceProviderModuleOptions.md#queue-1)
 
 ### Methods
 

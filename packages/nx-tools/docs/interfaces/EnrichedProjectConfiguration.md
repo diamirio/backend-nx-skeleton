@@ -6,9 +6,9 @@ Per application settings in workspace.json
 
 ## Type parameters
 
-| Name | Type                                                                                   |
-| :--- | :------------------------------------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
 
 ## Hierarchy
 
@@ -54,7 +54,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`;  }
 
 #### Inherited from
 
@@ -62,9 +62,9 @@ ProjectConfiguration.generators
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:74
+node_modules/nx/src/config/workspace-json-project-json.d.ts:72
 
----
+___
 
 ### implicitDependencies
 
@@ -78,9 +78,9 @@ ProjectConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:82
+node_modules/nx/src/config/workspace-json-project-json.d.ts:80
 
----
+___
 
 ### integration
 
@@ -90,7 +90,7 @@ node_modules/@nrwl/tao/src/shared/workspace.d.ts:82
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:16
 
----
+___
 
 ### name
 
@@ -104,9 +104,9 @@ ProjectConfiguration.name
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:38
+node_modules/nx/src/config/workspace-json-project-json.d.ts:36
 
----
+___
 
 ### projectType
 
@@ -120,9 +120,9 @@ ProjectConfiguration.projectType
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:56
+node_modules/nx/src/config/workspace-json-project-json.d.ts:54
 
----
+___
 
 ### root
 
@@ -136,9 +136,9 @@ ProjectConfiguration.root
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:48
+node_modules/nx/src/config/workspace-json-project-json.d.ts:46
 
----
+___
 
 ### sourceRoot
 
@@ -152,9 +152,9 @@ ProjectConfiguration.sourceRoot
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:52
+node_modules/nx/src/config/workspace-json-project-json.d.ts:50
 
----
+___
 
 ### tags
 
@@ -168,9 +168,9 @@ ProjectConfiguration.tags
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:86
+node_modules/nx/src/config/workspace-json-project-json.d.ts:84
 
----
+___
 
 ### targets
 
@@ -188,4 +188,4 @@ ProjectConfiguration.targets
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:42
+node_modules/nx/src/config/workspace-json-project-json.d.ts:40

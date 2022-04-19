@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
+    "dev:start": "tsup-node --silent --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -27,11 +27,11 @@
     "docs:readme": "yarn oclif-dev readme"
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
+    "*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./**/*.{json,md}": [
+    "*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },
@@ -66,13 +66,13 @@
     "rewire": "^6.0.0",
     "tmp-promise": "^3.0.3",
     "tslib": "^2.3.1",
-    "wrap-ansi": "^8.0.1"
+    "wrap-ansi": "^7"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.10",
     "@types/fs-extra": "^9.0.13",
     "@types/rewire": "^2.5.28",
-    "@types/wrap-ansi": "^8.0.1"
+    "@types/wrap-ansi": "^3"
   },
   "engines": {
     "node": ">= 16"

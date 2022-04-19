@@ -7,7 +7,8 @@ import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { DATA_LOADER_CONTEXT_KEY } from '@constants/context.constants'
-import { ApolloServerLoaderPluginOptions } from '@interfaces/apollo-server-plugin.interface'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { ApolloServerLoaderPluginOptions } from '@interfaces/apollo-server-plugin.interface'
 import type { Context } from '@interfaces/context.interface'
 
 @Injectable()

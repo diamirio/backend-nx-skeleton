@@ -33,7 +33,7 @@
 
 ### AvailableExtensionsMap
 
-• **AvailableExtensionsMap**: `ExtensionsMap`<typeof [`AvailableExtensions`](enums/AvailableExtensions.md), `ApplicationNormalizedSchema`\>
+• `Const` **AvailableExtensionsMap**: `ExtensionsMap`<typeof [`AvailableExtensions`](enums/AvailableExtensions.md), `ApplicationNormalizedSchema`\>
 
 #### Defined in
 
@@ -43,7 +43,7 @@ ___
 
 ### PrettyNamesForAvailableThingies
 
-• **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableComponents`](enums/AvailableComponents.md) \| [`AvailableServerTypes`](enums/AvailableServerTypes.md) \| [`AvailableServerAdapters`](enums/AvailableServerAdapters.md) \| [`AvailableDBTypes`](enums/AvailableDBTypes.md) \| [`AvailableMicroserviceTypes`](enums/AvailableMicroserviceTypes.md) \| [`AvailableExtensions`](enums/AvailableExtensions.md)\>
+• `Const` **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableComponents`](enums/AvailableComponents.md) \| [`AvailableServerTypes`](enums/AvailableServerTypes.md) \| [`AvailableServerAdapters`](enums/AvailableServerAdapters.md) \| [`AvailableDBTypes`](enums/AvailableDBTypes.md) \| [`AvailableMicroserviceTypes`](enums/AvailableMicroserviceTypes.md) \| [`AvailableExtensions`](enums/AvailableExtensions.md)\>
 
 Prettified names for components to use with prompts and such.
 

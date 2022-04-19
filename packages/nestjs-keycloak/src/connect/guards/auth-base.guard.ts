@@ -10,8 +10,9 @@ import {
   KEYCLOAK_CONNECT_METADATA_SCOPES,
   KEYCLOAK_CONNECT_METADATA_UNPROTECTED
 } from '@connect/connect.constants'
-import type { KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
-import { ExceptionMessagesFallback, KeycloakConnectOptions } from '@connect/connect.interfaces'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { KeycloakConnectUserInfo, ScopesOption, KeycloakConnectOptions } from '@connect/connect.interfaces'
+import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
 import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
 

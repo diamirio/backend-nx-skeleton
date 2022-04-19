@@ -4,7 +4,8 @@ import moment from 'moment'
 import type { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
-import { CacheLifetimeOptions } from './cache-lifetime.interface'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { CacheLifetimeOptions } from './cache-lifetime.interface'
 import type { Request } from '@webundsoehne/nestjs-util'
 import { ConfigParam, Configurable } from '@webundsoehne/nestjs-util'
 

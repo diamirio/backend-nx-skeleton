@@ -13,9 +13,9 @@
 - [get](ConfigService.md#get)
 - [has](ConfigService.md#has)
 - [setModuleConfig](ConfigService.md#setmoduleconfig)
-- [get](ConfigService.md#get)
-- [has](ConfigService.md#has)
-- [setModuleConfig](ConfigService.md#setmoduleconfig)
+- [get](ConfigService.md#get-1)
+- [has](ConfigService.md#has-1)
+- [setModuleConfig](ConfigService.md#setmoduleconfig-1)
 
 ## Constructors
 

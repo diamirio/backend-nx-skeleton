@@ -31,7 +31,7 @@
 
 connect/connect.interfaces.ts:28
 
----
+___
 
 ### rolesMissing
 
@@ -41,7 +41,7 @@ connect/connect.interfaces.ts:28
 
 connect/connect.interfaces.ts:30
 
----
+___
 
 ### rolesUnauthorized
 
@@ -51,7 +51,7 @@ connect/connect.interfaces.ts:30
 
 connect/connect.interfaces.ts:31
 
----
+___
 
 ### scopesMissing
 
@@ -61,7 +61,7 @@ connect/connect.interfaces.ts:31
 
 connect/connect.interfaces.ts:32
 
----
+___
 
 ### scopesUnauthorized
 
@@ -71,7 +71,7 @@ connect/connect.interfaces.ts:32
 
 connect/connect.interfaces.ts:33
 
----
+___
 
 ### tokenMissing
 

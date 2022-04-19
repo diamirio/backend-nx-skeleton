@@ -33,16 +33,16 @@
 
 ### Variables
 
-- [KEYCLOAK_ADMIN_INSTANCE](index.md#keycloak_admin_instance)
-- [KEYCLOAK_ADMIN_OPTIONS](index.md#keycloak_admin_options)
-- [KEYCLOAK_CONNECT_INSTANCE](index.md#keycloak_connect_instance)
-- [KEYCLOAK_CONNECT_METADATA_GROUPS](index.md#keycloak_connect_metadata_groups)
-- [KEYCLOAK_CONNECT_METADATA_PROTECTED](index.md#keycloak_connect_metadata_protected)
-- [KEYCLOAK_CONNECT_METADATA_ROLES](index.md#keycloak_connect_metadata_roles)
-- [KEYCLOAK_CONNECT_METADATA_SCOPES](index.md#keycloak_connect_metadata_scopes)
-- [KEYCLOAK_CONNECT_METADATA_UNPROTECTED](index.md#keycloak_connect_metadata_unprotected)
-- [KEYCLOAK_CONNECT_METADATA_USER](index.md#keycloak_connect_metadata_user)
-- [KEYCLOAK_CONNECT_OPTIONS](index.md#keycloak_connect_options)
+- [KEYCLOAK\_ADMIN\_INSTANCE](index.md#keycloak_admin_instance)
+- [KEYCLOAK\_ADMIN\_OPTIONS](index.md#keycloak_admin_options)
+- [KEYCLOAK\_CONNECT\_INSTANCE](index.md#keycloak_connect_instance)
+- [KEYCLOAK\_CONNECT\_METADATA\_GROUPS](index.md#keycloak_connect_metadata_groups)
+- [KEYCLOAK\_CONNECT\_METADATA\_PROTECTED](index.md#keycloak_connect_metadata_protected)
+- [KEYCLOAK\_CONNECT\_METADATA\_ROLES](index.md#keycloak_connect_metadata_roles)
+- [KEYCLOAK\_CONNECT\_METADATA\_SCOPES](index.md#keycloak_connect_metadata_scopes)
+- [KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED](index.md#keycloak_connect_metadata_unprotected)
+- [KEYCLOAK\_CONNECT\_METADATA\_USER](index.md#keycloak_connect_metadata_user)
+- [KEYCLOAK\_CONNECT\_OPTIONS](index.md#keycloak_connect_options)
 
 ### Functions
 
@@ -72,7 +72,7 @@
 
 interfaces/request.interface.ts:11
 
----
+___
 
 ### EnrichedFastifyRequest
 
@@ -82,7 +82,7 @@ interfaces/request.interface.ts:11
 
 interfaces/request.interface.ts:12
 
----
+___
 
 ### EnrichedRequest
 
@@ -92,17 +92,17 @@ interfaces/request.interface.ts:12
 
 interfaces/request.interface.ts:14
 
----
+___
 
 ### KeycloakConnectUserInfo
 
-Ƭ **KeycloakConnectUserInfo**: `Record`<`string`, `string` \| `number` \| `boolean` \| `null`\>
+Ƭ **KeycloakConnectUserInfo**: `Record`<`string`, `string` \| `number` \| `boolean` \| ``null``\>
 
 #### Defined in
 
 connect/connect.interfaces.ts:36
 
----
+___
 
 ### RolesOption
 
@@ -112,7 +112,7 @@ connect/connect.interfaces.ts:36
 
 connect/connect.interfaces.ts:23
 
----
+___
 
 ### ScopesOption
 
@@ -124,99 +124,99 @@ connect/connect.interfaces.ts:25
 
 ## Variables
 
-### KEYCLOAK_ADMIN_INSTANCE
+### KEYCLOAK\_ADMIN\_INSTANCE
 
-• **KEYCLOAK_ADMIN_INSTANCE**: typeof [`KEYCLOAK_ADMIN_INSTANCE`](index.md#keycloak_admin_instance)
+• `Const` **KEYCLOAK\_ADMIN\_INSTANCE**: typeof [`KEYCLOAK_ADMIN_INSTANCE`](index.md#keycloak_admin_instance)
 
 #### Defined in
 
 admin/admin.constants.ts:2
 
----
+___
 
-### KEYCLOAK_ADMIN_OPTIONS
+### KEYCLOAK\_ADMIN\_OPTIONS
 
-• **KEYCLOAK_ADMIN_OPTIONS**: typeof [`KEYCLOAK_ADMIN_OPTIONS`](index.md#keycloak_admin_options)
+• `Const` **KEYCLOAK\_ADMIN\_OPTIONS**: typeof [`KEYCLOAK_ADMIN_OPTIONS`](index.md#keycloak_admin_options)
 
 #### Defined in
 
 admin/admin.constants.ts:1
 
----
+___
 
-### KEYCLOAK_CONNECT_INSTANCE
+### KEYCLOAK\_CONNECT\_INSTANCE
 
-• **KEYCLOAK_CONNECT_INSTANCE**: typeof [`KEYCLOAK_CONNECT_INSTANCE`](index.md#keycloak_connect_instance)
+• `Const` **KEYCLOAK\_CONNECT\_INSTANCE**: typeof [`KEYCLOAK_CONNECT_INSTANCE`](index.md#keycloak_connect_instance)
 
 #### Defined in
 
 connect/connect.constants.ts:2
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_GROUPS
+### KEYCLOAK\_CONNECT\_METADATA\_GROUPS
 
-• **KEYCLOAK_CONNECT_METADATA_GROUPS**: typeof [`KEYCLOAK_CONNECT_METADATA_GROUPS`](index.md#keycloak_connect_metadata_groups)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_GROUPS**: typeof [`KEYCLOAK_CONNECT_METADATA_GROUPS`](index.md#keycloak_connect_metadata_groups)
 
 #### Defined in
 
 connect/connect.constants.ts:6
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_PROTECTED
+### KEYCLOAK\_CONNECT\_METADATA\_PROTECTED
 
-• **KEYCLOAK_CONNECT_METADATA_PROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_PROTECTED`](index.md#keycloak_connect_metadata_protected)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_PROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_PROTECTED`](index.md#keycloak_connect_metadata_protected)
 
 #### Defined in
 
 connect/connect.constants.ts:5
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_ROLES
+### KEYCLOAK\_CONNECT\_METADATA\_ROLES
 
-• **KEYCLOAK_CONNECT_METADATA_ROLES**: typeof [`KEYCLOAK_CONNECT_METADATA_ROLES`](index.md#keycloak_connect_metadata_roles)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_ROLES**: typeof [`KEYCLOAK_CONNECT_METADATA_ROLES`](index.md#keycloak_connect_metadata_roles)
 
 #### Defined in
 
 connect/connect.constants.ts:7
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_SCOPES
+### KEYCLOAK\_CONNECT\_METADATA\_SCOPES
 
-• **KEYCLOAK_CONNECT_METADATA_SCOPES**: typeof [`KEYCLOAK_CONNECT_METADATA_SCOPES`](index.md#keycloak_connect_metadata_scopes)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_SCOPES**: typeof [`KEYCLOAK_CONNECT_METADATA_SCOPES`](index.md#keycloak_connect_metadata_scopes)
 
 #### Defined in
 
 connect/connect.constants.ts:8
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_UNPROTECTED
+### KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED
 
-• **KEYCLOAK_CONNECT_METADATA_UNPROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_UNPROTECTED`](index.md#keycloak_connect_metadata_unprotected)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_UNPROTECTED**: typeof [`KEYCLOAK_CONNECT_METADATA_UNPROTECTED`](index.md#keycloak_connect_metadata_unprotected)
 
 #### Defined in
 
 connect/connect.constants.ts:4
 
----
+___
 
-### KEYCLOAK_CONNECT_METADATA_USER
+### KEYCLOAK\_CONNECT\_METADATA\_USER
 
-• **KEYCLOAK_CONNECT_METADATA_USER**: typeof [`KEYCLOAK_CONNECT_METADATA_USER`](index.md#keycloak_connect_metadata_user)
+• `Const` **KEYCLOAK\_CONNECT\_METADATA\_USER**: typeof [`KEYCLOAK_CONNECT_METADATA_USER`](index.md#keycloak_connect_metadata_user)
 
 #### Defined in
 
 connect/connect.constants.ts:9
 
----
+___
 
-### KEYCLOAK_CONNECT_OPTIONS
+### KEYCLOAK\_CONNECT\_OPTIONS
 
-• **KEYCLOAK_CONNECT_OPTIONS**: typeof [`KEYCLOAK_CONNECT_OPTIONS`](index.md#keycloak_connect_options)
+• `Const` **KEYCLOAK\_CONNECT\_OPTIONS**: typeof [`KEYCLOAK_CONNECT_OPTIONS`](index.md#keycloak_connect_options)
 
 #### Defined in
 
@@ -240,11 +240,11 @@ Injects Keyclaok admin instance initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -254,7 +254,7 @@ Injects Keyclaok admin instance initiated to the service.
 
 admin/decorators/inject.decorator.ts:8
 
----
+___
 
 ### InjectKeycloakConnect
 
@@ -272,11 +272,11 @@ Injects Keyclaok connect instance initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -286,7 +286,7 @@ Injects Keyclaok connect instance initiated to the service.
 
 connect/decorators/inject.decorator.ts:8
 
----
+___
 
 ### InjectKeycloakConnectOptions
 
@@ -304,11 +304,11 @@ Injects Keyclaok connect instance options initiated to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
@@ -318,11 +318,11 @@ Injects Keyclaok connect instance options initiated to the service.
 
 connect/decorators/inject.decorator.ts:15
 
----
+___
 
 ### KeycloakPrivate
 
-▸ `Const` **KeycloakPrivate**(): `CustomDecorator`<`symbol`\>
+▸ **KeycloakPrivate**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route private and require Keycloak authentication.
 
@@ -336,11 +336,11 @@ Makes the controller route private and require Keycloak authentication.
 
 connect/decorators/protected.decorator.ts:10
 
----
+___
 
 ### KeycloakProtected
 
-▸ `Const` **KeycloakProtected**(): `CustomDecorator`<`symbol`\>
+▸ **KeycloakProtected**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route private and require Keycloak authentication.
 
@@ -354,11 +354,11 @@ Makes the controller route private and require Keycloak authentication.
 
 connect/decorators/protected.decorator.ts:16
 
----
+___
 
 ### KeycloakPublic
 
-▸ `Const` **KeycloakPublic**(): `CustomDecorator`<`symbol`\>
+▸ **KeycloakPublic**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route public and does not require Keycloak authentication.
 
@@ -372,11 +372,11 @@ Makes the controller route public and does not require Keycloak authentication.
 
 connect/decorators/unprotected.decorator.ts:10
 
----
+___
 
 ### KeycloakRoles
 
-▸ `Const` **KeycloakRoles**(...`roles`): `CustomDecorator`<`symbol`\>
+▸ **KeycloakRoles**(...`roles`): `CustomDecorator`<`symbol`\>
 
 Inject current Keycloak users roles in to a variable.
 
@@ -384,8 +384,8 @@ Inject current Keycloak users roles in to a variable.
 
 #### Parameters
 
-| Name       | Type       |
-| :--------- | :--------- |
+| Name | Type |
+| :------ | :------ |
 | `...roles` | `string`[] |
 
 #### Returns
@@ -396,11 +396,11 @@ Inject current Keycloak users roles in to a variable.
 
 connect/decorators/roles.decorator.ts:10
 
----
+___
 
 ### KeycloakScopes
 
-▸ `Const` **KeycloakScopes**(...`list`): `CustomDecorator`<`symbol`\>
+▸ **KeycloakScopes**(...`list`): `CustomDecorator`<`symbol`\>
 
 Inject current Keycloak user client scopes in to a variable.
 
@@ -408,8 +408,8 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Parameters
 
-| Name      | Type                                      |
-| :-------- | :---------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...list` | [`ScopesOption`](index.md#scopesoption)[] |
 
 #### Returns
@@ -420,11 +420,11 @@ Inject current Keycloak user client scopes in to a variable.
 
 connect/decorators/scopes.decorator.ts:11
 
----
+___
 
 ### KeycloakUnprotected
 
-▸ `Const` **KeycloakUnprotected**(): `CustomDecorator`<`symbol`\>
+▸ **KeycloakUnprotected**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route public and does not require Keycloak authentication.
 
@@ -438,11 +438,11 @@ Makes the controller route public and does not require Keycloak authentication.
 
 connect/decorators/unprotected.decorator.ts:16
 
----
+___
 
 ### Private
 
-▸ `Const` **Private**(): `CustomDecorator`<`symbol`\>
+▸ **Private**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route private and require Keycloak authentication.
 
@@ -456,11 +456,11 @@ Makes the controller route private and require Keycloak authentication.
 
 connect/decorators/protected.decorator.ts:22
 
----
+___
 
 ### Protected
 
-▸ `Const` **Protected**(): `CustomDecorator`<`symbol`\>
+▸ **Protected**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route private and require Keycloak authentication.
 
@@ -474,11 +474,11 @@ Makes the controller route private and require Keycloak authentication.
 
 connect/decorators/protected.decorator.ts:28
 
----
+___
 
 ### Public
 
-▸ `Const` **Public**(): `CustomDecorator`<`symbol`\>
+▸ **Public**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route public and does not require Keycloak authentication.
 
@@ -492,11 +492,11 @@ Makes the controller route public and does not require Keycloak authentication.
 
 connect/decorators/unprotected.decorator.ts:22
 
----
+___
 
 ### Roles
 
-▸ `Const` **Roles**(...`roles`): `CustomDecorator`<`symbol`\>
+▸ **Roles**(...`roles`): `CustomDecorator`<`symbol`\>
 
 Inject current Keycloak users roles in to a variable.
 
@@ -506,8 +506,8 @@ Inject current Keycloak users roles in to a variable.
 
 #### Parameters
 
-| Name       | Type       |
-| :--------- | :--------- |
+| Name | Type |
+| :------ | :------ |
 | `...roles` | `string`[] |
 
 #### Returns
@@ -518,11 +518,11 @@ Inject current Keycloak users roles in to a variable.
 
 connect/decorators/roles.decorator.ts:17
 
----
+___
 
 ### Scopes
 
-▸ `Const` **Scopes**(...`list`): `CustomDecorator`<`symbol`\>
+▸ **Scopes**(...`list`): `CustomDecorator`<`symbol`\>
 
 Inject current Keycloak user client scopes in to a variable.
 
@@ -532,8 +532,8 @@ Inject current Keycloak user client scopes in to a variable.
 
 #### Parameters
 
-| Name      | Type                                      |
-| :-------- | :---------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...list` | [`ScopesOption`](index.md#scopesoption)[] |
 
 #### Returns
@@ -544,11 +544,11 @@ Inject current Keycloak user client scopes in to a variable.
 
 connect/decorators/scopes.decorator.ts:22
 
----
+___
 
 ### Unprotected
 
-▸ `Const` **Unprotected**(): `CustomDecorator`<`symbol`\>
+▸ **Unprotected**(): `CustomDecorator`<`symbol`\>
 
 Makes the controller route public and does not require Keycloak authentication.
 

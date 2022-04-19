@@ -18,6 +18,7 @@
     "declaration": true,
     "composite": false,
     "noImplicitAny": false,
+    "isolatedModules": true,
     "outDir": "./dist",
     "baseUrl": "packages/",
     "rootDir": "packages/"

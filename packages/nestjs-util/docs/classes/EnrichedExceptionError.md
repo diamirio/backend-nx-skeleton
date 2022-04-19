@@ -31,8 +31,8 @@ Mostly required for making instanceof check of graphql valid after version 15.0.
 
 #### Parameters
 
-| Name    | Type                                                      |
-| :------ | :-------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `error` | [`EnrichedException`](../interfaces/EnrichedException.md) |
 
 #### Defined in
@@ -53,7 +53,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:25
 
 packages/nestjs-util/src/filter/exception.interface.ts:19
 
----
+___
 
 ### errors
 
@@ -67,7 +67,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:19
 
 packages/nestjs-util/src/filter/exception.interface.ts:21
 
----
+___
 
 ### message
 
@@ -81,7 +81,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:21
 
 packages/nestjs-util/src/filter/exception.interface.ts:20
 
----
+___
 
 ### service
 
@@ -95,7 +95,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:20
 
 packages/nestjs-util/src/filter/exception.interface.ts:22
 
----
+___
 
 ### stacktrace
 
@@ -109,7 +109,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:22
 
 packages/nestjs-util/src/filter/exception.interface.ts:23
 
----
+___
 
 ### statusCode
 
