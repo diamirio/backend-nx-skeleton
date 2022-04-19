@@ -1,3 +1,10 @@
+## @webundsoehne/eslint-config [5.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.0...@webundsoehne/eslint-config@5.2.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
 # @webundsoehne/eslint-config [5.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.1.5...@webundsoehne/eslint-config@5.2.0) (2022-04-19)
 
 
