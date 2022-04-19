@@ -10,13 +10,6 @@ module.exports = {
         assets: ['CHANGELOG.md', 'README.md', 'docs/']
       }
     ],
-    [
-      '@semantic-release/gitlab',
-      {
-        gitlabUrl: 'https://gitlab.tailored-apps.com',
-        assets: []
-      }
-    ],
     '@semantic-release/npm'
   ]
 }
