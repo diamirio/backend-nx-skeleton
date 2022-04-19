@@ -18,11 +18,9 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/brownie](#webundsoehnebrownie)
-- [Description](#description)
-- [Commands](#commands)
-
+* [@webundsoehne/brownie](#webundsoehnebrownie)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -30,13 +28,12 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-
-- [`brownie config:workspace`](#brownie-configworkspace)
-- [`brownie docker`](#brownie-docker)
-- [`brownie gitlab`](#brownie-gitlab)
-- [`brownie help [COMMAND]`](#brownie-help-command)
-- [`brownie nx`](#brownie-nx)
-- [`brownie workspace`](#brownie-workspace)
+* [`brownie config:workspace`](#brownie-configworkspace)
+* [`brownie docker`](#brownie-docker)
+* [`brownie gitlab`](#brownie-gitlab)
+* [`brownie help [COMMAND]`](#brownie-help-command)
+* [`brownie nx`](#brownie-nx)
+* [`brownie workspace`](#brownie-workspace)
 
 ## `brownie config:workspace`
 
@@ -46,6 +43,8 @@ Edit available workspace skeletons through a user interface.
 USAGE
   $ brownie config:workspace
 ```
+
+_See code: [dist/commands/config/workspace.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/config/workspace.js)_
 
 ## `brownie docker`
 
@@ -64,6 +63,8 @@ OPTIONS
   -v, --volume                         Use optional persistent volumes with the containers.
 ```
 
+_See code: [dist/commands/docker/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/docker/index.js)_
+
 ## `brownie gitlab`
 
 Create a gitlab ci configuration from known NX configuration.
@@ -75,6 +76,8 @@ USAGE
 ALIASES
   $ brownie ci
 ```
+
+_See code: [dist/commands/gitlab/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/gitlab/index.js)_
 
 ## `brownie help [COMMAND]`
 
@@ -91,7 +94,7 @@ OPTIONS
   -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -106,6 +109,8 @@ OPTIONS
   -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -s, --skip-updates  Skip the dependency updates.
 ```
+
+_See code: [dist/commands/nx/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/nx/index.js)_
 
 ## `brownie workspace`
 
@@ -124,4 +129,5 @@ ALIASES
   $ brownie ws
 ```
 
+_See code: [dist/commands/workspace/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/workspace/index.js)_
 <!-- commandsstop -->
