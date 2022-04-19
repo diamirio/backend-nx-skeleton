@@ -20,7 +20,7 @@
 
 ### AvailableCLICommands
 
-• **AvailableCLICommands**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
+• `Const` **AvailableCLICommands**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
 
 #### Defined in
 
@@ -30,7 +30,7 @@ ___
 
 ### AvailableWorkspaceFiles
 
-• **AvailableWorkspaceFiles**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
+• `Const` **AvailableWorkspaceFiles**: `Record`<[`AvailableCLIs`](enums/AvailableCLIs.md), `string`\>
 
 #### Defined in
 
@@ -40,7 +40,7 @@ ___
 
 ### PrettyNamesForAvailableThingies
 
-• **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableCLIs`](enums/AvailableCLIs.md) \| [`AvailableFolderStructures`](enums/AvailableFolderStructures.md)\>
+• `Const` **PrettyNamesForAvailableThingies**: `PrettyNames`<[`AvailableCLIs`](enums/AvailableCLIs.md) \| [`AvailableFolderStructures`](enums/AvailableFolderStructures.md)\>
 
 Prettified names for components to use with prompts and such.
 

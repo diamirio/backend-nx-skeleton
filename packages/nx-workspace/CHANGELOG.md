@@ -1,3 +1,28 @@
+# @webundsoehne-private/nx-workspace [4.3.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.2.11...@webundsoehne-private/nx-workspace@4.3.0-beta.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* bump release ([ab310c3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ab310c3c2f0db48bdbf9fff9c31ff4f171055e01))
+* housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+* linters gonna lint ([6d7e3e0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6d7e3e0bfee76e363ab9868d1244adab5a3546ec))
+* update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+
+### Features
+
+* get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.0-beta.1
+* **@webundsoehne/nx-builders:** upgraded to 5.3.0-beta.1
+* **@webundsoehne/nx-tools:** upgraded to 5.3.0-beta.1
+
 ## @webundsoehne-private/nx-workspace [4.2.11](https://github.com/tailoredmedia/backend-nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.2.10...@webundsoehne-private/nx-workspace@4.2.11) (2022-03-04)
 
 ### Bug Fixes
