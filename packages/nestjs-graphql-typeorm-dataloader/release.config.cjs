@@ -1,3 +1,4 @@
+// publish
 module.exports = {
   ...require('../../release.config.cjs'),
   plugins: [
