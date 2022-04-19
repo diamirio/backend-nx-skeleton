@@ -11,7 +11,6 @@ module.exports = {
         assets: ['CHANGELOG.md', 'README.md', 'docs/']
       }
     ],
-    '@semantic-release/gitlab',
     '@semantic-release/npm'
   ]
 }
