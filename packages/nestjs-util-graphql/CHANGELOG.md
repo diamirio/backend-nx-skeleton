@@ -1,3 +1,29 @@
+# @webundsoehne/nestjs-util-graphql [1.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.2.2...@webundsoehne/nestjs-util-graphql@1.3.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* add back gitlab releases to try ([d4bc21f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d4bc21f7667f3fda4ccb6c8173ce7667d8fd372e))
+* bump release ([ab310c3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ab310c3c2f0db48bdbf9fff9c31ff4f171055e01))
+* fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+* janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+* republish packages ([3f2b2e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3f2b2e339fc78c4e11263981fc78d787034472ff))
+* update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+* update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
+
+### Features
+
+* get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 5.4.1
+
 # @webundsoehne/nestjs-util-graphql [1.3.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.2.3-beta.1...@webundsoehne/nestjs-util-graphql@1.3.0-beta.1) (2022-04-19)
 
 
