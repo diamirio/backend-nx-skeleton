@@ -15,10 +15,9 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/patch-package](#webundsoehnepatch-package)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/patch-package](#webundsoehnepatch-package)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -26,11 +25,10 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 # Commands
 
 <!-- commands -->
-
-- [`ws-patch-package `](#ws-patch-package-)
-- [`ws-patch-package create`](#ws-patch-package-create)
-- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
-- [`ws-patch-package patch`](#ws-patch-package-patch)
+* [`ws-patch-package `](#ws-patch-package-)
+* [`ws-patch-package create`](#ws-patch-package-create)
+* [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+* [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
 
@@ -38,6 +36,8 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 USAGE
   $ ws-patch-package
 ```
+
+_See code: [dist/commands/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/index.js)_
 
 ## `ws-patch-package create`
 
@@ -59,6 +59,8 @@ EXAMPLE
   Create a patch for given package: patch-package create graphql
 ```
 
+_See code: [dist/commands/create.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/create.js)_
+
 ## `ws-patch-package help [COMMAND]`
 
 Display help for ws-patch-package.
@@ -74,7 +76,7 @@ OPTIONS
   -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `ws-patch-package patch`
 
@@ -98,4 +100,5 @@ EXAMPLES
   Use extended glob patterns: patch-package patch "graphql*"
 ```
 
+_See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
 <!-- commandsstop -->
