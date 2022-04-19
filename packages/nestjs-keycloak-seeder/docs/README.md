@@ -25,7 +25,7 @@
 
 ### KEYCLOAK\_SEEDER\_SEEDS
 
-• **KEYCLOAK\_SEEDER\_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
+• `Const` **KEYCLOAK\_SEEDER\_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
 
 #### Defined in
 
