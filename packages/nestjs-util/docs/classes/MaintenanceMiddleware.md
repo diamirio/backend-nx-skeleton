@@ -42,7 +42,7 @@ packages/nestjs-util/src/middleware/maintenance.ts:8
 
 | Name | Type |
 | :------ | :------ |
-| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`\> |
+| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`, `FastifyLoggerInstance`\> |
 | `_res` | `FastifyReply`<`Server`, `IncomingMessage`, `ServerResponse`, `RouteGenericInterface`, `unknown`\> |
 | `next` | (`err?`: `any`) => `any` |
 
