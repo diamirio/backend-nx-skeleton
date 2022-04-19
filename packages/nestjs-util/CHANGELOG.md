@@ -1,3 +1,18 @@
+## @webundsoehne/nestjs-util [5.4.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.0...@webundsoehne/nestjs-util@5.4.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.1
+
 # @webundsoehne/nestjs-util [5.4.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.1...@webundsoehne/nestjs-util@5.4.0) (2022-04-19)
 
 
