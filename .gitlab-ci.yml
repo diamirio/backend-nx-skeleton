@@ -68,7 +68,7 @@ publish:
     GIT_COMMITTER_NAME: semantic-release [bot]
     GIT_COMMITTER_EMAIL: $BANDAID_API_USER_EMAIL
     GL_TOKEN: $BANDAID_API_TOKEN_WRITE
-    NPM_NPMRC: $NPM_RC
+    NPM_LOGIN: $NPM_LOGIN
     RUN_MULTI: 'true'
   script:
     - pipe
