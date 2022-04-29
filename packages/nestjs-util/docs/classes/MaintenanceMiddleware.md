@@ -24,8 +24,8 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                          |
+| :-------- | :-------------------------------------------- |
 | `service` | [`MaintenanceService`](MaintenanceService.md) |
 
 #### Defined in
@@ -40,11 +40,11 @@ packages/nestjs-util/src/middleware/maintenance.ts:8
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`\> |
-| `_res` | `FastifyReply`<`Server`, `IncomingMessage`, `ServerResponse`, `RouteGenericInterface`, `unknown`\> |
-| `next` | (`err?`: `any`) => `any` |
+| Name   | Type                                                                                                        |
+| :----- | :---------------------------------------------------------------------------------------------------------- |
+| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`, `FastifyLoggerInstance`\> |
+| `_res` | `FastifyReply`<`Server`, `IncomingMessage`, `ServerResponse`, `RouteGenericInterface`, `unknown`\>          |
+| `next` | (`err?`: `any`) => `any`                                                                                    |
 
 #### Returns
 

@@ -48,7 +48,7 @@ Application AuthGuard for Keycloak applications. This only works for REST APIs.
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:26
+connect/guards/auth-base.guard.ts:27
 
 ## Properties
 
@@ -82,7 +82,7 @@ connect/guards/auth-base.guard.ts:26
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:32
+connect/guards/auth-base.guard.ts:33
 
 ---
 
@@ -139,4 +139,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:105
+connect/guards/auth-base.guard.ts:106

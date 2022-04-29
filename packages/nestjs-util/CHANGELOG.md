@@ -1,3 +1,63 @@
+## @webundsoehne/nestjs-util [5.4.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.1...@webundsoehne/nestjs-util@5.4.2) (2022-04-19)
+
+### Bug Fixes
+
+- disable gitlab while releasing for now ([e30a432](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e30a43247f725b38fd59a7634c71c85d52331291))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.2.2
+
+## @webundsoehne/nestjs-util [5.4.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.0...@webundsoehne/nestjs-util@5.4.1) (2022-04-19)
+
+### Bug Fixes
+
+- update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.2.1
+
+# @webundsoehne/nestjs-util [5.4.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.1...@webundsoehne/nestjs-util@5.4.0) (2022-04-19)
+
+### Bug Fixes
+
+- add back gitlab releases to try ([d4bc21f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d4bc21f7667f3fda4ccb6c8173ce7667d8fd372e))
+- bump release ([ab310c3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ab310c3c2f0db48bdbf9fff9c31ff4f171055e01))
+- do not derive EnrichedHttpException from Error, otherwise fastify rethrows the error ([efce2de](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/efce2de069d1a5a8379321652126fca6a3e344e4))
+- fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+- housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+- janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+- republish packages ([3f2b2e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3f2b2e339fc78c4e11263981fc78d787034472ff))
+- update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+### Features
+
+- get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.2.0
+
+# @webundsoehne/nestjs-util [5.4.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.2-beta.1...@webundsoehne/nestjs-util@5.4.0-beta.1) (2022-04-19)
+
+### Bug Fixes
+
+- bump release ([ab310c3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ab310c3c2f0db48bdbf9fff9c31ff4f171055e01))
+- fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+- housekeeping, swap links to oss repos on github ([7e0f209](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7e0f2093cf8c9afddd3d2f9228ec81896eb2d5e6))
+- janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+- republish packages ([3f2b2e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3f2b2e339fc78c4e11263981fc78d787034472ff))
+- update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+### Features
+
+- get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.2.0-beta.1
+
 ## @webundsoehne/nestjs-util [5.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.3.1...@webundsoehne/nestjs-util@5.3.2-beta.1) (2022-04-04)
 
 ### Bug Fixes

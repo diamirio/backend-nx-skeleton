@@ -28,14 +28,14 @@ Seeder service to run all the seeds that has been passed to it.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
 | `keycloak` | [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md) |
-| `seeds` | `KeycloakSeeds` |
+| `seeds`    | `KeycloakSeeds`                                           |
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:15
+module/keycloak-seeder.service.ts:16
 
 ## Properties
 
@@ -43,7 +43,7 @@ module/keycloak-seeder.service.ts:15
 
 • `Protected` `Readonly` **keycloak**: [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md)
 
-___
+---
 
 ### logger
 
@@ -51,9 +51,9 @@ ___
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:13
+module/keycloak-seeder.service.ts:14
 
-___
+---
 
 ### seeds
 
@@ -73,4 +73,4 @@ Run all the seeds.
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:20
+module/keycloak-seeder.service.ts:21

@@ -30,11 +30,11 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`\> |
-| `res` | `any` |
-| `next` | () => `any` |
+| Name   | Type                                                                                                        |
+| :----- | :---------------------------------------------------------------------------------------------------------- |
+| `_req` | `FastifyRequest`<`RouteGenericInterface`, `Server`, `IncomingMessage`, `unknown`, `FastifyLoggerInstance`\> |
+| `res`  | `any`                                                                                                       |
+| `next` | () => `any`                                                                                                 |
 
 #### Returns
 

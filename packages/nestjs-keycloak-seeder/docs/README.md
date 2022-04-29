@@ -13,7 +13,7 @@
 
 ### Variables
 
-- [KEYCLOAK\_SEEDER\_SEEDS](README.md#keycloak_seeder_seeds)
+- [KEYCLOAK_SEEDER_SEEDS](README.md#keycloak_seeder_seeds)
 
 ### Functions
 
@@ -23,9 +23,9 @@
 
 ## Variables
 
-### KEYCLOAK\_SEEDER\_SEEDS
+### KEYCLOAK_SEEDER_SEEDS
 
-• **KEYCLOAK\_SEEDER\_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
+• `Const` **KEYCLOAK_SEEDER_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
 
 #### Defined in
 
@@ -49,11 +49,11 @@ Injects Keyclaok admin instance initiated to the service.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                           |
+| :------- | :----------------------------- |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key` | `string` \| `symbol` |
-| `index?` | `number` |
+| `key`    | `string` \| `symbol`           |
+| `index?` | `number`                       |
 
 ##### Returns
 
@@ -63,7 +63,7 @@ Injects Keyclaok admin instance initiated to the service.
 
 module/decorators/inject.decorator.ts:8
 
-___
+---
 
 ### filterMatchingPropertyFromData
 
@@ -73,20 +73,20 @@ Returns the matched data.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K` | extends `string` \| `number` \| `symbol` |
-| `P` | extends `string` \| `number` \| `symbol` |
+| Name | Type                                      |
+| :--- | :---------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K`  | extends `string` \| `number` \| `symbol`  |
+| `P`  | extends `string` \| `number` \| `symbol`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-| `compare` | `K` |
-| `values` | `InferedObjectType`<`T`, `K`\>[] |
-| `fetch` | `P` |
+| Name      | Type                             |
+| :-------- | :------------------------------- |
+| `data`    | `T`                              |
+| `compare` | `K`                              |
+| `values`  | `InferedObjectType`<`T`, `K`\>[] |
+| `fetch`   | `P`                              |
 
 #### Returns
 
@@ -96,7 +96,7 @@ Returns the matched data.
 
 utils/keycloak-filter.ts:24
 
-___
+---
 
 ### getMatchingPropertyFromData
 
@@ -106,20 +106,20 @@ Matchs a data and returns another property of the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K` | extends `string` \| `number` \| `symbol` |
-| `P` | extends `string` \| `number` \| `symbol` |
+| Name | Type                                      |
+| :--- | :---------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K`  | extends `string` \| `number` \| `symbol`  |
+| `P`  | extends `string` \| `number` \| `symbol`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-| `compare` | `K` |
-| `value` | `InferedObjectType`<`T`, `K`\> |
-| `fetch` | `P` |
+| Name      | Type                           |
+| :-------- | :----------------------------- |
+| `data`    | `T`                            |
+| `compare` | `K`                            |
+| `value`   | `InferedObjectType`<`T`, `K`\> |
+| `fetch`   | `P`                            |
 
 #### Returns
 

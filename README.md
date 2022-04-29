@@ -25,8 +25,8 @@ A set of schematics and tools that provides the basis for fast template scaffold
   - [nx-nest - @webundsoehne-private/nx-nest](#nx-nest---webundsoehne-privatenx-nest)
   - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
   - [nx-workspace - @webundsoehne-private/nx-workspace](#nx-workspace---webundsoehne-privatenx-workspace)
-  - [patch-package - @webundsoehne-private/patch-package](#patch-package---webundsoehne-privatepatch-package)
-  - [ts-utility-types - @webundsoehne-private/ts-utility-types](#ts-utility-types---webundsoehne-privatets-utility-types)
+  - [patch-package - @webundsoehne/patch-package](#patch-package---webundsoehnepatch-package)
+  - [ts-utility-types - @webundsoehne/ts-utility-types](#ts-utility-types---webundsoehnets-utility-types)
 - [Further Development](#further-development)
   - [Local Development Steps](#local-development-steps)
   - [Warnings](#warnings)
@@ -127,13 +127,13 @@ Schematic for scaffolding `@nrwl/nx` workspace.
 
 [**Read more...**](./packages/nx-workspace/README.md)
 
-### patch-package - @webundsoehne-private/patch-package
+### patch-package - @webundsoehne/patch-package
 
 A wrapper around the `patch-package` library which can automatically apply predefined patches or create new ones.
 
 [**Read more...**](./packages/patch-package/README.md)
 
-### ts-utility-types - @webundsoehne-private/ts-utility-types
+### ts-utility-types - @webundsoehne/ts-utility-types
 
 Some basic utility types for Typescript.
 
@@ -162,6 +162,7 @@ This is a brief walkthrough, you can find more information in the following sect
 ### Warnings
 
 - If you have a new or updated NPM module added to one of the packages, you might need to install it again from root. Because `yarn workspaces` and `resolutions` field do not play nice. But do not worry since the install will only fix the resolutions and not take much of time.
+- Since it was taking a lots of resources to use Typescript compiler on this repository, it is converted to a tool called `tsup` based on `esbuild` and `rollup`. `esbuild` is very strict with `import type` and `export type` statements where `isolatedModules` should be used. `eslint` will do its best to convert the code to use `import/export type` statements but sometimes since these types can be used in `constructor` it will leave them alone since they can also be dependency injection. This can not be true for the cases with interfaces or types but it still acts this way, so some caution is needed.
 
 ### Publishing Process
 

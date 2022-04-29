@@ -1,3 +1,44 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.2) (2022-04-19)
+
+### Bug Fixes
+
+- disable gitlab while releasing for now ([e30a432](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e30a43247f725b38fd59a7634c71c85d52331291))
+
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.0...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.1) (2022-04-19)
+
+### Bug Fixes
+
+- update repo url ([bbc48e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bbc48e30f42691ef3513eb47b0776b9658409bc1))
+
+# @webundsoehne/nestjs-graphql-typeorm-dataloader [3.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.3...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.0) (2022-04-19)
+
+### Bug Fixes
+
+- add back gitlab releases to try ([d4bc21f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d4bc21f7667f3fda4ccb6c8173ce7667d8fd372e))
+- update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+### Features
+
+- get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+# @webundsoehne/nestjs-graphql-typeorm-dataloader [3.3.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.3...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.0-beta.1) (2022-04-19)
+
+### Bug Fixes
+
+- update base package to esm for new multi-semantic-release versions ([d0798b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d0798b822e3f25968a573712b998a189292159c7))
+
+### Features
+
+- get over semantic-release hang ([5f83281](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5f83281a01242f536ce2b57a98f049c42c6684ab))
+
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.2...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.3) (2022-04-07)
+
+### Bug Fixes
+
+- fixes previous publishing fix ([4365bbe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4365bbe69e840e563097dd629c1cd9352a89956c))
+- janitoring, README.md updates ([fe8a4c4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fe8a4c47bba245fe6338988fef4c5c025e455666))
+- republish packages ([3f2b2e3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3f2b2e339fc78c4e11263981fc78d787034472ff))
+
 ## @webundsoehne/nestjs-graphql-typeorm-dataloader [3.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@3.2.2) (2022-04-05)
 
 ### Bug Fixes

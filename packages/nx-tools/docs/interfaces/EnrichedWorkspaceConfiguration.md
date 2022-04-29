@@ -28,6 +28,7 @@ Nx does not import a type for workspace.json. This fills that gap.
 - [implicitDependencies](EnrichedWorkspaceConfiguration.md#implicitdependencies)
 - [npmScope](EnrichedWorkspaceConfiguration.md#npmscope)
 - [plugins](EnrichedWorkspaceConfiguration.md#plugins)
+- [pluginsConfig](EnrichedWorkspaceConfiguration.md#pluginsconfig)
 - [projects](EnrichedWorkspaceConfiguration.md#projects)
 - [targetDependencies](EnrichedWorkspaceConfiguration.md#targetdependencies)
 - [tasksRunnerOptions](EnrichedWorkspaceConfiguration.md#tasksrunneroptions)
@@ -48,7 +49,7 @@ WorkspaceConfiguration.affected
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:38
+node_modules/nx/src/config/nx-json.d.ts:38
 
 ---
 
@@ -60,10 +61,11 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name                 | Type             |
-| :------------------- | :--------------- |
-| `defaultCollection?` | `string`         |
-| `packageManager?`    | `PackageManager` |
+| Name                  | Type             |
+| :-------------------- | :--------------- |
+| `defaultCollection?`  | `string`         |
+| `defaultProjectName?` | `string`         |
+| `packageManager?`     | `PackageManager` |
 
 #### Inherited from
 
@@ -71,7 +73,7 @@ WorkspaceConfiguration.cli
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:86
+node_modules/nx/src/config/nx-json.d.ts:86
 
 ---
 
@@ -87,7 +89,7 @@ WorkspaceConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:98
+node_modules/nx/src/config/nx-json.d.ts:103
 
 ---
 
@@ -103,7 +105,7 @@ WorkspaceConfiguration.extends
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:22
+node_modules/nx/src/config/nx-json.d.ts:22
 
 ---
 
@@ -137,7 +139,7 @@ WorkspaceConfiguration.generators
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:78
+node_modules/nx/src/config/nx-json.d.ts:78
 
 ---
 
@@ -153,7 +155,7 @@ WorkspaceConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:26
+node_modules/nx/src/config/nx-json.d.ts:26
 
 ---
 
@@ -169,7 +171,7 @@ WorkspaceConfiguration.npmScope
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:34
+node_modules/nx/src/config/nx-json.d.ts:34
 
 ---
 
@@ -185,7 +187,23 @@ WorkspaceConfiguration.plugins
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:93
+node_modules/nx/src/config/nx-json.d.ts:94
+
+---
+
+### pluginsConfig
+
+• `Optional` **pluginsConfig**: `Record`<`string`, `unknown`\>
+
+Configuration for Nx Plugins
+
+#### Inherited from
+
+WorkspaceConfiguration.pluginsConfig
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:98
 
 ---
 
@@ -211,7 +229,7 @@ WorkspaceConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:30
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ---
 
@@ -231,7 +249,7 @@ WorkspaceConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:49
+node_modules/nx/src/config/nx-json.d.ts:49
 
 ---
 
@@ -247,7 +265,7 @@ WorkspaceConfiguration.version
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:14
+node_modules/nx/src/config/workspace-json-project-json.d.ts:12
 
 ---
 
@@ -270,4 +288,4 @@ WorkspaceConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:42
+node_modules/nx/src/config/nx-json.d.ts:42

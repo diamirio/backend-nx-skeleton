@@ -23,15 +23,15 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
+| Name   | Type              |
+| :----- | :---------------- |
+| `t`    | `T`               |
 | `...s` | `Partial`<`T`\>[] |
 
 #### Returns
@@ -42,7 +42,7 @@ Mutates the object.
 
 merge.ts:12
 
-___
+---
 
 ### deepMergeWithArrayOverwrite
 
@@ -54,15 +54,15 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
+| Name   | Type              |
+| :----- | :---------------- |
+| `t`    | `T`               |
 | `...s` | `Partial`<`T`\>[] |
 
 #### Returns
@@ -73,7 +73,7 @@ Mutates the object.
 
 merge.ts:40
 
-___
+---
 
 ### deepMergeWithUniqueMergeArray
 
@@ -85,15 +85,15 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
+| Name   | Type              |
+| :----- | :---------------- |
+| `t`    | `T`               |
 | `...s` | `Partial`<`T`\>[] |
 
 #### Returns
@@ -104,21 +104,21 @@ Mutates the object.
 
 merge.ts:25
 
-___
+---
 
 ### uniqueArrayFilter
 
-▸ `Const` **uniqueArrayFilter**(`item`, `index`, `array`): `boolean`
+▸ **uniqueArrayFilter**(`item`, `index`, `array`): `boolean`
 
 A standard array filter for filtering it to unique items.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | `any` |
+| Name    | Type     |
+| :------ | :------- |
+| `item`  | `any`    |
 | `index` | `number` |
-| `array` | `any`[] |
+| `array` | `any`[]  |
 
 #### Returns
 

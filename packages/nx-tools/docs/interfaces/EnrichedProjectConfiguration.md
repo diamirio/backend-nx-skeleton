@@ -62,7 +62,7 @@ ProjectConfiguration.generators
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:74
+node_modules/nx/src/config/workspace-json-project-json.d.ts:72
 
 ---
 
@@ -78,7 +78,7 @@ ProjectConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:82
+node_modules/nx/src/config/workspace-json-project-json.d.ts:80
 
 ---
 
@@ -104,7 +104,7 @@ ProjectConfiguration.name
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:38
+node_modules/nx/src/config/workspace-json-project-json.d.ts:36
 
 ---
 
@@ -120,7 +120,7 @@ ProjectConfiguration.projectType
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:56
+node_modules/nx/src/config/workspace-json-project-json.d.ts:54
 
 ---
 
@@ -136,7 +136,7 @@ ProjectConfiguration.root
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:48
+node_modules/nx/src/config/workspace-json-project-json.d.ts:46
 
 ---
 
@@ -152,7 +152,7 @@ ProjectConfiguration.sourceRoot
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:52
+node_modules/nx/src/config/workspace-json-project-json.d.ts:50
 
 ---
 
@@ -168,7 +168,7 @@ ProjectConfiguration.tags
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:86
+node_modules/nx/src/config/workspace-json-project-json.d.ts:84
 
 ---
 
@@ -188,4 +188,4 @@ ProjectConfiguration.targets
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/workspace.d.ts:42
+node_modules/nx/src/config/workspace-json-project-json.d.ts:40

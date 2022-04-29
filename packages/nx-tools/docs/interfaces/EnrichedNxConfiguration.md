@@ -29,6 +29,7 @@ nx.json interface expanded before, although nx has changed configuration now, th
 - [integration](EnrichedNxConfiguration.md#integration)
 - [npmScope](EnrichedNxConfiguration.md#npmscope)
 - [plugins](EnrichedNxConfiguration.md#plugins)
+- [pluginsConfig](EnrichedNxConfiguration.md#pluginsconfig)
 - [targetDependencies](EnrichedNxConfiguration.md#targetdependencies)
 - [tasksRunnerOptions](EnrichedNxConfiguration.md#tasksrunneroptions)
 - [workspaceLayout](EnrichedNxConfiguration.md#workspacelayout)
@@ -47,7 +48,7 @@ NxJsonConfiguration.affected
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:38
+node_modules/nx/src/config/nx-json.d.ts:38
 
 ---
 
@@ -59,10 +60,11 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name                 | Type             |
-| :------------------- | :--------------- |
-| `defaultCollection?` | `string`         |
-| `packageManager?`    | `PackageManager` |
+| Name                  | Type             |
+| :-------------------- | :--------------- |
+| `defaultCollection?`  | `string`         |
+| `defaultProjectName?` | `string`         |
+| `packageManager?`     | `PackageManager` |
 
 #### Inherited from
 
@@ -70,7 +72,7 @@ NxJsonConfiguration.cli
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:86
+node_modules/nx/src/config/nx-json.d.ts:86
 
 ---
 
@@ -86,7 +88,7 @@ NxJsonConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:98
+node_modules/nx/src/config/nx-json.d.ts:103
 
 ---
 
@@ -102,7 +104,7 @@ NxJsonConfiguration.extends
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:22
+node_modules/nx/src/config/nx-json.d.ts:22
 
 ---
 
@@ -136,7 +138,7 @@ NxJsonConfiguration.generators
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:78
+node_modules/nx/src/config/nx-json.d.ts:78
 
 ---
 
@@ -152,7 +154,7 @@ NxJsonConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:26
+node_modules/nx/src/config/nx-json.d.ts:26
 
 ---
 
@@ -178,7 +180,7 @@ NxJsonConfiguration.npmScope
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:34
+node_modules/nx/src/config/nx-json.d.ts:34
 
 ---
 
@@ -194,7 +196,23 @@ NxJsonConfiguration.plugins
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:93
+node_modules/nx/src/config/nx-json.d.ts:94
+
+---
+
+### pluginsConfig
+
+• `Optional` **pluginsConfig**: `Record`<`string`, `unknown`\>
+
+Configuration for Nx Plugins
+
+#### Inherited from
+
+NxJsonConfiguration.pluginsConfig
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:98
 
 ---
 
@@ -210,7 +228,7 @@ NxJsonConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:30
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ---
 
@@ -230,7 +248,7 @@ NxJsonConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:49
+node_modules/nx/src/config/nx-json.d.ts:49
 
 ---
 
@@ -253,4 +271,4 @@ NxJsonConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/@nrwl/tao/src/shared/nx.d.ts:42
+node_modules/nx/src/config/nx-json.d.ts:42

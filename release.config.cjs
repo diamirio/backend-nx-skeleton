@@ -1,7 +1,10 @@
 module.exports = {
   repositoryUrl: 'https://gitlab.tailored-apps.com/bdsm/nx-skeleton',
   branches: [
+    'main',
     'master',
+    'next',
+    'next-major',
     {
       name: 'alpha',
       prerelease: true
@@ -13,7 +16,10 @@ module.exports = {
     {
       name: 'rc',
       prerelease: true
+    },
+    {
+      name: 'rc',
+      prerelease: true
     }
-  ],
-  verifyConditions: ['@semantic-release/changelog', '@semantic-release/git', '@semantic-release/npm']
+  ]
 }

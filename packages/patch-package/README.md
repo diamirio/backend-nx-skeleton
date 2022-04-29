@@ -39,6 +39,8 @@ USAGE
   $ ws-patch-package
 ```
 
+_See code: [dist/commands/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/index.js)_
+
 ## `ws-patch-package create`
 
 Creates a new patch from scratch, just point the applications you want as package name.
@@ -59,6 +61,8 @@ EXAMPLE
   Create a patch for given package: patch-package create graphql
 ```
 
+_See code: [dist/commands/create.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/create.js)_
+
 ## `ws-patch-package help [COMMAND]`
 
 Display help for ws-patch-package.
@@ -74,7 +78,7 @@ OPTIONS
   -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `ws-patch-package patch`
 
@@ -97,5 +101,7 @@ EXAMPLES
   Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0
   Use extended glob patterns: patch-package patch "graphql*"
 ```
+
+_See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
 
 <!-- commandsstop -->

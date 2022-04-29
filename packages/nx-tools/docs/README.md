@@ -628,7 +628,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:24
 
 ### LINTER_VERSIONS
 
-• **LINTER_VERSIONS**: [`LinterVersions`](README.md#linterversions)
+• `Const` **LINTER_VERSIONS**: [`LinterVersions`](README.md#linterversions)
 
 Version constants that is shared through multiple places.
 
@@ -640,7 +640,7 @@ packages/nx-tools/src/utils/linter-versions.constants.ts:6
 
 ### PackageManagerCommands
 
-• **PackageManagerCommands**: `Record`<[`AvailablePackageManagers`](enums/AvailablePackageManagers.md), `Record`<[`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md), `string`\>\>
+• `Const` **PackageManagerCommands**: `Record`<[`AvailablePackageManagers`](enums/AvailablePackageManagers.md), `Record`<[`PackageManagerUsableCommands`](enums/PackageManagerUsableCommands.md), `string`\>\>
 
 #### Defined in
 
@@ -650,7 +650,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.constants.ts:25
 
 ### PrettyNamesDefault
 
-• **PrettyNamesDefault**: [`PrettyNames`](README.md#prettynames)
+• `Const` **PrettyNamesDefault**: [`PrettyNames`](README.md#prettynames)
 
 Prettified names for components to use with prompts and such.
 
@@ -662,7 +662,7 @@ packages/nx-tools/src/constants/available.constants.ts:30
 
 ### RUN_PACKAGE_MANAGER_TASK_NAME
 
-• **RUN_PACKAGE_MANAGER_TASK_NAME**: `"run-package-manager-task"`
+• `Const` **RUN_PACKAGE_MANAGER_TASK_NAME**: `"run-package-manager-task"`
 
 #### Defined in
 
@@ -672,7 +672,7 @@ packages/nx-tools/src/tasks/run-package-manager/run-package-manager.interface.ts
 
 ### WINSTON_INSTANCE
 
-• **WINSTON_INSTANCE**: `"WINSTON_DEFAULT_LOGGER"`
+• `Const` **WINSTON_INSTANCE**: `"WINSTON_DEFAULT_LOGGER"`
 
 #### Defined in
 
@@ -682,7 +682,7 @@ packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
 ### color
 
-• **color**: `Colorette`
+• `Const` **color**: `Colorette`
 
 #### Defined in
 
@@ -1588,7 +1588,7 @@ packages/nx-tools/src/utils/schematics/generate-name-cases.ts:5
 
 #### Defined in
 
-packages/nx-tools/src/utils/schematics/generate-project-lint-target.ts:7
+packages/nx-tools/src/utils/schematics/generate-project-lint-target.ts:8
 
 ---
 

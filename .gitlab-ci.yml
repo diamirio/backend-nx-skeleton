@@ -5,7 +5,6 @@ stages:
   - build
   - docs
   - publish
-  - sync
 
 cache:
   paths:
@@ -52,6 +51,8 @@ docs:
       - packages/*/docs
   only:
     - master
+    - next
+    - next-major
     - beta
     - rc
     - alpha
@@ -60,58 +61,22 @@ docs:
 
 publish:
   stage: publish
-  image: cenk1cenk2/drone-semantic-release
+  image: cenk1cenk2/pipe-semantic-release:latest
   variables:
-    PLUGIN_GIT_METHOD: gl
-    PLUGIN_MODE: release
-    PLUGIN_ADD_MODULES: '@qiwi/multi-semantic-release@5 @semantic-release/gitlab'
-    PLUGIN_OVERRIDE: multi-semantic-release --sequential-init
-    PLUGIN_GIT_USER_EMAIL: $BANDAID_API_USER_EMAIL
-    PLUGIN_GITLAB_TOKEN: $BANDAID_API_TOKEN_WRITE
-    PLUGIN_UPDATE_README_TOC: 'false'
-    # PLUGIN_NPM_USERNAME: $NPM_WS_USERNAME
-    # PLUGIN_NPM_PASSWORD: $NPM_WS_PASSWORD
-    # PLUGIN_NPM_EMAIL: $NPM_WS_EMAIL
-    # npm_config_loglevel: verbose
-    # PLUGIN_NPM_TOKEN: $NPM_WS_TOKEN
-    NPM_RC: $NPM_RC
-    DRONE_REPO_BRANCH: $CI_COMMIT_REF_NAME
-  before_script:
-    - apk add --no-cache --no-progress rsync
-    - rsync -a $CI_PROJECT_DIR/ /drone/src/
-    - cd /drone/src
-    - echo -e "${NPM_RC}" > .npmrc
+    GIT_AUTHOR_NAME: semantic-release [bot]
+    GIT_AUTHOR_EMAIL: $BANDAID_API_USER_EMAIL
+    GIT_COMMITTER_NAME: semantic-release [bot]
+    GIT_COMMITTER_EMAIL: $BANDAID_API_USER_EMAIL
+    NPM_LOGIN: $NPM_LOGIN
+    RUN_MULTI: 'true'
   script:
-    - /semantic-release/release.sh
-  after_script:
-    - rsync -a /drone/src/ $CI_PROJECT_DIR/
+    - pipe
   only:
     - master
+    - next
+    - next-major
     - beta
     - rc
     - alpha
-  tags:
-    - node
-
-sync:
-  stage: sync
-  image: bitnami/git:latest
-  before_script:
-    - git config --global user.name "backend"
-    - git config --global user.email "$NPM_WS_EMAIL"
-    - mkdir -p ~/.ssh/
-    - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-  script:
-    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
-    - git remote remove github || true
-    - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
-    - git checkout $CI_COMMIT_BRANCH
-    - git pull origin $CI_COMMIT_BRANCH
-    - git pull github $CI_COMMIT_BRANCH
-    - git status
-    - git push -u github $CI_COMMIT_BRANCH
-  only:
-    - master
   tags:
     - docker

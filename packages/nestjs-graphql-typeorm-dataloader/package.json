@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
+    "dev:start": "tsup-node --silent --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -27,11 +27,11 @@
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
+    "*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./**/*.{json,md}": [
+    "*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "apollo-server-plugin-base": "^3.5.1",
-    "dataloader": "^2.0.0",
+    "dataloader": "^2.1.0",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0",
@@ -58,10 +58,10 @@
     "class-validator": "^0.13.2",
     "graphql": "^15",
     "graphql-request": "^3.7.0",
-    "mikro-orm": "^4.5.10",
+    "mikro-orm": "^5.1.2",
     "rimraf": "^3.0.2",
     "sqlite3": "^5.0.2",
-    "typeorm": "^0.2.42"
+    "typeorm": "^0.3.5"
   },
   "engines": {
     "node": ">= 16"

@@ -22,11 +22,11 @@
     }
   },
   "lint-staged": {
-    "./**/*.{ts,js,tsx,jsx}": [
+    "*.{ts,js,tsx,jsx}": [
       "prettier --loglevel warn --write",
       "eslint --fix"
     ],
-    "./**/*.{json,md}": [
+    "*.{json,md}": [
       "prettier --loglevel warn --write"
     ]
   },
@@ -39,8 +39,8 @@
     "eslint-plugin-react-hooks": ">= 4"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
-    "@typescript-eslint/parser": "^5.12.0",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
     "load-tsconfig": "^0.2.3"
   },
   "devDependencies": {

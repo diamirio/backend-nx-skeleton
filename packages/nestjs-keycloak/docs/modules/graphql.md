@@ -19,7 +19,7 @@
 
 ### GetToken
 
-▸ `Const` **GetToken**(...`dataOrPipes`): `ParameterDecorator`
+▸ **GetToken**(...`dataOrPipes`): `ParameterDecorator`
 
 Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
@@ -43,7 +43,7 @@ connect/decorators/token-graphql.decorator.ts:12
 
 ### GetUser
 
-▸ `Const` **GetUser**(...`dataOrPipes`): `ParameterDecorator`
+▸ **GetUser**(...`dataOrPipes`): `ParameterDecorator`
 
 Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
@@ -67,7 +67,7 @@ connect/decorators/user-graphql.decorator.ts:12
 
 ### Token
 
-▸ `Const` **Token**(...`dataOrPipes`): `ParameterDecorator`
+▸ **Token**(...`dataOrPipes`): `ParameterDecorator`
 
 Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 
@@ -93,7 +93,7 @@ connect/decorators/token-graphql.decorator.ts:24
 
 ### User
 
-▸ `Const` **User**(...`dataOrPipes`): `ParameterDecorator`
+▸ **User**(...`dataOrPipes`): `ParameterDecorator`
 
 Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
 

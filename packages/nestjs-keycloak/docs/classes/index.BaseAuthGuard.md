@@ -56,7 +56,7 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:26
+connect/guards/auth-base.guard.ts:27
 
 ## Properties
 
@@ -66,7 +66,7 @@ connect/guards/auth-base.guard.ts:26
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:24
+connect/guards/auth-base.guard.ts:25
 
 ---
 
@@ -96,7 +96,7 @@ CanActivate.canActivate
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:32
+connect/guards/auth-base.guard.ts:33
 
 ---
 
@@ -116,7 +116,7 @@ connect/guards/auth-base.guard.ts:32
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:131
+connect/guards/auth-base.guard.ts:132
 
 ---
 
@@ -136,7 +136,7 @@ connect/guards/auth-base.guard.ts:131
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:143
+connect/guards/auth-base.guard.ts:144
 
 ---
 
@@ -157,7 +157,7 @@ connect/guards/auth-base.guard.ts:143
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:155
+connect/guards/auth-base.guard.ts:156
 
 ---
 
@@ -177,7 +177,7 @@ connect/guards/auth-base.guard.ts:155
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:127
+connect/guards/auth-base.guard.ts:128
 
 ---
 
@@ -197,7 +197,7 @@ connect/guards/auth-base.guard.ts:127
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:165
+connect/guards/auth-base.guard.ts:166
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
@@ -213,7 +213,7 @@ connect/guards/auth-base.guard.ts:165
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:166
+connect/guards/auth-base.guard.ts:167
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
@@ -229,7 +229,7 @@ connect/guards/auth-base.guard.ts:166
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:167
+connect/guards/auth-base.guard.ts:168
 
 ---
 
@@ -251,7 +251,7 @@ connect/guards/auth-base.guard.ts:167
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:117
+connect/guards/auth-base.guard.ts:118
 
 ---
 
@@ -274,4 +274,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:105
+connect/guards/auth-base.guard.ts:106

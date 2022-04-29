@@ -1,7 +1,8 @@
 import { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-import { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
 import { Configurable, ConfigParam } from '@webundsoehne/nestjs-util'
 
 export class SwaggerService {
@@ -17,7 +18,7 @@ export class SwaggerService {
     let builder = new DocumentBuilder()
       .setTitle(config?.title)
       .setDescription(config?.description)
-      .setVersion(process.env?.PACKAGE_VERSION ?? '0.0.0')
+      .setVersion(process.env?.PACKAGE_VERSION ?? process.env?.npm_package_version ?? '0.0.0')
 
     if (typeof options?.customize === 'function') {
       builder = options.customize(builder)
