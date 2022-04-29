@@ -24,7 +24,7 @@ export class InternalService {
     this.logger.debug('Everything fine')
 
     return {
-      apiVersion: process.env.PACKAGE_VERSION,
+      apiVersion: process.env?.PACKAGE_VERSION ?? process.env?.npm_package_version ?? '0.0.0',
       lastUpdate
     }
   }

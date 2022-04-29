@@ -1,6 +1,7 @@
 import fs from 'fs-extra'
+import path from 'path'
 
-export async function setEnvironmentVariables (packageFile = 'package.json'): Promise<void> {
+export async function setEnvironmentVariables (packageFile = path.join(process.cwd(), 'package.json')): Promise<void> {
   const { name, version } = await fs.readJSON(packageFile)
 
   process.env.PACKAGE_NAME = name
