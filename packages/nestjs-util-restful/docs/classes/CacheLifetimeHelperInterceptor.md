@@ -42,7 +42,7 @@ interceptor/cache-lifetime.interceptor.ts:16
 
 interceptor/cache-lifetime.interceptor.ts:13
 
----
+___
 
 ### options
 
@@ -60,8 +60,8 @@ interceptor/cache-lifetime.interceptor.ts:14
 
 #### Parameters
 
-| Name                    | Type                   |
-| :---------------------- | :--------------------- |
+| Name | Type |
+| :------ | :------ |
 | `cacheLifetimeOptions?` | `CacheLifetimeOptions` |
 
 #### Returns
@@ -72,7 +72,7 @@ interceptor/cache-lifetime.interceptor.ts:14
 
 interceptor/cache-lifetime.interceptor.ts:21
 
----
+___
 
 ### intercept
 
@@ -80,10 +80,10 @@ interceptor/cache-lifetime.interceptor.ts:21
 
 #### Parameters
 
-| Name      | Type                  |
-| :-------- | :-------------------- |
-| `context` | `ExecutionContext`    |
-| `next`    | `CallHandler`<`any`\> |
+| Name | Type |
+| :------ | :------ |
+| `context` | `ExecutionContext` |
+| `next` | `CallHandler`<`any`\> |
 
 #### Returns
 
