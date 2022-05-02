@@ -227,7 +227,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/util/environment.ts:12
+packages/nestjs-util/src/util/environment.ts:13
 
 ___
 
@@ -237,9 +237,9 @@ ___
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `packageFile` | `string` | `'package.json'` |
+| Name | Type |
+| :------ | :------ |
+| `packageFile` | `string` |
 
 #### Returns
 
@@ -247,7 +247,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/util/environment.ts:3
+packages/nestjs-util/src/util/environment.ts:4
 
 ___
 

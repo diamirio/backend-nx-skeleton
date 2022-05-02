@@ -50,7 +50,7 @@ FastifyRequest.body
 
 node_modules/fastify/types/request.d.ts:32
 
----
+___
 
 ### connection
 
@@ -64,7 +64,7 @@ FastifyRequest.connection
 
 node_modules/fastify/types/request.d.ts:55
 
----
+___
 
 ### context
 
@@ -78,7 +78,7 @@ FastifyRequest.context
 
 node_modules/fastify/types/request.d.ts:33
 
----
+___
 
 ### headers
 
@@ -92,7 +92,7 @@ FastifyRequest.headers
 
 node_modules/fastify/types/request.d.ts:29
 
----
+___
 
 ### hostname
 
@@ -106,7 +106,7 @@ FastifyRequest.hostname
 
 node_modules/fastify/types/request.d.ts:44
 
----
+___
 
 ### id
 
@@ -120,7 +120,7 @@ FastifyRequest.id
 
 node_modules/fastify/types/request.d.ts:25
 
----
+___
 
 ### ip
 
@@ -134,7 +134,7 @@ FastifyRequest.ip
 
 node_modules/fastify/types/request.d.ts:42
 
----
+___
 
 ### ips
 
@@ -148,7 +148,7 @@ FastifyRequest.ips
 
 node_modules/fastify/types/request.d.ts:43
 
----
+___
 
 ### is404
 
@@ -162,7 +162,7 @@ FastifyRequest.is404
 
 node_modules/fastify/types/request.d.ts:50
 
----
+___
 
 ### log
 
@@ -176,7 +176,7 @@ FastifyRequest.log
 
 node_modules/fastify/types/request.d.ts:30
 
----
+___
 
 ### method
 
@@ -190,7 +190,7 @@ FastifyRequest.method
 
 node_modules/fastify/types/request.d.ts:47
 
----
+___
 
 ### params
 
@@ -204,11 +204,11 @@ FastifyRequest.params
 
 node_modules/fastify/types/request.d.ts:26
 
----
+___
 
 ### protocol
 
-• `Readonly` **protocol**: `"http"` \| `"https"`
+• `Readonly` **protocol**: ``"http"`` \| ``"https"``
 
 #### Inherited from
 
@@ -218,7 +218,7 @@ FastifyRequest.protocol
 
 node_modules/fastify/types/request.d.ts:46
 
----
+___
 
 ### query
 
@@ -232,7 +232,7 @@ FastifyRequest.query
 
 node_modules/fastify/types/request.d.ts:28
 
----
+___
 
 ### raw
 
@@ -246,7 +246,7 @@ FastifyRequest.raw
 
 node_modules/fastify/types/request.d.ts:27
 
----
+___
 
 ### req
 
@@ -262,7 +262,7 @@ FastifyRequest.req
 
 node_modules/fastify/types/request.d.ts:41
 
----
+___
 
 ### routerMethod
 
@@ -276,7 +276,7 @@ FastifyRequest.routerMethod
 
 node_modules/fastify/types/request.d.ts:49
 
----
+___
 
 ### routerPath
 
@@ -290,7 +290,7 @@ FastifyRequest.routerPath
 
 node_modules/fastify/types/request.d.ts:48
 
----
+___
 
 ### server
 
@@ -304,7 +304,7 @@ FastifyRequest.server
 
 node_modules/fastify/types/request.d.ts:31
 
----
+___
 
 ### socket
 
@@ -318,17 +318,17 @@ FastifyRequest.socket
 
 node_modules/fastify/types/request.d.ts:51
 
----
+___
 
 ### state
 
-• **state**: `Record`<`string`, `any`\> & { `tokenPayload?`: `Record`<`string`, `any`\> ; `setCacheLifetime?`: (`lifetime`: `number`, `useExpiresHeader`: `boolean`) => `void` }
+• **state**: `Record`<`string`, `any`\> & { `tokenPayload?`: `Record`<`string`, `any`\> ; `setCacheLifetime?`: (`lifetime`: `number`, `useExpiresHeader`: `boolean`) => `void`  }
 
 #### Defined in
 
 packages/nestjs-util/src/interface/request.interface.ts:4
 
----
+___
 
 ### url
 
@@ -342,11 +342,11 @@ FastifyRequest.url
 
 node_modules/fastify/types/request.d.ts:45
 
----
+___
 
 ### validationError
 
-• `Optional` **validationError**: `Error` & { `validation`: `any` ; `validationContext`: `string` }
+• `Optional` **validationError**: `Error` & { `validation`: `any` ; `validationContext`: `string`  }
 
 in order for this to be used the user should ensure they have set the attachValidation option.
 

@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.4.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.2...@webundsoehne/nestjs-util@5.4.3-beta.1) (2022-05-02)
+
+
+### Bug Fixes
+
+* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
+
 ## @webundsoehne/nestjs-util [5.4.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.1...@webundsoehne/nestjs-util@5.4.2) (2022-04-19)
 
 ### Bug Fixes
