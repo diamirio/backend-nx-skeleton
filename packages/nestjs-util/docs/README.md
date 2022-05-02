@@ -227,7 +227,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/util/environment.ts:13
+packages/nestjs-util/src/util/environment.ts:22
 
 ___
 
