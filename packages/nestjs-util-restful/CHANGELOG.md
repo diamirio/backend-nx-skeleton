@@ -1,3 +1,19 @@
+## @webundsoehne/nestjs-util-restful [1.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.1...@webundsoehne/nestjs-util-restful@1.3.2) (2022-05-03)
+
+
+### Bug Fixes
+
+* is semantic-release broken, lets find out ([e7e6e20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e7e6e206a5c557f42ba99d6d9f91189a7f6ab8ca))
+* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 5.4.3
+
 ## @webundsoehne/nestjs-util-restful [1.3.2-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.2-beta.1...@webundsoehne/nestjs-util-restful@1.3.2-beta.2) (2022-05-02)
 
 
