@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [5.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.0...@webundsoehne/nx-builders@5.3.1) (2022-05-16)
+
+
+### Bug Fixes
+
+* update nx-builders readme with assets ignore info ([923fe3f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/923fe3ff2e2f503bdb26631af84d4dd5671371d4))
+
 # @webundsoehne/nx-builders [5.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.2.4...@webundsoehne/nx-builders@5.3.0) (2022-04-19)
 
 ### Bug Fixes

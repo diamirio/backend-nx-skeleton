@@ -25,6 +25,7 @@ This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for custo
     - [Configuration](#configuration)
       - [Build Mode](#build-mode)
       - [Watch Mode](#watch-mode)
+      - [Ignore assets](#ignore-assets)
   - [ts-node-dev](#ts-node-dev)
     - [Configuration](#configuration-1)
   - [run](#run)
