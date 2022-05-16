@@ -26,7 +26,7 @@
 
 interfaces/available.constants.ts:20
 
----
+___
 
 ### AvailableWorkspaceFiles
 
@@ -36,7 +36,7 @@ interfaces/available.constants.ts:20
 
 interfaces/available.constants.ts:16
 
----
+___
 
 ### PrettyNamesForAvailableThingies
 
