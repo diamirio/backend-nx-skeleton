@@ -72,12 +72,12 @@ import { TscBuilderOptions, TsNodeBuilderOptions } from '@webundsoehne/nx-builde
 export interface SchematicArchitect {
   [key: string]: any
   build: {
-    executor '@webundsoehne/nx-builders:tsc'
+    executor: '@webundsoehne/nx-builders:tsc'
     options: TscBuilderOptions
   }
 
   serve: {
-    executor '@webundsoehne/nx-builders:ts-node-dev'
+    executor: '@webundsoehne/nx-builders:ts-node-dev'
     options: TsNodeBuilderOptions
   }
 }
@@ -95,11 +95,11 @@ This custom TypeScript compiler has additional properties to the generic one tha
 
 #### Build Mode
 
-If you want to add this to an existing project or a new `nx` schematic. You can configure it as a minimum below. Where options fields must match with your directories.
+If you want to add this to an existing project or a new `nx` schematic, you can configure it as a minimum below. Where options fields must match with your directories.
 
 ```typescript
 architect.build = {
-  executor '@webundsoehne/nx-builders:tsc',
+  executor: '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -129,7 +129,7 @@ To run this in watch mode you can use `@nrwl/node` and change the serve command 
 
 ```typescript
 architect.build = {
-  executor '@webundsoehne/nx-builders:tsc',
+  executor: '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -148,19 +148,18 @@ architect.build = {
 }
 
 architect.serve = {
-      executor '@webundsoehne/nx-builders:execute',
-      options: {
-        buildTarget: '${options.name}:build'
-          // this will inject options to the tsc-watch builder
-        inject: {
-          // you have to have a valid command since this will be run inside the
-          runAfterWatch: 'yarn start -r source-map-support/register',
-          sourceMap: true,
-          environment: {
-            NODE_ENV: 'develop'
-          }
-        }
+  executor: '@webundsoehne/nx-builders:execute',
+  options: {
+    buildTarget: '${options.name}:build',
+    // this will inject options to the tsc-watch builder
+    inject: {
+      // you have to have a valid command since this will be run inside the
+      runAfterWatch: 'yarn start -r source-map-support/register',
+      sourceMap: true,
+      environment: {
+        NODE_ENV: 'develop'
       }
+    }
   }
 }
 ```
@@ -169,7 +168,7 @@ architect.serve = {
 
 ```typescript
 architect.serve = {
-  executor '@webundsoehne/nx-builders:tsc',
+  executor: '@webundsoehne/nx-builders:tsc',
   options: {
     cwd: options.root,
     main: `${options.root}/src/main.ts`,
@@ -189,6 +188,23 @@ architect.serve = {
 }
 ```
 
+#### Ignore assets
+
+You can exclude certain files or directories that are copied over in the assets option, using the `ignore` property. It takes an array of glob expressions that match the desired files/directories to be excluded.
+
+```typescript
+assets: [
+  {
+    glob: '*',
+    ignore: ['**/*.ts'],
+    input: `${options.root}/config`,
+    output: 'config'
+  }
+]
+```
+
+For more information about globbing patterns please refer to [fast-glob](https://www.npmjs.com/package/fast-glob) documentation.
+
 ## ts-node-dev
 
 Builder: `@webundsoehne/nx-builders:ts-node-dev`
@@ -201,7 +217,7 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 
 ```typescript
 architect.serve = {
-  executor '@webundsoehne/nx-builders:ts-node-dev',
+  executor: '@webundsoehne/nx-builders:ts-node-dev',
   options: {
     cwd: options.root,
     main: join(options.root, 'src/main.ts'),
@@ -225,7 +241,7 @@ If you want to add this to an existing project or a new `nx` schematic. You can 
 
 ```typescript
 architect.serve = {
-  executor '@webundsoehne/nx-builders:run',
+  executor: '@webundsoehne/nx-builders:run',
   options: {
     // ...
   }
@@ -281,7 +297,7 @@ This builder is a jumper to run another builders first then run a shell command 
 
 ```typescript
 architect.anything = {
-  executor '@webundsoehne/nx-builders:execute',
+  executor: '@webundsoehne/nx-builders:execute',
   options: {
     // ...
   }
