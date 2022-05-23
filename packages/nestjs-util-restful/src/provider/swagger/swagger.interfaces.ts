@@ -1,4 +1,4 @@
-import type { DocumentBuilder } from '@nestjs/swagger'
+import type { DocumentBuilder, SwaggerCustomOptions } from '@nestjs/swagger'
 
 export interface SwaggerConfig {
   useHttps: boolean
@@ -6,6 +6,7 @@ export interface SwaggerConfig {
   path: string
   title: string
   description: string
+  custom?: SwaggerCustomOptions
 }
 
 export interface UrlConfig {

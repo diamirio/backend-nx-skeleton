@@ -3,7 +3,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import type { SwaggerConfig, SwaggerOptions, UrlConfig } from './swagger.interfaces'
-import { Configurable, ConfigParam } from '@webundsoehne/nestjs-util'
+import { ConfigParam, Configurable } from '@webundsoehne/nestjs-util'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 
 export class SwaggerService {
   /**
@@ -30,7 +31,8 @@ export class SwaggerService {
       app,
       SwaggerModule.createDocument(app, builder.build(), {
         ignoreGlobalPrefix: false
-      })
+      }),
+      config?.custom
     )
   }
 }
