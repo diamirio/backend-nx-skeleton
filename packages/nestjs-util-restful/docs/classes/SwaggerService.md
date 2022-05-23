@@ -41,4 +41,4 @@ Enables a swagger route to the application
 
 #### Defined in
 
-provider/swagger/swagger.service.ts:17
+provider/swagger/swagger.service.ts:18

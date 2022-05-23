@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util-restful [1.4.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.2...@webundsoehne/nestjs-util-restful@1.4.0) (2022-05-23)
+
+
+### Features
+
+* add ability to pass custom options to swagger-ui ([fdb0e62](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fdb0e625333f8dd50f0759c3c4f20a62c89ef507))
+
 ## @webundsoehne/nestjs-util-restful [1.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.1...@webundsoehne/nestjs-util-restful@1.3.2) (2022-05-03)
 
 
