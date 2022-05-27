@@ -148,7 +148,6 @@ export function addProject (options: NormalizedSchema): Rule {
           command: './src/main.ts',
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
-          executeWithNode: true,
           watch: false,
           interactive: true,
           environment: {
@@ -198,7 +197,6 @@ export function addProject (options: NormalizedSchema): Rule {
           command: `typeorm-seeding --configName=${join(configurationBasePath, 'orm.config.ts')} seed`,
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
-          executeWithNode: true,
           watch: false,
           environment: {}
         }
