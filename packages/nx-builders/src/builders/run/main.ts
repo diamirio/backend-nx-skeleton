@@ -45,8 +45,10 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
         instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
       } else {
         // any kind of global binary or node binary should be run with a child process
-        instance = this.manager.add(execa(this.paths.command, this.options.args, this.options.spawnOptions))
+        instance = this.manager.addPersistent(execa(this.paths.command, this.options.args, this.options.spawnOptions))
       }
+
+      this.logger.debug('Spawned application: %s', instance.spawnargs)
 
       if (this.builderOptions.interactive) {
         this.logger.debug('This command is an interactive one, will hijack stdio.')
@@ -112,28 +114,23 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     const command = unparsedCommand.shift()
     const args = [...unparsedCommand, ...extendedArgs].filter(Boolean)
 
+    this.paths.command = command
+
     if (options.node) {
       if (pathExistsSync(join(options.cwd, command))) {
         // the case where file name is given and it exists
         this.logger.debug(`Command marked as node.js script: ${command}`)
 
         options.executeWithNode = true
-
-        this.paths.command = join(options.cwd, command)
-
-        checkPathsExists(this.paths)
       } else {
         // the case where a node binary like webpack or jest is given
         this.logger.debug(`Command marked as node.js binary: ${command}`)
-
-        this.paths.command = command
 
         checkPathsExists(this.paths, this.pathExtensions?.path)
       }
     } else {
       this.logger.debug(`Command marked as shell command: ${command}`)
       // the case where it will run any other shell command
-      this.paths.command = command
 
       checkPathsExists(this.paths, this.pathExtensions?.path)
     }
