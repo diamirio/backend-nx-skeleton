@@ -99,29 +99,29 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     }
 
     // interpolate with jinja
-    options.command = jinja.renderString(options.command, ctx)
-    options.args = jinja.renderString(Array.isArray(options.args) ? options.args.join(' ') : options.args, ctx)
+    ctx.command = jinja.renderString(ctx.command, ctx)
+    ctx.args = jinja.renderString(Array.isArray(ctx.args) ? ctx.args.join(' ') : ctx.args, ctx)
 
-    if (options.nodeOptions) {
-      options.nodeOptions = jinja.renderString(options.nodeOptions, ctx)
+    if (ctx.nodeOptions) {
+      ctx.nodeOptions = jinja.renderString(ctx.nodeOptions, ctx)
 
-      env = { ...env, ...setNodeOptionsEnvironmentVariables(options.nodeOptions) }
+      env = { ...env, ...setNodeOptionsEnvironmentVariables(ctx.nodeOptions) }
     }
 
-    const unparsedCommand = options.command.split(' ')
-    const extendedArgs = options.args.split(' ')
+    const unparsedCommand = ctx.command.split(' ')
+    const extendedArgs = ctx.args.split(' ')
 
     const command = unparsedCommand.shift()
     const args = [...unparsedCommand, ...extendedArgs].filter(Boolean)
 
     this.paths.command = command
 
-    if (options.node) {
-      if (pathExistsSync(join(options.cwd, command))) {
+    if (ctx.node) {
+      if (pathExistsSync(join(ctx.cwd, command))) {
         // the case where file name is given and it exists
         this.logger.debug(`Command marked as node.js script: ${command}`)
 
-        options.executeWithNode = true
+        ctx.executeWithNode = true
       } else {
         // the case where a node binary like webpack or jest is given
         this.logger.debug(`Command marked as node.js binary: ${command}`)
@@ -138,13 +138,13 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     // options
     const spawnOptions: ExecaArguments['spawnOptions'] = {
       env,
-      stdio: options.interactive ? 'inherit' : 'pipe',
+      stdio: ctx.interactive ? 'inherit' : 'pipe',
       extendEnv: false,
       shell: true
     }
 
-    if (options.cwd) {
-      spawnOptions.cwd = options.cwd
+    if (ctx.cwd) {
+      spawnOptions.cwd = ctx.cwd
     }
 
     if (this.pathExtensions?.key) {
