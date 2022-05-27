@@ -1,0 +1,54 @@
+{
+  "name": "@webundsoehne/nestjs-mongo-seeder",
+  "description": "MongoDB seeder modules for MongoDB initiation.",
+  "version": "1.0.0",
+  "author": "Backend <backend@webundsoehne.com>",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nestjs",
+    "mongodb",
+    "mongo",
+    "seeder"
+  ],
+  "scripts": {
+    "build": "tsup-node",
+    "dev:start": "tsup-node --silent --watch",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
+    "lint:staged": "lint-staged",
+    "docs:jsdoc": "typedoc src/index.ts --readme none",
+    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "dependencies": {
+    "@webundsoehne/deep-merge": "*",
+    "@webundsoehne/ts-utility-types": "*"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^8.3.1",
+    "@nestjs/mongoose": "^9.1.0",
+    "mongoose": "^6.3.4"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">= 8",
+    "@nestjs/mongoose": ">= 8",
+    "mongoose": ">= 6"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

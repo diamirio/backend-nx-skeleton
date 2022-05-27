@@ -15,7 +15,7 @@
     "link-packages": "lerna link --force-local",
     "lint": "yarn command --concurrency 1 --no-bail lint",
     "lint:check": "yarn command --parallel --no-bail lint:check",
-    "lint:staged": "yarn command --concurrency 1 lint:staged",
+    "lint:staged": "yarn exec lint-staged",
     "scripts:link": "./scripts/link-packages.sh link",
     "scripts:unlink": "./scripts/link-packages.sh unlink",
     "scripts:workspace:link": "./scripts/link-packages-to-workspace.sh link",

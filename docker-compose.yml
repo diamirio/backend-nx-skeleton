@@ -41,5 +41,7 @@ services:
       SERVICE_13_NAME: nestjs-util-microservices
       SERVICE_14_CWD: packages/nestjs-util-restful
       SERVICE_14_NAME: nestjs-util-restful
+      SERVICE_15_CWD: packages/nestjs-mongodb-seeder
+      SERVICE_15_NAME: nestjs-mongodb-seeder
     volumes:
       - .:/data

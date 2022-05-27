@@ -79,6 +79,12 @@ This package extends the `@webundsoehne/nestjs-keycloak` to have the seeding fun
 
 [**Read more...**](./packages/nestjs-keycloak-seeder/README.md)
 
+### nestjs-mongodb-seeder - @webundsoehne/nestjs-mongodb-seeder
+
+A tool to inject seeds for MongoDB directly to your NestJS application.
+
+[**Read more...**](./packages/nestjs-mongodb-seeder/README.md)
+
 ### nestjs-util - @webundsoehne/nestjs-util
 
 Utility package for `@nestjs`.
