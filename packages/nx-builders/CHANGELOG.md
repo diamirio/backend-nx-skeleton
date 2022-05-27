@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [5.3.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.2...@webundsoehne/nx-builders@5.3.3) (2022-05-27)
+
+
+### Bug Fixes
+
+* identification of node script and binary ([b6c8de4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b6c8de4fd13277d48275d5c39d3541bd9ab122d6))
+
 ## @webundsoehne/nx-builders [5.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.1...@webundsoehne/nx-builders@5.3.2) (2022-05-27)
 
 
