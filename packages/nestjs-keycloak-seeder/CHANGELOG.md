@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-keycloak-seeder [2.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.3.0...@webundsoehne/nestjs-keycloak-seeder@2.3.1) (2022-05-27)
+
+
+### Bug Fixes
+
+* issue with running node commands and naming scheme ([18bb821](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18bb8218e52885ac7a35831e06f3c4ee8ff25b6f))
+
 # @webundsoehne/nestjs-keycloak-seeder [2.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.2.2...@webundsoehne/nestjs-keycloak-seeder@2.3.0) (2022-04-19)
 
 ### Bug Fixes
