@@ -38,6 +38,8 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
       // stop all manager tasks
       await this.manager.stop()
 
+      this.logger.debug('Will run with options: %o', this.builderOptions)
+
       let instance: ExecaChildProcess
 
       if (this.builderOptions.executeWithNode) {
