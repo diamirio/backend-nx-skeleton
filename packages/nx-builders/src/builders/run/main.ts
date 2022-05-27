@@ -7,7 +7,6 @@ import { pathExistsSync } from 'fs-extra'
 import { join } from 'path'
 
 import type { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
-import type { ExecaArguments, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 import {
   BaseExecutor,
   checkPathsExists,
@@ -15,9 +14,9 @@ import {
   getNodeBinaryPathExtensions,
   pipeProcessToLogger,
   runExecutor,
-  setNodeOptionsEnvironmentVariables,
-  getNodeBinaryPath
+  setNodeOptionsEnvironmentVariables
 } from '@webundsoehne/nx-tools'
+import type { ExecaArguments, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()
@@ -113,26 +112,19 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     const command = unparsedCommand.shift()
     const args = [...unparsedCommand, ...extendedArgs].filter(Boolean)
 
-    if (options.node && pathExistsSync(join(options.cwd, command))) {
-      // the case where file name is given and it exists
-      this.logger.debug(`Command marked as node script: ${command}`)
-
-      options.executeWithNode = true
-
-      this.paths.command = command
-    }
-
     if (options.node) {
-      if (options.executeWithNode) {
-        // the case where a node binary but should be executed with node
-        this.logger.debug(`Command marked as node binary but will be executed with node: ${command}`)
+      if (pathExistsSync(join(options.cwd, command))) {
+        // the case where file name is given and it exists
+        this.logger.debug(`Command marked as node.js script: ${command}`)
 
-        this.paths.command = getNodeBinaryPath(command)
+        options.executeWithNode = true
+
+        this.paths.command = join(options.cwd, command)
 
         checkPathsExists(this.paths)
       } else {
         // the case where a node binary like webpack or jest is given
-        this.logger.debug(`Command marked as node binary: ${command}`)
+        this.logger.debug(`Command marked as node.js binary: ${command}`)
 
         this.paths.command = command
 
