@@ -25,7 +25,7 @@ export class KeycloakSeederService {
       const seed = new Seed(this.keycloak)
 
       if (!(seed instanceof KeycloakSeed)) {
-        throw new Error(`Seed is not a KeycloakSeed: ${name}`)
+        throw new Error(`Seed is not a ${KeycloakSeed.name}: ${name}`)
       }
 
       this.logger.log(`Running seed: ${name}`)

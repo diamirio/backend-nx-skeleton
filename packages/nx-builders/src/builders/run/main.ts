@@ -120,7 +120,9 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
       options.executeWithNode = true
 
       this.paths.command = command
-    } else if (options.node) {
+    }
+
+    if (options.node) {
       if (options.executeWithNode) {
         // the case where a node binary but should be executed with node
         this.logger.debug(`Command marked as node binary but will be executed with node: ${command}`)
