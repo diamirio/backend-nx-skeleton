@@ -1,3 +1,10 @@
+## @webundsoehne-private/nx-workspace [4.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.3.5...@webundsoehne-private/nx-workspace@4.3.6) (2022-05-27)
+
+
+### Bug Fixes
+
+* update nx cli commands ([b6cccc2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b6cccc24f8ed70f0aaca23e0c3400d7e7a122bcd))
+
 ## @webundsoehne-private/nx-workspace [4.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.3.4...@webundsoehne-private/nx-workspace@4.3.5) (2022-05-27)
 
 
