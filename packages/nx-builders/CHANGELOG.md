@@ -1,3 +1,11 @@
+## @webundsoehne/nx-builders [5.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.4...@webundsoehne/nx-builders@5.3.5) (2022-05-27)
+
+
+### Bug Fixes
+
+* add debug log to be sure ([47b783b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/47b783b0ea880d3d37d336aee02437b0cf15cc5b))
+* mutability issue ([ce2528c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ce2528c48d5f9f7b9357f25954b4d66ac691d65e))
+
 ## @webundsoehne/nx-builders [5.3.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.3...@webundsoehne/nx-builders@5.3.4) (2022-05-27)
 
 
