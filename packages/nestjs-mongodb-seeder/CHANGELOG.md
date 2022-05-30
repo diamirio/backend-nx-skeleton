@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-mongo-seeder [1.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-mongo-seeder@1.0.0...@webundsoehne/nestjs-mongo-seeder@1.0.1) (2022-05-30)
+
+
+### Bug Fixes
+
+* change the seed signature to inject stuff in to it ([70a38db](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/70a38dbd11f084dd257b98d5ed5d2530375a13d3))
+
 # @webundsoehne/nestjs-mongo-seeder 1.0.0 (2022-05-27)
 
 
