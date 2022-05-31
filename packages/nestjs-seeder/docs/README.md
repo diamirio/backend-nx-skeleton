@@ -1,28 +1,28 @@
-@webundsoehne/nestjs-mongo-seeder
+@webundsoehne/nestjs-seeder
 
-# @webundsoehne/nestjs-mongo-seeder
+# @webundsoehne/nestjs-seeder
 
 ## Table of contents
 
 ### Classes
 
-- [MongoDBSeed](classes/MongoDBSeed.md)
-- [MongoDBSeederModule](classes/MongoDBSeederModule.md)
-- [MongoDBSeederService](classes/MongoDBSeederService.md)
+- [Seed](classes/Seed.md)
+- [SeederModule](classes/SeederModule.md)
+- [SeederService](classes/SeederService.md)
 
 ### Variables
 
-- [MONGODB_SEEDER_SEEDS](README.md#mongodb_seeder_seeds)
+- [SEEDER\_SEEDS](README.md#seeder_seeds)
 
 ### Functions
 
-- [InjectMongoDBSeederService](README.md#injectmongodbseederservice)
+- [InjectSeederService](README.md#injectseederservice)
 
 ## Variables
 
-### MONGODB_SEEDER_SEEDS
+### SEEDER\_SEEDS
 
-• `Const` **MONGODB_SEEDER_SEEDS**: typeof [`MONGODB_SEEDER_SEEDS`](README.md#mongodb_seeder_seeds)
+• `Const` **SEEDER\_SEEDS**: typeof [`SEEDER_SEEDS`](README.md#seeder_seeds)
 
 #### Defined in
 
@@ -30,11 +30,11 @@ constants/injection.constants.ts:1
 
 ## Functions
 
-### InjectMongoDBSeederService
+### InjectSeederService
 
-▸ **InjectMongoDBSeederService**(): (`target`: `Record`<`string`, `unknown`\>, `key`: `string` \| `symbol`, `index?`: `number`) => `void`
+▸ **InjectSeederService**(): (`target`: `Record`<`string`, `unknown`\>, `key`: `string` \| `symbol`, `index?`: `number`) => `void`
 
-Injects Keyclaok admin instance initiated to the service.
+Injects SeederService to the service.
 
 #### Returns
 
@@ -42,15 +42,15 @@ Injects Keyclaok admin instance initiated to the service.
 
 ▸ (`target`, `key`, `index?`): `void`
 
-Injects Keyclaok admin instance initiated to the service.
+Injects SeederService to the service.
 
 ##### Parameters
 
-| Name     | Type                           |
-| :------- | :----------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key`    | `string` \| `symbol`           |
-| `index?` | `number`                       |
+| `key` | `string` \| `symbol` |
+| `index?` | `number` |
 
 ##### Returns
 
