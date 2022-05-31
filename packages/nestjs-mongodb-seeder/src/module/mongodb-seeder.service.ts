@@ -1,6 +1,4 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
-import { InjectConnection } from '@nestjs/mongoose'
-import { Connection } from 'mongoose'
 
 import { MONGODB_SEEDER_SEEDS } from '@constants/injection.constants'
 import { MongoDBSeed } from '@interfaces/mongodb-seed'
@@ -14,14 +12,14 @@ import type { MongoDBSeeds } from '@interfaces/mongodb-seed.interface'
 export class MongoDBSeederService {
   protected readonly logger = new Logger(this.constructor.name)
 
-  constructor (@InjectConnection() protected readonly connection: Connection, @Inject(MONGODB_SEEDER_SEEDS) protected readonly seeds: MongoDBSeeds) {}
+  constructor (@Inject(MONGODB_SEEDER_SEEDS) protected readonly seeds: MongoDBSeeds) {}
 
   /**
    * Run all the seeds.
    */
   async init (): Promise<void> {
     for (const [name, Seed] of Object.entries(this.seeds)) {
-      const seed = new Seed(this.connection)
+      const seed = Inject(Seed)
 
       if (!(seed instanceof MongoDBSeed)) {
         throw new Error(`Seed is not a ${MongoDBSeed.name}: ${name}`)

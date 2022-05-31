@@ -10,16 +10,18 @@ import type { MongoDBSeeds } from '@interfaces/mongodb-seed.interface'
  */
 @Module({})
 export class MongoDBSeederModule {
-  static register (seeds: MongoDBSeeds): DynamicModule {
+  static register (seeds: MongoDBSeeds, inject?: Pick<DynamicModule, 'imports' | 'providers'>): DynamicModule {
     return {
       module: MongoDBSeederModule,
-      imports: [],
+      imports: [...inject?.imports ?? []],
       providers: [
         MongoDBSeederService,
         {
           provide: MONGODB_SEEDER_SEEDS,
           useValue: seeds
-        }
+        },
+        ...Object.values(seeds),
+        ...inject?.providers ?? []
       ],
       exports: [MongoDBSeederService]
     }
