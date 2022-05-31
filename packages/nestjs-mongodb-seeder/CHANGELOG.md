@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-mongo-seeder [1.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-mongo-seeder@1.1.0...@webundsoehne/nestjs-mongo-seeder@1.1.1) (2022-05-31)
+
+
+### Bug Fixes
+
+* delete requirement for constructor inject ([f2b6fb7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f2b6fb78e80083f2020a662c319af330d3d7e665))
+
 # @webundsoehne/nestjs-mongo-seeder [1.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-mongo-seeder@1.0.1...@webundsoehne/nestjs-mongo-seeder@1.1.0) (2022-05-31)
 
 

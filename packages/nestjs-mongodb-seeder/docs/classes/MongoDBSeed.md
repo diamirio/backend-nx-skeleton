@@ -12,7 +12,6 @@ A singular seed that should be extended from, for seeding MongoDB.
 
 ### Properties
 
-- [client](MongoDBSeed.md#client)
 - [logger](MongoDBSeed.md#logger)
 
 ### Methods
@@ -23,25 +22,9 @@ A singular seed that should be extended from, for seeding MongoDB.
 
 ### constructor
 
-• **new MongoDBSeed**(`client`)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `client` | `Connection` |
-
-#### Defined in
-
-interfaces/mongodb-seed.ts:10
+• **new MongoDBSeed**()
 
 ## Properties
-
-### client
-
-• `Protected` **client**: `Connection`
-
-___
 
 ### logger
 
@@ -49,7 +32,7 @@ ___
 
 #### Defined in
 
-interfaces/mongodb-seed.ts:8
+interfaces/mongodb-seed.ts:7
 
 ## Methods
 
@@ -63,4 +46,4 @@ interfaces/mongodb-seed.ts:8
 
 #### Defined in
 
-interfaces/mongodb-seed.ts:12
+interfaces/mongodb-seed.ts:9
