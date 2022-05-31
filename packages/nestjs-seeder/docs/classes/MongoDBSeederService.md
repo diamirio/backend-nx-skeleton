@@ -27,8 +27,8 @@ Seeder service to run all the seeds that has been passed to it.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type           |
+| :------ | :------------- |
 | `seeds` | `MongoDBSeeds` |
 
 #### Defined in
@@ -45,7 +45,7 @@ module/mongodb-seeder.service.ts:15
 
 module/mongodb-seeder.service.ts:13
 
-___
+---
 
 ### seeds
 

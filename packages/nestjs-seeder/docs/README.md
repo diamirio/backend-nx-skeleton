@@ -12,7 +12,7 @@
 
 ### Variables
 
-- [MONGODB\_SEEDER\_SEEDS](README.md#mongodb_seeder_seeds)
+- [MONGODB_SEEDER_SEEDS](README.md#mongodb_seeder_seeds)
 
 ### Functions
 
@@ -20,9 +20,9 @@
 
 ## Variables
 
-### MONGODB\_SEEDER\_SEEDS
+### MONGODB_SEEDER_SEEDS
 
-• `Const` **MONGODB\_SEEDER\_SEEDS**: typeof [`MONGODB_SEEDER_SEEDS`](README.md#mongodb_seeder_seeds)
+• `Const` **MONGODB_SEEDER_SEEDS**: typeof [`MONGODB_SEEDER_SEEDS`](README.md#mongodb_seeder_seeds)
 
 #### Defined in
 
@@ -46,11 +46,11 @@ Injects Keyclaok admin instance initiated to the service.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                           |
+| :------- | :----------------------------- |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key` | `string` \| `symbol` |
-| `index?` | `number` |
+| `key`    | `string` \| `symbol`           |
+| `index?` | `number`                       |
 
 ##### Returns
 

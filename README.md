@@ -17,6 +17,7 @@ A set of schematics and tools that provides the basis for fast template scaffold
   - [nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader](#nestjs-graphql-typeorm-dataloader---webundsoehnenestjs-graphql-typeorm-dataloader)
   - [nestjs-keycloak - @webundsoehne/nestjs-keycloak](#nestjs-keycloak---webundsoehnenestjs-keycloak)
   - [nestjs-keycloak-seeder - @webundsoehne/nestjs-keycloak-seeder](#nestjs-keycloak-seeder---webundsoehnenestjs-keycloak-seeder)
+  - [nestjs-seeder - @webundsoehne/nestjs-seeder](#nestjs-seeder---webundsoehnenestjs-seeder)
   - [nestjs-util - @webundsoehne/nestjs-util](#nestjs-util---webundsoehnenestjs-util)
   - [nestjs-util-graphql - @webundsoehne/nestjs-util-graphql](#nestjs-util-graphql---webundsoehnenestjs-util-graphql)
   - [nestjs-util-microservices - @webundsoehne/nestjs-util-microservices](#nestjs-util-microservices---webundsoehnenestjs-util-microservices)
@@ -79,11 +80,11 @@ This package extends the `@webundsoehne/nestjs-keycloak` to have the seeding fun
 
 [**Read more...**](./packages/nestjs-keycloak-seeder/README.md)
 
-### nestjs-mongodb-seeder - @webundsoehne/nestjs-mongodb-seeder
+### nestjs-seeder - @webundsoehne/nestjs-seeder
 
-A tool to inject seeds for MongoDB directly to your NestJS application.
+A generic seeder to inject services in to and initiate a application programmatically.
 
-[**Read more...**](./packages/nestjs-mongodb-seeder/README.md)
+[**Read more...**](./packages/nestjs-seeder/README.md)
 
 ### nestjs-util - @webundsoehne/nestjs-util
 

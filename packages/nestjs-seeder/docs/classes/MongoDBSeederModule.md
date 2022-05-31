@@ -28,10 +28,10 @@ MongoDBSeederModule provides the interface to run the seeds, any MongoDB connect
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `seeds` | `MongoDBSeeds` |
-| `inject?` | `Pick`<`DynamicModule`, ``"imports"`` \| ``"providers"``\> |
+| Name      | Type                                                   |
+| :-------- | :----------------------------------------------------- |
+| `seeds`   | `MongoDBSeeds`                                         |
+| `inject?` | `Pick`<`DynamicModule`, `"imports"` \| `"providers"`\> |
 
 #### Returns
 

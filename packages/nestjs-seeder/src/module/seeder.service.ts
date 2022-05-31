@@ -1,29 +1,25 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
+import { ModuleRef } from '@nestjs/core'
 
-import { MONGODB_SEEDER_SEEDS } from '@constants/injection.constants'
-import { MongoDBSeed } from '@interfaces/mongodb-seed'
+import { SEEDER_SEEDS } from '@constants/injection.constants'
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import type { MongoDBSeeds } from '@interfaces/mongodb-seed.interface'
+import type { Seeds } from '@interfaces/seeds.interface'
 
 /**
  * Seeder service to run all the seeds that has been passed to it.
  */
 @Injectable()
-export class MongoDBSeederService {
+export class SeederService {
   protected readonly logger = new Logger(this.constructor.name)
 
-  constructor (@Inject(MONGODB_SEEDER_SEEDS) protected readonly seeds: MongoDBSeeds) {}
+  constructor (@Inject(SEEDER_SEEDS) protected readonly seeds: Seeds, private moduleRef: ModuleRef) {}
 
   /**
    * Run all the seeds.
    */
   async init (): Promise<void> {
     for (const [name, Seed] of Object.entries(this.seeds)) {
-      const seed = Inject(Seed)
-
-      if (!(seed instanceof MongoDBSeed)) {
-        throw new Error(`Seed is not a ${MongoDBSeed.name}: ${name}`)
-      }
+      const seed = this.moduleRef.get(Seed)
 
       this.logger.log(`Running seed: ${name}`)
 

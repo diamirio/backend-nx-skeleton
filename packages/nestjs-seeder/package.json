@@ -1,6 +1,6 @@
 {
-  "name": "@webundsoehne/nestjs-mongo-seeder",
-  "description": "MongoDB seeder modules for MongoDB initiation.",
+  "name": "@webundsoehne/nestjs-seeder",
+  "description": "Generic seeder for nestjs for any kind of service based initialization.",
   "version": "1.0.0",
   "author": "Backend <backend@webundsoehne.com>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
@@ -39,14 +39,12 @@
     "@webundsoehne/ts-utility-types": "*"
   },
   "devDependencies": {
-    "@nestjs/common": "^8.3.1",
-    "@nestjs/mongoose": "^9.1.0",
-    "mongoose": "^6.3.4"
+    "@nestjs/common": "^8.4.6",
+    "@nestjs/core": "^8.4.6"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8",
-    "@nestjs/mongoose": ">= 8",
-    "mongoose": ">= 6"
+    "@nestjs/core": ">= 8"
   },
   "engines": {
     "node": ">= 16"

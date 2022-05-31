@@ -1,1 +1,0 @@
-export const MONGODB_SEEDER_SEEDS = Symbol('MONGODB_SEEDER_SEEDS')
