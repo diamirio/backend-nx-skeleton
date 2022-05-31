@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-mongo-seeder [1.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-mongo-seeder@1.0.1...@webundsoehne/nestjs-mongo-seeder@1.1.0) (2022-05-31)
+
+
+### Features
+
+* update seeder to be able to inject seeds as service ([60ca9f7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/60ca9f7604ce69456a0f7840c70a999709ec208f))
+
 ## @webundsoehne/nestjs-mongo-seeder [1.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-mongo-seeder@1.0.0...@webundsoehne/nestjs-mongo-seeder@1.0.1) (2022-05-30)
 
 

@@ -24,13 +24,14 @@ MongoDBSeederModule provides the interface to run the seeds, any MongoDB connect
 
 ### register
 
-▸ `Static` **register**(`seeds`): `DynamicModule`
+▸ `Static` **register**(`seeds`, `inject?`): `DynamicModule`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `seeds` | `MongoDBSeeds` |
+| `inject?` | `Pick`<`DynamicModule`, ``"imports"`` \| ``"providers"``\> |
 
 #### Returns
 

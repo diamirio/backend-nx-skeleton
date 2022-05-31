@@ -12,7 +12,6 @@ Seeder service to run all the seeds that has been passed to it.
 
 ### Properties
 
-- [connection](MongoDBSeederService.md#connection)
 - [logger](MongoDBSeederService.md#logger)
 - [seeds](MongoDBSeederService.md#seeds)
 
@@ -24,26 +23,19 @@ Seeder service to run all the seeds that has been passed to it.
 
 ### constructor
 
-• **new MongoDBSeederService**(`connection`, `seeds`)
+• **new MongoDBSeederService**(`seeds`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `connection` | `Connection` |
 | `seeds` | `MongoDBSeeds` |
 
 #### Defined in
 
-module/mongodb-seeder.service.ts:17
+module/mongodb-seeder.service.ts:15
 
 ## Properties
-
-### connection
-
-• `Protected` `Readonly` **connection**: `Connection`
-
-___
 
 ### logger
 
@@ -51,7 +43,7 @@ ___
 
 #### Defined in
 
-module/mongodb-seeder.service.ts:15
+module/mongodb-seeder.service.ts:13
 
 ___
 
@@ -73,4 +65,4 @@ Run all the seeds.
 
 #### Defined in
 
-module/mongodb-seeder.service.ts:22
+module/mongodb-seeder.service.ts:20
