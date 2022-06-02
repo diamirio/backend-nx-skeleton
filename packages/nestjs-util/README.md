@@ -26,6 +26,7 @@ This is a collection of useful modules for creating a [NestJS](https://github.co
   - [Retry Decorator](#retry-decorator)
   - [UseMaintenanceLocker Decorator](#usemaintenancelocker-decorator)
 - [Filters](#filters)
+  - [Reporting to sentry.io](#reporting-to-sentryio)
   - [Http](#http)
   - [Bad-Request](#bad-request)
 - [Middleware](#middleware)

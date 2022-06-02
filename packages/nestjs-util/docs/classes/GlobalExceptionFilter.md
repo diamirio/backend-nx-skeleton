@@ -38,7 +38,7 @@
 
 ### logger
 
-• `Private` **logger**: `Logger`
+• `Protected` **logger**: `Logger`
 
 #### Defined in
 

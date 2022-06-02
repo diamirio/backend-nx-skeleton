@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [5.5.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.3...@webundsoehne/nestjs-util@5.5.0) (2022-06-02)
+
+
+### Features
+
+* global exception filter with additional sentry reporting ([b131068](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b131068c88bbb6fb445cf92a590d6c6b89c406de))
+
 ## @webundsoehne/nestjs-util [5.4.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.2...@webundsoehne/nestjs-util@5.4.3) (2022-05-03)
 
 

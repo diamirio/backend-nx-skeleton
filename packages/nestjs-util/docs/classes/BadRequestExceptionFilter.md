@@ -14,6 +14,10 @@
 
 - [constructor](BadRequestExceptionFilter.md#constructor)
 
+### Properties
+
+- [logger](BadRequestExceptionFilter.md#logger)
+
 ### Methods
 
 - [catch](BadRequestExceptionFilter.md#catch)
@@ -29,6 +33,20 @@
 #### Inherited from
 
 [GlobalExceptionFilter](GlobalExceptionFilter.md).[constructor](GlobalExceptionFilter.md#constructor)
+
+## Properties
+
+### logger
+
+• `Protected` **logger**: `Logger`
+
+#### Inherited from
+
+[GlobalExceptionFilter](GlobalExceptionFilter.md).[logger](GlobalExceptionFilter.md#logger)
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:11
 
 ## Methods
 
