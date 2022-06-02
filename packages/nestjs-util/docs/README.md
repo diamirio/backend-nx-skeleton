@@ -12,6 +12,7 @@
 - [EnrichedExceptionError](classes/EnrichedExceptionError.md)
 - [ExtendedValidationPipe](classes/ExtendedValidationPipe.md)
 - [GlobalExceptionFilter](classes/GlobalExceptionFilter.md)
+- [GlobalSentryExceptionFilter](classes/GlobalSentryExceptionFilter.md)
 - [LoggerService](classes/LoggerService.md)
 - [MaintenanceMiddleware](classes/MaintenanceMiddleware.md)
 - [MaintenanceModule](classes/MaintenanceModule.md)

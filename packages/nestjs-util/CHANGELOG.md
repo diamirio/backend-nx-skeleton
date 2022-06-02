@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.5.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.0...@webundsoehne/nestjs-util@5.5.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* add global sentry exception filter to module export ([2893154](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/28931548c3e84c702ecd5fc1f0a38f9bedb68929))
+
 # @webundsoehne/nestjs-util [5.5.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.3...@webundsoehne/nestjs-util@5.5.0) (2022-06-02)
 
 
