@@ -8,7 +8,7 @@ import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
-  private logger = new Logger(this.constructor.name)
+  protected logger = new Logger(this.constructor.name)
 
   static defaultPayload (exception: any): EnrichedException {
     return new EnrichedExceptionError({
