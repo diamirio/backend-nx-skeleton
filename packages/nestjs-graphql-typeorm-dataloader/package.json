@@ -41,7 +41,7 @@
     "rxjs": ">= 7 < 8"
   },
   "dependencies": {
-    "apollo-server-plugin-base": "^3.5.1",
+    "apollo-server-plugin-base": "^3.6.0",
     "dataloader": "^2.1.0",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
@@ -49,19 +49,19 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/gateway": "^0.48.1",
-    "@nestjs/graphql": "^9.1.2",
-    "@types/jest": "^27.4.0",
-    "@types/lodash": "^4.14.178",
+    "@apollo/gateway": "^2.0.4",
+    "@nestjs/graphql": "^10.0.15",
+    "@types/jest": "^28.1.1",
+    "@types/lodash": "^4.14.182",
     "@types/uuid": "^8.3.4",
-    "apollo-server-fastify": "^3.6.3",
+    "apollo-server-fastify": "^3.8.2",
     "class-validator": "^0.13.2",
-    "graphql": "^15",
-    "graphql-request": "^3.7.0",
-    "mikro-orm": "^5.1.2",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0",
+    "mikro-orm": "^5.1.5",
     "rimraf": "^3.0.2",
-    "sqlite3": "^5.0.2",
-    "typeorm": "^0.3.5"
+    "sqlite3": "^5.0.8",
+    "typeorm": "^0.3.6"
   },
   "engines": {
     "node": ">= 16"
