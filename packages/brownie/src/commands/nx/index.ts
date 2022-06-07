@@ -72,8 +72,9 @@ export class NxCommand extends BaseCommand<Configuration> {
       },
 
       {
-        title: 'Checking whether this package is already installed.',
         task: async (ctx, task): Promise<void> => {
+          task.title = 'Checking whether this package is already installed.'
+
           const pkg = (
             await this.helpers.node.checkIfModuleInstalled(ctx.prompts.schematic, {
               getVersion: true,

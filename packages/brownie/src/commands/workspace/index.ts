@@ -199,7 +199,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
       stdio: 'inherit',
       shell: true,
       env: {
-        NG_DEBUG: this.isVerbose || this.isDebug
+        NG_DEBUG: String(this.isVerbose || this.isDebug)
       }
     })
   }

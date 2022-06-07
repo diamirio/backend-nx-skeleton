@@ -35,7 +35,7 @@ import {
 /**
  * Normalize the options passed in through angular-schematics.
  * @param host
- * @param context
+ * @param _context
  * @param options
  */
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
