@@ -32,16 +32,16 @@
     ]
   },
   "dependencies": {
-    "@angular-devkit/core": "^13.3.2",
-    "@angular-devkit/schematics": "^13.3.2",
-    "@nrwl/devkit": "^13.10.1",
-    "@nrwl/workspace": "^13.10.1",
+    "@angular-devkit/core": "^14.0.0",
+    "@angular-devkit/schematics": "^14.0.0",
+    "@nrwl/devkit": "^14.1.9",
+    "@nrwl/workspace": "^14.1.9",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",
     "enquirer": "^2.3.6",
     "listr2": "^4.0.4",
-    "typescript": "^4.6.0-dev.20220203"
+    "typescript": "^4.7.3"
   },
   "engines": {
     "node": ">= 16"

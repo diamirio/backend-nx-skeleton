@@ -59,10 +59,10 @@
       ],
       "default": true
     },
-    "cli": {
-      "description": "CLI used for generating code and running tasks",
-      "type": "string",
-      "enum": ["nx", "angular"]
+    "verbose": {
+      "type": "boolean",
+      "description": "Emits verbose output",
+      "default": false
     }
   }
 }
