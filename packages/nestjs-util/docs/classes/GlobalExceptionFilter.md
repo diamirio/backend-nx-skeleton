@@ -6,6 +6,8 @@
 
 - **`GlobalExceptionFilter`**
 
+  ↳ [`GlobalSentryExceptionFilter`](GlobalSentryExceptionFilter.md)
+
   ↳ [`BadRequestExceptionFilter`](BadRequestExceptionFilter.md)
 
 ## Implements
