@@ -6,5 +6,5 @@ import { MicroserviceProviderBaseMessage, BaseMessageIndexes } from '@webundsoeh
  * Request-response patterns for all message patterns of "{{ name }}" with pattern "{{ names.pattern }}"
  */
 export declare class {{ names.interface }} extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<{{ names.pattern }}> {
-  [{{ names.pattern }}.{{ names.default }}]: (request: any) => any
+  [{{ names.pattern }}.DEFAULT]: (request: any) => any
 }

@@ -92,22 +92,34 @@ export function multipleJinjaTemplate<T extends Record<string, any>> (ctx: T, op
         )
 
         if (!matched) {
-          // log.warn(`Can not match any template for generating multiple in tree for: ${options.templates.map((t) => `${t.path}@${t.output}`).join(', ')}`)
+          // log.warn('Can not match any template for generating multiple in tree for: %s', options.templates.map((t) => `${t.path}@${t.output}`).join(', '))
+
           return
         }
 
         await Promise.all(
           options.templates.map(async (template) => {
+            template = {
+              overwrite: true,
+              ...template
+            }
+
             try {
               const output: string = template.root ? join(template.root, template.output) : template.output
 
-              log.debug(`Generating template from ${matched} to: ${output}`)
+              if (!template.overwrite && host.exists(output)) {
+                log.warn('Template has been already generated before and instructed not to overwrite: %s', output)
+
+                return
+              }
+
+              log.debug('Generating template from %s to: %s', matched, output)
 
               const content = nunjucks.renderString(file.content, template.factory(ctx, template.output))
 
               host.create(output, content)
             } catch (e) {
-              log.error(`Could not create multiple file "${file.path}" from template: ${e.message}`)
+              log.error('Could not create multiple file "%s" from template: %s', file.path, e.message)
 
               // i want to stop execution if it is not verbose
               if (!isVerbose()) {

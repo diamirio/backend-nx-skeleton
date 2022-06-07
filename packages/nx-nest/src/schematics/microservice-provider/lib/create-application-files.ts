@@ -57,6 +57,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
         templates: options.microservices.map((microservice) => ({
           path: new RegExp('src/patterns/__pattern__.constants.ts.j2'),
           output: `src/patterns/${microservice.names.file}.constants.ts`,
+          overwrite: false,
           factory: (): ParsedMicroservice => {
             return microservice
           }
@@ -68,6 +69,7 @@ function generateRules (options: NormalizedSchema, log: Logger): Rule[] {
         templates: options.microservices.map((microservice) => ({
           path: new RegExp('src/interfaces/__interface__.interface.ts.j2'),
           output: `src/interfaces/${microservice.names.file}.interface.ts`,
+          overwrite: false,
           factory: (): ParsedMicroservice => {
             return microservice
           }
