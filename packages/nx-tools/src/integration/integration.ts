@@ -146,11 +146,18 @@ export function createWorkspaceProject<T extends Record<PropertyKey, any> = Base
     } catch (e) {
       const logger = new Logger()
 
-      logger.fatal(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
+      logger.fatal('Project "%s" can not be found while trying to update integration: %o', name, e)
+
+      throw e
     }
 
-    if (project) {
-      project = { ...project, ...configuration }
+    // lets try to keep the user configuration first, only adding the stuff that was not there before
+    const targets: EnrichedProjectConfiguration<T>['targets'] = { ...configuration.targets, ...project.targets }
+
+    project = {
+      ...project,
+      ...configuration,
+      targets
     }
 
     updateProjectConfiguration(convertAngularTreeToNxTree(host), name, project as unknown as ProjectConfiguration)
