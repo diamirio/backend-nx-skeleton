@@ -24,6 +24,7 @@
 - [initialized](GlobalSentryExceptionFilter.md#initialized)
 - [logger](GlobalSentryExceptionFilter.md#logger)
 - [options](GlobalSentryExceptionFilter.md#options)
+- [sentry](GlobalSentryExceptionFilter.md#sentry)
 
 ### Methods
 
@@ -74,11 +75,21 @@ ___
 
 ### options
 
-• `Private` `Optional` `Readonly` **options**: `Options`<`BaseTransportOptions`\>
+• `Private` `Optional` `Readonly` **options**: `any`
 
 #### Defined in
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:13
+
+___
+
+### sentry
+
+• `Private` **sentry**: `any`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:11
 
 ## Methods
 
@@ -107,7 +118,7 @@ ExceptionFilter.catch
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:50
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:68
 
 ___
 
@@ -125,7 +136,7 @@ OnApplicationShutdown.onApplicationShutdown
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:74
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:92
 
 ___
 
