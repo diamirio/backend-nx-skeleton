@@ -4,7 +4,7 @@ import type { ConfigureOptions } from 'nunjucks'
  * Generate templates ending with extension as jinja templates.
  */
 export interface JinjaTemplateOptions {
-  /** Set of extensions to designate as jinja tempaltes */
+  /** Set of extensions to designate as jinja templates */
   templates: string[]
   nunjucks?: ConfigureOptions
 }

@@ -31,7 +31,7 @@ export const PackageManagerCommands: Record<AvailablePackageManagers, Record<Pac
     [PackageManagerUsableCommands.DEVELOPMENT]: '--save-dev',
     [PackageManagerUsableCommands.FORCE]: '--force',
     [PackageManagerUsableCommands.REGISTRY]: 'npm_config_registry',
-    [PackageManagerUsableCommands.INSTALL]: 'install',
+    [PackageManagerUsableCommands.INSTALL]: 'install --legacy-peer-deps',
     [PackageManagerUsableCommands.RUN]: 'run',
     [PackageManagerUsableCommands.RUN_ARGS]: '--',
     [PackageManagerUsableCommands.ROOT]: 'root'
