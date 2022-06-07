@@ -30,7 +30,7 @@ export function createCommandModule ({% if database is defined and database != e
 @Module({
   providers: [
     ConfigService
-    ],
+  ],
   imports: [
     {% if database is defined and enum.dbAdapters.TYPEORM in database %}
     TypeOrmModule.forRoot(getDatabaseOptions(mock)),

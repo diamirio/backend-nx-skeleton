@@ -29,7 +29,7 @@ import * as tasks from './modules'
 export function createTaskModule ({% if database is defined and database != enum.database.NONE %}mock = false{% endif %}): new({% if database != enum.database.NONE %}mock : boolean{% endif %}) => NestModule {
   @Module({
     providers: [
-        ConfigService,
+      ConfigService
     ],
     imports: [
       ScheduleModule.forRoot(),

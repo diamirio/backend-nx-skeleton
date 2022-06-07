@@ -43,6 +43,7 @@ import {
   ApolloServerPluginLandingPageProductionDefault,
   ApolloServerPluginLandingPageLocalDefault
 } from 'apollo-server-core'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 {% endif %}
 {% if database is defined and database != enum.database.NONE %}
 {% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions and dbAdapters == enum.dbAdapters.TYPEORM %}
@@ -80,7 +81,8 @@ export function createServerModule ({% if database is defined and database != en
       }{% endif %}
     ],
     imports: [
-      {% if server == enum.server.GRAPHQL %}GraphQLModule.forRoot({
+      {% if server == enum.server.GRAPHQL %}GraphQLModule.forRoot<ApolloDriverConfig>({
+        driver: ApolloDriver,
         autoSchemaFile: join(process.cwd(), '.graphql/schema.gql'),
         context: graphQLContextParser,
         formatError: graphQLErrorParser,
