@@ -46,18 +46,13 @@
   "peerDependencies": {
     "@nestjs/common": ">= 8 < 10",
     "@nestjs/core": ">= 8 < 10",
-    "@nestjs/microservices": ">= 8 < 10",
     "class-transformer": ">= 0.4.0",
     "class-validator": ">= 0.13.0",
-    "express": ">= 4 < 5",
     "fastify": ">= 3",
     "@sentry/node": ">= 7 < 8"
   },
   "peerDependenciesMeta": {
     "fastify": {
-      "optional": true
-    },
-    "express": {
       "optional": true
     },
     "@sentry/node": {
@@ -72,7 +67,6 @@
     "@types/winston": "^2.4.4",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
-    "express": "^4.17.3",
     "fastify": "^3.27.0",
     "@sentry/node": "^7.0.0"
   },
