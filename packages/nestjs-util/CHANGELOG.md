@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.5.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.2...@webundsoehne/nestjs-util@5.5.3) (2022-06-09)
+
+
+### Bug Fixes
+
+* remove ghost peer dependencies from nestjs-utils package ([9ec9f68](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9ec9f68739e6688366f6f5f9a47868caccbb630b))
+
 ## @webundsoehne/nestjs-util [5.5.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.1...@webundsoehne/nestjs-util@5.5.2) (2022-06-07)
 
 
