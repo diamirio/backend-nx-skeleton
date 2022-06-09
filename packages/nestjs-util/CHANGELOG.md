@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.5.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.1...@webundsoehne/nestjs-util@5.5.2) (2022-06-07)
+
+
+### Bug Fixes
+
+* dynamically import sentry to avoid package missing error on optional usage ([b4bd048](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b4bd048daeeccff17b662225b4d40bf7b8b8e5f4))
+
 ## @webundsoehne/nestjs-util [5.5.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.0...@webundsoehne/nestjs-util@5.5.1) (2022-06-02)
 
 
