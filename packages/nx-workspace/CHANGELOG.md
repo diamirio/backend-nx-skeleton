@@ -1,3 +1,19 @@
+## @webundsoehne-private/nx-workspace [4.3.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.3.6...@webundsoehne-private/nx-workspace@4.3.7) (2022-06-13)
+
+
+### Bug Fixes
+
+* update READMEs with current banner design ([8137441](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/81374413da1208ea66b3e86f89771dfbd966dfbb))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 5.3.6
+* **@webundsoehne/nx-tools:** upgraded to 5.3.2
+
 ## @webundsoehne-private/nx-workspace [4.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.3.5...@webundsoehne-private/nx-workspace@4.3.6) (2022-05-27)
 
 
