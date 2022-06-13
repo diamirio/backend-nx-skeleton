@@ -18,10 +18,9 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/patch-package](#webundsoehnepatch-package)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/patch-package](#webundsoehnepatch-package)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -29,11 +28,11 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 # Commands
 
 <!-- commands -->
-
-- [`ws-patch-package `](#ws-patch-package-)
-- [`ws-patch-package create`](#ws-patch-package-create)
-- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
-- [`ws-patch-package patch`](#ws-patch-package-patch)
+* [`ws-patch-package `](#ws-patch-package-)
+* [`ws-patch-package create`](#ws-patch-package-create)
+* [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+* [`ws-patch-package list`](#ws-patch-package-list)
+* [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
 
@@ -83,6 +82,20 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
+## `ws-patch-package list`
+
+Lists all the static entities that are shipped with this module.
+
+```
+USAGE
+  $ ws-patch-package list
+
+ALIASES
+  $ ws-patch-package ls
+```
+
+_See code: [dist/commands/list.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/list.js)_
+
 ## `ws-patch-package patch`
 
 Patches or reserves given patches in a directory.
@@ -106,5 +119,4 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
-
 <!-- commandsstop -->
