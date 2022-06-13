@@ -1,3 +1,10 @@
+## @webundsoehne/ts-utility-types [2.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.0...@webundsoehne/ts-utility-types@2.2.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* update READMEs with current banner design ([8137441](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/81374413da1208ea66b3e86f89771dfbd966dfbb))
+
 # @webundsoehne/ts-utility-types [2.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.1.0...@webundsoehne/ts-utility-types@2.2.0) (2022-04-19)
 
 ### Bug Fixes
