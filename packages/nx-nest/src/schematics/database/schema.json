@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "@webundsoehne-private/nx-nest/backend-interfaces",
+  "title": "@webundsoehne-private/nx-nest/backend-interfaces",
+  "description": "Generate a common library for nestjs interfaces.",
+  "type": "object",
+  "properties": {
+    "linter": {
+      "description": "Linter for the application.",
+      "type": "string",
+      "enum": ["eslint", "none"],
+      "default": "eslint"
+    },
+
+    "skipFormat": {
+      "description": "Skip formatting after the initiation.",
+      "type": "boolean",
+      "aliases": ["skip-format"]
+    },
+
+    "silent": {
+      "description": "Run in silent mode.",
+      "type": "boolean"
+    },
+
+    "force": {
+      "description": "Do not prompt for overwrites.",
+      "type": "boolean"
+    },
+
+    "verbose": {
+      "description": "Set this to debug mode.",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}
