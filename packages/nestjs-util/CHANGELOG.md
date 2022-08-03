@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.5.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.3...@webundsoehne/nestjs-util@5.5.4) (2022-08-03)
+
+
+### Bug Fixes
+
+* update fetching of package name ([9bb13b3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9bb13b3e7ad880d83994fa70244fd30acc555d22)), closes [#26](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/26)
+
 ## @webundsoehne/nestjs-util [5.5.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.2...@webundsoehne/nestjs-util@5.5.3) (2022-06-09)
 
 
