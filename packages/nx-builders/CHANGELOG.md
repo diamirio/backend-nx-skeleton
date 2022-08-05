@@ -1,38 +1,43 @@
-## @webundsoehne/nx-builders [5.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.4...@webundsoehne/nx-builders@5.3.5) (2022-05-27)
-
+## @webundsoehne/nx-builders [5.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.5...@webundsoehne/nx-builders@5.3.6) (2022-06-13)
 
 ### Bug Fixes
 
-* add debug log to be sure ([47b783b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/47b783b0ea880d3d37d336aee02437b0cf15cc5b))
-* mutability issue ([ce2528c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ce2528c48d5f9f7b9357f25954b4d66ac691d65e))
+- update READMEs with current banner design ([8137441](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/81374413da1208ea66b3e86f89771dfbd966dfbb))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 5.3.2
+
+## @webundsoehne/nx-builders [5.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.4...@webundsoehne/nx-builders@5.3.5) (2022-05-27)
+
+### Bug Fixes
+
+- add debug log to be sure ([47b783b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/47b783b0ea880d3d37d336aee02437b0cf15cc5b))
+- mutability issue ([ce2528c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ce2528c48d5f9f7b9357f25954b4d66ac691d65e))
 
 ## @webundsoehne/nx-builders [5.3.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.3...@webundsoehne/nx-builders@5.3.4) (2022-05-27)
 
-
 ### Bug Fixes
 
-* try to fix issue with node scripts ([913f1b6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/913f1b65365602e45f60d81373de418c12e748d5))
+- try to fix issue with node scripts ([913f1b6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/913f1b65365602e45f60d81373de418c12e748d5))
 
 ## @webundsoehne/nx-builders [5.3.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.2...@webundsoehne/nx-builders@5.3.3) (2022-05-27)
 
-
 ### Bug Fixes
 
-* identification of node script and binary ([b6c8de4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b6c8de4fd13277d48275d5c39d3541bd9ab122d6))
+- identification of node script and binary ([b6c8de4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b6c8de4fd13277d48275d5c39d3541bd9ab122d6))
 
 ## @webundsoehne/nx-builders [5.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.1...@webundsoehne/nx-builders@5.3.2) (2022-05-27)
 
-
 ### Bug Fixes
 
-* issue with running node commands and naming scheme ([18bb821](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18bb8218e52885ac7a35831e06f3c4ee8ff25b6f))
+- issue with running node commands and naming scheme ([18bb821](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18bb8218e52885ac7a35831e06f3c4ee8ff25b6f))
 
 ## @webundsoehne/nx-builders [5.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.0...@webundsoehne/nx-builders@5.3.1) (2022-05-16)
 
-
 ### Bug Fixes
 
-* update nx-builders readme with assets ignore info ([923fe3f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/923fe3ff2e2f503bdb26631af84d4dd5671371d4))
+- update nx-builders readme with assets ignore info ([923fe3f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/923fe3ff2e2f503bdb26631af84d4dd5671371d4))
 
 # @webundsoehne/nx-builders [5.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.2.4...@webundsoehne/nx-builders@5.3.0) (2022-04-19)
 

@@ -1,58 +1,48 @@
-## @webundsoehne-private/nx-nest [4.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.4...@webundsoehne-private/nx-nest@4.3.5) (2022-05-27)
-
-
-
-
-
-### Dependencies
-
-* **@webundsoehne/nx-builders:** upgraded to 5.3.5
-
-## @webundsoehne-private/nx-nest [4.3.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.3...@webundsoehne-private/nx-nest@4.3.4) (2022-05-27)
-
-
-
-
-
-### Dependencies
-
-* **@webundsoehne/nx-builders:** upgraded to 5.3.4
-
-## @webundsoehne-private/nx-nest [4.3.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.2...@webundsoehne-private/nx-nest@4.3.3) (2022-05-27)
-
-
-
-
-
-### Dependencies
-
-* **@webundsoehne/nx-builders:** upgraded to 5.3.3
-
-## @webundsoehne-private/nx-nest [4.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.1...@webundsoehne-private/nx-nest@4.3.2) (2022-05-27)
-
+## @webundsoehne-private/nx-nest [4.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.5...@webundsoehne-private/nx-nest@4.3.6) (2022-06-13)
 
 ### Bug Fixes
 
-* issue with running node commands and naming scheme ([18bb821](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18bb8218e52885ac7a35831e06f3c4ee8ff25b6f))
-* revert back to old behaviour for running things with node ([49c0f08](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/49c0f083747462cfc3fd4ef9798cde5bf0b02a87))
-
-
-
-
+- update READMEs with current banner design ([8137441](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/81374413da1208ea66b3e86f89771dfbd966dfbb))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 5.3.2
+- **@webundsoehne/nx-builders:** upgraded to 5.3.6
+- **@webundsoehne/nx-tools:** upgraded to 5.3.2
+
+## @webundsoehne-private/nx-nest [4.3.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.4...@webundsoehne-private/nx-nest@4.3.5) (2022-05-27)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.3.5
+
+## @webundsoehne-private/nx-nest [4.3.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.3...@webundsoehne-private/nx-nest@4.3.4) (2022-05-27)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.3.4
+
+## @webundsoehne-private/nx-nest [4.3.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.2...@webundsoehne-private/nx-nest@4.3.3) (2022-05-27)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.3.3
+
+## @webundsoehne-private/nx-nest [4.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.1...@webundsoehne-private/nx-nest@4.3.2) (2022-05-27)
+
+### Bug Fixes
+
+- issue with running node commands and naming scheme ([18bb821](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18bb8218e52885ac7a35831e06f3c4ee8ff25b6f))
+- revert back to old behaviour for running things with node ([49c0f08](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/49c0f083747462cfc3fd4ef9798cde5bf0b02a87))
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 5.3.2
 
 ## @webundsoehne-private/nx-nest [4.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.3.0...@webundsoehne-private/nx-nest@4.3.1) (2022-05-16)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 5.3.1
+- **@webundsoehne/nx-builders:** upgraded to 5.3.1
 
 # @webundsoehne-private/nx-nest [4.3.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@4.2.8...@webundsoehne-private/nx-nest@4.3.0) (2022-04-19)
 

@@ -1,6 +1,9 @@
-[![Web&Söhne](https://webundsoehne.com/wp-content/uploads/2016/11/logo.png)](https://webundsoehne.com)
-
-Web & Söhne is Austrian's leading expert in programming and implementing complex and large web projects.
+<p align="center">
+  <a href="https://webundsoehne.com" target="blank">
+    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
+  </a>
+</p>
+Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
 
 ---
 
@@ -30,6 +33,7 @@ Web & Söhne is Austrian's leading expert in programming and implementing comple
 - [`ws-patch-package `](#ws-patch-package-)
 - [`ws-patch-package create`](#ws-patch-package-create)
 - [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+- [`ws-patch-package list`](#ws-patch-package-list)
 - [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
@@ -79,6 +83,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+
+## `ws-patch-package list`
+
+Lists all the static entities that are shipped with this module.
+
+```
+USAGE
+  $ ws-patch-package list
+
+ALIASES
+  $ ws-patch-package ls
+```
+
+_See code: [dist/commands/list.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/list.js)_
 
 ## `ws-patch-package patch`
 

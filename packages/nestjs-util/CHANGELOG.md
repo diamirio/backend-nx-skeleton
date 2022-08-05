@@ -1,38 +1,45 @@
-## @webundsoehne/nestjs-util [5.5.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.0...@webundsoehne/nestjs-util@5.5.1) (2022-06-02)
-
+## @webundsoehne/nestjs-util [5.5.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.2...@webundsoehne/nestjs-util@5.5.3) (2022-06-09)
 
 ### Bug Fixes
 
-* add global sentry exception filter to module export ([2893154](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/28931548c3e84c702ecd5fc1f0a38f9bedb68929))
+- remove ghost peer dependencies from nestjs-utils package ([9ec9f68](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9ec9f68739e6688366f6f5f9a47868caccbb630b))
+
+## @webundsoehne/nestjs-util [5.5.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.1...@webundsoehne/nestjs-util@5.5.2) (2022-06-07)
+
+### Bug Fixes
+
+- dynamically import sentry to avoid package missing error on optional usage ([b4bd048](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b4bd048daeeccff17b662225b4d40bf7b8b8e5f4))
+
+## @webundsoehne/nestjs-util [5.5.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.0...@webundsoehne/nestjs-util@5.5.1) (2022-06-02)
+
+### Bug Fixes
+
+- add global sentry exception filter to module export ([2893154](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/28931548c3e84c702ecd5fc1f0a38f9bedb68929))
 
 # @webundsoehne/nestjs-util [5.5.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.3...@webundsoehne/nestjs-util@5.5.0) (2022-06-02)
 
-
 ### Features
 
-* global exception filter with additional sentry reporting ([b131068](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b131068c88bbb6fb445cf92a590d6c6b89c406de))
+- global exception filter with additional sentry reporting ([b131068](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b131068c88bbb6fb445cf92a590d6c6b89c406de))
 
 ## @webundsoehne/nestjs-util [5.4.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.2...@webundsoehne/nestjs-util@5.4.3) (2022-05-03)
 
-
 ### Bug Fixes
 
-* provide further fallbacks to be really sure env vars are set ([f5786ee](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f5786eecc9afe8be78b6778dd8fb4f163b809cfe))
-* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
+- provide further fallbacks to be really sure env vars are set ([f5786ee](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f5786eecc9afe8be78b6778dd8fb4f163b809cfe))
+- set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
 
 ## @webundsoehne/nestjs-util [5.4.3-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.3-beta.1...@webundsoehne/nestjs-util@5.4.3-beta.2) (2022-05-02)
 
-
 ### Bug Fixes
 
-* provide further fallbacks to be really sure env vars are set ([f5786ee](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f5786eecc9afe8be78b6778dd8fb4f163b809cfe))
+- provide further fallbacks to be really sure env vars are set ([f5786ee](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f5786eecc9afe8be78b6778dd8fb4f163b809cfe))
 
 ## @webundsoehne/nestjs-util [5.4.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.2...@webundsoehne/nestjs-util@5.4.3-beta.1) (2022-05-02)
 
-
 ### Bug Fixes
 
-* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
+- set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
 
 ## @webundsoehne/nestjs-util [5.4.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.4.1...@webundsoehne/nestjs-util@5.4.2) (2022-04-19)
 

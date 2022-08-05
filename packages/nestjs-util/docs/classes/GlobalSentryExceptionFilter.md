@@ -24,6 +24,7 @@
 - [initialized](GlobalSentryExceptionFilter.md#initialized)
 - [logger](GlobalSentryExceptionFilter.md#logger)
 - [options](GlobalSentryExceptionFilter.md#options)
+- [sentry](GlobalSentryExceptionFilter.md#sentry)
 
 ### Methods
 
@@ -56,7 +57,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:15
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:12
 
-___
+---
 
 ### logger
 
@@ -70,15 +71,25 @@ ___
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:11
 
-___
+---
 
 ### options
 
-• `Private` `Optional` `Readonly` **options**: `Options`<`BaseTransportOptions`\>
+• `Private` `Optional` `Readonly` **options**: `any`
 
 #### Defined in
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:13
+
+---
+
+### sentry
+
+• `Private` **sentry**: `any`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:11
 
 ## Methods
 
@@ -88,10 +99,10 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:13
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `exception` | `Error` |
-| `host` | `ArgumentsHost` |
+| Name        | Type            |
+| :---------- | :-------------- |
+| `exception` | `Error`         |
+| `host`      | `ArgumentsHost` |
 
 #### Returns
 
@@ -107,9 +118,9 @@ ExceptionFilter.catch
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:50
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:68
 
-___
+---
 
 ### onApplicationShutdown
 
@@ -125,9 +136,9 @@ OnApplicationShutdown.onApplicationShutdown
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:74
+packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:92
 
-___
+---
 
 ### payload
 
@@ -135,8 +146,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name         | Type    |
+| :----------- | :------ |
 | `exception?` | `Error` |
 
 #### Returns
@@ -151,7 +162,7 @@ ___
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:47
 
-___
+---
 
 ### defaultPayload
 
@@ -159,8 +170,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name        | Type  |
+| :---------- | :---- |
 | `exception` | `any` |
 
 #### Returns
