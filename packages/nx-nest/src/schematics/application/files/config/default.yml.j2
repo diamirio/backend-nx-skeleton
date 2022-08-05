@@ -50,8 +50,8 @@ database:
   mock:
     database: db_mock
   directories:
-{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions %}
-    entity: ../../libs/{{ constants.BACKEND_INTERFACES_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
+{% if enum.extensions.EXTERNAL_BACKEND_DATABASE in extensions %}
+    entity: ../../libs/{{ constants.BACKEND_DATABASE_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
     migration: migrations
     seed: seeds
 {% else %}

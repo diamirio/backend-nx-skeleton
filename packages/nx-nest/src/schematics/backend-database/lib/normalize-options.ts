@@ -3,18 +3,18 @@ import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import type { NxNestProjectIntegration } from '@integration'
-import { readBackendInterfacesWorkspaceIntegration } from '@integration/backend-interfaces'
+import { readBackendDatabaseWorkspaceIntegration } from '@integration'
 import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
 import { uniqueArrayFilter } from '@webundsoehne/deep-merge'
 import {
+  ensureNxRootListrTask,
   isVerbose,
   normalizeNamePrompt,
   normalizePackageJsonNamePrompt,
   normalizePriorConfigurationPrompt,
   normalizeRootDirectoryPrompt,
   NxProjectTypes,
-  setSchemaDefaultsInContext,
-  ensureNxRootListrTask
+  setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
@@ -28,7 +28,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
               options,
               {
                 sourceRoot: 'src',
-                name: SchematicConstants.BACKEND_INTERFACES_PACKAGE,
+                name: SchematicConstants.BACKEND_DATABASE_PACKAGE,
                 constants: SchematicConstants,
                 dbAdapters: [],
                 enum: { dbAdapters: AvailableDBAdapters }
@@ -50,20 +50,20 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       ...normalizeRootDirectoryPrompt<NormalizedSchema>(host, NxProjectTypes.LIB),
 
       // check for prior configuration
-      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'backendInterfaces'),
+      ...normalizePriorConfigurationPrompt<NormalizedSchema, NxNestProjectIntegration>(host, 'backendDatabase'),
 
       // parse microservices for templates
       {
         title: 'Parsing all integrated backend applications...',
         task: (ctx, task): void => {
-          const backendInterfaces = readBackendInterfacesWorkspaceIntegration(host)
+          const backendDatabases = readBackendDatabaseWorkspaceIntegration(host)
 
-          ctx.dbAdapters = backendInterfaces.flatMap((m) => m.dbAdapters).filter(uniqueArrayFilter)
+          ctx.dbAdapters = backendDatabases.flatMap((m) => m.dbAdapters).filter(uniqueArrayFilter)
 
           if (ctx.dbAdapters.length > 0) {
             task.title = `DB Adapters used in the applications are: ${ctx.dbAdapters.join(', ')}`
 
-            task.output = `Applications with databases has been found: ${backendInterfaces.map((m) => `${m.name}:${m.dbAdapters}`).join(', ')}`
+            task.output = `Applications with databases has been found: ${backendDatabases.map((m) => `${m.name}:${m.dbAdapters}`).join(', ')}`
           } else {
             task.title = 'No applications with databases has been found.'
           }

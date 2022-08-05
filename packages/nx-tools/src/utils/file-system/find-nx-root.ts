@@ -9,7 +9,13 @@ const NX_ROOT_PATTERNS = ['nx.json', 'workspace.json', 'angular.json']
 export function findNxRoot (options?: { throw?: boolean }): string {
   options = { throw: true, ...options }
 
-  const root = findUpSync(NX_ROOT_PATTERNS, { cwd: process.cwd(), type: 'file' })
+  let root: string
+
+  if (process.env.NX_WORKSPACE_ROOT) {
+    root = process.env.NX_WORKSPACE_ROOT
+  } else {
+    root = findUpSync(NX_ROOT_PATTERNS, { cwd: process.cwd(), type: 'file' })
+  }
 
   if (!root && options.throw !== false) {
     throw new Error('Not an nx repository.')

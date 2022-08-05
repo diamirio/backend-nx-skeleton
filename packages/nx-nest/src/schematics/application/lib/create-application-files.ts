@@ -91,6 +91,12 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             rule: addSchematicTaskRule<BackendInterfacesSchema>('backend-interfaces', {})
           },
 
+          // backend-database is extension selected
+          {
+            condition: options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
+            rule: addSchematicTaskRule<BackendInterfacesSchema>('backend-database', {})
+          },
+
           // microservice-provider if microservice-server is defined
           {
             condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
@@ -102,7 +108,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition:
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
               options.dbAdapters === AvailableDBAdapters.TYPEORM &&
-              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
@@ -115,7 +121,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition:
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.MONGOOSE &&
               options.dbAdapters === AvailableDBAdapters.MONGOOSE &&
-              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
@@ -169,11 +175,11 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       ...[
         {
           match: AvailableDBAdapters.TYPEORM,
-          condition: options.dbAdapters === AvailableDBAdapters.TYPEORM && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+          condition: options.dbAdapters === AvailableDBAdapters.TYPEORM && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
         },
         {
           match: AvailableDBAdapters.MONGOOSE,
-          condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+          condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
         }
       ].map((a) => ({
         condition: a.condition,

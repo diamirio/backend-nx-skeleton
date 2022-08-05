@@ -42,6 +42,13 @@
       "schema": "./dist/schematics/backend-interfaces/schema.json",
       "aliases": ["bi"],
       "description": "Generate backend-interfaces based library."
+    },
+
+    "backend-database": {
+      "factory": "./dist/schematics/backend-database/main",
+      "schema": "./dist/schematics/backend-database/schema.json",
+      "aliases": ["bd"],
+      "description": "Generate backend-database based library."
     }
   }
 }

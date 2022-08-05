@@ -9,9 +9,6 @@ import { color, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefault
 
 /**
  * Normalize the options passed in through angular-schematics.
- * @param host
- * @param context
- * @param options
  */
 export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
@@ -115,8 +112,9 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
 
       // set workspacefile
       {
-        title: 'Setting workspace constants...',
         task: async (ctx, task): Promise<void> => {
+          task.title = 'Setting workspace constants...'
+
           const deps = await calculateDependencies(ctx)
 
           ctx.deps = deps.deps

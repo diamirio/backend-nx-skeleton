@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -42,9 +42,9 @@
     "rxjs": ">= 7 < 8"
   },
   "devDependencies": {
-    "@nestjs/common": "^8.4.6",
-    "@nestjs/core": "^8.4.6",
-    "@nestjs/graphql": "^10.0.15",
+    "@nestjs/common": "^9.0.8",
+    "@nestjs/core": "^9.0.8",
+    "@nestjs/graphql": "^10.0.21",
     "@webundsoehne/nestjs-util": "*",
     "graphql": "^16.5.0"
   },

@@ -1,6 +1,5 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
-import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
 import type { PromptOptionsMap } from 'listr2'
@@ -8,7 +7,7 @@ import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { color, findNxRoot, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -58,7 +57,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       // need package scope for imports and such
       {
         task: async (ctx): Promise<void> => {
-          const nxJsonPath = findUpSync('nx.json', { cwd: process.cwd(), type: 'file' })
+          const nxJsonPath = join(findNxRoot(), 'nx.json')
 
           logger.debug(`nx.json path found: ${nxJsonPath}`)
 

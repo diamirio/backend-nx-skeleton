@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -49,19 +49,19 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/gateway": "^2.0.4",
-    "@nestjs/graphql": "^10.0.15",
-    "@types/jest": "^28.1.1",
+    "@apollo/gateway": "^2.0.5",
+    "@nestjs/graphql": "^10.0.21",
+    "@types/jest": "^28.1.6",
     "@types/lodash": "^4.14.182",
     "@types/uuid": "^8.3.4",
-    "apollo-server-fastify": "^3.8.2",
+    "apollo-server-fastify": "^3.10.0",
     "class-validator": "^0.13.2",
     "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
-    "mikro-orm": "^5.1.5",
+    "mikro-orm": "^5.3.1",
     "rimraf": "^3.0.2",
-    "sqlite3": "^5.0.8",
-    "typeorm": "^0.3.6"
+    "sqlite3": "^5.0.11",
+    "typeorm": "^0.3.7"
   },
   "engines": {
     "node": ">= 16"

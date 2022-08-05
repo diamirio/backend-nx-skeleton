@@ -14,7 +14,7 @@
   "schematics": "./schematics.json",
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
@@ -35,9 +35,9 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.0.0",
-    "@angular-devkit/schematics": "^14.0.0",
-    "@nestjs/schematics": "^8.0.11",
+    "@angular-devkit/core": "^14.1.1",
+    "@angular-devkit/schematics": "^14.1.1",
+    "@nestjs/schematics": "^9.0.1",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",

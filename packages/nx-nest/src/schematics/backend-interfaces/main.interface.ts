@@ -18,6 +18,5 @@ export interface NormalizedSchema extends Schema, BaseNormalizedSchema, SchemaPr
 /**
  * This properties are shared across the input, normalized and saved configurations.
  */
-interface CommonPropertiesToSaveAndUse {
-  dbAdapters?: AvailableDBAdapters[]
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface CommonPropertiesToSaveAndUse {}

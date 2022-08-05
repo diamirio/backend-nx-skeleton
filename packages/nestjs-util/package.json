@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -51,11 +51,7 @@
     "class-transformer": ">= 0.4.0",
     "class-validator": ">= 0.13.0",
     "express": ">= 4 < 5",
-    "fastify": ">= 3",
-    "class-transformer": ">= 0.4.0",
-    "class-validator": ">= 0.13.0",
-    "fastify": ">= 3",
-    "@sentry/node": ">= 7 < 8"
+    "fastify": ">= 3"
   },
   "peerDependenciesMeta": {
     "fastify": {
@@ -66,17 +62,16 @@
     }
   },
   "devDependencies": {
-    "@nestjs/common": "^8.4.6",
-    "@nestjs/core": "^8.4.6",
-    "@sentry/node": "^7.0.0",
-    "@types/config": "^0.0.41",
+    "@nestjs/common": "^9.0.8",
+    "@nestjs/core": "^9.0.8",
+    "@sentry/node": "^7.8.1",
+    "@types/config": "^3.3.0",
     "@types/express": "^4.17.3",
     "@types/winston": "^2.4.4",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "express": "^4.18.1",
-    "fastify": "^3.29.0",
-    "@sentry/node": "^7.0.0"
+    "fastify": "^4.3.0"
   },
   "engines": {
     "node": ">= 16"

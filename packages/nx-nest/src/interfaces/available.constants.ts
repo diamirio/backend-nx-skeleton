@@ -59,12 +59,16 @@ export enum AvailableMicroserviceTypes {
  * Available extensions to further customize the application.
  */
 export enum AvailableExtensions {
-  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces'
+  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces',
+  EXTERNAL_BACKEND_DATABASE = 'external-backend-database'
 }
 
 export const AvailableExtensionsMap: ExtensionsMap<typeof AvailableExtensions, ApplicationNormalizedSchema> = {
   [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: {
     condition: true
+  },
+  [AvailableExtensions.EXTERNAL_BACKEND_DATABASE]: {
+    condition: (options) => !!options.dbAdapters
   }
 }
 
@@ -100,6 +104,7 @@ AvailableComponents | AvailableServerTypes | AvailableServerAdapters | Available
   [AvailableDBTypes.MONGOOSE_MONGODB]: 'MongoDB with Mongoose',
   [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ',
   [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library',
+  [AvailableExtensions.EXTERNAL_BACKEND_DATABASE]: 'Use external backend database library',
   [AvailableServerAdapters.EXPRESS]: 'express.js',
   [AvailableServerAdapters.FASTIFY]: 'fastify',
   ...PrettyNamesDefault

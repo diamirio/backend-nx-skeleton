@@ -1,13 +1,13 @@
 import type { Tree } from '@angular-devkit/schematics'
 
-import type { BackendInterfacesWorkspaceIntegration } from './backend-interfaces.interface'
+import type { BackendDatabaseWorkspaceIntegration } from './backend-database.interface'
 import type { NxNestProjectIntegration } from './integration.interface'
 import { readWorkspaceProjects } from '@webundsoehne/nx-tools'
 
 /**
  * Reads the backend interface integration part of the nx.json.
  */
-export function readBackendInterfacesWorkspaceIntegration (host: Tree): BackendInterfacesWorkspaceIntegration[] {
+export function readBackendDatabaseWorkspaceIntegration (host: Tree): BackendDatabaseWorkspaceIntegration[] {
   const projects = readWorkspaceProjects<NxNestProjectIntegration>(host)
 
   return Object.entries(projects).reduce((o, [key, value]) => {

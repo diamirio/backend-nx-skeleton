@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsup-node",
     "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -40,11 +40,11 @@
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1400.0",
-    "@angular-devkit/core": "^14.0.0",
-    "@angular-devkit/schematics": "^14.0.0",
-    "@nrwl/cli": "^14.1.9",
-    "@nrwl/devkit": "^14.1.9",
+    "@angular-devkit/architect": "^0.1401.1",
+    "@angular-devkit/core": "^14.1.1",
+    "@angular-devkit/schematics": "^14.1.1",
+    "@nrwl/cli": "^14.5.4",
+    "@nrwl/devkit": "^14.5.4",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-tools": "*",
     "delay": "^5.0.0",
