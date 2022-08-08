@@ -96,7 +96,9 @@ export class PackageManager {
         latest: typeof action.package !== 'string' && action.package.latest
       }
 
-      const pkg = action.useLatest ? `${typeof action.package === 'string' ? action.package : action.package.pkg}@${currentPkg.latest ?? 'latest'}` : currentPkg.pkg
+      const install = typeof action.package === 'string' ? action.package : action.package.pkg
+      const latest = currentPkg.latest ?? 'latest'
+      const pkg = action.useLatest ? `${install}@${latest}` : currentPkg.pkg
 
       argumentParser.push({ condition: true, args: pkg })
 
