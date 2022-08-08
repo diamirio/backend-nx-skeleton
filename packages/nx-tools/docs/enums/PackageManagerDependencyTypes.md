@@ -4,16 +4,16 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [DEVELOPMENT](PackageManagerDependencyTypes.md#development)
 - [PRODUCTION](PackageManagerDependencyTypes.md#production)
 
-## Enumeration members
+## Enumeration Members
 
 ### DEVELOPMENT
 
-• **DEVELOPMENT** = `"development"`
+• **DEVELOPMENT** = ``"development"``
 
 #### Defined in
 
@@ -23,7 +23,7 @@ ___
 
 ### PRODUCTION
 
-• **PRODUCTION** = `"production"`
+• **PRODUCTION** = ``"production"``
 
 #### Defined in
 

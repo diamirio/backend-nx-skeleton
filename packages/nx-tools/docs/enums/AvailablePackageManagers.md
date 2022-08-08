@@ -4,16 +4,16 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [NPM](AvailablePackageManagers.md#npm)
 - [YARN](AvailablePackageManagers.md#yarn)
 
-## Enumeration members
+## Enumeration Members
 
 ### NPM
 
-• **NPM** = `"npm"`
+• **NPM** = ``"npm"``
 
 #### Defined in
 
@@ -23,7 +23,7 @@ ___
 
 ### YARN
 
-• **YARN** = `"yarn"`
+• **YARN** = ``"yarn"``
 
 #### Defined in
 

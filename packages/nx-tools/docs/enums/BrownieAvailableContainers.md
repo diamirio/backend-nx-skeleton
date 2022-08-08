@@ -7,7 +7,7 @@ It is here instead of brownie since it is an integration thingy as well as avoid
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [MONGODB](BrownieAvailableContainers.md#mongodb)
 - [MYSQL](BrownieAvailableContainers.md#mysql)
@@ -15,11 +15,11 @@ It is here instead of brownie since it is an integration thingy as well as avoid
 - [POSTGRESQL](BrownieAvailableContainers.md#postgresql)
 - [RABBITMQ](BrownieAvailableContainers.md#rabbitmq)
 
-## Enumeration members
+## Enumeration Members
 
 ### MONGODB
 
-• **MONGODB** = `"db-mongodb"`
+• **MONGODB** = ``"db-mongodb"``
 
 #### Defined in
 
@@ -29,7 +29,7 @@ ___
 
 ### MYSQL
 
-• **MYSQL** = `"db-mysql"`
+• **MYSQL** = ``"db-mysql"``
 
 #### Defined in
 
@@ -39,7 +39,7 @@ ___
 
 ### NX
 
-• **NX** = `"nx"`
+• **NX** = ``"nx"``
 
 #### Defined in
 
@@ -49,7 +49,7 @@ ___
 
 ### POSTGRESQL
 
-• **POSTGRESQL** = `"db-postgresql"`
+• **POSTGRESQL** = ``"db-postgresql"``
 
 #### Defined in
 
@@ -59,7 +59,7 @@ ___
 
 ### RABBITMQ
 
-• **RABBITMQ** = `"rabbitmq"`
+• **RABBITMQ** = ``"rabbitmq"``
 
 #### Defined in
 

@@ -6,11 +6,11 @@ Base builder for extending from.
 
 ## Type parameters
 
-| Name                        | Type                                                                            |
-| :-------------------------- | :------------------------------------------------------------------------------ |
-| `ExecutorOptions`           | extends `Record`<`PropertyKey`, `any`\>                                         |
-| `NormalizedExecutorOptions` | extends `Record`<`PropertyKey`, `any`\>                                         |
-| `ProcessPaths`              | extends `Record`<`PropertyKey`, `string`\> = `Record`<`PropertyKey`, `string`\> |
+| Name | Type |
+| :------ | :------ |
+| `ExecutorOptions` | extends `Record`<`PropertyKey`, `any`\> |
+| `NormalizedExecutorOptions` | extends `Record`<`PropertyKey`, `any`\> |
+| `ProcessPaths` | extends `Record`<`PropertyKey`, `string`\> = `Record`<`PropertyKey`, `string`\> |
 
 ## Table of contents
 
@@ -45,18 +45,18 @@ Base builder for extending from.
 
 #### Type parameters
 
-| Name                        | Type                                                                            |
-| :-------------------------- | :------------------------------------------------------------------------------ |
-| `ExecutorOptions`           | extends `Record`<`PropertyKey`, `any`\>                                         |
-| `NormalizedExecutorOptions` | extends `Record`<`PropertyKey`, `any`\>                                         |
-| `ProcessPaths`              | extends `Record`<`PropertyKey`, `string`\> = `Record`<`PropertyKey`, `string`\> |
+| Name | Type |
+| :------ | :------ |
+| `ExecutorOptions` | extends `Record`<`PropertyKey`, `any`\> |
+| `NormalizedExecutorOptions` | extends `Record`<`PropertyKey`, `any`\> |
+| `ProcessPaths` | extends `Record`<`PropertyKey`, `string`\> = `Record`<`PropertyKey`, `string`\> |
 
 #### Parameters
 
-| Name             | Type              |
-| :--------------- | :---------------- |
+| Name | Type |
+| :------ | :------ |
 | `builderOptions` | `ExecutorOptions` |
-| `context`        | `ExecutorContext` |
+| `context` | `ExecutorContext` |
 
 #### Defined in
 
@@ -68,13 +68,21 @@ packages/nx-tools/src/utils/builders/base-executor.ts:26
 
 • **builderOptions**: `ExecutorOptions`
 
----
+#### Defined in
+
+packages/nx-tools/src/utils/builders/base-executor.ts:26
+
+___
 
 ### context
 
 • **context**: `ExecutorContext`
 
----
+#### Defined in
+
+packages/nx-tools/src/utils/builders/base-executor.ts:26
+
+___
 
 ### logger
 
@@ -84,7 +92,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:26
 
 packages/nx-tools/src/utils/builders/base-executor.ts:17
 
----
+___
 
 ### manager
 
@@ -94,7 +102,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:17
 
 packages/nx-tools/src/utils/builders/base-executor.ts:23
 
----
+___
 
 ### options
 
@@ -104,7 +112,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:23
 
 packages/nx-tools/src/utils/builders/base-executor.ts:21
 
----
+___
 
 ### paths
 
@@ -114,7 +122,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:21
 
 packages/nx-tools/src/utils/builders/base-executor.ts:22
 
----
+___
 
 ### project
 
@@ -124,7 +132,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:22
 
 packages/nx-tools/src/utils/builders/base-executor.ts:24
 
----
+___
 
 ### projectDependencies
 
@@ -134,7 +142,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:24
 
 packages/nx-tools/src/utils/builders/base-executor.ts:20
 
----
+___
 
 ### projectGraph
 
@@ -144,7 +152,7 @@ packages/nx-tools/src/utils/builders/base-executor.ts:20
 
 packages/nx-tools/src/utils/builders/base-executor.ts:18
 
----
+___
 
 ### projectTarget
 
@@ -170,7 +178,7 @@ Initiate the builder first.
 
 packages/nx-tools/src/utils/builders/base-executor.ts:53
 
----
+___
 
 ### normalizeOptions
 
@@ -180,8 +188,8 @@ Normalize the incoming options
 
 #### Parameters
 
-| Name      | Type              |
-| :-------- | :---------------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | `ExecutorOptions` |
 
 #### Returns
@@ -192,7 +200,7 @@ Normalize the incoming options
 
 packages/nx-tools/src/utils/builders/base-executor.ts:66
 
----
+___
 
 ### run
 

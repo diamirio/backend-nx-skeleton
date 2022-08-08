@@ -4,16 +4,16 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [DEBUG\_MODE](ProcessToken.md#debug_mode)
 - [DEVELOPMENT\_MODE](ProcessToken.md#development_mode)
 
-## Enumeration members
+## Enumeration Members
 
 ### DEBUG\_MODE
 
-• **DEBUG\_MODE** = `"NG_DEBUG"`
+• **DEBUG\_MODE** = ``"NG_DEBUG"``
 
 #### Defined in
 
@@ -23,7 +23,7 @@ ___
 
 ### DEVELOPMENT\_MODE
 
-• **DEVELOPMENT\_MODE** = `"NG_DEVELOP"`
+• **DEVELOPMENT\_MODE** = ``"NG_DEVELOP"``
 
 #### Defined in
 
