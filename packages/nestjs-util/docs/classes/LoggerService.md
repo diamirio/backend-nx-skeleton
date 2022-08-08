@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/provider/logger/logger.service.ts:82
+packages/nestjs-util/src/provider/logger/logger.service.ts:81
 
 ___
 
