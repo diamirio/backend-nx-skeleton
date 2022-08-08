@@ -117,8 +117,6 @@ Injects maintenance service instance initiated to the service.
 
 ▸ (`target`, `key`, `index?`): `void`
 
-Injects maintenance service instance initiated to the service.
-
 ##### Parameters
 
 | Name | Type |

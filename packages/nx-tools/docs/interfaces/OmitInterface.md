@@ -13,9 +13,6 @@
 ### Properties
 
 - [condition](OmitInterface.md#condition)
-
-### Methods
-
 - [match](OmitInterface.md#match)
 
 ## Properties
@@ -32,19 +29,23 @@ BaseWithCondition.condition
 
 packages/nx-tools/src/rules/create-application.rule.interface.ts:80
 
-## Methods
+___
 
 ### match
 
-▸ **match**(`file`): `boolean`
+• **match**: (`file`: `Path`) => `boolean`
 
-#### Parameters
+#### Type declaration
+
+▸ (`file`): `boolean`
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `file` | `Path` |
 
-#### Returns
+##### Returns
 
 `boolean`
 

@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [ArrayElement](README.md#arrayelement)
 - [Await](README.md#await)
@@ -15,7 +15,7 @@
 - [ValueOf](README.md#valueof)
 - [Writeable](README.md#writeable)
 
-## Type aliases
+## Type Aliases
 
 ### ArrayElement
 

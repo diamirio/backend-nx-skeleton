@@ -1,3 +1,41 @@
+# @webundsoehne/nx-tools [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@5.3.2...@webundsoehne/nx-tools@6.0.0-beta.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* always use legacy peer deps ([24add32](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/24add325df308b2862a3a55442b48018e2c0ed9f))
+* **nx-nest:** microservice generation, regenarating components that are not needed ([80e3957](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80e39573fa30b561f7235ad23fbaf533aa1a69dd))
+* **workspace:** overwriting user configuration while generating project ([c2ba52f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c2ba52f994e9e8b1294e6868da5a8ab3298a7d47))
+
+
+### Performance Improvements
+
+* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
+
+
+### BREAKING CHANGES
+
+* this is not compatible with older versions of the nx-nest generator
+
+- express/fastify is now selectable when selecting a server
+- moved database stuff to backend-database from backend-interface
+- extend generator to accept injecting arguments
+- use the migration module for mongodb
+- ditch typeorm-seeding for generic seeder
+- add relevant command for seeding to nestjs itself due to dependency injection
+* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
+nx.json
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
+
 ## @webundsoehne/nx-tools [5.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@5.3.1...@webundsoehne/nx-tools@5.3.2) (2022-06-13)
 
 ### Bug Fixes

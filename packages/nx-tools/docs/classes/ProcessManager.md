@@ -36,7 +36,7 @@ You can add long-living and short-living process to keep track of processes spaw
 
 | Name | Type |
 | :------ | :------ |
-| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+| `context` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
 
 #### Defined in
 

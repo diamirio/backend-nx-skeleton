@@ -14,11 +14,8 @@
 
 - [condition](Task.md#condition)
 - [dependsOn](Task.md#dependson)
-- [token](Task.md#token)
-
-### Methods
-
 - [fn](Task.md#fn)
+- [token](Task.md#token)
 
 ## Properties
 
@@ -42,21 +39,15 @@ packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:9
 
 ___
 
-### token
-
-• **token**: `ValueOf`<`T`\>
-
-#### Defined in
-
-packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:7
-
-## Methods
-
 ### fn
 
-▸ **fn**(`host`, `context`, `dependencies`): `TaskId`
+• **fn**: (`host`: `Tree`, `context`: `SchematicContext`, `dependencies`: `TaskId`[]) => `TaskId`
 
-#### Parameters
+#### Type declaration
+
+▸ (`host`, `context`, `dependencies`): `TaskId`
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
@@ -64,10 +55,20 @@ packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:7
 | `context` | `SchematicContext` |
 | `dependencies` | `TaskId`[] |
 
-#### Returns
+##### Returns
 
 `TaskId`
 
 #### Defined in
 
 packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:8
+
+___
+
+### token
+
+• **token**: `ValueOf`<`T`\>
+
+#### Defined in
+
+packages/nx-tools/src/tasks/manage-multiple-tasks.interface.ts:7

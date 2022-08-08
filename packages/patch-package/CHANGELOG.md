@@ -1,3 +1,15 @@
+## @webundsoehne/patch-package [3.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.1...@webundsoehne/patch-package@3.3.2-beta.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+
+
+### Performance Improvements
+
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+
 ## @webundsoehne/patch-package [3.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.0...@webundsoehne/patch-package@3.3.1) (2022-06-13)
 
 ### Bug Fixes

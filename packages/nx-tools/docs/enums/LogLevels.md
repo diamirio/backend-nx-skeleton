@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [DEBUG](LogLevels.md#debug)
 - [ERROR](LogLevels.md#error)
@@ -12,11 +12,11 @@
 - [INFO](LogLevels.md#info)
 - [WARN](LogLevels.md#warn)
 
-## Enumeration members
+## Enumeration Members
 
 ### DEBUG
 
-• **DEBUG** = `"debug"`
+• **DEBUG** = ``"debug"``
 
 #### Defined in
 
@@ -26,7 +26,7 @@ ___
 
 ### ERROR
 
-• **ERROR** = `"error"`
+• **ERROR** = ``"error"``
 
 #### Defined in
 
@@ -36,7 +36,7 @@ ___
 
 ### FATAL
 
-• **FATAL** = `"fatal"`
+• **FATAL** = ``"fatal"``
 
 #### Defined in
 
@@ -46,7 +46,7 @@ ___
 
 ### INFO
 
-• **INFO** = `"info"`
+• **INFO** = ``"info"``
 
 #### Defined in
 
@@ -56,7 +56,7 @@ ___
 
 ### WARN
 
-• **WARN** = `"warn"`
+• **WARN** = ``"warn"``
 
 #### Defined in
 

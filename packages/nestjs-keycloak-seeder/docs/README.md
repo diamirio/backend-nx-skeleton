@@ -45,8 +45,6 @@ Injects Keyclaok admin instance initiated to the service.
 
 ▸ (`target`, `key`, `index?`): `void`
 
-Injects Keyclaok admin instance initiated to the service.
-
 ##### Parameters
 
 | Name | Type |

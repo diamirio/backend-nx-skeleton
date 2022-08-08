@@ -373,7 +373,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `Record`<`string`, `any`\> |
+| `value` | `any` |
 
 #### Returns
 

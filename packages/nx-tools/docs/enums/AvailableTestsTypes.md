@@ -6,16 +6,16 @@ Available test configurations.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [JEST](AvailableTestsTypes.md#jest)
 - [NONE](AvailableTestsTypes.md#none)
 
-## Enumeration members
+## Enumeration Members
 
 ### JEST
 
-• **JEST** = `"jest"`
+• **JEST** = ``"jest"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### NONE
 
-• **NONE** = `"none"`
+• **NONE** = ``"none"``
 
 #### Defined in
 

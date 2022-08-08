@@ -2,13 +2,14 @@
 
 # Interface: EnrichedNxConfiguration<T\>
 
-nx.json interface expanded before, although nx has changed configuration now, that removes this need we may need in future, so instead of importing NxJson from nx we can still use ours.
+nx.json interface expanded before, although nx has changed configuration now, that removes this need
+we may need in future, so instead of importing NxJson from nx we can still use ours.
 
 ## Type parameters
 
-| Name | Type                                                                                               |
-| :--- | :------------------------------------------------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\> = [`BaseNxJsonIntegration`](../README.md#basenxjsonintegration) |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\> = [`BaseNxJsonIntegration`](../README.md#basenxjsonintegration) |
 
 ## Hierarchy
 
@@ -27,9 +28,11 @@ nx.json interface expanded before, although nx has changed configuration now, th
 - [generators](EnrichedNxConfiguration.md#generators)
 - [implicitDependencies](EnrichedNxConfiguration.md#implicitdependencies)
 - [integration](EnrichedNxConfiguration.md#integration)
+- [namedInputs](EnrichedNxConfiguration.md#namedinputs)
 - [npmScope](EnrichedNxConfiguration.md#npmscope)
 - [plugins](EnrichedNxConfiguration.md#plugins)
 - [pluginsConfig](EnrichedNxConfiguration.md#pluginsconfig)
+- [targetDefaults](EnrichedNxConfiguration.md#targetdefaults)
 - [targetDependencies](EnrichedNxConfiguration.md#targetdependencies)
 - [tasksRunnerOptions](EnrichedNxConfiguration.md#tasksrunneroptions)
 - [workspaceLayout](EnrichedNxConfiguration.md#workspacelayout)
@@ -48,9 +51,9 @@ NxJsonConfiguration.affected
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:38
+node_modules/nx/src/config/nx-json.d.ts:55
 
----
+___
 
 ### cli
 
@@ -60,11 +63,11 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name                  | Type             |
-| :-------------------- | :--------------- |
-| `defaultCollection?`  | `string`         |
-| `defaultProjectName?` | `string`         |
-| `packageManager?`     | `PackageManager` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `defaultCollection?` | `string` | **`Deprecated`**  - defaultCollection is deprecated and will be removed |
+| `defaultProjectName?` | `string` | - |
+| `packageManager?` | `PackageManager` | - |
 
 #### Inherited from
 
@@ -72,15 +75,16 @@ NxJsonConfiguration.cli
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:86
+node_modules/nx/src/config/nx-json.d.ts:103
 
----
+___
 
 ### defaultProject
 
 • `Optional` **defaultProject**: `string`
 
-Default project. When project isn't provided, the default project will be used. Convenient for small workspaces with one main application.
+Default project. When project isn't provided, the default project
+will be used. Convenient for small workspaces with one main application.
 
 #### Inherited from
 
@@ -88,9 +92,9 @@ NxJsonConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:103
+node_modules/nx/src/config/nx-json.d.ts:123
 
----
+___
 
 ### extends
 
@@ -104,9 +108,9 @@ NxJsonConfiguration.extends
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:22
+node_modules/nx/src/config/nx-json.d.ts:28
 
----
+___
 
 ### generators
 
@@ -130,7 +134,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`;  }
 
 #### Inherited from
 
@@ -138,13 +142,13 @@ NxJsonConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:78
+node_modules/nx/src/config/nx-json.d.ts:95
 
----
+___
 
 ### implicitDependencies
 
-• `Optional` **implicitDependencies**: `ImplicitDependencyEntry`<`string`[] \| `"*"`\>
+• `Optional` **implicitDependencies**: `ImplicitDependencyEntry`<`string`[] \| ``"*"``\>
 
 Map of files to projects that implicitly depend on them
 
@@ -154,9 +158,9 @@ NxJsonConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:26
+node_modules/nx/src/config/nx-json.d.ts:32
 
----
+___
 
 ### integration
 
@@ -166,11 +170,31 @@ node_modules/nx/src/config/nx-json.d.ts:26
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:24
 
----
+___
+
+### namedInputs
+
+• `Optional` **namedInputs**: `Object`
+
+Named inputs targets can refer to reduce duplication
+
+#### Index signature
+
+▪ [inputName: `string`]: (`string` \| `InputDefinition`)[]
+
+#### Inherited from
+
+NxJsonConfiguration.namedInputs
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:41
+
+___
 
 ### npmScope
 
-• **npmScope**: `string`
+• `Optional` **npmScope**: `string`
 
 NPM Scope that the workspace uses
 
@@ -180,9 +204,9 @@ NxJsonConfiguration.npmScope
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:34
+node_modules/nx/src/config/nx-json.d.ts:51
 
----
+___
 
 ### plugins
 
@@ -196,9 +220,9 @@ NxJsonConfiguration.plugins
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:94
+node_modules/nx/src/config/nx-json.d.ts:114
 
----
+___
 
 ### pluginsConfig
 
@@ -212,14 +236,33 @@ NxJsonConfiguration.pluginsConfig
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:98
+node_modules/nx/src/config/nx-json.d.ts:118
 
----
+___
+
+### targetDefaults
+
+• `Optional` **targetDefaults**: `TargetDefaults`
+
+Dependencies between different target names across all projects
+
+#### Inherited from
+
+NxJsonConfiguration.targetDefaults
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:47
+
+___
 
 ### targetDependencies
 
-• `Optional` **targetDependencies**: `Record`<`string`, `TargetDependencyConfig`[]\>
+• `Optional` **targetDependencies**: `TargetDependencies`
 
+**`Deprecated`**
+
+use targetDefaults instead
 Dependencies between different target names across all projects
 
 #### Inherited from
@@ -228,9 +271,9 @@ NxJsonConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:30
+node_modules/nx/src/config/nx-json.d.ts:37
 
----
+___
 
 ### tasksRunnerOptions
 
@@ -240,7 +283,7 @@ Available Task Runners
 
 #### Index signature
 
-▪ [tasksRunnerName: `string`]: { `options?`: `any` ; `runner`: `string` }
+▪ [tasksRunnerName: `string`]: { `options?`: `any` ; `runner`: `string`  }
 
 #### Inherited from
 
@@ -248,9 +291,9 @@ NxJsonConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:49
+node_modules/nx/src/config/nx-json.d.ts:66
 
----
+___
 
 ### workspaceLayout
 
@@ -260,8 +303,8 @@ Where new apps + libs should be placed
 
 #### Type declaration
 
-| Name      | Type     |
-| :-------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `appsDir` | `string` |
 | `libsDir` | `string` |
 
@@ -271,4 +314,4 @@ NxJsonConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:42
+node_modules/nx/src/config/nx-json.d.ts:59

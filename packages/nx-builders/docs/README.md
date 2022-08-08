@@ -16,7 +16,7 @@
 - [TsNodeBuilderOptions](interfaces/TsNodeBuilderOptions.md)
 - [TscBuilderOptions](interfaces/TscBuilderOptions.md)
 
-### Type aliases
+### Type Aliases
 
 - [NormalizedExecuteBuilderOptions](README.md#normalizedexecutebuilderoptions)
 - [NormalizedRunBuilderOptions](README.md#normalizedrunbuilderoptions)
@@ -28,7 +28,7 @@
 
 - [initiateBuilderDependencies](README.md#initiatebuilderdependencies)
 
-## Type aliases
+## Type Aliases
 
 ### NormalizedExecuteBuilderOptions
 

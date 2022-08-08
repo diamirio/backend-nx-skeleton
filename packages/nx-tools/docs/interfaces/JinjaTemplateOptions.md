@@ -27,7 +27,7 @@ ___
 
 • **templates**: `string`[]
 
-Set of extensions to designate as jinja tempaltes
+Set of extensions to designate as jinja templates
 
 #### Defined in
 

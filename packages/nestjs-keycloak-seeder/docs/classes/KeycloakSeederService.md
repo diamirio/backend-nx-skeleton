@@ -43,6 +43,10 @@ module/keycloak-seeder.service.ts:16
 
 • `Protected` `Readonly` **keycloak**: [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md)
 
+#### Defined in
+
+module/keycloak-seeder.service.ts:16
+
 ___
 
 ### logger
@@ -58,6 +62,10 @@ ___
 ### seeds
 
 • `Protected` `Readonly` **seeds**: `KeycloakSeeds`
+
+#### Defined in
+
+module/keycloak-seeder.service.ts:16
 
 ## Methods
 

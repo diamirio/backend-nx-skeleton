@@ -57,7 +57,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:15
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:12
 
----
+___
 
 ### logger
 
@@ -71,7 +71,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:12
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:11
 
----
+___
 
 ### options
 
@@ -81,7 +81,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:11
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:13
 
----
+___
 
 ### sentry
 
@@ -99,10 +99,10 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:11
 
 #### Parameters
 
-| Name        | Type            |
-| :---------- | :-------------- |
-| `exception` | `Error`         |
-| `host`      | `ArgumentsHost` |
+| Name | Type |
+| :------ | :------ |
+| `exception` | `Error` |
+| `host` | `ArgumentsHost` |
 
 #### Returns
 
@@ -120,7 +120,7 @@ ExceptionFilter.catch
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:68
 
----
+___
 
 ### onApplicationShutdown
 
@@ -138,7 +138,7 @@ OnApplicationShutdown.onApplicationShutdown
 
 packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:92
 
----
+___
 
 ### payload
 
@@ -146,8 +146,8 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:92
 
 #### Parameters
 
-| Name         | Type    |
-| :----------- | :------ |
+| Name | Type |
+| :------ | :------ |
 | `exception?` | `Error` |
 
 #### Returns
@@ -162,7 +162,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:92
 
 packages/nestjs-util/src/filter/global-exception.filter.ts:47
 
----
+___
 
 ### defaultPayload
 
@@ -170,8 +170,8 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:47
 
 #### Parameters
 
-| Name        | Type  |
-| :---------- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `exception` | `any` |
 
 #### Returns

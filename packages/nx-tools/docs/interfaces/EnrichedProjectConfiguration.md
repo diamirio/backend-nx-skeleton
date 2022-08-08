@@ -6,9 +6,9 @@ Per application settings in workspace.json
 
 ## Type parameters
 
-| Name | Type                                                                                   |
-| :--- | :------------------------------------------------------------------------------------- |
-| `T`  | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Record`<`string`, `any`\> = [`BaseIntegration`](../README.md#baseintegration) |
 
 ## Hierarchy
 
@@ -24,6 +24,7 @@ Per application settings in workspace.json
 - [implicitDependencies](EnrichedProjectConfiguration.md#implicitdependencies)
 - [integration](EnrichedProjectConfiguration.md#integration)
 - [name](EnrichedProjectConfiguration.md#name)
+- [namedInputs](EnrichedProjectConfiguration.md#namedinputs)
 - [projectType](EnrichedProjectConfiguration.md#projecttype)
 - [root](EnrichedProjectConfiguration.md#root)
 - [sourceRoot](EnrichedProjectConfiguration.md#sourceroot)
@@ -54,7 +55,7 @@ Example:
 
 #### Index signature
 
-▪ [collectionName: `string`]: { `[generatorName: string]`: `any`; }
+▪ [collectionName: `string`]: { `[generatorName: string]`: `any`;  }
 
 #### Inherited from
 
@@ -62,9 +63,9 @@ ProjectConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:72
+node_modules/nx/src/config/workspace-json-project-json.d.ts:76
 
----
+___
 
 ### implicitDependencies
 
@@ -78,9 +79,9 @@ ProjectConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:80
+node_modules/nx/src/config/workspace-json-project-json.d.ts:84
 
----
+___
 
 ### integration
 
@@ -90,7 +91,7 @@ node_modules/nx/src/config/workspace-json-project-json.d.ts:80
 
 packages/nx-tools/src/interfaces/nx-json.interface.ts:16
 
----
+___
 
 ### name
 
@@ -104,9 +105,29 @@ ProjectConfiguration.name
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:36
+node_modules/nx/src/config/workspace-json-project-json.d.ts:40
 
----
+___
+
+### namedInputs
+
+• `Optional` **namedInputs**: `Object`
+
+Named inputs targets can refer to reduce duplication
+
+#### Index signature
+
+▪ [inputName: `string`]: (`string` \| `InputDefinition`)[]
+
+#### Inherited from
+
+ProjectConfiguration.namedInputs
+
+#### Defined in
+
+node_modules/nx/src/config/workspace-json-project-json.d.ts:88
+
+___
 
 ### projectType
 
@@ -120,9 +141,9 @@ ProjectConfiguration.projectType
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:54
+node_modules/nx/src/config/workspace-json-project-json.d.ts:58
 
----
+___
 
 ### root
 
@@ -136,9 +157,9 @@ ProjectConfiguration.root
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:46
+node_modules/nx/src/config/workspace-json-project-json.d.ts:50
 
----
+___
 
 ### sourceRoot
 
@@ -152,9 +173,9 @@ ProjectConfiguration.sourceRoot
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:50
+node_modules/nx/src/config/workspace-json-project-json.d.ts:54
 
----
+___
 
 ### tags
 
@@ -168,9 +189,9 @@ ProjectConfiguration.tags
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:84
+node_modules/nx/src/config/workspace-json-project-json.d.ts:94
 
----
+___
 
 ### targets
 
@@ -188,4 +209,4 @@ ProjectConfiguration.targets
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:40
+node_modules/nx/src/config/workspace-json-project-json.d.ts:44

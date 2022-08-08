@@ -4,7 +4,8 @@
 
 [index](../modules/index.md).KeycloakAdminModule
 
-KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any modification the Keycloak itself.
+KeycloakAdminModule provides the Keycloak client to whole application, where you can perform any
+modification the Keycloak itself.
 
 ## Table of contents
 
@@ -30,8 +31,8 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 #### Parameters
 
-| Name      | Type                                                                  |
-| :-------- | :-------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | [`KeycloakAdminOptions`](../interfaces/index.KeycloakAdminOptions.md) |
 
 #### Returns
@@ -40,4 +41,4 @@ KeycloakAdminModule provides the Keycloak client to whole application, where you
 
 #### Defined in
 
-admin/admin.module.ts:15
+packages/nestjs-keycloak/src/admin/admin.module.ts:15
