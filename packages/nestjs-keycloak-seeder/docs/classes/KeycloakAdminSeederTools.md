@@ -132,7 +132,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
+| `T` | extends ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
 | `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
@@ -166,7 +166,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
+| `T` | extends ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
 | `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
@@ -198,7 +198,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `K` | extends `PropertyKey` |
-| `T` | extends ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` = ``"groups"`` \| ``"roles"`` \| ``"clients"`` \| ``"realms"`` |
+| `T` | extends ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` = ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
 
 #### Parameters
 
