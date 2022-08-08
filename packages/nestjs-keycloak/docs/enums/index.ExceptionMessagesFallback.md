@@ -6,7 +6,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [default](index.ExceptionMessagesFallback.md#default)
 - [rolesMissing](index.ExceptionMessagesFallback.md#rolesmissing)
@@ -15,62 +15,62 @@
 - [scopesUnauthorized](index.ExceptionMessagesFallback.md#scopesunauthorized)
 - [tokenMissing](index.ExceptionMessagesFallback.md#tokenmissing)
 
-## Enumeration members
+## Enumeration Members
 
 ### default
 
-• **default** = `"Error while authentication request."`
+• **default** = ``"Error while authentication request."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:54
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:54
 
----
+___
 
 ### rolesMissing
 
-• **rolesMissing** = `"You currently have no roles assigned."`
+• **rolesMissing** = ``"You currently have no roles assigned."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:50
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:50
 
----
+___
 
 ### rolesUnauthorized
 
-• **rolesUnauthorized** = `"You don't have right roles."`
+• **rolesUnauthorized** = ``"You don't have right roles."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:51
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:51
 
----
+___
 
 ### scopesMissing
 
-• **scopesMissing** = `"You currently have no scopes assigned."`
+• **scopesMissing** = ``"You currently have no scopes assigned."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:52
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:52
 
----
+___
 
 ### scopesUnauthorized
 
-• **scopesUnauthorized** = `"You don't have right scopes."`
+• **scopesUnauthorized** = ``"You don't have right scopes."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:53
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:53
 
----
+___
 
 ### tokenMissing
 
-• **tokenMissing** = `"Please provide a valid bearer token."`
+• **tokenMissing** = ``"Please provide a valid bearer token."``
 
 #### Defined in
 
-connect/connect.interfaces.ts:49
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:49

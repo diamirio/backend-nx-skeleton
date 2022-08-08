@@ -21,14 +21,12 @@
 
 ▸ **GetToken**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
-
-**`alias`** {GetToken,Token}
+Defines HTTP route param decorator
 
 #### Parameters
 
-| Name             | Type                                                                          |
-| :--------------- | :---------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -37,22 +35,20 @@ Fetch the current user access token from the request. This only works for GraphQ
 
 #### Defined in
 
-connect/decorators/token-graphql.decorator.ts:12
+node_modules/@nestjs/common/decorators/http/create-route-param-metadata.decorator.d.ts:10
 
----
+___
 
 ### GetUser
 
 ▸ **GetUser**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
-
-**`alias`** {GetUser,User}
+Defines HTTP route param decorator
 
 #### Parameters
 
-| Name             | Type                                                                                      |
-| :--------------- | :---------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -61,24 +57,20 @@ Inject the current Keycloak user to a variable. This only works for GraphQL appl
 
 #### Defined in
 
-connect/decorators/user-graphql.decorator.ts:12
+node_modules/@nestjs/common/decorators/http/create-route-param-metadata.decorator.d.ts:10
 
----
+___
 
 ### Token
 
 ▸ **Token**(...`dataOrPipes`): `ParameterDecorator`
 
-Fetch the current user access token from the request. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
-
-**`alias`** {GetToken,Token}
-
-**`deprecated`** Use GetToken instead because of the more generic naming scheme.
+Defines HTTP route param decorator
 
 #### Parameters
 
-| Name             | Type                                                                          |
-| :--------------- | :---------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -87,24 +79,20 @@ Fetch the current user access token from the request. This only works for GraphQ
 
 #### Defined in
 
-connect/decorators/token-graphql.decorator.ts:24
+node_modules/@nestjs/common/decorators/http/create-route-param-metadata.decorator.d.ts:10
 
----
+___
 
 ### User
 
 ▸ **User**(...`dataOrPipes`): `ParameterDecorator`
 
-Inject the current Keycloak user to a variable. This only works for GraphQL applications, please check the alternative one if you require it for a REST API.
-
-**`alias`** {GetUser,User}
-
-**`deprecated`** Use GetUser instead because of the more generic naming scheme.
+Defines HTTP route param decorator
 
 #### Parameters
 
-| Name             | Type                                                                                      |
-| :--------------- | :---------------------------------------------------------------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `...dataOrPipes` | (`string` \| `PipeTransform`<`any`, `any`\> \| `Type`<`PipeTransform`<`any`, `any`\>\>)[] |
 
 #### Returns
@@ -113,4 +101,4 @@ Inject the current Keycloak user to a variable. This only works for GraphQL appl
 
 #### Defined in
 
-connect/decorators/user-graphql.decorator.ts:24
+node_modules/@nestjs/common/decorators/http/create-route-param-metadata.decorator.d.ts:10
