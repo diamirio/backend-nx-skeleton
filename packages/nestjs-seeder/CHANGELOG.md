@@ -1,3 +1,19 @@
+## @webundsoehne/nestjs-seeder [1.0.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@1.0.1...@webundsoehne/nestjs-seeder@1.0.2-beta.1) (2022-08-08)
+
+
+### Performance Improvements
+
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
+* **@webundsoehne/ts-utility-types:** upgraded to 2.2.2-beta.1
+
 ## @webundsoehne/nestjs-seeder [1.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@1.0.0...@webundsoehne/nestjs-seeder@1.0.1) (2022-06-13)
 
 ### Dependencies

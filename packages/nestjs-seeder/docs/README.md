@@ -42,8 +42,6 @@ Injects SeederService to the service.
 
 ▸ (`target`, `key`, `index?`): `void`
 
-Injects SeederService to the service.
-
 ##### Parameters
 
 | Name | Type |
