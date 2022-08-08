@@ -18,10 +18,9 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/patch-package](#webundsoehnepatch-package)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/patch-package](#webundsoehnepatch-package)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -29,12 +28,11 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 # Commands
 
 <!-- commands -->
-
-- [`ws-patch-package `](#ws-patch-package-)
-- [`ws-patch-package create`](#ws-patch-package-create)
-- [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
-- [`ws-patch-package list`](#ws-patch-package-list)
-- [`ws-patch-package patch`](#ws-patch-package-patch)
+* [`ws-patch-package `](#ws-patch-package-)
+* [`ws-patch-package create`](#ws-patch-package-create)
+* [`ws-patch-package help [COMMAND]`](#ws-patch-package-help-command)
+* [`ws-patch-package list`](#ws-patch-package-list)
+* [`ws-patch-package patch`](#ws-patch-package-patch)
 
 ## `ws-patch-package `
 
@@ -121,5 +119,4 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
-
 <!-- commandsstop -->
