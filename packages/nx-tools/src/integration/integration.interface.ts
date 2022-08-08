@@ -9,3 +9,9 @@ export type BaseIntegration<T extends Record<string, unknown> | null = null> = T
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type BaseNxJsonIntegration<T extends Record<string, unknown> | null = null> = T extends null ? {} : Partial<T>
+
+export interface ProjectIntegration {
+  name: string
+  root: string
+  sourceRoot: string
+}

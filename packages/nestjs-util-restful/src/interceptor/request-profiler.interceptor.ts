@@ -21,8 +21,8 @@ export class RequestProfilerInterceptor implements NestInterceptor {
     const httpContext = context.switchToHttp()
     const request: Request = httpContext.getRequest()
 
-    const url = request.raw.url || ''
-    const method = String(request.raw.method || '').toUpperCase()
+    const url = request.url ?? request.raw.url ?? ''
+    const method = String(request.method ?? request.raw.method ?? '').toUpperCase()
 
     this.logger.log(`${method} ${url} starting`)
 

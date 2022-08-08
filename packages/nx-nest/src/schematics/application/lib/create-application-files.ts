@@ -5,6 +5,7 @@ import { join } from 'path'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import type { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableGenerators, AvailableServerTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@interfaces/constants'
 import type { Schema as BackendInterfacesSchema } from '@schematics/backend-interfaces/main.interface'
 import { ComponentLocationsMap } from '@schematics/component/interfaces/file.constants'
 import type { Schema as ComponentSchema } from '@schematics/component/main.interface'
@@ -130,16 +131,39 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             })
           },
 
+          // migration scheduled task for bgtasks
           {
-            condition:
-              options.components.includes(AvailableComponents.BG_TASK) &&
-              options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
-              options.dbAdapters === AvailableDBAdapters.TYPEORM,
+            condition: options.components.includes(AvailableComponents.BG_TASK) && [AvailableDBAdapters.TYPEORM, AvailableDBAdapters.MONGOOSE].includes(options.dbAdapters),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'migration',
-              type: AvailableGenerators.TYPEORM_MIGRATION_TASK_MODULE,
+              type: AvailableGenerators.MIGRATION_TASK_MODULE,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableComponents.BG_TASK], SchematicFilesMap.MODULES),
-              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }]
+              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }],
+              inject: {
+                constants: SchematicConstants,
+                dbAdapters: options.dbAdapters,
+                enum: {
+                  dbAdapters: AvailableDBAdapters
+                }
+              }
+            })
+          },
+
+          // seed command for bgtasks
+          {
+            condition:
+              options.components.includes(AvailableComponents.COMMAND) &&
+              options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE) &&
+              !options.priorConfiguration?.dbAdapters &&
+              !!options.dbAdapters,
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
+              name: 'seed',
+              type: AvailableGenerators.BACKEND_DATABASE_SEED_COMMAND,
+              directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableComponents.COMMAND], SchematicFilesMap.MODULES),
+              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }],
+              inject: {
+                constants: SchematicConstants
+              }
             })
           }
         ]

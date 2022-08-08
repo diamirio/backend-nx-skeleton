@@ -1,5 +1,5 @@
 import { VERSIONS } from './versions.constants'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerAdapters, AvailableServerTypes } from '@interfaces/available.constants'
 import type { NormalizedSchema } from '@schematics/application/main.interface'
 import type { PackageVersions } from '@webundsoehne/nx-tools'
 import { dependencyCalculator, AvailableTestsTypes } from '@webundsoehne/nx-tools'
@@ -25,7 +25,15 @@ export async function calculateDependencies (options: NormalizedSchema): Promise
       condition: options.tests === AvailableTestsTypes.JEST,
       deps: VERSIONS[AvailableTestsTypes.JEST]
     },
-    // api interfaces
+    // api
+    {
+      condition: options.components.includes(AvailableComponents.SERVER) && options.serverAdapter === AvailableServerAdapters.EXPRESS,
+      deps: VERSIONS[AvailableServerAdapters.EXPRESS]
+    },
+    {
+      condition: options.components.includes(AvailableComponents.SERVER) && options.serverAdapter === AvailableServerAdapters.FASTIFY,
+      deps: VERSIONS[AvailableServerAdapters.FASTIFY]
+    },
     {
       condition: options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.RESTFUL,
       deps: VERSIONS[AvailableServerTypes.RESTFUL]
@@ -33,6 +41,16 @@ export async function calculateDependencies (options: NormalizedSchema): Promise
     {
       condition: options.components.includes(AvailableComponents.SERVER) && options.server === AvailableServerTypes.GRAPHQL,
       deps: VERSIONS[AvailableServerTypes.GRAPHQL]
+    },
+    {
+      condition:
+        options.components.includes(AvailableComponents.SERVER) && options.serverAdapter === AvailableServerAdapters.EXPRESS && options.server === AvailableServerTypes.GRAPHQL,
+      deps: VERSIONS[`${AvailableServerAdapters.EXPRESS}_${AvailableServerTypes.GRAPHQL}`]
+    },
+    {
+      condition:
+        options.components.includes(AvailableComponents.SERVER) && options.serverAdapter === AvailableServerAdapters.FASTIFY && options.server === AvailableServerTypes.GRAPHQL,
+      deps: VERSIONS[`${AvailableServerAdapters.FASTIFY}_${AvailableServerTypes.GRAPHQL}`]
     },
     // microservices
     {

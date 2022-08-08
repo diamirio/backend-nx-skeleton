@@ -15,5 +15,9 @@ export function getDatabaseOptions (mock?: boolean): [string, MongooseModuleOpti
     mongoOptions.pass = password
   }
 
+  if (mongoOptions.migration) {
+    delete mongoOptions.migration
+  }
+
   return [uri, mongoOptions]
 }

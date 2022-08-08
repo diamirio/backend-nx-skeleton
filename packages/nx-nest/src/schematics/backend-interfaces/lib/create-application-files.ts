@@ -4,13 +4,17 @@ import { apply, chain, url } from '@angular-devkit/schematics'
 import type { NormalizedSchema } from '../main.interface'
 import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
 import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
-import { applyOverwriteWithDiff, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
+import { runInRule, applyOverwriteWithDiff, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
 export function createApplicationFiles (options: NormalizedSchema): Rule {
   return (_host: Tree, context: SchematicContext): Rule => {
     const log = new Logger(context)
     // source is always the same
     const source = url('./files')
+
+    if (options?.priorConfiguration) {
+      return chain([runInRule(log.warn.bind(log)('Library has already been generated before therefore skipping: %s@%s', options.name, options.root))])
+    }
 
     return chain([
       applyOverwriteWithDiff(

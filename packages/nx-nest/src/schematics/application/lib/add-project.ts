@@ -189,16 +189,21 @@ export function addProject (options: NormalizedSchema): Rule {
           }
         }
       }
+    }
 
+    if (options.components.includes(AvailableComponents.COMMAND) && options.dbAdapters && options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)) {
       targets.seed = {
         executor: '@webundsoehne/nx-builders:run',
         options: {
           cwd: options.root,
-          command: `typeorm-seeding --configName=${join(configurationBasePath, 'orm.config.ts')} seed`,
+          command: './src/main.ts seed',
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,
-          environment: {}
+          interactive: true,
+          environment: {
+            NODE_SERVICE: 'cli'
+          }
         }
       }
     }

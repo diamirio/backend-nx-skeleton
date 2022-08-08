@@ -82,7 +82,8 @@ export enum AvailableGenerators {
   MONGOOSE_ENTITY_TIMESTAMPS = 'mongoose-entity-timestamps',
   TYPEORM_ENTITY = 'typeorm-entity',
   TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary',
-  TYPEORM_MIGRATION_TASK_MODULE = 'typeorm-migration-task-module'
+  MIGRATION_TASK_MODULE = 'migration-task-module',
+  BACKEND_DATABASE_SEED_COMMAND = 'backend-database-seed-command'
 }
 
 /**

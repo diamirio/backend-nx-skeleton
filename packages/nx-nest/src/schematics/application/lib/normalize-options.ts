@@ -12,6 +12,7 @@ import {
   AvailableExtensions,
   AvailableExtensionsMap,
   AvailableMicroserviceTypes,
+  AvailableServerAdapters,
   AvailableServerTypes,
   PrettyNamesForAvailableThingies
 } from '@interfaces/available.constants'
@@ -61,7 +62,8 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
                   tests: AvailableTestsTypes,
                   microservice: AvailableMicroserviceTypes,
                   dbAdapters: AvailableDBAdapters,
-                  extensions: AvailableExtensions
+                  extensions: AvailableExtensions,
+                  serverAdapter: AvailableServerAdapters
                 }
               },
               {
@@ -113,6 +115,27 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
           ctx.effectiveComponents = ctx.components.includes(AvailableComponents.MICROSERVICE_CLIENT) ? ctx.components.length - 1 : ctx.components.length
 
           task.title = `Server components selected: ${ctx.components}`
+        },
+        options: {
+          bottomBar: Infinity,
+          persistentOutput: true
+        }
+      },
+
+      // backend server adapters
+      {
+        skip: (ctx): boolean => !ctx.components.includes(AvailableComponents.SERVER) && !ctx?.serverAdapter,
+        task: async (ctx, task): Promise<void> => {
+          const choices = mapPromptChoices<AvailableServerAdapters>(AvailableServerAdapters, PrettyNamesForAvailableThingies)
+
+          ctx.serverAdapter = await task.prompt<AvailableServerAdapters>({
+            type: 'Select',
+            message: 'Please select the API adapter type.',
+            choices,
+            initial: getInitialFromPriorConfiguration<NormalizedSchema, AvailableServerAdapters>(ctx, 'serverAdapter', choices)
+          })
+
+          task.title = `Server adapter selected as: ${ctx.serverAdapter}`
         },
         options: {
           bottomBar: Infinity,
@@ -277,8 +300,13 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
             ctx.packageJsonScripts.start = `node ./${ctx.root}/${ctx.sourceRoot}/main.js`
           }
 
-          if ([AvailableComponents.COMMAND].some((component) => ctx.components.includes(component))) {
+          if (ctx.components.includes(AvailableComponents.COMMAND)) {
             ctx.packageJsonScripts.command = `NODE_SERVICE='cli' node ./${ctx.root}/${ctx.sourceRoot}/main.js`
+          }
+
+          // add seed command for prod
+          if (ctx.components.includes(AvailableComponents.COMMAND) && ctx.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE) && !!ctx.dbAdapters) {
+            ctx.packageJsonScripts.command = 'npm run command seed'
           }
         }
       }

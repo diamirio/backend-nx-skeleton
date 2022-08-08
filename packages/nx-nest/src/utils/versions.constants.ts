@@ -1,5 +1,5 @@
 import type { Versions } from './versions.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerAdapters, AvailableServerTypes } from '@interfaces/available.constants'
 import { AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 export const VERSIONS: Versions = {
@@ -27,21 +27,39 @@ export const VERSIONS: Versions = {
       }
     }
   },
-  [AvailableServerTypes.RESTFUL]: {
+  [AvailableServerAdapters.EXPRESS]: {
+    deps: {
+      ['@nestjs/platform-express']: '^9',
+      ['swagger-ui-express']: { version: '^4', implicit: true }
+    }
+  },
+  [AvailableServerAdapters.FASTIFY]: {
     deps: {
       ['@nestjs/platform-fastify']: '^9',
       ['@fastify/swagger']: { version: '^7', implicit: true },
-      ['@fastify/static']: { version: '^6', implicit: true },
+      ['@fastify/static']: { version: '^6', implicit: true }
+    }
+  },
+  [AvailableServerTypes.RESTFUL]: {
+    deps: {
       ['@nestjs/swagger']: '^6',
       ['@webundsoehne/nestjs-util-restful']: '^1'
+    }
+  },
+  [`${AvailableServerAdapters.EXPRESS}_${AvailableServerTypes.GRAPHQL}`]: {
+    deps: {
+      ['apollo-server-express']: { version: '^3', implicit: true }
+    }
+  },
+  [`${AvailableServerAdapters.FASTIFY}_${AvailableServerTypes.GRAPHQL}`]: {
+    deps: {
+      ['apollo-server-fastify']: { version: '^3', implicit: true }
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
       ['@nestjs/graphql']: '^10',
       ['@nestjs/apollo']: '^10',
-      ['@nestjs/platform-fastify']: '^9',
-      ['apollo-server-fastify']: { version: '^3.10.0', implicit: true },
       graphql: { version: '^16.5.0', implicit: true },
       ['graphql-tools']: { version: '^8', implicit: true },
       ['@webundsoehne/nestjs-util-graphql']: '^1'
@@ -52,7 +70,7 @@ export const VERSIONS: Versions = {
       ['@nestjs/schedule']: '^2'
     },
     devDeps: {
-      ['@types/cron']: '^3'
+      ['@types/cron']: '^2'
     }
   },
   [AvailableComponents.COMMAND]: {
@@ -86,13 +104,14 @@ export const VERSIONS: Versions = {
     deps: {
       ['@nestjs/typeorm']: '^9',
       typeorm: { version: '^0.3.7', implicit: true },
-      ['typeorm-seeding']: { version: '^1.6.1', implicit: true }
+      ['@webundsoehne/nestjs-seeder']: '^1'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       ['@nestjs/mongoose']: '^9',
-      mongoose: { version: '^6.5.1', implicit: true }
+      mongoose: { version: '^6.5.1', implicit: true },
+      ['@webundsoehne/nestjs-seeder']: '^1'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {

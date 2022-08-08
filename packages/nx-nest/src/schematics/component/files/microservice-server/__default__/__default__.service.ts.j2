@@ -3,7 +3,7 @@ import { MessageQueues, MicroserviceRequest, MicroserviceResponse, {{ casing.inj
 
 @Injectable()
 export class {{ casing.pascal }}Microservice {
-  private logger: Logger = new Logger(this.constructor.name)
+  private readonly logger: Logger = new Logger(this.constructor.name)
 
   constructor() {}
 

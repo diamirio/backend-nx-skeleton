@@ -7,7 +7,7 @@ import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { color, findNxRoot, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { color, findNxRoot, generateNameCases, isVerbose, Logger, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -33,15 +33,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       },
 
       // prompt for generator component name
-      {
-        skip: (ctx): boolean => !!ctx.name,
-        task: async (ctx, task): Promise<void> => {
-          ctx.name = await task.prompt({
-            type: 'Input',
-            message: 'Please give a name to the soon to be generated component.'
-          })
-        }
-      },
+      ...normalizeNamePrompt(),
 
       // parse component name and convert casings to use in template
       {
@@ -65,8 +57,12 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
             const nxJson = await fs.readJSON(nxJsonPath)
 
             ctx.packageScope = `${nxJson.npmScope}`
+
+            logger.debug('Package scope set: %s', ctx.packageScope)
             // eslint-disable-next-line no-empty
-          } catch {}
+          } catch {
+            logger.debug('Package scope can not be set!')
+          }
         }
       },
 
@@ -129,7 +125,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       // get and process prompts
       {
         title: 'Extra prompts to extend the templates.',
-        skip: (ctx): boolean => !fs.existsSync(join(files, ctx.type, 'prompts.json')),
+        skip: (ctx): boolean => !fs.existsSync(join(files, ctx.type, 'prompts.json')) || !!ctx.inject,
         task: async (ctx, task): Promise<void> => {
           task.title = 'Prompts file is found, now have some extra questions to inject to templates.'
 

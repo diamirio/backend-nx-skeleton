@@ -3,7 +3,7 @@ import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import type { NxNestProjectIntegration } from '@integration'
-import { AvailableDBAdapters, SchematicConstants } from '@interfaces'
+import { SchematicConstants } from '@interfaces'
 import {
   ensureNxRootListrTask,
   isVerbose,
@@ -27,8 +27,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
               {
                 sourceRoot: 'src',
                 name: SchematicConstants.BACKEND_INTERFACES_PACKAGE,
-                constants: SchematicConstants,
-                enum: { dbAdapters: AvailableDBAdapters }
+                constants: SchematicConstants
               }
             ]
           })

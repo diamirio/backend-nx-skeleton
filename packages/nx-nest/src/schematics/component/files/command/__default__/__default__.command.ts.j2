@@ -7,8 +7,12 @@ import { Command, CommandRunner, Option } from 'nest-commander'
  */
 
 @Command({ name: '{{ casing.kebab }}', description: 'Command to {{ casing.pascal }}.' })
-export class {{ casing.pascal }}Command implements CommandRunner {
-  private logger: Logger = new Logger(this.constructor.name)
+export class {{ casing.pascal }}Command extends CommandRunner {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  constructor () {
+    super()
+  }
 
   async run(
     parameters: string[],

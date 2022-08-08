@@ -1,5 +1,4 @@
 import type { SchematicConstants } from '@interfaces'
-import type { AvailableDBAdapters } from '@interfaces/available.constants'
 import type { BaseNormalizedSchema, BaseSchema, SchemaPriorConfiguration } from '@webundsoehne/nx-tools'
 
 /**
@@ -12,7 +11,6 @@ export interface Schema extends BaseSchema, CommonPropertiesToSaveAndUse {}
  */
 export interface NormalizedSchema extends Schema, BaseNormalizedSchema, SchemaPriorConfiguration<CommonPropertiesToSaveAndUse> {
   constants: typeof SchematicConstants
-  enum: { dbAdapters: typeof AvailableDBAdapters }
 }
 
 /**

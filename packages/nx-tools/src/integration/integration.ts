@@ -33,7 +33,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
   }
 
   if (project) {
-    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(project, { integration }) : deepMergeWithUniqueMergeArray(project, { integration })
+    updated = options?.arrayOverwrite === false ? deepMergeWithUniqueMergeArray(project, { integration }) : deepMergeWithArrayOverwrite(project, { integration })
   }
 
   updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)

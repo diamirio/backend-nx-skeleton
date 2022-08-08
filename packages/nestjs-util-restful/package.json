@@ -70,7 +70,7 @@
     "@types/fs-extra": "^9.0.13",
     "@webundsoehne/nestjs-util": "*",
     "express": "^4.18.1",
-    "fastify": "^4.3.0",
+    "fastify": "^4.4.0",
     "fastify-swagger": "^5.2.0",
     "swagger-ui-express": "^4.5.0"
   },
