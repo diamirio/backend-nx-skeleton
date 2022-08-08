@@ -17,7 +17,7 @@
 - [MicroserviceProviderModuleOptions](interfaces/MicroserviceProviderModuleOptions.md)
 - [MicroserviceProviderServiceOptions](interfaces/MicroserviceProviderServiceOptions.md)
 
-### Type aliases
+### Type Aliases
 
 - [BaseMessageQueueMap](README.md#basemessagequeuemap)
 - [BaseMessageQueuePatterns](README.md#basemessagequeuepatterns)
@@ -33,7 +33,7 @@
 - [InjectMSP](README.md#injectmsp)
 - [provideMessageQueueClient](README.md#providemessagequeueclient)
 
-## Type aliases
+## Type Aliases
 
 ### BaseMessageQueueMap
 
@@ -174,8 +174,6 @@ Injects microservice provider service instance initiated to the service.
 
 ▸ (`target`, `key`, `index?`): `void`
 
-Injects microservice provider service instance initiated to the service.
-
 ##### Parameters
 
 | Name | Type |
@@ -203,22 +201,24 @@ Currently only supports RabbitMQ, but can be made generic later on.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `queue` | `string` \| `string`[] |
-| `options?` | `Object` |
-| `options.deserializer?` | `Deserializer`<`any`, `any`\> |
-| `options.headers?` | `Record`<`string`, `string`\> |
-| `options.isGlobalPrefetchCount?` | `boolean` |
-| `options.noAck?` | `boolean` |
-| `options.persistent?` | `boolean` |
-| `options.prefetchCount?` | `number` |
-| `options.queue?` | `string` |
-| `options.queueOptions?` | `any` |
-| `options.replyQueue?` | `string` |
-| `options.serializer?` | `Serializer`<`any`, `any`\> |
-| `options.socketOptions?` | `any` |
-| `options.urls?` | `string`[] \| `RmqUrl`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `queue` | `string` \| `string`[] |  |
+| `options?` | `Object` | - |
+| `options.deserializer?` | `Deserializer`<`any`, `any`\> | - |
+| `options.headers?` | `Record`<`string`, `string`\> | - |
+| `options.isGlobalPrefetchCount?` | `boolean` | - |
+| `options.maxConnectionAttempts?` | `number` | Maximum number of connection attempts. Applies only to the consumer configuration. -1 === infinite  **`Default`**  -1 |
+| `options.noAck?` | `boolean` | - |
+| `options.noAssert?` | `boolean` | - |
+| `options.persistent?` | `boolean` | - |
+| `options.prefetchCount?` | `number` | - |
+| `options.queue?` | `string` | - |
+| `options.queueOptions?` | `any` | - |
+| `options.replyQueue?` | `string` | - |
+| `options.serializer?` | `Serializer`<`any`, `any`\> | - |
+| `options.socketOptions?` | `any` | - |
+| `options.urls?` | `string`[] \| `RmqUrl`[] | - |
 
 #### Returns
 
