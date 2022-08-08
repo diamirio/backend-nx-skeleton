@@ -6,15 +6,15 @@ Available microservice types after selecting microservice-server as component.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [RMQ](AvailableMicroserviceTypes.md#rmq)
 
-## Enumeration members
+## Enumeration Members
 
 ### RMQ
 
-• **RMQ** = `"rmq"`
+• **RMQ** = ``"rmq"``
 
 #### Defined in
 

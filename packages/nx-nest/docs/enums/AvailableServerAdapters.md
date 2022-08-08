@@ -6,16 +6,16 @@ If server component is selected, these are the options to use as an adapter.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [EXPRESS](AvailableServerAdapters.md#express)
 - [FASTIFY](AvailableServerAdapters.md#fastify)
 
-## Enumeration members
+## Enumeration Members
 
 ### EXPRESS
 
-• **EXPRESS** = `"express"`
+• **EXPRESS** = ``"express"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### FASTIFY
 
-• **FASTIFY** = `"fastify"`
+• **FASTIFY** = ``"fastify"``
 
 #### Defined in
 

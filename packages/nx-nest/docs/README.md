@@ -37,7 +37,7 @@
 
 #### Defined in
 
-interfaces/available.constants.ts:65
+interfaces/available.constants.ts:66
 
 ___
 
@@ -49,7 +49,7 @@ Prettified names for components to use with prompts and such.
 
 #### Defined in
 
-interfaces/available.constants.ts:87
+interfaces/available.constants.ts:92
 
 ## Functions
 
