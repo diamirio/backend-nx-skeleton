@@ -1,3 +1,10 @@
+# @webundsoehne/nx-tools [6.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.0-beta.1...@webundsoehne/nx-tools@6.0.0-beta.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* refactor installing ([05d8d9f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/05d8d9f7bbad91117f0cf5e0107cb21e46916b4e))
+
 # @webundsoehne/nx-tools [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@5.3.2...@webundsoehne/nx-tools@6.0.0-beta.1) (2022-08-08)
 
 
