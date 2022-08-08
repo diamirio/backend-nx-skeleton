@@ -70,7 +70,7 @@ interceptor/cache-lifetime.interceptor.ts:14
 
 #### Defined in
 
-interceptor/cache-lifetime.interceptor.ts:21
+interceptor/cache-lifetime.interceptor.ts:20
 
 ___
 
