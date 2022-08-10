@@ -3,7 +3,7 @@ import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
 import type { ExecaChildProcess } from 'execa'
 import execa from 'execa'
-import { pathExistsSync } from 'fs-extra'
+import { statSync, pathExistsSync } from 'fs-extra'
 import { join } from 'path'
 
 import type { NormalizedRunBuilderOptions, RunBuilderOptions } from './main.interface'
@@ -42,7 +42,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
 
       let instance: ExecaChildProcess
 
-      if (this.builderOptions.executeWithNode) {
+      if (this.builderOptions.node && this.builderOptions.executeWithNode) {
         // node script inside the repo should be run with node
         instance = this.manager.addPersistent(execa.node(this.paths.command, this.options.args, this.options.spawnOptions))
       } else {
@@ -119,7 +119,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     this.paths.command = command
 
     if (ctx.node) {
-      if (pathExistsSync(join(ctx.cwd, command))) {
+      if (pathExistsSync(join(ctx.cwd, command)) && statSync(join(ctx.cwd, command)).isFile()) {
         // the case where file name is given and it exists
         this.logger.debug(`Command marked as node.js script: ${command}`)
 
