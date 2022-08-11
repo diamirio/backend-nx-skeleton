@@ -9,7 +9,7 @@ export const VERSIONS: Versions = {
         ['@nestjs/common']: '^9',
         ['@nestjs/core']: '^9',
         rxjs: { version: '^7', implicit: true },
-        ['@webundsoehne/nestjs-util']: '^5',
+        ['@webundsoehne/nestjs-util']: '^6',
         ['class-transformer']: { version: '^0.5.1', implicit: true },
         ['class-validator']: { version: '^0.13.2', implicit: true },
         ['reflect-metadata']: { version: '^0.1.13', implicit: true }
@@ -18,12 +18,12 @@ export const VERSIONS: Versions = {
     microservice: {
       deps: {
         ['@nestjs/microservices']: '^9',
-        ['@webundsoehne/nestjs-util-microservices']: '^1'
+        ['@webundsoehne/nestjs-util-microservices']: '^2'
       }
     },
     builder: {
       devDeps: {
-        ['@webundsoehne/nx-builders']: '^6.0.0'
+        ['@webundsoehne/nx-builders']: '^6'
       }
     }
   },
@@ -43,7 +43,7 @@ export const VERSIONS: Versions = {
   [AvailableServerTypes.RESTFUL]: {
     deps: {
       ['@nestjs/swagger']: '^6',
-      ['@webundsoehne/nestjs-util-restful']: '^1'
+      ['@webundsoehne/nestjs-util-restful']: '^2'
     }
   },
   [`${AvailableServerAdapters.EXPRESS}_${AvailableServerTypes.GRAPHQL}`]: {
