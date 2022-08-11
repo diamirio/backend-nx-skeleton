@@ -1,35 +1,41 @@
+<<<<<<< HEAD
+
 # @webundsoehne/nx-builders [6.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.1...@webundsoehne/nx-builders@6.0.0-beta.2) (2022-08-08)
 
+=======
 
+## @webundsoehne/nx-builders [5.3.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.6...@webundsoehne/nx-builders@5.3.7) (2022-08-10)
 
+### Bug Fixes
 
+- **nx-builders:** issue with trying to run folders with node ([d56e1c7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d56e1c730cc9bcec904b02c3ccd452181d219726))
+
+## @webundsoehne/nx-builders [5.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.5...@webundsoehne/nx-builders@5.3.6) (2022-06-13)
+
+### Bug Fixes
+
+- update READMEs with current banner design ([8137441](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/81374413da1208ea66b3e86f89771dfbd966dfbb))
+  > > > > > > > master
 
 ### Dependencies
 
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.2
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.2
 
 # @webundsoehne/nx-builders [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.6...@webundsoehne/nx-builders@6.0.0-beta.1) (2022-08-08)
 
-
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
-
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
 
 ### BREAKING CHANGES
 
-* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
-nx.json
-
-
-
-
+- **nx:** contains breaking changes for how nestjs handles graphql and nx handles nx.json
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.1
+- **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.1
 
 ## @webundsoehne/nx-builders [5.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.5...@webundsoehne/nx-builders@5.3.6) (2022-06-13)
 
