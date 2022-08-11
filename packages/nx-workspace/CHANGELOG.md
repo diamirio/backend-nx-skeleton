@@ -1,3 +1,18 @@
+# @webundsoehne-private/nx-workspace [5.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@5.0.0-beta.2...@webundsoehne-private/nx-workspace@5.0.0-beta.3) (2022-08-11)
+
+
+### Features
+
+* swap the gitlab build files with the predefined pipes ([921d9e5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/921d9e5d01db82c0f87373d997e73cfa0eb1708d))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.3
+
 # @webundsoehne-private/nx-workspace [5.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@5.0.0-beta.1...@webundsoehne-private/nx-workspace@5.0.0-beta.2) (2022-08-08)
 
 ## @webundsoehne-private/nx-workspace [4.3.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@4.3.7...@webundsoehne-private/nx-workspace@4.3.8) (2022-08-10)
