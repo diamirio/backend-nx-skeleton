@@ -1,3 +1,10 @@
+# @webundsoehne-private/nx-nest [5.0.0-beta.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.3...@webundsoehne-private/nx-nest@5.0.0-beta.4) (2022-08-11)
+
+
+### Bug Fixes
+
+* update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
+
 # @webundsoehne-private/nx-nest [5.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.2...@webundsoehne-private/nx-nest@5.0.0-beta.3) (2022-08-11)
 
 
