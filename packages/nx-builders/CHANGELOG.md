@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [6.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.2...@webundsoehne/nx-builders@6.0.0-beta.3) (2022-08-11)
+
+
+### Bug Fixes
+
+* **nx-builders:** issue with trying to run folders with node ([d56e1c7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d56e1c730cc9bcec904b02c3ccd452181d219726))
+
 # @webundsoehne/nx-builders [6.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.1...@webundsoehne/nx-builders@6.0.0-beta.2) (2022-08-08)
 
 ## @webundsoehne/nx-builders [5.3.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.6...@webundsoehne/nx-builders@5.3.7) (2022-08-10)
