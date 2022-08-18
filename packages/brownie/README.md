@@ -28,23 +28,28 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`brownie config:workspace`](#brownie-configworkspace)
+* [`brownie ci`](#brownie-ci)
 * [`brownie docker`](#brownie-docker)
 * [`brownie gitlab`](#brownie-gitlab)
 * [`brownie help [COMMAND]`](#brownie-help-command)
 * [`brownie nx`](#brownie-nx)
 * [`brownie workspace`](#brownie-workspace)
+* [`brownie ws`](#brownie-ws)
 
-## `brownie config:workspace`
+## `brownie ci`
 
-Edit available workspace skeletons through a user interface.
+Create a gitlab ci configuration from known NX configuration.
 
 ```
 USAGE
-  $ brownie config:workspace
-```
+  $ brownie ci
 
-_See code: [dist/commands/config/workspace.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/config/workspace.js)_
+DESCRIPTION
+  Create a gitlab ci configuration from known NX configuration.
+
+ALIASES
+  $ brownie ci
+```
 
 ## `brownie docker`
 
@@ -52,15 +57,18 @@ Create docker-compose configuration from boilerplates.
 
 ```
 USAGE
-  $ brownie docker
+  $ brownie docker [-f] [-o <value>] [-v] [-e] [-V <value>] [-F <value>]
 
-OPTIONS
-  -F, --files-folder=files-folder      [default: files] Output to included folder.
-  -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
-  -e, --expose                         Expose ports from the container.
-  -f, --force                          Force overwrites.
-  -o, --output=output                  [default: .docker] Output folder for the Docker files.
-  -v, --volume                         Use optional persistent volumes with the containers.
+FLAGS
+  -F, --files-folder=<value>    [default: files] Output to included folder.
+  -V, --volumes-folder=<value>  [default: volumes] Output to volumes folder.
+  -e, --expose                  Expose ports from the container.
+  -f, --force                   Force overwrites.
+  -o, --output=<value>          [default: .docker] Output folder for the Docker files.
+  -v, --volume                  Use optional persistent volumes with the containers.
+
+DESCRIPTION
+  Create docker-compose configuration from boilerplates.
 ```
 
 _See code: [dist/commands/docker/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/docker/index.js)_
@@ -72,6 +80,9 @@ Create a gitlab ci configuration from known NX configuration.
 ```
 USAGE
   $ brownie gitlab
+
+DESCRIPTION
+  Create a gitlab ci configuration from known NX configuration.
 
 ALIASES
   $ brownie ci
@@ -85,13 +96,16 @@ Display help for brownie.
 
 ```
 USAGE
-  $ brownie help [COMMAND]
+  $ brownie help [COMMAND] [-n]
 
 ARGUMENTS
   COMMAND  Command to show help for.
 
-OPTIONS
+FLAGS
   -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for brownie.
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
@@ -102,12 +116,15 @@ Configure NX modules.
 
 ```
 USAGE
-  $ brownie nx
+  $ brownie nx [-s] [-a] [-d]
 
-OPTIONS
+FLAGS
   -a, --arguments     Enable prompt for passing in arguments.
   -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -s, --skip-updates  Skip the dependency updates.
+
+DESCRIPTION
+  Configure NX modules.
 ```
 
 _See code: [dist/commands/nx/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/nx/index.js)_
@@ -118,16 +135,39 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie workspace
+  $ brownie workspace [-s] [-f] [-d]
 
-OPTIONS
+FLAGS
   -d, --develop       Puts the underlying schematics to development mode, if they support it.
   -f, --force         Force override for schematic.
   -s, --skip-updates  Skip the dependency updates.
+
+DESCRIPTION
+  Create a new workspace with NX.
 
 ALIASES
   $ brownie ws
 ```
 
 _See code: [dist/commands/workspace/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/workspace/index.js)_
+
+## `brownie ws`
+
+Create a new workspace with NX.
+
+```
+USAGE
+  $ brownie ws [-s] [-f] [-d]
+
+FLAGS
+  -d, --develop       Puts the underlying schematics to development mode, if they support it.
+  -f, --force         Force override for schematic.
+  -s, --skip-updates  Skip the dependency updates.
+
+DESCRIPTION
+  Create a new workspace with NX.
+
+ALIASES
+  $ brownie ws
+```
 <!-- commandsstop -->

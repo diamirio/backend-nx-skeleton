@@ -1,7 +1,8 @@
-import { toYaml } from '@cenk1cenk2/boilerplate-oclif'
-import fs from 'fs-extra'
+import { YamlParser, fs } from '@cenk1cenk2/oclif-common'
 import Nunjucks from 'nunjucks'
 import { dirname, isAbsolute, join } from 'path'
+
+const yaml = new YamlParser()
 
 export function jinja (path: string): Nunjucks.Environment {
   // some trickery because of the types of nunjucks
@@ -35,7 +36,7 @@ export function jinja (path: string): Nunjucks.Environment {
 
   // add filters
   env.addFilter('to_nice_yaml', (data: string | string[] | Record<string, any>) => {
-    return toYaml(data).trim()
+    return yaml.stringify(data).trim()
   })
 
   // add extensions

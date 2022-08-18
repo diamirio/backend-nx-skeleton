@@ -42,11 +42,11 @@
     "rxjs": ">= 7 < 8"
   },
   "devDependencies": {
-    "@nestjs/common": "^9.0.8",
-    "@nestjs/core": "^9.0.8",
+    "@nestjs/common": "^9.0.11",
+    "@nestjs/core": "^9.0.11",
     "@nestjs/graphql": "^10.0.21",
     "@webundsoehne/nestjs-util": "*",
-    "graphql": "^16.5.0"
+    "graphql": "^16.6.0"
   },
   "engines": {
     "node": ">= 16"

@@ -9,7 +9,7 @@ import { isVerbose } from '../schematics'
 import { isBuildContext, isExecutorContext } from '../schematics/is-context'
 import { color } from './colorette'
 import type { LoggerFormat, LoggerOptions, Winston } from './logger.interface'
-import { LogLevels, WINSTON_INSTANCE } from './logger.interface'
+import { LogLevels } from './logger.interface'
 
 /**
  * A general logger that is wrapped around the angular-cli logger.
@@ -84,7 +84,7 @@ export class Logger {
       return multiLineMessage.join(EOL)
     })
 
-    const logger = winston.loggers.add(WINSTON_INSTANCE, {
+    const logger = winston.createLogger({
       level: this.logLevel,
       format: format.combine(format.splat(), format.json({ space: 2 }), format.prettyPrint(), logFormat),
       levels: Object.values(LogLevels).reduce((o, level, i) => {
@@ -100,7 +100,7 @@ export class Logger {
       ]
     })
 
-    logger.debug(`Initiated new nx-tools logger with level "${this.logLevel}".`, { context: 'LOGGER' })
+    logger.log(LogLevels.DEBUG, 'Initiated new nx-tools logger with level: %s', this.logLevel, { context: 'Logger' })
 
     return logger as Winston
   }

@@ -1,9 +1,9 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { flags } from '@oclif/command'
+import { color, Command, MergeStrategy } from '@cenk1cenk2/oclif-common'
+import { Flags } from '@oclif/core'
 import execa from 'execa'
 import type { Listr } from 'listr2'
-import { createPrompt } from 'listr2'
 import { EOL } from 'os'
+import { join } from 'path'
 
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
@@ -11,20 +11,19 @@ import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config
 import type { Configuration } from '@interfaces/default-config.interface'
 import type { LocalNodeModule } from '@webundsoehne/nx-tools'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
-import { color } from '@webundsoehne/nx-tools/dist/utils/logger/colorette'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
-export class NxCommand extends BaseCommand<Configuration> {
+export class NxCommand extends Command<NxAddCommandCtx, Configuration> {
   static description = 'Configure NX modules.'
 
   static flags = {
-    ['skip-updates']: flags.boolean({
+    ['skip-updates']: Flags.boolean({
       description: 'Skip the dependency updates.',
       default: false,
       char: 's'
     }),
-    arguments: flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }),
-    develop: flags.boolean({
+    arguments: Flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }),
+    develop: Flags.boolean({
       description: 'Puts the underlying schematics to development mode, if they support it.',
       default: false,
       char: 'd'
@@ -33,12 +32,12 @@ export class NxCommand extends BaseCommand<Configuration> {
 
   private helpers: { node: NodeHelper }
 
-  async construct (): Promise<void> {
+  async shouldRunBefore (): Promise<void> {
     this.helpers = { node: new NodeHelper(this) }
   }
 
   async run (): Promise<void> {
-    const { flags } = this.parse(NxCommand)
+    const { flags } = await this.parse(NxCommand)
 
     if (flags.develop) {
       setDevelopmentMode()
@@ -47,7 +46,10 @@ export class NxCommand extends BaseCommand<Configuration> {
     }
 
     // get config
-    const { config } = await this.getConfig<NxSchematicsConfig[]>('nx-schematics.config.yml')
+    const config = await this.cs.extend<NxSchematicsConfig[]>(
+      MergeStrategy.OVERWRITE,
+      ...[this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, 'nx-schematics.config.yml'))
+    )
 
     // initiate variables
     this.tasks.ctx = new NxAddCommandCtx()
@@ -150,7 +152,7 @@ export class NxCommand extends BaseCommand<Configuration> {
     ])
 
     // run finally prematurely
-    const { ctx } = await this.finally<NxAddCommandCtx>()
+    const { ctx } = await this.finally()
 
     const schematic = `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`
 
@@ -166,14 +168,10 @@ export class NxCommand extends BaseCommand<Configuration> {
 
       this.logger.direct(help.stdout)
 
-      try {
-        ctx.prompts.arguments = await createPrompt({ type: 'Input', message: 'Arguments:' + EOL }, { error: false })
-      } catch {
-        this.logger.warn('Cancelled prompt.')
-      }
+      ctx.prompts.arguments = await this.prompt({ type: 'Input', message: 'Arguments:' + EOL })
     }
 
-    this.logger.module('Now will start running the schematic: %s', schematic)
+    this.logger.info('Now will start running the schematic: %s', schematic)
 
     const { manager, args, env } = this.helpers.node.parser({
       action: PackageManagerUsableCommands.EXEC,

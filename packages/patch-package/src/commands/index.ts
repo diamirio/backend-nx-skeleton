@@ -1,4 +1,4 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
+import { BaseCommand } from '@cenk1cenk2/oclif-common'
 
 export class CreateCommand extends BaseCommand {
   async run (): Promise<void> {

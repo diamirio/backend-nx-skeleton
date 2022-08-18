@@ -1,18 +1,17 @@
-import type { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { createDirIfNotExists, parseYaml, readFile, readRaw, tasksOverwritePrompt, writeFile } from '@cenk1cenk2/boilerplate-oclif'
+import type { ConfigCommand } from '@cenk1cenk2/oclif-common'
+import { merge, MergeStrategy } from '@cenk1cenk2/oclif-common'
 import axios from 'axios'
 import fs from 'fs-extra'
 import globby from 'globby'
 import type { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
-import { dirname, extname, join, relative } from 'path'
-import { v4 as uuidv4 } from 'uuid'
+import { EOL } from 'os'
+import { dirname, join, relative } from 'path'
 
 import type { AvailableContainers, DockerComposeFile, DockerHelperCtx } from './docker.helper.interface'
 import { VolumeModes } from './docker.helper.interface'
 import { jinja } from '@helpers/jinja.helper'
-import type { LocalLockFile } from '@interfaces/lock-file.interface'
-import { DockerHelperLock, LocalLockPaths } from '@interfaces/lock-file.interface'
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import type { LocalLockFile, LocalLockPaths } from '@interfaces/lock-file.interface'
+import { DockerHelperLock } from '@interfaces/lock-file.interface'
 import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 export class DockerHelper {
@@ -20,22 +19,22 @@ export class DockerHelper {
   public templatesLocation: string
 
   constructor (
-    private readonly cmd: BaseCommand,
+    private readonly cmd: ConfigCommand<any>,
     private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, expose?: boolean, ['volumes-folder']: string, ['files-folder']: string } }
   ) {
     cmd.logger.debug('DockerHelper initiated.')
-    this.cmd.locker.setRoot(LocalLockPaths.DOCKER_HELPER)
 
-    this.dockerConfigLocation = join(this.cmd.config.root, 'templates', 'containers')
-    this.templatesLocation = join(this.cmd.config.root, 'templates', 'base')
+    this.dockerConfigLocation = join(this.cmd.cs.oclif.root, 'templates', 'containers')
+    this.templatesLocation = join(this.cmd.cs.oclif.root, 'templates', 'base')
   }
 
-  generateGetContainerTasks (): Listr {
+  generateGetContainerTasks (): Listr<DockerHelperCtx> {
     return this.cmd.tasks.newListr<DockerHelperCtx>([
       // get available containers
       {
-        title: 'Looking for available containers.',
         task: async (ctx): Promise<void> => {
+          this.cmd.logger.info('Looking for available containers.')
+
           ctx.containers = await this.getAvailableContainers()
         }
       },
@@ -55,7 +54,7 @@ export class DockerHelper {
       // be sure that necassary folders are created
       {
         title: 'Creating output directory.',
-        task: async (): Promise<void> => createDirIfNotExists(this.options.flags.output)
+        task: async (): Promise<void> => this.cmd.fs.mkdir(this.options.flags.output)
       },
 
       // find selected container
@@ -70,7 +69,7 @@ export class DockerHelper {
           const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
 
           if (templateCheck.length > 0) {
-            this.cmd.message.fail(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
+            this.cmd.logger.warn(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
           }
 
           // only process known containers
@@ -107,29 +106,32 @@ export class DockerHelper {
                     const output = join(ctx.context[name].dir, 'Dockerfile')
 
                     // ask for overwrite
-                    try {
-                      if (!this.options.flags.force) {
-                        await tasksOverwritePrompt(output, task, false)
-                      }
-                    } catch {
-                      this.cmd.message.warn(`Skipping Dockerfile overwrite: ${name}`)
+                    if (
+                      !this.options.flags.force &&
+                      !await this.cmd.prompt({
+                        type: 'Toggle',
+                        initial: true,
+                        message: `Would you like to overwrite Dockerfile file: ${output}`
+                      })
+                    ) {
+                      this.cmd.logger.warn('Skipping Dockerfile file overwrite: %s', name)
 
                       return
                     }
 
                     // create directory and files
-                    await createDirIfNotExists(ctx.context[name].dir)
+                    await this.cmd.fs.mkdir(ctx.context[name].dir)
 
                     // write to file
-                    await writeFile(output, await readRaw(ctx.context[name].dockerfile))
+                    await this.cmd.parser.write(output, ctx.context[name].dockerfile)
 
                     // lock necassary information
-                    this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                    this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                       path: ctx.containers[name].name,
                       data: {
-                        [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: output }
+                        [DockerHelperLock.DIRECTORIES]: [output]
                       },
-                      merge: true
+                      merge: MergeStrategy.EXTEND
                     })
 
                     task.title = 'Dockerfile files generated.'
@@ -159,7 +161,7 @@ export class DockerHelper {
                           this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
 
                           try {
-                            await createDirIfNotExists(asset.to)
+                            await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
 
                             if (volume.mode === VolumeModes.FILE) {
                               task.output = `Copying asset: ${asset.from} -> ${asset.to}`
@@ -188,27 +190,27 @@ export class DockerHelper {
                             //   await fs.chmod(asset.to, volume.perm)
                             // }
 
-                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                               path: ctx.containers[name].name,
                               data: {
-                                [DockerHelperLock.FILES]: { [uuidv4()]: asset.to }
+                                [DockerHelperLock.FILES]: [asset.to]
                               },
-                              merge: true
+                              merge: MergeStrategy.EXTEND
                             })
                           } catch (e) {
-                            this.cmd.message.fail(`Error while copying asset: ${e}`)
+                            this.cmd.logger.warn('Error while copying asset: %s', e.message)
 
                             // just delete this from the list
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
                         } else if (volume.mode === VolumeModes.DIR) {
                           // if this is a directory we have to create the directory separetly and copy files in them, because of how fs works in node
-                          this.cmd.message.debug(`Copying directory: ${asset.from} -> ${asset.to}`)
+                          this.cmd.logger.debug('Copying directory: %s -> %s', asset.from, asset.to)
 
                           try {
                             asset.to = join(asset.to, volume.from)
 
-                            await createDirIfNotExists(asset.to)
+                            await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
                             await fs.copy(asset.from, asset.to)
 
                             // set permissions
@@ -216,15 +218,15 @@ export class DockerHelper {
                               await fs.chmod(asset.to, volume.perm)
                             }
 
-                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                               path: ctx.containers[name].name,
                               data: {
-                                [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: asset.to }
+                                [DockerHelperLock.DIRECTORIES]: [asset.to]
                               },
-                              merge: true
+                              merge: MergeStrategy.EXTEND
                             })
                           } catch (e) {
-                            this.cmd.message.fail(`Error while copying folder: ${e}`)
+                            this.cmd.logger.warn('Error while copying folder: %s', e.message)
 
                             // just delete this from the list
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
@@ -246,14 +248,14 @@ export class DockerHelper {
 
                           // it will clear out this entry
                           if (prompt) {
-                            await createDirIfNotExists(asset.to)
+                            await this.cmd.fs.mkdir(asset.to)
 
-                            this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                               path: ctx.containers[name].name,
                               data: {
-                                [DockerHelperLock.VOLUMES]: { [uuidv4()]: asset.to }
+                                [DockerHelperLock.VOLUMES]: [asset.to]
                               },
-                              merge: true
+                              merge: MergeStrategy.EXTEND
                             })
                           } else {
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
@@ -274,7 +276,7 @@ export class DockerHelper {
                 {
                   title: 'Processing environment files...',
                   skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
-                  task: async (ctx, task): Promise<void> => {
+                  task: async (): Promise<void> => {
                     // add this to context
                     ctx.context[name].env = ctx.containers[name].env[0]
 
@@ -282,12 +284,15 @@ export class DockerHelper {
                     const output = join(ctx.context[name].dir, '.env')
 
                     // ask for overwrite
-                    try {
-                      if (!this.options.flags.force) {
-                        await tasksOverwritePrompt(output, task, false)
-                      }
-                    } catch {
-                      this.cmd.message.warn(`Skipping .env file overwrite: ${name}`)
+                    if (
+                      !this.options.flags.force &&
+                      !await this.cmd.prompt({
+                        type: 'Toggle',
+                        initial: true,
+                        message: `Would you like to overwrite .env file: ${output}`
+                      })
+                    ) {
+                      this.cmd.logger.warn('Skipping .env file overwrite: %s', name)
 
                       return
                     }
@@ -305,30 +310,29 @@ export class DockerHelper {
                     }, [])
 
                     // create directory and files
-                    await createDirIfNotExists(ctx.context[name].dir)
+                    await this.cmd.fs.mkdir(ctx.context[name].dir)
 
                     // write to file
-                    await writeFile(output, buffer)
+                    await this.cmd.fs.write(output, buffer.join(EOL))
 
                     // lock necassary information
-                    this.cmd.locker.add<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                    this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
                       path: ctx.containers[name].name,
                       data: {
-                        [DockerHelperLock.DIRECTORIES]: { [uuidv4()]: output }
+                        [DockerHelperLock.DIRECTORIES]: [output]
                       },
-                      merge: true
+                      merge: MergeStrategy.EXTEND
                     })
 
-                    task.title = 'Environment files generated.'
+                    this.cmd.logger.info('Environment files generated.')
                   }
                 },
 
                 // processing exposed ports
                 {
-                  title: 'Processing exposed ports...',
                   skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.ports) || !this.options.flags.expose,
                   task: async (ctx, task): Promise<void> => {
-                    // add this to context
+                    this.cmd.logger.info('Processing exposed ports...')
 
                     // read the yaml template for one file
                     const file = await this.readYamlTemplate<string[]>(ctx.containers[name].ports[0], ctx.context[name])
@@ -346,17 +350,18 @@ export class DockerHelper {
                       }
                     }
 
-                    task.title = 'Exposed ports.'
+                    this.cmd.logger.info('Exposed ports.')
                   }
                 },
 
                 // creating configuration
                 {
-                  title: 'Creating configuration.',
-                  task: async (ctx, task): Promise<void> => {
+                  task: async (ctx): Promise<void> => {
+                    this.cmd.logger.info('Creating configuration.')
+
                     try {
                       // read the template
-                      const base = await readFile<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
+                      const base = await this.cmd.cs.read<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
 
                       ctx.context[name].config = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
 
@@ -371,13 +376,13 @@ export class DockerHelper {
                         delete ctx.context[name].config
                       }
 
-                      this.cmd.logger.debug(`Context for "${name}":\n%o`, ctx.context[name])
+                      this.cmd.logger.debug('Context for "%s":\n%o', name, ctx.context[name])
 
                       const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
 
                       // configuration can still be null which is not mergable
                       if (template) {
-                        ctx.config = deepMergeWithArrayOverwrite(base, ctx.config, template)
+                        ctx.config = merge(MergeStrategy.OVERWRITE, base, ctx.config, template)
                       } else {
                         throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
                       }
@@ -385,7 +390,7 @@ export class DockerHelper {
                       throw new Error(e)
                     }
 
-                    task.title = 'Configuration generated.'
+                    this.cmd.logger.info('Configuration generated.')
                   }
                 }
               ]
@@ -394,7 +399,7 @@ export class DockerHelper {
 
           return task.newListr(
             subtasks.map((t) => {
-              return this.cmd.tasks.indent(t.tasks, { rendererOptions: { collapse: true } }, { title: `Processing: ${t.name}` })
+              return this.cmd.tasks.indent(t.tasks, { rendererOptions: { collapse: true } })
             }),
             {
               rendererOptions: { collapse: false }
@@ -456,16 +461,16 @@ export class DockerHelper {
   private async readYamlTemplate<T extends Record<string, any>>(path: string, context: any): Promise<T> {
     const rawTemplate = await this.readTemplate(path, context)
 
-    this.cmd.logger.debug(`Parsing template "${path}":\n%s`, rawTemplate)
+    this.cmd.logger.debug('Parsing template "%s":\n%s', path, rawTemplate)
 
-    return parseYaml<T>(rawTemplate)
+    return this.cmd.parser.getParser('yml').parse<T>(rawTemplate)
   }
 
   private async readTemplate (path: string, context: any): Promise<string> {
-    let template: string = await readRaw(path)
+    let template: string = await this.cmd.fs.read(path)
 
     // check if this is jinja
-    if (extname(path) === '.j2') {
+    if (this.cmd.fs.extname(path) === '.j2') {
       template = jinja(path).renderString(template, context)
     }
 
@@ -479,8 +484,9 @@ export class DockerHelper {
       return true
     } else if (array.length > 1) {
       // maybe i will add multiple later, even though it is unnessary?
-      this.cmd.logger.fatal(`Error in configuration. There should be one file per container.\n${JSON.stringify(array, null, 2)}`)
-      process.exit(1)
+      this.cmd.logger.fatal('Error in configuration. There should be one file per container.\n%o', array)
+
+      throw new Error('Invalid configuration.')
     } else {
       return false
     }

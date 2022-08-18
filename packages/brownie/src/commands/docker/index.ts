@@ -1,45 +1,43 @@
-import type { ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
-import { ConfigBaseCommand, ConfigCommandChoices, ConfigTypes, createTable } from '@cenk1cenk2/boilerplate-oclif'
-import { flags } from '@oclif/command'
-import * as fs from 'fs-extra'
-import type { Listr, ListrDefaultRenderer, ListrTask, ListrTaskWrapper } from 'listr2'
+import type { ConfigCommandSetup } from '@cenk1cenk2/oclif-common'
+import { ConfigCommand, fs, LockerService, MergeStrategy } from '@cenk1cenk2/oclif-common'
+import { CliUx, Flags } from '@oclif/core'
+import type { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, join } from 'path'
 
 import type { DockerContainerAddCtx } from '@context/docker/containers'
 import { DockerContainersPurgeCtx } from '@context/docker/containers'
+import { BrownieLocker } from '@helpers/brownie-locker'
 import { DockerHelper } from '@helpers/docker.helper'
 import type { DockerComposeFile } from '@helpers/docker.helper.interface'
+import { DockerCommandChoices } from '@interfaces/commands/docker/choices.constants'
 import type { DockerNxCtx } from '@interfaces/commands/docker/nx'
 import type { LocalLockFile } from '@interfaces/lock-file.interface'
 import { DockerHelperLock, LocalLockPaths } from '@interfaces/lock-file.interface'
 import { readBrownieWorkspaceContainers } from '@webundsoehne/nx-tools/dist/integration/brownie'
 import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools/dist/integration/brownie.interface'
 
-export class DockerContainerCommand extends ConfigBaseCommand {
+export class DockerCommand extends ConfigCommand<DockerCommandChoices, LocalLockFile, DockerContainerAddCtx | DockerContainersPurgeCtx | DockerNxCtx> {
   static flags = {
-    force: flags.boolean({
-      char: 'f',
-      description: 'Force overwrites.'
-    }),
-    output: flags.string({
+    force: Flags.boolean({ char: 'f', description: 'Force overwrites.' }),
+    output: Flags.string({
       char: 'o',
       description: 'Output folder for the Docker files.',
       default: '.docker'
     }),
-    volume: flags.boolean({
+    volume: Flags.boolean({
       char: 'v',
       description: 'Use optional persistent volumes with the containers.'
     }),
-    expose: flags.boolean({
+    expose: Flags.boolean({
       char: 'e',
       description: 'Expose ports from the container.'
     }),
-    ['volumes-folder']: flags.string({
+    ['volumes-folder']: Flags.string({
       char: 'V',
       description: 'Output to volumes folder.',
       default: 'volumes'
     }),
-    ['files-folder']: flags.string({
+    ['files-folder']: Flags.string({
       char: 'F',
       description: 'Output to included folder.',
       default: 'files'
@@ -48,15 +46,24 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
   static description = 'Create docker-compose configuration from boilerplates.'
 
-  public choices: (ConfigCommandChoices | string)[] = ['Nx', ConfigCommandChoices.add, ConfigCommandChoices.show, ConfigCommandChoices.remove, 'Purge']
-
-  protected configName = 'docker-compose.yml'
-  protected configType = ConfigTypes.localRoot
-
   private helpers: { docker: DockerHelper }
+  private compose = new LockerService<DockerComposeFile>(join(process.cwd(), 'docker-compose.yml'), this.parser.getParser('yml'))
 
-  async construct (): Promise<void> {
-    const { flags } = this.parse(DockerContainerCommand)
+  async setup (): Promise<ConfigCommandSetup<DockerCommandChoices>> {
+    return {
+      choices: {
+        [DockerCommandChoices.NX]: this.nx,
+        [DockerCommandChoices.SHOW]: this.show,
+        [DockerCommandChoices.ADD]: this.add,
+        [DockerCommandChoices.REMOVE]: this.remove,
+        [DockerCommandChoices.PURGE]: this.purge
+      },
+      locker: new BrownieLocker(this.cs.command.id)
+    }
+  }
+
+  async shouldRunBefore (): Promise<void> {
+    const { flags } = await this.parse(DockerCommand)
 
     this.helpers = {
       docker: new DockerHelper(this, {
@@ -70,20 +77,22 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         }
       })
     }
+
+    this.tasks.options = { rendererSilent: true }
   }
 
-  async nxConfig (): Promise<void> {
+  async nx (): Promise<void> {
     this.tasks.add<DockerNxCtx>([
       {
         task: (): Listr => this.helpers.docker.generateGetContainerTasks()
       },
 
       {
-        title: 'Reading integration...',
-        task: (ctx, task): void => {
+        task: (ctx): void => {
+          this.logger.debug('Reading integration...')
           ctx.prompt = readBrownieWorkspaceContainers()
 
-          task.title = `Found containers: ${ctx.prompt.join(', ')}`
+          this.logger.info('Found containers: %s', ctx.prompt.join(', '))
         }
       },
 
@@ -94,18 +103,17 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
     const { ctx } = await this.finally<DockerNxCtx>()
 
-    // this is done auto in config commands but not in this one, due to my lib
-    await this.configLock.lock([
-      {
-        data: ctx.config,
-        merge: true,
-        root: this.configType === ConfigTypes.localRoot
-      }
-    ])
+    await this.compose.lock({
+      data: ctx.config,
+      merge: MergeStrategy.EXTEND
+    })
   }
 
-  async configAdd (config: DockerComposeFile): Promise<DockerComposeFile> {
-    this.tasks.ctx = { config }
+  async add (): Promise<void> {
+    this.setDefaultsInCtx({
+      default: [{ config: await this.compose.read() }]
+    })
+
     this.tasks.add<DockerContainerAddCtx>([
       {
         task: (): Listr => this.helpers.docker.generateGetContainerTasks()
@@ -119,115 +127,136 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             multiple: true,
             message: 'Please select which containers you want to add.',
             choices: Object.keys(ctx.containers),
-            initial: this.getInitialFromPriorConfiguration(config, Object.keys(ctx.containers))
+            initial: this.getInitialFromPriorConfiguration(ctx.config, Object.keys(ctx.containers))
           })
       },
 
       {
         task: (ctx): Listr => this.helpers.docker.generateDockerTasks(ctx.prompt)
+      },
+
+      {
+        task: (ctx): Promise<void> => this.compose.write(ctx.config)
       }
     ])
-
-    // run all the tasks
-    const { ctx } = await this.finally<DockerContainerAddCtx>()
-
-    return ctx.config
   }
 
-  // have to add this it is abstract :/
-  async configEdit (): Promise<null> {
-    return
-  }
+  async show (): Promise<void> {
+    const config = await this.compose.read()
 
-  async configShow (config: DockerComposeFile): Promise<void> {
     if (config?.services ? Object.keys(config.services).length > 0 : false) {
-      this.logger.info(
-        createTable(
-          ['Container', 'Image'],
-          Object.entries(config.services).map(([service, val]) => [service, val.image ?? val.build])
-        )
+      CliUx.ux.table(
+        Object.entries(config.services).map(([service, val]) => ({ service, image: val.image ?? val.build })),
+        {
+          container: {
+            header: 'Container'
+          },
+          image: {
+            header: 'Image'
+          }
+        }
       )
     } else {
       this.logger.warn('Configuration file is empty.')
     }
 
-    this.logger.module('Configuration file is listed.')
+    this.logger.info('Configuration file is listed.')
   }
 
-  async configRemove (config: DockerComposeFile): Promise<ConfigRemove<DockerComposeFile>> {
-    return {
-      keys: config?.services ? Object.keys(config.services) : [],
-      removeFunction: async (config, key): Promise<DockerComposeFile> => {
-        await Promise.all(
-          key.map(async (k) => {
-            delete config.services[k]
-          })
-        )
+  async remove (): Promise<void> {
+    const config = await this.compose.read()
 
-        return config
-      }
+    // get prompts for which one to remote
+    const prompt: string[] = await this.prompt({
+      type: 'MultiSelect',
+      message: 'Please select configuration to delete.',
+      hint: '[space to select, a to select all]',
+      choices: config?.services ? Object.keys(config.services) : []
+    })
+
+    // if nothing selected in the prompt
+    if (prompt.length === 0) {
+      this.logger.warn('Nothing selected to remove.')
+
+      return
     }
+
+    await Promise.all(
+      prompt.map(async (k) => {
+        delete config.services[k]
+      })
+    )
+
+    await this.compose.write(config)
+
+    this.logger.info('Removed entries: %s', prompt.join(', '))
   }
 
-  async purgeConfig (): Promise<void> {
-    const { flags } = this.parse(DockerContainerCommand)
-    const lock = await this.locker.getLockFile<LocalLockFile>()
+  async purge (): Promise<void> {
+    const { flags } = await this.parse(DockerCommand)
+
+    const lock = await this.locker.read()
     const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
     if (!containers || Object.keys(containers).length === 0) {
       throw new Error('Nothing in lock file to purge.')
     }
 
-    this.tasks.ctx = new DockerContainersPurgeCtx()
+    this.setDefaultsInCtx({
+      default: [new DockerContainersPurgeCtx()]
+    })
 
     this.tasks.add<DockerContainersPurgeCtx>([
       {
-        task: async (ctx, task): Promise<void> => {
-          ctx.prompt.containers = await task.prompt({
+        task: async (ctx): Promise<void> => {
+          ctx.prompt.containers = await this.prompt({
             type: 'MultiSelect',
             message: 'Which containers you want to apply this on?',
             choices: Object.keys(containers)
           })
-          task.title = `Will apply on containers: ${ctx.prompt.containers.join(', ')}`
+
+          this.logger.info('Will apply on containers: %s', ctx.prompt.containers.join(', '))
         }
       },
 
       {
         skip: (ctx): boolean => ctx.prompt.containers.length === 0,
-        task: async (ctx, task): Promise<void> => {
-          ctx.prompt.purge = await task.prompt({
+        task: async (ctx): Promise<void> => {
+          ctx.prompt.purge = await this.prompt({
             type: 'MultiSelect',
             message: 'Which data you want to purge?',
             choices: Object.values(DockerHelperLock)
           })
 
-          task.title = `Will purge: ${ctx.prompt.purge.join(', ')}`
+          this.logger.info('Will purge: %s', ctx.prompt.purge.join(', '))
         }
       },
 
       {
-        title: 'Processing containers...',
         skip: (ctx): boolean => ctx.prompt.purge.length === 0,
         task: (ctx, task): Listr => {
+          this.logger.info('Processing containers...')
+
           const subtasks = ctx.prompt.containers.map((name): { name: string, tasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] } => {
             return {
               name,
               tasks: [
                 {
-                  title: 'Deleting volumes...',
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.VOLUMES) || !containers[name]?.volumes || Object.keys(containers[name]?.volumes).length === 0,
                   task: (_, task): Listr => {
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].volumes).map(([key, v]) => ({
-                      task: async (_, task): Promise<void> => {
-                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
+                      task: async (): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(join(process.cwd(), v))
 
                         if (deleted || deleted === 'unlock') {
                           // unlock volumes from lock file
                           this.locker.addUnlock({
-                            path: `${name}.${DockerHelperLock.VOLUMES}.${key}`
+                            path: [name, DockerHelperLock.VOLUMES, key]
                           })
                         }
+
+                        this.logger.info('Deleted volume: %s', v)
                       }
                     }))
 
@@ -236,18 +265,19 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                 },
 
                 {
-                  title: 'Deleting configuration...',
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.DIRECTORIES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
-                  task: (_, task): Listr => {
+                  task: (): Listr => {
+                    this.logger.info('Deleting configuration...')
+
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].configuration).map(([key, v]) => ({
-                      task: async (_, task): Promise<void> => {
-                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
+                      task: async (): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(join(process.cwd(), v))
 
                         if (deleted || deleted === 'unlock') {
                           // unlock directories from local lock file
                           this.locker.addUnlock({
-                            path: `${name}.${DockerHelperLock.DIRECTORIES}.${key}`
+                            path: [name, DockerHelperLock.DIRECTORIES, key]
                           })
                         }
                       }
@@ -256,12 +286,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                     return task.newListr([
                       {
                         task: async (): Promise<void> => {
-                          await this.configLock.unlock([
-                            {
-                              path: `services.${name}`,
-                              root: true
-                            }
-                          ])
+                          await this.compose.unlock({
+                            path: ['services', name]
+                          })
                         }
                       },
                       ...subtasks
@@ -270,18 +297,19 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                 },
 
                 {
-                  title: 'Deleting files...',
                   skip: (ctx): boolean =>
                     !ctx.prompt.purge.includes(DockerHelperLock.FILES) || !containers[name]?.configuration || Object.keys(containers[name]?.configuration).length === 0,
-                  task: (_, task): Listr => {
+                  task: (): Listr => {
+                    this.logger.info('Deleting files...')
+
                     const subtasks: ListrTask<DockerContainersPurgeCtx, ListrDefaultRenderer>[] = Object.entries(containers[name].files).map(([key, v]) => ({
-                      task: async (_, task): Promise<void> => {
-                        const deleted = await this.deleteArtifacts(task, join(process.cwd(), v))
+                      task: async (): Promise<void> => {
+                        const deleted = await this.deleteArtifacts(join(process.cwd(), v))
 
                         if (deleted || deleted === 'unlock') {
                           // unlock directories from local lock file
                           this.locker.addUnlock({
-                            path: `${name}.${DockerHelperLock.FILES}.${key}`
+                            path: [name, DockerHelperLock.FILES, key]
                           })
                         }
                       }
@@ -290,12 +318,9 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                     return task.newListr([
                       {
                         task: async (): Promise<void> => {
-                          await this.configLock.unlock([
-                            {
-                              path: `services.${name}`,
-                              root: true
-                            }
-                          ])
+                          await this.compose.unlock({
+                            path: ['services', name]
+                          })
                         }
                       },
                       ...subtasks
@@ -308,20 +333,20 @@ export class DockerContainerCommand extends ConfigBaseCommand {
                   task: async (): Promise<void> => {
                     // ensure lock file entries are not empty
                     await this.locker.unlockAll()
-                    const lock = await this.locker.getLockFile<LocalLockFile>()
+                    const lock = await this.locker.read()
                     const containers = lock[LocalLockPaths.DOCKER_HELPER]
 
                     await Promise.all(
                       Object.keys(containers).map((c) => {
                         if (containers[c]?.configuration && Object.keys(containers[c].configuration).length === 0) {
                           this.locker.addUnlock({
-                            path: `${c}.${DockerHelperLock.DIRECTORIES}`
+                            path: [c, DockerHelperLock.DIRECTORIES]
                           })
                         }
 
                         if (containers[c]?.volumes && Object.keys(containers[c].volumes).length === 0) {
                           this.locker.addUnlock({
-                            path: `${c}.${DockerHelperLock.VOLUMES}`
+                            path: [c, DockerHelperLock.VOLUMES]
                           })
                         }
 
@@ -340,7 +365,7 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
           return task.newListr(
             subtasks.map((t) => {
-              return this.tasks.indent(t.tasks, { rendererOptions: { collapse: true } }, { title: `Processing: ${t.name}` })
+              return this.tasks.indent(t.tasks, { rendererOptions: { collapse: true } })
             }),
             {
               rendererOptions: { collapse: false },
@@ -356,12 +381,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
         task: (_, task): Listr =>
           task.newListr([
             {
-              task: async (_, task): Promise<void> => {
+              task: async (): Promise<void> => {
                 try {
                   const dir = fs.readdirSync(join(process.cwd(), flags.output))
 
                   if (dir.length === 0) {
-                    await this.deleteArtifacts(task, join(process.cwd(), flags.output))
+                    await this.deleteArtifacts(join(process.cwd(), flags.output))
                   }
                 } catch (e) {
                   this.logger.debug(e.message)
@@ -370,12 +395,12 @@ export class DockerContainerCommand extends ConfigBaseCommand {
             },
 
             {
-              task: async (_, task): Promise<void> => {
+              task: async (): Promise<void> => {
                 try {
-                  const dir = fs.readdirSync(join(process.cwd(), flags['volumes-folder']))
+                  const dir = await fs.readdir(join(process.cwd(), flags['volumes-folder']))
 
                   if (dir.length === 0) {
-                    await this.deleteArtifacts(task, join(process.cwd(), flags['volumes-folder']))
+                    await this.deleteArtifacts(join(process.cwd(), flags['volumes-folder']))
                   }
                 } catch (e) {
                   this.logger.debug(e.message)
@@ -402,14 +427,14 @@ export class DockerContainerCommand extends ConfigBaseCommand {
       : []
   }
 
-  private async deleteArtifacts (task: ListrTaskWrapper<any, any>, path: string): Promise<boolean | 'unlock'> {
-    const { flags } = this.parse(DockerContainerCommand)
+  private async deleteArtifacts (path: string): Promise<boolean | 'unlock'> {
+    const { flags } = await this.parse(DockerCommand)
 
-    if (fs.existsSync(path)) {
+    if (this.fs.exists(path)) {
       let prompt: boolean = flags.force
 
       if (!prompt) {
-        prompt = await task.prompt({
+        prompt = await this.prompt({
           type: 'Toggle',
           message: `Will delete: ${path}`,
           initial: true
@@ -418,27 +443,27 @@ export class DockerContainerCommand extends ConfigBaseCommand {
 
       if (prompt) {
         try {
-          if (fs.statSync(path).isDirectory()) {
-            await fs.emptyDir(path)
-            await fs.remove(path)
+          if (this.fs.stats(path).isDirectory()) {
+            await this.fs.remove(path)
 
-            task.title = `Deleted folder: ${path}`
-          } else if (fs.statSync(path).isFile()) {
-            await fs.remove(path)
+            this.logger.debug('Deleted folder: %s', path)
+          } else if (this.fs.stats(path).isFile()) {
+            await this.fs.remove(path)
 
-            task.title = `Deleted file: ${path}`
+            this.logger.debug('Deleted file: %s', path)
           }
 
           if (fs.readdirSync(dirname(path)).length === 0) {
-            this.logger.debug(`After removing ${path}, folder is empty, will remove it as well.`)
+            this.logger.debug('After removing %s, folder is empty, will remove it as well.', path)
 
-            await fs.remove(dirname(path))
+            await fs.remove(this.fs.dirname(path))
           }
 
           return true
         } catch (e) {
-          this.message.debug(e.message)
-          throw new Error(`Can not delete folder: ${path}`)
+          this.logger.debug(e.message)
+
+          throw new Error(`Can not delete: ${path}`)
         }
       }
     } else {

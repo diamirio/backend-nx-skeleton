@@ -38,7 +38,7 @@
     "@webundsoehne/ts-utility-types": "*"
   },
   "devDependencies": {
-    "@nestjs/common": "^9.0.8"
+    "@nestjs/common": "^9.0.11"
   },
   "peerDependencies": {
     "@keycloak/keycloak-admin-client": ">= 15",

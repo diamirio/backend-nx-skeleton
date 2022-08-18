@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { BaseCommand, createTable } from '@cenk1cenk2/boilerplate-oclif'
+import { BaseCommand, createTable } from '@cenk1cenk2/oclif-common'
 import fs from 'fs-extra'
 import globby from 'globby'
 import { EOL } from 'os'
