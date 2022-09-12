@@ -1,3 +1,4 @@
+---
 version: '3.7'
 services:
   monorepo:
@@ -5,6 +6,7 @@ services:
     environment:
       SYNC_WAIT: 7
       PROXY_PACKAGES_FOLDER: packages/
+      LOG_LEVEL: trace
       SERVICE_0_CWD: packages/ts-utility-types
       SERVICE_0_NAME: ts-utility-types
       SERVICE_0_SYNC: 'true'

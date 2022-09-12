@@ -1,10 +1,6 @@
-import type { BaseConfig } from '@cenk1cenk2/oclif-common'
+import type { NodeDependency } from '@webundsoehne/nx-tools'
 
-import type { AvailablePackageManagers, NodeDependency } from '@webundsoehne/nx-tools'
-
-export interface Configuration extends BaseConfig {
-  package_manager: AvailablePackageManagers
-
+export interface Configuration {
   workspace: {
     requiredDependencies: NodeDependency[]
   }

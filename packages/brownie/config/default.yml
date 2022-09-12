@@ -1,8 +1,0 @@
-workspace:
-  requiredDependencies:
-    - '@nrwl/cli'
-    - '@nrwl/tao'
-    - '@nrwl/workspace'
-    - '@angular/cli'
-
-package_manager: npm

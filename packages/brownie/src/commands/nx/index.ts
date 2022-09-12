@@ -1,55 +1,49 @@
-import { color, Command, MergeStrategy } from '@cenk1cenk2/oclif-common'
-import { Flags } from '@oclif/core'
+import type { InferFlags } from '@cenk1cenk2/oclif-common'
+import { color, Command, Flags } from '@cenk1cenk2/oclif-common'
 import execa from 'execa'
 import type { Listr } from 'listr2'
 import { EOL } from 'os'
 import { join } from 'path'
 
+import { DEVELOP_FLAGS } from '@constants/develop.constants'
+import { ConfigurationFiles } from '@constants/file.constants'
+import { PACKAGE_MANAGER_FLAGS } from '@constants/package-manager.constants'
 import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
 import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
-import type { Configuration } from '@interfaces/default-config.interface'
 import type { LocalNodeModule } from '@webundsoehne/nx-tools'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
-export class NxCommand extends Command<NxAddCommandCtx, Configuration> {
+export class NxCommand extends Command<NxAddCommandCtx, InferFlags<typeof NxCommand>> {
   static description = 'Configure NX modules.'
 
   static flags = {
+    ...DEVELOP_FLAGS,
+    ...PACKAGE_MANAGER_FLAGS,
     ['skip-updates']: Flags.boolean({
       description: 'Skip the dependency updates.',
       default: false,
       char: 's'
     }),
-    arguments: Flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' }),
-    develop: Flags.boolean({
-      description: 'Puts the underlying schematics to development mode, if they support it.',
-      default: false,
-      char: 'd'
-    })
+    arguments: Flags.boolean({ char: 'a', description: 'Enable prompt for passing in arguments.' })
   }
 
   private helpers: { node: NodeHelper }
 
   async shouldRunBefore (): Promise<void> {
-    this.helpers = { node: new NodeHelper(this) }
+    this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
   }
 
   async run (): Promise<void> {
-    const { flags } = await this.parse(NxCommand)
-
-    if (flags.develop) {
+    if (this.flags.develop) {
       setDevelopmentMode()
 
       this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
     }
 
     // get config
-    const config = await this.cs.extend<NxSchematicsConfig[]>(
-      MergeStrategy.OVERWRITE,
-      ...[this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, 'nx-schematics.config.yml'))
-    )
+    const config = await this.cs.extend<NxSchematicsConfig[]>([this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.SCHEMATICS)))
 
     // initiate variables
     this.tasks.ctx = new NxAddCommandCtx()
@@ -119,7 +113,7 @@ export class NxCommand extends Command<NxAddCommandCtx, Configuration> {
       },
 
       {
-        skip: (): boolean => flags['skip-updates'],
+        skip: (): boolean => this.flags['skip-updates'],
         task: (ctx): Listr =>
           this.helpers.node.packageManager(
             {
@@ -157,11 +151,11 @@ export class NxCommand extends Command<NxAddCommandCtx, Configuration> {
     const schematic = `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`
 
     // this is here because long prompts corrupt listr
-    if (flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
+    if (this.flags.arguments || ctx.prompts.toRunSchematic.forceArguments) {
       const { manager, args, env } = this.helpers.node.parser({
         action: PackageManagerUsableCommands.EXEC,
         command: 'nx',
-        args: ['g', schematic, '--help', ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
+        args: ['g', schematic, '--help', ...this.cs.isVerbose || this.cs.isDebug ? ['--verbose'] : []]
       })
 
       const help = await execa(manager, args, { shell: true, env })
@@ -176,7 +170,12 @@ export class NxCommand extends Command<NxAddCommandCtx, Configuration> {
     const { manager, args, env } = this.helpers.node.parser({
       action: PackageManagerUsableCommands.EXEC,
       command: 'nx',
-      args: ['g', schematic, ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [], ...this.isVerbose || this.isDebug ? ['--verbose'] : []]
+      args: [
+        'g',
+        schematic,
+        ...ctx.prompts.arguments?.split(' ')?.length > 0 ? ctx.prompts.arguments.split(' ') : [],
+        ...this.cs.isVerbose || this.cs.isDebug ? ['--verbose'] : []
+      ]
     })
 
     // this will be the command

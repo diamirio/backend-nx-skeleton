@@ -3,13 +3,12 @@ import { pipeProcessThroughListr } from '@cenk1cenk2/oclif-common'
 import execa from 'execa'
 import type { Listr } from 'listr2'
 
-import type { Configuration } from '@interfaces/default-config.interface'
-import type { NodeDependency, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
+import type { AvailablePackageManagers, NodeDependency, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
 import { PackageManager } from '@webundsoehne/nx-tools'
 
 export class NodeHelper extends PackageManager {
-  constructor (private readonly cmd: Command<any, Configuration>) {
-    super({ manager: cmd.cs.config.package_manager })
+  constructor (private readonly cmd: Command, options?: { manager?: AvailablePackageManagers }) {
+    super({ manager: options?.manager })
   }
 
   /**

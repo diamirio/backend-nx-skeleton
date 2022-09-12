@@ -59,7 +59,7 @@
     "topicSeparator": ":"
   },
   "dependencies": {
-    "@cenk1cenk2/oclif-common": "^2.3.0",
+    "@cenk1cenk2/oclif-common": "^3.0.4",
     "@oclif/core": "^1.14.1",
     "@oclif/plugin-help": "^5.1.10",
     "@webundsoehne/deep-merge": "*",
@@ -67,7 +67,7 @@
     "axios": "^0.27.2",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
-    "listr2": "^4.0.4",
+    "listr2": "^5.0.5",
     "nunjucks": "^3.2.3",
     "update-notifier2": "^1.0.6",
     "uuid": "^8.3.2"

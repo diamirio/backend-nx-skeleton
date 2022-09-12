@@ -6,11 +6,12 @@ export class WorkspaceCreateCommandCtx {
     workspace?: string
   }
   public workspaces: WorkspaceConfig[]
+  public dependencies: NodeDependency[]
   public deps: LocalNodeModule[]
   public packages: NodeDependency[]
   public workspace: WorkspaceConfig
 
-  constructor () {
+  constructor() {
     this.prompts = {}
     this.packages = []
   }

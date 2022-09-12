@@ -142,7 +142,7 @@ export class DockerHelper {
                   title: 'Processing volumes...',
                   skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
                   task: async (ctx, task): Promise<void> => {
-                    // doing this the counter intuative way because of globbing, first globbing then filtering out unwanted
+                    // doing this the counter intuitive way because of globbing, first globbing then filtering out unwanted
                     ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
 
                     // process all volumes async
@@ -204,7 +204,7 @@ export class DockerHelper {
                             ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                           }
                         } else if (volume.mode === VolumeModes.DIR) {
-                          // if this is a directory we have to create the directory separetly and copy files in them, because of how fs works in node
+                          // if this is a directory we have to create the directory separately and copy files in them, because of how fs works in node
                           this.cmd.logger.debug('Copying directory: %s -> %s', asset.from, asset.to)
 
                           try {
@@ -380,7 +380,7 @@ export class DockerHelper {
 
                       const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
 
-                      // configuration can still be null which is not mergable
+                      // configuration can still be null which is not mergeable
                       if (template) {
                         ctx.config = merge(MergeStrategy.OVERWRITE, base, ctx.config, template)
                       } else {

@@ -54,7 +54,7 @@
     }
   },
   "dependencies": {
-    "@cenk1cenk2/oclif-common": "^2.3.0",
+    "@cenk1cenk2/oclif-common": "^3.0.0",
     "@oclif/core": "^1.14.1",
     "patch-package": "^6.4.7",
     "rewire": "^6.0.0",

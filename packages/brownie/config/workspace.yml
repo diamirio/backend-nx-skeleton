@@ -1,0 +1,11 @@
+---
+dependencies:
+  - '@nrwl/cli'
+  - '@nrwl/tao'
+  - '@nrwl/workspace'
+  - '@angular/cli'
+
+workspaces:
+  - pkg: '@webundsoehne-private/nx-workspace'
+    registry: https://verdaccio.webundsoehne.com
+    collection: collections.json

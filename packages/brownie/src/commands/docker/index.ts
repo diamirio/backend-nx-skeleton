@@ -1,6 +1,6 @@
 import type { ConfigCommandSetup } from '@cenk1cenk2/oclif-common'
-import { ConfigCommand, fs, LockerService, MergeStrategy } from '@cenk1cenk2/oclif-common'
-import { CliUx, Flags } from '@oclif/core'
+import { Flags, ConfigCommand, fs, LockerService, MergeStrategy } from '@cenk1cenk2/oclif-common'
+import { CliUx } from '@oclif/core'
 import type { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { dirname, join } from 'path'
 
@@ -110,9 +110,7 @@ export class DockerCommand extends ConfigCommand<DockerCommandChoices, LocalLock
   }
 
   async add (): Promise<void> {
-    this.setDefaultsInCtx({
-      default: [{ config: await this.compose.read() }]
-    })
+    this.setCtxDefaults({ config: await this.compose.read() })
 
     this.tasks.add<DockerContainerAddCtx>([
       {
@@ -202,9 +200,7 @@ export class DockerCommand extends ConfigCommand<DockerCommandChoices, LocalLock
       throw new Error('Nothing in lock file to purge.')
     }
 
-    this.setDefaultsInCtx({
-      default: [new DockerContainersPurgeCtx()]
-    })
+    this.setCtxDefaults(new DockerContainersPurgeCtx())
 
     this.tasks.add<DockerContainersPurgeCtx>([
       {
