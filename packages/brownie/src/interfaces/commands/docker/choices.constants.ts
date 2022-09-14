@@ -1,5 +1,5 @@
 export enum DockerCommandChoices {
-  NX = 'nx',
+  NX = 'NX',
   ADD = 'Add',
   SHOW = 'Show',
   REMOVE = 'Remove',

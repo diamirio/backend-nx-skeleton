@@ -15,7 +15,7 @@ import type { LocalNodeModule } from '@webundsoehne/nx-tools'
 import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
-export class NxCommand extends Command<NxAddCommandCtx, InferFlags<typeof NxCommand>> {
+export class Nx extends Command<NxAddCommandCtx, InferFlags<typeof Nx>> {
   static description = 'Configure NX modules.'
 
   static flags = {

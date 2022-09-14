@@ -64,7 +64,7 @@ export class Logger {
   }
 
   private initiateLogger (): Winston {
-    const logFormat = format.printf(({ level, message, context }: LoggerFormat) => {
+    const logFormat = format.printf(({ level, message, context, status }: LoggerFormat) => {
       // parse multi line messages
       let multiLineMessage: string[]
 
@@ -77,7 +77,8 @@ export class Logger {
         return this.logColoring({
           level,
           message: msg,
-          context
+          context,
+          status
         })
       })
 
@@ -109,7 +110,7 @@ export class Logger {
     this.logger.log(level, data.toString(), ...args, { context: this.context })
   }
 
-  private logColoring ({ level, message, context }: { level: LogLevels, message: string, context?: string }): string {
+  private logColoring ({ level, message, context, status }: LoggerFormat): string {
     let icon: string
 
     // do the coloring
@@ -168,6 +169,6 @@ export class Logger {
       icon = `[${level.toUpperCase()}]`
     }
 
-    return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''} ${msgColoring(message)}`
+    return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''}${status ? ' ' + coloring(`[${status}]`) : ''} ${msgColoring(message)}`
   }
 }

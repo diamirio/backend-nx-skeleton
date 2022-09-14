@@ -19,6 +19,7 @@ export interface LoggerFormat {
   level: LogLevels
   message: string
   context: string
+  status?: string
 }
 
 export type Winston = WinstonLogger & Record<keyof typeof LogLevels, LeveledLogMethod>

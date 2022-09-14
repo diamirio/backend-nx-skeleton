@@ -7,7 +7,7 @@ import { dirname } from 'path'
 import type { Observable } from 'rxjs'
 import { firstValueFrom } from 'rxjs'
 
-import { isVerbose, Logger } from '@utils'
+import { isVerbose, ListrLogger, Logger } from '@utils'
 
 // FIXME: branchandmerge bug: https://github.com/angular/angular-cli/issues/11337A
 /**
@@ -100,7 +100,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
                       }
                     }
                   ],
-                  { rendererFallback: isVerbose() }
+                  { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
                 ).run()
               ).keep
             }

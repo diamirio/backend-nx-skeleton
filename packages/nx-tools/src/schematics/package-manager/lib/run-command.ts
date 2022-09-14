@@ -3,8 +3,9 @@ import execa from 'execa'
 import { Listr } from 'listr2'
 
 import type { NormalizedSchema } from '../main.interface'
-import { Logger, pipeProcessThroughListr } from '@utils/logger'
+import { ListrLogger, Logger, pipeProcessThroughListr } from '@utils/logger'
 import { PackageManager } from '@utils/package-manager'
+import { isVerbose } from '@utils/schematics'
 
 /**
  * A function that can create the application files for the given schematic.
@@ -14,26 +15,29 @@ export function runCommand (options: NormalizedSchema): Rule {
     const packageManager = new PackageManager()
     const log = new Logger(context)
 
-    return new Listr([
-      {
-        task: async (_, task): Promise<void> => {
-          const { manager, args, env } = packageManager.parser(options.action)
+    return new Listr(
+      [
+        {
+          task: async (_, task): Promise<void> => {
+            const { manager, args, env } = packageManager.parser(options.action)
 
-          log.debug('Project root: %s', options.root)
+            log.debug('Project root: %s', options.root)
 
-          task.title = `Running in workspace: ${[manager, args.join(' ')].join(' ')}`
+            task.title = `Running in workspace: ${[manager, args.join(' ')].join(' ')}`
 
-          await pipeProcessThroughListr(
-            task,
-            execa(manager, args, {
-              stdio: 'pipe',
-              shell: true,
-              env,
-              cwd: options.root
-            })
-          )
+            await pipeProcessThroughListr(
+              task,
+              execa(manager, args, {
+                stdio: 'pipe',
+                shell: true,
+                env,
+                cwd: options.root
+              })
+            )
+          }
         }
-      }
-    ]).run()
+      ],
+      { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
+    ).run()
   }
 }

@@ -28,386 +28,395 @@ export class DockerHelper {
     this.templatesLocation = join(this.cmd.cs.oclif.root, 'templates', 'base')
   }
 
-  generateGetContainerTasks (): Listr<DockerHelperCtx> {
-    return this.cmd.tasks.newListr<DockerHelperCtx>([
-      // get available containers
-      {
-        task: async (ctx): Promise<void> => {
-          this.cmd.logger.info('Looking for available containers.')
+  generateGetContainerTasks (): Listr<DockerHelperCtx, 'silent'> {
+    return this.cmd.tasks.newListr<DockerHelperCtx, 'silent'>(
+      [
+        // get available containers
+        {
+          task: async (ctx): Promise<void> => {
+            this.cmd.logger.info('Looking for available containers.')
 
-          ctx.containers = await this.getAvailableContainers()
-        }
-      },
+            ctx.containers = await this.getAvailableContainers()
+          }
+        },
 
-      // check if there is available containers
-      {
-        skip: (ctx): boolean => Object.keys(ctx.containers).length !== 0,
-        task: (): void => {
-          throw new Error(`No configuration files found in "${this.templatesLocation}".`)
+        // check if there is available containers
+        {
+          skip: (ctx): boolean => Object.keys(ctx.containers).length !== 0,
+          task: (): void => {
+            throw new Error(`No configuration files found in "${this.templatesLocation}".`)
+          }
         }
+      ],
+      {
+        rendererSilent: true
       }
-    ])
+    )
   }
 
-  generateDockerTasks (containers: BrownieAvailableContainers[]): Listr {
-    return this.cmd.tasks.newListr<DockerHelperCtx>([
-      // be sure that necassary folders are created
-      {
-        title: 'Creating output directory.',
-        task: async (): Promise<void> => this.cmd.fs.mkdir(this.options.flags.output)
-      },
+  generateDockerTasks (containers: BrownieAvailableContainers[]): Listr<DockerHelperCtx, 'silent'> {
+    return this.cmd.tasks.newListr<DockerHelperCtx, 'silent'>(
+      [
+        // be sure that necassary folders are created
+        {
+          task: async (): Promise<void> => {
+            this.cmd.logger.info('Creating output directory: %s', this.options.flags.output)
 
-      // find selected container
-      {
-        title: 'Processing containers.',
-        task: (ctx, task): Listr => {
-          // initialize variables
-          ctx.context = {}
-          containers.filter((c) => Object.keys(ctx.containers).includes(c))
-
-          // fail safe
-          const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
-
-          if (templateCheck.length > 0) {
-            this.cmd.logger.warn(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
+            await this.cmd.fs.mkdir(this.options.flags.output)
           }
+        },
 
-          // only process known containers
-          containers = containers.filter((c) => Object.keys(ctx.containers).includes(c))
+        // find selected container
+        {
+          task: (ctx, task): Listr => {
+            this.cmd.logger.info('Processing containers.')
 
-          const subtasks = containers.map((name): { name: string, tasks: ListrTask<DockerHelperCtx, ListrDefaultRenderer>[] } => {
-            return {
-              name: ctx.containers[name].name,
-              tasks: [
-                {
-                  title: 'Initiating...',
-                  task: async (ctx, task): Promise<void> => {
-                    // create jinja context
-                    ctx.context[name] = {
-                      name: ctx.containers[name].name,
-                      dir: join(this.options.flags.output, ctx.containers[name].name),
-                      path: ctx.containers[name].path,
-                      output: this.options.flags.output,
-                      volumeDir: join(this.options.flags['volumes-folder'], ctx.containers[name].name),
-                      fileDir: join(this.options.flags.output, ctx.containers[name].name, this.options.flags['files-folder'])
+            // initialize variables
+            ctx.context = {}
+            containers.filter((c) => Object.keys(ctx.containers).includes(c))
+
+            // fail safe
+            const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
+
+            if (templateCheck.length > 0) {
+              this.cmd.logger.warn(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
+            }
+
+            // only process known containers
+            containers = containers.filter((c) => Object.keys(ctx.containers).includes(c))
+
+            const subtasks = containers.map((name): { name: string, tasks: ListrTask<DockerHelperCtx, ListrDefaultRenderer>[] } => {
+              return {
+                name: ctx.containers[name].name,
+                tasks: [
+                  {
+                    task: async (ctx): Promise<void> => {
+                      // create jinja context
+                      ctx.context[name] = {
+                        name: ctx.containers[name].name,
+                        dir: join(this.options.flags.output, ctx.containers[name].name),
+                        path: ctx.containers[name].path,
+                        output: this.options.flags.output,
+                        volumeDir: join(this.options.flags['volumes-folder'], ctx.containers[name].name),
+                        fileDir: join(this.options.flags.output, ctx.containers[name].name, this.options.flags['files-folder'])
+                      }
+
+                      this.cmd.logger.info('Context initialized: %s', name)
+
+                      this.cmd.logger.debug('Jinja context for %s: %s', name, ctx.context[name])
                     }
+                  },
 
-                    task.title = 'Initialization complete.'
-                  }
-                },
+                  {
+                    skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.dockerfile),
+                    task: async (ctx): Promise<void> => {
+                      ctx.context[name].dockerfile = ctx.containers[name].dockerfile[0]
 
-                {
-                  title: 'Processing Dockerfile...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.dockerfile),
-                  task: async (ctx, task): Promise<void> => {
-                    ctx.context[name].dockerfile = ctx.containers[name].dockerfile[0]
+                      // output file
+                      const output = join(ctx.context[name].dir, 'Dockerfile')
 
-                    // output file
-                    const output = join(ctx.context[name].dir, 'Dockerfile')
+                      // ask for overwrite
+                      if (
+                        !this.options.flags.force &&
+                        !await this.cmd.prompt({
+                          type: 'Toggle',
+                          initial: true,
+                          message: `Would you like to overwrite Dockerfile file: ${output}`
+                        })
+                      ) {
+                        this.cmd.logger.warn('Skipping Dockerfile file overwrite: %s', name)
 
-                    // ask for overwrite
-                    if (
-                      !this.options.flags.force &&
-                      !await this.cmd.prompt({
-                        type: 'Toggle',
-                        initial: true,
-                        message: `Would you like to overwrite Dockerfile file: ${output}`
+                        return
+                      }
+
+                      // create directory and files
+                      await this.cmd.fs.mkdir(ctx.context[name].dir)
+
+                      // write to file
+                      await this.cmd.parser.write(output, ctx.context[name].dockerfile)
+
+                      // lock necassary information
+                      this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                        path: ctx.containers[name].name,
+                        data: {
+                          [DockerHelperLock.DIRECTORIES]: [output]
+                        },
+                        merge: MergeStrategy.EXTEND
                       })
-                    ) {
-                      this.cmd.logger.warn('Skipping Dockerfile file overwrite: %s', name)
 
-                      return
+                      this.cmd.logger.info('Dockerfile generated: %s', name)
+                      this.cmd.logger.debug('Dockerfile for %s: %o', name, ctx.context[name].dockerfile)
                     }
+                  },
 
-                    // create directory and files
-                    await this.cmd.fs.mkdir(ctx.context[name].dir)
+                  {
+                    skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
+                    task: async (ctx, task): Promise<void> => {
+                      // doing this the counter intuitive way because of globbing, first globbing then filtering out unwanted
+                      ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
 
-                    // write to file
-                    await this.cmd.parser.write(output, ctx.context[name].dockerfile)
+                      // process all volumes async
+                      await Promise.all(
+                        ctx.context[name].volumes.map(async (volume) => {
+                          // create asset
+                          const asset = {
+                            from: join(ctx.containers[name].files, volume.from),
+                            to: join(ctx.context[name].volumeDir)
+                          }
 
-                    // lock necassary information
-                    this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                      path: ctx.containers[name].name,
-                      data: {
-                        [DockerHelperLock.DIRECTORIES]: [output]
-                      },
-                      merge: MergeStrategy.EXTEND
-                    })
+                          if ([VolumeModes.FILE, VolumeModes.URL].includes(volume.mode)) {
+                            asset.to = join(ctx.context[name].fileDir, volume.from)
 
-                    task.title = 'Dockerfile files generated.'
-                  }
-                },
+                            // if this is a file copy it directly
+                            this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
 
-                {
-                  title: 'Processing volumes...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.volumes),
-                  task: async (ctx, task): Promise<void> => {
-                    // doing this the counter intuitive way because of globbing, first globbing then filtering out unwanted
-                    ctx.context[name].volumes = await this.readYamlTemplate(ctx.containers[name].volumes[0], ctx.context[name])
+                            try {
+                              await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
 
-                    // process all volumes async
-                    await Promise.all(
-                      ctx.context[name].volumes.map(async (volume) => {
-                        // create asset
-                        const asset = {
-                          from: join(ctx.containers[name].files, volume.from),
-                          to: join(ctx.context[name].volumeDir)
-                        }
+                              if (volume.mode === VolumeModes.FILE) {
+                                task.output = `Copying asset: ${asset.from} -> ${asset.to}`
 
-                        if ([VolumeModes.FILE, VolumeModes.URL].includes(volume.mode)) {
-                          asset.to = join(ctx.context[name].fileDir, volume.from)
+                                await fs.copy(asset.from, asset.to)
+                              } else {
+                                if (!volume.url) {
+                                  throw new Error(`Can not copy asset ${asset.from} -> ${asset.to}, since it is marked as url but no url has been given.`)
+                                }
 
-                          // if this is a file copy it directly
-                          this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
+                                asset.from = volume.url
 
-                          try {
-                            await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
+                                const download = await axios.get(asset.from, {
+                                  onDownloadProgress: (progress) => {
+                                    task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress.percent * 100}% ]`
+                                  }
+                                })
 
-                            if (volume.mode === VolumeModes.FILE) {
-                              task.output = `Copying asset: ${asset.from} -> ${asset.to}`
-
-                              await fs.copy(asset.from, asset.to)
-                            } else {
-                              if (!volume.url) {
-                                throw new Error(`Can not copy asset ${asset.from} -> ${asset.to}, since it is marked as url but no url has been given.`)
+                                await fs.writeFile(asset.to, download.data)
                               }
 
-                              asset.from = volume.url
+                              // BUG: if we set to chmod the file it goes to hell and deletes the whole file? what a weird bug
+                              // // set permissions
+                              // if (volume.perm) {
+                              //   this.cmd.logger.debug(`Setting asset permission ${asset.to}: ${volume.perm}`)
+                              //   await fs.chmod(asset.to, volume.perm)
+                              // }
 
-                              const download = await axios.get(asset.from, {
-                                onDownloadProgress: (progress) => {
-                                  task.output = `Downloading file: ${asset.from} -> ${asset.to} [ ${progress.percent * 100}% ]`
-                                }
+                              this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                                path: ctx.containers[name].name,
+                                data: {
+                                  [DockerHelperLock.FILES]: [asset.to]
+                                },
+                                merge: MergeStrategy.EXTEND
                               })
+                            } catch (e) {
+                              this.cmd.logger.warn('Error while copying asset: %s', e.message)
 
-                              await fs.writeFile(asset.to, download.data)
+                              // just delete this from the list
+                              ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
                             }
+                          } else if (volume.mode === VolumeModes.DIR) {
+                            // if this is a directory we have to create the directory separately and copy files in them, because of how fs works in node
+                            this.cmd.logger.debug('Copying directory: %s -> %s', asset.from, asset.to)
 
-                            // BUG: if we set to chmod the file it goes to hell and deletes the whole file? what a weird bug
-                            // // set permissions
-                            // if (volume.perm) {
-                            //   this.cmd.logger.debug(`Setting asset permission ${asset.to}: ${volume.perm}`)
-                            //   await fs.chmod(asset.to, volume.perm)
-                            // }
+                            try {
+                              asset.to = join(asset.to, volume.from)
 
-                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                              path: ctx.containers[name].name,
-                              data: {
-                                [DockerHelperLock.FILES]: [asset.to]
-                              },
-                              merge: MergeStrategy.EXTEND
-                            })
-                          } catch (e) {
-                            this.cmd.logger.warn('Error while copying asset: %s', e.message)
+                              await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
+                              await fs.copy(asset.from, asset.to)
 
-                            // just delete this from the list
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                          }
-                        } else if (volume.mode === VolumeModes.DIR) {
-                          // if this is a directory we have to create the directory separately and copy files in them, because of how fs works in node
-                          this.cmd.logger.debug('Copying directory: %s -> %s', asset.from, asset.to)
+                              // set permissions
+                              if (volume.perm) {
+                                await fs.chmod(asset.to, volume.perm)
+                              }
 
-                          try {
+                              this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                                path: ctx.containers[name].name,
+                                data: {
+                                  [DockerHelperLock.DIRECTORIES]: [asset.to]
+                                },
+                                merge: MergeStrategy.EXTEND
+                              })
+                            } catch (e) {
+                              this.cmd.logger.warn('Error while copying folder: %s', e.message)
+
+                              // just delete this from the list
+                              ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                            }
+                          } else if (volume.mode === VolumeModes.VOLUME) {
+                            // we can add persistent volumes if you want to keep data
+                            let prompt: boolean
+
                             asset.to = join(asset.to, volume.from)
 
-                            await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))
-                            await fs.copy(asset.from, asset.to)
-
-                            // set permissions
-                            if (volume.perm) {
-                              await fs.chmod(asset.to, volume.perm)
+                            // only asks this with this flag
+                            if (this.options.flags.volume) {
+                              prompt = await task.prompt({
+                                type: 'Toggle',
+                                message: `Do you want to add persistent volume for the container "${name}" at "${asset.to} -> ${volume.to}"?`,
+                                initial: true
+                              })
                             }
 
-                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                              path: ctx.containers[name].name,
-                              data: {
-                                [DockerHelperLock.DIRECTORIES]: [asset.to]
-                              },
-                              merge: MergeStrategy.EXTEND
-                            })
-                          } catch (e) {
-                            this.cmd.logger.warn('Error while copying folder: %s', e.message)
+                            // it will clear out this entry
+                            if (prompt) {
+                              await this.cmd.fs.mkdir(asset.to)
 
-                            // just delete this from the list
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
-                          }
-                        } else if (volume.mode === VolumeModes.VOLUME) {
-                          // we can add persistent volumes if you want to keep data
-                          let prompt: boolean
-
-                          asset.to = join(asset.to, volume.from)
-
-                          // only asks this with this flag
-                          if (this.options.flags.volume) {
-                            prompt = await task.prompt({
-                              type: 'Toggle',
-                              message: `Do you want to add persistent volume for the container "${name}" at "${asset.to} -> ${volume.to}"?`,
-                              initial: true
-                            })
-                          }
-
-                          // it will clear out this entry
-                          if (prompt) {
-                            await this.cmd.fs.mkdir(asset.to)
-
-                            this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                              path: ctx.containers[name].name,
-                              data: {
-                                [DockerHelperLock.VOLUMES]: [asset.to]
-                              },
-                              merge: MergeStrategy.EXTEND
-                            })
+                              this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                                path: ctx.containers[name].name,
+                                data: {
+                                  [DockerHelperLock.VOLUMES]: [asset.to]
+                                },
+                                merge: MergeStrategy.EXTEND
+                              })
+                            } else {
+                              ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                            }
+                          } else if (volume.mode === VolumeModes.MOUNT) {
+                            this.cmd.logger.debug('Running in persistent volume mode for: %s with %o', name, asset)
                           } else {
-                            ctx.context[name].volumes = ctx.context[name].volumes.filter((item) => item !== volume)
+                            throw new Error('Unknown volume mode this may be do to templating error.')
                           }
-                        } else if (volume.mode === VolumeModes.MOUNT) {
-                          this.cmd.logger.debug('Running in persistent volume mode for: %s with %o', name, asset)
+                        })
+                      )
+
+                      this.cmd.logger.info('Volumes are generated: %s', name)
+                      this.cmd.logger.debug('Volumes for %s: %o', name, ctx.context[name].volumes)
+                    }
+                  },
+
+                  // processing environment files
+                  {
+                    skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
+                    task: async (): Promise<void> => {
+                      // add this to context
+                      ctx.context[name].env = ctx.containers[name].env[0]
+
+                      // output file
+                      const output = join(ctx.context[name].dir, '.env')
+
+                      // ask for overwrite
+                      if (
+                        !this.options.flags.force &&
+                        !await this.cmd.prompt({
+                          type: 'Toggle',
+                          initial: true,
+                          message: `Would you like to overwrite .env file: ${output}`
+                        })
+                      ) {
+                        this.cmd.logger.warn('Skipping .env file overwrite: %s', name)
+
+                        return
+                      }
+
+                      // read the yaml template for one file
+                      const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
+
+                      // parse environment variables, this is more reasonable than jinja
+                      const buffer = Object.entries(file).reduce((o, [key, val]) => {
+                        if (val) {
+                          return [...o, `${key}=${val}`]
                         } else {
-                          throw new Error('Unknown volume mode this may be do to templating error.')
+                          return [...o, `${key}=`]
                         }
-                      })
-                    )
+                      }, [])
 
-                    task.title = 'Volumes are generated.'
-                  }
-                },
+                      // create directory and files
+                      await this.cmd.fs.mkdir(ctx.context[name].dir)
 
-                // processing environment files
-                {
-                  title: 'Processing environment files...',
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
-                  task: async (): Promise<void> => {
-                    // add this to context
-                    ctx.context[name].env = ctx.containers[name].env[0]
+                      // write to file
+                      await this.cmd.fs.write(output, buffer.join(EOL))
 
-                    // output file
-                    const output = join(ctx.context[name].dir, '.env')
-
-                    // ask for overwrite
-                    if (
-                      !this.options.flags.force &&
-                      !await this.cmd.prompt({
-                        type: 'Toggle',
-                        initial: true,
-                        message: `Would you like to overwrite .env file: ${output}`
-                      })
-                    ) {
-                      this.cmd.logger.warn('Skipping .env file overwrite: %s', name)
-
-                      return
-                    }
-
-                    // read the yaml template for one file
-                    const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
-
-                    // parse environment variables, this is more reasonable than jinja
-                    const buffer = Object.entries(file).reduce((o, [key, val]) => {
-                      if (val) {
-                        return [...o, `${key}=${val}`]
-                      } else {
-                        return [...o, `${key}=`]
-                      }
-                    }, [])
-
-                    // create directory and files
-                    await this.cmd.fs.mkdir(ctx.context[name].dir)
-
-                    // write to file
-                    await this.cmd.fs.write(output, buffer.join(EOL))
-
-                    // lock necassary information
-                    this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                      path: ctx.containers[name].name,
-                      data: {
-                        [DockerHelperLock.DIRECTORIES]: [output]
-                      },
-                      merge: MergeStrategy.EXTEND
-                    })
-
-                    this.cmd.logger.info('Environment files generated.')
-                  }
-                },
-
-                // processing exposed ports
-                {
-                  skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.ports) || !this.options.flags.expose,
-                  task: async (ctx, task): Promise<void> => {
-                    this.cmd.logger.info('Processing exposed ports...')
-
-                    // read the yaml template for one file
-                    const file = await this.readYamlTemplate<string[]>(ctx.containers[name].ports[0], ctx.context[name])
-
-                    // only asks this with this flag
-                    if (this.options.flags.expose) {
-                      const prompt = await task.prompt({
-                        type: 'Toggle',
-                        message: `Do you want to add exposed ports for the container "${name}" at "${file.join(', ')}"?`,
-                        initial: true
+                      // lock necassary information
+                      this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
+                        path: ctx.containers[name].name,
+                        data: {
+                          [DockerHelperLock.DIRECTORIES]: [output]
+                        },
+                        merge: MergeStrategy.EXTEND
                       })
 
-                      if (prompt) {
-                        ctx.context[name].ports = file
+                      this.cmd.logger.info('Environment files generated: %s', name)
+                      this.cmd.logger.debug('Environment files for %s: %o', name, ctx.context[name].env)
+                    }
+                  },
+
+                  // processing exposed ports
+                  {
+                    skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.ports) || !this.options.flags.expose,
+                    task: async (ctx, task): Promise<void> => {
+                      this.cmd.logger.info('Processing exposed ports...')
+
+                      // read the yaml template for one file
+                      const file = await this.readYamlTemplate<string[]>(ctx.containers[name].ports[0], ctx.context[name])
+
+                      // only asks this with this flag
+                      if (this.options.flags.expose) {
+                        const prompt = await task.prompt({
+                          type: 'Toggle',
+                          message: `Do you want to add exposed ports for the container "${name}" at "${file.join(', ')}"?`,
+                          initial: true
+                        })
+
+                        if (prompt) {
+                          ctx.context[name].ports = file
+                        }
+
+                        this.cmd.logger.info('Exposed ports: %s', name)
+                        this.cmd.logger.debug('Exposed ports for %s: %o', name, ctx.context[name].ports)
                       }
                     }
+                  },
 
-                    this.cmd.logger.info('Exposed ports.')
-                  }
-                },
+                  // creating configuration
+                  {
+                    task: async (ctx): Promise<void> => {
+                      this.cmd.logger.info('Creating configuration.')
 
-                // creating configuration
-                {
-                  task: async (ctx): Promise<void> => {
-                    this.cmd.logger.info('Creating configuration.')
+                      try {
+                        // read the template
+                        const base = await this.cmd.cs.read<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
 
-                    try {
-                      // read the template
-                      const base = await this.cmd.cs.read<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
+                        ctx.context[name].config = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
 
-                      ctx.context[name].config = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
+                        if (ctx.context[name].config?.image) {
+                          const { image, ...rest } = ctx.context[name].config
 
-                      if (ctx.context[name].config?.image) {
-                        const { image, ...rest } = ctx.context[name].config
+                          ctx.context[name].config = rest
+                          ctx.context[name].image = image
+                        }
 
-                        ctx.context[name].config = rest
-                        ctx.context[name].image = image
+                        if (Object.keys(ctx.context[name].config).length === 0) {
+                          delete ctx.context[name].config
+                        }
+
+                        const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
+
+                        // configuration can still be null which is not mergeable
+                        if (template) {
+                          ctx.config = merge(MergeStrategy.OVERWRITE, base, ctx.config, template)
+                        } else {
+                          throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
+                        }
+                      } catch (e) {
+                        throw new Error(e)
                       }
 
-                      if (Object.keys(ctx.context[name].config).length === 0) {
-                        delete ctx.context[name].config
-                      }
-
-                      this.cmd.logger.debug('Context for "%s":\n%o', name, ctx.context[name])
-
-                      const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
-
-                      // configuration can still be null which is not mergeable
-                      if (template) {
-                        ctx.config = merge(MergeStrategy.OVERWRITE, base, ctx.config, template)
-                      } else {
-                        throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
-                      }
-                    } catch (e) {
-                      throw new Error(e)
+                      this.cmd.logger.info('Configuration generated: %s', name)
                     }
-
-                    this.cmd.logger.info('Configuration generated.')
                   }
-                }
-              ]
-            }
-          })
+                ]
+              }
+            })
 
-          return task.newListr(
-            subtasks.map((t) => {
-              return this.cmd.tasks.indent(t.tasks, { rendererOptions: { collapse: true } })
-            }),
-            {
-              rendererOptions: { collapse: false }
-            }
-          )
+            return task.newListr(
+              subtasks.map((t) => {
+                return this.cmd.tasks.indent(t.tasks, { rendererOptions: { collapse: true } })
+              })
+            )
+          }
         }
-      }
-    ])
+      ],
+      { rendererSilent: true }
+    )
   }
 
   async getAvailableContainers (): Promise<AvailableContainers> {
@@ -484,7 +493,7 @@ export class DockerHelper {
       return true
     } else if (array.length > 1) {
       // maybe i will add multiple later, even though it is unnessary?
-      this.cmd.logger.fatal('Error in configuration. There should be one file per container.\n%o', array)
+      this.cmd.logger.fatal('Error in configuration. There should be one file per container.%s%o', EOL, array)
 
       throw new Error('Invalid configuration.')
     } else {

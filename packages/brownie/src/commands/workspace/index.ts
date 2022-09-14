@@ -12,7 +12,7 @@ import { NodeHelper } from '@helpers/node.helper'
 import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
 import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
-export class WorkspaceCreateCommand extends Command<WorkspaceCreateCommandCtx, InferFlags<typeof WorkspaceCreateCommand>> {
+export class WorkspaceCommand extends Command<WorkspaceCreateCommandCtx, InferFlags<typeof WorkspaceCommand>> {
   static description = 'Create a new workspace with NX.'
 
   static aliases = ['ws']
@@ -36,6 +36,13 @@ export class WorkspaceCreateCommand extends Command<WorkspaceCreateCommandCtx, I
 
   async shouldRunBefore (): Promise<void> {
     this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
+
+    this.setCtxDefaults(
+      new WorkspaceCreateCommandCtx(),
+      await this.cs.extend<Pick<WorkspaceCreateCommandCtx, 'workspaces' | 'dependencies'>>(
+        [this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.WORKSPACE))
+      )
+    )
   }
 
   async run (): Promise<void> {
@@ -44,13 +51,6 @@ export class WorkspaceCreateCommand extends Command<WorkspaceCreateCommandCtx, I
 
       this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
     }
-
-    this.setCtxDefaults(
-      new WorkspaceCreateCommandCtx(),
-      await this.cs.extend<Pick<WorkspaceCreateCommandCtx, 'workspaces' | 'dependencies'>>(
-        [this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.WORKSPACE))
-      )
-    )
 
     this.tasks.add<WorkspaceCreateCommandCtx>([
       this.tasks.indent(
@@ -67,7 +67,7 @@ export class WorkspaceCreateCommand extends Command<WorkspaceCreateCommandCtx, I
           }
         ],
         { rendererOptions: { collapse: false } },
-        { title: 'Performing primary actions.' }
+        { title: 'Performing primary actions...' }
       ),
 
       // Get which workspace to use.

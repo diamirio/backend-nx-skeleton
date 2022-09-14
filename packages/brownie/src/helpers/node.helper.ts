@@ -16,7 +16,7 @@ export class NodeHelper extends PackageManager {
    * @param options
    */
   packageManager (options: Omit<PackageManagerPackageAction, 'package'>, packages: NodeDependency[]): Listr {
-    return this.cmd.tasks.newListr(
+    return this.cmd.tasks.newListr<any, 'default'>(
       [
         {
           title: 'Working on dependencies...',
