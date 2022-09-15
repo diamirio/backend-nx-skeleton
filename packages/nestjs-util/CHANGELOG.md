@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [5.5.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.4...@webundsoehne/nestjs-util@5.5.5) (2022-09-15)
+
+
+### Bug Fixes
+
+* **SentryHandler:** add config switch to report all exceptions ([225c239](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/225c2395360fb8a03a55cb70b10781d2769b5b51))
+
 ## @webundsoehne/nestjs-util [5.5.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.3...@webundsoehne/nestjs-util@5.5.4) (2022-08-03)
 
 
