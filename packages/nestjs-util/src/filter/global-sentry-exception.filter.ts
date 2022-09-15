@@ -74,11 +74,11 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
       return
     }
 
-    // only report unhandled exceptions identified as such by base handler
     const ctx = host.switchToHttp()
     const response: FastifyReply = ctx.getResponse()
 
-    if (response?.statusCode < 500) {
+    // only report unhandled exceptions identified as such by base handler
+    if (!this.options?.reportAll && response?.statusCode < 500) {
       return
     }
 

@@ -106,7 +106,7 @@ class ServerModule implements NestModule {}
 
 ### Reporting to sentry.io
 
-`GlobalSentryExceptionFilter` extends the functionality of the `GlobalExceptionFilter` with additional reporting of errors with HTTP statuscode >= 500 to sentry.io. The options for sentry need to be set in the config file. At least the `dsn` has to be defined for a successful initialization. If the initialization was not successful, a warning will be displayed and the filter behaves as the base `GlobalExceptionFilter`.
+`GlobalSentryExceptionFilter` extends the functionality of the `GlobalExceptionFilter` with additional reporting of errors to sentry.io. The options for sentry need to be set in the config file. At least the `dsn` has to be defined for a successful initialization. If the initialization was not successful, a warning will be displayed and the filter behaves as the base `GlobalExceptionFilter`. By default, only unhandled or critical exceptions with HTTP statuscode >= 500 will be reported. Setting the optional config param `reportAll` to true will report all exceptions to sentry e.g. HttpExceptions, AuthorizationExceptions etc.
 
 This filter requires the `@sentry/node` package to be installed in your project. Please add it to your `package.json` dependencies.
 
@@ -116,6 +116,7 @@ This filter requires the `@sentry/node` package to be installed in your project.
 sentry:
   dsn: https://asdf13373r3p0rt1ng@o123456.ingest.sentry.io/12312345
   environment: appname_production
+  reportAll: false
 ```
 
 ### Http
