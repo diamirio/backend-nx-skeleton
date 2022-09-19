@@ -1,45 +1,37 @@
 # @webundsoehne/nestjs-util-microservices [2.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@1.3.7...@webundsoehne/nestjs-util-microservices@2.0.0-beta.1) (2022-08-08)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
 
 ### Performance Improvements
 
-* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-
+- extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ### BREAKING CHANGES
 
-* this is not compatible with older versions of the nx-nest generator
+- this is not compatible with older versions of the nx-nest generator
 
-- express/fastify is now selectable when selecting a server
-- moved database stuff to backend-database from backend-interface
-- extend generator to accept injecting arguments
-- use the migration module for mongodb
-- ditch typeorm-seeding for generic seeder
-- add relevant command for seeding to nestjs itself due to dependency injection
+* express/fastify is now selectable when selecting a server
+* moved database stuff to backend-database from backend-interface
+* extend generator to accept injecting arguments
+* use the migration module for mongodb
+* ditch typeorm-seeding for generic seeder
+* add relevant command for seeding to nestjs itself due to dependency injection
 
-
-
-
+## @webundsoehne/nestjs-util-microservices [1.3.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@1.3.7...@webundsoehne/nestjs-util-microservices@1.3.8) (2022-09-15)
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.1
+- **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.1
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.5
 
 ## @webundsoehne/nestjs-util-microservices [1.3.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@1.3.6...@webundsoehne/nestjs-util-microservices@1.3.7) (2022-08-03)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.4
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.4
 
 ## @webundsoehne/nestjs-util-microservices [1.3.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@1.3.5...@webundsoehne/nestjs-util-microservices@1.3.6) (2022-06-09)
 

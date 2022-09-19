@@ -39,8 +39,8 @@
     "@webundsoehne/ts-utility-types": "*"
   },
   "devDependencies": {
-    "@nestjs/common": "^9.0.11",
-    "@nestjs/core": "^9.0.11"
+    "@nestjs/common": "^9.1.1",
+    "@nestjs/core": "^9.1.1"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8",

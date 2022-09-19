@@ -35,8 +35,8 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.1.3",
-    "@angular-devkit/schematics": "^14.1.3",
+    "@angular-devkit/core": "^14.2.3",
+    "@angular-devkit/schematics": "^14.2.3",
     "@nestjs/schematics": "^9.0.1",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
