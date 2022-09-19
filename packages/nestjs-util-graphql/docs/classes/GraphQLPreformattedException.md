@@ -26,7 +26,6 @@
 
 ### Properties
 
-- [cause](GraphQLPreformattedException.md#cause)
 - [extensions](GraphQLPreformattedException.md#extensions)
 - [locations](GraphQLPreformattedException.md#locations)
 - [message](GraphQLPreformattedException.md#message)
@@ -67,20 +66,6 @@ Error.constructor
 packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:8
 
 ## Properties
-
-### cause
-
-• `Optional` **cause**: `Error`
-
-#### Inherited from
-
-Error.cause
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2022.error.d.ts:26
-
-___
 
 ### extensions
 
@@ -124,7 +109,7 @@ Error.message
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1029
+node_modules/typescript/lib/lib.es5.d.ts:1041
 
 ___
 
@@ -138,7 +123,7 @@ Error.name
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1028
+node_modules/typescript/lib/lib.es5.d.ts:1040
 
 ___
 
@@ -166,7 +151,7 @@ Error.stack
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1030
+node_modules/typescript/lib/lib.es5.d.ts:1042
 
 ___
 
