@@ -25,8 +25,8 @@ export enum AvailableServerTypes {
  * If server component is selected, these are the options to use as an adapter.
  */
 export enum AvailableServerAdapters {
-  EXPRESS = 'express',
-  FASTIFY = 'fastify'
+  FASTIFY = 'fastify',
+  EXPRESS = 'express'
 }
 
 /**

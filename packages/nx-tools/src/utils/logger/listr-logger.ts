@@ -23,7 +23,7 @@ export class ListrLogger extends BaseLogger {
   }
 
   success (message: string): void {
-    this.logger.info(message, { status: 'done' })
+    this.logger.info(message, { status: 'end' })
   }
 
   data (message: string): void {
