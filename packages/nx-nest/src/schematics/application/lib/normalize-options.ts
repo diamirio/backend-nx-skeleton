@@ -23,6 +23,7 @@ import {
   generateNameCases,
   getInitialFromPriorConfiguration,
   isVerbose,
+  ListrLogger,
   mapPromptChoices,
   normalizeExtensionsPrompt,
   normalizeNameWithApplicationModePrompt,
@@ -39,7 +40,7 @@ import {
  * @param _context
  * @param options
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -311,8 +312,6 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         }
       }
     ],
-    {
-      rendererFallback: isVerbose()
-    }
+    { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
   ).run()
 }

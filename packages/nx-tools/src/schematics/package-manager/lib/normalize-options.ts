@@ -2,7 +2,8 @@ import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { setSchemaDefaultsInContext } from '@utils/schematics'
+import { ListrLogger } from '@utils/logger'
+import { isVerbose, setSchemaDefaultsInContext } from '@utils/schematics'
 
 /**
  * Normalize the options passed in through angular-schematics.
@@ -10,15 +11,18 @@ import { setSchemaDefaultsInContext } from '@utils/schematics'
  * @param context
  * @param options
  */
-export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>([
-    // assign options to parsed schema
-    {
-      task: (ctx): void => {
-        setSchemaDefaultsInContext(ctx, {
-          default: [options, { root: process.cwd() }]
-        })
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Listr<NormalizedSchema>(
+    [
+      // assign options to parsed schema
+      {
+        task: (ctx): void => {
+          setSchemaDefaultsInContext(ctx, {
+            default: [options, { root: process.cwd() }]
+          })
+        }
       }
-    }
-  ]).run()
+    ],
+    { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
+  ).run()
 }

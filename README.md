@@ -139,7 +139,7 @@ Schematic for scaffolding `@nrwl/nx` workspace.
 
 ### patch-package - @webundsoehne/patch-package
 
-A wrapper around the `patch-package` library which can automatically apply predefined patches or create new ones.
+A wrapper around the `patch-package` library, which can automatically apply predefined patches or create new ones.
 
 [**Read more...**](./packages/patch-package/README.md)
 
@@ -155,7 +155,7 @@ Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder du
 
 Using the scripts link all the packages to your global link directory.
 
-You can use the `-d` or `--develop` flag in `brownie` commands `workspace` and `nx` to put schematics in development mode. This will do some additional tasks to ensure that it will work in a development environment. For dependencies it will only install the linked versions.
+You can use the `-d` or `--develop` flag in `brownie` commands `workspace` and `nx` to put schematics in development mode. This will do some additional tasks to ensure that it will work in a development environment. For dependencies, it will only install the linked versions.
 
 You can use the `--debug` flag for `brownie`, which will activate the debug log level for both the schematics that it runs and the `brownie` itself.
 
@@ -171,8 +171,8 @@ This is a brief walkthrough, you can find more information in the following sect
 
 ### Warnings
 
-- If you have a new or updated NPM module added to one of the packages, you might need to install it again from root. Because `yarn workspaces` and `resolutions` field do not play nice. But do not worry since the install will only fix the resolutions and not take much of time.
-- Since it was taking a lots of resources to use Typescript compiler on this repository, it is converted to a tool called `tsup` based on `esbuild` and `rollup`. `esbuild` is very strict with `import type` and `export type` statements where `isolatedModules` should be used. `eslint` will do its best to convert the code to use `import/export type` statements but sometimes since these types can be used in `constructor` it will leave them alone since they can also be dependency injection. This can not be true for the cases with interfaces or types but it still acts this way, so some caution is needed.
+- If you have a new or updated NPM module added to one of the packages, you might need to install it again from root. Because `yarn workspaces` and `resolutions` field do not play nice. But do not worry since the installation will only fix the resolutions and not take much of time.
+- Since it was taking a lots of resources to use Typescript compiler on this repository, it is converted to a tool called `tsup` based on `esbuild` and `rollup`. `esbuild` is very strict with `import type` and `export type` statements where `isolatedModules` should be used. `eslint` will do its best to convert the code to use `import/export type` statements but sometimes since these types can be used in `constructor` it will leave them alone since they can also be dependency injection. This cannot be true for the cases with interfaces or types, but it still acts this way, so some caution is needed.
 
 ### Publishing Process
 
@@ -188,7 +188,7 @@ Repository has `git commit` hook to ensure the commit format.
 
 So it is better to commit often for little things to ensure that your final version matches what you expect.
 
-To give an example to this lets say we will do changes in 2 packages, `nx-nest` and `nx-tools`.
+To give an example to these lets say we will do changes in 2 packages, `nx-nest` and `nx-tools`.
 
 `nx-nest` will have just a bug fix. So after changing the related files, we can just commit with `fix` to ensure that it will publish a patch version. `nx-tools` will have a new feature that is not breaking. So again after changing the related files, we can just commit with `feat` to ensure that it will publish a minor version.
 
@@ -196,13 +196,13 @@ So even though we will publish them at the same time, they will get individually
 
 The other options that are inside the `git commit` hook, which uses a interactive selection for commitizen is:
 
-- scope -> you can scope your changes to a package, so when you are searching through commits its easier to find them. We currently have no convention for this.
+- scope -> you can scope your changes to a package, so when you are searching through commits it's easier to find them. We now have no convention for this.
 - long description -> will append the description to the issues replied and the commit itself
 - resolves issues -> will automatically respond to related issues and close them if specified
 - breaking changes -> breaking changes is required to publish a major version, it will also append it in the changelogs
 - skip ci -> if you are sure that the ci does not have to be run after this commit and everything lints and builds fine and there is no publishing needed you can select this to save ci resources
 
-The other commit types like `refactor`, `build`, `ci`, `style` does not affect versioning in anyway. But it helps to identify the changes made to the repository.
+The other commit types like `refactor`, `build`, `ci`, `style` does not affect versioning in any way. But it helps to identify the changes made to the repository.
 
 ### Versioning of Individual Packages
 
@@ -225,7 +225,7 @@ The image uses s6-overlay to monitor the crashes and will run `dev:start` for ea
 
 ### CLI-Script
 
-`./cli` script can be used to access in to Docker container directly. These commands can be interactive that requires keyboard or not. But on the base Docker image which is based on Alpine-Linux there is no `bash`, so for interactive session `ash` should be run.
+`./cli` script can be used to access in to Docker container directly. These commands can be interactive that requires keyboard or not. But on the base Docker image, which is based on Alpine-Linux there is no `bash`, so for interactive session `ash` should be run.
 
 - `./cli ws ${COMMAND}`, `./cli . ${COMMAND}`, `./cli root ${COMMAND}` -> Will run the command in the workspace root.
 - `./cli ${PACKAGE_NAME} ${COMMAND}` -> Will look for package name in `packages/*` folder and execute the command in that root.
@@ -235,7 +235,7 @@ The image uses s6-overlay to monitor the crashes and will run `dev:start` for ea
 
 ## Scripts
 
-There are couple of scripts in the scripts folder:
+There are a couple of scripts in the scripts folder:
 
 - `./scripts/link-packages.sh [link | unlink]` This can also be accessed through: `yarn run scripts:link` `yarn run scripts:unlink`
 

@@ -1,73 +1,65 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { flags } from '@oclif/command'
+import type { InferFlags } from '@cenk1cenk2/oclif-common'
+import { Command, Flags } from '@cenk1cenk2/oclif-common'
 import execa from 'execa'
 import type { Listr } from 'listr2'
+import { join } from 'path'
 
+import { DEVELOP_FLAGS } from '@constants/develop.constants'
+import { ConfigurationFiles } from '@constants/file.constants'
+import { PACKAGE_MANAGER_FLAGS } from '@constants/package-manager.constants'
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
-import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
-import type { Configuration } from '@interfaces/default-config.interface'
 import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
 import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
-export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
+export class WorkspaceCommand extends Command<WorkspaceCreateCommandCtx, InferFlags<typeof WorkspaceCommand>> {
   static description = 'Create a new workspace with NX.'
+
   static aliases = ['ws']
+
   static flags = {
-    ['skip-updates']: flags.boolean({
+    ...DEVELOP_FLAGS,
+    ...PACKAGE_MANAGER_FLAGS,
+    ['skip-updates']: Flags.boolean({
       description: 'Skip the dependency updates.',
       default: false,
       char: 's'
     }),
-    force: flags.boolean({
+    force: Flags.boolean({
       description: 'Force override for schematic.',
       default: false,
       char: 'f'
-    }),
-    develop: flags.boolean({
-      description: 'Puts the underlying schematics to development mode, if they support it.',
-      default: false,
-      char: 'd'
     })
   }
 
   private helpers: { node: NodeHelper }
 
-  async construct (): Promise<void> {
-    // can not initiate helpers as private since this is initiated by oclif
-    this.helpers = { node: new NodeHelper(this) }
+  async shouldRunBefore (): Promise<void> {
+    this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
+
+    this.setCtxDefaults(
+      new WorkspaceCreateCommandCtx(),
+      await this.cs.extend<Pick<WorkspaceCreateCommandCtx, 'workspaces' | 'dependencies'>>(
+        [this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.WORKSPACE))
+      )
+    )
   }
 
   async run (): Promise<void> {
-    // get oclif parameters
-    const { flags } = this.parse(WorkspaceCreateCommand)
-
-    if (flags.develop) {
+    if (this.flags.develop) {
       setDevelopmentMode()
 
       this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
     }
-
-    // initiate variables
-    this.tasks.ctx = new WorkspaceCreateCommandCtx()
-
-    // get config
-    const { config } = await this.getConfig<WorkspaceConfig[]>('workspace.config.yml')
-
-    // add configuration in on ctx
-    this.tasks.options.ctx.workspaces = config
 
     this.tasks.add<WorkspaceCreateCommandCtx>([
       this.tasks.indent(
         [
           // ensure that git is installed
           {
-            title: 'Being sure that GIT is installed.',
-            task: async (_, task): Promise<void> => {
+            task: async (): Promise<void> => {
               try {
-                const gitVersion = await execa('git', ['--version'])
-
-                task.title = `Found git version: ${gitVersion.stdout}`
+                await execa('git', ['--version'])
               } catch {
                 throw new Error('GIT not available on the system or can not reach it!. Quitting.')
               }
@@ -75,7 +67,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           }
         ],
         { rendererOptions: { collapse: false } },
-        { title: 'Performing primary actions.' }
+        { title: 'Performing primary actions...' }
       ),
 
       // Get which workspace to use.
@@ -88,7 +80,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
             choices: ctx.workspaces.map((w) => w.pkg)
           })
 
-          ctx.workspace = config.find((c) => c.pkg === ctx.prompts.workspace)
+          ctx.workspace = ctx.workspaces.find((c) => c.pkg === ctx.prompts.workspace)
           this.logger.debug('Selected workspace package is: %o', ctx.workspace)
         }
       },
@@ -99,7 +91,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           {
             title: 'Checking dependency requirements...',
             task: async (ctx, task): Promise<void> => {
-              ctx.deps = await this.helpers.node.checkIfModuleInstalled([...this.constants.workspace.requiredDependencies, ctx.workspace], {
+              ctx.deps = await this.helpers.node.checkIfModuleInstalled([...ctx.dependencies, ctx.workspace], {
                 getVersion: true,
                 global: true,
                 getUpdate: true
@@ -114,7 +106,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           // offer to upgrade them as required
           {
             title: 'Checking for required dependency updates...',
-            skip: (): boolean => flags['skip-updates'],
+            skip: (): boolean => this.flags['skip-updates'],
             task: async (ctx, task): Promise<void> => {
               const updatable = ctx.deps.filter((d) => d.hasUpdate)
 
@@ -163,7 +155,7 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
           },
 
           {
-            skip: (): boolean => flags['skip-updates'],
+            skip: (): boolean => this.flags['skip-updates'],
             task: (ctx): Listr =>
               this.helpers.node.packageManager(
                 {
@@ -180,11 +172,10 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
         { title: 'Performing required dependency operations.' }
       )
     ])
+  }
 
-    // run finally prematurely
-    const { ctx } = await this.finally<WorkspaceCreateCommandCtx>()
-
-    this.logger.module('Now will start generating the workspace: %s', ctx.workspace.pkg)
+  async shouldRunAfter (ctx: WorkspaceCreateCommandCtx): Promise<void> {
+    this.logger.info('Now will start generating the workspace: %s', ctx.workspace.pkg)
 
     const workspace = (
       await this.helpers.node.checkIfModuleInstalled([ctx.workspace], {
@@ -195,11 +186,11 @@ export class WorkspaceCreateCommand extends BaseCommand<Configuration> {
     ).find((c) => c.pkg === ctx.workspace.pkg)
 
     // this will be the command
-    await execa('ng', ['new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...flags.force ? ['-f'] : []], {
+    await execa('ng', ['new', '--collection', `${workspace.path}/${ctx.workspace.collection}`, ...this.flags.force ? ['-f'] : []], {
       stdio: 'inherit',
       shell: true,
       env: {
-        NG_DEBUG: String(this.isVerbose || this.isDebug)
+        NG_DEBUG: String(this.cs.isVerbose || this.cs.isDebug)
       }
     })
   }

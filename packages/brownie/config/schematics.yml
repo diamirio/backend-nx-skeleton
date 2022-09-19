@@ -1,3 +1,4 @@
+---
 - pkg: '@webundsoehne-private/nx-nest'
   registry: 'https://verdaccio.webundsoehne.com'
   description: 'A boilerplate to generate Nest.js applications from scratch.'

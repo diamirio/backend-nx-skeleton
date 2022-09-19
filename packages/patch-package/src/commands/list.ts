@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { BaseCommand, createTable } from '@cenk1cenk2/boilerplate-oclif'
-import fs from 'fs-extra'
+import { CliUx, Command } from '@cenk1cenk2/oclif-common'
 import globby from 'globby'
 import { EOL } from 'os'
 import { getPackageDetailsFromPatchFilename } from 'patch-package/dist/PackageDetails'
@@ -8,15 +7,15 @@ import { join } from 'path'
 import rewire from 'rewire'
 import wrap from 'wrap-ansi'
 
-import type { ApplicationConfiguration } from '@interfaces/config.interface'
+import { FileLocations } from '@constants/file.constants'
 
-export class ListCommand extends BaseCommand<ApplicationConfiguration> {
+export class ListCommand extends Command<never, typeof ListCommand> {
   static description = 'Lists all the static entities that are shipped with this module.'
   static aliases = ['ls']
 
   private rewire: Record<'findPatchFiles', any> = {} as any
 
-  async construct (): Promise<void> {
+  async shouldRunBefore (): Promise<void> {
     // since the underlying application is not exposing any of these methods, run time rewire is required
     this.logger.debug('Rewiring underlying module...')
 
@@ -30,22 +29,22 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
   }
 
   async run (): Promise<void> {
-    this.logger.module('Listing all the available patches in this module.')
+    this.logger.info('Listing all the available patches in this module.')
 
     const directories = await globby('*', {
-      cwd: join(this.config.root, this.constants.patchesDir),
+      cwd: join(this.cs.root, FileLocations.PATCHES_DIR),
       onlyDirectories: true
     })
 
-    const table: string[][] = []
+    const table: Record<'name' | 'description' | 'subtable', string>[] = []
 
     await Promise.all(
       directories.map(async (dir) => {
-        const cwd = join(this.config.root, this.constants.patchesDir, dir)
+        const cwd = join(this.cs.root, FileLocations.PATCHES_DIR, dir)
 
         const files: string[] = this.rewire.findPatchFiles(cwd)
 
-        const description = fs.existsSync(join(cwd, 'description.txt')) ? await fs.readFile(join(cwd, 'description.txt')) : '-'
+        const description = this.fs.exists(join(cwd, 'description.txt')) ? await this.fs.read(join(cwd, 'description.txt')) : '-'
 
         const subtable: string[] = []
 
@@ -65,10 +64,18 @@ export class ListCommand extends BaseCommand<ApplicationConfiguration> {
           })
         )
 
-        table.push([dir, wrap(description.toString(), 60), subtable.join(EOL)])
+        table.push({
+          name: dir,
+          description: wrap(description.toString(), 60),
+          subtable: subtable.join(EOL)
+        })
       })
     )
 
-    this.logger.direct(createTable(['name', 'description', 'patches'], table))
+    CliUx.ux.table(table, {
+      name: { header: 'Name' },
+      description: { header: 'Description' },
+      subtable: { header: 'Patches' }
+    })
   }
 }

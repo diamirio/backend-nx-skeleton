@@ -4,6 +4,8 @@ import { Listr } from 'listr2'
 import type { NormalizedSchema, Schema } from '../main.interface'
 import {
   ensureNxRootListrTask,
+  isVerbose,
+  ListrLogger,
   normalizePackageJsonNameForParentPrompt,
   normalizeParentApplicationPrompt,
   normalizeParentConfigurationPrompt,
@@ -16,23 +18,26 @@ import {
  * @param context
  * @param options
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>([
-    // assign options to parsed schema
-    {
-      task: (ctx): void => {
-        setSchemaDefaultsInContext(ctx, {
-          default: [options]
-        })
-      }
-    },
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Listr<NormalizedSchema>(
+    [
+      // assign options to parsed schema
+      {
+        task: (ctx): void => {
+          setSchemaDefaultsInContext(ctx, {
+            default: [options]
+          })
+        }
+      },
 
-    ...ensureNxRootListrTask(),
+      ...ensureNxRootListrTask(),
 
-    ...normalizeParentApplicationPrompt<NormalizedSchema, never>(host),
+      ...normalizeParentApplicationPrompt<NormalizedSchema, never>(host),
 
-    ...normalizeParentConfigurationPrompt<NormalizedSchema>(host),
+      ...normalizeParentConfigurationPrompt<NormalizedSchema>(host),
 
-    ...normalizePackageJsonNameForParentPrompt<NormalizedSchema>(host)
-  ]).run()
+      ...normalizePackageJsonNameForParentPrompt<NormalizedSchema>(host)
+    ],
+    { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
+  ).run()
 }

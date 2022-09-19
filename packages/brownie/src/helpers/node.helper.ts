@@ -1,15 +1,14 @@
-import type { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
+import type { Command } from '@cenk1cenk2/oclif-common'
+import { pipeProcessThroughListr } from '@cenk1cenk2/oclif-common'
 import execa from 'execa'
 import type { Listr } from 'listr2'
 
-import type { Configuration } from '@interfaces/default-config.interface'
-import type { NodeDependency, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
+import type { AvailablePackageManagers, NodeDependency, PackageManagerPackageAction } from '@webundsoehne/nx-tools'
 import { PackageManager } from '@webundsoehne/nx-tools'
-import { pipeProcessThroughListr } from '@webundsoehne/nx-tools/dist/utils/logger/pipe-process-to-listr'
 
 export class NodeHelper extends PackageManager {
-  constructor (private readonly cmd: BaseCommand<Configuration>) {
-    super({ manager: cmd.constants.package_manager })
+  constructor (private readonly cmd: Command, options?: { manager?: AvailablePackageManagers }) {
+    super({ manager: options?.manager })
   }
 
   /**
@@ -17,7 +16,7 @@ export class NodeHelper extends PackageManager {
    * @param options
    */
   packageManager (options: Omit<PackageManagerPackageAction, 'package'>, packages: NodeDependency[]): Listr {
-    return this.cmd.tasks.newListr(
+    return this.cmd.tasks.newListr<any, 'default'>(
       [
         {
           title: 'Working on dependencies...',

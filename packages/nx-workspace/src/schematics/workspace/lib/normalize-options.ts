@@ -5,12 +5,12 @@ import { join } from 'path'
 import type { NormalizedSchema, Schema } from '../main.interface'
 import { AvailableCLIs, AvailableFolderStructures, PrettyNamesForAvailableThingies } from '@interfaces/available.constants'
 import { calculateDependencies } from '@utils/versions'
-import { color, generateNameCases, isVerbose, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
+import { color, generateNameCases, isVerbose, ListrLogger, mapPromptChoices, setSchemaDefaultsInContext } from '@webundsoehne/nx-tools'
 
 /**
  * Normalize the options passed in through angular-schematics.
  */
-export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -124,8 +124,6 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         }
       }
     ],
-    {
-      rendererFallback: isVerbose()
-    }
+    { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
   ).run()
 }

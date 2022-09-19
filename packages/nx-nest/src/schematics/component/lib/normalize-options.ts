@@ -12,6 +12,7 @@ import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThing
 import { generateMicroserviceCasing } from '@utils'
 import type { ConvertToPromptType } from '@webundsoehne/nx-tools'
 import {
+  ListrLogger,
   generateNameCases,
   isVerbose,
   normalizeNameWithParentApplicationPrompt,
@@ -28,7 +29,7 @@ import {
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -148,8 +149,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       }
     ],
     {
-      rendererFallback: isVerbose(),
-      rendererSilent: options.silent
+      rendererSilent: options.silent,
+      nonTTYRendererOptions: { logger: ListrLogger, options: [context] },
+      rendererFallback: isVerbose()
     }
   ).run()
 }

@@ -7,7 +7,7 @@ import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { color, findNxRoot, generateNameCases, isVerbose, Logger, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { color, findNxRoot, generateNameCases, isVerbose, ListrLogger, Logger, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -140,8 +140,9 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       }
     ],
     {
-      rendererFallback: isVerbose(),
-      rendererSilent: options.silent
+      rendererSilent: options.silent,
+      nonTTYRendererOptions: { logger: ListrLogger, options: [context] },
+      rendererFallback: isVerbose()
     }
   ).run()
 }

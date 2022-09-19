@@ -7,6 +7,7 @@ import { SchematicConstants } from '@interfaces'
 import {
   ensureNxRootListrTask,
   isVerbose,
+  ListrLogger,
   normalizeNamePrompt,
   normalizePackageJsonNamePrompt,
   normalizePriorConfigurationPrompt,
@@ -15,7 +16,7 @@ import {
   setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
   return new Listr<NormalizedSchema>(
     [
       // assign options to parsed schema
@@ -50,8 +51,9 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
     ],
     {
       concurrent: false,
-      rendererFallback: isVerbose(),
-      rendererSilent: options.silent
+      rendererSilent: options.silent,
+      nonTTYRendererOptions: { logger: ListrLogger, options: [context] },
+      rendererFallback: isVerbose()
     }
   ).run()
 }

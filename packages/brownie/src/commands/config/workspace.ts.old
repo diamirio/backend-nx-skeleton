@@ -1,10 +1,10 @@
-import type { ConfigRemove } from '@cenk1cenk2/boilerplate-oclif'
-import { ConfigBaseCommand, promptUser, createTable, ConfigTypes } from '@cenk1cenk2/boilerplate-oclif'
+import type { ConfigRemove } from '@cenk1cenk2/oclif-common'
+import { ConfigCommand, promptUser, createTable, ConfigTypes } from '@cenk1cenk2/oclif-common'
 
 import type { WorkspacePrompt } from '@context/config/workspace.config.interface'
 import type { WorkspaceConfig } from '@interfaces/config/workspace.config.interface'
 
-export class WorkspaceConfigCommand extends ConfigBaseCommand {
+export class WorkspaceConfigCommand extends ConfigCommand {
   static description = 'Edit available workspace skeletons through a user interface.'
   protected configName = 'workspace.config.yml'
   protected configType = ConfigTypes.general
@@ -16,7 +16,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
     // userInput user if name already exists
     const index = config.findIndex((c) => c.pkg === response.pkg)
 
-    if (index >= 0 && await promptUser({ type: 'Toggle', message: `"${response?.pkg}" already exists in local configuration. Do you want to overwrite?` })) {
+    if (index >= 0 && await this.prompt({ type: 'Toggle', message: `"${response?.pkg}" already exists in local configuration. Do you want to overwrite?` })) {
       config[index] = response
     } else {
       config.push(response)
@@ -93,7 +93,7 @@ export class WorkspaceConfigCommand extends ConfigBaseCommand {
   private prompt (config: WorkspaceConfig[], select?: string): Promise<WorkspacePrompt> {
     const matching = config.find((c) => c.pkg === select)
 
-    return promptUser<WorkspacePrompt>({
+    return this.prompt<WorkspacePrompt>({
       type: 'Form',
       message: 'Please provide the details for repository below.',
       choices: [
