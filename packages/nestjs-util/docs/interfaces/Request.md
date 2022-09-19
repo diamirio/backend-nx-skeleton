@@ -302,7 +302,7 @@ ___
 
 ### server
 
-• **server**: `FastifyInstance`<`Server`, `IncomingMessage`, `ServerResponse`, `FastifyBaseLogger`, `FastifyTypeProviderDefault`\>
+• **server**: `FastifyInstance`<`RawServerDefault`, `IncomingMessage`, `ServerResponse`<`IncomingMessage`\>, `FastifyBaseLogger`, `FastifyTypeProviderDefault`\>
 
 #### Inherited from
 

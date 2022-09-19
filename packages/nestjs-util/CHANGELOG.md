@@ -1,3 +1,21 @@
+# @webundsoehne/nestjs-util [6.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.0-beta.1...@webundsoehne/nestjs-util@6.0.0-beta.2) (2022-09-19)
+
+
+### Bug Fixes
+
+* **SentryHandler:** add config switch to report all exceptions ([225c239](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/225c2395360fb8a03a55cb70b10781d2769b5b51))
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+
 # @webundsoehne/nestjs-util [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.4...@webundsoehne/nestjs-util@6.0.0-beta.1) (2022-08-08)
 
 ## @webundsoehne/nestjs-util [5.5.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@5.5.4...@webundsoehne/nestjs-util@5.5.5) (2022-09-15)
