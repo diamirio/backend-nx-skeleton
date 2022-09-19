@@ -19,7 +19,7 @@ If server component is selected, these are the options to use as an adapter.
 
 #### Defined in
 
-interfaces/available.constants.ts:28
+interfaces/available.constants.ts:29
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-interfaces/available.constants.ts:29
+interfaces/available.constants.ts:28
