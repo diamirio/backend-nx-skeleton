@@ -21,6 +21,7 @@
 ### Classes
 
 - [BaseExecutor](classes/BaseExecutor.md)
+- [ListrLogger](classes/ListrLogger.md)
 - [Logger](classes/Logger.md)
 - [PackageManager](classes/PackageManager.md)
 - [ProcessManager](classes/ProcessManager.md)
@@ -120,7 +121,6 @@
 - [PackageManagerCommands](README.md#packagemanagercommands)
 - [PrettyNamesDefault](README.md#prettynamesdefault)
 - [RUN\_PACKAGE\_MANAGER\_TASK\_NAME](README.md#run_package_manager_task_name)
-- [WINSTON\_INSTANCE](README.md#winston_instance)
 - [color](README.md#color)
 
 ### Functions
@@ -623,7 +623,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.interface.ts:24
+packages/nx-tools/src/utils/logger/logger.interface.ts:25
 
 ## Variables
 
@@ -668,16 +668,6 @@ ___
 #### Defined in
 
 packages/nx-tools/src/tasks/run-package-manager/run-package-manager.interface.ts:3
-
-___
-
-### WINSTON\_INSTANCE
-
-• `Const` **WINSTON\_INSTANCE**: ``"WINSTON_DEFAULT_LOGGER"``
-
-#### Defined in
-
-packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
 ___
 

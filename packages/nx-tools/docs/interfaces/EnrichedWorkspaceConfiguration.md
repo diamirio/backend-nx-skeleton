@@ -51,7 +51,7 @@ WorkspaceConfiguration.affected
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:55
+node_modules/nx/src/config/nx-json.d.ts:57
 
 ___
 
@@ -75,7 +75,7 @@ WorkspaceConfiguration.cli
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:103
+node_modules/nx/src/config/nx-json.d.ts:105
 
 ___
 
@@ -92,7 +92,7 @@ WorkspaceConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:123
+node_modules/nx/src/config/nx-json.d.ts:125
 
 ___
 
@@ -108,7 +108,7 @@ WorkspaceConfiguration.extends
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:28
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ___
 
@@ -142,7 +142,7 @@ WorkspaceConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:95
+node_modules/nx/src/config/nx-json.d.ts:97
 
 ___
 
@@ -158,7 +158,7 @@ WorkspaceConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:32
+node_modules/nx/src/config/nx-json.d.ts:34
 
 ___
 
@@ -178,7 +178,7 @@ WorkspaceConfiguration.namedInputs
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:41
+node_modules/nx/src/config/nx-json.d.ts:43
 
 ___
 
@@ -194,7 +194,7 @@ WorkspaceConfiguration.npmScope
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:51
+node_modules/nx/src/config/nx-json.d.ts:53
 
 ___
 
@@ -210,7 +210,7 @@ WorkspaceConfiguration.plugins
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:114
+node_modules/nx/src/config/nx-json.d.ts:116
 
 ___
 
@@ -226,7 +226,7 @@ WorkspaceConfiguration.pluginsConfig
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:118
+node_modules/nx/src/config/nx-json.d.ts:120
 
 ___
 
@@ -252,7 +252,7 @@ WorkspaceConfiguration.targetDefaults
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:47
+node_modules/nx/src/config/nx-json.d.ts:49
 
 ___
 
@@ -271,7 +271,7 @@ WorkspaceConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:37
+node_modules/nx/src/config/nx-json.d.ts:39
 
 ___
 
@@ -291,7 +291,7 @@ WorkspaceConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:66
+node_modules/nx/src/config/nx-json.d.ts:68
 
 ___
 
@@ -307,7 +307,7 @@ WorkspaceConfiguration.version
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:16
+node_modules/nx/src/config/workspace-json-project-json.d.ts:17
 
 ___
 
@@ -330,4 +330,4 @@ WorkspaceConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:59
+node_modules/nx/src/config/nx-json.d.ts:61

@@ -51,7 +51,7 @@ NxJsonConfiguration.affected
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:55
+node_modules/nx/src/config/nx-json.d.ts:57
 
 ___
 
@@ -75,7 +75,7 @@ NxJsonConfiguration.cli
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:103
+node_modules/nx/src/config/nx-json.d.ts:105
 
 ___
 
@@ -92,7 +92,7 @@ NxJsonConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:123
+node_modules/nx/src/config/nx-json.d.ts:125
 
 ___
 
@@ -108,7 +108,7 @@ NxJsonConfiguration.extends
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:28
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ___
 
@@ -142,7 +142,7 @@ NxJsonConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:95
+node_modules/nx/src/config/nx-json.d.ts:97
 
 ___
 
@@ -158,7 +158,7 @@ NxJsonConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:32
+node_modules/nx/src/config/nx-json.d.ts:34
 
 ___
 
@@ -188,7 +188,7 @@ NxJsonConfiguration.namedInputs
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:41
+node_modules/nx/src/config/nx-json.d.ts:43
 
 ___
 
@@ -204,7 +204,7 @@ NxJsonConfiguration.npmScope
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:51
+node_modules/nx/src/config/nx-json.d.ts:53
 
 ___
 
@@ -220,7 +220,7 @@ NxJsonConfiguration.plugins
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:114
+node_modules/nx/src/config/nx-json.d.ts:116
 
 ___
 
@@ -236,7 +236,7 @@ NxJsonConfiguration.pluginsConfig
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:118
+node_modules/nx/src/config/nx-json.d.ts:120
 
 ___
 
@@ -252,7 +252,7 @@ NxJsonConfiguration.targetDefaults
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:47
+node_modules/nx/src/config/nx-json.d.ts:49
 
 ___
 
@@ -271,7 +271,7 @@ NxJsonConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:37
+node_modules/nx/src/config/nx-json.d.ts:39
 
 ___
 
@@ -291,7 +291,7 @@ NxJsonConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:66
+node_modules/nx/src/config/nx-json.d.ts:68
 
 ___
 
@@ -314,4 +314,4 @@ NxJsonConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:59
+node_modules/nx/src/config/nx-json.d.ts:61

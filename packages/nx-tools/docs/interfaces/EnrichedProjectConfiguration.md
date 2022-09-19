@@ -63,7 +63,7 @@ ProjectConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:76
+node_modules/nx/src/config/workspace-json-project-json.d.ts:79
 
 ___
 
@@ -79,7 +79,7 @@ ProjectConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:84
+node_modules/nx/src/config/workspace-json-project-json.d.ts:87
 
 ___
 
@@ -105,7 +105,7 @@ ProjectConfiguration.name
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:40
+node_modules/nx/src/config/workspace-json-project-json.d.ts:43
 
 ___
 
@@ -125,7 +125,7 @@ ProjectConfiguration.namedInputs
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:88
+node_modules/nx/src/config/workspace-json-project-json.d.ts:91
 
 ___
 
@@ -141,7 +141,7 @@ ProjectConfiguration.projectType
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:58
+node_modules/nx/src/config/workspace-json-project-json.d.ts:61
 
 ___
 
@@ -157,7 +157,7 @@ ProjectConfiguration.root
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:50
+node_modules/nx/src/config/workspace-json-project-json.d.ts:53
 
 ___
 
@@ -173,7 +173,7 @@ ProjectConfiguration.sourceRoot
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:54
+node_modules/nx/src/config/workspace-json-project-json.d.ts:57
 
 ___
 
@@ -189,7 +189,7 @@ ProjectConfiguration.tags
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:94
+node_modules/nx/src/config/workspace-json-project-json.d.ts:97
 
 ___
 
@@ -209,4 +209,4 @@ ProjectConfiguration.targets
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:44
+node_modules/nx/src/config/workspace-json-project-json.d.ts:47

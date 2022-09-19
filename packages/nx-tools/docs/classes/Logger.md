@@ -195,10 +195,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.context?` | `string` |
-| `__namedParameters.level` | [`LogLevels`](../enums/LogLevels.md) |
-| `__namedParameters.message` | `string` |
+| `__namedParameters` | [`LoggerFormat`](../interfaces/LoggerFormat.md) |
 
 #### Returns
 
@@ -206,7 +203,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:112
+packages/nx-tools/src/utils/logger/logger.ts:113
 
 ___
 
@@ -228,7 +225,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:108
+packages/nx-tools/src/utils/logger/logger.ts:109
 
 ___
 
