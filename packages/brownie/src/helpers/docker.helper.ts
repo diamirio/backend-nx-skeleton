@@ -1,7 +1,7 @@
 import type { ConfigCommand } from '@cenk1cenk2/oclif-common'
-import { merge, MergeStrategy } from '@cenk1cenk2/oclif-common'
+import { fs, MergeStrategy } from '@cenk1cenk2/oclif-common'
 import axios from 'axios'
-import fs from 'fs-extra'
+import type { GlobbyOptions } from 'globby'
 import globby from 'globby'
 import type { Listr, ListrDefaultRenderer, ListrTask } from 'listr2'
 import { EOL } from 'os'
@@ -15,17 +15,23 @@ import { DockerHelperLock } from '@interfaces/lock-file.interface'
 import type { BrownieAvailableContainers } from '@webundsoehne/nx-tools'
 
 export class DockerHelper {
-  public dockerConfigLocation: string
-  public templatesLocation: string
+  private location: {
+    containers: string
+    templates: string
+  }
 
   constructor (
-    private readonly cmd: ConfigCommand<any>,
+    private readonly cmd: ConfigCommand,
     private readonly options: { flags: { output: string, force?: boolean, volume?: boolean, expose?: boolean, ['volumes-folder']: string, ['files-folder']: string } }
   ) {
     cmd.logger.debug('DockerHelper initiated.')
 
-    this.dockerConfigLocation = join(this.cmd.cs.oclif.root, 'templates', 'containers')
-    this.templatesLocation = join(this.cmd.cs.oclif.root, 'templates', 'base')
+    this.location = {
+      containers: join(this.cmd.cs.root, 'templates', 'containers'),
+      templates: join(this.cmd.cs.root, 'templates', 'base')
+    }
+
+    cmd.logger.debug('Initiated locations: %s', this.location)
   }
 
   generateGetContainerTasks (): Listr<DockerHelperCtx, 'silent'> {
@@ -44,7 +50,7 @@ export class DockerHelper {
         {
           skip: (ctx): boolean => Object.keys(ctx.containers).length !== 0,
           task: (): void => {
-            throw new Error(`No configuration files found in "${this.templatesLocation}".`)
+            throw new Error(`No configuration files found in "${this.location.templates}".`)
           }
         }
       ],
@@ -249,7 +255,7 @@ export class DockerHelper {
 
                             // only asks this with this flag
                             if (this.options.flags.volume) {
-                              prompt = await task.prompt({
+                              prompt = await this.cmd.prompt({
                                 type: 'Toggle',
                                 message: `Do you want to add persistent volume for the container "${name}" at "${asset.to} -> ${volume.to}"?`,
                                 initial: true
@@ -288,61 +294,21 @@ export class DockerHelper {
                     skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.env),
                     task: async (): Promise<void> => {
                       // add this to context
-                      ctx.context[name].env = ctx.containers[name].env[0]
-
-                      // output file
-                      const output = join(ctx.context[name].dir, '.env')
-
-                      // ask for overwrite
-                      if (
-                        !this.options.flags.force &&
-                        !await this.cmd.prompt({
-                          type: 'Toggle',
-                          initial: true,
-                          message: `Would you like to overwrite .env file: ${output}`
-                        })
-                      ) {
-                        this.cmd.logger.warn('Skipping .env file overwrite: %s', name)
-
-                        return
-                      }
+                      const env = ctx.containers[name].env[0]
 
                       // read the yaml template for one file
-                      const file = await this.readYamlTemplate(ctx.context[name].env, ctx.context[name])
+                      const file = await this.readYamlTemplate<Record<string, string>>(env, ctx.context[name])
 
-                      // parse environment variables, this is more reasonable than jinja
-                      const buffer = Object.entries(file).reduce((o, [key, val]) => {
-                        if (val) {
-                          return [...o, `${key}=${val}`]
-                        } else {
-                          return [...o, `${key}=`]
-                        }
-                      }, [])
+                      ctx.context[name].env = file
 
-                      // create directory and files
-                      await this.cmd.fs.mkdir(ctx.context[name].dir)
-
-                      // write to file
-                      await this.cmd.fs.write(output, buffer.join(EOL))
-
-                      // lock necassary information
-                      this.cmd.locker.addLock<LocalLockFile[LocalLockPaths.DOCKER_HELPER]['any']>({
-                        path: ctx.containers[name].name,
-                        data: {
-                          [DockerHelperLock.DIRECTORIES]: [output]
-                        },
-                        merge: MergeStrategy.EXTEND
-                      })
-
-                      this.cmd.logger.info('Environment files generated: %s', name)
-                      this.cmd.logger.debug('Environment files for %s: %o', name, ctx.context[name].env)
+                      this.cmd.logger.debug('Environment variables generated for %s: %o', name, ctx.context[name].env)
                     }
                   },
 
                   // processing exposed ports
                   {
                     skip: (): boolean => !this.checkArrayIsExactlyOneInLength(ctx.containers[name]?.ports) || !this.options.flags.expose,
-                    task: async (ctx, task): Promise<void> => {
+                    task: async (ctx): Promise<void> => {
                       this.cmd.logger.info('Processing exposed ports...')
 
                       // read the yaml template for one file
@@ -350,7 +316,7 @@ export class DockerHelper {
 
                       // only asks this with this flag
                       if (this.options.flags.expose) {
-                        const prompt = await task.prompt({
+                        const prompt = await this.cmd.prompt({
                           type: 'Toggle',
                           message: `Do you want to add exposed ports for the container "${name}" at "${file.join(', ')}"?`,
                           initial: true
@@ -373,7 +339,7 @@ export class DockerHelper {
 
                       try {
                         // read the template
-                        const base = await this.cmd.cs.read<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml'))
+                        const base = await this.cmd.parser.read<DockerComposeFile>(join(this.location.templates, 'docker-compose.yml'))
 
                         ctx.context[name].config = await this.readYamlTemplate(ctx.containers[name].path, ctx.context[name])
 
@@ -388,11 +354,11 @@ export class DockerHelper {
                           delete ctx.context[name].config
                         }
 
-                        const template = await this.readYamlTemplate<DockerComposeFile>(join(this.templatesLocation, 'docker-compose.yml.j2'), ctx.context[name])
+                        const template = await this.readYamlTemplate<DockerComposeFile>(join(this.location.templates, 'docker-compose.yml.j2'), ctx.context[name])
 
                         // configuration can still be null which is not mergeable
                         if (template) {
-                          ctx.config = merge(MergeStrategy.OVERWRITE, base, ctx.config, template)
+                          ctx.config = this.cmd.cs.merge([base, ctx.config, template])
                         } else {
                           throw new Error(`Container "${ctx.containers[name].name}" does not have a valid template.`)
                         }
@@ -424,10 +390,26 @@ export class DockerHelper {
     return (
       await Promise.all(
         (
-          await globby(['**/config.yml(.j2)?'], { cwd: this.dockerConfigLocation, absolute: true })
+          await globby(['**/config.yml(.j2)?'], {
+            cwd: this.location.containers,
+            absolute: true,
+            fs,
+            deep: 2
+          })
         ).map(async (item) => {
           const base = dirname(item)
-          const name = relative(this.dockerConfigLocation, base)
+          const name = relative(this.location.containers, base)
+
+          this.cmd.logger.debug('Found container: %s -> %s', base, name)
+
+          const options: GlobbyOptions = {
+            cwd: base,
+            absolute: true,
+            fs,
+            dot: true,
+            deep: 1,
+            onlyFiles: true
+          }
 
           return {
             name,
@@ -438,29 +420,13 @@ export class DockerHelper {
 
             path: item,
 
-            dockerfile: await globby(['**/Dockerfile(.j2)?', '**/dockerfile(.j2)?'], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            }),
+            dockerfile: await globby(['Dockerfile(.j2)?', 'dockerfile(.j2)?'], options),
 
-            env: await globby(['**/env.yml(.j2)?'], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            }),
+            env: await globby(['env.yml(.j2)?'], options),
 
-            volumes: await globby(['**/volumes.yml(.j2)?'], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            }),
+            volumes: await globby(['volumes.yml(.j2)?'], options),
 
-            ports: await globby(['**/ports.yml(.j2)?'], {
-              cwd: base,
-              absolute: true,
-              dot: true
-            })
+            ports: await globby(['ports.yml(.j2)?'], options)
           }
         })
       )

@@ -2,9 +2,9 @@ import { YamlParser, fs } from '@cenk1cenk2/oclif-common'
 import Nunjucks from 'nunjucks'
 import { dirname, isAbsolute, join } from 'path'
 
-const yaml = new YamlParser()
-
 export function jinja (path: string): Nunjucks.Environment {
+  const yaml = new YamlParser()
+
   // some trickery because of the types of nunjucks
   Nunjucks.installJinjaCompat()
 

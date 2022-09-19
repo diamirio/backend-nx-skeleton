@@ -11,7 +11,7 @@ export class WorkspaceCreateCommandCtx {
   public packages: NodeDependency[]
   public workspace: WorkspaceConfig
 
-  constructor() {
+  constructor () {
     this.prompts = {}
     this.packages = []
   }

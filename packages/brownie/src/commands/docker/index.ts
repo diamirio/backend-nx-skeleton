@@ -62,11 +62,13 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
         [DockerCommandChoices.REMOVE]: this.remove,
         [DockerCommandChoices.PURGE]: this.purge
       },
-      locker: new BrownieLocker(LocalLockPaths.DOCKER_HELPER)
+      locker: new BrownieLocker([LocalLockPaths.DOCKER_HELPER])
     }
   }
 
   async shouldRunBefore (): Promise<void> {
+    this.compose = new LockerService<DockerComposeFile>(join(process.cwd(), this.flags.file))
+
     this.helpers = {
       docker: new DockerHelper(this, {
         flags: {
@@ -80,28 +82,33 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       })
     }
 
-    this.compose = new LockerService<DockerComposeFile>(join(process.cwd(), this.flags.file), this.parser.getParser('yml'))
-
-    this.tasks.options = { rendererSilent: true }
+    this.tasks.options.rendererSilent = true
   }
 
   async shouldRunAfter (): Promise<void> {
     await this.locker.all()
+    await this.compose.all()
   }
 
   async nx (): Promise<void> {
     this.tasks.add<DockerNxCtx>([
       {
-        task: (): Listr<any, 'silent'> => this.helpers.docker.generateGetContainerTasks()
-      },
-
-      {
         task: (ctx): void => {
           this.logger.debug('Reading integration...')
           ctx.prompt = readBrownieWorkspaceContainers()
 
-          this.logger.info('Found containers: %s', ctx.prompt.join(', '))
+          if (ctx.prompt.length > 0) {
+            this.logger.info('Found containers: %s', ctx.prompt.join(', '))
+          } else {
+            this.logger.warn('Can not find any containers through NX integration.')
+
+            throw new Error('Nothing to do.')
+          }
         }
+      },
+
+      {
+        task: (): Listr<any, 'silent'> => this.helpers.docker.generateGetContainerTasks()
       },
 
       {
@@ -109,8 +116,8 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       },
 
       {
-        task: (ctx): Promise<void> =>
-          this.compose.lock({
+        task: (ctx): void =>
+          this.compose.addLock({
             data: ctx.config,
             merge: MergeStrategy.EXTEND
           })
@@ -128,8 +135,8 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
 
       // get user prompts
       {
-        task: async (ctx, task): Promise<BrownieAvailableContainers[]> =>
-          ctx.prompt = await task.prompt<BrownieAvailableContainers[]>({
+        task: async (ctx): Promise<BrownieAvailableContainers[]> =>
+          ctx.prompt = await this.prompt<BrownieAvailableContainers[]>({
             type: 'AutoComplete',
             multiple: true,
             message: 'Please select which containers you want to add.',
@@ -143,7 +150,11 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       },
 
       {
-        task: (ctx): Promise<void> => this.compose.write(ctx.config)
+        task: (ctx): void =>
+          this.compose.addLock({
+            data: ctx.config,
+            root: true
+          })
       }
     ])
   }
@@ -153,7 +164,7 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
 
     if (config?.services ? Object.keys(config.services).length > 0 : false) {
       this.table(
-        Object.entries(config.services).map(([service, val]) => ({ service, image: val.image ?? val.build })),
+        Object.entries(config.services).map(([service, val]) => ({ container: service, image: val.image ?? val.build })),
         {
           container: {
             header: 'Container'
@@ -173,11 +184,17 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
   async remove (): Promise<void> {
     const config = await this.compose.tryRead()
 
+    if (typeof config?.services !== 'object' || Object.keys(config.services).length === 0) {
+      this.logger.warn('Nothing to remove.')
+
+      return
+    }
+
     // get prompts for which one to remote
     const prompt: string[] = await this.prompt({
       type: 'MultiSelect',
       message: 'Please select configuration to delete.',
-      choices: config?.services ? Object.keys(config.services) : []
+      choices: Object.keys(config.services)
     })
 
     // if nothing selected in the prompt
@@ -187,20 +204,21 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       return
     }
 
-    await Promise.all(
-      prompt.map(async (k) => {
-        delete config.services[k]
-      })
+    this.compose.addUnlock(
+      ...prompt.map((service) => ({
+        path: ['services', service],
+        root: true
+      }))
     )
-
-    await this.compose.write(config)
 
     this.logger.info('Removed entries: %s', prompt.join(', '))
   }
 
   async purge (): Promise<void> {
     const lock = await this.locker.tryRead()
-    const containers = lock[LocalLockPaths.DOCKER_HELPER]
+    const containers = lock?.[LocalLockPaths.DOCKER_HELPER]
+
+    this.logger.debug('Available containers in lock file: %o', containers)
 
     if (!containers || Object.keys(containers).length === 0) {
       throw new Error('Nothing in lock file to purge.')
@@ -287,8 +305,8 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
 
                     return task.newListr([
                       {
-                        task: async (): Promise<void> => {
-                          await this.compose.unlock({
+                        task: (): void => {
+                          this.compose.addUnlock({
                             path: ['services', name]
                           })
                         }
@@ -318,46 +336,14 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
 
                     return task.newListr([
                       {
-                        task: async (): Promise<void> => {
-                          await this.compose.unlock({
+                        task: (): void => {
+                          this.compose.addUnlock({
                             path: ['services', name]
                           })
                         }
                       },
                       ...subtasks
                     ])
-                  }
-                },
-
-                {
-                  title: 'Updating lock file...',
-                  task: async (): Promise<void> => {
-                    // ensure lock file entries are not empty
-                    await this.locker.unlockAll()
-                    const lock = await this.locker.tryRead() ?? {}
-                    const containers = lock[LocalLockPaths.DOCKER_HELPER]
-
-                    await Promise.all(
-                      Object.keys(containers).map((c) => {
-                        if (containers[c]?.configuration && Object.keys(containers[c].configuration).length === 0) {
-                          this.locker.addUnlock({
-                            path: [c, DockerHelperLock.DIRECTORIES]
-                          })
-                        }
-
-                        if (containers[c]?.volumes && Object.keys(containers[c].volumes).length === 0) {
-                          this.locker.addUnlock({
-                            path: [c, DockerHelperLock.VOLUMES]
-                          })
-                        }
-
-                        if (Object.keys(containers[c]).length === 0) {
-                          this.locker.addUnlock({
-                            path: c
-                          })
-                        }
-                      })
-                    )
                   }
                 }
               ]
@@ -442,7 +428,7 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       if (prompt) {
         try {
           if (this.fs.stats(path).isDirectory()) {
-            await this.fs.remove(path)
+            await this.fs.removeDir(path)
 
             this.logger.debug('Deleted folder: %s', path)
           } else if (this.fs.stats(path).isFile()) {
@@ -454,7 +440,7 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
           if (fs.readdirSync(dirname(path)).length === 0) {
             this.logger.debug('After removing %s, folder is empty, will remove it as well.', path)
 
-            await fs.remove(this.fs.dirname(path))
+            await this.fs.removeDir(this.fs.dirname(path))
           }
 
           return true

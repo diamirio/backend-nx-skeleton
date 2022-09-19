@@ -1,4 +1,4 @@
-import type { FlagInput, InferFlags } from '@cenk1cenk2/oclif-common'
+import type { InferFlags } from '@cenk1cenk2/oclif-common'
 import { Command, Flags } from '@cenk1cenk2/oclif-common'
 import execa from 'execa'
 import type { Listr } from 'listr2'
@@ -17,7 +17,7 @@ export class WorkspaceCommand extends Command<WorkspaceCreateCommandCtx, InferFl
 
   static aliases = ['ws']
 
-  static flags: FlagInput = {
+  static flags = {
     ...DEVELOP_FLAGS,
     ...PACKAGE_MANAGER_FLAGS,
     ['skip-updates']: Flags.boolean({

@@ -1,24 +1,22 @@
 /* eslint-disable no-underscore-dangle */
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { flags as Flags } from '@oclif/command'
-import type { IBooleanFlag, IOptionFlag } from '@oclif/parser/lib/flags'
-import fs from 'fs-extra'
+import type { InferFlags } from '@cenk1cenk2/oclif-common'
+import { Command, Flags, fs } from '@cenk1cenk2/oclif-common'
 import globby from 'globby'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
 import { getPackageDetailsFromPatchFilename } from 'patch-package/dist/PackageDetails'
 import { packageIsDevDependency } from 'patch-package/dist/packageIsDevDependency'
-import { join, resolve, isAbsolute, basename } from 'path'
+import { basename, isAbsolute, join, resolve } from 'path'
 import rewire from 'rewire'
 import tmp from 'tmp-promise'
 
-import type { ApplicationConfiguration } from '@interfaces/config.interface'
+import { FileLocations } from '@constants/file.constants'
 
-export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
+export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>> {
   static strict = false
   static description = 'Patches or reserves given patches in a directory.'
   static examples = ['Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0', 'Use extended glob patterns: patch-package patch "graphql*"']
   static aliases = ['apply']
-  static flags: Record<'path' | 'directory', IOptionFlag<string>> & Record<'exitOnError' | 'reverse', IBooleanFlag<boolean>> = {
+  static flags = {
     directory: Flags.string({
       char: 'd',
       description: 'Directory to apply the patches from.'
@@ -77,18 +75,17 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
   async run (): Promise<void> {
     // get arguments
-    const { flags, argv } = this.parse(PatchCommand)
 
     // set default arguments
-    flags.directory = flags.directory
-      ? isAbsolute(flags.directory)
-        ? flags.directory
-        : join(getAppRootPath(), flags.directory)
-      : join(this.config.root, this.constants.patchesDir)
+    this.flags.directory = this.flags.directory
+      ? isAbsolute(this.flags.directory)
+        ? this.flags.directory
+        : join(getAppRootPath(), this.flags.directory)
+      : join(this.config.root, FileLocations.PATCHES_DIR)
 
-    this.logger.module(`${flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, flags.path)
+    this.logger.info(`${this.flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, this.flags.path)
 
-    const limit = argv.length === 0 ? ['*'] : argv
+    const limit = this.argv.length === 0 ? ['*'] : this.argv
 
     // check for missing patches when limited to
     let matched = []
@@ -98,11 +95,11 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
 
     await Promise.all(
       limit.map(async (path) => {
-        this.logger.info('Importing patches from directory: %s', join(flags.directory, path))
+        this.logger.info('Importing patches from directory: %s', join(this.flags.directory, path))
 
         try {
           const glob = await globby(`${path ?? '.'}/*.patch`, {
-            cwd: flags.directory,
+            cwd: this.flags.directory,
             onlyFiles: true,
             absolute: true
           })
@@ -123,9 +120,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     )
 
     if (missingPatches.length > 0) {
-      this.logger.fatal(`Some of the patches you limit to is not appropriate: ${missingPatches.join(', ')}`)
-
-      process.exit(127)
+      throw new Error(`Some of the patches you limit to is not appropriate: ${missingPatches.join(', ')}`)
     }
 
     // create temporary directory and move the patches there
@@ -142,19 +137,19 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     )
 
     // set patch directory to temporary directory
-    flags.directory = this.temp.path
+    this.flags.directory = this.temp.path
 
     // apply patches
     let shouldTerminate = false
 
     try {
       await this.applyPatchesForApp({
-        appPath: flags?.path,
-        reverse: flags?.reverse,
-        patchDir: flags.directory
+        appPath: this.flags?.path,
+        reverse: this.flags?.reverse,
+        patchDir: this.flags.directory
       })
     } catch (e) {
-      shouldTerminate = flags?.exitOnError === true ? true : false
+      shouldTerminate = this.flags?.exitOnError === true ? true : false
     } finally {
       if (this.temp) {
         this.logger.debug('Cleaning up temporary directory: %s', this.temp.path)
@@ -164,8 +159,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     }
 
     if (shouldTerminate) {
-      this.logger.fatal('Terminating application with exit code 127.')
-      process.exit(127)
+      throw new Error('Could not apply all the patches.')
     }
   }
 
@@ -234,7 +228,7 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
               )
             }
 
-            this.logger.success(`${pathSpecifier}@${version}`)
+            this.logger.info(`${pathSpecifier}@${version}`)
           } else if (installedPackageVersion === version) {
             // completely failed to apply patch
             // TODO: propagate useful error messages from patch application
@@ -273,10 +267,10 @@ export class PatchCommand extends BaseCommand<ApplicationConfiguration> {
     }
 
     for (const error of errors) {
-      this.logger.fail(error)
+      this.logger.error(error)
     }
 
-    this.logger.module('Finished execution.')
+    this.logger.info('Finished execution.')
 
     if (warnings.length) {
       this.logger.warn(`${warnings.length} warning(s).`)
