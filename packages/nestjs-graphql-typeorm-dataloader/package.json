@@ -51,7 +51,7 @@
   "devDependencies": {
     "@apollo/gateway": "^2.0.5",
     "@nestjs/graphql": "^10.0.21",
-    "@types/jest": "^28.1.7",
+    "@types/jest": "^29.0.3",
     "@types/lodash": "^4.14.183",
     "@types/uuid": "^8.3.4",
     "apollo-server-fastify": "^3.10.1",
@@ -60,7 +60,7 @@
     "graphql-request": "^4.3.0",
     "mikro-orm": "^5.3.1",
     "rimraf": "^3.0.2",
-    "sqlite3": "^5.0.11",
+    "sqlite3": "^5.1.1",
     "typeorm": "^0.3.7"
   },
   "engines": {

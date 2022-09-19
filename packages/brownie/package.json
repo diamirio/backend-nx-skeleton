@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@cenk1cenk2/oclif-common": "^3.8.0",
-    "@oclif/core": "^1.14.1",
+    "@oclif/core": "^1.16.3",
     "@oclif/plugin-help": "^5.1.10",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-tools": "*",
@@ -76,7 +76,7 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "globby": "^11.0.3",
-    "oclif": "^3"
+    "oclif": "^3.2.2"
   },
   "engines": {
     "node": ">= 16"
