@@ -57,15 +57,29 @@ Create docker-compose configuration from boilerplates.
 
 ```
 USAGE
-  $ brownie docker [-f] [-o <value>] [-v] [-e] [-V <value>] [-F <value>]
+  $ brownie docker [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-f] [-o <value>] [-v] [-e] [-F <value>] [-V <value>] [-F <value>]
 
 FLAGS
+  -F, --file=<value>            [default: docker-compose.yml] Compose file path.
   -F, --files-folder=<value>    [default: files] Output to included folder.
   -V, --volumes-folder=<value>  [default: volumes] Output to volumes folder.
   -e, --expose                  Expose ports from the container.
   -f, --force                   Force overwrites.
   -o, --output=<value>          [default: .docker] Output folder for the Docker files.
   -v, --volume                  Use optional persistent volumes with the containers.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Create docker-compose configuration from boilerplates.
@@ -116,12 +130,26 @@ Configure NX modules.
 
 ```
 USAGE
-  $ brownie nx [-s] [-a] [-d]
+  $ brownie nx [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-a]
 
 FLAGS
-  -a, --arguments     Enable prompt for passing in arguments.
-  -d, --develop       Puts the underlying schematics to development mode, if they support it.
-  -s, --skip-updates  Skip the dependency updates.
+  -a, --arguments                   Enable prompt for passing in arguments.
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Configure NX modules.
@@ -135,12 +163,26 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie workspace [-s] [-f] [-d]
+  $ brownie workspace [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
 
 FLAGS
-  -d, --develop       Puts the underlying schematics to development mode, if they support it.
-  -f, --force         Force override for schematic.
-  -s, --skip-updates  Skip the dependency updates.
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -f, --force                       Force override for schematic.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Create a new workspace with NX.
@@ -157,12 +199,26 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie ws [-s] [-f] [-d]
+  $ brownie ws [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
 
 FLAGS
-  -d, --develop       Puts the underlying schematics to development mode, if they support it.
-  -f, --force         Force override for schematic.
-  -s, --skip-updates  Skip the dependency updates.
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -f, --force                       Force override for schematic.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Create a new workspace with NX.
