@@ -24,7 +24,7 @@
     "lint:staged": "lint-staged",
     "oclif": "oclif",
     "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
-    "docs:readme": "yarn oclif-dev readme"
+    "docs:toc": "oclif readme"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
