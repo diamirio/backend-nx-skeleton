@@ -1,3 +1,15 @@
+# @webundsoehne/eslint-config [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.3-beta.2...@webundsoehne/eslint-config@6.0.0-beta.1) (2022-09-19)
+
+
+### Performance Improvements
+
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+
 ## @webundsoehne/eslint-config [5.2.3-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.3-beta.1...@webundsoehne/eslint-config@5.2.3-beta.2) (2022-08-11)
 
 
