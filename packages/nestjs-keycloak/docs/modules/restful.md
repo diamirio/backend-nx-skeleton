@@ -21,7 +21,10 @@
 
 ▸ **GetToken**(...`dataOrPipes`): `ParameterDecorator`
 
-Defines HTTP route param decorator
+Fetch the current user access token from the request.
+This only works for REST API applications, please check the alternative one if you require it for a REST API.
+
+**`Alias`**
 
 #### Parameters
 
@@ -43,7 +46,10 @@ ___
 
 ▸ **GetUser**(...`dataOrPipes`): `ParameterDecorator`
 
-Defines HTTP route param decorator
+Inject the current Keycloak user to a variable.
+This only works for RESTFUL applications, please check the alternative one if you require it for a REST API.
+
+**`Alias`**
 
 #### Parameters
 
@@ -65,7 +71,14 @@ ___
 
 ▸ **Token**(...`dataOrPipes`): `ParameterDecorator`
 
-Defines HTTP route param decorator
+Fetch the current user access token from the request.
+This only works for REST API applications, please check the alternative one if you require it for a REST API.
+
+**`Alias`**
+
+**`Deprecated`**
+
+Use GetToken instead because of the more generic naming scheme.
 
 #### Parameters
 
@@ -87,7 +100,14 @@ ___
 
 ▸ **User**(...`dataOrPipes`): `ParameterDecorator`
 
-Defines HTTP route param decorator
+Inject the current Keycloak user to a variable.
+This only works for RESTFUL applications, please check the alternative one if you require it for a REST API.
+
+**`Alias`**
+
+**`Deprecated`**
+
+Use GetUser instead because of the more generic naming scheme.
 
 #### Parameters
 

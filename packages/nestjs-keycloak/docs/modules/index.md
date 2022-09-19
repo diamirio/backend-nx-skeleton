@@ -496,6 +496,10 @@ Inject current Keycloak users roles in to a variable.
 
 **`Alias`**
 
+**`Deprecated`**
+
+Use KeycloakRoles instead because of the more generic naming scheme.
+
 #### Parameters
 
 | Name | Type |
@@ -519,6 +523,10 @@ ___
 Inject current Keycloak user client scopes in to a variable.
 
 **`Alias`**
+
+**`Deprecated`**
+
+Use KeycloakScopes instead because of the more generic naming scheme.
 
 #### Parameters
 
