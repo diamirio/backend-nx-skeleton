@@ -1,3 +1,22 @@
+# @webundsoehne/patch-package [4.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.2-beta.1...@webundsoehne/patch-package@4.0.0-beta.1) (2022-09-19)
+
+
+### Bug Fixes
+
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+* update to oclif 3 ([3372528](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3372528ab748cdcb4bb82ccc80802698967c11c2))
+
+
+### BREAKING CHANGES
+
+* some of the cli will act differently
+* uses the new library
+
 ## @webundsoehne/patch-package [3.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.1...@webundsoehne/patch-package@3.3.2-beta.1) (2022-08-08)
 
 
