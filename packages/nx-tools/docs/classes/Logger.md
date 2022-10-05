@@ -106,7 +106,7 @@ packages/nx-tools/src/utils/logger/logger.ts:20
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:62
+packages/nx-tools/src/utils/logger/logger.ts:60
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:50
+packages/nx-tools/src/utils/logger/logger.ts:48
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:46
+packages/nx-tools/src/utils/logger/logger.ts:44
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:58
+packages/nx-tools/src/utils/logger/logger.ts:56
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:66
+packages/nx-tools/src/utils/logger/logger.ts:64
 
 ___
 
@@ -203,7 +203,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:113
+packages/nx-tools/src/utils/logger/logger.ts:111
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:109
+packages/nx-tools/src/utils/logger/logger.ts:107
 
 ___
 
@@ -246,4 +246,4 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:54
+packages/nx-tools/src/utils/logger/logger.ts:52

@@ -35,13 +35,14 @@
 
 ### constructor
 
-• **new ListrLogger**(`context?`)
+• **new ListrLogger**(`context?`, `options?`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `context?` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
+| `options?` | [`LoggerOptions`](../interfaces/LoggerOptions.md) |
 
 #### Overrides
 
@@ -49,7 +50,7 @@ BaseLogger.constructor
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:11
+packages/nx-tools/src/utils/logger/listr-logger.ts:12
 
 ## Properties
 
@@ -59,7 +60,7 @@ packages/nx-tools/src/utils/logger/listr-logger.ts:11
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:9
+packages/nx-tools/src/utils/logger/listr-logger.ts:10
 
 ## Methods
 
@@ -83,7 +84,7 @@ BaseLogger.data
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:29
+packages/nx-tools/src/utils/logger/listr-logger.ts:30
 
 ___
 
@@ -107,7 +108,7 @@ BaseLogger.fail
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:17
+packages/nx-tools/src/utils/logger/listr-logger.ts:18
 
 ___
 
@@ -182,7 +183,7 @@ BaseLogger.retry
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:41
+packages/nx-tools/src/utils/logger/listr-logger.ts:42
 
 ___
 
@@ -206,7 +207,7 @@ BaseLogger.rollback
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:45
+packages/nx-tools/src/utils/logger/listr-logger.ts:46
 
 ___
 
@@ -230,7 +231,7 @@ BaseLogger.skip
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:21
+packages/nx-tools/src/utils/logger/listr-logger.ts:22
 
 ___
 
@@ -254,7 +255,7 @@ BaseLogger.start
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:33
+packages/nx-tools/src/utils/logger/listr-logger.ts:34
 
 ___
 
@@ -278,7 +279,7 @@ BaseLogger.success
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:25
+packages/nx-tools/src/utils/logger/listr-logger.ts:26
 
 ___
 
@@ -302,4 +303,4 @@ BaseLogger.title
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/listr-logger.ts:37
+packages/nx-tools/src/utils/logger/listr-logger.ts:38

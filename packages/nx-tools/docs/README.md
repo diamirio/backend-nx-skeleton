@@ -23,6 +23,7 @@
 - [BaseExecutor](classes/BaseExecutor.md)
 - [ListrLogger](classes/ListrLogger.md)
 - [Logger](classes/Logger.md)
+- [Manager](classes/Manager.md)
 - [PackageManager](classes/PackageManager.md)
 - [ProcessManager](classes/ProcessManager.md)
 - [RunPackageManagerTask](classes/RunPackageManagerTask.md)
@@ -1274,7 +1275,7 @@ Creates a file backup in tree.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:299
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:302
 
 ___
 
@@ -1380,7 +1381,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:201
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:204
 
 ___
 
@@ -1467,7 +1468,7 @@ Will use prettier first, others after.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/format-files.ts:21
+packages/nx-tools/src/utils/file-system/format-files.ts:22
 
 ___
 
@@ -1892,7 +1893,7 @@ Merges files the common part.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:277
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:280
 
 ___
 
@@ -2785,7 +2786,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:229
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:232
 
 ___
 
@@ -2880,7 +2881,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:173
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:176
 
 ___
 
