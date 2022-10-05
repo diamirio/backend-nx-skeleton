@@ -71,7 +71,9 @@
     "listr2": "^4.0.5",
     "nunjucks": "^3.2.3",
     "update-notifier": "^6.0.2",
-    "update-notifier2": "^1.0.6"
+    "update-notifier2": "^1.0.6",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",

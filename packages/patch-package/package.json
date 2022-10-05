@@ -67,7 +67,9 @@
     "rewire": "^6.0.0",
     "tmp-promise": "^3.0.3",
     "update-notifier": "^6.0.2",
-    "wrap-ansi": "^7"
+    "wrap-ansi": "^7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
