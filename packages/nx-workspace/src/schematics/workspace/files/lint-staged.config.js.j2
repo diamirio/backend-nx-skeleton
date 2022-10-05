@@ -1,3 +1,15 @@
+const { relative, isAbsolute } = require('path')
+
 module.exports = {
-  '*': () => ['npm run affected:lint']
+  '*': (paths) => {
+    paths = paths.map((path) => {
+      if (isAbsolute(path)) {
+        return relative(__dirname, path)
+      }
+
+      return path
+    })
+
+    return [['nx format:write --files', ...paths].join(' '), ['nx affected:lint --fix --files', ...paths].join(' ')]
+  }
 }

@@ -4,6 +4,7 @@ import type {
   AvailableDBTypes,
   AvailableExtensions,
   AvailableMicroserviceTypes,
+  AvailableServerAdapters,
   AvailableServerTypes
 } from '@interfaces/available.constants'
 import type { SchematicConstants } from '@interfaces/constants'
@@ -48,6 +49,7 @@ interface CommonPropertiesToSaveAndUse<Values extends boolean = false> extends S
   components: Values extends true ? AvailableComponents[] : typeof AvailableComponents
   effectiveComponents: number
   server: Values extends true ? AvailableServerTypes : typeof AvailableServerTypes
+  serverAdapter: Values extends true ? AvailableServerAdapters : typeof AvailableServerAdapters
   microservice: Values extends true ? AvailableMicroserviceTypes : typeof AvailableMicroserviceTypes
   microserviceClient: string[]
   database: Values extends true ? AvailableDBTypes : typeof AvailableDBTypes

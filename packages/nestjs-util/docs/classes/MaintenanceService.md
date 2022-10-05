@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:77
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:76
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/module/maintenance/maintenance.service.ts:72
+packages/nestjs-util/src/module/maintenance/maintenance.service.ts:71
 
 ___
 

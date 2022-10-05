@@ -26,10 +26,12 @@ Nx does not import a type for workspace.json. This fills that gap.
 - [extends](EnrichedWorkspaceConfiguration.md#extends)
 - [generators](EnrichedWorkspaceConfiguration.md#generators)
 - [implicitDependencies](EnrichedWorkspaceConfiguration.md#implicitdependencies)
+- [namedInputs](EnrichedWorkspaceConfiguration.md#namedinputs)
 - [npmScope](EnrichedWorkspaceConfiguration.md#npmscope)
 - [plugins](EnrichedWorkspaceConfiguration.md#plugins)
 - [pluginsConfig](EnrichedWorkspaceConfiguration.md#pluginsconfig)
 - [projects](EnrichedWorkspaceConfiguration.md#projects)
+- [targetDefaults](EnrichedWorkspaceConfiguration.md#targetdefaults)
 - [targetDependencies](EnrichedWorkspaceConfiguration.md#targetdependencies)
 - [tasksRunnerOptions](EnrichedWorkspaceConfiguration.md#tasksrunneroptions)
 - [version](EnrichedWorkspaceConfiguration.md#version)
@@ -49,7 +51,7 @@ WorkspaceConfiguration.affected
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:38
+node_modules/nx/src/config/nx-json.d.ts:57
 
 ___
 
@@ -61,11 +63,11 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `defaultCollection?` | `string` |
-| `defaultProjectName?` | `string` |
-| `packageManager?` | `PackageManager` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `defaultCollection?` | `string` | **`Deprecated`**  - defaultCollection is deprecated and will be removed |
+| `defaultProjectName?` | `string` | - |
+| `packageManager?` | `PackageManager` | - |
 
 #### Inherited from
 
@@ -73,7 +75,7 @@ WorkspaceConfiguration.cli
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:86
+node_modules/nx/src/config/nx-json.d.ts:105
 
 ___
 
@@ -90,7 +92,7 @@ WorkspaceConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:103
+node_modules/nx/src/config/nx-json.d.ts:125
 
 ___
 
@@ -106,7 +108,7 @@ WorkspaceConfiguration.extends
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:22
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ___
 
@@ -140,7 +142,7 @@ WorkspaceConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:78
+node_modules/nx/src/config/nx-json.d.ts:97
 
 ___
 
@@ -156,7 +158,27 @@ WorkspaceConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:26
+node_modules/nx/src/config/nx-json.d.ts:34
+
+___
+
+### namedInputs
+
+• `Optional` **namedInputs**: `Object`
+
+Named inputs targets can refer to reduce duplication
+
+#### Index signature
+
+▪ [inputName: `string`]: (`string` \| `InputDefinition`)[]
+
+#### Inherited from
+
+WorkspaceConfiguration.namedInputs
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:43
 
 ___
 
@@ -172,7 +194,7 @@ WorkspaceConfiguration.npmScope
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:34
+node_modules/nx/src/config/nx-json.d.ts:53
 
 ___
 
@@ -188,7 +210,7 @@ WorkspaceConfiguration.plugins
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:94
+node_modules/nx/src/config/nx-json.d.ts:116
 
 ___
 
@@ -204,7 +226,7 @@ WorkspaceConfiguration.pluginsConfig
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:98
+node_modules/nx/src/config/nx-json.d.ts:120
 
 ___
 
@@ -218,10 +240,29 @@ packages/nx-tools/src/interfaces/nx-json.interface.ts:9
 
 ___
 
+### targetDefaults
+
+• `Optional` **targetDefaults**: `TargetDefaults`
+
+Dependencies between different target names across all projects
+
+#### Inherited from
+
+WorkspaceConfiguration.targetDefaults
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:49
+
+___
+
 ### targetDependencies
 
-• `Optional` **targetDependencies**: `Record`<`string`, `TargetDependencyConfig`[]\>
+• `Optional` **targetDependencies**: `TargetDependencies`
 
+**`Deprecated`**
+
+use targetDefaults instead
 Dependencies between different target names across all projects
 
 #### Inherited from
@@ -230,7 +271,7 @@ WorkspaceConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:30
+node_modules/nx/src/config/nx-json.d.ts:39
 
 ___
 
@@ -250,7 +291,7 @@ WorkspaceConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:49
+node_modules/nx/src/config/nx-json.d.ts:68
 
 ___
 
@@ -266,7 +307,7 @@ WorkspaceConfiguration.version
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:12
+node_modules/nx/src/config/workspace-json-project-json.d.ts:17
 
 ___
 
@@ -289,4 +330,4 @@ WorkspaceConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:42
+node_modules/nx/src/config/nx-json.d.ts:61

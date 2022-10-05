@@ -26,7 +26,6 @@
 
 ### Properties
 
-- [cause](GraphQLPreformattedException.md#cause)
 - [extensions](GraphQLPreformattedException.md#extensions)
 - [locations](GraphQLPreformattedException.md#locations)
 - [message](GraphQLPreformattedException.md#message)
@@ -67,20 +66,6 @@ Error.constructor
 packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:8
 
 ## Properties
-
-### cause
-
-• `Optional` **cause**: `Error`
-
-#### Inherited from
-
-Error.cause
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2022.error.d.ts:26
-
-___
 
 ### extensions
 
@@ -124,7 +109,7 @@ Error.message
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1023
+node_modules/typescript/lib/lib.es5.d.ts:1041
 
 ___
 
@@ -138,7 +123,7 @@ Error.name
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1022
+node_modules/typescript/lib/lib.es5.d.ts:1040
 
 ___
 
@@ -166,7 +151,7 @@ Error.stack
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1024
+node_modules/typescript/lib/lib.es5.d.ts:1042
 
 ___
 
@@ -180,7 +165,9 @@ ___
 
 Optional override for formatting stack traces
 
-**`see`** https://v8.dev/docs/stack-trace-api#customizing-stack-traces
+**`See`**
+
+https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ##### Parameters
 
@@ -199,7 +186,7 @@ Error.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/ts4.8/globals.d.ts:11
 
 ___
 
@@ -213,7 +200,7 @@ Error.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/ts4.8/globals.d.ts:13
 
 ## Methods
 
@@ -240,4 +227,4 @@ Error.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/ts4.8/globals.d.ts:4

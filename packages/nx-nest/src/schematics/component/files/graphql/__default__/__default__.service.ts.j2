@@ -5,7 +5,7 @@ import { {{ casing.pascal }}Output } from './{{ name }}.output'
 
 @Injectable()
 export class {{ casing.pascal }}Service {
-  private logger: Logger = new Logger(this.constructor.name)
+  private readonly logger: Logger = new Logger(this.constructor.name)
 
   constructor () {}
 

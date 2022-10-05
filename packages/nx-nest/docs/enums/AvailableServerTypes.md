@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableServerTypes
+[@webundsoehne/nx-nest](../README.md) / AvailableServerTypes
 
 # Enumeration: AvailableServerTypes
 
@@ -6,16 +6,16 @@ If server component is selected, these are the options to serve as a server.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [GRAPHQL](AvailableServerTypes.md#graphql)
 - [RESTFUL](AvailableServerTypes.md#restful)
 
-## Enumeration members
+## Enumeration Members
 
 ### GRAPHQL
 
-• **GRAPHQL** = `"graphql"`
+• **GRAPHQL** = ``"graphql"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### RESTFUL
 
-• **RESTFUL** = `"restful"`
+• **RESTFUL** = ``"restful"``
 
 #### Defined in
 

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-nest/application",
-  "title": "@webundsoehne-private/nx-nest/application",
+  "$id": "@webundsoehne/nx-nest/application",
+  "title": "@webundsoehne/nx-nest/application",
   "description": "Generate nestjs application.",
   "examples": [],
   "type": "object",

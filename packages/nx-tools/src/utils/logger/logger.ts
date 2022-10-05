@@ -9,7 +9,7 @@ import { isVerbose } from '../schematics'
 import { isBuildContext, isExecutorContext } from '../schematics/is-context'
 import { color } from './colorette'
 import type { LoggerFormat, LoggerOptions, Winston } from './logger.interface'
-import { LogLevels, WINSTON_INSTANCE } from './logger.interface'
+import { LogLevels } from './logger.interface'
 
 /**
  * A general logger that is wrapped around the angular-cli logger.
@@ -26,7 +26,7 @@ export class Logger {
     // set default options
     this.options = { useIcons: true, ...options }
 
-    this.context = context && (isExecutorContext(context) ? context?.projectName : isBuildContext(context) ? context?.target.project : null)
+    this.context = context && (isExecutorContext(context) ? context?.projectName : isBuildContext(context) ? context?.target.project : context?.schematic.description.name)
 
     if (isVerbose()) {
       this.logLevel = LogLevels.DEBUG
@@ -34,13 +34,11 @@ export class Logger {
       this.logLevel = LogLevels.INFO
     }
 
-    if (Logger.instance) {
-      this.logger = Logger.instance
-    } else {
-      this.logger = this.initiateLogger()
-
-      Logger.instance = this.logger
+    if (!Logger.instance) {
+      Logger.instance = this.initiateLogger()
     }
+
+    this.logger = Logger.instance
   }
 
   fatal (data: string | Buffer, ...args: any): void {
@@ -64,7 +62,7 @@ export class Logger {
   }
 
   private initiateLogger (): Winston {
-    const logFormat = format.printf(({ level, message, context }: LoggerFormat) => {
+    const logFormat = format.printf(({ level, message, context, status }: LoggerFormat) => {
       // parse multi line messages
       let multiLineMessage: string[]
 
@@ -77,14 +75,15 @@ export class Logger {
         return this.logColoring({
           level,
           message: msg,
-          context
+          context,
+          status
         })
       })
 
       return multiLineMessage.join(EOL)
     })
 
-    const logger = winston.loggers.add(WINSTON_INSTANCE, {
+    const logger = winston.createLogger({
       level: this.logLevel,
       format: format.combine(format.splat(), format.json({ space: 2 }), format.prettyPrint(), logFormat),
       levels: Object.values(LogLevels).reduce((o, level, i) => {
@@ -100,7 +99,7 @@ export class Logger {
       ]
     })
 
-    logger.debug(`Initiated new nx-tools logger with level "${this.logLevel}".`, { context: 'LOGGER' })
+    logger.log(LogLevels.DEBUG, 'Initiated new nx-tools logger with level: %s', this.logLevel, { context: 'Logger' })
 
     return logger as Winston
   }
@@ -109,7 +108,7 @@ export class Logger {
     this.logger.log(level, data.toString(), ...args, { context: this.context })
   }
 
-  private logColoring ({ level, message, context }: { level: LogLevels, message: string, context?: string }): string {
+  private logColoring ({ level, message, context, status }: LoggerFormat): string {
     let icon: string
 
     // do the coloring
@@ -168,6 +167,6 @@ export class Logger {
       icon = `[${level.toUpperCase()}]`
     }
 
-    return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''} ${msgColoring(message)}`
+    return `${coloring(icon)}${context ? ' ' + coloring(`[${context}]`) : ''}${status ? ' ' + coloring(`[${status}]`) : ''} ${msgColoring(message)}`
   }
 }

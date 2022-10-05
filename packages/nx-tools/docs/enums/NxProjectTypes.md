@@ -6,16 +6,16 @@ Nx application types
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [APP](NxProjectTypes.md#app)
 - [LIB](NxProjectTypes.md#lib)
 
-## Enumeration members
+## Enumeration Members
 
 ### APP
 
-• **APP** = `"application"`
+• **APP** = ``"application"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### LIB
 
-• **LIB** = `"library"`
+• **LIB** = ``"library"``
 
 #### Defined in
 

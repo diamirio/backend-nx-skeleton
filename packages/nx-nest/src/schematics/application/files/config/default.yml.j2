@@ -50,14 +50,14 @@ database:
   mock:
     database: db_mock
   directories:
-{% if enum.extensions.EXTERNAL_BACKEND_INTERFACES in extensions %}
-    entity: ../../libs/{{ constants.BACKEND_INTERFACES_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
-    migration: migrations
-    seed: seeds
+{% if enum.extensions.EXTERNAL_BACKEND_DATABASE in extensions %}
+    entity: ../../libs/{{ constants.BACKEND_DATABASE_PACKAGE }}/src/entity-typeorm/**/*.entity{.ts,.js}
+    migration: ../../libs/{{ constants.BACKEND_DATABASE_PACKAGE }}/src/migration-typeorm
+    seed: seed
 {% else %}
     entity: ./**/*.entity{.ts,.js}
-    migration: migrations
-    seed: seeds
+    migration: migration
+    seed: seed
 {% endif %}
 {% elif enum.dbAdapters.MONGOOSE == dbAdapters %}
   host: db-mongodb
@@ -68,6 +68,11 @@ database:
   ignoreUndefined: true
   useNewUrlParser: true
   useUnifiedTopology: true
+  migration:
+    migrationsDir: ../../libs/{{ constants.BACKEND_DATABASE_PACKAGE }}/src/migration-mongoose
+    changelogCollectionName: migrations
+    migrationFileExtension: '.js'
+    useFileHash: false
 {% endif %}
 {% endif %}
 

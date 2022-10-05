@@ -24,9 +24,9 @@
 
 #### Defined in
 
-connect/connect.interfaces.ts:41
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:41
 
----
+___
 
 ### groups
 
@@ -34,9 +34,9 @@ connect/connect.interfaces.ts:41
 
 #### Defined in
 
-connect/connect.interfaces.ts:44
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:44
 
----
+___
 
 ### id
 
@@ -44,9 +44,9 @@ connect/connect.interfaces.ts:44
 
 #### Defined in
 
-connect/connect.interfaces.ts:39
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:39
 
----
+___
 
 ### roles
 
@@ -54,9 +54,9 @@ connect/connect.interfaces.ts:39
 
 #### Defined in
 
-connect/connect.interfaces.ts:43
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:43
 
----
+___
 
 ### scopes
 
@@ -64,9 +64,9 @@ connect/connect.interfaces.ts:43
 
 #### Defined in
 
-connect/connect.interfaces.ts:45
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:45
 
----
+___
 
 ### username
 
@@ -74,9 +74,9 @@ connect/connect.interfaces.ts:45
 
 #### Defined in
 
-connect/connect.interfaces.ts:40
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:40
 
----
+___
 
 ### verified
 
@@ -84,4 +84,4 @@ connect/connect.interfaces.ts:40
 
 #### Defined in
 
-connect/connect.interfaces.ts:42
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:42

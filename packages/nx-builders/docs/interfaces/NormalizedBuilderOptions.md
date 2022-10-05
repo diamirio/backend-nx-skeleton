@@ -2,6 +2,8 @@
 
 # Interface: NormalizedBuilderOptions
 
+TSC Builder options
+
 ## Hierarchy
 
 - [`TscBuilderOptions`](TscBuilderOptions.md)
@@ -34,7 +36,9 @@
 
 copy assets
 
-**`param`** when a string defined it has to be inside the application directory, if it is outside a glob should be defined
+**`Param`**
+
+when a string defined it has to be inside the application directory, if it is outside a glob should be defined
 
 #### Inherited from
 

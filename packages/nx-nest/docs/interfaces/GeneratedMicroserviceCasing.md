@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / GeneratedMicroserviceCasing
+[@webundsoehne/nx-nest](../README.md) / GeneratedMicroserviceCasing
 
 # Interface: GeneratedMicroserviceCasing
 
@@ -34,7 +34,7 @@ ___
 
 ### names
 
-• **names**: `Record`<``"queue"`` \| ``"file"`` \| ``"pattern"`` \| ``"interface"`` \| ``"default"``, `string`\>
+• **names**: `Record`<``"queue"`` \| ``"file"`` \| ``"pattern"`` \| ``"interface"``, `string`\>
 
 #### Defined in
 

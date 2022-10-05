@@ -1,13 +1,17 @@
-import { EnrichedException } from '@webundsoehne/nestjs-util'
 import { GraphQLErrorParser } from '@webundsoehne/nestjs-util-graphql'
+{% if serverAdapter == enum.serverAdapter.FASTIFY %}
 import { FastifyRequest, RequestGenericInterface } from 'fastify'
+{% endif %}
+{% if serverAdapter == enum.serverAdapter.EXPRESS %}
+import { Request } from 'express'
+{% endif %}
 import { GraphQLError, GraphQLFormattedError } from 'graphql/error'
 
-export async function graphQLContextParser ({ req }: { req: FastifyRequest<RequestGenericInterface> }): Promise<FastifyRequest<RequestGenericInterface> & Record<string, any>> {
+export async function graphQLContextParser ({ req }: { req: {% if serverAdapter == enum.serverAdapter.FASTIFY %}FastifyRequest<RequestGenericInterface>{% endif %}{% if serverAdapter == enum.serverAdapter.Express %}any{% endif %} }): Promise<{% if serverAdapter == enum.serverAdapter.FASTIFY %}FastifyRequest<RequestGenericInterface>{% endif %}{% if serverAdapter == enum.serverAdapter.Express %}Request{% endif %} & Record<string, any>> {
   return { ...req }
 }
 
-export function graphQLErrorParser (exception: GraphQLError): GraphQLFormattedError<EnrichedException> {
+export function graphQLErrorParser (exception: GraphQLError): GraphQLFormattedError {
     // to convert this to enriched exception,
     // graphql handles all the errors internally, graphql exception filter is just for catching the rest of the http errors
     return {

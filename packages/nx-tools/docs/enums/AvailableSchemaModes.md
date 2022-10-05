@@ -6,16 +6,16 @@ Available generator modes.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [CREATE](AvailableSchemaModes.md#create)
 - [MODIFY](AvailableSchemaModes.md#modify)
 
-## Enumeration members
+## Enumeration Members
 
 ### CREATE
 
-• **CREATE** = `"create"`
+• **CREATE** = ``"create"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### MODIFY
 
-• **MODIFY** = `"modify"`
+• **MODIFY** = ``"modify"``
 
 #### Defined in
 

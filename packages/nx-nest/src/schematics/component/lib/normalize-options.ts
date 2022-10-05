@@ -1,7 +1,6 @@
 import { normalize } from '@angular-devkit/core'
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { directoryExists } from '@nrwl/workspace/src/utils/fileutils'
-import { Listr } from 'listr2'
 import { join } from 'path'
 
 import { ComponentLocationsMap } from '../interfaces/file.constants'
@@ -12,13 +11,13 @@ import { AvailableComponents, AvailableServerTypes, PrettyNamesForAvailableThing
 import { generateMicroserviceCasing } from '@utils'
 import type { ConvertToPromptType } from '@webundsoehne/nx-tools'
 import {
+  Manager,
+  ensureNxRootListrTask,
   generateNameCases,
-  isVerbose,
   normalizeNameWithParentApplicationPrompt,
   normalizeParentPriorConfigurationPrompt,
   normalizeWorkspacePackageScopePrompt,
-  setSchemaDefaultsInContext,
-  ensureNxRootListrTask
+  setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
 /**
@@ -28,8 +27,8 @@ import {
  * @returns Promise
  * Normalizes options for given schematic.
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>(
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -148,8 +147,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
       }
     ],
     {
-      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
-  ).run()
+  )
 }

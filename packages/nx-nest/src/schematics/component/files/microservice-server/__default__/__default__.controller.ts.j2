@@ -12,10 +12,10 @@ import { {{ casing.pascal }}Microservice } from './{{ name }}.service'
 export class {{ casing.pascal }}Microcontroller {
   constructor (private readonly {{ casing.camel }}Microservice: {{ casing.pascal }}Microservice) {}
 
-  @MessagePattern({{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }})
+  @MessagePattern({{ casing.injected.microservices.names.pattern }}.DEFAULT)
   default (
-    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
-  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {
+    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.DEFAULT>
+  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.DEFAULT>> {
     return this.{{ casing.camel }}Microservice.default(options)
   }
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-tools/exports",
-  "title": "@webundsoehne-private/nx-tools/exports",
+  "$id": "@webundsoehne/nx-tools/exports",
+  "title": "@webundsoehne/nx-tools/exports",
   "description": "Export the Typescript files from a common file.",
   "examples": [],
   "type": "object",

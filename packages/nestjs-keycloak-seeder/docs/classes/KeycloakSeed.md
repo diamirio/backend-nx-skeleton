@@ -41,6 +41,10 @@ interfaces/keycloak-seed.ts:11
 
 • `Protected` **keycloak**: [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md)
 
+#### Defined in
+
+interfaces/keycloak-seed.ts:11
+
 ___
 
 ### logger

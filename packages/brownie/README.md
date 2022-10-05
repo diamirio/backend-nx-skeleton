@@ -28,23 +28,28 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`brownie config:workspace`](#brownie-configworkspace)
+* [`brownie ci`](#brownie-ci)
 * [`brownie docker`](#brownie-docker)
 * [`brownie gitlab`](#brownie-gitlab)
 * [`brownie help [COMMAND]`](#brownie-help-command)
 * [`brownie nx`](#brownie-nx)
 * [`brownie workspace`](#brownie-workspace)
+* [`brownie ws`](#brownie-ws)
 
-## `brownie config:workspace`
+## `brownie ci`
 
-Edit available workspace skeletons through a user interface.
+Create a gitlab ci configuration from known NX configuration.
 
 ```
 USAGE
-  $ brownie config:workspace
-```
+  $ brownie ci
 
-_See code: [dist/commands/config/workspace.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/config/workspace.js)_
+DESCRIPTION
+  Create a gitlab ci configuration from known NX configuration.
+
+ALIASES
+  $ brownie ci
+```
 
 ## `brownie docker`
 
@@ -52,15 +57,32 @@ Create docker-compose configuration from boilerplates.
 
 ```
 USAGE
-  $ brownie docker
+  $ brownie docker [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-f] [-o <value>] [-v] [-e] [-F <value>] [-V <value>] [-F <value>]
 
-OPTIONS
-  -F, --files-folder=files-folder      [default: files] Output to included folder.
-  -V, --volumes-folder=volumes-folder  [default: volumes] Output to volumes folder.
-  -e, --expose                         Expose ports from the container.
-  -f, --force                          Force overwrites.
-  -o, --output=output                  [default: .docker] Output folder for the Docker files.
-  -v, --volume                         Use optional persistent volumes with the containers.
+FLAGS
+  -F, --file=<value>            [default: docker-compose.yml] Compose file path.
+  -F, --files-folder=<value>    [default: files] Output to included folder.
+  -V, --volumes-folder=<value>  [default: volumes] Output to volumes folder.
+  -e, --expose                  Expose ports from the container.
+  -f, --force                   Force overwrites.
+  -o, --output=<value>          [default: .docker] Output folder for the Docker files.
+  -v, --volume                  Use optional persistent volumes with the containers.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
+
+DESCRIPTION
+  Create docker-compose configuration from boilerplates.
 ```
 
 _See code: [dist/commands/docker/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/docker/index.js)_
@@ -72,6 +94,9 @@ Create a gitlab ci configuration from known NX configuration.
 ```
 USAGE
   $ brownie gitlab
+
+DESCRIPTION
+  Create a gitlab ci configuration from known NX configuration.
 
 ALIASES
   $ brownie ci
@@ -85,16 +110,19 @@ Display help for brownie.
 
 ```
 USAGE
-  $ brownie help [COMMAND]
+  $ brownie help [COMMAND] [-n]
 
 ARGUMENTS
   COMMAND  Command to show help for.
 
-OPTIONS
+FLAGS
   -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for brownie.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.14/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -102,12 +130,29 @@ Configure NX modules.
 
 ```
 USAGE
-  $ brownie nx
+  $ brownie nx [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-a]
 
-OPTIONS
-  -a, --arguments     Enable prompt for passing in arguments.
-  -d, --develop       Puts the underlying schematics to development mode, if they support it.
-  -s, --skip-updates  Skip the dependency updates.
+FLAGS
+  -a, --arguments                   Enable prompt for passing in arguments.
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
+
+DESCRIPTION
+  Configure NX modules.
 ```
 
 _See code: [dist/commands/nx/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/nx/index.js)_
@@ -118,16 +163,67 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie workspace
+  $ brownie workspace [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
 
-OPTIONS
-  -d, --develop       Puts the underlying schematics to development mode, if they support it.
-  -f, --force         Force override for schematic.
-  -s, --skip-updates  Skip the dependency updates.
+FLAGS
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -f, --force                       Force override for schematic.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
+
+DESCRIPTION
+  Create a new workspace with NX.
 
 ALIASES
   $ brownie ws
 ```
 
 _See code: [dist/commands/workspace/index.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/workspace/index.js)_
+
+## `brownie ws`
+
+Create a new workspace with NX.
+
+```
+USAGE
+  $ brownie ws [--log-level
+    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
+    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
+
+FLAGS
+  -d, --develop                     Puts the underlying schematics to development mode, if they support it.
+  -f, --force                       Force override for schematic.
+  -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
+  -s, --skip-updates                Skip the dependency updates.
+
+CLI FLAGS
+  --ci
+      Instruct whether this is running the CI/CD configuration.
+
+  --json
+      Put the CLI to respond in JSON.
+
+  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
+  |trace)
+      [default: INFO] Set the log level of the application.
+
+DESCRIPTION
+  Create a new workspace with NX.
+
+ALIASES
+  $ brownie ws
+```
 <!-- commandsstop -->

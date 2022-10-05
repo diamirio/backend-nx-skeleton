@@ -122,7 +122,7 @@ packages/nx-tools/src/utils/package-manager/package-manager.ts:24
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:167
+packages/nx-tools/src/utils/package-manager/package-manager.ts:169
 
 ___
 
@@ -165,7 +165,7 @@ data is PackageManagerPackageAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:385
+packages/nx-tools/src/utils/package-manager/package-manager.ts:387
 
 ___
 
@@ -185,7 +185,7 @@ data is PackageManagerWithCommandAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:393
+packages/nx-tools/src/utils/package-manager/package-manager.ts:395
 
 ___
 
@@ -205,7 +205,7 @@ data is PackageManagerWithoutCommandAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:401
+packages/nx-tools/src/utils/package-manager/package-manager.ts:403
 
 ___
 

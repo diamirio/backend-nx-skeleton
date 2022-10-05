@@ -6,16 +6,16 @@ Available Builders
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [TSC](AvailableBuilders.md#tsc)
 - [TS\_NODE\_DEV](AvailableBuilders.md#ts_node_dev)
 
-## Enumeration members
+## Enumeration Members
 
 ### TSC
 
-• **TSC** = `"tsc"`
+• **TSC** = ``"tsc"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### TS\_NODE\_DEV
 
-• **TS\_NODE\_DEV** = `"ts-node-dev"`
+• **TS\_NODE\_DEV** = ``"ts-node-dev"``
 
 #### Defined in
 

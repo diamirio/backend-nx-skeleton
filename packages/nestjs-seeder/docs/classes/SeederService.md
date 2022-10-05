@@ -52,6 +52,10 @@ ___
 
 • `Protected` `Readonly` **seeds**: `Seeds`
 
+#### Defined in
+
+module/seeder.service.ts:15
+
 ## Methods
 
 ### init

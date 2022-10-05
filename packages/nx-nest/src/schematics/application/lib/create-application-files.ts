@@ -5,6 +5,7 @@ import { join } from 'path'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import type { NormalizedSchema } from '../main.interface'
 import { AvailableComponents, AvailableDBAdapters, AvailableExtensions, AvailableGenerators, AvailableServerTypes } from '@interfaces/available.constants'
+import { SchematicConstants } from '@interfaces/constants'
 import type { Schema as BackendInterfacesSchema } from '@schematics/backend-interfaces/main.interface'
 import { ComponentLocationsMap } from '@schematics/component/interfaces/file.constants'
 import type { Schema as ComponentSchema } from '@schematics/component/main.interface'
@@ -55,6 +56,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
           {
             rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
           },
+          // FIXME: these should be schematic rule but it is going crazy so swapping out for a task
           {
             condition:
               !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
@@ -91,6 +93,12 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             rule: addSchematicTaskRule<BackendInterfacesSchema>('backend-interfaces', {})
           },
 
+          // backend-database is extension selected
+          {
+            condition: options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
+            rule: addSchematicTaskRule<BackendInterfacesSchema>('backend-database', {})
+          },
+
           // microservice-provider if microservice-server is defined
           {
             condition: options.components.includes(AvailableComponents.MICROSERVICE_SERVER),
@@ -102,7 +110,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition:
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
               options.dbAdapters === AvailableDBAdapters.TYPEORM &&
-              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.TYPEORM_ENTITY_PRIMARY,
@@ -115,7 +123,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             condition:
               options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.MONGOOSE &&
               options.dbAdapters === AvailableDBAdapters.MONGOOSE &&
-              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES),
+              !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'default',
               type: AvailableGenerators.MONGOOSE_ENTITY_TIMESTAMPS,
@@ -124,16 +132,39 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
             })
           },
 
+          // migration scheduled task for bgtasks
           {
-            condition:
-              options.components.includes(AvailableComponents.BG_TASK) &&
-              options.priorConfiguration?.dbAdapters !== AvailableDBAdapters.TYPEORM &&
-              options.dbAdapters === AvailableDBAdapters.TYPEORM,
+            condition: options.components.includes(AvailableComponents.BG_TASK) && [AvailableDBAdapters.TYPEORM, AvailableDBAdapters.MONGOOSE].includes(options.dbAdapters),
             rule: addSchematicTaskRule<GeneratorSchema>('generator', {
               name: 'migration',
-              type: AvailableGenerators.TYPEORM_MIGRATION_TASK_MODULE,
+              type: AvailableGenerators.MIGRATION_TASK_MODULE,
               directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableComponents.BG_TASK], SchematicFilesMap.MODULES),
-              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }]
+              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }],
+              inject: {
+                constants: SchematicConstants,
+                dbAdapters: options.dbAdapters,
+                enum: {
+                  dbAdapters: AvailableDBAdapters
+                }
+              }
+            })
+          },
+
+          // seed command for bgtasks
+          {
+            condition:
+              options.components.includes(AvailableComponents.COMMAND) &&
+              options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE) &&
+              !options.priorConfiguration?.dbAdapters &&
+              !!options.dbAdapters,
+            rule: addSchematicTaskRule<GeneratorSchema>('generator', {
+              name: 'seed',
+              type: AvailableGenerators.BACKEND_DATABASE_SEED_COMMAND,
+              directory: join(options.root, options.sourceRoot, SchematicFilesMap[AvailableComponents.COMMAND], SchematicFilesMap.MODULES),
+              exports: [{ output: 'index.ts', pattern: '**/*.module.ts' }],
+              inject: {
+                constants: SchematicConstants
+              }
             })
           }
         ]
@@ -169,11 +200,11 @@ export function generateRules (options: NormalizedSchema, log: Logger, settings?
       ...[
         {
           match: AvailableDBAdapters.TYPEORM,
-          condition: options.dbAdapters === AvailableDBAdapters.TYPEORM && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+          condition: options.dbAdapters === AvailableDBAdapters.TYPEORM && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
         },
         {
           match: AvailableDBAdapters.MONGOOSE,
-          condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
+          condition: options.dbAdapters === AvailableDBAdapters.MONGOOSE && !options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
         }
       ].map((a) => ({
         condition: a.condition,

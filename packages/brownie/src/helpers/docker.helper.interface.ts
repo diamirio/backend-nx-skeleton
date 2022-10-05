@@ -29,7 +29,7 @@ export interface ParsedContainers {
   config?: DockerComposeService
   image?: string
   dockerfile?: string
-  env?: string
+  env?: Record<string, string>
   volumes?: {
     from: string
     to: string

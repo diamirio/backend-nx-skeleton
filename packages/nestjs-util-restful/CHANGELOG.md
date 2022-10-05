@@ -1,4 +1,9 @@
-## @webundsoehne/nestjs-util-restful [1.4.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.5...@webundsoehne/nestjs-util-restful@1.4.6) (2022-09-15)
+# @webundsoehne/nestjs-util-restful [2.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@2.0.0-beta.2...@webundsoehne/nestjs-util-restful@2.0.0-beta.3) (2022-10-05)
+
+
+### Performance Improvements
+
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 
 
@@ -6,106 +11,125 @@
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.5
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.3
+
+# @webundsoehne/nestjs-util-restful [2.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@2.0.0-beta.1...@webundsoehne/nestjs-util-restful@2.0.0-beta.2) (2022-09-19)
+
+
+### Bug Fixes
+
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.2
+
+# @webundsoehne/nestjs-util-restful [2.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.5...@webundsoehne/nestjs-util-restful@2.0.0-beta.1) (2022-08-08)
+
+### Bug Fixes
+
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+
+### Performance Improvements
+
+- extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+
+### BREAKING CHANGES
+
+- this is not compatible with older versions of the nx-nest generator
+
+* express/fastify is now selectable when selecting a server
+* moved database stuff to backend-database from backend-interface
+* extend generator to accept injecting arguments
+* use the migration module for mongodb
+* ditch typeorm-seeding for generic seeder
+* add relevant command for seeding to nestjs itself due to dependency injection
+
+## @webundsoehne/nestjs-util-restful [1.4.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.5...@webundsoehne/nestjs-util-restful@1.4.6) (2022-09-15)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.1
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.5
 
 ## @webundsoehne/nestjs-util-restful [1.4.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.4...@webundsoehne/nestjs-util-restful@1.4.5) (2022-08-03)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.4
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.4
 
 ## @webundsoehne/nestjs-util-restful [1.4.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.3...@webundsoehne/nestjs-util-restful@1.4.4) (2022-06-09)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.3
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.3
 
 ## @webundsoehne/nestjs-util-restful [1.4.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.2...@webundsoehne/nestjs-util-restful@1.4.3) (2022-06-07)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.2
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.2
 
 ## @webundsoehne/nestjs-util-restful [1.4.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.1...@webundsoehne/nestjs-util-restful@1.4.2) (2022-06-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.1
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.1
 
 ## @webundsoehne/nestjs-util-restful [1.4.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.0...@webundsoehne/nestjs-util-restful@1.4.1) (2022-06-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.5.0
+- **@webundsoehne/nestjs-util:** upgraded to 5.5.0
 
 # @webundsoehne/nestjs-util-restful [1.4.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.2...@webundsoehne/nestjs-util-restful@1.4.0) (2022-05-23)
 
-
 ### Features
 
-* add ability to pass custom options to swagger-ui ([fdb0e62](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fdb0e625333f8dd50f0759c3c4f20a62c89ef507))
+- add ability to pass custom options to swagger-ui ([fdb0e62](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fdb0e625333f8dd50f0759c3c4f20a62c89ef507))
 
 ## @webundsoehne/nestjs-util-restful [1.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.1...@webundsoehne/nestjs-util-restful@1.3.2) (2022-05-03)
 
-
 ### Bug Fixes
 
-* is semantic-release broken, lets find out ([e7e6e20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e7e6e206a5c557f42ba99d6d9f91189a7f6ab8ca))
-* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
-
-
-
-
+- is semantic-release broken, lets find out ([e7e6e20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e7e6e206a5c557f42ba99d6d9f91189a7f6ab8ca))
+- set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.4.3
+- **@webundsoehne/nestjs-util:** upgraded to 5.4.3
 
 ## @webundsoehne/nestjs-util-restful [1.3.2-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.2-beta.1...@webundsoehne/nestjs-util-restful@1.3.2-beta.2) (2022-05-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.4.3-beta.2
+- **@webundsoehne/nestjs-util:** upgraded to 5.4.3-beta.2
 
 ## @webundsoehne/nestjs-util-restful [1.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.1...@webundsoehne/nestjs-util-restful@1.3.2-beta.1) (2022-05-02)
 
-
 ### Bug Fixes
 
-* is semantic-release broken, lets find out ([e7e6e20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e7e6e206a5c557f42ba99d6d9f91189a7f6ab8ca))
-* set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
-
-
-
-
+- is semantic-release broken, lets find out ([e7e6e20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e7e6e206a5c557f42ba99d6d9f91189a7f6ab8ca))
+- set version fallback to npm provided env var if missing ([d81a7ae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d81a7ae5acb7d372b57f892f415cbae2df871fd0))
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-util:** upgraded to 5.4.3-beta.1
+- **@webundsoehne/nestjs-util:** upgraded to 5.4.3-beta.1
 
 ## @webundsoehne/nestjs-util-restful [1.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.3.0...@webundsoehne/nestjs-util-restful@1.3.1) (2022-04-19)
 

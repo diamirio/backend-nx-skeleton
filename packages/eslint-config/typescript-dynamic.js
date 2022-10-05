@@ -9,7 +9,7 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-floating-promises': 'error',
-        '@typescript-eslint/return-await': ['error', 'never'],
+        '@typescript-eslint/return-await': 'off',
         '@typescript-eslint/await-thenable': 'error',
         'dot-notation': 'off',
         '@typescript-eslint/dot-notation': ['error'],

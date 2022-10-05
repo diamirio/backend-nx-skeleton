@@ -25,8 +25,8 @@ export enum AvailableServerTypes {
  * If server component is selected, these are the options to use as an adapter.
  */
 export enum AvailableServerAdapters {
-  EXPRESS = 'express',
-  FASTIFY = 'fastify'
+  FASTIFY = 'fastify',
+  EXPRESS = 'express'
 }
 
 /**
@@ -59,12 +59,16 @@ export enum AvailableMicroserviceTypes {
  * Available extensions to further customize the application.
  */
 export enum AvailableExtensions {
-  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces'
+  EXTERNAL_BACKEND_INTERFACES = 'external-backend-interfaces',
+  EXTERNAL_BACKEND_DATABASE = 'external-backend-database'
 }
 
 export const AvailableExtensionsMap: ExtensionsMap<typeof AvailableExtensions, ApplicationNormalizedSchema> = {
   [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: {
     condition: true
+  },
+  [AvailableExtensions.EXTERNAL_BACKEND_DATABASE]: {
+    condition: (options) => !!options.dbAdapters
   }
 }
 
@@ -78,7 +82,8 @@ export enum AvailableGenerators {
   MONGOOSE_ENTITY_TIMESTAMPS = 'mongoose-entity-timestamps',
   TYPEORM_ENTITY = 'typeorm-entity',
   TYPEORM_ENTITY_PRIMARY = 'typeorm-entity-with-primary',
-  TYPEORM_MIGRATION_TASK_MODULE = 'typeorm-migration-task-module'
+  MIGRATION_TASK_MODULE = 'migration-task-module',
+  BACKEND_DATABASE_SEED_COMMAND = 'backend-database-seed-command'
 }
 
 /**
@@ -100,6 +105,7 @@ AvailableComponents | AvailableServerTypes | AvailableServerAdapters | Available
   [AvailableDBTypes.MONGOOSE_MONGODB]: 'MongoDB with Mongoose',
   [AvailableMicroserviceTypes.RMQ]: 'RabbitMQ',
   [AvailableExtensions.EXTERNAL_BACKEND_INTERFACES]: 'Use external backend interfaces library',
+  [AvailableExtensions.EXTERNAL_BACKEND_DATABASE]: 'Use external backend database library',
   [AvailableServerAdapters.EXPRESS]: 'express.js',
   [AvailableServerAdapters.FASTIFY]: 'fastify',
   ...PrettyNamesDefault

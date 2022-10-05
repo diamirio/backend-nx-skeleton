@@ -21,7 +21,9 @@
 ### Classes
 
 - [BaseExecutor](classes/BaseExecutor.md)
+- [ListrLogger](classes/ListrLogger.md)
 - [Logger](classes/Logger.md)
+- [Manager](classes/Manager.md)
 - [PackageManager](classes/PackageManager.md)
 - [ProcessManager](classes/ProcessManager.md)
 - [RunPackageManagerTask](classes/RunPackageManagerTask.md)
@@ -75,12 +77,13 @@
 - [PackageManagerParsedCommand](interfaces/PackageManagerParsedCommand.md)
 - [PackageVersions](interfaces/PackageVersions.md)
 - [PipeProcessToLoggerOptions](interfaces/PipeProcessToLoggerOptions.md)
+- [ProjectIntegration](interfaces/ProjectIntegration.md)
 - [Task](interfaces/Task.md)
 - [TriggerActionsInterface](interfaces/TriggerActionsInterface.md)
 - [UpdatePackageJsonForProjectRuleOptions](interfaces/UpdatePackageJsonForProjectRuleOptions.md)
 - [WorkspaceJSON](interfaces/WorkspaceJSON.md)
 
-### Type aliases
+### Type Aliases
 
 - [AssetGlob](README.md#assetglob)
 - [AvailableAssetGlob](README.md#availableassetglob)
@@ -119,7 +122,6 @@
 - [PackageManagerCommands](README.md#packagemanagercommands)
 - [PrettyNamesDefault](README.md#prettynamesdefault)
 - [RUN\_PACKAGE\_MANAGER\_TASK\_NAME](README.md#run_package_manager_task_name)
-- [WINSTON\_INSTANCE](README.md#winston_instance)
 - [color](README.md#color)
 
 ### Functions
@@ -222,7 +224,7 @@
 - [updateTsConfigPathsRule](README.md#updatetsconfigpathsrule)
 - [useLinkedVersionOfDependencies](README.md#uselinkedversionofdependencies)
 
-## Type aliases
+## Type Aliases
 
 ### AssetGlob
 
@@ -622,7 +624,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.interface.ts:24
+packages/nx-tools/src/utils/logger/logger.interface.ts:25
 
 ## Variables
 
@@ -667,16 +669,6 @@ ___
 #### Defined in
 
 packages/nx-tools/src/tasks/run-package-manager/run-package-manager.interface.ts:3
-
-___
-
-### WINSTON\_INSTANCE
-
-• `Const` **WINSTON\_INSTANCE**: ``"WINSTON_DEFAULT_LOGGER"``
-
-#### Defined in
-
-packages/nx-tools/src/utils/logger/logger.interface.ts:26
 
 ___
 
@@ -1283,7 +1275,7 @@ Creates a file backup in tree.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:299
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:302
 
 ___
 
@@ -1313,7 +1305,7 @@ Creates a new project in the workspace.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:128
+packages/nx-tools/src/integration/integration.ts:130
 
 ___
 
@@ -1389,7 +1381,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:201
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:204
 
 ___
 
@@ -1476,7 +1468,7 @@ Will use prettier first, others after.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/format-files.ts:21
+packages/nx-tools/src/utils/file-system/format-files.ts:22
 
 ___
 
@@ -1668,17 +1660,17 @@ ___
 
 ### getNodeBinaryPath
 
-▸ **getNodeBinaryPath**(`bin`): `string`
+▸ **getNodeBinaryPath**(`bin?`): `string`
 
 Returns the binary path for a given cli in node_modules.
 
-**`export`**
+**`Export`**
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `bin` | `string` |
+| `bin?` | `string` |
 
 #### Returns
 
@@ -1718,7 +1710,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+| `context` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
 
 #### Returns
 
@@ -1740,7 +1732,7 @@ Returns whether this given context is a run type of context or a build type of c
 
 | Name | Type |
 | :------ | :------ |
-| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+| `context` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
 
 #### Returns
 
@@ -1778,7 +1770,7 @@ Returns whether this is the new type of context nx has old legacy context.
 
 | Name | Type |
 | :------ | :------ |
-| `context` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+| `context` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
 
 #### Returns
 
@@ -1901,7 +1893,7 @@ Merges files the common part.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:277
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:280
 
 ___
 
@@ -2374,7 +2366,7 @@ ___
 
 ### readNxJsonIntegration
 
-▸ **readNxJsonIntegration**<`T`\>(`host`): [`EnrichedNxConfiguration`](interfaces/EnrichedNxConfiguration.md)<`T`\>[``"integration"``]
+▸ **readNxJsonIntegration**<`T`\>(`_host`): [`EnrichedNxConfiguration`](interfaces/EnrichedNxConfiguration.md)<`T`\>[``"integration"``]
 
 Returns the integration field in nx.json.
 
@@ -2388,7 +2380,7 @@ Returns the integration field in nx.json.
 
 | Name | Type |
 | :------ | :------ |
-| `host` | `Tree` |
+| `_host` | `Tree` |
 
 #### Returns
 
@@ -2396,7 +2388,7 @@ Returns the integration field in nx.json.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:80
+packages/nx-tools/src/integration/integration.ts:82
 
 ___
 
@@ -2453,7 +2445,7 @@ Returns the integration field of a all the projects in nx.json.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:87
+packages/nx-tools/src/integration/integration.ts:89
 
 ___
 
@@ -2482,7 +2474,7 @@ Returns the workspace.json configuration for a given application.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:121
+packages/nx-tools/src/integration/integration.ts:123
 
 ___
 
@@ -2504,7 +2496,7 @@ Returns the workspace.json with extended typings.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:106
+packages/nx-tools/src/integration/integration.ts:108
 
 ___
 
@@ -2552,7 +2544,7 @@ Reads all the workspace projects.
 
 #### Defined in
 
-packages/nx-tools/src/integration/integration.ts:113
+packages/nx-tools/src/integration/integration.ts:115
 
 ___
 
@@ -2590,7 +2582,7 @@ Returns the relative path from the nx root.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/find-nx-root.ts:26
+packages/nx-tools/src/utils/file-system/find-nx-root.ts:32
 
 ___
 
@@ -2715,8 +2707,6 @@ Run a designated builder that is extended from base builder in NX way.
 
 ▸ (`options`, `builderContext`): `Observable`<`BuilderOutput`\>
 
-Run a designated builder that is extended from base builder in NX way.
-
 ##### Parameters
 
 | Name | Type |
@@ -2796,7 +2786,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:229
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:232
 
 ___
 
@@ -2891,7 +2881,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:173
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:176
 
 ___
 

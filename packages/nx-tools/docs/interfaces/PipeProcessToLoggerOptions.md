@@ -6,16 +6,39 @@
 
 ### Properties
 
+- [callback](PipeProcessToLoggerOptions.md#callback)
 - [exitCode](PipeProcessToLoggerOptions.md#exitcode)
 - [start](PipeProcessToLoggerOptions.md#start)
 - [stderr](PipeProcessToLoggerOptions.md#stderr)
 - [stdout](PipeProcessToLoggerOptions.md#stdout)
 
-### Methods
-
-- [callback](PipeProcessToLoggerOptions.md#callback)
-
 ## Properties
+
+### callback
+
+• `Optional` **callback**: (`error?`: `Error`) => `void`
+
+#### Type declaration
+
+▸ (`error?`): `void`
+
+will callback on error in the instance
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `error?` | `Error` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:11
+
+___
 
 ### exitCode
 
@@ -62,25 +85,3 @@ enable/disable stdout
 #### Defined in
 
 packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:7
-
-## Methods
-
-### callback
-
-▸ `Optional` **callback**(`error?`): `void`
-
-will callback on error in the instance
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `error?` | `Error` |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-packages/nx-tools/src/utils/logger/pipe-process-to-logger.interface.ts:11

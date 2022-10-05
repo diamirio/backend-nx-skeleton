@@ -1,19 +1,19 @@
-[@webundsoehne-private/nx-workspace](../README.md) / AvailableLibraryTypes
+[@webundsoehne/nx-workspace](../README.md) / AvailableLibraryTypes
 
 # Enumeration: AvailableLibraryTypes
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [BUILDABLE](AvailableLibraryTypes.md#buildable)
 - [SHARED](AvailableLibraryTypes.md#shared)
 
-## Enumeration members
+## Enumeration Members
 
 ### BUILDABLE
 
-• **BUILDABLE** = `"buildable"`
+• **BUILDABLE** = ``"buildable"``
 
 #### Defined in
 
@@ -23,7 +23,7 @@ ___
 
 ### SHARED
 
-• **SHARED** = `"shared"`
+• **SHARED** = ``"shared"``
 
 #### Defined in
 

@@ -33,7 +33,9 @@ TSC Builder options
 
 copy assets
 
-**`param`** when a string defined it has to be inside the application directory, if it is outside a glob should be defined
+**`Param`**
+
+when a string defined it has to be inside the application directory, if it is outside a glob should be defined
 
 #### Defined in
 

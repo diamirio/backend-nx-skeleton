@@ -12,7 +12,7 @@ export function getMatchingPropertyFromData<T extends Record<PropertyKey, any>[]
   const returnValue = data.find((d) => d[compare] === value)[fetch]
 
   if (!returnValue) {
-    throw new Error(`No data can be found with ${compare}: ${value}`)
+    throw new Error(`No data can be found with ${String(compare)}: ${String(value)}`)
   }
 
   return returnValue
@@ -30,7 +30,7 @@ export function filterMatchingPropertyFromData<T extends Record<PropertyKey, any
   const returnValues = data.filter((d) => values.includes(d[compare])).map((d) => d[fetch])
 
   if (returnValues.length === 0) {
-    throw new Error(`No data can be filtered using ${compare} to get ${fetch}: ${values.join(', ')}`)
+    throw new Error(`No data can be filtered using ${String(compare)} to get ${String(fetch)}: ${values.join(', ')}`)
   }
 
   return returnValues

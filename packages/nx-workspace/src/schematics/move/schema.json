@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-workspace/library",
-  "title": "@webundsoehne-private/nx-workspace/library",
+  "$id": "@webundsoehne/nx-workspace/library",
+  "title": "@webundsoehne/nx-workspace/library",
   "description": "Create a new library.",
   "type": "object",
   "examples": [],

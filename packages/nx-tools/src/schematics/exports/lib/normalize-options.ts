@@ -1,9 +1,8 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-exports.rule.interface'
-import { isVerbose, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { Manager, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 import type { ArrayElement } from '@webundsoehne/ts-utility-types'
 
 /**
@@ -12,8 +11,8 @@ import type { ArrayElement } from '@webundsoehne/ts-utility-types'
  * @param context
  * @param options
  */
-export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>(
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -50,8 +49,7 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
     ],
     {
       concurrent: false,
-      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
-  ).run()
+  )
 }

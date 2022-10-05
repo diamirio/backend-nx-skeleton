@@ -5,6 +5,7 @@ stages:
   - build
   - docs
   - publish
+  - sync
 
 cache:
   paths:
@@ -78,5 +79,29 @@ publish:
     - beta
     - rc
     - alpha
+  tags:
+    - docker
+
+# due to gitlab sync not working on the host
+sync:
+  stage: sync
+  image: bitnami/git:latest
+  before_script:
+    - git config --global user.name "backend"
+    - git config --global user.email "$NPM_WS_EMAIL"
+    - mkdir -p ~/.ssh/
+    - echo "$GITHUB_DEPLOY_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+  script:
+    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+    - git remote remove github || true
+    - git remote add github git@github.com:tailoredmedia/backend-nx-skeleton.git
+    - git checkout $CI_COMMIT_BRANCH
+    - git pull origin $CI_COMMIT_BRANCH
+    - git pull github $CI_COMMIT_BRANCH
+    - git status
+    - git push -u github $CI_COMMIT_BRANCH
+  only:
+    - master
   tags:
     - docker

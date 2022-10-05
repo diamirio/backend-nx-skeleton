@@ -1,7 +1,7 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
+import { Manager } from '@utils'
 import { setSchemaDefaultsInContext } from '@utils/schematics'
 
 /**
@@ -10,8 +10,8 @@ import { setSchemaDefaultsInContext } from '@utils/schematics'
  * @param context
  * @param options
  */
-export async function normalizeOptions (_host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>([
+export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Manager(context).run<NormalizedSchema>([
     // assign options to parsed schema
     {
       task: (ctx): void => {
@@ -20,5 +20,5 @@ export async function normalizeOptions (_host: Tree, _context: SchematicContext,
         })
       }
     }
-  ]).run()
+  ])
 }

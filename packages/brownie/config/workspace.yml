@@ -1,0 +1,10 @@
+---
+dependencies:
+  - '@nrwl/cli'
+  - '@nrwl/tao'
+  - '@nrwl/workspace'
+  - '@angular/cli'
+
+workspaces:
+  - pkg: '@webundsoehne/nx-workspace'
+    collection: collections.json

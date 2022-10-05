@@ -24,9 +24,9 @@ Administration user credentials and client.
 
 #### Defined in
 
-admin/admin.interfaces.ts:11
+packages/nestjs-keycloak/src/admin/admin.interfaces.ts:11
 
----
+___
 
 ### configuration
 
@@ -36,9 +36,9 @@ Realm to be managed.
 
 #### Defined in
 
-admin/admin.interfaces.ts:13
+packages/nestjs-keycloak/src/admin/admin.interfaces.ts:13
 
----
+___
 
 ### initialize
 
@@ -48,4 +48,4 @@ Initial connection that should be made with the master administrator account tha
 
 #### Defined in
 
-admin/admin.interfaces.ts:9
+packages/nestjs-keycloak/src/admin/admin.interfaces.ts:9

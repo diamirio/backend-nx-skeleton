@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableDBAdapters
+[@webundsoehne/nx-nest](../README.md) / AvailableDBAdapters
 
 # Enumeration: AvailableDBAdapters
 
@@ -6,16 +6,16 @@ Database adapters, these are not selectable but used in internal scripts.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [MONGOOSE](AvailableDBAdapters.md#mongoose)
 - [TYPEORM](AvailableDBAdapters.md#typeorm)
 
-## Enumeration members
+## Enumeration Members
 
 ### MONGOOSE
 
-• **MONGOOSE** = `"mongoose"`
+• **MONGOOSE** = ``"mongoose"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### TYPEORM
 
-• **TYPEORM** = `"typeorm"`
+• **TYPEORM** = ``"typeorm"``
 
 #### Defined in
 

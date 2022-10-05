@@ -68,11 +68,19 @@ packages/nx-tools/src/utils/builders/base-executor.ts:26
 
 • **builderOptions**: `ExecutorOptions`
 
+#### Defined in
+
+packages/nx-tools/src/utils/builders/base-executor.ts:26
+
 ___
 
 ### context
 
 • **context**: `ExecutorContext`
+
+#### Defined in
+
+packages/nx-tools/src/utils/builders/base-executor.ts:26
 
 ___
 

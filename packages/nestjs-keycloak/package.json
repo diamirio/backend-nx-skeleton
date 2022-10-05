@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
-    "dev:start": "tsup-node --silent --watch",
+    "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
     "lint:staged": "lint-staged",
@@ -34,15 +34,15 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@keycloak/keycloak-admin-client": "^17.0.1",
-    "@nestjs/common": "^8.3.1",
-    "@nestjs/core": "^8.3.1",
-    "@nestjs/graphql": "^9.0.4",
+    "@keycloak/keycloak-admin-client": "^19.0.1",
+    "@nestjs/common": "^9.1.3",
+    "@nestjs/core": "^9.1.3",
+    "@nestjs/graphql": "^10.1.3",
     "@types/express": "^4.17.3",
-    "express": "^4.17.3",
-    "fastify": "^3.27.0",
-    "graphql": "^15",
-    "keycloak-connect": "^17.0.1"
+    "express": "^4.18.1",
+    "fastify": "^4.7.0",
+    "graphql": "^16.6.0",
+    "keycloak-connect": "^19.0.1"
   },
   "peerDependencies": {
     "@keycloak/keycloak-admin-client": ">= 15",

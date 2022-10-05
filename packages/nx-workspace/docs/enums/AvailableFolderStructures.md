@@ -1,19 +1,19 @@
-[@webundsoehne-private/nx-workspace](../README.md) / AvailableFolderStructures
+[@webundsoehne/nx-workspace](../README.md) / AvailableFolderStructures
 
 # Enumeration: AvailableFolderStructures
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [MULTIPLE](AvailableFolderStructures.md#multiple)
 - [SINGLE](AvailableFolderStructures.md#single)
 
-## Enumeration members
+## Enumeration Members
 
 ### MULTIPLE
 
-• **MULTIPLE** = `"apps-and-libs"`
+• **MULTIPLE** = ``"apps-and-libs"``
 
 #### Defined in
 
@@ -23,7 +23,7 @@ ___
 
 ### SINGLE
 
-• **SINGLE** = `"packages"`
+• **SINGLE** = ``"packages"``
 
 #### Defined in
 

@@ -1,23 +1,20 @@
-import { BaseCommand } from '@cenk1cenk2/boilerplate-oclif'
-import { flags as Flags } from '@oclif/command'
-import type { IOptionFlag } from '@oclif/parser/lib/flags'
+import type { InferFlags } from '@cenk1cenk2/oclif-common'
+import { Command, Flags } from '@cenk1cenk2/oclif-common'
 import { detectPackageManager } from 'patch-package/dist/detectPackageManager'
 import { getAppRootPath } from 'patch-package/dist/getAppRootPath'
 import { makePatch } from 'patch-package/dist/makePatch'
 import { isAbsolute } from 'path'
 
-import type { ApplicationConfiguration } from '@interfaces/config.interface'
-
-export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
+export class CreateCommand extends Command<never, InferFlags<typeof CreateCommand>> {
   static strict = false
   static description = 'Creates a new patch from scratch, just point the applications you want as package name.'
   static examples = ['Create a patch for given package: patch-package create graphql']
-  static flags: Record<'directory' | 'path', IOptionFlag<string>> & Record<'include' | 'exclude', IOptionFlag<string[]>> = {
+  static flags = {
     directory: Flags.string({
       char: 'd',
-      description: 'Directory for outputing the patch files.',
+      description: 'Directory for outputting the patch files.',
       default: 'patches',
-      parse: (input) => {
+      parse: async (input) => {
         if (isAbsolute(input)) {
           throw new Error('Patch directory must be relative to the path.')
         }
@@ -46,31 +43,28 @@ export class CreateCommand extends BaseCommand<ApplicationConfiguration> {
 
   async run (): Promise<void> {
     // parse arguments
-    const { argv, flags } = this.parse(CreateCommand)
-
-    const packages = argv.filter((x, i, array) => i === array.indexOf(x))
+    const packages = this.argv.filter((x, i, array) => i === array.indexOf(x))
 
     if (packages?.length === 0) {
-      this.logger.fatal('At least one package has to be specified for processing.')
-      process.exit(127)
+      throw new Error('At least one package has to be specified for processing.')
     }
 
-    this.logger.module(`Creating patch files for modules: ${packages.join(', ')}`)
+    this.logger.info(`Creating patch files for modules: ${packages.join(', ')}`)
 
-    this.logger.info(`Running against root directory: ${flags.path}`)
+    this.logger.info(`Running against root directory: ${this.flags.path}`)
 
     await Promise.all(
       packages.map(async (pkg) => {
         makePatch({
           packagePathSpecifier: pkg,
-          appPath: flags.path,
-          packageManager: detectPackageManager(flags.path),
-          includePaths: flags.include,
-          excludePaths: flags.exclude,
-          patchDir: flags.directory
+          appPath: this.flags.path,
+          packageManager: detectPackageManager(this.flags.path),
+          includePaths: this.flags.include,
+          excludePaths: this.flags.exclude,
+          patchDir: this.flags.directory
         })
 
-        this.logger.success(`Created patch: ${pkg}`)
+        this.logger.info(`Created patch: ${pkg}`)
       })
     )
   }

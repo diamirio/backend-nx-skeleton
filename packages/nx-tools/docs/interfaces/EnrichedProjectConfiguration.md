@@ -24,6 +24,7 @@ Per application settings in workspace.json
 - [implicitDependencies](EnrichedProjectConfiguration.md#implicitdependencies)
 - [integration](EnrichedProjectConfiguration.md#integration)
 - [name](EnrichedProjectConfiguration.md#name)
+- [namedInputs](EnrichedProjectConfiguration.md#namedinputs)
 - [projectType](EnrichedProjectConfiguration.md#projecttype)
 - [root](EnrichedProjectConfiguration.md#root)
 - [sourceRoot](EnrichedProjectConfiguration.md#sourceroot)
@@ -62,7 +63,7 @@ ProjectConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:72
+node_modules/nx/src/config/workspace-json-project-json.d.ts:79
 
 ___
 
@@ -78,7 +79,7 @@ ProjectConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:80
+node_modules/nx/src/config/workspace-json-project-json.d.ts:87
 
 ___
 
@@ -104,7 +105,27 @@ ProjectConfiguration.name
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:36
+node_modules/nx/src/config/workspace-json-project-json.d.ts:43
+
+___
+
+### namedInputs
+
+• `Optional` **namedInputs**: `Object`
+
+Named inputs targets can refer to reduce duplication
+
+#### Index signature
+
+▪ [inputName: `string`]: (`string` \| `InputDefinition`)[]
+
+#### Inherited from
+
+ProjectConfiguration.namedInputs
+
+#### Defined in
+
+node_modules/nx/src/config/workspace-json-project-json.d.ts:91
 
 ___
 
@@ -120,7 +141,7 @@ ProjectConfiguration.projectType
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:54
+node_modules/nx/src/config/workspace-json-project-json.d.ts:61
 
 ___
 
@@ -136,7 +157,7 @@ ProjectConfiguration.root
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:46
+node_modules/nx/src/config/workspace-json-project-json.d.ts:53
 
 ___
 
@@ -152,7 +173,7 @@ ProjectConfiguration.sourceRoot
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:50
+node_modules/nx/src/config/workspace-json-project-json.d.ts:57
 
 ___
 
@@ -168,7 +189,7 @@ ProjectConfiguration.tags
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:84
+node_modules/nx/src/config/workspace-json-project-json.d.ts:97
 
 ___
 
@@ -188,4 +209,4 @@ ProjectConfiguration.targets
 
 #### Defined in
 
-node_modules/nx/src/config/workspace-json-project-json.d.ts:40
+node_modules/nx/src/config/workspace-json-project-json.d.ts:47

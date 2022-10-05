@@ -1,0 +1,23 @@
+import { getDatabaseOptions } from './database-mongoose'
+import { ConfigService } from '@webundsoehne/nestjs-util'
+
+export function generateMongooseMigrateConfig (mock?: boolean): any{
+  const { migration: migrationOptions } = ConfigService.get('database')
+  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions(mock)
+
+  let url = plainUrl
+
+  if (user && pass) {
+    url = `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(pass)}@${plainUrl.slice(10)}`
+  }
+
+  return {
+    mongodb: {
+      url,
+      options
+    },
+    ...migrationOptions
+  }
+}
+
+module.exports = generateMongooseMigrateConfig()

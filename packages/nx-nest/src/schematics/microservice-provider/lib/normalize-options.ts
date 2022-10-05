@@ -1,5 +1,4 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import type { NxNestProjectIntegration } from '@integration'
@@ -7,17 +6,17 @@ import { readMicroserviceProviderWorkspaceIntegration } from '@integration'
 import { SchematicConstants } from '@interfaces'
 import { generateMicroserviceCasing } from '@utils/generate-microservice-casing'
 import {
-  isVerbose,
+  ensureNxRootListrTask,
+  Manager,
   normalizePackageJsonNamePrompt,
   normalizePriorConfigurationPrompt,
   normalizeRootDirectoryPrompt,
   NxProjectTypes,
-  setSchemaDefaultsInContext,
-  ensureNxRootListrTask
+  setSchemaDefaultsInContext
 } from '@webundsoehne/nx-tools'
 
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>(
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -66,8 +65,7 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
     ],
     {
       concurrent: false,
-      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
-  ).run()
+  )
 }

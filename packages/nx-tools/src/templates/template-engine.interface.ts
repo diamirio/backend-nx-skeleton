@@ -4,7 +4,7 @@ import type { ConfigureOptions } from 'nunjucks'
  * Generate templates ending with extension as jinja templates.
  */
 export interface JinjaTemplateOptions {
-  /** Set of extensions to designate as jinja tempaltes */
+  /** Set of extensions to designate as jinja templates */
   templates: string[]
   nunjucks?: ConfigureOptions
 }
@@ -27,6 +27,8 @@ export interface MultipleJinjaTemplateTemplates<T extends Record<string, any> = 
   path: string | RegExp
   /** Output path for generating multiple templates. */
   output: string
-  /** Since everytemplate is indivudual, the template context can be generated through given ctx and output path. */
+  /** Since everytemplate is individual, the template context can be generated through given ctx and output path. */
   factory: (ctx?: T, output?: string) => T
+  /** These templates can be one time templates, the option to overwrite can be set to false to skip rewriting existing template. */
+  overwrite?: boolean
 }

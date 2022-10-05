@@ -4,7 +4,8 @@
 
 [index](../modules/index.md).BaseAuthGuard
 
-Application AuthGuard for Keycloak applications. Base for extending it for multiple use cases.
+Application AuthGuard for Keycloak applications.
+Base for extending it for multiple use cases.
 
 ## Hierarchy
 
@@ -48,15 +49,15 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 
 #### Parameters
 
-| Name              | Type                                                                      |
-| :---------------- | :------------------------------------------------------------------------ |
-| `keycloak`        | `Keycloak`                                                                |
+| Name | Type |
+| :------ | :------ |
+| `keycloak` | `Keycloak` |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector`       | `Reflector`                                                               |
+| `reflector` | `Reflector` |
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:27
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:27
 
 ## Properties
 
@@ -66,13 +67,17 @@ connect/guards/auth-base.guard.ts:27
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:25
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:25
 
----
+___
 
 ### reflector
 
 • `Readonly` **reflector**: `Reflector`
+
+#### Defined in
+
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
 
 ## Methods
 
@@ -82,8 +87,8 @@ connect/guards/auth-base.guard.ts:25
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -96,9 +101,9 @@ CanActivate.canActivate
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:33
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
 
----
+___
 
 ### extractBearerToken
 
@@ -106,9 +111,9 @@ connect/guards/auth-base.guard.ts:33
 
 #### Parameters
 
-| Name      | Type                                                                                                                                             |
-| :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `request` | [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
+| Name | Type |
+| :------ | :------ |
+| `request` | [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) |
 
 #### Returns
 
@@ -116,9 +121,9 @@ connect/guards/auth-base.guard.ts:33
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:132
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:132
 
----
+___
 
 ### fetchRoles
 
@@ -126,7 +131,7 @@ connect/guards/auth-base.guard.ts:132
 
 #### Parameters
 
-| Name    | Type    |
+| Name | Type |
 | :------ | :------ |
 | `grant` | `Grant` |
 
@@ -136,9 +141,9 @@ connect/guards/auth-base.guard.ts:132
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:144
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:144
 
----
+___
 
 ### fetchScopes
 
@@ -146,9 +151,9 @@ connect/guards/auth-base.guard.ts:144
 
 #### Parameters
 
-| Name               | Type                                               |
-| :----------------- | :------------------------------------------------- |
-| `roles`            | `string`[]                                         |
+| Name | Type |
+| :------ | :------ |
+| `roles` | `string`[] |
 | `authorizedScopes` | [`ScopesOption`](../modules/index.md#scopesoption) |
 
 #### Returns
@@ -157,9 +162,9 @@ connect/guards/auth-base.guard.ts:144
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:156
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:156
 
----
+___
 
 ### getExceptionMessage
 
@@ -167,8 +172,8 @@ connect/guards/auth-base.guard.ts:156
 
 #### Parameters
 
-| Name      | Type     |
-| :-------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `message` | `string` |
 
 #### Returns
@@ -177,34 +182,34 @@ connect/guards/auth-base.guard.ts:156
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:128
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:128
 
----
+___
 
 ### getRequest
 
-▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
+▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
 
-[`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
+[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:166
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:166
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -213,14 +218,14 @@ connect/guards/auth-base.guard.ts:166
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:167
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
 
 #### Parameters
 
-| Name      | Type               |
-| :-------- | :----------------- |
+| Name | Type |
+| :------ | :------ |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -229,9 +234,9 @@ connect/guards/auth-base.guard.ts:167
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:168
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:168
 
----
+___
 
 ### validate
 
@@ -239,11 +244,11 @@ connect/guards/auth-base.guard.ts:168
 
 #### Parameters
 
-| Name               | Type       | Default value |
-| :----------------- | :--------- | :------------ |
-| `key`              | `string`   | `undefined`   |
-| `values`           | `string`[] | `undefined`   |
-| `authorizedValues` | `string`[] | `[]`          |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `key` | `string` | `undefined` |
+| `values` | `string`[] | `undefined` |
+| `authorizedValues` | `string`[] | `[]` |
 
 #### Returns
 
@@ -251,9 +256,9 @@ connect/guards/auth-base.guard.ts:168
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:118
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:118
 
----
+___
 
 ### validateRequirements
 
@@ -263,10 +268,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name       | Type       | Default value |
-| :--------- | :--------- | :------------ |
-| `values`   | `string`[] | `undefined`   |
-| `required` | `string`[] | `[]`          |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `values` | `string`[] | `undefined` |
+| `required` | `string`[] | `[]` |
 
 #### Returns
 
@@ -274,4 +279,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-connect/guards/auth-base.guard.ts:106
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:106

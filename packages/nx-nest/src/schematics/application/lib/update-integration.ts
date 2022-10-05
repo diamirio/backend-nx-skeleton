@@ -15,6 +15,7 @@ export function updateIntegration (options: NormalizedSchema): Rule {
     'components',
     'effectiveComponents',
     'server',
+    'serverAdapter',
     'extensions',
     'microservice',
     'microserviceClient',

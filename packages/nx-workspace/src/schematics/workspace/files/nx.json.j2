@@ -16,10 +16,12 @@
     "**/public/**": "*"
   },
   "tasksRunnerOptions": {
-    "runner": "@nrwl/workspace/tasks-runners/default",
-    "options": {
-      "cacheDirectory": ".cache/nx",
-      "cacheableOperations": ["build", "lint", "test", "e2e"]
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheDirectory": ".cache/nx",
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
     }
   },
   {% if layout === enum.layout.SINGLE %}

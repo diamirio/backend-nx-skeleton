@@ -1,14 +1,12 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
-import { sync as findUpSync } from 'find-up'
 import fs from 'fs-extra'
 import globby from 'globby'
 import type { PromptOptionsMap } from 'listr2'
-import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { color, generateNameCases, isVerbose, Logger, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { color, findNxRoot, generateNameCases, Logger, Manager, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -22,7 +20,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
 
   logger.debug(`Template directory to scan in: ${files}`)
 
-  return new Listr<NormalizedSchema>(
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -34,15 +32,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       },
 
       // prompt for generator component name
-      {
-        skip: (ctx): boolean => !!ctx.name,
-        task: async (ctx, task): Promise<void> => {
-          ctx.name = await task.prompt({
-            type: 'Input',
-            message: 'Please give a name to the soon to be generated component.'
-          })
-        }
-      },
+      ...normalizeNamePrompt(),
 
       // parse component name and convert casings to use in template
       {
@@ -58,7 +48,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       // need package scope for imports and such
       {
         task: async (ctx): Promise<void> => {
-          const nxJsonPath = findUpSync('nx.json', { cwd: process.cwd(), type: 'file' })
+          const nxJsonPath = join(findNxRoot(), 'nx.json')
 
           logger.debug(`nx.json path found: ${nxJsonPath}`)
 
@@ -66,8 +56,12 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
             const nxJson = await fs.readJSON(nxJsonPath)
 
             ctx.packageScope = `${nxJson.npmScope}`
+
+            logger.debug('Package scope set: %s', ctx.packageScope)
             // eslint-disable-next-line no-empty
-          } catch {}
+          } catch {
+            logger.debug('Package scope can not be set!')
+          }
         }
       },
 
@@ -130,7 +124,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       // get and process prompts
       {
         title: 'Extra prompts to extend the templates.',
-        skip: (ctx): boolean => !fs.existsSync(join(files, ctx.type, 'prompts.json')),
+        skip: (ctx): boolean => !fs.existsSync(join(files, ctx.type, 'prompts.json')) || !!ctx.inject,
         task: async (ctx, task): Promise<void> => {
           task.title = 'Prompts file is found, now have some extra questions to inject to templates.'
 
@@ -145,8 +139,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       }
     ],
     {
-      rendererFallback: isVerbose(),
       rendererSilent: options.silent
     }
-  ).run()
+  )
 }

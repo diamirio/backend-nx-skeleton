@@ -18,7 +18,6 @@ A timeout exception for message queue internally.
 
 ### Properties
 
-- [cause](TimeoutException.md#cause)
 - [message](TimeoutException.md#message)
 - [name](TimeoutException.md#name)
 - [stack](TimeoutException.md#stack)
@@ -52,20 +51,6 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 ## Properties
 
-### cause
-
-• `Optional` **cause**: `Error`
-
-#### Inherited from
-
-RuntimeException.cause
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2022.error.d.ts:26
-
-___
-
 ### message
 
 • **message**: `string`
@@ -76,7 +61,7 @@ RuntimeException.message
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1023
+node_modules/typescript/lib/lib.es5.d.ts:1041
 
 ___
 
@@ -90,7 +75,7 @@ RuntimeException.name
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1022
+node_modules/typescript/lib/lib.es5.d.ts:1040
 
 ___
 
@@ -104,7 +89,7 @@ RuntimeException.stack
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1024
+node_modules/typescript/lib/lib.es5.d.ts:1042
 
 ___
 
@@ -118,7 +103,9 @@ ___
 
 Optional override for formatting stack traces
 
-**`see`** https://v8.dev/docs/stack-trace-api#customizing-stack-traces
+**`See`**
+
+https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ##### Parameters
 
@@ -137,7 +124,7 @@ RuntimeException.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/ts4.8/globals.d.ts:11
 
 ___
 
@@ -151,7 +138,7 @@ RuntimeException.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/ts4.8/globals.d.ts:13
 
 ## Methods
 
@@ -196,4 +183,4 @@ RuntimeException.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/ts4.8/globals.d.ts:4

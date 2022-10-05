@@ -5,6 +5,7 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
+      "@constants/*": ["constants/*"],
       "@commands/*": ["commands/*"],
       "@helpers/*": ["helpers/*"],
       "@interfaces/*": ["interfaces/*"],

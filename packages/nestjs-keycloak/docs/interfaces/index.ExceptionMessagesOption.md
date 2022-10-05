@@ -29,9 +29,9 @@
 
 #### Defined in
 
-connect/connect.interfaces.ts:28
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:28
 
----
+___
 
 ### rolesMissing
 
@@ -39,9 +39,9 @@ connect/connect.interfaces.ts:28
 
 #### Defined in
 
-connect/connect.interfaces.ts:30
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:30
 
----
+___
 
 ### rolesUnauthorized
 
@@ -49,9 +49,9 @@ connect/connect.interfaces.ts:30
 
 #### Defined in
 
-connect/connect.interfaces.ts:31
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:31
 
----
+___
 
 ### scopesMissing
 
@@ -59,9 +59,9 @@ connect/connect.interfaces.ts:31
 
 #### Defined in
 
-connect/connect.interfaces.ts:32
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:32
 
----
+___
 
 ### scopesUnauthorized
 
@@ -69,9 +69,9 @@ connect/connect.interfaces.ts:32
 
 #### Defined in
 
-connect/connect.interfaces.ts:33
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:33
 
----
+___
 
 ### tokenMissing
 
@@ -79,4 +79,4 @@ connect/connect.interfaces.ts:33
 
 #### Defined in
 
-connect/connect.interfaces.ts:29
+packages/nestjs-keycloak/src/connect/connect.interfaces.ts:29

@@ -40,7 +40,7 @@ It is not great but winston was not working that well in a amazingly stateless a
 
 | Name | Type |
 | :------ | :------ |
-| `context?` | `BuilderContext` \| `SchematicContext` \| `ExecutorContext` |
+| `context?` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
 | `options?` | [`LoggerOptions`](../interfaces/LoggerOptions.md) |
 
 #### Defined in
@@ -106,7 +106,7 @@ packages/nx-tools/src/utils/logger/logger.ts:20
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:62
+packages/nx-tools/src/utils/logger/logger.ts:60
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:50
+packages/nx-tools/src/utils/logger/logger.ts:48
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:46
+packages/nx-tools/src/utils/logger/logger.ts:44
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:58
+packages/nx-tools/src/utils/logger/logger.ts:56
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:66
+packages/nx-tools/src/utils/logger/logger.ts:64
 
 ___
 
@@ -195,10 +195,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.context?` | `string` |
-| `__namedParameters.level` | [`LogLevels`](../enums/LogLevels.md) |
-| `__namedParameters.message` | `string` |
+| `__namedParameters` | [`LoggerFormat`](../interfaces/LoggerFormat.md) |
 
 #### Returns
 
@@ -206,7 +203,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:112
+packages/nx-tools/src/utils/logger/logger.ts:111
 
 ___
 
@@ -228,7 +225,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:108
+packages/nx-tools/src/utils/logger/logger.ts:107
 
 ___
 
@@ -249,4 +246,4 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/logger/logger.ts:54
+packages/nx-tools/src/utils/logger/logger.ts:52

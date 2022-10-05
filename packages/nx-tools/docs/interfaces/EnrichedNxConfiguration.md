@@ -28,9 +28,11 @@ we may need in future, so instead of importing NxJson from nx we can still use o
 - [generators](EnrichedNxConfiguration.md#generators)
 - [implicitDependencies](EnrichedNxConfiguration.md#implicitdependencies)
 - [integration](EnrichedNxConfiguration.md#integration)
+- [namedInputs](EnrichedNxConfiguration.md#namedinputs)
 - [npmScope](EnrichedNxConfiguration.md#npmscope)
 - [plugins](EnrichedNxConfiguration.md#plugins)
 - [pluginsConfig](EnrichedNxConfiguration.md#pluginsconfig)
+- [targetDefaults](EnrichedNxConfiguration.md#targetdefaults)
 - [targetDependencies](EnrichedNxConfiguration.md#targetdependencies)
 - [tasksRunnerOptions](EnrichedNxConfiguration.md#tasksrunneroptions)
 - [workspaceLayout](EnrichedNxConfiguration.md#workspacelayout)
@@ -49,7 +51,7 @@ NxJsonConfiguration.affected
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:38
+node_modules/nx/src/config/nx-json.d.ts:57
 
 ___
 
@@ -61,11 +63,11 @@ Default generator collection. It is used when no collection is provided.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `defaultCollection?` | `string` |
-| `defaultProjectName?` | `string` |
-| `packageManager?` | `PackageManager` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `defaultCollection?` | `string` | **`Deprecated`**  - defaultCollection is deprecated and will be removed |
+| `defaultProjectName?` | `string` | - |
+| `packageManager?` | `PackageManager` | - |
 
 #### Inherited from
 
@@ -73,7 +75,7 @@ NxJsonConfiguration.cli
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:86
+node_modules/nx/src/config/nx-json.d.ts:105
 
 ___
 
@@ -90,7 +92,7 @@ NxJsonConfiguration.defaultProject
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:103
+node_modules/nx/src/config/nx-json.d.ts:125
 
 ___
 
@@ -106,7 +108,7 @@ NxJsonConfiguration.extends
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:22
+node_modules/nx/src/config/nx-json.d.ts:30
 
 ___
 
@@ -140,7 +142,7 @@ NxJsonConfiguration.generators
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:78
+node_modules/nx/src/config/nx-json.d.ts:97
 
 ___
 
@@ -156,7 +158,7 @@ NxJsonConfiguration.implicitDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:26
+node_modules/nx/src/config/nx-json.d.ts:34
 
 ___
 
@@ -170,9 +172,29 @@ packages/nx-tools/src/interfaces/nx-json.interface.ts:24
 
 ___
 
+### namedInputs
+
+• `Optional` **namedInputs**: `Object`
+
+Named inputs targets can refer to reduce duplication
+
+#### Index signature
+
+▪ [inputName: `string`]: (`string` \| `InputDefinition`)[]
+
+#### Inherited from
+
+NxJsonConfiguration.namedInputs
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:43
+
+___
+
 ### npmScope
 
-• **npmScope**: `string`
+• `Optional` **npmScope**: `string`
 
 NPM Scope that the workspace uses
 
@@ -182,7 +204,7 @@ NxJsonConfiguration.npmScope
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:34
+node_modules/nx/src/config/nx-json.d.ts:53
 
 ___
 
@@ -198,7 +220,7 @@ NxJsonConfiguration.plugins
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:94
+node_modules/nx/src/config/nx-json.d.ts:116
 
 ___
 
@@ -214,14 +236,33 @@ NxJsonConfiguration.pluginsConfig
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:98
+node_modules/nx/src/config/nx-json.d.ts:120
+
+___
+
+### targetDefaults
+
+• `Optional` **targetDefaults**: `TargetDefaults`
+
+Dependencies between different target names across all projects
+
+#### Inherited from
+
+NxJsonConfiguration.targetDefaults
+
+#### Defined in
+
+node_modules/nx/src/config/nx-json.d.ts:49
 
 ___
 
 ### targetDependencies
 
-• `Optional` **targetDependencies**: `Record`<`string`, `TargetDependencyConfig`[]\>
+• `Optional` **targetDependencies**: `TargetDependencies`
 
+**`Deprecated`**
+
+use targetDefaults instead
 Dependencies between different target names across all projects
 
 #### Inherited from
@@ -230,7 +271,7 @@ NxJsonConfiguration.targetDependencies
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:30
+node_modules/nx/src/config/nx-json.d.ts:39
 
 ___
 
@@ -250,7 +291,7 @@ NxJsonConfiguration.tasksRunnerOptions
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:49
+node_modules/nx/src/config/nx-json.d.ts:68
 
 ___
 
@@ -273,4 +314,4 @@ NxJsonConfiguration.workspaceLayout
 
 #### Defined in
 
-node_modules/nx/src/config/nx-json.d.ts:42
+node_modules/nx/src/config/nx-json.d.ts:61

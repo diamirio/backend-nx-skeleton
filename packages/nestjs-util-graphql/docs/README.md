@@ -8,7 +8,7 @@
 
 - [GraphQLPreformattedException](classes/GraphQLPreformattedException.md)
 
-### Type aliases
+### Type Aliases
 
 - [ExtendedGraphQLFormattedError](README.md#extendedgraphqlformattederror)
 
@@ -16,7 +16,7 @@
 
 - [GraphQLErrorParser](README.md#graphqlerrorparser)
 
-## Type aliases
+## Type Aliases
 
 ### ExtendedGraphQLFormattedError
 
@@ -36,7 +36,7 @@ packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:15
 
 ### GraphQLErrorParser
 
-▸ **GraphQLErrorParser**(`exception`): `GraphQLFormattedError`<`EnrichedException`\>
+▸ **GraphQLErrorParser**(`exception`): `GraphQLFormattedError`
 
 #### Parameters
 
@@ -46,8 +46,8 @@ packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:15
 
 #### Returns
 
-`GraphQLFormattedError`<`EnrichedException`\>
+`GraphQLFormattedError`
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:10
+packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:11

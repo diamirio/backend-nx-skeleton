@@ -3,13 +3,13 @@ import { MessageQueues, MicroserviceRequest, MicroserviceResponse, {{ casing.inj
 
 @Injectable()
 export class {{ casing.pascal }}Microservice {
-  private logger: Logger = new Logger(this.constructor.name)
+  private readonly logger: Logger = new Logger(this.constructor.name)
 
   constructor() {}
 
   async default (
-    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>
-  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.{{ casing.injected.microservices.names.default }}>> {
+    options: MicroserviceRequest<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.DEFAULT>
+  ): Promise<MicroserviceResponse<MessageQueues.{{ casing.injected.microservices.names.queue }}, {{ casing.injected.microservices.names.pattern }}.DEFAULT>> {
     return 'Hello world.'
   }
 }

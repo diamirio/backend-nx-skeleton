@@ -8,9 +8,13 @@ import { BrownieAvailableContainers, updateBrownieIntegrationRule, updateNxInteg
 export function updateIntegration (options: NormalizedSchema): Rule {
   return chain([
     // add the components that needs to be known
-    updateNxIntegrationRule<NxNestProjectIntegration>(options.name, {
-      microserviceProvider: { microservices: options.microservices }
-    }),
+    updateNxIntegrationRule<NxNestProjectIntegration>(
+      options.name,
+      {
+        microserviceProvider: { microservices: options.microservices }
+      },
+      { arrayOverwrite: true }
+    ),
 
     // add nx message queue container
     updateBrownieIntegrationRule(options.name, { containers: [BrownieAvailableContainers.NX] })

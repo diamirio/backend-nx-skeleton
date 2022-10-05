@@ -6,16 +6,16 @@ Available Linters
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [ESLINT](AvailableLinterTypes.md#eslint)
 - [NONE](AvailableLinterTypes.md#none)
 
-## Enumeration members
+## Enumeration Members
 
 ### ESLINT
 
-• **ESLINT** = `"eslint"`
+• **ESLINT** = ``"eslint"``
 
 #### Defined in
 
@@ -25,7 +25,7 @@ ___
 
 ### NONE
 
-• **NONE** = `"none"`
+• **NONE** = ``"none"``
 
 #### Defined in
 

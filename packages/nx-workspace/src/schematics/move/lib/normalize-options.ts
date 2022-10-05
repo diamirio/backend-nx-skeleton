@@ -1,9 +1,9 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import {
   ensureNxRootListrTask,
+  Manager,
   normalizeNameWithParentAndDestinationPrompt,
   normalizePackageJsonNameForParentPrompt,
   readProjectConfiguration,
@@ -16,8 +16,8 @@ import {
  * @param context
  * @param options
  */
-export async function normalizeOptions (host: Tree, _context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>([
+export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
+  return new Manager(context).run<NormalizedSchema>([
     // assign options to parsed schema
     {
       task: (ctx): void => {
@@ -38,5 +38,5 @@ export async function normalizeOptions (host: Tree, _context: SchematicContext, 
         ctx.project = readProjectConfiguration(host, ctx.parent)
       }
     }
-  ]).run()
+  ])
 }

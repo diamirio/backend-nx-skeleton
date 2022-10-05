@@ -93,8 +93,8 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 | :------ | :------ |
 | `Queue` | extends `string` |
 | `Pattern` | extends `any` |
-| `Payload` | extends `any` |
-| `ReturnValue` | extends `any` |
+| `Payload` | `Payload` |
+| `ReturnValue` | `ReturnValue` |
 
 #### Parameters
 
@@ -125,8 +125,8 @@ ___
 | :------ | :------ |
 | `Queue` | extends `string` |
 | `Pattern` | extends `any` |
-| `Payload` | extends `any` |
-| `ReturnValue` | extends `any` |
+| `Payload` | `Payload` |
+| `ReturnValue` | `ReturnValue` |
 
 #### Parameters
 
@@ -176,8 +176,8 @@ ___
 | :------ | :------ |
 | `Queue` | extends `string` |
 | `Pattern` | extends `any` |
-| `Payload` | extends `any` |
-| `ReturnValue` | extends `any` |
+| `Payload` | `Payload` |
+| `ReturnValue` | `ReturnValue` |
 
 #### Parameters
 
@@ -208,8 +208,8 @@ ___
 | :------ | :------ |
 | `Queue` | extends `string` |
 | `Pattern` | extends `any` |
-| `Payload` | extends `any` |
-| `ReturnValue` | extends `any` |
+| `Payload` | `Payload` |
+| `ReturnValue` | `ReturnValue` |
 
 #### Parameters
 

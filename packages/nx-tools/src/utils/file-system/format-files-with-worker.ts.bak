@@ -1,0 +1,136 @@
+import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
+import { noop } from '@angular-devkit/schematics'
+import * as path from 'path'
+import { join } from 'path'
+import { from } from 'rxjs'
+import { Worker } from 'worker_threads'
+
+import { getFilesInTree } from './file-system'
+import type { FormatFilesOptions } from './format-files.interface'
+import type { ThreadWorkerOptions, ThreadWorkerResponse } from './format-files.worker'
+import { findNxRoot, isVerbose, Logger } from '@utils'
+
+/**
+ * Format files as a rule in a tree.
+ *
+ * Requires configuration to be present in the current tree.
+ *
+ * Will use prettier first, others after.
+ * @param options
+ */
+export function formatFilesWithWorkerRule (options?: FormatFilesOptions): Rule {
+  options = {
+    skip: false,
+    prettier: true,
+    eslint: true,
+    ...options
+  }
+
+  // insanity check
+  if (options.skip || !(options.prettier || options.eslint)) {
+    return noop()
+  }
+
+  const processed = {
+    ignored: [],
+    prettier: { formatted: [], ignored: [] },
+    eslint: { formatted: [], ignored: [] }
+  }
+
+  const isDebug = isVerbose()
+
+  // BUG: it does not like observable tree because of the internal rxjs version differences so it is marked as any Observable<Tree>
+  return (host: Tree, context: SchematicContext): Tree | any => {
+    const log = new Logger(context)
+
+    const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')
+
+    if (files.size === 0) {
+      return host
+    }
+
+    // get root path
+    const appRootPath = findNxRoot({ throw: false }) ?? '/'
+
+    log.debug('Formatting and linting: tree %s in %s, running with options %o', host.root.path, appRootPath, options)
+
+    // BUG: additional configuration for some weird bug fixes
+    const prettierIgnored = ['custom-environment-variables.yml']
+
+    // this should be much faster than the observable approach that angular directly supports
+    // things were getting slow with it
+    return from(
+      (async (): Promise<Tree> => {
+        const start = Date.now()
+
+        await Promise.all(
+          Array.from(files.values()).map(async (file) => {
+            if (!host.exists(file.path)) {
+              if (isDebug) {
+                processed.ignored.push(file.path)
+              }
+
+              return
+            }
+
+            const systemPath = path.join(appRootPath, file.path)
+
+            const workerOptions: ThreadWorkerOptions = {
+              isDebug,
+              prettier: options.prettier,
+              eslint: options.eslint,
+              content: file.content,
+              treePath: file.path,
+              systemPath,
+              prettierIgnored
+            }
+
+            const worker = new Worker(join(__dirname, 'utils/file-system', './format-files.worker.js'), {
+              workerData: workerOptions
+            })
+
+            return new Promise((resolve) => {
+              worker.on('message', (data: ThreadWorkerResponse) => {
+                if (data.prettier) {
+                  processed.prettier.formatted.push({ path: file.path, time: data.prettierTime })
+                } else {
+                  processed.prettier.ignored.push({ path: file.path, time: data.prettierTime })
+                }
+
+                if (data.eslint) {
+                  processed.eslint.formatted.push({ path: file.path, time: data.eslintTime })
+                } else {
+                  processed.eslint.ignored.push({ path: file.path, time: data.eslintTime })
+                }
+
+                host.overwrite(file.path, data.content)
+
+                resolve(null)
+              })
+
+              worker.on('error', (e) => {
+                void worker.terminate()
+
+                log.error(`Could not format ${file.path}:\n${e.message}`)
+
+                resolve(null)
+              })
+
+              worker.on('exit', (code) => {
+                if (code !== 0) {
+                  void worker.terminate()
+                }
+
+                resolve(null)
+              })
+            })
+          })
+        )
+
+        log.debug('Formatted and linted files: %o in %ss', processed, (Date.now() - start) / 1000)
+
+        return host
+      })()
+    )
+  }
+}

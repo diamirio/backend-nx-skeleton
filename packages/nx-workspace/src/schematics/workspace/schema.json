@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-workspace/workspace",
-  "title": "@webundsoehne-private/nx-workspace/workspace",
+  "$id": "@webundsoehne/nx-workspace/workspace",
+  "title": "@webundsoehne/nx-workspace/workspace",
   "description": "Creates a new workspace through @nrwl/tao.",
   "type": "object",
   "properties": {
@@ -59,10 +59,10 @@
       ],
       "default": true
     },
-    "cli": {
-      "description": "CLI used for generating code and running tasks",
-      "type": "string",
-      "enum": ["nx", "angular"]
+    "verbose": {
+      "type": "boolean",
+      "description": "Emits verbose output",
+      "default": false
     }
   }
 }

@@ -28,6 +28,7 @@
 
 - [getResponse](ClassValidatorException.md#getresponse)
 - [getStatus](ClassValidatorException.md#getstatus)
+- [initCause](ClassValidatorException.md#initcause)
 - [initMessage](ClassValidatorException.md#initmessage)
 - [initName](ClassValidatorException.md#initname)
 - [captureStackTrace](ClassValidatorException.md#capturestacktrace)
@@ -57,7 +58,7 @@ packages/nestjs-util/src/filter/exception.interface.ts:7
 
 ### cause
 
-• `Optional` **cause**: `Error`
+• **cause**: `Error`
 
 #### Inherited from
 
@@ -65,7 +66,7 @@ BadRequestException.cause
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2022.error.d.ts:26
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:38
 
 ___
 
@@ -79,7 +80,7 @@ BadRequestException.message
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1023
+node_modules/typescript/lib/lib.es5.d.ts:1041
 
 ___
 
@@ -93,7 +94,7 @@ BadRequestException.name
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1022
+node_modules/typescript/lib/lib.es5.d.ts:1040
 
 ___
 
@@ -107,7 +108,7 @@ BadRequestException.stack
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:1024
+node_modules/typescript/lib/lib.es5.d.ts:1042
 
 ___
 
@@ -131,7 +132,9 @@ ___
 
 Optional override for formatting stack traces
 
-**`see`** https://v8.dev/docs/stack-trace-api#customizing-stack-traces
+**`See`**
+
+https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ##### Parameters
 
@@ -150,7 +153,7 @@ BadRequestException.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/ts4.8/globals.d.ts:11
 
 ___
 
@@ -164,7 +167,7 @@ BadRequestException.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/ts4.8/globals.d.ts:13
 
 ## Methods
 
@@ -182,7 +185,7 @@ BadRequestException.getResponse
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:40
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:49
 
 ___
 
@@ -200,7 +203,31 @@ BadRequestException.getStatus
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:41
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:50
+
+___
+
+### initCause
+
+▸ **initCause**(): `void`
+
+Configures error chaining support
+
+See:
+- https://nodejs.org/en/blog/release/v16.9.0/#error-cause
+- https://github.com/microsoft/TypeScript/issues/45167
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+BadRequestException.initCause
+
+#### Defined in
+
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:46
 
 ___
 
@@ -218,7 +245,7 @@ BadRequestException.initMessage
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:38
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:47
 
 ___
 
@@ -236,7 +263,7 @@ BadRequestException.initName
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:39
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:48
 
 ___
 
@@ -263,7 +290,7 @@ BadRequestException.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/ts4.8/globals.d.ts:4
 
 ___
 
@@ -289,4 +316,4 @@ BadRequestException.createBody
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:42
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:51

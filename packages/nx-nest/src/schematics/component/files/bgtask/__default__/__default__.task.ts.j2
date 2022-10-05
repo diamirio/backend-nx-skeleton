@@ -8,7 +8,7 @@ import { Interval } from '@nestjs/schedule'
 
 @Injectable()
 export class {{ casing.pascal }}Task {
-  private logger: Logger = new Logger(this.constructor.name)
+  private readonly logger: Logger = new Logger(this.constructor.name)
 
   @Interval(86400)
   defaultJob (): void {

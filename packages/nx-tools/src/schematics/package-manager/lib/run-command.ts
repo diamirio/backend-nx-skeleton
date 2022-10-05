@@ -1,8 +1,8 @@
 import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import execa from 'execa'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema } from '../main.interface'
+import { Manager } from '@utils'
 import { Logger, pipeProcessThroughListr } from '@utils/logger'
 import { PackageManager } from '@utils/package-manager'
 
@@ -14,7 +14,7 @@ export function runCommand (options: NormalizedSchema): Rule {
     const packageManager = new PackageManager()
     const log = new Logger(context)
 
-    return new Listr([
+    return new Manager(context).run<Rule>([
       {
         task: async (_, task): Promise<void> => {
           const { manager, args, env } = packageManager.parser(options.action)
@@ -34,6 +34,6 @@ export function runCommand (options: NormalizedSchema): Rule {
           )
         }
       }
-    ]).run()
+    ])
   }
 }

@@ -1,15 +1,15 @@
 import type { Versions } from './versions.interface'
-import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerTypes } from '@interfaces/available.constants'
+import { AvailableComponents, AvailableDBAdapters, AvailableDBTypes, AvailableServerAdapters, AvailableServerTypes } from '@interfaces/available.constants'
 import { AvailableTestsTypes } from '@webundsoehne/nx-tools'
 
 export const VERSIONS: Versions = {
   base: {
     default: {
       deps: {
-        ['@nestjs/common']: '^8.2.5',
-        ['@nestjs/core']: '^8.2.5',
-        rxjs: { version: '^7.5.2', implicit: true },
-        ['@webundsoehne/nestjs-util']: '^5.0.1',
+        ['@nestjs/common']: '^9',
+        ['@nestjs/core']: '^9',
+        rxjs: { version: '^7', implicit: true },
+        ['@webundsoehne/nestjs-util']: '^6',
         ['class-transformer']: { version: '^0.5.1', implicit: true },
         ['class-validator']: { version: '^0.13.2', implicit: true },
         ['reflect-metadata']: { version: '^0.1.13', implicit: true }
@@ -17,80 +17,101 @@ export const VERSIONS: Versions = {
     },
     microservice: {
       deps: {
-        ['@nestjs/microservices']: '^8.2.5',
-        ['@webundsoehne/nestjs-util-microservices']: '^1.0.0'
+        ['@nestjs/microservices']: '^9',
+        ['@webundsoehne/nestjs-util-microservices']: '^2'
       }
     },
     builder: {
       devDeps: {
-        ['@webundsoehne/nx-builders']: '^5.0.5'
+        ['@webundsoehne/nx-builders']: '^6'
       }
+    }
+  },
+  [AvailableServerAdapters.EXPRESS]: {
+    deps: {
+      ['@nestjs/platform-express']: '^9',
+      ['swagger-ui-express']: { version: '^4', implicit: true }
+    }
+  },
+  [AvailableServerAdapters.FASTIFY]: {
+    deps: {
+      ['@nestjs/platform-fastify']: '^9',
+      ['@fastify/swagger']: { version: '^7', implicit: true },
+      ['@fastify/static']: { version: '^6', implicit: true }
     }
   },
   [AvailableServerTypes.RESTFUL]: {
     deps: {
-      ['@nestjs/platform-fastify']: '^8.2.5',
-      ['fastify-swagger']: { version: '^4.13.1', implicit: true },
-      ['@nestjs/swagger']: '^5.1.5',
-      ['@webundsoehne/nestjs-util-restful']: '^1.0.0'
+      ['@nestjs/swagger']: '^6',
+      ['@webundsoehne/nestjs-util-restful']: '^2'
+    }
+  },
+  [`${AvailableServerAdapters.EXPRESS}_${AvailableServerTypes.GRAPHQL}`]: {
+    deps: {
+      ['apollo-server-express']: { version: '^3', implicit: true }
+    }
+  },
+  [`${AvailableServerAdapters.FASTIFY}_${AvailableServerTypes.GRAPHQL}`]: {
+    deps: {
+      ['apollo-server-fastify']: { version: '^3', implicit: true }
     }
   },
   [AvailableServerTypes.GRAPHQL]: {
     deps: {
-      ['@nestjs/graphql']: '^9.1.2',
-      ['@nestjs/platform-fastify']: '^8.2.5',
-      ['apollo-server-fastify']: { version: '^3.6.2', implicit: true },
-      graphql: { version: '^15', implicit: true },
-      ['graphql-tools']: { version: '^8.2.0', implicit: true },
-      ['@webundsoehne/nestjs-util-graphql']: '^1.0.0'
+      ['@nestjs/graphql']: '^10',
+      ['@nestjs/apollo']: '^10',
+      graphql: { version: '^16.6.0', implicit: true },
+      ['graphql-tools']: { version: '^8', implicit: true },
+      ['@webundsoehne/nestjs-util-graphql']: '^2'
     }
   },
   [AvailableComponents.BG_TASK]: {
     deps: {
-      ['@nestjs/schedule']: '^1.0.2'
+      ['@nestjs/schedule']: '^2'
     },
     devDeps: {
-      ['@types/cron']: '^1.7.3'
+      ['@types/cron']: '^2'
     }
   },
   [AvailableComponents.COMMAND]: {
     deps: {
-      ['nest-commander']: '^2.3.5'
+      ['nest-commander']: '^3'
     }
   },
   // if the support for per message queue support added this has to be done in a more complicated way
   [AvailableComponents.MICROSERVICE_SERVER]: {
     deps: {
-      amqplib: { version: '^0.8.0', implicit: true },
-      ['amqp-connection-manager']: { version: '^4.0.0', implicit: true }
+      amqplib: { version: '^0.10.3', implicit: true },
+      ['amqp-connection-manager']: { version: '^4.1.7', implicit: true }
     }
   },
   [AvailableComponents.MICROSERVICE_CLIENT]: {
     deps: {
-      amqplib: { version: '^0.8.0', implicit: true },
-      ['amqp-connection-manager']: { version: '^4.0.0', implicit: true }
+      amqplib: { version: '^0.10.3', implicit: true },
+      ['amqp-connection-manager']: { version: '^4.1.7', implicit: true }
     }
   },
   [AvailableTestsTypes.JEST]: {
     devDeps: {
-      ['@nestjs/testing']: '^8.2.5',
-      jest: '^27.4.7',
-      ['ts-jest']: '^27.0.7',
-      ['@types/jest']: '^27.1.3',
-      ['tsconfig-loader']: '^1.1.0'
+      ['@nestjs/testing']: '^9',
+      jest: '^28',
+      ['ts-jest']: '^28',
+      ['@types/jest']: '^28',
+      ['tsconfig-loader']: '^1'
     }
   },
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
-      ['@nestjs/typeorm']: '^8.0.3',
-      typeorm: { version: '^0.2.41', implicit: true },
-      ['typeorm-seeding']: { version: '^1.6.1', implicit: true }
+      ['@nestjs/typeorm']: '^9',
+      typeorm: { version: '^0.3.10', implicit: true },
+      ['@webundsoehne/nestjs-seeder']: '^2'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
-      ['@nestjs/mongoose']: '^9.0.2',
-      mongoose: { version: '^6.0.17', implicit: true }
+      ['@nestjs/mongoose']: '^9',
+      mongoose: { version: '^6.6.4', implicit: true },
+      ['@webundsoehne/nestjs-seeder']: '^2'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {
@@ -100,7 +121,7 @@ export const VERSIONS: Versions = {
   },
   [AvailableDBTypes.TYPEORM_POSTGRESQL]: {
     deps: {
-      pg: { version: '^8.7.1', implicit: true }
+      pg: { version: '^8.8.0', implicit: true }
     }
   },
   [AvailableDBTypes.MONGOOSE_MONGODB]: {}

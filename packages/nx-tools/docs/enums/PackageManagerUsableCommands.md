@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [ADD](PackageManagerUsableCommands.md#add)
 - [DEVELOPMENT](PackageManagerUsableCommands.md#development)
@@ -18,11 +18,11 @@
 - [RUN](PackageManagerUsableCommands.md#run)
 - [RUN\_ARGS](PackageManagerUsableCommands.md#run_args)
 
-## Enumeration members
+## Enumeration Members
 
 ### ADD
 
-• **ADD** = `"ADD"`
+• **ADD** = ``"ADD"``
 
 #### Defined in
 
@@ -32,7 +32,7 @@ ___
 
 ### DEVELOPMENT
 
-• **DEVELOPMENT** = `"DEVELOPMENT"`
+• **DEVELOPMENT** = ``"DEVELOPMENT"``
 
 #### Defined in
 
@@ -42,7 +42,7 @@ ___
 
 ### EXEC
 
-• **EXEC** = `"EXEC"`
+• **EXEC** = ``"EXEC"``
 
 #### Defined in
 
@@ -52,7 +52,7 @@ ___
 
 ### FORCE
 
-• **FORCE** = `"FORCE"`
+• **FORCE** = ``"FORCE"``
 
 #### Defined in
 
@@ -62,7 +62,7 @@ ___
 
 ### GLOBAL
 
-• **GLOBAL** = `"GLOBAL"`
+• **GLOBAL** = ``"GLOBAL"``
 
 #### Defined in
 
@@ -72,7 +72,7 @@ ___
 
 ### INSTALL
 
-• **INSTALL** = `"INSTALL"`
+• **INSTALL** = ``"INSTALL"``
 
 #### Defined in
 
@@ -82,7 +82,7 @@ ___
 
 ### REGISTRY
 
-• **REGISTRY** = `"REGISTRY"`
+• **REGISTRY** = ``"REGISTRY"``
 
 #### Defined in
 
@@ -92,7 +92,7 @@ ___
 
 ### REMOVE
 
-• **REMOVE** = `"REMOVE"`
+• **REMOVE** = ``"REMOVE"``
 
 #### Defined in
 
@@ -102,7 +102,7 @@ ___
 
 ### ROOT
 
-• **ROOT** = `"ROOT"`
+• **ROOT** = ``"ROOT"``
 
 #### Defined in
 
@@ -112,7 +112,7 @@ ___
 
 ### RUN
 
-• **RUN** = `"RUN"`
+• **RUN** = ``"RUN"``
 
 #### Defined in
 
@@ -122,7 +122,7 @@ ___
 
 ### RUN\_ARGS
 
-• **RUN\_ARGS** = `"RUN_ARGS"`
+• **RUN\_ARGS** = ``"RUN_ARGS"``
 
 #### Defined in
 

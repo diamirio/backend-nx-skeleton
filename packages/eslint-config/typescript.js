@@ -306,7 +306,7 @@ module.exports = {
           {
             blankLine: 'always',
             prev: '*',
-            next: 'return'
+            next: ['return', 'throw']
           },
           {
             blankLine: 'always',

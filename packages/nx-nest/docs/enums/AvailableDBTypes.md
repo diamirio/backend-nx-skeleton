@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableDBTypes
+[@webundsoehne/nx-nest](../README.md) / AvailableDBTypes
 
 # Enumeration: AvailableDBTypes
 
@@ -7,18 +7,18 @@ This is the database available that can be automatically injected.
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [MONGOOSE\_MONGODB](AvailableDBTypes.md#mongoose_mongodb)
 - [NONE](AvailableDBTypes.md#none)
 - [TYPEORM\_MYSQL](AvailableDBTypes.md#typeorm_mysql)
 - [TYPEORM\_POSTGRESQL](AvailableDBTypes.md#typeorm_postgresql)
 
-## Enumeration members
+## Enumeration Members
 
 ### MONGOOSE\_MONGODB
 
-• **MONGOOSE\_MONGODB** = `"mongoose-mongodb"`
+• **MONGOOSE\_MONGODB** = ``"mongoose-mongodb"``
 
 #### Defined in
 
@@ -28,7 +28,7 @@ ___
 
 ### NONE
 
-• **NONE** = `"none"`
+• **NONE** = ``"none"``
 
 #### Defined in
 
@@ -38,7 +38,7 @@ ___
 
 ### TYPEORM\_MYSQL
 
-• **TYPEORM\_MYSQL** = `"typeorm-mysql"`
+• **TYPEORM\_MYSQL** = ``"typeorm-mysql"``
 
 #### Defined in
 
@@ -48,7 +48,7 @@ ___
 
 ### TYPEORM\_POSTGRESQL
 
-• **TYPEORM\_POSTGRESQL** = `"typeorm-postgresql"`
+• **TYPEORM\_POSTGRESQL** = ``"typeorm-postgresql"``
 
 #### Defined in
 
