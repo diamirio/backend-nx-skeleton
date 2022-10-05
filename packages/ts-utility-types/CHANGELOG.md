@@ -1,3 +1,10 @@
+## @webundsoehne/ts-utility-types [2.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.1...@webundsoehne/ts-utility-types@2.2.2) (2022-10-05)
+
+
+### Performance Improvements
+
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+
 ## @webundsoehne/ts-utility-types [2.2.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.1...@webundsoehne/ts-utility-types@2.2.2-beta.1) (2022-08-08)
 
 
