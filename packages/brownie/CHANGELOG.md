@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [5.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.0...@webundsoehne/brownie@5.0.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* update missing deps ([d569594](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d5695945bb64410acba9218d8ccb8d3558223511))
+
 # @webundsoehne/brownie [5.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@4.3.2...@webundsoehne/brownie@5.0.0) (2022-10-05)
 
 
