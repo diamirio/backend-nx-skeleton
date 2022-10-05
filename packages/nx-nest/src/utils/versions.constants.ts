@@ -62,7 +62,7 @@ export const VERSIONS: Versions = {
       ['@nestjs/apollo']: '^10',
       graphql: { version: '^16.6.0', implicit: true },
       ['graphql-tools']: { version: '^8', implicit: true },
-      ['@webundsoehne/nestjs-util-graphql']: '^1'
+      ['@webundsoehne/nestjs-util-graphql']: '^2'
     }
   },
   [AvailableComponents.BG_TASK]: {
@@ -104,14 +104,14 @@ export const VERSIONS: Versions = {
     deps: {
       ['@nestjs/typeorm']: '^9',
       typeorm: { version: '^0.3.10', implicit: true },
-      ['@webundsoehne/nestjs-seeder']: '^1'
+      ['@webundsoehne/nestjs-seeder']: '^2'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       ['@nestjs/mongoose']: '^9',
       mongoose: { version: '^6.6.4', implicit: true },
-      ['@webundsoehne/nestjs-seeder']: '^1'
+      ['@webundsoehne/nestjs-seeder']: '^2'
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {
