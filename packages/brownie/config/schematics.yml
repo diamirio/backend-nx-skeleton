@@ -1,6 +1,5 @@
 ---
-- pkg: '@webundsoehne-private/nx-nest'
-  registry: 'https://verdaccio.webundsoehne.com'
+- pkg: '@webundsoehne/nx-nest'
   description: 'A boilerplate to generate Nest.js applications from scratch.'
   schematics:
     - name: app
@@ -16,8 +15,7 @@
     - name: generator
       description: Creates a single component from the given template.
 
-- pkg: '@webundsoehne-private/nx-workspace'
-  registry: 'https://verdaccio.webundsoehne.com'
+- pkg: '@webundsoehne/nx-workspace'
   description: 'General purpose workspace schematic extended from the default.'
   schematics:
     - name: library

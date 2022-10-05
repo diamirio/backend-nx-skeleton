@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-workspace/remove",
-  "title": "@webundsoehne-private/nx-workspace/remove",
+  "$id": "@webundsoehne/nx-workspace/remove",
+  "title": "@webundsoehne/nx-workspace/remove",
   "description": "Remove a project from the workspace",
   "type": "object",
   "examples": [],

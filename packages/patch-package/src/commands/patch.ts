@@ -278,6 +278,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
 
     if (errors.length) {
       this.logger.fatal(`${errors.length} error(s).`)
+
       throw new Error('Encountered errors.')
     }
   }

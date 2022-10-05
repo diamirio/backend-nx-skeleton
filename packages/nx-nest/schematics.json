@@ -1,11 +1,11 @@
 {
-  "name": "@webundsoehne-private/nx-nest",
+  "name": "@webundsoehne/nx-nest",
   "extends": ["@nrwl/workspace"],
   "schematics": {
     "init": {
       "factory": "./dist/schematics/init/main",
       "schema": "./dist/schematics/application/schema.json",
-      "description": "Initialize the @webundsoehne-private/nx-nest plugin.",
+      "description": "Initialize the @webundsoehne/nx-nest plugin.",
       "hidden": true
     },
 

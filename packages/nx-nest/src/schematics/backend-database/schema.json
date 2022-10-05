@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-nest/backend-database",
-  "title": "@webundsoehne-private/nx-nest/backend-database",
+  "$id": "@webundsoehne/nx-nest/backend-database",
+  "title": "@webundsoehne/nx-nest/backend-database",
   "description": "Generate a common library for nestjs database.",
   "type": "object",
   "properties": {

@@ -6,6 +6,5 @@ dependencies:
   - '@angular/cli'
 
 workspaces:
-  - pkg: '@webundsoehne-private/nx-workspace'
-    registry: https://verdaccio.webundsoehne.com
+  - pkg: '@webundsoehne/nx-workspace'
     collection: collections.json

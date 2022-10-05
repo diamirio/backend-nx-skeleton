@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne-private/nx-workspace",
+  "name": "@webundsoehne/nx-workspace",
   "extends": ["@nrwl/workspace"],
   "schematics": {
     "library": {

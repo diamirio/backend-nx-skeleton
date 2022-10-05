@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-nest/component",
-  "title": "@webundsoehne-private/nx-nest/compontent",
+  "$id": "@webundsoehne/nx-nest/component",
+  "title": "@webundsoehne/nx-nest/compontent",
   "description": "Generate nestjs components.",
   "examples": [],
   "type": "object",

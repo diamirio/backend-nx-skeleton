@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "@webundsoehne-private/nx-workspace/package-manager",
-  "title": "@webundsoehne-private/nx-workspace/package-manager",
+  "$id": "@webundsoehne/nx-workspace/package-manager",
+  "title": "@webundsoehne/nx-workspace/package-manager",
   "description": "Runs a package.json script.",
   "type": "object",
   "examples": [],

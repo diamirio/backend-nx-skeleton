@@ -1,5 +1,5 @@
 {
-  "name": "@webundsoehne-private/nx-workspace",
+  "name": "@webundsoehne/nx-workspace",
   "version": "1.0.0",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Workspace plugin for Nx",
@@ -8,8 +8,7 @@
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://verdaccio.webundsoehne.com/"
+    "access": "public"
   },
   "schematics": "./schematics.json",
   "scripts": {
