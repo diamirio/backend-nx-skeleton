@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-workspace](../README.md) / AvailableLibraryTypes
+[@webundsoehne/nx-workspace](../README.md) / AvailableLibraryTypes
 
 # Enumeration: AvailableLibraryTypes
 

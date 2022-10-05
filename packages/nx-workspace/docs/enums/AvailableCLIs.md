@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-workspace](../README.md) / AvailableCLIs
+[@webundsoehne/nx-workspace](../README.md) / AvailableCLIs
 
 # Enumeration: AvailableCLIs
 

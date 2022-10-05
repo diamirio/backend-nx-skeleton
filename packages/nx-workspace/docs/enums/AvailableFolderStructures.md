@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-workspace](../README.md) / AvailableFolderStructures
+[@webundsoehne/nx-workspace](../README.md) / AvailableFolderStructures
 
 # Enumeration: AvailableFolderStructures
 

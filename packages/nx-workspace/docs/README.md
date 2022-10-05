@@ -1,6 +1,6 @@
-@webundsoehne-private/nx-workspace
+@webundsoehne/nx-workspace
 
-# @webundsoehne-private/nx-workspace
+# @webundsoehne/nx-workspace
 
 ## Table of contents
 
