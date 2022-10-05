@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [5.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.1...@webundsoehne/brownie@5.0.2) (2022-10-05)
+
+
+### Bug Fixes
+
+* update ng debug config ([54ed889](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/54ed8898b7b243b171ee381a74d016d8cbf59204))
+
 ## @webundsoehne/brownie [5.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.0...@webundsoehne/brownie@5.0.1) (2022-10-05)
 
 
