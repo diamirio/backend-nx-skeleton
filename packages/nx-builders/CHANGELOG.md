@@ -1,3 +1,35 @@
+# @webundsoehne/nx-builders [6.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@5.3.7...@webundsoehne/nx-builders@6.0.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
+nx.json
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.3
+* **@webundsoehne/nx-tools:** upgraded to 6.0.0
+
 # @webundsoehne/nx-builders [6.0.0-beta.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.4...@webundsoehne/nx-builders@6.0.0-beta.5) (2022-10-05)
 
 
