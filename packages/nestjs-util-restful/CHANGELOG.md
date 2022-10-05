@@ -1,3 +1,40 @@
+# @webundsoehne/nestjs-util-restful [2.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@1.4.6...@webundsoehne/nestjs-util-restful@2.0.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+* this is not compatible with older versions of the nx-nest generator
+
+- express/fastify is now selectable when selecting a server
+- moved database stuff to backend-database from backend-interface
+- extend generator to accept injecting arguments
+- use the migration module for mongodb
+- ditch typeorm-seeding for generic seeder
+- add relevant command for seeding to nestjs itself due to dependency injection
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.0
+
 # @webundsoehne/nestjs-util-restful [2.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@2.0.0-beta.2...@webundsoehne/nestjs-util-restful@2.0.0-beta.3) (2022-10-05)
 
 
