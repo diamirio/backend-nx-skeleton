@@ -1,11 +1,9 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import {
   ensureNxRootListrTask,
-  isVerbose,
-  ListrLogger,
+  Manager,
   normalizeNameWithParentAndDestinationPrompt,
   normalizePackageJsonNameForParentPrompt,
   readProjectConfiguration,
@@ -19,29 +17,26 @@ import {
  * @param options
  */
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>(
-    [
-      // assign options to parsed schema
-      {
-        task: (ctx): void => {
-          setSchemaDefaultsInContext(ctx, {
-            default: [options]
-          })
-        }
-      },
-
-      ...ensureNxRootListrTask(),
-
-      ...normalizeNameWithParentAndDestinationPrompt<NormalizedSchema, never>(host),
-
-      ...normalizePackageJsonNameForParentPrompt<NormalizedSchema>(host),
-
-      {
-        task: async (ctx): Promise<void> => {
-          ctx.project = readProjectConfiguration(host, ctx.parent)
-        }
+  return new Manager(context).run<NormalizedSchema>([
+    // assign options to parsed schema
+    {
+      task: (ctx): void => {
+        setSchemaDefaultsInContext(ctx, {
+          default: [options]
+        })
       }
-    ],
-    { nonTTYRendererOptions: { logger: ListrLogger, options: [context] }, rendererFallback: isVerbose() }
-  ).run()
+    },
+
+    ...ensureNxRootListrTask(),
+
+    ...normalizeNameWithParentAndDestinationPrompt<NormalizedSchema, never>(host),
+
+    ...normalizePackageJsonNameForParentPrompt<NormalizedSchema>(host),
+
+    {
+      task: async (ctx): Promise<void> => {
+        ctx.project = readProjectConfiguration(host, ctx.parent)
+      }
+    }
+  ])
 }

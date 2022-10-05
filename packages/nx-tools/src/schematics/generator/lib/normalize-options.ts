@@ -3,11 +3,10 @@ import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils'
 import fs from 'fs-extra'
 import globby from 'globby'
 import type { PromptOptionsMap } from 'listr2'
-import { Listr } from 'listr2'
 import { join, relative } from 'path'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
-import { color, findNxRoot, generateNameCases, isVerbose, ListrLogger, Logger, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
+import { color, findNxRoot, generateNameCases, Logger, Manager, normalizeNamePrompt, relativeToNxRoot, setSchemaDefaultsInContext } from '@utils'
 
 /**
  * @param  {Tree} host
@@ -21,7 +20,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
 
   logger.debug(`Template directory to scan in: ${files}`)
 
-  return new Listr<NormalizedSchema>(
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -140,9 +139,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
       }
     ],
     {
-      rendererSilent: options.silent,
-      nonTTYRendererOptions: { logger: ListrLogger, options: [context] },
-      rendererFallback: isVerbose()
+      rendererSilent: options.silent
     }
-  ).run()
+  )
 }

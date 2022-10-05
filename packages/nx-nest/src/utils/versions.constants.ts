@@ -60,7 +60,7 @@ export const VERSIONS: Versions = {
     deps: {
       ['@nestjs/graphql']: '^10',
       ['@nestjs/apollo']: '^10',
-      graphql: { version: '^16.5.0', implicit: true },
+      graphql: { version: '^16.6.0', implicit: true },
       ['graphql-tools']: { version: '^8', implicit: true },
       ['@webundsoehne/nestjs-util-graphql']: '^1'
     }
@@ -81,14 +81,14 @@ export const VERSIONS: Versions = {
   // if the support for per message queue support added this has to be done in a more complicated way
   [AvailableComponents.MICROSERVICE_SERVER]: {
     deps: {
-      amqplib: { version: '^0.10.1', implicit: true },
-      ['amqp-connection-manager']: { version: '^4.1.3', implicit: true }
+      amqplib: { version: '^0.10.3', implicit: true },
+      ['amqp-connection-manager']: { version: '^4.1.7', implicit: true }
     }
   },
   [AvailableComponents.MICROSERVICE_CLIENT]: {
     deps: {
-      amqplib: { version: '^0.10.1', implicit: true },
-      ['amqp-connection-manager']: { version: '^4.1.3', implicit: true }
+      amqplib: { version: '^0.10.3', implicit: true },
+      ['amqp-connection-manager']: { version: '^4.1.7', implicit: true }
     }
   },
   [AvailableTestsTypes.JEST]: {
@@ -103,14 +103,14 @@ export const VERSIONS: Versions = {
   [AvailableDBAdapters.TYPEORM]: {
     deps: {
       ['@nestjs/typeorm']: '^9',
-      typeorm: { version: '^0.3.7', implicit: true },
+      typeorm: { version: '^0.3.10', implicit: true },
       ['@webundsoehne/nestjs-seeder']: '^1'
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       ['@nestjs/mongoose']: '^9',
-      mongoose: { version: '^6.5.1', implicit: true },
+      mongoose: { version: '^6.6.4', implicit: true },
       ['@webundsoehne/nestjs-seeder']: '^1'
     }
   },
@@ -121,7 +121,7 @@ export const VERSIONS: Versions = {
   },
   [AvailableDBTypes.TYPEORM_POSTGRESQL]: {
     deps: {
-      pg: { version: '^8.7.3', implicit: true }
+      pg: { version: '^8.8.0', implicit: true }
     }
   },
   [AvailableDBTypes.MONGOOSE_MONGODB]: {}

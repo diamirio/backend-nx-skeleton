@@ -4,14 +4,15 @@ import type { ExecutorContext } from '@nrwl/devkit'
 import { Logger as BaseLogger } from 'listr2'
 
 import { Logger } from './logger'
+import type { LoggerOptions } from './logger.interface'
 
 export class ListrLogger extends BaseLogger {
   public logger: Logger
 
-  constructor (context?: BuilderContext | SchematicContext | ExecutorContext) {
+  constructor (context?: BuilderContext | SchematicContext | ExecutorContext, options?: LoggerOptions) {
     super()
 
-    this.logger = new Logger(context)
+    this.logger = new Logger(context, options)
   }
 
   fail (message: string): void {

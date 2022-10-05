@@ -2,7 +2,6 @@ import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { noop } from '@angular-devkit/schematics'
 import * as path from 'path'
 import { join } from 'path'
-import type { Observable } from 'rxjs'
 import { from } from 'rxjs'
 import { Worker } from 'worker_threads'
 
@@ -40,7 +39,8 @@ export function formatFilesWithWorkerRule (options?: FormatFilesOptions): Rule {
 
   const isDebug = isVerbose()
 
-  return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
+  // BUG: it does not like observable tree because of the internal rxjs version differences so it is marked as any Observable<Tree>
+  return (host: Tree, context: SchematicContext): Tree | any => {
     const log = new Logger(context)
 
     const files = getFilesInTree(host, (action) => action.kind !== 'd' && action.kind !== 'r')

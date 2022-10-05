@@ -26,7 +26,7 @@ export class Logger {
     // set default options
     this.options = { useIcons: true, ...options }
 
-    this.context = context && (isExecutorContext(context) ? context?.projectName : isBuildContext(context) ? context?.target.project : null)
+    this.context = context && (isExecutorContext(context) ? context?.projectName : isBuildContext(context) ? context?.target.project : context?.schematic.description.name)
 
     if (isVerbose()) {
       this.logLevel = LogLevels.DEBUG
@@ -34,13 +34,11 @@ export class Logger {
       this.logLevel = LogLevels.INFO
     }
 
-    if (Logger.instance) {
-      this.logger = Logger.instance
-    } else {
-      this.logger = this.initiateLogger()
-
-      Logger.instance = this.logger
+    if (!Logger.instance) {
+      Logger.instance = this.initiateLogger()
     }
+
+    this.logger = Logger.instance
   }
 
   fatal (data: string | Buffer, ...args: any): void {

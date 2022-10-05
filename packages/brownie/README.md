@@ -18,9 +18,10 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/brownie](#webundsoehnebrownie)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/brownie](#webundsoehnebrownie)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -28,13 +29,14 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`brownie ci`](#brownie-ci)
-* [`brownie docker`](#brownie-docker)
-* [`brownie gitlab`](#brownie-gitlab)
-* [`brownie help [COMMAND]`](#brownie-help-command)
-* [`brownie nx`](#brownie-nx)
-* [`brownie workspace`](#brownie-workspace)
-* [`brownie ws`](#brownie-ws)
+
+- [`brownie ci`](#brownie-ci)
+- [`brownie docker`](#brownie-docker)
+- [`brownie gitlab`](#brownie-gitlab)
+- [`brownie help [COMMAND]`](#brownie-help-command)
+- [`brownie nx`](#brownie-nx)
+- [`brownie workspace`](#brownie-workspace)
+- [`brownie ws`](#brownie-ws)
 
 ## `brownie ci`
 
@@ -122,7 +124,7 @@ DESCRIPTION
   Display help for brownie.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.14/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -226,4 +228,5 @@ DESCRIPTION
 ALIASES
   $ brownie ws
 ```
+
 <!-- commandsstop -->

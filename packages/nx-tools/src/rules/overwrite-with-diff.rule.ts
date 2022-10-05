@@ -23,7 +23,7 @@ import { isVerbose, ListrLogger, Logger } from '@utils'
 export function applyOverwriteWithDiff (source: Source, oldSource: Source | void, context: SchematicContext): Rule {
   const log = new Logger(context)
 
-  // generate the old tree without aplying something
+  // generate the old tree without applying something
   let oldTree: Tree
 
   // angular is not enough for this, need a hacky solution to track the files, because some of them we overwrite directly
@@ -58,8 +58,10 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
                 const oldFile = oldTree.read(file.path).toString()
 
                 mergeFiles(host, file, tripleFileMerge(file.path, currentFile, oldFile, newFile, log), log)
+                log.debug('Performing triple merge on: %s', file.path)
               } else {
                 mergeFiles(host, file, doubleFileMerge(file.path, newFile, currentFile, log), log)
+                log.debug('Performing double merge on: %s', file.path)
               }
 
               // add this to file changes, return null since we did the operation directly
@@ -80,6 +82,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
               if (host.exists(path) && !fileChanges.includes(path)) {
                 filesToRemove = [...filesToRemove, path]
+                log.debug('File seems to be no longer needed: %s', path)
               }
             })
           },
@@ -299,7 +302,7 @@ export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | b
 export function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
   const backupFilePath = `${file.path}.old`
 
-  log.error(`Can not merge file: "${file.path}" -> "${backupFilePath}"`)
+  log.error(`Can not merge file creating backup: "${file.path}" -> "${backupFilePath}"`)
 
   if (host.exists(backupFilePath)) {
     host.delete(backupFilePath)

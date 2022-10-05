@@ -2,7 +2,8 @@ import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { noop } from '@angular-devkit/schematics'
 import { ESLint } from 'eslint'
 import * as path from 'path'
-import prettier from 'prettier'
+import type * as Prettier from 'prettier'
+import * as prettier from 'prettier'
 import type { Observable } from 'rxjs'
 import { from } from 'rxjs'
 
@@ -43,6 +44,15 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
   const isDebug = isVerbose()
 
+  let eslint: ESLint
+
+  if (options.eslint) {
+    // create new eslint instance
+    eslint = new ESLint({
+      fix: true
+    })
+  }
+
   return (host: Tree, context: SchematicContext): Tree | Observable<Tree> => {
     const log = new Logger(context)
 
@@ -56,15 +66,6 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
     const appRootPath = findNxRoot({ throw: false }) ?? '/'
 
     log.debug('Formatting and linting: tree %s in %s, running with options %o', host.root.path, appRootPath, options)
-
-    let eslint: ESLint
-
-    if (options.eslint) {
-      // create new eslint instance
-      eslint = new ESLint({
-        fix: true
-      })
-    }
 
     // BUG: additional configuration for some weird bug fixes
     const prettierIgnored = ['custom-environment-variables.yml']
@@ -91,7 +92,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
               if (options.prettier) {
                 const start = Date.now()
 
-                let config: prettier.Options = {
+                let config: Prettier.Options = {
                   filepath: systemPath
                 }
 
@@ -114,7 +115,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
                   return
                 }
 
-                // dont remove await, eventhough it is not marked as promise it is
+                // dont remove await, even though it is not marked as promise it is
                 // eslint-disable-next-line @typescript-eslint/await-thenable
                 file.content = await prettier.format(file.content, config)
 
@@ -162,67 +163,5 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
         return host
       })()
     )
-
-    // return from(files).pipe(
-    //   filter((file) => host.exists(file.path)),
-    //   mergeMap(async (file) => {
-    //     const systemPath = path.join(appRootPath, file.path)
-    //
-    //     try {
-    //       if (options.prettier) {
-    //         let config: prettier.Options = {
-    //           filepath: systemPath
-    //         }
-    //
-    //         const localConfig = await prettier.resolveConfig(systemPath)
-    //
-    //         if (localConfig) {
-    //           config = {
-    //             ...config,
-    //             ...localConfig
-    //           }
-    //         }
-    //
-    //         const support = await prettier.getFileInfo(systemPath)
-    //
-    //         if (support.ignored || !support.inferredParser || prettierIgnored.some((ignore) => file.path.includes(ignore))) {
-    //           return
-    //         }
-    //
-    //         // dont remove await, eventhough it is not marked as promise it is
-    //         // eslint-disable-next-line @typescript-eslint/await-thenable
-    //         file.content = await prettier.format(file.content, config)
-    //
-    //         log.debug('Prettier format: %s', file.path)
-    //       }
-    //
-    //       if (options.eslint) {
-    //         const config: any = {
-    //           filePath: systemPath
-    //         }
-    //
-    //         // have to exclude json files manually until i found a better solution because overriding exts not work with lintText!
-    //         if (await eslint.isPathIgnored(systemPath)) {
-    //           return
-    //         }
-    //
-    //         const results = await eslint.lintText(file.content, config)
-    //
-    //         if (results?.[0]?.output) {
-    //           file.content = results[0].output
-    //
-    //           log.debug('Eslint lint: %s', file.path)
-    //         }
-    //       }
-    //
-    //       host.overwrite(file.path, file.content)
-    //
-    //       return
-    //     } catch (e) {
-    //       log.error(`Could not format ${file.path}:\n${e.message}`)
-    //     }
-    //   }),
-    //   map(() => host)
-    // )
   }
 }

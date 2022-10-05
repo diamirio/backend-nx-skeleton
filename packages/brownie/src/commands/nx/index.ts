@@ -144,10 +144,9 @@ export class Nx extends Command<NxAddCommandCtx, InferFlags<typeof Nx>> {
         }
       }
     ])
+  }
 
-    // run finally prematurely
-    const { ctx } = await this.finally()
-
+  async shouldRunAfter (ctx?: NxAddCommandCtx): Promise<void> {
     const schematic = `${ctx.prompts.schematic.pkg}:${ctx.prompts.toRunSchematic.name}`
 
     // this is here because long prompts corrupt listr

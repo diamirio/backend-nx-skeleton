@@ -14,6 +14,7 @@ import { addGitTask, addInstallTask, addMultipleDependentTasksRule, addRunWorksp
 export default function (schema: Schema): (host: Tree, context: SchematicContext) => Promise<Rule> {
   return async (host: Tree, context: SchematicContext): Promise<Rule> => {
     const log = new Logger(context)
+
     const options = await normalizeOptions(host, context, schema)
 
     return chain([

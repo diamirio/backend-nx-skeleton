@@ -1,13 +1,11 @@
 import type { SchematicContext, Tree } from '@angular-devkit/schematics'
-import { Listr } from 'listr2'
 
 import type { NormalizedSchema, Schema } from '../main.interface'
 import type { NxNestProjectIntegration } from '@integration'
 import { SchematicConstants } from '@interfaces'
 import {
   ensureNxRootListrTask,
-  isVerbose,
-  ListrLogger,
+  Manager,
   normalizeNamePrompt,
   normalizePackageJsonNamePrompt,
   normalizePriorConfigurationPrompt,
@@ -17,7 +15,7 @@ import {
 } from '@webundsoehne/nx-tools'
 
 export async function normalizeOptions (host: Tree, context: SchematicContext, options: Schema): Promise<NormalizedSchema> {
-  return new Listr<NormalizedSchema>(
+  return new Manager(context).run<NormalizedSchema>(
     [
       // assign options to parsed schema
       {
@@ -51,9 +49,7 @@ export async function normalizeOptions (host: Tree, context: SchematicContext, o
     ],
     {
       concurrent: false,
-      rendererSilent: options.silent,
-      nonTTYRendererOptions: { logger: ListrLogger, options: [context] },
-      rendererFallback: isVerbose()
+      rendererSilent: options.silent
     }
-  ).run()
+  )
 }

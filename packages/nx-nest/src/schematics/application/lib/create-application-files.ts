@@ -56,6 +56,7 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
           {
             rule: runInRule(log.info.bind(log)('Adding default components to repository.'))
           },
+          // FIXME: these should be schematic rule but it is going crazy so swapping out for a task
           {
             condition:
               !options.priorConfiguration?.server?.includes(AvailableComponents.SERVER) &&
