@@ -1,3 +1,49 @@
+# @webundsoehne/nx-nest [5.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@4.3.7...@webundsoehne/nx-nest@5.0.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* **nx-nest:** microservice generation, regenarating components that are not needed ([80e3957](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80e39573fa30b561f7235ad23fbaf533aa1a69dd))
+* **nx-nest:** update how graphql is handled in nestjs with the new version ([37cbf20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/37cbf2061a8e37db4877d41ebefe1365c499abaf))
+* update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
+* update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
+* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
+
+
+### Performance Improvements
+
+* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
+* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
+
+### BREAKING CHANGES
+
+* uses the new library
+* this is not compatible with older versions of the nx-nest generator
+
+- express/fastify is now selectable when selecting a server
+- moved database stuff to backend-database from backend-interface
+- extend generator to accept injecting arguments
+- use the migration module for mongodb
+- ditch typeorm-seeding for generic seeder
+- add relevant command for seeding to nestjs itself due to dependency injection
+* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
+nx.json
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.3
+* **@webundsoehne/nx-builders:** upgraded to 6.0.0
+* **@webundsoehne/nx-tools:** upgraded to 6.0.0
+
 # @webundsoehne/nx-nest [5.0.0-beta.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.0-beta.6...@webundsoehne/nx-nest@5.0.0-beta.7) (2022-10-05)
 
 
