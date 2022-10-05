@@ -1,3 +1,18 @@
+# @webundsoehne/nestjs-util-graphql [2.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@2.0.0-beta.1...@webundsoehne/nestjs-util-graphql@2.0.0-beta.2) (2022-10-05)
+
+
+### Performance Improvements
+
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.0-beta.3
+
 # @webundsoehne/nestjs-util-graphql [2.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@1.3.8...@webundsoehne/nestjs-util-graphql@2.0.0-beta.1) (2022-09-19)
 
 
