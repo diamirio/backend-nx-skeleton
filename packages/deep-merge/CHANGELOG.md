@@ -1,3 +1,10 @@
+## @webundsoehne/deep-merge [2.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.2...@webundsoehne/deep-merge@2.2.3) (2022-10-05)
+
+
+### Performance Improvements
+
+* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+
 ## @webundsoehne/deep-merge [2.2.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.2...@webundsoehne/deep-merge@2.2.3-beta.1) (2022-08-08)
 
 
