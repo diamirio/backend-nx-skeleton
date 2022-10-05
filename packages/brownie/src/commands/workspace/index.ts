@@ -190,7 +190,7 @@ export class WorkspaceCommand extends Command<WorkspaceCreateCommandCtx, InferFl
       stdio: 'inherit',
       shell: true,
       env: {
-        NG_DEBUG: String(this.cs.isVerbose || this.cs.isDebug)
+        NG_DEBUG: (this.cs.isVerbose || this.cs.isDebug) && '1'
       }
     })
   }
