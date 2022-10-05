@@ -1,3 +1,19 @@
+# @webundsoehne/nx-builders [6.0.0-beta.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.4...@webundsoehne/nx-builders@6.0.0-beta.5) (2022-10-05)
+
+
+### Performance Improvements
+
+* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.4
+
 # @webundsoehne/nx-builders [6.0.0-beta.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0-beta.3...@webundsoehne/nx-builders@6.0.0-beta.4) (2022-09-19)
 
 
