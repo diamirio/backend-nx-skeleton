@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-seeder [2.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.0-beta.1...@webundsoehne/nestjs-seeder@2.0.0-beta.2) (2022-10-05)
+
+
+### Performance Improvements
+
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
 # @webundsoehne/nestjs-seeder [2.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@1.0.2-beta.1...@webundsoehne/nestjs-seeder@2.0.0-beta.1) (2022-09-19)
 
 
