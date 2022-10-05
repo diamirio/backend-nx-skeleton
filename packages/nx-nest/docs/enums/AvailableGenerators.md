@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableGenerators
+[@webundsoehne/nx-nest](../README.md) / AvailableGenerators
 
 # Enumeration: AvailableGenerators
 

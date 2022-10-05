@@ -1,6 +1,6 @@
-@webundsoehne-private/nx-nest
+@webundsoehne/nx-nest
 
-# @webundsoehne-private/nx-nest
+# @webundsoehne/nx-nest
 
 ## Table of contents
 

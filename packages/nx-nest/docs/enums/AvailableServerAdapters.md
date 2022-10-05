@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableServerAdapters
+[@webundsoehne/nx-nest](../README.md) / AvailableServerAdapters
 
 # Enumeration: AvailableServerAdapters
 

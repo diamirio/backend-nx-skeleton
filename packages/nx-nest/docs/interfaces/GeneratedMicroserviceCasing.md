@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / GeneratedMicroserviceCasing
+[@webundsoehne/nx-nest](../README.md) / GeneratedMicroserviceCasing
 
 # Interface: GeneratedMicroserviceCasing
 

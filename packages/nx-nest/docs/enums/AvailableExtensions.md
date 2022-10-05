@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableExtensions
+[@webundsoehne/nx-nest](../README.md) / AvailableExtensions
 
 # Enumeration: AvailableExtensions
 

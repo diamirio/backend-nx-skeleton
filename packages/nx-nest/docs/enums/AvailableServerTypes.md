@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableServerTypes
+[@webundsoehne/nx-nest](../README.md) / AvailableServerTypes
 
 # Enumeration: AvailableServerTypes
 

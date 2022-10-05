@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / SchematicConstants
+[@webundsoehne/nx-nest](../README.md) / SchematicConstants
 
 # Enumeration: SchematicConstants
 

@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableComponents
+[@webundsoehne/nx-nest](../README.md) / AvailableComponents
 
 # Enumeration: AvailableComponents
 

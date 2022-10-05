@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableMicroserviceTypes
+[@webundsoehne/nx-nest](../README.md) / AvailableMicroserviceTypes
 
 # Enumeration: AvailableMicroserviceTypes
 

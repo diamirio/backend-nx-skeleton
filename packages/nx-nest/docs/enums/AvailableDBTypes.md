@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableDBTypes
+[@webundsoehne/nx-nest](../README.md) / AvailableDBTypes
 
 # Enumeration: AvailableDBTypes
 

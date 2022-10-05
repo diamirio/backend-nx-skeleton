@@ -1,4 +1,4 @@
-[@webundsoehne-private/nx-nest](../README.md) / AvailableDBAdapters
+[@webundsoehne/nx-nest](../README.md) / AvailableDBAdapters
 
 # Enumeration: AvailableDBAdapters
 
