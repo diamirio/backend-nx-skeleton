@@ -1,3 +1,11 @@
+# @webundsoehne/patch-package [4.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.0-beta.1...@webundsoehne/patch-package@4.0.0-beta.2) (2022-10-05)
+
+
+### Performance Improvements
+
+* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+
 # @webundsoehne/patch-package [4.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.2-beta.1...@webundsoehne/patch-package@4.0.0-beta.1) (2022-09-19)
 
 
