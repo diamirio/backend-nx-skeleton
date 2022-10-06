@@ -34,9 +34,9 @@
     "rxjs": ">= 7 < 8"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1402.4",
-    "@angular-devkit/core": "^14.2.4",
-    "@angular-devkit/schematics": "^14.1.3",
+    "@angular-devkit/architect": "^0.1402.5",
+    "@angular-devkit/core": "^14.2.5",
+    "@angular-devkit/schematics": "^14.2.5",
     "@nrwl/cli": "^14.8.3",
     "@nrwl/devkit": "^14.8.3",
     "@nrwl/nx": "^7.8.7",

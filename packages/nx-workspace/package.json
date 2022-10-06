@@ -31,8 +31,8 @@
     ]
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.4",
-    "@angular-devkit/schematics": "^14.1.3",
+    "@angular-devkit/core": "^14.2.5",
+    "@angular-devkit/schematics": "^14.2.5",
     "@nrwl/devkit": "^14.8.3",
     "@nrwl/workspace": "^14.8.3",
     "@webundsoehne/deep-merge": "*",
