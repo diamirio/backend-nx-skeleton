@@ -17,6 +17,7 @@ It is not great but winston was not working that well in a amazingly stateless a
 - [context](Logger.md#context)
 - [logLevel](Logger.md#loglevel)
 - [logger](Logger.md#logger)
+- [options](Logger.md#options)
 - [instance](Logger.md#instance)
 
 ### Methods
@@ -76,6 +77,16 @@ ___
 #### Defined in
 
 packages/nx-tools/src/utils/logger/logger.ts:22
+
+___
+
+### options
+
+• `Private` `Optional` **options**: [`LoggerOptions`](../interfaces/LoggerOptions.md)
+
+#### Defined in
+
+packages/nx-tools/src/utils/logger/logger.ts:25
 
 ___
 

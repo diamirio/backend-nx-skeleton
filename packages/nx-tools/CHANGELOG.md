@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [6.0.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.1...@webundsoehne/nx-tools@6.0.2-beta.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **deps:** identify and move project root packages to peer deps ([d05dd4b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d05dd4b678efa0206bafb699b313b9e47d178895))
+
 ## @webundsoehne/nx-tools [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.0...@webundsoehne/nx-tools@6.0.1) (2022-10-06)
 
 

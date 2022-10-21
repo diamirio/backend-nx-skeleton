@@ -12,6 +12,10 @@
 
 - [constructor](RunPackageManagerTask.md#constructor)
 
+### Properties
+
+- [options](RunPackageManagerTask.md#options)
+
 ### Methods
 
 - [toConfiguration](RunPackageManagerTask.md#toconfiguration)
@@ -27,6 +31,16 @@
 | Name | Type |
 | :------ | :------ |
 | `options` | `Schema` |
+
+#### Defined in
+
+packages/nx-tools/src/tasks/run-package-manager/run-package-manager.task.ts:7
+
+## Properties
+
+### options
+
+• `Private` **options**: `Schema`
 
 #### Defined in
 
