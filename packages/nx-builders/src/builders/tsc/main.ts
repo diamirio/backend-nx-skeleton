@@ -9,6 +9,11 @@ import { EOL } from 'os'
 import { basename, dirname, join, normalize, relative } from 'path'
 
 import type { NormalizedBuilderOptions, OptionParser, OptionParserModes, ProcessPaths, TscBuilderOptions } from './main.interface'
+import type {
+  ExecaArguments,
+  FileInputOutput,
+  NodeBinaryPathExtensions
+} from '@webundsoehne/nx-tools'
 import {
   BaseExecutor,
   checkPathsExists,
@@ -17,10 +22,7 @@ import {
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runExecutor,
-  ExecaArguments,
-  FileInputOutput,
-  NodeBinaryPathExtensions
+  runExecutor
 } from '@webundsoehne/nx-tools'
 
 try {
