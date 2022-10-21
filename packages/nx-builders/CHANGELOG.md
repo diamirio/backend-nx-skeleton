@@ -1,3 +1,19 @@
+## @webundsoehne/nx-builders [6.0.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.1...@webundsoehne/nx-builders@6.0.2-beta.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **deps:** identify and move project root packages to peer deps ([d05dd4b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d05dd4b678efa0206bafb699b313b9e47d178895))
+* **deps:** lint ([0c6f0e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0c6f0e125ae8a29befec12553b8bb5719bbc24f1))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 6.0.2-beta.1
+
 ## @webundsoehne/nx-builders [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.0...@webundsoehne/nx-builders@6.0.1) (2022-10-06)
 
 
