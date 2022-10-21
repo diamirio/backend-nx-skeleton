@@ -28,6 +28,8 @@
 - [query](Request.md#query)
 - [raw](Request.md#raw)
 - [req](Request.md#req)
+- [routeConfig](Request.md#routeconfig)
+- [routeSchema](Request.md#routeschema)
 - [routerMethod](Request.md#routermethod)
 - [routerPath](Request.md#routerpath)
 - [server](Request.md#server)
@@ -68,7 +70,7 @@ FastifyRequest.connection
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:78
+node_modules/fastify/types/request.d.ts:80
 
 ___
 
@@ -110,7 +112,7 @@ FastifyRequest.hostname
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:61
+node_modules/fastify/types/request.d.ts:63
 
 ___
 
@@ -138,7 +140,7 @@ FastifyRequest.ip
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:59
+node_modules/fastify/types/request.d.ts:61
 
 ___
 
@@ -152,7 +154,7 @@ FastifyRequest.ips
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:60
+node_modules/fastify/types/request.d.ts:62
 
 ___
 
@@ -166,7 +168,7 @@ FastifyRequest.is404
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:67
+node_modules/fastify/types/request.d.ts:69
 
 ___
 
@@ -194,7 +196,7 @@ FastifyRequest.method
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:64
+node_modules/fastify/types/request.d.ts:66
 
 ___
 
@@ -222,7 +224,7 @@ FastifyRequest.protocol
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:63
+node_modules/fastify/types/request.d.ts:65
 
 ___
 
@@ -268,7 +270,35 @@ FastifyRequest.req
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:58
+node_modules/fastify/types/request.d.ts:60
+
+___
+
+### routeConfig
+
+• **routeConfig**: `FastifyContextConfig`
+
+#### Inherited from
+
+FastifyRequest.routeConfig
+
+#### Defined in
+
+node_modules/fastify/types/request.d.ts:51
+
+___
+
+### routeSchema
+
+• **routeSchema**: `FastifySchema`
+
+#### Inherited from
+
+FastifyRequest.routeSchema
+
+#### Defined in
+
+node_modules/fastify/types/request.d.ts:52
 
 ___
 
@@ -282,7 +312,7 @@ FastifyRequest.routerMethod
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:66
+node_modules/fastify/types/request.d.ts:68
 
 ___
 
@@ -296,7 +326,7 @@ FastifyRequest.routerPath
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:65
+node_modules/fastify/types/request.d.ts:67
 
 ___
 
@@ -324,7 +354,7 @@ FastifyRequest.socket
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:68
+node_modules/fastify/types/request.d.ts:70
 
 ___
 
@@ -348,7 +378,7 @@ FastifyRequest.url
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:62
+node_modules/fastify/types/request.d.ts:64
 
 ___
 
@@ -364,7 +394,7 @@ FastifyRequest.validationError
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:53
+node_modules/fastify/types/request.d.ts:55
 
 ## Methods
 
@@ -389,7 +419,7 @@ FastifyRequest.compileValidationSchema
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:72
+node_modules/fastify/types/request.d.ts:74
 
 ___
 
@@ -413,7 +443,7 @@ FastifyRequest.getValidationFunction
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:70
+node_modules/fastify/types/request.d.ts:72
 
 ▸ **getValidationFunction**(`schema`): `ValidationFunction`
 
@@ -433,7 +463,7 @@ FastifyRequest.getValidationFunction
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:71
+node_modules/fastify/types/request.d.ts:73
 
 ___
 
@@ -459,7 +489,7 @@ FastifyRequest.validateInput
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:73
+node_modules/fastify/types/request.d.ts:75
 
 ▸ **validateInput**(`input`, `httpPart?`): `boolean`
 
@@ -480,4 +510,4 @@ FastifyRequest.validateInput
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:74
+node_modules/fastify/types/request.d.ts:76

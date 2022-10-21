@@ -14,6 +14,7 @@
 
 ### Properties
 
+- [context](LoggerService.md#context)
 - [transports](LoggerService.md#transports)
 - [instance](LoggerService.md#instance)
 
@@ -45,6 +46,16 @@
 packages/nestjs-util/src/provider/logger/logger.service.ts:30
 
 ## Properties
+
+### context
+
+• `Private` `Optional` `Readonly` **context**: `string`
+
+#### Defined in
+
+packages/nestjs-util/src/provider/logger/logger.service.ts:30
+
+___
 
 ### transports
 
