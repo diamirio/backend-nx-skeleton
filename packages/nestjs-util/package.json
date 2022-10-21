@@ -54,6 +54,9 @@
     "fastify": ">= 3"
   },
   "peerDependenciesMeta": {
+    "express": {
+      "optional": true
+    },
     "fastify": {
       "optional": true
     },

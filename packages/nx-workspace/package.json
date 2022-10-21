@@ -30,11 +30,17 @@
       "prettier --loglevel warn --write"
     ]
   },
+  "peerDependencies": {
+    "@nrwl/workspace": ">= 14",
+    "@nrwl/devkit": ">= 14"
+  },
+  "devDependencies": {
+    "@nrwl/workspace": "^14.8.6",
+    "@nrwl/devkit": "^14.8.6"
+  },
   "dependencies": {
     "@angular-devkit/core": "^14.2.5",
     "@angular-devkit/schematics": "^14.2.5",
-    "@nrwl/devkit": "^14.8.3",
-    "@nrwl/workspace": "^14.8.3",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",
     "@webundsoehne/nx-tools": "*",

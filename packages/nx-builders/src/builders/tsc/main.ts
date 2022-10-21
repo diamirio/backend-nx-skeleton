@@ -17,9 +17,11 @@ import {
   isVerbose,
   mergeDependencies,
   pipeProcessToLogger,
-  runExecutor
+  runExecutor,
+  ExecaArguments,
+  FileInputOutput,
+  NodeBinaryPathExtensions
 } from '@webundsoehne/nx-tools'
-import type { ExecaArguments, FileInputOutput, NodeBinaryPathExtensions } from '@webundsoehne/nx-tools'
 
 try {
   require('dotenv').config()

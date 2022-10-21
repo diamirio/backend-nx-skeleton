@@ -57,8 +57,8 @@
   },
   "dependencies": {
     "@cenk1cenk2/oclif-common": "^3.8.1",
-    "@oclif/core": "^1.16.4",
-    "@oclif/plugin-help": "^5.1.14",
+    "@oclif/core": "^1.19.1",
+    "@oclif/plugin-help": "^5.1.15",
     "enquirer": "^2.3.6",
     "fs-extra": "^10.1.0",
     "globby": "^11.0.3",
