@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.1-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.0...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.1-beta.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **deps:** identify and move project root packages to peer deps ([d05dd4b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d05dd4b678efa0206bafb699b313b9e47d178895))
+
 # @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@3.3.2...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.0) (2022-10-05)
 
 

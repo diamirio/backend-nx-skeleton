@@ -12,6 +12,10 @@
 
 - [constructor](DataLoaderInterceptor.md#constructor)
 
+### Properties
+
+- [options](DataLoaderInterceptor.md#options)
+
 ### Methods
 
 - [intercept](DataLoaderInterceptor.md#intercept)
@@ -27,6 +31,16 @@
 | Name | Type |
 | :------ | :------ |
 | `options?` | `ApolloServerLoaderPluginOptions` |
+
+#### Defined in
+
+packages/nestjs-graphql-typeorm-dataloader/src/interceptors/data-loader.interceptor.ts:16
+
+## Properties
+
+### options
+
+• `Private` `Optional` **options**: `ApolloServerLoaderPluginOptions`
 
 #### Defined in
 
