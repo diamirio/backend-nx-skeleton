@@ -26,7 +26,9 @@ that is expanded from MicroserviceProviderBaseMessage
 ### Properties
 
 - [clients](MicroserviceProviderService.md#clients)
+- [names](MicroserviceProviderService.md#names)
 - [options](MicroserviceProviderService.md#options)
+- [provider](MicroserviceProviderService.md#provider)
 
 ### Methods
 
@@ -73,6 +75,16 @@ packages/nestjs-util-microservices/src/module/microservice-client/microservice-p
 
 ___
 
+### names
+
+• `Private` `Readonly` **names**: `MessageQueues`[]
+
+#### Defined in
+
+packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:25
+
+___
+
 ### options
 
 • `Private` **options**: `Required`<[`MicroserviceProviderServiceOptions`](../interfaces/MicroserviceProviderServiceOptions.md)\>
@@ -80,6 +92,16 @@ ___
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:23
+
+___
+
+### provider
+
+• `Private` `Readonly` **provider**: `ClientProviderOptions`[]
+
+#### Defined in
+
+packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.service.ts:25
 
 ## Methods
 
