@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [6.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.1...@webundsoehne/nx-tools@6.0.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* return the file from the foreach loop to construct the tree ([fb502f4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fb502f40f3ea2362f8d8e1c50c73580796a628ba))
+
 ## @webundsoehne/nx-tools [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.0...@webundsoehne/nx-tools@6.0.1) (2022-10-06)
 
 
