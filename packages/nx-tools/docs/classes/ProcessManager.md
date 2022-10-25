@@ -40,7 +40,7 @@ You can add long-living and short-living process to keep track of processes spaw
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:19
+packages/nx-tools/src/utils/node/process-manager.ts:20
 
 ## Properties
 
@@ -50,7 +50,7 @@ packages/nx-tools/src/utils/node/process-manager.ts:19
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:15
+packages/nx-tools/src/utils/node/process-manager.ts:16
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:17
+packages/nx-tools/src/utils/node/process-manager.ts:18
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:16
+packages/nx-tools/src/utils/node/process-manager.ts:17
 
 ## Methods
 
@@ -92,7 +92,7 @@ Add a new task that is killable.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:24
+packages/nx-tools/src/utils/node/process-manager.ts:25
 
 ___
 
@@ -114,7 +114,7 @@ Add a persistent task that should not be killed until everything finishes.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:31
+packages/nx-tools/src/utils/node/process-manager.ts:32
 
 ___
 
@@ -130,7 +130,7 @@ Kill all non-persistent tasks.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:38
+packages/nx-tools/src/utils/node/process-manager.ts:39
 
 ___
 
@@ -152,7 +152,7 @@ Tree kill proceseses.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:51
+packages/nx-tools/src/utils/node/process-manager.ts:52
 
 ___
 
@@ -168,4 +168,4 @@ Stop the processes compeletely.
 
 #### Defined in
 
-packages/nx-tools/src/utils/node/process-manager.ts:44
+packages/nx-tools/src/utils/node/process-manager.ts:45

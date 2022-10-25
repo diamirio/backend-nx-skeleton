@@ -1275,7 +1275,7 @@ Creates a file backup in tree.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:302
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:306
 
 ___
 
@@ -1381,7 +1381,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:204
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:208
 
 ___
 
@@ -1468,7 +1468,7 @@ Will use prettier first, others after.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/format-files.ts:22
+packages/nx-tools/src/utils/file-system/format-files.ts:23
 
 ___
 
@@ -1893,7 +1893,7 @@ Merges files the common part.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:280
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:284
 
 ___
 
@@ -2734,7 +2734,7 @@ Run something in a rule. It is just a empty function runs on condition. Just add
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `run` | (...`args`: `any`[]) => `void` | `undefined` |
+| `run` | (...`args`: `any`[]) => `Rule` | `undefined` |
 | `condition` | `boolean` | `true` |
 
 #### Returns
@@ -2786,7 +2786,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:232
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:236
 
 ___
 
@@ -2881,7 +2881,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:176
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:180
 
 ___
 
