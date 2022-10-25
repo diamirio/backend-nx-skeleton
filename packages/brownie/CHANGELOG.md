@@ -1,3 +1,18 @@
+## @webundsoehne/brownie [5.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.4...@webundsoehne/brownie@5.0.5) (2022-10-25)
+
+
+### Bug Fixes
+
+* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 6.0.3
+
 ## @webundsoehne/brownie [5.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.3...@webundsoehne/brownie@5.0.4) (2022-10-25)
 
 
