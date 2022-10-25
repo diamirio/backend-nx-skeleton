@@ -64,7 +64,7 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     } catch (e) {
       if (this.builderOptions.watch) {
         // just restart it
-        this.logger.error(`${this.builderOptions.command} crashed restarting in 3 secs.`)
+        this.logger.error('Crashed restarting in 3 secs: %s', this.builderOptions.command)
         this.logger.debug(e)
 
         await delay(3000)
@@ -121,17 +121,17 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
     if (ctx.node) {
       if (pathExistsSync(join(ctx.cwd, command)) && statSync(join(ctx.cwd, command)).isFile()) {
         // the case where file name is given and it exists
-        this.logger.debug(`Command marked as node.js script: ${command}`)
+        this.logger.debug('Command marked as node.js script: %s', command)
 
         ctx.executeWithNode = true
       } else {
         // the case where a node binary like webpack or jest is given
-        this.logger.debug(`Command marked as node.js binary: ${command}`)
+        this.logger.debug('Command marked as node.js binary: %s', command)
 
         checkPathsExists(this.paths, this.pathExtensions?.path)
       }
     } else {
-      this.logger.debug(`Command marked as shell command: ${command}`)
+      this.logger.debug('Command marked as shell command: %s', command)
       // the case where it will run any other shell command
 
       checkPathsExists(this.paths, this.pathExtensions?.path)

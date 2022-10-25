@@ -43,7 +43,11 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
 
                 log.warn('Prior configuration successfully recovered. Will run in diff-patch mode.')
                 // eslint-disable-next-line no-empty
-              } catch {}
+              } catch {
+                log.debug('Old source tree can not be parsed.')
+              }
+            } else {
+              log.debug('Old source tree is not available.')
             }
           },
 
@@ -77,10 +81,10 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
           }),
 
           // compare current and old configuration to get not needed files
-          (): void => {
+          (tree): void => {
             oldTree?.visit((path) => {
               // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
-              if (host.exists(path) && !fileChanges.includes(path)) {
+              if (tree.exists(path) && !fileChanges.includes(path)) {
                 filesToRemove = [...filesToRemove, path]
                 log.debug('File seems to be no longer needed: %s', path)
               }
@@ -110,7 +114,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
           },
 
           // delete not needed files from changing setup
-          async (): Promise<void> => {
+          async (tree): Promise<void> => {
             if (filesToRemove.length > 0) {
               // get which files to remove
               filesToRemove = filesToRemove.reduce((o, val) => {
@@ -124,10 +128,10 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               await Promise.all(
                 filesToRemove.map((file) => {
                   if (!filesToKeep.includes(file)) {
-                    log.debug(`Deleting not-needed file: "${file}"`)
-                    host.delete(file)
+                    log.debug('Deleting not-needed file: "%s"', file)
+                    tree.delete(file)
                   } else {
-                    log.debug(`Keeping not-needed file: "${file}"`)
+                    log.debug('Keeping not-needed file: "%s"', file)
                   }
                 })
               )
@@ -135,7 +139,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
           },
 
           // delete empty directories after changes
-          async (): Promise<void> => {
+          async (tree): Promise<void> => {
             if (filesToRemove.length > 0) {
               // get all directory names of files to remove
               const directories = filesToRemove.map((path) => dirname(path)).filter((item, index, array) => array.indexOf(item) === index)
@@ -143,12 +147,12 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               // check and delete empty directories
               await Promise.all(
                 directories.map(async (directory) => {
-                  if (host.getDir(directory)?.subfiles?.length === 0 && !(host.getDir(directory)?.subdirs?.length > 0)) {
-                    log.debug(`Deleting not-needed empty directory: "${directory}"`)
-                    host.delete(directory)
-                  } else if (host.getDir(directory)?.subdirs?.length > 0) {
+                  if (tree.getDir(directory)?.subfiles?.length === 0 && !(tree.getDir(directory)?.subdirs?.length > 0)) {
+                    log.debug('Deleting not-needed empty directory: "%s"', directory)
+                    tree.delete(directory)
+                  } else if (tree.getDir(directory)?.subdirs?.length > 0) {
                     // dont delete if has subdirectories
-                    log.debug(`Still has subdirectories: "${directory}"`)
+                    log.debug('Still has subdirectories: "%s"', directory)
                   }
                 })
               )
@@ -181,7 +185,7 @@ export function tripleFileMerge (name: string, currentFile: string, oldFile: str
   try {
     buffer = diff.applyPatch(currentFile, patch, { fuzzFactor: 1 })
   } catch (e) {
-    log.debug(`Error while triple-merging: ${e}`)
+    log.debug('Error while triple-merging: %s', e)
 
     return false
   }
@@ -208,7 +212,7 @@ export function doubleFileMerge (name: string, newFile: string, currentFile: str
   try {
     buffer = diff.applyPatch(currentFile, newToCurrentPatch)
   } catch (e) {
-    log.debug(`Error while double-merging: ${e}`)
+    log.debug('Error while double-merging: %s', e)
 
     return false
   }
@@ -285,7 +289,7 @@ export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | b
 
     host.overwrite(file.path, buffer)
   } else {
-    log.error(`Can not merge file: "${file.path}" -> "${file.path}.old"`)
+    log.error('Can not merge file: "%s" -> "%s.old"', file.path, file.path)
 
     createFileBackup(host, file, log)
 
@@ -302,7 +306,7 @@ export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | b
 export function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
   const backupFilePath = `${file.path}.old`
 
-  log.error(`Can not merge file creating backup: "${file.path}" -> "${backupFilePath}"`)
+  log.error('Can not merge file creating backup: "%s" -> "%s"', file.path, backupFilePath)
 
   if (host.exists(backupFilePath)) {
     host.delete(backupFilePath)

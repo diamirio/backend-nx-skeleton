@@ -83,7 +83,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
         : join(getAppRootPath(), this.flags.directory)
       : join(this.config.root, FileLocations.PATCHES_DIR)
 
-    this.logger.info(`${this.flags.reverse ? 'Reversing' : 'Applying'} patches to path: %s`, this.flags.path)
+    this.logger.info('%s patches to path: %s', this.flags.reverse ? 'Reversing' : 'Applying', this.flags.path)
 
     const limit = this.argv.length === 0 ? ['*'] : this.argv
 
@@ -106,7 +106,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
 
           matched.push(...glob)
 
-          this.logger.debug(`Matched from subdirectory ${path}: ${glob.join(', ')}`)
+          this.logger.debug('Matched from subdirectory %s: %s', path, glob.join(', '))
 
           if (glob.length === 0) {
             throw new Error('Can not match pattern.')
@@ -201,7 +201,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
 
           if (!installedPackageVersion) {
             // it's ok we're in production mode and this is a dev only package
-            this.logger.warn(`Skipping dev-only: ${pathSpecifier}@${version}`)
+            this.logger.warn('Skipping dev-only: %s@%s', pathSpecifier, version)
 
             return
           }
@@ -228,7 +228,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
               )
             }
 
-            this.logger.info(`${pathSpecifier}@${version}`)
+            this.logger.info('%s@%s', pathSpecifier, version)
           } else if (installedPackageVersion === version) {
             // completely failed to apply patch
             // TODO: propagate useful error messages from patch application
@@ -273,11 +273,11 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
     this.logger.info('Finished execution.')
 
     if (warnings.length) {
-      this.logger.warn(`${warnings.length} warning(s).`)
+      this.logger.warn('%d warning(s).', warnings.length)
     }
 
     if (errors.length) {
-      this.logger.fatal(`${errors.length} error(s).`)
+      this.logger.fatal('%d error(s).', errors.length)
 
       throw new Error('Encountered errors.')
     }

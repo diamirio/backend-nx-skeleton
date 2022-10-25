@@ -48,7 +48,7 @@ export class PackageManager {
           stdio: ['ignore', 'ignore', 'ignore']
         })
       } catch {
-        this.logger.debug(`Package manager not found: ${this.manager}`)
+        this.logger.debug('Package manager not found: %s', this.manager)
         this.ctx.fail[manager] = true
       }
     })
@@ -57,7 +57,7 @@ export class PackageManager {
       throw new Error('All package managers that are supported has failed.')
     }
 
-    this.logger.debug(`PackageManager initiated with package manager: ${this.manager}`)
+    this.logger.debug('PackageManager initiated with package manager: %s', this.manager)
 
     PackageManager.instance = this
   }
@@ -189,7 +189,7 @@ export class PackageManager {
 
           this.globalLinkFolder.push(yarnLinkFolder)
 
-          this.logger.debug(`Yarn link folder added to search: ${yarnLinkFolder}`)
+          this.logger.debug('Yarn link folder added to search: %s', yarnLinkFolder)
         }
       } else {
         this.logger.debug('Global linked search folders have already been initiated in the prior run.')
@@ -220,13 +220,13 @@ export class PackageManager {
 
           this.globalFolder.push(npmGlobalFolder)
 
-          this.logger.debug(`NPM global folder added to search: ${npmGlobalFolder}`)
+          this.logger.debug('NPM global folder added to search: %s', npmGlobalFolder)
         }
 
         if (!this.ctx.fail[AvailablePackageManagers.YARN] && this.manager === AvailablePackageManagers.YARN) {
           this.globalFolder.push(yarnGlobalFolder)
 
-          this.logger.debug(`YARN global folder added to search: ${yarnGlobalFolder}`)
+          this.logger.debug('YARN global folder added to search: %s', yarnGlobalFolder)
         }
       } else {
         this.logger.debug('Global search folders have already been initiated in the prior run.')
@@ -352,7 +352,7 @@ export class PackageManager {
                 o.hasUpdate = false
               }
             } catch (e) {
-              this.logger.warn(`Can not check for current version: ${currentPkg.pkg}`)
+              this.logger.warn('Can not check for current version: %s', currentPkg.pkg)
               this.logger.debug(e.message)
             }
           }

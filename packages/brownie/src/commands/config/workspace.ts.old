@@ -41,7 +41,7 @@ export class WorkspaceConfigCommand extends ConfigCommand {
       edit
     )
 
-    this.logger.success(`Edited "${select}" with "${edit.pkg}" in the local configuration.`)
+    this.logger.success(`Edited "%s" with "%s" in the local configuration.`, select, edit.pkg)
 
     return config
   }

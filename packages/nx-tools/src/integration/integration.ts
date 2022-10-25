@@ -29,7 +29,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
   } catch (e) {
     const logger = new Logger()
 
-    logger.fatal(`Project "${name}" can not be found while trying to update integration:`, JSON.stringify(e))
+    logger.fatal('Project "%s" can not be found while trying to update integration: %s', name, e)
   }
 
   if (project) {

@@ -5,6 +5,6 @@ import type { Rule } from '@angular-devkit/schematics'
  * @param run
  * @param condition
  */
-export function runInRule (run: (...args: any[]) => void, condition = true): Rule {
-  return (): ((...args: any[]) => void) => condition ? run : null
+export function runInRule (run: (...args: any[]) => Rule, condition = true): Rule {
+  return (): ((...args: any[]) => void) => condition ? run : undefined
 }

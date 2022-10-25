@@ -16,7 +16,7 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
     super()
 
     if (!this.options || !this.options?.dsn) {
-      this.logger.warn(`${!this.options ? 'Missing' : 'Invalid'} sentry.io config: ${JSON.stringify(this.options, null, 2)}`)
+      this.logger.warn(['%s sentry.io config: %o', !this.options ? 'Missing' : 'Invalid', this.options])
       this.logger.warn('Reporting to sentry.io will remain disabled...')
 
       return
@@ -41,7 +41,7 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
         new this.sentry.Integrations.OnUncaughtException({
           onFatalError: async (error): Promise<void> => {
             if (error.name === 'SentryError') {
-              this.logger.warn(`SentryError: ${JSON.stringify(error, null, 2)}`)
+              this.logger.warn(['SentryError: %o', error])
             } else {
               this.sentry.getCurrentHub()?.getClient()?.captureException(error)
             }
@@ -55,7 +55,7 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
         integrations
       })
     } catch (e) {
-      this.logger.warn('Sentry.io initialization failed: ' + e.toString())
+      this.logger.warn(['Sentry.io initialization failed: %s', e])
       this.logger.warn('Reporting to sentry.io will remain disabled...')
 
       return
@@ -85,7 +85,7 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
     try {
       this.sentry.captureException(exception)
     } catch (sentryException) {
-      this.logger.warn(`Sentry error: ${JSON.stringify(sentryException.message, null, 2)}`)
+      this.logger.warn(['Sentry error: %s', sentryException.message])
     }
   }
 

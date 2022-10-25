@@ -21,11 +21,11 @@ export class SeederService {
     for (const [name, Seed] of Object.entries(this.seeds)) {
       const seed = this.moduleRef.get(Seed)
 
-      this.logger.log(`Running seed: ${name}`)
+      this.logger.log(['Running seed: %s', name])
 
       await seed.run()
 
-      this.logger.log(`Finished seed: ${name}`)
+      this.logger.log(['Finished seed: %s', name])
     }
 
     this.logger.log('Finished seeding.')

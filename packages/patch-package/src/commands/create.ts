@@ -49,9 +49,9 @@ export class CreateCommand extends Command<never, InferFlags<typeof CreateComman
       throw new Error('At least one package has to be specified for processing.')
     }
 
-    this.logger.info(`Creating patch files for modules: ${packages.join(', ')}`)
+    this.logger.info('Creating patch files for modules: %s', packages.join(', '))
 
-    this.logger.info(`Running against root directory: ${this.flags.path}`)
+    this.logger.info('Running against root directory: %s', this.flags.path)
 
     await Promise.all(
       packages.map(async (pkg) => {
@@ -64,7 +64,7 @@ export class CreateCommand extends Command<never, InferFlags<typeof CreateComman
           patchDir: this.flags.directory
         })
 
-        this.logger.info(`Created patch: ${pkg}`)
+        this.logger.info('Created patch: %s', pkg)
       })
     )
   }

@@ -26,7 +26,7 @@ export async function useRetry<T> (callback: () => T, options?: UseRetryOptions)
 
       logger.debug(err)
 
-      logger.warn(`Retrying task: ${options.name} with attempt number ${retries} in ${options.interval}ms`)
+      logger.warn(['Retrying task: %s with attempt number %d in %dms', options.name, retries, options.interval])
 
       await new Promise((resolve) => setTimeout(resolve, options.interval))
     }

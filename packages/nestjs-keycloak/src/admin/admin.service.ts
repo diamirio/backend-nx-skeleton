@@ -80,7 +80,7 @@ export class KeycloakAdminService {
 
       return Math.floor(new Date().getTime() / 1000) >= tokenPayload.exp
     } catch (error) {
-      this.logger.debug(`Can't parse keycloak-admin token, because: ${error.message}`)
+      this.logger.debug(['Can\'t parse keycloak-admin token, because: %s', error.message])
 
       return true
     }

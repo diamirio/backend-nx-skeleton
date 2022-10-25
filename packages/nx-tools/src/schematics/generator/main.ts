@@ -18,7 +18,7 @@ export function generateGenericGenerator (files: string) {
       const options = await normalizeOptions(host, context, schema, files)
 
       return chain([
-        runInRule(log.info.bind(log)(`Generating "${options.type}" files: ${options.name}@${options.root}`), !schema.silent),
+        runInRule(log.info.bind(log)('Generating "%s" files: %s@%s', options.type, options.name, options.root), !schema.silent),
         createApplicationFiles(files, options),
 
         formatTreeRule({ skip: options.skipFormat })

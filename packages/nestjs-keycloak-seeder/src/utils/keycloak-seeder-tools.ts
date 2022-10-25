@@ -38,7 +38,7 @@ export class KeycloakAdminSeederTools {
 
   async createClient (realm: string, options?: DeepPartial<KeycloakAdminOptions>): Promise<KeycloakAdminClient> {
     if (!(this.clients?.[realm] instanceof KeycloakAdminClient)) {
-      this.logger.debug(`Creating a new Keycloak API client for realm: ${realm}`)
+      this.logger.debug(['Creating a new Keycloak API client for realm: %s', realm])
 
       const base = this.keycloak.getOptions()
 
@@ -146,7 +146,7 @@ export class KeycloakAdminSeederTools {
     if (options?.flush) {
       await this.flushKeycloakEntities(context, input, { realm: options?.realm })
 
-      this.logger.warn(`Flushed all Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}.`)
+      this.logger.warn(['Flushed all Keycloak %s in %s.', context, options?.realm ?? this.keycloak.client.realmName])
     }
 
     if (options?.flushUnknown) {
@@ -157,7 +157,7 @@ export class KeycloakAdminSeederTools {
       if (unknown.length > 0) {
         await this.flushKeycloakEntities(context, unknown as K, { realm: options.realm })
 
-        this.logger.warn(`Flushed unknown Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}.`)
+        this.logger.warn(['Flushed unknown Keycloak %s in %s.', context, options?.realm ?? this.keycloak.client.realmName])
       }
     }
 
@@ -184,9 +184,9 @@ export class KeycloakAdminSeederTools {
     )
 
     if (created.length > 0) {
-      this.logger.log(`Created ${created.length} Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${created.join(', ')}`)
+      this.logger.log(['Created %d Keycloak %s in %s: %s', created.length, context, options?.realm ?? this.keycloak.client.realmName, created.join(', ')])
     } else {
-      this.logger.log(`All Keycloak ${context} were already initialized in ${options?.realm ?? this.keycloak.client.realmName}.`)
+      this.logger.log(['All Keycloak %s were already initialized in %s.', context, options?.realm ?? this.keycloak.client.realmName])
     }
   }
 
@@ -240,7 +240,7 @@ export class KeycloakAdminSeederTools {
     )
 
     if (updated.length > 0 && !options?.silent) {
-      this.logger.log(`Updated ${updated.length} Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${updated.join(', ')}`)
+      this.logger.log(['Updated %d Keycloak %s in %s: %s', updated.length, context, options?.realm ?? this.keycloak.client.realmName, updated.join(', ')])
     }
   }
 
@@ -291,11 +291,11 @@ export class KeycloakAdminSeederTools {
     )
 
     if (deleted.length > 0) {
-      this.logger.warn(`Deleted Keycloak ${deleted.length} ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${deleted.join(', ')}`)
+      this.logger.warn(['Deleted Keycloak %d %s in %s: %s', deleted.length, context, options?.realm ?? this.keycloak.client.realmName, deleted.join(', ')])
     }
 
     if (ignored.length > 0) {
-      this.logger.debug(`Ignored deleting Keycloak ${ignored.length} ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${ignored.join(', ')}`)
+      this.logger.debug(['Ignored deleting Keycloak %d %s in %s: %s', ignored.length, options?.realm ?? this.keycloak.client.realmName, ignored.join(', ')])
     }
   }
 
@@ -333,7 +333,7 @@ export class KeycloakAdminSeederTools {
             )
 
             if (deleted.length > 0) {
-              this.logger.warn(`Flushed unknown roles in ${options?.realm ?? this.keycloak.client.realmName}: ${deleted.join(', ')} from group ${id}`)
+              this.logger.warn(['Flushed unknown roles in %s: %s from group %s', options?.realm ?? this.keycloak.client.realmName, deleted.join(', '), id])
             }
           })
         )
@@ -350,7 +350,7 @@ export class KeycloakAdminSeederTools {
           await client.groups.addRealmRoleMappings({ id, roles: this.swapNamesToMapping(roles, role) })
 
           if (!options?.silent) {
-            this.logger.log(`Set new Keycloak role in ${options?.realm ?? this.keycloak.client.realmName}: ${role.join(', ')} for group ${id}`)
+            this.logger.log(['Set new Keycloak role in %s: %s for group %s', options?.realm ?? this.keycloak.client.realmName, role.join(', '), id])
           }
         } catch (err) {
           this.parseSeedError(err)

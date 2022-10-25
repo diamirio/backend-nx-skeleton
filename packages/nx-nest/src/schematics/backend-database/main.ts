@@ -15,7 +15,7 @@ export default function (schema: Schema): (host: Tree, context: SchematicContext
     const options = await normalizeOptions(host, context, schema)
 
     return chain([
-      runInRule(log.info.bind(log)(`Adding ${SchematicConstants.BACKEND_DATABASE_PACKAGE} library to workspace.`)),
+      runInRule(log.info.bind(log)('Adding %s library to workspace.', SchematicConstants.BACKEND_DATABASE_PACKAGE)),
 
       addEslintConfigRule(options, { deps: LINTER_VERSIONS.eslint, json: {} }),
 

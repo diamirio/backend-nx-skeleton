@@ -88,7 +88,7 @@ export abstract class BaseAuthGuard implements CanActivate {
 
       return true
     } catch (error) {
-      this.logger.debug(`Could not validate access token, because: ${error?.message || error?.response?.message}`)
+      this.logger.debug(['Could not validate access token, because: %s', error?.message ?? error?.response?.message])
 
       if (error?.response?.statusCode === HttpStatus.FORBIDDEN) {
         // deny and forward the forbidden message

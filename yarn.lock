@@ -2228,11 +2228,6 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nrwl/nx@^7.8.7":
-  version "7.8.7"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx/-/nx-7.8.7.tgz#a85dc5ab30d33ac6cc2234bbc51e229ad85b9b9b"
-  integrity sha512-a/pOozIT86IIWue6MSwN2EKO4grJ8My7QMl+g535/vrDg75riyBTkWF+nX6VM/JjGz40Y5nFZaX94924cZWt5g==
-
 "@nrwl/tao@14.7.5":
   version "14.7.5"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-14.7.5.tgz#9b10c97f9efc558a651c98b27c29197ecc2d5d28"

@@ -14,7 +14,7 @@ export class RequestProfilerInterceptor implements NestInterceptor {
     const response: Request = httpContext.getResponse()
     const statusCode = (response as any)?.statusCode ?? response?.raw?.statusCode ?? 'UNDEF'
 
-    this.logger.log(`${method} ${url} finished - ${statusCode} - took: ${getDuration(start, end).toFixed(3)} sec`)
+    this.logger.log(['%s %s finished - %d - took: %d sec', method, url, statusCode, getDuration(start, end).toFixed(3)])
   }
 
   intercept (context: ExecutionContext, next: CallHandler): Observable<any> {
@@ -24,7 +24,7 @@ export class RequestProfilerInterceptor implements NestInterceptor {
     const url = request.url ?? request.raw.url ?? ''
     const method = String(request.method ?? request.raw.method ?? '').toUpperCase()
 
-    this.logger.log(`${method} ${url} starting`)
+    this.logger.log(['%s %s starting...', method, url])
 
     const start = Date.now()
 

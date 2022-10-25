@@ -1,6 +1,7 @@
 import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { noop } from '@angular-devkit/schematics'
 import { ESLint } from 'eslint'
+import { EOL } from 'os'
 import * as path from 'path'
 import type * as Prettier from 'prettier'
 import * as prettier from 'prettier'
@@ -153,7 +154,7 @@ export function formatFilesRule (options?: FormatFilesOptions): Rule {
 
               return
             } catch (e) {
-              log.error(`Could not format ${file.path}:\n${e.message}`)
+              log.error('Could not format %s:%s%s', file.path, EOL, e.message)
             }
           })
         )

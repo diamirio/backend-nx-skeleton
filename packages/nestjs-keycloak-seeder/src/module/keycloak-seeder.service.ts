@@ -28,11 +28,11 @@ export class KeycloakSeederService {
         throw new Error(`Seed is not a ${KeycloakSeed.name}: ${name}`)
       }
 
-      this.logger.log(`Running seed: ${name}`)
+      this.logger.log(['Running seed: %s', name])
 
       await seed.run()
 
-      this.logger.log(`Finished seed: ${name}`)
+      this.logger.log(['Finished seed: %s', name])
     }
 
     this.logger.log('Finished seeding.')

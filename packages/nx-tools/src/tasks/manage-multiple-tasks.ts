@@ -38,13 +38,13 @@ export function addMultipleDependentTasksRule<T extends Record<string, string>> 
 
               tasks.splice(index, 1)
 
-              logger.debug(`Adding context task: ${t.token.toString()}`)
+              logger.debug('Adding context task: %s', t.token.toString())
             } else if (t?.condition === false) {
               tasks.splice(index, 1)
 
               logger.debug('Condition does not meet for adding task: %s', t.token.toString())
             } else {
-              logger.debug(`Adding context task still depends on adding others first: ${t.token.toString()} depends on ${t.dependsOn.join(', ')}`)
+              logger.debug('Adding context task still depends on adding others first: %s depends on %s', t.token.toString(), t.dependsOn.join(', '))
             }
           })
         )

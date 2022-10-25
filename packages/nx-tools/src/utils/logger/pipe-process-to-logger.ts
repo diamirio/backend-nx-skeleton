@@ -25,7 +25,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
   }
 
   if (options.start) {
-    logger.info(`Spawning process: ${instance.spawnargs.join(' ')}`)
+    logger.info('Spawning process: %s', instance.spawnargs.join(' '))
   }
 
   if (instance.stdout) {

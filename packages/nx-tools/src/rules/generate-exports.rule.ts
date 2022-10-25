@@ -44,7 +44,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           const pattern = [...template.pattern, '!/' + join(root, template.output)]
 
           if (micromatch.all(file, pattern, { ...micromatchDefaultOptions, ...template.options })) {
-            log.debug(`Generate export pattern "${pattern.join(', ')}" matches: "${file}"`)
+            log.debug('Generate export pattern "%s" matches: "%s"', pattern.join(', '), file)
 
             o = deepMergeWithUniqueMergeArray(o, {
               [template.output]: [
@@ -71,7 +71,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       output = deepMergeWithUniqueMergeArray(
         output,
         options.templates.reduce<Record<string, string[]>>((o, template) => {
-          log.debug(`Generate empty export file: "${template.output}"`)
+          log.debug('Generate empty export file: "%s"', template.output)
 
           o = deepMergeWithUniqueMergeArray(o, {
             [template.output]: []

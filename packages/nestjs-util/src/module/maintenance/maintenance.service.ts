@@ -26,10 +26,10 @@ export class MaintenanceService {
   async enable (task = 'unknown-task'): Promise<void> {
     // add task to running tasks
     this.tasks.push(task)
-    this.logger.debug(`Task added to maintenance queue: ${task}`)
+    this.logger.debug(['Task added to maintenance queue: %s', task])
 
     if (!await this.isEnabled()) {
-      this.logger.verbose(`Enabling maintenance mode (lockfile is ${this.lockfile})`)
+      this.logger.verbose(['Enabling maintenance mode (lockfile is %s)', this.lockfile])
 
       await fs.ensureFile(this.lockfile)
 
@@ -44,13 +44,13 @@ export class MaintenanceService {
     this.tasks.splice(this.tasks.indexOf(task), 1)
 
     if (this.tasks.length === 0) {
-      this.logger.verbose(`Disabling maintenance mode (lockfile is ${this.lockfile})`)
+      this.logger.verbose(['Disabling maintenance mode (lockfile is %s)', this.lockfile])
 
       await fs.remove(this.lockfile)
 
       this.logger.log('◆◆◆ Maintenance mode disabled ◆◆◆')
     } else {
-      this.logger.verbose(`Not disabling maintenance mode still got running tasks: "${this.tasks.toString()}".`)
+      this.logger.verbose(['Not disabling maintenance mode still got running tasks: %s', this.tasks.join(', ')])
     }
   }
 

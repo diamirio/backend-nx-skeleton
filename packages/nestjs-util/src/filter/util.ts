@@ -60,5 +60,5 @@ export function ignoreErrors (exception: Error): boolean {
 
 // log debug message
 export function logErrorDebugMsg (logger: Logger, payload: EnrichedException, trace: string): void {
-  logger.debug(`[${payload.statusCode}] - "${getErrorMessage(payload.message)}"${EOL}${trace}"`)
+  logger.debug(['[%s] - "%s"%s%s', payload.statusCode, getErrorMessage(payload.message), EOL, trace])
 }

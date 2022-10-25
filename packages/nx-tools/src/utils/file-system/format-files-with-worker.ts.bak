@@ -9,6 +9,7 @@ import { getFilesInTree } from './file-system'
 import type { FormatFilesOptions } from './format-files.interface'
 import type { ThreadWorkerOptions, ThreadWorkerResponse } from './format-files.worker'
 import { findNxRoot, isVerbose, Logger } from '@utils'
+import { EOL } from 'os'
 
 /**
  * Format files as a rule in a tree.
@@ -111,7 +112,7 @@ export function formatFilesWithWorkerRule (options?: FormatFilesOptions): Rule {
               worker.on('error', (e) => {
                 void worker.terminate()
 
-                log.error(`Could not format ${file.path}:\n${e.message}`)
+                log.error(`Could not format %s:%s%s`, file.path, EOL, e.message)
 
                 resolve(null)
               })

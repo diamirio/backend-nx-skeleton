@@ -85,7 +85,7 @@ export class DockerHelper {
             const templateCheck = containers.filter((c) => !Object.keys(ctx.containers).includes(c))
 
             if (templateCheck.length > 0) {
-              this.cmd.logger.warn(`Containers skipped for being unknown: ${templateCheck.join(', ')}`)
+              this.cmd.logger.warn('Containers skipped for being unknown: %s', templateCheck.join(', '))
             }
 
             // only process known containers
@@ -174,7 +174,7 @@ export class DockerHelper {
                             asset.to = join(ctx.context[name].fileDir, volume.from)
 
                             // if this is a file copy it directly
-                            this.cmd.logger.debug(`Copying file: ${volume.from} -> ${asset.to}`)
+                            this.cmd.logger.debug('Copying file: %s -> %s', volume.from, asset.to)
 
                             try {
                               await this.cmd.fs.mkdir(this.cmd.fs.dirname(asset.to))

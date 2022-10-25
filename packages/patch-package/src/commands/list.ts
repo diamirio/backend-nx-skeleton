@@ -53,7 +53,7 @@ export class ListCommand extends Command<never, typeof ListCommand> {
             const packageDetails = getPackageDetailsFromPatchFilename(filename)
 
             if (!packageDetails) {
-              this.logger.warn(`Unrecognized patch file in patches directory: ${filename}`)
+              this.logger.warn('Unrecognized patch file in patches directory: %s', filename)
 
               return
             }

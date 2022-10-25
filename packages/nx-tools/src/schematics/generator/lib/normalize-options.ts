@@ -18,7 +18,7 @@ import { color, findNxRoot, generateNameCases, Logger, Manager, normalizeNamePro
 export async function normalizeOptions (_host: Tree, context: SchematicContext, options: Schema, files: string): Promise<NormalizedSchema> {
   const logger = new Logger(context)
 
-  logger.debug(`Template directory to scan in: ${files}`)
+  logger.debug('Template directory to scan in: %s', files)
 
   return new Manager(context).run<NormalizedSchema>(
     [
@@ -50,7 +50,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
         task: async (ctx): Promise<void> => {
           const nxJsonPath = join(findNxRoot(), 'nx.json')
 
-          logger.debug(`nx.json path found: ${nxJsonPath}`)
+          logger.debug('nx.json path found: %s', nxJsonPath)
 
           try {
             const nxJson = await fs.readJSON(nxJsonPath)
@@ -134,7 +134,7 @@ export async function normalizeOptions (_host: Tree, context: SchematicContext, 
 
           task.title = 'Injected extra variables to generator.'
 
-          logger.debug(`Injected extra variables through prompts: ${JSON.stringify(ctx.inject, null, 2)}`)
+          logger.debug('Injected extra variables through prompts: %o', ctx.inject)
         }
       }
     ],

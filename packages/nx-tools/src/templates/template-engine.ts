@@ -49,7 +49,7 @@ export function jinjaTemplate (ctx: Record<string, any>, options: JinjaTemplateO
           host.overwrite(file.path, file.content)
           host.rename(file.path, file.path.replace(matched, ''))
         } catch (e) {
-          log.error(`Could not create "${file.path}" from template: ${e.message}`)
+          log.error('Could not create "%s" from template: %s', file.path, e.message)
 
           // i want to stop execution if it is not verbose
           if (!isVerbose()) {

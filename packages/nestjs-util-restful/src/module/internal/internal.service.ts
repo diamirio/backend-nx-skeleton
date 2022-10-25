@@ -18,7 +18,7 @@ export class InternalService {
 
       lastUpdate = moment(mtime).toISOString()
     } catch (err) {
-      this.logger.warn(`Error while attempting to access last update file ${lastUpdateFilePath}`)
+      this.logger.warn(['Error while attempting to access last update file: %s', lastUpdateFilePath])
     }
 
     this.logger.debug('Everything fine')

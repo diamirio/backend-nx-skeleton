@@ -51,7 +51,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
 
           const value = useExpiresHeader ? `${moment().locale('en').add(lifetime, 'seconds').utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT` : `max-age=${lifetime}`
 
-          this.logger.verbose(`Cache lifetime is ${lifetime}sec -> setting "${headerName}" to ${value}`)
+          this.logger.verbose(['Cache lifetime is %dsec -> setting "%s" to %s', lifetime, headerName, value])
 
           response.headers.append(headerName, value)
         } else {

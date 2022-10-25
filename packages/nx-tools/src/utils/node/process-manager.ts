@@ -2,6 +2,7 @@ import type { BuilderContext } from '@angular-devkit/architect'
 import type { SchematicContext } from '@angular-devkit/schematics'
 import type { ExecutorContext } from '@nrwl/devkit'
 import type { ExecaChildProcess } from 'execa'
+import { EOL } from 'os'
 import pidtree from 'pidtree'
 
 import { Logger } from '@utils'
@@ -62,7 +63,7 @@ export class ProcessManager {
             try {
               pids = await pidtree(instance.pid, { root: true })
             } catch (e) {
-              this.logger.debug(`No matching PIDs has been found:\n${e}`)
+              this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
             }
 
             await Promise.all(
@@ -74,9 +75,9 @@ export class ProcessManager {
               })
             )
 
-            this.logger.warn(`Killing instance: ${instanceName} (${pids.join(', ')})`)
+            this.logger.warn('Killing instance: %s > %s', instanceName, pids.join(', '))
           } else {
-            this.logger.debug(`Instance is already stopped: ${instanceName}`)
+            this.logger.debug('Instance is already stopped: %s', instanceName)
           }
         })
       )

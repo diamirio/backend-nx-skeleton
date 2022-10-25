@@ -73,7 +73,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       if (this.options.watch) {
         this.logger.info('Starting TypeScript-Watch...')
 
-        this.logger.debug(`tsc-watch path: ${this.paths.tscWatch}`)
+        this.logger.debug('tsc-watch path: %s', this.paths.tscWatch)
 
         const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
 
@@ -110,7 +110,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         // the normal mode of compiling
         this.logger.info('Transpiling TypeScript files...')
 
-        this.logger.debug(`typescript path: ${this.paths.typescript}`)
+        this.logger.debug('typescript path: %s', this.paths.typescript)
 
         const { args, spawnOptions } = this.normalizeArguments('typescript')
 
@@ -296,7 +296,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     if (this.options.swapPaths) {
       this.logger.info('Swapping Typescript paths...')
 
-      this.logger.debug(`tsconfig-replace-paths path: ${this.paths.tsconfigReplacePaths}`)
+      this.logger.debug('tsconfig-replace-paths path: %s', this.paths.tsconfigReplacePaths)
 
       const { args, spawnOptions } = this.normalizeArguments('tsconfigReplacePaths')
 
@@ -316,7 +316,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
   private updatePackageJson (): void {
     const packageJsonPath = this.options.packageJson ? join(this.context.root, this.options.packageJson) : join(this.context.root, this.options.cwd, 'package.json')
 
-    this.logger.debug(`package.json path: ${packageJsonPath}`)
+    this.logger.debug('package.json path: %s', packageJsonPath)
 
     if (!existsSync(packageJsonPath)) {
       this.logger.warn('No implicit package.json file found for the package. Skipping.')
@@ -394,7 +394,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     try {
       await Promise.all(
         this.options.files.map((file) => {
-          this.logger.debug(`Copying "${file.input}" to ${file.output}`)
+          this.logger.debug('Copying: %s -> %s', file.input, file.output)
 
           return copy(file.input, file.output)
         })
