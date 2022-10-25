@@ -1,3 +1,19 @@
+## @webundsoehne/nx-nest [5.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.2...@webundsoehne/nx-nest@5.0.3) (2022-10-25)
+
+
+### Bug Fixes
+
+* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 6.0.3
+* **@webundsoehne/nx-tools:** upgraded to 6.0.3
+
 ## @webundsoehne/nx-nest [5.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.1...@webundsoehne/nx-nest@5.0.2) (2022-10-25)
 
 
