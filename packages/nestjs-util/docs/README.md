@@ -192,13 +192,13 @@ ___
 
 ### registerExitListeners
 
-▸ **registerExitListeners**(`moduleName?`): `void`
+▸ **registerExitListeners**(`name?`): `void`
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `moduleName` | `string` | `'module'` |
+| `name` | `string` | `'module'` |
 
 #### Returns
 
