@@ -67,7 +67,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               // add this to file changes, return null since we did the operation directly
               fileChanges = [...fileChanges, file.path]
 
-              return
+              return file
             }
 
             // vanilla mode
