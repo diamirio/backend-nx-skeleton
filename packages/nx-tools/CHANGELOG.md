@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [6.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.3...@webundsoehne/nx-tools@6.0.4) (2022-10-25)
+
+
+### Bug Fixes
+
+* revert back to old behavior for returning the file ([f3d2b6c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f3d2b6cda4b34106036547c66beb00e539f31958))
+
 ## @webundsoehne/nx-tools [6.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.2...@webundsoehne/nx-tools@6.0.3) (2022-10-25)
 
 
