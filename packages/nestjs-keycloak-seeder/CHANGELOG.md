@@ -1,3 +1,18 @@
+## @webundsoehne/nestjs-keycloak-seeder [3.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.1...@webundsoehne/nestjs-keycloak-seeder@3.0.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.2
+
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.0...@webundsoehne/nestjs-keycloak-seeder@3.0.1) (2022-10-06)
 
 
