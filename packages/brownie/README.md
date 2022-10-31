@@ -18,9 +18,10 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/brownie](#webundsoehnebrownie)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/brownie](#webundsoehnebrownie)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -28,13 +29,14 @@ Brownie will help scaffold `@nrwl/nx` projects, create a custom workspace compat
 # Commands
 
 <!-- commands -->
-* [`brownie ci`](#brownie-ci)
-* [`brownie docker`](#brownie-docker)
-* [`brownie gitlab`](#brownie-gitlab)
-* [`brownie help [COMMAND]`](#brownie-help-command)
-* [`brownie nx`](#brownie-nx)
-* [`brownie workspace`](#brownie-workspace)
-* [`brownie ws`](#brownie-ws)
+
+- [`brownie ci`](#brownie-ci)
+- [`brownie docker`](#brownie-docker)
+- [`brownie gitlab`](#brownie-gitlab)
+- [`brownie help [COMMAND]`](#brownie-help-command)
+- [`brownie nx`](#brownie-nx)
+- [`brownie workspace`](#brownie-workspace)
+- [`brownie ws`](#brownie-ws)
 
 ## `brownie ci`
 
@@ -57,9 +59,7 @@ Create docker-compose configuration from boilerplates.
 
 ```
 USAGE
-  $ brownie docker [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-f] [-o <value>] [-v] [-e] [-F <value>] [-V <value>] [-F <value>]
+  $ brownie docker [-f] [-o <value>] [-v] [-e] [-F <value>] [-V <value>] [-F <value>]
 
 FLAGS
   -F, --file=<value>            [default: docker-compose.yml] Compose file path.
@@ -69,17 +69,6 @@ FLAGS
   -f, --force                   Force overwrites.
   -o, --output=<value>          [default: .docker] Output folder for the Docker files.
   -v, --volume                  Use optional persistent volumes with the containers.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Create docker-compose configuration from boilerplates.
@@ -122,7 +111,7 @@ DESCRIPTION
   Display help for brownie.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.14/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.17/src/commands/help.ts)_
 
 ## `brownie nx`
 
@@ -130,26 +119,13 @@ Configure NX modules.
 
 ```
 USAGE
-  $ brownie nx [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-a]
+  $ brownie nx [-d] [-m yarn|npm] [-s] [-a]
 
 FLAGS
   -a, --arguments                   Enable prompt for passing in arguments.
   -d, --develop                     Puts the underlying schematics to development mode, if they support it.
   -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
   -s, --skip-updates                Skip the dependency updates.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Configure NX modules.
@@ -163,26 +139,13 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie workspace [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
+  $ brownie workspace [-d] [-m yarn|npm] [-s] [-f]
 
 FLAGS
   -d, --develop                     Puts the underlying schematics to development mode, if they support it.
   -f, --force                       Force override for schematic.
   -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
   -s, --skip-updates                Skip the dependency updates.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Create a new workspace with NX.
@@ -199,9 +162,7 @@ Create a new workspace with NX.
 
 ```
 USAGE
-  $ brownie ws [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d] [-m yarn|npm] [-s] [-f]
+  $ brownie ws [-d] [-m yarn|npm] [-s] [-f]
 
 FLAGS
   -d, --develop                     Puts the underlying schematics to development mode, if they support it.
@@ -209,21 +170,11 @@ FLAGS
   -m, --package-manager=(yarn|npm)  [default: npm] Use the given package manager to do the install/update operations.
   -s, --skip-updates                Skip the dependency updates.
 
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
-
 DESCRIPTION
   Create a new workspace with NX.
 
 ALIASES
   $ brownie ws
 ```
+
 <!-- commandsstop -->

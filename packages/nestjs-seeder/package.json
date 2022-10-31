@@ -21,7 +21,6 @@
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged",
     "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
@@ -39,8 +38,8 @@
     "@webundsoehne/ts-utility-types": "*"
   },
   "devDependencies": {
-    "@nestjs/common": "^9.1.4",
-    "@nestjs/core": "^9.1.4"
+    "@nestjs/common": "^9.1.6",
+    "@nestjs/core": "^9.1.6"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 8",

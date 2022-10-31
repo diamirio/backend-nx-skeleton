@@ -1,9 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import cpy from 'cpy'
+import rimraf from 'rimraf'
 import { defineConfig } from 'tsup'
 
 export default defineConfig((options) => ({
-  name: !options.watch && 'production',
+  name: !options.watch ? 'production' : undefined,
 
+  outDir: 'dist',
   entry: ['src/**/*.{js,ts}', '!src/**/files'],
   tsconfig: options.watch ? 'tsconfig.json' : 'tsconfig.build.json',
 
@@ -13,11 +16,38 @@ export default defineConfig((options) => ({
 
   target: ['es2021'],
 
-  sourcemap: options.watch && true,
+  sourcemap: options.watch ? true : false,
 
   splitting: false,
   clean: true,
   minify: false,
 
-  onSuccess: 'yarn run postbuild'
+  onSuccess: async (): Promise<void> => {
+    await Promise.all(
+      ['dist/**/assets/', 'dist/**/files/'].map(
+        async (path) =>
+          new Promise((resolve, reject) =>
+            rimraf(path, {}, (error) => {
+              if (error) {
+                reject(error)
+              }
+
+              // eslint-disable-next-line no-console
+              console.log('Cleaned up directory:', path)
+              resolve(null)
+            })
+          )
+      )
+    )
+
+    const copied = await cpy(['**/*.json', '**/files/**', '**/assets/**'], '../dist', {
+      cwd: './src',
+      dot: true,
+      overwrite: true,
+      parents: true
+    })
+
+    // eslint-disable-next-line no-console
+    console.log('Copied assets:', copied.join(', '))
+  }
 }))

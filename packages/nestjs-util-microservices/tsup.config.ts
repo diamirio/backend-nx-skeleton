@@ -1,24 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { esbuildDecorators } from '@anatine/esbuild-decorators'
 import { defineConfig } from 'tsup'
 
 export default defineConfig((options) => ({
-  name: !options.watch && 'production',
+  name: !options.watch ? 'production' : undefined,
 
   entry: ['src/**/*.{js,ts}'],
   tsconfig: options.watch ? 'tsconfig.json' : 'tsconfig.build.json',
 
-  dts: true,
+  dts: options.watch ? true : false,
 
   format: ['cjs'],
 
   target: ['es2021'],
 
-  sourcemap: options.watch && true,
-
-  esbuildPlugins: [esbuildDecorators()],
+  sourcemap: options.watch ? true : false,
 
   splitting: false,
   clean: true,
-  minify: false
+  minify: false,
+  keepNames: true
 }))

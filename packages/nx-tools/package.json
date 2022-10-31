@@ -13,11 +13,9 @@
   "schematics": "./schematics.json",
   "scripts": {
     "build": "tsup-node",
-    "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged",
     "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
@@ -34,9 +32,9 @@
     "rxjs": ">= 7 < 8"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1402.5",
-    "@angular-devkit/core": "^14.2.5",
-    "@angular-devkit/schematics": "^14.2.5",
+    "@angular-devkit/architect": "^0.1402.7",
+    "@angular-devkit/core": "^14.2.7",
+    "@angular-devkit/schematics": "^14.2.7",
     "@nrwl/cli": "^14.8.3",
     "@nrwl/devkit": "^14.8.3",
     "@nrwl/tao": "^14.8.3",
@@ -48,7 +46,7 @@
     "colorette": "^2.0.17",
     "diff": "^5.1.0",
     "enquirer": "^2.3.6",
-    "eslint": "^8.24.0",
+    "eslint": "^8.26.0",
     "execa": "^5.1.1",
     "figures": "^3.0.0",
     "find-up": "^5.0.0",
@@ -67,9 +65,10 @@
     "winston": "^3.6.0"
   },
   "devDependencies": {
+    "@swc/core": "^1.3.11",
     "@types/deepmerge": "^2.2.0",
     "@types/diff": "^5.0.2",
-    "@types/eslint": "^8.4.5",
+    "@types/eslint": "^8.4.9",
     "@types/figures": "^3.0.1",
     "@types/fs-extra": "^9.0.13",
     "@types/nunjucks": "^3.2.1",

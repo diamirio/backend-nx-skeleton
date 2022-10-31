@@ -12,7 +12,6 @@
   "scripts": {
     "lint": "prettier --loglevel warn --write ./**/*.js && eslint --ext .ts,.js,.tsx,.jsx --fix ./",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx ./",
-    "lint:staged": "lint-staged",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
   "husky": {
@@ -39,8 +38,8 @@
     "eslint-plugin-react-hooks": ">= 4"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.39.0",
-    "@typescript-eslint/parser": "^5.39.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "load-tsconfig": "^0.2.3"
   },
   "devDependencies": {

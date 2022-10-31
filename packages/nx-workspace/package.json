@@ -13,11 +13,9 @@
   "schematics": "./schematics.json",
   "scripts": {
     "build": "tsup-node",
-    "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged",
     "docs:jsdoc": "typedoc src/index.ts --readme none",
     "docs:toc": "markdown-toc README.md --bullets='-' -i"
   },
@@ -31,8 +29,8 @@
     ]
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.5",
-    "@angular-devkit/schematics": "^14.2.5",
+    "@angular-devkit/core": "^14.2.7",
+    "@angular-devkit/schematics": "^14.2.7",
     "@nrwl/devkit": "^14.8.3",
     "@nrwl/workspace": "^14.8.3",
     "@webundsoehne/deep-merge": "*",

@@ -14,10 +14,8 @@
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
-    "postbuild": "cpy --cwd=src --parents --dot '**/*.json' ../dist/ && rimraf dist/**/files/ dist/**/assets/ && cpy --cwd=src --parents --dot '**/files/**' '**/assets/**' ../dist/",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged",
     "docs:toc": "markdown-toc README.md --bullets='-' -i",
     "docs:jsdoc": "typedoc src/index.ts --readme none"
   },
@@ -34,8 +32,8 @@
     "@nrwl/workspace": "*"
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.5",
-    "@angular-devkit/schematics": "^14.2.5",
+    "@angular-devkit/core": "^14.2.7",
+    "@angular-devkit/schematics": "^14.2.7",
     "@nestjs/schematics": "^9.0.1",
     "@webundsoehne/deep-merge": "*",
     "@webundsoehne/nx-builders": "*",

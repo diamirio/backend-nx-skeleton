@@ -32,6 +32,10 @@ export class Nx extends Command<NxAddCommandCtx, InferFlags<typeof Nx>> {
   private helpers: { node: NodeHelper }
 
   async shouldRunBefore (): Promise<void> {
+    if (this.cs.isVerbose || this.cs.isDebug) {
+      setDebugMode()
+    }
+
     this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
   }
 

@@ -77,7 +77,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
         const { args, spawnOptions } = this.normalizeArguments('tsc-watch')
 
-        const instance = this.manager.addPersistent(execa(this.paths.tscWatch, args, spawnOptions))
+        const instance = this.manager.addPersistent(execa.node(this.paths.tscWatch, args, spawnOptions))
 
         void instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
           switch (msg) {

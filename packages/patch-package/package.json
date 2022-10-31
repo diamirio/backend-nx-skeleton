@@ -21,9 +21,8 @@
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
     "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "lint:staged": "lint-staged",
     "oclif": "oclif",
-    "oclif-dev": "node -r tsconfig-paths/register ../../node_modules/@oclif/dev-cli/bin/run",
+    "manifest": "oclif manifest",
     "docs:toc": "oclif readme"
   },
   "lint-staged": {
@@ -57,25 +56,25 @@
   },
   "dependencies": {
     "@cenk1cenk2/oclif-common": "^3.8.1",
-    "@oclif/core": "^1.16.4",
-    "@oclif/plugin-help": "^5.1.14",
+    "@oclif/core": "^1.20.2",
+    "@oclif/plugin-help": "^5.1.17",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "enquirer": "^2.3.6",
     "fs-extra": "^10.1.0",
     "globby": "^11.0.3",
     "listr2": "^4.0.5",
-    "patch-package": "^6.4.7",
+    "patch-package": "^6.5.0",
     "rewire": "^6.0.0",
     "tmp-promise": "^3.0.3",
     "update-notifier": "^6.0.2",
-    "wrap-ansi": "^7",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.2"
+    "wrap-ansi": "^7"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/rewire": "^2.5.28",
     "@types/wrap-ansi": "^3",
-    "oclif": "^3.2.13"
+    "oclif": "^3.2.24"
   },
   "engines": {
     "node": ">= 16"

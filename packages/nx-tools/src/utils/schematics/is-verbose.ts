@@ -6,3 +6,7 @@ import { ProcessToken } from '@constants/token.constants'
 export function isVerbose (): boolean {
   return process.argv.indexOf('--verbose') >= 0 || process.argv.indexOf('--debug') >= 0 || !!process.env?.[ProcessToken.DEBUG_MODE]
 }
+
+export function setDebugMode (): void {
+  process.env[ProcessToken.DEBUG_MODE] = '1'
+}

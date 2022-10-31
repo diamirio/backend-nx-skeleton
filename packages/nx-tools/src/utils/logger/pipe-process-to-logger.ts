@@ -43,7 +43,7 @@ export function pipeProcessToLogger (context: BuilderContext | ExecutorContext, 
   if (instance.stderr) {
     instance.stderr.pipe(
       through((chunk: string) => {
-        if (options.stderr) {
+        if (options.stderr && !['write EPIPE'].every((filter) => chunk.includes(filter))) {
           logger.warn(chunk)
         } else {
           logger.debug(chunk)
