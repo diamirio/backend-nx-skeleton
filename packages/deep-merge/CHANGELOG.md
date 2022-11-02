@@ -1,3 +1,10 @@
+## @webundsoehne/deep-merge [2.2.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.3...@webundsoehne/deep-merge@2.2.4) (2022-11-02)
+
+
+### Bug Fixes
+
+* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+
 ## @webundsoehne/deep-merge [2.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.2...@webundsoehne/deep-merge@2.2.3) (2022-10-05)
 
 
