@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [6.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.6...@webundsoehne/nx-builders@6.1.0) (2022-11-02)
+
+
+### Features
+
+* always force color for loggers ([563e778](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/563e7786424e19fda36edd6fa2a693a4f964a18d))
+
 ## @webundsoehne/nx-builders [6.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.5...@webundsoehne/nx-builders@6.0.6) (2022-11-02)
 
 
