@@ -1,3 +1,20 @@
+## @webundsoehne/nx-workspace [5.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.4...@webundsoehne/nx-workspace@5.0.5) (2022-11-02)
+
+
+### Bug Fixes
+
+* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.4
+* **@webundsoehne/nx-builders:** upgraded to 6.0.5
+* **@webundsoehne/nx-tools:** upgraded to 6.0.5
+
 ## @webundsoehne/nx-workspace [5.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.3...@webundsoehne/nx-workspace@5.0.4) (2022-10-25)
 
 
