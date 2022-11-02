@@ -40,6 +40,8 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
+
+    process.env.FORCE_COLOR = '1'
   }
 
   async run (): Promise<BuilderOutput> {

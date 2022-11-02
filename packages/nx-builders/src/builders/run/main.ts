@@ -28,6 +28,8 @@ class Executor extends BaseExecutor<RunBuilderOptions, NormalizedRunBuilderOptio
 
   init (): void {
     this.pathExtensions = getNodeBinaryPathExtensions()
+
+    process.env.FORCE_COLOR = '1'
   }
 
   async run (): Promise<BuilderOutput> {

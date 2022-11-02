@@ -21,6 +21,8 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
     this.paths = {
       tsNodeDev: 'ts-node-dev'
     }
+
+    process.env.FORCE_COLOR = '1'
   }
 
   async run (): Promise<BuilderOutput> {
