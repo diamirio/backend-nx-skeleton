@@ -28,8 +28,8 @@
 
 #### Parameters
 
-| Name      | Type     |
-| :-------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `options` | `Schema` |
 
 #### Defined in
