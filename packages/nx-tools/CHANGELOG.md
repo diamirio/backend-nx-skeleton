@@ -1,3 +1,10 @@
+## @webundsoehne/nx-tools [6.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.5...@webundsoehne/nx-tools@6.0.6) (2022-11-02)
+
+
+### Bug Fixes
+
+* checking for ewrite pipe errors everytime ([bcef315](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/bcef3157e9a2f5a431624ff5ad37613df87fb6ab))
+
 ## @webundsoehne/nx-tools [6.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.4...@webundsoehne/nx-tools@6.0.5) (2022-11-02)
 
 
