@@ -1,3 +1,10 @@
+## @webundsoehne/eslint-config [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@6.0.0...@webundsoehne/eslint-config@6.0.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+
 # @webundsoehne/eslint-config [6.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.2...@webundsoehne/eslint-config@6.0.0) (2022-10-05)
 
 
