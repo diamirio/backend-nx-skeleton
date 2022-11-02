@@ -9,6 +9,7 @@ import { ConfigurationFiles } from '@constants/file.constants'
 import { PACKAGE_MANAGER_FLAGS } from '@constants/package-manager.constants'
 import { WorkspaceCreateCommandCtx } from '@context/workspace/create.interface'
 import { NodeHelper } from '@helpers/node.helper'
+import { setDebugMode } from '@webundsoehne/nx-tools'
 import { PackageManagerUsableCommands } from '@webundsoehne/nx-tools/dist/utils/package-manager/package-manager.constants'
 import { setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
@@ -43,15 +44,19 @@ export class WorkspaceCommand extends Command<WorkspaceCreateCommandCtx, InferFl
         [this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.WORKSPACE))
       )
     )
-  }
 
-  async run (): Promise<void> {
+    if (this.cs.isVerbose || this.cs.isDebug) {
+      setDebugMode()
+    }
+
     if (this.flags.develop) {
       setDevelopmentMode()
 
       this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
     }
+  }
 
+  async run (): Promise<void> {
     this.tasks.add<WorkspaceCreateCommandCtx>([
       this.tasks.indent(
         [

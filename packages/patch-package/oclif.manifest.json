@@ -18,7 +18,7 @@
           "char": "p",
           "description": "Directory to take root as the application.",
           "multiple": false,
-          "default": "/home/cenk/development/work/nx-test/packages/patch-package"
+          "default": "/data/packages/patch-package"
         },
         "include": { "name": "include", "type": "option", "char": "i", "description": "Include given regex patterns.", "multiple": true, "default": [".*"] },
         "exclude": { "name": "exclude", "type": "option", "char": "e", "description": "Exclude given regex patterns.", "multiple": true, "default": ["package.json"] }
@@ -47,14 +47,7 @@
       "examples": ["Only apply certain patches with: patch-package apply graphql+15.5.0 class-validator+0.4.0", "Use extended glob patterns: patch-package patch \"graphql*\""],
       "flags": {
         "directory": { "name": "directory", "type": "option", "char": "d", "description": "Directory to apply the patches from.", "multiple": false },
-        "path": {
-          "name": "path",
-          "type": "option",
-          "char": "p",
-          "description": "Directory to apply patches to.",
-          "multiple": false,
-          "default": "/home/cenk/development/work/nx-test/packages/patch-package"
-        },
+        "path": { "name": "path", "type": "option", "char": "p", "description": "Directory to apply patches to.", "multiple": false, "default": "/data/packages/patch-package" },
         "exitOnError": {
           "name": "exitOnError",
           "type": "boolean",

@@ -12,7 +12,7 @@ import { NxAddCommandCtx } from '@context/nx/add.interface'
 import { NodeHelper } from '@helpers/node.helper'
 import type { NxSchematicsConfig } from '@interfaces/config/nx-schematics.config.interface'
 import type { LocalNodeModule } from '@webundsoehne/nx-tools'
-import { PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
+import { setDebugMode, PackageManagerDependencyTypes, PackageManagerUsableCommands } from '@webundsoehne/nx-tools'
 import { isDevelopmentMode, setDevelopmentMode } from '@webundsoehne/nx-tools/dist/utils/schematics/is-development-mode'
 
 export class Nx extends Command<NxAddCommandCtx, InferFlags<typeof Nx>> {
@@ -32,20 +32,20 @@ export class Nx extends Command<NxAddCommandCtx, InferFlags<typeof Nx>> {
   private helpers: { node: NodeHelper }
 
   async shouldRunBefore (): Promise<void> {
+    this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
+
     if (this.cs.isVerbose || this.cs.isDebug) {
       setDebugMode()
     }
 
-    this.helpers = { node: new NodeHelper(this, { manager: this.flags['package-manager'] }) }
-  }
-
-  async run (): Promise<void> {
     if (this.flags.develop) {
       setDevelopmentMode()
 
       this.logger.warn('Development flag is set. Underlying schematics will run in development mode wherever possible.')
     }
+  }
 
+  async run (): Promise<void> {
     // get config
     const config = await this.cs.extend<NxSchematicsConfig[]>([this.cs.defaults, this.cs.oclif.configDir].map((path) => join(path, ConfigurationFiles.SCHEMATICS)))
 

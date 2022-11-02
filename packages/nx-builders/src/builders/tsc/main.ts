@@ -13,6 +13,7 @@ import {
   BaseExecutor,
   checkPathsExists,
   generateBuilderAssets,
+  getNodeBinaryPath,
   getNodeBinaryPathExtensions,
   isVerbose,
   mergeDependencies,
@@ -36,7 +37,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
     this.paths = {
       typescript: 'tsc',
       tsconfigReplacePaths: 'tsconfig-replace-paths',
-      tscWatch: 'tsc-watch',
+      tscWatch: getNodeBinaryPath('tsc-watch'),
       tsconfig: join(this.context.root, this.options.tsConfig ?? 'tsconfig.build.json')
     }
   }
