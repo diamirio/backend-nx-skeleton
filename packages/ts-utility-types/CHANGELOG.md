@@ -1,3 +1,10 @@
+## @webundsoehne/ts-utility-types [2.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.2...@webundsoehne/ts-utility-types@2.2.3) (2022-11-02)
+
+
+### Bug Fixes
+
+* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+
 ## @webundsoehne/ts-utility-types [2.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.1...@webundsoehne/ts-utility-types@2.2.2) (2022-10-05)
 
 
