@@ -1,3 +1,20 @@
+## @webundsoehne/brownie [5.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.6...@webundsoehne/brownie@5.0.7) (2022-11-02)
+
+
+### Bug Fixes
+
+* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+* use node for running tsc-watch to hook into emitter ([1480372](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1480372ebb7dc3f3afcf8452d90d5df952046b41))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.4
+* **@webundsoehne/nx-tools:** upgraded to 6.0.5
+
 ## @webundsoehne/brownie [5.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.5...@webundsoehne/brownie@5.0.6) (2022-10-25)
 
 
