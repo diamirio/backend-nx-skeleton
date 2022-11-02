@@ -17,6 +17,7 @@ It is not great but winston was not working that well in a amazingly stateless a
 - [context](Logger.md#context)
 - [logLevel](Logger.md#loglevel)
 - [logger](Logger.md#logger)
+- [options](Logger.md#options)
 - [instance](Logger.md#instance)
 
 ### Methods
@@ -38,10 +39,10 @@ It is not great but winston was not working that well in a amazingly stateless a
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                        |
+| :--------- | :---------------------------------------------------------- |
 | `context?` | `SchematicContext` \| `BuilderContext` \| `ExecutorContext` |
-| `options?` | [`LoggerOptions`](../interfaces/LoggerOptions.md) |
+| `options?` | [`LoggerOptions`](../interfaces/LoggerOptions.md)           |
 
 #### Defined in
 
@@ -57,7 +58,7 @@ packages/nx-tools/src/utils/logger/logger.ts:25
 
 packages/nx-tools/src/utils/logger/logger.ts:23
 
-___
+---
 
 ### logLevel
 
@@ -67,7 +68,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:21
 
-___
+---
 
 ### logger
 
@@ -77,7 +78,17 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:22
 
-___
+---
+
+### options
+
+• `Private` `Optional` **options**: [`LoggerOptions`](../interfaces/LoggerOptions.md)
+
+#### Defined in
+
+packages/nx-tools/src/utils/logger/logger.ts:25
+
+---
 
 ### instance
 
@@ -95,10 +106,10 @@ packages/nx-tools/src/utils/logger/logger.ts:20
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `...args` | `any` |
+| Name      | Type                 |
+| :-------- | :------------------- |
+| `data`    | `string` \| `Buffer` |
+| `...args` | `any`                |
 
 #### Returns
 
@@ -108,7 +119,7 @@ packages/nx-tools/src/utils/logger/logger.ts:20
 
 packages/nx-tools/src/utils/logger/logger.ts:60
 
-___
+---
 
 ### error
 
@@ -116,10 +127,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `...args` | `any` |
+| Name      | Type                 |
+| :-------- | :------------------- |
+| `data`    | `string` \| `Buffer` |
+| `...args` | `any`                |
 
 #### Returns
 
@@ -129,7 +140,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:48
 
-___
+---
 
 ### fatal
 
@@ -137,10 +148,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `...args` | `any` |
+| Name      | Type                 |
+| :-------- | :------------------- |
+| `data`    | `string` \| `Buffer` |
+| `...args` | `any`                |
 
 #### Returns
 
@@ -150,7 +161,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:44
 
-___
+---
 
 ### info
 
@@ -158,10 +169,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `...args` | `any` |
+| Name      | Type                 |
+| :-------- | :------------------- |
+| `data`    | `string` \| `Buffer` |
+| `...args` | `any`                |
 
 #### Returns
 
@@ -171,7 +182,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:56
 
-___
+---
 
 ### initiateLogger
 
@@ -185,7 +196,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:64
 
-___
+---
 
 ### logColoring
 
@@ -193,8 +204,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                | Type                                            |
+| :------------------ | :---------------------------------------------- |
 | `__namedParameters` | [`LoggerFormat`](../interfaces/LoggerFormat.md) |
 
 #### Returns
@@ -205,7 +216,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:111
 
-___
+---
 
 ### parseMessage
 
@@ -213,11 +224,11 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type                                 |
+| :------ | :----------------------------------- |
 | `level` | [`LogLevels`](../enums/LogLevels.md) |
-| `data` | `string` \| `Buffer` |
-| `args` | `any`[] |
+| `data`  | `string` \| `Buffer`                 |
+| `args`  | `any`[]                              |
 
 #### Returns
 
@@ -227,7 +238,7 @@ ___
 
 packages/nx-tools/src/utils/logger/logger.ts:107
 
-___
+---
 
 ### warn
 
@@ -235,10 +246,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `string` \| `Buffer` |
-| `...args` | `any` |
+| Name      | Type                 |
+| :-------- | :------------------- |
+| `data`    | `string` \| `Buffer` |
+| `...args` | `any`                |
 
 #### Returns
 

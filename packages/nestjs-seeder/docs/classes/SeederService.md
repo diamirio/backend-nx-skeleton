@@ -13,6 +13,7 @@ Seeder service to run all the seeds that has been passed to it.
 ### Properties
 
 - [logger](SeederService.md#logger)
+- [moduleRef](SeederService.md#moduleref)
 - [seeds](SeederService.md#seeds)
 
 ### Methods
@@ -27,9 +28,9 @@ Seeder service to run all the seeds that has been passed to it.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `seeds` | `Seeds` |
+| Name        | Type        |
+| :---------- | :---------- |
+| `seeds`     | `Seeds`     |
 | `moduleRef` | `ModuleRef` |
 
 #### Defined in
@@ -46,7 +47,17 @@ module/seeder.service.ts:15
 
 module/seeder.service.ts:13
 
-___
+---
+
+### moduleRef
+
+• `Private` **moduleRef**: `ModuleRef`
+
+#### Defined in
+
+module/seeder.service.ts:15
+
+---
 
 ### seeds
 

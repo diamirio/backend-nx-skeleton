@@ -18,9 +18,10 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/patch-package](#webundsoehnepatch-package)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/patch-package](#webundsoehnepatch-package)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -28,12 +29,13 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 # Commands
 
 <!-- commands -->
-* [`ws-path-package apply`](#ws-path-package-apply)
-* [`ws-path-package create`](#ws-path-package-create)
-* [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
-* [`ws-path-package list`](#ws-path-package-list)
-* [`ws-path-package ls`](#ws-path-package-ls)
-* [`ws-path-package patch`](#ws-path-package-patch)
+
+- [`ws-path-package apply`](#ws-path-package-apply)
+- [`ws-path-package create`](#ws-path-package-create)
+- [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
+- [`ws-path-package list`](#ws-path-package-list)
+- [`ws-path-package ls`](#ws-path-package-ls)
+- [`ws-path-package patch`](#ws-path-package-patch)
 
 ## `ws-path-package apply`
 
@@ -41,26 +43,13 @@ Patches or reserves given patches in a directory.
 
 ```
 USAGE
-  $ ws-path-package apply [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d <value>] [-p <value>] [-e] [-r]
+  $ ws-path-package apply [-d <value>] [-p <value>] [-e] [-r]
 
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
+  -p, --path=<value>       [default: /data/packages/patch-package] Directory to apply patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Patches or reserves given patches in a directory.
@@ -80,27 +69,13 @@ Creates a new patch from scratch, just point the applications you want as packag
 
 ```
 USAGE
-  $ ws-path-package create [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d <value>] [-p <value>] [-i <value>] [-e <value>]
+  $ ws-path-package create [-d <value>] [-p <value>] [-i <value>] [-e <value>]
 
 FLAGS
   -d, --directory=<value>   [default: patches] Directory for outputting the patch files.
   -e, --exclude=<value>...  [default: package.json] Exclude given regex patterns.
   -i, --include=<value>...  [default: .*] Include given regex patterns.
-  -p, --path=<value>        [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to take root as the
-                            application.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
+  -p, --path=<value>        [default: /data/packages/patch-package] Directory to take root as the application.
 
 DESCRIPTION
   Creates a new patch from scratch, just point the applications you want as package name.
@@ -129,7 +104,7 @@ DESCRIPTION
   Display help for ws-path-package.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.14/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.17/src/commands/help.ts)_
 
 ## `ws-path-package list`
 
@@ -169,26 +144,13 @@ Patches or reserves given patches in a directory.
 
 ```
 USAGE
-  $ ws-path-package patch [--log-level
-    SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug|trace]
-    [--ci] [--json] [-d <value>] [-p <value>] [-e] [-r]
+  $ ws-path-package patch [-d <value>] [-p <value>] [-e] [-r]
 
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
+  -p, --path=<value>       [default: /data/packages/patch-package] Directory to apply patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
-
-CLI FLAGS
-  --ci
-      Instruct whether this is running the CI/CD configuration.
-
-  --json
-      Put the CLI to respond in JSON.
-
-  --log-level=(SILENT|DIRECT|FATAL|ERROR|WARN|INFO|VERBOSE|DEBUG|TRACE|silent|direct|fatal|error|warn|info|verbose|debug
-  |trace)
-      [default: INFO] Set the log level of the application.
 
 DESCRIPTION
   Patches or reserves given patches in a directory.
@@ -203,4 +165,5 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
+
 <!-- commandsstop -->

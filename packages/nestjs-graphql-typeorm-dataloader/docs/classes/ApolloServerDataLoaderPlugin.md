@@ -12,6 +12,10 @@
 
 - [constructor](ApolloServerDataLoaderPlugin.md#constructor)
 
+### Properties
+
+- [options](ApolloServerDataLoaderPlugin.md#options)
+
 ### Methods
 
 - [requestDidStart](ApolloServerDataLoaderPlugin.md#requestdidstart)
@@ -24,9 +28,19 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                              |
+| :--------- | :-------------------------------- |
 | `options?` | `ApolloServerLoaderPluginOptions` |
+
+#### Defined in
+
+packages/nestjs-graphql-typeorm-dataloader/src/plugins/data-loader.plugin.ts:18
+
+## Properties
+
+### options
+
+• `Private` `Optional` **options**: `ApolloServerLoaderPluginOptions`
 
 #### Defined in
 

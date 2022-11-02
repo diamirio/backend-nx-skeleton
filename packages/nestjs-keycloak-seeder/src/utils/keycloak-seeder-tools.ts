@@ -152,7 +152,7 @@ export class KeycloakAdminSeederTools {
     if (options?.flushUnknown) {
       const current = await client[context].find()
 
-      const unknown = (current as any[]).filter((o) => !(input as any).map((m: ArrayElement<K>) => m[options.identifier]).includes(o[options.identifier]))
+      const unknown = (current as any[]).filter((o) => !(input as any).map((m: ArrayElement<K>) => m[options.identifier as string]).includes(o[options.identifier as string]))
 
       if (unknown.length > 0) {
         await this.flushKeycloakEntities(context, unknown as K, { realm: options.realm })
@@ -166,17 +166,19 @@ export class KeycloakAdminSeederTools {
         try {
           await client[context].create(data)
 
-          created.push(data[options.identifier])
+          created.push(data[options.identifier as string])
         } catch (err) {
           if (options.fallbackToUpdate && ['groups', 'clients', 'realms'].includes(context)) {
             this.logger.warn(
-              `Creating new ${context} failed, falling back to updating existing ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
+              `Creating new ${context} failed, falling back to updating existing ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${
+                data[options.identifier as string]
+              }`
             )
 
-            await this.updateKeycloakEntities(context as any, [data] as any, { identifier: options.identifier, realm: options?.realm } as any)
+            await this.updateKeycloakEntities(context as any, [data] as any, { identifier: options.identifier as string, realm: options?.realm } as any)
           } else {
             this.parseSeedError(err, {
-              context: `Error while creating Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier]}`
+              context: `Error while creating Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${data[options.identifier as string]}`
             })
           }
         }
@@ -208,7 +210,7 @@ export class KeycloakAdminSeederTools {
     }
 
     const client = await this.getClient(options?.realm)
-    const keycloakData = await this.getAll(context, { groupBy: options.identifier, realm: options?.realm })
+    const keycloakData = await this.getAll(context, { groupBy: options.identifier as any, realm: options?.realm })
 
     const updated = []
 
@@ -219,9 +221,9 @@ export class KeycloakAdminSeederTools {
     }[context]
 
     await Promise.all(
-      (input as any).map(async ({ [options.identifier]: name, ...data }) => {
+      (input as any).map(async ({ [options.identifier as string]: name, ...data }) => {
         try {
-          const update = { [options.identifier]: name, ...data }
+          const update = { [options.identifier as string]: name, ...data }
 
           await client[context].update(
             {
@@ -266,7 +268,7 @@ export class KeycloakAdminSeederTools {
     await Promise.all(
       (input as any).map(async (m: ArrayElement<K>) => {
         try {
-          const name = m[options.identifier] as unknown as string
+          const name = m[options.identifier as string] as unknown as string
 
           if (shouldBeIgnored[context] && shouldBeIgnored[context].includes(name as unknown as string)) {
             ignored.push(name)
@@ -282,7 +284,7 @@ export class KeycloakAdminSeederTools {
         } catch (err) {
           this.logger.error(
             this.parseSeedError(err, {
-              context: `Error while flushing Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${m[options.identifier]}`,
+              context: `Error while flushing Keycloak ${context} in ${options?.realm ?? this.keycloak.client.realmName}: ${m[options.identifier as string]}`,
               return: true
             })
           )

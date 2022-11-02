@@ -28,6 +28,8 @@
 - [query](Request.md#query)
 - [raw](Request.md#raw)
 - [req](Request.md#req)
+- [routeConfig](Request.md#routeconfig)
+- [routeSchema](Request.md#routeschema)
 - [routerMethod](Request.md#routermethod)
 - [routerPath](Request.md#routerpath)
 - [server](Request.md#server)
@@ -56,7 +58,7 @@ FastifyRequest.body
 
 node_modules/fastify/types/request.d.ts:49
 
-___
+---
 
 ### connection
 
@@ -68,9 +70,9 @@ FastifyRequest.connection
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:78
+node_modules/fastify/types/request.d.ts:80
 
-___
+---
 
 ### context
 
@@ -84,7 +86,7 @@ FastifyRequest.context
 
 node_modules/fastify/types/request.d.ts:50
 
-___
+---
 
 ### headers
 
@@ -98,7 +100,7 @@ FastifyRequest.headers
 
 node_modules/fastify/types/request.d.ts:46
 
-___
+---
 
 ### hostname
 
@@ -110,9 +112,9 @@ FastifyRequest.hostname
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:61
+node_modules/fastify/types/request.d.ts:63
 
-___
+---
 
 ### id
 
@@ -126,7 +128,7 @@ FastifyRequest.id
 
 node_modules/fastify/types/request.d.ts:42
 
-___
+---
 
 ### ip
 
@@ -138,9 +140,9 @@ FastifyRequest.ip
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:59
+node_modules/fastify/types/request.d.ts:61
 
-___
+---
 
 ### ips
 
@@ -152,9 +154,9 @@ FastifyRequest.ips
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:60
+node_modules/fastify/types/request.d.ts:62
 
-___
+---
 
 ### is404
 
@@ -166,9 +168,9 @@ FastifyRequest.is404
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:67
+node_modules/fastify/types/request.d.ts:69
 
-___
+---
 
 ### log
 
@@ -182,7 +184,7 @@ FastifyRequest.log
 
 node_modules/fastify/types/request.d.ts:47
 
-___
+---
 
 ### method
 
@@ -194,9 +196,9 @@ FastifyRequest.method
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:64
+node_modules/fastify/types/request.d.ts:66
 
-___
+---
 
 ### params
 
@@ -210,11 +212,11 @@ FastifyRequest.params
 
 node_modules/fastify/types/request.d.ts:43
 
-___
+---
 
 ### protocol
 
-• `Readonly` **protocol**: ``"http"`` \| ``"https"``
+• `Readonly` **protocol**: `"http"` \| `"https"`
 
 #### Inherited from
 
@@ -222,9 +224,9 @@ FastifyRequest.protocol
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:63
+node_modules/fastify/types/request.d.ts:65
 
-___
+---
 
 ### query
 
@@ -238,7 +240,7 @@ FastifyRequest.query
 
 node_modules/fastify/types/request.d.ts:45
 
-___
+---
 
 ### raw
 
@@ -252,7 +254,7 @@ FastifyRequest.raw
 
 node_modules/fastify/types/request.d.ts:44
 
-___
+---
 
 ### req
 
@@ -268,9 +270,37 @@ FastifyRequest.req
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:58
+node_modules/fastify/types/request.d.ts:60
 
-___
+---
+
+### routeConfig
+
+• **routeConfig**: `FastifyContextConfig`
+
+#### Inherited from
+
+FastifyRequest.routeConfig
+
+#### Defined in
+
+node_modules/fastify/types/request.d.ts:51
+
+---
+
+### routeSchema
+
+• **routeSchema**: `FastifySchema`
+
+#### Inherited from
+
+FastifyRequest.routeSchema
+
+#### Defined in
+
+node_modules/fastify/types/request.d.ts:52
+
+---
 
 ### routerMethod
 
@@ -282,9 +312,9 @@ FastifyRequest.routerMethod
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:66
+node_modules/fastify/types/request.d.ts:68
 
-___
+---
 
 ### routerPath
 
@@ -296,9 +326,9 @@ FastifyRequest.routerPath
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:65
+node_modules/fastify/types/request.d.ts:67
 
-___
+---
 
 ### server
 
@@ -312,7 +342,7 @@ FastifyRequest.server
 
 node_modules/fastify/types/request.d.ts:48
 
-___
+---
 
 ### socket
 
@@ -324,19 +354,19 @@ FastifyRequest.socket
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:68
+node_modules/fastify/types/request.d.ts:70
 
-___
+---
 
 ### state
 
-• **state**: `Record`<`string`, `any`\> & { `setCacheLifetime?`: (`lifetime`: `number`, `useExpiresHeader`: `boolean`) => `void` ; `tokenPayload?`: `Record`<`string`, `any`\>  }
+• **state**: `Record`<`string`, `any`\> & { `setCacheLifetime?`: (`lifetime`: `number`, `useExpiresHeader`: `boolean`) => `void` ; `tokenPayload?`: `Record`<`string`, `any`\> }
 
 #### Defined in
 
 packages/nestjs-util/src/interface/request.interface.ts:4
 
-___
+---
 
 ### url
 
@@ -348,13 +378,13 @@ FastifyRequest.url
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:62
+node_modules/fastify/types/request.d.ts:64
 
-___
+---
 
 ### validationError
 
-• `Optional` **validationError**: `Error` & { `validation`: `any` ; `validationContext`: `string`  }
+• `Optional` **validationError**: `Error` & { `validation`: `any` ; `validationContext`: `string` }
 
 in order for this to be used the user should ensure they have set the attachValidation option.
 
@@ -364,7 +394,7 @@ FastifyRequest.validationError
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:53
+node_modules/fastify/types/request.d.ts:55
 
 ## Methods
 
@@ -374,9 +404,9 @@ node_modules/fastify/types/request.d.ts:53
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `schema` | `Object` |
+| Name        | Type              |
+| :---------- | :---------------- |
+| `schema`    | `Object`          |
 | `httpPart?` | `HTTPRequestPart` |
 
 #### Returns
@@ -389,9 +419,9 @@ FastifyRequest.compileValidationSchema
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:72
+node_modules/fastify/types/request.d.ts:74
 
-___
+---
 
 ### getValidationFunction
 
@@ -399,8 +429,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type              |
+| :--------- | :---------------- |
 | `httpPart` | `HTTPRequestPart` |
 
 #### Returns
@@ -413,14 +443,14 @@ FastifyRequest.getValidationFunction
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:70
+node_modules/fastify/types/request.d.ts:72
 
 ▸ **getValidationFunction**(`schema`): `ValidationFunction`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type     |
+| :------- | :------- |
 | `schema` | `Object` |
 
 #### Returns
@@ -433,9 +463,9 @@ FastifyRequest.getValidationFunction
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:71
+node_modules/fastify/types/request.d.ts:73
 
-___
+---
 
 ### validateInput
 
@@ -443,10 +473,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `input` | `any` |
-| `schema` | `Object` |
+| Name        | Type              |
+| :---------- | :---------------- |
+| `input`     | `any`             |
+| `schema`    | `Object`          |
 | `httpPart?` | `HTTPRequestPart` |
 
 #### Returns
@@ -459,15 +489,15 @@ FastifyRequest.validateInput
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:73
+node_modules/fastify/types/request.d.ts:75
 
 ▸ **validateInput**(`input`, `httpPart?`): `boolean`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `input` | `any` |
+| Name        | Type              |
+| :---------- | :---------------- |
+| `input`     | `any`             |
 | `httpPart?` | `HTTPRequestPart` |
 
 #### Returns
@@ -480,4 +510,4 @@ FastifyRequest.validateInput
 
 #### Defined in
 
-node_modules/fastify/types/request.d.ts:74
+node_modules/fastify/types/request.d.ts:76
