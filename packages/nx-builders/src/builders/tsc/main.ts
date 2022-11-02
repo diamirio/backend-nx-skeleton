@@ -331,7 +331,7 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
       const mainFile = basename(this.options.main, '.ts')
       const globalPackageJson = readPackageJson()
 
-      // made this optional since it was not alway strue
+      // made this optional since it was not always true
       if (!packageJson?.main) {
         packageJson.main = normalize(`./${this.options.relativeMainFileOutput}/${mainFile}.js`)
 
@@ -356,6 +356,10 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
 
       if (packageJson?.implicitDependencies && packageJson.implicitDependencies.length > 0) {
         this.logger.info('Processing "package.json" implicit dependencies...')
+
+        if (!Array.isArray(packageJson.implicitDependencies)) {
+          throw new Error('Implicit dependencies should be an array of strings.')
+        }
 
         packageJson.implicitDependencies.forEach((name: string) => {
           if (!globalPackageJson.dependencies[name]) {
