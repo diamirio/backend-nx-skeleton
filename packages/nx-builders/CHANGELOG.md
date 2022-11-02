@@ -1,3 +1,10 @@
+## @webundsoehne/nx-builders [6.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.0...@webundsoehne/nx-builders@6.1.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* check implicit dependencies while building ([a44d4ea](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a44d4ea8c580ae7e4d65d82aed516074b0a739d0))
+
 # @webundsoehne/nx-builders [6.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.0.6...@webundsoehne/nx-builders@6.1.0) (2022-11-02)
 
 
