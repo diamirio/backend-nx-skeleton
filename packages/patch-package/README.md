@@ -18,10 +18,9 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-
-- [@webundsoehne/patch-package](#webundsoehnepatch-package)
-- [Description](#description)
-- [Commands](#commands)
+* [@webundsoehne/patch-package](#webundsoehnepatch-package)
+* [Description](#description)
+* [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -29,13 +28,12 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 # Commands
 
 <!-- commands -->
-
-- [`ws-path-package apply`](#ws-path-package-apply)
-- [`ws-path-package create`](#ws-path-package-create)
-- [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
-- [`ws-path-package list`](#ws-path-package-list)
-- [`ws-path-package ls`](#ws-path-package-ls)
-- [`ws-path-package patch`](#ws-path-package-patch)
+* [`ws-path-package apply`](#ws-path-package-apply)
+* [`ws-path-package create`](#ws-path-package-create)
+* [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
+* [`ws-path-package list`](#ws-path-package-list)
+* [`ws-path-package ls`](#ws-path-package-ls)
+* [`ws-path-package patch`](#ws-path-package-patch)
 
 ## `ws-path-package apply`
 
@@ -165,5 +163,4 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
-
 <!-- commandsstop -->
