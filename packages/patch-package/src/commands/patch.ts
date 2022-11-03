@@ -51,7 +51,7 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
   any
   > = {} as any
 
-  async construct (): Promise<void> {
+  async shouldRunBefore (): Promise<void> {
     // since the underlying application is not exposing any of these methods, run time rewire is required
     this.logger.debug('Rewiring underlying module...')
 
@@ -132,13 +132,15 @@ export class PatchCommand extends Command<never, InferFlags<typeof PatchCommand>
 
     await Promise.all(
       matched.map(async (patch) => {
-        await fs.copyFile(patch, join(this.temp.path, `${basename(patch)}`))
+        await fs.copyFile(patch, join(this.temp.path, basename(patch)))
       })
     )
 
     // set patch directory to temporary directory
     this.flags.directory = this.temp.path
+  }
 
+  async shouldRunAfter (): Promise<void> {
     // apply patches
     let shouldTerminate = false
 
