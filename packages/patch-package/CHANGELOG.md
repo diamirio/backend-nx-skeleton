@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [4.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.3...@webundsoehne/patch-package@4.0.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* update package patching ([8e3ddae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/8e3ddae91de0afe62a49bb707fcc588e170c4a6c))
+
 ## @webundsoehne/patch-package [4.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.2...@webundsoehne/patch-package@4.0.3) (2022-11-02)
 
 
