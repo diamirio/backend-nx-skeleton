@@ -144,7 +144,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
-| `K` | extends `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
+| `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
@@ -156,7 +156,7 @@ ___
 | `options.fallbackToUpdate?` | `boolean` |
 | `options.flush?` | `boolean` |
 | `options.flushUnknown?` | `boolean` |
-| `options.identifier?` | `string` \| `number` \| `symbol` |
+| `options.identifier?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
 | `options.realm?` | `string` |
 
 #### Returns
@@ -178,7 +178,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends ``"roles"`` \| ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
-| `K` | extends `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
+| `K` | extends `default`[] \| `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
@@ -187,7 +187,7 @@ ___
 | `context` | `T` |
 | `input` | `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
 | `options?` | `Object` |
-| `options.identifier?` | `string` \| `number` \| `symbol` |
+| `options.identifier?` | keyof `ArrayElement`<`K`\> |
 | `options.realm?` | `string` |
 
 #### Returns
@@ -217,7 +217,7 @@ ___
 | :------ | :------ |
 | `context` | `T` |
 | `options?` | `Object` |
-| `options.groupBy?` | `string` \| `number` \| `symbol` |
+| `options.groupBy?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
 | `options.realm?` | `string` |
 
 #### Returns
@@ -260,7 +260,7 @@ Internal function to get the id of named Keycloak entitiy from the given parsed 
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends `Await`<`Promise`<`Record`<`PropertyKey`, `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\>\>\> |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
@@ -333,7 +333,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | `T` |
-| `K` | extends `Await`<`Promise`<`Record`<`PropertyKey`, `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\>\>\> |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
@@ -361,7 +361,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `string`[] |
-| `K` | extends `Await`<`Promise`<`Record`<`PropertyKey`, `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\>\>\> |
+| `K` | extends `Record`<`PropertyKey`, `default`[] \| `default`[] \| `default`[] \| `default`[]\> |
 
 #### Parameters
 
@@ -389,7 +389,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends ``"groups"`` \| ``"clients"`` \| ``"realms"`` |
-| `K` | extends `Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\> |
+| `K` | extends `default`[] \| `default`[] \| `default`[] |
 
 #### Parameters
 
@@ -398,7 +398,7 @@ ___
 | `context` | `T` |
 | `input` | `K` |
 | `options?` | `Object` |
-| `options.identifier?` | `string` \| `number` \| `symbol` |
+| `options.identifier?` | keyof `ArrayElement`<`Await`<`ReturnType`<`KeycloakAdminClient`[`T`][``"find"``]\>\>\> |
 | `options.realm?` | `string` |
 | `options.silent?` | `boolean` |
 
