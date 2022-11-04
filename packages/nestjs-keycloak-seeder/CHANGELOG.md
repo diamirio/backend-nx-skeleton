@@ -1,3 +1,20 @@
+## @webundsoehne/nestjs-keycloak-seeder [3.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.3...@webundsoehne/nestjs-keycloak-seeder@3.0.4) (2022-11-04)
+
+
+### Bug Fixes
+
+* issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.5
+* **@webundsoehne/ts-utility-types:** upgraded to 2.2.4
+* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.4
+
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.2...@webundsoehne/nestjs-keycloak-seeder@3.0.3) (2022-11-02)
 
 
