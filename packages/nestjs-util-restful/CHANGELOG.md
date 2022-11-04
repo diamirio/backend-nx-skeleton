@@ -1,3 +1,18 @@
+## @webundsoehne/nestjs-util-restful [2.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@2.0.3...@webundsoehne/nestjs-util-restful@2.0.4) (2022-11-04)
+
+
+### Bug Fixes
+
+* issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.4
+
 ## @webundsoehne/nestjs-util-restful [2.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@2.0.2...@webundsoehne/nestjs-util-restful@2.0.3) (2022-11-02)
 
 
