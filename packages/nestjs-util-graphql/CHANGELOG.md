@@ -1,3 +1,18 @@
+## @webundsoehne/nestjs-util-graphql [2.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@2.0.4...@webundsoehne/nestjs-util-graphql@2.0.5) (2022-11-14)
+
+
+### Bug Fixes
+
+* remove upper limits on peer deps ([116df4e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/116df4e4c3ad3e2a6745d908d1d73e7baaa2c7b5))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.5
+
 ## @webundsoehne/nestjs-util-graphql [2.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@2.0.3...@webundsoehne/nestjs-util-graphql@2.0.4) (2022-11-04)
 
 
