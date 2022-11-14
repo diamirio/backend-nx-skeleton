@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.2...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.3) (2022-11-14)
+
+
+### Bug Fixes
+
+* remove upper limits on peer deps ([116df4e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/116df4e4c3ad3e2a6745d908d1d73e7baaa2c7b5))
+
 ## @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.1...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.2) (2022-11-04)
 
 
