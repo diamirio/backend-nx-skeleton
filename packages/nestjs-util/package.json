@@ -43,13 +43,13 @@
     "winston-transport": "^4.5.0"
   },
   "peerDependencies": {
-    "@nestjs/common": ">= 8 < 10",
-    "@nestjs/core": ">= 8 < 10",
-    "@nestjs/microservices": ">= 8 < 10",
-    "@sentry/node": ">= 7 < 8",
+    "@nestjs/common": ">= 8",
+    "@nestjs/core": ">= 8",
+    "@nestjs/microservices": ">= 8",
+    "@sentry/node": ">= 7",
     "class-transformer": ">= 0.4.0",
     "class-validator": ">= 0.13.0",
-    "express": ">= 4 < 5",
+    "express": ">= 4",
     "fastify": ">= 3"
   },
   "peerDependenciesMeta": {

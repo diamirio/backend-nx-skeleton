@@ -32,15 +32,15 @@
     ]
   },
   "peerDependencies": {
-    "@nestjs/common": ">= 8 < 10",
-    "@nestjs/core": ">= 8 < 10",
-    "@nestjs/swagger": ">= 5 < 6",
+    "@nestjs/common": ">= 8",
+    "@nestjs/core": ">= 8",
+    "@nestjs/swagger": ">= 5",
     "@webundsoehne/nestjs-util": ">= 5",
-    "express": ">= 4 < 5",
+    "express": ">= 4",
     "fastify": ">= 3",
-    "fastify-swagger": ">= 4 < 5",
+    "fastify-swagger": ">= 4",
     "rxjs": ">= 7 < 8",
-    "swagger-ui-express": ">= 4 < 5"
+    "swagger-ui-express": ">= 4"
   },
   "peerDependenciesMeta": {
     "fastify": {

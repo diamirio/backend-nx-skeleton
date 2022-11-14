@@ -33,11 +33,11 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "@nestjs/common": ">= 8 < 10",
-    "@nestjs/core": ">= 8 < 10",
-    "@nestjs/graphql": ">= 8 < 10",
+    "@nestjs/common": ">= 8",
+    "@nestjs/core": ">= 8",
+    "@nestjs/graphql": ">= 8",
     "@webundsoehne/nestjs-util": ">= 5",
-    "graphql": ">= 15 < 16",
+    "graphql": ">= 15",
     "rxjs": ">= 7 < 8"
   },
   "devDependencies": {
