@@ -1,3 +1,18 @@
+## @webundsoehne/nx-builders [6.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.2...@webundsoehne/nx-builders@6.1.3) (2022-11-15)
+
+
+### Bug Fixes
+
+* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-tools:** upgraded to 6.0.8
+
 ## @webundsoehne/nx-builders [6.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.1...@webundsoehne/nx-builders@6.1.2) (2022-11-04)
 
 
