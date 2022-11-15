@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [4.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.4...@webundsoehne/patch-package@4.0.5) (2022-11-15)
+
+
+### Bug Fixes
+
+* **brownie:** issue with generating docker templates and oclif ([d083232](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d083232068ee5fd5be27986ab0a8b2a1e6fab9fe))
+
 ## @webundsoehne/patch-package [4.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.3...@webundsoehne/patch-package@4.0.4) (2022-11-03)
 
 
