@@ -1,3 +1,10 @@
+## @webundsoehne/patch-package [4.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.5...@webundsoehne/patch-package@4.0.6) (2022-11-15)
+
+
+### Bug Fixes
+
+* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
+
 ## @webundsoehne/patch-package [4.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.4...@webundsoehne/patch-package@4.0.5) (2022-11-15)
 
 
