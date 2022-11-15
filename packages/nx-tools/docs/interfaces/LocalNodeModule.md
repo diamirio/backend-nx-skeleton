@@ -24,7 +24,7 @@
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:51
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:52
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:48
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:49
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:54
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:55
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:49
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:50
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:55
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:56
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:53
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:54
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:47
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:48
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:52
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:53
 
 ___
 
@@ -104,4 +104,4 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:50
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:51

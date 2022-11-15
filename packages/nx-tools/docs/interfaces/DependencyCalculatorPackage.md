@@ -13,18 +13,18 @@
 
 ### deps
 
-• `Optional` **deps**: [`Dependency`](../README.md#dependency)
+• `Optional` **deps**: [`DependencyCalculatorDependency`](../README.md#dependencycalculatordependency)
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:14
+packages/nx-tools/src/interfaces/versions.interface.ts:16
 
 ___
 
 ### devDeps
 
-• `Optional` **devDeps**: [`Dependency`](../README.md#dependency)
+• `Optional` **devDeps**: [`DependencyCalculatorDependency`](../README.md#dependencycalculatordependency)
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:15
+packages/nx-tools/src/interfaces/versions.interface.ts:17

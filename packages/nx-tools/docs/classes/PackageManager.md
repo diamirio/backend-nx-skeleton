@@ -165,7 +165,7 @@ data is PackageManagerPackageAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:387
+packages/nx-tools/src/utils/package-manager/package-manager.ts:395
 
 ___
 
@@ -185,7 +185,7 @@ data is PackageManagerWithCommandAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:395
+packages/nx-tools/src/utils/package-manager/package-manager.ts:403
 
 ___
 
@@ -205,7 +205,7 @@ data is PackageManagerWithoutCommandAction
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.ts:403
+packages/nx-tools/src/utils/package-manager/package-manager.ts:411
 
 ___
 

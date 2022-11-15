@@ -7,6 +7,7 @@
 ### Properties
 
 - [latest](CommonNodeDependency.md#latest)
+- [linkable](CommonNodeDependency.md#linkable)
 - [pkg](CommonNodeDependency.md#pkg)
 - [registry](CommonNodeDependency.md#registry)
 - [version](CommonNodeDependency.md#version)
@@ -20,6 +21,16 @@
 #### Defined in
 
 packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:43
+
+___
+
+### linkable
+
+• `Optional` **linkable**: `boolean`
+
+#### Defined in
+
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:44
 
 ___
 

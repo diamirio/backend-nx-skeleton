@@ -20,7 +20,7 @@
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:61
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:62
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:63
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:64
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:62
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:63
 
 ___
 
@@ -50,14 +50,14 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:59
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:60
 
 ___
 
 ### onlyLinked
 
-• `Optional` **onlyLinked**: `any`
+• `Optional` **onlyLinked**: `boolean`
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:60
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:61

@@ -91,7 +91,7 @@
 - [BaseIntegration](README.md#baseintegration)
 - [BaseNxJsonIntegration](README.md#basenxjsonintegration)
 - [ConvertToPromptType](README.md#converttoprompttype)
-- [Dependency](README.md#dependency)
+- [DependencyCalculatorDependency](README.md#dependencycalculatordependency)
 - [DependencyCalculatorOptions](README.md#dependencycalculatoroptions)
 - [EnvironmentVariables](README.md#environmentvariables)
 - [ExtensionsMap](README.md#extensionsmap)
@@ -307,13 +307,13 @@ packages/nx-tools/src/utils/schematics/parse-arguments.interface.ts:4
 
 ___
 
-### Dependency
+### DependencyCalculatorDependency
 
-Ƭ **Dependency**: `Record`<`string`, `string` \| { `implicit?`: `boolean` ; `version`: `string`  }\>
+Ƭ **DependencyCalculatorDependency**: `Record`<`string`, `string` \| `Omit`<[`CommonNodeDependency`](interfaces/CommonNodeDependency.md), ``"pkg"``\> & { `implicit?`: `boolean`  }\>
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:1
+packages/nx-tools/src/interfaces/versions.interface.ts:3
 
 ___
 
@@ -370,7 +370,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:2
+packages/nx-tools/src/interfaces/versions.interface.ts:4
 
 ___
 
@@ -412,7 +412,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:66
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:67
 
 ___
 
@@ -422,7 +422,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:67
+packages/nx-tools/src/utils/package-manager/package-manager.interface.ts:68
 
 ___
 
@@ -615,7 +615,7 @@ For defining a version constant object that is used to install dependencies.
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:21
+packages/nx-tools/src/interfaces/versions.interface.ts:23
 
 ___
 
@@ -1133,7 +1133,7 @@ NX have a problem with its internal overwriting data mechanism so it is generate
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:23
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:24
 
 ___
 
@@ -1199,7 +1199,7 @@ Reorders the package dependencies to move out the implicit ones in to a separate
 
 #### Defined in
 
-packages/nx-tools/src/utils/schematics/dependency-calculator.ts:53
+packages/nx-tools/src/utils/schematics/dependency-calculator.ts:71
 
 ___
 
@@ -1267,7 +1267,7 @@ Creates a file backup in tree.
 | Name | Type |
 | :------ | :------ |
 | `host` | `Tree` |
-| `file` | `FileEntry` |
+| `file` | `FileEntry` \| `LazyFileEntry` |
 | `log` | [`Logger`](classes/Logger.md) |
 
 #### Returns
@@ -1276,7 +1276,7 @@ Creates a file backup in tree.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:306
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:307
 
 ___
 
@@ -1382,7 +1382,7 @@ Double file merge only adds changes on the new file to the current file. No dele
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:208
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:209
 
 ___
 
@@ -1884,7 +1884,7 @@ Merges files the common part.
 | Name | Type |
 | :------ | :------ |
 | `host` | `Tree` |
-| `file` | `FileEntry` |
+| `file` | `FileEntry` \| `LazyFileEntry` |
 | `mergedFiles` | `string` \| `boolean` |
 | `log` | [`Logger`](classes/Logger.md) |
 
@@ -1894,7 +1894,7 @@ Merges files the common part.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:284
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:285
 
 ___
 
@@ -2787,7 +2787,7 @@ Selectively applies patches where you can define to only add or remove items.
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:236
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:237
 
 ___
 
@@ -2896,7 +2896,7 @@ Triple file merge will compare old with new file and apply the changes to the cu
 
 #### Defined in
 
-packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:180
+packages/nx-tools/src/rules/overwrite-with-diff.rule.ts:181
 
 ___
 
@@ -3087,4 +3087,4 @@ Use linked versions of the given packages if they are available. This is used fo
 
 #### Defined in
 
-packages/nx-tools/src/utils/schematics/dependency-calculator.ts:84
+packages/nx-tools/src/utils/schematics/dependency-calculator.ts:102

@@ -20,7 +20,7 @@ Versions for npm packages.
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:8
+packages/nx-tools/src/interfaces/versions.interface.ts:10
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:9
+packages/nx-tools/src/interfaces/versions.interface.ts:11
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-packages/nx-tools/src/interfaces/versions.interface.ts:10
+packages/nx-tools/src/interfaces/versions.interface.ts:12
