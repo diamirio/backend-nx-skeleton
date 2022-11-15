@@ -22,7 +22,6 @@ export default defineConfig((options) => ({
   clean: true,
   minify: false,
 
-  watch: ['src/**'],
   onSuccess: async (): Promise<void> => {
     await Promise.all(
       ['dist/**/assets/', 'dist/**/files/'].map(
