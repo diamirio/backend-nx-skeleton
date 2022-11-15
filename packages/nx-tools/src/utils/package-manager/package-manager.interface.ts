@@ -41,6 +41,7 @@ export interface CommonNodeDependency {
   registry?: string
   version?: string
   latest?: string
+  linkable?: boolean
 }
 
 export interface LocalNodeModule {
@@ -57,7 +58,7 @@ export interface LocalNodeModule {
 
 export interface CheckNodeModuleInstalledOptions {
   global?: boolean
-  onlyLinked?
+  onlyLinked?: boolean
   cwd?: string[]
   getVersion?: boolean
   getUpdate?: boolean

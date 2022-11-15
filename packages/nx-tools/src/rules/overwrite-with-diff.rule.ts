@@ -1,5 +1,6 @@
 import type { FileEntry, Rule, SchematicContext, Source, Tree } from '@angular-devkit/schematics'
 import { apply, branchAndMerge, forEach, MergeStrategy, mergeWith } from '@angular-devkit/schematics'
+import type { LazyFileEntry } from '@angular-devkit/schematics/src/tree/entry'
 import * as diff from 'diff'
 import { Listr } from 'listr2'
 import { EOL } from 'os'
@@ -71,7 +72,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
               // add this to file changes, return null since we did the operation directly
               fileChanges = [...fileChanges, file.path]
 
-              return
+              return file
             }
 
             // vanilla mode
@@ -159,7 +160,7 @@ export function applyOverwriteWithDiff (source: Source, oldSource: Source | void
             }
           }
         ]),
-        MergeStrategy.AllowOverwriteConflict
+        MergeStrategy.Overwrite
       )
     )
   }
@@ -281,7 +282,7 @@ function replaceFirstChars (str: string, from: string, to: string): string {
  * @param mergedFiles
  * @param log
  */
-export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | boolean, log: Logger): void {
+export function mergeFiles (host: Tree, file: FileEntry | LazyFileEntry, mergedFiles: string | boolean, log: Logger): void {
   let buffer = file.content
 
   if (typeof mergedFiles === 'string') {
@@ -303,7 +304,7 @@ export function mergeFiles (host: Tree, file: FileEntry, mergedFiles: string | b
  * @param file
  * @param log
  */
-export function createFileBackup (host: Tree, file: FileEntry, log: Logger): void {
+export function createFileBackup (host: Tree, file: FileEntry | LazyFileEntry, log: Logger): void {
   const backupFilePath = `${file.path}.old`
 
   log.error('Can not merge file creating backup: "%s" -> "%s"', file.path, backupFilePath)

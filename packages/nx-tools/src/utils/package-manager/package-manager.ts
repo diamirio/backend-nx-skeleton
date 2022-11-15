@@ -239,6 +239,13 @@ export class PackageManager {
       pkg = [pkg]
     }
 
+    // special condition for searching only for linked packages
+    if (options.onlyLinked) {
+      this.logger.debug('Filtering for linkable packages since only linkable ones are requested.')
+
+      pkg = pkg.filter((p) => typeof p === 'string' || p.linkable === true)
+    }
+
     this.logger.debug(
       'Searching for deps %o in cwd %o.',
       pkg.map((p) => typeof p === 'string' ? p : p.pkg),
@@ -250,19 +257,20 @@ export class PackageManager {
       pkg.map(async (p) => {
         const currentPkg: NodeDependency = {
           pkg: typeof p === 'string' ? p : p.pkg,
-          registry: typeof p !== 'string' && p.registry
+          registry: typeof p !== 'string' && p.registry,
+          linkable: typeof p !== 'string' && p.linkable,
+          latest: typeof p !== 'string' && p.latest,
+          version: typeof p !== 'string' && p.version
         }
         // can be string legacy or the object so have to parse it manually
 
         const o = { pkg: currentPkg.pkg, installed: false } as LocalNodeModule
 
         if (options.cwd && options.cwd.length > 0) {
-          this.logger.debug('Using global package directory for package: %s', currentPkg.pkg)
-
           const found = await Promise.all(
-            options.cwd.map(async (v) => {
+            options.cwd.map(async (cwd) => {
               try {
-                const packagePath = join(v, currentPkg.pkg)
+                const packagePath = join(cwd, currentPkg.pkg)
 
                 statSync(packagePath)
 
@@ -271,7 +279,7 @@ export class PackageManager {
                 return { path: packagePath, installed: true }
                 // eslint-disable-next-line no-empty
               } catch (e) {
-                this.logger.debug('Can not find package in global directory: %s -> %o', v, e.message)
+                this.logger.debug('Can not find package in global directory: %s in %s -> %o', currentPkg.pkg, cwd, e.message)
               }
             })
           )
@@ -285,7 +293,7 @@ export class PackageManager {
             o.installed = firstOccurence.installed
 
             if (this.globalLinkFolder.length > 0 && this.globalLinkFolder.some((path) => o.path.startsWith(path))) {
-              this.logger.warn('Using linked package directory for package, please remove the link if we are not in development mode: %s', currentPkg.pkg)
+              this.logger.warn('Using linked package directory for package: %s', currentPkg.pkg)
 
               o.linked = true
             }

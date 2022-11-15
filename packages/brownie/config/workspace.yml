@@ -7,4 +7,5 @@ dependencies:
 
 workspaces:
   - pkg: '@webundsoehne/nx-workspace'
+    linkable: true
     collection: collections.json

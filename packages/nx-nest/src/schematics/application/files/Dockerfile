@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 # Workdir for node package
 WORKDIR /data/app
@@ -13,6 +13,6 @@ RUN printf "#!/bin/ash\nnpm run start" > /entrypoint.sh && \
   chmod +x /entrypoint.sh
 
 # Install Node packages, can not use lock file because of NX
-RUN npm ci --production --unsafe-perm
+RUN npm ci --omit dev --unsafe-perm
 
 ENTRYPOINT ["/sbin/tini", "-vg", "--", "/entrypoint.sh"]

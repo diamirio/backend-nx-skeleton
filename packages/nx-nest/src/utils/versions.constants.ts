@@ -9,7 +9,7 @@ export const VERSIONS: Versions = {
         ['@nestjs/common']: '^9',
         ['@nestjs/core']: '^9',
         rxjs: { version: '^7', implicit: true },
-        ['@webundsoehne/nestjs-util']: '^6',
+        ['@webundsoehne/nestjs-util']: { version: '^6', linkable: true },
         ['class-transformer']: { version: '^0.5.1', implicit: true },
         ['class-validator']: { version: '^0.13.2', implicit: true },
         ['reflect-metadata']: { version: '^0.1.13', implicit: true }
@@ -18,12 +18,12 @@ export const VERSIONS: Versions = {
     microservice: {
       deps: {
         ['@nestjs/microservices']: '^9',
-        ['@webundsoehne/nestjs-util-microservices']: '^2'
+        ['@webundsoehne/nestjs-util-microservices']: { version: '^2', linkable: true }
       }
     },
     builder: {
       devDeps: {
-        ['@webundsoehne/nx-builders']: '^6'
+        ['@webundsoehne/nx-builders']: { version: '^6', linkable: true }
       }
     }
   },
@@ -43,7 +43,7 @@ export const VERSIONS: Versions = {
   [AvailableServerTypes.RESTFUL]: {
     deps: {
       ['@nestjs/swagger']: '^6',
-      ['@webundsoehne/nestjs-util-restful']: '^2'
+      ['@webundsoehne/nestjs-util-restful']: { version: '^2', linkable: true }
     }
   },
   [`${AvailableServerAdapters.EXPRESS}_${AvailableServerTypes.GRAPHQL}`]: {
@@ -62,7 +62,7 @@ export const VERSIONS: Versions = {
       ['@nestjs/apollo']: '^10',
       graphql: { version: '^16.6.0', implicit: true },
       ['graphql-tools']: { version: '^8', implicit: true },
-      ['@webundsoehne/nestjs-util-graphql']: '^2'
+      ['@webundsoehne/nestjs-util-graphql']: { version: '^2', linkable: true }
     }
   },
   [AvailableComponents.BG_TASK]: {
@@ -104,14 +104,14 @@ export const VERSIONS: Versions = {
     deps: {
       ['@nestjs/typeorm']: '^9',
       typeorm: { version: '^0.3.10', implicit: true },
-      ['@webundsoehne/nestjs-seeder']: '^2'
+      ['@webundsoehne/nestjs-seeder']: { version: '^2', linkable: true }
     }
   },
   [AvailableDBAdapters.MONGOOSE]: {
     deps: {
       ['@nestjs/mongoose']: '^9',
       mongoose: { version: '^6.6.4', implicit: true },
-      ['@webundsoehne/nestjs-seeder']: '^2'
+      ['@webundsoehne/nestjs-seeder']: { version: '^2', linkable: true }
     }
   },
   [AvailableDBTypes.TYPEORM_MYSQL]: {

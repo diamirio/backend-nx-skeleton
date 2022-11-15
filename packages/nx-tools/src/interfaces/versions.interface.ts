@@ -1,4 +1,6 @@
-export type Dependency = Record<string, string | { version: string, implicit?: boolean }>
+import type { CommonNodeDependency } from '@utils/package-manager'
+
+export type DependencyCalculatorDependency = Record<string, string | (Omit<CommonNodeDependency, 'pkg'> & { implicit?: boolean })>
 export type ImplicitDependencies = string[]
 
 /**
@@ -11,8 +13,8 @@ export interface PackageVersions {
 }
 
 export interface DependencyCalculatorPackage {
-  deps?: Dependency
-  devDeps?: Dependency
+  deps?: DependencyCalculatorDependency
+  devDeps?: DependencyCalculatorDependency
 }
 
 /**

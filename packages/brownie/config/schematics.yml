@@ -1,5 +1,6 @@
 ---
 - pkg: '@webundsoehne/nx-nest'
+  linkable: true
   description: 'A boilerplate to generate Nest.js applications from scratch.'
   schematics:
     - name: app
@@ -16,6 +17,7 @@
       description: Creates a single component from the given template.
 
 - pkg: '@webundsoehne/nx-workspace'
+  linkable: true
   description: 'General purpose workspace schematic extended from the default.'
   schematics:
     - name: library
@@ -26,6 +28,7 @@
       description: Remove a project from the workspace.
 
 - pkg: '@webundsoehne/nx-tools'
+  linkable: true
   description: 'Some generic tools for nx.'
   schematics:
     - name: exports

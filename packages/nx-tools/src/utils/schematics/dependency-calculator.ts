@@ -1,6 +1,6 @@
 import type { DependencyCalculatorOptions } from './dependency-calculator.interface'
 import { isDevelopmentMode } from './is-development-mode'
-import type { Dependency, DependencyCalculatorPackage, PackageVersions } from '@interfaces/versions.interface'
+import type { DependencyCalculatorDependency, DependencyCalculatorPackage, PackageVersions } from '@interfaces/versions.interface'
 import { Logger } from '@utils/logger/logger'
 import type { LocalNodeModule } from '@utils/package-manager'
 import { PackageManager } from '@utils/package-manager'
@@ -17,22 +17,40 @@ export async function dependencyCalculator (options: DependencyCalculatorOptions
     logger.warn('dependencyCalculator is running in development mode.')
     logger.warn('It will use the linked packages if they are available.')
 
-    const deps = options.flatMap((pkg) => Object.values(pkg.deps).flatMap((v) => Object.keys(v)))
+    const deps = options.flatMap((pkg) =>
+      Object.values(pkg.deps).flatMap((v: DependencyCalculatorDependency) =>
+        Object.entries(v).map(([key, value]) => {
+          if (typeof value === 'string') {
+            return {
+              pkg: key,
+              version: value
+            }
+          }
+
+          return {
+            pkg: key,
+            ...value
+          }
+        })
+      )
+    )
 
     const linked = await packageManager.checkIfModuleInstalled(deps, { onlyLinked: true })
 
     return options.reduce<PackageVersions>((o, i) => {
-      if (i.condition !== false) {
-        const d = convertDependencyCalculatorPackage(i.deps)
-
-        const linkedPackages = useLinkedVersionOfDependencies(linked, d)
-
-        if (Object.values(linkedPackages).some((item) => Object.keys(item).length > 0)) {
-          logger.debug('Using linked dependencies for: %o', linkedPackages)
-        }
-
-        o = deepMerge(o, d, linkedPackages)
+      if (i.condition === false) {
+        return o
       }
+
+      const d = convertDependencyCalculatorPackage(i.deps)
+
+      const linkedPackages = useLinkedVersionOfDependencies(linked, d)
+
+      if (Object.values(linkedPackages).some((item) => Object.keys(item).length > 0)) {
+        logger.debug('Using linked dependencies for: %o', linkedPackages)
+      }
+
+      o = deepMerge(o, d, linkedPackages)
 
       return o
     }, {})
@@ -62,11 +80,11 @@ export function convertDependencyCalculatorPackage (deps: DependencyCalculatorPa
           if (typeof details === 'string') {
             return { ...o, [dep]: details }
           } else {
-            if ((details as Dependency).implicit) {
+            if ((details as DependencyCalculatorDependency).implicit) {
               implicitDeps.push(dep)
             }
 
-            return { ...o, [dep]: (details as Dependency).version }
+            return { ...o, [dep]: (details as DependencyCalculatorDependency).version }
           }
         }, {})
       ]
