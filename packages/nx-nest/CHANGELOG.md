@@ -1,3 +1,19 @@
+## @webundsoehne/nx-nest [5.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.9...@webundsoehne/nx-nest@5.0.10) (2022-11-15)
+
+
+### Bug Fixes
+
+* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nx-builders:** upgraded to 6.1.3
+* **@webundsoehne/nx-tools:** upgraded to 6.0.8
+
 ## @webundsoehne/nx-nest [5.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.8...@webundsoehne/nx-nest@5.0.9) (2022-11-04)
 
 
