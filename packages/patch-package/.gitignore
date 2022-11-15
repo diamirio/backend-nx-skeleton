@@ -40,3 +40,4 @@ tsconfig.*tsbuildinfo
 .npm
 .npmrc
 package-lock.json
+/oclif.manifest.json

@@ -91,6 +91,10 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
   }
 
   async nx (): Promise<void> {
+    this.setCtxDefaults<DockerNxCtx>({ config: await this.compose.tryRead() ?? ({} as DockerComposeFile) })
+
+    this.logger.debug('Context defaults: %o', this.tasks.ctx)
+
     this.tasks.add<DockerNxCtx>([
       {
         task: (ctx): void => {
@@ -126,7 +130,9 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
   }
 
   async add (): Promise<void> {
-    this.setCtxDefaults({ config: await this.compose.tryRead() })
+    this.setCtxDefaults<DockerContainerAddCtx>({ config: await this.compose.tryRead() ?? ({} as DockerComposeFile) })
+
+    this.logger.debug('Context defaults: %o', this.tasks.ctx)
 
     this.tasks.add<DockerContainerAddCtx>([
       {
@@ -224,7 +230,7 @@ export class Docker extends ConfigCommand<DockerCommandChoices, LocalLockFile, D
       throw new Error('Nothing in lock file to purge.')
     }
 
-    this.setCtxDefaults(new DockerContainersPurgeCtx())
+    this.setCtxDefaults<DockerContainersPurgeCtx>(new DockerContainersPurgeCtx())
 
     this.tasks.add<DockerContainersPurgeCtx>([
       {
