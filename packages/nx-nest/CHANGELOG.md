@@ -1,3 +1,10 @@
+## @webundsoehne/nx-nest [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.12...@webundsoehne/nx-nest@5.0.13) (2022-11-16)
+
+
+### Bug Fixes
+
+* issues with migration on mongodb side of things ([2460600](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/24606009f9aa6c89e9ef6c56e7543c9a9bfab899))
+
 ## @webundsoehne/nx-nest [5.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.11...@webundsoehne/nx-nest@5.0.12) (2022-11-16)
 
 
