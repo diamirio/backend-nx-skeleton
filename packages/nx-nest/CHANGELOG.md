@@ -1,3 +1,10 @@
+## @webundsoehne/nx-nest [5.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.10...@webundsoehne/nx-nest@5.0.11) (2022-11-16)
+
+
+### Bug Fixes
+
+* implement the bugs discussed on the telko ([48a37a2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/48a37a28f8f18b14f8f22dbe789370d35665549d))
+
 ## @webundsoehne/nx-nest [5.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.9...@webundsoehne/nx-nest@5.0.10) (2022-11-15)
 
 
