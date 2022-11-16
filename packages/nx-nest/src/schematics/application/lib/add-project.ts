@@ -169,7 +169,9 @@ export function addProject (options: NormalizedSchema): Rule {
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,
-          environment: {}
+          environment: {
+            NODE_SERVICE: 'cli'
+          }
         },
         configurations: {
           run: {
@@ -198,7 +200,9 @@ export function addProject (options: NormalizedSchema): Rule {
           nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
           node: true,
           watch: false,
-          environment: {}
+          environment: {
+            NODE_SERVICE: 'cli'
+          }
         },
         configurations: {
           run: {
