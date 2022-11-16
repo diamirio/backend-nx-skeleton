@@ -1,3 +1,10 @@
+## @webundsoehne/brownie [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.12...@webundsoehne/brownie@5.0.13) (2022-11-16)
+
+
+### Bug Fixes
+
+* update templates to be strings since it is inside docker-compose ([9423af8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9423af8e46477aad173d4f5285986a0800523207))
+
 ## @webundsoehne/brownie [5.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.11...@webundsoehne/brownie@5.0.12) (2022-11-16)
 
 
