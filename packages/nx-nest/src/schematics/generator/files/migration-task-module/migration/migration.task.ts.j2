@@ -51,7 +51,7 @@ export class MigrationTask {
       const migrated = await up(db, client)
 
       if (migrated.length > 0) {
-        migrated.forEach((fileName) => this.logger.verbose([ 'Migrated: %s', filename ]))
+        migrated.forEach((filename) => this.logger.verbose([ 'Migrated: %s', filename ]))
       } else {
         this.logger.verbose('No pending migration found.')
       }

@@ -39,3 +39,4 @@ tsconfig.tsbuildinfo
 .npm
 **/package-lock.json
 **/.swc
+*/**/config/local*

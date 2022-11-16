@@ -111,6 +111,7 @@ export const VERSIONS: Versions = {
     deps: {
       ['@nestjs/mongoose']: '^9',
       mongoose: { version: '^6.6.4', implicit: true },
+      ['migrate-mongo']: '^9.0.0',
       ['@webundsoehne/nestjs-seeder']: { version: '^2', linkable: true }
     }
   },
