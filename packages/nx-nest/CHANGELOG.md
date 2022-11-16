@@ -1,3 +1,10 @@
+## @webundsoehne/nx-nest [5.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.13...@webundsoehne/nx-nest@5.0.14) (2022-11-16)
+
+
+### Bug Fixes
+
+* **nx-nest/mongodb:** update migration for migrate-monngo ([567852b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/567852bb126bd18dfc75eaa1b1793cfeb4c3b5d8))
+
 ## @webundsoehne/nx-nest [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.12...@webundsoehne/nx-nest@5.0.13) (2022-11-16)
 
 
