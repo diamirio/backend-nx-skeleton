@@ -7,7 +7,7 @@ import { Connection } from 'typeorm'
 {% if inject.dbAdapters == inject.enum.dbAdapters.MONGOOSE %}
 import { config, database, up } from 'migrate-mongo'
 
-import { generateMongooseMigrateConfig } from '@{{ packageScope }}/{{ inject.constants.BACKEND_DATABASE_PACKAGE }}/database/migrate-mongoose'
+import * as generateMongooseMigrateConfig from '@{{ packageScope }}/{{ inject.constants.BACKEND_DATABASE_PACKAGE }}/database/migrate-mongoose'
 {% endif %}
 
 import { InjectMaintenanceService, MaintenanceService, Retry, UseMaintenanceLocker } from '@webundsoehne/nestjs-util'
@@ -16,7 +16,9 @@ import { InjectMaintenanceService, MaintenanceService, Retry, UseMaintenanceLock
 export class MigrationTask {
   private readonly logger: Logger = new Logger(this.constructor.name)
 
-  constructor ({% if inject.dbAdapters == inject.enum.dbAdapters.TYPEORM %}@InjectConnection() private readonly connection: Connection, {% endif %}@InjectMaintenanceService() private readonly maintanenceService: MaintenanceService) {}
+{% if inject.dbAdapters == inject.enum.dbAdapters.TYPEORM %}
+  constructor (@InjectConnection() private readonly connection: Connection) {}
+{% endif %}
 
 {% if inject.dbAdapters == inject.enum.dbAdapters.TYPEORM %}
   @Timeout(0)
@@ -45,7 +47,7 @@ export class MigrationTask {
   })
   async migrateMongoose (): Promise<void> {
     try {
-      config.set(generateMongooseMigrateConfig())
+      config.set(generateMongooseMigrateConfig)
 
       const { db, client } = await database.connect()
       const migrated = await up(db, client)

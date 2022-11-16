@@ -158,8 +158,8 @@ export function addProject (options: NormalizedSchema): Rule {
     }
 
     if (options.dbAdapters === AvailableDBAdapters.TYPEORM) {
-      const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_INTERFACES)
-        ? join(readWorkspaceLayout(host).libsDir, SchematicConstants.BACKEND_INTERFACES_PACKAGE)
+      const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
+        ? join('../', '../', readWorkspaceLayout(host).libsDir, SchematicConstants.BACKEND_DATABASE_PACKAGE, 'database')
         : join(options.sourceRoot, SchematicFilesMap.UTILS)
 
       targets.migration = {
@@ -175,9 +175,6 @@ export function addProject (options: NormalizedSchema): Rule {
           run: {
             command: `typeorm migration:run --config=${join(configurationBasePath, 'orm.config.ts')}`
           },
-          ['mock-run']: {
-            command: `typeorm migration:run --config=${join(configurationBasePath, 'mock-orm.config.ts')}`
-          },
           create: {
             command: `typeorm migration:create --config=${join(configurationBasePath, 'orm.config.ts')} -n`
           },
@@ -186,6 +183,32 @@ export function addProject (options: NormalizedSchema): Rule {
           },
           rollback: {
             command: `typeorm migration:revert --config=${join(configurationBasePath, 'orm.config.ts')}`
+          }
+        }
+      }
+    } else if (options.dbAdapters === AvailableDBAdapters.MONGOOSE) {
+      const configurationBasePath = options.extensions.includes(AvailableExtensions.EXTERNAL_BACKEND_DATABASE)
+        ? join('../', '../', readWorkspaceLayout(host).libsDir, SchematicConstants.BACKEND_DATABASE_PACKAGE, 'database')
+        : join(options.sourceRoot, SchematicFilesMap.UTILS)
+
+      targets.migration = {
+        executor: '@webundsoehne/nx-builders:run',
+        options: {
+          cwd: options.root,
+          nodeOptions: '-r ts-node/register -r tsconfig-paths/register',
+          node: true,
+          watch: false,
+          environment: {}
+        },
+        configurations: {
+          run: {
+            command: `migrate-mongo up -f=${join(configurationBasePath, 'migrate-mongoose.ts')}`
+          },
+          create: {
+            command: `migrate-mongo create -f=${join(configurationBasePath, 'migrate-mongoose.ts')}`
+          },
+          rollback: {
+            command: `migrate-mongo down -f=${join(configurationBasePath, 'migrate-mongoose.ts')}`
           }
         }
       }
