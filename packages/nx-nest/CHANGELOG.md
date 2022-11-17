@@ -1,273 +1,206 @@
-## @webundsoehne/nx-nest [5.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.13...@webundsoehne/nx-nest@5.0.14) (2022-11-16)
-
+## @webundsoehne/nx-nest [5.0.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.14...@webundsoehne/nx-nest@5.0.15) (2022-11-17)
 
 ### Bug Fixes
 
-* **nx-nest/mongodb:** update migration for migrate-monngo ([567852b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/567852bb126bd18dfc75eaa1b1793cfeb4c3b5d8))
+- update readmes and badges ([275c666](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/275c666e675ff27a02a66cf04ad9ac5d0026b55d))
+
+## @webundsoehne/nx-nest [5.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.13...@webundsoehne/nx-nest@5.0.14) (2022-11-16)
+
+### Bug Fixes
+
+- **nx-nest/mongodb:** update migration for migrate-monngo ([567852b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/567852bb126bd18dfc75eaa1b1793cfeb4c3b5d8))
 
 ## @webundsoehne/nx-nest [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.12...@webundsoehne/nx-nest@5.0.13) (2022-11-16)
 
-
 ### Bug Fixes
 
-* issues with migration on mongodb side of things ([2460600](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/24606009f9aa6c89e9ef6c56e7543c9a9bfab899))
+- issues with migration on mongodb side of things ([2460600](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/24606009f9aa6c89e9ef6c56e7543c9a9bfab899))
 
 ## @webundsoehne/nx-nest [5.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.11...@webundsoehne/nx-nest@5.0.12) (2022-11-16)
 
-
 ### Bug Fixes
 
-* update migrate module to include maintance lockers ([653c8fb](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/653c8fbb9f29c272819655a10dbaecfbc887c444))
+- update migrate module to include maintance lockers ([653c8fb](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/653c8fbb9f29c272819655a10dbaecfbc887c444))
 
 ## @webundsoehne/nx-nest [5.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.10...@webundsoehne/nx-nest@5.0.11) (2022-11-16)
 
-
 ### Bug Fixes
 
-* implement the bugs discussed on the telko ([48a37a2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/48a37a28f8f18b14f8f22dbe789370d35665549d))
+- implement the bugs discussed on the telko ([48a37a2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/48a37a28f8f18b14f8f22dbe789370d35665549d))
 
 ## @webundsoehne/nx-nest [5.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.9...@webundsoehne/nx-nest@5.0.10) (2022-11-15)
 
-
 ### Bug Fixes
 
-* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
-
-
-
-
+- fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.3
-* **@webundsoehne/nx-tools:** upgraded to 6.0.8
+- **@webundsoehne/nx-builders:** upgraded to 6.1.3
+- **@webundsoehne/nx-tools:** upgraded to 6.0.8
 
 ## @webundsoehne/nx-nest [5.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.8...@webundsoehne/nx-nest@5.0.9) (2022-11-04)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.5
-* **@webundsoehne/nx-builders:** upgraded to 6.1.2
-* **@webundsoehne/nx-tools:** upgraded to 6.0.7
+- **@webundsoehne/deep-merge:** upgraded to 2.2.5
+- **@webundsoehne/nx-builders:** upgraded to 6.1.2
+- **@webundsoehne/nx-tools:** upgraded to 6.0.7
 
 ## @webundsoehne/nx-nest [5.0.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.7...@webundsoehne/nx-nest@5.0.8) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.1
+- **@webundsoehne/nx-builders:** upgraded to 6.1.1
 
 ## @webundsoehne/nx-nest [5.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.6...@webundsoehne/nx-nest@5.0.7) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.0
+- **@webundsoehne/nx-builders:** upgraded to 6.1.0
 
 ## @webundsoehne/nx-nest [5.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.5...@webundsoehne/nx-nest@5.0.6) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.6
-* **@webundsoehne/nx-tools:** upgraded to 6.0.6
+- **@webundsoehne/nx-builders:** upgraded to 6.0.6
+- **@webundsoehne/nx-tools:** upgraded to 6.0.6
 
 ## @webundsoehne/nx-nest [5.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.4...@webundsoehne/nx-nest@5.0.5) (2022-11-02)
 
-
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
-
-
-
-
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.4
-* **@webundsoehne/nx-builders:** upgraded to 6.0.5
-* **@webundsoehne/nx-tools:** upgraded to 6.0.5
+- **@webundsoehne/deep-merge:** upgraded to 2.2.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.5
+- **@webundsoehne/nx-tools:** upgraded to 6.0.5
 
 ## @webundsoehne/nx-nest [5.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.3...@webundsoehne/nx-nest@5.0.4) (2022-10-25)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.4
-* **@webundsoehne/nx-tools:** upgraded to 6.0.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.4
+- **@webundsoehne/nx-tools:** upgraded to 6.0.4
 
 ## @webundsoehne/nx-nest [5.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.2...@webundsoehne/nx-nest@5.0.3) (2022-10-25)
 
-
 ### Bug Fixes
 
-* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
-
-
-
-
+- fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.3
-* **@webundsoehne/nx-tools:** upgraded to 6.0.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.3
+- **@webundsoehne/nx-tools:** upgraded to 6.0.3
 
 ## @webundsoehne/nx-nest [5.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.1...@webundsoehne/nx-nest@5.0.2) (2022-10-25)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.2
-* **@webundsoehne/nx-tools:** upgraded to 6.0.2
+- **@webundsoehne/nx-builders:** upgraded to 6.0.2
+- **@webundsoehne/nx-tools:** upgraded to 6.0.2
 
 ## @webundsoehne/nx-nest [5.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.0...@webundsoehne/nx-nest@5.0.1) (2022-10-06)
 
-
 ### Bug Fixes
 
-* update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
-
-
-
-
+- update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.1
-* **@webundsoehne/nx-tools:** upgraded to 6.0.1
+- **@webundsoehne/nx-builders:** upgraded to 6.0.1
+- **@webundsoehne/nx-tools:** upgraded to 6.0.1
 
 # @webundsoehne/nx-nest [5.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@4.3.7...@webundsoehne/nx-nest@5.0.0) (2022-10-05)
 
-
 ### Bug Fixes
 
-* **nx-nest:** microservice generation, regenarating components that are not needed ([80e3957](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80e39573fa30b561f7235ad23fbaf533aa1a69dd))
-* **nx-nest:** update how graphql is handled in nestjs with the new version ([37cbf20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/37cbf2061a8e37db4877d41ebefe1365c499abaf))
-* update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
-* update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- **nx-nest:** microservice generation, regenarating components that are not needed ([80e3957](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/80e39573fa30b561f7235ad23fbaf533aa1a69dd))
+- **nx-nest:** update how graphql is handled in nestjs with the new version ([37cbf20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/37cbf2061a8e37db4877d41ebefe1365c499abaf))
+- update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
+- update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
+- extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### BREAKING CHANGES
 
-* uses the new library
-* this is not compatible with older versions of the nx-nest generator
+- uses the new library
+- this is not compatible with older versions of the nx-nest generator
 
-- express/fastify is now selectable when selecting a server
-- moved database stuff to backend-database from backend-interface
-- extend generator to accept injecting arguments
-- use the migration module for mongodb
-- ditch typeorm-seeding for generic seeder
-- add relevant command for seeding to nestjs itself due to dependency injection
-* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
-nx.json
+* express/fastify is now selectable when selecting a server
+* moved database stuff to backend-database from backend-interface
+* extend generator to accept injecting arguments
+* use the migration module for mongodb
+* ditch typeorm-seeding for generic seeder
+* add relevant command for seeding to nestjs itself due to dependency injection
 
-
-
-
+- **nx:** contains breaking changes for how nestjs handles graphql and nx handles nx.json
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.3
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0
+- **@webundsoehne/deep-merge:** upgraded to 2.2.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0
 
 # @webundsoehne/nx-nest [5.0.0-beta.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.0-beta.6...@webundsoehne/nx-nest@5.0.0-beta.7) (2022-10-05)
 
-
 ### Bug Fixes
 
-* update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
+- update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
 
 # @webundsoehne/nx-nest [5.0.0-beta.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.0-beta.5...@webundsoehne/nx-nest@5.0.0-beta.6) (2022-10-05)
 
-
 ### Performance Improvements
 
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
-
-
-
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.5
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.5
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.4
 
 # @webundsoehne-private/nx-nest [5.0.0-beta.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.4...@webundsoehne-private/nx-nest@5.0.0-beta.5) (2022-09-19)
 
-
 ### Bug Fixes
 
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
 
 ### BREAKING CHANGES
 
-* uses the new library
-
-
-
-
+- uses the new library
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.4
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.4
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.3
 
 # @webundsoehne-private/nx-nest [5.0.0-beta.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.3...@webundsoehne-private/nx-nest@5.0.0-beta.4) (2022-08-11)
 
-
 ### Bug Fixes
 
-* update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
+- update matching versions ([d8b2b1d](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d8b2b1dce9c9cb0ff9381ae4be3b2042a686d770))
 
 # @webundsoehne-private/nx-nest [5.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.2...@webundsoehne-private/nx-nest@5.0.0-beta.3) (2022-08-11)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.3
 
 # @webundsoehne-private/nx-nest [5.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-nest@5.0.0-beta.1...@webundsoehne-private/nx-nest@5.0.0-beta.2) (2022-08-08)
 
