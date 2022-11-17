@@ -4,6 +4,5 @@
 **/.npmignore
 **/.eslintignore
 **/CHANGELOG.md
-**/README.md
 **/yarn.lock
 **/package-lock.json

@@ -26,9 +26,9 @@ A set of schematics and tools that provides the basis for fast template scaffold
   - [nestjs-util-microservices - @webundsoehne/nestjs-util-microservices](#nestjs-util-microservices---webundsoehnenestjs-util-microservices)
   - [nestjs-util-restful - @webundsoehne/nestjs-util-restful](#nestjs-util-restful---webundsoehnenestjs-util-restful)
   - [nx-builders - @webundsoehne/nx-builders](#nx-builders---webundsoehnenx-builders)
-  - [nx-nest - @webundsoehne-private/nx-nest](#nx-nest---webundsoehne-privatenx-nest)
+  - [nx-nest - @webundsoehne/nx-nest](#nx-nest---webundsoehnenx-nest)
   - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
-  - [nx-workspace - @webundsoehne-private/nx-workspace](#nx-workspace---webundsoehne-privatenx-workspace)
+  - [nx-workspace - @webundsoehne/nx-workspace](#nx-workspace---webundsoehnenx-workspace)
   - [patch-package - @webundsoehne/patch-package](#patch-package---webundsoehnepatch-package)
   - [ts-utility-types - @webundsoehne/ts-utility-types](#ts-utility-types---webundsoehnets-utility-types)
 - [Further Development](#further-development)
@@ -119,7 +119,7 @@ Custom builders for `@nrwl/nx`.
 
 [**Read more...**](./packages/nx-builders/README.md)
 
-### nx-nest - @webundsoehne-private/nx-nest
+### nx-nest - @webundsoehne/nx-nest
 
 A skeleton that can be generated through `@nrwl/nx` schematics.
 
@@ -131,7 +131,7 @@ Various tools that can be used while developing new `@nrwl/nx` schematics.
 
 [**Read more...**](./packages/nx-tools/README.md)
 
-### nx-workspace - @webundsoehne-private/nx-workspace
+### nx-workspace - @webundsoehne/nx-workspace
 
 Schematic for scaffolding `@nrwl/nx` workspace.
 
