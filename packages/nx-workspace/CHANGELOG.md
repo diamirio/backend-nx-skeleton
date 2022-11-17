@@ -1,247 +1,183 @@
-## @webundsoehne/nx-workspace [5.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.10...@webundsoehne/nx-workspace@5.0.11) (2022-11-17)
-
+## @webundsoehne/nx-workspace [5.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.11...@webundsoehne/nx-workspace@5.0.12) (2022-11-17)
 
 ### Bug Fixes
 
-* update default ci configuration ([42a1ac0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/42a1ac035b921832864aa939fbeecd3bf90f4c04))
+- update readmes and badges ([275c666](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/275c666e675ff27a02a66cf04ad9ac5d0026b55d))
+
+## @webundsoehne/nx-workspace [5.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.10...@webundsoehne/nx-workspace@5.0.11) (2022-11-17)
+
+### Bug Fixes
+
+- update default ci configuration ([42a1ac0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/42a1ac035b921832864aa939fbeecd3bf90f4c04))
 
 ## @webundsoehne/nx-workspace [5.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.9...@webundsoehne/nx-workspace@5.0.10) (2022-11-15)
 
-
 ### Bug Fixes
 
-* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
-
-
-
-
+- fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.3
-* **@webundsoehne/nx-tools:** upgraded to 6.0.8
+- **@webundsoehne/nx-builders:** upgraded to 6.1.3
+- **@webundsoehne/nx-tools:** upgraded to 6.0.8
 
 ## @webundsoehne/nx-workspace [5.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.8...@webundsoehne/nx-workspace@5.0.9) (2022-11-04)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.5
-* **@webundsoehne/nx-builders:** upgraded to 6.1.2
-* **@webundsoehne/nx-tools:** upgraded to 6.0.7
+- **@webundsoehne/deep-merge:** upgraded to 2.2.5
+- **@webundsoehne/nx-builders:** upgraded to 6.1.2
+- **@webundsoehne/nx-tools:** upgraded to 6.0.7
 
 ## @webundsoehne/nx-workspace [5.0.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.7...@webundsoehne/nx-workspace@5.0.8) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.1
+- **@webundsoehne/nx-builders:** upgraded to 6.1.1
 
 ## @webundsoehne/nx-workspace [5.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.6...@webundsoehne/nx-workspace@5.0.7) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.1.0
+- **@webundsoehne/nx-builders:** upgraded to 6.1.0
 
 ## @webundsoehne/nx-workspace [5.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.5...@webundsoehne/nx-workspace@5.0.6) (2022-11-02)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.6
-* **@webundsoehne/nx-tools:** upgraded to 6.0.6
+- **@webundsoehne/nx-builders:** upgraded to 6.0.6
+- **@webundsoehne/nx-tools:** upgraded to 6.0.6
 
 ## @webundsoehne/nx-workspace [5.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.4...@webundsoehne/nx-workspace@5.0.5) (2022-11-02)
 
-
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
-
-
-
-
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.4
-* **@webundsoehne/nx-builders:** upgraded to 6.0.5
-* **@webundsoehne/nx-tools:** upgraded to 6.0.5
+- **@webundsoehne/deep-merge:** upgraded to 2.2.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.5
+- **@webundsoehne/nx-tools:** upgraded to 6.0.5
 
 ## @webundsoehne/nx-workspace [5.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.3...@webundsoehne/nx-workspace@5.0.4) (2022-10-25)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.4
-* **@webundsoehne/nx-tools:** upgraded to 6.0.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.4
+- **@webundsoehne/nx-tools:** upgraded to 6.0.4
 
 ## @webundsoehne/nx-workspace [5.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.2...@webundsoehne/nx-workspace@5.0.3) (2022-10-25)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.3
-* **@webundsoehne/nx-tools:** upgraded to 6.0.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.3
+- **@webundsoehne/nx-tools:** upgraded to 6.0.3
 
 ## @webundsoehne/nx-workspace [5.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.1...@webundsoehne/nx-workspace@5.0.2) (2022-10-25)
 
-
-
-
-
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.2
-* **@webundsoehne/nx-tools:** upgraded to 6.0.2
+- **@webundsoehne/nx-builders:** upgraded to 6.0.2
+- **@webundsoehne/nx-tools:** upgraded to 6.0.2
 
 ## @webundsoehne/nx-workspace [5.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.0...@webundsoehne/nx-workspace@5.0.1) (2022-10-06)
 
-
 ### Bug Fixes
 
-* update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
-
-
-
-
+- update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.1
-* **@webundsoehne/nx-tools:** upgraded to 6.0.1
+- **@webundsoehne/nx-builders:** upgraded to 6.0.1
+- **@webundsoehne/nx-tools:** upgraded to 6.0.1
 
 # @webundsoehne/nx-workspace [5.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@4.3.8...@webundsoehne/nx-workspace@5.0.0) (2022-10-05)
 
-
 ### Bug Fixes
 
-* update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Features
 
-* swap the gitlab build files with the predefined pipes ([921d9e5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/921d9e5d01db82c0f87373d997e73cfa0eb1708d))
-
+- swap the gitlab build files with the predefined pipes ([921d9e5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/921d9e5d01db82c0f87373d997e73cfa0eb1708d))
 
 ### Performance Improvements
 
-* extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
+- extend templates ([4c380c5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4c380c51dfba2d340d09a48df3d0ca4f02374042))
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- **nx:** update nx to version 14 ([9730fd5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9730fd55748695b2053e2f880c2ec4aba5e2a006))
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### BREAKING CHANGES
 
-* uses the new library
-* this is not compatible with older versions of the nx-nest generator
+- uses the new library
+- this is not compatible with older versions of the nx-nest generator
 
-- express/fastify is now selectable when selecting a server
-- moved database stuff to backend-database from backend-interface
-- extend generator to accept injecting arguments
-- use the migration module for mongodb
-- ditch typeorm-seeding for generic seeder
-- add relevant command for seeding to nestjs itself due to dependency injection
-* **nx:** contains breaking changes for how nestjs handles graphql and nx handles
-nx.json
+* express/fastify is now selectable when selecting a server
+* moved database stuff to backend-database from backend-interface
+* extend generator to accept injecting arguments
+* use the migration module for mongodb
+* ditch typeorm-seeding for generic seeder
+* add relevant command for seeding to nestjs itself due to dependency injection
 
-
-
-
+- **nx:** contains breaking changes for how nestjs handles graphql and nx handles nx.json
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.3
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0
+- **@webundsoehne/deep-merge:** upgraded to 2.2.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0
 
 # @webundsoehne/nx-workspace [5.0.0-beta.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.0-beta.5...@webundsoehne/nx-workspace@5.0.0-beta.6) (2022-10-05)
 
-
 ### Bug Fixes
 
-* update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
+- update deps ([ffbc4e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ffbc4e119ada1e3b128d3ef197ce4ad966513979))
 
 # @webundsoehne/nx-workspace [5.0.0-beta.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.0-beta.4...@webundsoehne/nx-workspace@5.0.0-beta.5) (2022-10-05)
 
-
 ### Performance Improvements
 
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
-
-
-
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.5
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.4
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.5
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.4
 
 # @webundsoehne-private/nx-workspace [5.0.0-beta.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@5.0.0-beta.3...@webundsoehne-private/nx-workspace@5.0.0-beta.4) (2022-09-19)
 
-
 ### Bug Fixes
 
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
 
 ### BREAKING CHANGES
 
-* uses the new library
-
-
-
-
+- uses the new library
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.4
-* **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.4
+- **@webundsoehne/nx-tools:** upgraded to 6.0.0-beta.3
 
 # @webundsoehne-private/nx-workspace [5.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@5.0.0-beta.2...@webundsoehne-private/nx-workspace@5.0.0-beta.3) (2022-08-11)
 
-
 ### Features
 
-* swap the gitlab build files with the predefined pipes ([921d9e5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/921d9e5d01db82c0f87373d997e73cfa0eb1708d))
-
-
-
-
+- swap the gitlab build files with the predefined pipes ([921d9e5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/921d9e5d01db82c0f87373d997e73cfa0eb1708d))
 
 ### Dependencies
 
-* **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.3
+- **@webundsoehne/nx-builders:** upgraded to 6.0.0-beta.3
 
 # @webundsoehne-private/nx-workspace [5.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne-private/nx-workspace@5.0.0-beta.1...@webundsoehne-private/nx-workspace@5.0.0-beta.2) (2022-08-08)
 
