@@ -23,10 +23,8 @@ include:
 docs:
   stage: docs
   image: $CI_REGISTRY/bdsm/gitlab-pipes/gitlab-pipes-node:${NODE_VERSION}
-  variables:
-    NODE_COMMAND_SCRIPT: docs
   script:
-    - pipe
+    - pipe run docs
   artifacts:
     paths:
       - packages/*/README.md
