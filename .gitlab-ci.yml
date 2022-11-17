@@ -1,9 +1,9 @@
+---
 stages:
   - install
   - build
   - docs
   - publish
-  - sync
 
 cache:
   paths:
@@ -22,8 +22,11 @@ include:
 
 docs:
   stage: docs
+  image: $CI_REGISTRY/bdsm/gitlab-pipes/gitlab-pipes-node:${NODE_VERSION}
+  variables:
+    NODE_COMMAND_SCRIPT: docs
   script:
-    - yarn docs
+    - pipe
   artifacts:
     paths:
       - packages/*/README.md
@@ -36,9 +39,9 @@ docs:
     - rc
     - alpha
   tags:
-    - node
+    - docker
 
-publish:
+semantic-release:
   variables:
     NPM_LOGIN: $NPM_LOGIN
     RUN_MULTI: 'true'
