@@ -1,3 +1,10 @@
+## @webundsoehne/nx-workspace [5.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.10...@webundsoehne/nx-workspace@5.0.11) (2022-11-17)
+
+
+### Bug Fixes
+
+* update default ci configuration ([42a1ac0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/42a1ac035b921832864aa939fbeecd3bf90f4c04))
+
 ## @webundsoehne/nx-workspace [5.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.9...@webundsoehne/nx-workspace@5.0.10) (2022-11-15)
 
 
