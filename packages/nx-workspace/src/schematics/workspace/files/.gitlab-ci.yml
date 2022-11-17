@@ -33,9 +33,9 @@ include:
     file: /templates/node-nx.gitlab-ci.yml
     ref: main
 #
-####################################################################
-## add your applications here, that should be build as containers ##
-####################################################################
+##################################
+## add your applications here. ##
+#################################
 # docker-app:
 #   extends: .docker-common
 #   variables:
@@ -44,6 +44,8 @@ include:
 #   only:
 #     changes:
 #       - .gitlab-ci.yml
+#       - package.json
+#       - package-lock.json
 #       - 'libs/**/*'
 #       - 'apps/app/**/*'
 #     refs:
