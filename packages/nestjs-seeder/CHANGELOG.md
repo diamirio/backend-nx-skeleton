@@ -1,3 +1,20 @@
+## @webundsoehne/nestjs-seeder [2.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.4...@webundsoehne/nestjs-seeder@2.0.5) (2022-11-23)
+
+
+### Bug Fixes
+
+* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/deep-merge:** upgraded to 2.2.6
+* **@webundsoehne/ts-utility-types:** upgraded to 2.2.5
+
 ## @webundsoehne/nestjs-seeder [2.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.3...@webundsoehne/nestjs-seeder@2.0.4) (2022-11-04)
 
 
