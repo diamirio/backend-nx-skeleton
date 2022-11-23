@@ -1,3 +1,9 @@
+## @webundsoehne/nx-workspace [5.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.13...@webundsoehne/nx-workspace@5.0.14) (2022-11-23)
+
+### Bug Fixes
+
+- update pipe command with new method ([ac62c83](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ac62c83774fea5277da8d5ed45c3af172c40735a))
+
 ## @webundsoehne/nx-workspace [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.12...@webundsoehne/nx-workspace@5.0.13) (2022-11-17)
 
 ### Bug Fixes
