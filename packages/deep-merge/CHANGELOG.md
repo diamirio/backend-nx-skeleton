@@ -1,3 +1,11 @@
+## @webundsoehne/deep-merge [2.2.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.5...@webundsoehne/deep-merge@2.2.6) (2022-11-23)
+
+
+### Bug Fixes
+
+* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+
 ## @webundsoehne/deep-merge [2.2.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.4...@webundsoehne/deep-merge@2.2.5) (2022-11-04)
 
 
