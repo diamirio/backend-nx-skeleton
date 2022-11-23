@@ -38,7 +38,6 @@
     "**/@angular-devkit/schematics": "14.2.7"
   },
   "devDependencies": {
-    "@anatine/esbuild-decorators": "^0.2.18",
     "@cenk1cenk2/cz-cc": "^1.5.4",
     "@types/node": "^18.11.8",
     "@types/rimraf": "^3.0.2",
