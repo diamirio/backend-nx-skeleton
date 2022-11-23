@@ -42,4 +42,4 @@ docs:
 semantic-release:
   variables:
     NPM_LOGIN: $NPM_LOGIN
-    RUN_MULTI: 'true'
+    SEMANTIC_RELEASE_WORKSPACE: 'true'

@@ -40,7 +40,7 @@ include:
 #   extends: .docker-common
 #   variables:
 #     DOCKERFILE_CONTEXT: ./dist/apps/app
-#     DOCKER_IMAGE_NAME: app
+#     DOCKER_IMAGE_INTERNAL_NAME: app
 #   only:
 #     changes:
 #       - .gitlab-ci.yml
