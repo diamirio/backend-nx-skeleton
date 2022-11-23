@@ -46,7 +46,8 @@ USAGE
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
+  -p, --path=<value>       [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to apply
+                           patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
 
 DESCRIPTION
@@ -73,8 +74,8 @@ FLAGS
   -d, --directory=<value>   [default: patches] Directory for outputting the patch files.
   -e, --exclude=<value>...  [default: package.json] Exclude given regex patterns.
   -i, --include=<value>...  [default: .*] Include given regex patterns.
-  -p, --path=<value>        [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to take root as the
-                            application.
+  -p, --path=<value>        [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to take root
+                            as the application.
 
 DESCRIPTION
   Creates a new patch from scratch, just point the applications you want as package name.
@@ -148,7 +149,8 @@ USAGE
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/bdsm/nx-skeleton/packages/patch-package] Directory to apply patches to.
+  -p, --path=<value>       [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to apply
+                           patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
 
 DESCRIPTION
