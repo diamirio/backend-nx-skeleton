@@ -1,3 +1,19 @@
+## @webundsoehne/nestjs-util-graphql [2.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@2.0.5...@webundsoehne/nestjs-util-graphql@2.0.6) (2022-11-23)
+
+
+### Bug Fixes
+
+* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 6.0.6
+
 ## @webundsoehne/nestjs-util-graphql [2.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@2.0.4...@webundsoehne/nestjs-util-graphql@2.0.5) (2022-11-14)
 
 
