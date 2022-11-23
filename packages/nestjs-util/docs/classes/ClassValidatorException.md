@@ -33,6 +33,9 @@
 - [initName](ClassValidatorException.md#initname)
 - [captureStackTrace](ClassValidatorException.md#capturestacktrace)
 - [createBody](ClassValidatorException.md#createbody)
+- [extractDescriptionAndOptionsFrom](ClassValidatorException.md#extractdescriptionandoptionsfrom)
+- [getDescriptionFrom](ClassValidatorException.md#getdescriptionfrom)
+- [getHttpExceptionOptionsFrom](ClassValidatorException.md#gethttpexceptionoptionsfrom)
 
 ## Constructors
 
@@ -66,7 +69,7 @@ BadRequestException.cause
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:38
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:58
 
 ___
 
@@ -185,7 +188,7 @@ BadRequestException.getResponse
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:49
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:69
 
 ___
 
@@ -203,7 +206,7 @@ BadRequestException.getStatus
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:50
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:70
 
 ___
 
@@ -227,7 +230,7 @@ BadRequestException.initCause
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:46
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:66
 
 ___
 
@@ -245,7 +248,7 @@ BadRequestException.initMessage
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:47
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:67
 
 ___
 
@@ -263,7 +266,7 @@ BadRequestException.initName
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:48
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:68
 
 ___
 
@@ -296,13 +299,13 @@ ___
 
 ### createBody
 
-▸ `Static` **createBody**(`objectOrError`, `description?`, `statusCode?`): `object`
+▸ `Static` **createBody**(`objectOrErrorMessage`, `description?`, `statusCode?`): `object`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `objectOrError` | `string` \| `object` |
+| `objectOrErrorMessage` | `string` \| `object` |
 | `description?` | `string` |
 | `statusCode?` | `number` |
 
@@ -316,4 +319,81 @@ BadRequestException.createBody
 
 #### Defined in
 
-node_modules/@nestjs/common/exceptions/http.exception.d.ts:51
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:71
+
+___
+
+### extractDescriptionAndOptionsFrom
+
+▸ `Static` **extractDescriptionAndOptionsFrom**(`descriptionOrOptions`): `DescriptionAndOptions`
+
+Utility method used to extract the error description and httpExceptionOptions from the given argument.
+This is used by inheriting classes to correctly parse both options.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
+
+#### Returns
+
+`DescriptionAndOptions`
+
+the error description and the httpExceptionOptions as an object.
+
+#### Inherited from
+
+BadRequestException.extractDescriptionAndOptionsFrom
+
+#### Defined in
+
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:79
+
+___
+
+### getDescriptionFrom
+
+▸ `Static` **getDescriptionFrom**(`descriptionOrOptions`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
+
+#### Returns
+
+`string`
+
+#### Inherited from
+
+BadRequestException.getDescriptionFrom
+
+#### Defined in
+
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:72
+
+___
+
+### getHttpExceptionOptionsFrom
+
+▸ `Static` **getHttpExceptionOptionsFrom**(`descriptionOrOptions`): `HttpExceptionOptions`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
+
+#### Returns
+
+`HttpExceptionOptions`
+
+#### Inherited from
+
+BadRequestException.getHttpExceptionOptionsFrom
+
+#### Defined in
+
+node_modules/@nestjs/common/exceptions/http.exception.d.ts:73
