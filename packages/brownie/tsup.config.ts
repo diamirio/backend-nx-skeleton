@@ -15,6 +15,7 @@ export default defineConfig((options) => ({
 
   sourcemap: options.watch ? true : false,
 
+  bundle: false,
   splitting: false,
   clean: true,
   minify: false,

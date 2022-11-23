@@ -19,11 +19,6 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@anatine/esbuild-decorators@^0.2.18":
-  version "0.2.19"
-  resolved "https://registry.yarnpkg.com/@anatine/esbuild-decorators/-/esbuild-decorators-0.2.19.tgz#d4137182abfdf0e6de680f69b447492813b62ef4"
-  integrity sha512-pyj6ULyMacyzpDqlnbS2OCkOqxcVgk8IqiTMRJ5CrsF8Yl1azvlX/AM6xWR8UzHKUYDlWOw5mOpos3+7KKR0Lw==
-
 "@angular-devkit/architect@0.1402.7", "@angular-devkit/architect@^0.1402.7":
   version "0.1402.7"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1402.7.tgz#4382e9436ab541534891fc0da55512e226d86aa0"
