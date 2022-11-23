@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import cpy from 'cpy'
+import execa from 'execa'
 import rimraf from 'rimraf'
 import { defineConfig } from 'tsup'
 
@@ -50,5 +51,7 @@ export default defineConfig((options) => ({
 
     // eslint-disable-next-line no-console
     console.log('Copied assets:', copied.join(', '))
+
+    await Promise.all([execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr })])
   }
 }))
