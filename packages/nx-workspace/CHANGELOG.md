@@ -1,3 +1,9 @@
+## @webundsoehne/nx-workspace [5.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.12...@webundsoehne/nx-workspace@5.0.13) (2022-11-17)
+
+### Bug Fixes
+
+- update template ([0275ef9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0275ef97b0cc2d781f58c0ca15f024d05b5a3392))
+
 ## @webundsoehne/nx-workspace [5.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.11...@webundsoehne/nx-workspace@5.0.12) (2022-11-17)
 
 ### Bug Fixes
