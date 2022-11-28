@@ -11,16 +11,7 @@ variables:
   # please read through the readme for additional information: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/select-env
   ## DOCKER OPTIONS
   # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
-
-.docker-common:
-  stage: docker
-  trigger:
-    include:
-      # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/docker-build-with-artifacts.gitlab-ci.yml
-      - project: bdsm/gitlab-pipes
-        file: /templates/docker-build-with-artifacts.gitlab-ci.yml
-        ref: main
-    strategy: depend
+  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
 
 stages:
   - install
@@ -32,12 +23,17 @@ include:
   - project: bdsm/gitlab-pipes
     file: /templates/node-nx.gitlab-ci.yml
     ref: main
+  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/v2/docker-build-internal.gitlab-ci.yml
+  - project: bdsm/gitlab-pipes
+    file: /templates/v2/docker-build-internal.gitlab-ci.yml
+    ref: main
 #
 ##################################
 ## add your applications here. ##
 #################################
 # docker-app:
-#   extends: .docker-common
+#   stage: docker
+#   extends: .docker-build-internal
 #   variables:
 #     DOCKERFILE_CONTEXT: ./dist/apps/app
 #     DOCKER_IMAGE_INTERNAL_NAME: app
@@ -49,5 +45,5 @@ include:
 #       - 'libs/**/*'
 #       - 'apps/app/**/*'
 #     refs:
-#       - master
+#       - main
 #       - tags
