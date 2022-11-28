@@ -1,20 +1,21 @@
-## @webundsoehne/nx-workspace [5.0.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.14...@webundsoehne/nx-workspace@5.0.15) (2022-11-23)
-
+## @webundsoehne/nx-workspace [5.0.16](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.15...@webundsoehne/nx-workspace@5.0.16) (2022-11-28)
 
 ### Bug Fixes
 
-* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
-* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+- ditch gl artifact step ([a69fe1c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a69fe1c6483134870b96610b4ab8319fee9c48ed))
 
+## @webundsoehne/nx-workspace [5.0.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.14...@webundsoehne/nx-workspace@5.0.15) (2022-11-23)
 
+### Bug Fixes
 
-
+- do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+- issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.6
-* **@webundsoehne/nx-builders:** upgraded to 6.1.4
-* **@webundsoehne/nx-tools:** upgraded to 6.0.9
+- **@webundsoehne/deep-merge:** upgraded to 2.2.6
+- **@webundsoehne/nx-builders:** upgraded to 6.1.4
+- **@webundsoehne/nx-tools:** upgraded to 6.0.9
 
 ## @webundsoehne/nx-workspace [5.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.13...@webundsoehne/nx-workspace@5.0.14) (2022-11-23)
 
