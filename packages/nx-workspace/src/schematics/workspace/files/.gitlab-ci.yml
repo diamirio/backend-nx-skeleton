@@ -11,7 +11,6 @@ variables:
   # please read through the readme for additional information: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/select-env
   ## DOCKER OPTIONS
   # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
-  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
 
 stages:
   - install
@@ -37,6 +36,8 @@ include:
 #   variables:
 #     DOCKERFILE_CONTEXT: ./dist/apps/app
 #     DOCKER_IMAGE_INTERNAL_NAME: app
+#   dependencies:
+#     - build
 #   only:
 #     changes:
 #       - .gitlab-ci.yml
