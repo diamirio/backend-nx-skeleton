@@ -1,3 +1,9 @@
+## @webundsoehne/nx-workspace [5.0.17](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.16...@webundsoehne/nx-workspace@5.0.17) (2022-12-02)
+
+### Bug Fixes
+
+- **workspace:** extend the example for ci a bit ([d7736fe](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d7736fe38e72445bebdcb67d81405eb2370e08e4))
+
 ## @webundsoehne/nx-workspace [5.0.16](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.15...@webundsoehne/nx-workspace@5.0.16) (2022-11-28)
 
 ### Bug Fixes
