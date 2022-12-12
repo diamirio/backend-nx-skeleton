@@ -19,7 +19,7 @@ let nodeBinaryPath: string
  */
 export function getNodeBinaryPath (bin: string): string {
   if (!nodeBinaryPath) {
-    nodeBinaryPath = execa.sync('npm', ['bin']).stdout
+    nodeBinaryPath = execa.sync('npm', ['exec']).stdout
   }
 
   return join(nodeBinaryPath, bin)
