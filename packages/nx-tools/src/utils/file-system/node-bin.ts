@@ -1,4 +1,3 @@
-import execa from 'execa'
 import { delimiter, dirname, join, normalize } from 'path'
 
 import { findNxRoot } from './find-nx-root'
@@ -8,21 +7,11 @@ import { Logger } from '@utils/logger'
 
 const log = new Logger()
 
-let nodeBinaryPath: string
-
 /**
  * Returns the binary path for a given cli in node_modules.
- *
- * @export
- * @param {string} [bin]
- * @returns  {string}
  */
 export function getNodeBinaryPath (bin: string): string {
-  if (!nodeBinaryPath) {
-    nodeBinaryPath = execa.sync('npm', ['exec']).stdout
-  }
-
-  return join(nodeBinaryPath, bin)
+  return join(findNxRoot(), 'node_modules', '.bin', bin)
 }
 
 export function getNodeBinaryPathExtensions (options?: NodeBinaryPathExtensionsOptions): NodeBinaryPathExtensions | undefined {
