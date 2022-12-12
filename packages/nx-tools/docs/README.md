@@ -2581,7 +2581,7 @@ Returns the relative path from the nx root.
 
 #### Defined in
 
-packages/nx-tools/src/utils/file-system/find-nx-root.ts:32
+packages/nx-tools/src/utils/file-system/find-nx-root.ts:37
 
 ---
 

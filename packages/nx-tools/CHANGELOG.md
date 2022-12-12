@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.11...@webundsoehne/nx-tools@6.0.12) (2022-12-12)
+
+### Bug Fixes
+
+- change finding dirname for nx ([df4d19f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4d19ffc22e38760f95eedbe682dee7dc5d689f))
+
 ## @webundsoehne/nx-tools [6.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.10...@webundsoehne/nx-tools@6.0.11) (2022-12-12)
 
 ### Bug Fixes
