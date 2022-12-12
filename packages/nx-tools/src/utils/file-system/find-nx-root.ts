@@ -15,6 +15,11 @@ export function findNxRoot (options?: { throw?: boolean }): string {
     root = process.env.NX_WORKSPACE_ROOT
   } else {
     root = findUpSync(NX_ROOT_PATTERNS, { cwd: process.cwd(), type: 'file' })
+
+    if (root) {
+      // we actually need the dir name for this
+      root = dirname(root)
+    }
   }
 
   if (!root && options.throw !== false) {
@@ -23,7 +28,7 @@ export function findNxRoot (options?: { throw?: boolean }): string {
     return
   }
 
-  return dirname(root)
+  return root
 }
 
 /**
