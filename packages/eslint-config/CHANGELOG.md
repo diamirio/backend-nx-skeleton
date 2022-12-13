@@ -1,67 +1,63 @@
-## @webundsoehne/eslint-config [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@6.0.0...@webundsoehne/eslint-config@6.0.1) (2022-11-02)
-
+## @webundsoehne/eslint-config [6.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@6.0.1...@webundsoehne/eslint-config@6.0.2) (2022-12-13)
 
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+- update irrelevant fields ([691888a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/691888a429560d4ae15b18002e074ef7df867585))
+
+## @webundsoehne/eslint-config [6.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@6.0.0...@webundsoehne/eslint-config@6.0.1) (2022-11-02)
+
+### Bug Fixes
+
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
 
 # @webundsoehne/eslint-config [6.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.2...@webundsoehne/eslint-config@6.0.0) (2022-10-05)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-* **eslint-config:** disable rule ([fa4506e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fa4506e86c9648bc5dfe0df6cc2e0477cad71b63)), closes [#24](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/24)
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+- **eslint-config:** disable rule ([fa4506e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fa4506e86c9648bc5dfe0df6cc2e0477cad71b63)), closes [#24](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/24)
 
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### BREAKING CHANGES
 
-* uses the new library
+- uses the new library
 
 # @webundsoehne/eslint-config [6.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@6.0.0-beta.1...@webundsoehne/eslint-config@6.0.0-beta.2) (2022-10-05)
 
-
 ### Performance Improvements
 
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 # @webundsoehne/eslint-config [6.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.3-beta.2...@webundsoehne/eslint-config@6.0.0-beta.1) (2022-09-19)
 
-
 ### Performance Improvements
 
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
 
 ### BREAKING CHANGES
 
-* uses the new library
+- uses the new library
 
 ## @webundsoehne/eslint-config [5.2.3-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.3-beta.1...@webundsoehne/eslint-config@5.2.3-beta.2) (2022-08-11)
 
-
 ### Bug Fixes
 
-* **eslint-config:** disable rule ([fa4506e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fa4506e86c9648bc5dfe0df6cc2e0477cad71b63)), closes [#24](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/24)
+- **eslint-config:** disable rule ([fa4506e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/fa4506e86c9648bc5dfe0df6cc2e0477cad71b63)), closes [#24](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/24)
 
 ## @webundsoehne/eslint-config [5.2.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.2...@webundsoehne/eslint-config@5.2.3-beta.1) (2022-08-08)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
 
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ## @webundsoehne/eslint-config [5.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/eslint-config@5.2.1...@webundsoehne/eslint-config@5.2.2) (2022-04-19)
 
