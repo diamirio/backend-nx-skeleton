@@ -2,6 +2,7 @@ import type { BuilderOutput } from '@angular-devkit/architect'
 import { createBuilder } from '@angular-devkit/architect'
 import delay from 'delay'
 import execa from 'execa'
+import { pick, mapValues } from 'lodash'
 
 import type { TsNodeBuilderOptions } from './main.interface'
 import { BaseExecutor, checkPathsExists, getNodeBinaryPathExtensions, pipeProcessToLogger, removePathRoot, runExecutor } from '@webundsoehne/nx-tools'
@@ -62,7 +63,9 @@ class Executor extends BaseExecutor<TsNodeBuilderOptions, ExecaArguments, { tsNo
   }
 
   normalizeOptions (options: TsNodeBuilderOptions): ExecaArguments {
-    const { main, tsConfig, debounce, interval, debug, cwd, environment, inspect } = options
+    const { debounce, interval, debug, environment, inspect } = options
+    const projectRoot = this.context.workspace.projects[this.context.projectName].root
+    const { main, tsConfig, cwd } = mapValues(pick(options, ['main', 'tsConfig', 'cwd']), (val) => (val||'').replace('{projectRoot}', projectRoot))
 
     // default options
     let args = ['-r', 'tsconfig-paths/register']
