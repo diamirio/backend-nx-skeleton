@@ -1,176 +1,132 @@
-## @webundsoehne/nestjs-keycloak-seeder [3.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.4...@webundsoehne/nestjs-keycloak-seeder@3.0.5) (2022-11-23)
-
-
-### Bug Fixes
-
-* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
-* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
-
-
-
-
+## @webundsoehne/nestjs-keycloak-seeder [3.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.5...@webundsoehne/nestjs-keycloak-seeder@3.0.6) (2023-01-25)
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.6
-* **@webundsoehne/ts-utility-types:** upgraded to 2.2.5
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.5
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.6
+
+## @webundsoehne/nestjs-keycloak-seeder [3.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.4...@webundsoehne/nestjs-keycloak-seeder@3.0.5) (2022-11-23)
+
+### Bug Fixes
+
+- do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+- issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 2.2.6
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.5
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.5
 
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.3...@webundsoehne/nestjs-keycloak-seeder@3.0.4) (2022-11-04)
 
-
 ### Bug Fixes
 
-* issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
-
-
-
-
+- issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.5
-* **@webundsoehne/ts-utility-types:** upgraded to 2.2.4
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.4
+- **@webundsoehne/deep-merge:** upgraded to 2.2.5
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.4
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.4
 
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.2...@webundsoehne/nestjs-keycloak-seeder@3.0.3) (2022-11-02)
 
-
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
-
-
-
-
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.4
-* **@webundsoehne/ts-utility-types:** upgraded to 2.2.3
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.3
+- **@webundsoehne/deep-merge:** upgraded to 2.2.4
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.3
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.3
 
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.1...@webundsoehne/nestjs-keycloak-seeder@3.0.2) (2022-10-25)
 
-
 ### Bug Fixes
 
-* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
-
-
-
-
+- fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.2
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.2
 
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.0...@webundsoehne/nestjs-keycloak-seeder@3.0.1) (2022-10-06)
 
-
 ### Bug Fixes
 
-* update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
-
-
-
-
+- update deps ([5d18ba7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5d18ba77d558bffd6a235a0e4e0143b785378328))
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.1
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.1
 
 # @webundsoehne/nestjs-keycloak-seeder [3.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.3.2...@webundsoehne/nestjs-keycloak-seeder@3.0.0) (2022-10-05)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### BREAKING CHANGES
 
-* uses the new library
-
-
-
-
+- uses the new library
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.3
-* **@webundsoehne/ts-utility-types:** upgraded to 2.2.2
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0
+- **@webundsoehne/deep-merge:** upgraded to 2.2.3
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.2
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0
 
 # @webundsoehne/nestjs-keycloak-seeder [3.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.0-beta.1...@webundsoehne/nestjs-keycloak-seeder@3.0.0-beta.2) (2022-10-05)
 
-
 ### Performance Improvements
 
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
-
-
-
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.3
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.3
 
 # @webundsoehne/nestjs-keycloak-seeder [3.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.3.3-beta.1...@webundsoehne/nestjs-keycloak-seeder@3.0.0-beta.1) (2022-09-19)
 
-
 ### Bug Fixes
 
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
 
 ### BREAKING CHANGES
 
-* uses the new library
-
-
-
-
+- uses the new library
 
 ### Dependencies
 
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.2
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.2
 
 ## @webundsoehne/nestjs-keycloak-seeder [2.3.3-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.3.2...@webundsoehne/nestjs-keycloak-seeder@2.3.3-beta.1) (2022-08-08)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
 
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-
-
-
-
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ### Dependencies
 
-* **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
-* **@webundsoehne/ts-utility-types:** upgraded to 2.2.2-beta.1
-* **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.1
+- **@webundsoehne/deep-merge:** upgraded to 2.2.3-beta.1
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.2-beta.1
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.0.0-beta.1
 
 ## @webundsoehne/nestjs-keycloak-seeder [2.3.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@2.3.1...@webundsoehne/nestjs-keycloak-seeder@2.3.2) (2022-06-13)
 
