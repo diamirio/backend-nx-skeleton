@@ -3,12 +3,12 @@ import type { FastifyRequest } from 'fastify'
 
 import type { KeycloakConnectUser } from '@connect/connect.interfaces'
 
-interface RequestWithAuthentication {
-  user?: KeycloakConnectUser
+interface RequestWithAuthentication<User = KeycloakConnectUser> {
+  user?: User
   accessToken?: string
 }
 
-export type EnrichedExpressRequest = RequestWithAuthentication & Request
-export type EnrichedFastifyRequest = RequestWithAuthentication & FastifyRequest
+export type EnrichedExpressRequest<User = KeycloakConnectUser> = RequestWithAuthentication<User> & Request
+export type EnrichedFastifyRequest<User = KeycloakConnectUser> = RequestWithAuthentication<User> & FastifyRequest
 
-export type EnrichedRequest = EnrichedExpressRequest | EnrichedFastifyRequest
+export type EnrichedRequest<User = KeycloakConnectUser> = EnrichedExpressRequest<User> | EnrichedFastifyRequest<User>
