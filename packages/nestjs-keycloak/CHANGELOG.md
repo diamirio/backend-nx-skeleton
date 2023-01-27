@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [3.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.1.0...@webundsoehne/nestjs-keycloak@3.1.1) (2023-01-27)
+
+### Bug Fixes
+
+- **keycloak/keycloak-connect:** export settings since clients can extend ([e369c5b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e369c5b5418e581e723ab4eb3e2ff8829249ce70))
+
 # @webundsoehne/nestjs-keycloak [3.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.0.6...@webundsoehne/nestjs-keycloak@3.1.0) (2023-01-27)
 
 ### Features
