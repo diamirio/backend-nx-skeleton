@@ -4,8 +4,7 @@
 
 [index](../modules/index.md).BaseAuthGuard
 
-Application AuthGuard for Keycloak applications.
-Base for extending it for multiple use cases.
+Application AuthGuard for Keycloak applications. Base for extending it for multiple use cases.
 
 ## Hierarchy
 
@@ -51,11 +50,11 @@ Base for extending it for multiple use cases.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keycloak` | `Keycloak` |
+| Name              | Type                                                                      |
+| :---------------- | :------------------------------------------------------------------------ |
+| `keycloak`        | `Keycloak`                                                                |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector` | `Reflector` |
+| `reflector`       | `Reflector`                                                               |
 
 #### Defined in
 
@@ -71,7 +70,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:27
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:28
 
-___
+---
 
 ### keycloakOptions
 
@@ -81,7 +80,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
-___
+---
 
 ### logger
 
@@ -91,7 +90,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:25
 
-___
+---
 
 ### reflector
 
@@ -109,8 +108,8 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -125,7 +124,7 @@ CanActivate.canActivate
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
 
-___
+---
 
 ### extractBearerToken
 
@@ -134,8 +133,8 @@ ___
 #### Parameters
 
 | Name | Type |
-| :------ | :------ |
-| `request` | [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) |
+| :-- | :-- |
+| `request` | [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
 
 #### Returns
 
@@ -145,7 +144,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:132
 
-___
+---
 
 ### fetchRoles
 
@@ -153,7 +152,7 @@ ___
 
 #### Parameters
 
-| Name | Type |
+| Name    | Type    |
 | :------ | :------ |
 | `grant` | `Grant` |
 
@@ -165,7 +164,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:144
 
-___
+---
 
 ### fetchScopes
 
@@ -173,9 +172,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `roles` | `string`[] |
+| Name               | Type                                               |
+| :----------------- | :------------------------------------------------- |
+| `roles`            | `string`[]                                         |
 | `authorizedScopes` | [`ScopesOption`](../modules/index.md#scopesoption) |
 
 #### Returns
@@ -186,7 +185,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:156
 
-___
+---
 
 ### getExceptionMessage
 
@@ -194,8 +193,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type     |
+| :-------- | :------- |
 | `message` | `string` |
 
 #### Returns
@@ -206,59 +205,59 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:128
 
-___
+---
 
 ### getRequest
 
-▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
+▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
 
-[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
+[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:166
 
-▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
+▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
 
-[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)
+[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
 
-▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
+▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
 
-[`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)
+[`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Defined in
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:168
 
-___
+---
 
 ### validate
 
@@ -266,11 +265,11 @@ ___
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `key` | `string` | `undefined` |
-| `values` | `string`[] | `undefined` |
-| `authorizedValues` | `string`[] | `[]` |
+| Name               | Type       | Default value |
+| :----------------- | :--------- | :------------ |
+| `key`              | `string`   | `undefined`   |
+| `values`           | `string`[] | `undefined`   |
+| `authorizedValues` | `string`[] | `[]`          |
 
 #### Returns
 
@@ -280,7 +279,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:118
 
-___
+---
 
 ### validateRequirements
 
@@ -290,10 +289,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `values` | `string`[] | `undefined` |
-| `required` | `string`[] | `[]` |
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
 
 #### Returns
 

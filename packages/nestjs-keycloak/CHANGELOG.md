@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-keycloak [3.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.0.6...@webundsoehne/nestjs-keycloak@3.1.0) (2023-01-27)
+
+### Features
+
+- make user generic for updates through applications not using keycloak strictly ([f2b8543](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f2b8543446d4958360fddcf0e76372f6ce2356d2))
+
 ## @webundsoehne/nestjs-keycloak [3.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.0.5...@webundsoehne/nestjs-keycloak@3.0.6) (2023-01-25)
 
 ### Bug Fixes

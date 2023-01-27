@@ -4,8 +4,7 @@
 
 [graphql](../modules/graphql.md).AuthGuard
 
-Application AuthGuard for Keycloak applications.
-This only works for GraphQL APIs.
+Application AuthGuard for Keycloak applications. This only works for GraphQL APIs.
 
 ## Hierarchy
 
@@ -37,11 +36,11 @@ This only works for GraphQL APIs.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keycloak` | `Keycloak` |
+| Name              | Type                                                                      |
+| :---------------- | :------------------------------------------------------------------------ |
+| `keycloak`        | `Keycloak`                                                                |
 | `keycloakOptions` | [`KeycloakConnectOptions`](../interfaces/index.KeycloakConnectOptions.md) |
-| `reflector` | `Reflector` |
+| `reflector`       | `Reflector`                                                               |
 
 #### Inherited from
 
@@ -73,8 +72,8 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -89,7 +88,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
 
 packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
 
-___
+---
 
 ### getRequest
 
@@ -98,13 +97,13 @@ ___
 #### Type parameters
 
 | Name | Type |
-| :------ | :------ |
-| `Request` | extends [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest) = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest) |
+| :-- | :-- |
+| `Request` | extends [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
 
 #### Returns
@@ -119,7 +118,7 @@ ___
 
 packages/nestjs-keycloak/src/connect/guards/auth-graphql.guard.ts:14
 
-___
+---
 
 ### validateRequirements
 
@@ -129,10 +128,10 @@ Validate given condition to match the required values.
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `values` | `string`[] | `undefined` |
-| `required` | `string`[] | `[]` |
+| Name       | Type       | Default value |
+| :--------- | :--------- | :------------ |
+| `values`   | `string`[] | `undefined`   |
+| `required` | `string`[] | `[]`          |
 
 #### Returns
 
