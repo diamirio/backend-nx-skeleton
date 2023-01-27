@@ -40,7 +40,7 @@ export class KeycloakConnectModule {
           inject: [KEYCLOAK_CONNECT_OPTIONS]
         }
       ],
-      exports: [KEYCLOAK_CONNECT_INSTANCE]
+      exports: [KEYCLOAK_CONNECT_INSTANCE, KEYCLOAK_CONNECT_OPTIONS]
     }
   }
 }
