@@ -1,9 +1,10 @@
 import type { CanActivate, ExecutionContext } from '@nestjs/common'
 import { ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
-import { Keycloak } from 'keycloak-connect'
 import type { Grant } from 'keycloak-connect'
+import { Keycloak } from 'keycloak-connect'
 
+import type { AuthGuardRequestData } from './guard.interface'
 import {
   KEYCLOAK_CONNECT_METADATA_GROUPS,
   KEYCLOAK_CONNECT_METADATA_ROLES,
@@ -11,7 +12,7 @@ import {
   KEYCLOAK_CONNECT_METADATA_UNPROTECTED
 } from '@connect/connect.constants'
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import type { KeycloakConnectUserInfo, ScopesOption, KeycloakConnectOptions, KeycloakConnectUser } from '@connect/connect.interfaces'
+import type { KeycloakConnectOptions, KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
 import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
 import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
@@ -105,7 +106,7 @@ export abstract class BaseAuthGuard implements CanActivate {
   /**
    * Attachs the related values inside the scoped user request for identification.
    */
-  protected attachToRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest>(request: Request, data: { accessToken: string, user: KeycloakConnectUser }): void {
+  protected attachToRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest>(request: Request, data: AuthGuardRequestData): void {
     request.accessToken = data.accessToken
     request.user = data.user
   }
