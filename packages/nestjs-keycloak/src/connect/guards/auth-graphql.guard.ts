@@ -11,7 +11,11 @@ import type { EnrichedFastifyRequest, EnrichedExpressRequest } from '@interfaces
  */
 @Injectable()
 export class AuthGuard extends BaseAuthGuard {
-  getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
+  static getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
     return GqlExecutionContext.create(context).getContext().req ?? context.switchToHttp().getRequest()
+  }
+
+  getRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest = EnrichedFastifyRequest>(context: ExecutionContext): Request {
+    return AuthGuard.getRequest(context)
   }
 }
