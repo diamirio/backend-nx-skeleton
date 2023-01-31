@@ -1,6 +1,6 @@
 import type { KeycloakConnectUser } from '@connect/connect.interfaces'
 
-export interface AuthGuardRequestData {
-  accessToken: string
+export interface AuthGuardRequestAttachment {
+  token: string
   user: KeycloakConnectUser
 }

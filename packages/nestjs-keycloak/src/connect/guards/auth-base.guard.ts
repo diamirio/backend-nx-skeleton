@@ -4,7 +4,7 @@ import { Reflector } from '@nestjs/core'
 import type { Grant } from 'keycloak-connect'
 import { Keycloak } from 'keycloak-connect'
 
-import type { AuthGuardRequestData } from './guard.interface'
+import type { AuthGuardRequestAttachment } from './guard.interface'
 import {
   KEYCLOAK_CONNECT_METADATA_GROUPS,
   KEYCLOAK_CONNECT_METADATA_ROLES,
@@ -15,7 +15,7 @@ import {
 import type { KeycloakConnectOptions, KeycloakConnectUserInfo, ScopesOption } from '@connect/connect.interfaces'
 import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
-import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
+import type { EnrichedExpressRequest, EnrichedFastifyRequest, EnrichedRequest } from '@interfaces/request.interface'
 
 /**
  * Application AuthGuard for Keycloak applications.
@@ -39,7 +39,7 @@ export abstract class BaseAuthGuard implements CanActivate {
       return true
     }
 
-    const request: EnrichedFastifyRequest | EnrichedExpressRequest = this.getRequest(context)
+    const request: EnrichedRequest = this.getRequest(context)
 
     const token = this.extractBearerToken(request)
 
@@ -76,8 +76,8 @@ export abstract class BaseAuthGuard implements CanActivate {
         Object.values(this.keycloakOptions?.scopes || {}).filter((scope) => !(this.keycloakOptions?.scopesUnauthorized || []).includes(scope))
       )
 
-      this.attachToRequest(request, {
-        accessToken: token,
+      await this.attachToRequest(request, {
+        token,
         user: {
           id: user.sub as string,
           username: user.preferred_username as string,
@@ -106,8 +106,8 @@ export abstract class BaseAuthGuard implements CanActivate {
   /**
    * Attachs the related values inside the scoped user request for identification.
    */
-  protected attachToRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest>(request: Request, data: AuthGuardRequestData): void {
-    request.accessToken = data.accessToken
+  protected attachToRequest (request: EnrichedRequest<any>, data: AuthGuardRequestAttachment): void | Promise<void> {
+    request.accessToken = data.token
     request.user = data.user
   }
 
@@ -140,7 +140,7 @@ export abstract class BaseAuthGuard implements CanActivate {
     return this.keycloakOptions?.exceptionMessages?.[message] || ExceptionMessagesFallback?.[message]
   }
 
-  private extractBearerToken (request: EnrichedExpressRequest | EnrichedFastifyRequest): string {
+  private extractBearerToken (request: EnrichedRequest): string {
     if (request?.headers?.authorization) {
       const [type, token] = (request.headers.authorization as string).split(' ')
 
@@ -174,7 +174,7 @@ export abstract class BaseAuthGuard implements CanActivate {
     }, [])
   }
 
-  abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest | EnrichedExpressRequest
+  abstract getRequest (context: ExecutionContext): EnrichedRequest
   abstract getRequest (context: ExecutionContext): EnrichedFastifyRequest
   abstract getRequest (context: ExecutionContext): EnrichedExpressRequest
 }
