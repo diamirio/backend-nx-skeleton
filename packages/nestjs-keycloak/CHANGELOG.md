@@ -1,3 +1,15 @@
+# @webundsoehne/nestjs-keycloak [3.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.1.1...@webundsoehne/nestjs-keycloak@3.2.0) (2023-01-31)
+
+### Bug Fixes
+
+- **keycloak:** update attachment methodology ([30ffed1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/30ffed1d44923f94fca85036685d5af78a99ad33))
+- **keycloak:** use interface for request data instead of directly using it ([e700c3b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e700c3bde9d2742c6c1c3055c97577de598bfbbc))
+
+### Features
+
+- **keycloak:** ability to overwrite what is attached to the request ([de1f5b8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de1f5b8edfdd9cfabfd858c0667f70e277a241dd))
+- **keycloak:** add get request as a static property ([b26c0b6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b26c0b655f479d1c4fb247239d6a844817c68305))
+
 ## @webundsoehne/nestjs-keycloak [3.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.1.0...@webundsoehne/nestjs-keycloak@3.1.1) (2023-01-27)
 
 ### Bug Fixes

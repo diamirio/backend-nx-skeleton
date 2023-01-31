@@ -17,6 +17,7 @@
 
 ### Interfaces
 
+- [AuthGuardRequestAttachment](../interfaces/index.AuthGuardRequestAttachment.md)
 - [ExceptionMessagesOption](../interfaces/index.ExceptionMessagesOption.md)
 - [KeycloakAdminOptions](../interfaces/index.KeycloakAdminOptions.md)
 - [KeycloakConnectOptions](../interfaces/index.KeycloakConnectOptions.md)

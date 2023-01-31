@@ -33,6 +33,7 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 
 ### Methods
 
+- [attachToRequest](index.BaseAuthGuard.md#attachtorequest)
 - [canActivate](index.BaseAuthGuard.md#canactivate)
 - [extractBearerToken](index.BaseAuthGuard.md#extractbearertoken)
 - [fetchRoles](index.BaseAuthGuard.md#fetchroles)
@@ -58,7 +59,7 @@ Application AuthGuard for Keycloak applications. Base for extending it for multi
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:27
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:28
 
 ## Properties
 
@@ -68,7 +69,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:27
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:28
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 ---
 
@@ -78,7 +79,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:28
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
 
 ---
 
@@ -88,7 +89,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:29
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:25
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:26
 
 ---
 
@@ -98,9 +99,32 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:25
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:30
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:31
 
 ## Methods
+
+### attachToRequest
+
+▸ `Protected` **attachToRequest**(`request`, `data`): `void` \| `Promise`<`void`\>
+
+Attachs the related values inside the scoped user request for identification.
+
+#### Parameters
+
+| Name      | Type                                                                              |
+| :-------- | :-------------------------------------------------------------------------------- |
+| `request` | [`EnrichedRequest`](../modules/index.md#enrichedrequest)<`any`\>                  |
+| `data`    | [`AuthGuardRequestAttachment`](../interfaces/index.AuthGuardRequestAttachment.md) |
+
+#### Returns
+
+`void` \| `Promise`<`void`\>
+
+#### Defined in
+
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:109
+
+---
 
 ### canActivate
 
@@ -122,7 +146,7 @@ CanActivate.canActivate
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:34
 
 ---
 
@@ -132,9 +156,9 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
 
 #### Parameters
 
-| Name | Type |
-| :-- | :-- |
-| `request` | [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
+| Name      | Type                                                                                                                           |
+| :-------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| `request` | [`EnrichedRequest`](../modules/index.md#enrichedrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
 
 #### Returns
 
@@ -142,7 +166,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:33
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:132
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:143
 
 ---
 
@@ -162,7 +186,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:132
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:144
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:155
 
 ---
 
@@ -183,7 +207,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:144
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:156
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
 
 ---
 
@@ -203,13 +227,13 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:156
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:128
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:139
 
 ---
 
 ### getRequest
 
-▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
+▸ `Abstract` **getRequest**(`context`): [`EnrichedRequest`](../modules/index.md#enrichedrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Parameters
 
@@ -219,11 +243,11 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:128
 
 #### Returns
 
-[`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
+[`EnrichedRequest`](../modules/index.md#enrichedrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:166
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:177
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
@@ -239,7 +263,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:166
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:178
 
 ▸ `Abstract` **getRequest**(`context`): [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\>
 
@@ -255,7 +279,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:167
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:168
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:179
 
 ---
 
@@ -277,7 +301,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:168
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:118
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:129
 
 ---
 
@@ -300,4 +324,4 @@ Validate given condition to match the required values.
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:106
+packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:117
