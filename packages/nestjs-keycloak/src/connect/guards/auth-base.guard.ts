@@ -11,7 +11,7 @@ import {
   KEYCLOAK_CONNECT_METADATA_UNPROTECTED
 } from '@connect/connect.constants'
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import type { KeycloakConnectUserInfo, ScopesOption, KeycloakConnectOptions } from '@connect/connect.interfaces'
+import type { KeycloakConnectUserInfo, ScopesOption, KeycloakConnectOptions, KeycloakConnectUser } from '@connect/connect.interfaces'
 import { ExceptionMessagesFallback } from '@connect/connect.interfaces'
 import { InjectKeycloakConnect, InjectKeycloakConnectOptions } from '@connect/decorators'
 import type { EnrichedExpressRequest, EnrichedFastifyRequest } from '@interfaces/request.interface'
@@ -75,16 +75,18 @@ export abstract class BaseAuthGuard implements CanActivate {
         Object.values(this.keycloakOptions?.scopes || {}).filter((scope) => !(this.keycloakOptions?.scopesUnauthorized || []).includes(scope))
       )
 
-      request.accessToken = token
-      request.user = {
-        id: user.sub as string,
-        username: user.preferred_username as string,
-        email: user.email as string,
-        verified: user.email_verified as boolean,
-        groups,
-        roles,
-        scopes
-      }
+      this.attachToRequest(request, {
+        accessToken: token,
+        user: {
+          id: user.sub as string,
+          username: user.preferred_username as string,
+          email: user.email as string,
+          verified: user.email_verified as boolean,
+          groups,
+          roles,
+          scopes
+        }
+      })
 
       return true
     } catch (error) {
@@ -98,6 +100,14 @@ export abstract class BaseAuthGuard implements CanActivate {
       // deny and raise default unauthorized message
       throw new UnauthorizedException(this.getExceptionMessage('default'))
     }
+  }
+
+  /**
+   * Attachs the related values inside the scoped user request for identification.
+   */
+  protected attachToRequest<Request extends EnrichedFastifyRequest | EnrichedExpressRequest>(request: Request, data: { accessToken: string, user: KeycloakConnectUser }): void {
+    request.accessToken = data.accessToken
+    request.user = data.user
   }
 
   /**
