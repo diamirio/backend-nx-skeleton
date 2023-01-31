@@ -127,7 +127,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:34
 
 | Name | Type |
 | :-- | :-- |
-| `Request` | extends [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
+| `Request` | extends [`EnrichedRequest`](../modules/index.md#enrichedrequest)<`any`\> = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
 
 #### Parameters
 
@@ -145,7 +145,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:34
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:17
+packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:18
 
 ---
 
@@ -184,7 +184,7 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:117
 
 | Name | Type |
 | :-- | :-- |
-| `Request` | extends [`EnrichedExpressRequest`](../modules/index.md#enrichedexpressrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> \| [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
+| `Request` | extends [`EnrichedRequest`](../modules/index.md#enrichedrequest)<`any`\> = [`EnrichedFastifyRequest`](../modules/index.md#enrichedfastifyrequest)<[`KeycloakConnectUser`](../interfaces/index.KeycloakConnectUser.md)\> |
 
 #### Parameters
 
@@ -198,4 +198,4 @@ packages/nestjs-keycloak/src/connect/guards/auth-base.guard.ts:117
 
 #### Defined in
 
-packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:13
+packages/nestjs-keycloak/src/connect/guards/auth-restful.guard.ts:14

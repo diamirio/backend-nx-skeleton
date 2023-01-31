@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak [3.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.2.0...@webundsoehne/nestjs-keycloak@3.2.1) (2023-01-31)
+
+### Bug Fixes
+
+- **keycloak:** update type arguments for more extensibility ([6f83223](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6f832234132221a03edd63e2b0890c5a84d8551b))
+
 # @webundsoehne/nestjs-keycloak [3.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak@3.1.1...@webundsoehne/nestjs-keycloak@3.2.0) (2023-01-31)
 
 ### Bug Fixes
