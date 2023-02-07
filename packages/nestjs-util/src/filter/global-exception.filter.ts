@@ -13,7 +13,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   static defaultPayload (exception: any): EnrichedException {
     return new EnrichedExceptionError({
       statusCode: typeof exception?.status === 'number' ? exception?.status : HttpStatus.INTERNAL_SERVER_ERROR,
-      error: exception?.error ?? exception.message,
+      error: exception?.response?.error ?? exception?.error ?? exception?.constructor?.name ?? 'Error',
       message: getErrorMessage(exception),
       service: exception?.service
     })
