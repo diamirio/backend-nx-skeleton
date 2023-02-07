@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-keycloak-seeder [3.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.12...@webundsoehne/nestjs-keycloak-seeder@3.0.13) (2023-02-07)
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 3.0.1
+
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.11...@webundsoehne/nestjs-keycloak-seeder@3.0.12) (2023-02-07)
 
 ### Dependencies
