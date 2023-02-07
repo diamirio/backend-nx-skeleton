@@ -1,48 +1,46 @@
 import merge from 'deepmerge'
 
+import type { DeepPartial } from '@webundsoehne/ts-utility-types'
+
 // deep merge all does not work in all cases
 
 /**
  * Merge objects with defaults.
  *
  * Mutates the object.
- * @param t
- * @param s
  */
-export function deepMerge<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return s.reduce((o, val) => {
-    return merge(o, val ?? {})
-  }, t) as T
+export function deepMerge<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+  return deepMergeWithUniqueMergeArray(t, ...s)
 }
 
 /**
  * Merge objects with array merge and filtering them uniquely.
  *
  * Mutates the object.
- * @param t
- * @param s
  */
-export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return s.reduce((o, val) => {
-    return merge(o, val ?? {}, {
+export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+  return merge.all([
+    t,
+    ...s ?? [],
+    {
       arrayMerge: (target, source) => [...target, ...source].filter(uniqueArrayFilter)
-    })
-  }, t) as T
+    }
+  ]) as T
 }
 
 /**
  * Merge objects with overwriting the target array with source array.
  *
  * Mutates the object.
- * @param t
- * @param s
  */
-export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T, ...s: Partial<T>[]): T {
-  return s.reduce((o, val) => {
-    return merge(o, val ?? {}, {
+export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+  return merge.all([
+    t,
+    ...s ?? [],
+    {
       arrayMerge: (_, source) => source
-    })
-  }, t) as T
+    }
+  ]) as T
 }
 
 /**
