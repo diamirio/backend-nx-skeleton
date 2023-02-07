@@ -13,9 +13,7 @@ export type ValueOf<T> = T[keyof T]
 /**
  * Makes the object deep partial.
  */
-export type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>
-}
+export type DeepPartial<T> = T extends object ? { [P in keyof T]?: T[P] | DeepPartial<T[P]> } : T
 
 /**
  * Removes the readonly properties from the object.

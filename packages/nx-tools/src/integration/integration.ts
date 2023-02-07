@@ -33,7 +33,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
   }
 
   if (project) {
-    updated = options?.arrayOverwrite === false ? deepMergeWithUniqueMergeArray(project, { integration }) : deepMergeWithArrayOverwrite(project, { integration })
+    updated = options?.arrayOverwrite === false ? deepMergeWithUniqueMergeArray(project, { integration } as any) : deepMergeWithArrayOverwrite(project, { integration } as any)
   }
 
   updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)
@@ -62,7 +62,7 @@ export function updateNxJsonIntegrationRule<T extends Record<PropertyKey, any> =
   }
 
   if (current) {
-    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(current, integration) : deepMergeWithUniqueMergeArray(current, integration)
+    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(current, integration as any) : deepMergeWithUniqueMergeArray(current, integration as any)
   }
 
   return updateNxJsonInTree((json) => {

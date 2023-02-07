@@ -9,7 +9,7 @@ import type { DeepPartial } from '@webundsoehne/ts-utility-types'
  *
  * Mutates the object.
  */
-export function deepMerge<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+export function deepMerge<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
   return deepMergeWithUniqueMergeArray(t, ...s)
 }
 
@@ -18,7 +18,7 @@ export function deepMerge<T extends Record<string, any>> (t: T, ...s: DeepPartia
  *
  * Mutates the object.
  */
-export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+export function deepMergeWithUniqueMergeArray<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
   return merge.all([
     t,
     ...s ?? [],
@@ -33,7 +33,7 @@ export function deepMergeWithUniqueMergeArray<T extends Record<string, any>> (t:
  *
  * Mutates the object.
  */
-export function deepMergeWithArrayOverwrite<T extends Record<string, any>> (t: T, ...s: DeepPartial<T>[]): T {
+export function deepMergeWithArrayOverwrite<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
   return merge.all([
     t,
     ...s ?? [],
