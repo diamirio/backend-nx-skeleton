@@ -1,3 +1,9 @@
+## @webundsoehne/deep-merge [3.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@3.0.0...@webundsoehne/deep-merge@3.0.1) (2023-02-07)
+
+### Bug Fixes
+
+- **deep-merge:** typo ([ade99b9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/ade99b93326d34ab1eef3ec003714e3a331b66e6))
+
 # @webundsoehne/deep-merge [3.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@2.2.6...@webundsoehne/deep-merge@3.0.0) (2023-02-07)
 
 ### Bug Fixes

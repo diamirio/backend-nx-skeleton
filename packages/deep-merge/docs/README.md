@@ -71,7 +71,7 @@ Mutates the object.
 
 #### Defined in
 
-merge.ts:36
+merge.ts:32
 
 ---
 
@@ -126,4 +126,4 @@ A standard array filter for filtering it to unique items.
 
 #### Defined in
 
-merge.ts:49
+merge.ts:41
