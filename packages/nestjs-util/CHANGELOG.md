@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [6.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.8...@webundsoehne/nestjs-util@6.0.9) (2023-02-07)
+
+### Bug Fixes
+
+- **nestjs-util:** global exception handler error fallback chain ([9d5ea8f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9d5ea8fe3ba32109a03c81a70e492a2f55457a78))
+
 ## @webundsoehne/nestjs-util [6.0.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.7...@webundsoehne/nestjs-util@6.0.8) (2023-02-07)
 
 ### Dependencies
