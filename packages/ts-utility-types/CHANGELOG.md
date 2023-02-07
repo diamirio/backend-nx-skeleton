@@ -1,38 +1,39 @@
-## @webundsoehne/ts-utility-types [2.2.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.4...@webundsoehne/ts-utility-types@2.2.5) (2022-11-23)
-
+## @webundsoehne/ts-utility-types [2.2.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.5...@webundsoehne/ts-utility-types@2.2.6) (2023-02-07)
 
 ### Bug Fixes
 
-* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
-* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+- typing issues ([9b0efc3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9b0efc385f560fa6cfa45e39f33ed48560ae2d2e))
+
+## @webundsoehne/ts-utility-types [2.2.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.4...@webundsoehne/ts-utility-types@2.2.5) (2022-11-23)
+
+### Bug Fixes
+
+- do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+- issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
 
 ## @webundsoehne/ts-utility-types [2.2.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.3...@webundsoehne/ts-utility-types@2.2.4) (2022-11-04)
 
-
 ### Bug Fixes
 
-* issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
+- issues with missing types on packages ([de76566](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/de76566d5010c050398723c812a6761f9b63a4de))
 
 ## @webundsoehne/ts-utility-types [2.2.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.2...@webundsoehne/ts-utility-types@2.2.3) (2022-11-02)
 
-
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
 
 ## @webundsoehne/ts-utility-types [2.2.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.1...@webundsoehne/ts-utility-types@2.2.2) (2022-10-05)
 
-
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ## @webundsoehne/ts-utility-types [2.2.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.1...@webundsoehne/ts-utility-types@2.2.2-beta.1) (2022-08-08)
 
-
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ## @webundsoehne/ts-utility-types [2.2.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.0...@webundsoehne/ts-utility-types@2.2.1) (2022-06-13)
 

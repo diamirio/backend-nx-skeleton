@@ -25,15 +25,15 @@ Fetches a single element from the array if array is homogeneous in types.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name        | Type                         |
+| :---------- | :--------------------------- |
 | `ArrayType` | extends readonly `unknown`[] |
 
 #### Defined in
 
 array.ts:4
 
-___
+---
 
 ### Await
 
@@ -44,14 +44,14 @@ Since Awaited is missing from older Typescript versions, this takes in place to 
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
 function.ts:4
 
-___
+---
 
 ### ConfigEnvironmentVariables
 
@@ -62,32 +62,32 @@ Updates every key to support node-config environment variable format and makes i
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
 config.ts:4
 
-___
+---
 
 ### DeepPartial
 
-Ƭ **DeepPartial**<`T`\>: { [P in keyof T]?: DeepPartial<T[P]\> }
+Ƭ **DeepPartial**<`T`\>: `T` extends `object` ? { [P in keyof T]?: T[P] \| DeepPartial<T[P]\> } : `T`
 
 Makes the object deep partial.
 
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
 object.ts:16
 
-___
+---
 
 ### DeepWriteable
 
@@ -98,14 +98,14 @@ Removes the readonly properties from the object recursively.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
-object.ts:28
+object.ts:26
 
-___
+---
 
 ### InferedObjectType
 
@@ -115,16 +115,16 @@ Infers the object type.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\>[] |
-| `K` | extends keyof [`ArrayElement`](README.md#arrayelement)<`T`\> |
+| Name | Type                                                         |
+| :--- | :----------------------------------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\>[]                         |
+| `K`  | extends keyof [`ArrayElement`](README.md#arrayelement)<`T`\> |
 
 #### Defined in
 
 object.ts:6
 
-___
+---
 
 ### ValueOf
 
@@ -135,14 +135,14 @@ Fetches the type of value of an object property if object is homogeneous.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
 object.ts:11
 
-___
+---
 
 ### Writeable
 
@@ -153,9 +153,9 @@ Removes the readonly properties from the object.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
-object.ts:23
+object.ts:21
