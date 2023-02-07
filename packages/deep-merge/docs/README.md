@@ -23,16 +23,16 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
-| `...s` | `Partial`<`T`\>[] |
+| Name   | Type                  |
+| :----- | :-------------------- |
+| `t`    | `T`                   |
+| `...s` | `DeepPartial`<`T`\>[] |
 
 #### Returns
 
@@ -42,7 +42,7 @@ Mutates the object.
 
 merge.ts:12
 
-___
+---
 
 ### deepMergeWithArrayOverwrite
 
@@ -54,16 +54,16 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
-| `...s` | `Partial`<`T`\>[] |
+| Name   | Type                  |
+| :----- | :-------------------- |
+| `t`    | `T`                   |
+| `...s` | `DeepPartial`<`T`\>[] |
 
 #### Returns
 
@@ -71,9 +71,9 @@ Mutates the object.
 
 #### Defined in
 
-merge.ts:40
+merge.ts:36
 
-___
+---
 
 ### deepMergeWithUniqueMergeArray
 
@@ -85,16 +85,16 @@ Mutates the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `T` |
-| `...s` | `Partial`<`T`\>[] |
+| Name   | Type                  |
+| :----- | :-------------------- |
+| `t`    | `T`                   |
+| `...s` | `DeepPartial`<`T`\>[] |
 
 #### Returns
 
@@ -102,9 +102,9 @@ Mutates the object.
 
 #### Defined in
 
-merge.ts:25
+merge.ts:21
 
-___
+---
 
 ### uniqueArrayFilter
 
@@ -114,11 +114,11 @@ A standard array filter for filtering it to unique items.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | `any` |
+| Name    | Type     |
+| :------ | :------- |
+| `item`  | `any`    |
 | `index` | `number` |
-| `array` | `any`[] |
+| `array` | `any`[]  |
 
 #### Returns
 
@@ -126,4 +126,4 @@ A standard array filter for filtering it to unique items.
 
 #### Defined in
 
-merge.ts:51
+merge.ts:49
