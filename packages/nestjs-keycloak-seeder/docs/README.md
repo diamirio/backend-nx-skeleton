@@ -13,7 +13,7 @@
 
 ### Variables
 
-- [KEYCLOAK\_SEEDER\_SEEDS](README.md#keycloak_seeder_seeds)
+- [KEYCLOAK_SEEDER_SEEDS](README.md#keycloak_seeder_seeds)
 
 ### Functions
 
@@ -23,13 +23,13 @@
 
 ## Variables
 
-### KEYCLOAK\_SEEDER\_SEEDS
+### KEYCLOAK_SEEDER_SEEDS
 
-• `Const` **KEYCLOAK\_SEEDER\_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
+• `Const` **KEYCLOAK_SEEDER_SEEDS**: typeof [`KEYCLOAK_SEEDER_SEEDS`](README.md#keycloak_seeder_seeds)
 
 #### Defined in
 
-constants/injection.constants.ts:1
+nestjs-keycloak-seeder/src/constants/injection.constants.ts:1
 
 ## Functions
 
@@ -47,11 +47,11 @@ Injects Keyclaok admin instance initiated to the service.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                           |
+| :------- | :----------------------------- |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key` | `string` \| `symbol` |
-| `index?` | `number` |
+| `key`    | `string` \| `symbol`           |
+| `index?` | `number`                       |
 
 ##### Returns
 
@@ -59,9 +59,9 @@ Injects Keyclaok admin instance initiated to the service.
 
 #### Defined in
 
-module/decorators/inject.decorator.ts:8
+nestjs-keycloak-seeder/src/module/decorators/inject.decorator.ts:8
 
-___
+---
 
 ### filterMatchingPropertyFromData
 
@@ -71,20 +71,20 @@ Returns the matched data.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K` | extends `string` \| `number` \| `symbol` |
-| `P` | extends `string` \| `number` \| `symbol` |
+| Name | Type                                      |
+| :--- | :---------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K`  | extends `string` \| `number` \| `symbol`  |
+| `P`  | extends `string` \| `number` \| `symbol`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-| `compare` | `K` |
-| `values` | `InferedObjectType`<`T`, `K`\>[] |
-| `fetch` | `P` |
+| Name      | Type                             |
+| :-------- | :------------------------------- |
+| `data`    | `T`                              |
+| `compare` | `K`                              |
+| `values`  | `InferedObjectType`<`T`, `K`\>[] |
+| `fetch`   | `P`                              |
 
 #### Returns
 
@@ -92,9 +92,9 @@ Returns the matched data.
 
 #### Defined in
 
-utils/keycloak-filter.ts:24
+nestjs-keycloak-seeder/src/utils/keycloak-filter.ts:24
 
-___
+---
 
 ### getMatchingPropertyFromData
 
@@ -104,20 +104,20 @@ Matchs a data and returns another property of the object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`PropertyKey`, `any`\>[] |
-| `K` | extends `string` \| `number` \| `symbol` |
-| `P` | extends `string` \| `number` \| `symbol` |
+| Name | Type                                      |
+| :--- | :---------------------------------------- |
+| `T`  | extends `Record`<`PropertyKey`, `any`\>[] |
+| `K`  | extends `string` \| `number` \| `symbol`  |
+| `P`  | extends `string` \| `number` \| `symbol`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-| `compare` | `K` |
-| `value` | `InferedObjectType`<`T`, `K`\> |
-| `fetch` | `P` |
+| Name      | Type                           |
+| :-------- | :----------------------------- |
+| `data`    | `T`                            |
+| `compare` | `K`                            |
+| `value`   | `InferedObjectType`<`T`, `K`\> |
+| `fetch`   | `P`                            |
 
 #### Returns
 
@@ -125,4 +125,4 @@ Matchs a data and returns another property of the object.
 
 #### Defined in
 
-utils/keycloak-filter.ts:6
+nestjs-keycloak-seeder/src/utils/keycloak-filter.ts:6

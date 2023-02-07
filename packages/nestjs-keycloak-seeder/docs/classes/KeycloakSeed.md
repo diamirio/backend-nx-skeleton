@@ -27,13 +27,13 @@ A singular seed that should be extended from, for seeding Keycloak.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
 | `keycloak` | [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md) |
 
 #### Defined in
 
-interfaces/keycloak-seed.ts:11
+nestjs-keycloak-seeder/src/interfaces/keycloak-seed.ts:11
 
 ## Properties
 
@@ -43,9 +43,9 @@ interfaces/keycloak-seed.ts:11
 
 #### Defined in
 
-interfaces/keycloak-seed.ts:11
+nestjs-keycloak-seeder/src/interfaces/keycloak-seed.ts:11
 
-___
+---
 
 ### logger
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-interfaces/keycloak-seed.ts:9
+nestjs-keycloak-seeder/src/interfaces/keycloak-seed.ts:9
 
 ## Methods
 
@@ -67,4 +67,4 @@ interfaces/keycloak-seed.ts:9
 
 #### Defined in
 
-interfaces/keycloak-seed.ts:13
+nestjs-keycloak-seeder/src/interfaces/keycloak-seed.ts:13

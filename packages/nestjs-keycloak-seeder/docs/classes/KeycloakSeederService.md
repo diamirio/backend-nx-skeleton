@@ -28,14 +28,14 @@ Seeder service to run all the seeds that has been passed to it.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                                      |
+| :--------- | :-------------------------------------------------------- |
 | `keycloak` | [`KeycloakAdminSeederTools`](KeycloakAdminSeederTools.md) |
-| `seeds` | `KeycloakSeeds` |
+| `seeds`    | `KeycloakSeeds`                                           |
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:16
+nestjs-keycloak-seeder/src/module/keycloak-seeder.service.ts:16
 
 ## Properties
 
@@ -45,9 +45,9 @@ module/keycloak-seeder.service.ts:16
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:16
+nestjs-keycloak-seeder/src/module/keycloak-seeder.service.ts:16
 
-___
+---
 
 ### logger
 
@@ -55,9 +55,9 @@ ___
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:14
+nestjs-keycloak-seeder/src/module/keycloak-seeder.service.ts:14
 
-___
+---
 
 ### seeds
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:16
+nestjs-keycloak-seeder/src/module/keycloak-seeder.service.ts:16
 
 ## Methods
 
@@ -81,4 +81,4 @@ Run all the seeds.
 
 #### Defined in
 
-module/keycloak-seeder.service.ts:21
+nestjs-keycloak-seeder/src/module/keycloak-seeder.service.ts:21
