@@ -1,3 +1,13 @@
+## @webundsoehne/nx-tools [6.0.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.12...@webundsoehne/nx-tools@6.0.13) (2023-02-07)
+
+### Bug Fixes
+
+- typing issues ([9b0efc3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9b0efc385f560fa6cfa45e39f33ed48560ae2d2e))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 3.0.0
+
 ## @webundsoehne/nx-tools [6.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.11...@webundsoehne/nx-tools@6.0.12) (2022-12-12)
 
 ### Bug Fixes
