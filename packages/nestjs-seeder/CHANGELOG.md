@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-seeder [2.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.6...@webundsoehne/nestjs-seeder@2.0.7) (2023-02-07)
+
+### Dependencies
+
+- **@webundsoehne/ts-utility-types:** upgraded to 2.2.7
+
 ## @webundsoehne/nestjs-seeder [2.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.5...@webundsoehne/nestjs-seeder@2.0.6) (2023-02-07)
 
 ### Dependencies
