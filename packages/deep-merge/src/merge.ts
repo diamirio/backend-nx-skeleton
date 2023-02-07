@@ -19,13 +19,9 @@ export function deepMerge<T extends Record<PropertyKey, any>> (t: T, ...s: DeepP
  * Mutates the object.
  */
 export function deepMergeWithUniqueMergeArray<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
-  return merge.all([
-    t,
-    ...s ?? [],
-    {
-      arrayMerge: (target, source) => [...target, ...source].filter(uniqueArrayFilter)
-    }
-  ]) as T
+  return merge.all([t, ...s ?? []], {
+    arrayMerge: (target, source) => [...target, ...source].filter(uniqueArrayFilter)
+  }) as T
 }
 
 /**
@@ -34,13 +30,9 @@ export function deepMergeWithUniqueMergeArray<T extends Record<PropertyKey, any>
  * Mutates the object.
  */
 export function deepMergeWithArrayOverwrite<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
-  return merge.all([
-    t,
-    ...s ?? [],
-    {
-      arrayMerge: (_, source) => source
-    }
-  ]) as T
+  return merge.all([t, ...s ?? []], {
+    arrayMerge: (_, source) => source
+  }) as T
 }
 
 /**
