@@ -73,7 +73,7 @@ config.ts:4
 
 ### DeepPartial
 
-Ƭ **DeepPartial**<`T`\>: `T` extends `object` ? { [P in keyof T]?: T[P] \| DeepPartial<T[P]\> } : `T`
+Ƭ **DeepPartial**<`T`\>: `T` extends `Record`<`PropertyKey`, `any`\> ? { [P in keyof T]?: T[P] \| DeepPartial<T[P]\> } : `T`
 
 Makes the object deep partial.
 

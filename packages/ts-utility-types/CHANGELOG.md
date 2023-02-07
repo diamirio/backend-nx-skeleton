@@ -1,3 +1,9 @@
+## @webundsoehne/ts-utility-types [2.2.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.6...@webundsoehne/ts-utility-types@2.2.7) (2023-02-07)
+
+### Bug Fixes
+
+- **deep-merge:** typing ([9883b0e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/9883b0e72f1f546db16e609ab732bd26774d3bf5))
+
 ## @webundsoehne/ts-utility-types [2.2.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.5...@webundsoehne/ts-utility-types@2.2.6) (2023-02-07)
 
 ### Bug Fixes
