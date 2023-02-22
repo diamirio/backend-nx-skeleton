@@ -1,3 +1,18 @@
+# @webundsoehne/nestjs-util [7.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.9...@webundsoehne/nestjs-util@7.0.0) (2023-02-22)
+
+### Bug Fixes
+
+- if stack trace is missing dont log undefined ([001efdc](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/001efdcc3eb6332a5cded09cc6743fee60ead187))
+- update graphql error parsing ([2de5d54](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/2de5d543dea2bc5d9c5b827d59d57bbff806330f))
+
+### Performance Improvements
+
+- **nestjs-util:** error handling and filters ([f49d8aa](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f49d8aa3dbadf5f60c7b64342bee28b71a63860f))
+
+### BREAKING CHANGES
+
+- **nestjs-util:** Completely breaks how errors was handled before to mitigate always getting 500 errors.
+
 # @webundsoehne/nestjs-util [7.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0-beta.2...@webundsoehne/nestjs-util@7.0.0-beta.3) (2023-02-22)
 
 ### Bug Fixes
