@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [7.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0-beta.1...@webundsoehne/nestjs-util@7.0.0-beta.2) (2023-02-22)
+
+### Bug Fixes
+
+- if stack trace is missing dont log undefined ([001efdc](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/001efdcc3eb6332a5cded09cc6743fee60ead187))
+
 # @webundsoehne/nestjs-util [7.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.9...@webundsoehne/nestjs-util@7.0.0-beta.1) (2023-02-22)
 
 ### Performance Improvements
