@@ -55,7 +55,7 @@ BadRequestException.constructor
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:7
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:13
 
 ## Properties
 
@@ -121,7 +121,7 @@ node_modules/typescript/lib/lib.es5.d.ts:1042
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:5
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:11
 
 ---
 

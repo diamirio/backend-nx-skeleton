@@ -11,6 +11,7 @@
 ### Properties
 
 - [cause](EnrichedException.md#cause)
+- [code](EnrichedException.md#code)
 - [error](EnrichedException.md#error)
 - [errors](EnrichedException.md#errors)
 - [message](EnrichedException.md#message)
@@ -22,21 +23,31 @@
 
 ### cause
 
-• `Optional` **cause**: `Error`
+• `Optional` **cause**: `string` \| `Error`
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:26
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:9
+
+---
+
+### code
+
+• `Optional` **code**: `string`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:15
 
 ---
 
 ### error
 
-• **error**: `string`
+• **error**: `string` \| `Error`
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:24
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:7
 
 ---
 
@@ -46,7 +57,7 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:24
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:27
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:12
 
 ---
 
@@ -56,7 +67,7 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:27
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:25
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:8
 
 ---
 
@@ -66,7 +77,7 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:25
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:28
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:18
 
 ---
 
@@ -76,7 +87,7 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:28
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:29
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:21
 
 ---
 
@@ -86,4 +97,4 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:29
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:23
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:6
