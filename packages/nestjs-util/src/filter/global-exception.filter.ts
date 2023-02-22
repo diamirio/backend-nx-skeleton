@@ -69,8 +69,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       break
 
     case 'graphql':
-      this.reply(response, payload.statusCode, JSON.stringify(payload))
-
       break
 
     default:
