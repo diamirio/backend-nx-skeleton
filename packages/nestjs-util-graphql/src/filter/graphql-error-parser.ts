@@ -1,16 +1,21 @@
 import type { GraphQLError, GraphQLFormattedError } from 'graphql/error'
 
 import { GraphQLPreformattedException } from './interface'
-import { EnrichedExceptionError } from '@webundsoehne/nestjs-util'
+import type { EnrichedException } from '@webundsoehne/nestjs-util'
 
 export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedError {
-  const extensions = new EnrichedExceptionError({
-    code: exception?.extensions.code,
-    ...(exception?.extensions as any)?.response ?? {}
-  })
+  const extensions = exception.extensions.response as EnrichedException
+
+  const message = structuredClone(extensions.message)
+
+  delete extensions.message
 
   return new GraphQLPreformattedException({
     ...exception,
-    extensions
+    message,
+    extensions: {
+      code: exception.extensions.code,
+      ...extensions
+    }
   }) as unknown as GraphQLFormattedError
 }
