@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-util-graphql [3.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@3.0.1...@webundsoehne/nestjs-util-graphql@3.0.2) (2023-02-22)
+
+### Bug Fixes
+
+- issues with graphql error filter ([0e9f5e8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0e9f5e8bb657fefcefb8c446fef830f97bfcd175))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.0.2
+
 ## @webundsoehne/nestjs-util-graphql [3.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@3.0.0...@webundsoehne/nestjs-util-graphql@3.0.1) (2023-02-22)
 
 ### Dependencies
