@@ -16,6 +16,7 @@ Mostly required for making instanceof check of graphql valid after version 15.0.
 
 ### Properties
 
+- [cause](EnrichedExceptionError.md#cause)
 - [error](EnrichedExceptionError.md#error)
 - [errors](EnrichedExceptionError.md#errors)
 - [message](EnrichedExceptionError.md#message)
@@ -31,15 +32,29 @@ Mostly required for making instanceof check of graphql valid after version 15.0.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type                                                      |
+| :------ | :-------------------------------------------------------- |
 | `error` | [`EnrichedException`](../interfaces/EnrichedException.md) |
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:25
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:17
 
 ## Properties
+
+### cause
+
+• `Optional` **cause**: `Error`
+
+#### Implementation of
+
+[EnrichedException](../interfaces/EnrichedException.md).[cause](../interfaces/EnrichedException.md#cause)
+
+#### Defined in
+
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:12
+
+---
 
 ### error
 
@@ -51,9 +66,9 @@ packages/nestjs-util/src/filter/exception.interface.ts:25
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:19
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:10
 
-___
+---
 
 ### errors
 
@@ -65,9 +80,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:21
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:13
 
-___
+---
 
 ### message
 
@@ -79,9 +94,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:20
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:11
 
-___
+---
 
 ### service
 
@@ -93,9 +108,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:22
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:14
 
-___
+---
 
 ### stacktrace
 
@@ -107,9 +122,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:23
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:15
 
-___
+---
 
 ### statusCode
 
@@ -121,4 +136,4 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:18
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:9

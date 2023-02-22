@@ -10,6 +10,7 @@
 
 ### Properties
 
+- [cause](EnrichedException.md#cause)
 - [error](EnrichedException.md#error)
 - [errors](EnrichedException.md#errors)
 - [message](EnrichedException.md#message)
@@ -19,15 +20,25 @@
 
 ## Properties
 
+### cause
+
+• `Optional` **cause**: `Error`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:26
+
+---
+
 ### error
 
 • **error**: `string`
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:32
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:24
 
-___
+---
 
 ### errors
 
@@ -35,9 +46,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:34
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:27
 
-___
+---
 
 ### message
 
@@ -45,9 +56,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:33
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:25
 
-___
+---
 
 ### service
 
@@ -55,9 +66,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:35
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:28
 
-___
+---
 
 ### stacktrace
 
@@ -65,9 +76,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:36
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:29
 
-___
+---
 
 ### statusCode
 
@@ -75,4 +86,4 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:31
+packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:23

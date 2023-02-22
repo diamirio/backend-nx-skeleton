@@ -49,8 +49,8 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                    |
+| :--------- | :---------------------- |
 | `options?` | `ValidationPipeOptions` |
 
 #### Overrides
@@ -75,7 +75,7 @@ ValidationPipe.errorHttpStatusCode
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:25
 
-___
+---
 
 ### exceptionFactory
 
@@ -87,8 +87,8 @@ ___
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                |
+| :------- | :------------------ |
 | `errors` | `ValidationError`[] |
 
 ##### Returns
@@ -103,7 +103,7 @@ ValidationPipe.exceptionFactory
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:27
 
-___
+---
 
 ### expectedType
 
@@ -117,7 +117,7 @@ ValidationPipe.expectedType
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:26
 
-___
+---
 
 ### isDetailedOutputDisabled
 
@@ -131,7 +131,7 @@ ValidationPipe.isDetailedOutputDisabled
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:22
 
-___
+---
 
 ### isTransformEnabled
 
@@ -145,7 +145,7 @@ ValidationPipe.isTransformEnabled
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:21
 
-___
+---
 
 ### transformOptions
 
@@ -159,7 +159,7 @@ ValidationPipe.transformOptions
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:24
 
-___
+---
 
 ### validateCustomDecorators
 
@@ -173,7 +173,7 @@ ValidationPipe.validateCustomDecorators
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:28
 
-___
+---
 
 ### validatorOptions
 
@@ -201,8 +201,8 @@ node_modules/@nestjs/common/pipes/validation.pipe.d.ts:23
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                | Type                |
+| :------------------ | :------------------ |
 | `validationErrors?` | `ValidationError`[] |
 
 ##### Returns
@@ -217,7 +217,7 @@ ValidationPipe.createExceptionFactory
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:33
 
-___
+---
 
 ### flattenValidationErrors
 
@@ -225,8 +225,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name               | Type                |
+| :----------------- | :------------------ |
 | `validationErrors` | `ValidationError`[] |
 
 #### Returns
@@ -241,7 +241,7 @@ ValidationPipe.flattenValidationErrors
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:40
 
-___
+---
 
 ### isPrimitive
 
@@ -249,8 +249,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type      |
+| :------ | :-------- |
 | `value` | `unknown` |
 
 #### Returns
@@ -265,7 +265,7 @@ ValidationPipe.isPrimitive
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:38
 
-___
+---
 
 ### loadTransformer
 
@@ -273,8 +273,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                  | Type                 |
+| :-------------------- | :------------------- |
 | `transformerPackage?` | `TransformerPackage` |
 
 #### Returns
@@ -289,7 +289,7 @@ ValidationPipe.loadTransformer
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:31
 
-___
+---
 
 ### loadValidator
 
@@ -297,8 +297,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                | Type               |
+| :------------------ | :----------------- |
 | `validatorPackage?` | `ValidatorPackage` |
 
 #### Returns
@@ -313,7 +313,7 @@ ValidationPipe.loadValidator
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:30
 
-___
+---
 
 ### mapChildrenToValidationErrors
 
@@ -321,10 +321,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `error` | `ValidationError` |
-| `parentPath?` | `string` |
+| Name          | Type              |
+| :------------ | :---------------- |
+| `error`       | `ValidationError` |
+| `parentPath?` | `string`          |
 
 #### Returns
 
@@ -338,7 +338,7 @@ ValidationPipe.mapChildrenToValidationErrors
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:41
 
-___
+---
 
 ### prependConstraintsWithParentProp
 
@@ -346,10 +346,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `parentPath` | `string` |
-| `error` | `ValidationError` |
+| Name         | Type              |
+| :----------- | :---------------- |
+| `parentPath` | `string`          |
+| `error`      | `ValidationError` |
 
 #### Returns
 
@@ -363,7 +363,7 @@ ValidationPipe.prependConstraintsWithParentProp
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:42
 
-___
+---
 
 ### stripProtoKeys
 
@@ -371,8 +371,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type  |
+| :------ | :---- |
 | `value` | `any` |
 
 #### Returns
@@ -387,7 +387,7 @@ ValidationPipe.stripProtoKeys
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:37
 
-___
+---
 
 ### toEmptyIfNil
 
@@ -395,16 +395,16 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | `any` |
-| `R` | `any` |
+| Name | Type  |
+| :--- | :---- |
+| `T`  | `any` |
+| `R`  | `any` |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `T` |
+| Name    | Type |
+| :------ | :--- |
+| `value` | `T`  |
 
 #### Returns
 
@@ -418,7 +418,7 @@ ValidationPipe.toEmptyIfNil
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:36
 
-___
+---
 
 ### toValidate
 
@@ -426,8 +426,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type               |
+| :--------- | :----------------- |
 | `metadata` | `ArgumentMetadata` |
 
 #### Returns
@@ -442,7 +442,7 @@ ValidationPipe.toValidate
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:34
 
-___
+---
 
 ### transform
 
@@ -450,9 +450,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `any` |
+| Name       | Type               |
+| :--------- | :----------------- |
+| `value`    | `any`              |
 | `metadata` | `ArgumentMetadata` |
 
 #### Returns
@@ -465,9 +465,9 @@ ValidationPipe.transform
 
 #### Defined in
 
-packages/nestjs-util/src/pipes/validation.pipe.ts:16
+packages/nestjs-util/src/pipes/validation.pipe.ts:15
 
-___
+---
 
 ### transformPrimitive
 
@@ -475,9 +475,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `any` |
+| Name       | Type               |
+| :--------- | :----------------- |
+| `value`    | `any`              |
 | `metadata` | `ArgumentMetadata` |
 
 #### Returns
@@ -492,7 +492,7 @@ ValidationPipe.transformPrimitive
 
 node_modules/@nestjs/common/pipes/validation.pipe.d.ts:35
 
-___
+---
 
 ### validate
 
@@ -500,9 +500,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `object` | `object` |
+| Name                | Type               |
+| :------------------ | :----------------- |
+| `object`            | `object`           |
 | `validatorOptions?` | `ValidatorOptions` |
 
 #### Returns
