@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.2...@webundsoehne/nestjs-util@7.0.3) (2023-02-22)
+
+### Bug Fixes
+
+- dont double log ([61f2c0e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/61f2c0e8cc29bd05d4d3472972de6e1490bd5cd8))
+
 ## @webundsoehne/nestjs-util [7.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.1...@webundsoehne/nestjs-util@7.0.2) (2023-02-22)
 
 ### Bug Fixes

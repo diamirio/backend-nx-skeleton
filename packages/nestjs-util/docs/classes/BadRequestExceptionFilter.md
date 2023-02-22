@@ -76,7 +76,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:57
+packages/nestjs-util/src/filter/global-exception.filter.ts:59
 
 ---
 
@@ -126,7 +126,7 @@ packages/nestjs-util/src/filter/bad-request-exception.filter.ts:30
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:101
+packages/nestjs-util/src/filter/global-exception.filter.ts:103
 
 ---
 
@@ -150,7 +150,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:101
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:87
+packages/nestjs-util/src/filter/global-exception.filter.ts:89
 
 ---
 
