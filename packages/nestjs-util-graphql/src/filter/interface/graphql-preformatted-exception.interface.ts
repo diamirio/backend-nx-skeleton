@@ -6,9 +6,9 @@ export class GraphQLPreformattedException<T extends Record<string, any>> extends
   public extensions: ExtendedGraphQLFormattedError<T>['extensions']
 
   constructor (error: ExtendedGraphQLFormattedError<T>) {
-    const err = super()
+    super()
 
-    Object.assign(this, err, error)
+    Object.assign(this, error)
   }
 }
 

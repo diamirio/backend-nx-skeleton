@@ -4,7 +4,7 @@ import type { Observable } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
 import type { Request } from '@webundsoehne/nestjs-util'
-import { getDuration } from '@webundsoehne/nestjs-util'
+import { isExpressResponse, isFastifyResponse, getDuration, isFastifyRequest, isExpressRequest } from '@webundsoehne/nestjs-util'
 
 export class RequestProfilerInterceptor implements NestInterceptor {
   private readonly logger = new Logger(this.constructor.name)
@@ -12,7 +12,13 @@ export class RequestProfilerInterceptor implements NestInterceptor {
   requestProfilerLog (context: ExecutionContext, method: string, url: string, start: number, end: number): void {
     const httpContext = context.switchToHttp()
     const response: Request = httpContext.getResponse()
-    const statusCode = (response as any)?.statusCode ?? response?.raw?.statusCode ?? 'UNDEF'
+    let statusCode: number | string = 'UNDEF'
+
+    if (isFastifyResponse(response)) {
+      statusCode = response.raw.statusCode
+    } else if (isExpressResponse(response)) {
+      statusCode = response.statusCode
+    }
 
     this.logger.log(['%s %s finished - %d - took: %d sec', method, url, statusCode, getDuration(start, end).toFixed(3)])
   }
@@ -21,8 +27,16 @@ export class RequestProfilerInterceptor implements NestInterceptor {
     const httpContext = context.switchToHttp()
     const request: Request = httpContext.getRequest()
 
-    const url = request.url ?? request.raw.url ?? ''
-    const method = String(request.method ?? request.raw.method ?? '').toUpperCase()
+    let url = ''
+    let method = ''
+
+    if (isFastifyRequest(request)) {
+      url = request.raw.url
+      method = String(request.raw.method).toUpperCase()
+    } else if (isExpressRequest(request)) {
+      url = request.url
+      method = String(request.method).toUpperCase()
+    }
 
     this.logger.log(['%s %s starting...', method, url])
 
