@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [7.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0...@webundsoehne/nestjs-util@7.0.1) (2023-02-22)
+
+### Bug Fixes
+
+- update detection of response type ([7aef7a7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7aef7a7ba85ba4bd3072bf0ecc786952d5e0d5aa))
+- update guards ([5189a56](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5189a56f822d41471526c54ea5496a5adc74d0a7))
+
 # @webundsoehne/nestjs-util [7.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.9...@webundsoehne/nestjs-util@7.0.0) (2023-02-22)
 
 ### Bug Fixes
