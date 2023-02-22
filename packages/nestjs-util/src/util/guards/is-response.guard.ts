@@ -11,16 +11,16 @@ export function isResponse (response: unknown): response is Response {
   return false
 }
 
-export function isFastifyResponse (response: unknown): response is FastifyReply {
-  if (typeof response === 'object' && response.hasOwnProperty('code')) {
+export function isFastifyResponse (response: Response): response is FastifyReply {
+  if (typeof response === 'object' && response.hasOwnProperty('raw')) {
     return true
   }
 
   return false
 }
 
-export function isExpressResponse (response: unknown): response is ExpressResponse {
-  if (typeof response === 'object' && !response.hasOwnProperty('code') && response.hasOwnProperty('status')) {
+export function isExpressResponse (response: Response): response is ExpressResponse {
+  if (typeof response === 'object' && !response.hasOwnProperty('raw')) {
     return true
   }
 
