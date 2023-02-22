@@ -49,6 +49,8 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
   static debug (logger: Logger, payload: EnrichedException): void {
     if (payload.stacktrace) {
       logger.debug(['[%s] - "%s"%s%s', payload.statusCode, payload.message, EOL, payload.stacktrace])
+
+      return
     }
 
     logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
