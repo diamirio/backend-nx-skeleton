@@ -1,17 +1,16 @@
-import type { ArgumentsHost, RpcExceptionFilter } from '@nestjs/common'
-import { Catch, HttpException, Logger } from '@nestjs/common'
-import { RpcException } from '@nestjs/microservices'
+import type { ArgumentsHost, RpcExceptionFilter, HttpException } from '@nestjs/common'
+import { Catch, Logger } from '@nestjs/common'
+import type { RpcException } from '@nestjs/microservices'
 import { throwError } from 'rxjs'
 
 import { EnrichedExceptionError, GlobalExceptionFilter } from '@webundsoehne/nestjs-util'
 import type { EnrichedException } from '@webundsoehne/nestjs-util'
-import { logErrorDebugMsg } from '@webundsoehne/nestjs-util/dist/filter/util'
 
-@Catch(HttpException, RpcException)
+@Catch()
 export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
   private logger = new Logger(this.constructor.name)
 
-  static defaultPayload (exception: RpcException | HttpException, host: ArgumentsHost): EnrichedException {
+  static defaultPayload (exception: RpcException | HttpException | Error, host: ArgumentsHost): EnrichedException {
     return new EnrichedExceptionError({
       ...GlobalExceptionFilter.defaultPayload(exception),
       service: host
@@ -22,15 +21,15 @@ export class RpcGlobalExceptionFilter implements RpcExceptionFilter {
     })
   }
 
-  catch (exception: RpcException | HttpException, host: ArgumentsHost): any {
+  catch (exception: RpcException | HttpException | Error, host: ArgumentsHost): any {
     const payload = this.payload(exception, host)
 
-    logErrorDebugMsg(this.logger, payload, exception.stack)
+    GlobalExceptionFilter.debug(this.logger, payload)
 
     return throwError(() => payload)
   }
 
-  protected payload (exception: RpcException | HttpException, host: ArgumentsHost): EnrichedException {
+  protected payload (exception: RpcException | HttpException | Error, host: ArgumentsHost): EnrichedException {
     return RpcGlobalExceptionFilter.defaultPayload(exception, host)
   }
 }

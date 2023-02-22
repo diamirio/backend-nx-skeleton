@@ -20,17 +20,17 @@
 
 ### ExtendedGraphQLFormattedError
 
-Ƭ **ExtendedGraphQLFormattedError**<`T`\>: `Omit`<`GraphQLFormattedError`, ``"extensions"``\> & { `extensions`: `T`  }
+Ƭ **ExtendedGraphQLFormattedError**<`T`\>: `Omit`<`GraphQLFormattedError`, `"extensions"`\> & { `extensions`: `T` }
 
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:15
+packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception.interface.ts:15
 
 ## Functions
 
@@ -40,8 +40,8 @@ packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:15
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name        | Type           |
+| :---------- | :------------- |
 | `exception` | `GraphQLError` |
 
 #### Returns
@@ -50,4 +50,4 @@ packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:15
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:11
+packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:6

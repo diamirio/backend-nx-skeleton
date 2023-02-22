@@ -45,10 +45,10 @@ interceptor/request-profiler.interceptor.ts:10
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `ExecutionContext` |
-| `next` | `CallHandler`<`any`\> |
+| Name      | Type                  |
+| :-------- | :-------------------- |
+| `context` | `ExecutionContext`    |
+| `next`    | `CallHandler`<`any`\> |
 
 #### Returns
 
@@ -60,9 +60,9 @@ NestInterceptor.intercept
 
 #### Defined in
 
-interceptor/request-profiler.interceptor.ts:20
+interceptor/request-profiler.interceptor.ts:26
 
-___
+---
 
 ### requestProfilerLog
 
@@ -70,13 +70,13 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type               |
+| :-------- | :----------------- |
 | `context` | `ExecutionContext` |
-| `method` | `string` |
-| `url` | `string` |
-| `start` | `number` |
-| `end` | `number` |
+| `method`  | `string`           |
+| `url`     | `string`           |
+| `start`   | `number`           |
+| `end`     | `number`           |
 
 #### Returns
 

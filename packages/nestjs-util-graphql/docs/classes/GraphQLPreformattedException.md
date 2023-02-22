@@ -4,9 +4,9 @@
 
 ## Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 ## Hierarchy
 
@@ -47,14 +47,14 @@
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `T`  | extends `Record`<`string`, `any`\> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type                                                                                |
+| :------ | :---------------------------------------------------------------------------------- |
 | `error` | [`ExtendedGraphQLFormattedError`](../README.md#extendedgraphqlformattederror)<`T`\> |
 
 #### Overrides
@@ -63,7 +63,7 @@ Error.constructor
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:8
+packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception.interface.ts:8
 
 ## Properties
 
@@ -77,9 +77,9 @@ GraphQLFormattedError.extensions
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:6
+packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception.interface.ts:6
 
-___
+---
 
 ### locations
 
@@ -91,9 +91,9 @@ GraphQLFormattedError.locations
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:4
+packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception.interface.ts:4
 
-___
+---
 
 ### message
 
@@ -111,7 +111,7 @@ Error.message
 
 node_modules/typescript/lib/lib.es5.d.ts:1041
 
-___
+---
 
 ### name
 
@@ -125,7 +125,7 @@ Error.name
 
 node_modules/typescript/lib/lib.es5.d.ts:1040
 
-___
+---
 
 ### path
 
@@ -137,9 +137,9 @@ GraphQLFormattedError.path
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-exception.interface.ts:5
+packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception.interface.ts:5
 
-___
+---
 
 ### stack
 
@@ -153,7 +153,7 @@ Error.stack
 
 node_modules/typescript/lib/lib.es5.d.ts:1042
 
-___
+---
 
 ### prepareStackTrace
 
@@ -171,9 +171,9 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
+| Name          | Type         |
+| :------------ | :----------- |
+| `err`         | `Error`      |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -188,7 +188,7 @@ Error.prepareStackTrace
 
 node_modules/@types/node/ts4.8/globals.d.ts:11
 
-___
+---
 
 ### stackTraceLimit
 
@@ -212,9 +212,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `targetObject` | `object` |
+| Name              | Type       |
+| :---------------- | :--------- |
+| `targetObject`    | `object`   |
 | `constructorOpt?` | `Function` |
 
 #### Returns

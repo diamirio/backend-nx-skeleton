@@ -1,15 +1,6 @@
-import type { HttpStatus, ValidationError } from '@nestjs/common'
-import { BadRequestException } from '@nestjs/common'
+import type { HttpStatus } from '@nestjs/common'
 
-export class ClassValidatorException extends BadRequestException {
-  public validation: Partial<ValidationError[]>
-
-  constructor (validation: Partial<ValidationError[]>) {
-    const error = super()
-
-    Object.assign(this, error, { validation })
-  }
-}
+import type { ClassValidatorError } from './class-validator-exception.interface'
 
 /**
  * Mostly required for making instanceof check of graphql valid after version 15.0.3
@@ -18,6 +9,7 @@ export class EnrichedExceptionError implements EnrichedException {
   public statusCode: HttpStatus
   public error: string
   public message: string
+  public cause?: Error
   public errors?: string[] | ClassValidatorError[]
   public service?: string[]
   public stacktrace?: string
@@ -31,13 +23,8 @@ export interface EnrichedException {
   statusCode: HttpStatus
   error: string
   message: string
+  cause?: Error
   errors?: string[] | ClassValidatorError[]
   service?: string[]
   stacktrace?: string
-}
-
-export interface ClassValidatorError {
-  property: string
-  constraints: string[]
-  messages: string[]
 }

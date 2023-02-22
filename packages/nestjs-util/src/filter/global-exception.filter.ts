@@ -1,50 +1,104 @@
 import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common'
 import { Catch, HttpStatus, Logger } from '@nestjs/common'
-import type { FastifyRequest, FastifyReply } from 'fastify'
+import type { GqlContextType } from '@nestjs/graphql'
+import { EOL } from 'os'
 
-import type { EnrichedException } from './exception.interface'
-import { EnrichedExceptionError } from './exception.interface'
-import { getErrorMessage, ignoreErrors, logErrorDebugMsg } from './util'
+import { isEnrichedException, isHttpException } from './guard'
+import type { EnrichedException } from './interface'
+import { EnrichedExceptionError } from './interface'
+import type { Response } from '@interface'
+import { isExpressResponse, isFastifyResponse } from '@util'
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
   protected logger = new Logger(this.constructor.name)
 
   static defaultPayload (exception: any): EnrichedException {
+    if (isEnrichedException(exception)) {
+      return exception
+    } else if (isHttpException(exception)) {
+      return new EnrichedExceptionError({
+        statusCode: exception.getStatus(),
+        error: exception.name,
+        message: exception.message,
+        cause: exception.cause,
+        stacktrace: exception.stack
+      })
+    }
+
     return new EnrichedExceptionError({
-      statusCode: typeof exception?.status === 'number' ? exception?.status : HttpStatus.INTERNAL_SERVER_ERROR,
-      error: exception?.response?.error ?? exception?.error ?? exception?.constructor?.name ?? 'Error',
-      message: getErrorMessage(exception),
-      service: exception?.service
+      statusCode: exception?.statusCode ?? exception?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      error: exception?.response?.error ?? exception?.error ?? exception?.constructor?.name ?? Error.name,
+      message: GlobalExceptionFilter.formatMessage(exception),
+      service: exception?.service,
+      cause: exception?.cause,
+      stacktrace: exception?.stack
     })
   }
 
+  static formatMessage (error: string | Error): string | undefined {
+    if (typeof error === 'string') {
+      return error
+    } else if (typeof error === 'object' && typeof error?.message === 'string') {
+      return error.message
+    }
+
+    return JSON.stringify(error, null, 2)
+  }
+
+  static debug (logger: Logger, payload: EnrichedException): void {
+    if (payload.stacktrace) {
+      logger.debug(['[%s] - "%s"%s%s', payload.statusCode, payload.message, EOL, payload.stacktrace])
+    }
+
+    logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
+  }
+
   catch (exception: Error, host: ArgumentsHost): void {
-    const ctx = host.switchToHttp()
-    const request: FastifyRequest = ctx.getRequest()
-    const response: FastifyReply = ctx.getResponse()
-
-    const payload = this.payload(exception)
-
-    // messages to avoid
-    if (ignoreErrors(exception)) {
+    if (this.shouldIgnore(exception)) {
       return
     }
 
-    if (request && response?.send) {
-      logErrorDebugMsg(this.logger, payload, exception.stack)
+    const ctx = host.switchToHttp()
+    const response: Response = ctx.getResponse()
 
-      // do not handle internal error mechanisms
-      if (response.code) {
-        void response.code(payload.statusCode).send(payload)
-      } else {
-        void response.status(payload.statusCode)
-        void response.send(payload)
-      }
+    const payload = this.payload(exception)
+
+    switch (host.getType<GqlContextType>()) {
+    case 'rpc':
+      break
+
+    case 'graphql':
+      break
+
+    default:
+      this.reply(response, payload.statusCode, payload)
+
+      GlobalExceptionFilter.debug(this.logger, payload)
     }
+  }
+
+  // ignore some errors that you do not want to log
+  protected shouldIgnore (exception: Error): boolean {
+    const ignoredMessages = ['favicon.ico']
+
+    if (exception.message) {
+      return ignoredMessages.some((err) => exception.message.match(err))
+    }
+
+    return false
   }
 
   protected payload (exception?: Error): EnrichedException {
     return GlobalExceptionFilter.defaultPayload(exception)
+  }
+
+  protected reply (response: Response, code: number, payload: EnrichedExceptionError | string): void {
+    if (isFastifyResponse(response)) {
+      void response.code(code).send(payload)
+    } else if (isExpressResponse(response)) {
+      void response.status(code)
+      void response.send(payload)
+    }
   }
 }

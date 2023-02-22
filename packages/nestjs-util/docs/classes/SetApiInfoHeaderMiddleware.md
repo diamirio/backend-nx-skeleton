@@ -30,11 +30,11 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `_req` | `FastifyRequest`<`RouteGenericInterface`, `RawServerDefault`, `IncomingMessage`, `FastifySchema`, `FastifyTypeProviderDefault`, `unknown`, `FastifyBaseLogger`, `ResolveFastifyRequestType`<`FastifyTypeProviderDefault`, `FastifySchema`, `RouteGenericInterface`\>\> |
-| `res` | `any` |
-| `next` | () => `any` |
+| Name   | Type                              |
+| :----- | :-------------------------------- |
+| `_req` | [`Request`](../README.md#request) |
+| `res`  | `any`                             |
+| `next` | () => `any`                       |
 
 #### Returns
 
@@ -46,4 +46,4 @@ NestMiddleware.use
 
 #### Defined in
 
-packages/nestjs-util/src/middleware/info-header.ts:5
+packages/nestjs-util/src/middleware/info-header.ts:6

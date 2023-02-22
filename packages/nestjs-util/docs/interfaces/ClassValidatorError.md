@@ -18,9 +18,9 @@
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:41
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:16
 
-___
+---
 
 ### messages
 
@@ -28,9 +28,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:42
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:17
 
-___
+---
 
 ### property
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:40
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:15

@@ -1,14 +1,15 @@
 import type { ArgumentsHost, ExceptionFilter, OnApplicationShutdown } from '@nestjs/common'
 import { Catch } from '@nestjs/common'
-import type { FastifyReply } from 'fastify'
+import type * as Sentry from '@sentry/node'
 
 // please do not use static imports from @sentry here, as it's an optional dependency of the module
 import { ConfigService } from '../provider'
 import { GlobalExceptionFilter } from './global-exception.filter'
+import type { Response } from '@interface'
 
 @Catch()
 export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implements ExceptionFilter, OnApplicationShutdown {
-  private sentry
+  private sentry: typeof Sentry
   private initialized = false
   private readonly options? = ConfigService.get('sentry')
 
@@ -65,6 +66,10 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
     this.logger.log('Sentry.io initialized successfully. Uncaught exceptions will be reported...')
   }
 
+  async onApplicationShutdown (): Promise<void> {
+    await this.sentry.close()
+  }
+
   catch (exception: Error, host: ArgumentsHost): void {
     super.catch(exception, host)
 
@@ -75,7 +80,7 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
     }
 
     const ctx = host.switchToHttp()
-    const response: FastifyReply = ctx.getResponse()
+    const response: Response = ctx.getResponse()
 
     // only report unhandled exceptions identified as such by base handler
     if (!this.options?.reportAll && response?.statusCode < 500) {
@@ -87,9 +92,5 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
     } catch (sentryException) {
       this.logger.warn(['Sentry error: %s', sentryException.message])
     }
-  }
-
-  async onApplicationShutdown (): Promise<void> {
-    await this.sentry.close()
   }
 }

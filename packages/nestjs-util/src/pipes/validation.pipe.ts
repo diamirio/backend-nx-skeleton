@@ -1,13 +1,12 @@
 import type { ArgumentMetadata, ValidationError } from '@nestjs/common'
 import { Injectable, ValidationPipe, ValidationPipeOptions } from '@nestjs/common'
 
-import { ClassValidatorException } from '@filter/exception.interface'
+import { ClassValidatorException } from '@filter'
 
 @Injectable()
 export class ExtendedValidationPipe extends ValidationPipe {
   constructor (options?: ValidationPipeOptions) {
     super({
-      whitelist: true,
       exceptionFactory: (errors: ValidationError[]): ClassValidatorException => new ClassValidatorException(errors),
       ...options
     })

@@ -1,3 +1,29 @@
+# @webundsoehne/nestjs-util-microservices [3.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.0-beta.2...@webundsoehne/nestjs-util-microservices@3.0.0-beta.3) (2023-02-22)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.0.0-beta.3
+
+# @webundsoehne/nestjs-util-microservices [3.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.0-beta.1...@webundsoehne/nestjs-util-microservices@3.0.0-beta.2) (2023-02-22)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.0.0-beta.2
+
+# @webundsoehne/nestjs-util-microservices [3.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@2.0.9...@webundsoehne/nestjs-util-microservices@3.0.0-beta.1) (2023-02-22)
+
+### Performance Improvements
+
+- **nestjs-util:** error handling and filters ([f49d8aa](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f49d8aa3dbadf5f60c7b64342bee28b71a63860f))
+
+### BREAKING CHANGES
+
+- **nestjs-util:** Completely breaks how errors was handled before to mitigate always getting 500 errors.
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.0.0-beta.1
+
 ## @webundsoehne/nestjs-util-microservices [2.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@2.0.8...@webundsoehne/nestjs-util-microservices@2.0.9) (2023-02-07)
 
 ### Dependencies

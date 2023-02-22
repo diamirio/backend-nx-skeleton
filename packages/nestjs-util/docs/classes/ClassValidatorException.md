@@ -45,8 +45,8 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name         | Type                |
+| :----------- | :------------------ |
 | `validation` | `ValidationError`[] |
 
 #### Overrides
@@ -55,7 +55,7 @@ BadRequestException.constructor
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:7
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:7
 
 ## Properties
 
@@ -71,7 +71,7 @@ BadRequestException.cause
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:58
 
-___
+---
 
 ### message
 
@@ -85,7 +85,7 @@ BadRequestException.message
 
 node_modules/typescript/lib/lib.es5.d.ts:1041
 
-___
+---
 
 ### name
 
@@ -99,7 +99,7 @@ BadRequestException.name
 
 node_modules/typescript/lib/lib.es5.d.ts:1040
 
-___
+---
 
 ### stack
 
@@ -113,7 +113,7 @@ BadRequestException.stack
 
 node_modules/typescript/lib/lib.es5.d.ts:1042
 
-___
+---
 
 ### validation
 
@@ -121,9 +121,9 @@ ___
 
 #### Defined in
 
-packages/nestjs-util/src/filter/exception.interface.ts:5
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:5
 
-___
+---
 
 ### prepareStackTrace
 
@@ -141,9 +141,9 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
+| Name          | Type         |
+| :------------ | :----------- |
+| `err`         | `Error`      |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -158,7 +158,7 @@ BadRequestException.prepareStackTrace
 
 node_modules/@types/node/ts4.8/globals.d.ts:11
 
-___
+---
 
 ### stackTraceLimit
 
@@ -190,7 +190,7 @@ BadRequestException.getResponse
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:69
 
-___
+---
 
 ### getStatus
 
@@ -208,7 +208,7 @@ BadRequestException.getStatus
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:70
 
-___
+---
 
 ### initCause
 
@@ -217,6 +217,7 @@ ___
 Configures error chaining support
 
 See:
+
 - https://nodejs.org/en/blog/release/v16.9.0/#error-cause
 - https://github.com/microsoft/TypeScript/issues/45167
 
@@ -232,7 +233,7 @@ BadRequestException.initCause
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:66
 
-___
+---
 
 ### initMessage
 
@@ -250,7 +251,7 @@ BadRequestException.initMessage
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:67
 
-___
+---
 
 ### initName
 
@@ -268,7 +269,7 @@ BadRequestException.initName
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:68
 
-___
+---
 
 ### captureStackTrace
 
@@ -278,9 +279,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `targetObject` | `object` |
+| Name              | Type       |
+| :---------------- | :--------- |
+| `targetObject`    | `object`   |
 | `constructorOpt?` | `Function` |
 
 #### Returns
@@ -295,7 +296,7 @@ BadRequestException.captureStackTrace
 
 node_modules/@types/node/ts4.8/globals.d.ts:4
 
-___
+---
 
 ### createBody
 
@@ -303,11 +304,11 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                   | Type                 |
+| :--------------------- | :------------------- |
 | `objectOrErrorMessage` | `string` \| `object` |
-| `description?` | `string` |
-| `statusCode?` | `number` |
+| `description?`         | `string`             |
+| `statusCode?`          | `number`             |
 
 #### Returns
 
@@ -321,19 +322,18 @@ BadRequestException.createBody
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:71
 
-___
+---
 
 ### extractDescriptionAndOptionsFrom
 
 ▸ `Static` **extractDescriptionAndOptionsFrom**(`descriptionOrOptions`): `DescriptionAndOptions`
 
-Utility method used to extract the error description and httpExceptionOptions from the given argument.
-This is used by inheriting classes to correctly parse both options.
+Utility method used to extract the error description and httpExceptionOptions from the given argument. This is used by inheriting classes to correctly parse both options.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                   | Type                               |
+| :--------------------- | :--------------------------------- |
 | `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
 
 #### Returns
@@ -350,7 +350,7 @@ BadRequestException.extractDescriptionAndOptionsFrom
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:79
 
-___
+---
 
 ### getDescriptionFrom
 
@@ -358,8 +358,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                   | Type                               |
+| :--------------------- | :--------------------------------- |
 | `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
 
 #### Returns
@@ -374,7 +374,7 @@ BadRequestException.getDescriptionFrom
 
 node_modules/@nestjs/common/exceptions/http.exception.d.ts:72
 
-___
+---
 
 ### getHttpExceptionOptionsFrom
 
@@ -382,8 +382,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name                   | Type                               |
+| :--------------------- | :--------------------------------- |
 | `descriptionOrOptions` | `string` \| `HttpExceptionOptions` |
 
 #### Returns
