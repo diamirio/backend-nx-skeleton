@@ -47,7 +47,11 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   }
 
   static debug (logger: Logger, payload: EnrichedException): void {
-    logger.debug(['[%s] - "%s"%s%s', payload.statusCode, payload.message, EOL, payload.stacktrace])
+    if (payload.stacktrace) {
+      logger.debug(['[%s] - "%s"%s%s', payload.statusCode, payload.message, EOL, payload.stacktrace])
+    }
+
+    logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
   }
 
   catch (exception: Error, host: ArgumentsHost): void {
