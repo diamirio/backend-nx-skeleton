@@ -9,7 +9,6 @@
 - [BaseMessageIndexes](classes/BaseMessageIndexes.md)
 - [MicroserviceProviderModule](classes/MicroserviceProviderModule.md)
 - [MicroserviceProviderService](classes/MicroserviceProviderService.md)
-- [RpcGlobalExceptionFilter](classes/RpcGlobalExceptionFilter.md)
 - [TimeoutException](classes/TimeoutException.md)
 
 ### Interfaces
@@ -43,15 +42,15 @@ Type of message queue map
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`EnumKeys`](README.md#enumkeys) |
+| Name | Type                                     |
+| :--- | :--------------------------------------- |
+| `T`  | extends [`EnumKeys`](README.md#enumkeys) |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:94
 
-___
+---
 
 ### BaseMessageQueuePatterns
 
@@ -61,15 +60,15 @@ Type of a message queue patern thingy
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`EnumKeys`](README.md#enumkeys) |
+| Name | Type                                     |
+| :--- | :--------------------------------------- |
+| `T`  | extends [`EnumKeys`](README.md#enumkeys) |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:89
 
-___
+---
 
 ### EnumKeys
 
@@ -81,45 +80,45 @@ Shorthand for enum keys
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:84
 
-___
+---
 
 ### GetMicroserviceMessageRequestFromMap
 
-Ƭ **GetMicroserviceMessageRequestFromMap**<`Event`, `Map`\>: `Event` extends keyof `Map` ? `Map`[`Event`] extends (`request?`: `any`) => `any` ? `Map`[`Event`] extends (`request?`: infer P) => `any` ? `P` : `never` : ``"request"`` extends keyof `Map`[`Event`] ? `Map`[`Event`][``"request"``] : `never` : `never`
+Ƭ **GetMicroserviceMessageRequestFromMap**<`Event`, `Map`\>: `Event` extends keyof `Map` ? `Map`[`Event`] extends (`request?`: `any`) => `any` ? `Map`[`Event`] extends (`request?`: infer P) => `any` ? `P` : `never` : `"request"` extends keyof `Map`[`Event`] ? `Map`[`Event`][``"request"``] : `never` : `never`
 
 Request type of an microservice message.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Event` | extends `string` |
-| `Map` | extends `Record`<[`EnumKeys`](README.md#enumkeys), [`MicroserviceProviderMessage`](README.md#microserviceprovidermessage)\> |
+| Name    | Type                                                                                                                        |
+| :------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| `Event` | extends `string`                                                                                                            |
+| `Map`   | extends `Record`<[`EnumKeys`](README.md#enumkeys), [`MicroserviceProviderMessage`](README.md#microserviceprovidermessage)\> |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:48
 
-___
+---
 
 ### GetMicroserviceMessageResponseFromMap
 
-Ƭ **GetMicroserviceMessageResponseFromMap**<`Event`, `Map`\>: `Event` extends keyof `Map` ? `Map`[`Event`] extends (`request?`: `any`) => `any` ? `Map`[`Event`] extends (`request?`: `any`) => infer P ? `P` : `never` : ``"response"`` extends keyof `Map`[`Event`] ? `Map`[`Event`][``"response"``] : `never` : `never`
+Ƭ **GetMicroserviceMessageResponseFromMap**<`Event`, `Map`\>: `Event` extends keyof `Map` ? `Map`[`Event`] extends (`request?`: `any`) => `any` ? `Map`[`Event`] extends (`request?`: `any`) => infer P ? `P` : `never` : `"response"` extends keyof `Map`[`Event`] ? `Map`[`Event`][``"response"``] : `never` : `never`
 
 Response type of an microservice message.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Event` | extends `string` |
-| `Map` | extends `Record`<[`EnumKeys`](README.md#enumkeys), [`MicroserviceProviderMessage`](README.md#microserviceprovidermessage)\> |
+| Name    | Type                                                                                                                        |
+| :------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| `Event` | extends `string`                                                                                                            |
+| `Map`   | extends `Record`<[`EnumKeys`](README.md#enumkeys), [`MicroserviceProviderMessage`](README.md#microserviceprovidermessage)\> |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:62
 
-___
+---
 
 ### MicroserviceProviderBaseMessage
 
@@ -129,32 +128,31 @@ This is the base format which a message queue maps for request responses can be 
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type                                     |
+| :-------- | :--------------------------------------- |
 | `Pattern` | extends [`EnumKeys`](README.md#enumkeys) |
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:33
 
-___
+---
 
 ### MicroserviceProviderClientOptions
 
 Ƭ **MicroserviceProviderClientOptions**: `RmqOptions`[``"options"``]
 
-Inject options for provider client configuration
-Currently only supports options for RMQ
+Inject options for provider client configuration Currently only supports options for RMQ
 
 #### Defined in
 
 packages/nestjs-util-microservices/src/module/microservice-client/microservice-provider.interface.ts:27
 
-___
+---
 
 ### MicroserviceProviderMessage
 
-Ƭ **MicroserviceProviderMessage**: { `request?`: `any` ; `response?`: `any`  } \| (`request?`: `any`) => `any`
+Ƭ **MicroserviceProviderMessage**: { `request?`: `any` ; `response?`: `any` } \| (`request?`: `any`) => `any`
 
 #### Defined in
 
@@ -176,11 +174,11 @@ Injects microservice provider service instance initiated to the service.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                           |
+| :------- | :----------------------------- |
 | `target` | `Record`<`string`, `unknown`\> |
-| `key` | `string` \| `symbol` |
-| `index?` | `number` |
+| `key`    | `string` \| `symbol`           |
+| `index?` | `number`                       |
 
 ##### Returns
 
@@ -190,25 +188,24 @@ Injects microservice provider service instance initiated to the service.
 
 packages/nestjs-util-microservices/src/module/microservice-client/decorators/inject.decorator.ts:8
 
-___
+---
 
 ### provideMessageQueueClient
 
 ▸ **provideMessageQueueClient**(`queue`, `options?`): `FactoryProvider`<`ClientProxyFactory`\>[]
 
-Provide a message queue client with the supplied names of queues.
-Currently only supports RabbitMQ, but can be made generic later on.
+Provide a message queue client with the supplied names of queues. Currently only supports RabbitMQ, but can be made generic later on.
 
 #### Parameters
 
 | Name | Type | Description |
-| :------ | :------ | :------ |
+| :-- | :-- | :-- |
 | `queue` | `string` \| `string`[] |  |
 | `options?` | `Object` | - |
 | `options.deserializer?` | `Deserializer`<`any`, `any`\> | - |
 | `options.headers?` | `Record`<`string`, `string`\> | - |
 | `options.isGlobalPrefetchCount?` | `boolean` | - |
-| `options.maxConnectionAttempts?` | `number` | Maximum number of connection attempts. Applies only to the consumer configuration. -1 === infinite  **`Default`**  -1 |
+| `options.maxConnectionAttempts?` | `number` | Maximum number of connection attempts. Applies only to the consumer configuration. -1 === infinite **`Default`** -1 |
 | `options.noAck?` | `boolean` | - |
 | `options.noAssert?` | `boolean` | - |
 | `options.persistent?` | `boolean` | - |
