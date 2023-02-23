@@ -27,12 +27,14 @@
 ### Methods
 
 - [catch](GlobalExceptionFilter.md#catch)
+- [handleGraphQL](GlobalExceptionFilter.md#handlegraphql)
+- [handleHttp](GlobalExceptionFilter.md#handlehttp)
+- [handleRpc](GlobalExceptionFilter.md#handlerpc)
 - [payload](GlobalExceptionFilter.md#payload)
-- [reply](GlobalExceptionFilter.md#reply)
 - [shouldIgnore](GlobalExceptionFilter.md#shouldignore)
 - [debug](GlobalExceptionFilter.md#debug)
 - [defaultPayload](GlobalExceptionFilter.md#defaultpayload)
-- [formatMessage](GlobalExceptionFilter.md#formatmessage)
+- [format](GlobalExceptionFilter.md#format)
 
 ## Constructors
 
@@ -48,13 +50,13 @@
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:14
+packages/nestjs-util/src/filter/global-exception.filter.ts:16
 
 ## Methods
 
 ### catch
 
-▸ **catch**(`exception`, `host`): `void`
+▸ **catch**(`exception`, `host`): `void` \| `HttpException` \| `Observable`<`never`\>
 
 #### Parameters
 
@@ -65,7 +67,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 #### Returns
 
-`void`
+`void` \| `HttpException` \| `Observable`<`never`\>
 
 #### Implementation of
 
@@ -73,7 +75,68 @@ ExceptionFilter.catch
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:57
+packages/nestjs-util/src/filter/global-exception.filter.ts:59
+
+---
+
+### handleGraphQL
+
+▸ `Protected` **handleGraphQL**(`payload`): `HttpException`
+
+#### Parameters
+
+| Name      | Type                                                  |
+| :-------- | :---------------------------------------------------- |
+| `payload` | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+
+#### Returns
+
+`HttpException`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:122
+
+---
+
+### handleHttp
+
+▸ `Protected` **handleHttp**(`payload`, `host`): `void`
+
+#### Parameters
+
+| Name      | Type                                                  |
+| :-------- | :---------------------------------------------------- |
+| `payload` | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+| `host`    | `ArgumentsHost`                                       |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:109
+
+---
+
+### handleRpc
+
+▸ `Protected` **handleRpc**(`payload`): `Observable`<`never`\>
+
+#### Parameters
+
+| Name      | Type                                                  |
+| :-------- | :---------------------------------------------------- |
+| `payload` | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+
+#### Returns
+
+`Observable`<`never`\>
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:126
 
 ---
 
@@ -93,29 +156,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:57
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:92
-
----
-
-### reply
-
-▸ `Protected` **reply**(`response`, `code`, `payload`): `void`
-
-#### Parameters
-
-| Name       | Type                                                              |
-| :--------- | :---------------------------------------------------------------- |
-| `response` | [`Response`](../README.md#response)                               |
-| `code`     | `number`                                                          |
-| `payload`  | `string` \| [`EnrichedExceptionError`](EnrichedExceptionError.md) |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-packages/nestjs-util/src/filter/global-exception.filter.ts:96
+packages/nestjs-util/src/filter/global-exception.filter.ts:105
 
 ---
 
@@ -135,7 +176,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:96
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:82
+packages/nestjs-util/src/filter/global-exception.filter.ts:95
 
 ---
 
@@ -156,7 +197,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:82
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:49
+packages/nestjs-util/src/filter/global-exception.filter.ts:51
 
 ---
 
@@ -176,13 +217,13 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:49
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:16
+packages/nestjs-util/src/filter/global-exception.filter.ts:18
 
 ---
 
-### formatMessage
+### format
 
-▸ `Static` **formatMessage**(`error`): `string`
+▸ `Static` **format**(`error`): `string`
 
 #### Parameters
 
@@ -196,4 +237,4 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:16
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:39
+packages/nestjs-util/src/filter/global-exception.filter.ts:41

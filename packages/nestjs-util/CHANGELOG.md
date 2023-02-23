@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [7.0.0-beta.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0-beta.3...@webundsoehne/nestjs-util@7.0.0-beta.4) (2023-02-23)
+
+### Bug Fixes
+
+- **nestjs-util:** merge rpcglobalexceptionfilter in to globalexceptionfilter ([6919d8a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6919d8ad0e6462f92e1f7582dbd6f32f32bfb63b))
+
 # @webundsoehne/nestjs-util [7.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0-beta.2...@webundsoehne/nestjs-util@7.0.0-beta.3) (2023-02-22)
 
 ### Bug Fixes
