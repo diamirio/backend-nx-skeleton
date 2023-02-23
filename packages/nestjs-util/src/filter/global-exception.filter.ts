@@ -1,7 +1,9 @@
-import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common'
-import { Catch, HttpStatus, Logger } from '@nestjs/common'
+import type { ArgumentsHost, ContextType, ExceptionFilter } from '@nestjs/common'
+import { Catch, HttpException, HttpStatus, Logger } from '@nestjs/common'
 import type { GqlContextType } from '@nestjs/graphql'
 import { EOL } from 'os'
+import type { Observable } from 'rxjs'
+import { throwError } from 'rxjs'
 
 import { isEnrichedException, isHttpException } from './guard'
 import type { EnrichedException } from './interface'
@@ -28,15 +30,15 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     return new EnrichedExceptionError({
       statusCode: exception?.statusCode ?? exception?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
-      error: exception?.response?.error ?? exception?.error ?? exception?.constructor?.name ?? Error.name,
-      message: GlobalExceptionFilter.formatMessage(exception),
+      error: exception?.response?.error.name ?? exception?.error?.name ?? exception?.constructor?.name ?? exception?.name ?? Error.name,
+      message: GlobalExceptionFilter.format(exception),
       service: exception?.service,
       cause: exception?.cause,
       stacktrace: exception?.stack
     })
   }
 
-  static formatMessage (error: string | Error): string | undefined {
+  static format (error: string | Error): string | undefined {
     if (typeof error === 'string') {
       return error
     } else if (typeof error === 'object' && typeof error?.message === 'string') {
@@ -54,27 +56,38 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
   }
 
-  catch (exception: Error, host: ArgumentsHost): void {
+  catch (exception: Error, host: ArgumentsHost): void | HttpException | Observable<never> {
     if (this.shouldIgnore(exception)) {
       return
     }
 
-    const ctx = host.switchToHttp()
-    const response: Response = ctx.getResponse()
+    const ctxType = host.getType<ContextType | GqlContextType>()
 
     const payload = this.payload(exception)
 
-    switch (host.getType<GqlContextType>()) {
+    // to have context specific fields in the payload already while logging
+    switch (ctxType) {
     case 'rpc':
-      break
+      payload.service = host
+        .switchToRpc()
+        .getContext()
+        .args.map((args: any) => args.fields?.routingKey)
+        .filter(Boolean)
 
-    case 'graphql':
       break
+    }
+
+    GlobalExceptionFilter.debug(this.logger, payload)
+
+    switch (ctxType) {
+    case 'graphql':
+      return this.handleGraphQL(payload)
+
+    case 'rpc':
+      return this.handleRpc(payload)
 
     default:
-      this.reply(response, payload.statusCode, payload)
-
-      GlobalExceptionFilter.debug(this.logger, payload)
+      return this.handleHttp(payload, host)
     }
   }
 
@@ -93,12 +106,24 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     return GlobalExceptionFilter.defaultPayload(exception)
   }
 
-  protected reply (response: Response, code: number, payload: EnrichedExceptionError | string): void {
+  protected handleHttp (payload: EnrichedExceptionError, host: ArgumentsHost): void {
+    const ctx = host.switchToHttp()
+    const response: Response = ctx.getResponse()
+
+    // intentionally not using httpadapter injection because it caused problems before
     if (isFastifyResponse(response)) {
-      void response.code(code).send(payload)
+      void response.code(payload.statusCode).send(payload)
     } else if (isExpressResponse(response)) {
-      void response.status(code)
+      void response.status(payload.statusCode)
       void response.send(payload)
     }
+  }
+
+  protected handleGraphQL (payload: EnrichedExceptionError): HttpException {
+    return new HttpException(payload, payload.statusCode)
+  }
+
+  protected handleRpc (payload: EnrichedExceptionError): Observable<never> {
+    return throwError(() => payload)
   }
 }
