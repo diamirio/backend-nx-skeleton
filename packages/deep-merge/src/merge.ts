@@ -15,21 +15,22 @@ import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 export function merge<T extends Record<PropertyKey, any>> (options: DeepMergeOptions | null, t: T, ...s: DeepPartial<T>[]): T {
   options = {
     arrayMerge: ArrayMergeBehavior.UNIQUE,
+    clone: true,
     ...options ?? {}
   }
 
-  let arrayMergeFn: ArrayMergeFn
+  let arrayMerge: ArrayMergeFn
 
-  if (typeof options?.arrayMerge === 'function') {
-    arrayMergeFn = options.arrayMerge
-  } else if (options?.arrayMerge === ArrayMergeBehavior.OVERWRITE) {
-    arrayMergeFn = arrayMergeOverwrite
-  } else if (options?.arrayMerge === ArrayMergeBehavior.UNIQUE) {
-    arrayMergeFn = arrayMergeUnique
+  if (typeof options.arrayMerge === 'function') {
+    arrayMerge = options.arrayMerge
+  } else if (options.arrayMerge === ArrayMergeBehavior.OVERWRITE) {
+    arrayMerge = arrayMergeOverwrite
+  } else if (options.arrayMerge === ArrayMergeBehavior.UNIQUE) {
+    arrayMerge = arrayMergeUnique
   }
 
-  return deepmerge.all([t, ...s], {
-    clone: options?.clone,
-    arrayMerge: arrayMergeFn
+  return deepmerge.all([t ?? {}, ...s ?? []], {
+    clone: options.clone,
+    arrayMerge
   }) as T
 }
