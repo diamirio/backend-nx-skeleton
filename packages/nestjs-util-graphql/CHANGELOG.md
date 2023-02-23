@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-graphql [3.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@3.0.3...@webundsoehne/nestjs-util-graphql@3.0.4) (2023-02-23)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.1.0
+
 ## @webundsoehne/nestjs-util-graphql [3.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-graphql@3.0.2...@webundsoehne/nestjs-util-graphql@3.0.3) (2023-02-22)
 
 ### Dependencies
