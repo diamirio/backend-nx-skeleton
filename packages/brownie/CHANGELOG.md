@@ -1,3 +1,14 @@
+## @webundsoehne/brownie [5.0.20](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.19...@webundsoehne/brownie@5.0.20) (2023-02-23)
+
+### Bug Fixes
+
+- **deps:** update for breaking changes in deep-merge library ([08b00ad](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/08b00ad22f5e6e1af6a5d28bb4ed78a79df5e8db))
+
+### Dependencies
+
+- **@webundsoehne/deep-merge:** upgraded to 4.0.0
+- **@webundsoehne/nx-tools:** upgraded to 6.0.15
+
 ## @webundsoehne/brownie [5.0.19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.18...@webundsoehne/brownie@5.0.19) (2023-02-07)
 
 ### Dependencies
