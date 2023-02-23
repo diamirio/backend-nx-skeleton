@@ -28,8 +28,9 @@
 ### Methods
 
 - [catch](GlobalExceptionFilter.md#catch)
+- [handleGraphQL](GlobalExceptionFilter.md#handlegraphql)
+- [handleHttp](GlobalExceptionFilter.md#handlehttp)
 - [payload](GlobalExceptionFilter.md#payload)
-- [reply](GlobalExceptionFilter.md#reply)
 - [shouldIgnore](GlobalExceptionFilter.md#shouldignore)
 - [debug](GlobalExceptionFilter.md#debug)
 - [defaultPayload](GlobalExceptionFilter.md#defaultpayload)
@@ -78,6 +79,47 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:59
 
 ---
 
+### handleGraphQL
+
+▸ `Protected` **handleGraphQL**(`payload`): `HttpException`
+
+#### Parameters
+
+| Name      | Type                                                  |
+| :-------- | :---------------------------------------------------- |
+| `payload` | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+
+#### Returns
+
+`HttpException`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:109
+
+---
+
+### handleHttp
+
+▸ `Protected` **handleHttp**(`host`, `payload`): `void`
+
+#### Parameters
+
+| Name      | Type                                                  |
+| :-------- | :---------------------------------------------------- |
+| `host`    | `ArgumentsHost`                                       |
+| `payload` | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+packages/nestjs-util/src/filter/global-exception.filter.ts:96
+
+---
+
 ### payload
 
 ▸ `Protected` **payload**(`exception?`): [`EnrichedException`](../interfaces/EnrichedException.md)
@@ -94,29 +136,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:59
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:99
-
----
-
-### reply
-
-▸ `Protected` **reply**(`response`, `code`, `payload`): `void`
-
-#### Parameters
-
-| Name       | Type                                                  |
-| :--------- | :---------------------------------------------------- |
-| `response` | [`Response`](../README.md#response)                   |
-| `code`     | `number`                                              |
-| `payload`  | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-packages/nestjs-util/src/filter/global-exception.filter.ts:103
+packages/nestjs-util/src/filter/global-exception.filter.ts:92
 
 ---
 
@@ -136,7 +156,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:103
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:89
+packages/nestjs-util/src/filter/global-exception.filter.ts:82
 
 ---
 
