@@ -1,3 +1,9 @@
+## @webundsoehne/ts-utility-types [2.2.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.7...@webundsoehne/ts-utility-types@2.2.8) (2023-02-23)
+
+### Bug Fixes
+
+- **deps:** update for breaking changes in deep-merge library ([08b00ad](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/08b00ad22f5e6e1af6a5d28bb4ed78a79df5e8db))
+
 ## @webundsoehne/ts-utility-types [2.2.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/ts-utility-types@2.2.6...@webundsoehne/ts-utility-types@2.2.7) (2023-02-07)
 
 ### Bug Fixes
