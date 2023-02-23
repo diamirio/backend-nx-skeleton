@@ -2,14 +2,33 @@ import type { HttpStatus } from '@nestjs/common'
 
 import type { ClassValidatorError } from './class-validator-exception.interface'
 
+export interface EnrichedException {
+  statusCode: HttpStatus
+  error: string | Error
+  message: string
+  cause?: string | Error
+
+  // class validator specific
+  errors?: string[] | ClassValidatorError[]
+
+  // graphql specific
+  code?: string
+
+  // microservices specific
+  service?: string[]
+
+  // internally used
+  stacktrace?: string
+}
+
 /**
  * Mostly required for making instanceof check of graphql valid after version 15.0.3
  */
 export class EnrichedExceptionError implements EnrichedException {
   public statusCode: HttpStatus
-  public error: string
+  public error: string | Error
   public message: string
-  public cause?: Error
+  public cause?: string | Error
   public errors?: string[] | ClassValidatorError[]
   public service?: string[]
   public stacktrace?: string
@@ -17,14 +36,4 @@ export class EnrichedExceptionError implements EnrichedException {
   constructor (error: EnrichedException) {
     Object.assign(this, error)
   }
-}
-
-export interface EnrichedException {
-  statusCode: HttpStatus
-  error: string
-  message: string
-  cause?: Error
-  errors?: string[] | ClassValidatorError[]
-  service?: string[]
-  stacktrace?: string
 }

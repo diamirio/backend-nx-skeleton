@@ -46,6 +46,7 @@
     "@nestjs/common": ">= 8",
     "@nestjs/core": ">= 8",
     "@nestjs/microservices": ">= 8",
+    "@nestjs/graphql": ">= 8",
     "@sentry/node": ">= 7",
     "class-transformer": ">= 0.4.0",
     "class-validator": ">= 0.13.0",
@@ -59,6 +60,9 @@
     },
     "@sentry/node": {
       "optional": true
+    },
+    "@nestjs/graphql": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -66,6 +70,7 @@
     "@nestjs/core": "^9.1.6",
     "@sentry/node": "^7.17.3",
     "@types/config": "^3.3.0",
+    "@nestjs/graphql": "^10.1.5",
     "@types/express": "^4.17.3",
     "@types/winston": "^2.4.4",
     "class-transformer": "^0.5.1",

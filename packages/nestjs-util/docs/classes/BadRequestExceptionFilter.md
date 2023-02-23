@@ -57,7 +57,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 ### catch
 
-▸ **catch**(`exception`, `host`): `void`
+▸ **catch**(`exception`, `host`): `void` \| `HttpException`
 
 #### Parameters
 
@@ -68,7 +68,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 #### Returns
 
-`void`
+`void` \| `HttpException`
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:57
+packages/nestjs-util/src/filter/global-exception.filter.ts:59
 
 ---
 
@@ -110,11 +110,11 @@ packages/nestjs-util/src/filter/bad-request-exception.filter.ts:30
 
 #### Parameters
 
-| Name       | Type                                                              |
-| :--------- | :---------------------------------------------------------------- |
-| `response` | [`Response`](../README.md#response)                               |
-| `code`     | `number`                                                          |
-| `payload`  | `string` \| [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+| Name       | Type                                                  |
+| :--------- | :---------------------------------------------------- |
+| `response` | [`Response`](../README.md#response)                   |
+| `code`     | `number`                                              |
+| `payload`  | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
 
 #### Returns
 
@@ -126,7 +126,7 @@ packages/nestjs-util/src/filter/bad-request-exception.filter.ts:30
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:96
+packages/nestjs-util/src/filter/global-exception.filter.ts:103
 
 ---
 
@@ -150,7 +150,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:96
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:82
+packages/nestjs-util/src/filter/global-exception.filter.ts:89
 
 ---
 

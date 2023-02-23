@@ -18,7 +18,7 @@
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:16
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:6
 
 ---
 
@@ -28,7 +28,7 @@ packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:17
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:7
 
 ---
 
@@ -38,4 +38,4 @@ packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts
 
 #### Defined in
 
-packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:15
+packages/nestjs-util/src/filter/interface/class-validator-exception.interface.ts:5

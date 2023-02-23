@@ -1,6 +1,12 @@
 import type { ValidationError } from '@nestjs/common'
 import { BadRequestException } from '@nestjs/common'
 
+export interface ClassValidatorError {
+  property: string
+  constraints: string[]
+  messages: string[]
+}
+
 export class ClassValidatorException extends BadRequestException {
   public validation: Partial<ValidationError[]>
 
@@ -9,10 +15,4 @@ export class ClassValidatorException extends BadRequestException {
 
     Object.assign(this, error, { validation })
   }
-}
-
-export interface ClassValidatorError {
-  property: string
-  constraints: string[]
-  messages: string[]
 }

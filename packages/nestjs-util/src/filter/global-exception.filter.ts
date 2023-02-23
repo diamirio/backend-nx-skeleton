@@ -12,7 +12,7 @@ import type { Response } from '@interface'
 import { isExpressResponse, isFastifyResponse } from '@util'
 
 @Catch()
-export class GlobalExceptionFilter implements ExceptionFilter {
+export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilter {
   protected logger = new Logger(this.constructor.name)
 
   static defaultPayload (exception: any): EnrichedException {
@@ -51,6 +51,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   static debug (logger: Logger, payload: EnrichedException): void {
     if (payload.stacktrace) {
       logger.debug(['[%s] - "%s"%s%s', payload.statusCode, payload.message, EOL, payload.stacktrace])
+
+      return
     }
 
     logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
@@ -89,6 +91,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     default:
       return this.handleHttp(payload, host)
     }
+
+    this.reply(response, payload.statusCode, payload)
   }
 
   // ignore some errors that you do not want to log

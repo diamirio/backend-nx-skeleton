@@ -164,7 +164,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:69
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:92
+packages/nestjs-util/src/filter/global-exception.filter.ts:99
 
 ---
 
@@ -174,11 +174,11 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:92
 
 #### Parameters
 
-| Name       | Type                                                              |
-| :--------- | :---------------------------------------------------------------- |
-| `response` | [`Response`](../README.md#response)                               |
-| `code`     | `number`                                                          |
-| `payload`  | `string` \| [`EnrichedExceptionError`](EnrichedExceptionError.md) |
+| Name       | Type                                                  |
+| :--------- | :---------------------------------------------------- |
+| `response` | [`Response`](../README.md#response)                   |
+| `code`     | `number`                                              |
+| `payload`  | [`EnrichedExceptionError`](EnrichedExceptionError.md) |
 
 #### Returns
 
@@ -190,7 +190,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:92
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:96
+packages/nestjs-util/src/filter/global-exception.filter.ts:103
 
 ---
 
@@ -214,7 +214,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:96
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:82
+packages/nestjs-util/src/filter/global-exception.filter.ts:89
 
 ---
 

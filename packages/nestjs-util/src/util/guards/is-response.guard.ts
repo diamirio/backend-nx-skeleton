@@ -12,7 +12,7 @@ export function isResponse (response: unknown): response is Response {
 }
 
 export function isFastifyResponse (response: unknown): response is FastifyReply {
-  if (typeof response === 'object' && response.hasOwnProperty('code')) {
+  if (typeof response === 'object' && response.hasOwnProperty('raw')) {
     return true
   }
 
@@ -20,7 +20,7 @@ export function isFastifyResponse (response: unknown): response is FastifyReply 
 }
 
 export function isExpressResponse (response: unknown): response is ExpressResponse {
-  if (typeof response === 'object' && !response.hasOwnProperty('code') && response.hasOwnProperty('status')) {
+  if (typeof response === 'object' && !response.hasOwnProperty('raw')) {
     return true
   }
 

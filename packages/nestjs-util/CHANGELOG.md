@@ -1,3 +1,37 @@
+## @webundsoehne/nestjs-util [7.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.2...@webundsoehne/nestjs-util@7.0.3) (2023-02-22)
+
+### Bug Fixes
+
+- dont double log ([61f2c0e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/61f2c0e8cc29bd05d4d3472972de6e1490bd5cd8))
+
+## @webundsoehne/nestjs-util [7.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.1...@webundsoehne/nestjs-util@7.0.2) (2023-02-22)
+
+### Bug Fixes
+
+- issues with graphql error filter ([0e9f5e8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0e9f5e8bb657fefcefb8c446fef830f97bfcd175))
+
+## @webundsoehne/nestjs-util [7.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0...@webundsoehne/nestjs-util@7.0.1) (2023-02-22)
+
+### Bug Fixes
+
+- update detection of response type ([7aef7a7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7aef7a7ba85ba4bd3072bf0ecc786952d5e0d5aa))
+- update guards ([5189a56](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/5189a56f822d41471526c54ea5496a5adc74d0a7))
+
+# @webundsoehne/nestjs-util [7.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@6.0.9...@webundsoehne/nestjs-util@7.0.0) (2023-02-22)
+
+### Bug Fixes
+
+- if stack trace is missing dont log undefined ([001efdc](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/001efdcc3eb6332a5cded09cc6743fee60ead187))
+- update graphql error parsing ([2de5d54](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/2de5d543dea2bc5d9c5b827d59d57bbff806330f))
+
+### Performance Improvements
+
+- **nestjs-util:** error handling and filters ([f49d8aa](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/f49d8aa3dbadf5f60c7b64342bee28b71a63860f))
+
+### BREAKING CHANGES
+
+- **nestjs-util:** Completely breaks how errors was handled before to mitigate always getting 500 errors.
+
 # @webundsoehne/nestjs-util [7.0.0-beta.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.0.0-beta.2...@webundsoehne/nestjs-util@7.0.0-beta.3) (2023-02-22)
 
 ### Bug Fixes

@@ -244,17 +244,17 @@ packages/nestjs-util/src/filter/guard/enriched-exception.guard.ts:3
 
 ### isExpressRequest
 
-▸ **isExpressRequest**(`response`): response is Request<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>
+▸ **isExpressRequest**(`request`): request is Request<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>
 
 #### Parameters
 
-| Name       | Type      |
-| :--------- | :-------- |
-| `response` | `unknown` |
+| Name      | Type      |
+| :-------- | :-------- |
+| `request` | `unknown` |
 
 #### Returns
 
-response is Request<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>
+request is Request<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>
 
 #### Defined in
 
@@ -284,17 +284,17 @@ packages/nestjs-util/src/util/guards/is-response.guard.ts:22
 
 ### isFastifyRequest
 
-▸ **isFastifyRequest**(`response`): response is FastifyRequest<RouteGenericInterface, RawServerDefault, IncomingMessage, FastifySchema, FastifyTypeProviderDefault, unknown, FastifyBaseLogger, ResolveFastifyRequestType<FastifyTypeProviderDefault, FastifySchema, RouteGenericInterface\>\>
+▸ **isFastifyRequest**(`request`): request is FastifyRequest<RouteGenericInterface, RawServerDefault, IncomingMessage, FastifySchema, FastifyTypeProviderDefault, unknown, FastifyBaseLogger, ResolveFastifyRequestType<FastifyTypeProviderDefault, FastifySchema, RouteGenericInterface\>\>
 
 #### Parameters
 
-| Name       | Type      |
-| :--------- | :-------- |
-| `response` | `unknown` |
+| Name      | Type      |
+| :-------- | :-------- |
+| `request` | `unknown` |
 
 #### Returns
 
-response is FastifyRequest<RouteGenericInterface, RawServerDefault, IncomingMessage, FastifySchema, FastifyTypeProviderDefault, unknown, FastifyBaseLogger, ResolveFastifyRequestType<FastifyTypeProviderDefault, FastifySchema, RouteGenericInterface\>\>
+request is FastifyRequest<RouteGenericInterface, RawServerDefault, IncomingMessage, FastifySchema, FastifyTypeProviderDefault, unknown, FastifyBaseLogger, ResolveFastifyRequestType<FastifyTypeProviderDefault, FastifySchema, RouteGenericInterface\>\>
 
 #### Defined in
 
