@@ -27,7 +27,7 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     }
 
     return new EnrichedExceptionError({
-      statusCode: exception?.statusCode ?? exception?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      statusCode: typeof exception?.statusCode === 'number' ? exception.statusCode : typeof exception?.status === 'number' ? exception.status : HttpStatus.INTERNAL_SERVER_ERROR,
       error: exception?.response?.error.name ?? exception?.error?.name ?? exception?.name ?? exception?.constructor?.name ?? Error.name,
       message: GlobalExceptionFilter.formatMessage(exception),
       service: exception?.service,
@@ -63,26 +63,19 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
 
     const ctxType = host.getType<ContextType | GqlContextType>()
 
-    // this should be already handled by the RpcGlobalExceptionFilter
-    if (['rpc'].includes(ctxType)) {
-      return
-    }
-
-    const ctx = host.switchToHttp()
-
-    const response: Response = ctx.getResponse()
-
     const payload = this.payload(exception)
 
     GlobalExceptionFilter.debug(this.logger, payload)
 
     delete payload.stacktrace
 
-    if (['graphql'].includes(ctxType)) {
-      return new HttpException(payload, payload.statusCode)
-    }
+    switch (ctxType) {
+    case 'graphql':
+      return this.handleGraphQL(payload)
 
-    this.reply(response, payload.statusCode, payload)
+    default:
+      return this.handleHttp(host, payload)
+    }
   }
 
   // ignore some errors that you do not want to log
@@ -100,12 +93,20 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     return GlobalExceptionFilter.defaultPayload(exception)
   }
 
-  protected reply (response: Response, code: number, payload: EnrichedExceptionError): void {
+  protected handleHttp (host: ArgumentsHost, payload: EnrichedExceptionError): void {
+    const ctx = host.switchToHttp()
+
+    const response: Response = ctx.getResponse()
+
     if (isFastifyResponse(response)) {
-      void response.code(code).send(payload)
+      void response.code(payload.statusCode).send(payload)
     } else if (isExpressResponse(response)) {
-      void response.status(code)
+      void response.status(payload.statusCode)
       void response.send(payload)
     }
+  }
+
+  protected handleGraphQL (payload: EnrichedExceptionError): HttpException {
+    return new HttpException(payload, payload.statusCode)
   }
 }
