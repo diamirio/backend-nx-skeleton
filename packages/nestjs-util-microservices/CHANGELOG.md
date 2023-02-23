@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-util-microservices [3.0.4-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.3...@webundsoehne/nestjs-util-microservices@3.0.4-beta.1) (2023-02-23)
+
+### Bug Fixes
+
+- **nestjs-util:** merge rpcglobalexceptionfilter in to globalexceptionfilter ([6919d8a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/6919d8ad0e6462f92e1f7582dbd6f32f32bfb63b))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.0.4-beta.1
+
 ## @webundsoehne/nestjs-util-microservices [3.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.2...@webundsoehne/nestjs-util-microservices@3.0.3) (2023-02-22)
 
 ### Dependencies
