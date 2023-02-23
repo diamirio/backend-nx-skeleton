@@ -50,4 +50,4 @@ packages/nestjs-util-graphql/src/filter/interface/graphql-preformatted-exception
 
 #### Defined in
 
-packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:6
+packages/nestjs-util-graphql/src/filter/graphql-error-parser.ts:7
