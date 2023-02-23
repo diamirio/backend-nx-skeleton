@@ -1,115 +1,105 @@
-## @webundsoehne/patch-package [4.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.6...@webundsoehne/patch-package@4.0.7) (2022-11-23)
-
+## @webundsoehne/patch-package [4.0.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.7...@webundsoehne/patch-package@4.0.8) (2023-02-23)
 
 ### Bug Fixes
 
-* do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
-* issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
+- **deps:** update for breaking changes in deep-merge library ([08b00ad](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/08b00ad22f5e6e1af6a5d28bb4ed78a79df5e8db))
+
+## @webundsoehne/patch-package [4.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.6...@webundsoehne/patch-package@4.0.7) (2022-11-23)
+
+### Bug Fixes
+
+- do not bundle and swap typescript paths manually from jsfiles ([e9b13f0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/e9b13f07eed2c3648bb5b3370f731daaef1377b1))
+- issue with bundling ([7afe3d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7afe3d035343c5dd19d0c5fe962888e7492f3b68))
 
 ## @webundsoehne/patch-package [4.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.5...@webundsoehne/patch-package@4.0.6) (2022-11-15)
 
-
 ### Bug Fixes
 
-* fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
+- fix issue with parsing the file entries inside a tree ([16b5b19](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/16b5b19124643dea10f4eb2ecc718d50c957f7c4))
 
 ## @webundsoehne/patch-package [4.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.4...@webundsoehne/patch-package@4.0.5) (2022-11-15)
 
-
 ### Bug Fixes
 
-* **brownie:** issue with generating docker templates and oclif ([d083232](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d083232068ee5fd5be27986ab0a8b2a1e6fab9fe))
+- **brownie:** issue with generating docker templates and oclif ([d083232](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d083232068ee5fd5be27986ab0a8b2a1e6fab9fe))
 
 ## @webundsoehne/patch-package [4.0.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.3...@webundsoehne/patch-package@4.0.4) (2022-11-03)
 
-
 ### Bug Fixes
 
-* update package patching ([8e3ddae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/8e3ddae91de0afe62a49bb707fcc588e170c4a6c))
+- update package patching ([8e3ddae](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/8e3ddae91de0afe62a49bb707fcc588e170c4a6c))
 
 ## @webundsoehne/patch-package [4.0.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.2...@webundsoehne/patch-package@4.0.3) (2022-11-02)
 
-
 ### Bug Fixes
 
-* update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
-* use node for running tsc-watch to hook into emitter ([1480372](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1480372ebb7dc3f3afcf8452d90d5df952046b41))
+- update build mechanism for all repositories, fix tsc-watch for builders ([df4a61e](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4a61ed8ab9b15a76089f22daadb33acfa693fe))
+- use node for running tsc-watch to hook into emitter ([1480372](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1480372ebb7dc3f3afcf8452d90d5df952046b41))
 
 ## @webundsoehne/patch-package [4.0.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.1...@webundsoehne/patch-package@4.0.2) (2022-10-25)
 
-
 ### Bug Fixes
 
-* fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
+- fix issues with null exceptions in rule ([c53143a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/c53143af06eefe9709ffefa027f850e20c0375a1))
 
 ## @webundsoehne/patch-package [4.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.0...@webundsoehne/patch-package@4.0.1) (2022-10-05)
 
-
 ### Bug Fixes
 
-* update missing deps ([d569594](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d5695945bb64410acba9218d8ccb8d3558223511))
+- update missing deps ([d569594](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d5695945bb64410acba9218d8ccb8d3558223511))
 
 # @webundsoehne/patch-package [4.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.1...@webundsoehne/patch-package@4.0.0) (2022-10-05)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* update to oclif 3 ([3372528](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3372528ab748cdcb4bb82ccc80802698967c11c2))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
-
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- update to oclif 3 ([3372528](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3372528ab748cdcb4bb82ccc80802698967c11c2))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 ### BREAKING CHANGES
 
-* some of the cli will act differently
-* uses the new library
+- some of the cli will act differently
+- uses the new library
 
 # @webundsoehne/patch-package [4.0.0-beta.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@4.0.0-beta.1...@webundsoehne/patch-package@4.0.0-beta.2) (2022-10-05)
 
-
 ### Performance Improvements
 
-* moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
-* updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
+- moves publishing part to npm ([a8401d0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a8401d041cc2a05371ea4fd75443d7ef1f2e9f71))
+- updates underlying library versions ([0bc345f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0bc345f89c46cca58977ff9b9f7db2a7ef64d515))
 
 # @webundsoehne/patch-package [4.0.0-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.2-beta.1...@webundsoehne/patch-package@4.0.0-beta.1) (2022-09-19)
 
-
 ### Bug Fixes
 
-* update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
-
+- update packages ([3d04baf](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3d04baf77fe95b2914b145d4d4313dfdfc4e520f))
 
 ### Performance Improvements
 
-* update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
-* update to oclif 3 ([3372528](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3372528ab748cdcb4bb82ccc80802698967c11c2))
-
+- update depednencies for cli apps ([dbdd8d6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/dbdd8d668a23664aef2b59cfe5d0337c3b4d4a64))
+- update to oclif 3 ([3372528](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3372528ab748cdcb4bb82ccc80802698967c11c2))
 
 ### BREAKING CHANGES
 
-* some of the cli will act differently
-* uses the new library
+- some of the cli will act differently
+- uses the new library
 
 ## @webundsoehne/patch-package [3.3.2-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.1...@webundsoehne/patch-package@3.3.2-beta.1) (2022-08-08)
 
-
 ### Bug Fixes
 
-* **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
-
+- **deps:** bump dependendencies ([1c5c2df](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/1c5c2df6274de822c73edc4f083ebf835d5039f7))
 
 ### Performance Improvements
 
-* nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
+- nx14 upgrade ([968801a](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/968801a20dc1978c5baf7dfa71f21375e59809e9))
 
 ## @webundsoehne/patch-package [3.3.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/patch-package@3.3.0...@webundsoehne/patch-package@3.3.1) (2022-06-13)
 
