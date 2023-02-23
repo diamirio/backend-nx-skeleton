@@ -12,7 +12,7 @@ import type { Response } from '@interface'
 import { isExpressResponse, isFastifyResponse } from '@util'
 
 @Catch()
-export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilter {
+export class GlobalExceptionFilter implements ExceptionFilter {
   protected logger = new Logger(this.constructor.name)
 
   static defaultPayload (exception: any): EnrichedException {
@@ -91,8 +91,6 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     default:
       return this.handleHttp(payload, host)
     }
-
-    this.reply(response, payload.statusCode, payload)
   }
 
   // ignore some errors that you do not want to log

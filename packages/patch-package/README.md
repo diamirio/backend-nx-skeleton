@@ -18,9 +18,10 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
-* [@webundsoehne/patch-package](#webundsoehnepatch-package)
-* [Description](#description)
-* [Commands](#commands)
+
+- [@webundsoehne/patch-package](#webundsoehnepatch-package)
+- [Description](#description)
+- [Commands](#commands)
 <!-- tocstop -->
 
 ---
@@ -28,12 +29,13 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 # Commands
 
 <!-- commands -->
-* [`ws-path-package apply`](#ws-path-package-apply)
-* [`ws-path-package create`](#ws-path-package-create)
-* [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
-* [`ws-path-package list`](#ws-path-package-list)
-* [`ws-path-package ls`](#ws-path-package-ls)
-* [`ws-path-package patch`](#ws-path-package-patch)
+
+- [`ws-path-package apply`](#ws-path-package-apply)
+- [`ws-path-package create`](#ws-path-package-create)
+- [`ws-path-package help [COMMAND]`](#ws-path-package-help-command)
+- [`ws-path-package list`](#ws-path-package-list)
+- [`ws-path-package ls`](#ws-path-package-ls)
+- [`ws-path-package patch`](#ws-path-package-patch)
 
 ## `ws-path-package apply`
 
@@ -46,8 +48,7 @@ USAGE
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to apply
-                           patches to.
+  -p, --path=<value>       [default: /data/packages/patch-package] Directory to apply patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
 
 DESCRIPTION
@@ -74,8 +75,7 @@ FLAGS
   -d, --directory=<value>   [default: patches] Directory for outputting the patch files.
   -e, --exclude=<value>...  [default: package.json] Exclude given regex patterns.
   -i, --include=<value>...  [default: .*] Include given regex patterns.
-  -p, --path=<value>        [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to take root
-                            as the application.
+  -p, --path=<value>        [default: /data/packages/patch-package] Directory to take root as the application.
 
 DESCRIPTION
   Creates a new patch from scratch, just point the applications you want as package name.
@@ -149,8 +149,7 @@ USAGE
 FLAGS
   -d, --directory=<value>  Directory to apply the patches from.
   -e, --exitOnError        Whether to exit on error if the patching process fails or not.
-  -p, --path=<value>       [default: /builds/N47Wr75n/0/bdsm/nx-skeleton/packages/patch-package] Directory to apply
-                           patches to.
+  -p, --path=<value>       [default: /data/packages/patch-package] Directory to apply patches to.
   -r, --reverse            Reverses the patches, if they were applied before.
 
 DESCRIPTION
@@ -166,4 +165,5 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/patch.js](https://github.com/tailoredmedia/backend-nx-skeleton/blob/v1.0.0/dist/commands/patch.js)_
+
 <!-- commandsstop -->
