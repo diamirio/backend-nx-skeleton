@@ -1,5 +1,8 @@
-import merge from 'deepmerge'
+import deepmerge from 'deepmerge'
 
+import { ArrayMergeBehavior } from './constants'
+import type { ArrayMergeFn, DeepMergeOptions } from './interface'
+import { arrayMergeOverwrite, arrayMergeUnique } from './utils'
 import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 
 // deep merge all does not work in all cases
@@ -7,35 +10,26 @@ import type { DeepPartial } from '@webundsoehne/ts-utility-types'
 /**
  * Merge objects with defaults.
  *
- * Mutates the object.
+ * Mutates the object depending on the options.clone key.
  */
-export function deepMerge<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
-  return deepMergeWithUniqueMergeArray(t, ...s)
-}
+export function merge<T extends Record<PropertyKey, any>> (options: DeepMergeOptions | null, t: T, ...s: DeepPartial<T>[]): T {
+  options = {
+    arrayMerge: ArrayMergeBehavior.UNIQUE,
+    ...options ?? {}
+  }
 
-/**
- * Merge objects with array merge and filtering them uniquely.
- *
- * Mutates the object.
- */
-export function deepMergeWithUniqueMergeArray<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
-  return merge.all([t, ...s ?? []], {
-    arrayMerge: (target, source) => [...target, ...source].filter(uniqueArrayFilter)
+  let arrayMergeFn: ArrayMergeFn
+
+  if (typeof options?.arrayMerge === 'function') {
+    arrayMergeFn = options.arrayMerge
+  } else if (options?.arrayMerge === ArrayMergeBehavior.OVERWRITE) {
+    arrayMergeFn = arrayMergeOverwrite
+  } else if (options?.arrayMerge === ArrayMergeBehavior.UNIQUE) {
+    arrayMergeFn = arrayMergeUnique
+  }
+
+  return deepmerge.all([t, ...s], {
+    clone: options?.clone,
+    arrayMerge: arrayMergeFn
   }) as T
 }
-
-/**
- * Merge objects with overwriting the target array with source array.
- *
- * Mutates the object.
- */
-export function deepMergeWithArrayOverwrite<T extends Record<PropertyKey, any>> (t: T, ...s: DeepPartial<T>[]): T {
-  return merge.all([t, ...s ?? []], {
-    arrayMerge: (_, source) => source
-  }) as T
-}
-
-/**
- * A standard array filter for filtering it to unique items.
- */
-export const uniqueArrayFilter = (item: any, index: number, array: any[]): boolean => array.indexOf(item) === index
