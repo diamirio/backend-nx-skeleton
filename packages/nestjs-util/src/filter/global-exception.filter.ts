@@ -1,7 +1,9 @@
 import type { ArgumentsHost, ContextType, ExceptionFilter } from '@nestjs/common'
 import { Catch, HttpException, HttpStatus, Logger } from '@nestjs/common'
-import type { GqlContextType, GqlExceptionFilter } from '@nestjs/graphql'
+import type { GqlContextType } from '@nestjs/graphql'
 import { EOL } from 'os'
+import type { Observable } from 'rxjs'
+import { throwError } from 'rxjs'
 
 import { isEnrichedException, isHttpException } from './guard'
 import type { EnrichedException } from './interface'
@@ -10,7 +12,7 @@ import type { Response } from '@interface'
 import { isExpressResponse, isFastifyResponse } from '@util'
 
 @Catch()
-export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilter {
+export class GlobalExceptionFilter implements ExceptionFilter {
   protected logger = new Logger(this.constructor.name)
 
   static defaultPayload (exception: any): EnrichedException {
@@ -18,7 +20,7 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
       return exception
     } else if (isHttpException(exception)) {
       return new EnrichedExceptionError({
-        statusCode: exception.getStatus(),
+        statusCode: exception.getStatus() ?? HttpStatus.INTERNAL_SERVER_ERROR,
         error: exception.name,
         message: exception.message,
         cause: exception.cause,
@@ -56,33 +58,41 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
   }
 
-  catch (exception: Error, host: ArgumentsHost): void | HttpException {
+  catch (exception: Error, host: ArgumentsHost): void | HttpException | Observable<never> {
     if (this.shouldIgnore(exception)) {
       return
     }
 
     const ctxType = host.getType<ContextType | GqlContextType>()
 
-    // this should be already handled by the RpcGlobalExceptionFilter
-    if (['rpc'].includes(ctxType)) {
-      return
-    }
-
-    const ctx = host.switchToHttp()
-
-    const response: Response = ctx.getResponse()
-
     const payload = this.payload(exception)
+
+    // enrich the payload before logging out to the console
+    switch (ctxType) {
+    case 'rpc':
+      payload.service = host
+        .switchToRpc()
+        .getContext()
+        .args.map((args: any) => args.fields?.routingKey)
+        .filter(Boolean)
+
+      break
+    }
 
     GlobalExceptionFilter.debug(this.logger, payload)
 
     delete payload.stacktrace
 
-    if (['graphql'].includes(ctxType)) {
-      return new HttpException(payload, payload.statusCode)
-    }
+    switch (ctxType) {
+    case 'graphql':
+      return this.handleGraphQL(payload)
 
-    this.reply(response, payload.statusCode, payload)
+    case 'rpc':
+      return this.handleRpc(payload)
+
+    default:
+      return this.handleHttp(host, payload)
+    }
   }
 
   // ignore some errors that you do not want to log
@@ -100,12 +110,24 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     return GlobalExceptionFilter.defaultPayload(exception)
   }
 
-  protected reply (response: Response, code: number, payload: EnrichedExceptionError): void {
+  protected handleHttp (host: ArgumentsHost, payload: EnrichedExceptionError): void {
+    const ctx = host.switchToHttp()
+
+    const response: Response = ctx.getResponse()
+
     if (isFastifyResponse(response)) {
-      void response.code(code).send(payload)
+      void response.code(payload.statusCode).send(payload)
     } else if (isExpressResponse(response)) {
-      void response.status(code)
+      void response.status(payload.statusCode)
       void response.send(payload)
     }
+  }
+
+  protected handleGraphQL (payload: EnrichedExceptionError): HttpException {
+    return new HttpException(payload, payload.statusCode)
+  }
+
+  protected handleRpc (payload: EnrichedExceptionError): Observable<never> {
+    return throwError(() => throwError(() => payload))
   }
 }
