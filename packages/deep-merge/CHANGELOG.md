@@ -1,3 +1,18 @@
+# @webundsoehne/deep-merge [4.0.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@3.0.1...@webundsoehne/deep-merge@4.0.0) (2023-02-23)
+
+### Bug Fixes
+
+- **deep-merge:** update initiation problem ([3e4a031](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3e4a031c0b714f1490344b2b6606fcdbce19d769))
+- **deps:** update for breaking changes in deep-merge library ([08b00ad](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/08b00ad22f5e6e1af6a5d28bb4ed78a79df5e8db))
+
+### Performance Improvements
+
+- **deep-merge:** exposes the options of underlying library ([7f07cce](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7f07cce9907a7d78d391639147a60f382bf9ae76))
+
+### BREAKING CHANGES
+
+- **deep-merge:** Breaks the old API, requires to pass an options object first.
+
 ## @webundsoehne/deep-merge [3.0.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/deep-merge@3.0.0...@webundsoehne/deep-merge@3.0.1) (2023-02-07)
 
 ### Bug Fixes

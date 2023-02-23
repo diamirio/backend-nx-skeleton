@@ -4,22 +4,101 @@
 
 ## Table of contents
 
+### Enumerations
+
+- [ArrayMergeBehavior](enums/ArrayMergeBehavior.md)
+
+### Interfaces
+
+- [DeepMergeOptions](interfaces/DeepMergeOptions.md)
+
+### Type Aliases
+
+- [ArrayMergeFn](README.md#arraymergefn)
+
 ### Functions
 
-- [deepMerge](README.md#deepmerge)
-- [deepMergeWithArrayOverwrite](README.md#deepmergewitharrayoverwrite)
-- [deepMergeWithUniqueMergeArray](README.md#deepmergewithuniquemergearray)
+- [arrayMergeOverwrite](README.md#arraymergeoverwrite)
+- [arrayMergeUnique](README.md#arraymergeunique)
+- [merge](README.md#merge)
 - [uniqueArrayFilter](README.md#uniquearrayfilter)
+
+## Type Aliases
+
+### ArrayMergeFn
+
+Ƭ **ArrayMergeFn**: (`target`: `unknown`[], `source`: `unknown`[]) => `unknown`[]
+
+#### Type declaration
+
+▸ (`target`, `source`): `unknown`[]
+
+##### Parameters
+
+| Name     | Type        |
+| :------- | :---------- |
+| `target` | `unknown`[] |
+| `source` | `unknown`[] |
+
+##### Returns
+
+`unknown`[]
+
+#### Defined in
+
+interface.ts:3
 
 ## Functions
 
-### deepMerge
+### arrayMergeOverwrite
 
-▸ **deepMerge**<`T`\>(`t`, ...`s`): `T`
+▸ **arrayMergeOverwrite**(`target`, `source`): `unknown`[]
+
+#### Parameters
+
+| Name     | Type        |
+| :------- | :---------- |
+| `target` | `unknown`[] |
+| `source` | `unknown`[] |
+
+#### Returns
+
+`unknown`[]
+
+#### Defined in
+
+interface.ts:3
+
+---
+
+### arrayMergeUnique
+
+▸ **arrayMergeUnique**(`target`, `source`): `unknown`[]
+
+#### Parameters
+
+| Name     | Type        |
+| :------- | :---------- |
+| `target` | `unknown`[] |
+| `source` | `unknown`[] |
+
+#### Returns
+
+`unknown`[]
+
+#### Defined in
+
+interface.ts:3
+
+---
+
+### merge
+
+▸ **merge**<`T`\>(`options`, `t`, ...`s`): `T`
 
 Merge objects with defaults.
 
-Mutates the object.
+Mutates the object depending on the options.clone key.
 
 #### Type parameters
 
@@ -29,10 +108,11 @@ Mutates the object.
 
 #### Parameters
 
-| Name   | Type                  |
-| :----- | :-------------------- |
-| `t`    | `T`                   |
-| `...s` | `DeepPartial`<`T`\>[] |
+| Name      | Type                                                 |
+| :-------- | :--------------------------------------------------- |
+| `options` | [`DeepMergeOptions`](interfaces/DeepMergeOptions.md) |
+| `t`       | `T`                                                  |
+| `...s`    | `DeepPartial`<`T`\>[]                                |
 
 #### Returns
 
@@ -40,69 +120,7 @@ Mutates the object.
 
 #### Defined in
 
-merge.ts:12
-
----
-
-### deepMergeWithArrayOverwrite
-
-▸ **deepMergeWithArrayOverwrite**<`T`\>(`t`, ...`s`): `T`
-
-Merge objects with overwriting the target array with source array.
-
-Mutates the object.
-
-#### Type parameters
-
-| Name | Type                                    |
-| :--- | :-------------------------------------- |
-| `T`  | extends `Record`<`PropertyKey`, `any`\> |
-
-#### Parameters
-
-| Name   | Type                  |
-| :----- | :-------------------- |
-| `t`    | `T`                   |
-| `...s` | `DeepPartial`<`T`\>[] |
-
-#### Returns
-
-`T`
-
-#### Defined in
-
-merge.ts:32
-
----
-
-### deepMergeWithUniqueMergeArray
-
-▸ **deepMergeWithUniqueMergeArray**<`T`\>(`t`, ...`s`): `T`
-
-Merge objects with array merge and filtering them uniquely.
-
-Mutates the object.
-
-#### Type parameters
-
-| Name | Type                                    |
-| :--- | :-------------------------------------- |
-| `T`  | extends `Record`<`PropertyKey`, `any`\> |
-
-#### Parameters
-
-| Name   | Type                  |
-| :----- | :-------------------- |
-| `t`    | `T`                   |
-| `...s` | `DeepPartial`<`T`\>[] |
-
-#### Returns
-
-`T`
-
-#### Defined in
-
-merge.ts:21
+merge.ts:15
 
 ---
 
@@ -126,4 +144,4 @@ A standard array filter for filtering it to unique items.
 
 #### Defined in
 
-merge.ts:41
+utils.ts:6
