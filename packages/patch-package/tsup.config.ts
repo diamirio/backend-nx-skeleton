@@ -23,9 +23,7 @@ export default defineConfig((options) => ({
   keepNames: true,
 
   onSuccess: async (): Promise<void> => {
-    await Promise.all([
-      execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr }),
-      execa.command('yarn run manifest', { stdout: process.stdout, stderr: process.stderr })
-    ])
+    await execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr })
+    await Promise.all([execa.command('yarn run manifest', { stdout: process.stdout, stderr: process.stderr })])
   }
 }))

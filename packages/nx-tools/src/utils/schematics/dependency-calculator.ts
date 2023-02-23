@@ -4,7 +4,7 @@ import type { DependencyCalculatorDependency, DependencyCalculatorPackage, Packa
 import { Logger } from '@utils/logger/logger'
 import type { LocalNodeModule } from '@utils/package-manager'
 import { PackageManager } from '@utils/package-manager'
-import { deepMerge } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 
 /**
  * Calculates the dependencies with a given condition, returns the package versions merged.
@@ -50,7 +50,7 @@ export async function dependencyCalculator (options: DependencyCalculatorOptions
         logger.debug('Using linked dependencies for: %o', linkedPackages)
       }
 
-      o = deepMerge(o, d, linkedPackages)
+      o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, d, linkedPackages)
 
       return o
     }, {})
@@ -58,7 +58,7 @@ export async function dependencyCalculator (options: DependencyCalculatorOptions
 
   return options.reduce<PackageVersions>((o, i) => {
     if (i.condition !== false) {
-      o = deepMerge(o, convertDependencyCalculatorPackage(i.deps))
+      o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, convertDependencyCalculatorPackage(i.deps))
     }
 
     return o

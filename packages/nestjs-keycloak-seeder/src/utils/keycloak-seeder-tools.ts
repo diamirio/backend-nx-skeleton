@@ -4,7 +4,7 @@ import type { RoleMappingPayload } from '@keycloak/keycloak-admin-client/lib/def
 import type { Credentials } from '@keycloak/keycloak-admin-client/lib/utils/auth'
 import { Injectable, Logger } from '@nestjs/common'
 
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 import type { KeycloakAdminOptions } from '@webundsoehne/nestjs-keycloak'
 import { InjectKeycloak, KeycloakAdminService } from '@webundsoehne/nestjs-keycloak'
 import type { ArrayElement, Await, DeepPartial } from '@webundsoehne/ts-utility-types'
@@ -42,11 +42,11 @@ export class KeycloakAdminSeederTools {
 
       const base = this.keycloak.getOptions()
 
-      this.clients[realm] = new KeycloakAdminClient(deepMergeWithArrayOverwrite(base.initialize, (options?.initialize as ConnectionConfig) ?? {}))
+      this.clients[realm] = new KeycloakAdminClient(merge({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, base.initialize, (options?.initialize as ConnectionConfig) ?? {}))
 
-      await this.clients[realm].auth(deepMergeWithArrayOverwrite(base.authentication, (options?.authentication as Credentials) ?? {}))
+      await this.clients[realm].auth(merge({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, base.authentication, (options?.authentication as Credentials) ?? {}))
       this.clients[realm].setConfig(
-        deepMergeWithArrayOverwrite(base.configuration, (options?.configuration as Partial<ConnectionConfig>) ?? {}, {
+        merge({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, base.configuration, (options?.configuration as Partial<ConnectionConfig>) ?? {}, {
           realmName: realm
         })
       )

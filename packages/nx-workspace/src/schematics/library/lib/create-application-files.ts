@@ -3,7 +3,7 @@ import { apply, chain, url } from '@angular-devkit/schematics'
 
 import { getSchematicFiles } from '../interfaces/file.constants'
 import type { NormalizedSchema } from '../main.interface'
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
 import { applyOverwriteWithDiff, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
@@ -23,7 +23,9 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         // just needs the url the rest it will do it itself
         apply(source, generateRules(options, log)),
         // needs the rule applied files, representing the prior configuration
-        options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite(options, options.priorConfiguration), log, { silent: true })) : null,
+        options?.priorConfiguration
+          ? apply(source, generateRules(merge<NormalizedSchema>({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, options, options.priorConfiguration), log, { silent: true }))
+          : null,
         context
       ),
 

@@ -4,7 +4,7 @@ import { join } from 'path'
 
 import type { UpdatePackageJsonForProjectRuleOptions } from './update-package-json.rule.interface'
 import type { BaseNormalizedSchemaRoot } from '@interfaces/base-schemas.interface'
-import { deepMerge } from '@webundsoehne/deep-merge'
+import { merge } from '@webundsoehne/deep-merge'
 
 export function updatePackageJsonForProjectRule<T extends BaseNormalizedSchemaRoot> (options: T, data: UpdatePackageJsonForProjectRuleOptions): Rule {
   return updateJsonInTree(join(options.root, 'package.json'), (json) => {
@@ -13,7 +13,7 @@ export function updatePackageJsonForProjectRule<T extends BaseNormalizedSchemaRo
     }
 
     if (data.scripts && Object.keys(data.scripts).length > 0) {
-      json.scripts = deepMerge(json.scripts, data.scripts)
+      json.scripts = merge(null, json.scripts, data.scripts)
     }
 
     return json

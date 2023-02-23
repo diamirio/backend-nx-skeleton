@@ -8,7 +8,7 @@ import type { GenerateExportsJinjaTemplateOptions } from '@rules/generate-export
 import { applyOverwriteWithDiff } from '@rules/overwrite-with-diff.rule'
 import type { MultipleJinjaTemplateTemplates } from '@templates/template-engine.interface'
 import { convertStringToDirPath, Logger } from '@utils'
-import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 
 /**
  * Generates from given template. Will search for multiple files that match the import case and will export them from root of the output file.
@@ -32,7 +32,8 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
       }
 
       // if we dont overwrite the file with filechanges we do not need it, but it exists in tree which is the current host sysstem
-      output = deepMergeWithUniqueMergeArray(
+      output = merge(
+        { arrayMerge: ArrayMergeBehavior.UNIQUE },
         output,
         options.templates.reduce<Record<string, string[]>>((o, template) => {
           if (!Array.isArray(template.pattern)) {
@@ -46,7 +47,7 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
           if (micromatch.all(file, pattern, { ...micromatchDefaultOptions, ...template.options })) {
             log.debug('Generate export pattern "%s" matches: "%s"', pattern.join(', '), file)
 
-            o = deepMergeWithUniqueMergeArray(o, {
+            o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, {
               [template.output]: [
                 './' +
                   join(
@@ -68,12 +69,13 @@ export function generateExportsRule (source: Source, options: GenerateExportsJin
     if (!output || Object.keys(output).length === 0) {
       log.warn('Nothing to export no file has been matched with the given pattern.')
 
-      output = deepMergeWithUniqueMergeArray(
+      output = merge(
+        null,
         output,
         options.templates.reduce<Record<string, string[]>>((o, template) => {
           log.debug('Generate empty export file: "%s"', template.output)
 
-          o = deepMergeWithUniqueMergeArray(o, {
+          o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, {
             [template.output]: []
           })
 

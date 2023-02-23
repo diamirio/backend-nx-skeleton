@@ -15,7 +15,7 @@ import type { BaseIntegration, BaseNxJsonIntegration } from './integration.inter
 import { convertAngularTreeToNxTree } from './nx-integration'
 import type { EnrichedNxConfiguration, EnrichedProjectConfiguration } from '@interfaces/nx-json.interface'
 import { Logger } from '@utils'
-import { deepMergeWithArrayOverwrite, deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 
 /**
  * Updates nx integration by saving values like prior configuration or so for having a memory.
@@ -33,7 +33,7 @@ export function updateNxIntegration<T extends Record<PropertyKey, any> = BaseInt
   }
 
   if (project) {
-    updated = options?.arrayOverwrite === false ? deepMergeWithUniqueMergeArray(project, { integration } as any) : deepMergeWithArrayOverwrite(project, { integration } as any)
+    updated = merge({ arrayMerge: options?.arrayOverwrite ? ArrayMergeBehavior.OVERWRITE : ArrayMergeBehavior.UNIQUE }, project, { integration } as any)
   }
 
   updateProjectConfiguration(convertAngularTreeToNxTree(host), name, updated as unknown as ProjectConfiguration)
@@ -62,7 +62,7 @@ export function updateNxJsonIntegrationRule<T extends Record<PropertyKey, any> =
   }
 
   if (current) {
-    updated = options?.arrayOverwrite ? deepMergeWithArrayOverwrite(current, integration as any) : deepMergeWithUniqueMergeArray(current, integration as any)
+    updated = merge({ arrayMerge: options?.arrayOverwrite ? ArrayMergeBehavior.OVERWRITE : ArrayMergeBehavior.UNIQUE }, current, integration as any)
   }
 
   return updateNxJsonInTree((json) => {
@@ -93,7 +93,7 @@ export function readNxWorkspaceIntegration<T extends Record<PropertyKey, any> = 
     const found = value?.integration
 
     if (found) {
-      o = deepMergeWithUniqueMergeArray(o, [found])
+      o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, [found])
     }
 
     return o

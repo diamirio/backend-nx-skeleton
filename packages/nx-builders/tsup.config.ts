@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import cpy from 'cpy'
 import execa from 'execa'
@@ -23,6 +24,7 @@ export default defineConfig((options) => ({
   splitting: false,
   clean: true,
   minify: false,
+  keepNames: true,
 
   onSuccess: async (): Promise<void> => {
     await Promise.all(
@@ -50,8 +52,8 @@ export default defineConfig((options) => ({
     })
 
     // eslint-disable-next-line no-console
-    console.log('Copied assets:', copied.join(', '))
+    // console.log('Copied assets:', copied.join(', '))
 
-    await Promise.all([execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr })])
+    await execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr })
   }
 }))

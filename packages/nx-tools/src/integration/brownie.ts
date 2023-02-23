@@ -4,7 +4,7 @@ import type { BrownieAvailableContainers, BrownieIntegration } from './brownie.i
 import { readNxWorkspaceIntegration, readProjectConfiguration } from './integration'
 import type { BaseIntegration } from './integration.interface'
 import { updateNxIntegrationRule } from '@rules/integration.rule'
-import { deepMergeWithUniqueMergeArray } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 
 /**
  * Updates brownie integration by wiriting data to nx.json
@@ -31,7 +31,7 @@ export function readBrownieWorkspaceContainers (host?: Tree): BrownieAvailableCo
 
   return Object.values(integration).reduce((o, value) => {
     if (value?.brownie) {
-      o = deepMergeWithUniqueMergeArray(o, value.brownie.containers)
+      o = merge({ arrayMerge: ArrayMergeBehavior.UNIQUE }, o, value.brownie.containers)
     }
 
     return o

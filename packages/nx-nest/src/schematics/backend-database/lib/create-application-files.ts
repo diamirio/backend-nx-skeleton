@@ -6,7 +6,7 @@ import type { Schema as GeneratorSchema } from '../../generator/main.interface'
 import { getSchematicFiles, SchematicFilesMap } from '../interfaces/file.constants'
 import type { NormalizedSchema } from '../main.interface'
 import { AvailableDBAdapters, AvailableGenerators } from '@interfaces/available.constants'
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
 import { addSchematicTaskRule, applyOverwriteWithDiff, convertStringToDirPath, createApplicationRule, Logger } from '@webundsoehne/nx-tools'
 
@@ -21,7 +21,9 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         // just needs the url the rest it will do it itself
         apply(source, generateRules(options, log)),
         // needs the rule applied files, representing the prior configuration
-        options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite<NormalizedSchema>(options, options.priorConfiguration), log)) : null,
+        options?.priorConfiguration
+          ? apply(source, generateRules(merge<NormalizedSchema>({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, options, options.priorConfiguration), log))
+          : null,
         context
       ),
 

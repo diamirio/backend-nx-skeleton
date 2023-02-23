@@ -3,7 +3,7 @@ import { apply, chain, externalSchematic, url } from '@angular-devkit/schematics
 import { join } from 'path'
 
 import type { NormalizedSchema, ParsedMicroservice } from '../main.interface'
-import { deepMergeWithArrayOverwrite } from '@webundsoehne/deep-merge'
+import { ArrayMergeBehavior, merge } from '@webundsoehne/deep-merge'
 import type { CreateApplicationRuleInterface } from '@webundsoehne/nx-tools'
 import { applyOverwriteWithDiff, createApplicationRule, Logger, convertStringToDirPath } from '@webundsoehne/nx-tools'
 import type { Schema as ExportsSchema } from '@webundsoehne/nx-tools/dist/schematics/exports/main.interface'
@@ -19,7 +19,9 @@ export function createApplicationFiles (options: NormalizedSchema): Rule {
         // just needs the url the rest it will do it itself
         apply(source, generateRules(options, log)),
         // needs the rule applied files, representing the prior configuration
-        options?.priorConfiguration ? apply(source, generateRules(deepMergeWithArrayOverwrite<NormalizedSchema>(options, options.priorConfiguration), log)) : null,
+        options?.priorConfiguration
+          ? apply(source, generateRules(merge<NormalizedSchema>({ arrayMerge: ArrayMergeBehavior.OVERWRITE }, options, options.priorConfiguration), log))
+          : null,
         context
       ),
 
