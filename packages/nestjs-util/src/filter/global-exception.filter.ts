@@ -56,7 +56,7 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     logger.debug(['[%s] - "%s"', payload.statusCode, payload.message])
   }
 
-  catch<T extends Error = Error>(exception: T, host: ArgumentsHost): void | HttpException {
+  catch (exception: Error, host: ArgumentsHost): void | HttpException {
     if (this.shouldIgnore(exception)) {
       return
     }
