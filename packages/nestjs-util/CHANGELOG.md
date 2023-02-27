@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.2...@webundsoehne/nestjs-util@7.1.3) (2023-02-27)
+
+### Bug Fixes
+
+- **nestjs-util:** dont make the catch method generic ([db6c5e1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/db6c5e12b6806dbd364e457e25bf7c6809b27fb8))
+
 ## @webundsoehne/nestjs-util [7.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.1...@webundsoehne/nestjs-util@7.1.2) (2023-02-27)
 
 ### Bug Fixes

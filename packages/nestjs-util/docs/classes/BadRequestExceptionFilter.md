@@ -58,19 +58,13 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 ### catch
 
-▸ **catch**<`T`\>(`exception`, `host`): `void` \| `HttpException`
-
-#### Type parameters
-
-| Name | Type                      |
-| :--- | :------------------------ |
-| `T`  | extends `Error` = `Error` |
+▸ **catch**(`exception`, `host`): `void` \| `HttpException`
 
 #### Parameters
 
 | Name        | Type            |
 | :---------- | :-------------- |
-| `exception` | `T`             |
+| `exception` | `Error`         |
 | `host`      | `ArgumentsHost` |
 
 #### Returns
