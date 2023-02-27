@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-microservices [3.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.5...@webundsoehne/nestjs-util-microservices@3.0.6) (2023-02-27)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.1.2
+
 ## @webundsoehne/nestjs-util-microservices [3.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.4...@webundsoehne/nestjs-util-microservices@3.0.5) (2023-02-23)
 
 ### Bug Fixes
