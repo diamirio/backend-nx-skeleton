@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-restful [3.0.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.6...@webundsoehne/nestjs-util-restful@3.0.7) (2023-02-27)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.1.3
+
 ## @webundsoehne/nestjs-util-restful [3.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.5...@webundsoehne/nestjs-util-restful@3.0.6) (2023-02-27)
 
 ### Dependencies
