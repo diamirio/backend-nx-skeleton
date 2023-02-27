@@ -58,13 +58,19 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:14
 
 ### catch
 
-▸ **catch**(`exception`, `host`): `void` \| `HttpException`
+▸ **catch**<`T`\>(`exception`, `host`): `void` \| `HttpException`
+
+#### Type parameters
+
+| Name | Type                      |
+| :--- | :------------------------ |
+| `T`  | extends `Error` = `Error` |
 
 #### Parameters
 
 | Name        | Type            |
 | :---------- | :-------------- |
-| `exception` | `Error`         |
+| `exception` | `T`             |
 | `host`      | `ArgumentsHost` |
 
 #### Returns
@@ -101,7 +107,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:59
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:109
+packages/nestjs-util/src/filter/global-exception.filter.ts:110
 
 ---
 
@@ -126,7 +132,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:109
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:96
+packages/nestjs-util/src/filter/global-exception.filter.ts:97
 
 ---
 
@@ -174,7 +180,7 @@ packages/nestjs-util/src/filter/bad-request-exception.filter.ts:30
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:82
+packages/nestjs-util/src/filter/global-exception.filter.ts:83
 
 ---
 

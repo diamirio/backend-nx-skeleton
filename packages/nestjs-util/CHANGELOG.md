@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [7.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.1...@webundsoehne/nestjs-util@7.1.2) (2023-02-27)
+
+### Bug Fixes
+
+- **nestjs-util:** properly extend error ([18e05c9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/18e05c9015c041bb85b1784011760db6fdecc330))
+- no need to expose name ([62f0995](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/62f099504aa080df456cb923f1f7150602bd73c4))
+
 ## @webundsoehne/nestjs-util [7.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.0...@webundsoehne/nestjs-util@7.1.1) (2023-02-23)
 
 ### Bug Fixes

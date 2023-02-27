@@ -147,7 +147,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:73
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:109
+packages/nestjs-util/src/filter/global-exception.filter.ts:110
 
 ---
 
@@ -172,7 +172,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:109
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:96
+packages/nestjs-util/src/filter/global-exception.filter.ts:97
 
 ---
 
@@ -200,9 +200,9 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:69
 
 #### Parameters
 
-| Name         | Type    |
-| :----------- | :------ |
-| `exception?` | `Error` |
+| Name         | Type  |
+| :----------- | :---- |
+| `exception?` | `any` |
 
 #### Returns
 
@@ -214,7 +214,7 @@ packages/nestjs-util/src/filter/global-sentry-exception.filter.ts:69
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:92
+packages/nestjs-util/src/filter/global-exception.filter.ts:93
 
 ---
 
@@ -238,7 +238,7 @@ packages/nestjs-util/src/filter/global-exception.filter.ts:92
 
 #### Defined in
 
-packages/nestjs-util/src/filter/global-exception.filter.ts:82
+packages/nestjs-util/src/filter/global-exception.filter.ts:83
 
 ---
 

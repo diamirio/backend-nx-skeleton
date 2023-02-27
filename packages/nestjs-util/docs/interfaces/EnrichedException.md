@@ -2,6 +2,12 @@
 
 # Interface: EnrichedException
 
+## Hierarchy
+
+- `Error`
+
+  ↳ **`EnrichedException`**
+
 ## Implemented by
 
 - [`EnrichedExceptionError`](../classes/EnrichedExceptionError.md)
@@ -15,7 +21,9 @@
 - [error](EnrichedException.md#error)
 - [errors](EnrichedException.md#errors)
 - [message](EnrichedException.md#message)
+- [name](EnrichedException.md#name)
 - [service](EnrichedException.md#service)
+- [stack](EnrichedException.md#stack)
 - [stacktrace](EnrichedException.md#stacktrace)
 - [statusCode](EnrichedException.md#statuscode)
 
@@ -65,9 +73,27 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:12
 
 • **message**: `string`
 
+#### Overrides
+
+Error.message
+
 #### Defined in
 
 packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:8
+
+---
+
+### name
+
+• **name**: `string`
+
+#### Inherited from
+
+Error.name
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es5.d.ts:1040
 
 ---
 
@@ -78,6 +104,20 @@ packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:8
 #### Defined in
 
 packages/nestjs-util/src/filter/interface/enriched-exception.interface.ts:18
+
+---
+
+### stack
+
+• `Optional` **stack**: `string`
+
+#### Inherited from
+
+Error.stack
+
+#### Defined in
+
+node_modules/typescript/lib/lib.es5.d.ts:1042
 
 ---
 
