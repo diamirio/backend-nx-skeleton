@@ -68,6 +68,7 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
     GlobalExceptionFilter.debug(this.logger, payload)
 
     delete payload.stacktrace
+    delete payload.name
 
     switch (ctxType) {
     case 'graphql':
