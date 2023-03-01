@@ -199,7 +199,7 @@ Normalize the incoming options
 
 #### Defined in
 
-packages/nx-tools/src/utils/builders/base-executor.ts:75
+packages/nx-tools/src/utils/builders/base-executor.ts:74
 
 ---
 
@@ -215,7 +215,7 @@ The run command about what to do
 
 #### Defined in
 
-packages/nx-tools/src/utils/builders/base-executor.ts:69
+packages/nx-tools/src/utils/builders/base-executor.ts:68
 
 ---
 

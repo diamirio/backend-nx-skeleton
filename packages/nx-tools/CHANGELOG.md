@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.0...@webundsoehne/nx-tools@6.1.1) (2023-03-01)
+
+### Bug Fixes
+
+- create async project graph directly ([7537476](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/7537476221aaf30c18442fb42aae8d7fe4b5751e))
+
 # @webundsoehne/nx-tools [6.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.15...@webundsoehne/nx-tools@6.1.0) (2023-03-01)
 
 ### Features
