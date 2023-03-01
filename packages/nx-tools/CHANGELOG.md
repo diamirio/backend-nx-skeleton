@@ -1,3 +1,9 @@
+# @webundsoehne/nx-tools [6.1.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.15...@webundsoehne/nx-tools@6.1.0) (2023-03-01)
+
+### Features
+
+- basic update for nx15 compatability in 14 ([4fef42f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4fef42f928fa1d0c554a8f5ac00b9df2e4f30081))
+
 ## @webundsoehne/nx-tools [6.0.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.0.14...@webundsoehne/nx-tools@6.0.15) (2023-02-23)
 
 ### Bug Fixes
