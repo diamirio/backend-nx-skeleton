@@ -34,6 +34,12 @@ export function runExecutor<
 
     const executor = new Executor(options, context)
 
-    return from(executor.run())
+    return from(
+      (async (): Promise<BuilderOutput> => {
+        await executor.setup()
+
+        return executor.run()
+      })()
+    )
   }
 }
