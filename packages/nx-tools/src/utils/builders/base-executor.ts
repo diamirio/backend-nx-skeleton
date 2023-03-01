@@ -1,6 +1,6 @@
 import type { BuilderOutput } from '@angular-devkit/architect'
 import type { ExecutorContext, ProjectConfiguration, ProjectGraph, ProjectGraphProjectNode } from '@nrwl/devkit'
-import { readCachedProjectGraph, createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph'
+import { createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph'
 import type { DependentBuildableProjectNode } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 import { calculateProjectDependencies } from '@nrwl/workspace/src/utilities/buildable-libs-utils'
 
@@ -38,8 +38,7 @@ export abstract class BaseExecutor<
     this.paths = {} as ProcessPaths
 
     // create dependency
-    await createProjectGraphAsync()
-    this.projectGraph = readCachedProjectGraph()
+    this.projectGraph = await createProjectGraphAsync()
     const { target, dependencies } = calculateProjectDependencies(
       this.projectGraph,
       this.context.root,
