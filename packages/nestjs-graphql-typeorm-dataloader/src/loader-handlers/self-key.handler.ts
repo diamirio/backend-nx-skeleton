@@ -12,7 +12,7 @@ export async function handleOneToOneNotOwnerWithSelfKey<V> (selfKeyFunc: SelfKey
     relation.entityMetadata.primaryColumns,
     (connection) => new SelfKeyDataloader<V>(relation, connection, selfKeyFunc),
     async (dataloader, columns) => {
-      return (dataloader as any).load(columns[0].getEntityValue(parent))[0] ?? null
+      return (await dataloader.load(columns[0].getEntityValue(parent)))[0] ?? null
     }
   )
 }
