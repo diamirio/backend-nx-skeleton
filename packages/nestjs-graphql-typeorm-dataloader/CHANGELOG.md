@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.5...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.6) (2023-03-12)
+
+### Bug Fixes
+
+- update per github issue [#6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/issues/6) for onetoone relations ([43db27b](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/43db27bbd450ef4114ff72fb367f502cb55d66a7))
+
 ## @webundsoehne/nestjs-graphql-typeorm-dataloader [4.0.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.4...@webundsoehne/nestjs-graphql-typeorm-dataloader@4.0.5) (2023-02-23)
 
 ### Bug Fixes
