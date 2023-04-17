@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.3...@webundsoehne/nestjs-util@7.1.4) (2023-04-17)
+
+### Bug Fixes
+
+- **nestjs-util:** logger error level opt param spread fallback ([74f1060](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/74f1060afa220788c7e45f9c5388a14edbe91b65))
+
 ## @webundsoehne/nestjs-util [7.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.2...@webundsoehne/nestjs-util@7.1.3) (2023-02-27)
 
 ### Bug Fixes

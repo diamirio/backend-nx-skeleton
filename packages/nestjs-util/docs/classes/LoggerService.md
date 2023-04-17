@@ -37,8 +37,8 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type     |
+| :--------- | :------- |
 | `context?` | `string` |
 
 #### Defined in
@@ -55,7 +55,7 @@ packages/nestjs-util/src/provider/logger/logger.service.ts:30
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:30
 
-___
+---
 
 ### transports
 
@@ -65,7 +65,7 @@ ___
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:11
 
-___
+---
 
 ### instance
 
@@ -83,8 +83,8 @@ packages/nestjs-util/src/provider/logger/logger.service.ts:9
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name        | Type              |
+| :---------- | :---------------- |
 | `transport` | `TransportStream` |
 
 #### Returns
@@ -95,7 +95,7 @@ packages/nestjs-util/src/provider/logger/logger.service.ts:9
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:32
 
-___
+---
 
 ### debug
 
@@ -103,9 +103,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `any` |
+| Name       | Type     |
+| :--------- | :------- |
+| `message`  | `any`    |
 | `context?` | `string` |
 
 #### Returns
@@ -120,19 +120,18 @@ LoggerServiceCommon.debug
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:65
 
-___
+---
 
 ### error
 
-▸ **error**(`message`, `context?`, `trace?`): `void`
+▸ **error**(`message`, ...`optionalParams`): `void`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `any` |
-| `context?` | `string` |
-| `trace?` | `string` |
+| Name                | Type    |
+| :------------------ | :------ |
+| `message`           | `any`   |
+| `...optionalParams` | `any`[] |
 
 #### Returns
 
@@ -146,7 +145,7 @@ LoggerServiceCommon.error
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:40
 
-___
+---
 
 ### getLogger
 
@@ -154,8 +153,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name        | Type     |
+| :---------- | :------- |
 | `logLevel?` | `string` |
 
 #### Returns
@@ -166,7 +165,7 @@ ___
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:81
 
-___
+---
 
 ### log
 
@@ -174,9 +173,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `any` |
+| Name       | Type     |
+| :--------- | :------- |
+| `message`  | `any`    |
 | `context?` | `string` |
 
 #### Returns
@@ -191,7 +190,7 @@ LoggerServiceCommon.log
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:49
 
-___
+---
 
 ### logMessage
 
@@ -199,13 +198,13 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `__namedParameters` | `Object` |
+| Name                         | Type     |
+| :--------------------------- | :------- |
+| `__namedParameters`          | `Object` |
 | `__namedParameters.context?` | `string` |
-| `__namedParameters.message` | `any` |
-| `__namedParameters.trace?` | `any` |
-| `__namedParameters.type` | `string` |
+| `__namedParameters.message`  | `any`    |
+| `__namedParameters.trace?`   | `any`    |
+| `__namedParameters.type`     | `string` |
 
 #### Returns
 
@@ -215,7 +214,7 @@ ___
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:100
 
-___
+---
 
 ### verbose
 
@@ -223,9 +222,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `any` |
+| Name       | Type     |
+| :--------- | :------- |
+| `message`  | `any`    |
 | `context?` | `string` |
 
 #### Returns
@@ -240,7 +239,7 @@ LoggerServiceCommon.verbose
 
 packages/nestjs-util/src/provider/logger/logger.service.ts:73
 
-___
+---
 
 ### warn
 
@@ -248,9 +247,9 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `any` |
+| Name       | Type     |
+| :--------- | :------- |
+| `message`  | `any`    |
 | `context?` | `string` |
 
 #### Returns
