@@ -37,12 +37,12 @@ export class LoggerService implements LoggerServiceCommon {
     return this
   }
 
-  error (message: any, context?: string, trace?: string): void {
+  error (message, ...optionalParams): void {
     this.logMessage({
       type: LogType.error,
       message,
-      context,
-      trace
+      context: optionalParams[1] ?? optionalParams[0],
+      trace: optionalParams[1] ? optionalParams[0] : undefined
     })
   }
 
