@@ -27,7 +27,7 @@ export class SwaggerService {
 
     // FIXME: this is a bug with fastify, if we use the global prefix, it ignors it while using fastify but express works just fine
     SwaggerModule.setup(
-      `${url?.apiPath}${config.path}`,
+      `${url?.apiPath ?? ''}${config.path}`,
       app,
       SwaggerModule.createDocument(app, builder.build(), {
         ignoreGlobalPrefix: false
