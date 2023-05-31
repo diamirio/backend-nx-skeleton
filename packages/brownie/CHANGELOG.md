@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [5.0.23](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.22...@webundsoehne/brownie@5.0.23) (2023-05-31)
+
+### Bug Fixes
+
+- **nestjs-util:** publish ([229b103](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/229b1031fae3c0805fbac6d7c26e826d358b44af))
+
 ## @webundsoehne/brownie [5.0.22](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.21...@webundsoehne/brownie@5.0.22) (2023-03-01)
 
 ### Dependencies
