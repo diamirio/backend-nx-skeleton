@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-restful [3.0.9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.8...@webundsoehne/nestjs-util-restful@3.0.9) (2023-05-31)
+
+### Bug Fixes
+
+- **nestjs-util:** stringify undefined url to empty string in swagger path ([834219c](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/834219ccc40f9e501a49cf56163436a036cbaba5))
+
 ## @webundsoehne/nestjs-util-restful [3.0.8](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.7...@webundsoehne/nestjs-util-restful@3.0.8) (2023-04-17)
 
 ### Dependencies
