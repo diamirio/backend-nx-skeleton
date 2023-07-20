@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.1...@webundsoehne/nx-tools@6.1.2) (2023-07-20)
+
+### Bug Fixes
+
+- issue with process manager and task killing ([075a497](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/075a49771d1f3d5e21728b0604037585dfeefc85))
+
 ## @webundsoehne/nx-tools [6.1.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.0...@webundsoehne/nx-tools@6.1.1) (2023-03-01)
 
 ### Bug Fixes
