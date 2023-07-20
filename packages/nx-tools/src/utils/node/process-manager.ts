@@ -66,8 +66,6 @@ export class ProcessManager {
           return
         }
 
-        instance.kill()
-
         const pids: number[] = []
 
         try {
