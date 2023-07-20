@@ -224,7 +224,8 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         rules: [
           {
             args: {
-              cwd: this.options.normalizedOutputPath
+              cwd: this.options.normalizedOutputPath,
+              shell: true
             }
           }
         ]
