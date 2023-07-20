@@ -1,3 +1,13 @@
+## @webundsoehne/nx-builders [6.1.16](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.15...@webundsoehne/nx-builders@6.1.16) (2023-07-20)
+
+### Bug Fixes
+
+- not taking the kill signal still ([aec5dc4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/aec5dc4f92dffc069155d5f0fa2b75fd4111977d))
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 6.1.5
+
 ## @webundsoehne/nx-builders [6.1.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.14...@webundsoehne/nx-builders@6.1.15) (2023-07-20)
 
 ### Dependencies
