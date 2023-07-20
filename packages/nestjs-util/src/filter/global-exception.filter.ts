@@ -39,8 +39,8 @@ export class GlobalExceptionFilter implements ExceptionFilter, GqlExceptionFilte
   static formatMessage (error: string | Error): string | undefined {
     if (typeof error === 'string') {
       return error
-    } else if (isHttpException(error)) {
-      return error.cause.message
+    } else if (typeof error === 'object' && typeof (error as any).cause === 'object' && typeof (error as any).cause.message === 'string') {
+      return (error as any).cause.message
     } else if (typeof error === 'object' && typeof error?.message === 'string') {
       return error.message
     }
