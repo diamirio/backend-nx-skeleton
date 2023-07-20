@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [5.0.24](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.23...@webundsoehne/brownie@5.0.24) (2023-07-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 6.1.2
+
 ## @webundsoehne/brownie [5.0.23](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.22...@webundsoehne/brownie@5.0.23) (2023-05-31)
 
 ### Bug Fixes
