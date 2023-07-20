@@ -1,3 +1,10 @@
+## @webundsoehne/nx-workspace [5.0.26](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.25...@webundsoehne/nx-workspace@5.0.26) (2023-07-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.1.13
+- **@webundsoehne/nx-tools:** upgraded to 6.1.2
+
 ## @webundsoehne/nx-workspace [5.0.25](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.24...@webundsoehne/nx-workspace@5.0.25) (2023-03-01)
 
 ### Dependencies
