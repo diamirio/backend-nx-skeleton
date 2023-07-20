@@ -61,10 +61,10 @@ export class ProcessManager {
         const instanceName = instance.spawnargs.join(' ')
 
         if (typeof instance.exitCode !== 'number') {
-          let pids: number[] = []
+          const pids: number[] = [instance.pid]
 
           try {
-            pids = await pidtree(instance.pid, { root: true })
+            pids.push(...await pidtree(instance.pid, { root: true }))
           } catch (e) {
             this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
           }
