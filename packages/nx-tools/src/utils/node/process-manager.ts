@@ -52,35 +52,37 @@ export class ProcessManager {
   private async killProcesses (tasks: ExecaChildProcess[]): Promise<void | void[]> {
     if (tasks.length === 0) {
       this.logger.debug('Nothing found to kill.')
-    } else {
-      await Promise.all(
-        tasks.map(async (instance) => {
-          const instanceName = instance.spawnargs.join(' ')
 
-          if (typeof instance.exitCode !== 'number') {
-            let pids: number[]
-
-            try {
-              pids = await pidtree(instance.pid, { root: true })
-            } catch (e) {
-              this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
-            }
-
-            await Promise.all(
-              pids.map(async (pid) => {
-                try {
-                  process.kill(pid)
-                  // eslint-disable-next-line no-empty
-                } catch (err) {}
-              })
-            )
-
-            this.logger.warn('Killing instance: %s > %s', instanceName, pids.join(', '))
-          } else {
-            this.logger.debug('Instance is already stopped: %s', instanceName)
-          }
-        })
-      )
+      return
     }
+
+    await Promise.all(
+      tasks.map(async (instance) => {
+        const instanceName = instance.spawnargs.join(' ')
+
+        if (typeof instance.exitCode !== 'number') {
+          let pids: number[] = []
+
+          try {
+            pids = await pidtree(instance.pid, { root: true })
+          } catch (e) {
+            this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
+          }
+
+          await Promise.all(
+            pids.map(async (pid) => {
+              try {
+                process.kill(pid)
+                // eslint-disable-next-line no-empty
+              } catch (err) {}
+            })
+          )
+
+          this.logger.warn('Killing instance: %s > %s', instanceName, pids.join(', '))
+        } else {
+          this.logger.debug('Instance is already stopped: %s', instanceName)
+        }
+      })
+    )
   }
 }
