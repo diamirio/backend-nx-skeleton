@@ -60,28 +60,33 @@ export class ProcessManager {
       tasks.map(async (instance) => {
         const instanceName = instance.spawnargs.join(' ')
 
-        if (typeof instance.exitCode !== 'number') {
-          const pids: number[] = [instance.pid]
-
-          try {
-            pids.push(...await pidtree(instance.pid, { root: true }))
-          } catch (e) {
-            this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
-          }
-
-          await Promise.all(
-            pids.map(async (pid) => {
-              try {
-                process.kill(pid)
-                // eslint-disable-next-line no-empty
-              } catch (err) {}
-            })
-          )
-
-          this.logger.warn('Killing instance: %s > %s', instanceName, pids.join(', '))
-        } else {
+        if (typeof instance.exitCode === 'number') {
           this.logger.debug('Instance is already stopped: %s', instanceName)
+
+          return
         }
+
+        instance.kill()
+
+        const pids: number[] = []
+
+        try {
+          pids.push(...await pidtree(instance.pid, { root: true }))
+        } catch (e) {
+          this.logger.debug('No matching PIDs has been found:%s%s', EOL, e)
+        }
+
+        await Promise.all(
+          pids.map(async (pid) => {
+            try {
+              process.kill(pid)
+            } catch (err) {
+              this.logger.debug(err)
+            }
+          })
+        )
+
+        this.logger.warn('Killing instance: %s > %s', instanceName, pids.join(', '))
       })
     )
   }
