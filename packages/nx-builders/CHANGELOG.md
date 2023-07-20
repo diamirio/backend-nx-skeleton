@@ -1,3 +1,9 @@
+## @webundsoehne/nx-builders [6.1.17](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.16...@webundsoehne/nx-builders@6.1.17) (2023-07-20)
+
+### Bug Fixes
+
+- this is a ps aux problem not nodejs problem ([a55af2f](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/a55af2fa41ca1a234429528fe95ac7d8aaaa0b7e))
+
 ## @webundsoehne/nx-builders [6.1.16](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.15...@webundsoehne/nx-builders@6.1.16) (2023-07-20)
 
 ### Bug Fixes
