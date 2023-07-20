@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.5...@webundsoehne/nestjs-util@7.1.6) (2023-07-20)
+
+### Bug Fixes
+
+- fetch message from cause ([b79a075](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/b79a075ed5ecbf5976c2ed91b1d8dfb6bda4cd10))
+
 ## @webundsoehne/nestjs-util [7.1.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.4...@webundsoehne/nestjs-util@7.1.5) (2023-07-20)
 
 ### Bug Fixes
