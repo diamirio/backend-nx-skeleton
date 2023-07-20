@@ -1,3 +1,9 @@
+## @webundsoehne/nx-nest [5.0.29](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.28...@webundsoehne/nx-nest@5.0.29) (2023-07-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.1.17
+
 ## @webundsoehne/nx-nest [5.0.28](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.27...@webundsoehne/nx-nest@5.0.28) (2023-07-20)
 
 ### Dependencies
