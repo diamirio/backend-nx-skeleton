@@ -1,3 +1,9 @@
+## @webundsoehne/nx-builders [6.1.13](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.12...@webundsoehne/nx-builders@6.1.13) (2023-07-20)
+
+### Dependencies
+
+- **@webundsoehne/nx-tools:** upgraded to 6.1.2
+
 ## @webundsoehne/nx-builders [6.1.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.11...@webundsoehne/nx-builders@6.1.12) (2023-03-01)
 
 ### Dependencies
