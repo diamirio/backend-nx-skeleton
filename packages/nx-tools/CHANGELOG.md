@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.1.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.4...@webundsoehne/nx-tools@6.1.5) (2023-07-20)
+
+### Bug Fixes
+
+- not taking the kill signal still ([aec5dc4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/aec5dc4f92dffc069155d5f0fa2b75fd4111977d))
+
 ## @webundsoehne/nx-tools [6.1.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.3...@webundsoehne/nx-tools@6.1.4) (2023-07-20)
 
 ### Bug Fixes
