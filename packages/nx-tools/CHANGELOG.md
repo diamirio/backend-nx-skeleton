@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.2...@webundsoehne/nx-tools@6.1.3) (2023-07-20)
+
+### Bug Fixes
+
+- at least add self to pid list ([4b52b58](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/4b52b58b94b7e72f30c80de3b0ba15013dbbc02a))
+
 ## @webundsoehne/nx-tools [6.1.2](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.1...@webundsoehne/nx-tools@6.1.2) (2023-07-20)
 
 ### Bug Fixes
