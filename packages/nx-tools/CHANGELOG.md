@@ -1,3 +1,9 @@
+## @webundsoehne/nx-tools [6.1.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.3...@webundsoehne/nx-tools@6.1.4) (2023-07-20)
+
+### Bug Fixes
+
+- try to fix zombies ([926ccdd](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/926ccdd243e6d9325bf0df147f41a0bcc2a3f414))
+
 ## @webundsoehne/nx-tools [6.1.3](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-tools@6.1.2...@webundsoehne/nx-tools@6.1.3) (2023-07-20)
 
 ### Bug Fixes
