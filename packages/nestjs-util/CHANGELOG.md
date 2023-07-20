@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.5](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.4...@webundsoehne/nestjs-util@7.1.5) (2023-07-20)
+
+### Bug Fixes
+
+- filter having the whole message inside ([df4eabd](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/df4eabd059ec6129a55bfb7b6d9a24f3a2c09e50))
+
 ## @webundsoehne/nestjs-util [7.1.4](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.3...@webundsoehne/nestjs-util@7.1.4) (2023-04-17)
 
 ### Bug Fixes
