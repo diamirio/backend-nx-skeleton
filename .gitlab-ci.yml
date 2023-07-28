@@ -20,25 +20,25 @@ include:
   - project: bdsm/gitlab-pipes
     file: /templates/semantic-release.gitlab-ci.yml
 
-docs:
-  stage: docs
-  image: $CI_REGISTRY/bdsm/gitlab-pipes/gitlab-pipes-node:${NODE_VERSION}
-  script:
-    - pipe run docs
-  artifacts:
-    paths:
-      - packages/*/README.md
-      - packages/*/docs
-  only:
-    - master
-    - next
-    - next-major
-    - beta
-    - rc
-    - alpha
-  tags:
-    - docker
-
+# docs:
+#   stage: docs
+#   image: $CI_REGISTRY/bdsm/gitlab-pipes/gitlab-pipes-node:${NODE_VERSION}
+#   script:
+#     - pipe run docs
+#   artifacts:
+#     paths:
+#       - packages/*/README.md
+#       - packages/*/docs
+#   only:
+#     - master
+#     - next
+#     - next-major
+#     - beta
+#     - rc
+#     - alpha
+#   tags:
+#     - docker
+#
 semantic-release:
   variables:
     NPM_LOGIN: $NPM_LOGIN
