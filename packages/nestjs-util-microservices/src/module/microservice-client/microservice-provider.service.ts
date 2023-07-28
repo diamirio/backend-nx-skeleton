@@ -96,14 +96,15 @@ export class MicroserviceProviderService<
       throw new Error(`"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`)
     }
 
-    return firstValueFrom<ReturnValue>(
+    return firstValueFrom(
       this.clients[queue][command](pattern, payload).pipe(
         timeout({
           first: o.timeout,
           with: () => throwError(() => new TimeoutException(queue)),
           scheduler: asyncScheduler
         })
-      )
+      ),
+      { defaultValue: null }
     )
   }
 }
