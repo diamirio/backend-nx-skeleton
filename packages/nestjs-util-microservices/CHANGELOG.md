@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-microservices [3.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.10...@webundsoehne/nestjs-util-microservices@3.0.11) (2023-07-28)
+
+### Bug Fixes
+
+- return null on empty microservice return ([22fe4f6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/22fe4f63bbc701a17f3f815e7f3168610015cd50))
+
 ## @webundsoehne/nestjs-util-microservices [3.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.9...@webundsoehne/nestjs-util-microservices@3.0.10) (2023-07-20)
 
 ### Dependencies
