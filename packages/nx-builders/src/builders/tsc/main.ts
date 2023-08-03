@@ -85,6 +85,16 @@ class Executor extends BaseExecutor<TscBuilderOptions, NormalizedBuilderOptions,
         void instance.on('message', async (msg: 'first_success' | 'success' | 'compile_errors') => {
           switch (msg) {
           case 'success':
+            this.logger.info('Recalculating assets...')
+            this.options.files = generateBuilderAssets(
+              {
+                outDir: this.options.outputPath,
+                cwd: this.options.cwd,
+                workspaceRoot: this.context.root
+              },
+              this.options.assets
+            )
+
             await this.secondaryCompileActions()
 
             if (this.options.runAfterWatch) {
