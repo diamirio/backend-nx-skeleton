@@ -1,3 +1,9 @@
+# @webundsoehne/nx-builders [6.2.0](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.17...@webundsoehne/nx-builders@6.2.0) (2023-08-03)
+
+### Features
+
+- recalculate assets on watch tsc ([0346969](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/0346969066435215c94eb01dfbea683c462d3bdc))
+
 ## @webundsoehne/nx-builders [6.1.17](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.1.16...@webundsoehne/nx-builders@6.1.17) (2023-07-20)
 
 ### Bug Fixes
