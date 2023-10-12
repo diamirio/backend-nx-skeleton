@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-keycloak-seeder [3.0.15](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.14...@webundsoehne/nestjs-keycloak-seeder@3.0.15) (2023-10-12)
+
+### Bug Fixes
+
+- remove typings from inject decorators due to nestjs going crazy with ts5+ ([3ed80e9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3ed80e9873ba0dbdb8cb275d96f5a4041d072d04))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-keycloak:** upgraded to 3.2.3
+
 ## @webundsoehne/nestjs-keycloak-seeder [3.0.14](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-keycloak-seeder@3.0.13...@webundsoehne/nestjs-keycloak-seeder@3.0.14) (2023-02-23)
 
 ### Bug Fixes
