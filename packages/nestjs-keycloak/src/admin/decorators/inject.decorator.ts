@@ -5,6 +5,7 @@ import { KEYCLOAK_ADMIN_INSTANCE } from '@admin/admin.constants'
 /**
  * Injects Keyclaok admin instance initiated to the service.
  */
-export function InjectKeycloak (): (target: Record<string, unknown>, key: string | symbol, index?: number) => void {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function InjectKeycloak () {
   return Inject(KEYCLOAK_ADMIN_INSTANCE)
 }

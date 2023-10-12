@@ -5,6 +5,7 @@ import { MicroserviceProviderService } from '../microservice-provider.service'
 /**
  * Injects microservice provider service instance initiated to the service.
  */
-export function InjectMSP (): (target: Record<string, unknown>, key: string | symbol, index?: number) => void {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function InjectMSP () {
   return Inject(MicroserviceProviderService)
 }

@@ -5,6 +5,7 @@ import { KeycloakSeederService } from '@module/keycloak-seeder.service'
 /**
  * Injects Keyclaok admin instance initiated to the service.
  */
-export function InjectKeycloakSeederService (): (target: Record<string, unknown>, key: string | symbol, index?: number) => void {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function InjectKeycloakSeederService () {
   return Inject(KeycloakSeederService)
 }
