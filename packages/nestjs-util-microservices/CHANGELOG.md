@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-util-microservices [3.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.11...@webundsoehne/nestjs-util-microservices@3.0.12) (2023-10-12)
+
+### Bug Fixes
+
+- remove typings from inject decorators due to nestjs going crazy with ts5+ ([3ed80e9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3ed80e9873ba0dbdb8cb275d96f5a4041d072d04))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 7.1.7
+
 ## @webundsoehne/nestjs-util-microservices [3.0.11](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.10...@webundsoehne/nestjs-util-microservices@3.0.11) (2023-07-28)
 
 ### Bug Fixes
