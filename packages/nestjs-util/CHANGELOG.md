@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.6...@webundsoehne/nestjs-util@7.1.7) (2023-10-12)
+
+### Bug Fixes
+
+- remove typings from inject decorators due to nestjs going crazy with ts5+ ([3ed80e9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/3ed80e9873ba0dbdb8cb275d96f5a4041d072d04))
+
 ## @webundsoehne/nestjs-util [7.1.6](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.5...@webundsoehne/nestjs-util@7.1.6) (2023-07-20)
 
 ### Bug Fixes
