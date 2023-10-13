@@ -1,4 +1,4 @@
-import type { OnApplicationBootstrap } from '@nestjs/common'
+import type { OnModuleInit } from '@nestjs/common'
 import { Injectable } from '@nestjs/common'
 import type { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
 import type { Observable } from 'rxjs'
@@ -18,7 +18,7 @@ export class MicroserviceProviderService<
   MessageQueues extends string = any,
   MessageQueuePatterns extends Record<MessageQueues, any> = any,
   MessageQueueMap extends Record<MessageQueues, any> = any
-> implements OnApplicationBootstrap {
+> implements OnModuleInit {
   private clients: Record<MessageQueues, ClientProxy>
   private options: Required<MicroserviceProviderServiceOptions>
 
@@ -32,7 +32,7 @@ export class MicroserviceProviderService<
     }
   }
 
-  onApplicationBootstrap (): void {
+  onModuleInit (): void {
     this.clients = this.provider.reduce<Record<string, unknown>>((o, c, i) => {
       // this seems to be the only reliable way to inject the client names here
       o[this.names[i]] = c
