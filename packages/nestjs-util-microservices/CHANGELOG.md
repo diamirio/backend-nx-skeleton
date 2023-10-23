@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-microservices [3.0.13-beta.1](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.12...@webundsoehne/nestjs-util-microservices@3.0.13-beta.1) (2023-10-13)
+
+### Bug Fixes
+
+- try onmoduleinit ([d3c3ab9](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/commit/d3c3ab91fef66e4e5dcb33d03d9845d99529d0fd))
+
 ## @webundsoehne/nestjs-util-microservices [3.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.11...@webundsoehne/nestjs-util-microservices@3.0.12) (2023-10-12)
 
 ### Bug Fixes
