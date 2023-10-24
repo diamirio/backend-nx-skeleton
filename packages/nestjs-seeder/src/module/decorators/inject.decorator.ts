@@ -1,11 +1,11 @@
 import { Inject } from '@nestjs/common'
 
-import { SeederService } from '@module/seeder.service'
+import { SEEDER_SERVICE } from '../seeder.constants'
 
 /**
  * Injects SeederService to the service.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function InjectSeederService () {
-  return Inject(SeederService)
+export function InjectSeederService (token?: string | symbol) {
+  return Inject(token ?? SEEDER_SERVICE)
 }
