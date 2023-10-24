@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
-import fs from 'fs-extra'
-import moment from 'moment'
+import fs from 'fs/promises'
 
 import type { ApiStatus } from './internal.interface'
 import { ConfigParam, Configurable } from '@webundsoehne/nestjs-util'
@@ -16,7 +15,7 @@ export class InternalService {
     try {
       const { mtime } = await fs.stat(lastUpdateFilePath)
 
-      lastUpdate = moment(mtime).toISOString()
+      lastUpdate = new Date(mtime).toISOString()
     } catch (err) {
       this.logger.warn(['Error while attempting to access last update file: %s', lastUpdateFilePath])
     }

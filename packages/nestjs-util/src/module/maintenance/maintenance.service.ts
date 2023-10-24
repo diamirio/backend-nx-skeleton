@@ -1,5 +1,5 @@
 import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common'
-import fs from 'fs-extra'
+import fs from 'fs/promises'
 import path from 'path'
 
 import { Configurable, ConfigParam } from '@provider/config'
@@ -31,7 +31,7 @@ export class MaintenanceService {
     if (!await this.isEnabled()) {
       this.logger.verbose(['Enabling maintenance mode (lockfile is %s)', this.lockfile])
 
-      await fs.ensureFile(this.lockfile)
+      await fs.access(this.lockfile)
 
       this.logger.log('◆◆◆ Maintenance mode enabled ◆◆◆')
     } else {
@@ -46,7 +46,7 @@ export class MaintenanceService {
     if (this.tasks.length === 0) {
       this.logger.verbose(['Disabling maintenance mode (lockfile is %s)', this.lockfile])
 
-      await fs.remove(this.lockfile)
+      await fs.unlink(this.lockfile)
 
       this.logger.log('◆◆◆ Maintenance mode disabled ◆◆◆')
     } else {

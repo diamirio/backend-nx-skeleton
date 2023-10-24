@@ -1,6 +1,5 @@
 import type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common'
 import { Logger } from '@nestjs/common'
-import moment from 'moment'
 import type { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 
@@ -49,7 +48,7 @@ export class CacheLifetimeHelperInterceptor implements NestInterceptor {
         if (lifetime && !isNaN(lifetime) && lifetime > 0) {
           const headerName = useExpiresHeader ? this.options.expiresHeader : this.options.cacheControlHeader
 
-          const value = useExpiresHeader ? `${moment().locale('en').add(lifetime, 'seconds').utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT` : `max-age=${lifetime}`
+          const value = useExpiresHeader ? new Date(Date.now() + lifetime * 1000).toUTCString() : `max-age=${lifetime}`
 
           this.logger.verbose(['Cache lifetime is %dsec -> setting "%s" to %s', lifetime, headerName, value])
 
