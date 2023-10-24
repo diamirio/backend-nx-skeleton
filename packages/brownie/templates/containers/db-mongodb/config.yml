@@ -1,2 +1,2 @@
-image: mongo:5
+image: mongo:7
 command: --directoryperdb
