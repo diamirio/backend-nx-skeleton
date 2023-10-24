@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-seeder [2.1.0](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.10...@webundsoehne/nestjs-seeder@2.1.0) (2023-10-24)
+
+### Features
+
+- ability to add multiple seeders to same module ([f777a18](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/f777a1855b345e5e20edfe286bec91dcf9ea8ada))
+
 ## @webundsoehne/nestjs-seeder [2.0.10](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-seeder@2.0.9...@webundsoehne/nestjs-seeder@2.0.10) (2023-10-12)
 
 ### Bug Fixes
