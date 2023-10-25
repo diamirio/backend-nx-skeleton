@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import fs from 'fs/promises'
 import path from 'path'
 
 export async function setEnvironmentVariables (packageFile = path.join(process.cwd(), 'package.json')): Promise<void> {
@@ -10,7 +10,7 @@ export async function setEnvironmentVariables (packageFile = path.join(process.c
 
   // only read package file if we miss something
   if (!name || !version) {
-    packageJson = await fs.readJSON(packageFile)
+    packageJson = JSON.parse(await fs.readFile(packageFile, { encoding: 'utf8' }))
   }
 
   process.env.PACKAGE_NAME = name ?? packageJson?.name ?? 'nestjs'
