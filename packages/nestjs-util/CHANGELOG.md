@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [8.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.5...@webundsoehne/nestjs-util@8.0.0-beta.6) (2023-12-01)
+
+### Bug Fixes
+
+- maintancence mode ([72c3546](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/72c354604b67a948d2f70e20a34af084ce8b23fe))
+
 # @webundsoehne/nestjs-util [8.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.4...@webundsoehne/nestjs-util@8.0.0-beta.5) (2023-12-01)
 
 ### Bug Fixes
