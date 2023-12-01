@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [8.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.3...@webundsoehne/nestjs-util@8.0.0-beta.4) (2023-12-01)
+
+### Bug Fixes
+
+- try to fix error not exposing stack and message ([c96a5fe](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c96a5fe2b28802eab878abd5f71cdb10e99b4e33))
+
 # @webundsoehne/nestjs-util [8.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.2...@webundsoehne/nestjs-util@8.0.0-beta.3) (2023-12-01)
 
 ### Bug Fixes
