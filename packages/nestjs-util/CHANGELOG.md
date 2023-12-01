@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util [8.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.1...@webundsoehne/nestjs-util@8.0.0-beta.2) (2023-12-01)
+
+### Bug Fixes
+
+- **nestjs-util:** issues with stacktrace and error message ([48a8be7](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/48a8be749e15e6d46fc93a3d0738c2d483510e2b))
+
 # @webundsoehne/nestjs-util [8.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.7...@webundsoehne/nestjs-util@8.0.0-beta.1) (2023-12-01)
 
 ### Bug Fixes
