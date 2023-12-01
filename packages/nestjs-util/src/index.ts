@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 export * from './decorator'
 export * from './interface'
-export * from './filter'
+export * from './filters'
 export * from './middleware'
 export * from './module'
 export * from './pipes'

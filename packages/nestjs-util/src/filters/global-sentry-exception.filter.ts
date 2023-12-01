@@ -1,5 +1,6 @@
 import type { ArgumentsHost, ExceptionFilter, OnApplicationShutdown } from '@nestjs/common'
 import { Catch } from '@nestjs/common'
+import { ModuleRef } from '@nestjs/core'
 import type * as Sentry from '@sentry/node'
 
 // please do not use static imports from @sentry here, as it's an optional dependency of the module
@@ -13,8 +14,8 @@ export class GlobalSentryExceptionFilter extends GlobalExceptionFilter implement
   private initialized = false
   private readonly options? = ConfigService.get('sentry')
 
-  constructor () {
-    super()
+  constructor (moduleRef: ModuleRef) {
+    super(moduleRef)
 
     if (!this.options || !this.options?.dsn) {
       this.logger.warn(['%s sentry.io config: %o', !this.options ? 'Missing' : 'Invalid', this.options])
