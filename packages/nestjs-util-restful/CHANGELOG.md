@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util-restful [3.0.13-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.13-beta.5...@webundsoehne/nestjs-util-restful@3.0.13-beta.6) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.6
+
 ## @webundsoehne/nestjs-util-restful [3.0.13-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.13-beta.4...@webundsoehne/nestjs-util-restful@3.0.13-beta.5) (2023-12-01)
 
 ### Dependencies
