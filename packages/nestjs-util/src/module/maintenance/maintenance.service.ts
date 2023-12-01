@@ -31,7 +31,7 @@ export class MaintenanceService {
     if (!await this.isEnabled()) {
       this.logger.verbose(['Enabling maintenance mode (lockfile is %s)', this.lockfile])
 
-      await fs.writeFile(this.lockfile, null)
+      await fs.writeFile(this.lockfile, '')
 
       this.logger.log('◆◆◆ Maintenance mode enabled ◆◆◆')
     } else {
