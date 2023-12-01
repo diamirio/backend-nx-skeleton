@@ -1,3 +1,25 @@
+# @webundsoehne/nestjs-util [8.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.7...@webundsoehne/nestjs-util@8.0.0-beta.1) (2023-12-01)
+
+### Bug Fixes
+
+- **nestjs-util:** fs-extra in env ([512e8eb](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/512e8eb7cd0b7d21359ef0ad01a191bbe4ef6b7a))
+- **nestjs-util:** remove deprecated deps in utils ([28861ba](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/28861bac546ba10e6b128a8e75a2d3a6e1c7d5c0))
+
+### Performance Improvements
+
+- **nestjs-util:** rewrite filters ([17fb359](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/17fb359ad164272eb9343d708fded212e997814e))
+
+### BREAKING CHANGES
+
+- **nestjs-util:** - GlobalExceptionFilter stays in the @webundsoehne/nestjs-util
+
+* BadRequestExceptionFilter is deleted since it now utilizes ClassValidatorException and ExtendedValidationPipe to throw the error directly as HttpException
+* RpcGlobalExceptionFilter is deleted and GlobalExceptionFilter can be used for it directly since with the newer nestjs versions it seems to parse the context correctly
+* From anywhere in your code you can throw ClassValidatorException to throw arbitrary validation errors if you do validateOrReject().
+* error stack trace is propagated to the service directly (see 1th screenshot) and it will write the service name in front if it to designate it as external error (for now only configrued for rmq)
+* seems to handle all kinds of messages i can think of see rest of the screenshots
+* refactored the class validator error a bit more. for child properties it includes the parent property name like parent.child.test etc. (see last screenshots)
+
 ## @webundsoehne/nestjs-util [7.1.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.6...@webundsoehne/nestjs-util@7.1.7) (2023-10-12)
 
 ### Bug Fixes
