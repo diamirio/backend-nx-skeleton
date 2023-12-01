@@ -15,7 +15,7 @@ export class EnrichedExceptionError implements Error {
 
     // TODO: types can be updated whenever typescript is updated, <5 is acts stupid for this
     if ('response' in error && typeof (error as any).response === 'object') {
-      if (this.message && 'message' in (error as any).response) {
+      if ('message' in error && (error as any).message && 'message' in (error as any).response) {
         delete (error as any).response.message
       }
 

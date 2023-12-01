@@ -31,16 +31,23 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     } else if (isHttpException(exception)) {
       return new EnrichedExceptionError({
         ...exception,
-        statusCode: exception.getStatus()
+        statusCode: exception.getStatus(),
+        message: exception.message,
+        stack: exception.stack
       })
     } else if (isRpcException(exception)) {
-      return new EnrichedExceptionError({ ...exception })
+      return new EnrichedExceptionError({
+        ...exception,
+        message: exception.message,
+        stack: exception.stack
+      })
     } else if (isSerializedEnrichedExceptionError(exception)) {
       return new EnrichedExceptionError(exception)
     } else if (isSerializedError(exception)) {
       return new EnrichedExceptionError(exception.error)
     } else if (isGenericError(exception)) {
       return new EnrichedExceptionError({
+        ...exception,
         error: exception,
         message: exception.message,
         stack: exception.stack
