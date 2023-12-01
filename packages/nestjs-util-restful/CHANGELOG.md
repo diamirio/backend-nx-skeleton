@@ -1,3 +1,13 @@
+## @webundsoehne/nestjs-util-restful [3.0.13-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.12...@webundsoehne/nestjs-util-restful@3.0.13-beta.1) (2023-12-01)
+
+### Bug Fixes
+
+- **nestjs-util:** remove deprecated deps in utils ([28861ba](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/28861bac546ba10e6b128a8e75a2d3a6e1c7d5c0))
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.1
+
 ## @webundsoehne/nestjs-util-restful [3.0.12](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-restful@3.0.11...@webundsoehne/nestjs-util-restful@3.0.12) (2023-10-12)
 
 ### Dependencies
