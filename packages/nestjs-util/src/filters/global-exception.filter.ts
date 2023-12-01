@@ -52,15 +52,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       })
     }
 
-    return new EnrichedExceptionError({
-      message: 'Can not handle given error payload.',
-      error: exception
-    })
+    throw new InternalServerErrorException(format('Can not handle given error payload: %o', exception))
   }
 
   static log (logger: Logger, payload: EnrichedExceptionError): void {
     if (payload?.stack) {
-      logger.debug(['%s[%s] - "%s"%s%s', payload.service ? `[${payload.service}] ` : '', payload.statusCode, payload.message, EOL, payload.stack])
+      logger.verbose(['%s[%s] - "%s"%s%s', payload.service ? `[${payload.service}] ` : '', payload.statusCode, payload.message, EOL, payload.stack])
 
       return
     }
@@ -124,8 +121,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     delete payload.stack
 
-    // goes crazy with missing fields when passing the class itself since then it acts as DTO?
-    httpAdapterHost.httpAdapter.reply(ctx.getResponse(), { ...payload }, payload.statusCode)
+    httpAdapterHost.httpAdapter.reply(ctx.getResponse(), payload, payload.statusCode)
   }
 
   protected handleGraphQL (_host: ArgumentsHost, payload: EnrichedExceptionError): HttpException {

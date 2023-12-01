@@ -1,18 +1,17 @@
 import { HttpStatus } from '@nestjs/common'
 
-export class EnrichedExceptionError extends Error {
-  public readonly statusCode: HttpStatus
+export class EnrichedExceptionError implements Error {
+  public readonly name: string
   public readonly message: string
+  public stack?: string
+  public readonly statusCode: HttpStatus
   public readonly cause?: unknown
   public error?: unknown
   public errors?: unknown[]
   public service?: string
 
   constructor (error: Omit<EnrichedExceptionError, 'name' | 'statusCode'> & Partial<Pick<EnrichedExceptionError, 'statusCode'>>) {
-    super(error.message)
-
-    delete this.stack
-    this.name = error?.error instanceof Error ? error.error.name : typeof error?.error === 'string' ? error.error : undefined
+    this.name = error?.error instanceof Error ? error.error.name : typeof error?.error === 'string' ? error.error : Error.name
 
     // TODO: types can be updated whenever typescript is updated, <5 is acts stupid for this
     if ('response' in error && typeof (error as any).response === 'object') {
@@ -20,7 +19,7 @@ export class EnrichedExceptionError extends Error {
         delete (error as any).response.message
       }
 
-      Object.assign(this, (error as any).response)
+      Object.assign(error, (error as any).response)
 
       delete (error as any).response
     }
