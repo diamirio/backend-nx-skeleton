@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "version": 2,
+  "title": "Run executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "Root directory of the project to use as cwd."
+    },
+    "command": {
+      "type": "string",
+      "description": "The command to run."
+    },
+    "args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Append arguments to the command on runtime.",
+      "default": []
+    },
+    "env": {
+      "type": "object",
+      "description": "Environment variables that will be made available to the command. (alias of environment)",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    },
+    "environment": {
+      "type": "object",
+      "description": "Environment variables that will be made available to the command. (alias of env)",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    }
+  },
+  "required": ["command"]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "@webundsoehne/nx-executors",
+  "version": "1.0.0",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
+  "description": "Custom nx executors.",
+  "author": "Backend <backend@webundsoehne.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup-node",
+    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx}": [
+      "prettier --loglevel warn --write",
+      "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --loglevel warn --write"
+    ]
+  },
+  "peerDependencies": {
+    "nx": ">= 18.0.0",
+    "ts-node": ">= 8.10.0",
+    "ts-node-dev": ">= 1.0.0",
+    "typescript": ">= 3.9.0"
+  },
+  "dependencies": {
+    "@nx/devkit": "^19.3.0",
+    "@nx/js": "^19.3.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@nx/plugin": "^19.3.0",
+    "nx": "^19.3.0"
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "executors": "./executors.json"
+}
