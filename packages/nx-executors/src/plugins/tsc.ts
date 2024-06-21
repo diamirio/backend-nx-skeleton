@@ -62,7 +62,7 @@ async function internalCreateNode (
       executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',
       options: {
         main: 'src/main.ts',
-        tsConfig: 'tsconfig.app.json'
+        tsConfig: 'tsconfig.build.json'
       }
     }
   }

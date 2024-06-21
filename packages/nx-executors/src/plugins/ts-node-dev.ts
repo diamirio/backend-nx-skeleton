@@ -70,7 +70,7 @@ async function internalCreateNode (
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       options: {
         main: 'src/main.ts',
-        tsConfig: 'tsconfig.app.json'
+        tsConfig: 'tsconfig.json'
       }
     }
     const nodeService = guessNodeService(projectConfig.integration?.nestjs?.components ?? [])
