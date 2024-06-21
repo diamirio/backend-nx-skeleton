@@ -1,6 +1,7 @@
 // publish-
 module.exports = {
   ...require('../../release.config.cjs'),
+  pkgRoot: 'dist',
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',

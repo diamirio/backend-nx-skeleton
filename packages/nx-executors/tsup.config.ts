@@ -3,10 +3,9 @@ import cpy from 'cpy'
 import execa from 'execa'
 import { defineConfig } from 'tsup'
 
-export default defineConfig((options) => ({
-  name: !options.watch ? 'production' : undefined,
-
-  entry: ['src/**/*.{js,ts}'],
+export default defineConfig(() => ({
+  name: 'production',
+  entry: ['src/**/*.{js,ts}', 'plugin/*.{js,ts}'],
   tsconfig: 'tsconfig.build.json',
   dts: true,
   format: ['cjs'],
@@ -20,11 +19,15 @@ export default defineConfig((options) => ({
   keepNames: true,
 
   onSuccess: async (): Promise<void> => {
-    await cpy(['**/*.json', '**/files/**', '**/assets/**'], '../dist', {
+    await cpy(['**/*.json'], '../dist/src/', {
       cwd: './src',
       dot: true,
       overwrite: true,
       parents: true
+    })
+    // to build a flat package from ./dist
+    await cpy(['package.json', 'executors.json', 'LICENSE', 'README.md'], './dist/', {
+      overwrite: true
     })
 
     await execa.command('yarn exec tsconfig-replace-paths', { stdout: process.stdout, stderr: process.stderr })
