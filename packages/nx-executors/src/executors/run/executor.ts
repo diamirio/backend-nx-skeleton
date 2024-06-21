@@ -13,7 +13,7 @@ export default async function (options: RunExecutorSchema, context: ExecutorCont
     ...Object.assign({}, options.environment, options.env)
   }
 
-  await spawnProcess(options.command, options.args ?? [], { cwd, env: processEnvs })
+  await spawnProcess(options.command, options.args ?? [], { cwd, env: processEnvs }, context)
 
   return {
     success: true

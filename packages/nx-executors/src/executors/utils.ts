@@ -1,27 +1,32 @@
 import type { SpawnOptions } from 'node:child_process'
 import { spawn } from 'node:child_process'
 import { EOL } from 'node:os'
+import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
 
-export function spawnProcess (command: string, args: string[], options: SpawnOptions): Promise<number | Error> {
+import { LogWriter } from './logger'
+
+export function spawnProcess (command: string, args: string[], options: SpawnOptions, context: ExecutorContext): Promise<number | Error> {
+  const logWriter = new LogWriter(context)
+
   return new Promise((resolve, reject) => {
     const executor = spawn(command, args, options)
 
-    process.stdout.write(`Spawning process: ${executor.spawnargs.join(' ')}${EOL}`)
+    logWriter.stdout(`Spawning process: ${executor.spawnargs.join(' ')}${EOL}`)
 
     executor.stdout.on('data', (data) => {
-      process.stdout.write(data.toString())
+      logWriter.stdout(data.toString())
     })
     executor.stderr.on('data', (data) => {
-      process.stderr.write(data.toString())
+      logWriter.stderr(data.toString())
     })
 
     executor.on('exit', (code, signal) => {
-      process.stdout.write(`Process exited with code ${code}${signal ? `- SIGNAL ${signal}` : ''}`)
+      logWriter.stdout(`Process exited with code ${code}${signal ? `- SIGNAL ${signal}` : ''}`)
       resolve(code)
     })
 
     executor.on('error', (error) => {
-      process.stdout.write(`Process error: ${error}${EOL}`)
+      logWriter.stdout(`Process error: ${error}${EOL}`)
       reject(error)
     })
   })

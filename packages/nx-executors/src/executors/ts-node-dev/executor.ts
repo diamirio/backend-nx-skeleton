@@ -25,7 +25,7 @@ export default async function (options: TsNodeDevExecutorSchema, context: Execut
 
   processArgs.push(options.main)
 
-  await spawnProcess('ts-node-dev', processArgs, { cwd, env: processEnvs })
+  await spawnProcess('ts-node-dev', processArgs, { cwd, env: processEnvs }, context)
 
   return {
     success: true
