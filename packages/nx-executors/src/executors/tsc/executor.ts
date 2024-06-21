@@ -1,11 +1,11 @@
 import type { ExecutorContext } from '@nx/devkit'
 import { tscExecutor as nxTscExecutor } from '@nx/js/src/executors/tsc/tsc.impl'
-import type { ExecutorOptions } from '@nx/js/src/utils/schema'
 import { join } from 'node:path'
 
 import type { ExecutorResult } from '../inteface'
+import type { TscExecutorSchema } from './schema'
 
-export default async function (options: ExecutorOptions & { cwd?: string }, context: ExecutorContext): Promise<ExecutorResult> {
+export default async function (options: TscExecutorSchema, context: ExecutorContext): Promise<ExecutorResult> {
   const project = context.projectsConfigurations.projects[context.projectName]
   const cwd = options?.cwd ?? project.root
 
@@ -13,8 +13,11 @@ export default async function (options: ExecutorOptions & { cwd?: string }, cont
   options.outputPath = options.outputPath ?? `dist/${context.projectName}`
   options.main = options.main.startsWith(cwd) ? options.main : join(cwd, options.main)
   options.tsConfig = options.tsConfig.startsWith(cwd) ? options.tsConfig : join(cwd, options.tsConfig)
-  // merge defaultTargetOptions and project.json options
-  options.assets = options.assets.concat(context.nxJsonConfiguration?.targetDefaults?.[context.targetName]?.options?.assets ?? [])
+
+  if (options.mergeAssets) {
+    // merge defaultTargetOptions and project.json options
+    options.assets = options.assets.concat(context.nxJsonConfiguration?.targetDefaults?.[context.targetName]?.options?.assets ?? [])
+  }
 
   for await (const data of nxTscExecutor(options, context)) {
     if (!data.success) {

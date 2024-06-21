@@ -26,7 +26,7 @@ export default defineConfig(() => ({
       parents: true
     })
     // to build a flat package from ./dist
-    await cpy(['package.json', 'executors.json', 'LICENSE', 'README.md'], './dist/', {
+    await cpy(['package.json', 'executors.json', 'LICENSE', '*.md'], './dist/', {
       overwrite: true
     })
 
