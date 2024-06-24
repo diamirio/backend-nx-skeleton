@@ -19,6 +19,11 @@ export default async function (options: TsNodeDevExecutorSchema, context: Execut
     processArgs.push('--debug')
   }
 
+  if (options.watchConfig) {
+    processArgs.push('--watch')
+    processArgs.push('config')
+  }
+
   if (options.args.length) {
     processArgs.push(...options.args)
   }

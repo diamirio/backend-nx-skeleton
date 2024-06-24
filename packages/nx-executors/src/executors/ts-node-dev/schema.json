@@ -44,6 +44,11 @@
       "description": "Show additional debug logs of ts-node-dev.",
       "default": false
     },
+    "watchConfig": {
+      "type": "boolean",
+      "description": "Add watchers to the config files",
+      "default": false
+    },
     "args": {
       "type": "array",
       "description": "Additional arguments to pass to ts-node-dev.",

@@ -22,12 +22,11 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
 - [Executors](#executors)
   - [TSC](#tsc)
     - [Configuration](#configuration)
-      - [Build Mode](#build-mode)
-      - [Ignore assets](#ignore-assets)
   - [ts-node-dev](#ts-node-dev)
     - [Configuration](#configuration-1)
   - [run](#run)
     - [Configuration](#configuration-2)
+- [Plugins](#plugins)
 
 <!-- tocstop -->
 
@@ -86,6 +85,7 @@ Run a project in the source folder directly, where all the assets will be in pla
           NODE_ENV: 'develop'
         },
         debug: true, // ts-node-dev `--debug` flag
+        watchConfig: false, // watch the `config` directory files (to restart on config change)
         args: ['-r', 'tsconfig-paths/register'] // pass additional arguments to ts-node-dev
       }
     }
@@ -132,3 +132,47 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
   }
 }
 ```
+
+# Plugins
+
+TSC and Ts-Node-Executors can be added to each application via a nx-plugin. To override or add target configs set `tagetDefaults` accordingly.
+
+Add `tsc` executor as `build` target.
+
+```json5
+{
+  plugin: '@webundsoehne/nx-executors/plugin/tsc',
+  options: {
+    // these are the default options
+    targetName: 'build',
+    executor: '@webundsoehne/nx-executors:tsc'
+  }
+}
+```
+
+Add `ts-node-dev` as `serve` target.
+
+```json5
+{
+  plugin: '@webundsoehne/nx-executors/plugin/ts-node-dev',
+  options: {
+    // these are the default options
+    targetName: 'serve',
+    executor: '@webundsoehne/nx-executors:ts-node-dev'
+  }
+}
+```
+
+Add both `tsc` and `tsc-node-dev` as `build` and `server` target.
+
+```json5
+{
+  plugin: '@webundsoehne/nx-executors/plugin',
+  options: {
+    tscOptions: {}, // same options as `[..]/plugin/tsc`
+    tsNodeDevOptions: {} // same options as `[..]/plugin/ts-node-dev`
+  }
+}
+```
+
+**Hint:** on config change it needs `nx reset` to clear the cached targets before the change is active.
