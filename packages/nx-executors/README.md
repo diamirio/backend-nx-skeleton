@@ -27,6 +27,11 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
   - [run](#run)
     - [Configuration](#configuration-2)
 - [Plugins](#plugins)
+- [Migration](#migration)
+  - [Packages](#packages)
+  - [nx.json](#nxjson)
+  - [Lint + Test](#lint--test)
+  - [Projects](#projects)
 
 <!-- tocstop -->
 
@@ -176,3 +181,183 @@ Add both `tsc` and `tsc-node-dev` as `build` and `server` target.
 ```
 
 **Hint:** on config change it needs `nx reset` to clear the cached targets before the change is active.
+
+# Migration
+
+Some tips on how to migrate from the older nx-builders to the new nx-executors.
+
+## Packages
+
+The old `@nwrl` and `@angular-devkit` packages can be replaced by a handful of new `@nx` packages:
+
+```
+"@nx/eslint" ... eslint executor + plugin
+"@nx/eslint-plugin" ... eslint rules
+"@nx/jest" ... jest executor + plugin
+"nx" ... nx cli + basic executor
+```
+
+### gitignore
+
+With those new packages, nx has a new cache folder structure that needs to be set in the .gitignore file:
+
+```
+# nx cache
+.nx/cache
+.nx/workspace-data
+```
+
+### tsconfig paths
+
+For an easy way to work with tsconfig paths include `ts-patch` and `typescript-transform-paths` as dev-dependency. Add a `prepare` script (for local use): `ts-patch install -s` and include `"plugins": [{ "transform": "typescript-transform-paths" }]` in the `tsconfig.json`. After running `npm i` or `npm run prepare` the tsconfig paths should be replaced for any process that uses this `tsconfig.json` (i.e. ts-node-dev, jest, ...)
+
+## nx.json
+
+First the schema for the `nx.json` changed, so it needs to be replaced with the new schema
+
+```json5
+// nx.json
+{
+  $schema: './node_modules/nx/schemas/nx-schema.json',
+  namedInputs: {
+    default: ['{projectRoot}/**/*', 'sharedGlobals'],
+    production: [
+      'default',
+      '!{projectRoot}/.eslintrc.json',
+      '!{projectRoot}/eslint.config.js',
+      '!{projectRoot}/tsconfig.spec.json',
+      '!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)',
+      '!{projectRoot}/jest.config.[jt]s',
+      '!{projectRoot}/src/test-setup.[jt]s',
+      '!{projectRoot}/test-setup.[jt]s'
+    ],
+    sharedGlobals: []
+  },
+  targetDefaults: {},
+  plugins: []
+}
+```
+
+Secondly the `workspace.json` is deprecated and can be removed.
+
+## Lint + Test
+
+Instead of having a separate `lint` and `test` target in each `project.json` we can use the nx-plugins to add those targets for us.
+
+```json5
+// nx.json
+{
+  targetDefaults: {
+    test: {
+      options: {
+        passWithNoTests: true
+      }
+    }
+  },
+  plugins: [
+    {
+      plugin: '@nx/eslint/plugin',
+      options: {
+        targetName: 'lint'
+      }
+    },
+    {
+      plugin: '@nx/jest/plugin',
+      options: {
+        targetName: 'test'
+      }
+    }
+  ]
+}
+```
+
+### EsLint
+
+Replace the plugin in the `eslintrc` to: `"plugins": ["@nx"]`. Everything else should be good to go.
+
+### Jest
+
+For the jest plugin to work, first update or add the `jest.config.ts` file to pick the projects that should receive the test target
+
+```typescript
+// jest.config.ts
+import { getJestProjectsAsync } from '@nx/jest'
+
+export default async () => ({
+  projects: await getJestProjectsAsync()
+})
+```
+
+Then move/create a `jest.config.ts` in the root of the project, jest should run in (i.e. move the file from the `test` folder into the project root)
+
+```typescript
+// apps/../jest.config.ts
+export default {
+  displayName: 'app', // change to project name
+  preset: '../../jest.preset.js'
+}
+```
+
+```javascript
+// jest.preset.js
+const nxPreset = require('@nx/jest/preset').default
+
+module.exports = {
+  ...nxPreset,
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.(ts|js)$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json' }] // only required if not using `tsconfig.spec.json`
+  }
+}
+```
+
+## Projects
+
+Because we move most logic to the nx plugins we can clear up the unused targets like `lint` and `test` in the `project.json` files for the each application/library.
+
+Same can be done for `build` and `server` by adding the `@webundsoehne/nx-executors/plugin` to the `nx.json` and set some `targetDefaults`:
+
+```json5
+{
+  targetDefaults: {
+    serve: {
+      options: {
+        // restart service if a config file changes
+        watchConfig: true
+      }
+    },
+    build: {
+      options: {
+        // default assets (will be merged with the project.json assets, if not configured otherwise)
+        assets: [
+          {
+            glob: '*',
+            input: '{projectRoot}/config',
+            output: 'config'
+          },
+          {
+            glob: '.dockerignore',
+            input: '{projectRoot}',
+            output: '.'
+          },
+          {
+            glob: 'Dockerfile',
+            input: '{projectRoot}',
+            output: '.'
+          }
+        ]
+      }
+    }
+  },
+  plugins: [
+    {
+      // eslint & jest plugins
+    },
+    {
+      plugin: '@webundsoehne/nx-executors/plugin'
+    }
+  ]
+}
+```
+
+With this setup, only project specific configuration overrides or targets need to be set in the `project.json` any generally used target like `test`, `lint`, `build` and `serve` will be available via the plugins and do not have to be set manually in each `project.json` anymore.
