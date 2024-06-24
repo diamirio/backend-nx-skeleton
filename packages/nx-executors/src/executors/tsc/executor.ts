@@ -10,7 +10,7 @@ export default async function (options: TscExecutorSchema, context: ExecutorCont
   const cwd = options?.cwd ?? project.root
 
   options.rootDir = options.rootDir ?? './'
-  options.outputPath = options.outputPath ?? `dist/${context.projectName}`
+  options.outputPath = options.outputPath ?? `dist/${project.root}` // default: /dist/apps/{name}
   options.main = options.main.startsWith(cwd) ? options.main : join(cwd, options.main)
   options.tsConfig = options.tsConfig.startsWith(cwd) ? options.tsConfig : join(cwd, options.tsConfig)
 
