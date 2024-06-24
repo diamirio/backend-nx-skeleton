@@ -5,5 +5,6 @@ export interface TsNodeDevExecutorSchema {
   env?: Record<string, string>
   environment?: Record<string, string>
   debug?: boolean
+  watchConfig?: boolean
   args?: string[]
 }
