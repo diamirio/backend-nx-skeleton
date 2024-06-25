@@ -1,5 +1,6 @@
 import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
+import type { BuildTargetOptions } from './utils/plugin'
 import { buildPlugin, PluginBuilder } from './utils/plugin'
 
 export interface TscPluginOptions {
@@ -11,7 +12,7 @@ class TscPlugin extends PluginBuilder<TscPluginOptions> {
   name = 'tsc'
   targetName = 'build'
 
-  buildTarget (options: TscPluginOptions): TargetConfiguration {
+  buildTarget ({ options }: BuildTargetOptions<TscPluginOptions>): TargetConfiguration {
     return {
       executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',
       cache: true,

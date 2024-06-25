@@ -97,14 +97,8 @@
       "description": "Environment variables that will be made available to the commands. This property has priority over the `.env` files.",
       "additionalProperties": {
         "type": "string"
-      }
-    },
-    "environment": {
-      "type": "object",
-      "description": "Environment variables that will be made available to the commands. (alias for env)",
-      "additionalProperties": {
-        "type": "string"
-      }
+      },
+      "aliases": ["environment"]
     },
     "__unparsed__": {
       "hidden": true,

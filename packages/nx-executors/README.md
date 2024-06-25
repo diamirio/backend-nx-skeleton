@@ -26,6 +26,8 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
     - [Configuration](#configuration-1)
   - [run](#run)
     - [Configuration](#configuration-2)
+  - [jest](#jest)
+    - [Configuration](#configuration-3)
 - [Plugins](#plugins)
 - [Migration](#migration)
   - [Packages](#packages)
@@ -41,7 +43,7 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
 
 ## tsc
 
-Builder: `@webundsoehne/nx-executors:tsc`
+Executor: `@webundsoehne/nx-executors:tsc`
 
 Extends the default `@nx/js:tsc` executor to set the `cwd` to the project-root and prefixes the `main` and `tsConfig` to shorten the configuration. On the other hand, the `targetDefaults` assets will be merged with the project assets, allowing to extend assets in the `project.json` instead of overwriting them. Furthermore by default the `package.json` and `package-lock.json` will be generated.
 
@@ -68,7 +70,7 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
 
 ## ts-node-dev
 
-Builder: `@webundsoehne/nx-executors:ts-node-dev`
+Executor: `@webundsoehne/nx-executors:ts-node-dev`
 
 Run a project in the source folder directly, where all the assets will be in place. It will pipe the output through a custom logger where it will prefix the name of the project to make it easily identifiable while running multiple packages in parallel.<br> There is no tsconfig-path replacer set up by default. Either use `tsconfig-paths` and register it via the `args` option, or use `typescript-transform-paths` with`ts-patch` and add it als `transformer` plugin to the tsconfig file.
 
@@ -100,7 +102,7 @@ Run a project in the source folder directly, where all the assets will be in pla
 
 ## run
 
-Builder: `@webundsoehne/nx-executors:run`
+Executor: `@webundsoehne/nx-executors:run`
 
 Extends the default `nx:run-commands` executor to set the `cwd` to the project-root. On running node binaries, set the `tsNode` option to `true` to get typescript support. (Will extend the `nodeOptions` with `-r ts-node/register` is not already set)
 
@@ -138,6 +140,29 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
 }
 ```
 
+## jest
+
+Executor: `@webundsoehne/nx-executors:jest`
+
+Extends the `@nx/jest:jest` executor to move to the correct project-folder and extend it with some more configurations.
+
+### Configuration
+
+Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/jest#options
+
+```json
+{
+  "targets": {
+    "seed": {
+      "executor": "@webundsoehne/nx-executors:jest",
+      "options": {
+        "jestConfig": "./test/jest.config.ts"
+      }
+    }
+  }
+}
+```
+
 # Plugins
 
 TSC and Ts-Node-Executors can be added to each application via a nx-plugin. To override or add target configs set `tagetDefaults` accordingly.
@@ -168,14 +193,30 @@ Add `ts-node-dev` as `serve` target.
 }
 ```
 
-Add both `tsc` and `tsc-node-dev` as `build` and `server` target.
+Add `jest` as `test` target. (Including `e2e` and `cov` configurations)
+
+```json5
+{
+  plugin: '@webundsoehne/nx-executors/plugin/jest',
+  options: {
+    // these are the default options
+    targetName: 'test',
+    executor: '@webundsoehne/nx-executors:jest',
+    testConfig: './test/jest.config.ts',
+    e2eTestConfig: './test/jest-e2e.config.ts'
+  }
+}
+```
+
+Add `tsc`, `tsc-node-dev` and `jest`' as `build`, `server` and `test` target.
 
 ```json5
 {
   plugin: '@webundsoehne/nx-executors/plugin',
   options: {
     tscOptions: {}, // same options as `[..]/plugin/tsc`
-    tsNodeDevOptions: {} // same options as `[..]/plugin/ts-node-dev`
+    tsNodeDevOptions: {}, // same options as `[..]/plugin/ts-node-dev`
+    jestOptions: {} // same options as `[..]/plugin/jest`
   }
 }
 ```
