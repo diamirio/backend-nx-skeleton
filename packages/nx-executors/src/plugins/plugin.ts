@@ -4,6 +4,8 @@ import type { CreateNodes, CreateNodesContext, CreateNodesResult, CreateNodesV2 
 import type { CreateNodesResultV2 } from 'nx/src/project-graph/plugins/public-api'
 import { logger } from 'nx/src/utils/logger'
 
+import type { JestPluginOptions } from './jest'
+import { buildNodes as buildJestNodes, buildTarget as buildJestTarget } from './jest'
 import type { TsNodeDevPluginOptions } from './ts-node-dev'
 import { buildNodes as buildTsNodeDevNodes, buildTarget as buildTsNodeDevTarget } from './ts-node-dev'
 import type { TscPluginOptions } from './tsc'
@@ -13,6 +15,7 @@ import { FILE_PATTERN } from './utils/plugin'
 export interface PluginOptions {
   tscOptions: TscPluginOptions
   tsNodeDevOptions: TsNodeDevPluginOptions
+  jestOptions: JestPluginOptions
 }
 
 export const createNodes: CreateNodes = [
@@ -28,8 +31,24 @@ export const createNodes: CreateNodes = [
     }
 
     const targets = {
-      [options?.tscOptions?.targetName ?? 'build']: buildTscTarget(options?.tscOptions, projectConfig),
-      [options?.tsNodeDevOptions?.targetName ?? 'serve']: buildTsNodeDevTarget(options?.tsNodeDevOptions, projectConfig)
+      [options?.tscOptions?.targetName ?? 'build']: buildTscTarget({
+        options: options?.tscOptions,
+        projectConfig,
+        context,
+        projectRoot
+      }),
+      [options?.tsNodeDevOptions?.targetName ?? 'serve']: buildTsNodeDevTarget({
+        options: options?.tsNodeDevOptions,
+        projectConfig,
+        context,
+        projectRoot
+      }),
+      [options?.jestOptions?.targetName ?? 'test']: buildJestTarget({
+        options: options?.jestOptions,
+        projectConfig,
+        context,
+        projectRoot
+      })
     }
 
     return {
@@ -45,6 +64,12 @@ export const createNodes: CreateNodes = [
 export const createNodesV2: CreateNodesV2 = [
   FILE_PATTERN,
   async (configFiles: string[], options: PluginOptions, context: CreateNodesContext): Promise<CreateNodesResultV2> => {
-    return (await Promise.all([buildTscNodes(configFiles, options?.tscOptions, context), buildTsNodeDevNodes(configFiles, options?.tsNodeDevOptions, context)])).flat()
+    return (
+      await Promise.all([
+        buildTscNodes(configFiles, options?.tscOptions, context),
+        buildTsNodeDevNodes(configFiles, options?.tsNodeDevOptions, context),
+        buildJestNodes(configFiles, options?.jestOptions, context)
+      ])
+    ).flat()
   }
 ]

@@ -34,6 +34,7 @@
   "dependencies": {
     "@nx/devkit": "^19.3.0",
     "@nx/js": "^19.3.0",
+    "@nx/jest": "^19.3.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

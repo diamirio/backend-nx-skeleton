@@ -14,10 +14,17 @@ export const FILE_PATTERN = '**/project.json'
 
 type Plugin<O> = new (...args: any[]) => PluginBuilder<O>
 
+export interface BuildTargetOptions<O> {
+  options: O
+  projectConfig: Record<string, any>
+  context: CreateNodesContext
+  projectRoot: string
+}
+
 interface BuildPluginResponse<O> {
   createNodes: CreateNodes
   createNodesV2: CreateNodesV2
-  buildTarget: (option: O, projectConfig: Record<string, any>) => TargetConfiguration
+  buildTarget: (options: BuildTargetOptions<O>) => TargetConfiguration
   buildNodes: (configFiles: string[], options: O, context: CreateNodesContext) => Promise<CreateNodesResultV2>
 }
 
@@ -41,6 +48,7 @@ export function buildPlugin<O> (pluginBuilder: Plugin<O>): BuildPluginResponse<O
 
 export abstract class PluginBuilder<O extends { targetName?: string }> {
   filePattern: string = FILE_PATTERN
+  projectTypes: string[] = ['application']
 
   abstract name: string
   abstract targetName: string
@@ -49,14 +57,19 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
     const projectRoot = dirname(configFilePath)
     const projectConfig = await loadConfigFile(resolve(context.workspaceRoot, configFilePath))
 
-    if (projectConfig.projectType !== 'application') {
+    if (!this.projectTypes.includes(projectConfig.projectType)) {
       return {}
     }
 
     const hash = await calculateHashForCreateNodes(projectRoot, options, context)
 
     if (!targetsCache[hash]) {
-      targetsCache[hash] = this.buildTarget(options, projectConfig)
+      targetsCache[hash] = this.buildTarget({
+        options,
+        projectConfig,
+        context,
+        projectRoot
+      })
     }
 
     return {
@@ -85,5 +98,5 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
     }
   }
 
-  abstract buildTarget (option: O, projectConfig: Record<string, any>): TargetConfiguration
+  abstract buildTarget (option: BuildTargetOptions<O>): TargetConfiguration
 }

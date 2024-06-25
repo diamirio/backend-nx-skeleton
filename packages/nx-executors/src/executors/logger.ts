@@ -2,11 +2,7 @@ import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
 import { EOL } from 'os'
 
 export class LogWriter {
-  private readonly context: ExecutorContext
-
-  constructor (context: ExecutorContext) {
-    this.context = context
-  }
+  constructor (private readonly context?: ExecutorContext) {}
 
   stdout (message: string): void {
     this.handleMessage(message, 'stdout')

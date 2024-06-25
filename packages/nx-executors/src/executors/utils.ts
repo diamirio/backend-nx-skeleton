@@ -5,7 +5,7 @@ import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
 
 import { LogWriter } from './logger'
 
-export function spawnProcess (command: string, args: string[], options: SpawnOptions, context: ExecutorContext): Promise<number | Error> {
+export function spawnProcess (command: string, args: string[], options: SpawnOptions, context?: ExecutorContext): Promise<number | Error> {
   const logWriter = new LogWriter(context)
 
   return new Promise((resolve, reject) => {

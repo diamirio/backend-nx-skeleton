@@ -29,15 +29,8 @@
       "additionalProperties": {
         "type": "string"
       },
-      "default": {}
-    },
-    "environment": {
-      "type": "object",
-      "description": "Environment variables that will be made available to the commands. (alias of env)",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "default": {}
+      "default": {},
+      "aliases": ["environment"]
     },
     "debug": {
       "type": "boolean",

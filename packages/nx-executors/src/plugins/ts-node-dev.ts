@@ -1,5 +1,6 @@
 import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
+import type { BuildTargetOptions } from './utils/plugin'
 import { buildPlugin, PluginBuilder } from './utils/plugin'
 
 export interface TsNodeDevPluginOptions {
@@ -11,7 +12,7 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   name = 'ts-node-dev'
   targetName = 'serve'
 
-  buildTarget (options: TsNodeDevPluginOptions, projectConfig: Record<string, any>): TargetConfiguration {
+  buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): TargetConfiguration {
     const target: TargetConfiguration = {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       options: {

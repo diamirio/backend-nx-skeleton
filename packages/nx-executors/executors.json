@@ -1,5 +1,11 @@
 {
   "executors": {
+    "jest": {
+      "implementation": "./src/executors/jest/executor",
+      "batchImplementation": "./src/executors/jest/executor-batch",
+      "schema": "./src/executors/jest/schema.json",
+      "description": "jest executor"
+    },
     "run": {
       "implementation": "./src/executors/run/executor",
       "schema": "./src/executors/run/schema.json",
