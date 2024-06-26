@@ -1,0 +1,10 @@
+{
+  "schematics": {
+    "migrate-to-nx-executors": {
+      "cli": "nx",
+      "version": "7.0.0",
+      "description": "Move from old nx-builders to new nx-executors",
+      "factory": "./dist/migrations/migrate-to-nx-executors"
+    }
+  }
+}

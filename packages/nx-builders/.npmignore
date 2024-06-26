@@ -3,4 +3,5 @@
 !dist/**
 !builders.json
 !schematics.json
+!migrations.json
 !collections.json
