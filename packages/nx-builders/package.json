@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nx-builders",
-  "version": "1.0.0",
+  "version": "7.0.0",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "TSC compiler for NX.",
   "author": "Backend <backend@webundsoehne.com>",
@@ -12,6 +12,9 @@
   },
   "schematics": "./schematics.json",
   "builders": "./builders.json",
+  "ng-update": {
+    "migrations": "./migrations.json"
+  },
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
