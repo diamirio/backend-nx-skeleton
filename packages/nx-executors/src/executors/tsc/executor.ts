@@ -16,7 +16,23 @@ export default async function (options: TscExecutorSchema, context: ExecutorCont
 
   if (options.mergeAssets) {
     // merge defaultTargetOptions and project.json options
-    options.assets = options.assets.concat(context.nxJsonConfiguration?.targetDefaults?.[context.targetName]?.options?.assets ?? [])
+    const defaultAssets = (context.nxJsonConfiguration?.targetDefaults?.[context.targetName]?.options?.assets ?? [])
+      .map((asset) =>
+        Object.fromEntries(
+          Object.entries(asset).map(([key, value]) => {
+            if (typeof value === 'string') {
+              return [key, value.replace('{projectRoot}', project.root).replace('{workspaceRoot}', context.root)]
+            }
+
+            return [key, value]
+          })
+        )
+      )
+      .filter(({ glob, input }) => {
+        return !options.assets.find((asset) => typeof asset !== 'string' && asset.glob === glob && asset.input === input)
+      })
+
+    options.assets = options.assets.concat(defaultAssets)
   }
 
   for await (const data of nxTscExecutor(options, context)) {

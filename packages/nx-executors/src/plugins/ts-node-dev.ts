@@ -17,7 +17,7 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       options: {
         main: 'src/main.ts',
-        tsConfig: 'tsconfig.json'
+        tsConfig: 'tsconfig.build.json'
       }
     }
     const nodeService = this.guessNodeService(projectConfig?.integration?.nestjs?.components ?? [])
