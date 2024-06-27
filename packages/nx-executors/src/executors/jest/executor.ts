@@ -20,9 +20,5 @@ export default async function (options: JestExecutorSchema, context: ExecutorCon
   process.chdir(cwd)
   context.root = cwd
 
-  await jestExecutor(options, context)
-
-  return {
-    success: true
-  }
+  return jestExecutor(options, context)
 }
