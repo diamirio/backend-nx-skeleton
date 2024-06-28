@@ -32,6 +32,7 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
     const testTarget: TargetConfiguration = {
       executor: options.executor ?? '@webundsoehne/nx-executors:jest',
       cache: true,
+      inputs: ['default', '^default', '{workspaceRoot}/jest.preset.js', '{workspaceRoot}/jest-e2e.preset.js', { externalDependencies: ['jest'] }],
       options: {
         jestConfig: options.testConfig,
         passWithNoTests: true,
