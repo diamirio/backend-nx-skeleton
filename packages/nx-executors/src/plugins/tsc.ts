@@ -16,6 +16,8 @@ class TscPlugin extends PluginBuilder<TscPluginOptions> {
     return {
       executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',
       cache: true,
+      inputs: ['production', '^production'],
+      outputs: ['{options.outputPath}'],
       options: {
         main: 'src/main.ts',
         tsConfig: 'tsconfig.build.json'

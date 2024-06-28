@@ -15,6 +15,7 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): TargetConfiguration {
     const target: TargetConfiguration = {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
+      inputs: ['production', '^production'],
       options: {
         main: 'src/main.ts',
         tsConfig: 'tsconfig.build.json'
