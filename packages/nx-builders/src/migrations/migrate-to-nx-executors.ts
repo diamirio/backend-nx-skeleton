@@ -92,7 +92,14 @@ async function updatePackageJson (tree: Tree): Promise<void> {
       'tsc-watch',
       'tsconfig-loader',
       'tsconfig-paths',
-      'tsconfig-replace-paths'
+      'tsconfig-replace-paths',
+      // installed with new version
+      '@types/jest',
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'eslint-config-prettier',
+      'jest',
+      'ts-jest'
     ]
   )
   await addDependenciesToPackageJson(
