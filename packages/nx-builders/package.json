@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nx-builders",
-  "version": "7.0.0",
+  "version": "1.0.0",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "TSC compiler for NX.",
   "author": "Backend <backend@webundsoehne.com>",
