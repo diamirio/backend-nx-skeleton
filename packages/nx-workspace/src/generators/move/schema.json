@@ -1,0 +1,60 @@
+{
+  "$id": "Move",
+  "cli": "nx",
+  "title": "Move project",
+  "description": "Move a project to another folder in the workspace.",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "alias": "project",
+      "description": "The name of the project to move.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which project should be moved?",
+      "x-dropdown": "projects"
+    },
+    "destination": {
+      "type": "string",
+      "description": "The folder to move the project into.",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "Where should the project be moved to?"
+    },
+    "updateImportPath": {
+      "type": "boolean",
+      "aliases": ["update-import-path"],
+      "description": "Should the generator update the import path to reflect the new location?",
+      "default": true,
+      "x-priority": "internal"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "aliases": ["skip-format"],
+      "description": "Skip formatting files.",
+      "default": true,
+      "x-priority": "internal"
+    },
+    "newProjectName": {
+      "type": "string",
+      "alias": "project",
+      "description": "The new name of the project after the move.",
+      "pattern": "(?:^@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*\\/[a-zA-Z0-9-~][a-zA-Z0-9-._~]*|^[a-zA-Z][^:]*)$",
+      "x-priority": "important"
+    },
+    "projectNameAndRootFormat": {
+      "description": "Whether to generate the new project name and destination as provided (`as-provided`) or generate them composing their values and taking the configured layout into account (`derived`).",
+      "type": "string",
+      "enum": ["as-provided", "derived"]
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The new import path to use in the `tsconfig.base.json`."
+    }
+  },
+  "required": ["projectName", "destination"]
+}

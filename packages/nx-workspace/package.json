@@ -4,13 +4,13 @@
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Workspace plugin for Nx",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "schematics": "./schematics.json",
+  "generators": "./generators.json",
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
@@ -29,18 +29,12 @@
     ]
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.7",
-    "@angular-devkit/schematics": "^14.2.7",
-    "@nrwl/devkit": "^14.8.3",
-    "@nrwl/workspace": "^14.8.3",
-    "@webundsoehne/deep-merge": "*",
-    "@webundsoehne/nx-builders": "*",
-    "@webundsoehne/nx-tools": "*",
-    "enquirer": "^2.3.6",
-    "listr2": "^4.0.5",
-    "typescript": "^4.8.4"
+    "@nx/devkit": "^19.3.0",
+    "@nx/js": "^19.3.0",
+    "@nx/workspace": "^19.3.0",
+    "tslib": "^2.3.0"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }

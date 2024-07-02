@@ -4,18 +4,7 @@
     "outDir": "./dist",
     "rootDir": "src",
     "baseUrl": "src",
-    "paths": {
-      "@utils/*": ["utils/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@constants/*": ["constants/*"],
-      "@integration/*": ["integration/*"],
-      "@schematics/*": ["schematics/*"],
-      "@utils": ["utils"],
-      "@interfaces": ["interfaces"],
-      "@constants": ["constants"],
-      "@integration": ["integration"],
-      "@schematics": ["schematics"]
-    }
+    "paths": {}
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "**/files", "**/templates"]

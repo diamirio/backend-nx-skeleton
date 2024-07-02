@@ -1,0 +1,59 @@
+import { addDependenciesToPackageJson, addProjectConfiguration, output, readNxJson, names } from '@nx/devkit'
+import type { GeneratorCallback, Tree } from '@nx/devkit'
+import { addTsConfigPath } from '@nx/js'
+import { ProjectType } from '@nx/workspace'
+import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
+import { join } from 'node:path'
+
+import { applyTemplateFactory } from '../utils'
+import { DEPENDENCIES, DEV_DEPENDENCIES } from './constants'
+import type { LibraryGeneratorSchema } from './schema'
+
+export default async function libraryGenerator (tree: Tree, options: LibraryGeneratorSchema): Promise<GeneratorCallback> {
+  const tasks: GeneratorCallback[] = []
+  const applyTemplate = applyTemplateFactory(tree)
+  const scope = getNpmScope(tree) ?? 'lib'
+  const projectNames = names(options.name)
+
+  options.importPath ??= `@${scope}/${projectNames.fileName}`
+
+  const templateContext = {
+    ...options,
+    packageScope: options.importPath
+  }
+
+  const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
+  const projectRoot = join(libRoot, projectNames.fileName)
+
+  output.log({ title: 'Applying templates', bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...'] })
+
+  applyTemplate(['library', 'files'], templateContext, projectRoot)
+
+  addProjectConfiguration(tree, options.name, {
+    root: projectRoot,
+    sourceRoot: join(projectRoot, 'src'),
+    projectType: ProjectType.Library,
+    tags: [],
+    targets: {}
+  })
+
+  if (options.jest) {
+    output.log({ title: 'Setup jest', bodyLines: ['Add config files ...', !options.skipPackageJson ? 'Add dependencies ...' : ''] })
+
+    applyTemplate(['library', 'jest', 'preset'], templateContext)
+    applyTemplate(['library', 'jest', 'files'], templateContext, projectRoot)
+
+    if (!options.skipPackageJson) {
+      tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+    }
+  }
+
+  addTsConfigPath(tree, options.importPath, [join(projectRoot, 'src', 'index.ts')])
+  addTsConfigPath(tree, `${options.importPath}/*`, [join(projectRoot, 'src', '*')])
+
+  return async () => {
+    for (const task of tasks) {
+      await task()
+    }
+  }
+}
