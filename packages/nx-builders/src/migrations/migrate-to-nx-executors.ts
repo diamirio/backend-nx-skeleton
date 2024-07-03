@@ -113,7 +113,7 @@ async function updatePackageJson (tree: Tree): Promise<void> {
       '@types/jest': '^29.4.0',
       '@typescript-eslint/eslint-plugin': '^7.3.0',
       '@typescript-eslint/parser': '^7.3.0',
-      '@webundsoehne/nx-executors': '^1.0.0-beta.1', // new executors
+      '@webundsoehne/nx-executors': '^1.0.0', // new executors
       'eslint-config-prettier': '^9.1.0',
       jest: '^29.4.0',
       nx: '^19.3.0',
