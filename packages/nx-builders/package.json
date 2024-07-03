@@ -12,6 +12,9 @@
   },
   "schematics": "./schematics.json",
   "builders": "./builders.json",
+  "ng-update": {
+    "migrations": "./migrations.json"
+  },
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",

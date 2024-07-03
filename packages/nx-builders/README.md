@@ -11,6 +11,15 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 [![Version](https://img.shields.io/npm/v/@webundsoehne/nx-builders.svg)](https://npmjs.org/package/@webundsoehne/nx-builders) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nx-builders.svg)](https://npmjs.org/package/@webundsoehne/nx-builders) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nx-builders)](https://npmjs.org/package/@webundsoehne/nx-builders) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+# Deprecated
+
+This package will be deprecated in favour of the new `nx-executors` package.<br> Migration commands to run in the workspace to update:
+
+1. `nx migrate @webundsoehne/nx-builder@7.0.0`
+2. `nx migrate --run-migrations`
+
+This should fetch the last version and create a `migrations.json` file, linking to the `@webundsoehne/nx-builders` package. By running this, the migrations will remove deprecated packages, add new nx packages, update nx.json, package.json moving to the new packages.<br> After the migration validate the changes made did not override another config before committing them.
+
 # Description
 
 This package includes [@nrwl/nx](https://github.com/nrwl/nx) libraries for customizing the build and serve process.
@@ -317,7 +326,7 @@ These options are valid for this builder.
   - You can inject environment variables through `environment` key-
 
 ```typescript
-**
+/**
  * Options for execute
  */
 export interface ExecuteBuilderOptions extends JsonObject {
