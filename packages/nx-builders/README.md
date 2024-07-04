@@ -15,7 +15,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 This package will be deprecated in favour of the new `nx-executors` package.<br> Migration commands to run in the workspace to update:
 
-1. `nx migrate @webundsoehne/nx-builder@7.0.0`
+1. `nx migrate @webundsoehne/nx-builder@6.3.0`
 2. `nx migrate --run-migrations`
 
 This should fetch the last version and create a `migrations.json` file, linking to the `@webundsoehne/nx-builders` package. By running this, the migrations will remove deprecated packages, add new nx packages, update nx.json, package.json moving to the new packages.<br> After the migration validate the changes made did not override another config before committing them.
