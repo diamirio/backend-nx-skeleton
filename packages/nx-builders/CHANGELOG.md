@@ -1,3 +1,9 @@
+# @webundsoehne/nx-builders [6.3.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.1...@webundsoehne/nx-builders@6.3.0-beta.2) (2024-07-05)
+
+### Features
+
+- **nx-builders:** update migration version ([a723823](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a723823a647cf0e92500cca6f29957ab2bfd35ad))
+
 # @webundsoehne/nx-builders [6.3.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.2.0...@webundsoehne/nx-builders@6.3.0-beta.1) (2024-07-03)
 
 ### Features
