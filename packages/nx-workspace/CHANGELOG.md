@@ -1,3 +1,9 @@
+## @webundsoehne/nx-workspace [5.0.32-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32-beta.1...@webundsoehne/nx-workspace@5.0.32-beta.2) (2024-07-05)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.2
+
 ## @webundsoehne/nx-workspace [5.0.32-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.31...@webundsoehne/nx-workspace@5.0.32-beta.1) (2024-07-03)
 
 ### Dependencies
