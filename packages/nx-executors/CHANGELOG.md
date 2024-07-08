@@ -1,3 +1,10 @@
+# @webundsoehne/nx-executors [1.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.1...@webundsoehne/nx-executors@1.0.0-beta.2) (2024-07-08)
+
+### Bug Fixes
+
+- **nx-executors:** `dist` folder as package-root ([d2f7ff6](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/d2f7ff6cc14318f8c1ba1b1b1206be80a0595d7e))
+- **nx-executors:** disable `detectOpenHandles` for jest ([058728e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/058728ef849073da07cbee76881138b4922dace2))
+
 # @webundsoehne/nx-executors 1.0.0-beta.1 (2024-07-01)
 
 ### Features
