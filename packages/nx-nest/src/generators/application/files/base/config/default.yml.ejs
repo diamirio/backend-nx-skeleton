@@ -1,0 +1,60 @@
+<% if (isServer) { %>port: 3000<% } %>
+logLevel: debug
+
+misc:
+  lockfile: maintenance.lock
+  maintenanceNotification: null
+  lastUpdateFile: .last-update
+  changelogFile: CHANGELOG.md
+<% if (isServer) { %>
+url:
+  basePath: http://localhost:3000
+  apiPath: ""
+
+swagger:
+  path: /internal/docs
+  title: NestJS Skeleton
+  description: API
+  useHttps: false
+
+cacheLifetime:
+  defaultExpiresHeader: false
+  defaultLifetime: 0
+  expiresHeader: Expires
+  cacheControlHeader: Cache-control
+<% } -%>
+<% if (includeMessageQueue) { %>
+messageQueue:
+  urls:
+    - amqp://rabbitmq:5672
+<% } -%>
+<% if (database !== DATABASE.NONE) { %>
+database: <% if (database === DATABASE.TYPEORM) { %>
+  database: db
+  mock:
+    database: db_mock
+    username: user
+    password: secret
+  host: localhost
+  type: # msql | postgresql
+  port: # 3306 | 5432
+  synchronize: false
+  cache: false
+  keepConnectionAlive: true
+  directories:
+  entity: entity/**/*.entity{.ts,.js}
+  migration: migration
+  seed: seed
+<% } else if (database === DATABASE.MONGOOSE) { %>
+  host: localhost
+  ignoreUndefined: true
+  useNewUrlParser: true
+  useUnifiedTopology: true
+  migration:
+  migrationsDir: migration
+  changelogCollectionName: migrations
+  migrationFileExtension: '.js'
+  useFileHash: false
+  moduleSystem: esm
+<% } -%>
+<% } -%>

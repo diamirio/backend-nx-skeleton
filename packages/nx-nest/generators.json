@@ -1,0 +1,34 @@
+{
+  "generators": {
+    "preset": {
+      "factory": "./dist/generators/workspace/generator",
+      "schema": "./dist/generators/workspace/schema.json",
+      "description": "nest workspace",
+      "aliases": ["workspace", "ws"]
+    },
+    "application": {
+      "factory": "./dist/generators/application/generator",
+      "schema": "./dist/generators/application/schema.json",
+      "description": "nest application",
+      "aliases": ["app"]
+    },
+    "library": {
+      "factory": "./dist/generators/library/generator",
+      "schema": "./dist/generators/library/schema.json",
+      "description": "library",
+      "aliases": ["lib"]
+    },
+    "database-orm": {
+      "factory": "./dist/generators/database-orm/generator",
+      "schema": "./dist/generators/database-orm/schema.json",
+      "description": "database-orm util library",
+      "aliases": ["database", "db"]
+    },
+    "microservice-provider": {
+      "factory": "./dist/generators/microservice-provider/generator",
+      "schema": "./dist/generators/microservice-provider/schema.json",
+      "description": "microservice-provider util library",
+      "aliases": ["microserviceProvider", "msp"]
+    }
+  }
+}

@@ -1,12 +1,12 @@
-import { addDependenciesToPackageJson, addProjectConfiguration, output, readNxJson, names } from '@nx/devkit'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
+import { formatFiles, addDependenciesToPackageJson, addProjectConfiguration, names, output, readNxJson, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 
 import { applyTemplateFactory } from '../utils'
-import { DEPENDENCIES, DEV_DEPENDENCIES } from './constants'
+import { JEST_DEPENDENCIES } from './constants'
 import type { LibraryGeneratorSchema } from './schema'
 
 export default async function libraryGenerator (tree: Tree, options: LibraryGeneratorSchema): Promise<GeneratorCallback> {
@@ -25,9 +25,12 @@ export default async function libraryGenerator (tree: Tree, options: LibraryGene
   const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
   const projectRoot = join(libRoot, projectNames.fileName)
 
-  output.log({ title: 'Applying templates', bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...'] })
+  output.log({
+    title: 'Applying templates',
+    bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
+  })
 
-  applyTemplate(['library', 'files'], templateContext, projectRoot)
+  applyTemplate(['library', 'files', 'base'], templateContext, projectRoot)
 
   addProjectConfiguration(tree, options.name, {
     root: projectRoot,
@@ -38,15 +41,26 @@ export default async function libraryGenerator (tree: Tree, options: LibraryGene
   })
 
   if (options.jest) {
-    output.log({ title: 'Setup jest', bodyLines: ['Add config files ...', !options.skipPackageJson ? 'Add dependencies ...' : ''] })
+    output.log({
+      title: 'Setup jest',
+      bodyLines: ['Add config files ...', !options.skipPackageJson ? 'Add dependencies ...' : '']
+    })
 
-    applyTemplate(['library', 'jest', 'preset'], templateContext)
-    applyTemplate(['library', 'jest', 'files'], templateContext, projectRoot)
+    applyTemplate(['library', 'files', 'jest', 'preset'], templateContext)
+    applyTemplate(['library', 'files', 'jest', 'files'], templateContext, projectRoot)
 
     if (!options.skipPackageJson) {
-      tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+      tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))
+      updateJson(tree, 'package.json', (content) => {
+        content.scripts.test = 'nx run-many --target test --parallel 10'
+        content.scripts['test:one'] = 'nx test --project'
+
+        return content
+      })
     }
   }
+
+  await formatFiles(tree)
 
   addTsConfigPath(tree, options.importPath, [join(projectRoot, 'src', 'index.ts')])
   addTsConfigPath(tree, `${options.importPath}/*`, [join(projectRoot, 'src', '*')])

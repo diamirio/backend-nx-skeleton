@@ -1,0 +1,25 @@
+import { Logger } from '@nestjs/common'
+import { Command, CommandRunner, Option } from 'nest-commander'
+
+/**
+ * Register your cli commands in this component.
+ * Documentation: https://docs.nestjs.com/recipes/nest-commander#nest-commander
+ */
+
+@Command({ name: 'default', description: 'Default command' })
+export class DefaultCommand extends CommandRunner {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  constructor () {
+    super()
+  }
+
+  async run(
+    parameters: string[],
+    options?: Record<string, any>,
+  ): Promise<void> {
+    this.logger.log('Running the default command.')
+
+    return
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$id": "nest-application",
+  "cli": "nx",
+  "title": "NestJs Application",
+  "description": "Add a new application to the workspace",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Application name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the application?",
+      "pattern": "(?:^@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*\\/[a-zA-Z0-9-~][a-zA-Z0-9-._~]*|^[a-zA-Z][^:]*)$"
+    },
+    "jest": {
+      "type": "boolean",
+      "aliases": ["j"],
+      "description": "Include jest as test runner.",
+      "x-prompt": "Setup jest for unit tests?"
+    },
+    "skipPackageJson": {
+      "description": "Do not add dependencies to `package.json`.",
+      "aliases": ["skip-package-json"],
+      "type": "boolean",
+      "default": false,
+      "x-priority": "internal"
+    },
+    "components": {
+      "type": "array",
+      "items": "string",
+      "aliases": ["c"],
+      "description": "Application components",
+      "x-prompt": {
+        "message": "Please select which components you want to include:",
+        "multiselect": true,
+        "type": "list",
+        "items": [
+          { "value": "server", "label": "Server" },
+          { "value": "command", "label": "Command" },
+          { "value": "bg-task", "label": "Background Task" },
+          { "value": "microservice", "label": "Microservice Server" }
+        ]
+      }
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database orm to use",
+      "x-prompt": {
+        "message": "Which database-orm should be included?",
+        "type": "item",
+        "items": ["none", "typeorm", "mongoose"]
+      }
+    },
+    "microserviceProvider": {
+      "type": "boolean",
+      "aliases": ["microservice-provider", "msp"],
+      "description": "Include microservice-provider",
+      "x-prompt": "Include microservice-provider?"
+    },
+    "update": {
+      "type": "boolean",
+      "aliases": ["u"],
+      "description": "Update an existing application",
+      "default": false,
+      "x-priority": "internal"
+    }
+  },
+  "required": ["name", "jest", "components", "database", "microserviceProvider"]
+}

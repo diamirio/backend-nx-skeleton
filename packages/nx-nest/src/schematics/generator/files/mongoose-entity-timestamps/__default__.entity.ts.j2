@@ -1,9 +1,0 @@
-import { Schema, SchemaFactory } from '@nestjs/mongoose'
-
-import { BaseDocumentWithTimestamps } from './util'
-
-@Schema({ timestamps: true })
-export class {{ casing.pascal }}Entity extends BaseDocumentWithTimestamps {
-}
-
-export const {{ casing.pascal }}Schema = SchemaFactory.createForClass({{ casing.pascal }}Entity)

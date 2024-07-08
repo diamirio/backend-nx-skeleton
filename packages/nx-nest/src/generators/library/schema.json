@@ -1,0 +1,46 @@
+{
+  "$id": "library",
+  "cli": "nx",
+  "title": "Empty Library",
+  "description": "Add a new library to the workspace",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Library name.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?"
+    },
+    "jest": {
+      "type": "boolean",
+      "aliases": ["j"],
+      "description": "Include jest as test runner.",
+      "x-prompt": "Setup jest for unit tests?"
+    },
+    "skipPackageJson": {
+      "description": "Do not add dependencies to `package.json`.",
+      "aliases": ["skip-package-json"],
+      "type": "boolean",
+      "default": false,
+      "x-priority": "internal"
+    },
+    "importPath": {
+      "type": "string",
+      "aliases": ["import-path", "path", "p"],
+      "description": "The library name used to import it, like @myorg/my-awesome-lib.",
+      "x-priority": "important"
+    },
+    "update": {
+      "type": "boolean",
+      "aliases": ["u"],
+      "description": "Update an existing application",
+      "default": false,
+      "x-priority": "internal"
+    }
+  },
+  "required": ["name", "jest"]
+}

@@ -10,14 +10,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "schematics": "./schematics.json",
+  "generators": "./generators.json",
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i",
-    "docs:jsdoc": "typedoc src/index.ts --readme none"
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
@@ -29,20 +27,19 @@
     ]
   },
   "peerDependencies": {
-    "@nrwl/workspace": "*"
+    "nx": ">= 17 <= 20"
   },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.7",
-    "@angular-devkit/schematics": "^14.2.7",
-    "@nestjs/schematics": "^9.0.1",
-    "@webundsoehne/deep-merge": "*",
-    "@webundsoehne/nx-builders": "*",
-    "@webundsoehne/nx-tools": "*",
-    "enquirer": "^2.3.6",
-    "execa": "^5.1.1",
-    "listr2": "^4.0.5"
+    "@nx/devkit": "^19.3.0",
+    "@nx/js": "^19.3.0",
+    "@nx/workspace": "^19.3.0",
+    "ts-morph": "^23.0.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "nx": "^19.5.2"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }

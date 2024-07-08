@@ -1,0 +1,7 @@
+import { <%- projectNames.className -%>Pattern } from '../patterns'
+import type { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util-microservices';
+import { BaseMessageIndexes } from '@webundsoehne/nestjs-util-microservices'
+
+export declare class <%- projectNames.className -%>Message extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<<%- projectNames.className -%>Pattern> {
+  [<%- projectNames.className -%>Pattern.DEFAULT]: (request: unknown) => unknown
+}

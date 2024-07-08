@@ -2,7 +2,7 @@
   "$id": "Library",
   "cli": "nx",
   "title": "Library",
-  "description": "Add a new library the workspace.",
+  "description": "Add a new library to the workspace.",
   "type": "object",
   "properties": {
     "name": {

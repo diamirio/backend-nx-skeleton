@@ -15,9 +15,7 @@
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "docs:jsdoc": "typedoc src/index.ts --readme none",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
@@ -28,11 +26,17 @@
       "prettier --loglevel warn --write"
     ]
   },
+  "peerDependencies": {
+    "nx": ">= 17 <= 20"
+  },
   "dependencies": {
     "@nx/devkit": "^19.3.0",
     "@nx/js": "^19.3.0",
     "@nx/workspace": "^19.3.0",
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "nx": "^19.5.2"
   },
   "engines": {
     "node": ">= 18"

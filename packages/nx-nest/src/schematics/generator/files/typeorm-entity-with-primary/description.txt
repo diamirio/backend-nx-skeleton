@@ -1,1 +1,0 @@
-Typeorm entity with a primary id column.

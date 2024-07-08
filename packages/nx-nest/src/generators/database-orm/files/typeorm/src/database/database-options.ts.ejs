@@ -1,0 +1,22 @@
+import { join } from 'node:path'
+import type { DataSourceOptions } from 'typeorm'
+
+import { ConfigService } from '@webundsoehne/nestjs-util'
+
+const { mock: mockOptions = {}, directories, ...options } = ConfigService.get('database')
+
+const entitiesDir = join(__dirname, `../${directories.entity}`)
+const migrationsDir = join(__dirname, `../${directories.migration}`)
+const seedsDir = join(__dirname, `../${directories.seed}`)
+const databaseOptions: DataSourceOptions = {
+  ...options,
+  entities: [`${entitiesDir}/*{.ts,.js}`],
+  migrations: [`${migrationsDir}/*{.ts,.js}`],
+  cli: { entitiesDir, migrationsDir },
+  seeds: [`${seedsDir}/**/*.seed{.ts,.js}`],
+  factories: [`${seedsDir}/**/*.factory{.ts,.js}`]
+}
+
+export function getDatabaseOptions (mock = false): DataSourceOptions {
+  return mock ? { ...databaseOptions, ...mockOptions } : databaseOptions
+}

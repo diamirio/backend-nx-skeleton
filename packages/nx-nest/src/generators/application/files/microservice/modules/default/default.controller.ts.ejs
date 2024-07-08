@@ -1,0 +1,14 @@
+import { Controller } from '@nestjs/common'
+import { MessagePattern } from '@nestjs/microservices'
+
+import { DefaultMicroservice } from './default.service'
+
+@Controller()
+export class DefaultMicrocontroller {
+  constructor (private readonly defaultMicroservice: DefaultMicroservice) {}
+
+  @MessagePattern('DEFAULT')
+  default (options: any): Promise<any> {
+    return this.defaultMicroservice.default(options)
+  }
+}

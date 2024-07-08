@@ -1,5 +1,5 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, output, OverwriteStrategy, readNxJson, updateJson, updateNxJson } from '@nx/devkit'
+import { formatFiles, addDependenciesToPackageJson, output, OverwriteStrategy, readNxJson, updateJson, updateNxJson } from '@nx/devkit'
 
 import { applyTemplateFactory } from '../utils'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, LAYOUTS, SCRIPTS } from './constants'
@@ -22,6 +22,8 @@ export default async function workspaceGenerator (tree: Tree, options: Workspace
     ...options,
     packageScope: `@${options.scope}/${options.name}`
   })
+
+  await formatFiles(tree)
 
   // dependencies and scripts
   if (!options.skipPackageJson) {

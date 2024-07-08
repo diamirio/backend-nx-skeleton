@@ -1,0 +1,18 @@
+import { InternalServerErrorException } from '@nestjs/common'
+
+import { Service } from './constants'
+<% for (const metadata of applicationMetadata) { %>
+  <%- metadata.applicationImports -%>
+<% } %>
+
+function bootstrap (): Promise<void> {
+  switch (String(process.env.NODE_SERVICE).toLowerCase()) {
+  <% for (const metadata of applicationMetadata) { %>
+    <%- metadata.applicationCase -%>
+  <% } %>
+  default:
+    throw new InternalServerErrorException('NODE_SERVICE environment variable is not set.')
+  }
+}
+
+void bootstrap()
