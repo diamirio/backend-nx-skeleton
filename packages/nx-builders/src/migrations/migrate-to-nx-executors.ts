@@ -38,6 +38,8 @@ const defaultAssets = [
 
 export default async function (tree: Tree): Promise<void> {
   if (!tree.exists('nx.json')) {
+    logger.warn('No `nx.json` found, skipping migration ...')
+
     return
   }
 
@@ -56,6 +58,12 @@ export default async function (tree: Tree): Promise<void> {
 // add ts-patch and new path-replacer
 async function updatePackageJson (tree: Tree): Promise<void> {
   logger.info('Update to new nx and nx-executors packages')
+
+  if (!tree.exists('package.json')) {
+    logger.warn('No `package.json` found, skipping dependency updates ...')
+
+    return
+  }
 
   updateJson(tree, 'package.json', (content) => {
     content.scripts = {
@@ -113,7 +121,7 @@ async function updatePackageJson (tree: Tree): Promise<void> {
       '@types/jest': '^29.4.0',
       '@typescript-eslint/eslint-plugin': '^7.3.0',
       '@typescript-eslint/parser': '^7.3.0',
-      '@webundsoehne/nx-executors': '^1.0.0', // new executors
+      '@webundsoehne/nx-executors': '^1.0.0-beta.1', // new executors
       'eslint-config-prettier': '^9.1.0',
       jest: '^29.4.0',
       nx: '^19.3.0',
@@ -199,62 +207,66 @@ function updateProjects (tree: Tree): void {
   const projects = getProjects(tree)
 
   for (const [name, project] of projects) {
-    const buildTarget = project.targets?.build
+    if (tree.exists(join(project.root, 'project.json'))) {
+      const buildTarget = project.targets?.build
 
-    // remove targets that will be covered by the nx-executors/plugin
-    // and try to update the old `:run` targets to work without manual updates
-    project.targets = Object.fromEntries(
-      Object.entries(project.targets ?? {})
-        .filter(([target]) => !['build', 'serve', 'test', 'lint'].includes(target))
-        .map(([target, value]) => {
-          if (value.executor.includes('nx-builders:run')) {
-            value.executor = '@webundsoehne/nx-executors:run'
-            const options: any = {}
+      // remove targets that will be covered by the nx-executors/plugin
+      // and try to update the old `:run` targets to work without manual updates
+      project.targets = Object.fromEntries(
+        Object.entries(project.targets ?? {})
+          .filter(([target]) => !['build', 'serve', 'test', 'lint'].includes(target))
+          .map(([target, value]) => {
+            if (value.executor.includes('nx-builders:run')) {
+              value.executor = '@webundsoehne/nx-executors:run'
+              const options: any = {}
 
-            if (value.options?.environment) {
-              options.env = value.options?.environment
+              if (value.options?.environment) {
+                options.env = value.options?.environment
+              }
+
+              if (value.options?.command?.startsWith('./')) {
+                options.command = `ts-node ${value.options.command}`
+              } else {
+                options.tsNode = true
+              }
+
+              value.options = options
             }
 
-            if (value.options?.command?.startsWith('./')) {
-              options.command = `ts-node ${value.options.command}`
-            } else {
-              options.tsNode = true
-            }
-
-            value.options = options
-          }
-
-          return [target, value]
-        })
-    )
-
-    // keep non default assets in the project.json
-    if (buildTarget) {
-      const uniqueAssets = buildTarget.options?.assets?.filter((asset: { input: string, glob: string }) => {
-        return (
-          asset.glob !== 'package-lock.json' &&
-          !defaultAssets.find(({ input, glob }) => {
-            return asset.input === input.replace('{projectRoot}', project.root) && asset.glob === glob
+            return [target, value]
           })
-        )
-      })
+      )
 
-      if (uniqueAssets?.length) {
-        project.targets.build = {
-          options: {
-            assets: uniqueAssets
-          }
-        } as any
+      // keep non default assets in the project.json
+      if (buildTarget) {
+        const uniqueAssets = buildTarget.options?.assets?.filter((asset: { input: string, glob: string }) => {
+          return (
+            asset.glob !== 'package-lock.json' &&
+            !defaultAssets.find(({ input, glob }) => {
+              return asset.input === input.replace('{projectRoot}', project.root) && asset.glob === glob
+            })
+          )
+        })
+
+        if (uniqueAssets?.length) {
+          project.targets.build = {
+            options: {
+              assets: uniqueAssets
+            }
+          } as any
+        }
       }
+
+      updateProjectConfiguration(tree, name, project)
     }
 
-    updateProjectConfiguration(tree, name, project)
+    if (tree.exists(join(project.root, 'tsconfig.json'))) {
+      updateJson(tree, join(project.root, 'tsconfig.json'), (content) => {
+        content.exclude = content.exclude?.filter((e: string) => !['test', '**/*.spec.ts'].includes(e)) ?? []
 
-    updateJson(tree, join(project.root, 'tsconfig.json'), (content) => {
-      content.exclude = content.exclude?.filter((e: string) => !['test', '**/*.spec.ts'].includes(e)) ?? []
-
-      return content
-    })
+        return content
+      })
+    }
   }
 }
 
@@ -269,13 +281,15 @@ function updateImplicitDependencies (tree: Tree): void {
 
     if (tree.isFile(packageJsonFile)) {
       updateJson(tree, packageJsonFile, (content) => {
-        const dependencies = {}
+        let implicitDependencies = []
 
-        for (const implicitDependency of content?.implicitDependencies ?? []) {
-          dependencies[implicitDependency] = workspacePackages[implicitDependency]
+        if (Array.isArray(content?.implicitDependencies)) {
+          implicitDependencies = content.implicitDependencies
+        } else if (typeof content?.implicitDependencies === 'object') {
+          implicitDependencies = Object.keys(content.implicitDependencies ?? {})
         }
 
-        content.dependencies = Object.fromEntries(Object.entries(dependencies).filter(([key, value]) => !!key && !!value))
+        content.dependencies = Object.fromEntries(implicitDependencies.map((dependency) => [dependency, workspacePackages[dependency]]).filter(([key, value]) => !!key && !!value))
         delete content.implicitDependencies
 
         return content
