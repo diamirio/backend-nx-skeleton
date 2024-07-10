@@ -71,6 +71,11 @@ async function updatePackageJson (tree: Tree): Promise<void> {
       prepare: 'ts-patch install -s'
     }
 
+    if (content.scripts.lint) {
+      // drop "nx workspace-lint", does not exists anymore
+      content.scripts.lint = 'nx format:write --all && npm run lint:check -- --fix'
+    }
+
     return content
   })
   updateJson(tree, 'tsconfig.json', (content) => {
