@@ -36,7 +36,6 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
       options: {
         jestConfig: options.testConfig,
         passWithNoTests: true,
-        detectOpenHandles: false, // somehow results in "Cannot find module '@[...]' from [...]" if true
         noStackTrace: true,
         env: {
           NODE_ENV: 'development', // config-package: hide NODE_ENV value of '[...'] did not match any deployment files
