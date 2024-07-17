@@ -1,3 +1,9 @@
+# @webundsoehne/nx-executors [1.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.2...@webundsoehne/nx-executors@1.0.0-beta.3) (2024-07-17)
+
+### Bug Fixes
+
+- **nx-executors:** semantic-release, publish version ([7444401](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/744440161b4e38c5007d350ce2f37f9284d222b3))
+
 # @webundsoehne/nx-executors [1.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.1...@webundsoehne/nx-executors@1.0.0-beta.2) (2024-07-08)
 
 ### Bug Fixes
