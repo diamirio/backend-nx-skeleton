@@ -1,3 +1,9 @@
+# @webundsoehne/nx-executors [1.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.3...@webundsoehne/nx-executors@1.0.0-beta.4) (2024-07-18)
+
+### Bug Fixes
+
+- **nx-executors:** update build flow ([1563694](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/15636943a6988e06543b79902709228b90dcff58))
+
 # @webundsoehne/nx-executors [1.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.2...@webundsoehne/nx-executors@1.0.0-beta.3) (2024-07-17)
 
 ### Bug Fixes
