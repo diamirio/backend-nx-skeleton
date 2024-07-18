@@ -11,18 +11,6 @@ module.exports = {
         assets: ['CHANGELOG.md', 'README.md', 'docs/']
       }
     ],
-    [
-      '@semantic-release/npm',
-      {
-        npmPublish: false
-      }
-    ],
-    [
-      '@semantic-release/npm',
-      {
-        npmPublish: true,
-        pkgRoot: 'dist'
-      }
-    ]
+    '@semantic-release/npm'
   ]
 }
