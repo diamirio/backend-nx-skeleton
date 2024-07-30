@@ -3,9 +3,10 @@ import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, nam
 import { output, ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
+import { readJson } from 'nx/src/generators/utils/json'
 
 import { Database } from '../../constant'
-import { Component, DEPENDENCIES, DEV_DEPENDENCIES } from '../../constant/application'
+import { Component, DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
@@ -149,26 +150,6 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
   await formatFiles(tree)
 
-  updateJson(tree, join(projectRoot, 'package.json'), (content) => {
-    for (const component of options.components) {
-      /* eslint-disable @typescript-eslint/indent,@typescript-eslint/padding-line-between-statements,indent*/
-      switch (component) {
-        case Component.SERVER:
-        case Component.BG_TASK:
-        case Component.MICROSERVICE:
-          content.scripts.start = `node ./${projectRoot}/src/main.js`
-          break
-
-        case Component.COMMAND:
-          content.scripts.command = `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
-          break
-      }
-      /* eslint-enable*/
-    }
-
-    return content
-  })
-
   if (!options.skipPackageJson) {
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
@@ -180,6 +161,31 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
       return content
     })
+
+    updateJson(tree, join(projectRoot, 'package.json'), (content) => {
+      for (const component of options.components) {
+        /* eslint-disable @typescript-eslint/indent,@typescript-eslint/padding-line-between-statements,indent*/
+        switch (component) {
+          case Component.SERVER:
+          case Component.BG_TASK:
+          case Component.MICROSERVICE:
+            content.scripts.start = `node ./${projectRoot}/src/main.js`
+            break
+
+          case Component.COMMAND:
+            content.scripts.command = `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
+            break
+        }
+        /* eslint-enable*/
+      }
+
+      return content
+    })
+
+    const rootDependencies = readJson(tree, 'package.json')?.dependencies ?? {}
+    const projectDependencies = Object.fromEntries(IMPLICIT_DEPENDENCIES.map((dependency) => [dependency, rootDependencies[dependency]]).filter((dependency) => !!dependency[1]))
+
+    addDependenciesToPackageJson(tree, projectDependencies, {}, join(projectRoot, 'package.json'))
   }
 
   /**

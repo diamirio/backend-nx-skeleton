@@ -26,3 +26,14 @@ export const DEV_DEPENDENCIES = {
   '@webundsoehne/nx-executors': '1.0.0-beta.4'
 }
 /* eslint-enable */
+
+export const IMPLICIT_DEPENDENCIES = [
+  '@fastify/static',
+  '@fastify/swagger',
+  'amqp-connection-manager',
+  'amqplib',
+  'class-transformer',
+  'class-validator',
+  'reflect-metadata',
+  'rxjs'
+]
