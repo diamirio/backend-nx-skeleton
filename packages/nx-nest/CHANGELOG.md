@@ -1,3 +1,9 @@
+## @webundsoehne/nx-nest [5.0.31-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.2...@webundsoehne/nx-nest@5.0.31-beta.3) (2024-07-31)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.3
+
 ## @webundsoehne/nx-nest [5.0.31-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.1...@webundsoehne/nx-nest@5.0.31-beta.2) (2024-07-05)
 
 ### Dependencies
