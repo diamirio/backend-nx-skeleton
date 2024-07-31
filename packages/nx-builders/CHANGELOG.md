@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [6.3.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.2...@webundsoehne/nx-builders@6.3.0-beta.3) (2024-07-31)
+
+### Bug Fixes
+
+- **nx-builders:** add more "file exists" checks ([3a622e4](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3a622e4277705ecca30ac079b2a690a9695c0ed4))
+- **nx-builders:** correct nx-executors version ([6b1aa6f](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6b1aa6fe39b63144f4fff8d898a55a792e196d48))
+
 # @webundsoehne/nx-builders [6.3.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.1...@webundsoehne/nx-builders@6.3.0-beta.2) (2024-07-05)
 
 ### Features
