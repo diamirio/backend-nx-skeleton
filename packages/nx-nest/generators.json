@@ -29,6 +29,12 @@
       "schema": "./dist/generators/microservice-provider/schema.json",
       "description": "microservice-provider util library",
       "aliases": ["microserviceProvider", "msp"]
+    },
+    "resource": {
+      "factory": "./dist/generators/resource/generator",
+      "schema": "./dist/generators/resource/schema.json",
+      "description": "resource util library",
+      "aliases": ["res"]
     }
   }
 }

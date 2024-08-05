@@ -7,13 +7,13 @@ import { join } from 'node:path'
 import { updateJson } from 'nx/src/generators/utils/json'
 
 import { DEPENDENCIES, DEV_DEPENDENCIES } from '../../constant/microservice-provider'
-import { applyTasks, applyTemplateFactory } from '../utils'
+import { applyTasks, applyTemplateFactory } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
 // @todo: project selection to add Orm-Module root import
 export default async function microserviceProviderGenerator (tree: Tree, options: MicroserviceProviderGeneratorSchema): Promise<GeneratorCallback> {
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree)
+  const applyTemplate = applyTemplateFactory(tree, __dirname)
   const scope = getNpmScope(tree)
   const libraryName = names(options.name).fileName
   const importPath = options?.importPath ?? `@${scope}/${libraryName}`
@@ -39,7 +39,7 @@ export default async function microserviceProviderGenerator (tree: Tree, options
     targets: {}
   })
 
-  applyTemplate(['microservice-provider', 'files'], templateContext, projectRoot)
+  applyTemplate(['files'], templateContext, projectRoot)
 
   await formatFiles(tree)
 

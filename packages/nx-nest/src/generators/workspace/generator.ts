@@ -3,14 +3,14 @@ import { addDependenciesToPackageJson, formatFiles, output, OverwriteStrategy, r
 
 import { Database } from '../../constant'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, SCRIPTS } from '../../constant/workspace'
+import { applyTasks, applyTemplateFactory } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
-import { applyTasks, applyTemplateFactory } from '../utils'
 import type { NestWorkspaceGeneratorSchema } from './schema'
 
 export default async function workspaceGenerator (tree: Tree, options: NestWorkspaceGeneratorSchema): Promise<GeneratorCallback> {
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree, { overwriteStrategy: options.force ? OverwriteStrategy.Overwrite : OverwriteStrategy.ThrowIfExisting })
+  const applyTemplate = applyTemplateFactory(tree, __dirname, { overwriteStrategy: options.force ? OverwriteStrategy.Overwrite : OverwriteStrategy.ThrowIfExisting })
   const packageScope = `@${options.scope}/${options.name}`
 
   output.log({ title: '[Workspace] Applying templates', bodyLines: ['Update files ...', 'Creating template files...', 'Creating layout folders...'] })
@@ -21,7 +21,7 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
   tree.delete('README.md')
 
   // add base template
-  applyTemplate(['workspace', 'files'], {
+  applyTemplate(['files'], {
     ...options,
     packageScope
   })

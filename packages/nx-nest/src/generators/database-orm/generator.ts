@@ -7,7 +7,7 @@ import { join } from 'node:path'
 
 import { Database } from '../../constant'
 import { DEPENDENCIES_MONGOOSE, DEPENDENCIES_TYPEORM, SCRIPTS } from '../../constant/database-orm'
-import { applyTasks, applyTemplateFactory } from '../utils'
+import { applyTasks, applyTemplateFactory } from '../../utils'
 import type { DatabaseOrmGeneratorSchema } from './schema'
 
 function getDatabaseOrmDetails (orm: string): { folder: string, dependencies: Record<string, string> } {
@@ -26,7 +26,7 @@ function getDatabaseOrmDetails (orm: string): { folder: string, dependencies: Re
 // @todo: project selection to add Orm-Module root import
 export default async function databaseOrmGenerator (tree: Tree, options: DatabaseOrmGeneratorSchema): Promise<GeneratorCallback> {
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree)
+  const applyTemplate = applyTemplateFactory(tree, __dirname)
   const scope = getNpmScope(tree)
   const libraryName = names(options.name).fileName
   const importPath = options?.importPath ?? `@${scope}/${libraryName}`
@@ -59,7 +59,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     targets: {}
   })
 
-  applyTemplate(['database-orm', 'files', databaseOrm.folder], templateContext, projectRoot)
+  applyTemplate(['files', databaseOrm.folder], templateContext, projectRoot)
 
   await formatFiles(tree)
 

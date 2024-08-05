@@ -6,8 +6,8 @@ import { Command, CommandRunner, Option } from 'nest-commander'
  * Documentation: https://docs.nestjs.com/recipes/nest-commander#nest-commander
  */
 
-@Command({ name: 'default', description: 'Default command' })
-export class DefaultCommand extends CommandRunner {
+@Command({ name: '<%- resourceNames.fileName -%>', description: '<%- resourceNames.className -%> command' })
+export class <%- resourceNames.className -%>Command extends CommandRunner {
   private readonly logger: Logger = new Logger(this.constructor.name)
 
   constructor () {
@@ -18,11 +18,11 @@ export class DefaultCommand extends CommandRunner {
     flags: '-d, --default [string]',
     description: 'A default option',
   })
-  parseDefault(val: string): string {
-    return val;
+  parseDefault (val: string): string {
+    return val
   }
 
-  async run(
+  async run (
     parameters: string[],
     options?: Record<string, any>,
   ): Promise<void> {

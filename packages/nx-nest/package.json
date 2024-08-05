@@ -27,7 +27,8 @@
     ]
   },
   "peerDependencies": {
-    "nx": ">= 17 <= 20"
+    "nx": ">= 17 <= 20",
+    "enquirer": ">= 2.3"
   },
   "dependencies": {
     "@nx/devkit": "^19.3.0",

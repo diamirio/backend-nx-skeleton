@@ -8,12 +8,11 @@ import { readJson } from 'nx/src/generators/utils/json'
 import { Database } from '../../constant'
 import { Component, DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
+import { applyTasks, applyTemplateFactory, addEnumMember, addIndexExport, addClassProperty, updateSourceFile, addImport } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
-import { applyTasks, applyTemplateFactory } from '../utils'
 import type { ApplicationGeneratorSchema } from './schema'
-import { getComponentMetadata, addEnumMember, addIndexExport, addClassProperty, updateSourceFile, addImport } from './utils'
-import { addPlugin } from './utils/add-plugin'
+import { getComponentMetadata, addPlugin } from './utils'
 
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
   if (!options.components?.length) {
@@ -23,7 +22,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   }
 
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree)
+  const applyTemplate = applyTemplateFactory(tree, __dirname)
   const scope = getNpmScope(tree)
   const projectNames = names(options.name)
 
@@ -99,7 +98,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
         bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
       })
     } else {
-      applyTemplate(['application', 'files', 'microservice-queue'], templateContext, join(mspLib, 'src'))
+      applyTemplate(['files', 'microservice-queue'], templateContext, join(mspLib, 'src'))
 
       updateSourceFile(tree, join(mspLib, 'src', 'interfaces', 'index.ts'), (file) => {
         addIndexExport(file, `./${projectNames.fileName}.interface`)
@@ -134,18 +133,18 @@ export default async function applicationGenerator (tree: Tree, options: Applica
       targets: {}
     })
 
-    applyTemplate(['application', 'files', 'base'], templateContext, projectRoot)
+    applyTemplate(['files', 'base'], templateContext, projectRoot)
   }
 
   // component-specific folder
   for (const component of applicationMetadata) {
-    applyTemplate(['application', 'files', component.file], templateContext, join(projectRoot, 'src', component.file))
+    applyTemplate(['files', component.file], templateContext, join(projectRoot, 'src', component.file))
   }
 
   if (applicationMetadata.length > 1) {
-    applyTemplate(['application', 'files', 'multi-application'], templateContext, projectRoot)
+    applyTemplate(['files', 'multi-application'], templateContext, projectRoot)
   } else {
-    applyTemplate(['application', 'files', 'single-application'], templateContext, projectRoot)
+    applyTemplate(['files', 'single-application'], templateContext, projectRoot)
   }
 
   await formatFiles(tree)
@@ -197,12 +196,12 @@ export default async function applicationGenerator (tree: Tree, options: Applica
       bodyLines: ['Add config files ...', !options.skipPackageJson ? 'Add dependencies ...' : '']
     })
 
-    applyTemplate(['application', 'files', 'jest', 'preset'], templateContext)
-    applyTemplate(['application', 'files', 'jest', 'files'], templateContext, projectRoot)
+    applyTemplate(['files', 'jest', 'preset'], templateContext)
+    applyTemplate(['files', 'jest', 'files'], templateContext, projectRoot)
 
     if (options.components.includes(Component.SERVER)) {
-      applyTemplate(['application', 'files', 'jest', 'e2e', 'preset'], templateContext)
-      applyTemplate(['application', 'files', 'jest', 'e2e', 'files'], templateContext, projectRoot)
+      applyTemplate(['files', 'jest', 'e2e', 'preset'], templateContext)
+      applyTemplate(['files', 'jest', 'e2e', 'files'], templateContext, projectRoot)
 
       if (!options.skipPackageJson) {
         updateJson(tree, 'package.json', (content) => {

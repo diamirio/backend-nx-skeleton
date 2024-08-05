@@ -1,5 +1,5 @@
 import type { Tree } from '@nx/devkit'
-import type { ExportDeclarationStructure, OptionalKind, SourceFile } from 'ts-morph'
+import type { SourceFile } from 'ts-morph'
 import { Project } from 'ts-morph'
 
 export function updateSourceFile (tree: Tree, filePath: string, fileAction: (fileNode: SourceFile) => void): void {
@@ -44,14 +44,12 @@ export function addClassProperty (file: SourceFile, className: string, name: str
   classNode.addProperty({ name, type })
 }
 
-export function addIndexExport (file: SourceFile, modulePath: string, exportItems?: string[]): void {
-  const exportStructure: OptionalKind<ExportDeclarationStructure> = { moduleSpecifier: modulePath }
+export function addIndexExport (file: SourceFile, modulePath: string): void {
+  const moduleExport = file.getExportDeclaration((declaration) => declaration.getModuleSpecifierValue() === modulePath) ?? false
 
-  if (exportItems?.length) {
-    exportStructure.namedExports = exportItems
+  if (!moduleExport) {
+    file.addExportDeclaration({ moduleSpecifier: modulePath })
   }
-
-  file.addExportDeclaration(exportStructure)
 }
 
 export function addImport (file: SourceFile, importValue: string, importPath: string): void {

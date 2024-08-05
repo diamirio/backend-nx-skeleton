@@ -6,12 +6,12 @@ import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { applyTasks, applyTemplateFactory } from '../utils'
+import { applyTasks, applyTemplateFactory } from '../../utils'
 import type { LibraryGeneratorSchema } from './schema'
 
 export default async function libraryGenerator (tree: Tree, options: LibraryGeneratorSchema): Promise<GeneratorCallback> {
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree)
+  const applyTemplate = applyTemplateFactory(tree, __dirname)
   const scope = getNpmScope(tree) ?? 'lib'
   const projectNames = names(options.name)
 
@@ -39,7 +39,7 @@ export default async function libraryGenerator (tree: Tree, options: LibraryGene
       targets: {}
     })
 
-    applyTemplate(['library', 'files', 'base'], templateContext, projectRoot)
+    applyTemplate(['files', 'base'], templateContext, projectRoot)
   }
 
   if (options.jest) {
@@ -48,8 +48,8 @@ export default async function libraryGenerator (tree: Tree, options: LibraryGene
       bodyLines: ['Add config files ...', !options.skipPackageJson ? 'Add dependencies ...' : '']
     })
 
-    applyTemplate(['library', 'files', 'jest', 'preset'], templateContext)
-    applyTemplate(['library', 'files', 'jest', 'files'], templateContext, projectRoot)
+    applyTemplate(['files', 'jest', 'preset'], templateContext)
+    applyTemplate(['files', 'jest', 'files'], templateContext, projectRoot)
 
     if (!options.skipPackageJson) {
       tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))

@@ -26,6 +26,7 @@ This package includes [nx](https://github.com/nrwl/nx) generators to set up nest
   - [Microservice Provider](#microservice-provider)
   - [Database Orm](#database-orm)
   - [Library](#library)
+  - [Resource](#resource)
 
 <!-- tocstop -->
 
@@ -126,3 +127,19 @@ Options:
 | importPath      | string  | optional import-path overwrite (full path) (default: `@{scope}/{name}`)      |
 | skipPackageJson | boolean | optional skip any action related to the package.json (scripts, dependencies) |
 | update          | boolean | optional set to true if you want to update the library options               |
+
+## Resource
+
+A specific component resource: folder with module + controller/task/command + service.
+
+Names: `resource`, `res`
+
+Options:
+
+| Option    | Type   | Description                                   |
+| --------- | ------ | --------------------------------------------- |
+| name      | string | Resource name                                 |
+| component | string | the resource-type to generate                 |
+| project   | string | in which project to generate the new resource |
+
+The resource generator allows generating via commandline args, but also has a custom enquirer prompt flow. After setting the name and selecting the component, only applications including this component will be suggested for selection.
