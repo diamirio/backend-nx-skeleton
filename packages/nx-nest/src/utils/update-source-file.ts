@@ -27,7 +27,7 @@ export function updateSourceFile (tree: Tree, filePath: string, fileAction: (fil
 export function addEnumMember (file: SourceFile, enumName: string, name: string, value: string | number): void {
   const enumNode = file.getEnum(enumName)
 
-  if (!enumNode) {
+  if (!enumNode || !!enumNode.getMember(name)) {
     return
   }
 
@@ -37,7 +37,7 @@ export function addEnumMember (file: SourceFile, enumName: string, name: string,
 export function addClassProperty (file: SourceFile, className: string, name: string, type: string): void {
   const classNode = file.getClass(className)
 
-  if (!classNode) {
+  if (!classNode || !!classNode.getProperty(name)) {
     return
   }
 
@@ -45,7 +45,7 @@ export function addClassProperty (file: SourceFile, className: string, name: str
 }
 
 export function addIndexExport (file: SourceFile, modulePath: string): void {
-  const moduleExport = file.getExportDeclaration((declaration) => declaration.getModuleSpecifierValue() === modulePath) ?? false
+  const moduleExport = file.getExportDeclaration(modulePath)
 
   if (!moduleExport) {
     file.addExportDeclaration({ moduleSpecifier: modulePath })
@@ -53,11 +53,11 @@ export function addIndexExport (file: SourceFile, modulePath: string): void {
 }
 
 export function addImport (file: SourceFile, importValue: string, importPath: string): void {
-  const importNode = file.getImportDeclaration((i) => i.getModuleSpecifier().getLiteralValue() === importPath)
+  const importNode = file.getImportDeclaration(importPath)
 
   if (!importNode) {
     file.addImportDeclaration({ moduleSpecifier: importPath, namedImports: [importValue] })
-  } else {
+  } else if (!importNode.getNamedImports().find((i) => i.getName() === importValue)) {
     importNode.addNamedImport(importValue)
   }
 }
