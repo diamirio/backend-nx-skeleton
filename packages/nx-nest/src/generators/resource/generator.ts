@@ -4,19 +4,12 @@ import { output } from '@nx/workspace'
 import { prompt } from 'enquirer'
 import { join } from 'node:path'
 
-import { Component } from '../../constant/application'
+import { Component, componentMetaData } from '../../constant'
 import { addIndexExport, applyTemplateFactory, updateSourceFile } from '../../utils'
 import type { ResourceGeneratorSchema } from './schema'
 
 export default async function resourceGenerator (tree: Tree, options: ResourceGeneratorSchema): Promise<GeneratorCallback> {
-  const componentFolder = {
-    [Component.COMMAND]: 'command',
-    [Component.MICROSERVICE]: 'microservice',
-    [Component.SERVER]: 'server',
-    [Component.BG_TASK]: 'task'
-  }
-
-  if (!componentFolder[options.component]) {
+  if (!componentMetaData[options.component]) {
     output.error({ title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}` })
 
     return
@@ -47,7 +40,7 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
   ).project
 
   const project = projects.get(options.project)
-  const componentRoot = join(project.sourceRoot, componentFolder[options.component])
+  const componentRoot = join(project.sourceRoot, componentMetaData[options.component].folder)
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)
 
@@ -66,7 +59,7 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
   })
 
   // component-specific folder
-  applyTemplate(['files', componentFolder[options.component]], templateContext, componentRoot)
+  applyTemplate(['files', componentMetaData[options.component].folder], templateContext, componentRoot)
 
   updateSourceFile(tree, join(componentRoot, 'modules', 'index.ts'), (file) => {
     addIndexExport(file, `./${resourceNames.fileName}/${resourceNames.fileName}.module`)

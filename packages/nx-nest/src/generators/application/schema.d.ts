@@ -1,5 +1,4 @@
-import type { Database } from '../../constant'
-import type { Component } from '../../constant/application'
+import type { Component, Database } from '../../constant'
 
 export interface ApplicationGeneratorSchema {
   name: string

@@ -5,14 +5,14 @@ import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 
-import { Database } from '../../constant'
-import { Component, DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
+import { Component, Database, getComponentMetadata } from '../../constant'
+import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import { applyTasks, applyTemplateFactory, addEnumMember, addIndexExport, addClassProperty, updateSourceFile, addImport } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
-import { getComponentMetadata, addPlugin } from './utils'
+import { addPlugin } from './utils'
 
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
   if (!options.components?.length) {
@@ -138,7 +138,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
   // component-specific folder
   for (const component of applicationMetadata) {
-    applyTemplate(['files', component.file], templateContext, join(projectRoot, 'src', component.file))
+    applyTemplate(['files', component.folder], templateContext, join(projectRoot, 'src', component.folder))
   }
 
   if (applicationMetadata.length > 1) {
