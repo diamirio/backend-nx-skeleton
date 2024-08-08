@@ -15,12 +15,6 @@ export const SCRIPTS = {
   'test:cov:one': 'nx test -c cov --project',
   lint: 'npm run lint:check -- --fix',
   'lint:check': 'nx run-many --parallel 10 --target lint --',
-  affected: 'nx affected',
-  'affected:apps': 'nx affected:apps',
-  'affected:libs': 'nx affected:libs',
-  'affected:build': 'nx affected:build',
-  'affected:test': 'nx affected:test',
-  'affected:lint': 'nx affected:lint --base=$(git branch --show-current) --parallel 10 --fix',
   update: 'nx migrate latest',
   clean: 'rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json',
   'backend:command:one': 'nx command'
