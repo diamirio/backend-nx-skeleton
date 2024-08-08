@@ -36,11 +36,6 @@ coverage
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Configuration
-config/local-*
-config/jest.setup.js
-config/test.json
-
 # File Uploads
 uploads
 
