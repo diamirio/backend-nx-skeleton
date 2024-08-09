@@ -1,3 +1,27 @@
+# @webundsoehne/nx-nest [6.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.3...@webundsoehne/nx-nest@6.0.0-beta.1) (2024-08-09)
+
+### Bug Fixes
+
+- **nx-nest:** correct dependency version ([88174fd](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/88174fd8fea7820800f605326dbe1c5051ae6e0a))
+- **nx-nest:** default database config ([424ade1](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/424ade10ebb087c9d69d994e50decd4e31d09bd5))
+- **nx-nest:** default database config ([b291f14](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b291f14e3dd3c7cad6dd199b231cb0dad98bff0f))
+- **nx-nest:** side-effect free source-file modification helper ([0ff19ba](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0ff19ba3e99d81237dc74053e38797786c7564b7))
+
+- feat(nx-nest)!: move to nx-generators ([558c13d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/558c13da49e865534f87ae39293a22739a0d83ce))
+
+### Features
+
+- **nx-nest:** add bootstrap information logs ([b8718c0](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b8718c0b7fbdcae9d221fe4aecaec689c9948f47))
+- **nx-nest:** implicit dependencies ([18b68e7](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/18b68e7594f7dd375e0d4cc5acd2fd456b288bb6))
+- **nx-nest:** lib src folder with index file ([9487e75](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9487e75a0ffa8e737b74259f803b22c56c57680c))
+- **nx-nest:** lint staged config, reduce default scripts ([c0bad75](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c0bad75b19cba0a895a4f337f366db97405b25b7))
+- **nx-nest:** resource generation ([726568e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/726568e73fc8b93dfb0082dc3c25501b272e1df5))
+- **nx-nest:** update default scripts ([5e01a65](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/5e01a650951ace658dba78a0e9ab3917bbb1b0db))
+
+### BREAKING CHANGES
+
+- Move from schematics to new generators. Add/Rewrite generators for creating a nest-workspace, application, util-lib, default lib.
+
 ## @webundsoehne/nx-nest [5.0.31-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.2...@webundsoehne/nx-nest@5.0.31-beta.3) (2024-07-31)
 
 ### Dependencies
