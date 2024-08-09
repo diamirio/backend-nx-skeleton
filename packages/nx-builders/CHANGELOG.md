@@ -1,3 +1,9 @@
+# @webundsoehne/nx-builders [6.3.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.3...@webundsoehne/nx-builders@6.3.0-beta.4) (2024-08-09)
+
+### Bug Fixes
+
+- **nx-builders:** package.json devDependency ([7e67167](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/7e6716775f57aa034d8705a10628695db24591dc))
+
 # @webundsoehne/nx-builders [6.3.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.2...@webundsoehne/nx-builders@6.3.0-beta.3) (2024-07-31)
 
 ### Bug Fixes
