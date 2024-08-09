@@ -1,0 +1,22 @@
+import { NestFactory } from '@nestjs/core'
+import type { MicroserviceOptions } from '@nestjs/microservices'
+import { Transport } from '@nestjs/microservices'
+
+import { createMicroserviceModule } from './microservice.module'
+import { MessageQueues } from '<%- msp.importPath -%>'
+import { ConfigService, LoggerService } from '@webundsoehne/nestjs-util'
+
+export async function createApplication (): Promise<void> {
+  const { urls } = ConfigService.get('messageQueue')
+
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(createMicroserviceModule(), {
+    logger: new LoggerService(),
+    transport: Transport.RMQ,
+    options: {
+      urls,
+      queue: MessageQueues.<%- projectNames.constantName %>
+    }
+  })
+
+  await app.listen()
+}

@@ -1,0 +1,35 @@
+{
+  "generators": {
+    "preset": {
+      "factory": "./dist/generators/workspace/generator",
+      "schema": "./dist/generators/workspace/schema.json",
+      "description": "workspace preset"
+    },
+    "docker": {
+      "factory": "./dist/generators/docker/generator",
+      "schema": "./dist/generators/docker/schema.json",
+      "description": "docker generator"
+    },
+    "library": {
+      "factory": "./dist/generators/library/generator",
+      "schema": "./dist/generators/library/schema.json",
+      "aliases": ["lib"],
+      "description": "library generator"
+    },
+    "move": {
+      "factory": "./dist/generators/move/generator",
+      "schema": "./dist/generators/move/schema.json",
+      "description": "move generator"
+    },
+    "remove": {
+      "factory": "./dist/generators/remove/generator",
+      "schema": "./dist/generators/remove/schema.json",
+      "description": "move generator"
+    },
+    "workspace": {
+      "factory": "./dist/generators/workspace/generator",
+      "schema": "./dist/generators/workspace/schema.json",
+      "description": "workspace generator"
+    }
+  }
+}

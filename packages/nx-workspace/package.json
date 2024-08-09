@@ -4,20 +4,18 @@
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Workspace plugin for Nx",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "schematics": "./schematics.json",
+  "generators": "./generators.json",
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
     "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "docs:jsdoc": "typedoc src/index.ts --readme none",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
+    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
@@ -28,19 +26,19 @@
       "prettier --loglevel warn --write"
     ]
   },
+  "peerDependencies": {
+    "nx": ">= 17 <= 20"
+  },
   "dependencies": {
-    "@angular-devkit/core": "^14.2.7",
-    "@angular-devkit/schematics": "^14.2.7",
-    "@nrwl/devkit": "^14.8.3",
-    "@nrwl/workspace": "^14.8.3",
-    "@webundsoehne/deep-merge": "*",
-    "@webundsoehne/nx-builders": "*",
-    "@webundsoehne/nx-tools": "*",
-    "enquirer": "^2.3.6",
-    "listr2": "^4.0.5",
-    "typescript": "^4.8.4"
+    "@nx/devkit": "^19.3.0",
+    "@nx/js": "^19.3.0",
+    "@nx/workspace": "^19.3.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "nx": "^19.5.2"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }

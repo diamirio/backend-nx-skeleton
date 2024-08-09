@@ -1,0 +1,29 @@
+{
+  "$id": "nest-msp-library",
+  "cli": "nx",
+  "title": "Microservice-Provider Library",
+  "description": "Add a microservice-provider library to the workspace",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Library name",
+      "default": "microservice-provider"
+    },
+    "importPath": {
+      "type": "string",
+      "aliases": ["import-path", "path", "p"],
+      "description": "Library import path",
+      "x-priority": "internal"
+    },
+    "skipPackageJson": {
+      "description": "Do not add dependencies to `package.json`.",
+      "aliases": ["skip-package-json"],
+      "type": "boolean",
+      "default": false,
+      "x-priority": "internal"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,24 @@
+import type { DefaultMessage } from './interfaces'
+import type { DefaultPattern } from './patterns'
+import type { BaseMessageQueueMap, BaseMessageQueuePatterns } from '@webundsoehne/nestjs-util-microservices'
+
+/**
+ * All available message queues.
+ */
+export enum MessageQueues {
+  DEFAULT = 'DEFAULT'
+}
+
+/**
+ * A map for all available patterns for given message queue.
+ */
+export declare class MessageQueuePatterns implements BaseMessageQueuePatterns<MessageQueues> {
+  [MessageQueues.DEFAULT]: DefaultPattern
+}
+
+/**
+ * A map for all requests and responses for a given message queue.
+ */
+export declare class MessageQueueMap implements BaseMessageQueueMap<MessageQueues> {
+  [MessageQueues.DEFAULT]: DefaultMessage
+}

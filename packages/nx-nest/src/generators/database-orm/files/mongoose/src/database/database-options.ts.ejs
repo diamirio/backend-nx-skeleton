@@ -1,0 +1,23 @@
+import { MongooseModuleOptions } from '@nestjs/mongoose'
+import { ConfigService } from '@webundsoehne/nestjs-util'
+
+const { mock: mockOptions = {}, ...options } = ConfigService.get('database')
+
+export function getDatabaseOptions (mock?: boolean): [string, MongooseModuleOptions] {
+  const databaseOptions = mock ? { ...options, ...mockOptions } : options
+
+  const { host, port, database, username, password, ...mongoOptions } = databaseOptions
+
+  const uri = `mongodb://${host}${port ? `:${port}` : ''}/${database}`
+
+  if (username && password) {
+    mongoOptions.user = username
+    mongoOptions.pass = password
+  }
+
+  if (mongoOptions.migration) {
+    delete mongoOptions.migration
+  }
+
+  return [uri, mongoOptions]
+}

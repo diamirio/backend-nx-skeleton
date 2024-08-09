@@ -1,7 +1,0 @@
-import { Field, ArgsType } from '@nestjs/graphql'
-
-@ArgsType()
-export class {{ casing.pascal }}Input {
-  @Field(() => String, { nullable: true })
-  name?: string
-}

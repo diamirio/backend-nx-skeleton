@@ -13,67 +13,137 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 # Description
 
-This package includes [@nrwl/nx](https://github.com/nrwl/nx) schematics to generate nest.js projects.
+This package includes [nx](https://github.com/nrwl/nx) generators to set up nest.js projects.
 
-- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
 
-- [Schematics](#schematics)
+- [Preset](#preset)
+- [Generators](#generators)
+  - [Workspace](#workspace)
   - [Application](#application)
-  - [Component](#component)
   - [Microservice Provider](#microservice-provider)
-  - [Backend Interfaces](#backend-interfaces)
-  - [Generator](#generator)
-- [Notes](#notes)
+  - [Database Orm](#database-orm)
+  - [Library](#library)
+  - [Resource](#resource)
 
 <!-- tocstop -->
 
 ---
 
-# Schematics
+# Preset
+
+To create a nx + nestjs workspace together in one command: `npx create-nx-workspace --skip ci --preset @webundsoehne/nx-nest [name]`. (See [Workspace](#workspace) for details on the options)
+
+Based on the selected database and microservice-provider, this will generate an empty workspace with `apps` and `libs` folders, eslint setup, gitlab-ci preset, package.json scripts and pre-commit setup.
+
+If a database was selected the `database` util-library will be generated providing the database-orm options and a central place for entities, migrations and seeds.
+
+If the microservice-provider was included, the `microservice-provider` library will be created. This will be the central spot for keeping Message-Queues, their patterns and message-interfaces.
+
+# Generators
+
+Use the generators by calling `nx g @webundsoehne/nx-nest:<NAME> [OPTIONS]`. Any required option will be prompted for if not given as parameter yet. To update an application pass `--update` with the same name of an existing application and reselect the required and new options. (This will not remove existing configurations if deselected on update)
+
+Database-ORM and Microservice-Provider Libraries can be created on workspace initialization, if selected on application generation or manually by hand. Information to those two util-libraries are stored in the `nx.json` in the custom `integration` section.
+
+Run `nx list @webundsoehne/nx-nest` to view available generators (or check the following sections below).<br> Run `nx g @webundsoehne/nx-nest:<NAME> --help` to get details about the selected generator (also below in the respective section).
+
+## Workspace
+
+The generator used in the preset. If you have an empty nx workspace already, use this to add the nestjs skeleton presets.
+
+Names: `workspace`, `ws`
+
+Options:
+
+| Option               | Type    | Description                                                                  |
+| -------------------- | ------- | ---------------------------------------------------------------------------- |
+| name                 | string  | workspace folder name                                                        |
+| scope                | string  | library import prefix i.e. `@scope/lib`                                      |
+| database             | string  | if and what database to set up the database util-library for                 |
+| microserviceProvider | boolean | if to include the microservice-provider util-library                         |
+| skipPackageJson      | boolean | optional skip any action related to the package.json (scripts, dependencies) |
+| force                | boolean | option force overwriting existing files                                      |
 
 ## Application
 
-Application schematic creates a `@nestjs` application. Run the `application` schematic with its name or alias of `app` to follow through an interactive menu.
+The main nestjs application itself.
 
-The first argument passed in to `nx g @webundsoehne/nx-nest:app ${APP_NAME}` will be the application name itself. This application will be created under the folder `apps/` with the given name.
+Names: `application`, `app`
 
-Follow through the interactive menu to generate a application with the components you need.
+Options:
 
-Application will use `ts-node-dev` for development and `tsc` for distribution.
-
-**To change the setup of the application and add/remove components in to it just rerun the command and follow through the prompt.** Application is memoryful therefore it will remember previous choices and try to diff-merge new components in to it without explicitly deleting your code. If merge for a file fails, it will take a backup of the current file.
-
-## Component
-
-To generate new components after an application has been created, run the `component` schematic with its name or alias of `co`.
-
-The first argument passed in to `nx g @webundsoehne/nx-nest:co ${APP_NAME} ${COMPONENT_NAME}` is the application name and the second is the component name.
-
-Follow through the prompts, where it will guide you with only available components that can be added to the application due to memoryful operation.
-
-It will place the new component inside respective `modules/` folder under the component folder and regenerate `index.ts` file to make it automatically imported to the main application. Generating `index.ts` only consists of adding the missing lines in to the file so nothing is allowed to be deleted from the current file.
+| Option               | Type     | Description                                                                               |
+| -------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| name                 | string   | application folder name                                                                   |
+| components           | string[] | what components the app includes (any of: server, bg-task, command, microservice)         |
+| jest                 | boolean  | if to setup jest for unit and e2e tests                                                   |
+| database             | string   | if and what database to include in the application                                        |
+| microserviceProvider | boolean  | if to include the microservice-provider in the app (if the app is an Microservice-Client) |
+| skipPackageJson      | boolean  | optional skip any action related to the package.json (scripts, dependencies)              |
+| update               | boolean  | option set to true if you want to update the applications options                         |
 
 ## Microservice Provider
 
-To generate a microservice-provider that utilizes the `@webundsoehne/nestjs-util` `MicroserviceProviderModule`, run the `microservice-provider` schematic with its name or alias of `msp`.
+All about microservices and their message patterns and interfaces. In here, the Message-Queues are defined, what pattern they hold and which interfaces those patterns require on request and response.
 
-This will take no argument and will auto detect applications that are created with this plugin and have `microservice-server` selected as a component. If it fails to find any services it will run in mock mode for integration to legacy applications.
+Names: `microserviceProvider`, `microservice-provider`, `msp`
 
-This will create a new library called `microservice-provider` where the applications that utilize `microservice-client` to connect through. It will house the generic message queue names, patterns and request-response map for completion.
+Options:
 
-## Backend Interfaces
+| Option          | Type    | Description                                                                  |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| name            | string  | library folder name (default: microservice-provider)                         |
+| importPath      | string  | optional import-path overwrite (full path) (default: `@{scope}/{name}`)      |
+| skipPackageJson | boolean | optional skip any action related to the package.json (scripts, dependencies) |
 
-Generates a common backend-interfaces library that can be used by the nest applications.
+## Database ORM
 
-This is also generated when the extension of backend interfaces is selected for the application. If the defined `nestjs` applications have a database adapter defined to them, it will auto generate the entities folders to responding adapter automatically.
+The place for database setup, entities, migrations and seeds. Besides the orm-config and general database options, in this library the entities, migrations and seeds should be placed.
 
-## Generator
+Names: `database`, `db`
 
-A basic generator that is usuable for generating a single file sets as in the case of `angular` or `nestjs` command line interfaces. This can scaffold a single component in a folder easily.
+Options:
 
-# Notes
+| Option          | Type    | Description                                                                  |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| database        | string  | which database orm to use                                                    |
+| name            | string  | library folder name (default: database)                                      |
+| importPath      | string  | optional import-path overwrite (full path) (default: `@{scope}/{name}`)      |
+| skipPackageJson | boolean | optional skip any action related to the package.json (scripts, dependencies) |
 
-- Currently GraphQL does not play real well with fastify3 especially with playground, therefore packages depend on fastify like `@nestjs/fastify-adapter`, `fastify`, `fastify-swagger` is at a older version that supports fastify2.
+## Library
+
+An empty library folder with optional jest setup.
+
+Names: `library`, `lib`
+
+Options:
+
+| Option          | Type    | Description                                                                  |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| name            | string  | library folder name                                                          |
+| jest            | boolean | if to setup jest for unit tests                                              |
+| importPath      | string  | optional import-path overwrite (full path) (default: `@{scope}/{name}`)      |
+| skipPackageJson | boolean | optional skip any action related to the package.json (scripts, dependencies) |
+| update          | boolean | optional set to true if you want to update the library options               |
+
+## Resource
+
+A specific component resource: folder with module + controller/task/command + service.
+
+Names: `resource`, `res`
+
+Options:
+
+| Option    | Type   | Description                                                                    |
+| --------- | ------ | ------------------------------------------------------------------------------ |
+| name      | string | Resource name                                                                  |
+| component | string | the resource-type to generate (one of: server, bg-task, command, microservice) |
+| project   | string | in which project to generate the new resource                                  |
+
+The resource generator allows generating via commandline args, but also has a custom enquirer prompt flow. After setting the name and selecting the component, only applications including this component will be suggested for selection.
+
+Additionally resources can be generated by the shorthand command `nx g @webundsoehne/nx-nest:res <name> <project> <component>` i.e. `nx g @webundsoehne/nx-nest:res user app-api server`

@@ -1,0 +1,5 @@
+export enum Service {
+  <% for (const metadata of applicationMetadata) { -%>
+    <%- metadata.applicationConstants -%>,
+  <% } -%>
+}

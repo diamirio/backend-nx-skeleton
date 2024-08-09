@@ -1,0 +1,50 @@
+---
+variables:
+  NODE_VERSION: 18-alpine
+  ## NODE OPTIONS
+  # install: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#install
+  # build: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#build
+  # lint: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#run
+  # test: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#run
+  ## BUILD TIME ENVIRONMENT VARIABLES FOR MOSTLY FRONTEND APPLICATIONS
+  # ENVIRONMENT_ENABLE: 'true'
+  # please read through the readme for additional information: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/select-env
+  ## DOCKER OPTIONS
+  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
+
+stages:
+  - install
+  - build
+  - docker
+
+include:
+  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/node-nx.gitlab-ci.yml
+  - project: bdsm/gitlab-pipes
+    file: /templates/node-nx.gitlab-ci.yml
+    ref: main
+  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/v2/docker-build-internal.gitlab-ci.yml
+  - project: bdsm/gitlab-pipes
+    file: /templates/v2/docker-build-internal.gitlab-ci.yml
+    ref: main
+#
+##################################
+## add your applications here. ##
+#################################
+# docker-app:
+#   stage: docker
+#   extends: .docker-build-internal
+#   variables:
+#     DOCKERFILE_CONTEXT: ./dist/apps/app
+#     DOCKER_IMAGE_INTERNAL_NAME: app
+#   dependencies:
+#     - build
+#   only:
+#     changes:
+#       - .gitlab-ci.yml
+#       - package.json
+#       - package-lock.json
+#       - 'libs/**/*'
+#       - 'apps/app/**/*'
+#     refs:
+#       - main
+#       - tags

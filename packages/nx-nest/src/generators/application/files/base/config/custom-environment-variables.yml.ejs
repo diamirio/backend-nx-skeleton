@@ -1,0 +1,38 @@
+<% if (isServer) { %>port: API_PORT<% } %>
+logLevel: LOG_LEVEL
+
+misc:
+  lockfile: MAINTENANCE_LOCKFILE
+  lastUpdateFile: LAST_UPDATE_FILE
+  maintenanceNotification: MAINTENANCE_MESSAGE
+<% if (isServer) { %>
+url:
+  basePath: BASE_URL
+  apiPath: API_BASE_PATH
+
+swagger:
+  useHttps:
+    __name: USE_HTTPS
+    __format: json
+  basePath: API_BASE_PATH
+<% } -%>
+<% if (includeMessageQueue) { %>
+messageQueue:
+  urls:
+    __name: MESSAGE_QUEUE_URLS
+    __format: json
+<% } -%>
+<% if (database !== DATABASE.NONE) { %>
+database:
+  host: DATABASE_HOST
+  port: DATABASE_PORT
+  database: DATABASE_NAME <% if (database === DATABASE.TYPEORM) { %>
+  type: DATABASE_TYPE
+  username: DATABASE_USER
+  password: DATABASE_PASSWORD
+  migrationsTableName: DATABASE_MIGRATIONS_TABLE <% } else if (database === DATABASE.MONGOOSE) { %>
+  authentication:
+    username: DATABASE_USER
+    password: DATABASE_PASSWORD
+<% } -%>
+<% } -%>

@@ -1,0 +1,17 @@
+import { Controller, Get } from '@nestjs/common'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+
+import { DefaultService } from './default.service'
+
+@ApiTags('Default')
+@Controller({ path: 'default' })
+export class DefaultController {
+  constructor (private readonly defaultService: DefaultService) {}
+
+  @ApiOperation({ summary: 'Default', description: 'Route auto-generated for Default' })
+  @ApiResponse({ status: 200, description: 'Default route' })
+  @Get()
+  default (): Promise<string> {
+    return this.defaultService.default()
+  }
+}

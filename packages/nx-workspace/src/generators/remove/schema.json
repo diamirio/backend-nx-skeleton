@@ -1,0 +1,38 @@
+{
+  "$id": "Remove",
+  "cli": "nx",
+  "title": "Remove project",
+  "description": "Remove a project from the workspace.",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "alias": "project",
+      "description": "The name of the project to remove.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which project should be removed?",
+      "x-dropdown": "projects"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "aliases": ["skip-format"],
+      "description": "Skip formatting files.",
+      "default": true,
+      "x-priority": "internal"
+    },
+    "forceRemove": {
+      "type": "boolean",
+      "aliases": ["force-remove", "force"],
+      "description": "When `true`, forces removal even if the project is still in use.",
+      "default": false
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used at creation time"
+    }
+  },
+  "required": ["projectName"]
+}

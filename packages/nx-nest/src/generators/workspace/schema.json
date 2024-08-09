@@ -1,0 +1,54 @@
+{
+  "$id": "nest-workspace",
+  "description": "Generate a custom nestjs workspace",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Workspace name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "scope": {
+      "type": "string",
+      "aliases": ["s"],
+      "description": "Workspace scope",
+      "x-prompt": "What package scope name you like to use?"
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database orm to use",
+      "x-prompt": {
+        "message": "Which database-orm should be included?",
+        "type": "item",
+        "items": ["none", "typeorm", "mongoose"]
+      }
+    },
+    "microserviceProvider": {
+      "type": "boolean",
+      "aliases": ["microservice-provider", "msp"],
+      "description": "Setup microservice-provider library",
+      "x-prompt": "Setup microservice-provider?"
+    },
+    "skipPackageJson": {
+      "type": "boolean",
+      "aliases": ["skip-package-json"],
+      "description": "Skip adding package.json dependencies",
+      "x-priority": "internal",
+      "$default": false
+    },
+    "force": {
+      "type": "boolean",
+      "aliases": ["f"],
+      "description": "Force overwrite of existing files",
+      "x-priority": "internal",
+      "$default": false
+    }
+  },
+  "required": ["name", "scope", "database", "microserviceProvider"]
+}

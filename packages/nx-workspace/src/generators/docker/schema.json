@@ -1,0 +1,20 @@
+{
+  "$id": "Docker",
+  "cli": "nx",
+  "title": "Docker",
+  "description": "Add a dockerfile to each (not excluded) project",
+  "type": "object",
+  "properties": {
+    "exclude": {
+      "type": "array",
+      "items": "string",
+      "description": "Exclude projects"
+    },
+    "projects": {
+      "type": "array",
+      "items": "string",
+      "description": "Select projects"
+    }
+  },
+  "required": []
+}

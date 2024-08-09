@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { DefaultCommand } from './default.command'
+
+@Module({
+  providers: [ DefaultCommand ],
+  exports: [ DefaultCommand ]
+})
+export class DefaultCommandModule {}
