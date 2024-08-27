@@ -8,7 +8,7 @@ import { readJson } from 'nx/src/generators/utils/json'
 import { Component, Database, getComponentMetadata } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { applyTasks, applyTemplateFactory, addEnumMember, addIndexExport, addClassProperty, updateSourceFile, addImport } from '../../utils'
+import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
@@ -30,7 +30,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   const templateContext: Record<string, any> = {
     ...options,
     isServer: options.components.includes(Component.SERVER),
-    includeMessageQueue: options.components.some((component) => component.startsWith('microservice')),
+    includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
     applicationMetadata,
     packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
     projectNames,
@@ -243,7 +243,29 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
     content.targetDefaults = {
       ...content.targetDefaults ?? {},
-      lint: { configurations: { fix: { fix: true } } }
+      lint: { configurations: { fix: { fix: true } } },
+      serve: { options: { watchConfig: true } },
+      build: {
+        options: {
+          assets: [
+            {
+              glob: '*',
+              input: '{projectRoot}/config',
+              output: 'config'
+            },
+            {
+              glob: '.dockerignore',
+              input: '{projectRoot}',
+              output: '.'
+            },
+            {
+              glob: 'Dockerfile',
+              input: '{projectRoot}',
+              output: '.'
+            }
+          ]
+        }
+      }
     }
 
     return content
