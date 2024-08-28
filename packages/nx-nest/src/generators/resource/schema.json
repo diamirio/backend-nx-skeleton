@@ -39,7 +39,7 @@
         "items": [
           { "value": "server", "label": "Server" },
           { "value": "command", "label": "Command" },
-          { "value": "bg-task", "label": "Background Task" },
+          { "value": "bgtask", "label": "Background Task" },
           { "value": "microservice", "label": "Microservice Server" }
         ]
       }
