@@ -36,11 +36,7 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
       options: {
         jestConfig: options.testConfig,
         passWithNoTests: true,
-        noStackTrace: true,
-        env: {
-          NODE_ENV: 'development', // config-package: hide NODE_ENV value of '[...'] did not match any deployment files
-          SUPPRESS_NO_CONFIG_WARNING: 'true' // config-package: hide warning that config folder is missing
-        }
+        noStackTrace: true
       },
       configurations: {
         cov: {
