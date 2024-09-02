@@ -1,3 +1,13 @@
+# @webundsoehne/nx-executors [1.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.4...@webundsoehne/nx-executors@1.0.0-beta.5) (2024-09-02)
+
+### Bug Fixes
+
+- **nx-executors:** remove default jest node-env ([e3ef1e9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/e3ef1e9d7a4a310889e5301e9005e7ea381c831a))
+
+### Features
+
+- **nx-executors:** get package.json version from root ([fb28b12](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/fb28b12a145a2b4987784c3f3cfbfa6d20718e5f))
+
 # @webundsoehne/nx-executors [1.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.3...@webundsoehne/nx-executors@1.0.0-beta.4) (2024-07-18)
 
 ### Bug Fixes
