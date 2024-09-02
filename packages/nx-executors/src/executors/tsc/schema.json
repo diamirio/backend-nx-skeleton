@@ -115,6 +115,12 @@
       "description": "Generate a lockfile (e.g. package-lock.json) that matches the workspace lockfile to ensure package versions match.",
       "default": true,
       "x-priority": "internal"
+    },
+    "keepPackageVersion": {
+      "type": "boolean",
+      "description": "Keep projects package.json version instead of using the roots package.json version.",
+      "default": false,
+      "x-priority": "internal"
     }
   },
   "required": ["main", "tsConfig"],
