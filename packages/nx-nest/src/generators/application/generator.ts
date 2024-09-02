@@ -228,6 +228,79 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
   // custom integration metadata
   updateJson(tree, join(projectRoot, 'project.json'), (content) => {
+    if (options.components.includes(Component.COMMAND)) {
+      content.targets = {
+        ...content.targets ?? {},
+        command: {
+          executor: '@webundsoehne/nx-executors:run',
+          options: {
+            env: {
+              NODE_SERVICE: 'cli'
+            },
+            command: 'ts-node ./src/main.ts'
+          }
+        }
+      }
+    }
+
+    if (options.components.includes(Component.BG_TASK)) {
+      if (options.database === Database.TYPEORM) {
+        content.targets = {
+          ...content.targets ?? {},
+          migration: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              env: {
+                TYPEORM_DATASOURCE: '../../libs/database/src/database/orm.config.ts'
+              }
+            },
+            configurations: {
+              show: {
+                command: 'typeorm migration:show -d=$TYPEORM_DATASOURCE'
+              },
+              run: {
+                command: 'typeorm migration:run -d=$TYPEORM_DATASOURCE'
+              },
+              create: {
+                command: 'typeorm migration:create -d=$TYPEORM_DATASOURCE'
+              },
+              generate: {
+                command: 'typeorm migration:generate -d=$TYPEORM_DATASOURCE'
+              },
+              rollback: {
+                command: 'typeorm migration:revert -d=$TYPEORM_DATASOURCE'
+              }
+            }
+          }
+        }
+      } else if (options.database === Database.MONGOOSE) {
+        content.targets = {
+          ...content.targets ?? {},
+          migration: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              env: {
+                MONGOOSE_MIGRATE_OPTIONS: '../../libs/database/src/database/migrate-options.ts'
+              }
+            },
+            configurations: {
+              run: {
+                command: 'migrate-mongo up -f $MONGOOSE_MIGRATE_OPTIONS'
+              },
+              create: {
+                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS'
+              },
+              rollback: {
+                command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
+              }
+            }
+          }
+        }
+      }
+    }
+
     content.integration = {
       nestjs: {
         components: options.components
