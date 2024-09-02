@@ -263,14 +263,14 @@ export default async function applicationGenerator (tree: Tree, options: Applica
               run: {
                 command: 'typeorm migration:run -d=$TYPEORM_DATASOURCE'
               },
+              rollback: {
+                command: 'typeorm migration:revert -d=$TYPEORM_DATASOURCE'
+              },
               create: {
                 command: 'typeorm migration:create -d=$TYPEORM_DATASOURCE'
               },
               generate: {
                 command: 'typeorm migration:generate -d=$TYPEORM_DATASOURCE'
-              },
-              rollback: {
-                command: 'typeorm migration:revert -d=$TYPEORM_DATASOURCE'
               }
             }
           }
@@ -290,11 +290,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
               run: {
                 command: 'migrate-mongo up -f $MONGOOSE_MIGRATE_OPTIONS'
               },
-              create: {
-                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS'
-              },
               rollback: {
                 command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
+              },
+              create: {
+                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS'
               }
             }
           }
@@ -308,6 +308,9 @@ export default async function applicationGenerator (tree: Tree, options: Applica
             executor: '@webundsoehne/nx-executors:run',
             options: {
               tsNode: true,
+              env: {
+                NODE_SERVICE: 'cli'
+              },
               command: 'ts-node ./src/main.ts seed'
             }
           }
