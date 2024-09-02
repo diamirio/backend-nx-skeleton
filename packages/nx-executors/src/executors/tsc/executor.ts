@@ -1,6 +1,7 @@
 import type { ExecutorContext } from '@nx/devkit'
 import { tscExecutor as nxTscExecutor } from '@nx/js/src/executors/tsc/tsc.impl'
 import { join } from 'node:path'
+import { fileExists, readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
 import type { ExecutorResult } from '../inteface'
 import type { TscExecutorSchema } from './schema'
@@ -39,6 +40,22 @@ export default async function (options: TscExecutorSchema, context: ExecutorCont
     if (!data.success) {
       throw new Error(`Error compiling: ${data.outfile}`)
     }
+  }
+
+  // Set missing version or overwrite with the roots package.json version
+  const rootPackageJson = join(context.root, 'package.json')
+  const packageJsonPath = join(options.outputPath, 'package.json')
+
+  if (fileExists(packageJsonPath)) {
+    const packageJson = readJsonFile(packageJsonPath)
+
+    packageJson.version ??= '0.0.1'
+
+    if (!options.keepPackageVersion && fileExists(rootPackageJson)) {
+      packageJson.version = readJsonFile(rootPackageJson)?.version ?? '0.0.1'
+    }
+
+    writeJsonFile(packageJsonPath, packageJson)
   }
 
   return { success: true }
