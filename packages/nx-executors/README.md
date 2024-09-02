@@ -93,7 +93,8 @@ Run a project in the source folder directly, where all the assets will be in pla
         },
         debug: true, // ts-node-dev `--debug` flag
         watchConfig: false, // watch the `config` directory files (to restart on config change)
-        args: ['-r', 'tsconfig-paths/register'] // pass additional arguments to ts-node-dev
+        args: ['-r', 'tsconfig-paths/register'], // pass additional arguments to ts-node-dev,
+        keepPackageVersion: false // keep projects package.json version (default: false)
       }
     }
   }
