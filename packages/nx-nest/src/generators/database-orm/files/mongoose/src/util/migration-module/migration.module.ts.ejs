@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common'
+
+import { MigrationTask } from './migration.task'
+import { MaintenanceModule } from '@webundsoehne/nestjs-util'
+
+@Module({
+  imports: [MaintenanceModule],
+  providers: [MigrationTask],
+  exports: [MigrationTask]
+})
+export class MigrationModule {}

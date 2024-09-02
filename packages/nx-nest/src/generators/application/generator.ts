@@ -32,6 +32,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     isServer: options.components.includes(Component.SERVER),
     includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
     applicationMetadata,
+    scope,
     packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
     projectNames,
     fileName: projectNames.fileName,
@@ -295,6 +296,19 @@ export default async function applicationGenerator (tree: Tree, options: Applica
               rollback: {
                 command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
               }
+            }
+          }
+        }
+      }
+
+      if (options.database !== Database.NONE) {
+        content.targets = {
+          ...content.targets ?? {},
+          seed: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              command: 'ts-node ./src/main.ts seed'
             }
           }
         }
