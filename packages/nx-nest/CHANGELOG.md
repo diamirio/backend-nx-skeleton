@@ -1,3 +1,21 @@
+# @webundsoehne/nx-nest [6.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.1...@webundsoehne/nx-nest@6.0.0-beta.2) (2024-09-12)
+
+### Bug Fixes
+
+- **nx-nest:** add test config file ([c55aef5](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c55aef55deabc8229d9cea481ad9238b28d71673))
+- **nx-nest:** background task component name ([ea3f2db](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ea3f2dbd6359ee73a84a819eb58a7a3c553fd9e9))
+- **nx-nest:** command, migration targets ([aefdd23](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/aefdd2387d24084250ff1150b87856d80fb119a5))
+- **nx-nest:** database options, exports ([cdb8e4b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/cdb8e4b229fa2f4b483c7201d0a7128c8a97abb1))
+- **nx-nest:** messageQueues option, default build assets ([0b64bfb](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0b64bfb65ebe878ae1fceafd30de12751e44ec54))
+- **nx-nest:** microservice pattern and request + response types ([0a37c7a](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0a37c7abc0663760deac61c39dd936b5aaa72035))
+- **nx-nest:** migration-modules ([9c14b0e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9c14b0e583949c89794dfb23cb7a4e46c8438889))
+- **nx-nest:** nx-nest version ([3a6102e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3a6102ee002ae883d6defd1eea0c58afbd6fa037))
+- **nx-nest:** seeding ([a6d2903](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a6d2903cbfae7c9904538a4a7066fd37edf2e93f))
+
+### Performance Improvements
+
+- **nx-generators:** bump node version to current lts ([9b25560](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9b25560ded9145b5a6cf089868d2237e1c9993f7))
+
 # @webundsoehne/nx-nest [6.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.3...@webundsoehne/nx-nest@6.0.0-beta.1) (2024-08-09)
 
 ### Bug Fixes
