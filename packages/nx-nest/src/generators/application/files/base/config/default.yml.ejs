@@ -36,7 +36,7 @@ database: <% if (database === DATABASE.TYPEORM) { %>
   username: user
   password: secret
   host: localhost
-  type: # msql | postgresql
+  type: # mysql | postgresql
   port: # 3306 | 5432
   synchronize: false
   cache: false
@@ -44,7 +44,6 @@ database: <% if (database === DATABASE.TYPEORM) { %>
   directories:
     entity: entity
     migration: migration
-    seed: seed
 <% } else if (database === DATABASE.MONGOOSE) { %>
   host: localhost
   ignoreUndefined: true

@@ -1,11 +1,12 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { formatFiles, getProjects, names } from '@nx/devkit'
+import { readNxJson, formatFiles, getProjects, names } from '@nx/devkit'
 import { output } from '@nx/workspace'
+import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { prompt } from 'enquirer'
 import { join } from 'node:path'
 
 import { Component, componentMetaData } from '../../constant'
-import { addIndexExport, applyTemplateFactory, updateSourceFile } from '../../utils'
+import { addClassProperty, addEnumMember, addIndexExport, applyTemplateFactory, updateSourceFile } from '../../utils'
 import type { ResourceGeneratorSchema } from './schema'
 
 export default async function resourceGenerator (tree: Tree, options: ResourceGeneratorSchema): Promise<GeneratorCallback> {
@@ -43,11 +44,14 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
   const componentRoot = join(project.sourceRoot, componentMetaData[options.component].folder)
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)
+  const projectNames = names(project.name)
 
   const templateContext: Record<string, any> = {
     ...options,
     resourceNames,
-    fileName: resourceNames.fileName
+    scope: getNpmScope(tree),
+    fileName: resourceNames.fileName,
+    projectNames
   }
 
   /**
@@ -64,6 +68,39 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
   updateSourceFile(tree, join(componentRoot, 'modules', 'index.ts'), (file) => {
     addIndexExport(file, `./${resourceNames.fileName}/${resourceNames.fileName}.module`)
   })
+
+  output.log({
+    title: 'Tefa',
+    bodyLines: [options.component]
+  })
+
+  if (options.component === Component.MICROSERVICE) {
+    const mspLib = (readNxJson(tree) as any)?.integration?.msp.projectRoot
+
+    output.log({
+      title: 'Tefa#2',
+      bodyLines: [mspLib]
+    })
+
+    if (!mspLib) {
+      output.warn({
+        title: '[Application] Cannot update Microservice Provider',
+        bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
+      })
+    } else {
+      output.log({
+        title: 'Tefa#3',
+        bodyLines: [join(mspLib, 'src', 'patterns', `${projectNames.fileName}.ts`), `${projectNames.className}Pattern`, resourceNames.constantName]
+      })
+
+      updateSourceFile(tree, join(mspLib, 'src', 'patterns', `${projectNames.fileName}.pattern.ts`), (file) => {
+        addEnumMember(file, `${projectNames.className}Pattern`, resourceNames.constantName, resourceNames.constantName)
+      })
+      updateSourceFile(tree, join(mspLib, 'src', 'interfaces', `${projectNames.fileName}.interface.ts`), (file) => {
+        addClassProperty(file, `${projectNames.className}Message`, `[${projectNames.className}Pattern.${resourceNames.constantName}]`, '(request: unknown) => string')
+      })
+    }
+  }
 
   await formatFiles(tree)
 }

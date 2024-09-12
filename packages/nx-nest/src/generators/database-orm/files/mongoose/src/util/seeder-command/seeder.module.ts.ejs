@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common'
+
+import { SeederCommand } from './seeder.command'
+import { SeederModule } from '../../seeder'
+
+@Module({
+  imports: [SeederModule],
+  providers: [SeederCommand],
+  exports: [SeederCommand]
+})
+export class SeederCommandModule {}

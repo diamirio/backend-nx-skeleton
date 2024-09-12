@@ -5,9 +5,7 @@ const { mock: mockOptions = {}, ...options } = ConfigService.get('database')
 
 export function getDatabaseOptions (mock?: boolean): [string, MongooseModuleOptions] {
   const databaseOptions = mock ? { ...options, ...mockOptions } : options
-
   const { host, port, database, username, password, ...mongoOptions } = databaseOptions
-
   const uri = `mongodb://${host}${port ? `:${port}` : ''}/${database}`
 
   if (username && password) {

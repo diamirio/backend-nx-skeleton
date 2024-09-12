@@ -8,7 +8,7 @@ import { readJson } from 'nx/src/generators/utils/json'
 import { Component, Database, getComponentMetadata } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { applyTasks, applyTemplateFactory, addEnumMember, addIndexExport, addClassProperty, updateSourceFile, addImport } from '../../utils'
+import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
@@ -30,8 +30,9 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   const templateContext: Record<string, any> = {
     ...options,
     isServer: options.components.includes(Component.SERVER),
-    includeMessageQueue: options.components.some((component) => component.startsWith('microservice')),
+    includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
     applicationMetadata,
+    scope,
     packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
     projectNames,
     fileName: projectNames.fileName,
@@ -228,6 +229,95 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
   // custom integration metadata
   updateJson(tree, join(projectRoot, 'project.json'), (content) => {
+    if (options.components.includes(Component.COMMAND)) {
+      content.targets = {
+        ...content.targets ?? {},
+        command: {
+          executor: '@webundsoehne/nx-executors:run',
+          options: {
+            env: {
+              NODE_SERVICE: 'cli'
+            },
+            command: 'ts-node ./src/main.ts'
+          }
+        }
+      }
+    }
+
+    if (options.components.includes(Component.BG_TASK)) {
+      if (options.database === Database.TYPEORM) {
+        content.targets = {
+          ...content.targets ?? {},
+          migration: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              env: {
+                TYPEORM_DATASOURCE: '../../libs/database/src/database/orm.config.ts'
+              }
+            },
+            configurations: {
+              show: {
+                command: 'typeorm migration:show -d=$TYPEORM_DATASOURCE'
+              },
+              run: {
+                command: 'typeorm migration:run -d=$TYPEORM_DATASOURCE'
+              },
+              rollback: {
+                command: 'typeorm migration:revert -d=$TYPEORM_DATASOURCE'
+              },
+              create: {
+                command: 'typeorm migration:create -d=$TYPEORM_DATASOURCE'
+              },
+              generate: {
+                command: 'typeorm migration:generate -d=$TYPEORM_DATASOURCE'
+              }
+            }
+          }
+        }
+      } else if (options.database === Database.MONGOOSE) {
+        content.targets = {
+          ...content.targets ?? {},
+          migration: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              env: {
+                MONGOOSE_MIGRATE_OPTIONS: '../../libs/database/src/database/migrate-options.ts'
+              }
+            },
+            configurations: {
+              run: {
+                command: 'migrate-mongo up -f $MONGOOSE_MIGRATE_OPTIONS'
+              },
+              rollback: {
+                command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
+              },
+              create: {
+                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS'
+              }
+            }
+          }
+        }
+      }
+
+      if (options.database !== Database.NONE) {
+        content.targets = {
+          ...content.targets ?? {},
+          seed: {
+            executor: '@webundsoehne/nx-executors:run',
+            options: {
+              tsNode: true,
+              env: {
+                NODE_SERVICE: 'cli'
+              },
+              command: 'ts-node ./src/main.ts seed'
+            }
+          }
+        }
+      }
+    }
+
     content.integration = {
       nestjs: {
         components: options.components
@@ -243,7 +333,29 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
     content.targetDefaults = {
       ...content.targetDefaults ?? {},
-      lint: { configurations: { fix: { fix: true } } }
+      lint: { configurations: { fix: { fix: true } } },
+      serve: { options: { watchConfig: true } },
+      build: {
+        options: {
+          assets: [
+            {
+              glob: '*',
+              input: '{projectRoot}/config',
+              output: 'config'
+            },
+            {
+              glob: '.dockerignore',
+              input: '{projectRoot}',
+              output: '.'
+            },
+            {
+              glob: 'Dockerfile',
+              input: '{projectRoot}',
+              output: '.'
+            }
+          ]
+        }
+      }
     }
 
     return content

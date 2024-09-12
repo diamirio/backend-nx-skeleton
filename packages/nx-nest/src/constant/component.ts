@@ -1,7 +1,7 @@
 export enum Component {
   SERVER = 'server',
   COMMAND = 'command',
-  BG_TASK = 'bg-task',
+  BG_TASK = 'bgtask',
   MICROSERVICE = 'microservice'
 }
 
