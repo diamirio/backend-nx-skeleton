@@ -1,3 +1,9 @@
+# @webundsoehne/nx-executors [1.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.5...@webundsoehne/nx-executors@1.0.0-beta.6) (2024-09-19)
+
+### Bug Fixes
+
+- **nx-executors:** add windows support for ts-node-dev executor ([42aacc5](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/42aacc57fb3a537b7138123b57f463934ce1b95d))
+
 # @webundsoehne/nx-executors [1.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.4...@webundsoehne/nx-executors@1.0.0-beta.5) (2024-09-02)
 
 ### Bug Fixes
