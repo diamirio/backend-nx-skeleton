@@ -1,3 +1,4 @@
+import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
 import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
@@ -5,7 +6,7 @@ import { Test } from '@nestjs/testing'
 import { createServerModule } from '../src/server/server.module'
 
 describe('Server (e2e)', () => {
-  let app
+  let app: NestFastifyApplication
 
   beforeAll(async () => {
     const ServerModule = createServerModule(true)
@@ -24,7 +25,13 @@ describe('Server (e2e)', () => {
     await app.close()
   })
 
-  it('should be defined', async () => {
-    expect(app).toBeDefined()
+  describe('Server should be running', () => {
+    test('should be defined', async () => {
+        expect(app).toBeDefined()
+    })
+
+    test('should be able to inject requests', async () => {
+      expect(app.inject()).toBeDefined()
+    })
   })
 })
