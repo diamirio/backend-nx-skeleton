@@ -30,6 +30,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   const templateContext: Record<string, any> = {
     ...options,
     isServer: options.components.includes(Component.SERVER),
+    isBgTask: options.components.includes(Component.BG_TASK),
     includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
     applicationMetadata,
     scope,
@@ -312,6 +313,17 @@ export default async function applicationGenerator (tree: Tree, options: Applica
                 NODE_SERVICE: 'cli'
               },
               command: 'ts-node ./src/main.ts seed'
+            }
+          },
+          build: {
+            options: {
+              assets: [
+                {
+                  glob: '*.js',
+                  input: 'libs/database/src/migration',
+                  output: 'libs/database/src/migration'
+                }
+              ]
             }
           }
         }
