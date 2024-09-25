@@ -34,10 +34,12 @@
     "@nx/devkit": "^19.3.0",
     "@nx/js": "^19.3.0",
     "@nx/workspace": "^19.3.0",
+    "yaml": "^2.5.1",
     "ts-morph": "^23.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "enquirer": "^2.4.1",
     "nx": "^19.5.2"
   },
   "engines": {

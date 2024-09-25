@@ -8,12 +8,13 @@ import { readJson } from 'nx/src/generators/utils/json'
 import { Component, Database, getComponentMetadata } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
+import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
+// eslint-disable-next-line complexity
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
   if (!options.components?.length) {
     output.error({ title: '[Application] At least one component must be selected' })
@@ -372,6 +373,40 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
     return content
   })
+
+  // update gitlab-ci
+  if (tree.exists('.gitlab-ci.yml')) {
+    updateYaml(tree, '.gitlab-ci.yml', (content) => {
+      if (!content.has(projectNames.fileName)) {
+        const configName = content.createNode(projectNames.fileName)
+        const configContent = content.createNode({
+          key: projectNames.fileName,
+          value: {
+            stage: 'docker',
+            extends: '.docker-build-internal',
+            variables: {
+              DOCKERFILE_CONTEXT: `./dist/apps/${projectNames.fileName}`,
+              DOCKER_IMAGE_INTERNAL_NAME: `${projectNames.fileName}`
+            },
+            dependencies: ['build'],
+            only: {
+              changes: ['.gitlab-ci.yml', 'package.json', 'package-lock.json', 'libs/**/*', `apps/${projectNames.fileName}/**/*`],
+              refs: ['main', 'develop', 'tags']
+            }
+          }
+        })
+
+        if (content.comment) {
+          configName.commentBefore = content.comment
+          content.comment = null
+        } else {
+          configName.spaceBefore = true
+        }
+
+        content.add({ key: configName, value: configContent })
+      }
+    })
+  }
 
   if (tree.exists(join(appRoot, '.gitkeep'))) {
     tree.delete(join(appRoot, '.gitkeep'))
