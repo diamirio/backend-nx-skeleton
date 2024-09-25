@@ -23,7 +23,7 @@ export const DEV_DEPENDENCIES = {
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',
-  '@webundsoehne/nx-nest': '^6.0.0-beta.1',
+  '@webundsoehne/nx-nest': '^6.0.0-beta.2',
   eslint: '^8',
   'eslint-config-prettier': '^9.1.0',
   'eslint-module-utils': '^2',
@@ -35,6 +35,6 @@ export const DEV_DEPENDENCIES = {
   'ts-node': '^10',
   'ts-node-dev': '^2',
   'ts-patch': '^3',
-  typescript: '^5',
+  typescript: '~5.5', // fixed minor-version until "typescript-transform-paths" works with version 5.6+
   'typescript-transform-paths': '^3'
 }
