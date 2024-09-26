@@ -155,11 +155,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   if (!options.skipPackageJson) {
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
-      content.scripts.start = 'nx run-many -t serve --parallel 100'
-      content.scripts['start:one'] = 'nx serve'
-      content.scripts.build = 'nx run-many -t build'
-      content.scripts['build:one'] = 'nx build'
-      content.scripts['build:nocache'] = 'nx run-many -t build --skip-nx-cache'
+      content.scripts.start ??= 'nx run-many -t serve --parallel 100'
+      content.scripts['start:one'] ??= 'nx serve'
+      content.scripts.build ??= 'nx run-many -t build'
+      content.scripts['build:one'] ??= 'nx build'
+      content.scripts['build:nocache'] ??= 'nx run-many -t build --skip-nx-cache'
 
       return content
     })
