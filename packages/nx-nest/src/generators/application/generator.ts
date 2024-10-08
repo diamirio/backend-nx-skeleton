@@ -165,6 +165,10 @@ export default async function applicationGenerator (tree: Tree, options: Applica
       content.scripts['build:one'] ??= 'nx build'
       content.scripts['build:nocache'] ??= 'nx run-many -t build --skip-nx-cache'
 
+      if (options.components.includes(Component.COMMAND)) {
+        content.scripts['command:one'] ??= 'nx command'
+      }
+
       return content
     })
 
@@ -175,11 +179,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
           case Component.SERVER:
           case Component.BG_TASK:
           case Component.MICROSERVICE:
-            content.scripts.start = `node ./${projectRoot}/src/main.js`
+            content.scripts.start ??= `node ./${projectRoot}/src/main.js`
             break
 
           case Component.COMMAND:
-            content.scripts.command = `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
+            content.scripts.command ??= `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
             break
         }
         /* eslint-enable*/
