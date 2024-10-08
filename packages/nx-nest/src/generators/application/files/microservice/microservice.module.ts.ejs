@@ -1,14 +1,14 @@
 import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
-<% if (database === DATABASE.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
-<% if (database === DATABASE.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
+<% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
+<% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
 
 import * as modules from './modules'
-<% if (database !== DATABASE.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>'<% } %>
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>'<% } %>
 import { ConfigService, GlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util-microservices'
 
-<% if (database !== DATABASE.NONE) { %>export function createMicroserviceModule (mock = false): new(mock: boolean) => NestModule {
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>export function createMicroserviceModule (mock = false): new(mock: boolean) => NestModule {
 <% } else { -%>export function createMicroserviceModule (): new() => NestModule {<% } %>
   @Module({
     providers: [
@@ -31,8 +31,8 @@ import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>Rpc
       }
     ],
     imports: [
-      <% if (database === DATABASE.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
-      <% if (database === DATABASE.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
       <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
       ...Object.values(modules)
     ]

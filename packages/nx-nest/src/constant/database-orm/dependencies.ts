@@ -5,6 +5,16 @@ export const DEPENDENCIES_TYPEORM = {
   typeorm: '^0.3.20'
 }
 
+export const DEPENDENCIES_TYPEORM_MYSQL = {
+  ...DEPENDENCIES_TYPEORM,
+  mysql2: '^3.11.0'
+}
+
+export const DEPENDENCIES_TYPEORM_POSTGRES = {
+  ...DEPENDENCIES_TYPEORM,
+  pg: '^8.13.0'
+}
+
 export const DEPENDENCIES_MONGOOSE = {
   '@nestjs/mongoose': '^10',
   '@webundsoehne/nestjs-seeder': '^2',

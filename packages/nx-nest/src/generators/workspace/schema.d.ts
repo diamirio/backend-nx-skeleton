@@ -1,9 +1,10 @@
-import type { Database } from '../../constant'
+import type { Database, DatabaseOrm } from '../../constant'
 
 export interface NestWorkspaceGeneratorSchema {
   name: string
   scope: string
-  database: Database
+  databaseOrm: DatabaseOrm
+  database?: Database
   microserviceProvider: boolean
   skipPackageJson: boolean
   force: boolean

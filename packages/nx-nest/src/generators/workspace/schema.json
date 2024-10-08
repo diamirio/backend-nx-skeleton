@@ -19,15 +19,21 @@
       "description": "Workspace scope",
       "x-prompt": "What package scope name you like to use?"
     },
-    "database": {
+    "databaseOrm": {
       "type": "string",
-      "aliases": ["db"],
+      "aliases": ["orm"],
       "description": "Database orm to use",
       "x-prompt": {
         "message": "Which database-orm should be included?",
         "type": "item",
         "items": ["none", "typeorm", "mongoose"]
       }
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database to use",
+      "x-priority": "internal"
     },
     "microserviceProvider": {
       "type": "boolean",
@@ -50,5 +56,5 @@
       "$default": false
     }
   },
-  "required": ["name", "scope", "database", "microserviceProvider"]
+  "required": ["name", "scope", "databaseOrm", "microserviceProvider"]
 }

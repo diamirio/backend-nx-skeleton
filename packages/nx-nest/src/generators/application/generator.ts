@@ -5,7 +5,7 @@ import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 
-import { Component, Database, getComponentMetadata } from '../../constant'
+import { Component, Database, DatabaseOrm, getComponentMetadata } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
@@ -39,6 +39,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     projectNames,
     fileName: projectNames.fileName,
     COMPONENT: Component,
+    DATABASE_ORM: DatabaseOrm,
     DATABASE: Database
   }
 
@@ -48,28 +49,27 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   /**
    * DATABASE
    */
-  if (options.database !== Database.NONE) {
-    const databaseOrm = (readNxJson(tree) as any)?.integration?.orm
+  if (options.databaseOrm !== DatabaseOrm.NONE) {
+    const databaseIntegration = (readNxJson(tree) as any)?.integration?.orm
 
-    if (databaseOrm && databaseOrm.database !== options.database) {
-      output.error({ title: `[Application] Invalid database-orm. "${databaseOrm}" already configured.` })
+    output.log({ title: '[Application] Setup database-orm util library ...' })
 
+    const databaseLib = await databaseLibraryGenerator(tree, {
+      databaseOrm: options.databaseOrm,
+      database: options.database ?? databaseIntegration?.system,
+      name: 'database',
+      skipPackageJson: options.skipPackageJson,
+      update: !!databaseIntegration
+    })
+
+    if (!databaseLib) {
       return
     }
 
-    if (!databaseOrm) {
-      output.log({ title: '[Application] Setup database-orm util library ...' })
-
-      tasks.push(
-        await databaseLibraryGenerator(tree, {
-          database: options.database,
-          name: 'database',
-          skipPackageJson: options.skipPackageJson
-        })
-      )
-    }
+    tasks.push(databaseLib)
 
     templateContext.orm = (readNxJson(tree) as any)?.integration?.orm
+    templateContext.database = templateContext.orm.system
   }
 
   /**
@@ -81,12 +81,16 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     if (!microserviceProvider) {
       output.log({ title: '[Application] Setup microservice-provider util library ...' })
 
-      tasks.push(
-        await microserviceProviderGenerator(tree, {
-          name: 'microservice-provider',
-          skipPackageJson: options.skipPackageJson
-        })
-      )
+      const mspLib = await microserviceProviderGenerator(tree, {
+        name: 'microservice-provider',
+        skipPackageJson: options.skipPackageJson
+      })
+
+      if (!mspLib) {
+        return
+      }
+
+      tasks.push(mspLib)
     }
 
     templateContext.msp = (readNxJson(tree) as any)?.integration?.msp
@@ -247,7 +251,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     }
 
     if (options.components.includes(Component.BG_TASK)) {
-      if (options.database === Database.TYPEORM) {
+      if (options.databaseOrm === DatabaseOrm.TYPEORM) {
         content.targets = {
           ...content.targets ?? {},
           migration: {
@@ -277,7 +281,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
             }
           }
         }
-      } else if (options.database === Database.MONGOOSE) {
+      } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
         content.targets = {
           ...content.targets ?? {},
           migration: {
@@ -303,7 +307,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
         }
       }
 
-      if (options.database !== Database.NONE) {
+      if (options.databaseOrm !== DatabaseOrm.NONE) {
         content.targets = {
           ...content.targets ?? {},
           seed: {

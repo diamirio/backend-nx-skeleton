@@ -46,15 +46,21 @@
         ]
       }
     },
-    "database": {
+    "databaseOrm": {
       "type": "string",
-      "aliases": ["db"],
-      "description": "Database orm to use",
+      "aliases": ["orm"],
+      "description": "Database-ORM to use",
       "x-prompt": {
         "message": "Which database-orm should be included?",
         "type": "item",
         "items": ["none", "typeorm", "mongoose"]
       }
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database to use",
+      "x-priority": "internal"
     },
     "microserviceProvider": {
       "type": "boolean",
@@ -70,5 +76,5 @@
       "x-priority": "internal"
     }
   },
-  "required": ["name", "jest", "components", "database", "microserviceProvider"]
+  "required": ["name", "jest", "components", "databaseOrm", "microserviceProvider"]
 }
