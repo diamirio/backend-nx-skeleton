@@ -29,17 +29,17 @@
         "items": ["none", "typeorm", "mongoose"]
       }
     },
-    "database": {
-      "type": "string",
-      "aliases": ["db"],
-      "description": "Database to use",
-      "x-priority": "internal"
-    },
     "microserviceProvider": {
       "type": "boolean",
       "aliases": ["microservice-provider", "msp"],
       "description": "Setup microservice-provider library",
       "x-prompt": "Setup microservice-provider?"
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database to use",
+      "x-priority": "internal"
     },
     "skipPackageJson": {
       "type": "boolean",

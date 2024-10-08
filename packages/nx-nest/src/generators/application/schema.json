@@ -16,19 +16,6 @@
       "x-prompt": "What name would you like to use for the application?",
       "pattern": "(?:^@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*\\/[a-zA-Z0-9-~][a-zA-Z0-9-._~]*|^[a-zA-Z][^:]*)$"
     },
-    "jest": {
-      "type": "boolean",
-      "aliases": ["j"],
-      "description": "Include jest as test runner.",
-      "x-prompt": "Setup jest for unit tests?"
-    },
-    "skipPackageJson": {
-      "description": "Do not add dependencies to `package.json`.",
-      "aliases": ["skip-package-json"],
-      "type": "boolean",
-      "default": false,
-      "x-priority": "internal"
-    },
     "components": {
       "type": "array",
       "items": "string",
@@ -46,6 +33,12 @@
         ]
       }
     },
+    "jest": {
+      "type": "boolean",
+      "aliases": ["j"],
+      "description": "Include jest as test runner.",
+      "x-prompt": "Setup jest for unit tests?"
+    },
     "databaseOrm": {
       "type": "string",
       "aliases": ["orm"],
@@ -56,17 +49,24 @@
         "items": ["none", "typeorm", "mongoose"]
       }
     },
+    "microserviceProvider": {
+      "type": "boolean",
+      "aliases": ["microservice-provider", "msp"],
+      "description": "Include microservice-provider",
+      "x-prompt": "Include microservice-provider?"
+    },
     "database": {
       "type": "string",
       "aliases": ["db"],
       "description": "Database to use",
       "x-priority": "internal"
     },
-    "microserviceProvider": {
+    "skipPackageJson": {
+      "description": "Do not add dependencies to `package.json`.",
+      "aliases": ["skip-package-json"],
       "type": "boolean",
-      "aliases": ["microservice-provider", "msp"],
-      "description": "Include microservice-provider",
-      "x-prompt": "Include microservice-provider?"
+      "default": false,
+      "x-priority": "internal"
     },
     "update": {
       "type": "boolean",
