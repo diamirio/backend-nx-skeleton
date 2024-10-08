@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { NODE_VERSION } from '../index'
+
 export const DEPENDENCIES = {
   '@fastify/static': '^6',
   '@fastify/swagger': '^8.11.0',
@@ -19,7 +21,7 @@ export const DEV_DEPENDENCIES = {
   '@nx/eslint': '^19.3.0',
   '@nx/eslint-plugin': '^19.3.0',
   '@nx/workspace': '^19.3.0',
-  '@types/node': '^18',
+  '@types/node': `^${NODE_VERSION}`,
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',

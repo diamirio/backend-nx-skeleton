@@ -5,7 +5,7 @@ import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 
-import { Component, Database, DatabaseOrm, getComponentMetadata } from '../../constant'
+import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
@@ -38,6 +38,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
     projectNames,
     fileName: projectNames.fileName,
+    NODE_VERSION,
     COMPONENT: Component,
     DATABASE_ORM: DatabaseOrm,
     DATABASE: Database
