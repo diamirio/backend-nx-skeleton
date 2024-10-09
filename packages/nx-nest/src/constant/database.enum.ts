@@ -7,5 +7,6 @@ export enum DatabaseOrm {
 export enum Database {
   MYSQL = 'mysql',
   POSTGRES = 'postgres',
-  MONGO = 'mongo'
+  MONGO = 'mongo',
+  OTHER = 'other'
 }

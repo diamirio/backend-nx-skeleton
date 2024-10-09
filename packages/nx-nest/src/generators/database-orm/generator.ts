@@ -5,10 +5,20 @@ import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { prompt } from 'enquirer'
 import { join } from 'node:path'
+import { YAMLMap, YAMLSeq } from 'yaml'
 
 import { Database, DatabaseOrm } from '../../constant'
-import { DEPENDENCIES_MONGOOSE, DEPENDENCIES_TYPEORM, DEPENDENCIES_TYPEORM_MYSQL, DEPENDENCIES_TYPEORM_POSTGRES, SCRIPTS } from '../../constant/database-orm'
-import { applyTasks, applyTemplateFactory } from '../../utils'
+import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
+import {
+  DEPENDENCIES_MONGOOSE,
+  DEPENDENCIES_TYPEORM,
+  DEPENDENCIES_TYPEORM_MYSQL,
+  DEPENDENCIES_TYPEORM_POSTGRES,
+  DOCKER_DB_SERVICE,
+  DOCKER_SERVICE_NAME,
+  SCRIPTS
+} from '../../constant/database-orm'
+import { applyTasks, applyTemplateFactory, updateYaml } from '../../utils'
 import type { DatabaseOrmGeneratorSchema } from './schema'
 
 function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder: string, dependencies: Record<string, string> } {
@@ -49,7 +59,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
         type: 'autocomplete',
         name: 'database',
         message: 'Please select a database:',
-        choices: [...Object.values(Database), 'other']
+        choices: Object.values(Database)
       })
     ).database
   } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
@@ -127,6 +137,27 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
     return content
   })
+
+  if (options.database !== Database.OTHER) {
+    updateYaml(tree, 'service-docker-compose.yml', (content) => {
+      if (!content.has('services')) {
+        content.add({ key: 'services', value: new YAMLMap() })
+      }
+
+      if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
+        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+      }
+    })
+    updateYaml(tree, 'docker-compose.yml', (content) => {
+      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
+        content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
+      }
+
+      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on', DOCKER_SERVICE_NAME])) {
+        content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+      }
+    })
+  }
 
   if (tree.exists(join(libRoot, '.gitkeep'))) {
     tree.delete(join(libRoot, '.gitkeep'))

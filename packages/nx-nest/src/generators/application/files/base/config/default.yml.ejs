@@ -35,7 +35,7 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
     database: db_mock
   username: user
   password: secret
-  host: localhost
+  host: db
   type: <% if (database === DATABASE.MYSQL) { %>mysql<%
   } else if (database === DATABASE.POSTGRES) { %>postgres<%
   } else { %># @todo: set driver<% } %>
@@ -50,7 +50,7 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
     migration: migration
     seed: seed
 <% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
-  host: localhost
+  host: db
   ignoreUndefined: true
   useNewUrlParser: true
   useUnifiedTopology: true

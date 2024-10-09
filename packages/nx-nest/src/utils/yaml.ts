@@ -1,18 +1,23 @@
 import type { Tree } from 'nx/src/generators/tree'
 import type { CreateNodeOptions, DocumentOptions, ParseOptions, SchemaOptions, ToStringOptions } from 'yaml'
-import { parseDocument, stringify } from 'yaml'
-import type { Document } from 'yaml/dist/doc/Document'
+import { Document, parseDocument, stringify, YAMLMap } from 'yaml'
 
 export type YamlParseOptions = ParseOptions & DocumentOptions & SchemaOptions
 export type YamlSerializeOptions = DocumentOptions & SchemaOptions & ParseOptions & CreateNodeOptions & ToStringOptions
 
-export function readYaml (tree: Tree, path: string, options?: YamlParseOptions): Document.Parsed {
+export function serializeYaml<T extends object = object> (value: T, options?: YamlSerializeOptions): string {
+  return stringify(value, options)
+}
+
+export function readYaml (tree: Tree, path: string, options?: YamlParseOptions): Document {
   if (!tree.exists(path)) {
     throw new Error(`Cannot find ${path}`)
   }
 
   try {
-    return parseDocument(tree.read(path, 'utf-8'), options)
+    const content = tree.read(path, 'utf-8')
+
+    return content.length ? parseDocument(content, options) : new Document(new YAMLMap(), options)
   } catch (e) {
     throw new Error(`Cannot parse ${path}: ${e.message}`)
   }
@@ -24,7 +29,7 @@ export function writeYaml<T extends object = object> (tree: Tree, path: string, 
   tree.write(path, `${serialized}\n`)
 }
 
-export function updateYaml (tree: Tree, path: string, updater: (value: Document.Parsed) => void, options?: YamlParseOptions & YamlSerializeOptions): void {
+export function updateYaml (tree: Tree, path: string, updater: (value: Document) => void, options?: YamlParseOptions & YamlSerializeOptions): void {
   const document = readYaml(tree, path, options)
 
   updater(document)

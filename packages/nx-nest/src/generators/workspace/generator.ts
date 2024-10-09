@@ -2,6 +2,7 @@ import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { addDependenciesToPackageJson, formatFiles, output, OverwriteStrategy, removeDependenciesFromPackageJson, updateJson } from '@nx/devkit'
 
 import { DatabaseOrm, NODE_VERSION } from '../../constant'
+import { SERVICE_NAME, DOCKER_IMAGE } from '../../constant/application'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, SCRIPTS } from '../../constant/workspace'
 import { applyTasks, applyTemplateFactory } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
@@ -24,7 +25,9 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
   applyTemplate(['files'], {
     ...options,
     packageScope,
-    NODE_VERSION
+    NODE_VERSION,
+    SERVICE_NAME,
+    DOCKER_IMAGE
   })
   updateJson(tree, 'package.json', (content) => {
     content.name = packageScope
