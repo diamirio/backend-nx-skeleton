@@ -52,6 +52,8 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
         choices: [...Object.values(Database), 'other']
       })
     ).database
+  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
+    options.database = Database.MONGO
   }
 
   const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
