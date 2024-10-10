@@ -26,20 +26,20 @@
     ]
   },
   "peerDependencies": {
-    "nx": ">= 18.0.0",
+    "nx": ">= 20.0.0",
     "ts-node": ">= 8.10.0",
     "ts-node-dev": ">= 1.0.0",
     "typescript": ">= 3.9.0"
   },
   "dependencies": {
-    "@nx/devkit": "^19.3.0",
-    "@nx/js": "^19.3.0",
-    "@nx/jest": "^19.3.0",
+    "@nx/devkit": "^20.0.0",
+    "@nx/js": "^20.0.0",
+    "@nx/jest": "^20.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@nx/plugin": "^19.3.0",
-    "nx": "^19.3.0"
+    "@nx/plugin": "^20.0.0",
+    "nx": "^20.0.0"
   },
   "engines": {
     "node": ">= 18"

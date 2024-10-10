@@ -1,4 +1,4 @@
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
+import type { TargetConfiguration } from '@nx/devkit'
 
 import type { BuildTargetOptions } from './utils/plugin'
 import { buildPlugin, PluginBuilder } from './utils/plugin'

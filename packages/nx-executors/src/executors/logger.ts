@@ -1,4 +1,4 @@
-import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
+import type { ExecutorContext } from '@nx/devkit'
 import { EOL } from 'os'
 
 export class LogWriter {

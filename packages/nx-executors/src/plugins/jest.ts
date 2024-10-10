@@ -1,6 +1,6 @@
+import type { TargetConfiguration } from '@nx/devkit'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 import { fileExists } from 'nx/src/utils/fileutils'
 
 import type { BuildTargetOptions } from './utils/plugin'

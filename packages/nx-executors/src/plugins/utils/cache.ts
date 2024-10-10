@@ -1,6 +1,6 @@
+import type { TargetConfiguration } from '@nx/devkit'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 import { hashObject } from 'nx/src/hasher/file-hasher'
 import type { CreateNodesResult } from 'nx/src/project-graph/plugins'
 import { workspaceDataDirectory } from 'nx/src/utils/cache-directory'
