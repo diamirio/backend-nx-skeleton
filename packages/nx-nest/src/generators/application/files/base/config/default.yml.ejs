@@ -31,8 +31,6 @@ messageQueue:
 <% if (databaseOrm !== DATABASE_ORM.NONE) { %>
 database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   database: db
-  mock:
-    database: db_mock
   username: user
   password: secret
   host: db
@@ -55,10 +53,10 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   useNewUrlParser: true
   useUnifiedTopology: true
   migration:
-  migrationsDir: migration
-  changelogCollectionName: migrations
-  migrationFileExtension: '.js'
-  useFileHash: false
-  moduleSystem: esm
+    migrationsDir: migration
+    changelogCollectionName: migrations
+    migrationFileExtension: '.js'
+    useFileHash: false
+    moduleSystem: esm
 <% } -%>
 <% } -%>

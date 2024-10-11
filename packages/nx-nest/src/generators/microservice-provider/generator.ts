@@ -81,7 +81,9 @@ export default async function microserviceProviderGenerator (tree: Tree, options
       content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
     }
 
-    if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on', DOCKER_SERVICE_NAME])) {
+    const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+
+    if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
       content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
     }
   })

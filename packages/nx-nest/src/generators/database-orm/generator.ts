@@ -59,7 +59,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
         type: 'autocomplete',
         name: 'database',
         message: 'Please select a database:',
-        choices: Object.values(Database)
+        choices: [Database.MYSQL, Database.POSTGRES, Database.OTHER]
       })
     ).database
   } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
@@ -68,7 +68,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
   const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
   const projectRoot = join(libRoot, libraryName)
-  const databaseOrm = getDatabaseOrmDetails(options.databaseOrm)
+  const databaseOrm = getDatabaseOrmDetails(options.databaseOrm, options.database)
 
   if (!databaseOrm) {
     output.error({ title: '[Database] Missing orm config' })
@@ -153,7 +153,9 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
         content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
       }
 
-      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on', DOCKER_SERVICE_NAME])) {
+      const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+
+      if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
         content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
       }
     })

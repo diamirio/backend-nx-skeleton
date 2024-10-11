@@ -8,8 +8,7 @@ import * as modules from './modules'
 import { ConfigService, GlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
 import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util-microservices'
 
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>export function createMicroserviceModule (mock = false): new(mock: boolean) => NestModule {
-<% } else { -%>export function createMicroserviceModule (): new() => NestModule {<% } %>
+export function createMicroserviceModule (): new() => NestModule {
   @Module({
     providers: [
       ConfigService,
@@ -31,8 +30,8 @@ import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>Rpc
       }
     ],
     imports: [
-      <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
-      <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
       <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
       ...Object.values(modules)
     ]

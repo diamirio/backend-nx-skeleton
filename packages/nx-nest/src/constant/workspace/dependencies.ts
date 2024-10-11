@@ -18,9 +18,9 @@ export const DEPENDENCIES = {
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nx/eslint': '^19.3.0',
-  '@nx/eslint-plugin': '^19.3.0',
-  '@nx/workspace': '^19.3.0',
+  '@nx/eslint': '^20.0.0',
+  '@nx/eslint-plugin': '^20.0.0',
+  '@nx/workspace': '^20.0.0',
   '@types/node': `^${NODE_VERSION}`,
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
@@ -31,7 +31,7 @@ export const DEV_DEPENDENCIES = {
   'eslint-module-utils': '^2',
   'eslint-plugin-import': '^2',
   'lint-staged': '^13',
-  nx: '^19.3.0',
+  nx: '^20.0.0',
   prettier: '^2.7.1',
   'simple-git-hooks': '^2',
   'ts-node': '^10',

@@ -11,16 +11,15 @@ import { ConfigService } from '@webundsoehne/nestjs-util'
 /**
  * Register all services under providers
  */
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>export function createTaskModule (mock = false): new(mock: boolean) => NestModule {
-<% } else { -%>export function createTaskModule (): new() => NestModule { <% } %>
+export function createTaskModule (): new() => NestModule {
   @Module({
     providers: [
       ConfigService
     ],
     imports: [
       ScheduleModule.forRoot(),
-      <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
-      <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
+      <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
       <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
       ...Object.values(tasks)
       ]

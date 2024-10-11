@@ -10,15 +10,14 @@ import {ConfigService } from '@webundsoehne/nestjs-util'
 /**
   * Utilizes (nestjs-commander)[https://docs.nestjs.com/recipes/nest-commander].
  */
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>export function createCommandModule (mock = false): new(mock: boolean) => NestModule {
-<% } else { -%>export function createCommandModule (): new() => NestModule { <% } %>
+export function createCommandModule (): new() => NestModule {
 @Module({
   providers: [
     ConfigService
   ],
   imports: [
-    <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
-    <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+    <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
+    <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
     <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
     ...Object.values(modules)
     ]

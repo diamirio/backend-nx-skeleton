@@ -1,9 +1,9 @@
 import { getDatabaseOptions } from './database-options'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
-export function generateMongooseMigrateConfig (mock?: boolean): any {
+export function generateMongooseMigrateConfig (): any {
   const { migration: migrationOptions } = ConfigService.get('database')
-  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions(mock)
+  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions()
 
   let url = plainUrl
 
