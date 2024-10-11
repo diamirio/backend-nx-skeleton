@@ -9,6 +9,11 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 # <%= packageScope %>
 
+<!-- toc -->
+- [Description](#description)
+- [Docker Compose](#docker-compose)
+<!-- tocstop -->
+
 ## Description
 
 This is an auto-generated custom workspace with [nx](https://www.npmjs.com/package/nx).<br>
@@ -31,8 +36,20 @@ If a database is set up:
 
 **Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`, `migrate`, `migrate:rollback`
 
-<!-- toc -->
-<!-- tocstop -->
+
+## Docker Compose
+On workspace and application generation two docker-files will also be generated:
+1. docker-compose.yml
+2. service-docker-compose.yml
+
+First on starts the full application: dependencies like the database and message-queue, together with a single nx container starting all projects.<br>
+The seconds one only starts the dependencies without nx, if you want to start the nx processes directly on your machine instead.
+
+You can proxy command to the nx container to i.e. run tests: `docker compose exec nx npm run test`<br>
+The full project is mounted inside the nx container, so any `package.json` script or `nx` command can be executed inside the container.
+
+**Hint**: To exclude some projects from running, either update the docker compose command like `command: npm run start -- --exclude=bgtask`, or add a new `package.json` script and replace the command to run.
+
 
 ## Stay in touch
 
