@@ -3,14 +3,12 @@ import { FastifyAdapter } from '@nestjs/platform-fastify'
 import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
 
-import { createServerModule } from '../src/server/server.module'
+import { ServerModule } from '../src/server/server.module'
 
 describe('Server (e2e)', () => {
   let app: NestFastifyApplication
 
   beforeAll(async () => {
-    const ServerModule = createServerModule(true)
-
     const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [ServerModule]
     }).compile()
