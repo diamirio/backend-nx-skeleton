@@ -18,6 +18,6 @@ export const DEPENDENCIES_TYPEORM_POSTGRES = {
 export const DEPENDENCIES_MONGOOSE = {
   '@nestjs/mongoose': '^10',
   '@webundsoehne/nestjs-seeder': '^2',
-  'migrate-mongo': '^10.0.0',
+  'migrate-mongo': '^11.0.0',
   mongoose: '^8'
 }
