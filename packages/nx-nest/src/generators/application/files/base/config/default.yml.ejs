@@ -49,9 +49,11 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
     seed: seed
 <% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
   host: db
+  port: 27017
+  database: db
+  username: user
+  password: secret
   ignoreUndefined: true
-  useNewUrlParser: true
-  useUnifiedTopology: true
   migration:
     migrationsDir: migration
     changelogCollectionName: migrations

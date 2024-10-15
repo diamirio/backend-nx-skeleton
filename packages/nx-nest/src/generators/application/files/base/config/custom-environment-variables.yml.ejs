@@ -26,13 +26,9 @@ messageQueue:
 database:
   host: DATABASE_HOST
   port: DATABASE_PORT
-  database: DATABASE_NAME <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
-  type: DATABASE_TYPE
   username: DATABASE_USER
   password: DATABASE_PASSWORD
-  migrationsTableName: DATABASE_MIGRATIONS_TABLE <% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
-  authentication:
-    username: DATABASE_USER
-    password: DATABASE_PASSWORD
-<% } -%>
+  database: DATABASE_NAME <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
+  type: DATABASE_TYPE
+  migrationsTableName: DATABASE_MIGRATIONS_TABLE <% }
 <% } -%>
