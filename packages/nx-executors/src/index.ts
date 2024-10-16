@@ -1,0 +1,7 @@
+export type { JestExecutorSchema } from './executors/jest/schema'
+export type { RunExecutorSchema } from './executors/run/schema'
+export type { TsNodeDevExecutorSchema } from './executors/ts-node-dev/schema'
+export type { TscExecutorSchema } from './executors/tsc/schema'
+export type { JestPluginOptions } from './plugins/jest'
+export type { TsNodeDevPluginOptions } from './plugins/ts-node-dev'
+export type { TscPluginOptions } from './plugins/tsc'

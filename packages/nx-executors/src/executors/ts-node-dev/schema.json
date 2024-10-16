@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "version": 2,
+  "title": "TsNodeDev executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "cwd": {
+      "type": "string",
+      "description": "execution directory"
+    },
+    "main": {
+      "type": "string",
+      "description": "The name of the main entry-point file.",
+      "x-completion-type": "file",
+      "x-completion-glob": "main@(.js|.ts|.jsx|.tsx)",
+      "x-priority": "important"
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "The path to the Typescript configuration file.",
+      "x-completion-type": "file",
+      "x-completion-glob": "tsconfig.*.json",
+      "x-priority": "important"
+    },
+    "env": {
+      "type": "object",
+      "description": "Environment variables that will be made available to the commands. (alias of environment)",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "aliases": ["environment"]
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Show additional debug logs of ts-node-dev.",
+      "default": false
+    },
+    "watchConfig": {
+      "type": "boolean",
+      "description": "Add watchers to the config files",
+      "default": false
+    },
+    "args": {
+      "type": "array",
+      "description": "Additional arguments to pass to ts-node-dev.",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "required": ["main", "tsConfig"]
+}

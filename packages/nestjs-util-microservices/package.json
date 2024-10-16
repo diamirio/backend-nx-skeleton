@@ -40,9 +40,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@nestjs/common": "^9.1.6",
-    "@nestjs/core": "^9.1.6",
-    "@nestjs/microservices": "^9.1.6",
+    "@nestjs/common": "^9.4.0",
+    "@nestjs/core": "^9.4.0",
+    "@nestjs/microservices": "^9.4.0",
     "@webundsoehne/nestjs-util": "*",
     "amqp-connection-manager": "^4.1.9",
     "amqplib": "^0.10.2"

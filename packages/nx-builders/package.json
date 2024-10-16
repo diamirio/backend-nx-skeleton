@@ -12,6 +12,9 @@
   },
   "schematics": "./schematics.json",
   "builders": "./builders.json",
+  "ng-update": {
+    "migrations": "./migrations.json"
+  },
   "scripts": {
     "build": "tsup-node",
     "dev:start": "tsup-node --watch",
@@ -52,6 +55,7 @@
     "tree-kill": "^1.2.2"
   },
   "devDependencies": {
+    "@nrwl/workspace": "^14.8.3",
     "@types/execa": "^2.0.0",
     "@types/fs-extra": "^9.0.13",
     "@types/tsc-watch": "^4.2.0"
