@@ -132,6 +132,7 @@ async function updatePackageJson (tree: Tree): Promise<void> {
       nx: '^20.0.0',
       'ts-jest': '^29.1.0',
       'ts-patch': '^3',
+      typescript: '~5.5',
       'typescript-transform-paths': '^3'
     }
     /* eslint-enable */

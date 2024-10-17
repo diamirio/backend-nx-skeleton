@@ -391,14 +391,7 @@ Same can be done for `build` and `server` by adding the `@webundsoehne/nx-execut
       }
     }
   },
-  plugins: [
-    {
-      // eslint & jest plugins
-    },
-    {
-      plugin: '@webundsoehne/nx-executors/plugin'
-    }
-  ]
+  plugins: ['@webundsoehne/nx-executors/plugin']
 }
 ```
 
