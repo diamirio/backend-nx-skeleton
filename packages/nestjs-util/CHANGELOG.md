@@ -1,3 +1,10 @@
+## @webundsoehne/nestjs-util [7.1.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.7...@webundsoehne/nestjs-util@7.1.8) (2024-10-18)
+
+### Bug Fixes
+
+- **nestjs-util:** fs-extra in env ([512e8eb](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/512e8eb7cd0b7d21359ef0ad01a191bbe4ef6b7a))
+- **nestjs-util:** remove deprecated deps in utils ([28861ba](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/28861bac546ba10e6b128a8e75a2d3a6e1c7d5c0))
+
 ## @webundsoehne/nestjs-util [7.1.7](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.6...@webundsoehne/nestjs-util@7.1.7) (2023-10-12)
 
 ### Bug Fixes
