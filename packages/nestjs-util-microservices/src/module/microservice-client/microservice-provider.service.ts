@@ -1,4 +1,4 @@
-import type { OnModuleInit } from '@nestjs/common'
+import type { OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Injectable } from '@nestjs/common'
 import type { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
 import type { Observable } from 'rxjs'
@@ -18,7 +18,7 @@ export class MicroserviceProviderService<
   MessageQueues extends string = any,
   MessageQueuePatterns extends Record<MessageQueues, any> = any,
   MessageQueueMap extends Record<MessageQueues, any> = any
-> implements OnModuleInit {
+> implements OnModuleInit, OnModuleDestroy {
   private clients: Record<MessageQueues, ClientProxy>
   private options: Required<MicroserviceProviderServiceOptions>
 
@@ -39,6 +39,12 @@ export class MicroserviceProviderService<
 
       return o
     }, {}) as unknown as Record<MessageQueues, ClientProxy>
+  }
+
+  onModuleDestroy (): void {
+    for (const client of Object.values<ClientProxy>(this.clients)) {
+      client.close()
+    }
   }
 
   // FIXME: this guys causes problems when typing the message request-respond types itself. only making the map a string map works.
@@ -81,6 +87,15 @@ export class MicroserviceProviderService<
         scheduler: asyncScheduler
       })
     )
+  }
+
+  close<Queue extends MessageQueues>(queue: Queue): void {
+    // it does not like ?.[]
+    if (!this.clients || !this.clients[queue]) {
+      throw new Error(`"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`)
+    }
+
+    this.clients[queue].close()
   }
 
   private async execute<
