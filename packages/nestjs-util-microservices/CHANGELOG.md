@@ -1,3 +1,9 @@
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.6...@webundsoehne/nestjs-util-microservices@4.0.0-beta.7) (2024-10-18)
+
+### Features
+
+- **nestjs-util-microservices:** add close method and onModuleDestroy method ([e5952d5](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/e5952d58c6faa10882226b51a1e99ef58d5dc42f))
+
 # @webundsoehne/nestjs-util-microservices [4.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.5...@webundsoehne/nestjs-util-microservices@4.0.0-beta.6) (2023-12-01)
 
 ### Dependencies
