@@ -1,3 +1,9 @@
+## @webundsoehne/nx-executors [1.0.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0...@webundsoehne/nx-executors@1.0.1) (2024-10-18)
+
+### Bug Fixes
+
+- **nx-executors:** typescript version, readme ([6f53650](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6f53650edeed780f8df0461eb5d4c15744f422a3))
+
 # @webundsoehne/nx-executors 1.0.0 (2024-10-16)
 
 ### Bug Fixes
