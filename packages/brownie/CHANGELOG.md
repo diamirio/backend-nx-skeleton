@@ -1,3 +1,9 @@
+## @webundsoehne/brownie [5.0.28](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.27...@webundsoehne/brownie@5.0.28) (2024-10-18)
+
+### Bug Fixes
+
+- **brownie:** update compose db min versions ([0015863](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/00158637bf43269c4c7398a69701a433d027b91a))
+
 ## @webundsoehne/brownie [5.0.27](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.26...@webundsoehne/brownie@5.0.27) (2023-07-20)
 
 ### Dependencies
