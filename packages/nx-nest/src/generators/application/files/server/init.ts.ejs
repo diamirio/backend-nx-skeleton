@@ -20,5 +20,11 @@ export async function createApplication (): Promise<void> {
 
   SwaggerService.enable(app)
 
-  await app.listen(port, '0.0.0.0')
+  await app.listen({ port, host: '0.0.0.0' }, (error, address) => {
+    if (error) {
+      Logger.error(`Error creating application: ${error.message}`)
+    }
+
+    Logger.log(`Listening on ${address}`, 'NestApplication')
+  })
 }
