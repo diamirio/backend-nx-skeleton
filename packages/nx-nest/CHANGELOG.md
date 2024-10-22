@@ -1,3 +1,21 @@
+# @webundsoehne/nx-nest [6.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.2...@webundsoehne/nx-nest@6.0.0-beta.3) (2024-10-22)
+
+### Bug Fixes
+
+- **nx-nest:** database dependencies, config ([576cd71](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/576cd712e9b980d8f971353e430af10245eb655c))
+- **nx-nest:** do not overwrite existing start and build scripts ([6d5aa53](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6d5aa534eaf0b649bb5f48603cf13ecfebdbd94c))
+- **nx-nest:** include db migration on build ([6b5c8c0](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6b5c8c0234c8bb2d853a78317a521f4d4f426aa8))
+- **nx-nest:** missing mongodb default config ([fcb3f76](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/fcb3f7662492324efaebd1219dce5fcc6b942782))
+- **nx-nest:** mongodb migration dir ([891a7df](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/891a7dfe87c9f3e326cb1b7e2f2451446ddf5f05))
+- **nx-nest:** remove module wrapper `create[..]` function ([1374286](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/137428614457e448bd791ca1bf62a18b280e97e2))
+- **nx-nest:** server template ([d35c916](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/d35c91662003a99eb2ff96b2e43f7b5d682f59ca))
+
+### Features
+
+- **nx-nest:** docker-compose service generation ([db3a7ef](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/db3a7ef4605fde3744e5feb1633c720ae4824a77))
+- **nx-nest:** select database system when using typeorm ([a85fe35](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a85fe35dd971511c0a13022951abf408cff695a2))
+- **nx-nest:** v20, docker-compose migration ([cb94a3e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/cb94a3e3094603563856d74512393d58cdada817))
+
 # @webundsoehne/nx-nest [6.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.1...@webundsoehne/nx-nest@6.0.0-beta.2) (2024-09-12)
 
 ### Bug Fixes
