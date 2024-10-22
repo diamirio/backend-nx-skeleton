@@ -9,173 +9,47 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 # <%= packageScope %>
 
-## Description
-
-This is an auto-generated custom workspace with [nx](https://www.npmjs.com/package/nx).
-
 <!-- toc -->
+- [Description](#description)
+- [Docker Compose](#docker-compose)
 <!-- tocstop -->
 
----
+## Description
 
-# Setup
+This is an auto-generated custom workspace with [nx](https://www.npmjs.com/package/nx).<br>
+Most information can be found in the `nx.json`, the projects `project.json` and `package.json`.
 
-Everything is dockerized and it will run out of the box, without extra hassle.
+## Commands
 
-Remember that `nx` does not run the services in any kind of order whenever you do `run-many` commands, it is strictly dependent on the dependencies of the project and may not work for tasks like seeding or migrating if the packages depend on a specific order.
+- `npm run start:one <project>` or `nx run <project>:serve` to start the application in watch-mode
+- `npm run build:one <project>` or `nx run <project>:build` to build the application
 
-```bash
-docker-compose up -d
-```
+If jest is set up:
+- `npm run test:one <project>` or `nx run <project>:test` to start an application's unit-tests
+- `npm run test:e2e:one <project>` or `nx run <project>:test:e2e` to start an applications e2e-tests
 
-## Proxying Commands to Docker
+If a database is set up:
+- `npm run backend:migrate:one <project>` or `nx run <project>:migration:run` to migrate open db-migrations
+- `npm run backend:migrate:rollback:one <project>` or `nx run <project>:migration:rollback` to revert the last db migration
+- `npm run backend:migrations:create:one <project>` or `nx run <project>:migration:create` to create a blank migration file
+- `npm run backend:migrations:generate:one <project>` or `nx run <project>:migration:generate` to generate a migration file (only typeorm)
 
-All the actions should be done inside the container to have proper access to databases and helper services.
+**Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`, `migrate`, `migrate:rollback`
 
-CLI script at the root of the repository is helpful in this case, where it proxies the commands in to the container.
 
-```bash
-# Start a bash session inside the container
-./cli bash
-```
+## Docker Compose
+On workspace and application generation two docker-files will also be generated:
+1. docker-compose.yml
+2. service-docker-compose.yml
 
-## Build
+First on starts the full application: dependencies like the database and message-queue, together with a single nx container starting all projects.<br>
+The seconds one only starts the dependencies without nx, if you want to start the nx processes directly on your machine instead.
 
-```bash
-# build all services
-./cli npm run build
+You can proxy command to the nx container to i.e. run tests: `docker compose exec nx npm run test`<br>
+The full project is mounted inside the nx container, so any `package.json` script or `nx` command can be executed inside the container.
 
-# build a single service
-./cli npm run build:one ${PACKAGE}
+**Hint**: To exclude some projects from running, either update the docker compose command like `command: npm run start -- --exclude=bgtask`, or add a new `package.json` script and replace the command to run.
 
-# append --skip-nx-cache for disabling the cache
-
-# build only changed services
-./cli npm run affected:build
-```
-
-## Lint
-
-```bash
-# lint whole project, with prettier first tslint/eslint later
-./cli npm run lint
-
-# lint only affected part
-./cli npm run affected:lint
-
-# check linting rules
-./cli npm run lint:check
-```
-
-## Testing
-
-Testing actions of normal `testing`, `coverage`, `watch` mode and `e2e` is accessible by `nx`.
-
-### `@webundsoehne/nx-builders:run` to run jest
-
-```bash
-# run the tests for all services
-./cli npm run test
-
-# run the tests for a single service
-./cli npm run test:one ${PACKAGE}
-
-# run the e2e tests for all services
-./cli npm run test:e2e
-
-# run the e2e tests for a single service
-./cli npm run test:e2e:one ${PACKAGE}
-
-# run the tests with coverage report for all services
-./cli npm run test:cov
-
-# run the tests with coverage report for a single service
-./cli npm run test:cov:one ${PACKAGE}
-
-# to run development mode for tests with watch mode in jest
-# this is intended to be ran in a one-at-a-time manner, because the output hijacks stdout and is interactive
-# a debug port in 9229 will be open
-./cli npm run test:dev -- ${PACKAGE}
-
-# to change the debug port
-./cli npm run test:dev -- ${PACKAGE} --debug-port 9300
-
-# for running the e2e tests in dev mode
-./cli npm run test:dev:e2e -- ${PACKAGE}
-```
-
-### `@nrwl/jest` to run jest
-
-```bash
-# run the tests for all services
-./cli npm run test
-
-# run the tests for a single service
-./cli npm run test:one ${PACKAGE}
-
-# run the e2e tests
-./cli npm run e2e
-
-# run the e2e tests for a single service
-./cli npm run e2e:one ${PACKAGE}
-```
-
-## Backend Related
-
-### Seeding
-
-A fresh start requires the seeds to be run and this has to be repeated each time database containers are flushed.
-
-```bash
-# run the seeds for all services
-./cli npm run backend:seed
-
-# to run seeds for all services
-./cli npm run backend:seed:one ${PACKAGE}
-```
-
-### Migrations
-
-Migration actions of `run`, `mock-run`, `create`, `generate`, `rollback` is accessible by `nx`.
-
-Migration runner currently only works for backend applications that are utilizing `TypeOrm` as their database adapter.
-
-```bash
-# to run migrations for all services
-./cli npm run backend:migrate
-
-# to run the migrations for a single service
-./cli npm run backend:migrate:one ${PACKAGE}
-
-# to run migrations in mock mode for all services
-./cli npm run backend:migrate:mock
-
-# to run the migrations in mock mode for a single service
-./cli npm run backend:migrate:mock:one ${PACKAGE}
-
-# to rollback migrations for all services
-./cli npm run backend:migrate:rollback
-
-# to rollback the migrations for a single service
-./cli npm run backend:migrate:rollback:one ${PACKAGE}
-
-# create migrations for a single service, you have to pass in --args flag for naming it
-./cli npm run backend:migrations:create:one -- ${PACKAGE} --args ${MIGRATION_NAME}
-
-# generate migrations for a single service, you have to pass in --args flag for naming it
-./cli npm run nx -- migration:generate:generate ${PACKAGE} --args ${MIGRATION_NAME}
-```
-
-### Running CLIs
-
-CLIs are accesible by NX. Arguments can be passed through `--args`.
-
-```bash
-# to run a cli
-./cli npm run backend:command:one -- ${PACKAGE} --args "hello user"
-```
-
----
 
 ## Stay in touch
 

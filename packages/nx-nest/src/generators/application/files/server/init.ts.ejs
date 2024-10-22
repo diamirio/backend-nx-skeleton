@@ -1,13 +1,14 @@
+import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { FastifyAdapter } from '@nestjs/platform-fastify'
 
-import { createServerModule } from './server.module'
+import { ServerModule } from './server.module'
 import { LoggerService, ConfigService } from '@webundsoehne/nestjs-util'
 import { SwaggerService } from '@webundsoehne/nestjs-util-restful'
 
 export async function createApplication (): Promise<void> {
-  const app = await NestFactory.create<NestFastifyApplication>(createServerModule(), new FastifyAdapter(), {
+  const app = await NestFactory.create<NestFastifyApplication>(ServerModule, new FastifyAdapter(), {
     logger: new LoggerService()
   })
 
@@ -20,5 +21,11 @@ export async function createApplication (): Promise<void> {
 
   SwaggerService.enable(app)
 
-  await app.listen(port, '0.0.0.0')
+  await app.listen({ port, host: '0.0.0.0' }, (error, address) => {
+    if (error) {
+      Logger.error(`Error creating application: ${error.message}`)
+    }
+
+    Logger.log(`Listening on ${address}`, 'NestApplication')
+  })
 }

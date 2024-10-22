@@ -2,3 +2,4 @@
 !dist/
 !dist/**
 !generators.json
+!migrations.json

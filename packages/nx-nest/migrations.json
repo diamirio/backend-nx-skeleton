@@ -1,0 +1,33 @@
+{
+  "schematics": {
+    "migrate-to-20-and-docker-compose": {
+      "cli": "nx",
+      "version": "3",
+      "description": "Nx 20, Docker-Compose setup",
+      "factory": "./dist/migrations/migrate-to-nx-20-and-docker-compose"
+    }
+  },
+  "packageJsonUpdates": {
+    "migrate-to-20-and-docker-compose": {
+      "version": "3",
+      "packages": {
+        "nx": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/eslint": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/eslint-plugin": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/workspace": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}

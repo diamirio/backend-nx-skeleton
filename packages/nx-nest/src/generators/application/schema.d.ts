@@ -1,11 +1,12 @@
-import type { Component, Database } from '../../constant'
+import type { Component, Database, DatabaseOrm } from '../../constant'
 
 export interface ApplicationGeneratorSchema {
   name: string
   jest: boolean
   skipPackageJson: boolean
   components: Component[]
-  database: Database
+  databaseOrm: DatabaseOrm
+  database?: Database
   microserviceProvider: boolean
   update: boolean
 }

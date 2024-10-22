@@ -1,32 +1,27 @@
 import { Module, NestModule } from '@nestjs/common'
-<% if (database === DATABASE.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
-<% if (database === DATABASE.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
+<% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
+<% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
 
 import * as modules from './modules'
-<% if (database !== DATABASE.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>' <% } %>
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>' <% } %>
 import {ConfigService } from '@webundsoehne/nestjs-util'
 <% if (microserviceProvider) { %>import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util-microservices'<% } -%>
 
 /**
   * Utilizes (nestjs-commander)[https://docs.nestjs.com/recipes/nest-commander].
  */
-<% if (database !== DATABASE.NONE) { %>export function createCommandModule (mock = false): new(mock: boolean) => NestModule {
-<% } else { -%>export function createCommandModule (): new() => NestModule { <% } %>
 @Module({
   providers: [
     ConfigService
   ],
   imports: [
-    <% if (database === DATABASE.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions(mock)),<% } -%>
-    <% if (database === DATABASE.MONGOOSE) { %>MongooseModule.forRoot(getDatabaseOptions(mock)),<% } -%>
+    <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
+    <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
     <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
     ...Object.values(modules)
     ]
 })
-  class CommandModule implements NestModule {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    async configure (): Promise<any> {}
-  }
-
-  return CommandModule
+export class CommandModule implements NestModule {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async configure (): Promise<any> {}
 }

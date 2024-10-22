@@ -15,9 +15,7 @@ export const SCRIPTS = {
   'test:cov:one': 'nx test -c cov --project',
   lint: 'npm run lint:check -- --fix',
   'lint:check': 'nx run-many --parallel 10 --target lint --',
-  update: 'nx migrate latest',
-  clean: 'rimraf dist/ .cache/ node_modules/ yarn.lock yarn-error.log package-lock.json',
-  'backend:command:one': 'nx command'
+  update: 'nx migrate latest'
 }
 
 export const CUSTOM_FIELDS = {

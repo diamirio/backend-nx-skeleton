@@ -1,6 +1,6 @@
 ---
 variables:
-  NODE_VERSION: 18-alpine
+  NODE_VERSION: <%= NODE_VERSION %>-alpine
   ## NODE OPTIONS
   # install: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#install
   # build: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#build
@@ -11,6 +11,8 @@ variables:
   # please read through the readme for additional information: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/select-env
   ## DOCKER OPTIONS
   # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
+  ## ENABLE TESTS
+  # NODE_TEST_COMMAND: "npm run test"
 
 stages:
   - install
@@ -28,9 +30,10 @@ include:
     ref: main
 #
 ##################################
-## add your applications here. ##
+##        applications         ##
 #################################
-# docker-app:
+## template
+# app:
 #   stage: docker
 #   extends: .docker-build-internal
 #   variables:
@@ -43,8 +46,9 @@ include:
 #       - .gitlab-ci.yml
 #       - package.json
 #       - package-lock.json
-#       - 'libs/**/*'
-#       - 'apps/app/**/*'
+#       - libs/**/*
+#       - apps/app/**/*
 #     refs:
 #       - main
+#       - develop
 #       - tags

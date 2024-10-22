@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { NODE_VERSION } from '../index'
+
 export const DEPENDENCIES = {
   '@fastify/static': '^6',
   '@fastify/swagger': '^8.11.0',
@@ -16,25 +18,25 @@ export const DEPENDENCIES = {
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nx/eslint': '^19.3.0',
-  '@nx/eslint-plugin': '^19.3.0',
-  '@nx/workspace': '^19.3.0',
-  '@types/node': '^18',
+  '@nx/eslint': '^20.0.0',
+  '@nx/eslint-plugin': '^20.0.0',
+  '@nx/workspace': '^20.0.0',
+  '@types/node': `^${NODE_VERSION}`,
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',
-  '@webundsoehne/nx-nest': '^6.0.0-beta.1',
+  '@webundsoehne/nx-nest': '^6.0.0-beta.2',
   eslint: '^8',
   'eslint-config-prettier': '^9.1.0',
   'eslint-module-utils': '^2',
   'eslint-plugin-import': '^2',
   'lint-staged': '^13',
-  nx: '^19.3.0',
+  nx: '^20.0.0',
   prettier: '^2.7.1',
   'simple-git-hooks': '^2',
   'ts-node': '^10',
   'ts-node-dev': '^2',
   'ts-patch': '^3',
-  typescript: '^5',
+  typescript: '~5.5', // fixed minor-version until "typescript-transform-paths" works with version 5.6+
   'typescript-transform-paths': '^3'
 }

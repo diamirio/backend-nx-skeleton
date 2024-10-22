@@ -5,15 +5,16 @@ import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 
-import { Component, Database, getComponentMetadata } from '../../constant'
+import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
+import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
+// eslint-disable-next-line complexity
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
   if (!options.components?.length) {
     output.error({ title: '[Application] At least one component must be selected' })
@@ -30,13 +31,16 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   const templateContext: Record<string, any> = {
     ...options,
     isServer: options.components.includes(Component.SERVER),
+    isBgTask: options.components.includes(Component.BG_TASK),
     includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
     applicationMetadata,
     scope,
     packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
     projectNames,
     fileName: projectNames.fileName,
+    NODE_VERSION,
     COMPONENT: Component,
+    DATABASE_ORM: DatabaseOrm,
     DATABASE: Database
   }
 
@@ -46,28 +50,27 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   /**
    * DATABASE
    */
-  if (options.database !== Database.NONE) {
-    const databaseOrm = (readNxJson(tree) as any)?.integration?.orm
+  if (options.databaseOrm !== DatabaseOrm.NONE) {
+    const databaseIntegration = (readNxJson(tree) as any)?.integration?.orm
 
-    if (databaseOrm && databaseOrm.database !== options.database) {
-      output.error({ title: `[Application] Invalid database-orm. "${databaseOrm}" already configured.` })
+    output.log({ title: '[Application] Setup database-orm util library ...' })
 
+    const databaseLib = await databaseLibraryGenerator(tree, {
+      databaseOrm: options.databaseOrm,
+      database: options.database ?? databaseIntegration?.system,
+      name: 'database',
+      skipPackageJson: options.skipPackageJson,
+      update: !!databaseIntegration
+    })
+
+    if (!databaseLib) {
       return
     }
 
-    if (!databaseOrm) {
-      output.log({ title: '[Application] Setup database-orm util library ...' })
-
-      tasks.push(
-        await databaseLibraryGenerator(tree, {
-          database: options.database,
-          name: 'database',
-          skipPackageJson: options.skipPackageJson
-        })
-      )
-    }
+    tasks.push(databaseLib)
 
     templateContext.orm = (readNxJson(tree) as any)?.integration?.orm
+    templateContext.database = templateContext.orm.system
   }
 
   /**
@@ -79,12 +82,16 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     if (!microserviceProvider) {
       output.log({ title: '[Application] Setup microservice-provider util library ...' })
 
-      tasks.push(
-        await microserviceProviderGenerator(tree, {
-          name: 'microservice-provider',
-          skipPackageJson: options.skipPackageJson
-        })
-      )
+      const mspLib = await microserviceProviderGenerator(tree, {
+        name: 'microservice-provider',
+        skipPackageJson: options.skipPackageJson
+      })
+
+      if (!mspLib) {
+        return
+      }
+
+      tasks.push(mspLib)
     }
 
     templateContext.msp = (readNxJson(tree) as any)?.integration?.msp
@@ -153,11 +160,15 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   if (!options.skipPackageJson) {
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
-      content.scripts.start = 'nx run-many -t serve --parallel 100'
-      content.scripts['start:one'] = 'nx serve'
-      content.scripts.build = 'nx run-many -t build'
-      content.scripts['build:one'] = 'nx build'
-      content.scripts['build:nocache'] = 'nx run-many -t build --skip-nx-cache'
+      content.scripts.start ??= 'nx run-many -t serve --parallel 100'
+      content.scripts['start:one'] ??= 'nx serve'
+      content.scripts.build ??= 'nx run-many -t build'
+      content.scripts['build:one'] ??= 'nx build'
+      content.scripts['build:nocache'] ??= 'nx run-many -t build --skip-nx-cache'
+
+      if (options.components.includes(Component.COMMAND)) {
+        content.scripts['command:one'] ??= 'nx command'
+      }
 
       return content
     })
@@ -169,11 +180,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
           case Component.SERVER:
           case Component.BG_TASK:
           case Component.MICROSERVICE:
-            content.scripts.start = `node ./${projectRoot}/src/main.js`
+            content.scripts.start ??= `node ./${projectRoot}/src/main.js`
             break
 
           case Component.COMMAND:
-            content.scripts.command = `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
+            content.scripts.command ??= `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
             break
         }
         /* eslint-enable*/
@@ -245,7 +256,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     }
 
     if (options.components.includes(Component.BG_TASK)) {
-      if (options.database === Database.TYPEORM) {
+      if (options.databaseOrm === DatabaseOrm.TYPEORM) {
         content.targets = {
           ...content.targets ?? {},
           migration: {
@@ -275,7 +286,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
             }
           }
         }
-      } else if (options.database === Database.MONGOOSE) {
+      } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
         content.targets = {
           ...content.targets ?? {},
           migration: {
@@ -301,7 +312,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
         }
       }
 
-      if (options.database !== Database.NONE) {
+      if (options.databaseOrm !== DatabaseOrm.NONE) {
         content.targets = {
           ...content.targets ?? {},
           seed: {
@@ -312,6 +323,17 @@ export default async function applicationGenerator (tree: Tree, options: Applica
                 NODE_SERVICE: 'cli'
               },
               command: 'ts-node ./src/main.ts seed'
+            }
+          },
+          build: {
+            options: {
+              assets: [
+                {
+                  glob: '*.js',
+                  input: 'libs/database/src/migration',
+                  output: 'libs/database/src/migration'
+                }
+              ]
             }
           }
         }
@@ -360,6 +382,40 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
     return content
   })
+
+  // update gitlab-ci
+  if (tree.exists('.gitlab-ci.yml')) {
+    updateYaml(tree, '.gitlab-ci.yml', (content) => {
+      if (!content.has(projectNames.fileName)) {
+        const configName = content.createNode(projectNames.fileName)
+        const configContent = content.createNode({
+          key: projectNames.fileName,
+          value: {
+            stage: 'docker',
+            extends: '.docker-build-internal',
+            variables: {
+              DOCKERFILE_CONTEXT: `./dist/apps/${projectNames.fileName}`,
+              DOCKER_IMAGE_INTERNAL_NAME: `${projectNames.fileName}`
+            },
+            dependencies: ['build'],
+            only: {
+              changes: ['.gitlab-ci.yml', 'package.json', 'package-lock.json', 'libs/**/*', `apps/${projectNames.fileName}/**/*`],
+              refs: ['main', 'develop', 'tags']
+            }
+          }
+        })
+
+        if (content.comment) {
+          configName.commentBefore = content.comment
+          content.comment = null
+        } else {
+          configName.spaceBefore = true
+        }
+
+        content.add({ key: configName, value: configContent })
+      }
+    })
+  }
 
   if (tree.exists(join(appRoot, '.gitkeep'))) {
     tree.delete(join(appRoot, '.gitkeep'))

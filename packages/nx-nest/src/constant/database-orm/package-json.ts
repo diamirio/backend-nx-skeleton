@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export const SCRIPTS = {
-  'backend:seed': 'nx run-many --target seed --parallel',
-  'backend:seed:one': 'nx seed',
-  'backend:migrate': 'nx run-many --target migration -c run --parallel',
-  'backend:migrate:one': 'nx migration -c run',
-  'backend:migrate:rollback': 'nx run-many --target migration -c rollback --parallel',
-  'backend:migrate:rollback:one': 'nx migration -c rollback',
-  'backend:migrations:create:one': 'nx migration -c create',
-  'backend:migrations:generate:one': 'nx migration -c generate'
+  seed: 'nx run-many --target seed --parallel',
+  'seed:one': 'nx seed',
+  migrate: 'nx run-many --target migration -c run --parallel',
+  'migrate:one': 'nx migration -c run',
+  'migrate:rollback': 'nx run-many --target migration -c rollback --parallel',
+  'migrate:rollback:one': 'nx migration -c rollback',
+  'migrations:create:one': 'nx migration -c create',
+  'migrations:generate:one': 'nx migration -c generate'
 }

@@ -1,9 +1,12 @@
+import { join } from 'node:path'
+
 import { getDatabaseOptions } from './database-options'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
-export function generateMongooseMigrateConfig (mock?: boolean): any {
-  const { migration: migrationOptions } = ConfigService.get('database')
-  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions(mock)
+export function generateMongooseMigrateConfig (): any {
+  const migrationOptions = ConfigService.get('database.migration')
+  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions()
+  const migrationsDir = join(__dirname, `../${migrationOptions.migrationsDir}`)
 
   let url = plainUrl
 
@@ -16,7 +19,8 @@ export function generateMongooseMigrateConfig (mock?: boolean): any {
       url,
       options
     },
-    ...migrationOptions
+    ...migrationOptions,
+    migrationsDir
   }
 }
 

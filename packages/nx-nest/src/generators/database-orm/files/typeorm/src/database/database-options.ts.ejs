@@ -3,17 +3,17 @@ import type { DataSourceOptions } from 'typeorm'
 
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
-const { mock: mockOptions = {}, directories, ...options } = ConfigService.get('database')
-
+const { directories, ...options } = ConfigService.get('database')
 const entitiesDir = join(__dirname, `../${directories.entity}`)
 const migrationsDir = join(__dirname, `../${directories.migration}`)
-const databaseOptions: DataSourceOptions = {
-  ...options,
-  entities: [`${entitiesDir}/*{.ts,.js}`],
-  migrations: [`${migrationsDir}/*{.ts,.js}`],
-  cli: { entitiesDir, migrationsDir }
-}
 
-export function getDatabaseOptions (mock = false): DataSourceOptions {
-  return mock ? { ...databaseOptions, ...mockOptions } : databaseOptions
+export function getDatabaseOptions (): DataSourceOptions {
+  const databaseOptions: DataSourceOptions = {
+    ...options,
+    entities: [`${entitiesDir}/*{.ts,.js}`],
+    migrations: [`${migrationsDir}/*{.ts,.js}`],
+    cli: { entitiesDir, migrationsDir }
+  }
+
+return databaseOptions
 }

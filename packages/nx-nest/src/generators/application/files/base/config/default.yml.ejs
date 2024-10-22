@@ -28,32 +28,37 @@ messageQueue:
   urls:
     - amqp://rabbitmq:5672
 <% } -%>
-<% if (database !== DATABASE.NONE) { %>
-database: <% if (database === DATABASE.TYPEORM) { %>
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>
+database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   database: db
-  mock:
-    database: db_mock
   username: user
   password: secret
-  host: localhost
-  type: # mysql | postgresql
-  port: # 3306 | 5432
+  host: db
+  type: <% if (database === DATABASE.MYSQL) { %>mysql<%
+  } else if (database === DATABASE.POSTGRES) { %>postgres<%
+  } else { %># @todo: set driver<% } %>
+  port: <% if (database === DATABASE.MYSQL) { %>3306<%
+  } else if (database === DATABASE.POSTGRES) { %>5432<%
+  } else { %># @todo: set port<% } %>
   synchronize: false
   cache: false
   keepConnectionAlive: true
   directories:
     entity: entity
     migration: migration
-<% } else if (database === DATABASE.MONGOOSE) { %>
-  host: localhost
+    seed: seed
+<% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
+  host: db
+  port: 27017
+  database: db
+  username: user
+  password: secret
   ignoreUndefined: true
-  useNewUrlParser: true
-  useUnifiedTopology: true
   migration:
-  migrationsDir: migration
-  changelogCollectionName: migrations
-  migrationFileExtension: '.js'
-  useFileHash: false
-  moduleSystem: esm
+    migrationsDir: migration
+    changelogCollectionName: migrations
+    migrationFileExtension: '.js'
+    useFileHash: false
+    moduleSystem: esm
 <% } -%>
 <% } -%>

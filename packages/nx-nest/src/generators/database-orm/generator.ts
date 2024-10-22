@@ -3,20 +3,37 @@ import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, nam
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
+import { prompt } from 'enquirer'
 import { join } from 'node:path'
+import { YAMLMap, YAMLSeq } from 'yaml'
 
-import { Database } from '../../constant'
-import { DEPENDENCIES_MONGOOSE, DEPENDENCIES_TYPEORM, SCRIPTS } from '../../constant/database-orm'
-import { applyTasks, applyTemplateFactory } from '../../utils'
+import { Database, DatabaseOrm } from '../../constant'
+import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
+import {
+  DEPENDENCIES_MONGOOSE,
+  DEPENDENCIES_TYPEORM,
+  DEPENDENCIES_TYPEORM_MYSQL,
+  DEPENDENCIES_TYPEORM_POSTGRES,
+  DOCKER_DB_SERVICE,
+  DOCKER_SERVICE_NAME,
+  SCRIPTS
+} from '../../constant/database-orm'
+import { applyTasks, applyTemplateFactory, updateYaml } from '../../utils'
 import type { DatabaseOrmGeneratorSchema } from './schema'
 
-function getDatabaseOrmDetails (orm: string): { folder: string, dependencies: Record<string, string> } {
+function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder: string, dependencies: Record<string, string> } {
   switch (orm) {
-  case Database.TYPEORM:
-    return { folder: Database.TYPEORM, dependencies: DEPENDENCIES_TYPEORM }
+  case DatabaseOrm.TYPEORM:
+    if (database === Database.MYSQL) {
+      return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_MYSQL }
+    } else if (database === Database.POSTGRES) {
+      return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_POSTGRES }
+    } else {
+      return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM }
+    }
 
-  case Database.MONGOOSE:
-    return { folder: Database.MONGOOSE, dependencies: DEPENDENCIES_MONGOOSE }
+  case DatabaseOrm.MONGOOSE:
+    return { folder: DatabaseOrm.MONGOOSE, dependencies: DEPENDENCIES_MONGOOSE }
 
   default:
     return
@@ -36,12 +53,33 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     packageScope: scope ? importPath : libraryName
   }
 
+  if (options.databaseOrm === DatabaseOrm.TYPEORM) {
+    options.database ??= (
+      await prompt<{ database?: Database }>({
+        type: 'autocomplete',
+        name: 'database',
+        message: 'Please select a database:',
+        choices: [Database.MYSQL, Database.POSTGRES, Database.OTHER]
+      })
+    ).database
+  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
+    options.database = Database.MONGO
+  }
+
   const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
   const projectRoot = join(libRoot, libraryName)
-  const databaseOrm = getDatabaseOrmDetails(options.database)
+  const databaseOrm = getDatabaseOrmDetails(options.databaseOrm, options.database)
 
   if (!databaseOrm) {
     output.error({ title: '[Database] Missing orm config' })
+
+    return
+  }
+
+  const integration = (readNxJson(tree) as any)?.integration?.orm
+
+  if (integration && (integration.database !== options.databaseOrm || integration.system && integration.system !== options.database)) {
+    output.error({ title: `[Application] Invalid database config. "${integration.database}-${integration.system}" already configured.` })
 
     return
   }
@@ -51,20 +89,22 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
   })
 
-  addProjectConfiguration(tree, libraryName, {
-    root: projectRoot,
-    sourceRoot: join(projectRoot, 'src'),
-    projectType: ProjectType.Library,
-    tags: [],
-    targets: {}
-  })
+  if (!options.update) {
+    addProjectConfiguration(tree, libraryName, {
+      root: projectRoot,
+      sourceRoot: join(projectRoot, 'src'),
+      projectType: ProjectType.Library,
+      tags: [],
+      targets: {}
+    })
 
-  applyTemplate(['files', databaseOrm.folder], templateContext, projectRoot)
+    applyTemplate(['files', databaseOrm.folder], templateContext, projectRoot)
+
+    addTsConfigPath(tree, importPath, [join(projectRoot, 'src', 'index.ts')])
+    addTsConfigPath(tree, `${importPath}/*`, [join(projectRoot, 'src', '*')])
+  }
 
   await formatFiles(tree)
-
-  addTsConfigPath(tree, importPath, [join(projectRoot, 'src', 'index.ts')])
-  addTsConfigPath(tree, `${importPath}/*`, [join(projectRoot, 'src', '*')])
 
   // dependencies and scripts
   if (!options.skipPackageJson) {
@@ -88,7 +128,8 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     content.integration = {
       ...content.integration ?? {},
       orm: {
-        database: options.database,
+        database: options.databaseOrm,
+        system: options.database,
         projectRoot,
         importPath
       }
@@ -96,6 +137,29 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
     return content
   })
+
+  if (options.database !== Database.OTHER) {
+    updateYaml(tree, 'service-docker-compose.yml', (content) => {
+      if (!content.has('services')) {
+        content.add({ key: 'services', value: new YAMLMap() })
+      }
+
+      if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
+        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+      }
+    })
+    updateYaml(tree, 'docker-compose.yml', (content) => {
+      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
+        content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
+      }
+
+      const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+
+      if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
+        content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+      }
+    })
+  }
 
   if (tree.exists(join(libRoot, '.gitkeep'))) {
     tree.delete(join(libRoot, '.gitkeep'))
