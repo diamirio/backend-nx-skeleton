@@ -1,3 +1,9 @@
+# @webundsoehne/nx-nest [6.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.3...@webundsoehne/nx-nest@6.0.0-beta.4) (2024-10-23)
+
+### Features
+
+- **nx-nest:** move nx cache up a level ([1f24dd9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/1f24dd922d6da59666d9aee039980b18132f8adb))
+
 # @webundsoehne/nx-nest [6.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.2...@webundsoehne/nx-nest@6.0.0-beta.3) (2024-10-22)
 
 ### Bug Fixes
