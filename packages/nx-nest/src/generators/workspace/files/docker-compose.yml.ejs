@@ -8,7 +8,7 @@ services:
         working_dir: /opt/workspace
         environment:
             NX_CACHE_DIRECTORY: /opt/.nx/cache
-            NX_WORKSPACE_DATA_DIRECTORY: /opt/.nx/cache
+            NX_WORKSPACE_DATA_DIRECTORY: /opt/.nx/workspace-data
         volumes:
             - .:/opt/workspace
             - nx_cache:/opt/.nx
