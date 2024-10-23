@@ -24,7 +24,7 @@ export interface BuildTargetOptions<O> {
 interface BuildPluginResponse<O> {
   createNodes: CreateNodes
   createNodesV2: CreateNodesV2
-  buildTarget: (options: BuildTargetOptions<O>) => TargetConfiguration
+  buildTarget: (options: BuildTargetOptions<O>) => Record<string, TargetConfiguration>
   buildNodes: (configFiles: string[], options: O, context: CreateNodesContext) => Promise<CreateNodesResultV2>
 }
 
@@ -51,7 +51,6 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
   projectTypes: string[] = ['application']
 
   abstract name: string
-  abstract targetName: string
 
   async internalCreateNode (configFilePath: string, options: O, context: CreateNodesContext, targetsCache: TargetCache): Promise<CreateNodesResult> {
     const projectRoot = dirname(configFilePath)
@@ -75,9 +74,7 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
     return {
       projects: {
         [projectRoot]: {
-          targets: {
-            [options?.targetName ?? this.targetName]: targetsCache[hash]
-          }
+          targets: targetsCache[hash]
         }
       }
     }
@@ -98,5 +95,5 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
     }
   }
 
-  abstract buildTarget (option: BuildTargetOptions<O>): TargetConfiguration
+  abstract buildTarget (option: BuildTargetOptions<O>): Record<string, TargetConfiguration>
 }

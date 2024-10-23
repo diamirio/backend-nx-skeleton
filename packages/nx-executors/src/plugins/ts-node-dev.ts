@@ -10,9 +10,8 @@ export interface TsNodeDevPluginOptions {
 
 class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   name = 'ts-node-dev'
-  targetName = 'serve'
 
-  buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): TargetConfiguration {
+  buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): Record<string, TargetConfiguration> {
     const target: TargetConfiguration = {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       inputs: ['production', '^production'],
@@ -27,7 +26,7 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
       target.options.env = { NODE_SERVICE: nodeService }
     }
 
-    return target
+    return { [options?.targetName ?? 'serve']: target }
   }
 
   private guessNodeService (components: string[]): string {

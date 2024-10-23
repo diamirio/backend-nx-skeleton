@@ -31,19 +31,19 @@ export const createNodes: CreateNodes = [
     }
 
     const targets = {
-      [options?.tscOptions?.targetName ?? 'build']: buildTscTarget({
+      ...buildTscTarget({
         options: options?.tscOptions,
         projectConfig,
         context,
         projectRoot
       }),
-      [options?.tsNodeDevOptions?.targetName ?? 'serve']: buildTsNodeDevTarget({
+      ...buildTsNodeDevTarget({
         options: options?.tsNodeDevOptions,
         projectConfig,
         context,
         projectRoot
       }),
-      [options?.jestOptions?.targetName ?? 'test']: buildJestTarget({
+      ...buildJestTarget({
         options: options?.jestOptions,
         projectConfig,
         context,

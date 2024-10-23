@@ -10,15 +10,16 @@ export interface JestPluginOptions {
   targetName?: string
   executor?: string
   testConfig?: string
+  e2eTargetName?: string
+  e2eExecutor?: string
   e2eTestConfig?: string
 }
 
 class JestPlugin extends PluginBuilder<JestPluginOptions> {
   name = 'jest'
-  targetName = 'test'
   projectTypes = ['application', 'library']
 
-  buildTarget ({ options, context, projectRoot }: BuildTargetOptions<JestPluginOptions>): TargetConfiguration {
+  buildTarget ({ options, context, projectRoot }: BuildTargetOptions<JestPluginOptions>): Record<string, TargetConfiguration> {
     const cwd = join(context.workspaceRoot, projectRoot)
 
     options ??= {}
@@ -29,33 +30,44 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
       return {}
     }
 
-    const testTarget: TargetConfiguration = {
-      executor: options.executor ?? '@webundsoehne/nx-executors:jest',
-      cache: true,
-      inputs: ['default', '^default', '{workspaceRoot}/jest.preset.js', '{workspaceRoot}/jest-e2e.preset.js', { externalDependencies: ['jest'] }],
-      options: {
-        jestConfig: options.testConfig,
-        passWithNoTests: true,
-        noStackTrace: true
-      },
-      configurations: {
-        cov: {
-          coverage: true
+    const targets: Record<string, TargetConfiguration> = {
+      [options?.targetName ?? 'test']: {
+        executor: options.executor ?? '@webundsoehne/nx-executors:jest',
+        cache: true,
+        inputs: ['default', '^default', '{workspaceRoot}/jest.preset.js', { externalDependencies: ['jest'] }],
+        options: {
+          jestConfig: options.testConfig,
+          passWithNoTests: true,
+          noStackTrace: true
+        },
+        configurations: {
+          cov: {
+            coverage: true
+          }
         }
       }
     }
 
     if (options.e2eTestConfig && existsSync(join(cwd, options.e2eTestConfig))) {
-      testTarget.configurations = {
-        ...testTarget.configurations,
-        e2e: {
+      targets[options?.e2eTargetName ?? 'e2e'] = {
+        executor: options.e2eExecutor ?? '@webundsoehne/nx-executors:jest',
+        cache: true,
+        inputs: ['default', '^default', '{workspaceRoot}/jest-e2e.preset.js', { externalDependencies: ['jest'] }],
+        options: {
           jestConfig: options.e2eTestConfig,
+          passWithNoTests: true,
+          noStackTrace: true,
           runInBand: true
+        },
+        configurations: {
+          cov: {
+            coverage: true
+          }
         }
       }
     }
 
-    return testTarget
+    return targets
   }
 
   private findConfigFile (cwd: string, name: string, folder?: string[]): string {
