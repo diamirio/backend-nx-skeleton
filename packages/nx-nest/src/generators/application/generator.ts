@@ -217,8 +217,8 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
       if (!options.skipPackageJson) {
         updateJson(tree, 'package.json', (content) => {
-          content.scripts['test:e2e'] = 'nx run-many -t test -c e2e --parallel 10'
-          content.scripts['test:e2e:one'] = 'nx test -c e2e'
+          content.scripts['test:e2e'] = 'nx run-many -t e2e --parallel 10'
+          content.scripts['test:e2e:one'] = 'nx e2e'
 
           return content
         })

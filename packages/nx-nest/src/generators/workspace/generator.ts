@@ -84,6 +84,14 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
     )
   }
 
+  // extend generated gitignore
+  if (tree.exists('.gitignore')) {
+    const ignored = tree.read('.gitignore')
+    const toIgnore = ['# Node Package Manager', '.npm', '', '# enviroment files', '.*env*', '', '# File Uploads', 'uploads', '', '# Config', '**/config/local*'].join('\n')
+
+    tree.write('.gitignore', `${ignored}\n${toIgnore}`)
+  }
+
   output.log({ title: '[Workspace] Post-Processing ...' })
 
   return applyTasks(tasks)
