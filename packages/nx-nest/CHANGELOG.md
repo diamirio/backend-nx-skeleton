@@ -1,3 +1,13 @@
+# @webundsoehne/nx-nest [6.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.4...@webundsoehne/nx-nest@6.0.0-beta.5) (2024-10-25)
+
+### Bug Fixes
+
+- **nx-nest:** custom gitignore entries ([da489a3](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/da489a32cff3b88e85bef6f95e486283b0c19c24))
+
+### Features
+
+- **nx-nest:** split test and e2e targets ([ec8a830](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ec8a830b0d61184ba6a134df13439c1f7c80485b))
+
 # @webundsoehne/nx-nest [6.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.3...@webundsoehne/nx-nest@6.0.0-beta.4) (2024-10-23)
 
 ### Features
