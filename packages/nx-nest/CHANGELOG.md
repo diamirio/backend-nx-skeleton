@@ -1,3 +1,11 @@
+# @webundsoehne/nx-nest [6.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.5...@webundsoehne/nx-nest@6.0.0-beta.6) (2024-10-29)
+
+### Bug Fixes
+
+- **nx-nest:** activate git hooks on application generation ([c62abe3](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c62abe3ff83bf3e2931ac9cf4d75acd75ab8a98d))
+- **nx-nest:** gitlab ci application config ([0d37732](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0d37732b2c9c79550af4e935770ebb25a3b8e42c))
+- **nx-nest:** move eslintignore into eslintrc ([639b8c1](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/639b8c17d7eef424d26b234e94c727904e2bd8ae))
+
 # @webundsoehne/nx-nest [6.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.4...@webundsoehne/nx-nest@6.0.0-beta.5) (2024-10-25)
 
 ### Bug Fixes
