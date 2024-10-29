@@ -1,8 +1,9 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, readNxJson, updateJson } from '@nx/devkit'
+import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, getPackageManagerCommand, names, readNxJson, updateJson } from '@nx/devkit'
 import { output, ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
+import { execCommand } from 'nx/src/command-line/release/utils/exec-command'
 import { readJson } from 'nx/src/generators/utils/json'
 
 import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
@@ -197,6 +198,15 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     const projectDependencies = Object.fromEntries(IMPLICIT_DEPENDENCIES.map((dependency) => [dependency, rootDependencies[dependency]]).filter((dependency) => !!dependency[1]))
 
     addDependenciesToPackageJson(tree, projectDependencies, {}, join(projectRoot, 'package.json'))
+
+    // does not work in workspace preset, so here it is now
+    // (workspace creation does git init as last step, so we cannot access .git in the preset)
+    tasks.push(async () => {
+      output.log({
+        title: '[Git] setup hooks',
+        bodyLines: [await execCommand(getPackageManagerCommand().exec, ['simple-git-hooks'], { cwd: tree.root })]
+      })
+    })
   }
 
   /**
