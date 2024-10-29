@@ -2,7 +2,7 @@ import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { addDependenciesToPackageJson, formatFiles, output, OverwriteStrategy, removeDependenciesFromPackageJson, updateJson } from '@nx/devkit'
 
 import { DatabaseOrm, NODE_VERSION } from '../../constant'
-import { SERVICE_NAME, DOCKER_IMAGE } from '../../constant/application'
+import { DOCKER_IMAGE, SERVICE_NAME } from '../../constant/application'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, SCRIPTS } from '../../constant/workspace'
 import { applyTasks, applyTemplateFactory } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
