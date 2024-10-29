@@ -399,19 +399,16 @@ export default async function applicationGenerator (tree: Tree, options: Applica
       if (!content.has(projectNames.fileName)) {
         const configName = content.createNode(projectNames.fileName)
         const configContent = content.createNode({
-          key: projectNames.fileName,
-          value: {
-            stage: 'docker',
-            extends: '.docker-build-internal',
-            variables: {
-              DOCKERFILE_CONTEXT: `./dist/apps/${projectNames.fileName}`,
-              DOCKER_IMAGE_INTERNAL_NAME: `${projectNames.fileName}`
-            },
-            dependencies: ['build'],
-            only: {
-              changes: ['.gitlab-ci.yml', 'package.json', 'package-lock.json', 'libs/**/*', `apps/${projectNames.fileName}/**/*`],
-              refs: ['main', 'develop', 'tags']
-            }
+          stage: 'docker',
+          extends: '.docker-build-internal',
+          variables: {
+            DOCKERFILE_CONTEXT: `./dist/apps/${projectNames.fileName}`,
+            DOCKER_IMAGE_INTERNAL_NAME: `${projectNames.fileName}`
+          },
+          dependencies: ['build'],
+          only: {
+            changes: ['.gitlab-ci.yml', 'package.json', 'package-lock.json', 'libs/**/*', `apps/${projectNames.fileName}/**/*`],
+            refs: ['main', 'develop', 'tags']
           }
         })
 
