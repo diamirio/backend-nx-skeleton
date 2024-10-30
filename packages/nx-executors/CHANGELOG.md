@@ -1,3 +1,9 @@
+# @webundsoehne/nx-executors [1.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.6...@webundsoehne/nx-executors@1.0.0-beta.7) (2024-10-30)
+
+### Features
+
+- **nx-executor:** split test and e2e into separate targets ([5b37638](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/5b37638507c20dbcb33bcc831caffea3ba442d74))
+
 # @webundsoehne/nx-executors [1.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.5...@webundsoehne/nx-executors@1.0.0-beta.6) (2024-09-19)
 
 ### Bug Fixes
