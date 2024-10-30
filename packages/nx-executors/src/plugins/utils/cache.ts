@@ -6,7 +6,7 @@ import type { CreateNodesResult } from 'nx/src/project-graph/plugins'
 import { workspaceDataDirectory } from 'nx/src/utils/cache-directory'
 import { readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
-export type TargetCache = Record<string, TargetConfiguration>
+export type TargetCache = Record<string, Record<string, TargetConfiguration>>
 export interface CacheInterface {
   cachePath: string
   targetsCache: Record<string, CreateNodesResult['projects']>

@@ -10,17 +10,18 @@ export interface TscPluginOptions {
 
 class TscPlugin extends PluginBuilder<TscPluginOptions> {
   name = 'tsc'
-  targetName = 'build'
 
-  buildTarget ({ options }: BuildTargetOptions<TscPluginOptions>): TargetConfiguration {
+  buildTarget ({ options }: BuildTargetOptions<TscPluginOptions>): Record<string, TargetConfiguration> {
     return {
-      executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',
-      cache: true,
-      inputs: ['production', '^production'],
-      outputs: ['{options.outputPath}'],
-      options: {
-        main: 'src/main.ts',
-        tsConfig: 'tsconfig.build.json'
+      [options?.targetName ?? 'build']: {
+        executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',
+        cache: true,
+        inputs: ['production', '^production'],
+        outputs: ['{options.outputPath}'],
+        options: {
+          main: 'src/main.ts',
+          tsConfig: 'tsconfig.build.json'
+        }
       }
     }
   }
