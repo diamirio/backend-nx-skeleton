@@ -25,7 +25,7 @@ export const DEV_DEPENDENCIES = {
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',
-  '@webundsoehne/nx-nest': '^6.0.0-beta.2',
+  '@webundsoehne/nx-nest': '^6.0.0-beta.6',
   eslint: '^8',
   'eslint-config-prettier': '^9.1.0',
   'eslint-module-utils': '^2',

@@ -23,7 +23,7 @@ export const DEPENDENCIES = {
 
 export const DEV_DEPENDENCIES = {
   '@nestjs/testing': '^10',
-  '@webundsoehne/nx-executors': '1.0.0-beta.6'
+  '@webundsoehne/nx-executors': '^1.0.0'
 }
 /* eslint-enable */
 

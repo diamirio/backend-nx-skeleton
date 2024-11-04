@@ -37,7 +37,7 @@ Workspace is defined as `preset` generator that can be called as `--preset @webu
 
 ```shell
 # via create-nx-workspace
-npx create-nx-workspace --ci=skip --preset=@webunsoehne/nx-weokspace
+npx create-nx-workspace --ci=skip --preset=@webunsoehne/nx-workspace
 # with generate inside an existing nx-workspace
 nx generate @webunsoehne/nx-workspace:workspace
 ```
