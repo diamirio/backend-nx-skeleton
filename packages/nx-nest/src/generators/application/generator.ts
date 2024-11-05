@@ -274,24 +274,26 @@ export default async function applicationGenerator (tree: Tree, options: Applica
             options: {
               tsNode: true,
               env: {
-                TYPEORM_DATASOURCE: '../../libs/database/src/database/orm.config.ts'
+                TYPEORM_SOURCE: '../../libs/database/src',
+                TYPEORM_DATASOURCE: 'database/orm.config.ts',
+                TYPEORM_MIGRATION: 'migration'
               }
             },
             configurations: {
               show: {
-                command: 'typeorm migration:show -d=$TYPEORM_DATASOURCE'
+                command: 'typeorm migration:show -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
               },
               run: {
-                command: 'typeorm migration:run -d=$TYPEORM_DATASOURCE'
+                command: 'typeorm migration:run -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
               },
               rollback: {
-                command: 'typeorm migration:revert -d=$TYPEORM_DATASOURCE'
+                command: 'typeorm migration:revert -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
               },
               create: {
-                command: 'typeorm migration:create -d=$TYPEORM_DATASOURCE'
+                command: 'typeorm migration:create $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
               },
               generate: {
-                command: 'typeorm migration:generate -d=$TYPEORM_DATASOURCE'
+                command: 'typeorm migration:generate -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
               }
             }
           }
@@ -315,7 +317,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
                 command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
               },
               create: {
-                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS'
+                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS {args.name}'
               }
             }
           }
