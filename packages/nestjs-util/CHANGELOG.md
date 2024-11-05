@@ -1,3 +1,9 @@
+## @webundsoehne/nestjs-util [7.1.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.8...@webundsoehne/nestjs-util@7.1.9) (2024-11-05)
+
+### Bug Fixes
+
+- **nestjs-util:** maintenance service lockfile ([e46a05b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/e46a05bef3ac70036ffe6b8fb39d7d2d2dd65c90))
+
 ## @webundsoehne/nestjs-util [7.1.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.7...@webundsoehne/nestjs-util@7.1.8) (2024-10-18)
 
 ### Bug Fixes
