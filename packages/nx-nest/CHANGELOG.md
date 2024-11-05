@@ -1,3 +1,9 @@
+# @webundsoehne/nx-nest [6.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.6...@webundsoehne/nx-nest@6.0.0-beta.7) (2024-11-05)
+
+### Features
+
+- **nx-nest:** update typeorm migration target configuration ([18c1e7e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/18c1e7e6d4f31375fec4cc7d7860dd03da493bab))
+
 # @webundsoehne/nx-nest [6.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.5...@webundsoehne/nx-nest@6.0.0-beta.6) (2024-10-29)
 
 ### Bug Fixes
