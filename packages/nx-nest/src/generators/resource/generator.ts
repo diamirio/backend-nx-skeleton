@@ -69,18 +69,8 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
     addIndexExport(file, `./${resourceNames.fileName}/${resourceNames.fileName}.module`)
   })
 
-  output.log({
-    title: 'Tefa',
-    bodyLines: [options.component]
-  })
-
   if (options.component === Component.MICROSERVICE) {
     const mspLib = (readNxJson(tree) as any)?.integration?.msp.projectRoot
-
-    output.log({
-      title: 'Tefa#2',
-      bodyLines: [mspLib]
-    })
 
     if (!mspLib) {
       output.warn({
@@ -88,11 +78,6 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
         bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
       })
     } else {
-      output.log({
-        title: 'Tefa#3',
-        bodyLines: [join(mspLib, 'src', 'patterns', `${projectNames.fileName}.ts`), `${projectNames.className}Pattern`, resourceNames.constantName]
-      })
-
       updateSourceFile(tree, join(mspLib, 'src', 'patterns', `${projectNames.fileName}.pattern.ts`), (file) => {
         addEnumMember(file, `${projectNames.className}Pattern`, resourceNames.constantName, resourceNames.constantName)
       })

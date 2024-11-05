@@ -31,8 +31,8 @@ If jest is set up:
 If a database is set up:
 - `npm run backend:migrate:one <project>` or `nx run <project>:migration:run` to migrate open db-migrations
 - `npm run backend:migrate:rollback:one <project>` or `nx run <project>:migration:rollback` to revert the last db migration
-- `npm run backend:migrations:create:one <project>` or `nx run <project>:migration:create` to create a blank migration file
-- `npm run backend:migrations:generate:one <project>` or `nx run <project>:migration:generate` to generate a migration file (only typeorm)
+- `npm run backend:migrations:create:one <project> --name<name>` to create a blank migration file
+- `npm run backend:migrations:generate:one <project> --name<name>` to generate a migration file (only typeorm)
 
 **Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`, `migrate`, `migrate:rollback`
 

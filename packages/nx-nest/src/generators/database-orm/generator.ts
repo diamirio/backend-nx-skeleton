@@ -53,18 +53,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     packageScope: scope ? importPath : libraryName
   }
 
-  if (options.databaseOrm === DatabaseOrm.TYPEORM) {
-    options.database ??= (
-      await prompt<{ database?: Database }>({
-        type: 'autocomplete',
-        name: 'database',
-        message: 'Please select a database:',
-        choices: [Database.MYSQL, Database.POSTGRES, Database.OTHER]
-      })
-    ).database
-  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
-    options.database = Database.MONGO
-  }
+  await promptDatabase(options)
 
   const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
   const projectRoot = join(libRoot, libraryName)
@@ -107,22 +96,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   await formatFiles(tree)
 
   // dependencies and scripts
-  if (!options.skipPackageJson) {
-    output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
-
-    updateJson(tree, 'package.json', (content) => {
-      Object.assign(content, {
-        scripts: {
-          ...content.scripts ?? {},
-          ...SCRIPTS
-        }
-      })
-
-      return content
-    })
-
-    tasks.push(addDependenciesToPackageJson(tree, databaseOrm.dependencies, {}))
-  }
+  updatePackageJson(tree, options, databaseOrm, tasks)
 
   updateJson(tree, 'nx.json', (content) => {
     content.integration = {
@@ -166,4 +140,38 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   }
 
   return applyTasks(tasks)
+}
+
+async function promptDatabase (options: DatabaseOrmGeneratorSchema): Promise<void> {
+  if (options.databaseOrm === DatabaseOrm.TYPEORM) {
+    options.database ??= (
+      await prompt<{ database?: Database }>({
+        type: 'autocomplete',
+        name: 'database',
+        message: 'Please select a database:',
+        choices: [Database.MYSQL, Database.POSTGRES, Database.OTHER]
+      })
+    ).database
+  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
+    options.database = Database.MONGO
+  }
+}
+
+function updatePackageJson (tree: Tree, options: DatabaseOrmGeneratorSchema, databaseOrm, tasks: GeneratorCallback[]): void {
+  if (!options.skipPackageJson) {
+    output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
+
+    updateJson(tree, 'package.json', (content) => {
+      Object.assign(content, {
+        scripts: {
+          ...content.scripts ?? {},
+          ...SCRIPTS
+        }
+      })
+
+      return content
+    })
+
+    tasks.push(addDependenciesToPackageJson(tree, databaseOrm.dependencies, {}))
+  }
 }

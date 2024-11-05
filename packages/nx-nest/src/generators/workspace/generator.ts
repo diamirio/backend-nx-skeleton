@@ -38,27 +38,7 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
   await formatFiles(tree)
 
   // dependencies and scripts
-  if (!options.skipPackageJson) {
-    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
-
-    updateJson(tree, 'package.json', (content) => {
-      Object.assign(
-        content,
-        {
-          scripts: {
-            ...content.scripts ?? {},
-            ...SCRIPTS
-          }
-        },
-        CUSTOM_FIELDS
-      )
-
-      return content
-    })
-
-    tasks.push(removeDependenciesFromPackageJson(tree, ['@webundsoehne/nx-nest'], []))
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
-  }
+  updatePackageJson(tree, options, tasks)
 
   if (options.databaseOrm !== DatabaseOrm.NONE) {
     output.log({ title: '[Workspace] Setup database-orm util library ...' })
@@ -85,14 +65,43 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
   }
 
   // extend generated gitignore
+  extendGitignore(tree)
+
+  output.log({ title: '[Workspace] Post-Processing ...' })
+
+  return applyTasks(tasks)
+}
+
+// HELPER
+function updatePackageJson (tree: Tree, options: NestWorkspaceGeneratorSchema, tasks: GeneratorCallback[]): void {
+  if (!options.skipPackageJson) {
+    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
+
+    updateJson(tree, 'package.json', (content) => {
+      Object.assign(
+        content,
+        {
+          scripts: {
+            ...content.scripts ?? {},
+            ...SCRIPTS
+          }
+        },
+        CUSTOM_FIELDS
+      )
+
+      return content
+    })
+
+    tasks.push(removeDependenciesFromPackageJson(tree, ['@webundsoehne/nx-nest'], []))
+    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+  }
+}
+
+function extendGitignore (tree: Tree): void {
   if (tree.exists('.gitignore')) {
     const ignored = tree.read('.gitignore')
     const toIgnore = ['# Node Package Manager', '.npm', '', '# enviroment files', '.*env*', '', '# File Uploads', 'uploads', '', '# Config', '**/config/local*'].join('\n')
 
     tree.write('.gitignore', `${ignored}\n${toIgnore}`)
   }
-
-  output.log({ title: '[Workspace] Post-Processing ...' })
-
-  return applyTasks(tasks)
 }
