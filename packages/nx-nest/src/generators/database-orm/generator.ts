@@ -113,26 +113,31 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   })
 
   if (options.database !== Database.OTHER) {
-    updateYaml(tree, 'service-docker-compose.yml', (content) => {
-      if (!content.has('services')) {
-        content.add({ key: 'services', value: new YAMLMap() })
-      }
+    if (tree.exists('service-docker-compose.yml')) {
+      updateYaml(tree, 'service-docker-compose.yml', (content) => {
+        if (!content.has('services')) {
+          content.add({ key: 'services', value: new YAMLMap() })
+        }
 
-      if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
-        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
-      }
-    })
-    updateYaml(tree, 'docker-compose.yml', (content) => {
-      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
-        content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
-      }
+        if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
+          content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+        }
+      })
+    }
 
-      const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+    if (tree.exists('docker-compose.yml')) {
+      updateYaml(tree, 'docker-compose.yml', (content) => {
+        if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
+          content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
+        }
 
-      if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
-        content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
-      }
-    })
+        const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+
+        if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
+          content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+        }
+      })
+    }
   }
 
   if (tree.exists(join(libRoot, '.gitkeep'))) {
