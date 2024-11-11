@@ -1,12 +1,13 @@
 import type { OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Injectable } from '@nestjs/common'
-import type { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
+import type { ClientProviderOptions } from '@nestjs/microservices'
 import type { Observable } from 'rxjs'
 import { asyncScheduler, firstValueFrom, throwError } from 'rxjs'
 import { timeout } from 'rxjs/operators'
 
 import type { GetMicroserviceMessageRequestFromMap, GetMicroserviceMessageResponseFromMap, MicroserviceProviderServiceOptions } from './microservice-provider.interface'
 import { TimeoutException } from './microservice-provider.interface'
+import type { ClientProxyRMQ } from './utils/client-rmq.proxy'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
 /**
@@ -19,7 +20,7 @@ export class MicroserviceProviderService<
   MessageQueuePatterns extends Record<MessageQueues, any> = any,
   MessageQueueMap extends Record<MessageQueues, any> = any
 > implements OnModuleInit, OnModuleDestroy {
-  private clients: Record<MessageQueues, ClientProxy>
+  private clients: Record<MessageQueues, ClientProxyRMQ>
   private options: Required<MicroserviceProviderServiceOptions>
 
   constructor (private readonly provider: ClientProviderOptions[], private readonly names: MessageQueues[]) {
@@ -38,11 +39,11 @@ export class MicroserviceProviderService<
       o[this.names[i]] = c
 
       return o
-    }, {}) as unknown as Record<MessageQueues, ClientProxy>
+    }, {}) as unknown as Record<MessageQueues, ClientProxyRMQ>
   }
 
   onModuleDestroy (): void {
-    for (const client of Object.values<ClientProxy>(this.clients)) {
+    for (const client of Object.values<ClientProxyRMQ>(this.clients)) {
       client.close()
     }
   }
