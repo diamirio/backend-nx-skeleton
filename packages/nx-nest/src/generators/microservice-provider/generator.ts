@@ -12,44 +12,50 @@ import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_IMAGE, DOCKER_SERVICE_NAME } fro
 import { applyTasks, applyTemplateFactory, updateYaml } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
-// @todo: project selection to add Orm-Module root import
+interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
+  scope: string
+  libraryName: string
+  importPath: string
+  packageScope: string
+  libRoot: string
+  projectRoot: string
+}
+
 export default async function microserviceProviderGenerator (tree: Tree, options: MicroserviceProviderGeneratorSchema): Promise<GeneratorCallback> {
+  const generateOptions: GenerateOptions = options as GenerateOptions
+
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-  const scope = getNpmScope(tree)
-  const libraryName = names(options.name).fileName
-  const importPath = options?.importPath ?? `@${scope}/${libraryName}`
 
-  const templateContext = {
-    ...options,
-    packageScope: scope ? importPath : libraryName
-  }
-
-  const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  const projectRoot = join(libRoot, libraryName)
+  generateOptions.scope = getNpmScope(tree)
+  generateOptions.libraryName = names(generateOptions.name).fileName
+  generateOptions.importPath = generateOptions?.importPath ?? `@${generateOptions.scope}/${generateOptions.libraryName}`
+  generateOptions.packageScope = generateOptions.scope ? generateOptions.importPath : generateOptions.libraryName
+  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.libraryName)
 
   output.log({
     title: '[Microservice Provider] Applying templates',
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
   })
 
-  addProjectConfiguration(tree, libraryName, {
-    root: projectRoot,
-    sourceRoot: join(projectRoot, 'src'),
+  addProjectConfiguration(tree, generateOptions.libraryName, {
+    root: generateOptions.projectRoot,
+    sourceRoot: join(generateOptions.projectRoot, 'src'),
     projectType: ProjectType.Library,
     tags: [],
     targets: {}
   })
 
-  applyTemplate(['files'], templateContext, projectRoot)
+  applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
 
   await formatFiles(tree)
 
-  addTsConfigPath(tree, importPath, [join(projectRoot, 'src', 'index.ts')])
-  addTsConfigPath(tree, `${importPath}/*`, [join(projectRoot, 'src', '*')])
+  addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
+  addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
 
   // dependencies and scripts
-  if (!options.skipPackageJson) {
+  if (!generateOptions.skipPackageJson) {
     output.log({ title: '[Microservice Provider] Updating package.json', bodyLines: ['Add dependencies ...'] })
 
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
@@ -59,8 +65,8 @@ export default async function microserviceProviderGenerator (tree: Tree, options
     content.integration = {
       ...content.integration ?? {},
       msp: {
-        projectRoot,
-        importPath
+        projectRoot: generateOptions.projectRoot,
+        importPath: generateOptions.importPath
       }
     }
 
@@ -93,8 +99,8 @@ export default async function microserviceProviderGenerator (tree: Tree, options
     })
   }
 
-  if (tree.exists(join(libRoot, '.gitkeep'))) {
-    tree.delete(join(libRoot, '.gitkeep'))
+  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
+    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
   }
 
   return applyTasks(tasks)

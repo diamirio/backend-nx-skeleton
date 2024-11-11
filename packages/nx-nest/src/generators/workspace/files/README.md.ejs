@@ -26,15 +26,15 @@ Most information can be found in the `nx.json`, the projects `project.json` and 
 
 If jest is set up:
 - `npm run test:one <project>` or `nx run <project>:test` to start an application's unit-tests
-- `npm run test:e2e:one <project>` or `nx run <project>:test:e2e` to start an applications e2e-tests
+- `npm run test:e2e:one <project>` or `nx run <project>:e2e` to start an applications e2e-tests
 
 If a database is set up:
-- `npm run backend:migrate:one <project>` or `nx run <project>:migration:run` to migrate open db-migrations
-- `npm run backend:migrate:rollback:one <project>` or `nx run <project>:migration:rollback` to revert the last db migration
-- `npm run backend:migrations:create:one <project> --name<name>` to create a blank migration file
-- `npm run backend:migrations:generate:one <project> --name<name>` to generate a migration file (only typeorm)
+- `npm run backend:migrate <project>` or `nx run <project>:migration:run` to migrate open db-migrations
+- `npm run backend:migrate:rollback <project>` or `nx run <project>:migration:rollback` to revert the last db migration
+- `npm run backend:migrations:create <project> <name>` to create a blank migration file
+- `npm run backend:migrations:generate <project> <name>` to generate a migration file (only typeorm)
 
-**Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`, `migrate`, `migrate:rollback`
+**Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`
 
 
 ## Docker Compose

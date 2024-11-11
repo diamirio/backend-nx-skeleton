@@ -73,7 +73,7 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
 // HELPER
 function updatePackageJson (tree: Tree, options: NestWorkspaceGeneratorSchema, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
-    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
+    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
     updateJson(tree, 'package.json', (content) => {
       Object.assign(

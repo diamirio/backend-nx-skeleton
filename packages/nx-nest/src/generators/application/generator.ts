@@ -9,15 +9,33 @@ import { readJson } from 'nx/src/generators/utils/json'
 import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
 import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
+import type { ApplyTemplate } from '../../utils'
 import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
+interface GenerateOptions extends ApplicationGeneratorSchema {
+  scope: string
+  packageScope: string
+  projectNames: {
+    name: string
+    className: string
+    propertyName: string
+    constantName: string
+    fileName: string
+  }
+  projectName: string
+  appRoot: string
+  projectRoot: string
+}
+
 // eslint-disable-next-line complexity
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
-  if (!options.components?.length) {
+  const generateOptions: GenerateOptions = options as GenerateOptions
+
+  if (!generateOptions.components?.length) {
     output.error({ title: '[Application] At least one component must be selected' })
 
     return
@@ -25,33 +43,32 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-  const scope = getNpmScope(tree)
-  const projectNames = names(options.name)
 
-  const applicationMetadata = getComponentMetadata(options.components)
+  generateOptions.scope = getNpmScope(tree)
+  generateOptions.projectNames = names(generateOptions.name)
+  generateOptions.projectName = generateOptions.projectNames.fileName
+  generateOptions.packageScope = generateOptions.scope ? `@${generateOptions.scope}/${generateOptions.projectNames.fileName}` : generateOptions.projectNames.fileName
+
+  const applicationMetadata = getComponentMetadata(generateOptions.components)
   const templateContext: Record<string, any> = {
-    ...options,
-    isServer: options.components.includes(Component.SERVER),
-    isBgTask: options.components.includes(Component.BG_TASK),
-    includeMessageQueue: options.components.includes(Component.MICROSERVICE) || options.microserviceProvider,
+    ...generateOptions,
+    isServer: generateOptions.components.includes(Component.SERVER),
+    isBgTask: generateOptions.components.includes(Component.BG_TASK),
+    includeMessageQueue: generateOptions.components.includes(Component.MICROSERVICE) || generateOptions.microserviceProvider,
     applicationMetadata,
-    scope,
-    packageScope: scope ? `@${scope}/${projectNames.fileName}` : projectNames.fileName,
-    projectNames,
-    fileName: projectNames.fileName,
     NODE_VERSION,
     COMPONENT: Component,
     DATABASE_ORM: DatabaseOrm,
     DATABASE: Database
   }
 
-  const appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
-  const projectRoot = join(appRoot, projectNames.fileName)
+  generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
+  generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectNames.fileName)
 
-  await generateDatabaseLib(tree, options, templateContext, tasks)
-  await generateMspLib(tree, options, templateContext, tasks)
+  await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
+  await generateMspLib(tree, generateOptions, templateContext, tasks)
 
-  generateMicroserviceServer(tree, options, templateContext, applyTemplate)
+  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
 
   /**
    * TEMPLATES
@@ -62,40 +79,40 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   })
 
   if (!options.update) {
-    addProjectConfiguration(tree, options.name, {
-      root: projectRoot,
-      sourceRoot: join(projectRoot, 'src'),
+    addProjectConfiguration(tree, generateOptions.name, {
+      root: generateOptions.projectRoot,
+      sourceRoot: join(generateOptions.projectRoot, 'src'),
       projectType: ProjectType.Application,
       tags: [],
       targets: {}
     })
 
-    applyTemplate(['files', 'base'], templateContext, projectRoot)
+    applyTemplate(['files', 'base'], templateContext, generateOptions.projectRoot)
   }
 
   // component-specific folder
   for (const component of applicationMetadata) {
-    applyTemplate(['files', component.folder], templateContext, join(projectRoot, 'src', component.folder))
+    applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
   }
 
   if (applicationMetadata.length > 1) {
-    applyTemplate(['files', 'multi-application'], templateContext, projectRoot)
+    applyTemplate(['files', 'multi-application'], templateContext, generateOptions.projectRoot)
   } else {
-    applyTemplate(['files', 'single-application'], templateContext, projectRoot)
+    applyTemplate(['files', 'single-application'], templateContext, generateOptions.projectRoot)
   }
 
-  updatePackageJson(tree, options, projectRoot, tasks)
+  updatePackageJson(tree, generateOptions, tasks)
 
-  setupJest(tree, options, templateContext, projectRoot, applyTemplate, tasks)
+  setupJest(tree, generateOptions, templateContext, applyTemplate, tasks)
 
   // custom integration metadata
-  setProjectTargets(tree, options, projectRoot)
+  setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
 
-  updateGitlabCI(tree, projectNames)
+  updateGitlabCI(tree, generateOptions.projectNames)
 
-  if (tree.exists(join(appRoot, '.gitkeep'))) {
-    tree.delete(join(appRoot, '.gitkeep'))
+  if (tree.exists(join(generateOptions.appRoot, '.gitkeep'))) {
+    tree.delete(join(generateOptions.appRoot, '.gitkeep'))
   }
 
   output.log({ title: '[Application] Post-Processing ...' })
@@ -103,7 +120,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   return applyTasks(tasks)
 }
 
-async function generateDatabaseLib (tree: Tree, options: ApplicationGeneratorSchema, context, tasks: GeneratorCallback[]): Promise<void> {
+async function generateDatabaseLib (tree: Tree, options: GenerateOptions, context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
   if (options.databaseOrm !== DatabaseOrm.NONE) {
     const databaseIntegration = (readNxJson(tree) as any)?.integration?.orm
 
@@ -180,7 +197,7 @@ function generateMicroserviceServer (tree: Tree, options: ApplicationGeneratorSc
   }
 }
 
-function updatePackageJson (tree: Tree, options: ApplicationGeneratorSchema, projectRoot: string, tasks: GeneratorCallback[]): void {
+function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
@@ -192,23 +209,37 @@ function updatePackageJson (tree: Tree, options: ApplicationGeneratorSchema, pro
 
       if (options.components.includes(Component.COMMAND)) {
         content.scripts['command:one'] ??= 'nx command'
+
+        if (options.databaseOrm !== DatabaseOrm.NONE) {
+          content.scripts.seed ??= `nx seed ${options.projectName}`
+        }
+      }
+
+      if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
+        content.scripts.migrate ??= `nx migration -c run ${options.projectName}`
+        content.scripts['migrate:rollback'] ??= `nx migration -c rollback ${options.projectName}`
+        content.scripts['migrations:create'] ??= `nx migration -c create ${options.projectName} --name`
+
+        if (options.databaseOrm === DatabaseOrm.TYPEORM) {
+          content.scripts['migrations:generate'] ??= `nx migration -c generate ${options.projectName} --name`
+        }
       }
 
       return content
     })
 
-    updateJson(tree, join(projectRoot, 'package.json'), (content) => {
+    updateJson(tree, join(options.projectRoot, 'package.json'), (content) => {
       for (const component of options.components) {
         /* eslint-disable @typescript-eslint/indent,@typescript-eslint/padding-line-between-statements,indent*/
         switch (component) {
           case Component.SERVER:
           case Component.BG_TASK:
           case Component.MICROSERVICE:
-            content.scripts.start ??= `node ./${projectRoot}/src/main.js`
+            content.scripts.start ??= `node ./${options.projectRoot}/src/main.js`
             break
 
           case Component.COMMAND:
-            content.scripts.command ??= `NODE_SERVICE='cli' node ./${projectRoot}/src/main.js`
+            content.scripts.command ??= `NODE_SERVICE='cli' node ./${options.projectRoot}/src/main.js`
             break
         }
         /* eslint-enable*/
@@ -220,7 +251,7 @@ function updatePackageJson (tree: Tree, options: ApplicationGeneratorSchema, pro
     const rootDependencies = readJson(tree, 'package.json')?.dependencies ?? {}
     const projectDependencies = Object.fromEntries(IMPLICIT_DEPENDENCIES.map((dependency) => [dependency, rootDependencies[dependency]]).filter((dependency) => !!dependency[1]))
 
-    addDependenciesToPackageJson(tree, projectDependencies, {}, join(projectRoot, 'package.json'))
+    addDependenciesToPackageJson(tree, projectDependencies, {}, join(options.projectRoot, 'package.json'))
 
     // does not work in workspace preset, so here it is now
     // (workspace creation does git init as last step, so we cannot access .git in the preset)
@@ -233,7 +264,7 @@ function updatePackageJson (tree: Tree, options: ApplicationGeneratorSchema, pro
   }
 }
 
-function setupJest (tree: Tree, options: ApplicationGeneratorSchema, context, projectRoot: string, applyTemplate, tasks: GeneratorCallback[]): void {
+function setupJest (tree: Tree, options: GenerateOptions, context: Record<string, any>, applyTemplate: ApplyTemplate, tasks: GeneratorCallback[]): void {
   if (options.jest) {
     output.log({
       title: '[Application] Setup jest',
@@ -241,11 +272,11 @@ function setupJest (tree: Tree, options: ApplicationGeneratorSchema, context, pr
     })
 
     applyTemplate(['files', 'jest', 'preset'], context)
-    applyTemplate(['files', 'jest', 'files'], context, projectRoot)
+    applyTemplate(['files', 'jest', 'files'], context, options.projectRoot)
 
     if (options.components.includes(Component.SERVER)) {
       applyTemplate(['files', 'jest', 'e2e', 'preset'], context)
-      applyTemplate(['files', 'jest', 'e2e', 'files'], context, projectRoot)
+      applyTemplate(['files', 'jest', 'e2e', 'files'], context, options.projectRoot)
 
       if (!options.skipPackageJson) {
         updateJson(tree, 'package.json', (content) => {
@@ -269,8 +300,8 @@ function setupJest (tree: Tree, options: ApplicationGeneratorSchema, context, pr
   }
 }
 
-function setProjectTargets (tree: Tree, options: ApplicationGeneratorSchema, projectRoot: string): void {
-  updateJson(tree, join(projectRoot, 'project.json'), (content) => {
+function setProjectTargets (tree: Tree, options: GenerateOptions): void {
+  updateJson(tree, join(options.projectRoot, 'project.json'), (content) => {
     if (options.components.includes(Component.COMMAND)) {
       content.targets = {
         ...content.targets ?? {},
@@ -419,7 +450,7 @@ function setNxJsonPluginsAndDefaults (tree: Tree): void {
   })
 }
 
-function updateGitlabCI (tree: Tree, projectNames): void {
+function updateGitlabCI (tree: Tree, projectNames: GenerateOptions['projectNames']): void {
   // update gitlab-ci
   if (tree.exists('.gitlab-ci.yml')) {
     updateYaml(tree, '.gitlab-ci.yml', (content) => {
