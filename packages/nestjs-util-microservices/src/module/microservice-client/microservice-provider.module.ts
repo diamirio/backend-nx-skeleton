@@ -1,9 +1,10 @@
 import type { DynamicModule, FactoryProvider } from '@nestjs/common'
 import { Global, Module } from '@nestjs/common'
-import type { ClientProviderOptions, ClientProxyFactory } from '@nestjs/microservices'
+import type { ClientProviderOptions } from '@nestjs/microservices'
 
 import type { MicroserviceProviderModuleOptions } from './microservice-provider.interface'
 import { MicroserviceProviderService } from './microservice-provider.service'
+import type { ClientProxyRMQ } from './utils/client-rmq.proxy'
 import { provideMessageQueueClient } from './utils/microservice-client.util'
 
 @Global()
@@ -14,7 +15,7 @@ export class MicroserviceProviderModule {
    * @param options
    */
   static forRoot (options: MicroserviceProviderModuleOptions): DynamicModule {
-    const clients: FactoryProvider<ClientProxyFactory>[] = !options.provider ? provideMessageQueueClient(options.queue, options.clientOptions) : options.provider(options.queue)
+    const clients: FactoryProvider<ClientProxyRMQ>[] = !options.provider ? provideMessageQueueClient(options.queue, options.clientOptions) : options.provider(options.queue)
 
     const tokens = clients.map((c) => c.provide)
 
