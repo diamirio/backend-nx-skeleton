@@ -1,3 +1,11 @@
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.7...@webundsoehne/nestjs-util-microservices@4.0.0-beta.8) (2024-11-12)
+
+- feat(nestjs-util-microservice)!: close failed connection ([3c35fec](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3c35fecb6623f961eba17356f14a98ee76af64af))
+
+### BREAKING CHANGES
+
+- Using an extended `ClientRMQ` instance instead of the ClientProxyFactory.
+
 # @webundsoehne/nestjs-util-microservices [4.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.6...@webundsoehne/nestjs-util-microservices@4.0.0-beta.7) (2024-10-18)
 
 ### Features
