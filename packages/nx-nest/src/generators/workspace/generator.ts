@@ -1,5 +1,5 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, formatFiles, output, OverwriteStrategy, removeDependenciesFromPackageJson, updateJson } from '@nx/devkit'
+import { addDependenciesToPackageJson, output, OverwriteStrategy, updateJson } from '@nx/devkit'
 
 import { DatabaseOrm, NODE_VERSION } from '../../constant'
 import { DOCKER_IMAGE, SERVICE_NAME } from '../../constant/application'
@@ -34,8 +34,6 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
 
     return content
   })
-
-  await formatFiles(tree)
 
   // dependencies and scripts
   updatePackageJson(tree, options, tasks)
@@ -75,7 +73,7 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
 // HELPER
 function updatePackageJson (tree: Tree, options: NestWorkspaceGeneratorSchema, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
-    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
+    output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
     updateJson(tree, 'package.json', (content) => {
       Object.assign(
@@ -89,10 +87,15 @@ function updatePackageJson (tree: Tree, options: NestWorkspaceGeneratorSchema, t
         CUSTOM_FIELDS
       )
 
+      const packageVersion = content.dependencies['@webundsoehne/nx-nest']
+
+      delete content.dependencies['@webundsoehne/nx-nest']
+
+      content.devDependencies['@webundsoehne/nx-nest'] = packageVersion
+
       return content
     })
 
-    tasks.push(removeDependenciesFromPackageJson(tree, ['@webundsoehne/nx-nest'], []))
     tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
   }
 }

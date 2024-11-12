@@ -6,7 +6,6 @@ const IMAGE_MYSQL = 'mysql:8'
 const IMAGE_POSTGRES = 'postgres:16-alpine'
 const IMAGE_MONGO = 'mongo:7'
 
-// @todo: init multiple dbs, volumes
 export const DOCKER_DB_SERVICE = {
   [Database.MYSQL]: {
     image: IMAGE_MYSQL,

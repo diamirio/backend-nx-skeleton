@@ -15,11 +15,20 @@ import {
   DEPENDENCIES_TYPEORM_MYSQL,
   DEPENDENCIES_TYPEORM_POSTGRES,
   DOCKER_DB_SERVICE,
-  DOCKER_SERVICE_NAME,
-  SCRIPTS
+  DOCKER_SERVICE_NAME
 } from '../../constant/database-orm'
 import { applyTasks, applyTemplateFactory, updateYaml } from '../../utils'
 import type { DatabaseOrmGeneratorSchema } from './schema'
+
+interface GenerateOptions extends DatabaseOrmGeneratorSchema {
+  scope: string
+  libraryName: string
+  importPath: string
+  packageScope: string
+  libRoot: string
+  projectRoot: string
+  databaseOrmDetails: { folder: string, dependencies: Record<string, string> }
+}
 
 function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder: string, dependencies: Record<string, string> } {
   switch (orm) {
@@ -40,26 +49,25 @@ function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder
   }
 }
 
-// @todo: project selection to add Orm-Module root import
 export default async function databaseOrmGenerator (tree: Tree, options: DatabaseOrmGeneratorSchema): Promise<GeneratorCallback> {
+  const generateOptions: GenerateOptions = options as GenerateOptions
+
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-  const scope = getNpmScope(tree)
-  const libraryName = names(options.name).fileName
-  const importPath = options?.importPath ?? `@${scope}/${libraryName}`
 
-  const templateContext = {
-    ...options,
-    packageScope: scope ? importPath : libraryName
-  }
+  generateOptions.scope = getNpmScope(tree)
 
-  await promptDatabase(options)
+  generateOptions.libraryName = names(generateOptions.name).fileName
+  generateOptions.importPath = generateOptions?.importPath ?? `@${generateOptions.scope}/${generateOptions.libraryName}`
+  generateOptions.packageScope = generateOptions.scope ? generateOptions.importPath : generateOptions.libraryName
 
-  const libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  const projectRoot = join(libRoot, libraryName)
-  const databaseOrm = getDatabaseOrmDetails(options.databaseOrm, options.database)
+  await promptDatabase(generateOptions)
 
-  if (!databaseOrm) {
+  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.libraryName)
+  generateOptions.databaseOrmDetails = getDatabaseOrmDetails(generateOptions.databaseOrm, generateOptions.database)
+
+  if (!generateOptions.databaseOrm) {
     output.error({ title: '[Database] Missing orm config' })
 
     return
@@ -67,7 +75,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
   const integration = (readNxJson(tree) as any)?.integration?.orm
 
-  if (integration && (integration.database !== options.databaseOrm || integration.system && integration.system !== options.database)) {
+  if (integration && (integration.database !== generateOptions.databaseOrm || integration.system && integration.system !== generateOptions.database)) {
     output.error({ title: `[Application] Invalid database config. "${integration.database}-${integration.system}" already configured.` })
 
     return
@@ -78,71 +86,76 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
   })
 
-  if (!options.update) {
-    addProjectConfiguration(tree, libraryName, {
-      root: projectRoot,
-      sourceRoot: join(projectRoot, 'src'),
+  if (!generateOptions.update) {
+    addProjectConfiguration(tree, generateOptions.libraryName, {
+      root: generateOptions.projectRoot,
+      sourceRoot: join(generateOptions.projectRoot, 'src'),
       projectType: ProjectType.Library,
       tags: [],
       targets: {}
     })
 
-    applyTemplate(['files', databaseOrm.folder], templateContext, projectRoot)
+    applyTemplate(['files', generateOptions.databaseOrmDetails.folder], generateOptions, generateOptions.projectRoot)
 
-    addTsConfigPath(tree, importPath, [join(projectRoot, 'src', 'index.ts')])
-    addTsConfigPath(tree, `${importPath}/*`, [join(projectRoot, 'src', '*')])
+    addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
+    addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
   }
 
   await formatFiles(tree)
 
   // dependencies and scripts
-  updatePackageJson(tree, options, databaseOrm, tasks)
+  updatePackageJson(tree, generateOptions, tasks)
 
   updateJson(tree, 'nx.json', (content) => {
     content.integration = {
       ...content.integration ?? {},
       orm: {
-        database: options.databaseOrm,
-        system: options.database,
-        projectRoot,
-        importPath
+        database: generateOptions.databaseOrm,
+        system: generateOptions.database,
+        projectRoot: generateOptions.projectRoot,
+        importPath: generateOptions.importPath
       }
     }
 
     return content
   })
 
-  if (options.database !== Database.OTHER) {
-    updateYaml(tree, 'service-docker-compose.yml', (content) => {
-      if (!content.has('services')) {
-        content.add({ key: 'services', value: new YAMLMap() })
-      }
+  if (generateOptions.database !== Database.OTHER) {
+    if (tree.exists('service-docker-compose.yml')) {
+      updateYaml(tree, 'service-docker-compose.yml', (content) => {
+        if (!content.has('services')) {
+          content.add({ key: 'services', value: new YAMLMap() })
+        }
 
-      if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
-        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
-      }
-    })
-    updateYaml(tree, 'docker-compose.yml', (content) => {
-      if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
-        content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
-      }
+        if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
+          content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+        }
+      })
+    }
 
-      const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+    if (tree.exists('docker-compose.yml')) {
+      updateYaml(tree, 'docker-compose.yml', (content) => {
+        if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
+          content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
+        }
 
-      if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
-        content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
-      }
-    })
+        const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+
+        if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
+          content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+        }
+      })
+    }
   }
 
-  if (tree.exists(join(libRoot, '.gitkeep'))) {
-    tree.delete(join(libRoot, '.gitkeep'))
+  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
+    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
   }
 
   return applyTasks(tasks)
 }
 
-async function promptDatabase (options: DatabaseOrmGeneratorSchema): Promise<void> {
+async function promptDatabase (options: GenerateOptions): Promise<void> {
   if (options.databaseOrm === DatabaseOrm.TYPEORM) {
     options.database ??= (
       await prompt<{ database?: Database }>({
@@ -157,21 +170,10 @@ async function promptDatabase (options: DatabaseOrmGeneratorSchema): Promise<voi
   }
 }
 
-function updatePackageJson (tree: Tree, options: DatabaseOrmGeneratorSchema, databaseOrm, tasks: GeneratorCallback[]): void {
+function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
-    output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ....', 'Add dependencies ...'] })
+    output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
-    updateJson(tree, 'package.json', (content) => {
-      Object.assign(content, {
-        scripts: {
-          ...content.scripts ?? {},
-          ...SCRIPTS
-        }
-      })
-
-      return content
-    })
-
-    tasks.push(addDependenciesToPackageJson(tree, databaseOrm.dependencies, {}))
+    tasks.push(addDependenciesToPackageJson(tree, options.databaseOrmDetails.dependencies, {}))
   }
 }

@@ -18,20 +18,15 @@ export const DEPENDENCIES = {
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nx/eslint': '^20.0.0',
-  '@nx/eslint-plugin': '^20.0.0',
-  '@nx/workspace': '^20.0.0',
   '@types/node': `^${NODE_VERSION}`,
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',
-  '@webundsoehne/nx-nest': '^6.0.0-beta.6',
   eslint: '^8',
   'eslint-config-prettier': '^9.1.0',
   'eslint-module-utils': '^2',
   'eslint-plugin-import': '^2',
   'lint-staged': '^13',
-  nx: '^20.0.0',
   prettier: '^2.7.1',
   'simple-git-hooks': '^2',
   'ts-node': '^10',

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common'
 
-import { DefaultPattern, MessageQueues, MicroserviceRequest, MicroserviceResponse } from '@<%- scope %>/microservice-provider'
+import { <%- projectNames.className %>Pattern, MessageQueues, MicroserviceRequest, MicroserviceResponse } from '@<%- scope %>/microservice-provider'
 
 @Injectable()
 export class DefaultMicroservice {
@@ -9,8 +9,8 @@ export class DefaultMicroservice {
   constructor() {}
 
   async default (
-    options: MicroserviceRequest<MessageQueues.DEFAULT, DefaultPattern.DEFAULT>
-  ): Promise<MicroserviceResponse<MessageQueues.DEFAULT, DefaultPattern.DEFAULT>> {
+    options: MicroserviceRequest<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>
+  ): Promise<MicroserviceResponse<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>> {
     return 'Hello world.'
   }
 }
