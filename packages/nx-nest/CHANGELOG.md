@@ -1,3 +1,13 @@
+# @webundsoehne/nx-nest [6.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.7...@webundsoehne/nx-nest@6.0.0-beta.8) (2024-11-12)
+
+### Bug Fixes
+
+- **nx-nest:** microservice default module template ([8575b5f](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/8575b5fea96f8427eb7e46b9493cc5a8673633b6))
+
+### Features
+
+- **nx-nest:** seed and migration scripts, unified generate options ([848dcee](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/848dceef47196ed8a5cec6d861d919c721d3a57c))
+
 # @webundsoehne/nx-nest [6.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.6...@webundsoehne/nx-nest@6.0.0-beta.7) (2024-11-05)
 
 ### Features
