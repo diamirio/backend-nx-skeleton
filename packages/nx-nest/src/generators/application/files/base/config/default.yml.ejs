@@ -43,10 +43,7 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   synchronize: false
   cache: false
   keepConnectionAlive: true
-  directories:
-    entity: entity
-    migration: migration
-    seed: seed
+  migrationsTableName: migrations
 <% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
   host: db
   port: 27017
@@ -55,10 +52,8 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   password: secret
   ignoreUndefined: true
   migration:
-    migrationsDir: migration
-    changelogCollectionName: migrations
     migrationFileExtension: '.js'
     useFileHash: false
-    moduleSystem: esm
+    moduleSystem: commonjs
 <% } -%>
 <% } -%>

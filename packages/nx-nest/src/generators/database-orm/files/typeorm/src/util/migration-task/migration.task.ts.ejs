@@ -16,8 +16,24 @@ export class MigrationTask {
     interval: 3 * 1000
   })
   async migrate (): Promise<void> {
+    const options = getDatabaseOptions()
+
+    if (!options?.cli?.migrationsDir) {
+      this.logger.warn('No migrations folder configured')
+
+      return
+    }
+
     try {
-      const dataSource = await new DataSource(getDatabaseOptions()).initialize()
+      await stat(options.cli.migrationsDir)
+    } catch (error) {
+      this.logger.warn(`No migrations folder found in "${options.cli.migrationsDir}"`)
+
+      return
+    }
+
+    try {
+      const dataSource = await new DataSource(options).initialize()
 
       await dataSource.runMigrations({ transaction: 'all' })
       await dataSource.destroy()

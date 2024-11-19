@@ -26,9 +26,7 @@ messageQueue:
 database:
   host: DATABASE_HOST
   port: DATABASE_PORT
+  database: DATABASE_NAME
   username: DATABASE_USER
   password: DATABASE_PASSWORD
-  database: DATABASE_NAME <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
-  type: DATABASE_TYPE
-  migrationsTableName: DATABASE_MIGRATIONS_TABLE <% } %>
 <% } -%>

@@ -18,6 +18,8 @@ export const DEPENDENCIES = {
 }
 
 export const DEV_DEPENDENCIES = {
+  '@nx/eslint': '^20.0.0',
+  '@nx/eslint-plugin': '^20.0.0',
   '@types/node': `^${NODE_VERSION}`,
   '@typescript-eslint/eslint-plugin': '^7.14.1',
   '@typescript-eslint/parser': '^7.14.1',
@@ -32,6 +34,6 @@ export const DEV_DEPENDENCIES = {
   'ts-node': '^10',
   'ts-node-dev': '^2',
   'ts-patch': '^3',
-  typescript: '~5.5', // fixed minor-version until "typescript-transform-paths" works with version 5.6+
+  typescript: '^5.6',
   'typescript-transform-paths': '^3'
 }
