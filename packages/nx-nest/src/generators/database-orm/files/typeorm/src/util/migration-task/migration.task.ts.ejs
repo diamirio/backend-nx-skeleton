@@ -1,8 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { Timeout } from '@nestjs/schedule'
+import { stat } from 'node:fs/promises'
 import { DataSource } from 'typeorm'
 
-import { getDatabaseOptions } from '../../database/database-options'
+import { getDatabaseOptions, migrationsDir } from '../../database/database-options'
 import { Retry, UseMaintenanceLocker } from '@webundsoehne/nestjs-util'
 
 @Injectable()
@@ -18,16 +19,16 @@ export class MigrationTask {
   async migrate (): Promise<void> {
     const options = getDatabaseOptions()
 
-    if (!options?.cli?.migrationsDir) {
+    if (!migrationsDir) {
       this.logger.warn('No migrations folder configured')
 
       return
     }
 
     try {
-      await stat(options.cli.migrationsDir)
+      await stat(migrationsDir)
     } catch (error) {
-      this.logger.warn(`No migrations folder found in "${options.cli.migrationsDir}"`)
+      this.logger.warn(`No migrations folder found in "${migrationsDir}"`)
 
       return
     }
