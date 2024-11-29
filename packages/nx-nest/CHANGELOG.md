@@ -1,3 +1,15 @@
+# @webundsoehne/nx-nest [6.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.8...@webundsoehne/nx-nest@6.0.0-beta.9) (2024-11-29)
+
+### Bug Fixes
+
+- **nx-nest:** swagger custom-environment-variables ([48ba1d8](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/48ba1d85f6287d4a3153d177c78558b29498716a))
+
+### Features
+
+- **nx-nest:** migrations, nx eslint ([bf4fd1e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/bf4fd1e2d2e0b7028ead1a3d97ab2f9c390bee26))
+- **nx-nest:** nx migration to update db-migration ([3c47c5b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3c47c5b74d5ea65b6b41db31a7219d1ea727ccc7))
+- **nx-nest:** nx migration to update db-migration ([b3ef800](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b3ef8003c6130f80d7b420c79b1bbe949de32d0c))
+
 # @webundsoehne/nx-nest [6.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.7...@webundsoehne/nx-nest@6.0.0-beta.8) (2024-11-12)
 
 ### Bug Fixes
