@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { Timeout } from '@nestjs/schedule'
 import { config, database, up } from 'migrate-mongo'
+import { stat } from 'node:fs/promises'
 
 import * as mongooseMigrateConfig from '../../database/migrate-options'
 import { Retry, UseMaintenanceLocker } from '@webundsoehne/nestjs-util'
@@ -16,8 +17,24 @@ export class MigrationTask {
     interval: 3 * 1000
   })
   async migrateMongoose (): Promise<void> {
+    const options = mongooseMigrateConfig()
+
+    if (!options?.migrationsDir) {
+      this.logger.warn('No migrations folder configured')
+
+      return
+    }
+
     try {
-      config.set(mongooseMigrateConfig)
+      await stat(options.migrationsDir)
+    } catch (error) {
+      this.logger.warn(`No migrations folder found in "${options.migrationsDir}"`)
+
+      return
+    }
+
+    try {
+      config.set(options)
 
       const { db, client } = await database.connect()
       const migrated = await up(db, client)

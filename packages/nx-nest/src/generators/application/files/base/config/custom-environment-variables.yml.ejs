@@ -14,7 +14,7 @@ swagger:
   useHttps:
     __name: USE_HTTPS
     __format: json
-  basePath: API_BASE_PATH
+  path: SWAGGER_PATH
 <% } -%>
 <% if (includeMessageQueue) { %>
 messageQueue:
@@ -26,9 +26,7 @@ messageQueue:
 database:
   host: DATABASE_HOST
   port: DATABASE_PORT
+  database: DATABASE_NAME
   username: DATABASE_USER
   password: DATABASE_PASSWORD
-  database: DATABASE_NAME <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
-  type: DATABASE_TYPE
-  migrationsTableName: DATABASE_MIGRATIONS_TABLE <% } %>
 <% } -%>
