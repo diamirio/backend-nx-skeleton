@@ -35,6 +35,8 @@ interface GenerateOptions extends ApplicationGeneratorSchema {
 export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
+  validateComponents(generateOptions)
+
   if (!generateOptions.components?.length) {
     output.error({ title: '[Application] At least one component must be selected' })
 
@@ -118,6 +120,30 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   output.log({ title: '[Application] Post-Processing ...' })
 
   return applyTasks(tasks)
+}
+
+// validate and map component names (validate manually typed components if not using the interactive input)
+function validateComponents (options: GenerateOptions): void {
+  const validatedComponents: GenerateOptions['components'] = []
+  const componentMap: Record<string, string> = Object.fromEntries(Object.entries(Component).map(([key, value]) => [value, key]))
+  const asComponent = (key: string): Component => Component[componentMap[key]]
+
+  for (let i = 0, l = options.components?.length ?? 0; i < l; ++i) {
+    const componentString = options.components[i].toLowerCase()
+    let c: Component
+
+    if (componentString === 'cli') {
+      c = Component.COMMAND
+    } else {
+      c = asComponent(componentString)
+    }
+
+    if (c) {
+      validatedComponents.push(c)
+    }
+  }
+
+  options.components = validatedComponents
 }
 
 async function generateDatabaseLib (tree: Tree, options: GenerateOptions, context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
