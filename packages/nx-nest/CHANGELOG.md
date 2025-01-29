@@ -1,3 +1,9 @@
+# @webundsoehne/nx-nest [6.0.0-beta.10](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.9...@webundsoehne/nx-nest@6.0.0-beta.10) (2025-01-29)
+
+### Bug Fixes
+
+- **nx-nest:** validate manual typed component names ([f5b2c9b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/f5b2c9be64569b8f210fad960075b1c0dfe9978d))
+
 # @webundsoehne/nx-nest [6.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.8...@webundsoehne/nx-nest@6.0.0-beta.9) (2024-11-29)
 
 ### Bug Fixes
