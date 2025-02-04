@@ -29,6 +29,9 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
   - [jest](#jest)
     - [Configuration](#configuration-3)
 - [Plugins](#plugins)
+  - [Single Plugin](#single-plugin)
+  - [Split Plugins](#split-plugins)
+  - [Exclude Plugins](#exclude-plugins)
 - [Migration](#migration)
   - [Packages](#packages)
   - [nx.json](#nxjson)
@@ -60,8 +63,10 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
         main: 'src/main.ts',
         tsConfig: 'tsconfig.app.json',
         // additional optional options
-        mergeAssets: true, // set `false` to overwrite targetDefault assets
-        cwd: '{projectRoot}' // used to prefix `main` and `tsConfig` paths
+        mergeAssets: true,
+        // set `false` to overwrite targetDefault assets
+        cwd: '{projectRoot}'
+        // used to prefix `main` and `tsConfig` paths
       }
     }
   }
@@ -86,15 +91,20 @@ Run a project in the source folder directly, where all the assets will be in pla
         main: 'src/main.ts',
         tsConfig: 'tsconfig.app.json',
         // optional
-        cwd: '{projectRoot}', // defaults to the project-root
+        cwd: '{projectRoot}',
+        // defaults to the project-root
         env: {
           // or alias "environment"
           NODE_ENV: 'develop'
         },
-        debug: true, // ts-node-dev `--debug` flag
-        watchConfig: false, // watch the `config` directory files (to restart on config change)
-        args: ['-r', 'tsconfig-paths/register'], // pass additional arguments to ts-node-dev,
-        keepPackageVersion: false // keep projects package.json version (default: false)
+        debug: true,
+        // ts-node-dev `--debug` flag
+        watchConfig: false,
+        // watch the `config` directory files (to restart on config change)
+        args: ['-r', 'tsconfig-paths/register'],
+        // pass additional arguments to ts-node-dev,
+        keepPackageVersion: false
+        // keep projects package.json version (default: false)
       }
     }
   }
@@ -166,7 +176,23 @@ Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/
 
 # Plugins
 
-TSC and Ts-Node-Executors can be added to each application via a nx-plugin. To override or add target configs set `tagetDefaults` accordingly.
+By default, the `serve`, `build`, `test` and `e2e` targets are added to each `"projectType": "application"` project ( `test` & `e2e` only if a valid jest config is found).
+
+If you need to disable the plugin for a specific project (i.e. the mono-repo includes a frontend project with own targets) you can add `skipNxExecutors` to the `project.json` `tags`.
+
+## Single Plugin
+
+To add all plugins (tsc, ts-node-dev and jest) just add the plugin to the `nx.json` config. This will add all application targets with the default configurations (as seen in the split plugins below).
+
+```json5
+{
+  plugins: ['@webundsoehne/nx-executors/plugin']
+}
+```
+
+## Split Plugins
+
+Each executor-plugin can be added on its own to the `nx.json` too. To override additional configs (beside the plugin config) set `tagetDefaults` accordingly.
 
 Add `tsc` executor as `build` target.
 
@@ -215,14 +241,29 @@ Add `tsc`, `tsc-node-dev` and `jest`' as `build`, `server` and `test` target.
 {
   plugin: '@webundsoehne/nx-executors/plugin',
   options: {
-    tscOptions: {}, // same options as `[..]/plugin/tsc`
-    tsNodeDevOptions: {}, // same options as `[..]/plugin/ts-node-dev`
-    jestOptions: {} // same options as `[..]/plugin/jest`
+    tscOptions: {},
+    // same options as `[..]/plugin/tsc`
+    tsNodeDevOptions: {},
+    // same options as `[..]/plugin/ts-node-dev`
+    jestOptions: {}
+    // same options as `[..]/plugin/jest`
   }
 }
 ```
 
 **Hint:** on config change it needs `nx reset` to clear the cached targets before the change is active.
+
+## Exclude Plugins
+
+Besides excluding all plugins with the `skipNxExecutors` tag for a project, there is the option to just skip single plugins from generating targets for a project:
+
+| tag                         | description                           |
+| --------------------------- | ------------------------------------- |
+| skipNxExecutors:tsc         | Skip generating `build` target        |
+| skipNxExecutors:ts-node-dev | Skip generating `serve` target        |
+| skipNxExecutors:jest        | Skip generating `test` & `e2e` target |
+| skipNxExecutors:jest:test   | Skip generating `test` target         |
+| skipNxExecutors:jest:e2e    | Skip generating `e2e` target          |
 
 # Migration
 

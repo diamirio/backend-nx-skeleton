@@ -11,6 +11,7 @@ import type { TargetCache } from './cache'
 import { getCache, writeTargetsToCache } from './cache'
 
 export const FILE_PATTERN = '**/project.json'
+export const SKIP_NX_EXECUTORS = 'skipNxExecutors'
 
 type Plugin<O> = new (...args: any[]) => PluginBuilder<O>
 
