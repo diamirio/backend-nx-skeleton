@@ -1,0 +1,35 @@
+import type { NestFastifyApplication } from '@nestjs/platform-fastify'
+import { FastifyAdapter } from '@nestjs/platform-fastify'
+import type { TestingModule } from '@nestjs/testing'
+import { Test } from '@nestjs/testing'
+
+import { ServerModule } from '../src/server/server.module'
+
+describe('Server (e2e)', () => {
+  let app: NestFastifyApplication
+
+  beforeAll(async () => {
+    const moduleRef: TestingModule = await Test.createTestingModule({
+      imports: [ServerModule]
+    }).compile()
+
+    app = moduleRef.createNestApplication(new FastifyAdapter(), { logger: ['error'] })
+
+    await app.init()
+    await app.getHttpAdapter().getInstance().ready()
+  })
+
+  afterAll(async () => {
+    await app.close()
+  })
+
+  describe('Server should be running', () => {
+    test('should be defined', async () => {
+        expect(app).toBeDefined()
+    })
+
+    test('should be able to inject requests', async () => {
+      expect(app.inject).toBeDefined()
+    })
+  })
+})

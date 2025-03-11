@@ -1,0 +1,52 @@
+{
+  "$id": "nest-database-library",
+  "cli": "nx",
+  "title": "Database-ORM Library",
+  "description": "Add a database-util library to the workspace",
+  "type": "object",
+  "properties": {
+    "databaseOrm": {
+      "type": "string",
+      "aliases": ["orm"],
+      "description": "Database orm to use",
+      "x-prompt": {
+        "message": "Which database-orm should be included?",
+        "type": "item",
+        "items": ["typeorm", "mongoose"]
+      }
+    },
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Library name",
+      "default": "database"
+    },
+    "database": {
+      "type": "string",
+      "aliases": ["db"],
+      "description": "Database to use",
+      "x-priority": "internal"
+    },
+    "importPath": {
+      "type": "string",
+      "aliases": ["import-path", "path", "p"],
+      "description": "Library import path",
+      "x-priority": "internal"
+    },
+    "skipPackageJson": {
+      "description": "Do not add dependencies to `package.json`.",
+      "aliases": ["skip-package-json"],
+      "type": "boolean",
+      "default": false,
+      "x-priority": "internal"
+    },
+    "update": {
+      "type": "boolean",
+      "aliases": ["u"],
+      "description": "Update the existing library",
+      "default": false,
+      "x-priority": "internal"
+    }
+  },
+  "required": ["databaseOrm"]
+}

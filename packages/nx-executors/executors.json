@@ -1,0 +1,24 @@
+{
+  "executors": {
+    "jest": {
+      "implementation": "./dist/executors/jest/executor",
+      "schema": "./dist/executors/jest/schema.json",
+      "description": "jest executor"
+    },
+    "run": {
+      "implementation": "./dist/executors/run/executor",
+      "schema": "./dist/executors/run/schema.json",
+      "description": "run executor"
+    },
+    "ts-node-dev": {
+      "implementation": "./dist/executors/ts-node-dev/executor",
+      "schema": "./dist/executors/ts-node-dev/schema.json",
+      "description": "ts-node-dev executor"
+    },
+    "tsc": {
+      "implementation": "./dist/executors/tsc/executor",
+      "schema": "./dist/executors/tsc/schema.json",
+      "description": "tsc executor"
+    }
+  }
+}

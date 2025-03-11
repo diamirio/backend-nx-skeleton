@@ -1,3 +1,31 @@
+# @webundsoehne/nx-workspace [6.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32-beta.3...@webundsoehne/nx-workspace@6.0.0-beta.1) (2024-08-09)
+
+- feat(nx-nest)!: move to nx-generators ([558c13d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/558c13da49e865534f87ae39293a22739a0d83ce))
+- feat(nx-workspace)!: move to nx generators ([9bd918e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9bd918e7caf53bfbe65b1c0a18a4a385f252fce5))
+
+### BREAKING CHANGES
+
+- Move from schematics to new generators. Add/Rewrite generators for creating a nest-workspace, application, util-lib, default lib.
+- Moving from old schematics to new generators. Adapt workspace template to be used with `nx generate` and as `create-nx-workspace` preset. Wrapping the `@nx/workspace:move` and `@nx/workspace:remove` generator, adding better user interaction.
+
+## @webundsoehne/nx-workspace [5.0.32-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32-beta.2...@webundsoehne/nx-workspace@5.0.32-beta.3) (2024-07-31)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.3
+
+## @webundsoehne/nx-workspace [5.0.32-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32-beta.1...@webundsoehne/nx-workspace@5.0.32-beta.2) (2024-07-05)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.2
+
+## @webundsoehne/nx-workspace [5.0.32-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.31...@webundsoehne/nx-workspace@5.0.32-beta.1) (2024-07-03)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.1
+
 ## @webundsoehne/nx-workspace [5.0.31](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.30...@webundsoehne/nx-workspace@5.0.31) (2023-08-03)
 
 ### Dependencies

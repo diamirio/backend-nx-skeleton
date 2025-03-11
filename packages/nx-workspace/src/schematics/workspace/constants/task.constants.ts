@@ -1,5 +1,0 @@
-export enum TaskTokens {
-  NPM_INSTALL = 'NPM_INSTALL',
-  GIT_INIT = 'GIT_INIT',
-  PACKAGE_SCRIPT_LINT = 'PACKAGE_SCRIPT_LINT'
-}

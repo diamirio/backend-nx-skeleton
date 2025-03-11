@@ -1,0 +1,18 @@
+include:
+    - service-docker-compose.yml
+services:
+    <%= SERVICE_NAME %>:
+        image: <%= DOCKER_IMAGE %>
+        ports:
+            - "3000:3000"
+        working_dir: /opt/workspace
+        environment:
+            NX_CACHE_DIRECTORY: /opt/.nx/cache
+            NX_WORKSPACE_DATA_DIRECTORY: /opt/.nx/workspace-data
+        volumes:
+            - .:/opt/workspace
+            - nx_cache:/opt/.nx
+        command: npm run start
+volumes:
+    # container requires "self-generated" cache dir
+    nx_cache:

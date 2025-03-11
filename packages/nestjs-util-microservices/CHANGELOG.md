@@ -1,3 +1,68 @@
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.7...@webundsoehne/nestjs-util-microservices@4.0.0-beta.8) (2024-11-12)
+
+- feat(nestjs-util-microservice)!: close failed connection ([3c35fec](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3c35fecb6623f961eba17356f14a98ee76af64af))
+
+### BREAKING CHANGES
+
+- Using an extended `ClientRMQ` instance instead of the ClientProxyFactory.
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.6...@webundsoehne/nestjs-util-microservices@4.0.0-beta.7) (2024-10-18)
+
+### Features
+
+- **nestjs-util-microservices:** add close method and onModuleDestroy method ([e5952d5](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/e5952d58c6faa10882226b51a1e99ef58d5dc42f))
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.5...@webundsoehne/nestjs-util-microservices@4.0.0-beta.6) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.6
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.4...@webundsoehne/nestjs-util-microservices@4.0.0-beta.5) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.5
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.3...@webundsoehne/nestjs-util-microservices@4.0.0-beta.4) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.4
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.2...@webundsoehne/nestjs-util-microservices@4.0.0-beta.3) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.3
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.1...@webundsoehne/nestjs-util-microservices@4.0.0-beta.2) (2023-12-01)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.2
+
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.13...@webundsoehne/nestjs-util-microservices@4.0.0-beta.1) (2023-12-01)
+
+### Performance Improvements
+
+- **nestjs-util:** rewrite filters ([17fb359](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/17fb359ad164272eb9343d708fded212e997814e))
+
+### BREAKING CHANGES
+
+- **nestjs-util:** - GlobalExceptionFilter stays in the @webundsoehne/nestjs-util
+
+* BadRequestExceptionFilter is deleted since it now utilizes ClassValidatorException and ExtendedValidationPipe to throw the error directly as HttpException
+* RpcGlobalExceptionFilter is deleted and GlobalExceptionFilter can be used for it directly since with the newer nestjs versions it seems to parse the context correctly
+* From anywhere in your code you can throw ClassValidatorException to throw arbitrary validation errors if you do validateOrReject().
+* error stack trace is propagated to the service directly (see 1th screenshot) and it will write the service name in front if it to designate it as external error (for now only configrued for rmq)
+* seems to handle all kinds of messages i can think of see rest of the screenshots
+* refactored the class validator error a bit more. for child properties it includes the parent property name like parent.child.test etc. (see last screenshots)
+
+### Dependencies
+
+- **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.1
+
 ## @webundsoehne/nestjs-util-microservices [3.0.13](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@3.0.12...@webundsoehne/nestjs-util-microservices@3.0.13) (2023-10-24)
 
 ### Bug Fixes

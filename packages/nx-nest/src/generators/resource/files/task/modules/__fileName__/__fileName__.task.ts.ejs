@@ -1,0 +1,17 @@
+import { Injectable, Logger } from '@nestjs/common'
+import { Interval } from '@nestjs/schedule'
+
+/**
+ * Register your bgtask in this component.
+ * Documentation: https://docs.nestjs.com/techniques/task-scheduling
+ */
+
+@Injectable()
+export class <%- resourceNames.className -%>Task {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  @Interval(86400)
+  defaultJob (): void {
+    this.logger.debug('Background task is active.')
+  }
+}

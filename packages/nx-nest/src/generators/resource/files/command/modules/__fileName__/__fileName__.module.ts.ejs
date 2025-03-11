@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { <%- resourceNames.className -%>Command } from './<%- resourceNames.fileName -%>.command'
+
+@Module({
+  providers: [ <%- resourceNames.className -%>Command ],
+  exports: [ <%- resourceNames.className -%>Command ]
+})
+export class <%- resourceNames.className -%>CommandModule {}

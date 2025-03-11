@@ -1,0 +1,52 @@
+{
+  "$id": "Workspace",
+  "description": "Generate an empty custom nx-workspace.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Workspace name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "scope": {
+      "type": "string",
+      "aliases": ["s"],
+      "description": "Workspace scope",
+      "x-prompt": "What package scope name you like to use?"
+    },
+    "layout": {
+      "type": "string",
+      "description": "Layout of the workspace",
+      "x-prompt": {
+        "message": "What folder structure do you want to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "apps-and-libs",
+            "label": "Apps & Libs"
+          },
+          {
+            "value": "packages",
+            "label": "Packages"
+          }
+        ]
+      }
+    },
+    "skipPackageJson": {
+      "type": "boolean",
+      "aliases": ["skip-package-json"],
+      "description": "Skip adding package.json dependencies",
+      "x-priority": "internal"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force overwrite of existing files",
+      "x-priority": "internal"
+    }
+  },
+  "required": ["name", "scope", "layout"]
+}

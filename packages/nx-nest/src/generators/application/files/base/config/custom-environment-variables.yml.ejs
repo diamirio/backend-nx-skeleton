@@ -1,0 +1,32 @@
+<% if (isServer) { %>port: API_PORT<% } %>
+logLevel: LOG_LEVEL
+
+misc:
+  lockfile: MAINTENANCE_LOCKFILE
+  lastUpdateFile: LAST_UPDATE_FILE
+  maintenanceNotification: MAINTENANCE_MESSAGE
+<% if (isServer) { %>
+url:
+  basePath: BASE_URL
+  apiPath: API_BASE_PATH
+
+swagger:
+  useHttps:
+    __name: USE_HTTPS
+    __format: json
+  path: SWAGGER_PATH
+<% } -%>
+<% if (includeMessageQueue) { %>
+messageQueue:
+  urls:
+    __name: MESSAGE_QUEUE_URLS
+    __format: json
+<% } -%>
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>
+database:
+  host: DATABASE_HOST
+  port: DATABASE_PORT
+  database: DATABASE_NAME
+  username: DATABASE_USER
+  password: DATABASE_PASSWORD
+<% } -%>

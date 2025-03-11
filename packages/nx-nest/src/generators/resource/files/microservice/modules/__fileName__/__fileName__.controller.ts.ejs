@@ -1,0 +1,17 @@
+import { Controller } from '@nestjs/common'
+import { MessagePattern } from '@nestjs/microservices'
+
+import { <%- resourceNames.className -%>Microservice } from './<%- resourceNames.fileName -%>.service'
+import { <%- projectNames.className %>Pattern, MessageQueues, MicroserviceRequest, MicroserviceResponse } from '@<%- scope %>/microservice-provider'
+
+@Controller()
+export class <%- resourceNames.className -%>Microcontroller {
+  constructor (private readonly <%- resourceNames.propertyName -%>Microservice: <%- resourceNames.className -%>Microservice) {}
+
+  @MessagePattern(<%- projectNames.className %>Pattern.<%- resourceNames.constantName -%>)
+  default (
+    options: MicroserviceRequest<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.<%- resourceNames.constantName -%>>
+  ): Promise<MicroserviceResponse<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.<%- resourceNames.constantName -%>>> {
+    return this.<%- resourceNames.propertyName -%>Microservice.default(options)
+  }
+}

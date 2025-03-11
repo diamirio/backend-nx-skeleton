@@ -1,0 +1,57 @@
+<p align="center">
+  <a href="https://webundsoehne.com" target="blank">
+    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
+  </a>
+</p>
+Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+
+---
+
+# <%= packageScope %>
+
+<!-- toc -->
+- [Description](#description)
+- [Docker Compose](#docker-compose)
+<!-- tocstop -->
+
+## Description
+
+This is an auto-generated custom workspace with [nx](https://www.npmjs.com/package/nx).<br>
+Most information can be found in the `nx.json`, the projects `project.json` and `package.json`.
+
+## Commands
+
+- `npm run start:one <project>` or `nx run <project>:serve` to start the application in watch-mode
+- `npm run build:one <project>` or `nx run <project>:build` to build the application
+
+If jest is set up:
+- `npm run test:one <project>` or `nx run <project>:test` to start an application's unit-tests
+- `npm run test:e2e:one <project>` or `nx run <project>:e2e` to start an applications e2e-tests
+
+If a database is set up:
+- `npm run backend:migrate <project>` or `nx run <project>:migration:run` to migrate open db-migrations
+- `npm run backend:migrate:rollback <project>` or `nx run <project>:migration:rollback` to revert the last db migration
+- `npm run backend:migrations:create <project> <name>` to create a blank migration file
+- `npm run backend:migrations:generate <project> <name>` to generate a migration file (only typeorm)
+
+**Hint**: to i.e. start all project run `npm run start` instead, same for `build`, `test`, `test:e2e`
+
+
+## Docker Compose
+On workspace and application generation two docker-files will also be generated:
+1. docker-compose.yml
+2. service-docker-compose.yml
+
+First on starts the full application: dependencies like the database and message-queue, together with a single nx container starting all projects.<br>
+The seconds one only starts the dependencies without nx, if you want to start the nx processes directly on your machine instead.
+
+You can proxy command to the nx container to i.e. run tests: `docker compose exec nx npm run test`<br>
+The full project is mounted inside the nx container, so any `package.json` script or `nx` command can be executed inside the container.
+
+**Hint**: To exclude some projects from running, either update the docker compose command like `command: npm run start -- --exclude=bgtask`, or add a new `package.json` script and replace the command to run.
+
+
+## Stay in touch
+
+- Author: [Backend Team](mailto:backend@webundsoehne.com)
+- Website: [Web & Söhne](https://webundsoehne.com)

@@ -1,3 +1,139 @@
+# @webundsoehne/nx-nest [6.0.0-beta.10](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.9...@webundsoehne/nx-nest@6.0.0-beta.10) (2025-01-29)
+
+### Bug Fixes
+
+- **nx-nest:** validate manual typed component names ([f5b2c9b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/f5b2c9be64569b8f210fad960075b1c0dfe9978d))
+
+# @webundsoehne/nx-nest [6.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.8...@webundsoehne/nx-nest@6.0.0-beta.9) (2024-11-29)
+
+### Bug Fixes
+
+- **nx-nest:** swagger custom-environment-variables ([48ba1d8](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/48ba1d85f6287d4a3153d177c78558b29498716a))
+
+### Features
+
+- **nx-nest:** migrations, nx eslint ([bf4fd1e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/bf4fd1e2d2e0b7028ead1a3d97ab2f9c390bee26))
+- **nx-nest:** nx migration to update db-migration ([3c47c5b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3c47c5b74d5ea65b6b41db31a7219d1ea727ccc7))
+- **nx-nest:** nx migration to update db-migration ([b3ef800](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b3ef8003c6130f80d7b420c79b1bbe949de32d0c))
+
+# @webundsoehne/nx-nest [6.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.7...@webundsoehne/nx-nest@6.0.0-beta.8) (2024-11-12)
+
+### Bug Fixes
+
+- **nx-nest:** microservice default module template ([8575b5f](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/8575b5fea96f8427eb7e46b9493cc5a8673633b6))
+
+### Features
+
+- **nx-nest:** seed and migration scripts, unified generate options ([848dcee](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/848dceef47196ed8a5cec6d861d919c721d3a57c))
+
+# @webundsoehne/nx-nest [6.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.6...@webundsoehne/nx-nest@6.0.0-beta.7) (2024-11-05)
+
+### Features
+
+- **nx-nest:** update typeorm migration target configuration ([18c1e7e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/18c1e7e6d4f31375fec4cc7d7860dd03da493bab))
+
+# @webundsoehne/nx-nest [6.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.5...@webundsoehne/nx-nest@6.0.0-beta.6) (2024-10-29)
+
+### Bug Fixes
+
+- **nx-nest:** activate git hooks on application generation ([c62abe3](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c62abe3ff83bf3e2931ac9cf4d75acd75ab8a98d))
+- **nx-nest:** gitlab ci application config ([0d37732](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0d37732b2c9c79550af4e935770ebb25a3b8e42c))
+- **nx-nest:** move eslintignore into eslintrc ([639b8c1](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/639b8c17d7eef424d26b234e94c727904e2bd8ae))
+
+# @webundsoehne/nx-nest [6.0.0-beta.5](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.4...@webundsoehne/nx-nest@6.0.0-beta.5) (2024-10-25)
+
+### Bug Fixes
+
+- **nx-nest:** custom gitignore entries ([da489a3](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/da489a32cff3b88e85bef6f95e486283b0c19c24))
+
+### Features
+
+- **nx-nest:** split test and e2e targets ([ec8a830](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ec8a830b0d61184ba6a134df13439c1f7c80485b))
+
+# @webundsoehne/nx-nest [6.0.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.3...@webundsoehne/nx-nest@6.0.0-beta.4) (2024-10-23)
+
+### Features
+
+- **nx-nest:** move nx cache up a level ([1f24dd9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/1f24dd922d6da59666d9aee039980b18132f8adb))
+
+# @webundsoehne/nx-nest [6.0.0-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.2...@webundsoehne/nx-nest@6.0.0-beta.3) (2024-10-22)
+
+### Bug Fixes
+
+- **nx-nest:** database dependencies, config ([576cd71](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/576cd712e9b980d8f971353e430af10245eb655c))
+- **nx-nest:** do not overwrite existing start and build scripts ([6d5aa53](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6d5aa534eaf0b649bb5f48603cf13ecfebdbd94c))
+- **nx-nest:** include db migration on build ([6b5c8c0](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6b5c8c0234c8bb2d853a78317a521f4d4f426aa8))
+- **nx-nest:** missing mongodb default config ([fcb3f76](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/fcb3f7662492324efaebd1219dce5fcc6b942782))
+- **nx-nest:** mongodb migration dir ([891a7df](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/891a7dfe87c9f3e326cb1b7e2f2451446ddf5f05))
+- **nx-nest:** remove module wrapper `create[..]` function ([1374286](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/137428614457e448bd791ca1bf62a18b280e97e2))
+- **nx-nest:** server template ([d35c916](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/d35c91662003a99eb2ff96b2e43f7b5d682f59ca))
+
+### Features
+
+- **nx-nest:** docker-compose service generation ([db3a7ef](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/db3a7ef4605fde3744e5feb1633c720ae4824a77))
+- **nx-nest:** select database system when using typeorm ([a85fe35](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a85fe35dd971511c0a13022951abf408cff695a2))
+- **nx-nest:** v20, docker-compose migration ([cb94a3e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/cb94a3e3094603563856d74512393d58cdada817))
+
+# @webundsoehne/nx-nest [6.0.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.1...@webundsoehne/nx-nest@6.0.0-beta.2) (2024-09-12)
+
+### Bug Fixes
+
+- **nx-nest:** add test config file ([c55aef5](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c55aef55deabc8229d9cea481ad9238b28d71673))
+- **nx-nest:** background task component name ([ea3f2db](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ea3f2dbd6359ee73a84a819eb58a7a3c553fd9e9))
+- **nx-nest:** command, migration targets ([aefdd23](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/aefdd2387d24084250ff1150b87856d80fb119a5))
+- **nx-nest:** database options, exports ([cdb8e4b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/cdb8e4b229fa2f4b483c7201d0a7128c8a97abb1))
+- **nx-nest:** messageQueues option, default build assets ([0b64bfb](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0b64bfb65ebe878ae1fceafd30de12751e44ec54))
+- **nx-nest:** microservice pattern and request + response types ([0a37c7a](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0a37c7abc0663760deac61c39dd936b5aaa72035))
+- **nx-nest:** migration-modules ([9c14b0e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9c14b0e583949c89794dfb23cb7a4e46c8438889))
+- **nx-nest:** nx-nest version ([3a6102e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3a6102ee002ae883d6defd1eea0c58afbd6fa037))
+- **nx-nest:** seeding ([a6d2903](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a6d2903cbfae7c9904538a4a7066fd37edf2e93f))
+
+### Performance Improvements
+
+- **nx-generators:** bump node version to current lts ([9b25560](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9b25560ded9145b5a6cf089868d2237e1c9993f7))
+
+# @webundsoehne/nx-nest [6.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.3...@webundsoehne/nx-nest@6.0.0-beta.1) (2024-08-09)
+
+### Bug Fixes
+
+- **nx-nest:** correct dependency version ([88174fd](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/88174fd8fea7820800f605326dbe1c5051ae6e0a))
+- **nx-nest:** default database config ([424ade1](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/424ade10ebb087c9d69d994e50decd4e31d09bd5))
+- **nx-nest:** default database config ([b291f14](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b291f14e3dd3c7cad6dd199b231cb0dad98bff0f))
+- **nx-nest:** side-effect free source-file modification helper ([0ff19ba](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/0ff19ba3e99d81237dc74053e38797786c7564b7))
+
+- feat(nx-nest)!: move to nx-generators ([558c13d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/558c13da49e865534f87ae39293a22739a0d83ce))
+
+### Features
+
+- **nx-nest:** add bootstrap information logs ([b8718c0](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/b8718c0b7fbdcae9d221fe4aecaec689c9948f47))
+- **nx-nest:** implicit dependencies ([18b68e7](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/18b68e7594f7dd375e0d4cc5acd2fd456b288bb6))
+- **nx-nest:** lib src folder with index file ([9487e75](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9487e75a0ffa8e737b74259f803b22c56c57680c))
+- **nx-nest:** lint staged config, reduce default scripts ([c0bad75](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c0bad75b19cba0a895a4f337f366db97405b25b7))
+- **nx-nest:** resource generation ([726568e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/726568e73fc8b93dfb0082dc3c25501b272e1df5))
+- **nx-nest:** update default scripts ([5e01a65](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/5e01a650951ace658dba78a0e9ab3917bbb1b0db))
+
+### BREAKING CHANGES
+
+- Move from schematics to new generators. Add/Rewrite generators for creating a nest-workspace, application, util-lib, default lib.
+
+## @webundsoehne/nx-nest [5.0.31-beta.3](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.2...@webundsoehne/nx-nest@5.0.31-beta.3) (2024-07-31)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.3
+
+## @webundsoehne/nx-nest [5.0.31-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.31-beta.1...@webundsoehne/nx-nest@5.0.31-beta.2) (2024-07-05)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.2
+
+## @webundsoehne/nx-nest [5.0.31-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.30...@webundsoehne/nx-nest@5.0.31-beta.1) (2024-07-03)
+
+### Dependencies
+
+- **@webundsoehne/nx-builders:** upgraded to 6.3.0-beta.1
+
 ## @webundsoehne/nx-nest [5.0.30](https://gitlab.tailored-apps.com/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@5.0.29...@webundsoehne/nx-nest@5.0.30) (2023-08-03)
 
 ### Dependencies

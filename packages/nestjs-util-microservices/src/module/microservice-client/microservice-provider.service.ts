@@ -1,12 +1,13 @@
-import type { OnModuleInit } from '@nestjs/common'
+import type { OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Injectable } from '@nestjs/common'
-import type { ClientProviderOptions, ClientProxy } from '@nestjs/microservices'
+import type { ClientProviderOptions } from '@nestjs/microservices'
 import type { Observable } from 'rxjs'
 import { asyncScheduler, firstValueFrom, throwError } from 'rxjs'
 import { timeout } from 'rxjs/operators'
 
 import type { GetMicroserviceMessageRequestFromMap, GetMicroserviceMessageResponseFromMap, MicroserviceProviderServiceOptions } from './microservice-provider.interface'
 import { TimeoutException } from './microservice-provider.interface'
+import type { ClientProxyRMQ } from './utils/client-rmq.proxy'
 import { ConfigService } from '@webundsoehne/nestjs-util'
 
 /**
@@ -18,8 +19,8 @@ export class MicroserviceProviderService<
   MessageQueues extends string = any,
   MessageQueuePatterns extends Record<MessageQueues, any> = any,
   MessageQueueMap extends Record<MessageQueues, any> = any
-> implements OnModuleInit {
-  private clients: Record<MessageQueues, ClientProxy>
+> implements OnModuleInit, OnModuleDestroy {
+  private clients: Record<MessageQueues, ClientProxyRMQ>
   private options: Required<MicroserviceProviderServiceOptions>
 
   constructor (private readonly provider: ClientProviderOptions[], private readonly names: MessageQueues[]) {
@@ -38,7 +39,13 @@ export class MicroserviceProviderService<
       o[this.names[i]] = c
 
       return o
-    }, {}) as unknown as Record<MessageQueues, ClientProxy>
+    }, {}) as unknown as Record<MessageQueues, ClientProxyRMQ>
+  }
+
+  onModuleDestroy (): void {
+    for (const client of Object.values<ClientProxyRMQ>(this.clients)) {
+      client.close()
+    }
   }
 
   // FIXME: this guys causes problems when typing the message request-respond types itself. only making the map a string map works.
@@ -81,6 +88,15 @@ export class MicroserviceProviderService<
         scheduler: asyncScheduler
       })
     )
+  }
+
+  close<Queue extends MessageQueues>(queue: Queue): void {
+    // it does not like ?.[]
+    if (!this.clients || !this.clients[queue]) {
+      throw new Error(`"${queue}" is not available in the context of this provider. Please check MicroserviceProviderModule.forRoot inputs and message queue connection.`)
+    }
+
+    this.clients[queue].close()
   }
 
   private async execute<

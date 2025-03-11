@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { <%- resourceNames.className -%>Task } from './<%- resourceNames.fileName -%>.task'
+
+@Module({
+  providers: [ <%- resourceNames.className -%>Task ],
+  exports: [ <%- resourceNames.className -%>Task ]
+})
+export class <%- resourceNames.className -%>TaskModule {}

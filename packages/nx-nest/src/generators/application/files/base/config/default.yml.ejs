@@ -1,0 +1,59 @@
+<% if (isServer) { %>port: 3000<% } %>
+logLevel: debug
+
+misc:
+  lockfile: maintenance.lock
+  maintenanceNotification: null
+  lastUpdateFile: .last-update
+  changelogFile: CHANGELOG.md
+<% if (isServer) { %>
+url:
+  basePath: http://localhost:3000
+  apiPath: ""
+
+swagger:
+  path: /internal/docs
+  title: NestJS Skeleton
+  description: API
+  useHttps: false
+
+cacheLifetime:
+  defaultExpiresHeader: false
+  defaultLifetime: 0
+  expiresHeader: Expires
+  cacheControlHeader: Cache-control
+<% } -%>
+<% if (includeMessageQueue) { %>
+messageQueue:
+  urls:
+    - amqp://rabbitmq:5672
+<% } -%>
+<% if (databaseOrm !== DATABASE_ORM.NONE) { %>
+database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
+  database: db
+  username: user
+  password: secret
+  host: db
+  type: <% if (database === DATABASE.MYSQL) { %>mysql<%
+  } else if (database === DATABASE.POSTGRES) { %>postgres<%
+  } else { %># @todo: set driver<% } %>
+  port: <% if (database === DATABASE.MYSQL) { %>3306<%
+  } else if (database === DATABASE.POSTGRES) { %>5432<%
+  } else { %># @todo: set port<% } %>
+  synchronize: false
+  cache: false
+  keepConnectionAlive: true
+  migrationsTableName: migrations
+<% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
+  host: db
+  port: 27017
+  database: db
+  username: user
+  password: secret
+  ignoreUndefined: true
+  migration:
+    migrationFileExtension: '.js'
+    useFileHash: false
+    moduleSystem: commonjs
+<% } -%>
+<% } -%>
