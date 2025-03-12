@@ -7,7 +7,15 @@ import { execCommand } from 'nx/src/command-line/release/utils/exec-command'
 import { readJson } from 'nx/src/generators/utils/json'
 
 import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
-import { DEPENDENCIES, DEV_DEPENDENCIES, IMPLICIT_DEPENDENCIES } from '../../constant/application'
+import {
+  BACKGROUND_TASK_DEPENDENCIES,
+  COMMAND_DEPENDENCIES,
+  DEPENDENCIES,
+  DEV_DEPENDENCIES,
+  IMPLICIT_DEPENDENCIES,
+  MICROSERVICE_DEPENDENCIES,
+  SERVER_DEPENDENCIES
+} from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import type { ApplyTemplate } from '../../utils'
 import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
@@ -225,7 +233,25 @@ function generateMicroserviceServer (tree: Tree, options: ApplicationGeneratorSc
 
 function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+    const dependencies = { ...DEPENDENCIES }
+
+    if (options.components?.includes(Component.SERVER)) {
+      Object.assign(dependencies, SERVER_DEPENDENCIES)
+    }
+
+    if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
+      Object.assign(dependencies, MICROSERVICE_DEPENDENCIES)
+    }
+
+    if (options.components?.includes(Component.BG_TASK)) {
+      Object.assign(dependencies, BACKGROUND_TASK_DEPENDENCIES)
+    }
+
+    if (options.components?.includes(Component.COMMAND)) {
+      Object.assign(dependencies, COMMAND_DEPENDENCIES)
+    }
+
+    tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
       content.scripts.start ??= 'nx run-many -t serve --parallel 100'
       content.scripts['start:one'] ??= 'nx serve'
