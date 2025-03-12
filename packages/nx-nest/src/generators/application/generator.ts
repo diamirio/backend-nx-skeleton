@@ -12,6 +12,7 @@ import { JEST_DEPENDENCIES } from '../../constant/jest'
 import type { ApplyTemplate } from '../../utils'
 import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
+import databaseTargetGenerator from '../database-target/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
@@ -110,6 +111,10 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   // custom integration metadata
   setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
+
+  if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
+    await databaseTargetGenerator(tree, { project: generateOptions.projectName })
+  }
 
   updateGitlabCI(tree, generateOptions.projectNames)
 
@@ -241,16 +246,6 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
         }
       }
 
-      if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
-        content.scripts.migrate ??= `nx migration -c run ${options.projectName}`
-        content.scripts['migrate:rollback'] ??= `nx migration -c rollback ${options.projectName}`
-        content.scripts['migrations:create'] ??= `nx migration -c create ${options.projectName} --name`
-
-        if (options.databaseOrm === DatabaseOrm.TYPEORM) {
-          content.scripts['migrations:generate'] ??= `nx migration -c generate ${options.projectName} --name`
-        }
-      }
-
       return content
     })
 
@@ -338,93 +333,6 @@ function setProjectTargets (tree: Tree, options: GenerateOptions): void {
               NODE_SERVICE: 'cli'
             },
             command: 'ts-node ./src/main.ts'
-          }
-        }
-      }
-    }
-
-    if (options.components.includes(Component.BG_TASK)) {
-      if (options.databaseOrm === DatabaseOrm.TYPEORM) {
-        content.targets = {
-          ...content.targets ?? {},
-          migration: {
-            executor: '@webundsoehne/nx-executors:run',
-            options: {
-              tsNode: true,
-              env: {
-                TYPEORM_SOURCE: '../../libs/database/src',
-                TYPEORM_DATASOURCE: 'database/orm.config.ts',
-                TYPEORM_MIGRATION: 'migration'
-              }
-            },
-            configurations: {
-              show: {
-                command: 'typeorm migration:show -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
-              },
-              run: {
-                command: 'typeorm migration:run -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
-              },
-              rollback: {
-                command: 'typeorm migration:revert -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE'
-              },
-              create: {
-                command: 'typeorm migration:create $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
-              },
-              generate: {
-                command: 'typeorm migration:generate -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
-              }
-            }
-          }
-        }
-      } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
-        content.targets = {
-          ...content.targets ?? {},
-          migration: {
-            executor: '@webundsoehne/nx-executors:run',
-            options: {
-              tsNode: true,
-              env: {
-                MONGOOSE_MIGRATE_OPTIONS: '../../libs/database/src/database/migrate-options.ts'
-              }
-            },
-            configurations: {
-              run: {
-                command: 'migrate-mongo up -f $MONGOOSE_MIGRATE_OPTIONS'
-              },
-              rollback: {
-                command: 'migrate-mongo down -f $MONGOOSE_MIGRATE_OPTIONS'
-              },
-              create: {
-                command: 'migrate-mongo create -f $MONGOOSE_MIGRATE_OPTIONS {args.name}'
-              }
-            }
-          }
-        }
-      }
-
-      if (options.databaseOrm !== DatabaseOrm.NONE) {
-        content.targets = {
-          ...content.targets ?? {},
-          seed: {
-            executor: '@webundsoehne/nx-executors:run',
-            options: {
-              tsNode: true,
-              env: {
-                NODE_SERVICE: 'cli'
-              },
-              command: 'ts-node ./src/main.ts seed'
-            }
-          },
-          build: {
-            options: {
-              assets: [
-                {
-                  glob: '*.js',
-                  input: 'libs/database/src/migration',
-                  output: 'libs/database/src/migration'
-                }
-              ]
-            }
           }
         }
       }

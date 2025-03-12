@@ -1,0 +1,18 @@
+{
+  "$id": "database-target",
+  "cli": "nx",
+  "title": "Database-Target",
+  "description": "Add the database-target to a project",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "aliases": ["p"],
+      "description": "Project name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  }
+}
