@@ -116,16 +116,6 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
     if (orm !== DatabaseOrm.NONE) {
       content.targets = {
         ...content.targets ?? {},
-        seed: {
-          executor: '@webundsoehne/nx-executors:run',
-          options: {
-            tsNode: true,
-            env: {
-              NODE_SERVICE: 'cli'
-            },
-            command: 'ts-node ./src/main.ts seed'
-          }
-        },
         build: {
           options: {
             assets: [
