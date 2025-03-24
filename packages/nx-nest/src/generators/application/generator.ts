@@ -242,7 +242,7 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
         content.scripts['command:one'] ??= 'nx command'
 
         if (options.databaseOrm !== DatabaseOrm.NONE) {
-          content.scripts.seed ??= `nx seed ${options.projectName}`
+          content.scripts.seed ??= `nx command ${options.projectName} seed`
         }
       }
 
