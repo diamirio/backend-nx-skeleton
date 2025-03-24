@@ -43,7 +43,7 @@ database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
   synchronize: false
   cache: false
   keepConnectionAlive: true
-  migrationsTableName: migrations
+  migrationsTableName: _migrations
 <% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
   host: db
   port: 27017
