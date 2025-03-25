@@ -15,8 +15,7 @@ export const DOCKER_DB_SERVICE = {
       MYSQL_ROOT_PASSWORD: 'secret',
       MYSQL_DATABASE: 'db'
     },
-    ports: ['3306:3306'],
-    cap_add: ['sys_nice']
+    ports: ['3306:3306']
   },
   [Database.POSTGRES]: {
     image: IMAGE_POSTGRES,
