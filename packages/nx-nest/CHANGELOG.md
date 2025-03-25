@@ -1,3 +1,13 @@
+# @webundsoehne/nx-nest [6.0.0-beta.11](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.10...@webundsoehne/nx-nest@6.0.0-beta.11) (2025-03-25)
+
+### Bug Fixes
+
+- **nx-nest:** package.json seed script ([707ecf4](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/707ecf4a0a1e27c4a69cf36525b03fed628531f8))
+
+### Features
+
+- **nx-nest:** database target generator ([25e5d8d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/25e5d8d382b9cd764e8720724d6f67174e5f0212))
+
 # @webundsoehne/nx-nest [6.0.0-beta.10](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.9...@webundsoehne/nx-nest@6.0.0-beta.10) (2025-01-29)
 
 ### Bug Fixes
