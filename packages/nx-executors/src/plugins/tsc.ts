@@ -1,7 +1,7 @@
 import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
 import type { BuildTargetOptions } from './utils/plugin'
-import { buildPlugin, PluginBuilder } from './utils/plugin'
+import { SKIP_NX_EXECUTORS, buildPlugin, PluginBuilder } from './utils/plugin'
 
 export interface TscPluginOptions {
   targetName?: string
@@ -11,7 +11,11 @@ export interface TscPluginOptions {
 class TscPlugin extends PluginBuilder<TscPluginOptions> {
   name = 'tsc'
 
-  buildTarget ({ options }: BuildTargetOptions<TscPluginOptions>): Record<string, TargetConfiguration> {
+  buildTarget ({ options, projectConfig }: BuildTargetOptions<TscPluginOptions>): Record<string, TargetConfiguration> {
+    if (projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}`)) {
+      return {}
+    }
+
     return {
       [options?.targetName ?? 'build']: {
         executor: options?.executor ?? '@webundsoehne/nx-executors:tsc',

@@ -1,7 +1,7 @@
 import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
 import type { BuildTargetOptions } from './utils/plugin'
-import { buildPlugin, PluginBuilder } from './utils/plugin'
+import { SKIP_NX_EXECUTORS, buildPlugin, PluginBuilder } from './utils/plugin'
 
 export interface TsNodeDevPluginOptions {
   targetName?: string
@@ -12,6 +12,10 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   name = 'ts-node-dev'
 
   buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): Record<string, TargetConfiguration> {
+    if (projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}`)) {
+      return {}
+    }
+
     const target: TargetConfiguration = {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       inputs: ['production', '^production'],
