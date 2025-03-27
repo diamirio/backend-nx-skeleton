@@ -1,3 +1,11 @@
+# @webundsoehne/nx-executors [1.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.7...@webundsoehne/nx-executors@1.0.0-beta.8) (2025-03-27)
+
+- feat(nx-executors)!: skipNxExecutors tags ([973e414](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/973e4143911ac8d05d100aef0b809d66b3b76c12))
+
+### BREAKING CHANGES
+
+- Upgrade to nx 20
+
 # @webundsoehne/nx-executors [1.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.6...@webundsoehne/nx-executors@1.0.0-beta.7) (2024-10-30)
 
 ### Features
