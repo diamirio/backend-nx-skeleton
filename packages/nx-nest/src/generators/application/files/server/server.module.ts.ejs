@@ -1,10 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
-<% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
-<% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
 
 import * as modules from './modules'
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>'<% } %>
 import {
   ConfigService,
   BadRequestExceptionFilter,
@@ -20,7 +17,6 @@ import {
   InternalModule,
   RequestProfilerInterceptor,
 } from '@webundsoehne/nestjs-util-restful'
-<% if (microserviceProvider) { %>import { MicroserviceProviderModule } from '@webundsoehne/nestjs-util-microservices'<% } -%>
 
 @Module({
   providers: [
@@ -47,13 +43,10 @@ import {
     }
   ],
   imports: [
-    <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
-    <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
-    <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
     InternalModule,
     MaintenanceModule,
     ...Object.values(modules)
-    ]
+  ]
 })
 export class ServerModule implements NestModule {
   async configure (consumer: MiddlewareConsumer): Promise<void> {

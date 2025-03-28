@@ -42,6 +42,12 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
 
   const project = projects.get(options.project)
 
+  if (!project) {
+    output.error({ title: `[Migration-Target] Invalid project "${options.project}"` })
+
+    return
+  }
+
   updateJson(tree, 'package.json', (content) => {
     content.scripts.migrate ??= `nx migration -c run ${project.name}`
     content.scripts['migrate:rollback'] ??= `nx migration -c rollback ${project.name}`

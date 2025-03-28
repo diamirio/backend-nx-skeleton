@@ -1,15 +1,17 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, readNxJson } from '@nx/devkit'
+import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { join } from 'node:path'
-import { updateJson } from 'nx/src/generators/utils/json'
+import { readJson, updateJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
+import { componentMetaData } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
 import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_IMAGE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
-import { applyTasks, applyTemplateFactory, updateYaml } from '../../utils'
+import { getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY } from '../../constant/microservice-provider/config'
+import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectRootMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
 interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
@@ -25,7 +27,7 @@ export default async function microserviceProviderGenerator (tree: Tree, options
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   const tasks: GeneratorCallback[] = []
-  const applyTemplate = applyTemplateFactory(tree, __dirname)
+  const applyTemplate = applyTemplateFactory(tree, __dirname, { overwriteStrategy: OverwriteStrategy.KeepExisting })
 
   generateOptions.scope = getNpmScope(tree)
   generateOptions.libraryName = names(generateOptions.name).fileName
@@ -39,20 +41,24 @@ export default async function microserviceProviderGenerator (tree: Tree, options
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
   })
 
-  addProjectConfiguration(tree, generateOptions.libraryName, {
-    root: generateOptions.projectRoot,
-    sourceRoot: join(generateOptions.projectRoot, 'src'),
-    projectType: ProjectType.Library,
-    tags: [],
-    targets: {}
-  })
+  if (!tree.exists(generateOptions.projectRoot)) {
+    addProjectConfiguration(tree, generateOptions.libraryName, {
+      root: generateOptions.projectRoot,
+      sourceRoot: join(generateOptions.projectRoot, 'src'),
+      projectType: ProjectType.Library,
+      tags: [],
+      targets: {}
+    })
 
-  applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
+    applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
+
+    addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
+    addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
+  }
+
+  await updateConfigAndApplication(tree, generateOptions)
 
   await formatFiles(tree)
-
-  addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
-  addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
 
   // dependencies and scripts
   if (!generateOptions.skipPackageJson) {
@@ -104,4 +110,40 @@ export default async function microserviceProviderGenerator (tree: Tree, options
   }
 
   return applyTasks(tasks)
+}
+
+async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
+  // prompt, if not called by application generator, which applications should be updated
+  if (!options.updateApplicationsRoot?.length) {
+    options.updateApplicationsRoot = await promptProjectRootMultiselect(tree, 'Please select the project which should include the MSP:')
+  }
+
+  if (options.updateApplicationsRoot?.length) {
+    output.log({
+      title: '[Microservice Provider] Updating applications',
+      bodyLines: options.updateApplicationsRoot
+    })
+
+    const messageQueueConfig = getMessageQueueConfig()
+
+    for (const applicationRoot of options.updateApplicationsRoot) {
+      // update config files
+      updateConfigFiles(tree, applicationRoot, MESSAGE_QUEUE_CONFIG_KEY, messageQueueConfig.defaultConfig, messageQueueConfig.environmentConfig)
+      const projectJson = readJson(tree, join(applicationRoot, 'project.json'))
+
+      // update application module
+      for (const component of projectJson?.integration?.nestjs?.components ?? []) {
+        const componentMeta = componentMetaData[component]
+
+        if (componentMeta) {
+          updateSourceFile(tree, join(applicationRoot, 'src', componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
+            addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
+            addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
+
+            return file
+          })
+        }
+      }
+    }
+  }
 }

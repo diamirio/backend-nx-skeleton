@@ -11,7 +11,6 @@ export const DEV_DEPENDENCIES = {
   '@typescript-eslint/parser': '^7.14.1',
   '@webundsoehne/eslint-config': '^6',
   eslint: '^8',
-  'eslint-config-prettier': '^9.1.0',
   'eslint-module-utils': '^2',
   'eslint-plugin-import': '^2',
   'lint-staged': '^13',

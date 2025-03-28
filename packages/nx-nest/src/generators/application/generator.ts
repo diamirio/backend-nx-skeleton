@@ -76,9 +76,6 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
   generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectNames.fileName)
 
-  await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
-  await generateMspLib(tree, generateOptions, templateContext, tasks)
-
   generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
 
   /**
@@ -119,6 +116,9 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   // custom integration metadata
   setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
+
+  await generateMspLib(tree, generateOptions, templateContext, tasks)
+  await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
 
   if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
     await databaseTargetGenerator(tree, { project: generateOptions.projectName })
@@ -170,7 +170,8 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, contex
       database: options.database ?? databaseIntegration?.system,
       name: 'database',
       skipPackageJson: options.skipPackageJson,
-      update: !!databaseIntegration
+      update: !!databaseIntegration,
+      updateApplicationsRoot: [options.projectRoot]
     })
 
     if (!databaseLib) {
@@ -184,7 +185,7 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, contex
   }
 }
 
-async function generateMspLib (tree: Tree, options: ApplicationGeneratorSchema, context, tasks: GeneratorCallback[]): Promise<void> {
+async function generateMspLib (tree: Tree, options: GenerateOptions, context, tasks: GeneratorCallback[]): Promise<void> {
   if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
     const microserviceProvider = (readNxJson(tree) as any)?.integration?.msp
 
@@ -193,7 +194,8 @@ async function generateMspLib (tree: Tree, options: ApplicationGeneratorSchema, 
 
       const mspLib = await microserviceProviderGenerator(tree, {
         name: 'microservice-provider',
-        skipPackageJson: options.skipPackageJson
+        skipPackageJson: options.skipPackageJson,
+        updateApplicationsRoot: [options.projectRoot]
       })
 
       if (!mspLib) {

@@ -1,6 +1,6 @@
 import type { Tree } from '@nx/devkit'
 import type { SourceFile } from 'ts-morph'
-import { Project } from 'ts-morph'
+import { SyntaxKind, Project } from 'ts-morph'
 
 export function updateSourceFile (tree: Tree, filePath: string, fileAction: (fileNode: SourceFile) => void): void {
   if (!tree.exists(filePath)) {
@@ -59,5 +59,23 @@ export function addImport (file: SourceFile, importValue: string, importPath: st
     file.addImportDeclaration({ moduleSpecifier: importPath, namedImports: [importValue] })
   } else if (!importNode.getNamedImports().find((i) => i.getName() === importValue)) {
     importNode.addNamedImport(importValue)
+  }
+}
+
+export function addModuleDecoratorImport (file: SourceFile, className: string, importValue: string): void {
+  const moduleClass = file.getClass(className)
+
+  if (moduleClass) {
+    const moduleDecorator = moduleClass.getDecorator('Module')
+    const moduleOptions = moduleDecorator?.getFirstDescendantByKind(SyntaxKind.ObjectLiteralExpression)
+    const importArray = moduleOptions?.getProperty('imports')?.getFirstChildByKind(SyntaxKind.ArrayLiteralExpression)
+
+    const hasImport = !!importArray?.getElements()?.find((element) => {
+      return element.getText() === importValue
+    })
+
+    if (!hasImport) {
+      importArray?.addElement(importValue)
+    }
   }
 }
