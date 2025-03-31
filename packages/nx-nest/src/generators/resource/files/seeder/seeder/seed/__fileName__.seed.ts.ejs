@@ -1,0 +1,11 @@
+import { Injectable } from '@nestjs/common'
+
+import { <%- resourceNames.fileName -%>Factory } from '../factory'
+import { Seed } from '@webundsoehne/nestjs-seeder'
+
+@Injectable()
+export class <%- resourceNames.className -%>Seed extends Seed {
+  async run (): Promise<void> {
+    this.logger.debug(<%- resourceNames.fileName -%>Factory())
+  }
+}

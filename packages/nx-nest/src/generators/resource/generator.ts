@@ -1,15 +1,27 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { readNxJson, formatFiles, getProjects, names } from '@nx/devkit'
+import { formatFiles, getProjects, names, readNxJson } from '@nx/devkit'
 import { output } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { prompt } from 'enquirer'
 import { join } from 'node:path'
 
 import { Component, componentMetaData } from '../../constant'
-import { addClassProperty, addEnumMember, addIndexExport, applyTemplateFactory, updateSourceFile } from '../../utils'
+import { addClassProperty, addEnumMember, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
 import type { ResourceGeneratorSchema } from './schema'
 
 export default async function resourceGenerator (tree: Tree, options: ResourceGeneratorSchema): Promise<GeneratorCallback> {
+  if (options.component === 'seeder') {
+    createSeederResource(tree, options)
+  } else {
+    await createComponentResource(tree, options)
+  }
+
+  await formatFiles(tree)
+
+  return applyTasks([])
+}
+
+async function createComponentResource (tree: Tree, options: ResourceGeneratorSchema): Promise<void> {
   if (!componentMetaData[options.component]) {
     output.error({ title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}` })
 
@@ -86,6 +98,39 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
       })
     }
   }
+}
 
-  await formatFiles(tree)
+function createSeederResource (tree: Tree, options: ResourceGeneratorSchema): void {
+  const applyTemplate = applyTemplateFactory(tree, __dirname)
+  const resourceNames = names(options.name)
+  const seederSourceRoot = getProjects(tree).get('seeder')?.sourceRoot
+
+  if (!seederSourceRoot) {
+    output.error({ title: '[Resource] Missing seeder lib folder' })
+
+    return
+  }
+
+  const templateContext: Record<string, any> = {
+    ...options,
+    resourceNames,
+    scope: getNpmScope(tree),
+    fileName: resourceNames.fileName
+  }
+
+  output.log({
+    title: '[Resource] Applying templates',
+    bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
+  })
+
+  // component-specific folder
+  applyTemplate(['files', 'seeder'], templateContext, seederSourceRoot)
+
+  updateSourceFile(tree, join(seederSourceRoot, 'seeder', 'seed', 'index.ts'), (file) => {
+    addIndexExport(file, `./${resourceNames.fileName}.seed`)
+  })
+
+  updateSourceFile(tree, join(seederSourceRoot, 'seeder', 'factory', 'index.ts'), (file) => {
+    addIndexExport(file, `./${resourceNames.fileName}.factory`)
+  })
 }

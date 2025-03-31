@@ -1,6 +1,7 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, formatFiles, getProjects, names, output, readNxJson, updateJson } from '@nx/devkit'
+import { addProjectConfiguration, addDependenciesToPackageJson, formatFiles, getProjects, names, output, readNxJson, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
+import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { prompt } from 'enquirer'
 import { join } from 'node:path'
@@ -62,6 +63,14 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
 
   const project = projects.get(options.project)
 
+  addProjectConfiguration(tree, 'seeder', {
+    root: generateOptions.projectRoot,
+    sourceRoot: join(generateOptions.projectRoot, 'src'),
+    projectType: ProjectType.Library,
+    tags: [],
+    targets: {}
+  })
+
   output.log({
     title: '[Seeder] Applying templates',
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
@@ -70,16 +79,15 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
   // dependencies
   updatePackageJson(tree, generateOptions, tasks)
 
+  // create files
+  applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
+
   // seed package.json script
   updateJson(tree, 'package.json', (content) => {
     content.scripts[`seed:${project.name}`] ??= `nx command ${project.name} seed`
 
     return content
   })
-
-  // create files
-  applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
-
   updateSourceFile(tree, join(project.root, 'src', 'command', 'modules', 'index.ts'), (file) => {
     addExport(file, 'SeederCommandModule', `${generateOptions.packageScope}`)
   })
