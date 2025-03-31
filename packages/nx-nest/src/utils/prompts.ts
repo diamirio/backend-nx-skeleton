@@ -15,7 +15,7 @@ export async function promptDatabase (): Promise<Database> {
   ).database
 }
 
-export async function promptProjectRootMultiselect (tree: Tree, message: string): Promise<string[]> {
+export async function promptProjectMultiselect (tree: Tree, message: string): Promise<string[]> {
   const projects = getProjects(tree)
   const applications = []
   let selectedProjects = []
@@ -36,7 +36,7 @@ export async function promptProjectRootMultiselect (tree: Tree, message: string)
       })
     ).projects
 
-    selectedProjects = projectApplications?.map((application) => projects.get(application)?.root)?.filter((application) => !!application)
+    selectedProjects = projectApplications?.filter((application) => !!projects.get(application))
   }
 
   return selectedProjects

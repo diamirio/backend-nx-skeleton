@@ -7,5 +7,5 @@ export interface DatabaseOrmGeneratorSchema {
   importPath?: string
   skipPackageJson: boolean
   update?: boolean
-  updateApplicationsRoot?: string[]
+  updateApplications?: string[]
 }

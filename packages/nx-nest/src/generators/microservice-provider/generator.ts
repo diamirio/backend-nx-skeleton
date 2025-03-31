@@ -1,5 +1,5 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson } from '@nx/devkit'
+import { readProjectConfiguration, addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
@@ -11,7 +11,7 @@ import { componentMetaData } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
 import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_IMAGE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
 import { getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY } from '../../constant/microservice-provider/config'
-import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectRootMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
+import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
 interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
@@ -114,29 +114,31 @@ export default async function microserviceProviderGenerator (tree: Tree, options
 
 async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
   // prompt, if not called by application generator, which applications should be updated
-  if (!options.updateApplicationsRoot?.length) {
-    options.updateApplicationsRoot = await promptProjectRootMultiselect(tree, 'Please select the project which should include the MSP:')
+  if (!options.updateApplications?.length) {
+    options.updateApplications = await promptProjectMultiselect(tree, 'Please select the project which should include the MSP:')
   }
 
-  if (options.updateApplicationsRoot?.length) {
+  if (options.updateApplications?.length) {
     output.log({
       title: '[Microservice Provider] Updating applications',
-      bodyLines: options.updateApplicationsRoot
+      bodyLines: options.updateApplications
     })
 
     const messageQueueConfig = getMessageQueueConfig()
 
-    for (const applicationRoot of options.updateApplicationsRoot) {
+    for (const application of options.updateApplications) {
+      const project = readProjectConfiguration(tree, application)
+
       // update config files
-      updateConfigFiles(tree, applicationRoot, MESSAGE_QUEUE_CONFIG_KEY, messageQueueConfig.defaultConfig, messageQueueConfig.environmentConfig)
-      const projectJson = readJson(tree, join(applicationRoot, 'project.json'))
+      updateConfigFiles(tree, project.root, MESSAGE_QUEUE_CONFIG_KEY, messageQueueConfig.defaultConfig, messageQueueConfig.environmentConfig)
+      const projectJson = readJson(tree, join(project.root, 'project.json'))
 
       // update application module
       for (const component of projectJson?.integration?.nestjs?.components ?? []) {
         const componentMeta = componentMetaData[component]
 
         if (componentMeta) {
-          updateSourceFile(tree, join(applicationRoot, 'src', componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
+          updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
             addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
             addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
 

@@ -171,7 +171,7 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, contex
       name: 'database',
       skipPackageJson: options.skipPackageJson,
       update: !!databaseIntegration,
-      updateApplicationsRoot: [options.projectRoot]
+      updateApplications: [options.projectName]
     })
 
     if (!databaseLib) {
@@ -195,7 +195,7 @@ async function generateMspLib (tree: Tree, options: GenerateOptions, context, ta
       const mspLib = await microserviceProviderGenerator(tree, {
         name: 'microservice-provider',
         skipPackageJson: options.skipPackageJson,
-        updateApplicationsRoot: [options.projectRoot]
+        updateApplications: [options.projectName]
       })
 
       if (!mspLib) {

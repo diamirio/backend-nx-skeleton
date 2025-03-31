@@ -1,5 +1,5 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, updateJson } from '@nx/devkit'
+import { readProjectConfiguration, addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
@@ -24,7 +24,7 @@ import {
   applyTasks,
   applyTemplateFactory,
   promptDatabase,
-  promptProjectRootMultiselect,
+  promptProjectMultiselect,
   updateConfigFiles,
   updateSourceFile,
   updateYaml
@@ -39,7 +39,7 @@ interface GenerateOptions extends DatabaseOrmGeneratorSchema {
   libRoot: string
   projectRoot: string
   databaseOrmDetails: { folder: string, dependencies: Record<string, string> }
-  updateApplicationsRoot: string[]
+  updateApplications: string[]
 }
 
 function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder: string, dependencies: Record<string, string> } {
@@ -183,30 +183,32 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
 
 async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
   // prompt, if not called by application generator, which applications should be updated
-  if (!options.updateApplicationsRoot?.length) {
-    options.updateApplicationsRoot = await promptProjectRootMultiselect(tree, `Please select the project which should include ${options.databaseOrm}:`)
+  if (!options.updateApplications?.length) {
+    options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.databaseOrm}:`)
   }
 
-  if (options.updateApplicationsRoot?.length) {
-    output.log({ title: '[Database] Updating applications', bodyLines: options.updateApplicationsRoot })
+  if (options.updateApplications?.length) {
+    output.log({ title: '[Database] Updating applications', bodyLines: options.updateApplications })
 
-    for (const applicationRoot of options.updateApplicationsRoot) {
+    for (const application of options.updateApplications) {
       const databaseConfig = getDatabaseConfig(options)
 
       if (!databaseConfig) {
-        continue
+        break
       }
 
+      const project = readProjectConfiguration(tree, application)
+
       // update config files
-      updateConfigFiles(tree, applicationRoot, DATABASE_CONFIG_KEY, databaseConfig.defaultConfig, databaseConfig.environmentConfig)
-      const projectJson = readJson(tree, join(applicationRoot, 'project.json'))
+      updateConfigFiles(tree, project.root, DATABASE_CONFIG_KEY, databaseConfig.defaultConfig, databaseConfig.environmentConfig)
+      const projectJson = readJson(tree, join(project.root, 'project.json'))
 
       // update application module
       for (const component of projectJson?.integration?.nestjs?.components ?? []) {
         const componentMeta = componentMetaData[component]
 
         if (componentMeta) {
-          updateSourceFile(tree, join(applicationRoot, 'src', componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
+          updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
             addModuleDecoratorImport(file, `${componentMeta.className}Module`, databaseConfig.forRoot)
             addImport(file, databaseConfig.moduleClass, databaseConfig.importPath)
             addImport(file, 'getDatabaseOptions', options.importPath)
