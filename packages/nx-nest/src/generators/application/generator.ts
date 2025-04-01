@@ -114,7 +114,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   await generateMspLib(tree, generateOptions, templateContext, tasks)
   await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
 
-  if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
+  if (options.components.includes(Component.BG_TASK) && options.database) {
     await databaseTargetGenerator(tree, { project: generateOptions.projectName })
   }
 
@@ -154,17 +154,12 @@ function validateComponents (options: GenerateOptions): void {
 }
 
 async function generateDatabaseLib (tree: Tree, options: GenerateOptions, context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
-  if (options.databaseOrm !== DatabaseOrm.NONE) {
-    const databaseIntegration = (readNxJson(tree) as any)?.integration?.orm
-
+  if (options.database) {
     output.log({ title: '[Application] Setup database-orm util library ...' })
 
     const databaseLib = await databaseLibraryGenerator(tree, {
-      databaseOrm: options.databaseOrm,
-      database: options.database ?? databaseIntegration?.system,
       name: 'database',
       skipPackageJson: options.skipPackageJson,
-      update: !!databaseIntegration,
       updateApplications: [options.projectName]
     })
 
@@ -263,7 +258,7 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
       if (options.components.includes(Component.COMMAND)) {
         content.scripts['command:one'] ??= 'nx command'
 
-        if (options.databaseOrm !== DatabaseOrm.NONE) {
+        if (options.database) {
           content.scripts.seed ??= `nx command ${options.projectName} seed`
         }
       }

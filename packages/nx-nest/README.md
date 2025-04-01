@@ -65,8 +65,7 @@ Options:
 | -------------------- | ------- | ---------------------------------------------------------------------------- |
 | name                 | string  | workspace folder name                                                        |
 | scope                | string  | library import prefix i.e. `@scope/lib`                                      |
-| databaseOrm          | string  | if and what database orm-library to set up the database util-library for     |
-| database             | string  | for `typeorm` select mysql or postgres db-system                             |
+| database             | boolean | if a database-orm should be set up                                           |
 | microserviceProvider | boolean | if to include the microservice-provider util-library                         |
 | skipPackageJson      | boolean | optional skip any action related to the package.json (scripts, dependencies) |
 | force                | boolean | option force overwriting existing files                                      |
@@ -84,8 +83,7 @@ Options:
 | name                 | string   | application folder name                                                                   |
 | components           | string[] | what components the app includes (any of: server, bg-task, command, microservice)         |
 | jest                 | boolean  | if to setup jest for unit and e2e tests                                                   |
-| databaseOrm          | string   | if and what database orm-library to include in the application                            |
-| database             | string   | for `typeorm` select mysql or postgres db-system                                          |
+| database             | boolean  | if a database-orm should be set up                                                        |
 | microserviceProvider | boolean  | if to include the microservice-provider in the app (if the app is an Microservice-Client) |
 | skipPackageJson      | boolean  | optional skip any action related to the package.json (scripts, dependencies)              |
 | update               | boolean  | option set to true if you want to update the applications options                         |
@@ -114,7 +112,7 @@ Options:
 
 | Option          | Type    | Description                                                                  |
 | --------------- | ------- | ---------------------------------------------------------------------------- |
-| databaseOrm     | string  | which database orm to use                                                    |
+| orm             | string  | which database orm to use                                                    |
 | database        | string  | for `typeorm` select mysql or postgres db-system                             |
 | name            | string  | library folder name (default: database)                                      |
 | importPath      | string  | optional import-path overwrite (full path) (default: `@{scope}/{name}`)      |

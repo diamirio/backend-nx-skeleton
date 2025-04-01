@@ -24,6 +24,7 @@ import {
   applyTasks,
   applyTemplateFactory,
   promptDatabase,
+  promptDatabaseOrm,
   promptProjectMultiselect,
   updateConfigFiles,
   updateSourceFile,
@@ -72,30 +73,31 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   generateOptions.libraryName = names(generateOptions.name).fileName
   generateOptions.importPath = generateOptions?.importPath ?? `@${generateOptions.scope}/${generateOptions.libraryName}`
   generateOptions.packageScope = generateOptions.scope ? generateOptions.importPath : generateOptions.libraryName
-
-  if (options.databaseOrm === DatabaseOrm.TYPEORM) {
-    options.database ??= await promptDatabase()
-  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
-    options.database = Database.MONGO
-  }
-
   generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
   generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.libraryName)
-  generateOptions.databaseOrmDetails = getDatabaseOrmDetails(generateOptions.databaseOrm, generateOptions.database)
 
-  if (!generateOptions.databaseOrm) {
+  const integration = (readNxJson(tree) as any)?.integration?.orm
+
+  if (integration) {
+    generateOptions.orm = integration.database
+    generateOptions.database = integration.system
+  }
+
+  generateOptions.orm ??= await promptDatabaseOrm()
+
+  if (!generateOptions.orm) {
     output.error({ title: '[Database] Missing orm config' })
 
     return
   }
 
-  const integration = (readNxJson(tree) as any)?.integration?.orm
-
-  if (integration && (integration.database !== generateOptions.databaseOrm || integration.system && integration.system !== generateOptions.database)) {
-    output.error({ title: `[Application] Invalid database config. "${integration.database}-${integration.system}" already configured.` })
-
-    return
+  if (generateOptions.orm === DatabaseOrm.TYPEORM) {
+    generateOptions.database ??= await promptDatabase()
+  } else if (generateOptions.orm === DatabaseOrm.MONGOOSE) {
+    generateOptions.database = Database.MONGO
   }
+
+  generateOptions.databaseOrmDetails = getDatabaseOrmDetails(generateOptions.orm, generateOptions.database)
 
   output.log({
     title: '[Database] Applying templates',
@@ -128,7 +130,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     content.integration = {
       ...content.integration ?? {},
       orm: {
-        database: generateOptions.databaseOrm,
+        database: generateOptions.orm,
         system: generateOptions.database,
         projectRoot: generateOptions.projectRoot,
         importPath: generateOptions.importPath
@@ -184,7 +186,7 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
 async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
   // prompt, if not called by application generator, which applications should be updated
   if (!options.updateApplications?.length) {
-    options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.databaseOrm}:`)
+    options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.orm}:`)
   }
 
   if (options.updateApplications?.length) {

@@ -23,12 +23,12 @@ export default async function (tree: Tree): Promise<void> {
         type: 'autocomplete',
         name: 'database',
         message: 'Please select the used database:',
-        choices: [DatabaseOrm.TYPEORM, DatabaseOrm.MONGOOSE, DatabaseOrm.NONE]
+        choices: [DatabaseOrm.TYPEORM, DatabaseOrm.MONGOOSE, 'none']
       })
     ).database
   }
 
-  if (database && database !== DatabaseOrm.NONE) {
+  if (database && database !== 'none') {
     generateFiles(
       tree,
       join(__dirname, `../generators/database-orm/files/${database}/src/util/migration-task`),

@@ -10,10 +10,10 @@ interface DatabaseConfig {
 
 export const DATABASE_CONFIG_KEY = 'database'
 
-export function getDatabaseConfig (options: { database?: Database, databaseOrm: DatabaseOrm }): DatabaseConfig {
+export function getDatabaseConfig (options: { database?: Database, orm?: DatabaseOrm }): DatabaseConfig {
   const environmentConfig = getEnvironmentConfig()
 
-  if (options.databaseOrm === DatabaseOrm.TYPEORM) {
+  if (options.orm === DatabaseOrm.TYPEORM) {
     return {
       defaultConfig: getTypeormConfig(options.database),
       environmentConfig,
@@ -21,7 +21,7 @@ export function getDatabaseConfig (options: { database?: Database, databaseOrm: 
       moduleClass: 'TypeOrmModule',
       importPath: '@nestjs/typeorm'
     }
-  } else if (options.databaseOrm === DatabaseOrm.MONGOOSE) {
+  } else if (options.orm === DatabaseOrm.MONGOOSE) {
     return {
       defaultConfig: getMongooseConfig(),
       environmentConfig,

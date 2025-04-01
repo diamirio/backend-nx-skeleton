@@ -2,7 +2,18 @@ import type { Tree } from '@nx/devkit'
 import { getProjects } from '@nx/devkit'
 import { prompt } from 'enquirer'
 
-import { Database } from '../constant'
+import { Database, DatabaseOrm } from '../constant'
+
+export async function promptDatabaseOrm (): Promise<DatabaseOrm> {
+  return (
+    await prompt<{ orm?: DatabaseOrm }>({
+      type: 'autocomplete',
+      name: 'orm',
+      message: 'Please select a database ORM:',
+      choices: [DatabaseOrm.TYPEORM, DatabaseOrm.MONGOOSE]
+    })
+  ).orm
+}
 
 export async function promptDatabase (): Promise<Database> {
   return (
