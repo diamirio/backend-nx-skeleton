@@ -1,5 +1,5 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { readProjectConfiguration, addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, updateJson } from '@nx/devkit'
+import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, readProjectConfiguration, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
@@ -149,6 +149,10 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
         if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
           content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+
+          if (generateOptions.database === Database.MONGO) {
+            applyTemplate(['files', 'docker'], generateOptions, '.docker')
+          }
         }
       })
     }

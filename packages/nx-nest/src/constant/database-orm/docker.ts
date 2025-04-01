@@ -31,9 +31,12 @@ export const DOCKER_DB_SERVICE = {
     environment: {
       MONGO_INITDB_ROOT_USERNAME: 'root',
       MONGO_INITDB_ROOT_PASSWORD: 'secret',
-      MONGO_INITDB_DATABASE: 'db'
+      MONGO_INITDB_DATABASE: 'db',
+      MONGO_USERNAME: 'user',
+      MONGO_PASSWORD: 'secret'
     },
     ports: ['27017:27017'],
-    command: '--directoryperdb'
+    command: '--directoryperdb',
+    volumes: ['./.docker/init-mongodb.js:/docker-entrypoint-initdb.d/init-mongodb.js:ro']
   }
 }
