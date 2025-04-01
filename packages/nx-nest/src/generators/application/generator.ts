@@ -76,8 +76,6 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
   generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectNames.fileName)
 
-  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
-
   /**
    * TEMPLATES
    */
@@ -96,26 +94,22 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     })
 
     applyTemplate(['files', 'base'], templateContext, generateOptions.projectRoot)
-  }
 
-  // component-specific folder
-  for (const component of applicationMetadata) {
-    applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
-  }
+    // component-specific folder
+    for (const component of applicationMetadata) {
+      applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
+    }
 
-  if (applicationMetadata.length > 1) {
-    applyTemplate(['files', 'multi-application'], templateContext, generateOptions.projectRoot)
-  } else {
-    applyTemplate(['files', 'single-application'], templateContext, generateOptions.projectRoot)
+    updatePackageJson(tree, generateOptions, tasks)
   }
-
-  updatePackageJson(tree, generateOptions, tasks)
 
   setupJest(tree, generateOptions, templateContext, applyTemplate, tasks)
 
   // custom integration metadata
   setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
+
+  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
 
   await generateMspLib(tree, generateOptions, templateContext, tasks)
   await generateDatabaseLib(tree, generateOptions, templateContext, tasks)

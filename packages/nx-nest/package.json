@@ -1,6 +1,6 @@
 {
   "name": "@webundsoehne/nx-nest",
-  "version": "1.0.0",
+  "version": "99.0.0",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "description": "Nest Plugin for Nx",
   "main": "./dist/index.js",
