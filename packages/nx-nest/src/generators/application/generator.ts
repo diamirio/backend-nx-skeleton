@@ -367,7 +367,7 @@ function setProjectTargets (tree: Tree, options: GenerateOptions): void {
 
 function setNxJsonPluginsAndDefaults (tree: Tree): void {
   updateJson(tree, 'nx.json', (content) => {
-    addPlugin(content, { plugin: '@nx/eslint/plugin', options: {} })
+    addPlugin(content, '@nx/eslint/plugin')
     addPlugin(content, '@webundsoehne/nx-executors/plugin')
 
     content.targetDefaults = {
