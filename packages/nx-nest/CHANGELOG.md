@@ -1,3 +1,9 @@
+# @webundsoehne/nx-nest [6.0.0-beta.12](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.11...@webundsoehne/nx-nest@6.0.0-beta.12) (2025-04-08)
+
+### Performance Improvements
+
+- **nestjs-util:** use cached layers for npm i in Dockerfile ([5c199b9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/5c199b990136b403474b8ebb6ec8068b071b3a8f))
+
 # @webundsoehne/nx-nest [6.0.0-beta.11](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.10...@webundsoehne/nx-nest@6.0.0-beta.11) (2025-03-25)
 
 ### Bug Fixes
