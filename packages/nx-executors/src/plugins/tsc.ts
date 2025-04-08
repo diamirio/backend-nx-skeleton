@@ -1,7 +1,7 @@
 import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
 import type { BuildTargetOptions } from './utils/plugin'
-import { SKIP_NX_EXECUTORS, buildPlugin, PluginBuilder } from './utils/plugin'
+import { buildPlugin, PluginBuilder, SKIP_NX_EXECUTORS } from './utils/plugin'
 
 export interface TscPluginOptions {
   targetName?: string
@@ -11,7 +11,7 @@ export interface TscPluginOptions {
 class TscPlugin extends PluginBuilder<TscPluginOptions> {
   name = 'tsc'
 
-  buildTarget ({ options, projectConfig }: BuildTargetOptions<TscPluginOptions>): Record<string, TargetConfiguration> {
+  buildTarget ({ options, projectConfig, projectRoot }: BuildTargetOptions<TscPluginOptions>): Record<string, TargetConfiguration> {
     if (projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}`)) {
       return {}
     }
@@ -24,7 +24,8 @@ class TscPlugin extends PluginBuilder<TscPluginOptions> {
         outputs: ['{options.outputPath}'],
         options: {
           main: 'src/main.ts',
-          tsConfig: 'tsconfig.build.json'
+          tsConfig: 'tsconfig.build.json',
+          outputPath: projectConfig.targets?.[options?.targetName ?? 'build']?.options?.outputPath ?? `dist/${projectRoot}`
         }
       }
     }
