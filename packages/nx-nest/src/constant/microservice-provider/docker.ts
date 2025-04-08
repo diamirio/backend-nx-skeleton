@@ -1,2 +1,5 @@
 export const DOCKER_SERVICE_NAME = 'rabbitmq'
-export const DOCKER_IMAGE = 'rabbitmq:3-management-alpine'
+export const DOCKER_SERVICE = {
+  image: 'rabbitmq:3-management-alpine',
+  ports: ['5672:5672', '15672:15672']
+}

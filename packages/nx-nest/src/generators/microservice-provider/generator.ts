@@ -9,7 +9,7 @@ import { YAMLMap, YAMLSeq } from 'yaml'
 
 import { componentMetaData } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
-import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_IMAGE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
+import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_SERVICE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
 import { getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY } from '../../constant/microservice-provider/config'
 import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
@@ -86,7 +86,7 @@ export default async function microserviceProviderGenerator (tree: Tree, options
       }
 
       if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
-        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: { image: DOCKER_IMAGE } })
+        content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_SERVICE })
       }
     })
   }
