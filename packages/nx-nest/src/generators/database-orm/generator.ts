@@ -15,6 +15,7 @@ import {
   DEPENDENCIES_TYPEORM_MYSQL,
   DEPENDENCIES_TYPEORM_POSTGRES,
   DOCKER_DB_SERVICE,
+  DOCKER_DB_VOLUME,
   DOCKER_SERVICE_NAME
 } from '../../constant/database-orm'
 import { DATABASE_CONFIG_KEY, getDatabaseConfig } from '../../constant/database-orm/config'
@@ -152,6 +153,14 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
           if (generateOptions.database === Database.MONGO) {
             applyTemplate(['files', 'docker'], generateOptions, '.docker')
+          }
+
+          if (!content.has('volumes')) {
+            content.add({ key: 'volumes', value: new YAMLMap() })
+          }
+
+          if (!content.hasIn(['volumes', DOCKER_DB_VOLUME[options.database]])) {
+            content.addIn(['volumes'], { key: DOCKER_DB_VOLUME[options.database], value: new YAMLMap() })
           }
         }
       })
