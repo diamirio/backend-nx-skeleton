@@ -1,3 +1,9 @@
+# @webundsoehne/nx-executors [1.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.8...@webundsoehne/nx-executors@1.0.0-beta.9) (2025-04-08)
+
+### Bug Fixes
+
+- **nx-executors:** add the missing outputPath option ([55c04a9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/55c04a95ab0faa212cfa0ff0091b64459fdd2af0))
+
 # @webundsoehne/nx-executors [1.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.7...@webundsoehne/nx-executors@1.0.0-beta.8) (2025-03-27)
 
 - feat(nx-executors)!: skipNxExecutors tags ([973e414](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/973e4143911ac8d05d100aef0b809d66b3b76c12))
