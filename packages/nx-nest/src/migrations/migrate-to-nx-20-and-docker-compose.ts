@@ -5,7 +5,7 @@ import { readJson } from 'nx/src/generators/utils/json'
 
 import { Database, DatabaseOrm } from '../constant'
 import { DOCKER_DB_SERVICE } from '../constant/database-orm'
-import { DOCKER_IMAGE as MSP_DOCKER_IMAGE } from '../constant/microservice-provider'
+import { DOCKER_SERVICE as MSP_DOCKER_IMAGE } from '../constant/microservice-provider'
 import { writeYaml } from '../utils'
 
 export default async function (tree: Tree): Promise<void> {
@@ -55,7 +55,7 @@ export default async function (tree: Tree): Promise<void> {
 
   if (integration?.msp) {
     logger.log('Found MSP, adding rabbitmq to docker-compose')
-    services.rabbitmq = { image: MSP_DOCKER_IMAGE }
+    services.rabbitmq = MSP_DOCKER_IMAGE
     hasMq = true
   }
 
