@@ -1,5 +1,4 @@
 export enum DatabaseOrm {
-  NONE = 'none',
   TYPEORM = 'typeorm',
   MONGOOSE = 'mongoose'
 }

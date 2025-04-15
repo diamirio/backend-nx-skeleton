@@ -10,7 +10,8 @@ import type { DatabaseTargetGeneratorSchema } from './schema'
 export default async function databaseTargetGenerator (tree: Tree, options: DatabaseTargetGeneratorSchema): Promise<GeneratorCallback> {
   const orm = (readNxJson(tree) as any)?.integration?.orm?.database
 
-  if (!orm || orm === DatabaseOrm.NONE) {
+  if (!orm || orm === 'none') {
+    // @todo: remove legacy 'none'
     output.error({ title: '[Migration-Target] Requires database-orm to be set up' })
 
     return
@@ -42,13 +43,20 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
 
   const project = projects.get(options.project)
 
+  if (!project) {
+    output.error({ title: `[Migration-Target] Invalid project "${options.project}"` })
+
+    return
+  }
+
   updateJson(tree, 'package.json', (content) => {
     content.scripts.migrate ??= `nx migration -c run ${project.name}`
-    content.scripts['migrate:rollback'] ??= `nx migration -c rollback ${project.name}`
-    content.scripts['migrations:create'] ??= `nx migration -c create ${project.name} --name`
+    content.scripts['migration:run'] ??= `nx migration -c run ${project.name}`
+    content.scripts['migration:rollback'] ??= `nx migration -c rollback ${project.name}`
+    content.scripts['migration:create'] ??= `nx migration -c create ${project.name} --name`
 
     if (orm === DatabaseOrm.TYPEORM) {
-      content.scripts['migrations:generate'] ??= `nx migration -c generate ${project.name} --name`
+      content.scripts['migration:generate'] ??= `nx migration -c generate ${project.name} --name`
     }
 
     return content
@@ -113,19 +121,17 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
       }
     }
 
-    if (orm !== DatabaseOrm.NONE) {
-      content.targets = {
-        ...content.targets ?? {},
-        build: {
-          options: {
-            assets: [
-              {
-                glob: '*.js',
-                input: 'libs/database/src/migration',
-                output: 'libs/database/src/migration'
-              }
-            ]
-          }
+    content.targets = {
+      ...content.targets ?? {},
+      build: {
+        options: {
+          assets: [
+            {
+              glob: '*.js',
+              input: 'libs/database/src/migration',
+              output: 'libs/database/src/migration'
+            }
+          ]
         }
       }
     }

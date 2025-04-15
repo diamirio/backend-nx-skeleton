@@ -76,11 +76,6 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
   generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectNames.fileName)
 
-  await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
-  await generateMspLib(tree, generateOptions, templateContext, tasks)
-
-  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
-
   /**
    * TEMPLATES
    */
@@ -99,20 +94,14 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     })
 
     applyTemplate(['files', 'base'], templateContext, generateOptions.projectRoot)
-  }
 
-  // component-specific folder
-  for (const component of applicationMetadata) {
-    applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
-  }
+    // component-specific folder
+    for (const component of applicationMetadata) {
+      applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
+    }
 
-  if (applicationMetadata.length > 1) {
-    applyTemplate(['files', 'multi-application'], templateContext, generateOptions.projectRoot)
-  } else {
-    applyTemplate(['files', 'single-application'], templateContext, generateOptions.projectRoot)
+    updatePackageJson(tree, generateOptions, tasks)
   }
-
-  updatePackageJson(tree, generateOptions, tasks)
 
   setupJest(tree, generateOptions, templateContext, applyTemplate, tasks)
 
@@ -120,7 +109,12 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
 
-  if (options.components.includes(Component.BG_TASK) && options.databaseOrm !== DatabaseOrm.NONE) {
+  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
+
+  await generateMspLib(tree, generateOptions, templateContext, tasks)
+  await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
+
+  if (options.components.includes(Component.BG_TASK) && options.database) {
     await databaseTargetGenerator(tree, { project: generateOptions.projectName })
   }
 
@@ -160,17 +154,13 @@ function validateComponents (options: GenerateOptions): void {
 }
 
 async function generateDatabaseLib (tree: Tree, options: GenerateOptions, context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
-  if (options.databaseOrm !== DatabaseOrm.NONE) {
-    const databaseIntegration = (readNxJson(tree) as any)?.integration?.orm
-
+  if (options.database) {
     output.log({ title: '[Application] Setup database-orm util library ...' })
 
     const databaseLib = await databaseLibraryGenerator(tree, {
-      databaseOrm: options.databaseOrm,
-      database: options.database ?? databaseIntegration?.system,
       name: 'database',
       skipPackageJson: options.skipPackageJson,
-      update: !!databaseIntegration
+      updateApplications: [options.projectName]
     })
 
     if (!databaseLib) {
@@ -184,7 +174,7 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, contex
   }
 }
 
-async function generateMspLib (tree: Tree, options: ApplicationGeneratorSchema, context, tasks: GeneratorCallback[]): Promise<void> {
+async function generateMspLib (tree: Tree, options: GenerateOptions, context, tasks: GeneratorCallback[]): Promise<void> {
   if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
     const microserviceProvider = (readNxJson(tree) as any)?.integration?.msp
 
@@ -193,7 +183,8 @@ async function generateMspLib (tree: Tree, options: ApplicationGeneratorSchema, 
 
       const mspLib = await microserviceProviderGenerator(tree, {
         name: 'microservice-provider',
-        skipPackageJson: options.skipPackageJson
+        skipPackageJson: options.skipPackageJson,
+        updateApplications: [options.projectName]
       })
 
       if (!mspLib) {
@@ -267,7 +258,7 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
       if (options.components.includes(Component.COMMAND)) {
         content.scripts['command:one'] ??= 'nx command'
 
-        if (options.databaseOrm !== DatabaseOrm.NONE) {
+        if (options.database) {
           content.scripts.seed ??= `nx command ${options.projectName} seed`
         }
       }
@@ -376,7 +367,7 @@ function setProjectTargets (tree: Tree, options: GenerateOptions): void {
 
 function setNxJsonPluginsAndDefaults (tree: Tree): void {
   updateJson(tree, 'nx.json', (content) => {
-    addPlugin(content, { plugin: '@nx/eslint/plugin', options: {} })
+    addPlugin(content, '@nx/eslint/plugin')
     addPlugin(content, '@webundsoehne/nx-executors/plugin')
 
     content.targetDefaults = {

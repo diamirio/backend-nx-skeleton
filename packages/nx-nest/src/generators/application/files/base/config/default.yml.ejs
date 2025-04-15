@@ -23,37 +23,3 @@ cacheLifetime:
   expiresHeader: Expires
   cacheControlHeader: Cache-control
 <% } -%>
-<% if (includeMessageQueue) { %>
-messageQueue:
-  urls:
-    - amqp://rabbitmq:5672
-<% } -%>
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>
-database: <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>
-  database: db
-  username: user
-  password: secret
-  host: db
-  type: <% if (database === DATABASE.MYSQL) { %>mysql<%
-  } else if (database === DATABASE.POSTGRES) { %>postgres<%
-  } else { %># @todo: set driver<% } %>
-  port: <% if (database === DATABASE.MYSQL) { %>3306<%
-  } else if (database === DATABASE.POSTGRES) { %>5432<%
-  } else { %># @todo: set port<% } %>
-  synchronize: false
-  cache: false
-  keepConnectionAlive: true
-  migrationsTableName: _migrations
-<% } else if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>
-  host: db
-  port: 27017
-  database: db
-  username: user
-  password: secret
-  ignoreUndefined: true
-  migration:
-    migrationFileExtension: '.js'
-    useFileHash: false
-    moduleSystem: commonjs
-<% } -%>
-<% } -%>

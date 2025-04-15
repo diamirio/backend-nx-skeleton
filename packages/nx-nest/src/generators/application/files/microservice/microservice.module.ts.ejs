@@ -1,12 +1,8 @@
 import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
 import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
-<% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>import { TypeOrmModule } from '@nestjs/typeorm'<% } %>
-<% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>import { MongooseModule } from '@nestjs/mongoose'<% } %>
 
 import * as modules from './modules'
-<% if (databaseOrm !== DATABASE_ORM.NONE) { %>import { getDatabaseOptions } from '<%- orm.importPath -%>'<% } %>
 import { ConfigService, GlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
-import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util-microservices'
 
 @Module({
   providers: [
@@ -29,9 +25,6 @@ import { <% if (microserviceProvider) { %>MicroserviceProviderModule, <% } %>Rpc
     }
   ],
   imports: [
-    <% if (databaseOrm === DATABASE_ORM.TYPEORM) { %>TypeOrmModule.forRoot(getDatabaseOptions()),<% } -%>
-    <% if (databaseOrm === DATABASE_ORM.MONGOOSE) { %>MongooseModule.forRoot(...getDatabaseOptions()),<% } -%>
-    <% if (microserviceProvider) { %>MicroserviceProviderModule.forRoot({ queue: [] }),<% } -%>
     ...Object.values(modules)
   ]
 })
