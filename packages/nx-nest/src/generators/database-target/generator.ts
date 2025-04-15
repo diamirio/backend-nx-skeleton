@@ -51,11 +51,12 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
 
   updateJson(tree, 'package.json', (content) => {
     content.scripts.migrate ??= `nx migration -c run ${project.name}`
-    content.scripts['migrate:rollback'] ??= `nx migration -c rollback ${project.name}`
-    content.scripts['migrations:create'] ??= `nx migration -c create ${project.name} --name`
+    content.scripts['migration:run'] ??= `nx migration -c run ${project.name}`
+    content.scripts['migration:rollback'] ??= `nx migration -c rollback ${project.name}`
+    content.scripts['migration:create'] ??= `nx migration -c create ${project.name} --name`
 
     if (orm === DatabaseOrm.TYPEORM) {
-      content.scripts['migrations:generate'] ??= `nx migration -c generate ${project.name} --name`
+      content.scripts['migration:generate'] ??= `nx migration -c generate ${project.name} --name`
     }
 
     return content
