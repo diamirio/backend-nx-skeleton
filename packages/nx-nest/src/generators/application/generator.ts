@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import { execCommand } from 'nx/src/command-line/release/utils/exec-command'
 import { readJson } from 'nx/src/generators/utils/json'
 
-import { Component, Database, DatabaseOrm, getComponentMetadata, NODE_VERSION } from '../../constant'
+import { Component, getComponentMetadata, NODE_VERSION } from '../../constant'
 import {
   BACKGROUND_TASK_DEPENDENCIES,
   COMMAND_DEPENDENCIES,
@@ -69,8 +69,7 @@ export default async function applicationGenerator (tree: Tree, options: Applica
     applicationMetadata,
     NODE_VERSION,
     COMPONENT: Component,
-    DATABASE_ORM: DatabaseOrm,
-    DATABASE: Database
+    database: options.database
   }
 
   generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
