@@ -23,7 +23,7 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
 
 async function createComponentResource (tree: Tree, options: ResourceGeneratorSchema): Promise<void> {
   if (!componentMetaData[options.component]) {
-    output.error({ title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}` })
+    output.error({ title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}, seeder` })
 
     return
   }
