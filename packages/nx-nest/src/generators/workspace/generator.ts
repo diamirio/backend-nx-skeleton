@@ -1,7 +1,7 @@
 import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { addDependenciesToPackageJson, output, OverwriteStrategy, updateJson } from '@nx/devkit'
 
-import { DatabaseOrm, NODE_VERSION } from '../../constant'
+import { NODE_VERSION } from '../../constant'
 import { DOCKER_IMAGE, SERVICE_NAME } from '../../constant/application'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, SCRIPTS } from '../../constant/workspace'
 import { applyTasks, applyTemplateFactory } from '../../utils'
@@ -38,13 +38,11 @@ export default async function workspaceGenerator (tree: Tree, options: NestWorks
   // dependencies and scripts
   updatePackageJson(tree, options, tasks)
 
-  if (options.databaseOrm !== DatabaseOrm.NONE) {
+  if (options.database) {
     output.log({ title: '[Workspace] Setup database-orm util library ...' })
 
     tasks.push(
       await databaseLibraryGenerator(tree, {
-        databaseOrm: options.databaseOrm,
-        database: options.database,
         name: 'database',
         skipPackageJson: options.skipPackageJson
       })

@@ -1,3 +1,24 @@
+# @webundsoehne/nx-nest [6.0.0-beta.13](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.12...@webundsoehne/nx-nest@6.0.0-beta.13) (2025-04-15)
+
+### Bug Fixes
+
+- **nx-nest:** migration ([e1f9eb2](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/e1f9eb2d398935a765ad6c8cb430b9f11b5aa6b3))
+- **nx-nest:** mongodb docker-compose ([fb1c767](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/fb1c7670e90e2030bddc6267b0ea29e54fb969fb))
+
+### Features
+
+- **nx-nest:** database and msp config generation ([4e3d81c](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/4e3d81c53a12a8681eaaec4c4e400df6bdfc1094))
+- **nx-nest:** db named volumes ([49393a9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/49393a9803718b23c9a0cf1d6176f2dcf8d37317))
+- **nx-nest:** db orm selection in database-lib generation ([90adf37](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/90adf376384c2aed7631a9a93ec9221ad6922286))
+- **nx-nest:** msp docker-compose ports ([ad14eb2](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ad14eb20f59a4071ac8a6dd83c0d89db64e88293))
+- **nx-nest:** update db and msp lib generation ([65d5434](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/65d54341f69b390388aff3f22b9983e8390f062f))
+
+# @webundsoehne/nx-nest [6.0.0-beta.12](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.11...@webundsoehne/nx-nest@6.0.0-beta.12) (2025-04-08)
+
+### Performance Improvements
+
+- **nestjs-util:** use cached layers for npm i in Dockerfile ([5c199b9](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/5c199b990136b403474b8ebb6ec8068b071b3a8f))
+
 # @webundsoehne/nx-nest [6.0.0-beta.11](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.10...@webundsoehne/nx-nest@6.0.0-beta.11) (2025-03-25)
 
 ### Bug Fixes

@@ -39,27 +39,17 @@
       "description": "Include jest as test runner.",
       "x-prompt": "Setup jest for unit tests?"
     },
-    "databaseOrm": {
-      "type": "string",
-      "aliases": ["orm"],
-      "description": "Database-ORM to use",
-      "x-prompt": {
-        "message": "Which database-orm should be included?",
-        "type": "item",
-        "items": ["none", "typeorm", "mongoose"]
-      }
+    "database": {
+      "type": "boolean",
+      "aliases": ["db", "orm"],
+      "description": "Include a Database-ORM",
+      "x-prompt": "Setup a database-ORM?"
     },
     "microserviceProvider": {
       "type": "boolean",
       "aliases": ["microservice-provider", "msp"],
       "description": "Include microservice-provider",
       "x-prompt": "Include microservice-provider?"
-    },
-    "database": {
-      "type": "string",
-      "aliases": ["db"],
-      "description": "Database to use",
-      "x-priority": "internal"
     },
     "skipPackageJson": {
       "description": "Do not add dependencies to `package.json`.",
@@ -76,5 +66,5 @@
       "x-priority": "internal"
     }
   },
-  "required": ["name", "jest", "components", "databaseOrm", "microserviceProvider"]
+  "required": ["name", "jest", "components", "database", "microserviceProvider"]
 }

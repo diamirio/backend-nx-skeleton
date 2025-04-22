@@ -11,8 +11,4 @@ services:
             NX_WORKSPACE_DATA_DIRECTORY: /opt/.nx/workspace-data
         volumes:
             - .:/opt/workspace
-            - nx_cache:/opt/.nx
         command: npm run start
-volumes:
-    # container requires "self-generated" cache dir
-    nx_cache:

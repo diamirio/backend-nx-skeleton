@@ -5,27 +5,22 @@
   "description": "Add a database-util library to the workspace",
   "type": "object",
   "properties": {
-    "databaseOrm": {
+    "orm": {
       "type": "string",
-      "aliases": ["orm"],
-      "description": "Database orm to use",
-      "x-prompt": {
-        "message": "Which database-orm should be included?",
-        "type": "item",
-        "items": ["typeorm", "mongoose"]
-      }
-    },
-    "name": {
-      "type": "string",
-      "aliases": ["n"],
-      "description": "Library name",
-      "default": "database"
+      "aliases": ["db-orm"],
+      "description": "Database orm to use"
     },
     "database": {
       "type": "string",
       "aliases": ["db"],
       "description": "Database to use",
       "x-priority": "internal"
+    },
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Library name",
+      "default": "database"
     },
     "importPath": {
       "type": "string",
@@ -48,5 +43,5 @@
       "x-priority": "internal"
     }
   },
-  "required": ["databaseOrm"]
+  "required": []
 }
