@@ -108,10 +108,10 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   setProjectTargets(tree, generateOptions)
   setNxJsonPluginsAndDefaults(tree)
 
-  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
-
   await generateMspLib(tree, generateOptions, templateContext, tasks)
   await generateDatabaseLib(tree, generateOptions, templateContext, tasks)
+
+  generateMicroserviceServer(tree, generateOptions, templateContext, applyTemplate)
 
   if (options.components.includes(Component.BG_TASK) && options.database) {
     await databaseTargetGenerator(tree, { project: generateOptions.projectName })
