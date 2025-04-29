@@ -27,7 +27,7 @@ export const MICROSERVICE_DEPENDENCIES = {
   '@nestjs/microservices': '^11',
   '@webundsoehne/nestjs-util-microservices': '^3',
   'amqp-connection-manager': '^4.1.7',
-  amqplib: '^0.10.3'
+  amqplib: '^0.10.7'
 }
 
 export const COMMAND_DEPENDENCIES = {
