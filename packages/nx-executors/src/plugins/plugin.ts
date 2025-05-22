@@ -37,24 +37,33 @@ export const createNodesV2: CreateNodesV2<PluginOptions> = [
 async function createNodeTargets (configFile: string, options: PluginOptions, context: CreateNodesContext): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFile)
   const projectConfig = await loadConfigFile(resolve(context.workspaceRoot, configFile))
+  let targets = {}
 
-  if (projectConfig.projectType !== 'application' || projectConfig.tags?.includes(SKIP_NX_EXECUTORS)) {
-    return {}
+  if (projectConfig.tags?.includes(SKIP_NX_EXECUTORS)) {
+    return targets
   }
 
-  const targets = {
-    ...buildTscTarget({
-      options: options?.tscOptions,
-      projectConfig,
-      context,
-      projectRoot
-    }),
-    ...buildTsNodeDevTarget({
-      options: options?.tsNodeDevOptions,
-      projectConfig,
-      context,
-      projectRoot
-    }),
+  // just applications
+  if (projectConfig.projectType === 'application') {
+    targets = {
+      ...buildTscTarget({
+        options: options?.tscOptions,
+        projectConfig,
+        context,
+        projectRoot
+      }),
+      ...buildTsNodeDevTarget({
+        options: options?.tsNodeDevOptions,
+        projectConfig,
+        context,
+        projectRoot
+      })
+    }
+  }
+
+  // applications & libraries
+  targets = {
+    ...targets,
     ...buildJestTarget({
       options: options?.jestOptions,
       projectConfig,
