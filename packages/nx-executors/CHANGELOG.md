@@ -1,3 +1,10 @@
+# @webundsoehne/nx-executors [1.0.0-beta.10](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.9...@webundsoehne/nx-executors@1.0.0-beta.10) (2025-06-11)
+
+
+### Bug Fixes
+
+* **nx-executors:** fix targeting of applications and libraries ([323de2b](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/323de2bac056af223511abff4d9cfba793be1810))
+
 # @webundsoehne/nx-executors [1.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.8...@webundsoehne/nx-executors@1.0.0-beta.9) (2025-04-08)
 
 ### Bug Fixes
