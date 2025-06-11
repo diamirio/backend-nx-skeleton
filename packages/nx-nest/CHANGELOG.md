@@ -1,3 +1,11 @@
+# @webundsoehne/nx-nest [6.0.0-beta.14](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.13...@webundsoehne/nx-nest@6.0.0-beta.14) (2025-06-11)
+
+
+### Features
+
+* **nx-nest:** default seed example ([af798d3](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/af798d36aa3fe13476bb00d4b8c370544f1fa541))
+* **nx-nest:** move seeder to own lib ([a1e5672](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a1e5672d22bdba7c331459dd2ea376c698ec5e0f))
+
 # @webundsoehne/nx-nest [6.0.0-beta.13](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.12...@webundsoehne/nx-nest@6.0.0-beta.13) (2025-04-15)
 
 ### Bug Fixes
