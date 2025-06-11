@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export const DEPENDENCIES = {
-  '@webundsoehne/nestjs-util-microservices': '^3.0.13'
-}
+import { MICROSERVICE_DEPENDENCIES } from '../application'
+
+export const DEPENDENCIES = MICROSERVICE_DEPENDENCIES
 
 export const DEV_DEPENDENCIES = {}

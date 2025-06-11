@@ -18,6 +18,12 @@
       "description": "library",
       "aliases": ["lib"]
     },
+    "resource": {
+      "factory": "./dist/generators/resource/generator",
+      "schema": "./dist/generators/resource/schema.json",
+      "description": "application resource",
+      "aliases": ["res"]
+    },
     "database-orm": {
       "factory": "./dist/generators/database-orm/generator",
       "schema": "./dist/generators/database-orm/schema.json",
@@ -30,11 +36,11 @@
       "description": "microservice-provider util library",
       "aliases": ["microserviceProvider", "msp"]
     },
-    "resource": {
-      "factory": "./dist/generators/resource/generator",
-      "schema": "./dist/generators/resource/schema.json",
-      "description": "application resource",
-      "aliases": ["res"]
+    "seeder": {
+      "factory": "./dist/generators/seeder/generator",
+      "schema": "./dist/generators/seeder/schema.json",
+      "description": "seeder library",
+      "aliases": ["seed"]
     },
     "database-target": {
       "factory": "./dist/generators/database-target/generator",

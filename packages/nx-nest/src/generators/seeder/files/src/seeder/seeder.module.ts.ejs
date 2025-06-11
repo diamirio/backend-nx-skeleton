@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common'
+
+import * as seeds from './seed'
+import { SeederModule as BaseSeederModule } from '@webundsoehne/nestjs-seeder'
+
+@Module({
+  imports: [
+    BaseSeederModule.register(seeds)
+  ],
+  exports: [BaseSeederModule]
+})
+export class SeederModule {}

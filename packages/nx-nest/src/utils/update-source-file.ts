@@ -52,6 +52,16 @@ export function addIndexExport (file: SourceFile, modulePath: string): void {
   }
 }
 
+export function addExport (file: SourceFile, importValue: string, importPath: string): void {
+  const exportNode = file.getExportDeclaration(importPath)
+
+  if (!exportNode) {
+    file.addExportDeclaration({ moduleSpecifier: importPath, namedExports: [importValue] })
+  } else if (!exportNode.getNamedExports().find((i) => i.getName() === importValue)) {
+    exportNode.addNamedExport(importValue)
+  }
+}
+
 export function addImport (file: SourceFile, importValue: string, importPath: string): void {
   const importNode = file.getImportDeclaration(importPath)
 

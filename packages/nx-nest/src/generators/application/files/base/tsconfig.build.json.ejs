@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {},
-  "include": ["src"<% if (isBgTask && databaseOrm !== DATABASE_ORM.NONE) {%>, "../../libs/database/src/migration"<% } %>],
+  "include": ["src"<% if (isBgTask && database) {%>, "../../libs/database/src/migration"<% } %>],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export const DEPENDENCIES_TYPEORM = {
-  '@nestjs/typeorm': '^10',
-  '@webundsoehne/nestjs-seeder': '^2',
-  typeorm: '^0.3.20'
+  '@nestjs/typeorm': '^11',
+  typeorm: '^0.3.22'
 }
 
 export const DEPENDENCIES_TYPEORM_MYSQL = {
@@ -16,8 +15,7 @@ export const DEPENDENCIES_TYPEORM_POSTGRES = {
 }
 
 export const DEPENDENCIES_MONGOOSE = {
-  '@nestjs/mongoose': '^10',
-  '@webundsoehne/nestjs-seeder': '^2',
-  'migrate-mongo': '^11.0.0',
+  '@nestjs/mongoose': '^11',
+  'migrate-mongo': '^12',
   mongoose: '^8'
 }

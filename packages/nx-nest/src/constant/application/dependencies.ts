@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export const DEPENDENCIES = {
-  '@nestjs/common': '^10',
-  '@nestjs/core': '^10',
+  '@nestjs/common': '^11',
+  '@nestjs/core': '^11',
   '@webundsoehne/nestjs-util': '^7',
   'class-transformer': '^0.5',
   'class-validator': '^0.14',
@@ -11,23 +11,23 @@ export const DEPENDENCIES = {
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nestjs/testing': '^10',
-  '@webundsoehne/nx-executors': '^1.0.0'
+  '@nestjs/testing': '^11',
+  '@webundsoehne/nx-executors': '^1.0.1'
 }
 
 export const SERVER_DEPENDENCIES = {
-  '@fastify/static': '^6',
-  '@fastify/swagger': '^8',
-  '@nestjs/platform-fastify': '^10',
-  '@nestjs/swagger': '^7',
+  '@fastify/static': '^8',
+  '@fastify/swagger': '^9',
+  '@nestjs/platform-fastify': '^11',
+  '@nestjs/swagger': '^11',
   '@webundsoehne/nestjs-util-restful': '^3'
 }
 
 export const MICROSERVICE_DEPENDENCIES = {
-  '@nestjs/microservices': '^10',
+  '@nestjs/microservices': '^11',
   '@webundsoehne/nestjs-util-microservices': '^3',
   'amqp-connection-manager': '^4.1.7',
-  amqplib: '^0.10.3'
+  amqplib: '^0.10.7'
 }
 
 export const COMMAND_DEPENDENCIES = {
@@ -35,7 +35,7 @@ export const COMMAND_DEPENDENCIES = {
 }
 
 export const BACKGROUND_TASK_DEPENDENCIES = {
-  '@nestjs/schedule': '^4'
+  '@nestjs/schedule': '^6'
 }
 /* eslint-enable */
 
