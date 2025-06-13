@@ -1,3 +1,10 @@
+# @webundsoehne/nestjs-util [8.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.6...@webundsoehne/nestjs-util@8.0.0-beta.7) (2025-06-13)
+
+
+### Features
+
+* **nestjs-util:** extend logger ([f5a5a68](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/f5a5a6887c0a8f57c4e1701082f64981447e8b47))
+
 # @webundsoehne/nestjs-util [8.0.0-beta.6](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.5...@webundsoehne/nestjs-util@8.0.0-beta.6) (2023-12-01)
 
 ### Bug Fixes
