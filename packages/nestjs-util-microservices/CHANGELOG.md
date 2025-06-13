@@ -1,3 +1,13 @@
+# @webundsoehne/nestjs-util-microservices [4.0.0-beta.9](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.8...@webundsoehne/nestjs-util-microservices@4.0.0-beta.9) (2025-06-13)
+
+
+
+
+
+### Dependencies
+
+* **@webundsoehne/nestjs-util:** upgraded to 8.0.0-beta.7
+
 # @webundsoehne/nestjs-util-microservices [4.0.0-beta.8](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util-microservices@4.0.0-beta.7...@webundsoehne/nestjs-util-microservices@4.0.0-beta.8) (2024-11-12)
 
 - feat(nestjs-util-microservice)!: close failed connection ([3c35fec](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3c35fecb6623f961eba17356f14a98ee76af64af))
