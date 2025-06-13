@@ -309,6 +309,19 @@ class CustomService {
 }
 ```
 
+**Request-Id**
+
+In the main application-module set up the [nestjs-cls](https://papooch.github.io/nestjs-cls/) package. Next enable the `.getId()` method via `generateId: true` and optionally customize the `idGenerator`.
+
+To include the request-id in the logs, after creating the `NestApplication` set/link the `ClsService` to the logger.
+
+```typescript
+const logger = new LoggerService()
+const app = await NestFactory.create<NestFastifyApplication>(ServerModule, new FastifyAdapter(), { logger })
+
+logger.setClsService(app.get(ClsService))
+```
+
 ## Pipes
 
 Extended pipes provide capabilities over the default ones for better interacting with this library.
