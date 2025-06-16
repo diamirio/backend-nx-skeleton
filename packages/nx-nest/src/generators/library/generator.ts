@@ -1,9 +1,17 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { formatFiles, addDependenciesToPackageJson, addProjectConfiguration, names, output, readNxJson, updateJson } from '@nx/devkit'
+import {
+  addDependenciesToPackageJson,
+  addProjectConfiguration,
+  formatFiles,
+  names,
+  output,
+  readNxJson,
+  updateJson
+} from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { join } from 'node:path'
 
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import { applyTasks, applyTemplateFactory } from '../../utils'
@@ -22,7 +30,10 @@ interface GenerateOptions extends LibraryGeneratorSchema {
   projectRoot: string
 }
 
-export default async function libraryGenerator (tree: Tree, options: LibraryGeneratorSchema): Promise<GeneratorCallback> {
+export default async function libraryGenerator(
+  tree: Tree,
+  options: LibraryGeneratorSchema
+): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   const tasks: GeneratorCallback[] = []

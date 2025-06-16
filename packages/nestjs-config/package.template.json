@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "config": "catalog:"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "catalog:peer"
+  },
+  "peerDependenciesMeta": {}
+}

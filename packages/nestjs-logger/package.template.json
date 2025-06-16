@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "winston": "catalog:"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "catalog:nestjs",
+    "nestjs-cls": "catalog:peer"
+  },
+  "peerDependenciesMeta": {
+    "nestjs-cls": {
+      "optional": true
+    }
+  }
+}

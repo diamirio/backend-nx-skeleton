@@ -1,11 +1,94 @@
 {
-  "extends": "nx/presets/npm.json",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "appsDir": "packages"
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default"],
+    "sharedGlobals": []
+  },
+  "release": {
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "changelog": {
+      "workspaceChangelog": false,
+      "projectChangelogs": {
+        "applyUsernameToAuthors": false
+      },
+      "automaticFromRef": true
+    },
+    "version": {
+      "conventionalCommits": true,
+      "manifestRootsToUpdate": [
+        "{projectRoot}",
+        {
+          "path": "dist/{projectName}",
+          "preserveLocalDependencyProtocols": false
+        }
+      ],
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
       "options": {
-        "cacheableOperations": ["build", "lint", "lint:check"]
+        "clean": true
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectName}"
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome check"
+      },
+      "configurations": {
+        "fix": {
+          "args": ["--write"]
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "rootDir": "{projectRoot}",
+        "outputPath": "dist/{projectName}",
+        "main": "{projectRoot}/src/index.ts",
+        "tsConfig": "{projectRoot}/tsconfig.build.json",
+        "assets": ["{projectRoot}/README.md", "{projectRoot}/LICENSE"]
+      }
+    },
+    "updateManifest": {
+      "executor": "@tools/internal:update-manifest",
+      "options": {
+        "inputFile": "{projectRoot}/package.template.json",
+        "outputFile": "{projectRoot}/package.json"
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx release -p {projectName} --yes"
+      },
+      "configurations": {
+        "beta": {
+          "args": ["--preid=beta"]
+        }
       }
     }
-  }
+  },
+  "plugins": ["@nx/jest/plugin"]
 }

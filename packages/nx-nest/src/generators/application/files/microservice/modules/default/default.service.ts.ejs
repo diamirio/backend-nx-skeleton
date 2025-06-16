@@ -8,9 +8,7 @@ export class DefaultMicroservice {
 
   constructor() {}
 
-  async default (
-    options: MicroserviceRequest<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>
-  ): Promise<MicroserviceResponse<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>> {
+  async default (options: unknown): Promise<string> {
     return 'Hello world.'
   }
 }

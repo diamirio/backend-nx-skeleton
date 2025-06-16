@@ -1,10 +1,17 @@
+import { ConfigService } from '@diamir/nestjs-config'
 import { MongooseModuleOptions } from '@nestjs/mongoose'
-import { ConfigService } from '@webundsoehne/nestjs-util'
 
 const databaseOptions = ConfigService.get('database')
 
 export function getDatabaseOptions (): [string, MongooseModuleOptions] {
-  const { host, port, database, username, password, ...mongoOptions } = databaseOptions
+  const { connectionString, host, port, database, username, password, ...mongoOptions } = databaseOptions
+
+  // if using a custom connection-string, do not pass any other options
+  // those should all be defined in the connection-string
+  if (connectionString) {
+    return [connectionString, {}]
+  }
+
   const uri = `mongodb://${host}${port ? `:${port}` : ''}/${database}`
 
   if (username && password) {

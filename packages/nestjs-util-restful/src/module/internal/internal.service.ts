@@ -1,26 +1,33 @@
-import { Injectable, Logger } from '@nestjs/common'
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
+import { Injectable, Logger, Optional } from '@nestjs/common'
 
-import type { ApiStatus } from './internal.interface'
-import { ConfigParam, Configurable } from '@webundsoehne/nestjs-util'
+import type { ApiStatus, InternalOptions } from './interface'
 
 @Injectable()
 export class InternalService {
-  private logger = new Logger(InternalService.name)
+  private readonly logger = new Logger(InternalService.name)
+  private readonly options: InternalOptions = {
+    lastUpdateFile: '.last-update',
+    changelogFile: 'CHANGELOG.md',
+    includeLastUpdate: true
+  }
 
-  @Configurable()
-  async checkApiStatus (@ConfigParam('misc.lastUpdateFile', '.last-update') lastUpdateFilePath?: string): Promise<ApiStatus> {
+  constructor(@Optional() options?: InternalOptions) {
+    Object.assign(this.options, options)
+  }
+
+  async checkApiStatus(): Promise<ApiStatus> {
     let lastUpdate: string
 
-    try {
-      const { mtime } = await fs.stat(lastUpdateFilePath)
+    if (this.options.includeLastUpdate) {
+      try {
+        const { mtime } = await fs.stat(this.options.lastUpdateFile)
 
-      lastUpdate = new Date(mtime).toISOString()
-    } catch (err) {
-      this.logger.warn(['Error while attempting to access last update file: %s', lastUpdateFilePath])
+        lastUpdate = new Date(mtime).toISOString()
+      } catch (_) {
+        this.logger.warn(`Error while attempting to access last update file: ${this.options.lastUpdateFile}`)
+      }
     }
-
-    this.logger.debug('Everything fine')
 
     return {
       apiVersion: process.env?.PACKAGE_VERSION ?? process.env?.npm_package_version ?? '0.0.0',
@@ -28,10 +35,9 @@ export class InternalService {
     }
   }
 
-  @Configurable()
-  async getChangelog (@ConfigParam('misc.changelogFile', 'CHANGELOG.md') changelogFilePath?: string): Promise<string> {
+  async getChangelog(): Promise<string> {
     this.logger.verbose('Retrieving changelog')
 
-    return fs.readFile(changelogFilePath, { encoding: 'utf8' })
+    return fs.readFile(this.options.changelogFile, { encoding: 'utf8' })
   }
 }

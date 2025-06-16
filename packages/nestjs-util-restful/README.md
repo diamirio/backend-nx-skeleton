@@ -7,47 +7,171 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ---
 
-# @webundsoehne/nestjs-util-restful
+# nestjs-util-restful
 
-[![Version](https://img.shields.io/npm/v/@webundsoehne/nestjs-util.svg)](https://npmjs.org/package/@webundsoehne/nestjs-util) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nestjs-util.svg)](https://npmjs.org/package/@webundsoehne/nestjs-util) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nestjs-util)](https://npmjs.org/package/@webundsoehne/nestjs-util) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+<!-- TOC -->
+* [nestjs-util-restful](#nestjs-util-restful)
+  * [Description](#description)
+  * [Filter](#filter)
+    * [GlobalExceptionFilter](#globalexceptionfilter)
+    * [BadRequestFilter](#badrequestfilter)
+    * [Extra](#extra)
+    * [Formatter](#formatter)
+    * [Options](#options)
+    * [Example](#example)
+  * [Interceptor](#interceptor)
+  * [InternalModule](#internalmodule)
+  * [Swagger](#swagger)
+  * [Migration](#migration)
+    * [Filter](#filter-1)
+    * [InternalModule](#internalmodule-1)
+    * [Swagger](#swagger-1)
+<!-- TOC -->
 
 ## Description
 
-This is a collection of useful modules for creating a [NestJS](https://github.com/nestjs/nest) project. Mostly all of these modules are used by the in-house boilerplate of Web & Söhne.
+Set of utils/helpers for restful nestjs setups.
 
-## Modules
+## Filter
 
-- **[Read The API Documentation](./docs/README.md)**
-- [Changelog](./CHANGELOG.md)
+Hint: The ordering of the filter-provider is relevant (see full-example below)
 
-<!-- toc -->
+These filter are for the api-server (and bg-task) only, in a microservice serve throw `RpcException` and let the nest default filter handle it.
 
-- [Interceptors](#interceptors)
-  - [Cache-Lifetime](#cache-lifetime)
-  - [Request-Profiler](#request-profiler)
-- [Providers](#providers)
-  - [Swagger](#swagger)
-- [Modules](#modules)
-  - [Internal](#internal)
-    - [Status](#status)
-    - [Changelog](#changelog)
-- [Stay in touch](#stay-in-touch)
+### GlobalExceptionFilter
 
-<!-- tocstop -->
+The main filter that catches any error not yet processed.<br>
+Can be configured to push those errors to sentry too. (see [Options](#options))
 
-## Interceptors
+### BadRequestFilter
 
-### Cache-Lifetime
+Catching `BadRequestExceptions` and prepare a response payload that supports the `ValidationPipe` errors.
 
-The interceptor sets the cache-lifetime information of the response as it was configured. The configuration depends normally on project and environment.
+### Extra
 
-It will add a function to the request state `request.state.setCacheLifetime()`, with that you can set a customized lifetime for each request.
+- `EntityNotFoundExtra`: Catch typeorm entity-not-found error thrown when using `.findOneOrFail()`
 
-**Usage**
+This is not available as a filter itself, because of the optional `typeorm` dependency. Therefore, you must initialise the filter yourself:
 
 ```typescript
-import { RequestProfilerInterceptor } from '@webundsoehne/nestjs-util'
+import { EntityNotFoundError } from 'typeorm'
+import { EntityNotFoundExtra } from '@diamir/nestjs-util-restful'
+import { Catch } from '@nestjs/common'
 
+@Catch(EntityNotFoundError)
+class EntityNotFoundExceptionFilter extends EntityNotFoundExtra {}
+```
+
+Write your own custom filter by extending and implementing the `AbstractExceptionFilter`.
+
+### Formatter
+
+Beside the basic `application/json` you can opt-in to return `application/problem+json` instead (or write your own formatter extending the abstract `ErrorFormatter` class).
+
+```typescript
+import { ErrorFormatter, ProblemJsonFormatter } from '@diamir/nestjs-util-restful'
+import { Module } from '@nestjs/common'
+
+@Module({
+  providers: [
+    {
+      provide: ErrorFormatter,
+      useClass: ProblemJsonFormatter
+    }
+  ]
+})
+```
+
+### Options
+
+You can customise the filter by providing an `ERROR_OPTIONS` object, to e.g. enable sentry for the `GlobalExceptionFilter` or disable logging for the `BadRequestFilter`
+
+```typescript
+import { ERROR_OPTIONS } from '@diamir/nestjs-util-restful'
+import { Module } from '@nestjs/common'
+
+@Module({
+  providers: [
+    {
+      provide: ERROR_OPTIONS,
+      useValue: {
+        GlobalExceptionFilter: {
+          sentry: {
+            enable: true,
+            dsn: '...',
+            environment: 'my-application'
+          }
+        },
+        BadRequestFilter: {
+          logging: false
+        }
+      }
+    }
+  ]
+})
+```
+
+### Example
+
+```typescript
+import { rrorFormatter, ERROR_OPTIONS, GlobalExceptionFilter, BadRequestExceptionFilter, EntityNotFoundExceptionFilter, ProblemJsonFormatter } from '@diamir/nestjs-util-restful'
+import { Module, ValidationPipe } from '@nestjs/common'
+import { APP_FILTER, APP_PIPE } from '@nestjs/core'
+
+@Module({
+  providers: [
+    {
+      provide: ERROR_OPTIONS,
+      useValue: {
+        GlobalExceptionFilter: {
+          sentry: {
+            enable: true,
+            dsn: '...',
+            environment: 'my-application'
+          }
+        }
+      }
+    },
+    {
+      provide: ErrorFormatter,
+      useClass: ProblemJsonFormatter
+    },
+    // filter are processed from bottom to top
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter
+    },
+    {
+      provide: APP_FILTER,
+      useClass: BadRequestExceptionFilter
+    },
+    {
+      provide: APP_FILTER,
+      useClass: EntityNotFoundExceptionFilter
+    },
+    // if an error occurs if passes 
+    // 1. EntityNotFoundExceptionFilter
+    // 2. BadRequestExceptionFilter
+    // 3. GlobalExceptionFilter
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe
+    }
+  ]
+})
+```
+
+## Interceptor
+
+- `RequestProfilerInterceptor`: logs incoming requests and how long they took until their response
+
+```typescript
+import { Module } from '@nestjs/common'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+
+import { RequestProfilerInterceptor } from '@diamir/nestjs-util-restful'
+
+// restful server
 @Module({
   providers: [
     {
@@ -56,134 +180,71 @@ import { RequestProfilerInterceptor } from '@webundsoehne/nestjs-util'
     }
   ]
 })
-class ServerModule implements NestModule {}
 ```
 
-**setCacheLifetime()**
-
-This function takes 2 parameters, where the second one is optional.
-
-| Name             | Type    | Optional | Description                                                                                                                   |
-| ---------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| lifetime         | Number  | false    | The lifetime of the cache in seconds                                                                                          |
-| useExpiresHeader | Boolean | true     | If `true` the `expiresHeader` header will be set, otherwise the `cacheControlHeader`, be default it uses the configured value |
-
-**Configuration**
-
-> The default values only exists in out skeleton project.
-
-| Key                                | Type    | Default         | Description                                                                          |
-| ---------------------------------- | ------- | --------------- | ------------------------------------------------------------------------------------ |
-| cacheLifetime.defaultExpiresHeader | Boolean | false           | If `true` the `expiresHeader` header will be set, otherwise the `cacheControlHeader` |
-| cacheLifetime.defaultLifetime      | Number  | 0               | This value may set a default cache lifetime, if there was not set any before         |
-| cacheLifetime.expiresHeader        | String  | 'Expires'       | The header key for the `expiresHeader`                                               |
-| cacheLifetime.cacheControlHeader   | String  | 'Cache-control' | The header key for the `cacheControlHeader`                                          |
-
-### Request-Profiler
-
-On `debug` logger level the request profile informs you when a request got started and when it was finished. It also logs down the response code information and how many seconds the request round-trip took.
-
-**Usage**
-
-```typescript
-import { RequestProfilerInterceptor } from '@webundsoehne/nestjs-util'
-
-@Module({
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: RequestProfilerInterceptor
-    }
-  ]
-})
-class ServerModule implements NestModule {}
-```
-
-**Example**
-
+Example Output:
 ```text
 [2020-01-01T12:00:00.000Z] [debug] [RequestProfilerInterceptor] - GET /v1/hello/world starting
 [2020-01-01T12:00:00.025Z] [debug] [RequestProfilerInterceptor] - GET /v1/hello/world finished - 200 - took: 0.0250 sec
 ```
 
-## Providers
+## InternalModule
+
+Provides a controller with two `GET` endpoints
+- `GET /internal/status`: provides status details as application-version and last-update date
+- `GET /internal/changelog`: provides the changelog
+
+```typescript
+@Module({
+  imports: [
+    InternalModule.forRoot({
+      lastUpdateFile: ConfigService.get('misc.lastUpdateFile'), // path to the file from which the last-updated timestamp will be read
+      changelogFile: ConfigService.get('misc.changelogFile'), // path to the changelog file
+      includeLastUpdate: true // if the last-update timestamp should be processed or not
+    })
+  ]
+})
+```
+
+## Swagger
+
+Set up the swagger documentation with a single function on application creation.
+
+```typescript
+import { ConfigService } from '@diamir/nestjs-config'
+import { SwaggerService } from '@diamir/nestjs-util-restful'
+
+const app = await NestFactory.create(/* ... */)
+
+SwaggerService.enable(app, {
+  path: '/internal/docs',
+  title: 'Swagger Docu',
+  description: 'Some helpful description of the project'
+}, {
+  basePath: 'http://localhost:3000',
+  apiPath: 'api'
+})
+// customise `DocumentBuilder`
+SwaggerService.enable(app, ConfigService.get('swagger'), ConfigService.get('url'), {
+  customize: (builder) => builder.addBearerAuth()
+})
+```
+
+
+
+## Migration
+
+### Filter
+- replace dependency
+- drop deprecated filter (server and microservice-server)
+- replace with new filter
+
+### InternalModule
+- replace dependency
+- setup module with `.forRoot()` (see ConfigService paths in [InternalModule](#internalmodule))
 
 ### Swagger
-
-Automatically creates a Swagger documentation out of your controllers. For detailed information about the how-to, take a deeper look at the Nest [documentation](https://docs.nestjs.com/recipes/swagger).
-
-**Usage**
-
-```typescript
-import { SwaggerService } from '@webundsoehne/nestjs-util'
-
-const app = await NestFactory.create<INestApplication>(ServerModule, new FastifyAdapter())
-SwaggerService.enable(app, options)
-```
-
-**Parameters**
-
-| Name    | Required | Type             | Description                                                             |
-| ------- | -------- | ---------------- | ----------------------------------------------------------------------- |
-| app     | true     | INestApplication | The Nest application on which the documentation should be created       |
-| options | false    | SwaggerOptions   | Options for customize the default created document                      |
-| config  | false    | SwaggerConfig    | Standard configuration, which are required for creating a documentation |
-
-**Types**
-
-_SwaggerOptions_
-
-| Name      | Required | Type     | Description                                                    |
-| --------- | -------- | -------- | -------------------------------------------------------------- |
-| customize | false    | Function | This function takes an DocumentBuilder modifies and returns it |
-
-_SwaggerConfig_
-
-| Name        | Required | Type    | Description                         |
-| ----------- | -------- | ------- | ----------------------------------- |
-| useHttps    | true     | Boolean | If the API is behind SSL encryption |
-| basePath    | true     | String  | The base-path of the API            |
-| path        | true     | String  | The sub-path to reach the API       |
-| title       | true     | String  | The name of the API or the customer |
-| description | true     | String  | A description for the whole API     |
-
-## Modules
-
-### Internal
-
-This is a NestJS controller module for internal API endpoints, which can simply be added to each project. The controller provides you 2 endpoints `/status` and `/changelog`.
-
-**Usage**
-
-```typescript
-import { InternalModule } from '@webundsoehne/nestjs-util'
-
-@Module({
-  imports: [InternalModule]
-})
-class ServerModule implements NestModule {
-  async configure(): Promise<any> {
-    await setEnvironmentVariables()
-  }
-}
-```
-
-**Configuration**
-
-| Key                 | Type   | Default        | Description                                         |
-| ------------------- | ------ | -------------- | --------------------------------------------------- |
-| misc.changelogFile  | String | 'CHANGELOG.md' | The filepath of the project's changelog information |
-| misc.lastUpdateFile | String | '.last-update' | The filepath of the projects's last update file     |
-
-#### Status
-
-The status endpoint returns the current API version set during the process environment and the last modification of the `.last-update` in your root directory. The version will be set with the util function `setEnvironmentVariables()` read from `package.json` and the file will normally be generated/modified during the deployment process. You may change this value with the `misc.lastUpdateFile` configuration.
-
-#### Changelog
-
-This endpoint simply reads and responds with the `CHANGELOG.md` from your root directory. You can change the filepath with the configuration value `misc.changelogFile`.
-
-## Stay in touch
-
-- Author: [Backend Team](mailto:backend@webundsoehne.com)
-- Website: [Web & Söhne](https://webundsoehne.com)
+- replace dependency
+- update `SwaggerService.enable()` to new syntax
+  - old: `enable(app, customize, swagger, url)`
+  - new: `enable(app, swagger, url, customize)` (see [Swagger](#swagger))

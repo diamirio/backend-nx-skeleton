@@ -1,0 +1,7 @@
+{
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": "catalog:nestjs"
+  },
+  "peerDependenciesMeta": {}
+}

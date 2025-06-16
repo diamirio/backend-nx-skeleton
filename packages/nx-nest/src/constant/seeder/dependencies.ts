@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export const DEPENDENCIES = {
-  '@webundsoehne/nestjs-seeder': '^2'
+  '@diamir/nestjs-seeder': '0.1.0'
 }

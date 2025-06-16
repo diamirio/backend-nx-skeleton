@@ -1,9 +1,19 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, ProjectConfiguration, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, readProjectConfiguration, updateJson } from '@nx/devkit'
+import {
+  addDependenciesToPackageJson,
+  addProjectConfiguration,
+  formatFiles,
+  names,
+  OverwriteStrategy,
+  output,
+  readNxJson,
+  readProjectConfiguration,
+  updateJson
+} from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
@@ -40,30 +50,40 @@ interface GenerateOptions extends DatabaseOrmGeneratorSchema {
   packageScope: string
   libRoot: string
   projectRoot: string
-  databaseOrmDetails: { folder: string, dependencies: Record<string, string> }
+  databaseOrmDetails: { folder: string; dependencies: Record<string, string> }
   updateApplications: string[]
 }
 
-function getDatabaseOrmDetails (orm: DatabaseOrm, database?: Database): { folder: string, dependencies: Record<string, string> } {
+function getDatabaseOrmDetails(
+  orm: DatabaseOrm,
+  database?: Database
+): { folder: string; dependencies: Record<string, string> } {
   switch (orm) {
-  case DatabaseOrm.TYPEORM:
-    if (database === Database.MYSQL) {
-      return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_MYSQL }
-    } else if (database === Database.POSTGRES) {
-      return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_POSTGRES }
-    } else {
+    case DatabaseOrm.TYPEORM: {
+      if (database === Database.MYSQL) {
+        return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_MYSQL }
+      }
+
+      if (database === Database.POSTGRES) {
+        return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM_POSTGRES }
+      }
+
       return { folder: DatabaseOrm.TYPEORM, dependencies: DEPENDENCIES_TYPEORM }
     }
 
-  case DatabaseOrm.MONGOOSE:
-    return { folder: DatabaseOrm.MONGOOSE, dependencies: DEPENDENCIES_MONGOOSE }
+    case DatabaseOrm.MONGOOSE: {
+      return { folder: DatabaseOrm.MONGOOSE, dependencies: DEPENDENCIES_MONGOOSE }
+    }
 
-  default:
-    return
+    default:
+      return
   }
 }
 
-export default async function databaseOrmGenerator (tree: Tree, options: DatabaseOrmGeneratorSchema): Promise<GeneratorCallback> {
+export default async function databaseOrmGenerator(
+  tree: Tree,
+  options: DatabaseOrmGeneratorSchema
+): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   const tasks: GeneratorCallback[] = []
@@ -105,7 +125,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     bodyLines: ['Update files ...', 'Creating template files...', 'Creating folders...']
   })
 
-  if (!generateOptions.update && !tree.exists(generateOptions.projectRoot)) {
+  if (!(generateOptions.update || tree.exists(generateOptions.projectRoot))) {
     addProjectConfiguration(tree, generateOptions.libraryName, {
       root: generateOptions.projectRoot,
       sourceRoot: join(generateOptions.projectRoot, 'src'),
@@ -123,7 +143,9 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   const projects = await updateConfigAndApplication(tree, generateOptions)
 
   // add migration-task util if not exists and bg-task project was updated
-  const bgTaskProject = projects.find((p) => ((p as any)?.integration?.nestjs?.components ?? []).includes(Component.BG_TASK))
+  const bgTaskProject = projects.find((p) =>
+    ((p as any)?.integration?.nestjs?.components ?? []).includes(Component.BG_TASK)
+  )
 
   if (bgTaskProject) {
     const sourceRoot = join(generateOptions.projectRoot, 'src')
@@ -145,7 +167,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
 
   updateJson(tree, 'nx.json', (content) => {
     content.integration = {
-      ...content.integration ?? {},
+      ...(content.integration ?? {}),
       orm: {
         database: generateOptions.orm,
         system: generateOptions.database,
@@ -217,7 +239,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
   return applyTasks(tasks)
 }
 
-function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
+function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
     output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
@@ -225,12 +247,15 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
   }
 }
 
-async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<ProjectConfiguration[]> {
+async function updateConfigAndApplication(tree: Tree, options: GenerateOptions): Promise<ProjectConfiguration[]> {
   const updatedProjects = []
 
   // prompt, if not called by application generator, which applications should be updated
   if (!options.updateApplications?.length) {
-    options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.orm}:`)
+    options.updateApplications = await promptProjectMultiselect(
+      tree,
+      `Please select the project which should include ${options.orm}:`
+    )
   }
 
   if (options.updateApplications?.length) {
@@ -248,7 +273,13 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
       updatedProjects.push(project)
 
       // update config files
-      updateConfigFiles(tree, project.root, DATABASE_CONFIG_KEY, databaseConfig.defaultConfig, databaseConfig.environmentConfig)
+      updateConfigFiles(
+        tree,
+        project.root,
+        DATABASE_CONFIG_KEY,
+        databaseConfig.defaultConfig,
+        databaseConfig.environmentConfig
+      )
       const projectJson = readJson(tree, join(project.root, 'project.json'))
 
       // update application module
@@ -256,13 +287,17 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
         const componentMeta = componentMetaData[component]
 
         if (componentMeta) {
-          updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
-            addModuleDecoratorImport(file, `${componentMeta.className}Module`, databaseConfig.forRoot)
-            addImport(file, databaseConfig.moduleClass, databaseConfig.importPath)
-            addImport(file, 'getDatabaseOptions', options.importPath)
+          updateSourceFile(
+            tree,
+            join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`),
+            (file) => {
+              addModuleDecoratorImport(file, `${componentMeta.className}Module`, databaseConfig.forRoot)
+              addImport(file, databaseConfig.moduleClass, databaseConfig.importPath)
+              addImport(file, 'getDatabaseOptions', options.importPath)
 
-            return file
-          })
+              return file
+            }
+          )
         }
       }
     }

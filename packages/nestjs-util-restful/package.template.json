@@ -1,0 +1,19 @@
+{
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": "catalog:nestjs",
+    "@nestjs/core": "catalog:nestjs",
+    "@nestjs/swagger": "catalog:nestjs",
+    "@sentry/node": "catalog:peer",
+    "typeorm": "catalog:peer",
+    "rxjs": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "typeorm": {
+      "optional": true
+    },
+    "@sentry/node": {
+      "optional": true
+    }
+  }
+}

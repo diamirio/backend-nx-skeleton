@@ -1,1 +1,0 @@
-export const KEYCLOAK_SEEDER_SEEDS = Symbol('KEYCLOAK_SEEDER_SEEDS')

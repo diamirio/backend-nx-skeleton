@@ -40,7 +40,7 @@ export const componentMetaData = {
   }
 }
 
-function getComponentStrings (component: Component): ComponentMetadata {
+function getComponentStrings(component: Component): ComponentMetadata {
   const { service, className, constant, folder } = componentMetaData[component]
 
   return {
@@ -52,6 +52,6 @@ function getComponentStrings (component: Component): ComponentMetadata {
   }
 }
 
-export function getComponentMetadata (components: Component[]): ComponentMetadata[] {
+export function getComponentMetadata(components: Component[]): ComponentMetadata[] {
   return components.filter((c) => !!componentMetaData[c]).map(getComponentStrings)
 }

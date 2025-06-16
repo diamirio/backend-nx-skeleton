@@ -9,9 +9,7 @@ export class DefaultMicrocontroller {
   constructor (private readonly defaultMicroservice: DefaultMicroservice) {}
 
   @MessagePattern(<%- projectNames.className %>Pattern.DEFAULT)
-  default (
-    options: MicroserviceRequest<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>
-  ): Promise<MicroserviceResponse<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.DEFAULT>> {
+  default (options: unknown): Promise<string> {
     return this.defaultMicroservice.default(options)
   }
 }

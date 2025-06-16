@@ -1,51 +1,31 @@
 {
-  "name": "@webundsoehne/nx-nest",
-  "version": "1.0.0",
+  "name": "@diamir/nx-nest",
+  "version": "0.1.0-beta.0",
+  "description": "",
+  "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
-  "description": "Nest Plugin for Nx",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [],
+  "dependencies": {
+    "@nx/devkit": "21.5.3",
+    "@nx/js": "21.5.3",
+    "@nx/workspace": "21.5.3",
+    "yaml": "2.8.1",
+    "ts-morph": "27.0.0",
+    "tslib": "2.8.1"
+  },
+  "peerDependencies": {
+    "nx": ">= 21.0.0",
+    "enquirer": ">= 2.3.0"
+  },
+  "engines": {
+    "node": ">= 20"
+  },
   "generators": "./generators.json",
   "nx-migrations": {
     "migrations": "./migrations.json"
-  },
-  "scripts": {
-    "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
-    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/"
-  },
-  "lint-staged": {
-    "*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
-  },
-  "peerDependencies": {
-    "nx": ">= 20",
-    "enquirer": ">= 2.3"
-  },
-  "dependencies": {
-    "@nx/devkit": "^20.0.0",
-    "@nx/js": "^20.0.0",
-    "@nx/workspace": "^20.0.0",
-    "yaml": "^2.5.1",
-    "ts-morph": "^23.0.0",
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "enquirer": "^2.4.1",
-    "nx": "^20.0.0"
-  },
-  "engines": {
-    "node": ">= 18"
   }
 }

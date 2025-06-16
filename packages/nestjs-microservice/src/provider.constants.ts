@@ -1,0 +1,1 @@
+export const PROVIDER_OPTIONS = Symbol('PROVIDER_OPTIONS')

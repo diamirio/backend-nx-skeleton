@@ -1,0 +1,6 @@
+import { recommended, utils } from '@diamir/eslint-config'
+
+export default utils.defineConfig(
+  utils.internalPackageImport('^@<%= scope %>/'),
+  recommended
+)

@@ -1,51 +1,43 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export const DEPENDENCIES = {
-  '@nestjs/common': '^11',
-  '@nestjs/core': '^11',
-  '@webundsoehne/nestjs-util': '^7',
-  'class-transformer': '^0.5',
-  'class-validator': '^0.14',
-  'js-yaml': '^4.1',
-  'reflect-metadata': '^0.1',
-  rxjs: '^7'
+  '@diamir/nestjs-config': '0.1.0',
+  '@diamir/nestjs-logger': '0.1.0',
+  '@nestjs/common': '11.1.6',
+  '@nestjs/core': '11.1.6',
+  'class-transformer': '0.5.1',
+  'class-validator': '0.14.2',
+  'js-yaml': '4.1.0',
+  'reflect-metadata': '0.2.2',
+  rxjs: '7.8.2'
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nestjs/testing': '^11',
-  '@webundsoehne/nx-executors': '^2.0.0'
+  '@nestjs/testing': '11.1.6',
+  '@diamir/nx-executors': '0.1.0'
 }
 
 export const SERVER_DEPENDENCIES = {
-  '@fastify/static': '^8',
-  '@fastify/swagger': '^9',
-  '@nestjs/platform-fastify': '^11',
-  '@nestjs/swagger': '^11',
-  '@webundsoehne/nestjs-util-restful': '^3'
+  '@diamir/nestjs-process': '0.1.0',
+  '@diamir/nestjs-util-restful': '0.1.0',
+  '@diamir/nestjs-maintenance': '0.1.0',
+  '@fastify/static': '8.2.0',
+  '@fastify/swagger': '9.5.1',
+  '@nestjs/platform-fastify': '11.1.6',
+  '@nestjs/swagger': '11.2.0'
 }
 
 export const MICROSERVICE_DEPENDENCIES = {
-  '@nestjs/microservices': '^11',
-  '@webundsoehne/nestjs-util-microservices': '^3',
-  'amqp-connection-manager': '^4.1.7',
-  amqplib: '^0.10.7'
+  '@diamir/nestjs-microservices': '0.1.0',
+  '@nestjs/microservices': '11.1.6',
+  'amqp-connection-manager': '4.1.14',
+  amqplib: '0.10.9'
 }
 
 export const COMMAND_DEPENDENCIES = {
-  'nest-commander': '^3'
+  'nest-commander': '3.20.0'
 }
 
 export const BACKGROUND_TASK_DEPENDENCIES = {
-  '@nestjs/schedule': '^6'
+  '@diamir/nestjs-maintenance': '0.1.0',
+  '@diamir/nestjs-retry': '0.1.0',
+  '@nestjs/schedule': '6.0.1'
 }
-/* eslint-enable */
-
-export const IMPLICIT_DEPENDENCIES = [
-  '@fastify/static',
-  '@fastify/swagger',
-  'amqp-connection-manager',
-  'amqplib',
-  'class-transformer',
-  'class-validator',
-  'reflect-metadata',
-  'rxjs'
-]

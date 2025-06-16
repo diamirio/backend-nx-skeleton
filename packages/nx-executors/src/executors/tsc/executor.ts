@@ -1,6 +1,6 @@
+import { join } from 'node:path'
 import type { ExecutorContext } from '@nx/devkit'
 import { tscExecutor as nxTscExecutor } from '@nx/js/src/executors/tsc/tsc.impl'
-import { join } from 'node:path'
 import { fileExists, readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
 import type { ExecutorResult } from '../inteface'
@@ -30,7 +30,9 @@ export default async function (options: TscExecutorSchema, context: ExecutorCont
         )
       )
       .filter(({ glob, input }) => {
-        return !options.assets.find((asset) => typeof asset !== 'string' && asset.glob === glob && asset.input === input)
+        return !options.assets.find(
+          (asset) => typeof asset !== 'string' && asset.glob === glob && asset.input === input
+        )
       })
 
     options.assets = options.assets.concat(defaultAssets)

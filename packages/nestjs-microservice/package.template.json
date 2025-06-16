@@ -1,0 +1,10 @@
+{
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": "catalog:nestjs",
+    "@nestjs/core": "catalog:nestjs",
+    "@nestjs/microservices": "catalog:nestjs",
+    "rxjs": "catalog:"
+  },
+  "peerDependenciesMeta": {}
+}

@@ -1,9 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { ModuleRef } from '@nestjs/core'
 
-import { SEEDER_SEEDS } from '@constants/injection.constants'
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import type { Seeds } from '@interfaces/seeds.interface'
+import { SEEDER_SEEDS } from '../constants'
+import { Seeds } from '../interfaces/seeds.interface'
 
 /**
  * Seeder service to run all the seeds that has been passed to it.
@@ -12,22 +11,25 @@ import type { Seeds } from '@interfaces/seeds.interface'
 export class SeederService {
   protected readonly logger = new Logger(this.constructor.name)
 
-  constructor (@Inject(SEEDER_SEEDS) protected readonly seeds: Seeds, private moduleRef: ModuleRef) {}
+  constructor(
+    @Inject(SEEDER_SEEDS) protected readonly seeds: Seeds,
+    private readonly moduleRef: ModuleRef
+  ) {}
 
   /**
    * Run all the seeds.
    */
-  async init (): Promise<void> {
+  async init(): Promise<void> {
     for (const [name, Seed] of Object.entries(this.seeds)) {
       const seed = this.moduleRef.get(Seed)
 
-      this.logger.log(['Running seed: %s', name])
+      this.logger.log(`   Running seed: ${name}`)
 
       await seed.run()
 
-      this.logger.log(['Finished seed: %s', name])
+      this.logger.log(`   Finished seed: ${name}`)
     }
 
-    this.logger.log('Finished seeding.')
+    this.logger.log('Finished seeding')
   }
 }

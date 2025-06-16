@@ -1,17 +1,45 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { readProjectConfiguration, addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson } from '@nx/devkit'
+import {
+  addDependenciesToPackageJson,
+  addProjectConfiguration,
+  formatFiles,
+  names,
+  OverwriteStrategy,
+  output,
+  readNxJson,
+  readProjectConfiguration
+} from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { join } from 'node:path'
 import { readJson, updateJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
 import { componentMetaData } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
-import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_SERVICE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
-import { buildMessageQueueUrl, getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY, MESSAGE_QUEUE_URL_ENV_VAR } from '../../constant/microservice-provider/config'
-import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
+import {
+  DEPENDENCIES,
+  DEV_DEPENDENCIES,
+  DOCKER_SERVICE,
+  DOCKER_SERVICE_NAME
+} from '../../constant/microservice-provider'
+import {
+  buildMessageQueueUrl,
+  getMessageQueueConfig,
+  MESSAGE_QUEUE_CONFIG_KEY,
+  MESSAGE_QUEUE_URL_ENV_VAR
+} from '../../constant/microservice-provider/config'
+import {
+  addImport,
+  addModuleDecoratorImport,
+  applyTasks,
+  applyTemplateFactory,
+  promptProjectMultiselect,
+  updateConfigFiles,
+  updateSourceFile,
+  updateYaml
+} from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
 interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
@@ -23,7 +51,10 @@ interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
   projectRoot: string
 }
 
-export default async function microserviceProviderGenerator (tree: Tree, options: MicroserviceProviderGeneratorSchema): Promise<GeneratorCallback> {
+export default async function microserviceProviderGenerator(
+  tree: Tree,
+  options: MicroserviceProviderGeneratorSchema
+): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   const tasks: GeneratorCallback[] = []
@@ -69,7 +100,7 @@ export default async function microserviceProviderGenerator (tree: Tree, options
 
   updateJson(tree, 'nx.json', (content) => {
     content.integration = {
-      ...content.integration ?? {},
+      ...(content.integration ?? {}),
       msp: {
         projectRoot: generateOptions.projectRoot,
         importPath: generateOptions.importPath
@@ -125,10 +156,13 @@ export default async function microserviceProviderGenerator (tree: Tree, options
   return applyTasks(tasks)
 }
 
-async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
+async function updateConfigAndApplication(tree: Tree, options: GenerateOptions): Promise<void> {
   // prompt, if not called by application generator, which applications should be updated
   if (!options.updateApplications?.length) {
-    options.updateApplications = await promptProjectMultiselect(tree, 'Please select the project which should include the MSP:')
+    options.updateApplications = await promptProjectMultiselect(
+      tree,
+      'Please select the project which should include the MSP:'
+    )
   }
 
   if (options.updateApplications?.length) {
@@ -143,7 +177,13 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
       const project = readProjectConfiguration(tree, application)
 
       // update config files
-      updateConfigFiles(tree, project.root, MESSAGE_QUEUE_CONFIG_KEY, messageQueueConfig.defaultConfig, messageQueueConfig.environmentConfig)
+      updateConfigFiles(
+        tree,
+        project.root,
+        MESSAGE_QUEUE_CONFIG_KEY,
+        messageQueueConfig.defaultConfig,
+        messageQueueConfig.environmentConfig
+      )
 
       if (!options.skipModuleImport) {
         const projectJson = readJson(tree, join(project.root, 'project.json'))
@@ -153,12 +193,16 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
           const componentMeta = componentMetaData[component]
 
           if (componentMeta) {
-            updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
-              addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
-              addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
+            updateSourceFile(
+              tree,
+              join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`),
+              (file) => {
+                addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
+                addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
 
-              return file
-            })
+                return file
+              }
+            )
           }
         }
       }

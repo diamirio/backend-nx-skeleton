@@ -12,15 +12,15 @@ export interface CacheInterface {
   targetsCache: Record<string, CreateNodesResult['projects']>
 }
 
-export function readTargetsCache (cachePath: string): CacheInterface['targetsCache'] {
+export function readTargetsCache(cachePath: string): CacheInterface['targetsCache'] {
   return process.env.NX_CACHE_PROJECT_GRAPH !== 'false' && existsSync(cachePath) ? readJsonFile(cachePath) : {}
 }
 
-export function writeTargetsToCache (cachePath: string, results: CacheInterface['targetsCache']): void {
+export function writeTargetsToCache(cachePath: string, results: CacheInterface['targetsCache']): void {
   writeJsonFile(cachePath, results)
 }
 
-export function getCache<O extends object> (options: O, prefix: string): CacheInterface {
+export function getCache<O extends object>(options: O, prefix: string): CacheInterface {
   const optionsHash = hashObject(options)
   const cachePath = join(workspaceDataDirectory, `${prefix}-${optionsHash}.hash`)
   const targetsCache = readTargetsCache(cachePath)

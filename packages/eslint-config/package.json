@@ -1,50 +1,26 @@
 {
-  "name": "@webundsoehne/eslint-config",
-  "version": "1.0.0",
-  "description": "Eslint configuration for Web&Söhne applications.",
-  "main": "index.js",
+  "name": "@diamir/eslint-config",
+  "version": "0.1.0-beta.0",
+  "description": "",
+  "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
-  "author": "Backend <backend@webundsoehne.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "lint": "prettier --loglevel warn --write ./**/*.js && eslint --ext .ts,.js,.tsx,.jsx --fix ./",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx ./",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
+  "keywords": [],
+  "main": "./src/index.js",
+  "dependencies": {
+    "@stylistic/eslint-plugin": "5.4.0",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import-x": "4.16.1",
+    "typescript-eslint": "8.44.1"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">= 5",
-    "@typescript-eslint/parser": ">= 5",
-    "eslint": ">= 7.5.0",
-    "eslint-config-react": ">= 1",
-    "eslint-plugin-import": ">= 2",
-    "eslint-plugin-react-hooks": ">= 4"
+    "eslint": ">= 9.0.0"
   },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "load-tsconfig": "^0.2.3"
-  },
-  "devDependencies": {
-    "eslint-config-react": "^1.1.7",
-    "eslint-plugin-import": "^2.24.1",
-    "eslint-plugin-react-hooks": "^4.6.0"
+  "peerDependenciesMeta": {},
+  "engines": {
+    "node": ">= 20"
   }
 }

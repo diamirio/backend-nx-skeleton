@@ -1,2 +1,0 @@
-image: mongo:7
-command: --directoryperdb

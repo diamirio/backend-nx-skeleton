@@ -1,20 +1,12 @@
-# Compiled Output
-**/node_modules
-**/dist
-**/tsconfig*.tsbuildinfo*
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Docker stuff
-/volumes
+# compiled output
+dist
+tmp
+out-tsc
 
-# Logs
-logs
-/**/*.log
-/**/*-debug.log*
-/**/*-error.log*
-/.nyc_output
-
-# OS
-.DS_Store
+# dependencies
+node_modules
 
 # IDEs and editors
 /.idea
@@ -32,11 +24,32 @@ logs
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# tsbuild
-tsconfig.tsbuildinfo
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.nx/cache
+.nx/workspace-data
 
 # Node Package Manager
-#.npm
-#**/package-lock.json
-**/.swc
-*/**/config/local*
+.npm
+.pnpm-store
+
+# enviroment files
+.*env*
+
+# File Uploads
+uploads
+
+# Config
+**/config/local*

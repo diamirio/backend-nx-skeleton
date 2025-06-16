@@ -1,11 +1,5 @@
 {
-  "extends": "../../tsconfig",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "src",
-    "baseUrl": "src",
-    "paths": {}
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/files", "**/templates"]
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*.ts"],
+  "references": [{ "path": "./tsconfig.build.json" }]
 }
