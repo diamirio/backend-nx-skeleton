@@ -3,7 +3,7 @@ import type { MicroserviceOptions } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices'
 
 import { MicroservicesModule } from './microservice.module'
-import { MessageQueues } from '<%- msp.importPath -%>'
+<%# MessageQueue import added by generator %>
 import { ConfigService, LoggerService } from '@webundsoehne/nestjs-util'
 
 export async function createApplication (): Promise<void> {

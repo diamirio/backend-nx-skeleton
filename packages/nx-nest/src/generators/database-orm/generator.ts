@@ -18,7 +18,7 @@ import {
   DOCKER_DB_VOLUME,
   DOCKER_SERVICE_NAME
 } from '../../constant/database-orm'
-import { DATABASE_CONFIG_KEY, getDatabaseConfig } from '../../constant/database-orm/config'
+import { DATABASE_CONFIG_KEY, DATABASE_HOST_ENV_VAR, getDatabaseConfig } from '../../constant/database-orm/config'
 import {
   addImport,
   addModuleDecoratorImport,
@@ -167,15 +167,28 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     }
 
     if (tree.exists('docker-compose.yml')) {
+      // depends-on
       updateYaml(tree, 'docker-compose.yml', (content) => {
         if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
           content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
         }
 
-        const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+        const dependsOn = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
 
         if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
           content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+        }
+      })
+      // host env-var
+      updateYaml(tree, 'docker-compose.yml', (content) => {
+        if (!content.hasIn(['services', NX_SERVICE_NAME, 'environment'])) {
+          content.addIn(['services', NX_SERVICE_NAME], { key: 'environment', value: new YAMLMap() })
+        }
+
+        const environment = content.getIn(['services', NX_SERVICE_NAME, 'environment']) as YAMLMap
+
+        if (!environment.has(DATABASE_HOST_ENV_VAR)) {
+          environment.add({ key: DATABASE_HOST_ENV_VAR, value: DOCKER_SERVICE_NAME })
         }
       })
     }
@@ -205,13 +218,13 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
   if (options.updateApplications?.length) {
     output.log({ title: '[Database] Updating applications', bodyLines: options.updateApplications })
 
+    const databaseConfig = getDatabaseConfig(options)
+
+    if (!databaseConfig) {
+      return
+    }
+
     for (const application of options.updateApplications) {
-      const databaseConfig = getDatabaseConfig(options)
-
-      if (!databaseConfig) {
-        break
-      }
-
       const project = readProjectConfiguration(tree, application)
 
       // update config files

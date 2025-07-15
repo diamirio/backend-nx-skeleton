@@ -3,4 +3,5 @@ export interface MicroserviceProviderGeneratorSchema {
   importPath?: string
   skipPackageJson: boolean
   updateApplications?: string[]
+  skipModuleImport?: boolean
 }

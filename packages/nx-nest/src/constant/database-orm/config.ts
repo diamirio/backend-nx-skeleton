@@ -9,6 +9,7 @@ interface DatabaseConfig {
 }
 
 export const DATABASE_CONFIG_KEY = 'database'
+export const DATABASE_HOST_ENV_VAR = 'DATABASE_HOST'
 
 export function getDatabaseConfig (options: { database?: Database, orm?: DatabaseOrm }): DatabaseConfig {
   const environmentConfig = getEnvironmentConfig()
@@ -37,12 +38,12 @@ function getTypeormConfig (database: Database): Record<string, any> {
   const port = database === Database.MYSQL ? 3306 : database === Database.POSTGRES ? 5432 : '# @todo: set port'
 
   return {
+    host: 'localhost',
+    port,
     database: 'db',
     username: 'user',
     password: 'secret',
-    host: 'db',
     type,
-    port,
     synchronize: false,
     cache: false,
     keepConnectionAlive: true,
@@ -52,7 +53,7 @@ function getTypeormConfig (database: Database): Record<string, any> {
 
 function getMongooseConfig (): Record<string, any> {
   return {
-    host: 'db',
+    host: 'localhost',
     port: 27017,
     database: 'db',
     username: 'user',
@@ -68,7 +69,7 @@ function getMongooseConfig (): Record<string, any> {
 
 function getEnvironmentConfig (): Record<string, any> {
   return {
-    host: 'DATABASE_HOST',
+    host: DATABASE_HOST_ENV_VAR,
     port: 'DATABASE_PORT',
     database: 'DATABASE_NAME',
     username: 'DATABASE_USER',

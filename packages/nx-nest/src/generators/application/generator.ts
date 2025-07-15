@@ -152,7 +152,7 @@ function validateComponents (options: GenerateOptions): void {
   options.components = validatedComponents
 }
 
-async function generateDatabaseLib (tree: Tree, options: GenerateOptions, context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
+async function generateDatabaseLib (tree: Tree, options: GenerateOptions, _context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
   if (options.database) {
     output.log({ title: '[Application] Setup database-orm util library ...' })
 
@@ -167,60 +167,56 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, contex
     }
 
     tasks.push(databaseLib)
-
-    context.orm = (readNxJson(tree) as any)?.integration?.orm
-    context.database = context.orm.system
   }
 }
 
-async function generateMspLib (tree: Tree, options: GenerateOptions, context, tasks: GeneratorCallback[]): Promise<void> {
+async function generateMspLib (tree: Tree, options: GenerateOptions, _context, tasks: GeneratorCallback[]): Promise<void> {
   if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
-    const microserviceProvider = (readNxJson(tree) as any)?.integration?.msp
+    output.log({ title: '[Application] Setup microservice-provider util library ...' })
 
-    if (!microserviceProvider) {
-      output.log({ title: '[Application] Setup microservice-provider util library ...' })
-
-      const mspLib = await microserviceProviderGenerator(tree, {
-        name: 'microservice-provider',
-        skipPackageJson: options.skipPackageJson,
-        updateApplications: [options.projectName]
-      })
-
-      if (!mspLib) {
-        return
-      }
-
-      tasks.push(mspLib)
-    }
-
-    context.msp = (readNxJson(tree) as any)?.integration?.msp
-  }
-}
-
-function generateMicroserviceServer (tree: Tree, options: ApplicationGeneratorSchema, context, applyTemplate): void {
-  if (options.components?.includes(Component.MICROSERVICE)) {
-    const mspLib = (readNxJson(tree) as any)?.integration?.msp.projectRoot
+    const mspLib = await microserviceProviderGenerator(tree, {
+      name: 'microservice-provider',
+      skipPackageJson: options.skipPackageJson,
+      updateApplications: [options.projectName],
+      skipModuleImport: !options.microserviceProvider
+    })
 
     if (!mspLib) {
+      return
+    }
+
+    tasks.push(mspLib)
+  }
+}
+
+function generateMicroserviceServer (tree: Tree, options: GenerateOptions, context, applyTemplate): void {
+  if (options.components?.includes(Component.MICROSERVICE)) {
+    const mspDetails = (readNxJson(tree) as any)?.integration?.msp
+
+    if (!mspDetails?.projectRoot || !mspDetails?.importPath) {
       output.warn({
         title: '[Application] Cannot update Microservice Provider',
         bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
       })
     } else {
-      applyTemplate(['files', 'microservice-queue'], context, join(mspLib, 'src'))
+      applyTemplate(['files', 'microservice-queue'], context, join(mspDetails.projectRoot, 'src'))
 
-      updateSourceFile(tree, join(mspLib, 'src', 'interfaces', 'index.ts'), (file) => {
+      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'interfaces', 'index.ts'), (file) => {
         addIndexExport(file, `./${context.projectNames.fileName}.interface`)
       })
-      updateSourceFile(tree, join(mspLib, 'src', 'patterns', 'index.ts'), (file) => {
+      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'patterns', 'index.ts'), (file) => {
         addIndexExport(file, `./${context.projectNames.fileName}.pattern`)
       })
-      updateSourceFile(tree, join(mspLib, 'src', 'microservice-provider.constants.ts'), (file) => {
+      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'microservice-provider.constants.ts'), (file) => {
         addEnumMember(file, 'MessageQueues', context.projectNames.constantName, context.projectNames.constantName)
         addImport(file, `${context.projectNames.className}Pattern`, './patterns')
         addClassProperty(file, 'MessageQueuePatterns', `[MessageQueues.${context.projectNames.constantName}]`, `${context.projectNames.className}Pattern`)
         addImport(file, `${context.projectNames.className}Message`, './interfaces')
         addClassProperty(file, 'MessageQueueMap', `[MessageQueues.${context.projectNames.constantName}]`, `${context.projectNames.className}Message`)
+      })
+
+      updateSourceFile(tree, join(options.projectRoot, 'src', 'microservice', 'init.ts'), (file) => {
+        addImport(file, 'MessageQueues', mspDetails.importPath)
       })
     }
   }

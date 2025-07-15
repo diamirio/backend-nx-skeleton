@@ -3,6 +3,7 @@ import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
 
 import * as modules from './modules'
 import { ConfigService, GlobalExceptionFilter, ExtendedValidationPipe } from '@webundsoehne/nestjs-util'
+import { RpcGlobalExceptionFilter } from '@webundsoehne/nestjs-util-microservices'
 
 @Module({
   providers: [
