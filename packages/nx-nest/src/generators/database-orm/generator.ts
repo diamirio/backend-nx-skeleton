@@ -1,4 +1,4 @@
-import type { GeneratorCallback, Tree } from '@nx/devkit'
+import type { GeneratorCallback, ProjectConfiguration, Tree } from '@nx/devkit'
 import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, readProjectConfiguration, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
-import { componentMetaData, Database, DatabaseOrm } from '../../constant'
+import { Component, componentMetaData, Database, DatabaseOrm } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
 import {
   DEPENDENCIES_MONGOOSE,
@@ -120,7 +120,23 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
   }
 
-  await updateConfigAndApplication(tree, generateOptions)
+  const projects = await updateConfigAndApplication(tree, generateOptions)
+
+  // add migration-task util if not exists and bg-task project was updated
+  const bgTaskProject = projects.find((p) => ((p as any)?.integration?.nestjs?.components ?? []).includes(Component.BG_TASK))
+
+  if (bgTaskProject) {
+    const sourceRoot = join(generateOptions.projectRoot, 'src')
+    const targetPath = join(sourceRoot, 'util', 'migration-task')
+
+    if (!tree.exists(targetPath)) {
+      applyTemplate(['files', 'migration-task'], generateOptions, targetPath)
+
+      updateSourceFile(tree, join(sourceRoot, 'util', 'index.ts'), (file) => {
+        file.insertText(0, '// migration-task module is imported in bg-task via full path to folder\n\n')
+      })
+    }
+  }
 
   await formatFiles(tree)
 
@@ -209,7 +225,9 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
   }
 }
 
-async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
+async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<ProjectConfiguration[]> {
+  const updatedProjects = []
+
   // prompt, if not called by application generator, which applications should be updated
   if (!options.updateApplications?.length) {
     options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.orm}:`)
@@ -226,6 +244,8 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
 
     for (const application of options.updateApplications) {
       const project = readProjectConfiguration(tree, application)
+
+      updatedProjects.push(project)
 
       // update config files
       updateConfigFiles(tree, project.root, DATABASE_CONFIG_KEY, databaseConfig.defaultConfig, databaseConfig.environmentConfig)
@@ -247,4 +267,6 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
       }
     }
   }
+
+  return updatedProjects
 }
