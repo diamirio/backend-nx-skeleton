@@ -1,4 +1,4 @@
-import type { GeneratorCallback, Tree } from '@nx/devkit'
+import type { GeneratorCallback, ProjectConfiguration, Tree } from '@nx/devkit'
 import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, names, output, OverwriteStrategy, readNxJson, readProjectConfiguration, updateJson } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import { readJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
-import { componentMetaData, Database, DatabaseOrm } from '../../constant'
+import { Component, componentMetaData, Database, DatabaseOrm } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
 import {
   DEPENDENCIES_MONGOOSE,
@@ -18,7 +18,7 @@ import {
   DOCKER_DB_VOLUME,
   DOCKER_SERVICE_NAME
 } from '../../constant/database-orm'
-import { DATABASE_CONFIG_KEY, getDatabaseConfig } from '../../constant/database-orm/config'
+import { DATABASE_CONFIG_KEY, DATABASE_HOST_ENV_VAR, getDatabaseConfig } from '../../constant/database-orm/config'
 import {
   addImport,
   addModuleDecoratorImport,
@@ -120,7 +120,23 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
   }
 
-  await updateConfigAndApplication(tree, generateOptions)
+  const projects = await updateConfigAndApplication(tree, generateOptions)
+
+  // add migration-task util if not exists and bg-task project was updated
+  const bgTaskProject = projects.find((p) => ((p as any)?.integration?.nestjs?.components ?? []).includes(Component.BG_TASK))
+
+  if (bgTaskProject) {
+    const sourceRoot = join(generateOptions.projectRoot, 'src')
+    const targetPath = join(sourceRoot, 'util', 'migration-task')
+
+    if (!tree.exists(targetPath)) {
+      applyTemplate(['files', 'migration-task'], generateOptions, targetPath)
+
+      updateSourceFile(tree, join(sourceRoot, 'util', 'index.ts'), (file) => {
+        file.insertText(0, '// migration-task module is imported in bg-task via full path to folder\n\n')
+      })
+    }
+  }
 
   await formatFiles(tree)
 
@@ -167,15 +183,28 @@ export default async function databaseOrmGenerator (tree: Tree, options: Databas
     }
 
     if (tree.exists('docker-compose.yml')) {
+      // depends-on
       updateYaml(tree, 'docker-compose.yml', (content) => {
         if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
           content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
         }
 
-        const dependsOn: YAMLSeq = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
+        const dependsOn = content.getIn(['services', NX_SERVICE_NAME, 'depends_on']) as YAMLSeq
 
         if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
           content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+        }
+      })
+      // host env-var
+      updateYaml(tree, 'docker-compose.yml', (content) => {
+        if (!content.hasIn(['services', NX_SERVICE_NAME, 'environment'])) {
+          content.addIn(['services', NX_SERVICE_NAME], { key: 'environment', value: new YAMLMap() })
+        }
+
+        const environment = content.getIn(['services', NX_SERVICE_NAME, 'environment']) as YAMLMap
+
+        if (!environment.has(DATABASE_HOST_ENV_VAR)) {
+          environment.add({ key: DATABASE_HOST_ENV_VAR, value: DOCKER_SERVICE_NAME })
         }
       })
     }
@@ -196,7 +225,9 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
   }
 }
 
-async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<void> {
+async function updateConfigAndApplication (tree: Tree, options: GenerateOptions): Promise<ProjectConfiguration[]> {
+  const updatedProjects = []
+
   // prompt, if not called by application generator, which applications should be updated
   if (!options.updateApplications?.length) {
     options.updateApplications = await promptProjectMultiselect(tree, `Please select the project which should include ${options.orm}:`)
@@ -205,14 +236,16 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
   if (options.updateApplications?.length) {
     output.log({ title: '[Database] Updating applications', bodyLines: options.updateApplications })
 
+    const databaseConfig = getDatabaseConfig(options)
+
+    if (!databaseConfig) {
+      return
+    }
+
     for (const application of options.updateApplications) {
-      const databaseConfig = getDatabaseConfig(options)
-
-      if (!databaseConfig) {
-        break
-      }
-
       const project = readProjectConfiguration(tree, application)
+
+      updatedProjects.push(project)
 
       // update config files
       updateConfigFiles(tree, project.root, DATABASE_CONFIG_KEY, databaseConfig.defaultConfig, databaseConfig.environmentConfig)
@@ -234,4 +267,6 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
       }
     }
   }
+
+  return updatedProjects
 }

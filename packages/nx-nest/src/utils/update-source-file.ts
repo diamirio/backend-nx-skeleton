@@ -52,13 +52,13 @@ export function addIndexExport (file: SourceFile, modulePath: string): void {
   }
 }
 
-export function addExport (file: SourceFile, importValue: string, importPath: string): void {
-  const exportNode = file.getExportDeclaration(importPath)
+export function addExport (file: SourceFile, exportValue: string, exportPath: string): void {
+  const exportNode = file.getExportDeclaration(exportPath)
 
   if (!exportNode) {
-    file.addExportDeclaration({ moduleSpecifier: importPath, namedExports: [importValue] })
-  } else if (!exportNode.getNamedExports().find((i) => i.getName() === importValue)) {
-    exportNode.addNamedExport(importValue)
+    file.addExportDeclaration({ moduleSpecifier: exportPath, namedExports: [exportValue] })
+  } else if (!exportNode.getNamedExports().find((i) => i.getName() === exportValue)) {
+    exportNode.addNamedExport(exportValue)
   }
 }
 

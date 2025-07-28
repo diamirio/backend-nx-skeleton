@@ -21,8 +21,8 @@ export const componentMetaData = {
     folder: 'command'
   },
   [Component.MICROSERVICE]: {
-    service: 'microservice_server',
-    constant: 'MICROSERVICE_SERVER',
+    service: 'microservice',
+    constant: 'MICROSERVICE',
     className: 'Microservice',
     folder: 'microservice'
   },

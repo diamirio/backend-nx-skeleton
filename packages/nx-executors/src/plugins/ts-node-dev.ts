@@ -34,7 +34,7 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   }
 
   private guessNodeService (components: string[]): string {
-    for (const service of ['server', 'bgtask', 'microservice-server']) {
+    for (const service of ['server', 'bgtask', 'microservice']) {
       if (components.includes(service)) {
         return service
       }

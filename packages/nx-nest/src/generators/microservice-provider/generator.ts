@@ -10,7 +10,7 @@ import { YAMLMap, YAMLSeq } from 'yaml'
 import { componentMetaData } from '../../constant'
 import { SERVICE_NAME as NX_SERVICE_NAME } from '../../constant/application'
 import { DEPENDENCIES, DEV_DEPENDENCIES, DOCKER_SERVICE, DOCKER_SERVICE_NAME } from '../../constant/microservice-provider'
-import { getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY } from '../../constant/microservice-provider/config'
+import { buildMessageQueueUrl, getMessageQueueConfig, MESSAGE_QUEUE_CONFIG_KEY, MESSAGE_QUEUE_URL_ENV_VAR } from '../../constant/microservice-provider/config'
 import { addImport, addModuleDecoratorImport, applyTasks, applyTemplateFactory, promptProjectMultiselect, updateConfigFiles, updateSourceFile, updateYaml } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
@@ -92,6 +92,7 @@ export default async function microserviceProviderGenerator (tree: Tree, options
   }
 
   if (tree.exists('docker-compose.yml')) {
+    // depends-on
     updateYaml(tree, 'docker-compose.yml', (content) => {
       if (!content.hasIn(['services', NX_SERVICE_NAME, 'depends_on'])) {
         content.addIn(['services', NX_SERVICE_NAME], { key: 'depends_on', value: new YAMLSeq() })
@@ -101,6 +102,18 @@ export default async function microserviceProviderGenerator (tree: Tree, options
 
       if (!dependsOn.items.find((item: any) => item.value === DOCKER_SERVICE_NAME)) {
         content.addIn(['services', NX_SERVICE_NAME, 'depends_on'], DOCKER_SERVICE_NAME)
+      }
+    })
+    // urls env-var
+    updateYaml(tree, 'docker-compose.yml', (content) => {
+      if (!content.hasIn(['services', NX_SERVICE_NAME, 'environment'])) {
+        content.addIn(['services', NX_SERVICE_NAME], { key: 'environment', value: new YAMLMap() })
+      }
+
+      const environment = content.getIn(['services', NX_SERVICE_NAME, 'environment']) as YAMLMap
+
+      if (!environment.has(MESSAGE_QUEUE_URL_ENV_VAR)) {
+        environment.add({ key: MESSAGE_QUEUE_URL_ENV_VAR, value: [buildMessageQueueUrl(DOCKER_SERVICE_NAME)] })
       }
     })
   }
@@ -131,19 +144,22 @@ async function updateConfigAndApplication (tree: Tree, options: GenerateOptions)
 
       // update config files
       updateConfigFiles(tree, project.root, MESSAGE_QUEUE_CONFIG_KEY, messageQueueConfig.defaultConfig, messageQueueConfig.environmentConfig)
-      const projectJson = readJson(tree, join(project.root, 'project.json'))
 
-      // update application module
-      for (const component of projectJson?.integration?.nestjs?.components ?? []) {
-        const componentMeta = componentMetaData[component]
+      if (!options.skipModuleImport) {
+        const projectJson = readJson(tree, join(project.root, 'project.json'))
 
-        if (componentMeta) {
-          updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
-            addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
-            addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
+        // update application module
+        for (const component of projectJson?.integration?.nestjs?.components ?? []) {
+          const componentMeta = componentMetaData[component]
 
-            return file
-          })
+          if (componentMeta) {
+            updateSourceFile(tree, join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`), (file) => {
+              addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
+              addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
+
+              return file
+            })
+          }
         }
       }
     }

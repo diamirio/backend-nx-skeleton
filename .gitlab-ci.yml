@@ -11,8 +11,8 @@ cache:
     - packages/*/node_modules
 
 variables:
-  NODE_VERSION: 18-alpine
-  NODE_PACKAGE_MANAGER: yarn
+  NODE_VERSION: 20-alpine
+  NODE_PACKAGE_MANAGER: npm
 
 include:
   - project: bdsm/gitlab-pipes
