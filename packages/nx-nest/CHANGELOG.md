@@ -1,3 +1,11 @@
+# @webundsoehne/nx-nest [6.0.0-beta.15](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.14...@webundsoehne/nx-nest@6.0.0-beta.15) (2025-08-05)
+
+
+### Features
+
+* **nx-nest:** database migration-task module ([3049bfb](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3049bfb484a16455aa650388a3d241771e844b94))
+* **nx-nest:** microservice server generation, docker-compose env-vars ([3d387e6](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3d387e691bdf86144268dadc6c29c296ff375c50))
+
 # @webundsoehne/nx-nest [6.0.0-beta.14](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-nest@6.0.0-beta.13...@webundsoehne/nx-nest@6.0.0-beta.14) (2025-06-11)
 
 
