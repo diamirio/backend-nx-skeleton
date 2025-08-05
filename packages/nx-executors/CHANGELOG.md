@@ -1,3 +1,10 @@
+# @webundsoehne/nx-executors [1.0.0-beta.11](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.10...@webundsoehne/nx-executors@1.0.0-beta.11) (2025-08-05)
+
+
+### Features
+
+* **nx-nest:** microservice server generation, docker-compose env-vars ([3d387e6](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3d387e691bdf86144268dadc6c29c296ff375c50))
+
 # @webundsoehne/nx-executors [1.0.0-beta.10](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-executors@1.0.0-beta.9...@webundsoehne/nx-executors@1.0.0-beta.10) (2025-06-11)
 
 
