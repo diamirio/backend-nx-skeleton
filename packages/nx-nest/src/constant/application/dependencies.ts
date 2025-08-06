@@ -12,7 +12,7 @@ export const DEPENDENCIES = {
 
 export const DEV_DEPENDENCIES = {
   '@nestjs/testing': '^11',
-  '@webundsoehne/nx-executors': '^1.0.1'
+  '@webundsoehne/nx-executors': '^2.0.0'
 }
 
 export const SERVER_DEPENDENCIES = {
