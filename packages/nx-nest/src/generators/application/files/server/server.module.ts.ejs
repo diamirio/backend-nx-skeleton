@@ -1,0 +1,59 @@
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+
+import * as modules from './modules'
+import {
+  ConfigService,
+  BadRequestExceptionFilter,
+  GlobalExceptionFilter,
+  MaintenanceMiddleware,
+  MaintenanceModule,
+  SetApiInfoHeaderMiddleware,
+  setEnvironmentVariables,
+  ExtendedValidationPipe
+} from '@webundsoehne/nestjs-util'
+import {
+  CacheLifetimeHelperInterceptor,
+  InternalModule,
+  RequestProfilerInterceptor,
+} from '@webundsoehne/nestjs-util-restful'
+
+@Module({
+  providers: [
+    ConfigService,
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter
+    },
+    {
+      provide: APP_FILTER,
+      useClass: BadRequestExceptionFilter
+    },
+    {
+      provide: APP_PIPE,
+      useClass: ExtendedValidationPipe
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheLifetimeHelperInterceptor
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestProfilerInterceptor
+    }
+  ],
+  imports: [
+    InternalModule,
+    MaintenanceModule,
+    ...Object.values(modules)
+  ]
+})
+export class ServerModule implements NestModule {
+  async configure (consumer: MiddlewareConsumer): Promise<void> {
+    await setEnvironmentVariables()
+
+    consumer
+      .apply(MaintenanceMiddleware, SetApiInfoHeaderMiddleware)
+      .forRoutes({ path: '(.*)', method: RequestMethod.ALL })
+  }
+}

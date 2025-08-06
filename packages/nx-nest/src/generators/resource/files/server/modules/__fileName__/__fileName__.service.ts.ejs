@@ -1,0 +1,12 @@
+import { Injectable, Logger } from '@nestjs/common'
+
+@Injectable()
+export class <%- resourceNames.className -%>Service {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  constructor () {}
+
+  async default (): Promise<string> {
+    return 'Hello World!'
+  }
+}

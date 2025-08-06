@@ -1,0 +1,39 @@
+{
+  "schematics": {
+    "migrate-to-20-and-docker-compose": {
+      "cli": "nx",
+      "version": "6.0.0-beta.6",
+      "description": "Nx 20, Docker-Compose setup",
+      "factory": "dist/migrations/migrate-to-nx-20-and-docker-compose"
+    },
+    "update-db-migration-task": {
+      "cli": "nx",
+      "version": "6.0.0-beta.9",
+      "description": "Db migration task changes",
+      "factory": "dist/migrations/updated-db-migration-task"
+    }
+  },
+  "packageJsonUpdates": {
+    "migrate-to-20-and-docker-compose": {
+      "version": "6.0.0-beta.6",
+      "packages": {
+        "nx": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/eslint": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/eslint-plugin": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nx/workspace": {
+          "version": "^20.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}

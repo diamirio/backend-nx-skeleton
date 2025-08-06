@@ -1,0 +1,50 @@
+{
+  "$id": "nest-resource",
+  "cli": "nx",
+  "title": "NestJs Resource",
+  "description": "Add a resource folder to a project",
+  "type": "object",
+  "properties": {
+    "component": {
+      "type": "string",
+      "aliases": ["c"],
+      "description": "Component resource",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": {
+        "message": "Please select which component-resource you want to generate:",
+        "type": "list",
+        "items": [
+          { "value": "server", "label": "Server" },
+          { "value": "command", "label": "Command" },
+          { "value": "bgtask", "label": "Background Task" },
+          { "value": "microservice", "label": "Microservice Server" },
+          { "value": "seeder", "label": "Seeder" }
+        ]
+      }
+    },
+    "name": {
+      "type": "string",
+      "aliases": ["n"],
+      "description": "Resource name",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What name would you like to use for the resource?",
+      "pattern": "(?:^@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*\\/[a-zA-Z0-9-~][a-zA-Z0-9-._~]*|^[a-zA-Z][^:]*)$"
+    },
+    "project": {
+      "type": "string",
+      "aliases": ["p"],
+      "description": "Project name",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    },
+    "required": ["name", "component"]
+  }
+}

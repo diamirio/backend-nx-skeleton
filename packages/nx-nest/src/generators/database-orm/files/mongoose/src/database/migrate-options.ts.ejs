@@ -1,0 +1,27 @@
+import { join } from 'node:path'
+
+import { getDatabaseOptions } from './database-options'
+import { ConfigService } from '@webundsoehne/nestjs-util'
+
+export function generateMongooseMigrateConfig (): any {
+  const migrationOptions = ConfigService.get('database.migration')
+  const [plainUrl, { user, pass, ...options }] = getDatabaseOptions()
+  const migrationsDir = join(__dirname, '../migration')
+
+  let url = plainUrl
+
+  if (user && pass) {
+    url = `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(pass)}@${plainUrl.slice(10)}`
+  }
+
+  return {
+    mongodb: {
+      url,
+      options
+    },
+    ...migrationOptions,
+    migrationsDir
+  }
+}
+
+module.exports = generateMongooseMigrateConfig()

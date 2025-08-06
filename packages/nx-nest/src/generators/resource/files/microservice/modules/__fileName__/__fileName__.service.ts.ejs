@@ -1,0 +1,16 @@
+import { Injectable, Logger } from '@nestjs/common'
+
+import { <%- projectNames.className %>Pattern, MessageQueues, MicroserviceRequest, MicroserviceResponse } from '@<%- scope %>/microservice-provider'
+
+@Injectable()
+export class <%- resourceNames.className -%>Microservice {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  constructor() {}
+
+  async default (
+    options: MicroserviceRequest<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.<%- resourceNames.constantName -%>>
+  ): Promise<MicroserviceResponse<MessageQueues.<%- projectNames.constantName %>, <%- projectNames.className %>Pattern.<%- resourceNames.constantName -%>>> {
+    return 'Hello world.'
+  }
+}

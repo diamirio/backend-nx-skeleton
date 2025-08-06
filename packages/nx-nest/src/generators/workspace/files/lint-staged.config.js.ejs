@@ -1,0 +1,6 @@
+module.exports = {
+  // only fix changed files
+  '*.{js,ts}': 'eslint --fix',
+  // on eslintrc change fix the whole project (without appending files)
+  '.eslintrc.json': () => 'npm run lint'
+}

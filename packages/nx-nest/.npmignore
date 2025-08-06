@@ -1,6 +1,5 @@
 **
 !dist/
 !dist/**
-!builders.json
-!schematics.json
-!collections.json
+!generators.json
+!migrations.json

@@ -1,4 +1,4 @@
-## @webundsoehne/brownie [5.0.28](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.27...@webundsoehne/brownie@5.0.28) (2024-10-18)
+## @webundsoehne/brownie [5.0.28-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/brownie@5.0.27...@webundsoehne/brownie@5.0.28-beta.1) (2023-12-01)
 
 ### Bug Fixes
 

@@ -13,29 +13,77 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 # Description
 
-This package includes [@nrwl/nx](https://github.com/nrwl/nx) workspace to generate base workspace. This extends the default `@nrwl/workspace` so all commands not defined inside of it is inherited from the base schematic.
+This package includes the preset of a [nx](https://github.com/nrwl/nx) workspace. This can be used with the `npx create-nx-workspace` command.
 
-- **[Read The API Documentation](./docs/README.md)**
 - [Changelog](./CHANGELOG.md)
 
 <!-- toc -->
 
-- [Schematics](#schematics)
+- [Generators](#generators)
   - [Workspace](#workspace)
+  - [Move](#move)
+  - [Remove](#remove)
+  - [Library](#library)
 
 <!-- tocstop -->
 
 ---
 
-# Schematics
+# Generators
 
 ## Workspace
 
-Workspace is a hidden schematic that can be called through `ng` cli or `brownie`. This will create a custom workspace for tailored `@webundsoehne` applications.
+Workspace is defined as `preset` generator that can be called as `--preset @webundsoehne/nx-workspace` through the `create-nx-workspace` (or `generate`) command.
 
 ```shell
-# with angular-cli
-ng new --collection=${FULL_PATH_TO_GLOBAL_MODULE}/collections.json
-# with brownie
-brownie workspace
+# via create-nx-workspace
+npx create-nx-workspace --ci=skip --preset=@webunsoehne/nx-workspace
+# with generate inside an existing nx-workspace
+nx generate @webunsoehne/nx-workspace:workspace
+```
+
+## Move
+
+Move a project to a new destination. Extends the `@nx/workspace:move` generator, but adds more user interaction and better rename support. <br> i.e. Renaming a project is possible without setting the full destination path
+
+```shell
+# interactive mode
+nx generate @webunsoehne/nx-workspace:move
+
+# quick rename
+nx generate @webunsoehne/nx-workspace:move [old-name] [new-name]
+
+# equivalent in interactive mode:
+# nx generate @lib/gen:move
+#
+#✔ Which project should be moved? · [old-name]
+#✔ Where should the project be moved to? · [new-name]
+
+# move to different folder
+nx generate @webunsoehne/nx-workspace:move [name] folder/path/[name]
+```
+
+## Remove
+
+Remove a project from the workspace. Extends the `@nx/workspace:remove` generator, but adds more user interaction. (Use `--force` to remove a project even if still in use by other projects.)
+
+```shell
+# interactive mode
+nx generate @webunsoehne/nx-workspace:remove
+
+# cli mode
+nx generate @webunsoehne/nx-workspace:remove [name] --force
+```
+
+## Library
+
+Adds a new library to the workspace. Simple empty library with optional jest setup. (Use `--skipPackageJson` to skip adding jest packages as devDependencies)
+
+```shell
+# interactive mode
+nx generate @webunsoehne/nx-workspace:library
+nx generate @webunsoehne/nx-workspace:lib
+
+# setup with jest
+nx generate @webunsoehne/nx-workspace:library [name] --jest
 ```

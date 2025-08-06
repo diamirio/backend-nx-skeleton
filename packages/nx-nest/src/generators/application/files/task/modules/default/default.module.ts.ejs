@@ -1,0 +1,9 @@
+import { Module } from '@nestjs/common'
+
+import { DefaultTask } from './default.task'
+
+@Module({
+  providers: [ DefaultTask ],
+  exports: [ DefaultTask ]
+})
+export class DefaultTaskModule {}

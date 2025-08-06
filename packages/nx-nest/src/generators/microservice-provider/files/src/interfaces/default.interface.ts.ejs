@@ -1,0 +1,7 @@
+import { DefaultPattern } from '../patterns'
+import type { MicroserviceProviderBaseMessage } from '@webundsoehne/nestjs-util-microservices';
+import { BaseMessageIndexes } from '@webundsoehne/nestjs-util-microservices'
+
+export declare class DefaultMessage extends BaseMessageIndexes implements MicroserviceProviderBaseMessage<DefaultPattern> {
+  [DefaultPattern.DEFAULT]: (request: unknown) => unknown
+}

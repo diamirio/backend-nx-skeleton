@@ -1,12 +1,14 @@
 import type { LoggerService as LoggerServiceCommon } from '@nestjs/common'
+import type { ClsService } from 'nestjs-cls'
 import winston from 'winston'
 import Transport from 'winston-transport'
 
-import { ColorSchema, LogType, LOG_LEVEL } from './logger.constants'
+import { ColorSchema, LOG_LEVEL, LogType } from './logger.constants'
 import { ConfigParam, Configurable } from '@provider/config'
 
 export class LoggerService implements LoggerServiceCommon {
   static instance: winston.Logger
+  protected cls: undefined | ClsService
 
   private transports: Transport[] = [
     new winston.transports.Console({
@@ -20,6 +22,7 @@ export class LoggerService implements LoggerServiceCommon {
             `[${data.timestamp}]` + // timestamp
             ` ${ColorSchema[data.level](`[${data.level}]`)}` + // log-level
             (data.context ? ` [${data.context}]` : '') + // context (optional)
+            (data.requestId ? ` - ${data.requestId}` : '') + // request-id (optional)
             ` - ${ColorSchema[data.level](data.message || 'missing log message')}` + // message
             (data.ms ? ` ${data.ms}` : '') // ms since last log (optional)
         )
@@ -37,7 +40,11 @@ export class LoggerService implements LoggerServiceCommon {
     return this
   }
 
-  error (message, ...optionalParams): void {
+  setClsService (cls: ClsService): void {
+    this.cls = cls
+  }
+
+  error (message: any, ...optionalParams: any[]): void {
     this.logMessage({
       type: LogType.error,
       message,
@@ -78,6 +85,25 @@ export class LoggerService implements LoggerServiceCommon {
     })
   }
 
+  protected logMessage ({ type, message: rawMessage, context, trace }: { type: string, message: any, context?: string, trace?: any }): void {
+    const [message, ...splat] = Array.isArray(rawMessage) ? rawMessage : [rawMessage]
+
+    this.getLogger()[type]({
+      context: context || this.context || this.constructor.name,
+      requestId: this.cls?.getId(),
+      message,
+      splat
+    })
+
+    if (trace) {
+      this.getLogger()[LogType.verbose]({
+        context: context || this.context || this.constructor.name,
+        requestId: this.cls?.getId(),
+        message: trace
+      })
+    }
+  }
+
   @Configurable()
   private getLogger (@ConfigParam('logLevel', LOG_LEVEL) logLevel?: string): winston.Logger {
     if (!LoggerService.instance) {
@@ -95,22 +121,5 @@ export class LoggerService implements LoggerServiceCommon {
     }
 
     return LoggerService.instance
-  }
-
-  private logMessage ({ type, message: rawMessage, context, trace }: { type: string, message: any, context?: string, trace?: any }): void {
-    const [message, ...splat] = Array.isArray(rawMessage) ? rawMessage : [rawMessage]
-
-    this.getLogger()[type]({
-      context: context || this.context || this.constructor.name,
-      message,
-      splat
-    })
-
-    if (trace) {
-      this.getLogger()[LogType.verbose]({
-        context: context || this.context || this.constructor.name,
-        message: trace
-      })
-    }
   }
 }

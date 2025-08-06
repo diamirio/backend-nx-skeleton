@@ -1,7 +1,7 @@
-import type { TargetConfiguration } from '@nx/devkit'
+import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
 
 import type { BuildTargetOptions } from './utils/plugin'
-import { buildPlugin, PluginBuilder } from './utils/plugin'
+import { SKIP_NX_EXECUTORS, buildPlugin, PluginBuilder } from './utils/plugin'
 
 export interface TsNodeDevPluginOptions {
   targetName?: string
@@ -10,9 +10,12 @@ export interface TsNodeDevPluginOptions {
 
 class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   name = 'ts-node-dev'
-  targetName = 'serve'
 
-  buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): TargetConfiguration {
+  buildTarget ({ options, projectConfig }: BuildTargetOptions<TsNodeDevPluginOptions>): Record<string, TargetConfiguration> {
+    if (projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}`)) {
+      return {}
+    }
+
     const target: TargetConfiguration = {
       executor: options?.executor ?? '@webundsoehne/nx-executors:ts-node-dev',
       inputs: ['production', '^production'],
@@ -27,11 +30,11 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
       target.options.env = { NODE_SERVICE: nodeService }
     }
 
-    return target
+    return { [options?.targetName ?? 'serve']: target }
   }
 
   private guessNodeService (components: string[]): string {
-    for (const service of ['server', 'bgtask', 'microservice-server']) {
+    for (const service of ['server', 'bgtask', 'microservice']) {
       if (components.includes(service)) {
         return service
       }

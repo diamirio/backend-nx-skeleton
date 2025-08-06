@@ -36,7 +36,7 @@ logs
 tsconfig.tsbuildinfo
 
 # Node Package Manager
-.npm
-**/package-lock.json
+#.npm
+#**/package-lock.json
 **/.swc
 */**/config/local*

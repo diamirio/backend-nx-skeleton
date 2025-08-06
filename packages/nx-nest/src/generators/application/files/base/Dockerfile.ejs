@@ -1,0 +1,20 @@
+FROM node:<%= NODE_VERSION %>-alpine
+
+# Set workdir for node application
+WORKDIR /opt/app
+
+# Install node packages
+COPY package*.json /opt/app
+RUN npm ci --omit dev --unsafe-perm
+
+# Copy node application
+COPY . /opt/app
+
+# Install Tini
+RUN apk --no-cache --no-progress add tini
+
+# Create custom entrypoint supports environment variables
+RUN printf "#!/bin/ash\nnpm run start" > /entrypoint.sh && \
+chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/sbin/tini", "-vg", "--", "/entrypoint.sh"]

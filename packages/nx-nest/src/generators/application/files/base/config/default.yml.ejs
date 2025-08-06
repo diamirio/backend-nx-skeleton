@@ -1,0 +1,25 @@
+<% if (isServer) { %>port: 3000<% } %>
+logLevel: debug
+
+misc:
+  lockfile: maintenance.lock
+  maintenanceNotification: null
+  lastUpdateFile: .last-update
+  changelogFile: CHANGELOG.md
+<% if (isServer) { %>
+url:
+  basePath: http://localhost:3000
+  apiPath: ""
+
+swagger:
+  path: /internal/docs
+  title: NestJS Skeleton
+  description: API
+  useHttps: false
+
+cacheLifetime:
+  defaultExpiresHeader: false
+  defaultLifetime: 0
+  expiresHeader: Expires
+  cacheControlHeader: Cache-control
+<% } -%>

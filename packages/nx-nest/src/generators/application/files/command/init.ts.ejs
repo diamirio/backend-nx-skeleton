@@ -1,0 +1,8 @@
+import { CommandFactory } from 'nest-commander'
+
+import { CommandModule } from './command.module'
+import { LoggerService } from '@webundsoehne/nestjs-util'
+
+export async function createApplication(): Promise<void> {
+  await CommandFactory.run(CommandModule, new LoggerService())
+}

@@ -30,7 +30,18 @@ export default async function (options: TsNodeDevExecutorSchema, context: Execut
 
   processArgs.push(options.main)
 
-  await spawnProcess('ts-node-dev', processArgs, { cwd, env: processEnvs }, context)
+  await spawnProcess(
+    'ts-node-dev',
+    processArgs,
+    {
+      cwd,
+      env: processEnvs,
+      // windows needs shell to spawn ts-node-dev process, on *nix false works fine (default)
+      // https://nodejs.org/api/child_process.html#child_processspawncommand-args-options
+      shell: process.platform === 'win32'
+    },
+    context
+  )
 
   return {
     success: true

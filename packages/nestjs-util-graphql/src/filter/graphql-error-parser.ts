@@ -2,7 +2,7 @@ import type { GraphQLFormattedError } from 'graphql/error'
 import { GraphQLError } from 'graphql/error'
 
 import { GraphQLPreformattedException } from './interface'
-import type { EnrichedException } from '@webundsoehne/nestjs-util'
+import type { EnrichedExceptionError } from '@webundsoehne/nestjs-util'
 
 export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedError {
   // then this means that this does not come from the nestjs part of the application
@@ -10,16 +10,17 @@ export function GraphQLErrorParser (exception: GraphQLError): GraphQLFormattedEr
   if (!exception?.extensions?.response) {
     delete exception.extensions?.exception
 
-    exception.extensions.code = GraphQLError.name
+    exception.extensions.code ??= GraphQLError.name
 
     return exception
   }
 
-  const extensions = exception.extensions.response as EnrichedException
+  const extensions = exception.extensions.response as EnrichedExceptionError
 
   const message = structuredClone(extensions.message)
 
-  delete extensions.message
+  // TODO: can be updated with typescript 5
+  delete (extensions as any).message
 
   return new GraphQLPreformattedException({
     ...exception,

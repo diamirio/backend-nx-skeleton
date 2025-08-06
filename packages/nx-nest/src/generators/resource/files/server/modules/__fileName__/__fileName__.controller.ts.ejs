@@ -1,0 +1,17 @@
+import { Controller, Get } from '@nestjs/common'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+
+import { <%- resourceNames.className -%>Service } from './<%- resourceNames.fileName -%>.service'
+
+@ApiTags('<%- resourceNames.className -%>')
+@Controller({ path: '<%- resourceNames.fileName -%>' })
+export class <%- resourceNames.className -%>Controller {
+  constructor (private readonly <%- resourceNames.propertyName -%>Service: <%- resourceNames.className -%>Service) {}
+
+  @ApiOperation({ summary: '<%- resourceNames.className -%>', description: 'Route for <%- resourceNames.className -%>' })
+  @ApiResponse({ status: 200, description: '<%- resourceNames.className -%> route' })
+  @Get()
+  default (): Promise<string> {
+    return this.<%- resourceNames.propertyName -%>Service.default()
+  }
+}
