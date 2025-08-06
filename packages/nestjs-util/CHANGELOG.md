@@ -1,3 +1,40 @@
+# @webundsoehne/nestjs-util [8.0.0](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@7.1.9...@webundsoehne/nestjs-util@8.0.0) (2025-08-06)
+
+
+### Bug Fixes
+
+* maintancence mode ([72c3546](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/72c354604b67a948d2f70e20a34af084ce8b23fe))
+* **nestjs-util:** issues with stacktrace and error message ([48a8be7](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/48a8be749e15e6d46fc93a3d0738c2d483510e2b))
+* properly enable maintenance mode ([5191525](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/519152534fd78447c6d25c9901d52e417b6cc005))
+* try to fix error not exposing stack and message ([c96a5fe](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/c96a5fe2b28802eab878abd5f71cdb10e99b4e33))
+* write empty file ([7b3f10d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/7b3f10da9c8dff9f600f30f70fdfaf521b619c81))
+
+
+### Features
+
+* **nestjs-util:** extend logger ([f5a5a68](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/f5a5a6887c0a8f57c4e1701082f64981447e8b47))
+
+
+### Performance Improvements
+
+* **nestjs-util:** rewrite filters ([17fb359](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/17fb359ad164272eb9343d708fded212e997814e))
+
+
+### BREAKING CHANGES
+
+* **nestjs-util:** - GlobalExceptionFilter stays in the @webundsoehne/nestjs-util
+- BadRequestExceptionFilter is deleted since it now utilizes ClassValidatorException and
+ExtendedValidationPipe to throw the error directly as HttpException
+- RpcGlobalExceptionFilter is deleted and GlobalExceptionFilter can be used for it directly since
+with the newer nestjs versions it seems to parse the context correctly
+- From anywhere in your code you can throw ClassValidatorException to throw arbitrary validation
+errors if you do validateOrReject().
+- error stack trace is propagated to the service directly (see 1th screenshot) and it will write the
+service name in front if it to designate it as external error (for now only configrued for rmq)
+- seems to handle all kinds of messages i can think of see rest of the screenshots
+- refactored the class validator error a bit more. for child properties it includes the parent
+property name like parent.child.test etc. (see last screenshots)
+
 # @webundsoehne/nestjs-util [8.0.0-beta.7](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nestjs-util@8.0.0-beta.6...@webundsoehne/nestjs-util@8.0.0-beta.7) (2025-06-13)
 
 
