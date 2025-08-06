@@ -1,3 +1,10 @@
+# @webundsoehne/nx-builders [6.4.0-beta.2](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.4.0-beta.1...@webundsoehne/nx-builders@6.4.0-beta.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* **nx-builders,nx-nest:** update nx-executors version to new release ([03a53c6](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/03a53c620e0680be45cc5b529f9649d667f9094a))
+
 # @webundsoehne/nx-builders [6.4.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0...@webundsoehne/nx-builders@6.4.0-beta.1) (2025-08-06)
 
 
