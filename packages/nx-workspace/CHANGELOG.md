@@ -1,3 +1,18 @@
+# @webundsoehne/nx-workspace [6.0.0](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32...@webundsoehne/nx-workspace@6.0.0) (2025-08-06)
+
+
+* feat(nx-nest)!: move to nx-generators ([558c13d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/558c13da49e865534f87ae39293a22739a0d83ce))
+* feat(nx-workspace)!: move to nx generators ([9bd918e](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/9bd918e7caf53bfbe65b1c0a18a4a385f252fce5))
+
+
+### BREAKING CHANGES
+
+* Move from schematics to new generators.
+Add/Rewrite generators for creating a nest-workspace, application, util-lib, default lib.
+* Moving from old schematics to new generators.
+Adapt workspace template to be used with `nx generate` and as `create-nx-workspace` preset.
+Wrapping the `@nx/workspace:move` and `@nx/workspace:remove` generator, adding better user interaction.
+
 # @webundsoehne/nx-workspace [6.0.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-workspace@5.0.32-beta.3...@webundsoehne/nx-workspace@6.0.0-beta.1) (2024-08-09)
 
 - feat(nx-nest)!: move to nx-generators ([558c13d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/558c13da49e865534f87ae39293a22739a0d83ce))
