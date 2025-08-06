@@ -1,3 +1,20 @@
+# @webundsoehne/nx-builders [6.4.0-beta.1](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0...@webundsoehne/nx-builders@6.4.0-beta.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **nx-builders:** add more "file exists" checks ([3a622e4](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/3a622e4277705ecca30ac079b2a690a9695c0ed4))
+* **nx-builders:** correct nx-executors version ([6b1aa6f](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/6b1aa6fe39b63144f4fff8d898a55a792e196d48))
+* **nx-builders:** package.json devDependency ([7e67167](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/7e6716775f57aa034d8705a10628695db24591dc))
+
+
+### Features
+
+* **nx-builders:** migration note in README ([ed1fd25](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/ed1fd25e9fa9cd668715edc74384e18de4836e58))
+* **nx-builders:** nx migration to nx-executors ([079bd9a](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/079bd9a22b80cf171d7dd52f7e294660063a6e97))
+* **nx-builders:** update migration version ([a723823](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/a723823a647cf0e92500cca6f29957ab2bfd35ad))
+* **nx-builders:** update packages in migration ([18e3c2d](https://gitlab.diamir.tech/bdsm/nx-skeleton/commit/18e3c2d4278bd203fb2c530a323e63180e1d5463))
+
 # @webundsoehne/nx-builders [6.3.0-beta.4](https://gitlab.diamir.tech/bdsm/nx-skeleton/compare/@webundsoehne/nx-builders@6.3.0-beta.3...@webundsoehne/nx-builders@6.3.0-beta.4) (2024-08-09)
 
 ### Bug Fixes
