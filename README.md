@@ -102,7 +102,7 @@ to the `pnpm-workspace.yml` catalogs, where the dependency versions can be manag
 The `updateManifest` target (custom internal executor [manifest](tools/internal/src/executors/update-manifest)) will update the `package.json` replacing the
 dependency versions linked in the template from the pnpm catalogues.
 
-If you update a dependency in a catalog, you must **manually** run `npm run manifest:update` (or the `updateManifest` target another way) to update the `package.json`.
+If you update a dependency in a catalog, you must **manually** run `npm run manifest:update` (or the `updateManifest` target another way) to update the `package.json` and `pnpm install` to update the lockfile.
 
 This way, we can utilize the pnpm catalog feature while still have the git change on version update to later generate a
 changelog and version based on the committed change.
