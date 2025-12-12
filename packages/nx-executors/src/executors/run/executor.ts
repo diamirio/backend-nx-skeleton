@@ -4,7 +4,7 @@ import runCommands from 'nx/src/executors/run-commands/run-commands.impl'
 
 import type { ExecutorResult } from '../inteface'
 
-function normalizeNodeOptions (env?: string | string[]): string[] {
+function normalizeNodeOptions(env?: string | string[]): string[] {
   const options = []
 
   if (!env) {
@@ -19,11 +19,16 @@ function normalizeNodeOptions (env?: string | string[]): string[] {
 
   return options
 }
-export function setNodeOptionsEnvironmentVariables (env: string[]): { NODE_OPTIONS: string } {
+// biome-ignore lint/style/useNamingConvention: env-var
+export function setNodeOptionsEnvironmentVariables(env: string[]): { NODE_OPTIONS: string } {
+  // biome-ignore lint/style/useNamingConvention: env-var
   return { NODE_OPTIONS: env.join(' ') }
 }
 
-export default async function ({ nodeOptions, tsNode, ...options }: RunCommandsOptions, context: ExecutorContext): Promise<ExecutorResult> {
+export default async function (
+  { nodeOptions, tsNode, ...options }: RunCommandsOptions,
+  context: ExecutorContext
+): Promise<ExecutorResult> {
   const project = context.projectsConfigurations.projects[context.projectName]
 
   nodeOptions = normalizeNodeOptions(options.nodeOptions)

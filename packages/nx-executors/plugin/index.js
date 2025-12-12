@@ -1,6 +1,6 @@
-const import_plugin = require('../dist/plugins/plugin')
+const importPlugin = require('../src/plugins/plugin')
 
 module.exports = {
-  createNodes: import_plugin.createNodes,
-  createNodesV2: import_plugin.createNodesV2
+  createNodes: importPlugin.createNodes,
+  createNodesV2: importPlugin.createNodesV2
 }

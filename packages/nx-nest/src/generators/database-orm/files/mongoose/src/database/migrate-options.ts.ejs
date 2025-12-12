@@ -1,7 +1,7 @@
+import { ConfigService } from '@diamir/nestjs-config'
 import { join } from 'node:path'
 
 import { getDatabaseOptions } from './database-options'
-import { ConfigService } from '@webundsoehne/nestjs-util'
 
 export function generateMongooseMigrateConfig (): any {
   const migrationOptions = ConfigService.get('database.migration')

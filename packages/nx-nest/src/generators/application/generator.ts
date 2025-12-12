@@ -1,10 +1,16 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addDependenciesToPackageJson, addProjectConfiguration, getPackageManagerCommand, names, readNxJson, updateJson } from '@nx/devkit'
+import {
+  addDependenciesToPackageJson,
+  addProjectConfiguration,
+  getPackageManagerCommand,
+  names,
+  readNxJson,
+  updateJson
+} from '@nx/devkit'
 import { output, ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { join } from 'node:path'
 import { execCommand } from 'nx/src/command-line/release/utils/exec-command'
-import { readJson } from 'nx/src/generators/utils/json'
 
 import { Component, getComponentMetadata, NODE_VERSION } from '../../constant'
 import {
@@ -12,13 +18,20 @@ import {
   COMMAND_DEPENDENCIES,
   DEPENDENCIES,
   DEV_DEPENDENCIES,
-  IMPLICIT_DEPENDENCIES,
   MICROSERVICE_DEPENDENCIES,
   SERVER_DEPENDENCIES
 } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import type { ApplyTemplate } from '../../utils'
-import { addClassProperty, addEnumMember, addImport, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile, updateYaml } from '../../utils'
+import {
+  addEnumMember,
+  addImport,
+  addIndexExport,
+  applyTasks,
+  applyTemplateFactory,
+  updateSourceFile,
+  updateYaml
+} from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import databaseTargetGenerator from '../database-target/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
@@ -40,8 +53,10 @@ interface GenerateOptions extends ApplicationGeneratorSchema {
   projectRoot: string
 }
 
-// eslint-disable-next-line complexity
-export default async function applicationGenerator (tree: Tree, options: ApplicationGeneratorSchema): Promise<GeneratorCallback> {
+export default async function applicationGenerator(
+  tree: Tree,
+  options: ApplicationGeneratorSchema
+): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   validateComponents(generateOptions)
@@ -58,17 +73,22 @@ export default async function applicationGenerator (tree: Tree, options: Applica
   generateOptions.scope = getNpmScope(tree)
   generateOptions.projectNames = names(generateOptions.name)
   generateOptions.projectName = generateOptions.projectNames.fileName
-  generateOptions.packageScope = generateOptions.scope ? `@${generateOptions.scope}/${generateOptions.projectNames.fileName}` : generateOptions.projectNames.fileName
+  generateOptions.packageScope = generateOptions.scope
+    ? `@${generateOptions.scope}/${generateOptions.projectNames.fileName}`
+    : generateOptions.projectNames.fileName
 
   const applicationMetadata = getComponentMetadata(generateOptions.components)
   const templateContext: Record<string, any> = {
     ...generateOptions,
     isServer: generateOptions.components.includes(Component.SERVER),
     isBgTask: generateOptions.components.includes(Component.BG_TASK),
-    includeMessageQueue: generateOptions.components.includes(Component.MICROSERVICE) || generateOptions.microserviceProvider,
+    includeMessageQueue:
+      generateOptions.components.includes(Component.MICROSERVICE) || generateOptions.microserviceProvider,
     applicationMetadata,
+    // biome-ignore-start lint/style/useNamingConvention: naming
     NODE_VERSION,
     COMPONENT: Component,
+    // biome-ignore-end lint/style/useNamingConvention: naming
     database: options.database
   }
 
@@ -96,7 +116,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 
     // component-specific folder
     for (const component of applicationMetadata) {
-      applyTemplate(['files', component.folder], templateContext, join(generateOptions.projectRoot, 'src', component.folder))
+      applyTemplate(
+        ['files', component.folder],
+        templateContext,
+        join(generateOptions.projectRoot, 'src', component.folder)
+      )
     }
 
     updatePackageJson(tree, generateOptions, tasks)
@@ -129,9 +153,11 @@ export default async function applicationGenerator (tree: Tree, options: Applica
 }
 
 // validate and map component names (validate manually typed components if not using the interactive input)
-function validateComponents (options: GenerateOptions): void {
+function validateComponents(options: GenerateOptions): void {
   const validatedComponents: GenerateOptions['components'] = []
-  const componentMap: Record<string, string> = Object.fromEntries(Object.entries(Component).map(([key, value]) => [value, key]))
+  const componentMap: Record<string, string> = Object.fromEntries(
+    Object.entries(Component).map(([key, value]) => [value, key])
+  )
   const asComponent = (key: string): Component => Component[componentMap[key]]
 
   for (let i = 0, l = options.components?.length ?? 0; i < l; ++i) {
@@ -152,7 +178,12 @@ function validateComponents (options: GenerateOptions): void {
   options.components = validatedComponents
 }
 
-async function generateDatabaseLib (tree: Tree, options: GenerateOptions, _context: Record<string, any>, tasks: GeneratorCallback[]): Promise<void> {
+async function generateDatabaseLib(
+  tree: Tree,
+  options: GenerateOptions,
+  _context: Record<string, any>,
+  tasks: GeneratorCallback[]
+): Promise<void> {
   if (options.database) {
     output.log({ title: '[Application] Setup database-orm util library ...' })
 
@@ -170,7 +201,12 @@ async function generateDatabaseLib (tree: Tree, options: GenerateOptions, _conte
   }
 }
 
-async function generateMspLib (tree: Tree, options: GenerateOptions, _context, tasks: GeneratorCallback[]): Promise<void> {
+async function generateMspLib(
+  tree: Tree,
+  options: GenerateOptions,
+  _context,
+  tasks: GeneratorCallback[]
+): Promise<void> {
   if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
     output.log({ title: '[Application] Setup microservice-provider util library ...' })
 
@@ -189,40 +225,36 @@ async function generateMspLib (tree: Tree, options: GenerateOptions, _context, t
   }
 }
 
-function generateMicroserviceServer (tree: Tree, options: GenerateOptions, context, applyTemplate): void {
+function generateMicroserviceServer(tree: Tree, options: GenerateOptions, context, applyTemplate): void {
   if (options.components?.includes(Component.MICROSERVICE)) {
     const mspDetails = (readNxJson(tree) as any)?.integration?.msp
 
-    if (!mspDetails?.projectRoot || !mspDetails?.importPath) {
+    if (!(mspDetails?.projectRoot && mspDetails?.importPath)) {
       output.warn({
         title: '[Application] Cannot update Microservice Provider',
-        bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
+        bodyLines: [
+          'Missing folder information in nx.json integration',
+          'New queue, interface and pattern will not be created automatically'
+        ]
       })
     } else {
       applyTemplate(['files', 'microservice-queue'], context, join(mspDetails.projectRoot, 'src'))
 
-      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'interfaces', 'index.ts'), (file) => {
-        addIndexExport(file, `./${context.projectNames.fileName}.interface`)
+      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'index.ts'), (file) => {
+        addIndexExport(file, `./provider/${context.projectNames.fileName}`)
       })
-      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'patterns', 'index.ts'), (file) => {
-        addIndexExport(file, `./${context.projectNames.fileName}.pattern`)
-      })
-      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'microservice-provider.constants.ts'), (file) => {
-        addEnumMember(file, 'MessageQueues', context.projectNames.constantName, context.projectNames.constantName)
-        addImport(file, `${context.projectNames.className}Pattern`, './patterns')
-        addClassProperty(file, 'MessageQueuePatterns', `[MessageQueues.${context.projectNames.constantName}]`, `${context.projectNames.className}Pattern`)
-        addImport(file, `${context.projectNames.className}Message`, './interfaces')
-        addClassProperty(file, 'MessageQueueMap', `[MessageQueues.${context.projectNames.constantName}]`, `${context.projectNames.className}Message`)
+      updateSourceFile(tree, join(mspDetails.projectRoot, 'src', 'message-queue.enum.ts'), (file) => {
+        addEnumMember(file, 'MessageQueue', context.projectNames.constantName, context.projectNames.constantName)
       })
 
       updateSourceFile(tree, join(options.projectRoot, 'src', 'microservice', 'init.ts'), (file) => {
-        addImport(file, 'MessageQueues', mspDetails.importPath)
+        addImport(file, 'MessageQueue', mspDetails.importPath)
       })
     }
   }
 }
 
-function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
+function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
     const dependencies = { ...DEPENDENCIES }
 
@@ -259,7 +291,6 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
 
     updateJson(tree, join(options.projectRoot, 'package.json'), (content) => {
       for (const component of options.components) {
-        /* eslint-disable @typescript-eslint/indent,@typescript-eslint/padding-line-between-statements,indent*/
         switch (component) {
           case Component.SERVER:
           case Component.BG_TASK:
@@ -277,11 +308,6 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
       return content
     })
 
-    const rootDependencies = readJson(tree, 'package.json')?.dependencies ?? {}
-    const projectDependencies = Object.fromEntries(IMPLICIT_DEPENDENCIES.map((dependency) => [dependency, rootDependencies[dependency]]).filter((dependency) => !!dependency[1]))
-
-    addDependenciesToPackageJson(tree, projectDependencies, {}, join(options.projectRoot, 'package.json'))
-
     // does not work in workspace preset, so here it is now
     // (workspace creation does git init as last step, so we cannot access .git in the preset)
     tasks.push(async () => {
@@ -293,7 +319,13 @@ function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: Generat
   }
 }
 
-function setupJest (tree: Tree, options: GenerateOptions, context: Record<string, any>, applyTemplate: ApplyTemplate, tasks: GeneratorCallback[]): void {
+function setupJest(
+  tree: Tree,
+  options: GenerateOptions,
+  context: Record<string, any>,
+  applyTemplate: ApplyTemplate,
+  tasks: GeneratorCallback[]
+): void {
   if (options.jest) {
     output.log({
       title: '[Application] Setup jest',
@@ -329,15 +361,16 @@ function setupJest (tree: Tree, options: GenerateOptions, context: Record<string
   }
 }
 
-function setProjectTargets (tree: Tree, options: GenerateOptions): void {
+function setProjectTargets(tree: Tree, options: GenerateOptions): void {
   updateJson(tree, join(options.projectRoot, 'project.json'), (content) => {
     if (options.components.includes(Component.COMMAND)) {
       content.targets = {
-        ...content.targets ?? {},
+        ...(content.targets ?? {}),
         command: {
-          executor: '@webundsoehne/nx-executors:run',
+          executor: '@diamir/nx-executors:run',
           options: {
             env: {
+              // biome-ignore lint/style/useNamingConvention: env-var
               NODE_SERVICE: 'cli'
             },
             command: 'ts-node ./src/main.ts'
@@ -356,13 +389,13 @@ function setProjectTargets (tree: Tree, options: GenerateOptions): void {
   })
 }
 
-function setNxJsonPluginsAndDefaults (tree: Tree): void {
+function setNxJsonPluginsAndDefaults(tree: Tree): void {
   updateJson(tree, 'nx.json', (content) => {
     addPlugin(content, '@nx/eslint/plugin')
-    addPlugin(content, '@webundsoehne/nx-executors/plugin')
+    addPlugin(content, '@diamir/nx-executors/plugin')
 
     content.targetDefaults = {
-      ...content.targetDefaults ?? {},
+      ...(content.targetDefaults ?? {}),
       lint: { configurations: { fix: { fix: true } } },
       serve: { options: { watchConfig: true } },
       build: {
@@ -392,7 +425,7 @@ function setNxJsonPluginsAndDefaults (tree: Tree): void {
   })
 }
 
-function updateGitlabCI (tree: Tree, projectNames: GenerateOptions['projectNames']): void {
+function updateGitlabCI(tree: Tree, projectNames: GenerateOptions['projectNames']): void {
   // update gitlab-ci
   if (tree.exists('.gitlab-ci.yml')) {
     updateYaml(tree, '.gitlab-ci.yml', (content) => {
@@ -402,12 +435,20 @@ function updateGitlabCI (tree: Tree, projectNames: GenerateOptions['projectNames
           stage: 'docker',
           extends: '.docker-build-internal',
           variables: {
+            // biome-ignore-start lint/style/useNamingConvention: env-var
             DOCKERFILE_CONTEXT: `./dist/apps/${projectNames.fileName}`,
             DOCKER_IMAGE_INTERNAL_NAME: `${projectNames.fileName}`
+            // biome-ignore-end lint/style/useNamingConvention: env-var
           },
           dependencies: ['build'],
           only: {
-            changes: ['.gitlab-ci.yml', 'package.json', 'package-lock.json', 'libs/**/*', `apps/${projectNames.fileName}/**/*`],
+            changes: [
+              '.gitlab-ci.yml',
+              'package.json',
+              'package-lock.json',
+              'libs/**/*',
+              `apps/${projectNames.fileName}/**/*`
+            ],
             refs: ['main', 'develop', 'tags']
           }
         })

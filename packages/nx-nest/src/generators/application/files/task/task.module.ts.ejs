@@ -2,15 +2,11 @@ import { Module, NestModule } from '@nestjs/common'
 import { ScheduleModule } from '@nestjs/schedule'
 
 import * as tasks from './modules'
-import { ConfigService } from '@webundsoehne/nestjs-util'
 
 /**
  * Register all services under providers
  */
 @Module({
-  providers: [
-    ConfigService
-  ],
   imports: [
     ScheduleModule.forRoot(),
     ...Object.values(tasks)

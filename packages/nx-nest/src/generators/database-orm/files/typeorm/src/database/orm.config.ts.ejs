@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
 
-import { getDatabaseOptions } from './database-options'
+import { getMigrationOptions } from './migration-options'
 
-export default new DataSource(getDatabaseOptions())
+export default new DataSource(getMigrationOptions())

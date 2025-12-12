@@ -24,12 +24,12 @@ describe('Server (e2e)', () => {
   })
 
   describe('Server should be running', () => {
-    test('should be defined', async () => {
-        expect(app).toBeDefined()
+    test('should be defined', () => {
+      expect(app).toBeDefined()
     })
 
-    test('should be able to inject requests', async () => {
-      expect(app.inject).toBeDefined()
+    test('should be able to inject requests', () => {
+      expect(app).toHaveProperty('inject')
     })
   })
 })

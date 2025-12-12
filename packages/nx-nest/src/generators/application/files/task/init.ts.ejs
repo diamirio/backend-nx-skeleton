@@ -1,10 +1,11 @@
+import { ConfigService } from '@diamir/nestjs-config'
+import { WinstonLogger } from '@diamir/nestjs-logger'
 import { NestFactory } from '@nestjs/core'
 
 import { TaskModule } from './task.module'
-import { LoggerService } from '@webundsoehne/nestjs-util'
 
 export async function createApplication(): Promise<void> {
   await NestFactory.createApplicationContext(TaskModule, {
-    logger: new LoggerService()
+    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') })
   })
 }

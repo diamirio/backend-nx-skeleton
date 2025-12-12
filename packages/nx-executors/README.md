@@ -7,38 +7,38 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ---
 
-# @webundsoehne/nx-executors
+# nx-executors
 
-[![Version](https://img.shields.io/npm/v/@webundsoehne/nx-executors.svg)](https://npmjs.org/package/@webundsoehne/nx-executors) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nx-executors.svg)](https://npmjs.org/package/@webundsoehne/nx-executors) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nx-executors)](https://npmjs.org/package/@webundsoehne/nx-executors) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+<!-- TOC -->
+* [nx-executors](#nx-executors)
+* [Description](#description)
+* [Executors](#executors)
+  * [tsc](#tsc)
+    * [Configuration](#configuration)
+  * [ts-node-dev](#ts-node-dev)
+    * [Configuration](#configuration-1)
+  * [run](#run)
+    * [Configuration](#configuration-2)
+  * [jest](#jest)
+    * [Configuration](#configuration-3)
+* [Plugins](#plugins)
+  * [Single Plugin](#single-plugin)
+  * [Split Plugins](#split-plugins)
+  * [Exclude Plugins](#exclude-plugins)
+* [Migration](#migration)
+  * [Packages](#packages)
+    * [gitignore](#gitignore)
+    * [tsconfig paths](#tsconfig-paths)
+  * [nx.json](#nxjson)
+  * [Lint + Test](#lint--test)
+    * [EsLint](#eslint)
+    * [Jest](#jest-1)
+  * [Projects](#projects)
+<!-- TOC -->
 
 # Description
 
-This package includes [nx](https://github.com/nrwl/nx) libraries for customizing the build and serve process.
-
-- [Changelog](./CHANGELOG.md)
-
-<!-- toc -->
-
-- [Executors](#executors)
-  - [TSC](#tsc)
-    - [Configuration](#configuration)
-  - [ts-node-dev](#ts-node-dev)
-    - [Configuration](#configuration-1)
-  - [run](#run)
-    - [Configuration](#configuration-2)
-  - [jest](#jest)
-    - [Configuration](#configuration-3)
-- [Plugins](#plugins)
-  - [Single Plugin](#single-plugin)
-  - [Split Plugins](#split-plugins)
-  - [Exclude Plugins](#exclude-plugins)
-- [Migration](#migration)
-  - [Packages](#packages)
-  - [nx.json](#nxjson)
-  - [Lint + Test](#lint--test)
-  - [Projects](#projects)
-
-<!-- tocstop -->
+This package includes [nx](https://github.com/nrwl/nx) libraries for customising the build and serve process.
 
 ---
 
@@ -46,7 +46,7 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customizing
 
 ## tsc
 
-Executor: `@webundsoehne/nx-executors:tsc`
+Executor: `@diamir/nx-executors:tsc`
 
 Extends the default `@nx/js:tsc` executor to set the `cwd` to the project-root and prefixes the `main` and `tsConfig` to shorten the configuration. On the other hand, the `targetDefaults` assets will be merged with the project assets, allowing to extend assets in the `project.json` instead of overwriting them. Furthermore by default the `package.json` and `package-lock.json` will be generated.
 
@@ -58,7 +58,7 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
 {
   targets: {
     build: {
-      executor: '@webundsoehne/nx-executors:tsc',
+      executor: '@diamir/nx-executors:tsc',
       options: {
         main: 'src/main.ts',
         tsConfig: 'tsconfig.app.json',
@@ -75,7 +75,7 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
 
 ## ts-node-dev
 
-Executor: `@webundsoehne/nx-executors:ts-node-dev`
+Executor: `@diamir/nx-executors:ts-node-dev`
 
 Run a project in the source folder directly, where all the assets will be in place. It will pipe the output through a custom logger where it will prefix the name of the project to make it easily identifiable while running multiple packages in parallel.<br> There is no tsconfig-path replacer set up by default. Either use `tsconfig-paths` and register it via the `args` option, or use `typescript-transform-paths` with`ts-patch` and add it als `transformer` plugin to the tsconfig file.
 
@@ -85,7 +85,7 @@ Run a project in the source folder directly, where all the assets will be in pla
 {
   targets: {
     serve: {
-      executor: '@webundsoehne/nx-executors:ts-node-dev',
+      executor: '@diamir/nx-executors:ts-node-dev',
       options: {
         // required
         main: 'src/main.ts',
@@ -113,7 +113,7 @@ Run a project in the source folder directly, where all the assets will be in pla
 
 ## run
 
-Executor: `@webundsoehne/nx-executors:run`
+Executor: `@diamir/nx-executors:run`
 
 Extends the default `nx:run-commands` executor to set the `cwd` to the project-root. On running node binaries, set the `tsNode` option to `true` to get typescript support. (Will extend the `nodeOptions` with `-r ts-node/register` is not already set)
 
@@ -125,7 +125,7 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
 {
   "targets": {
     "seed": {
-      "executor": "@webundsoehne/nx-executors:run",
+      "executor": "@diamir/nx-executors:run",
       "options": {
         "command": "ts-node ./seed/seed.ts",
         "env": {
@@ -141,7 +141,7 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
 {
   targets: {
     seed: {
-      executor: '@webundsoehne/nx-executors:run',
+      executor: '@diamir/nx-executors:run',
       options: {
         tsNode: true,
         command: 'migrate-mongo up -f ./database/migrate-mongoose.ts'
@@ -153,7 +153,7 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
 
 ## jest
 
-Executor: `@webundsoehne/nx-executors:jest`
+Executor: `@diamir/nx-executors:jest`
 
 Extends the `@nx/jest:jest` executor to move to the correct project-folder and extend it with some more configurations.
 
@@ -165,7 +165,7 @@ Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/
 {
   "targets": {
     "seed": {
-      "executor": "@webundsoehne/nx-executors:jest",
+      "executor": "@diamir/nx-executors:jest",
       "options": {
         "jestConfig": "./test/jest.config.ts"
       }
@@ -186,7 +186,7 @@ To add all plugins (tsc, ts-node-dev and jest) just add the plugin to the `nx.js
 
 ```json5
 {
-  plugins: ['@webundsoehne/nx-executors/plugin']
+  plugins: ['@diamir/nx-executors/plugin']
 }
 ```
 
@@ -198,11 +198,11 @@ Add `tsc` executor as `build` target.
 
 ```json5
 {
-  plugin: '@webundsoehne/nx-executors/plugin/tsc',
+  plugin: '@diamir/nx-executors/plugin/tsc',
   options: {
     // these are the default options
     targetName: 'build',
-    executor: '@webundsoehne/nx-executors:tsc'
+    executor: '@diamir/nx-executors:tsc'
   }
 }
 ```
@@ -211,11 +211,11 @@ Add `ts-node-dev` as `serve` target.
 
 ```json5
 {
-  plugin: '@webundsoehne/nx-executors/plugin/ts-node-dev',
+  plugin: '@diamir/nx-executors/plugin/ts-node-dev',
   options: {
     // these are the default options
     targetName: 'serve',
-    executor: '@webundsoehne/nx-executors:ts-node-dev'
+    executor: '@diamir/nx-executors:ts-node-dev'
   }
 }
 ```
@@ -224,11 +224,11 @@ Add `jest` as `test` target. (Including `e2e` and `cov` configurations)
 
 ```json5
 {
-  plugin: '@webundsoehne/nx-executors/plugin/jest',
+  plugin: '@diamir/nx-executors/plugin/jest',
   options: {
     // these are the default options
     targetName: 'test',
-    executor: '@webundsoehne/nx-executors:jest',
+    executor: '@diamir/nx-executors:jest',
     testConfig: './test/jest.config.ts',
     e2eTestConfig: './test/jest-e2e.config.ts'
   }
@@ -239,7 +239,7 @@ Add `tsc`, `tsc-node-dev` and `jest`' as `build`, `server` and `test` target.
 
 ```json5
 {
-  plugin: '@webundsoehne/nx-executors/plugin',
+  plugin: '@diamir/nx-executors/plugin',
   options: {
     tscOptions: {},
     // same options as `[..]/plugin/tsc`
@@ -398,7 +398,7 @@ module.exports = {
 
 Because we move most logic to the nx plugins we can clear up the unused targets like `lint` and `test` in the `project.json` files for the each application/library.
 
-Same can be done for `build` and `server` by adding the `@webundsoehne/nx-executors/plugin` to the `nx.json` and set some `targetDefaults`:
+Same can be done for `build` and `server` by adding the `@diamir/nx-executors/plugin` to the `nx.json` and set some `targetDefaults`:
 
 ```json5
 {
@@ -437,7 +437,7 @@ Same can be done for `build` and `server` by adding the `@webundsoehne/nx-execut
       // eslint & jest plugins
     },
     {
-      plugin: '@webundsoehne/nx-executors/plugin'
+      plugin: '@diamir/nx-executors/plugin'
     }
   ]
 }

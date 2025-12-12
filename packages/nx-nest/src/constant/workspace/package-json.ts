@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export const SCRIPTS = {
   nx: 'nx',
   prepare: 'ts-patch install -s',

@@ -1,10 +1,19 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addProjectConfiguration, addDependenciesToPackageJson, formatFiles, getProjects, names, output, readNxJson, updateJson } from '@nx/devkit'
+import {
+  addDependenciesToPackageJson,
+  addProjectConfiguration,
+  formatFiles,
+  getProjects,
+  names,
+  output,
+  readNxJson,
+  updateJson
+} from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { prompt } from 'enquirer'
-import { join } from 'node:path'
 
 import { Component } from '../../constant'
 import { DEPENDENCIES } from '../../constant/seeder'
@@ -25,7 +34,10 @@ interface GenerateOptions extends SeederGeneratorSchema {
   packageScope: string
 }
 
-export default async function databaseOrmGenerator (tree: Tree, options: SeederGeneratorSchema): Promise<GeneratorCallback> {
+export default async function databaseOrmGenerator(
+  tree: Tree,
+  options: SeederGeneratorSchema
+): Promise<GeneratorCallback> {
   const generateOptions: GenerateOptions = options as GenerateOptions
 
   const tasks: GeneratorCallback[] = []
@@ -41,7 +53,10 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
   const projects = getProjects(tree)
 
   for (const project of projects.values()) {
-    if (project.projectType === 'application' && (project as any).integration.nestjs.components.includes(Component.COMMAND)) {
+    if (
+      project.projectType === 'application' &&
+      (project as any).integration.nestjs.components.includes(Component.COMMAND)
+    ) {
       applications.push({ name: project.name, value: project.name })
     }
   }
@@ -104,7 +119,7 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
   return applyTasks(tasks)
 }
 
-function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
+function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
     output.log({ title: '[Seeder] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 

@@ -1,9 +1,8 @@
+import { InjectSeederService, SeederService } from '@diamir/nestjs-seeder'
 import { Logger } from '@nestjs/common'
 import { Command, CommandRunner } from 'nest-commander'
 
-import { InjectSeederService, SeederService } from '@webundsoehne/nestjs-seeder'
-
-@Command({ name: 'seed', description: 'Trigger database seeding' })
+@Command({ name: 'seed', description: 'Trigger custom seeding' })
 export class SeederCommand extends CommandRunner {
   private readonly logger: Logger = new Logger(this.constructor.name)
 

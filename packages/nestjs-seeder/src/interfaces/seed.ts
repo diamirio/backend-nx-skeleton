@@ -6,5 +6,5 @@ import { Logger } from '@nestjs/common'
 export abstract class Seed {
   protected logger: Logger = new Logger(this.constructor.name)
 
-  abstract run (): Promise<void>
+  abstract run(): Promise<void>
 }

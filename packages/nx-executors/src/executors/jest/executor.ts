@@ -1,7 +1,7 @@
-import type { ExecutorContext } from '@nx/devkit'
-import { jestExecutor } from '@nx/jest/src/executors/jest/jest.impl'
 import { join } from 'node:path'
 import * as process from 'node:process'
+import type { ExecutorContext } from '@nx/devkit'
+import { jestExecutor } from '@nx/jest/src/executors/jest/jest.impl'
 
 import type { ExecutorResult } from '../inteface'
 import type { JestExecutorSchema } from './schema'

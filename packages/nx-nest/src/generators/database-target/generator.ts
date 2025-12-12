@@ -1,13 +1,16 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { formatFiles, getProjects, readNxJson, updateJson } from '@nx/devkit'
 import { output } from '@nx/workspace'
 import { prompt } from 'enquirer'
-import { join } from 'node:path'
 
 import { DatabaseOrm } from '../../constant'
 import type { DatabaseTargetGeneratorSchema } from './schema'
 
-export default async function databaseTargetGenerator (tree: Tree, options: DatabaseTargetGeneratorSchema): Promise<GeneratorCallback> {
+export default async function databaseTargetGenerator(
+  tree: Tree,
+  options: DatabaseTargetGeneratorSchema
+): Promise<GeneratorCallback> {
   const orm = (readNxJson(tree) as any)?.integration?.orm?.database
 
   if (!orm || orm === 'none') {
@@ -65,15 +68,17 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
   updateJson(tree, join(project.root, 'project.json'), (content) => {
     if (orm === DatabaseOrm.TYPEORM) {
       content.targets = {
-        ...content.targets ?? {},
+        ...(content.targets ?? {}),
         migration: {
-          executor: '@webundsoehne/nx-executors:run',
+          executor: '@diamir/nx-executors:run',
           options: {
             tsNode: true,
             env: {
+              // biome-ignore-start lint/style/useNamingConvention: env-var
               TYPEORM_SOURCE: '../../libs/database/src',
               TYPEORM_DATASOURCE: 'database/orm.config.ts',
               TYPEORM_MIGRATION: 'migration'
+              // biome-ignore-end lint/style/useNamingConvention: env-var
             }
           },
           configurations: {
@@ -90,19 +95,21 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
               command: 'typeorm migration:create $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
             },
             generate: {
-              command: 'typeorm migration:generate -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
+              command:
+                'typeorm migration:generate -d=$TYPEORM_SOURCE/$TYPEORM_DATASOURCE $TYPEORM_SOURCE/$TYPEORM_MIGRATION/{args.name}'
             }
           }
         }
       }
     } else if (orm === DatabaseOrm.MONGOOSE) {
       content.targets = {
-        ...content.targets ?? {},
+        ...(content.targets ?? {}),
         migration: {
-          executor: '@webundsoehne/nx-executors:run',
+          executor: '@diamir/nx-executors:run',
           options: {
             tsNode: true,
             env: {
+              // biome-ignore lint/style/useNamingConvention: env-var
               MONGOOSE_MIGRATE_OPTIONS: '../../libs/database/src/database/migrate-options.ts'
             }
           },
@@ -122,7 +129,7 @@ export default async function databaseTargetGenerator (tree: Tree, options: Data
     }
 
     content.targets = {
-      ...content.targets ?? {},
+      ...(content.targets ?? {}),
       build: {
         options: {
           assets: [

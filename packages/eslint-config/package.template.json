@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@stylistic/eslint-plugin": "catalog:eslint",
+    "eslint-import-resolver-typescript": "catalog:eslint",
+    "eslint-plugin-import-x": "catalog:eslint",
+    "typescript-eslint": "catalog:eslint"
+  },
+  "peerDependencies": {
+    "eslint": "catalog:peer"
+  },
+  "peerDependenciesMeta": {}
+}

@@ -7,60 +7,88 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ---
 
-# @webundsoehne/eslint-config
+# eslint-config
 
-[![Version](https://img.shields.io/npm/v/@webundsoehne/eslint-config.svg)](https://npmjs.org/package/@webundsoehne/eslint-config) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/eslint-config.svg)](https://npmjs.org/package/@webundsoehne/eslint-config) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/eslint-config)](https://npmjs.org/package/@webundsoehne/eslint-config) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+## Description
 
-# Description
+Base set of 
 
-`eslint` configuration for company-wide projects to ensure code quality and code readability.
+- [eslint](https://www.npmjs.com/package/eslint)
+- [typescript-eslint](https://www.npmjs.com/package/typescript-eslint)
+- [@stylistic/eslint-plugin](https://www.npmjs.com/package/@stylistic/eslint-plugin)
+- [eslint-plugin-import-x](https://www.npmjs.com/package/eslint-plugin-import-x)
 
-- [Changelog](./CHANGELOG.md)
+linting rules.
 
-<!-- toc -->
+## Configs
 
-- [Rules](#rules)
-  - [Default](#default)
-  - [Typescript](#typescript)
-  - [React](#react)
-  - [React-TypeScript](#react-typescript)
+Import config package on their own via `import { configs } from '@diamir/eslint-config'`
 
-<!-- tocstop -->
+- `configs.base` ... basic eslint rules like `eqeqeq`, `no-eval`, `no-shadow`
+- `configs.typescript` ... import order and typescript rules like `@typescript-eslint/naming-convention`
+- `configs.style` ... stylistic rules like `@stylistic/quotes`, `@stylistic/semi`
 
----
+and use them like 
 
-## Rules
+```ts
+// eslint.config.mjs
+import { configs, utils } from '@diamir/eslint-config'
 
-For importing the rules no peer dependencies are required except for `eslint`, all comes bundled with the package itself.
-
-### Default
-
-```json
-{
-  "extends": ["@webundsoehne/eslint-config"]
-}
+export default utils.defineConfig(
+  globalIgnores(['dist/**']),
+  configs.base,
+  configs.typescript
+)
 ```
 
-### Typescript
+### Minimal
 
-```json
-{
-  "extends": ["@webundsoehne/eslint-config/typescript"]
-}
+Predefined config for base + TypeScript, including global ignores for `dist` and `migration` folder.
+
+```ts
+// eslint.config.mjs
+import { minimal } from '@diamir/eslint-config'
+
+export default minimal
 ```
 
-### React
+### Recommended
 
-```json
-{
-  "extends": ["@webundsoehne/eslint-config/react"]
-}
+Predefined config for base + typescript + stylistic, including global ignores for `dist` and `migration` folder.
+
+```ts
+// eslint.config.mjs
+import { recommended } from '@diamir/eslint-config'
+
+export default recommended
 ```
 
-### React-TypeScript
+## Utils
 
-```json
-{
-  "extends": ["@webundsoehne/eslint-config/react-typescript"]
-}
+Imported via `import { utils } from '@diamir/eslint-config'`
+
+### Define-Config
+
+Re-Export of `typescript-eslint` `config` helper. 
+
+```ts
+import { utils } from '@diamir/eslint-config'
+
+export default utils.defineConfigs(
+  // eslint configs go here
+)
+```
+
+### Internal Package Import
+
+If using libs with an internal scope (as in tsconfig paths) you can use `internalPackageImport()` to define a regex that identifies those packages to correctly order the imports.
+
+```ts
+// eslint.config.mjs
+import { recommended, utils } from '@diamir/eslint-config'
+
+export default utils.defineConfig(
+  utils.internalPackageImport('^@scope/'),
+  recommended
+)
 ```

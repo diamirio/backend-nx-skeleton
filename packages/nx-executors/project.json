@@ -1,0 +1,22 @@
+{
+  "name": "nx-executors",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/nx-executors/src",
+  "targets": {
+    "build": {
+      "options": {
+        "assets": [
+          "{projectRoot}/*.md",
+          "{projectRoot}/LICENSE",
+          "{projectRoot}/executors.json",
+          "{projectRoot}/plugin/*.js",
+          "{projectRoot}/src/executors/**/*.json"
+        ]
+      }
+    },
+    "lint": {},
+    "updateManifest": {},
+    "release": {}
+  }
+}

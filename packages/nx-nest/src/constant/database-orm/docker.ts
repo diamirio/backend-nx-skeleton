@@ -1,3 +1,4 @@
+// biome-ignore-all lint/style/useNamingConvention: env-vars
 import { Database } from '../database.enum'
 
 export const DOCKER_SERVICE_NAME = 'db'
@@ -45,6 +46,9 @@ export const DOCKER_DB_SERVICE = {
     },
     ports: ['27017:27017'],
     command: '--directoryperdb',
-    volumes: ['./.docker/init-mongodb.js:/docker-entrypoint-initdb.d/init-mongodb.js:ro', `${DOCKER_DB_VOLUME[Database.MONGO]}:/data/db`]
+    volumes: [
+      './.docker/init-mongodb.js:/docker-entrypoint-initdb.d/init-mongodb.js:ro',
+      `${DOCKER_DB_VOLUME[Database.MONGO]}:/data/db`
+    ]
   }
 }

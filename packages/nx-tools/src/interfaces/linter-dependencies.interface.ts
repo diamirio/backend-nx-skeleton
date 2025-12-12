@@ -1,8 +1,0 @@
-/**
- * To add linter dependencies to project.
- * This has no optional properties since NX goes crazy with current version of angular-cli ~10.
- */
-export interface LinterDependencies {
-  dependencies: Record<string, string>
-  devDependencies: Record<string, string>
-}

@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "update-manifest": {
+      "implementation": "./src/executors/update-manifest/update-manifest",
+      "schema": "./src/executors/update-manifest/schema.json",
+      "description": "update manifest executor"
+    }
+  }
+}

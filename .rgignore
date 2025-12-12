@@ -1,8 +1,0 @@
-**/docs/**
-**/README.md*
-**/LICENSE
-**/.npmignore
-**/.eslintignore
-**/CHANGELOG.md
-**/yarn.lock
-**/package-lock.json
