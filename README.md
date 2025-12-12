@@ -149,7 +149,7 @@ Once a branch is merged into the `beta` branch, the beta-release will be trigger
 
 ## Master
 
-Once a branch is merged into the `master` branch, a notmal release will be triggered.
+Once a branch is merged into the `master` branch, a normal release will be triggered.
 
 # old skeleton
 
