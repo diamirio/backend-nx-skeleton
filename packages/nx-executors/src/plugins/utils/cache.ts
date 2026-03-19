@@ -1,10 +1,9 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
+import type { CreateNodesResult, TargetConfiguration } from '@nx/devkit'
+import { readJsonFile, writeJsonFile } from '@nx/devkit'
 import { hashObject } from 'nx/src/hasher/file-hasher'
-import type { CreateNodesResult } from 'nx/src/project-graph/plugins'
 import { workspaceDataDirectory } from 'nx/src/utils/cache-directory'
-import { readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
 export type TargetCache = Record<string, Record<string, TargetConfiguration>>
 export interface CacheInterface {

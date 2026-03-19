@@ -6,6 +6,7 @@ import { buildPlugin, PluginBuilder, SKIP_NX_EXECUTORS } from './utils/plugin'
 export interface TscPluginOptions {
   targetName?: string
   executor?: string
+  typecheckTargetName?: string
 }
 
 class TscPlugin extends PluginBuilder<TscPluginOptions> {
@@ -32,9 +33,19 @@ class TscPlugin extends PluginBuilder<TscPluginOptions> {
           outputPath:
             projectConfig.targets?.[options?.targetName ?? 'build']?.options?.outputPath ?? `dist/${projectRoot}`
         }
+      },
+      [options?.typecheckTargetName ?? 'typecheck']: {
+        executor: 'nx:run-commands',
+        inputs: ['production', '^production'],
+        outputs: [],
+        options: {
+          command: 'tsc --noEmit',
+          args: ['--project=tsconfig.build.json'],
+          cwd: '{projectRoot}'
+        }
       }
     }
   }
 }
 
-export const { createNodes, createNodesV2, buildTarget, buildNodes } = buildPlugin(TscPlugin)
+export const { createNodes, buildTarget } = buildPlugin(TscPlugin)

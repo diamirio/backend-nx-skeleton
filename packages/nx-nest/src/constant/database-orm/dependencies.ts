@@ -1,6 +1,6 @@
 export const DEPENDENCIES_TYPEORM = {
   '@nestjs/typeorm': '11.0.0',
-  typeorm: '0.3.26'
+  typeorm: '0.3.28'
 }
 
 export const DEPENDENCIES_TYPEORM_MYSQL = {

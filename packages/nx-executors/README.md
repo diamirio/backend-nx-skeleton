@@ -48,7 +48,10 @@ This package includes [nx](https://github.com/nrwl/nx) libraries for customising
 
 Executor: `@diamir/nx-executors:tsc`
 
-Extends the default `@nx/js:tsc` executor to set the `cwd` to the project-root and prefixes the `main` and `tsConfig` to shorten the configuration. On the other hand, the `targetDefaults` assets will be merged with the project assets, allowing to extend assets in the `project.json` instead of overwriting them. Furthermore by default the `package.json` and `package-lock.json` will be generated.
+Extends the default `@nx/js:tsc` executor to set the `cwd` to the project-root and prefixes the `main` and `tsConfig` to
+shorten the configuration. On the other hand, the `targetDefaults` assets will be merged with the project assets,
+allowing to extend assets in the `project.json` instead of overwriting them. Furthermore by default the `package.json`
+and `package-lock.json` will be generated.
 
 ### Configuration
 
@@ -77,7 +80,11 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
 
 Executor: `@diamir/nx-executors:ts-node-dev`
 
-Run a project in the source folder directly, where all the assets will be in place. It will pipe the output through a custom logger where it will prefix the name of the project to make it easily identifiable while running multiple packages in parallel.<br> There is no tsconfig-path replacer set up by default. Either use `tsconfig-paths` and register it via the `args` option, or use `typescript-transform-paths` with`ts-patch` and add it als `transformer` plugin to the tsconfig file.
+Run a project in the source folder directly, where all the assets will be in place. It will pipe the output through a
+custom logger where it will prefix the name of the project to make it easily identifiable while running multiple
+packages in parallel.<br> There is no tsconfig-path replacer set up by default. Either use `tsconfig-paths` and register
+it via the `args` option, or use `typescript-transform-paths` with`ts-patch` and add it als `transformer` plugin to the
+tsconfig file.
 
 ### Configuration
 
@@ -101,7 +108,10 @@ Run a project in the source folder directly, where all the assets will be in pla
         // ts-node-dev `--debug` flag
         watchConfig: false,
         // watch the `config` directory files (to restart on config change)
-        args: ['-r', 'tsconfig-paths/register'],
+        args: [
+          '-r',
+          'tsconfig-paths/register'
+        ],
         // pass additional arguments to ts-node-dev,
         keepPackageVersion: false
         // keep projects package.json version (default: false)
@@ -115,7 +125,9 @@ Run a project in the source folder directly, where all the assets will be in pla
 
 Executor: `@diamir/nx-executors:run`
 
-Extends the default `nx:run-commands` executor to set the `cwd` to the project-root. On running node binaries, set the `tsNode` option to `true` to get typescript support. (Will extend the `nodeOptions` with `-r ts-node/register` is not already set)
+Extends the default `nx:run-commands` executor to set the `cwd` to the project-root. On running node binaries, set the
+`tsNode` option to `true` to get typescript support. (Will extend the `nodeOptions` with `-r ts-node/register` is not
+already set)
 
 ### Configuration
 
@@ -176,23 +188,29 @@ Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/
 
 # Plugins
 
-By default, the `serve`, `build`, `test` and `e2e` targets are added to each `"projectType": "application"` project ( `test` & `e2e` only if a valid jest config is found).
+By default, the `serve`, `build`, `typecheck`, `test` and `e2e` targets are added to each `"projectType": "application"`
+project ( `test` & `e2e` only if a valid jest config is found).
 
-If you need to disable the plugin for a specific project (i.e. the mono-repo includes a frontend project with own targets) you can add `skipNxExecutors` to the `project.json` `tags`.
+If you need to disable the plugin for a specific project (i.e. the mono-repo includes a frontend project with own
+targets) you can add `skipNxExecutors` to the `project.json` `tags`.
 
 ## Single Plugin
 
-To add all plugins (tsc, ts-node-dev and jest) just add the plugin to the `nx.json` config. This will add all application targets with the default configurations (as seen in the split plugins below).
+To add all plugins (tsc, ts-node-dev and jest) just add the plugin to the `nx.json` config. This will add all
+application targets with the default configurations (as seen in the split plugins below).
 
 ```json5
 {
-  plugins: ['@diamir/nx-executors/plugin']
+  plugins: [
+    '@diamir/nx-executors/plugin'
+  ]
 }
 ```
 
 ## Split Plugins
 
-Each executor-plugin can be added on its own to the `nx.json` too. To override additional configs (beside the plugin config) set `tagetDefaults` accordingly.
+Each executor-plugin can be added on its own to the `nx.json` too. To override additional configs (beside the plugin
+config) set `tagetDefaults` accordingly.
 
 Add `tsc` executor as `build` target.
 
@@ -202,7 +220,8 @@ Add `tsc` executor as `build` target.
   options: {
     // these are the default options
     targetName: 'build',
-    executor: '@diamir/nx-executors:tsc'
+    executor: '@diamir/nx-executors:tsc',
+    typecheckTargetName: 'typecheck'
   }
 }
 ```
@@ -255,15 +274,16 @@ Add `tsc`, `tsc-node-dev` and `jest`' as `build`, `server` and `test` target.
 
 ## Exclude Plugins
 
-Besides excluding all plugins with the `skipNxExecutors` tag for a project, there is the option to just skip single plugins from generating targets for a project:
+Besides excluding all plugins with the `skipNxExecutors` tag for a project, there is the option to just skip single
+plugins from generating targets for a project:
 
-| tag                         | description                           |
-| --------------------------- | ------------------------------------- |
-| skipNxExecutors:tsc         | Skip generating `build` target        |
-| skipNxExecutors:ts-node-dev | Skip generating `serve` target        |
-| skipNxExecutors:jest        | Skip generating `test` & `e2e` target |
-| skipNxExecutors:jest:test   | Skip generating `test` target         |
-| skipNxExecutors:jest:e2e    | Skip generating `e2e` target          |
+| tag                         | description                                  |
+|-----------------------------|----------------------------------------------|
+| skipNxExecutors:tsc         | Skip generating `build` & `typecheck` target |
+| skipNxExecutors:ts-node-dev | Skip generating `serve` target               |
+| skipNxExecutors:jest        | Skip generating `test` & `e2e` target        |
+| skipNxExecutors:jest:test   | Skip generating `test` target                |
+| skipNxExecutors:jest:e2e    | Skip generating `e2e` target                 |
 
 # Migration
 
@@ -292,7 +312,11 @@ With those new packages, nx has a new cache folder structure that needs to be se
 
 ### tsconfig paths
 
-For an easy way to work with tsconfig paths include `ts-patch` and `typescript-transform-paths` as dev-dependency. Add a `prepare` script (for local use): `ts-patch install -s` and include `"plugins": [{ "transform": "typescript-transform-paths" }]` in the `tsconfig.json`. After running `npm i` or `npm run prepare` the tsconfig paths should be replaced for any process that uses this `tsconfig.json` (i.e. ts-node-dev, jest, ...)
+For an easy way to work with tsconfig paths include `ts-patch` and `typescript-transform-paths` as dev-dependency. Add a
+`prepare` script (for local use): `ts-patch install -s` and include
+`"plugins": [{ "transform": "typescript-transform-paths" }]` in the `tsconfig.json`. After running `npm i` or
+`npm run prepare` the tsconfig paths should be replaced for any process that uses this `tsconfig.json` (i.e.
+ts-node-dev, jest, ...)
 
 ## nx.json
 
@@ -303,7 +327,10 @@ First the schema for the `nx.json` changed, so it needs to be replaced with the 
 {
   $schema: './node_modules/nx/schemas/nx-schema.json',
   namedInputs: {
-    default: ['{projectRoot}/**/*', 'sharedGlobals'],
+    default: [
+      '{projectRoot}/**/*',
+      'sharedGlobals'
+    ],
     production: [
       'default',
       '!{projectRoot}/.eslintrc.json',
@@ -325,7 +352,8 @@ Secondly the `workspace.json` is deprecated and can be removed.
 
 ## Lint + Test
 
-Instead of having a separate `lint` and `test` target in each `project.json` we can use the nx-plugins to add those targets for us.
+Instead of having a separate `lint` and `test` target in each `project.json` we can use the nx-plugins to add those
+targets for us.
 
 ```json5
 // nx.json
@@ -360,7 +388,8 @@ Replace the plugin in the `eslintrc` to: `"plugins": ["@nx"]`. Everything else s
 
 ### Jest
 
-For the jest plugin to work, first update or add the `jest.config.ts` file to pick the projects that should receive the test target
+For the jest plugin to work, first update or add the `jest.config.ts` file to pick the projects that should receive the
+test target
 
 ```typescript
 // jest.config.ts
@@ -371,7 +400,8 @@ export default async () => ({
 })
 ```
 
-Then move/create a `jest.config.ts` in the root of the project, jest should run in (i.e. move the file from the `test` folder into the project root)
+Then move/create a `jest.config.ts` in the root of the project, jest should run in (i.e. move the file from the `test`
+folder into the project root)
 
 ```typescript
 // apps/../jest.config.ts
@@ -396,9 +426,11 @@ module.exports = {
 
 ## Projects
 
-Because we move most logic to the nx plugins we can clear up the unused targets like `lint` and `test` in the `project.json` files for the each application/library.
+Because we move most logic to the nx plugins we can clear up the unused targets like `lint` and `test` in the
+`project.json` files for the each application/library.
 
-Same can be done for `build` and `server` by adding the `@diamir/nx-executors/plugin` to the `nx.json` and set some `targetDefaults`:
+Same can be done for `build` and `server` by adding the `@diamir/nx-executors/plugin` to the `nx.json` and set some
+`targetDefaults`:
 
 ```json5
 {
@@ -434,7 +466,7 @@ Same can be done for `build` and `server` by adding the `@diamir/nx-executors/pl
   },
   plugins: [
     {
-      // eslint & jest plugins
+      // other plugins
     },
     {
       plugin: '@diamir/nx-executors/plugin'
@@ -443,4 +475,6 @@ Same can be done for `build` and `server` by adding the `@diamir/nx-executors/pl
 }
 ```
 
-With this setup, only project specific configuration overrides or targets need to be set in the `project.json` any generally used target like `test`, `lint`, `build` and `serve` will be available via the plugins and do not have to be set manually in each `project.json` anymore.
+With this setup, only project specific configuration overrides or targets need to be set in the `project.json` any
+generally used target like `test`, `lint`, `build` and `serve` will be available via the plugins and do not have to be
+set manually in each `project.json` anymore.
