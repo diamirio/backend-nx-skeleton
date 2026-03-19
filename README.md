@@ -140,6 +140,7 @@ the package like
 | lint           | run biome linting (apply fix)                           |
 | updateManifest | write `catalog` dependency versions into `package.json` |
 | build          | run tsc to build the project                            |
+| release        | version, changelog generation and publish a package     |
 
 # Release
 

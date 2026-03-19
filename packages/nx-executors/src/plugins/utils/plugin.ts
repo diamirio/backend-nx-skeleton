@@ -1,11 +1,14 @@
 import { dirname, resolve } from 'node:path'
+import type {
+  CreateNodesContextV2,
+  CreateNodesResult,
+  CreateNodesResultV2,
+  CreateNodesV2,
+  TargetConfiguration
+} from '@nx/devkit'
+import { createNodesFromFiles } from '@nx/devkit'
 import { calculateHashForCreateNodes } from '@nx/devkit/src/utils/calculate-hash-for-create-nodes'
 import { loadConfigFile } from '@nx/devkit/src/utils/config-utils'
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
-import type { CreateNodes, CreateNodesContext, CreateNodesResult, CreateNodesV2 } from 'nx/src/project-graph/plugins'
-import { createNodesFromFiles } from 'nx/src/project-graph/plugins'
-import type { CreateNodesResultV2 } from 'nx/src/project-graph/plugins/public-api'
-import { logger } from 'nx/src/utils/logger'
 
 import type { TargetCache } from './cache'
 import { getCache, writeTargetsToCache } from './cache'
@@ -18,34 +21,23 @@ type Plugin<O> = new (...args: any[]) => PluginBuilder<O>
 export interface BuildTargetOptions<O> {
   options: O
   projectConfig: Record<string, any>
-  context: CreateNodesContext
+  context: CreateNodesContextV2
   projectRoot: string
 }
 
 interface BuildPluginResponse<O> {
-  createNodes: CreateNodes
-  createNodesV2: CreateNodesV2
+  createNodes: CreateNodesV2
   buildTarget: (options: BuildTargetOptions<O>) => Record<string, TargetConfiguration>
-  buildNodes: (configFiles: string[], options: O, context: CreateNodesContext) => Promise<CreateNodesResultV2>
+  buildNodes: (configFiles: string[], options: O, context: CreateNodesContextV2) => Promise<CreateNodesResultV2>
 }
 
 export function buildPlugin<O>(pluginBuilder: Plugin<O>): BuildPluginResponse<O> {
   const plugin = new pluginBuilder()
 
   return {
-    createNodes: [
-      plugin.filePattern,
-      (configFile: string, options: O, context: CreateNodesContext): Promise<CreateNodesResult> => {
-        logger.warn(
-          '`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API.'
-        )
-
-        return plugin.internalCreateNode(configFile, options, context, {})
-      }
-    ],
-    createNodesV2: [plugin.filePattern, plugin.internalCreateNodeV2.bind(plugin)],
+    createNodes: [plugin.filePattern, plugin.internalCreateNode.bind(plugin)],
     buildTarget: plugin.buildTarget.bind(plugin),
-    buildNodes: plugin.internalCreateNodeV2.bind(plugin)
+    buildNodes: plugin.internalCreateNode.bind(plugin)
   }
 }
 
@@ -54,11 +46,31 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
   projectTypes: string[] = ['application']
 
   abstract name: string
+  abstract buildTarget(option: BuildTargetOptions<O>): Record<string, TargetConfiguration>
 
   async internalCreateNode(
+    configFiles: string[],
+    options: O,
+    context: CreateNodesContextV2
+  ): Promise<CreateNodesResultV2> {
+    const { cachePath, targetsCache } = getCache(options, this.name)
+
+    try {
+      return await createNodesFromFiles(
+        (configFile: string, opt, ctx) => this.createNodeTargets(configFile, opt, ctx, targetsCache),
+        configFiles,
+        options,
+        context
+      )
+    } finally {
+      writeTargetsToCache(cachePath, targetsCache)
+    }
+  }
+
+  private async createNodeTargets(
     configFilePath: string,
     options: O,
-    context: CreateNodesContext,
+    context: CreateNodesContextV2,
     targetsCache: TargetCache
   ): Promise<CreateNodesResult> {
     const projectRoot = dirname(configFilePath)
@@ -87,25 +99,4 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
       }
     }
   }
-
-  async internalCreateNodeV2(
-    configFiles: string[],
-    options: O,
-    context: CreateNodesContext
-  ): Promise<CreateNodesResultV2> {
-    const { cachePath, targetsCache } = getCache(options, this.name)
-
-    try {
-      return await createNodesFromFiles(
-        (configFile: string, opt, ctx) => this.internalCreateNode(configFile, opt, ctx, targetsCache),
-        configFiles,
-        options,
-        context
-      )
-    } finally {
-      writeTargetsToCache(cachePath, targetsCache)
-    }
-  }
-
-  abstract buildTarget(option: BuildTargetOptions<O>): Record<string, TargetConfiguration>
 }

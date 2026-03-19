@@ -96,4 +96,4 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
   }
 }
 
-export const { createNodes, createNodesV2, buildTarget, buildNodes } = buildPlugin(JestPlugin)
+export const { createNodes, buildTarget } = buildPlugin(JestPlugin)

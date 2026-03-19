@@ -46,4 +46,4 @@ class TsNodeDevPlugin extends PluginBuilder<TsNodeDevPluginOptions> {
   }
 }
 
-export const { createNodes, createNodesV2, buildTarget, buildNodes } = buildPlugin(TsNodeDevPlugin)
+export const { createNodes, buildTarget } = buildPlugin(TsNodeDevPlugin)

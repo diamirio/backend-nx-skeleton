@@ -1,14 +1,7 @@
 import { dirname, resolve } from 'node:path'
+import type { CreateNodesContextV2, CreateNodesResult, CreateNodesV2 } from '@nx/devkit'
 import { createNodesFromFiles } from '@nx/devkit'
 import { loadConfigFile } from '@nx/devkit/src/utils/config-utils'
-import type {
-  CreateNodes,
-  CreateNodesContext,
-  CreateNodesContextV2,
-  CreateNodesResult,
-  CreateNodesV2
-} from 'nx/src/project-graph/plugins'
-import { logger } from 'nx/src/utils/logger'
 
 import type { JestPluginOptions } from './jest'
 import { buildTarget as buildJestTarget } from './jest'
@@ -24,18 +17,7 @@ export interface PluginOptions {
   jestOptions: JestPluginOptions
 }
 
-export const createNodes: CreateNodes = [
-  FILE_PATTERN,
-  (configFile: string, options: PluginOptions, context: CreateNodesContext): Promise<CreateNodesResult> => {
-    logger.warn(
-      '`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API.'
-    )
-
-    return createNodeTargets(configFile, options, context)
-  }
-]
-
-export const createNodesV2: CreateNodesV2<PluginOptions> = [
+export const createNodes: CreateNodesV2<PluginOptions> = [
   FILE_PATTERN,
   (
     configFiles: readonly string[],
@@ -49,7 +31,7 @@ export const createNodesV2: CreateNodesV2<PluginOptions> = [
 async function createNodeTargets(
   configFile: string,
   options: PluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContextV2
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFile)
   const projectConfig = await loadConfigFile(resolve(context.workspaceRoot, configFile))

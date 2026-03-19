@@ -50,7 +50,11 @@ function getTypeormConfig(database: Database): Record<string, any> {
     synchronize: false,
     cache: false,
     keepConnectionAlive: true,
-    migrationsTableName: '_migrations'
+    migrationsTableName: '_migrations',
+    invalidWhereValuesBehavior: {
+      null: 'throw',
+      undefined: 'throw'
+    }
   }
 }
 

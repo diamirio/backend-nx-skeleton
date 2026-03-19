@@ -11,7 +11,7 @@
   "keywords": [],
   "main": "./src/index.js",
   "dependencies": {
-    "winston": "3.17.0"
+    "winston": "3.19.0"
   },
   "peerDependencies": {
     "@nestjs/common": ">= 11.0.0",

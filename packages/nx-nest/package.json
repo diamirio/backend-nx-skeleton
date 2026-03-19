@@ -10,15 +10,15 @@
   },
   "keywords": [],
   "dependencies": {
-    "@nx/devkit": "21.5.3",
-    "@nx/js": "21.5.3",
-    "@nx/workspace": "21.5.3",
-    "yaml": "2.8.1",
-    "ts-morph": "27.0.0",
+    "@nx/devkit": "22.3.3",
+    "@nx/js": "22.3.3",
+    "@nx/workspace": "22.3.3",
+    "yaml": "2.8.2",
+    "ts-morph": "27.0.2",
     "tslib": "2.8.1"
   },
   "peerDependencies": {
-    "nx": ">= 21.0.0",
+    "nx": ">= 22.0.0",
     "enquirer": ">= 2.3.0"
   },
   "engines": {
