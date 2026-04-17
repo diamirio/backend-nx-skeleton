@@ -74,8 +74,8 @@ export default async function libraryGenerator(
     if (!generateOptions.skipPackageJson) {
       tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))
       updateJson(tree, 'package.json', (content) => {
-        content.scripts.test = 'nx run-many --target test --parallel 10'
-        content.scripts['test:one'] = 'nx test --project'
+        content.scripts.test ??= 'nx run-many --target test --parallel 10'
+        content.scripts['test:one'] ??= 'nx test --project'
 
         return content
       })

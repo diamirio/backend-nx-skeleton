@@ -341,8 +341,8 @@ function setupJest(
 
       if (!options.skipPackageJson) {
         updateJson(tree, 'package.json', (content) => {
-          content.scripts['test:e2e'] = 'nx run-many -t e2e --parallel 10'
-          content.scripts['test:e2e:one'] = 'nx e2e'
+          content.scripts['test:e2e'] ??= 'nx run-many -t e2e --parallel 10'
+          content.scripts['test:e2e:one'] ??= 'nx e2e'
 
           return content
         })
@@ -352,8 +352,8 @@ function setupJest(
     if (!options.skipPackageJson) {
       tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))
       updateJson(tree, 'package.json', (content) => {
-        content.scripts.test = 'nx run-many -t test --parallel 10'
-        content.scripts['test:one'] = 'nx test'
+        content.scripts.test ??= 'nx run-many -t test --parallel 10'
+        content.scripts['test:one'] ??= 'nx test'
 
         return content
       })
@@ -396,9 +396,9 @@ function setNxJsonPluginsAndDefaults(tree: Tree): void {
 
     content.targetDefaults = {
       ...(content.targetDefaults ?? {}),
-      lint: { configurations: { fix: { fix: true } } },
-      serve: { options: { watchConfig: true } },
-      build: {
+      lint: content.targetDefaults?.lint ?? { configurations: { fix: { fix: true } } },
+      serve: content.targetDefaults?.serve ?? { options: { watchConfig: true } },
+      build: content.targetDefaults?.build ?? {
         options: {
           assets: [
             {
