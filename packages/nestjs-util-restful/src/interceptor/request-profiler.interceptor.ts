@@ -1,8 +1,8 @@
-import type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common'
-import { Logger } from '@nestjs/common'
+import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from '@nestjs/common'
 import type { Observable } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
+@Injectable()
 export class RequestProfilerInterceptor implements NestInterceptor {
   private readonly logger = new Logger(this.constructor.name)
 
