@@ -1,3 +1,13 @@
+## 0.1.0-beta.2 (2026-04-17)
+
+### 🩹 Fixes
+
+- injectable decorator
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 0.1.0-beta.1 (2025-12-12)
 
 ### 🚀 Features
