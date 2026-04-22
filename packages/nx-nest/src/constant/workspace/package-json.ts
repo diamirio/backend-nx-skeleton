@@ -1,9 +1,9 @@
 export const SCRIPTS = {
   nx: 'nx',
   prepare: 'ts-patch install -s',
-  start: 'nx run-many --target serve --parallel 1000',
+  start: 'nx run-many --target serve --parallel 100 --batch',
   'start:one': 'nx serve',
-  build: 'nx run-many --target build',
+  build: 'nx run-many --target build --batch',
   'build:one': 'nx build',
   'build:nocache': 'npm run build -- --skip-nx-cache',
   test: 'nx run-many --target test --parallel 10',

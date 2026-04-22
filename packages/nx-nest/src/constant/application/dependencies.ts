@@ -26,7 +26,7 @@ export const SERVER_DEPENDENCIES = {
 }
 
 export const MICROSERVICE_DEPENDENCIES = {
-  '@diamir/nestjs-microservices': '0.1.0',
+  '@diamir/nestjs-microservice': '0.1.0',
   '@nestjs/microservices': '11.1.6',
   'amqp-connection-manager': '4.1.14',
   amqplib: '0.10.9'

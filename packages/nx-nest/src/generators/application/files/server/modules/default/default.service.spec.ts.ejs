@@ -1,0 +1,13 @@
+import { DefaultService } from './default.service'
+
+describe('DefaultService', () => {
+  const service = new DefaultService()
+
+  test('should be defined', () => {
+    expect(service).toBeDefined()
+  })
+
+  test('should return "Hello World!"', () => {
+    expect(service.default()).toEqual('Hello World!')
+  })
+})

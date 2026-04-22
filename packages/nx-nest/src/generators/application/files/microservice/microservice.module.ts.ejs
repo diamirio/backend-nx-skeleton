@@ -1,5 +1,4 @@
-import { Module, NestModule, ClassSerializerInterceptor } from '@nestjs/common'
-import { APP_FILTER, APP_PIPE, APP_INTERCEPTOR } from '@nestjs/core'
+import { Module, NestModule } from '@nestjs/common'
 
 import * as modules from './modules'
 
@@ -8,7 +7,7 @@ import * as modules from './modules'
     ...Object.values(modules)
   ]
 })
-export class MicroservicesModule implements NestModule {
+export class MicroserviceModule implements NestModule {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   async configure (): Promise<any> {}
 }

@@ -19,6 +19,6 @@ export function getMessageQueueConfig(): MessageQueueConfig {
     environmentConfig: { urls: { __name: MESSAGE_QUEUE_URL_ENV_VAR, __format: 'json' } },
     forRoot: "MicroserviceProviderModule.forRoot(ConfigService.get('messageQueue'), [])",
     moduleClass: 'MicroserviceProviderModule',
-    importPath: '@diamir/nestjs-microservices'
+    importPath: '@diamir/nestjs-microservice'
   }
 }

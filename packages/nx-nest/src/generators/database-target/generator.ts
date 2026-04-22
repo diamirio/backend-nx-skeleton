@@ -53,7 +53,6 @@ export default async function databaseTargetGenerator(
   }
 
   updateJson(tree, 'package.json', (content) => {
-    content.scripts.migrate ??= `nx migration -c run ${project.name}`
     content.scripts['migration:run'] ??= `nx migration -c run ${project.name}`
     content.scripts['migration:rollback'] ??= `nx migration -c rollback ${project.name}`
     content.scripts['migration:create'] ??= `nx migration -c create ${project.name} --name`

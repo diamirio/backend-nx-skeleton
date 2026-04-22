@@ -1,4 +1,5 @@
 export const DEPENDENCIES_TYPEORM = {
+  '@diamir/nestjs-config': '0.1.0',
   '@nestjs/typeorm': '11.0.0',
   typeorm: '0.3.28'
 }
@@ -14,6 +15,7 @@ export const DEPENDENCIES_TYPEORM_POSTGRES = {
 }
 
 export const DEPENDENCIES_MONGOOSE = {
+  '@diamir/nestjs-config': '0.1.0',
   '@nestjs/mongoose': '11.0.3',
   'migrate-mongo': '12.1.3',
   mongoose: '8.18.2'

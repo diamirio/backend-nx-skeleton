@@ -5,7 +5,7 @@ import { Timeout } from '@nestjs/schedule'
 import { stat } from 'node:fs/promises'
 <% if (orm === 'typeorm') { %>
 import { DataSource } from 'typeorm'
-import { getDatabaseOptions, migrationsDir } from '../../database/database-options'
+import { getMigrationOptions, migrationsDir } from '../../database/migration-options'
 <% } else if (orm === 'mongoose') { %>
 import { config, database, up } from 'migrate-mongo'
 
@@ -24,7 +24,7 @@ export class MigrationTask {
   })
   async migrate (): Promise<void> {
   <% if (orm === 'typeorm') { %>
-    const options = getDatabaseOptions()
+    const options = getMigrationOptions()
 
     if (!migrationsDir) {
       this.logger.warn('No migrations folder configured')

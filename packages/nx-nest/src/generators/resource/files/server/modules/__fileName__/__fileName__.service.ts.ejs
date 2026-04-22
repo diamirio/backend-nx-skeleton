@@ -4,9 +4,9 @@ import { Injectable, Logger } from '@nestjs/common'
 export class <%- resourceNames.className -%>Service {
   private readonly logger: Logger = new Logger(this.constructor.name)
 
-  constructor () {}
+  constructor () { /**/ }
 
-  async default (): Promise<string> {
-    return 'Hello World!'
+  default (): string {
+    return 'Hello <%- resourceNames.className -%>!'
   }
 }
