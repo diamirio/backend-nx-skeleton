@@ -1,3 +1,13 @@
+## 0.1.0-beta.3 (2026-04-22)
+
+### 🩹 Fixes
+
+- **nx-nest:** fix dependencies, templates, generators
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 0.1.0-beta.2 (2026-04-21)
 
 ### 🚀 Features
