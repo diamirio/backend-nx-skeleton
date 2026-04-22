@@ -5,6 +5,7 @@ import { <%- resourceNames.fileName -%>Factory } from '../factory'
 
 @Injectable()
 export class <%- resourceNames.className -%>Seed extends Seed {
+  // eslint-disable-next-line @typescript-eslint/require-await
   async run (): Promise<void> {
     this.logger.debug(<%- resourceNames.fileName -%>Factory())
   }

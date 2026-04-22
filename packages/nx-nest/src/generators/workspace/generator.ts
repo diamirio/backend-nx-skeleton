@@ -44,6 +44,11 @@ export default async function workspaceGenerator(
 
     return content
   })
+  updateJson(tree, 'nx.json', (content) => {
+    content.tui = { enabled: false }
+
+    return content
+  })
 
   // dependencies and scripts
   updatePackageJson(tree, options, tasks)

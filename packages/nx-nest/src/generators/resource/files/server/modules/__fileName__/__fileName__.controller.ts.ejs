@@ -11,7 +11,7 @@ export class <%- resourceNames.className -%>Controller {
   @ApiOperation({ summary: '<%- resourceNames.className -%>', description: 'Route for <%- resourceNames.className -%>' })
   @ApiResponse({ status: 200, description: '<%- resourceNames.className -%> route' })
   @Get()
-  default (): Promise<string> {
+  default (): string {
     return this.<%- resourceNames.propertyName -%>Service.default()
   }
 }

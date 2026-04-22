@@ -1,4 +1,4 @@
-import { InjectSeederService, SeederService } from '@diamir/nestjs-seeder'
+import { SeederService } from '@diamir/nestjs-seeder'
 import { Logger } from '@nestjs/common'
 import { Command, CommandRunner } from 'nest-commander'
 
@@ -6,7 +6,7 @@ import { Command, CommandRunner } from 'nest-commander'
 export class SeederCommand extends CommandRunner {
   private readonly logger: Logger = new Logger(this.constructor.name)
 
-  constructor (@InjectSeederService() private readonly seeder: SeederService) {
+  constructor (private readonly seeder: SeederService) {
     super()
   }
 

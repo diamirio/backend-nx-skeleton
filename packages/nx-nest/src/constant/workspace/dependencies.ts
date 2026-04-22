@@ -3,7 +3,7 @@ import { NODE_VERSION } from '../index'
 export const DEPENDENCIES = {}
 
 export const DEV_DEPENDENCIES = {
-  '@nx/eslint': '22.0.3',
+  '@nx/eslint': '22.6.5',
   '@types/node': `^${NODE_VERSION}`,
   '@diamir/eslint-config': '0.1.0',
   eslint: '9.36.0',

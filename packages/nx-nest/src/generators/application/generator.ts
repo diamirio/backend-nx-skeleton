@@ -22,6 +22,7 @@ import {
   SERVER_DEPENDENCIES
 } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
+import { SCRIPTS } from '../../constant/workspace'
 import type { ApplyTemplate } from '../../utils'
 import {
   addEnumMember,
@@ -276,11 +277,11 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
 
     tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES))
     updateJson(tree, 'package.json', (content) => {
-      content.scripts.start ??= 'nx run-many -t serve --parallel 100'
-      content.scripts['start:one'] ??= 'nx serve'
-      content.scripts.build ??= 'nx run-many -t build'
-      content.scripts['build:one'] ??= 'nx build'
-      content.scripts['build:nocache'] ??= 'nx run-many -t build --skip-nx-cache'
+      content.scripts.start ??= SCRIPTS.start
+      content.scripts['start:one'] ??= SCRIPTS['start:one']
+      content.scripts.build ??= SCRIPTS.build
+      content.scripts['build:one'] ??= SCRIPTS['build:one']
+      content.scripts['build:nocache'] ??= SCRIPTS['build:nocache']
 
       if (options.components.includes(Component.COMMAND)) {
         content.scripts['command:one'] ??= 'nx command'

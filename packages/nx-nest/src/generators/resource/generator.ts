@@ -68,6 +68,13 @@ async function createComponentResource(tree: Tree, options: ResourceGeneratorSch
   ).project
 
   const project = projects.get(options.project)
+
+  if (!project) {
+    output.error({ title: `[Resource] No project named ${options.project}` })
+
+    return
+  }
+
   const componentRoot = join(project.sourceRoot, componentMetaData[options.component].folder)
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)

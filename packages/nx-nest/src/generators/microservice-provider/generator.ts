@@ -198,6 +198,7 @@ async function updateConfigAndApplication(tree: Tree, options: GenerateOptions):
               join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`),
               (file) => {
                 addModuleDecoratorImport(file, `${componentMeta.className}Module`, messageQueueConfig.forRoot)
+                addImport(file, `ConfigService`, '@diamir/nestjs-config')
                 addImport(file, messageQueueConfig.moduleClass, messageQueueConfig.importPath)
 
                 return file

@@ -1,0 +1,17 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+
+import { BaseDocumentWithTimestamps } from './util'
+
+@Schema({ collection: 'default' })
+export class Default extends BaseDocumentWithTimestamps {
+  @Prop({ required: true })
+  prop: string
+}
+
+export const DefaultSchema =
+  SchemaFactory.createForClass(Default)
+
+export const DefaultDocument = {
+  name: Default.name,
+  schema: DefaultSchema
+}

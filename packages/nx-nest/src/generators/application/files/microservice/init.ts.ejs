@@ -4,11 +4,11 @@ import { NestFactory } from '@nestjs/core'
 import type { MicroserviceOptions } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices'
 
-import { MicroservicesModule } from './microservice.module'
+import { MicroserviceModule } from './microservice.module'
 <%# MessageQueue import added by generator %>
 
 export async function createApplication (): Promise<void> {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(MicroservicesModule, {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(MicroserviceModule, {
     logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') }),
     transport: Transport.RMQ,
     options: {
