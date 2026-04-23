@@ -275,7 +275,7 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
       Object.assign(dependencies, COMMAND_DEPENDENCIES)
     }
 
-    tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES))
+    tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES, undefined, true))
     updateJson(tree, 'package.json', (content) => {
       content.scripts.start ??= SCRIPTS.start
       content.scripts['start:one'] ??= SCRIPTS['start:one']
@@ -351,7 +351,7 @@ function setupJest(
     }
 
     if (!options.skipPackageJson) {
-      tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))
+      tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES, undefined, true))
       updateJson(tree, 'package.json', (content) => {
         content.scripts.test ??= 'nx run-many -t test --parallel 10'
         content.scripts['test:one'] ??= 'nx test'

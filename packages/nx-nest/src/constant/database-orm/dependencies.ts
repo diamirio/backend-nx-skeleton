@@ -1,22 +1,24 @@
+import { DEPENDENCY_VERSIONS } from '../dependencies'
+
 export const DEPENDENCIES_TYPEORM = {
-  '@diamir/nestjs-config': '0.1.0',
-  '@nestjs/typeorm': '11.0.0',
-  typeorm: '0.3.28'
+  '@diamir/nestjs-config': DEPENDENCY_VERSIONS['@diamir/nestjs-config'],
+  '@nestjs/typeorm': DEPENDENCY_VERSIONS['@nestjs/typeorm'],
+  typeorm: DEPENDENCY_VERSIONS.typeorm
 }
 
 export const DEPENDENCIES_TYPEORM_MYSQL = {
   ...DEPENDENCIES_TYPEORM,
-  mysql2: '3.15.0'
+  mysql2: DEPENDENCY_VERSIONS.mysql2
 }
 
 export const DEPENDENCIES_TYPEORM_POSTGRES = {
   ...DEPENDENCIES_TYPEORM,
-  pg: '8.16.3'
+  pg: DEPENDENCY_VERSIONS.pg
 }
 
 export const DEPENDENCIES_MONGOOSE = {
-  '@diamir/nestjs-config': '0.1.0',
-  '@nestjs/mongoose': '11.0.3',
-  'migrate-mongo': '12.1.3',
-  mongoose: '8.18.2'
+  '@diamir/nestjs-config': DEPENDENCY_VERSIONS['@diamir/nestjs-config'],
+  '@nestjs/mongoose': DEPENDENCY_VERSIONS['@nestjs/mongoose'],
+  'migrate-mongo': DEPENDENCY_VERSIONS['migrate-mongo'],
+  mongoose: DEPENDENCY_VERSIONS.mongoose
 }

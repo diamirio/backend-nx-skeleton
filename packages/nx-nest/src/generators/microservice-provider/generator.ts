@@ -95,7 +95,7 @@ export default async function microserviceProviderGenerator(
   if (!generateOptions.skipPackageJson) {
     output.log({ title: '[Microservice Provider] Updating package.json', bodyLines: ['Add dependencies ...'] })
 
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES, undefined, true))
   }
 
   updateJson(tree, 'nx.json', (content) => {

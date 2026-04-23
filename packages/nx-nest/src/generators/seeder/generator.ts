@@ -123,6 +123,6 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
   if (!options.skipPackageJson) {
     output.log({ title: '[Seeder] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, {}))
+    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, {}, undefined, true))
   }
 }
