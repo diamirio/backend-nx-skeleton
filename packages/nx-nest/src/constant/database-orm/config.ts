@@ -49,6 +49,7 @@ function getTypeormConfig(database: Database): Record<string, any> {
     type,
     synchronize: false,
     cache: false,
+    logging: false,
     keepConnectionAlive: true,
     migrationsTableName: '_migrations',
     invalidWhereValuesBehavior: {

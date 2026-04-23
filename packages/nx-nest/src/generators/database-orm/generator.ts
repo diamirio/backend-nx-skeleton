@@ -243,7 +243,7 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
   if (!options.skipPackageJson) {
     output.log({ title: '[Database] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
-    tasks.push(addDependenciesToPackageJson(tree, options.databaseOrmDetails.dependencies, {}))
+    tasks.push(addDependenciesToPackageJson(tree, options.databaseOrmDetails.dependencies, {}, undefined, true))
   }
 }
 
@@ -292,7 +292,6 @@ async function updateConfigAndApplication(tree: Tree, options: GenerateOptions):
             join(project.sourceRoot, componentMeta.folder, `${componentMeta.folder}.module.ts`),
             (file) => {
               addModuleDecoratorImport(file, `${componentMeta.className}Module`, databaseConfig.forRoot)
-              addImport(file, `ConfigService`, '@diamir/nestjs-config')
               addImport(file, databaseConfig.moduleClass, databaseConfig.importPath)
               addImport(file, 'getDatabaseOptions', options.importPath)
 

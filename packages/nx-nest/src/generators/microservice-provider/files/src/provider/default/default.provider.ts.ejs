@@ -5,7 +5,7 @@ import { MessageQueue } from '../../message-queue.enum'
 
 @MSP(MessageQueue.DEFAULT)
 export class DefaultProvider extends BaseMicroserviceProvider<DefaultPattern> {
-  default (): Promise<unknwon> {
+  default (): Promise<unknown> {
     return this.send(DefaultPattern.DEFAULT, {})
   }
 }

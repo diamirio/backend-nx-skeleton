@@ -6,6 +6,7 @@ export enum Component {
 }
 
 interface ComponentMetadata {
+  component: Component
   applicationConstants: string
   applicationImports: string
   applicationBootstrap: string
@@ -44,6 +45,7 @@ function getComponentStrings(component: Component): ComponentMetadata {
   const { service, className, constant, folder } = componentMetaData[component]
 
   return {
+    component,
     applicationConstants: `${constant} = '${service}'`,
     applicationImports: `import { createApplication as create${className}Application } from './${folder}/init'`,
     applicationBootstrap: `return create${className}Application()`,

@@ -4,4 +4,5 @@ export interface ResourceGeneratorSchema {
   name: string
   project?: string
   component: Component | 'seeder'
+  skipInput?: boolean
 }

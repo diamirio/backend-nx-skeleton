@@ -7,7 +7,7 @@
     "build": {
       "options": {
         "assets": [
-          "{projectRoot}/*.md",
+          "{projectRoot}/README.md",
           "{projectRoot}/LICENSE",
           "{projectRoot}/generators.json",
           "{projectRoot}/migrations.json",

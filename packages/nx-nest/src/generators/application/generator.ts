@@ -36,6 +36,7 @@ import {
 import databaseLibraryGenerator from '../database-orm/generator'
 import databaseTargetGenerator from '../database-target/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
+import resourceGenerator from '../resource/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
@@ -122,6 +123,12 @@ export default async function applicationGenerator(
         templateContext,
         join(generateOptions.projectRoot, 'src', component.folder)
       )
+      await resourceGenerator(tree, {
+        component: component.component,
+        project: generateOptions.name,
+        name: 'default',
+        skipInput: true
+      })
     }
 
     updatePackageJson(tree, generateOptions, tasks)
@@ -275,7 +282,7 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
       Object.assign(dependencies, COMMAND_DEPENDENCIES)
     }
 
-    tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES))
+    tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES, undefined, true))
     updateJson(tree, 'package.json', (content) => {
       content.scripts.start ??= SCRIPTS.start
       content.scripts['start:one'] ??= SCRIPTS['start:one']
@@ -351,7 +358,7 @@ function setupJest(
     }
 
     if (!options.skipPackageJson) {
-      tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES))
+      tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES, undefined, true))
       updateJson(tree, 'package.json', (content) => {
         content.scripts.test ??= 'nx run-many -t test --parallel 10'
         content.scripts['test:one'] ??= 'nx test'

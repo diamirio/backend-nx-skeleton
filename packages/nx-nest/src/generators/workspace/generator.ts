@@ -100,16 +100,13 @@ function updatePackageJson(tree: Tree, options: NestWorkspaceGeneratorSchema, ta
         CUSTOM_FIELDS
       )
 
-      const packageVersion = content.dependencies['@diamir/nx-nest']
-
+      content.devDependencies['@diamir/nx-nest'] = content.dependencies['@diamir/nx-nest']
       delete content.dependencies['@diamir/nx-nest']
-
-      content.devDependencies['@diamir/nx-nest'] = packageVersion
 
       return content
     })
 
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES))
+    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, DEV_DEPENDENCIES, undefined, true))
   }
 }
 

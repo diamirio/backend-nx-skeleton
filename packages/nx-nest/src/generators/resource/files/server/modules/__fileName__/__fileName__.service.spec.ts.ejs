@@ -1,0 +1,13 @@
+import { <%- resourceNames.className -%>Service } from './<%- resourceNames.fileName -%>.service'
+
+describe('<%- resourceNames.className -%>Service', () => {
+  const service = new <%- resourceNames.className -%>Service()
+
+  test('should be defined', () => {
+    expect(service).toBeDefined()
+  })
+
+  test('should return "Hello <%- resourceNames.className -%>!"', () => {
+    expect(service.default()).toEqual('Hello <%- resourceNames.className -%>!')
+  })
+})
