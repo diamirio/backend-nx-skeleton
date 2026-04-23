@@ -1,3 +1,17 @@
+## 0.1.0-beta.4 (2026-04-23)
+
+### 🚀 Features
+
+- **nx-nest:** reuse resource generator for default application components
+
+### 🩹 Fixes
+
+- **nx-nest:** templates, no dependency override, single dendency-version file
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 0.1.0-beta.3 (2026-04-22)
 
 ### 🩹 Fixes
