@@ -11,6 +11,7 @@ export const DEPENDENCY_VERSIONS = {
   '@diamir/nestjs-microservice': '0.1.0',
   '@diamir/nestjs-retry': '0.1.0',
   // workspace
+  '@nx/eslint': '22.6.5',
   eslint: '9.36.0',
   'simple-git-hooks': '2.13.1',
   'ts-node': '10.9.2',

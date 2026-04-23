@@ -36,6 +36,7 @@ import {
 import databaseLibraryGenerator from '../database-orm/generator'
 import databaseTargetGenerator from '../database-target/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
+import resourceGenerator from '../resource/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
@@ -122,6 +123,12 @@ export default async function applicationGenerator(
         templateContext,
         join(generateOptions.projectRoot, 'src', component.folder)
       )
+      await resourceGenerator(tree, {
+        component: component.component,
+        project: generateOptions.name,
+        name: 'default',
+        skipInput: true
+      })
     }
 
     updatePackageJson(tree, generateOptions, tasks)

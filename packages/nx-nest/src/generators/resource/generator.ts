@@ -40,32 +40,36 @@ async function createComponentResource(tree: Tree, options: ResourceGeneratorSch
     return
   }
 
-  const applications = []
   const projects = getProjects(tree)
 
-  for (const project of projects.values()) {
-    if (
-      project.projectType === 'application' &&
-      (project as any).integration.nestjs.components.includes(options.component)
-    ) {
-      applications.push({ name: project.name, value: project.name })
+  // skip if used to generate default components from the application-generator
+  if (!options.skipInput) {
+    const applications = []
+
+    for (const project of projects.values()) {
+      if (
+        project.projectType === 'application' &&
+        (project as any).integration?.nestjs?.components?.includes(options.component)
+      ) {
+        applications.push({ name: project.name, value: project.name })
+      }
     }
+
+    if (!applications.length) {
+      output.error({ title: `[Resource] No matching project for the component ${options.component}` })
+
+      return
+    }
+
+    options.project ??= (
+      await prompt<{ project: string }>({
+        type: 'autocomplete',
+        name: 'project',
+        message: 'Please select a project:',
+        choices: applications
+      })
+    ).project
   }
-
-  if (!applications.length) {
-    output.error({ title: '[Resource] No matching project for this component' })
-
-    return
-  }
-
-  options.project ??= (
-    await prompt<{ project: string }>({
-      type: 'autocomplete',
-      name: 'project',
-      message: 'Please select a project:',
-      choices: applications
-    })
-  ).project
 
   const project = projects.get(options.project)
 

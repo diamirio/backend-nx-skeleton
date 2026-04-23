@@ -6,6 +6,7 @@ export const DEPENDENCIES = {}
 export const DEV_DEPENDENCIES = {
   '@types/node': `^${NODE_VERSION}`,
   '@diamir/eslint-config': DEPENDENCY_VERSIONS['@diamir/eslint-config'],
+  '@nx/eslint': DEPENDENCY_VERSIONS['@nx/eslint'],
   eslint: DEPENDENCY_VERSIONS.eslint,
   'simple-git-hooks': DEPENDENCY_VERSIONS['simple-git-hooks'],
   'ts-node': DEPENDENCY_VERSIONS['ts-node'],
