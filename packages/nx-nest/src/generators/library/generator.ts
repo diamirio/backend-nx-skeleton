@@ -87,5 +87,9 @@ export default async function libraryGenerator(
   addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
   addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
 
+  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
+    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
+  }
+
   return applyTasks(tasks)
 }
