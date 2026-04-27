@@ -2,10 +2,16 @@
 logLevel: LOG_LEVEL
 
 misc:
+  # maintenance module
   lockfile: MAINTENANCE_LOCKFILE
-  lastUpdateFile: LAST_UPDATE_FILE
   maintenanceNotification: MAINTENANCE_MESSAGE
-<% if (isServer) { %>
+<% if (isServer) { %>  # internal module
+  internalRoutesEnabled:
+    __name: INTERNAL_ROUTES_ENABLED
+    __format: json
+  lastUpdateFile: LAST_UPDATE_FILE
+  changelogFile: CHANGELOG_FILE
+
 url:
   basePath: BASE_URL
   apiPath: API_BASE_PATH

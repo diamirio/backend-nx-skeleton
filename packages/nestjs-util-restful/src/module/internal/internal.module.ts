@@ -7,6 +7,12 @@ import { InternalService } from './internal.service'
 @Module({})
 export class InternalModule {
   static forRoot(options: InternalOptions): DynamicModule {
+    if (typeof options?.enabled === 'boolean' && !options?.enabled) {
+      return {
+        module: InternalModule
+      }
+    }
+
     return {
       module: InternalModule,
       controllers: [InternalController],
