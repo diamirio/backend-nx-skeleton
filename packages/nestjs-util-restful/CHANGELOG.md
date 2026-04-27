@@ -1,3 +1,14 @@
+## 0.1.0-beta.3 (2026-04-27)
+
+### 🚀 Features
+
+- **nestjs-util-restful:** config/env-var to disable internal module routes
+- **nestjs-util-restful:** config/env-var to disable swagger-ui
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 0.1.0-beta.2 (2026-04-17)
 
 ### 🩹 Fixes
