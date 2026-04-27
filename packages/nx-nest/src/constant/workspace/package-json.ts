@@ -6,12 +6,6 @@ export const SCRIPTS = {
   build: 'nx run-many --target build --batch',
   'build:one': 'nx build',
   'build:nocache': 'npm run build -- --skip-nx-cache',
-  test: 'nx run-many --target test --parallel 10',
-  'test:one': 'nx test --project',
-  'test:e2e': 'nx run-many --target test -c e2e --parallel 10',
-  'test:e2e:one': 'nx test -c e2e --project',
-  'test:cov': 'nx run-many --target test -c cov --parallel 10',
-  'test:cov:one': 'nx test -c cov --project',
   lint: 'npm run lint:check -- --fix',
   'lint:check': 'nx run-many --parallel 10 --target lint --',
   update: 'nx migrate latest'

@@ -2,6 +2,7 @@ import { DEPENDENCY_VERSIONS } from '../dependencies'
 
 export const DEPENDENCIES_TYPEORM = {
   '@diamir/nestjs-config': DEPENDENCY_VERSIONS['@diamir/nestjs-config'],
+  '@nestjs/swagger': DEPENDENCY_VERSIONS['@nestjs/swagger'],
   '@nestjs/typeorm': DEPENDENCY_VERSIONS['@nestjs/typeorm'],
   typeorm: DEPENDENCY_VERSIONS.typeorm
 }

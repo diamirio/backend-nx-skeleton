@@ -2,9 +2,9 @@ import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { formatFiles, getProjects, readNxJson, updateJson } from '@nx/devkit'
 import { output } from '@nx/workspace'
-import { prompt } from 'enquirer'
 
 import { DatabaseOrm } from '../../constant'
+import { addPackageScripts, selectProjectByAutocomplete } from '../../utils'
 import type { DatabaseTargetGeneratorSchema } from './schema'
 
 export default async function databaseTargetGenerator(
@@ -14,7 +14,6 @@ export default async function databaseTargetGenerator(
   const orm = (readNxJson(tree) as any)?.integration?.orm?.database
 
   if (!orm || orm === 'none') {
-    // @todo: remove legacy 'none'
     output.error({ title: '[Migration-Target] Requires database-orm to be set up' })
 
     return
@@ -35,14 +34,15 @@ export default async function databaseTargetGenerator(
     return
   }
 
-  options.project ??= (
-    await prompt<{ project: string }>({
-      type: 'autocomplete',
-      name: 'project',
-      message: 'Please select the project to setup the migration for:',
-      choices: applications
-    })
-  ).project
+  options.project ??= await selectProjectByAutocomplete(
+    applications,
+    'Please select the project to setup the migration for:'
+  )
+
+  if (!options.project) {
+    output.error({ title: '[Migration-Target] No project selected' })
+    return
+  }
 
   const project = projects.get(options.project)
 
@@ -52,17 +52,17 @@ export default async function databaseTargetGenerator(
     return
   }
 
-  updateJson(tree, 'package.json', (content) => {
-    content.scripts['migration:run'] ??= `nx migration -c run ${project.name}`
-    content.scripts['migration:rollback'] ??= `nx migration -c rollback ${project.name}`
-    content.scripts['migration:create'] ??= `nx migration -c create ${project.name} --name`
+  const migrationScripts: Record<string, string> = {
+    'migration:run': `nx migration -c run ${project.name}`,
+    'migration:rollback': `nx migration -c rollback ${project.name}`,
+    'migration:create': `nx migration -c create ${project.name} --name`
+  }
 
-    if (orm === DatabaseOrm.TYPEORM) {
-      content.scripts['migration:generate'] ??= `nx migration -c generate ${project.name} --name`
-    }
+  if (orm === DatabaseOrm.TYPEORM) {
+    migrationScripts['migration:generate'] = `nx migration -c generate ${project.name} --name`
+  }
 
-    return content
-  })
+  addPackageScripts(tree, 'package.json', migrationScripts)
 
   updateJson(tree, join(project.root, 'project.json'), (content) => {
     if (orm === DatabaseOrm.TYPEORM) {

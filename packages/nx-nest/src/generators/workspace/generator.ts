@@ -4,7 +4,7 @@ import { addDependenciesToPackageJson, OverwriteStrategy, output, updateJson } f
 import { NODE_VERSION } from '../../constant'
 import { DOCKER_IMAGE, SERVICE_NAME } from '../../constant/application'
 import { CUSTOM_FIELDS, DEPENDENCIES, DEV_DEPENDENCIES, SCRIPTS } from '../../constant/workspace'
-import { applyTasks, applyTemplateFactory } from '../../utils'
+import { addPackageScripts, applyTasks, applyTemplateFactory } from '../../utils'
 import databaseLibraryGenerator from '../database-orm/generator'
 import microserviceProviderGenerator from '../microservice-provider/generator'
 import type { NestWorkspaceGeneratorSchema } from './schema'
@@ -88,20 +88,19 @@ function updatePackageJson(tree: Tree, options: NestWorkspaceGeneratorSchema, ta
   if (!options.skipPackageJson) {
     output.log({ title: '[Workspace] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
+    addPackageScripts(tree, 'package.json', {
+      nx: SCRIPTS.nx,
+      prepare: SCRIPTS.prepare,
+      lint: SCRIPTS.lint,
+      'lint:check': SCRIPTS['lint:check'],
+      update: SCRIPTS.update
+    })
     updateJson(tree, 'package.json', (content) => {
-      Object.assign(
-        content,
-        {
-          scripts: {
-            ...(content.scripts ?? {}),
-            ...SCRIPTS
-          }
-        },
-        CUSTOM_FIELDS
-      )
+      Object.assign(content, CUSTOM_FIELDS)
 
       content.devDependencies['@diamir/nx-nest'] = content.dependencies['@diamir/nx-nest']
       delete content.dependencies['@diamir/nx-nest']
+      DEV_DEPENDENCIES['@nx/eslint'] = content.devDependencies.nx
 
       return content
     })

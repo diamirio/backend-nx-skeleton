@@ -4,12 +4,10 @@ import {
   addDependenciesToPackageJson,
   addProjectConfiguration,
   getPackageManagerCommand,
-  names,
   readNxJson,
   updateJson
 } from '@nx/devkit'
 import { output, ProjectType } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { execCommand } from 'nx/src/command-line/release/utils/exec-command'
 
 import { Component, getComponentMetadata, NODE_VERSION } from '../../constant'
@@ -23,13 +21,16 @@ import {
 } from '../../constant/application'
 import { JEST_DEPENDENCIES } from '../../constant/jest'
 import { SCRIPTS } from '../../constant/workspace'
-import type { ApplyTemplate } from '../../utils'
 import {
   addEnumMember,
   addImport,
   addIndexExport,
+  addPackageScripts,
   applyTasks,
   applyTemplateFactory,
+  cleanupGitkeep,
+  SetupGeneratorOptions,
+  setupGeneratorOptions,
   updateSourceFile,
   updateYaml
 } from '../../utils'
@@ -40,26 +41,14 @@ import resourceGenerator from '../resource/generator'
 import type { ApplicationGeneratorSchema } from './schema'
 import { addPlugin } from './utils'
 
-interface GenerateOptions extends ApplicationGeneratorSchema {
-  scope: string
-  packageScope: string
-  projectNames: {
-    name: string
-    className: string
-    propertyName: string
-    constantName: string
-    fileName: string
-  }
-  projectName: string
-  appRoot: string
-  projectRoot: string
-}
+type GenerateOptions = SetupGeneratorOptions<ApplicationGeneratorSchema>
 
 export default async function applicationGenerator(
   tree: Tree,
   options: ApplicationGeneratorSchema
 ): Promise<GeneratorCallback> {
-  const generateOptions: GenerateOptions = options as GenerateOptions
+  const generateOptions: GenerateOptions = setupGeneratorOptions(tree, options)
+  generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectName)
 
   validateComponents(generateOptions)
 
@@ -71,13 +60,6 @@ export default async function applicationGenerator(
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-
-  generateOptions.scope = getNpmScope(tree)
-  generateOptions.projectNames = names(generateOptions.name)
-  generateOptions.projectName = generateOptions.projectNames.fileName
-  generateOptions.packageScope = generateOptions.scope
-    ? `@${generateOptions.scope}/${generateOptions.projectNames.fileName}`
-    : generateOptions.projectNames.fileName
 
   const applicationMetadata = getComponentMetadata(generateOptions.components)
   const templateContext: Record<string, any> = {
@@ -93,9 +75,6 @@ export default async function applicationGenerator(
     // biome-ignore-end lint/style/useNamingConvention: naming
     database: options.database
   }
-
-  generateOptions.appRoot = readNxJson(tree)?.workspaceLayout?.appsDir ?? 'apps'
-  generateOptions.projectRoot = join(generateOptions.appRoot, generateOptions.projectNames.fileName)
 
   /**
    * TEMPLATES
@@ -151,9 +130,7 @@ export default async function applicationGenerator(
 
   updateGitlabCI(tree, generateOptions.projectNames)
 
-  if (tree.exists(join(generateOptions.appRoot, '.gitkeep'))) {
-    tree.delete(join(generateOptions.appRoot, '.gitkeep'))
-  }
+  cleanupGitkeep(tree, generateOptions.appRoot)
 
   output.log({ title: '[Application] Post-Processing ...' })
 
@@ -161,7 +138,7 @@ export default async function applicationGenerator(
 }
 
 // validate and map component names (validate manually typed components if not using the interactive input)
-function validateComponents(options: GenerateOptions): void {
+function validateComponents(options: Pick<GenerateOptions, 'components'>): void {
   const validatedComponents: GenerateOptions['components'] = []
   const componentMap: Record<string, string> = Object.fromEntries(
     Object.entries(Component).map(([key, value]) => [value, key])
@@ -212,7 +189,7 @@ async function generateDatabaseLib(
 async function generateMspLib(
   tree: Tree,
   options: GenerateOptions,
-  _context,
+  _context: Record<string, any>,
   tasks: GeneratorCallback[]
 ): Promise<void> {
   if (options.components?.includes(Component.MICROSERVICE) || options.microserviceProvider) {
@@ -283,19 +260,18 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
     }
 
     tasks.push(addDependenciesToPackageJson(tree, dependencies, DEV_DEPENDENCIES, undefined, true))
-    updateJson(tree, 'package.json', (content) => {
-      content.scripts.start ??= SCRIPTS.start
-      content.scripts['start:one'] ??= SCRIPTS['start:one']
-      content.scripts.build ??= SCRIPTS.build
-      content.scripts['build:one'] ??= SCRIPTS['build:one']
-      content.scripts['build:nocache'] ??= SCRIPTS['build:nocache']
 
-      if (options.components.includes(Component.COMMAND)) {
-        content.scripts['command:one'] ??= 'nx command'
-      }
-
-      return content
+    addPackageScripts(tree, 'package.json', {
+      start: SCRIPTS.start,
+      'start:one': SCRIPTS['start:one'],
+      build: SCRIPTS.build,
+      'build:one': SCRIPTS['build:one'],
+      'build:nocache': SCRIPTS['build:nocache']
     })
+
+    if (options.components.includes(Component.COMMAND)) {
+      addPackageScripts(tree, 'package.json', { 'command:one': 'nx command' })
+    }
 
     updateJson(tree, join(options.projectRoot, 'package.json'), (content) => {
       for (const component of options.components) {
@@ -310,7 +286,6 @@ function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: Generato
             content.scripts.command ??= `NODE_SERVICE='cli' node ./${options.projectRoot}/src/main.js`
             break
         }
-        /* eslint-enable*/
       }
 
       return content
@@ -331,7 +306,7 @@ function setupJest(
   tree: Tree,
   options: GenerateOptions,
   context: Record<string, any>,
-  applyTemplate: ApplyTemplate,
+  applyTemplate: ReturnType<typeof applyTemplateFactory>,
   tasks: GeneratorCallback[]
 ): void {
   if (options.jest) {
@@ -348,22 +323,18 @@ function setupJest(
       applyTemplate(['files', 'jest', 'e2e', 'files'], context, options.projectRoot)
 
       if (!options.skipPackageJson) {
-        updateJson(tree, 'package.json', (content) => {
-          content.scripts['test:e2e'] ??= 'nx run-many -t e2e --parallel 10'
-          content.scripts['test:e2e:one'] ??= 'nx e2e'
-
-          return content
+        addPackageScripts(tree, 'package.json', {
+          'test:e2e': 'nx run-many -t e2e --parallel 10',
+          'test:e2e:one': 'nx e2e'
         })
       }
     }
 
     if (!options.skipPackageJson) {
       tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES, undefined, true))
-      updateJson(tree, 'package.json', (content) => {
-        content.scripts.test ??= 'nx run-many -t test --parallel 10'
-        content.scripts['test:one'] ??= 'nx test'
-
-        return content
+      addPackageScripts(tree, 'package.json', {
+        test: 'nx run-many -t test --parallel 10',
+        'test:one': 'nx test'
       })
     }
   }
