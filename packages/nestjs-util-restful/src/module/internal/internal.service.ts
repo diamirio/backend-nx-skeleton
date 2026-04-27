@@ -7,6 +7,7 @@ import type { ApiStatus, InternalOptions } from './interface'
 export class InternalService {
   private readonly logger = new Logger(InternalService.name)
   private readonly options: InternalOptions = {
+    enabled: true,
     lastUpdateFile: '.last-update',
     changelogFile: 'CHANGELOG.md',
     includeLastUpdate: true

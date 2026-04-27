@@ -1,49 +1,31 @@
 import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import {
-  addDependenciesToPackageJson,
-  addProjectConfiguration,
-  formatFiles,
-  names,
-  output,
-  readNxJson,
-  updateJson
-} from '@nx/devkit'
+import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, output } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 
 import { JEST_DEPENDENCIES } from '../../constant/jest'
-import { applyTasks, applyTemplateFactory } from '../../utils'
+import {
+  addPackageScripts,
+  applyTasks,
+  applyTemplateFactory,
+  cleanupGitkeep,
+  SetupGeneratorOptions,
+  setupGeneratorOptions
+} from '../../utils'
 import type { LibraryGeneratorSchema } from './schema'
 
-interface GenerateOptions extends LibraryGeneratorSchema {
-  scope: string
-  projectNames: {
-    name: string
-    className: string
-    propertyName: string
-    constantName: string
-    fileName: string
-  }
-  libRoot: string
-  projectRoot: string
-}
+type GenerateOptions = SetupGeneratorOptions<LibraryGeneratorSchema>
 
 export default async function libraryGenerator(
   tree: Tree,
   options: LibraryGeneratorSchema
 ): Promise<GeneratorCallback> {
-  const generateOptions: GenerateOptions = options as GenerateOptions
+  const generateOptions: GenerateOptions = setupGeneratorOptions(tree, options)
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectName)
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-
-  generateOptions.scope = getNpmScope(tree) ?? 'lib'
-  generateOptions.projectNames = names(options.name)
-  generateOptions.importPath ??= `@${generateOptions.scope}/${generateOptions.projectNames.fileName}`
-  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectNames.fileName)
 
   output.log({
     title: '[Library] Applying templates',
@@ -73,11 +55,9 @@ export default async function libraryGenerator(
 
     if (!generateOptions.skipPackageJson) {
       tasks.push(addDependenciesToPackageJson(tree, {}, JEST_DEPENDENCIES, undefined, true))
-      updateJson(tree, 'package.json', (content) => {
-        content.scripts.test ??= 'nx run-many --target test --parallel 10'
-        content.scripts['test:one'] ??= 'nx test --project'
-
-        return content
+      addPackageScripts(tree, 'package.json', {
+        test: 'nx run-many --target test --parallel 10',
+        'test:one': 'nx test --project'
       })
     }
   }
@@ -86,6 +66,8 @@ export default async function libraryGenerator(
 
   addTsConfigPath(tree, generateOptions.importPath, [join(generateOptions.projectRoot, 'src', 'index.ts')])
   addTsConfigPath(tree, `${generateOptions.importPath}/*`, [join(generateOptions.projectRoot, 'src', '*')])
+
+  cleanupGitkeep(tree, generateOptions.libRoot)
 
   return applyTasks(tasks)
 }

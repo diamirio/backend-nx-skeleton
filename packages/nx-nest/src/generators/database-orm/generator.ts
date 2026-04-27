@@ -4,7 +4,6 @@ import {
   addDependenciesToPackageJson,
   addProjectConfiguration,
   formatFiles,
-  names,
   OverwriteStrategy,
   output,
   readNxJson,
@@ -13,7 +12,6 @@ import {
 } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 import { readJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
@@ -34,24 +32,21 @@ import {
   addModuleDecoratorImport,
   applyTasks,
   applyTemplateFactory,
+  cleanupGitkeep,
   promptDatabase,
   promptDatabaseOrm,
   promptProjectMultiselect,
+  SetupGeneratorOptions,
+  setupGeneratorOptions,
   updateConfigFiles,
   updateSourceFile,
   updateYaml
 } from '../../utils'
 import type { DatabaseOrmGeneratorSchema } from './schema'
 
-interface GenerateOptions extends DatabaseOrmGeneratorSchema {
-  scope: string
-  libraryName: string
-  importPath: string
-  packageScope: string
-  libRoot: string
-  projectRoot: string
-  databaseOrmDetails: { folder: string; dependencies: Record<string, string> }
-  updateApplications: string[]
+type GenerateOptions = SetupGeneratorOptions<DatabaseOrmGeneratorSchema> & {
+  databaseOrmDetails?: { folder: string; dependencies: Record<string, string> }
+  updateApplications?: string[]
 }
 
 function getDatabaseOrmDetails(
@@ -84,18 +79,11 @@ export default async function databaseOrmGenerator(
   tree: Tree,
   options: DatabaseOrmGeneratorSchema
 ): Promise<GeneratorCallback> {
-  const generateOptions: GenerateOptions = options as GenerateOptions
+  const generateOptions: GenerateOptions = setupGeneratorOptions(tree, options)
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectName)
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname, { overwriteStrategy: OverwriteStrategy.KeepExisting })
-
-  generateOptions.scope = getNpmScope(tree)
-
-  generateOptions.libraryName = names(generateOptions.name).fileName
-  generateOptions.importPath = generateOptions?.importPath ?? `@${generateOptions.scope}/${generateOptions.libraryName}`
-  generateOptions.packageScope = generateOptions.scope ? generateOptions.importPath : generateOptions.libraryName
-  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.libraryName)
 
   const integration = (readNxJson(tree) as any)?.integration?.orm
 
@@ -126,7 +114,7 @@ export default async function databaseOrmGenerator(
   })
 
   if (!(generateOptions.update || tree.exists(generateOptions.projectRoot))) {
-    addProjectConfiguration(tree, generateOptions.libraryName, {
+    addProjectConfiguration(tree, generateOptions.projectName, {
       root: generateOptions.projectRoot,
       sourceRoot: join(generateOptions.projectRoot, 'src'),
       projectType: ProjectType.Library,
@@ -232,9 +220,7 @@ export default async function databaseOrmGenerator(
     }
   }
 
-  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
-    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
-  }
+  cleanupGitkeep(tree, generateOptions.libRoot)
 
   return applyTasks(tasks)
 }

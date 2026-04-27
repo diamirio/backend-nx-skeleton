@@ -23,7 +23,10 @@ import * as modules from './modules'
     }
   ],
   imports: [
-    InternalModule.forRoot(ConfigService.get('misc')),
+    InternalModule.forRoot({
+      ...ConfigService.get('misc'),
+      enabled: ConfigService.get('misc.internalRoutesEnabled')
+    }),
     MaintenanceModule.forRoot({
       application: ConfigService.get('url.basePath'),
       lockfilePath: ConfigService.get('misc.lockfile')

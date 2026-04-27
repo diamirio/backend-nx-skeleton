@@ -51,6 +51,8 @@ export function addIndexExport(file: SourceFile, modulePath: string): void {
   if (!moduleExport) {
     file.addExportDeclaration({ moduleSpecifier: modulePath })
   }
+
+  clearDefaultExport(file)
 }
 
 export function addExport(file: SourceFile, exportValue: string, exportPath: string): void {
@@ -61,6 +63,8 @@ export function addExport(file: SourceFile, exportValue: string, exportPath: str
   } else if (!exportNode.getNamedExports().find((i) => i.getName() === exportValue)) {
     exportNode.addNamedExport(exportValue)
   }
+
+  clearDefaultExport(file)
 }
 
 export function addImport(file: SourceFile, importValue: string, importPath: string): void {
@@ -88,5 +92,15 @@ export function addModuleDecoratorImport(file: SourceFile, className: string, im
     if (!hasImport) {
       importArray?.addElement(importValue)
     }
+  }
+}
+
+export function clearDefaultExport(file: SourceFile): void {
+  const exportNode = file.getExportDeclaration((decl) => {
+    return decl.getFullText() === 'export {}'
+  })
+
+  if (exportNode) {
+    exportNode.remove()
   }
 }

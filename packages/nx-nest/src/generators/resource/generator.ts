@@ -3,7 +3,6 @@ import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { formatFiles, getProjects, names, readNxJson } from '@nx/devkit'
 import { output } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { prompt } from 'enquirer'
 
 import { Component, componentMetaData } from '../../constant'
 import {
@@ -12,6 +11,7 @@ import {
   addIndexExport,
   applyTasks,
   applyTemplateFactory,
+  selectProjectByAutocomplete,
   updateSourceFile
 } from '../../utils'
 import type { ResourceGeneratorSchema } from './schema'
@@ -61,14 +61,7 @@ async function createComponentResource(tree: Tree, options: ResourceGeneratorSch
       return
     }
 
-    options.project ??= (
-      await prompt<{ project: string }>({
-        type: 'autocomplete',
-        name: 'project',
-        message: 'Please select a project:',
-        choices: applications
-      })
-    ).project
+    options.project ??= await selectProjectByAutocomplete(applications, 'Please select a project:')
   }
 
   const project = projects.get(options.project)
@@ -79,7 +72,10 @@ async function createComponentResource(tree: Tree, options: ResourceGeneratorSch
     return
   }
 
-  const componentRoot = join(project.sourceRoot, componentMetaData[options.component].folder)
+  const componentRoot =
+    project.projectType === 'application'
+      ? join(project.sourceRoot, componentMetaData[options.component].folder, 'modules')
+      : project.sourceRoot
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)
   const projectNames = names(project.name)
@@ -103,7 +99,7 @@ async function createComponentResource(tree: Tree, options: ResourceGeneratorSch
   // component-specific folder
   applyTemplate(['files', componentMetaData[options.component].folder], templateContext, componentRoot)
 
-  updateSourceFile(tree, join(componentRoot, 'modules', 'index.ts'), (file) => {
+  updateSourceFile(tree, join(componentRoot, 'index.ts'), (file) => {
     addIndexExport(file, `./${resourceNames.fileName}/${resourceNames.fileName}.module`)
   })
 

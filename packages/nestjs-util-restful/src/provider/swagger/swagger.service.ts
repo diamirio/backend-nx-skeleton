@@ -13,6 +13,11 @@ export class SwaggerService {
    * @param {SwaggerOptions} [options]
    */
   static enable(app: INestApplication, config?: SwaggerConfig, url?: UrlConfig, options?: SwaggerOptions): void {
+    // skip if swagger is disabled, if config is missing keep swagger-ui
+    if (typeof config?.enabled === 'boolean' && !config?.enabled) {
+      return
+    }
+
     let builder = new DocumentBuilder()
       .setTitle(config?.title)
       .setDescription(config?.description)

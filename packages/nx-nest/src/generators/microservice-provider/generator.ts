@@ -4,16 +4,14 @@ import {
   addDependenciesToPackageJson,
   addProjectConfiguration,
   formatFiles,
-  names,
   OverwriteStrategy,
   output,
-  readNxJson,
-  readProjectConfiguration
+  readProjectConfiguration,
+  updateJson
 } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { readJson, updateJson } from 'nx/src/generators/utils/json'
+import { readJson } from 'nx/src/generators/utils/json'
 import { YAMLMap, YAMLSeq } from 'yaml'
 
 import { componentMetaData } from '../../constant'
@@ -35,37 +33,27 @@ import {
   addModuleDecoratorImport,
   applyTasks,
   applyTemplateFactory,
+  cleanupGitkeep,
   promptProjectMultiselect,
+  SetupGeneratorOptions,
+  setupGeneratorOptions,
   updateConfigFiles,
   updateSourceFile,
   updateYaml
 } from '../../utils'
 import type { MicroserviceProviderGeneratorSchema } from './schema'
 
-interface GenerateOptions extends MicroserviceProviderGeneratorSchema {
-  scope: string
-  libraryName: string
-  importPath: string
-  packageScope: string
-  libRoot: string
-  projectRoot: string
-}
+type GenerateOptions = SetupGeneratorOptions<MicroserviceProviderGeneratorSchema>
 
 export default async function microserviceProviderGenerator(
   tree: Tree,
   options: MicroserviceProviderGeneratorSchema
 ): Promise<GeneratorCallback> {
-  const generateOptions: GenerateOptions = options as GenerateOptions
+  const generateOptions: GenerateOptions = setupGeneratorOptions(tree, options)
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectName)
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname, { overwriteStrategy: OverwriteStrategy.KeepExisting })
-
-  generateOptions.scope = getNpmScope(tree)
-  generateOptions.libraryName = names(generateOptions.name).fileName
-  generateOptions.importPath = generateOptions?.importPath ?? `@${generateOptions.scope}/${generateOptions.libraryName}`
-  generateOptions.packageScope = generateOptions.scope ? generateOptions.importPath : generateOptions.libraryName
-  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.libraryName)
 
   output.log({
     title: '[Microservice Provider] Applying templates',
@@ -73,7 +61,7 @@ export default async function microserviceProviderGenerator(
   })
 
   if (!tree.exists(generateOptions.projectRoot)) {
-    addProjectConfiguration(tree, generateOptions.libraryName, {
+    addProjectConfiguration(tree, generateOptions.projectName, {
       root: generateOptions.projectRoot,
       sourceRoot: join(generateOptions.projectRoot, 'src'),
       projectType: ProjectType.Library,
@@ -149,9 +137,7 @@ export default async function microserviceProviderGenerator(
     })
   }
 
-  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
-    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
-  }
+  cleanupGitkeep(tree, generateOptions.libRoot)
 
   return applyTasks(tasks)
 }
