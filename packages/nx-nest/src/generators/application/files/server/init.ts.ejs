@@ -13,7 +13,7 @@ export async function createApplication (): Promise<void> {
     logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') })
   })
 
-  // app.enableCors()
+  app.enableCors()
 
   app.setGlobalPrefix(ConfigService.get('url.apiPath', ''))
 
