@@ -93,6 +93,7 @@ function updatePackageJson(tree: Tree, options: NestWorkspaceGeneratorSchema, ta
       prepare: SCRIPTS.prepare,
       lint: SCRIPTS.lint,
       'lint:check': SCRIPTS['lint:check'],
+      'lint:fix': SCRIPTS['lint:fix'],
       update: SCRIPTS.update
     })
     updateJson(tree, 'package.json', (content) => {
