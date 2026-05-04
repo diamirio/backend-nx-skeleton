@@ -175,7 +175,7 @@ export default async function databaseOrmGenerator(
         }
 
         if (!content.hasIn(['services', DOCKER_SERVICE_NAME])) {
-          content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[options.database] })
+          content.addIn(['services'], { key: DOCKER_SERVICE_NAME, value: DOCKER_DB_SERVICE[generateOptions.database] })
 
           if (generateOptions.database === Database.MONGO) {
             applyTemplate(['files', 'docker'], generateOptions, '.docker')
@@ -185,8 +185,8 @@ export default async function databaseOrmGenerator(
             content.add({ key: 'volumes', value: new YAMLMap() })
           }
 
-          if (!content.hasIn(['volumes', DOCKER_DB_VOLUME[options.database]])) {
-            content.addIn(['volumes'], { key: DOCKER_DB_VOLUME[options.database], value: new YAMLMap() })
+          if (!content.hasIn(['volumes', DOCKER_DB_VOLUME[generateOptions.database]])) {
+            content.addIn(['volumes'], { key: DOCKER_DB_VOLUME[generateOptions.database], value: new YAMLMap() })
           }
         }
       })

@@ -43,20 +43,12 @@ install:
     when: on_success
     expire_in: 30min
   script: pnpm install --frozen-lockfile
-  rules:
-    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-      when: always
-    - when: never
 
 audit:
   stage: install
   allow_failure: true
   dependencies: []
   script: pnpm audit --prod --audit-level=high
-  rules:
-    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-      when: always
-    - when: never
 
 # lint and test
 lint:
@@ -64,10 +56,6 @@ lint:
   script: pnpm run lint
   dependencies:
     - install
-  rules:
-    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-      when: on_success
-    - when: never
 
 test:
   stage: test
@@ -75,10 +63,6 @@ test:
   script: if [ -z "$NX_BASE" ]; then pnpm run test; else pnpm run nx affected --target test; fi
   dependencies:
     - install
-  rules:
-    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-      when: on_success
-    - when: never
 
 ## build
 build:
@@ -94,10 +78,6 @@ build:
       - node_modules*
       - node_modules/**/*
     expire_in: 30min
-  rules:
-    - if: $CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-      when: on_success
-    - when: never
 
 ## release
 .release:
@@ -106,8 +86,11 @@ build:
     # prepare pnpm
     - !reference [ default, before_script ]
     # prepare .npmrc
-    - echo "@diamir:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    # gitlab package-registry
+    # - echo "@diamir:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
+    # - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    # npm registry
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     # prepare git interactions
     - git config --global user.email "backend@diamir.io"
     - git config --global user.name "Backend Diamir"

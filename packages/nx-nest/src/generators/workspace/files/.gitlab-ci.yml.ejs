@@ -1,7 +1,7 @@
 ---
 include:
   # https://gitlab.diamir.tech/components/node/-/tree/main
-  - component: $CI_SERVER_FQDN/components/node/pipe@main
+  - component: $CI_SERVER_FQDN/components/node/pipe@1
     inputs:
       node-version: <%= NODE_VERSION %>
   # https://gitlab.diamir.tech/bdsm/gitlab-pipes/-/blob/main/templates/v2/docker-build-internal.gitlab-ci.yml

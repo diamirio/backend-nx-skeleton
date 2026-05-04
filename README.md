@@ -8,6 +8,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 ---
 
 <!-- TOC -->
+* [compatibility](#compatibility)
 * [nx-skeleton](#nx-skeleton)
   * [eslint-config](#eslint-config)
   * [nestjs-config](#nestjs-config)
@@ -28,6 +29,22 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
   * [Master](#master)
 * [old skeleton](#old-skeleton)
 <!-- TOC -->
+
+# compatibility
+
+| package                | dependency      |
+|------------------------|-----------------|
+| eslint-config@9        | eslint@9        |
+| nestjs-config@11       | nest@11         |
+| nestjs-logger@11       | nest@11         |
+| nestjs-maintenance@11  | nest@11         |
+| nestjs-microservice@11 | nest@11         |
+| nestjs-process@11      | nest@11         |
+| nestjs-retry@11        | nest@11         |
+| nestjs-seeder@11       | nest@11         |
+| nestjs-util-restful@11 | nest@11         |
+| nx-executorsl@22       | nx@22           |
+| nx-nest@22             | nx@22 & nest@11 |
 
 # nx-skeleton
 

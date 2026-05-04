@@ -6,8 +6,9 @@ export const SCRIPTS = {
   build: 'nx run-many --target build --batch',
   'build:one': 'nx build',
   'build:nocache': 'npm run build -- --skip-nx-cache',
-  lint: 'npm run lint:check -- --fix',
+  lint: 'npm run lint:check',
   'lint:check': 'nx run-many --parallel 10 --target lint --',
+  'lint:fix': 'nx run-many --parallel 10 --target lint -- --fix',
   update: 'nx migrate latest'
 }
 
