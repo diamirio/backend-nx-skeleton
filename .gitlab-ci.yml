@@ -87,10 +87,10 @@ build:
     - !reference [ default, before_script ]
     # prepare .npmrc
     # gitlab package-registry
-    # - echo "@diamir:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
-    # - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    - echo "@diamir:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     # npm registry
-    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    # - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
     # prepare git interactions
     - git config --global user.email "backend@diamir.io"
     - git config --global user.name "Backend Diamir"
