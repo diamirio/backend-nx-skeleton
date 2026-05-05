@@ -1,3 +1,18 @@
+## 0.1.0-beta.6 (2026-05-05)
+
+### 🚀 Features
+
+- **nx-nest:** dependency versions
+- **nx-nest:** lint scripts
+
+### 🩹 Fixes
+
+- **nx-nest:** database docker setup
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 0.1.0-beta.5 (2026-04-27)
 
 ### 🚀 Features
