@@ -40,6 +40,6 @@ export class ServerModule implements NestModule {
 
     consumer
       .apply(MaintenanceMiddleware, SetApiInfoHeaderMiddleware)
-      .forRoutes({ path: '(.*)', method: RequestMethod.ALL })
+      .forRoutes({ path: '*path', method: RequestMethod.ALL })
   }
 }
