@@ -10,16 +10,15 @@ import { ServerModule } from './server.module'
 
 export async function createApplication (): Promise<void> {
   const app = await NestFactory.create<NestFastifyApplication>(ServerModule, new FastifyAdapter(), {
-    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') })
-  })
-
-  app.enableCors()
+    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') }),
+    cors: ConfigService.get('cors')
+    })
 
   app.setGlobalPrefix(ConfigService.get('url.apiPath', ''))
 
   SwaggerService.enable(app, ConfigService.get('swagger'), ConfigService.get('url'))
 
-  await app.listen({ port: ConfigService.get('port', 3000) }, (error, address) => {
+  await app.listen({ port: ConfigService.get('port', 3000), host: '::' }, (error, address) => {
     if (error) {
       Logger.error(`Error creating application: ${error.message}`)
     }
