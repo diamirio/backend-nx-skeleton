@@ -10,10 +10,9 @@ import { ServerModule } from './server.module'
 
 export async function createApplication (): Promise<void> {
   const app = await NestFactory.create<NestFastifyApplication>(ServerModule, new FastifyAdapter(), {
-    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') })
-  })
-
-  app.enableCors()
+    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') }),
+    cors: ConfigService.get('cors')
+    })
 
   app.setGlobalPrefix(ConfigService.get('url.apiPath', ''))
 
