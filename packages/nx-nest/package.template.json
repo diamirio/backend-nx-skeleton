@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@nx/devkit": "catalog:nx",
+    "@nx/js": "catalog:nx",
+    "@nx/workspace": "catalog:nx",
+    "yaml": "catalog:",
+    "ts-morph": "catalog:",
+    "tslib": "catalog:"
+  },
+  "peerDependencies": {
+    "nx": "catalog:peer",
+    "enquirer": "catalog:peer"
+  }
+}

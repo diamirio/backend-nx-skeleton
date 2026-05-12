@@ -1,0 +1,42 @@
+packages:
+  - packages/*
+
+catalog:
+  config: 4.1.1
+  rxjs: 7.8.2
+  ts-morph: 27.0.2
+  tslib: 2.8.1
+  winston: 3.19.0
+  yaml: 2.8.2
+
+catalogs:
+  # DEPENDENCY
+  eslint:
+    '@stylistic/eslint-plugin': 5.7.0
+    eslint-import-resolver-typescript: 4.4.4
+    eslint-plugin-import-x: 4.16.1
+    typescript-eslint: 8.53.0
+  nx:
+    '@nx/devkit': 22.3.3
+    '@nx/jest': 22.3.3
+    '@nx/js': 22.3.3
+    '@nx/workspace': 22.3.3
+  # DEPENDENCY PEER
+  nestjs:
+    '@nestjs/common': '>= 11.0.0'
+    '@nestjs/core': '>= 11.0.0'
+    '@nestjs/microservices': '>= 11.0.0'
+    '@nestjs/swagger': '>= 11.0.0'
+  peer:
+    '@sentry/node': '>= 10.27.0'
+    enquirer: '>= 2.3.0'
+    eslint: '>= 9.0.0'
+    nestjs-cls: '>= 5.0.0'
+    nx: '>= 22.0.0'
+    reflect-metadata: '>= 0.1.0'
+    ts-node: '>= 10.0.0'
+    ts-node-dev: '>= 2.0.0'
+    typeorm: '>= 0.3.28'
+    typescript: '>= 3.9.0'
+
+saveExact: true

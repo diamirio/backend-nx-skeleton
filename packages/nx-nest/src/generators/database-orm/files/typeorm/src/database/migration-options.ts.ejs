@@ -1,0 +1,13 @@
+import { join } from 'node:path'
+import type { DataSourceOptions } from 'typeorm'
+
+import { getDatabaseOptions } from './database-options'
+
+export const migrationsDir = join(__dirname, '../migration')
+
+export function getMigrationOptions (): DataSourceOptions {
+  return {
+    ...getDatabaseOptions(),
+    migrations: [`${migrationsDir}/*{.ts,.js}`]
+  }
+}

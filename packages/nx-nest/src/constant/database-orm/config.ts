@@ -11,8 +11,8 @@ interface DatabaseConfig {
 export const DATABASE_CONFIG_KEY = 'database'
 export const DATABASE_HOST_ENV_VAR = 'DATABASE_HOST'
 
-export function getDatabaseConfig (options: { database?: Database, orm?: DatabaseOrm }): DatabaseConfig {
-  const environmentConfig = getEnvironmentConfig()
+export function getDatabaseConfig(options: { database?: Database; orm?: DatabaseOrm }): DatabaseConfig {
+  const environmentConfig = getEnvironmentConfig(options.orm)
 
   if (options.orm === DatabaseOrm.TYPEORM) {
     return {
@@ -22,7 +22,9 @@ export function getDatabaseConfig (options: { database?: Database, orm?: Databas
       moduleClass: 'TypeOrmModule',
       importPath: '@nestjs/typeorm'
     }
-  } else if (options.orm === DatabaseOrm.MONGOOSE) {
+  }
+
+  if (options.orm === DatabaseOrm.MONGOOSE) {
     return {
       defaultConfig: getMongooseConfig(),
       environmentConfig,
@@ -33,8 +35,9 @@ export function getDatabaseConfig (options: { database?: Database, orm?: Databas
   }
 }
 
-function getTypeormConfig (database: Database): Record<string, any> {
-  const type = database === Database.MYSQL ? 'mysql' : database === Database.POSTGRES ? 'postgres' : '# @todo: set driver'
+function getTypeormConfig(database: Database): Record<string, any> {
+  const type =
+    database === Database.MYSQL ? 'mysql' : database === Database.POSTGRES ? 'postgres' : '# @todo: set driver'
   const port = database === Database.MYSQL ? 3306 : database === Database.POSTGRES ? 5432 : '# @todo: set port'
 
   return {
@@ -46,12 +49,17 @@ function getTypeormConfig (database: Database): Record<string, any> {
     type,
     synchronize: false,
     cache: false,
+    logging: false,
     keepConnectionAlive: true,
-    migrationsTableName: '_migrations'
+    migrationsTableName: '_migrations',
+    invalidWhereValuesBehavior: {
+      null: 'throw',
+      undefined: 'throw'
+    }
   }
 }
 
-function getMongooseConfig (): Record<string, any> {
+function getMongooseConfig(): Record<string, any> {
   return {
     host: 'localhost',
     port: 27017,
@@ -59,6 +67,7 @@ function getMongooseConfig (): Record<string, any> {
     username: 'user',
     password: 'secret',
     ignoreUndefined: true,
+    connectionString: null,
     migration: {
       migrationFileExtension: '.js',
       useFileHash: false,
@@ -67,12 +76,18 @@ function getMongooseConfig (): Record<string, any> {
   }
 }
 
-function getEnvironmentConfig (): Record<string, any> {
-  return {
+function getEnvironmentConfig(orm: DatabaseOrm): Record<string, any> {
+  const config: ReturnType<typeof getEnvironmentConfig> = {
     host: DATABASE_HOST_ENV_VAR,
     port: 'DATABASE_PORT',
     database: 'DATABASE_NAME',
     username: 'DATABASE_USER',
     password: 'DATABASE_PASSWORD'
   }
+
+  if (orm === DatabaseOrm.MONGOOSE) {
+    config.connectionString = 'DATABASE_CONNECTION_STRING'
+  }
+
+  return config
 }

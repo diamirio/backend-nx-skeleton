@@ -1,10 +1,16 @@
+import { ConfigService } from '@diamir/nestjs-config'
+import { MaintenanceModule } from '@diamir/nestjs-maintenance'
 import { Module } from '@nestjs/common'
 
 import { MigrationTask } from './migration.task'
-import { MaintenanceModule } from '@webundsoehne/nestjs-util'
 
 @Module({
-  imports: [MaintenanceModule],
+  imports: [
+    MaintenanceModule.forRoot({
+      application: 'Migration',
+      lockfilePath: ConfigService.get('misc.lockfile')
+    })
+  ],
   providers: [MigrationTask],
   exports: [MigrationTask]
 })

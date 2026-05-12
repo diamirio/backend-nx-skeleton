@@ -7,245 +7,168 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ---
 
-# @webundsoehne/nx-skeleton
+<!-- TOC -->
+* [compatibility](#compatibility)
+* [nx-skeleton](#nx-skeleton)
+  * [eslint-config](#eslint-config)
+  * [nestjs-config](#nestjs-config)
+  * [nestjs-logger](#nestjs-logger)
+  * [nestjs-maintenance](#nestjs-maintenance)
+  * [nestjs-microservice](#nestjs-microservice)
+  * [nestjs-process](#nestjs-process)
+  * [nestjs-retry](#nestjs-retry)
+  * [nestjs-seeder](#nestjs-seeder)
+  * [nestjs-util-restful](#nestjs-util-restful)
+  * [nx-executors](#nx-executors)
+  * [nx-nest](#nx-nest)
+* [Development](#development)
+  * [package.json](#packagejson)
+  * [Targets](#targets)
+* [Release](#release)
+  * [Beta](#beta)
+  * [Master](#master)
+* [old skeleton](#old-skeleton)
+<!-- TOC -->
 
-A set of schematics and tools that provides the basis for fast template scaffolding base on the [@nrwl/nx](https://github.com/nrwl/nx).
+# compatibility
 
-<!-- toc -->
+| package                | dependency      |
+|------------------------|-----------------|
+| eslint-config@9        | eslint@9        |
+| nestjs-config@11       | nest@11         |
+| nestjs-logger@11       | nest@11         |
+| nestjs-maintenance@11  | nest@11         |
+| nestjs-microservice@11 | nest@11         |
+| nestjs-process@11      | nest@11         |
+| nestjs-retry@11        | nest@11         |
+| nestjs-seeder@11       | nest@11         |
+| nestjs-util-restful@11 | nest@11         |
+| nx-executorsl@22       | nx@22           |
+| nx-nest@22             | nx@22 & nest@11 |
 
-- [Packages](#packages)
-  - [brownie - @webundsoehne/brownie](#brownie---webundsoehnebrownie)
-  - [deep-merge - @webundsoehne/deep-merge](#deep-merge---webundsoehnedeep-merge)
-  - [eslint-config - @webundsoehne/eslint-config](#eslint-config---webundsoehneeslint-config)
-  - [nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader](#nestjs-graphql-typeorm-dataloader---webundsoehnenestjs-graphql-typeorm-dataloader)
-  - [nestjs-keycloak - @webundsoehne/nestjs-keycloak](#nestjs-keycloak---webundsoehnenestjs-keycloak)
-  - [nestjs-keycloak-seeder - @webundsoehne/nestjs-keycloak-seeder](#nestjs-keycloak-seeder---webundsoehnenestjs-keycloak-seeder)
-  - [nestjs-seeder - @webundsoehne/nestjs-seeder](#nestjs-seeder---webundsoehnenestjs-seeder)
-  - [nestjs-util - @webundsoehne/nestjs-util](#nestjs-util---webundsoehnenestjs-util)
-  - [nestjs-util-graphql - @webundsoehne/nestjs-util-graphql](#nestjs-util-graphql---webundsoehnenestjs-util-graphql)
-  - [nestjs-util-microservices - @webundsoehne/nestjs-util-microservices](#nestjs-util-microservices---webundsoehnenestjs-util-microservices)
-  - [nestjs-util-restful - @webundsoehne/nestjs-util-restful](#nestjs-util-restful---webundsoehnenestjs-util-restful)
-  - [nx-builders - @webundsoehne/nx-builders](#nx-builders---webundsoehnenx-builders)
-  - [nx-nest - @webundsoehne/nx-nest](#nx-nest---webundsoehnenx-nest)
-  - [nx-tools - @webundsoehne/nx-tools](#nx-tools---webundsoehnenx-tools)
-  - [nx-workspace - @webundsoehne/nx-workspace](#nx-workspace---webundsoehnenx-workspace)
-  - [patch-package - @webundsoehne/patch-package](#patch-package---webundsoehnepatch-package)
-  - [ts-utility-types - @webundsoehne/ts-utility-types](#ts-utility-types---webundsoehnets-utility-types)
-- [Further Development](#further-development)
-  - [Local Development Steps](#local-development-steps)
-  - [Warnings](#warnings)
-  - [Publishing Process](#publishing-process)
-  - [Versioning of Individual Packages](#versioning-of-individual-packages)
-- [Docker Setup](#docker-setup)
-  - [CLI-Script](#cli-script)
-- [Scripts](#scripts)
-- [Package Manager](#package-manager)
+# nx-skeleton
 
-<!-- tocstop -->
+NestJs and Nx utils/helper/tools
 
----
+## eslint-config
 
-## Packages
+Eslint-Config presets
+[eslint-config](./packages/eslint-config)
 
-### brownie - @webundsoehne/brownie
+## nestjs-config
 
-A CLI interface for creating `@nrwl/nx` workspaces and Docker templates from scratch.
+Runtime config util and decorators
+[nestjs-config](./packages/nestjs-config)
 
-[**Read more...**](./packages/brownie/README.md)
+## nestjs-logger
 
-### deep-merge - @webundsoehne/deep-merge
+Winston nestjs logger instance
+[nestjs-logger](./packages/nestjs-logger)
 
-Helper tools for deep merge objects.
+## nestjs-maintenance
 
-[**Read more...**](./packages/deep-merge/README.md)
+Maintenance middleware and module
+[nestjs-maintenance](./packages/nestjs-maintenance)
 
-### eslint-config - @webundsoehne/eslint-config
+## nestjs-microservice
 
-`eslint` configuration for variety of environments.
+Microservice utils
+[nestjs-microservice](./packages/nestjs-microservice)
 
-[**Read more...**](./packages/eslint-config/README.md)
+## nestjs-process
 
-### nestjs-graphql-typeorm-dataloader - @webundsoehne/nestjs-graphql-typeorm-dataloader
+Node process/environment utils
+[nestjs-process](./packages/nestjs-process)
 
-Easily implement data-loader to Typeorm projects via decorating the DTOs or entities instead of creating custom ones.
+## nestjs-retry
 
-[**Read more...**](./packages/nestjs-graphql-typeorm-dataloader/README.md)
+Method retry decorator
+[nestjs-retry](./packages/nestjs-retry)
 
-### nestjs-keycloak - @webundsoehne/nestjs-keycloak
+## nestjs-seeder
 
-This package includes Keycloak integration for NestJS.
+Generic seeding module
+[nestjs-seeder](./packages/nestjs-seeder)
 
-[**Read more...**](./packages/nestjs-keycloak/README.md)
+## nestjs-util-restful
 
-### nestjs-keycloak-seeder - @webundsoehne/nestjs-keycloak-seeder
+Restful utils, swagger, exception-filter tools
+[nestjs-util-restful](./packages/nestjs-util-restful)
 
-This package extends the `@webundsoehne/nestjs-keycloak` to have the seeding functionality to initiate and manage a Keycloak instance.
+## nx-executors
 
-[**Read more...**](./packages/nestjs-keycloak-seeder/README.md)
+NX executors and plugins
+[nx-executors](./packages/nx-executors)
 
-### nestjs-seeder - @webundsoehne/nestjs-seeder
+## nx-nest
 
-A generic seeder to inject services in to and initiate a application programmatically.
+NX application/workspace generators
+[nx-nest](./packages/nx-nest)
 
-[**Read more...**](./packages/nestjs-seeder/README.md)
+# Development
 
-### nestjs-util - @webundsoehne/nestjs-util
+New packages can be generated using the internal package generator `nx g package @diamir/<name>`
 
-Utility package for `@nestjs`.
+## package.json
 
-[**Read more...**](./packages/nestjs-util/README.md)
+Each package has a `package.json` and a `package.template.json`.
 
-### nestjs-util-graphql - @webundsoehne/nestjs-util-graphql
+The `package.template.json` only hold the `dependency` and `peerDependency` information linking the dependency version
+to the `pnpm-workspace.yml` catalogs, where the dependency versions can be managed in a single place.
 
-Utility package for `@nestjs` for GraphQL applications.
+The `updateManifest` target (custom internal executor [manifest](tools/internal/src/executors/update-manifest)) will update the `package.json` replacing the
+dependency versions linked in the template from the pnpm catalogues.
 
-[**Read more...**](./packages/nestjs-util-graphql/README.md)
+If you update a dependency in a catalog, you must **manually** run `npm run manifest:update` (or the `updateManifest` target another way) to update the `package.json` and `pnpm install` to update the lockfile.
 
-### nestjs-util-microservices - @webundsoehne/nestjs-util-microservices
+This way, we can utilize the pnpm catalog feature while still have the git change on version update to later generate a
+changelog and version based on the committed change.
 
-Utility package for `@nestjs` for microservices applications.
+## Targets
 
-[**Read more...**](./packages/nestjs-util-microservices/README.md)
+The default nx targets are all stored in the [`nx.json`](nx.json) `targetDefaults` and applied in the `project.json` via
+e.g. `build: {}` (the target must be included per project, but the config is shared in the nx.json)
 
-### nestjs-util-restful - @webundsoehne/nestjs-util-restful
+By default, the `README.md` and the `LICENCE` files are included as asset on build, to add more, extend the `build` target for
+the package like
 
-Utility package for `@nestjs` for restful applications.
+```json5
+// project.json
+{
+  // ... nx metadata
+  "targets": {
+    "build": {
+      "options": {
+        "assets": [
+          "{projectRoot}/README.md",
+          "{projectRoot}/LICENSE",
+          "{projectRoot}/path-to-file/with-glob*"
+        ]
+      }
+    },
+    // other targets
+  }
+}
+```
 
-[**Read more...**](./packages/nestjs-util-microservices/README.md)
+| target         | description                                             |
+|----------------|---------------------------------------------------------|
+| test           | run the packages unit-tests                             |
+| lint           | run biome linting (apply fix)                           |
+| updateManifest | write `catalog` dependency versions into `package.json` |
+| build          | run tsc to build the project                            |
+| release        | version, changelog generation and publish a package     |
 
-### nx-builders - @webundsoehne/nx-builders
+# Release
 
-Custom builders for `@nrwl/nx`.
+## Beta
 
-[**Read more...**](./packages/nx-builders/README.md)
+Once a branch is merged into the `beta` branch, the beta-release will be triggered, setting a pre-release tag like `0.1.1-beta.0`.
 
-### nx-nest - @webundsoehne/nx-nest
+## Master
 
-A skeleton that can be generated through `@nrwl/nx` schematics.
+Once a branch is merged into the `master` branch, a normal release will be triggered.
 
-[**Read more...**](./packages/nx-nest/README.md)
+# old skeleton
 
-### nx-tools - @webundsoehne/nx-tools
-
-Various tools that can be used while developing new `@nrwl/nx` schematics.
-
-[**Read more...**](./packages/nx-tools/README.md)
-
-### nx-workspace - @webundsoehne/nx-workspace
-
-Schematic for scaffolding `@nrwl/nx` workspace.
-
-[**Read more...**](./packages/nx-workspace/README.md)
-
-### patch-package - @webundsoehne/patch-package
-
-A wrapper around the `patch-package` library, which can automatically apply predefined patches or create new ones.
-
-[**Read more...**](./packages/patch-package/README.md)
-
-### ts-utility-types - @webundsoehne/ts-utility-types
-
-Some basic utility types for Typescript.
-
-[**Read more...**](./packages/ts-utility-types/README.md)
-
-## Further Development
-
-Developing schematics for `@nrwl/nx` is not really possible in one-hit wonder due to templating and all the options that can be added to the schematics itself.
-
-Using the scripts link all the packages to your global link directory.
-
-You can use the `-d` or `--develop` flag in `brownie` commands `workspace` and `nx` to put schematics in development mode. This will do some additional tasks to ensure that it will work in a development environment. For dependencies, it will only install the linked versions.
-
-You can use the `--debug` flag for `brownie`, which will activate the debug log level for both the schematics that it runs and the `brownie` itself.
-
-### Local Development Steps
-
-This is a brief walkthrough, you can find more information in the following sections.
-
-- Install the dependencies with `yarn`.
-- Run the docker-compose stack. All the packages will be built locally.
-- Link all the packages to your global link folder. You can use `yarn run scripts:link` to link them all at once.
-- Create a mock NX workspace with `brownie`. You should definitely use `-d` flag to put `brownie` and some schematics in to development mode and can always use `--debug` flag for more output.
-- You can then just run `brownie` as you wish to test things out. But always remember to put it in to development mode with `-d` flag.
-
-### Warnings
-
-- If you have a new or updated NPM module added to one of the packages, you might need to install it again from root. Because `yarn workspaces` and `resolutions` field do not play nice. But do not worry since the installation will only fix the resolutions and not take much of time.
-- Since it was taking a lots of resources to use Typescript compiler on this repository, it is converted to a tool called `tsup` based on `esbuild` and `rollup`. `esbuild` is very strict with `import type` and `export type` statements where `isolatedModules` should be used. `eslint` will do its best to convert the code to use `import/export type` statements but sometimes since these types can be used in `constructor` it will leave them alone since they can also be dependency injection. This cannot be true for the cases with interfaces or types, but it still acts this way, so some caution is needed.
-
-### Publishing Process
-
-This is a brief walkthrough, you can find more information in the following sections.
-
-Repository has `git commit` hook to ensure the commit format.
-
-- fix -> will publish new patch version for the package that the commits apply to
-- feat -> will publish new minor version for the package that the commits apply to
-- perf with breaking changes selected -> will publish new major version for the package that the commits apply to
-
-`semantic-release` decides to publish the packages or not depending on whether the new commits since the last known tag has been made to the given package.
-
-So it is better to commit often for little things to ensure that your final version matches what you expect.
-
-To give an example to these lets say we will do changes in 2 packages, `nx-nest` and `nx-tools`.
-
-`nx-nest` will have just a bug fix. So after changing the related files, we can just commit with `fix` to ensure that it will publish a patch version. `nx-tools` will have a new feature that is not breaking. So again after changing the related files, we can just commit with `feat` to ensure that it will publish a minor version.
-
-So even though we will publish them at the same time, they will get individually versioned depending on what commits have been made to them.
-
-The other options that are inside the `git commit` hook, which uses a interactive selection for commitizen is:
-
-- scope -> you can scope your changes to a package, so when you are searching through commits it's easier to find them. We now have no convention for this.
-- long description -> will append the description to the issues replied and the commit itself
-- resolves issues -> will automatically respond to related issues and close them if specified
-- breaking changes -> breaking changes is required to publish a major version, it will also append it in the changelogs
-- skip ci -> if you are sure that the ci does not have to be run after this commit and everything lints and builds fine and there is no publishing needed you can select this to save ci resources
-
-The other commit types like `refactor`, `build`, `ci`, `style` does not affect versioning in any way. But it helps to identify the changes made to the repository.
-
-### Versioning of Individual Packages
-
-This repository uses [semantic-release](https://github.com/semantic-release/semantic-release) to versioning of the indivudal packages. Since semantic-release is not intended for multiple packages at the same time it uses [multi-semantic-release](https://github.com/qiwi/multi-semantic-release#readme) on top of it.
-
-What it does is:
-
-- Goes through all the packages analyzes the commits and generate changelogs and decide next version for each. It will scope the changes inside the folder of the package.
-- Writes cross-dependency versions as pinned to avoid dependency problems to each package.
-- Release packages that have relevant commits on it filtering the commits to their own folder.
-- Closes issues depending on the commits, comments them if they have been released in which version.
-
-`semantic-release` relies on [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/) commit format to decide through these changes. This is enforced through a `git` `prepare-commit-msg` hook to create a interactive menu to help you through the process.
-
-## Docker Setup
-
-This repository includes a Docker-Compose stack for automatically compiling `SERVICES` variable defined. It will first compile the `RUN_IN_BAND` packages sequentially and after that it will compile everything else defined in the `SERVICES` variable in parallel.
-
-The image uses s6-overlay to monitor the crashes and will run `dev:start` for each package unless overridden with the `SERVICE` variable. Since these are intended to be published packages to NPM, it is a better approach to use `tsc-watch` to create a structure as if the package is published.
-
-### CLI-Script
-
-`./cli` script can be used to access in to Docker container directly. These commands can be interactive that requires keyboard or not. But on the base Docker image, which is based on Alpine-Linux there is no `bash`, so for interactive session `ash` should be run.
-
-- `./cli ws ${COMMAND}`, `./cli . ${COMMAND}`, `./cli root ${COMMAND}` -> Will run the command in the workspace root.
-- `./cli ${PACKAGE_NAME} ${COMMAND}` -> Will look for package name in `packages/*` folder and execute the command in that root.
-- `./cli all ${COMMAND}` -> Will run the command for every package.
-- `./cli lerna ${COMMAND}` -> Will run a `lerna` command for every package.
-- `./cli ls` -> Will list the available packages.
-
-## Scripts
-
-There are a couple of scripts in the scripts folder:
-
-- `./scripts/link-packages.sh [link | unlink]` This can also be accessed through: `yarn run scripts:link` `yarn run scripts:unlink`
-
-  > Will link all the packages inside the packages folder.
-
-- `./link-packages-to-workspace.sh [link | unlink] \${PWD_OF_MOCK_PROJECT}` This can also be accessed through: `yarn run scripts:workspace:link` `yarn run scripts:workspace:unlink`
-  > Copy this script to somewhere else for easily creating a new empty workspace in the designated folder to test out the schematics.
-
-## Package Manager
-
-`yarn` must be used due to its support of `resolutions` field in the `package.json` as well as this repository being configured for `yarn workspaces`.
-
-`@angular` scoped packages have inconsistencies between similar versions due to utilizing different versioned sub-packages. In the development process you can get over this with fixing the package versions utilizing `resolutions` in the root `package.json`.
+Anything up to `0ac7ecf101a36c5f0ec8e8f7d1bde8459b2bbddd` is before the skeleton-rework took place.

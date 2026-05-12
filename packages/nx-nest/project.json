@@ -1,0 +1,23 @@
+{
+  "name": "nx-nest",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/nx-nest/src",
+  "targets": {
+    "build": {
+      "options": {
+        "assets": [
+          "{projectRoot}/README.md",
+          "{projectRoot}/LICENSE",
+          "{projectRoot}/generators.json",
+          "{projectRoot}/migrations.json",
+          "{projectRoot}/src/generators/**/*.json",
+          "{projectRoot}/src/generators/**/*.ejs"
+        ]
+      }
+    },
+    "lint": {},
+    "updateManifest": {},
+    "release": {}
+  }
+}

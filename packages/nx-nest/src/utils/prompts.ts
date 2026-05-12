@@ -4,7 +4,7 @@ import { prompt } from 'enquirer'
 
 import { Database, DatabaseOrm } from '../constant'
 
-export async function promptDatabaseOrm (): Promise<DatabaseOrm> {
+export async function promptDatabaseOrm(): Promise<DatabaseOrm> {
   return (
     await prompt<{ orm?: DatabaseOrm }>({
       type: 'autocomplete',
@@ -15,7 +15,7 @@ export async function promptDatabaseOrm (): Promise<DatabaseOrm> {
   ).orm
 }
 
-export async function promptDatabase (): Promise<Database> {
+export async function promptDatabase(): Promise<Database> {
   return (
     await prompt<{ database?: Database }>({
       type: 'autocomplete',
@@ -26,7 +26,7 @@ export async function promptDatabase (): Promise<Database> {
   ).database
 }
 
-export async function promptProjectMultiselect (tree: Tree, message: string): Promise<string[]> {
+export async function promptProjectMultiselect(tree: Tree, message: string): Promise<string[]> {
   const projects = getProjects(tree)
   const applications = []
   let selectedProjects = []

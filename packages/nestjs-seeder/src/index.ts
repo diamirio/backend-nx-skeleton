@@ -1,3 +1,5 @@
 export * from './constants'
-export * from './interfaces'
-export * from './module'
+export * from './interfaces/seed'
+export * from './interfaces/seeds.interface'
+export * from './module/seeder.module'
+export * from './module/seeder.service'

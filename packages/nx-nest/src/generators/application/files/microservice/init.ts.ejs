@@ -1,20 +1,19 @@
+import { ConfigService } from '@diamir/nestjs-config'
+import { WinstonLogger } from '@diamir/nestjs-logger'
 import { NestFactory } from '@nestjs/core'
 import type { MicroserviceOptions } from '@nestjs/microservices'
 import { Transport } from '@nestjs/microservices'
 
-import { MicroservicesModule } from './microservice.module'
+import { MicroserviceModule } from './microservice.module'
 <%# MessageQueue import added by generator %>
-import { ConfigService, LoggerService } from '@webundsoehne/nestjs-util'
 
 export async function createApplication (): Promise<void> {
-  const { urls } = ConfigService.get('messageQueue')
-
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(MicroservicesModule, {
-    logger: new LoggerService(),
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(MicroserviceModule, {
+    logger: new WinstonLogger({ logLevel: ConfigService.get('logLevel') }),
     transport: Transport.RMQ,
     options: {
-      urls,
-      queue: MessageQueues.<%- projectNames.constantName %>
+      ...ConfigService.get('messageQueue'),
+      queue: MessageQueue.<%- projectNames.constantName %>
     }
   })
 

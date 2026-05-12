@@ -1,5 +1,5 @@
-import type { ExecutorContext } from '@nx/devkit'
 import { join } from 'node:path'
+import type { ExecutorContext } from '@nx/devkit'
 
 import type { ExecutorResult } from '../inteface'
 import { spawnProcess } from '../utils'

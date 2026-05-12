@@ -1,16 +1,13 @@
+import { ConfigService } from '@diamir/nestjs-config'
 import { join } from 'node:path'
 import type { DataSourceOptions } from 'typeorm'
 
-import { ConfigService } from '@webundsoehne/nestjs-util'
-
 const options = ConfigService.get('database')
 const entitiesDir = join(__dirname, '../entity')
-export const migrationsDir = join(__dirname, '../migration')
 
 export function getDatabaseOptions (): DataSourceOptions {
   return {
     ...options,
-    entities: [`${entitiesDir}/*{.ts,.js}`],
-    migrations: [`${migrationsDir}/*{.ts,.js}`]
-  } satisfies DataSourceOptions
+    entities: [`${entitiesDir}/*{.ts,.js}`]
+  }
 }

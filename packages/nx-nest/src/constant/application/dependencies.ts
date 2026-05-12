@@ -1,51 +1,45 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import { DEPENDENCY_VERSIONS } from '../dependencies'
+
 export const DEPENDENCIES = {
-  '@nestjs/common': '^11',
-  '@nestjs/core': '^11',
-  '@webundsoehne/nestjs-util': '^7',
-  'class-transformer': '^0.5',
-  'class-validator': '^0.14',
-  'js-yaml': '^4.1',
-  'reflect-metadata': '^0.1',
-  rxjs: '^7'
+  '@diamir/nestjs-config': DEPENDENCY_VERSIONS['@diamir/nestjs-config'],
+  '@diamir/nestjs-logger': DEPENDENCY_VERSIONS['@diamir/nestjs-logger'],
+  '@nestjs/common': DEPENDENCY_VERSIONS['@nestjs/common'],
+  '@nestjs/core': DEPENDENCY_VERSIONS['@nestjs/core'],
+  'class-transformer': DEPENDENCY_VERSIONS['class-transformer'],
+  'class-validator': DEPENDENCY_VERSIONS['class-validator'],
+  'js-yaml': DEPENDENCY_VERSIONS['js-yaml'],
+  'reflect-metadata': DEPENDENCY_VERSIONS['reflect-metadata'],
+  rxjs: DEPENDENCY_VERSIONS.rxjs
 }
 
 export const DEV_DEPENDENCIES = {
-  '@nestjs/testing': '^11',
-  '@webundsoehne/nx-executors': '^2.0.0'
+  '@nestjs/testing': DEPENDENCY_VERSIONS['@nestjs/testing'],
+  '@diamir/nx-executors': DEPENDENCY_VERSIONS['@diamir/nx-executors']
 }
 
 export const SERVER_DEPENDENCIES = {
-  '@fastify/static': '^8',
-  '@fastify/swagger': '^9',
-  '@nestjs/platform-fastify': '^11',
-  '@nestjs/swagger': '^11',
-  '@webundsoehne/nestjs-util-restful': '^3'
+  '@diamir/nestjs-process': DEPENDENCY_VERSIONS['@diamir/nestjs-process'],
+  '@diamir/nestjs-util-restful': DEPENDENCY_VERSIONS['@diamir/nestjs-util-restful'],
+  '@diamir/nestjs-maintenance': DEPENDENCY_VERSIONS['@diamir/nestjs-maintenance'],
+  '@fastify/static': DEPENDENCY_VERSIONS['@fastify/static'],
+  '@fastify/swagger': DEPENDENCY_VERSIONS['@fastify/swagger'],
+  '@nestjs/platform-fastify': DEPENDENCY_VERSIONS['@nestjs/platform-fastify'],
+  '@nestjs/swagger': DEPENDENCY_VERSIONS['@nestjs/swagger']
 }
 
 export const MICROSERVICE_DEPENDENCIES = {
-  '@nestjs/microservices': '^11',
-  '@webundsoehne/nestjs-util-microservices': '^3',
-  'amqp-connection-manager': '^4.1.7',
-  amqplib: '^0.10.7'
+  '@diamir/nestjs-microservice': DEPENDENCY_VERSIONS['@diamir/nestjs-microservice'],
+  '@nestjs/microservices': DEPENDENCY_VERSIONS['@nestjs/microservices'],
+  'amqp-connection-manager': DEPENDENCY_VERSIONS['amqp-connection-manager'],
+  amqplib: DEPENDENCY_VERSIONS.amqplib
 }
 
 export const COMMAND_DEPENDENCIES = {
-  'nest-commander': '^3'
+  'nest-commander': DEPENDENCY_VERSIONS['nest-commander']
 }
 
 export const BACKGROUND_TASK_DEPENDENCIES = {
-  '@nestjs/schedule': '^6'
+  '@diamir/nestjs-maintenance': DEPENDENCY_VERSIONS['@diamir/nestjs-maintenance'],
+  '@diamir/nestjs-retry': DEPENDENCY_VERSIONS['@diamir/nestjs-retry'],
+  '@nestjs/schedule': DEPENDENCY_VERSIONS['@nestjs/schedule']
 }
-/* eslint-enable */
-
-export const IMPLICIT_DEPENDENCIES = [
-  '@fastify/static',
-  '@fastify/swagger',
-  'amqp-connection-manager',
-  'amqplib',
-  'class-transformer',
-  'class-validator',
-  'reflect-metadata',
-  'rxjs'
-]

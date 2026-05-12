@@ -1,34 +1,43 @@
 ---
-variables:
-  NODE_VERSION: <%= NODE_VERSION %>-alpine
-  ## NODE OPTIONS
-  # install: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#install
-  # build: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#build
-  # lint: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#run
-  # test: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/node#run
-  ## BUILD TIME ENVIRONMENT VARIABLES FOR MOSTLY FRONTEND APPLICATIONS
-  # ENVIRONMENT_ENABLE: 'true'
-  # please read through the readme for additional information: https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/select-env
-  ## DOCKER OPTIONS
-  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/tree/main/docker
-  ## ENABLE TESTS
-  # NODE_TEST_COMMAND: "npm run test"
-
-stages:
-  - install
-  - build
-  - docker
-
 include:
-  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/node-nx.gitlab-ci.yml
-  - project: bdsm/gitlab-pipes
-    file: /templates/node-nx.gitlab-ci.yml
-    ref: next
-  # https://gitlab.tailored-apps.com/bdsm/gitlab-pipes/-/blob/main/templates/v2/docker-build-internal.gitlab-ci.yml
+  # https://gitlab.diamir.tech/components/node/-/tree/main
+  - component: $CI_SERVER_FQDN/components/node/pipe@1
+    inputs:
+      node-version: <%= NODE_VERSION %>
+  # https://gitlab.diamir.tech/bdsm/gitlab-pipes/-/blob/main/templates/v2/docker-build-internal.gitlab-ci.yml
   - project: bdsm/gitlab-pipes
     file: /templates/v2/docker-build-internal.gitlab-ci.yml
     ref: next
-#
+
+stages:
+  - prepare
+  - test
+  - build
+  - docker
+
+workflow:
+  rules:
+    # do not run on merge-request, just branch pipelines
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    # run if branch or tag is pushed/created
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+build:
+  rules:
+  -  if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_TAG
+
+typecheck:
+  extends: .npm-run
+  stage: test
+  variables:
+    NPM_RUN_SCRIPT: build:typecheck
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_TAG
+      when: never
+    - when: on_success
+
 ##################################
 ##        applications         ##
 #################################

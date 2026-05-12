@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import { DEPENDENCY_VERSIONS } from '../dependencies'
+
 export const DEPENDENCIES = {
-  '@webundsoehne/nestjs-seeder': '^2'
+  '@diamir/nestjs-seeder': DEPENDENCY_VERSIONS['@diamir/nestjs-seeder']
 }

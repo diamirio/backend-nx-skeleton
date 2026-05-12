@@ -1,6 +1,5 @@
-const import_jest = require('../dist/plugins/jest')
+const importJest = require('../src/plugins/jest')
 
 module.exports = {
-  createNodes: import_jest.createNodes,
-  createNodesV2: import_jest.createNodesV2
+  createNodes: importJest.createNodes
 }

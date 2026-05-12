@@ -1,18 +1,19 @@
-import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
-import { EOL } from 'os'
+import { EOL } from 'node:os'
+import type { ExecutorContext } from '@nx/devkit'
 
 export class LogWriter {
-  constructor (private readonly context?: ExecutorContext) {}
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: once used for app-name prefix
+  constructor(private readonly _context?: ExecutorContext) {}
 
-  stdout (message: string): void {
+  stdout(message: string): void {
     this.handleMessage(message, 'stdout')
   }
 
-  stderr (message: string): void {
+  stderr(message: string): void {
     this.handleMessage(message, 'stderr')
   }
 
-  protected handleMessage (message: string, stream: 'stdout' | 'stderr'): void {
+  protected handleMessage(message: string, stream: 'stdout' | 'stderr'): void {
     const messageLines = message.split(EOL)
 
     for (let i = 0, len = messageLines.length; i < len; ++i) {
@@ -22,10 +23,9 @@ export class LogWriter {
     }
   }
 
-  protected messageFormat (text: string): string {
-    const prefix = this.context?.projectName ? `[${this.context.projectName}] ` : ''
+  protected messageFormat(text: string): string {
     const suffix = text.endsWith(EOL) ? '' : EOL
 
-    return `${prefix}${text}${suffix}`
+    return `${text}${suffix}`
   }
 }

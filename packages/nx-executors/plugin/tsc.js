@@ -1,6 +1,5 @@
-const import_tsc = require('../dist/plugins/tsc')
+const importTsc = require('../src/plugins/tsc')
 
 module.exports = {
-  createNodes: import_tsc.createNodes,
-  createNodesV2: import_tsc.createNodesV2
+  createNodes: importTsc.createNodes
 }

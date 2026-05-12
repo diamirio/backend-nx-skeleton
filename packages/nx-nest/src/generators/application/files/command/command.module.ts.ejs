@@ -1,15 +1,11 @@
 import { Module, NestModule } from '@nestjs/common'
 
 import * as modules from './modules'
-import {ConfigService } from '@webundsoehne/nestjs-util'
 
 /**
   * Utilizes (nestjs-commander)[https://docs.nestjs.com/recipes/nest-commander].
  */
 @Module({
-  providers: [
-    ConfigService
-  ],
   imports: [
     ...Object.values(modules)
   ]

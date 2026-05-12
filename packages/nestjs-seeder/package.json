@@ -1,51 +1,22 @@
 {
-  "name": "@webundsoehne/nestjs-seeder",
-  "description": "Generic seeder for nestjs for any kind of service based initialization.",
-  "version": "1.0.0",
-  "author": "Backend <backend@webundsoehne.com>",
+  "name": "@diamir/nestjs-seeder",
+  "version": "0.1.0-beta.1",
+  "description": "",
+  "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "nestjs",
-    "mongodb",
-    "mongo",
-    "seeder"
-  ],
-  "scripts": {
-    "build": "tsup-node",
-    "dev:start": "tsup-node --watch",
-    "lint": "prettier --loglevel warn --write src/ && eslint --ext .ts,.js,.tsx,.jsx --fix src/",
-    "lint:check": "eslint --ext .ts,.js,.tsx,.jsx src/",
-    "docs:jsdoc": "typedoc src/index.ts --readme none",
-    "docs:toc": "markdown-toc README.md --bullets='-' -i"
-  },
-  "lint-staged": {
-    "*.{ts,js,tsx,jsx}": [
-      "prettier --loglevel warn --write",
-      "eslint --fix"
-    ],
-    "*.{json,md}": [
-      "prettier --loglevel warn --write"
-    ]
-  },
-  "dependencies": {
-    "@webundsoehne/deep-merge": "*",
-    "@webundsoehne/ts-utility-types": "*"
-  },
-  "devDependencies": {
-    "@nestjs/common": "^9.1.6",
-    "@nestjs/core": "^9.1.6"
-  },
+  "keywords": [],
+  "main": "./src/index.js",
+  "dependencies": {},
   "peerDependencies": {
-    "@nestjs/common": ">= 8",
-    "@nestjs/core": ">= 8"
+    "@nestjs/core": ">= 11.0.0",
+    "@nestjs/common": ">= 11.0.0"
   },
+  "peerDependenciesMeta": {},
   "engines": {
-    "node": ">= 16"
+    "node": ">= 20"
   }
 }

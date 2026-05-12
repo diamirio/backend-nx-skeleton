@@ -1,47 +1,41 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
-import { addProjectConfiguration, addDependenciesToPackageJson, formatFiles, getProjects, names, output, readNxJson, updateJson } from '@nx/devkit'
+import { addDependenciesToPackageJson, addProjectConfiguration, formatFiles, getProjects, output } from '@nx/devkit'
 import { addTsConfigPath } from '@nx/js'
 import { ProjectType } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { prompt } from 'enquirer'
-import { join } from 'node:path'
 
 import { Component } from '../../constant'
 import { DEPENDENCIES } from '../../constant/seeder'
-import { addExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
+import {
+  addExport,
+  addPackageScripts,
+  applyTasks,
+  applyTemplateFactory,
+  cleanupGitkeep,
+  SetupGeneratorOptions,
+  selectProjectByAutocomplete,
+  setupGeneratorOptions,
+  updateSourceFile
+} from '../../utils'
 import type { SeederGeneratorSchema } from './schema'
 
-interface GenerateOptions extends SeederGeneratorSchema {
-  scope: string
-  projectNames: {
-    name: string
-    className: string
-    propertyName: string
-    constantName: string
-    fileName: string
-  }
-  libRoot: string
-  projectRoot: string
-  packageScope: string
-}
+type GenerateOptions = SetupGeneratorOptions<SeederGeneratorSchema>
 
-export default async function databaseOrmGenerator (tree: Tree, options: SeederGeneratorSchema): Promise<GeneratorCallback> {
-  const generateOptions: GenerateOptions = options as GenerateOptions
+export default async function seederGenerator(tree: Tree, options: SeederGeneratorSchema): Promise<GeneratorCallback> {
+  const generateOptions: GenerateOptions = setupGeneratorOptions(tree, { ...options, name: 'seeder' })
+  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectName)
 
   const tasks: GeneratorCallback[] = []
   const applyTemplate = applyTemplateFactory(tree, __dirname)
-
-  generateOptions.scope = getNpmScope(tree) ?? 'lib'
-  generateOptions.projectNames = names('seeder')
-  generateOptions.packageScope = `@${generateOptions.scope}/${generateOptions.projectNames.fileName}`
-  generateOptions.libRoot = readNxJson(tree)?.workspaceLayout?.libsDir ?? 'libs'
-  generateOptions.projectRoot = join(generateOptions.libRoot, generateOptions.projectNames.fileName)
 
   const applications = []
   const projects = getProjects(tree)
 
   for (const project of projects.values()) {
-    if (project.projectType === 'application' && (project as any).integration.nestjs.components.includes(Component.COMMAND)) {
+    if (
+      project.projectType === 'application' &&
+      (project as any).integration.nestjs.components.includes(Component.COMMAND)
+    ) {
       applications.push({ name: project.name, value: project.name })
     }
   }
@@ -52,14 +46,15 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
     return
   }
 
-  options.project ??= (
-    await prompt<{ project: string }>({
-      type: 'autocomplete',
-      name: 'project',
-      message: 'Please select the project to setup the seeder for:',
-      choices: applications
-    })
-  ).project
+  options.project ??= await selectProjectByAutocomplete(
+    applications,
+    'Please select the project to setup the seeder for:'
+  )
+
+  if (!options.project) {
+    output.error({ title: '[Seeder] No project selected' })
+    return
+  }
 
   const project = projects.get(options.project)
 
@@ -83,11 +78,10 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
   applyTemplate(['files'], generateOptions, generateOptions.projectRoot)
 
   // seed package.json script
-  updateJson(tree, 'package.json', (content) => {
-    content.scripts[`seed:${project.name}`] ??= `nx command ${project.name} seed`
-
-    return content
+  addPackageScripts(tree, 'package.json', {
+    [`seed:${project.name}`]: `nx command ${project.name} seed`
   })
+
   updateSourceFile(tree, join(project.root, 'src', 'command', 'modules', 'index.ts'), (file) => {
     addExport(file, 'SeederCommandModule', `${generateOptions.packageScope}`)
   })
@@ -97,17 +91,15 @@ export default async function databaseOrmGenerator (tree: Tree, options: SeederG
   addTsConfigPath(tree, generateOptions.packageScope, [join(generateOptions.projectRoot, 'src', 'index.ts')])
   addTsConfigPath(tree, `${generateOptions.packageScope}/*`, [join(generateOptions.projectRoot, 'src', '*')])
 
-  if (tree.exists(join(generateOptions.libRoot, '.gitkeep'))) {
-    tree.delete(join(generateOptions.libRoot, '.gitkeep'))
-  }
+  cleanupGitkeep(tree, generateOptions.libRoot)
 
   return applyTasks(tasks)
 }
 
-function updatePackageJson (tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
+function updatePackageJson(tree: Tree, options: GenerateOptions, tasks: GeneratorCallback[]): void {
   if (!options.skipPackageJson) {
     output.log({ title: '[Seeder] Updating package.json', bodyLines: ['Add scripts ...', 'Add dependencies ...'] })
 
-    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, {}))
+    tasks.push(addDependenciesToPackageJson(tree, DEPENDENCIES, {}, undefined, true))
   }
 }

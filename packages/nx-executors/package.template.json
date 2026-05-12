@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@nx/devkit": "catalog:nx",
+    "@nx/js": "catalog:nx",
+    "@nx/jest": "catalog:nx",
+    "tslib": "catalog:"
+  },
+  "peerDependencies": {
+    "nx": "catalog:peer",
+    "ts-node": "catalog:peer",
+    "ts-node-dev": "catalog:peer",
+    "typescript": "catalog:peer"
+  }
+}

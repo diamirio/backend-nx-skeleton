@@ -1,0 +1,99 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!tsconfig.*"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 120,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "useSimplifiedLogicExpression": "error",
+        "noStaticOnlyClass": "off"
+      },
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "nursery": {
+        "noShadow": "error",
+        "useExplicitType": "off"
+      },
+      "style": {
+        "noUselessElse": "error",
+        "useConsistentArrayType": "error",
+        "useConsistentObjectDefinitions": "error",
+        "useEnumInitializers": "error",
+        "useImportType": "off",
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "strictCase": false,
+            "conventions": [
+              {
+                "selector": {
+                  "kind": "enumMember"
+                },
+                "formats": ["CONSTANT_CASE", "PascalCase", "camelCase"]
+              }
+            ]
+          }
+        },
+        "useShorthandAssign": "error",
+        "useSingleVarDeclarator": "error"
+      },
+      "suspicious": {
+        "noBitwiseOperators": "error",
+        "noConsole": "error",
+        "noExplicitAny": "off",
+        "noUselessEscapeInString": "error"
+      }
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [[":NODE:", ":PACKAGE:"], ":BLANK_LINE:", [":PATH:"]]
+          }
+        }
+      }
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "quoteStyle": "single",
+      "arrowParentheses": "always",
+      "semicolons": "asNeeded",
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    },
+    "assist": {
+      "enabled": true
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    }
+  }
+}

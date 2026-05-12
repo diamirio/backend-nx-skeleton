@@ -1,0 +1,9 @@
+import { Column, Entity } from 'typeorm'
+
+import { BaseEntityWithPrimary } from './util'
+
+@Entity('default')
+export class DefaultEntity extends BaseEntityWithPrimary {
+    @Column()
+    column: string
+}

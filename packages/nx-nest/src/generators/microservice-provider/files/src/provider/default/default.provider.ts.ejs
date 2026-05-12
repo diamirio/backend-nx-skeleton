@@ -1,0 +1,11 @@
+import { BaseMicroserviceProvider, MSP } from '@diamir/nestjs-microservice'
+
+import { DefaultPattern } from './default.pattern'
+import { MessageQueue } from '../../message-queue.enum'
+
+@MSP(MessageQueue.DEFAULT)
+export class DefaultProvider extends BaseMicroserviceProvider<DefaultPattern> {
+  default (): Promise<unknown> {
+    return this.send(DefaultPattern.DEFAULT, {})
+  }
+}

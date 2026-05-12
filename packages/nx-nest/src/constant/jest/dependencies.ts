@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import { DEPENDENCY_VERSIONS } from '../dependencies'
+
 export const JEST_DEPENDENCIES = {
-  '@types/jest': '^29.5.0',
-  jest: '^29.7.0',
-  'ts-jest': '^29.1.0'
+  '@types/jest': DEPENDENCY_VERSIONS['@types/jest'],
+  jest: DEPENDENCY_VERSIONS.jest,
+  'ts-jest': DEPENDENCY_VERSIONS['ts-jest']
 }
-/* eslint-enable */

@@ -1,26 +1,14 @@
+import { ConfigService } from '@diamir/nestjs-config'
+import { MaintenanceMiddleware, MaintenanceModule } from '@diamir/nestjs-maintenance'
+import { SetApiInfoHeaderMiddleware, setEnvironmentVariables } from '@diamir/nestjs-process'
+import { BadRequestExceptionFilter, GlobalExceptionFilter, InternalModule, RequestProfilerInterceptor } from '@diamir/nestjs-util-restful'
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 
 import * as modules from './modules'
-import {
-  ConfigService,
-  BadRequestExceptionFilter,
-  GlobalExceptionFilter,
-  MaintenanceMiddleware,
-  MaintenanceModule,
-  SetApiInfoHeaderMiddleware,
-  setEnvironmentVariables,
-  ExtendedValidationPipe
-} from '@webundsoehne/nestjs-util'
-import {
-  CacheLifetimeHelperInterceptor,
-  InternalModule,
-  RequestProfilerInterceptor,
-} from '@webundsoehne/nestjs-util-restful'
 
 @Module({
   providers: [
-    ConfigService,
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter
@@ -30,21 +18,19 @@ import {
       useClass: BadRequestExceptionFilter
     },
     {
-      provide: APP_PIPE,
-      useClass: ExtendedValidationPipe
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheLifetimeHelperInterceptor
-    },
-    {
       provide: APP_INTERCEPTOR,
       useClass: RequestProfilerInterceptor
     }
   ],
   imports: [
-    InternalModule,
-    MaintenanceModule,
+    InternalModule.forRoot({
+      ...ConfigService.get('misc'),
+      enabled: ConfigService.get('misc.internalRoutesEnabled')
+    }),
+    MaintenanceModule.forRoot({
+      application: ConfigService.get('url.basePath'),
+      lockfilePath: ConfigService.get('misc.lockfile')
+    }),
     ...Object.values(modules)
   ]
 })
@@ -54,6 +40,6 @@ export class ServerModule implements NestModule {
 
     consumer
       .apply(MaintenanceMiddleware, SetApiInfoHeaderMiddleware)
-      .forRoutes({ path: '(.*)', method: RequestMethod.ALL })
+      .forRoutes({ path: '*path', method: RequestMethod.ALL })
   }
 }

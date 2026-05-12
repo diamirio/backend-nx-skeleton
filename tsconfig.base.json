@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@tools/internal": ["tools/internal/src/index.ts"]
+    }
+  }
+}

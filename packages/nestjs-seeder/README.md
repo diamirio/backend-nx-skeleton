@@ -7,21 +7,35 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 
 ---
 
-# @webundsoehne/nestjs-seeder
+# nestjs-seeder
 
-[![Version](https://img.shields.io/npm/v/@webundsoehne/nestjs-mongodb-seeder.svg)](https://npmjs.org/package/@webundsoehne/nestjs-mongodb-seeder) [![Downloads/week](https://img.shields.io/npm/dw/@webundsoehne/nestjs-mongodb-seeder.svg)](https://npmjs.org/package/@webundsoehne/nestjs-mongodb-seeder) [![Dependencies](https://img.shields.io/librariesio/release/npm/@webundsoehne/nestjs-mongodb-seeder)](https://npmjs.org/package/@webundsoehne/nestjs-mongodb-seeder) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+<!-- TOC -->
+* [nestjs-seeder](#nestjs-seeder)
+  * [Description](#description)
+  * [Usage](#usage)
+<!-- TOC -->
 
 ## Description
 
-A generic seeder to inject services in to and initiate a application programmatically.
+A generic seeder to inject services in to and initiate an application programmatically.
 
-- **[Read The API Documentation](./docs/README.md)**
-- [Changelog](./CHANGELOG.md)
+## Usage
 
-<!-- toc -->
+Register the `SeederModule` module, add the seed providers (the order of the providers is equal to the execution order) and optional dependencies used by the seeder
 
+To add a seed, create a new injectable class extending `Seed`.
 
+```typescript
+import { Injectable } from '@nestjs/common'
 
-<!-- tocstop -->
+import { Seed } from '@diamir/nestjs-seeder'
 
----
+@Injectable()
+export class ExampleSeed extends Seed {
+  async run (): Promise<void> {
+    this.logger.log('Example seed running...')
+  }
+}
+```
+
+Those seeds can inject providers as usual in nestjs and can be used for more than just database seeding.

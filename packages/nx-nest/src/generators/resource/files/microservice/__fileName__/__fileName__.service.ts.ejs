@@ -1,0 +1,15 @@
+import { Injectable, Logger } from '@nestjs/common'
+
+import { <%- projectNames.className %>Pattern } from '@<%- scope %>/microservice-provider'
+
+@Injectable()
+export class <%- resourceNames.className -%>Microservice {
+  private readonly logger: Logger = new Logger(this.constructor.name)
+
+  constructor () { /**/ }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async default (_options: unknown): string {
+    return 'Hello world.'
+  }
+}

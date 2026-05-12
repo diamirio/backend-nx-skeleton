@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import type { TargetConfiguration } from 'nx/src/config/workspace-json-project-json'
+import type { TargetConfiguration } from '@nx/devkit'
 import { fileExists } from 'nx/src/utils/fileutils'
 
 import type { BuildTargetOptions } from './utils/plugin'
@@ -19,7 +19,12 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
   name = 'jest'
   projectTypes = ['application', 'library']
 
-  buildTarget ({ options, context, projectRoot, projectConfig }: BuildTargetOptions<JestPluginOptions>): Record<string, TargetConfiguration> {
+  buildTarget({
+    options,
+    context,
+    projectRoot,
+    projectConfig
+  }: BuildTargetOptions<JestPluginOptions>): Record<string, TargetConfiguration> {
     if (projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}`)) {
       return {}
     }
@@ -35,7 +40,7 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
     if (!projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}:test`)) {
       if (options.testConfig && existsSync(join(cwd, options.testConfig))) {
         targets[options?.targetName ?? 'test'] = {
-          executor: options.executor ?? '@webundsoehne/nx-executors:jest',
+          executor: options.executor ?? '@diamir/nx-executors:jest',
           cache: true,
           inputs: ['default', '^default', '{workspaceRoot}/jest.preset.js', { externalDependencies: ['jest'] }],
           options: {
@@ -55,7 +60,7 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
     if (!projectConfig.tags?.includes(`${SKIP_NX_EXECUTORS}:${this.name}:e2e`)) {
       if (options.e2eTestConfig && existsSync(join(cwd, options.e2eTestConfig))) {
         targets[options?.e2eTargetName ?? 'e2e'] = {
-          executor: options.e2eExecutor ?? '@webundsoehne/nx-executors:jest',
+          executor: options.e2eExecutor ?? '@diamir/nx-executors:jest',
           cache: true,
           inputs: ['default', '^default', '{workspaceRoot}/jest-e2e.preset.js', { externalDependencies: ['jest'] }],
           options: {
@@ -76,13 +81,12 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
     return targets
   }
 
-  private findConfigFile (cwd: string, name: string, folder?: string[]): string {
+  private findConfigFile(cwd: string, name: string, folder?: string[]): string {
     folder ??= ['test']
 
     const possibleFiles = [name, folder.map((path) => join(path, name))]
       .flat()
-      .map((file) => [`${file}.js`, `${file}.ts`])
-      .flat()
+      .flatMap((file) => [`${file}.js`, `${file}.ts`])
 
     for (const file of possibleFiles) {
       if (fileExists(join(cwd, file))) {
@@ -92,4 +96,4 @@ class JestPlugin extends PluginBuilder<JestPluginOptions> {
   }
 }
 
-export const { createNodes, createNodesV2, buildTarget, buildNodes } = buildPlugin(JestPlugin)
+export const { createNodes, buildTarget } = buildPlugin(JestPlugin)

@@ -1,20 +1,14 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export const SCRIPTS = {
   nx: 'nx',
   prepare: 'ts-patch install -s',
-  start: 'nx run-many --target serve --parallel 1000',
+  start: 'nx run-many --target serve --parallel 100 --batch',
   'start:one': 'nx serve',
-  build: 'nx run-many --target build',
+  build: 'nx run-many --target build --batch',
   'build:one': 'nx build',
   'build:nocache': 'npm run build -- --skip-nx-cache',
-  test: 'nx run-many --target test --parallel 10',
-  'test:one': 'nx test --project',
-  'test:e2e': 'nx run-many --target test -c e2e --parallel 10',
-  'test:e2e:one': 'nx test -c e2e --project',
-  'test:cov': 'nx run-many --target test -c cov --parallel 10',
-  'test:cov:one': 'nx test -c cov --project',
-  lint: 'npm run lint:check -- --fix',
+  lint: 'npm run lint:check',
   'lint:check': 'nx run-many --parallel 10 --target lint --',
+  'lint:fix': 'nx run-many --parallel 10 --target lint -- --fix',
   update: 'nx migrate latest'
 }
 

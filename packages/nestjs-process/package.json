@@ -1,0 +1,21 @@
+{
+  "name": "@diamir/nestjs-process",
+  "version": "0.1.0-beta.1",
+  "description": "",
+  "author": "Backend <backend@diamir.io>",
+  "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [],
+  "main": "./src/index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": ">= 11.0.0"
+  },
+  "peerDependenciesMeta": {},
+  "engines": {
+    "node": ">= 20"
+  }
+}

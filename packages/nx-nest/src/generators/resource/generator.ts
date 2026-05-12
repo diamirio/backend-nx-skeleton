@@ -1,15 +1,25 @@
+import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { formatFiles, getProjects, names, readNxJson } from '@nx/devkit'
 import { output } from '@nx/workspace'
 import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
-import { prompt } from 'enquirer'
-import { join } from 'node:path'
 
 import { Component, componentMetaData } from '../../constant'
-import { addClassProperty, addEnumMember, addIndexExport, applyTasks, applyTemplateFactory, updateSourceFile } from '../../utils'
+import {
+  addClassProperty,
+  addEnumMember,
+  addIndexExport,
+  applyTasks,
+  applyTemplateFactory,
+  selectProjectByAutocomplete,
+  updateSourceFile
+} from '../../utils'
 import type { ResourceGeneratorSchema } from './schema'
 
-export default async function resourceGenerator (tree: Tree, options: ResourceGeneratorSchema): Promise<GeneratorCallback> {
+export default async function resourceGenerator(
+  tree: Tree,
+  options: ResourceGeneratorSchema
+): Promise<GeneratorCallback> {
   if (options.component === 'seeder') {
     createSeederResource(tree, options)
   } else {
@@ -21,39 +31,51 @@ export default async function resourceGenerator (tree: Tree, options: ResourceGe
   return applyTasks([])
 }
 
-async function createComponentResource (tree: Tree, options: ResourceGeneratorSchema): Promise<void> {
+async function createComponentResource(tree: Tree, options: ResourceGeneratorSchema): Promise<void> {
   if (!componentMetaData[options.component]) {
-    output.error({ title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}, seeder` })
+    output.error({
+      title: `[Resource] Invalid component "${options.component}". Must be one of ${Object.values(Component).join(', ')}, seeder`
+    })
 
     return
   }
 
-  const applications = []
   const projects = getProjects(tree)
 
-  for (const project of projects.values()) {
-    if (project.projectType === 'application' && (project as any).integration.nestjs.components.includes(options.component)) {
-      applications.push({ name: project.name, value: project.name })
+  // skip if used to generate default components from the application-generator
+  if (!options.skipInput) {
+    const applications = []
+
+    for (const project of projects.values()) {
+      if (
+        project.projectType === 'application' &&
+        (project as any).integration?.nestjs?.components?.includes(options.component)
+      ) {
+        applications.push({ name: project.name, value: project.name })
+      }
     }
+
+    if (!applications.length) {
+      output.error({ title: `[Resource] No matching project for the component ${options.component}` })
+
+      return
+    }
+
+    options.project ??= await selectProjectByAutocomplete(applications, 'Please select a project:')
   }
 
-  if (!applications.length) {
-    output.error({ title: '[Resource] No matching project for this component' })
+  const project = projects.get(options.project)
+
+  if (!project) {
+    output.error({ title: `[Resource] No project named ${options.project}` })
 
     return
   }
 
-  options.project ??= (
-    await prompt<{ project: string }>({
-      type: 'autocomplete',
-      name: 'project',
-      message: 'Please select a project:',
-      choices: applications
-    })
-  ).project
-
-  const project = projects.get(options.project)
-  const componentRoot = join(project.sourceRoot, componentMetaData[options.component].folder)
+  const componentRoot =
+    project.projectType === 'application'
+      ? join(project.sourceRoot, componentMetaData[options.component].folder, 'modules')
+      : project.sourceRoot
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)
   const projectNames = names(project.name)
@@ -77,7 +99,7 @@ async function createComponentResource (tree: Tree, options: ResourceGeneratorSc
   // component-specific folder
   applyTemplate(['files', componentMetaData[options.component].folder], templateContext, componentRoot)
 
-  updateSourceFile(tree, join(componentRoot, 'modules', 'index.ts'), (file) => {
+  updateSourceFile(tree, join(componentRoot, 'index.ts'), (file) => {
     addIndexExport(file, `./${resourceNames.fileName}/${resourceNames.fileName}.module`)
   })
 
@@ -87,20 +109,28 @@ async function createComponentResource (tree: Tree, options: ResourceGeneratorSc
     if (!mspLib) {
       output.warn({
         title: '[Application] Cannot update Microservice Provider',
-        bodyLines: ['Missing folder information in nx.json integration', 'New queue, interface and pattern will not be created automatically']
+        bodyLines: [
+          'Missing folder information in nx.json integration',
+          'New queue, interface and pattern will not be created automatically'
+        ]
       })
     } else {
       updateSourceFile(tree, join(mspLib, 'src', 'patterns', `${projectNames.fileName}.pattern.ts`), (file) => {
         addEnumMember(file, `${projectNames.className}Pattern`, resourceNames.constantName, resourceNames.constantName)
       })
       updateSourceFile(tree, join(mspLib, 'src', 'interfaces', `${projectNames.fileName}.interface.ts`), (file) => {
-        addClassProperty(file, `${projectNames.className}Message`, `[${projectNames.className}Pattern.${resourceNames.constantName}]`, '(request: unknown) => string')
+        addClassProperty(
+          file,
+          `${projectNames.className}Message`,
+          `[${projectNames.className}Pattern.${resourceNames.constantName}]`,
+          '(request: unknown) => string'
+        )
       })
     }
   }
 }
 
-function createSeederResource (tree: Tree, options: ResourceGeneratorSchema): void {
+function createSeederResource(tree: Tree, options: ResourceGeneratorSchema): void {
   const applyTemplate = applyTemplateFactory(tree, __dirname)
   const resourceNames = names(options.name)
   const seederSourceRoot = getProjects(tree).get('seeder')?.sourceRoot

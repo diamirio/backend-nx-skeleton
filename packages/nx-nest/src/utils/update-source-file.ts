@@ -1,15 +1,16 @@
 import type { Tree } from '@nx/devkit'
 import type { SourceFile } from 'ts-morph'
-import { SyntaxKind, Project } from 'ts-morph'
+import { Project, SyntaxKind } from 'ts-morph'
 
-export function updateSourceFile (tree: Tree, filePath: string, fileAction: (fileNode: SourceFile) => void): void {
+export function updateSourceFile(tree: Tree, filePath: string, fileAction: (fileNode: SourceFile) => void): void {
   if (!tree.exists(filePath)) {
     return
   }
 
   const morphProject = new Project()
   const fileContent = tree.read(filePath).toString()
-  const fileNode = morphProject.addSourceFileAtPathIfExists(filePath) ?? morphProject.createSourceFile(filePath, fileContent)
+  const fileNode =
+    morphProject.addSourceFileAtPathIfExists(filePath) ?? morphProject.createSourceFile(filePath, fileContent)
 
   if (!fileNode) {
     return
@@ -24,7 +25,7 @@ export function updateSourceFile (tree: Tree, filePath: string, fileAction: (fil
   }
 }
 
-export function addEnumMember (file: SourceFile, enumName: string, name: string, value: string | number): void {
+export function addEnumMember(file: SourceFile, enumName: string, name: string, value: string | number): void {
   const enumNode = file.getEnum(enumName)
 
   if (!enumNode || !!enumNode.getMember(name)) {
@@ -34,7 +35,7 @@ export function addEnumMember (file: SourceFile, enumName: string, name: string,
   enumNode.addMember({ name, value })
 }
 
-export function addClassProperty (file: SourceFile, className: string, name: string, type: string): void {
+export function addClassProperty(file: SourceFile, className: string, name: string, type: string): void {
   const classNode = file.getClass(className)
 
   if (!classNode || !!classNode.getProperty(name)) {
@@ -44,15 +45,17 @@ export function addClassProperty (file: SourceFile, className: string, name: str
   classNode.addProperty({ name, type })
 }
 
-export function addIndexExport (file: SourceFile, modulePath: string): void {
+export function addIndexExport(file: SourceFile, modulePath: string): void {
   const moduleExport = file.getExportDeclaration(modulePath)
 
   if (!moduleExport) {
     file.addExportDeclaration({ moduleSpecifier: modulePath })
   }
+
+  clearDefaultExport(file)
 }
 
-export function addExport (file: SourceFile, exportValue: string, exportPath: string): void {
+export function addExport(file: SourceFile, exportValue: string, exportPath: string): void {
   const exportNode = file.getExportDeclaration(exportPath)
 
   if (!exportNode) {
@@ -60,9 +63,11 @@ export function addExport (file: SourceFile, exportValue: string, exportPath: st
   } else if (!exportNode.getNamedExports().find((i) => i.getName() === exportValue)) {
     exportNode.addNamedExport(exportValue)
   }
+
+  clearDefaultExport(file)
 }
 
-export function addImport (file: SourceFile, importValue: string, importPath: string): void {
+export function addImport(file: SourceFile, importValue: string, importPath: string): void {
   const importNode = file.getImportDeclaration(importPath)
 
   if (!importNode) {
@@ -72,7 +77,7 @@ export function addImport (file: SourceFile, importValue: string, importPath: st
   }
 }
 
-export function addModuleDecoratorImport (file: SourceFile, className: string, importValue: string): void {
+export function addModuleDecoratorImport(file: SourceFile, className: string, importValue: string): void {
   const moduleClass = file.getClass(className)
 
   if (moduleClass) {
@@ -87,5 +92,15 @@ export function addModuleDecoratorImport (file: SourceFile, className: string, i
     if (!hasImport) {
       importArray?.addElement(importValue)
     }
+  }
+}
+
+export function clearDefaultExport(file: SourceFile): void {
+  const exportNode = file.getExportDeclaration((decl) => {
+    return decl.getFullText() === 'export {}'
+  })
+
+  if (exportNode) {
+    exportNode.remove()
   }
 }

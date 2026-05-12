@@ -1,45 +1,121 @@
----
+variables:
+  NODE_IMAGE: node:22
+  TAG_NODE: node
+
+workflow:
+  rules:
+    # do not run on merge-request, just branch pipelines
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    # run if branch or tag is pushed/created
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+
 stages:
   - install
+  - test
   - build
-  - docs
-  - publish
+  - release
 
-cache:
-  paths:
-    - node_modules/
-    - packages/*/node_modules
+default:
+  image: ${NODE_IMAGE}
+  tags:
+    - ${TAG_NODE}
+  before_script:
+    # prepare pnpm
+    - npm install --global corepack@latest
+    - corepack enable
+    - corepack prepare pnpm@latest-10 --activate
+    - pnpm config set store-dir .pnpm-store
+    # prepare nx-affected
+    # always compare to the last release
+    - export NX_BASE=$(git log -n 1 --format=format:%H --grep="chore(release):\spublish")
+    - export NX_HEAD=$CI_COMMIT_SHA
 
-variables:
-  NODE_VERSION: 20-alpine
-  NODE_PACKAGE_MANAGER: npm
+# install and audit
+install:
+  stage: install
+  artifacts:
+    paths:
+      - node_modules
+      - packages/*/node_modules
+      - .pnpm-store
+    when: on_success
+    expire_in: 30min
+  script: pnpm install --frozen-lockfile
 
-include:
-  - project: bdsm/gitlab-pipes
-    file: /templates/node.gitlab-ci.yml
-  - project: bdsm/gitlab-pipes
-    file: /templates/semantic-release.gitlab-ci.yml
+audit:
+  stage: install
+  allow_failure: true
+  dependencies: []
+  script: pnpm audit --prod --audit-level=high
 
-# docs:
-#   stage: docs
-#   image: $CI_REGISTRY/bdsm/gitlab-pipes/gitlab-pipes-node:${NODE_VERSION}
-#   script:
-#     - pipe run docs
-#   artifacts:
-#     paths:
-#       - packages/*/README.md
-#       - packages/*/docs
-#   only:
-#     - master
-#     - next
-#     - next-major
-#     - beta
-#     - rc
-#     - alpha
-#   tags:
-#     - docker
-#
-semantic-release:
-  variables:
-    NPM_LOGIN: $NPM_LOGIN
-    SEMANTIC_RELEASE_WORKSPACE: 'true'
+# lint and test
+lint:
+  stage: test
+  script: pnpm run lint
+  dependencies:
+    - install
+
+test:
+  stage: test
+  # if no last release build all, else just build affected since last release
+  script: if [ -z "$NX_BASE" ]; then pnpm run test; else pnpm run nx affected --target test; fi
+  dependencies:
+    - install
+
+## build
+build:
+  stage: build
+  # if no last release build all, else just build affected since last release
+  script: if [ -z "$NX_BASE" ]; then pnpm run build; else pnpm run nx affected --target build; fi
+  dependencies:
+    - install
+  artifacts:
+    paths:
+      - dist/
+    exclude:
+      - node_modules*
+      - node_modules/**/*
+    expire_in: 30min
+
+## release
+.release:
+  stage: release
+  before_script:
+    # prepare pnpm
+    - !reference [ default, before_script ]
+    # prepare .npmrc
+    # gitlab package-registry
+    # - echo "@diamir:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
+    # - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+    # npm registry
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    # prepare git interactions
+    - git config --global user.email "backend@diamir.io"
+    - git config --global user.name "Backend Diamir"
+    - git remote set-url origin https://gitlab-ci-token:${GL_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
+  after_script:
+    # only run if job is successful
+    - if [ $CI_JOB_STATUS != 'success' ]; then exit 0; fi
+    - git push origin -o ci.skip HEAD:$CI_COMMIT_BRANCH
+    - git push origin --tags
+  dependencies:
+    - install
+    - build
+
+release-beta: # release beta
+  extends: .release
+  script: if [ -z "$NX_BASE" ]; then pnpm run nx release --preid=beta --yes; else pnpm run nx affected --target release -c beta; fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == "beta"
+      when: on_success
+    - when: never
+
+release: # release main
+  extends: .release
+  script: if [ -z "$NX_BASE" ]; then pnpm run nx release --yes; else pnpm run nx affected --target release; fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+    - when: never

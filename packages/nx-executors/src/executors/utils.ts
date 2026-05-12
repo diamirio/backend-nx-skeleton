@@ -1,11 +1,16 @@
 import type { SpawnOptions } from 'node:child_process'
 import { spawn } from 'node:child_process'
 import { EOL } from 'node:os'
-import type { ExecutorContext } from 'nx/src/config/misc-interfaces'
+import type { ExecutorContext } from '@nx/devkit'
 
 import { LogWriter } from './logger'
 
-export function spawnProcess (command: string, args: string[], options: SpawnOptions, context?: ExecutorContext): Promise<number | Error> {
+export function spawnProcess(
+  command: string,
+  args: string[],
+  options: SpawnOptions,
+  context?: ExecutorContext
+): Promise<number | Error> {
   const logWriter = new LogWriter(context)
 
   return new Promise((resolve, reject) => {
