@@ -1,14 +1,19 @@
 {
   "name": "@diamir/nx-nest",
   "version": "22.0.0",
-  "description": "",
+  "description": "Nx nestjs workspace and package generator",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nx",
+    "nestjs",
+    "workspace"
+  ],
   "dependencies": {
     "@nx/devkit": "22.3.3",
     "@nx/js": "22.3.3",
