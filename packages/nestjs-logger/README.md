@@ -1,12 +1,3 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # nestjs-logger
 
 <!-- TOC -->
@@ -16,6 +7,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
   * [Options](#options)
     * [Log-Level](#log-level)
     * [Formats](#formats)
+    * [Transports](#transports)
     * [ClsService](#clsservice)
   * [Migration](#migration)
 <!-- TOC -->
