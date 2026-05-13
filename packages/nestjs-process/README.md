@@ -1,12 +1,22 @@
 # nestjs-process
 
+## Description
+
+Bunch of general process utils used to set default header and environment variables.
+
+---
+
 <!-- TOC -->
 * [nestjs-process](#nestjs-process)
+  * [Description](#description)
   * [SetApiInfoHeaderMiddleware](#setapiinfoheadermiddleware)
   * [setEnvironmentVariables](#setenvironmentvariables)
   * [requireNodeEnv](#requirenodeenv)
   * [registerExitListeners](#registerexitlisteners)
+* [Links](#links)
 <!-- TOC -->
+
+---
 
 ## SetApiInfoHeaderMiddleware
 
@@ -32,3 +42,7 @@ Throw error if `process.env.NODE_ENV` is not set
 ## registerExitListeners
 
 Register `SIGTERM` and `SIGINT` listener
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

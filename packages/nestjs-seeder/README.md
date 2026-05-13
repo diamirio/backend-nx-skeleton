@@ -1,14 +1,20 @@
 # nestjs-seeder
 
-<!-- TOC -->
-* [nestjs-seeder](#nestjs-seeder)
-  * [Description](#description)
-  * [Usage](#usage)
-<!-- TOC -->
 
 ## Description
 
 A generic seeder to inject services in to and initiate an application programmatically.
+
+---
+
+<!-- TOC -->
+* [nestjs-seeder](#nestjs-seeder)
+  * [Description](#description)
+  * [Usage](#usage)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Usage
 
@@ -30,3 +36,7 @@ export class ExampleSeed extends Seed {
 ```
 
 Those seeds can inject providers as usual in nestjs and can be used for more than just database seeding.
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

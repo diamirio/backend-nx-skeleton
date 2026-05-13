@@ -1,5 +1,15 @@
 # nestjs-logger
 
+## Description
+
+Custom logger service based on [winston](https://github.com/winstonjs/winston.
+
+Details from winston read-me:
+- Formats: [winston#formats](https://github.com/winstonjs/winston?tab=readme-ov-file#formats)
+- Transport: [winston#transports](https://github.com/winstonjs/winston?tab=readme-ov-file#transports)
+
+---
+
 <!-- TOC -->
 * [nestjs-logger](#nestjs-logger)
   * [Description](#description)
@@ -9,16 +19,11 @@
     * [Formats](#formats)
     * [Transports](#transports)
     * [ClsService](#clsservice)
-  * [Migration](#migration)
+* [Migration](#migration)
+* [Links](#links)
 <!-- TOC -->
 
-## Description
-
-Custom logger service based on [winston](https://github.com/winstonjs/winston.
-
-Details from winston read-me:
-- Formats: [winston#formats](https://github.com/winstonjs/winston?tab=readme-ov-file#formats)
-- Transport: [winston#transports](https://github.com/winstonjs/winston?tab=readme-ov-file#transports)
+---
 
 ## Usage
 
@@ -146,9 +151,14 @@ new WinstonLogger({
 })
 ```
 
-## Migration
+# Migration
 
 To migrate from the old `@webundsoehne/nestjs-util` to `@diamir/nestjs-logger`:
 - Change `LoggerService` class to `WinstonLogger`
 - manually link the `logLevel` in the class options (does not pull it via `ConfigService` any more)
 - update how the `clsService` is set (drop `setClsService`, move to class options)
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)
+- [winston](https://github.com/winstonjs/winston)

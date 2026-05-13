@@ -4,19 +4,19 @@ NestJs and Nx utils/helper/tools
 
 <!-- TOC -->
 * [nx-skeleton](#nx-skeleton)
-* [compatibility](#compatibility)
-* [packages](#packages)
-  * [eslint-config](#eslint-config)
-  * [nestjs-config](#nestjs-config)
-  * [nestjs-logger](#nestjs-logger)
-  * [nestjs-maintenance](#nestjs-maintenance)
-  * [nestjs-microservice](#nestjs-microservice)
-  * [nestjs-process](#nestjs-process)
-  * [nestjs-retry](#nestjs-retry)
-  * [nestjs-seeder](#nestjs-seeder)
-  * [nestjs-util-restful](#nestjs-util-restful)
-  * [nx-executors](#nx-executors)
-  * [nx-nest](#nx-nest)
+  * [compatibility](#compatibility)
+  * [packages](#packages)
+    * [eslint-config](#eslint-config)
+    * [nestjs-config](#nestjs-config)
+    * [nestjs-logger](#nestjs-logger)
+    * [nestjs-maintenance](#nestjs-maintenance)
+    * [nestjs-microservice](#nestjs-microservice)
+    * [nestjs-process](#nestjs-process)
+    * [nestjs-retry](#nestjs-retry)
+    * [nestjs-seeder](#nestjs-seeder)
+    * [nestjs-util-restful](#nestjs-util-restful)
+    * [nx-executors](#nx-executors)
+    * [nx-nest](#nx-nest)
 * [Development](#development)
   * [package.json](#packagejson)
   * [Targets](#targets)
@@ -26,7 +26,7 @@ NestJs and Nx utils/helper/tools
 * [old skeleton](#old-skeleton)
 <!-- TOC -->
 
-# compatibility
+## compatibility
 
 | package                | dependency      |
 |------------------------|-----------------|
@@ -42,59 +42,59 @@ NestJs and Nx utils/helper/tools
 | nx-executors@22        | nx@22           |
 | nx-nest@22             | nx@22 & nest@11 |
 
-# packages
+## packages
 
-## eslint-config
+### eslint-config
 
 Eslint-Config presets
 [eslint-config](./packages/eslint-config)
 
-## nestjs-config
+### nestjs-config
 
 Runtime config util and decorators
 [nestjs-config](./packages/nestjs-config)
 
-## nestjs-logger
+### nestjs-logger
 
 Winston nestjs logger instance
 [nestjs-logger](./packages/nestjs-logger)
 
-## nestjs-maintenance
+### nestjs-maintenance
 
 Maintenance middleware and module
 [nestjs-maintenance](./packages/nestjs-maintenance)
 
-## nestjs-microservice
+### nestjs-microservice
 
 Microservice utils
 [nestjs-microservice](./packages/nestjs-microservice)
 
-## nestjs-process
+### nestjs-process
 
 Node process/environment utils
 [nestjs-process](./packages/nestjs-process)
 
-## nestjs-retry
+### nestjs-retry
 
 Method retry decorator
 [nestjs-retry](./packages/nestjs-retry)
 
-## nestjs-seeder
+### nestjs-seeder
 
 Generic seeding module
 [nestjs-seeder](./packages/nestjs-seeder)
 
-## nestjs-util-restful
+### nestjs-util-restful
 
 Restful utils, swagger, exception-filter tools
 [nestjs-util-restful](./packages/nestjs-util-restful)
 
-## nx-executors
+### nx-executors
 
 NX executors and plugins
 [nx-executors](./packages/nx-executors)
 
-## nx-nest
+### nx-nest
 
 NX application/workspace generators
 [nx-nest](./packages/nx-nest)

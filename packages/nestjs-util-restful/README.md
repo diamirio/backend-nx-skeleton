@@ -1,5 +1,11 @@
 # nestjs-util-restful
 
+## Description
+
+Set of utils/helpers for restful nestjs setups.
+
+---
+
 <!-- TOC -->
 * [nestjs-util-restful](#nestjs-util-restful)
   * [Description](#description)
@@ -13,15 +19,14 @@
   * [Interceptor](#interceptor)
   * [InternalModule](#internalmodule)
   * [Swagger](#swagger)
-  * [Migration](#migration)
-    * [Filter](#filter-1)
-    * [InternalModule](#internalmodule-1)
-    * [Swagger](#swagger-1)
+* [Migration](#migration)
+  * [Filter](#filter-1)
+  * [InternalModule](#internalmodule-1)
+  * [Swagger](#swagger-1)
+* [Links](#links)
 <!-- TOC -->
 
-## Description
-
-Set of utils/helpers for restful nestjs setups.
+---
 
 ## Filter
 
@@ -223,19 +228,23 @@ SwaggerService.enable(app, ConfigService.get('swagger'), ConfigService.get('url'
 
 
 
-## Migration
+# Migration
 
-### Filter
+## Filter
 - replace dependency
 - drop deprecated filter (server and microservice-server)
 - replace with new filter
 
-### InternalModule
+## InternalModule
 - replace dependency
 - setup module with `.forRoot()` (see ConfigService paths in [InternalModule](#internalmodule))
 
-### Swagger
+## Swagger
 - replace dependency
 - update `SwaggerService.enable()` to new syntax
   - old: `enable(app, customize, swagger, url)`
   - new: `enable(app, swagger, url, customize)` (see [Swagger](#swagger))
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

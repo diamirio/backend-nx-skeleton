@@ -1,20 +1,25 @@
 # nestjs-maintenance
 
-<!-- TOC -->
-* [nestjs-maintenance](#nestjs-maintenance)
-  * [Description](#description)
-  * [Usage](#usage)
-    * [MaintenanceService](#maintenanceservice)
-    * [Decorator](#decorator)
-  * [Migration](#migration)
-<!-- TOC -->
-
 ## Description
 
 The maintenance module gives you the possibility to generate and remove a lock file,
 as well as checking if the lock file exists and throwing a preconfigured `ServiceUnavailableException` error.
 
 You may use the maintenance module anywhere in your project, e.g. for database migrations. (But make sure to access the same lock-file in each module)
+
+---
+
+<!-- TOC -->
+* [nestjs-maintenance](#nestjs-maintenance)
+  * [Description](#description)
+  * [Usage](#usage)
+    * [MaintenanceService](#maintenanceservice)
+    * [Decorator](#decorator)
+* [Migration](#migration)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Usage
 
@@ -59,8 +64,12 @@ Apply the `@UseMaintenanceLocker()` decorator on a method to wrap the original f
 2. execute method
 3. disable lock
 
-## Migration
+# Migration
 
 To migrate from the old `@webundsoehne/nestjs-util` to `@diamir/nestjs-maintenance`:
 - replace the imports
 - change the `MaintenanceModule` imports to use the `.forRoot` method
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)
