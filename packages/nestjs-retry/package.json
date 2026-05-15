@@ -1,14 +1,18 @@
 {
   "name": "@diamir/nestjs-retry",
   "version": "11.0.0",
-  "description": "",
+  "description": "Nestjs decorator to trigger retry on failure",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nestjs",
+    "retry"
+  ],
   "main": "./src/index.js",
   "dependencies": {},
   "peerDependencies": {

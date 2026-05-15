@@ -1,12 +1,3 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # nestjs-microservice
 
 ## Description
@@ -14,6 +5,20 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 RabbitMQ, NestJs-Microservice wrapper for easier microservice interaction.
 
 Create the microservice-server as normal with NestJs (`createMicroservice`) and in the api (that interacts with that server) use this provider-utils.
+
+---
+
+<!-- TOC -->
+* [nestjs-microservice](#nestjs-microservice)
+  * [Description](#description)
+  * [Microservice-Provider Module](#microservice-provider-module)
+    * [Options](#options)
+  * [Microservice-Provider](#microservice-provider)
+  * [Interceptor](#interceptor)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Microservice-Provider Module
 
@@ -122,3 +127,7 @@ Example Output:
 [2020-01-01T12:00:00.000Z] [debug] [RequestProfilerInterceptor] - Pattern example starting
 [2020-01-01T12:00:00.025Z] [debug] [RequestProfilerInterceptor] - Pattern example finished - took: 0.0250 sec
 ```
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

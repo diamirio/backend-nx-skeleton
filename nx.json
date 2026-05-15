@@ -28,6 +28,22 @@
         }
       ],
       "fallbackCurrentVersionResolver": "disk"
+    },
+    "conventionalCommits": {
+      "types": {
+        "docs": {
+          "semverBump": "patch",
+          "changelog": {
+            "title": "Documentation"
+          }
+        },
+        "chore": {
+          "semverBump": "patch",
+          "changelog": {
+            "hidden": true
+          }
+        }
+      }
     }
   },
   "targetDefaults": {

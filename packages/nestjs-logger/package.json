@@ -1,14 +1,20 @@
 {
   "name": "@diamir/nestjs-logger",
   "version": "11.0.0",
-  "description": "",
+  "description": "Nestjs logger based on winston",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nestjs",
+    "logger",
+    "logging",
+    "winston"
+  ],
   "main": "./src/index.js",
   "dependencies": {
     "winston": "3.19.0"

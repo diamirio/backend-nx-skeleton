@@ -1,14 +1,20 @@
 {
   "name": "@diamir/nestjs-maintenance",
   "version": "11.0.0",
-  "description": "",
+  "description": "Nestjs maintenance middleware and lock",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nestjs",
+    "middleware",
+    "maintenance",
+    "lock"
+  ],
   "main": "./src/index.js",
   "dependencies": {},
   "peerDependencies": {

@@ -1,14 +1,19 @@
 {
   "name": "@diamir/nestjs-util-restful",
   "version": "11.0.0",
-  "description": "",
+  "description": "Nestjs REST utils, modules and filter",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nestjs",
+    "rest",
+    "util"
+  ],
   "main": "./src/index.js",
   "dependencies": {},
   "peerDependencies": {

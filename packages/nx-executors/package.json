@@ -1,14 +1,21 @@
 {
   "name": "@diamir/nx-executors",
   "version": "22.0.0",
-  "description": "",
+  "description": "Nx custom executors",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nx",
+    "executor",
+    "typescript",
+    "jest",
+    "ts-node-dev"
+  ],
   "main": "./src/index.js",
   "dependencies": {
     "@nx/devkit": "22.3.3",

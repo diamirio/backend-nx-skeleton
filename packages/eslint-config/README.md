@@ -1,17 +1,8 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # eslint-config
 
 ## Description
 
-Base set of 
+Base set of
 
 - [eslint](https://www.npmjs.com/package/eslint)
 - [typescript-eslint](https://www.npmjs.com/package/typescript-eslint)
@@ -19,6 +10,22 @@ Base set of
 - [eslint-plugin-import-x](https://www.npmjs.com/package/eslint-plugin-import-x)
 
 linting rules.
+
+---
+
+<!-- TOC -->
+* [eslint-config](#eslint-config)
+  * [Description](#description)
+  * [Configs](#configs)
+    * [Minimal](#minimal)
+    * [Recommended](#recommended)
+  * [Utils](#utils)
+    * [Define-Config](#define-config)
+    * [Internal Package Import](#internal-package-import)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Configs
 
@@ -92,3 +99,7 @@ export default utils.defineConfig(
   recommended
 )
 ```
+
+# Links
+- [Diamir](https://diamir.io/)
+- [eslint](https://eslint.org/)

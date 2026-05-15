@@ -1,13 +1,10 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+# nestjs-util-restful
+
+## Description
+
+Set of utils/helpers for restful nestjs setups.
 
 ---
-
-# nestjs-util-restful
 
 <!-- TOC -->
 * [nestjs-util-restful](#nestjs-util-restful)
@@ -22,15 +19,14 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
   * [Interceptor](#interceptor)
   * [InternalModule](#internalmodule)
   * [Swagger](#swagger)
-  * [Migration](#migration)
-    * [Filter](#filter-1)
-    * [InternalModule](#internalmodule-1)
-    * [Swagger](#swagger-1)
+* [Migration](#migration)
+  * [Filter](#filter-1)
+  * [InternalModule](#internalmodule-1)
+  * [Swagger](#swagger-1)
+* [Links](#links)
 <!-- TOC -->
 
-## Description
-
-Set of utils/helpers for restful nestjs setups.
+---
 
 ## Filter
 
@@ -232,19 +228,23 @@ SwaggerService.enable(app, ConfigService.get('swagger'), ConfigService.get('url'
 
 
 
-## Migration
+# Migration
 
-### Filter
+## Filter
 - replace dependency
 - drop deprecated filter (server and microservice-server)
 - replace with new filter
 
-### InternalModule
+## InternalModule
 - replace dependency
 - setup module with `.forRoot()` (see ConfigService paths in [InternalModule](#internalmodule))
 
-### Swagger
+## Swagger
 - replace dependency
 - update `SwaggerService.enable()` to new syntax
   - old: `enable(app, customize, swagger, url)`
   - new: `enable(app, swagger, url, customize)` (see [Swagger](#swagger))
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

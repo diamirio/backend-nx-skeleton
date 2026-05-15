@@ -1,24 +1,4 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # nestjs-logger
-
-<!-- TOC -->
-* [nestjs-logger](#nestjs-logger)
-  * [Description](#description)
-  * [Usage](#usage)
-  * [Options](#options)
-    * [Log-Level](#log-level)
-    * [Formats](#formats)
-    * [ClsService](#clsservice)
-  * [Migration](#migration)
-<!-- TOC -->
 
 ## Description
 
@@ -27,6 +7,23 @@ Custom logger service based on [winston](https://github.com/winstonjs/winston.
 Details from winston read-me:
 - Formats: [winston#formats](https://github.com/winstonjs/winston?tab=readme-ov-file#formats)
 - Transport: [winston#transports](https://github.com/winstonjs/winston?tab=readme-ov-file#transports)
+
+---
+
+<!-- TOC -->
+* [nestjs-logger](#nestjs-logger)
+  * [Description](#description)
+  * [Usage](#usage)
+  * [Options](#options)
+    * [Log-Level](#log-level)
+    * [Formats](#formats)
+    * [Transports](#transports)
+    * [ClsService](#clsservice)
+* [Migration](#migration)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Usage
 
@@ -154,9 +151,14 @@ new WinstonLogger({
 })
 ```
 
-## Migration
+# Migration
 
 To migrate from the old `@webundsoehne/nestjs-util` to `@diamir/nestjs-logger`:
 - Change `LoggerService` class to `WinstonLogger`
 - manually link the `logLevel` in the class options (does not pull it via `ConfigService` any more)
 - update how the `clsService` is set (drop `setClsService`, move to class options)
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)
+- [winston](https://github.com/winstonjs/winston)

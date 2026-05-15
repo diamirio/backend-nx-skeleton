@@ -1,21 +1,22 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+# nestjs-process
+
+## Description
+
+Bunch of general process utils used to set default header and environment variables.
 
 ---
 
-# nestjs-process
-
 <!-- TOC -->
 * [nestjs-process](#nestjs-process)
+  * [Description](#description)
   * [SetApiInfoHeaderMiddleware](#setapiinfoheadermiddleware)
   * [setEnvironmentVariables](#setenvironmentvariables)
   * [requireNodeEnv](#requirenodeenv)
   * [registerExitListeners](#registerexitlisteners)
+* [Links](#links)
 <!-- TOC -->
+
+---
 
 ## SetApiInfoHeaderMiddleware
 
@@ -41,3 +42,7 @@ Throw error if `process.env.NODE_ENV` is not set
 ## registerExitListeners
 
 Register `SIGTERM` and `SIGINT` listener
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)
