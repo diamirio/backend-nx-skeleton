@@ -1,6 +1,6 @@
 {
   "name": "@diamir/nestjs-util-restful",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "Nestjs REST utils, modules and filter",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
