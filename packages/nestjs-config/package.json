@@ -1,6 +1,6 @@
 {
   "name": "@diamir/nestjs-config",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "Wrapper for the config package with additional usage with decorators",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
