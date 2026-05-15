@@ -1,6 +1,6 @@
 {
   "name": "@diamir/nestjs-logger",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "Nestjs logger based on winston",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
