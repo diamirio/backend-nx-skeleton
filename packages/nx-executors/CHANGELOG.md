@@ -1,3 +1,15 @@
+## 22.0.1 (2026-05-15)
+
+### Documentation
+
+- unified readme structure, update toc, add links
+- remove deprecated header from readme
+- add package.json description and keywords
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 # 22.0.0 (2026-05-12)
 
 ### 🚀 Features
