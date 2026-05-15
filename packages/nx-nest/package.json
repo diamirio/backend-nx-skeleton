@@ -1,6 +1,6 @@
 {
   "name": "@diamir/nx-nest",
-  "version": "22.0.0",
+  "version": "22.0.1",
   "description": "Nx nestjs workspace and package generator",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
