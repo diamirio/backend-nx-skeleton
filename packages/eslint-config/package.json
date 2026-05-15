@@ -1,6 +1,6 @@
 {
   "name": "@diamir/eslint-config",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Diamir's eslint config for backend projects",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
