@@ -15,7 +15,7 @@
   ],
   "main": "./src/index.js",
   "dependencies": {
-    "config": "4.1.1"
+    "config": "^4.1.1"
   },
   "peerDependencies": {
     "reflect-metadata": ">= 0.1.0"
