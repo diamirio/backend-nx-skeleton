@@ -1,3 +1,7 @@
+## 11.0.2 (2026-05-19)
+
+This was a version bump only for nestjs-retry to align it with other projects, there were no code changes.
+
 ## 11.0.1 (2026-05-15)
 
 ### Documentation
