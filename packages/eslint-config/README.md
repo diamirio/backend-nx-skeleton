@@ -35,10 +35,11 @@ Import config package on their own via `import { configs } from '@diamir/eslint-
 - `configs.typescript` ... import order and typescript rules like `@typescript-eslint/naming-convention`
 - `configs.style` ... stylistic rules like `@stylistic/quotes`, `@stylistic/semi`
 
-and use them like 
+and use them like
 
 ```ts
 // eslint.config.mjs
+import { globalIgnores } from 'eslint/config'
 import { configs, utils } from '@diamir/eslint-config'
 
 export default utils.defineConfig(
@@ -94,7 +95,7 @@ If using libs with an internal scope (as in tsconfig paths) you can use `interna
 // eslint.config.mjs
 import { recommended, utils } from '@diamir/eslint-config'
 
-export default utils.defineConfig(
+export default defineConfig(
   utils.internalPackageImport('^@scope/'),
   recommended
 )
