@@ -22,7 +22,7 @@
     "@nestjs/swagger": ">= 11.0.0",
     "@sentry/node": ">= 10.27.0",
     "typeorm": ">= 0.3.28",
-    "rxjs": "7.8.2"
+    "rxjs": "^7.8.2"
   },
   "peerDependenciesMeta": {
     "typeorm": {
