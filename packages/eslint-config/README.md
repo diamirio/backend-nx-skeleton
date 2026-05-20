@@ -45,7 +45,20 @@ import { configs, utils } from '@diamir/eslint-config'
 export default utils.defineConfig(
   globalIgnores(['dist/**']),
   configs.base,
-  configs.typescript
+  configs.typescript,
+  {
+    name: 'custom',
+    rules: {
+      // custom rules
+    }
+  },
+  {
+    name: 'test',
+    files: ['**/*.spec.ts'],
+    rules: {
+      // rules applied to test files
+    }
+  }
 )
 ```
 
@@ -95,7 +108,7 @@ If using libs with an internal scope (as in tsconfig paths) you can use `interna
 // eslint.config.mjs
 import { recommended, utils } from '@diamir/eslint-config'
 
-export default defineConfig(
+export default utils.defineConfig(
   utils.internalPackageImport('^@scope/'),
   recommended
 )
