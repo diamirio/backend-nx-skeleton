@@ -40,7 +40,7 @@ class TscPlugin extends PluginBuilder<TscPluginOptions> {
         outputs: [],
         options: {
           command: 'tsc --noEmit',
-          args: ['--project=tsconfig.build.json'],
+          args: ['--project tsconfig.build.json'],
           cwd: '{projectRoot}'
         }
       }

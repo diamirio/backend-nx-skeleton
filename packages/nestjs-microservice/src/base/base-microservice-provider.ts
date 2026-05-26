@@ -25,7 +25,8 @@ export abstract class BaseMicroserviceProvider<Pattern extends string> implement
   onModuleInit(): void {
     this.clientProxy = new ClientRMQ({
       ...(this.options.clientOptions ?? {}),
-      queue: this.queue
+      queue: this.queue,
+      urls: this.options.urls
     })
   }
 
@@ -59,9 +60,12 @@ export abstract class BaseMicroserviceProvider<Pattern extends string> implement
   protected responseException(pattern: Pattern, error: any) {
     return (
       this.options.responseErrorFactory?.(this.queue, pattern, error) ??
-      new InternalServerErrorException(`${this.queue}#${String(pattern)} failed: ${error.message ?? error.err?.code}`, {
-        cause: error
-      })
+      new InternalServerErrorException(
+        `${this.queue}#${String(pattern)} failed: ${error.message ?? error.err?.message ?? error.err?.code}`,
+        {
+          cause: error
+        }
+      )
     )
   }
 

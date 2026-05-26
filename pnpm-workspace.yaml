@@ -1,6 +1,9 @@
 packages:
   - packages/*
 
+allowBuilds:
+  simple-git-hooks: true
+
 catalog:
   config: '^4.1.1'
   rxjs: '^7.8.2'
