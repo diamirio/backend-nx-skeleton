@@ -1,3 +1,13 @@
+## 11.0.3 (2026-05-26)
+
+### 🩹 Fixes
+
+- **nestjs-microservice:** add missing urls on rmq-client init
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 11.0.2 (2026-05-19)
 
 This was a version bump only for nestjs-microservice to align it with other projects, there were no code changes.
