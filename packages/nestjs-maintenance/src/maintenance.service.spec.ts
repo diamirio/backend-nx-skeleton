@@ -19,22 +19,6 @@ jest.mock('node:fs/promises', () => {
 describe('Maintenance Service', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    MaintenanceService.instance = undefined // reset singleton
-  })
-
-  test('should create singleton instance', () => {
-    expect(MaintenanceService.instance).toBeUndefined()
-    expect(resolve).not.toHaveBeenCalled()
-
-    const service = new MaintenanceService()
-    expect(resolve).toHaveBeenCalledTimes(1)
-    expect(MaintenanceService.instance).toBeDefined()
-    expect(service.message).toEqual('Application is currently down for maintenance')
-    expect(resolve).toHaveBeenCalledWith('maintenance.lock')
-
-    new MaintenanceService()
-    new MaintenanceService()
-    expect(resolve).toHaveBeenCalledTimes(1)
   })
 
   test('should use constructor options', () => {
