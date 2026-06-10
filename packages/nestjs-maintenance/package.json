@@ -1,6 +1,6 @@
 {
   "name": "@diamir/nestjs-maintenance",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "description": "Nestjs maintenance middleware and lock",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",

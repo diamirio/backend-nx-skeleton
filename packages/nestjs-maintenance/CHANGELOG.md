@@ -1,3 +1,13 @@
+## 11.0.3 (2026-06-10)
+
+### 🩹 Fixes
+
+- **nestjs-maintenance:** drop custom singleton, module provides singleton itself
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 11.0.2 (2026-05-19)
 
 This was a version bump only for nestjs-maintenance to align it with other projects, there were no code changes.
