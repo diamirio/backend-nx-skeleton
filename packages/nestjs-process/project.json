@@ -6,6 +6,13 @@
   "targets": {
     "build": {},
     "lint": {},
+    "test": {
+      "command": "vitest --config=./vitest.config.ts",
+      "options": {
+        "cwd": "{projectRoot}",
+        "forwardAllArgs": true
+      }
+    },
     "updateManifest": {},
     "release": {}
   }
