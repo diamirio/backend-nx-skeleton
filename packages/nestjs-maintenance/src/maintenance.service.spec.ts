@@ -1,24 +1,25 @@
-/** biome-ignore-all lint/complexity/useLiteralKeys: access to private properties */
 import { rm, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { vitest } from 'vitest'
 
 import { MaintenanceService } from './maintenance.service'
 
-jest.mock('node:path', () => {
+vitest.mock(import('node:path'), () => {
   return {
-    resolve: jest.fn((path: string) => path)
+    resolve: vitest.fn((path: string) => path)
   }
 })
-jest.mock('node:fs/promises', () => {
+vitest.mock(import('node:fs/promises'), () => {
   return {
-    writeFile: jest.fn(),
-    rm: jest.fn()
+    access: vitest.fn(),
+    writeFile: vitest.fn(),
+    rm: vitest.fn()
   }
 })
 
 describe('Maintenance Service', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vitest.clearAllMocks()
   })
 
   test('should use constructor options', () => {
@@ -30,8 +31,13 @@ describe('Maintenance Service', () => {
 
   test('should enable lock', async () => {
     const service = new MaintenanceService({ application: 'mock', lockfilePath: 'mock.lock' })
-    jest.replaceProperty(service as any, 'logger', { log: jest.fn(), debug: jest.fn(), verbose: jest.fn() })
-    jest.spyOn(service, 'isEnabled').mockResolvedValue(false)
+
+    vitest.spyOn(service as any, 'logger', 'get').mockReturnValue({
+      debug: vitest.fn(),
+      verbose: vitest.fn(),
+      log: vitest.fn()
+    })
+    vitest.spyOn(service, 'isEnabled').mockResolvedValue(false)
 
     expect(service['tasks']).toEqual([])
     await expect(service.enable('mock')).resolves.not.toThrow()
@@ -45,8 +51,13 @@ describe('Maintenance Service', () => {
 
   test('should skip if already locked', async () => {
     const service = new MaintenanceService({ application: 'mock', lockfilePath: 'mock.lock' })
-    jest.replaceProperty(service as any, 'logger', { log: jest.fn(), debug: jest.fn(), verbose: jest.fn() })
-    jest.spyOn(service, 'isEnabled').mockResolvedValue(true)
+
+    vitest.spyOn(service as any, 'logger', 'get').mockReturnValue({
+      debug: vitest.fn(),
+      verbose: vitest.fn(),
+      log: vitest.fn()
+    })
+    vitest.spyOn(service, 'isEnabled').mockResolvedValue(true)
 
     expect(service['tasks']).toEqual([])
     await expect(service.enable('mock-2')).resolves.not.toThrow()
@@ -61,8 +72,13 @@ describe('Maintenance Service', () => {
 
   test('should disable lock if no tasks left', async () => {
     const service = new MaintenanceService({ application: 'mock', lockfilePath: 'mock.lock' })
-    jest.replaceProperty(service as any, 'logger', { log: jest.fn(), debug: jest.fn(), verbose: jest.fn() })
-    jest.replaceProperty(service as any, 'tasks', ['mock'])
+
+    vitest.spyOn(service as any, 'logger', 'get').mockReturnValue({
+      debug: vitest.fn(),
+      verbose: vitest.fn(),
+      log: vitest.fn()
+    })
+    vitest.spyOn(service as any, 'tasks', 'get').mockReturnValue(['mock'])
 
     expect(service['tasks']).toEqual(['mock'])
     await expect(service.disable('mock-1')).resolves.not.toThrow()
@@ -76,8 +92,13 @@ describe('Maintenance Service', () => {
 
   test('should not disable lock if still tasks left', async () => {
     const service = new MaintenanceService({ application: 'mock', lockfilePath: 'mock.lock' })
-    jest.replaceProperty(service as any, 'logger', { log: jest.fn(), debug: jest.fn(), verbose: jest.fn() })
-    jest.replaceProperty(service as any, 'tasks', ['mock', 'mock-1', 'mock-2'])
+
+    vitest.spyOn(service as any, 'logger', 'get').mockReturnValue({
+      debug: vitest.fn(),
+      verbose: vitest.fn(),
+      log: vitest.fn()
+    })
+    vitest.spyOn(service as any, 'tasks', 'get').mockReturnValue(['mock', 'mock-1', 'mock-2'])
 
     expect(service['tasks']).toEqual(['mock', 'mock-1', 'mock-2'])
     await expect(service.disable('mock-1')).resolves.not.toThrow()

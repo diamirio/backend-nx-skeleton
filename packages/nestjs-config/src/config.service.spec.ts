@@ -2,17 +2,19 @@ import config from 'config'
 
 import { ConfigService } from './config.service'
 
-jest.mock('config', () => {
+vitest.mock(import('config'), async () => {
   return {
-    get: (key: string) => {
-      return {
-        lorem: 'ipsum',
-        mock: 'mock'
-      }[key]
-    },
-    has: (key: string) => ['lorem', 'mock'].includes(key),
-    util: {
-      setModuleDefaults: jest.fn()
+    default: {
+      get: (key: string) => {
+        return {
+          lorem: 'ipsum',
+          mock: 'mock'
+        }[key]
+      },
+      has: (key: string) => ['lorem', 'mock'].includes(key),
+      util: {
+        setModuleDefaults: vitest.fn()
+      }
     }
   }
 })
@@ -39,7 +41,7 @@ describe('Config-Service', () => {
   })
 
   test('should pass data to underlying config', () => {
-    const moduleDefaults = jest.spyOn(config.util, 'setModuleDefaults')
+    const moduleDefaults = vitest.spyOn(config.util, 'setModuleDefaults')
 
     ConfigService.setModuleConfig('module', { config: 'mock' })
 

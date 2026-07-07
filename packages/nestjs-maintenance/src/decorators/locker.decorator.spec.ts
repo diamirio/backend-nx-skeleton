@@ -35,8 +35,8 @@ describe('Maintenance Locker decorator', () => {
   })
 
   test('should lock if methodA is called', async () => {
-    const enable = jest.spyOn(maintenance, 'enable')
-    const disable = jest.spyOn(maintenance, 'disable')
+    const enable = vitest.spyOn(maintenance, 'enable')
+    const disable = vitest.spyOn(maintenance, 'disable')
 
     await service.methodA()
     expect(enable).toHaveBeenCalled()

@@ -2,18 +2,20 @@ import config from 'config'
 
 import { ConfigParam, Configurable } from './config.decorators'
 
-jest.mock('config', () => {
+vitest.mock(import('config'), async () => {
   return {
-    get: (key: string) => {
-      return {
-        lorem: 'ipsum',
-        mock: 'mock',
-        array: [1, 2, 3, 4, 5]
-      }[key]
-    },
-    has: (key: string) => ['lorem', 'mock', 'array'].includes(key),
-    util: {
-      setModuleDefaults: jest.fn()
+    default: {
+      get: (key: string) => {
+        return {
+          lorem: 'ipsum',
+          mock: 'mock',
+          array: [1, 2, 3, 4, 5]
+        }[key]
+      },
+      has: (key: string) => ['lorem', 'mock', 'array'].includes(key),
+      util: {
+        setModuleDefaults: vitest.fn()
+      }
     }
   }
 })
@@ -42,15 +44,15 @@ class MockService {
 
 describe('config decorator', () => {
   let service: MockService
-  let configGet: jest.SpyInstance
+  let configGet: ReturnType<typeof vitest.spyOn>
 
   beforeAll(() => {
     service = new MockService()
-    configGet = jest.spyOn(config, 'get')
+    configGet = vitest.spyOn(config, 'get')
   })
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    vitest.clearAllMocks()
   })
 
   test('should return parameters values from the config', () => {
