@@ -1,3 +1,4 @@
+import { join } from 'node:path'
 import type { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
@@ -29,7 +30,7 @@ export class SwaggerService {
 
     // FIXME: this is a bug with fastify, if we use the global prefix, it ignores it while using fastify but express works just fine
     SwaggerModule.setup(
-      `${url?.apiPath ?? ''}${config.path}`,
+      join(url?.apiPath ?? '', config?.path ?? 'internal/docs'),
       app,
       SwaggerModule.createDocument(app, builder.build(), {
         ignoreGlobalPrefix: false

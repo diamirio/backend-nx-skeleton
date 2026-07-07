@@ -2,17 +2,14 @@ import type { DocumentBuilder, SwaggerCustomOptions } from '@nestjs/swagger'
 
 export interface SwaggerConfig {
   enabled: boolean
-  useHttps: boolean
-  basePath: string
-  path: string
-  title: string
-  description: string
+  title?: string
+  description?: string
+  path?: string
   custom?: SwaggerCustomOptions
 }
 
 export interface UrlConfig {
-  basePath: string
-  apiPath: string
+  apiPath?: string
 }
 
 export interface SwaggerOptions {
