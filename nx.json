@@ -36,12 +36,6 @@
           "changelog": {
             "title": "Documentation"
           }
-        },
-        "chore": {
-          "semverBump": "patch",
-          "changelog": {
-            "hidden": true
-          }
         }
       }
     }
