@@ -18,13 +18,13 @@
   ],
   "main": "./src/index.js",
   "dependencies": {
-    "@nx/devkit": "^22.7.0",
-    "@nx/js": "^22.7.0",
-    "@nx/jest": "^22.7.0",
+    "@nx/devkit": "^23.1.0",
+    "@nx/js": "^23.1.0",
+    "@nx/jest": "^23.1.0",
     "tslib": "^2.8.1"
   },
   "peerDependencies": {
-    "nx": ">= 22.0.0",
+    "nx": ">= 23.1.0",
     "ts-node": ">= 10.0.0",
     "ts-node-dev": ">= 2.0.0",
     "typescript": ">= 3.9.0"

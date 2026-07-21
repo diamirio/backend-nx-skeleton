@@ -2,6 +2,7 @@ packages:
   - packages/*
 
 allowBuilds:
+  nx: false
   simple-git-hooks: true
 
 catalog:
@@ -10,7 +11,7 @@ catalog:
   ts-morph: '^27.0.2'
   tslib: '^2.8.1'
   winston: '^3.19.0'
-  yaml: '^2.8.2'
+  yaml: '^2.8.3'
 
 catalogs:
   # DEPENDENCY
@@ -20,10 +21,10 @@ catalogs:
     eslint-plugin-import-x: '^4.16.1'
     typescript-eslint: '^8.53.0'
   nx:
-    '@nx/devkit': '^22.7.0'
-    '@nx/jest': '^22.7.0'
-    '@nx/js': '^22.7.0'
-    '@nx/workspace': '^22.7.0'
+    '@nx/devkit': '^23.1.0'
+    '@nx/jest': '^23.1.0'
+    '@nx/js': '^23.1.0'
+    '@nx/workspace': '^23.1.0'
   # DEPENDENCY PEER
   nestjs:
     '@nestjs/common': '>= 11.0.0'
@@ -35,7 +36,7 @@ catalogs:
     enquirer: '>= 2.3.0'
     eslint: '>= 9.0.0'
     nestjs-cls: '>= 5.0.0'
-    nx: '>= 22.0.0'
+    nx: '>= 23.1.0'
     reflect-metadata: '>= 0.1.0'
     ts-node: '>= 10.0.0'
     ts-node-dev: '>= 2.0.0'
