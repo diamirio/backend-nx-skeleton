@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import type { GeneratorCallback, Tree } from '@nx/devkit'
 import { formatFiles, getProjects, names, readNxJson } from '@nx/devkit'
+import { getNpmScope } from '@nx/js/internal'
 import { output } from '@nx/workspace'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
 
 import { Component, componentMetaData } from '../../constant'
 import {

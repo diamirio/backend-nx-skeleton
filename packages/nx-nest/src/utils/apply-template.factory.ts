@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import type { Tree } from '@nx/devkit'
 import { generateFiles, OverwriteStrategy } from '@nx/devkit'
-import type { GenerateFilesOptions } from '@nx/devkit/src/generators/generate-files'
+import type { GenerateFilesOptions } from '@nx/devkit/dist/src/generators/generate-files'
 
 export type ApplyTemplate = (templatePath: string[], context?: Record<string, any>, target?: string) => void
 

@@ -1,6 +1,6 @@
 import { join } from 'node:path'
-import type { ExecutorContext } from '@nx/devkit'
-import { tscExecutor as nxTscExecutor } from '@nx/js/src/executors/tsc/tsc.impl'
+import type { ExecutorContext, TargetConfiguration } from '@nx/devkit'
+import nxTscExecutor from '@nx/js/dist/src/executors/tsc/tsc.impl'
 import { fileExists, readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
 import type { ExecutorResult } from '../inteface'
@@ -17,7 +17,13 @@ export default async function (options: TscExecutorSchema, context: ExecutorCont
 
   if (options.mergeAssets) {
     // merge defaultTargetOptions and project.json options
-    const defaultAssets = (context.nxJsonConfiguration?.targetDefaults?.[context.targetName]?.options?.assets ?? [])
+    let targetDefaults = context.nxJsonConfiguration?.targetDefaults?.[context.targetName]
+
+    if (Array.isArray(targetDefaults)) {
+      targetDefaults = targetDefaults[0] as TargetConfiguration
+    }
+
+    const defaultAssets = (targetDefaults?.options?.assets ?? [])
       .map((asset) =>
         Object.fromEntries(
           Object.entries(asset).map(([key, value]) => {

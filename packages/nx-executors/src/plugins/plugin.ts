@@ -1,7 +1,7 @@
 import { dirname, resolve } from 'node:path'
 import type { CreateNodesContextV2, CreateNodesResult, CreateNodesV2 } from '@nx/devkit'
 import { createNodesFromFiles } from '@nx/devkit'
-import { loadConfigFile } from '@nx/devkit/src/utils/config-utils'
+import { loadConfigFile } from '@nx/devkit/internal'
 
 import type { JestPluginOptions } from './jest'
 import { buildTarget as buildJestTarget } from './jest'

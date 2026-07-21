@@ -100,5 +100,6 @@
       }
     }
   },
-  "plugins": ["@nx/jest/plugin"]
+  "plugins": ["@nx/jest/plugin"],
+  "analytics": false
 }

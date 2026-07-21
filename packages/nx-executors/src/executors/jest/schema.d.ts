@@ -1,4 +1,4 @@
-import type { JestExecutorOptions } from '@nx/jest/src/executors/jest/schema'
+import type { JestExecutorOptions } from '@nx/jest/dist/src/executors/jest/schema'
 
 export interface JestExecutorSchema extends JestExecutorOptions {
   cwd?: string
