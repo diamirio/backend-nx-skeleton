@@ -1,23 +1,30 @@
 {
   "name": "@diamir/nx-executors",
-  "version": "0.1.0-beta.1",
-  "description": "",
+  "version": "22.0.3",
+  "description": "Nx custom executors",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nx",
+    "executor",
+    "typescript",
+    "jest",
+    "ts-node-dev"
+  ],
   "main": "./src/index.js",
   "dependencies": {
-    "@nx/devkit": "22.3.3",
-    "@nx/js": "22.3.3",
-    "@nx/jest": "22.3.3",
-    "tslib": "2.8.1"
+    "@nx/devkit": "^23.1.0",
+    "@nx/js": "^23.1.0",
+    "@nx/jest": "^23.1.0",
+    "tslib": "^2.8.1"
   },
   "peerDependencies": {
-    "nx": ">= 22.0.0",
+    "nx": ">= 23.1.0",
     "ts-node": ">= 10.0.0",
     "ts-node-dev": ">= 2.0.0",
     "typescript": ">= 3.9.0"

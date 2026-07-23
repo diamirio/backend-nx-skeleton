@@ -7,8 +7,8 @@ import type {
   TargetConfiguration
 } from '@nx/devkit'
 import { createNodesFromFiles } from '@nx/devkit'
-import { calculateHashForCreateNodes } from '@nx/devkit/src/utils/calculate-hash-for-create-nodes'
-import { loadConfigFile } from '@nx/devkit/src/utils/config-utils'
+import { calculateHashesForCreateNodes } from '@nx/devkit/dist/src/utils/calculate-hash-for-create-nodes'
+import { loadConfigFile } from '@nx/devkit/internal'
 
 import type { TargetCache } from './cache'
 import { getCache, writeTargetsToCache } from './cache'
@@ -80,7 +80,7 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
       return {}
     }
 
-    const hash = await calculateHashForCreateNodes(projectRoot, options, context)
+    const [hash] = await calculateHashesForCreateNodes([projectRoot], options, context)
 
     if (!targetsCache[hash]) {
       targetsCache[hash] = this.buildTarget({

@@ -1,25 +1,21 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+# nestjs-config
+
+## Description
+
+This is a wrapper for the great [config](https://github.com/lorenwest/node-config) library adding typescript support, fallback values and custom decorators.
 
 ---
-
-# nestjs-config
 
 <!-- TOC -->
 * [nestjs-config](#nestjs-config)
   * [Description](#description)
   * [Usage](#usage)
     * [Decorator](#decorator)
-  * [Migration](#migration)
+* [Migration](#migration)
+* [Links](#links)
 <!-- TOC -->
 
-## Description
-
-This is a wrapper for the great [config](https://github.com/lorenwest/node-config) library adding typescript support, fallback values and custom decorators.
+---
 
 ## Usage
 
@@ -55,8 +51,13 @@ class CustomService {
 }
 ```
 
-## Migration
+# Migration
 
 To migrate from the old `@webundsoehne/nestjs-util` to `@diamir/nestjs-config`:
 - replace the imports
 - switch any injected `ConfigService` to the static methods
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)
+- [config](https://github.com/node-config/node-config)

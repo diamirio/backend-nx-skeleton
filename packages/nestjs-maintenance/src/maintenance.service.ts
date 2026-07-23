@@ -6,20 +6,14 @@ import type { MaintenanceOptions } from './interface'
 
 @Injectable()
 export class MaintenanceService {
-  static instance: MaintenanceService
-
   public readonly message: string
   private readonly logger = new Logger(this.constructor.name)
   private readonly lockfile: string
   private readonly tasks: string[] = []
 
   constructor(@Optional() options?: MaintenanceOptions) {
-    if (!MaintenanceService.instance) {
-      this.message = `${options?.application ?? process.env.PACKAGE_NAME ?? 'Application'} is currently down for maintenance`
-      this.lockfile = resolve(options?.lockfilePath ?? 'maintenance.lock')
-
-      MaintenanceService.instance = this
-    }
+    this.message = `${options?.application ?? process.env.PACKAGE_NAME ?? 'Application'} is currently down for maintenance`
+    this.lockfile = resolve(options?.lockfilePath ?? 'maintenance.lock')
   }
 
   async enable(task = 'unknown-task'): Promise<void> {

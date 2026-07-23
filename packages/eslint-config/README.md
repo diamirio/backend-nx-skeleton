@@ -1,17 +1,8 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # eslint-config
 
 ## Description
 
-Base set of 
+Base set of
 
 - [eslint](https://www.npmjs.com/package/eslint)
 - [typescript-eslint](https://www.npmjs.com/package/typescript-eslint)
@@ -19,6 +10,22 @@ Base set of
 - [eslint-plugin-import-x](https://www.npmjs.com/package/eslint-plugin-import-x)
 
 linting rules.
+
+---
+
+<!-- TOC -->
+* [eslint-config](#eslint-config)
+  * [Description](#description)
+  * [Configs](#configs)
+    * [Minimal](#minimal)
+    * [Recommended](#recommended)
+  * [Utils](#utils)
+    * [Define-Config](#define-config)
+    * [Internal Package Import](#internal-package-import)
+* [Links](#links)
+<!-- TOC -->
+
+---
 
 ## Configs
 
@@ -28,16 +35,30 @@ Import config package on their own via `import { configs } from '@diamir/eslint-
 - `configs.typescript` ... import order and typescript rules like `@typescript-eslint/naming-convention`
 - `configs.style` ... stylistic rules like `@stylistic/quotes`, `@stylistic/semi`
 
-and use them like 
+and use them like
 
 ```ts
 // eslint.config.mjs
+import { globalIgnores } from 'eslint/config'
 import { configs, utils } from '@diamir/eslint-config'
 
 export default utils.defineConfig(
   globalIgnores(['dist/**']),
   configs.base,
-  configs.typescript
+  configs.typescript,
+  {
+    name: 'custom',
+    rules: {
+      // custom rules
+    }
+  },
+  {
+    name: 'test',
+    files: ['**/*.spec.ts'],
+    rules: {
+      // rules applied to test files
+    }
+  }
 )
 ```
 
@@ -92,3 +113,7 @@ export default utils.defineConfig(
   recommended
 )
 ```
+
+# Links
+- [Diamir](https://diamir.io/)
+- [eslint](https://eslint.org/)

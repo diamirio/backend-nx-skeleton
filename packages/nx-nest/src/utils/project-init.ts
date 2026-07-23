@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import type { Tree } from '@nx/devkit'
 import { names, readNxJson } from '@nx/devkit'
-import { getNpmScope } from '@nx/workspace/src/utilities/get-import-path'
+import { getNpmScope } from '@nx/js/internal'
 
 export type SetupGeneratorOptions<T> = {
   scope: string

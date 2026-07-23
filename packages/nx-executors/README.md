@@ -1,50 +1,45 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
-
----
-
 # nx-executors
 
-<!-- TOC -->
-* [nx-executors](#nx-executors)
-* [Description](#description)
-* [Executors](#executors)
-  * [tsc](#tsc)
-    * [Configuration](#configuration)
-  * [ts-node-dev](#ts-node-dev)
-    * [Configuration](#configuration-1)
-  * [run](#run)
-    * [Configuration](#configuration-2)
-  * [jest](#jest)
-    * [Configuration](#configuration-3)
-* [Plugins](#plugins)
-  * [Single Plugin](#single-plugin)
-  * [Split Plugins](#split-plugins)
-  * [Exclude Plugins](#exclude-plugins)
-* [Migration](#migration)
-  * [Packages](#packages)
-    * [gitignore](#gitignore)
-    * [tsconfig paths](#tsconfig-paths)
-  * [nx.json](#nxjson)
-  * [Lint + Test](#lint--test)
-    * [EsLint](#eslint)
-    * [Jest](#jest-1)
-  * [Projects](#projects)
-<!-- TOC -->
 
-# Description
+## Description
 
 This package includes [nx](https://github.com/nrwl/nx) libraries for customising the build and serve process.
 
 ---
 
-# Executors
+<!-- TOC -->
+* [nx-executors](#nx-executors)
+  * [Description](#description)
+  * [Executors](#executors)
+    * [tsc](#tsc)
+      * [Configuration](#configuration)
+    * [ts-node-dev](#ts-node-dev)
+      * [Configuration](#configuration-1)
+    * [run](#run)
+      * [Configuration](#configuration-2)
+    * [jest](#jest)
+      * [Configuration](#configuration-3)
+  * [Plugins](#plugins)
+    * [Single Plugin](#single-plugin)
+    * [Split Plugins](#split-plugins)
+    * [Exclude Plugins](#exclude-plugins)
+* [Migration](#migration)
+  * [Packages](#packages)
+  * [gitignore](#gitignore)
+  * [tsconfig paths](#tsconfig-paths)
+  * [nx.json](#nxjson)
+  * [Lint + Test](#lint--test)
+    * [EsLint](#eslint)
+    * [Jest](#jest-1)
+  * [Projects](#projects)
+* [Links](#links)
+<!-- TOC -->
 
-## tsc
+---
+
+## Executors
+
+### tsc
 
 Executor: `@diamir/nx-executors:tsc`
 
@@ -53,7 +48,7 @@ shorten the configuration. On the other hand, the `targetDefaults` assets will b
 allowing to extend assets in the `project.json` instead of overwriting them. Furthermore by default the `package.json`
 and `package-lock.json` will be generated.
 
-### Configuration
+#### Configuration
 
 Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc#options
 
@@ -76,7 +71,7 @@ Extends the default tsc executor options: https://nx.dev/nx-api/js/executors/tsc
 }
 ```
 
-## ts-node-dev
+### ts-node-dev
 
 Executor: `@diamir/nx-executors:ts-node-dev`
 
@@ -86,7 +81,7 @@ packages in parallel.<br> There is no tsconfig-path replacer set up by default. 
 it via the `args` option, or use `typescript-transform-paths` with`ts-patch` and add it als `transformer` plugin to the
 tsconfig file.
 
-### Configuration
+#### Configuration
 
 ```json5
 {
@@ -121,7 +116,7 @@ tsconfig file.
 }
 ```
 
-## run
+### run
 
 Executor: `@diamir/nx-executors:run`
 
@@ -129,7 +124,7 @@ Extends the default `nx:run-commands` executor to set the `cwd` to the project-r
 `tsNode` option to `true` to get typescript support. (Will extend the `nodeOptions` with `-r ts-node/register` is not
 already set)
 
-### Configuration
+#### Configuration
 
 Extends the default run-commands executor options: https://nx.dev/nx-api/nx/executors/run-commands#options
 
@@ -163,13 +158,13 @@ Extends the default run-commands executor options: https://nx.dev/nx-api/nx/exec
 }
 ```
 
-## jest
+### jest
 
 Executor: `@diamir/nx-executors:jest`
 
 Extends the `@nx/jest:jest` executor to move to the correct project-folder and extend it with some more configurations.
 
-### Configuration
+#### Configuration
 
 Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/jest#options
 
@@ -186,7 +181,7 @@ Extends the default jest executor options: https://nx.dev/nx-api/jest/executors/
 }
 ```
 
-# Plugins
+## Plugins
 
 By default, the `serve`, `build`, `typecheck`, `test` and `e2e` targets are added to each `"projectType": "application"`
 project ( `test` & `e2e` only if a valid jest config is found).
@@ -194,7 +189,7 @@ project ( `test` & `e2e` only if a valid jest config is found).
 If you need to disable the plugin for a specific project (i.e. the mono-repo includes a frontend project with own
 targets) you can add `skipNxExecutors` to the `project.json` `tags`.
 
-## Single Plugin
+### Single Plugin
 
 To add all plugins (tsc, ts-node-dev and jest) just add the plugin to the `nx.json` config. This will add all
 application targets with the default configurations (as seen in the split plugins below).
@@ -207,7 +202,7 @@ application targets with the default configurations (as seen in the split plugin
 }
 ```
 
-## Split Plugins
+### Split Plugins
 
 Each executor-plugin can be added on its own to the `nx.json` too. To override additional configs (beside the plugin
 config) set `tagetDefaults` accordingly.
@@ -272,7 +267,7 @@ Add `tsc`, `tsc-node-dev` and `jest`' as `build`, `server` and `test` target.
 
 **Hint:** on config change it needs `nx reset` to clear the cached targets before the change is active.
 
-## Exclude Plugins
+### Exclude Plugins
 
 Besides excluding all plugins with the `skipNxExecutors` tag for a project, there is the option to just skip single
 plugins from generating targets for a project:
@@ -300,7 +295,7 @@ The old `@nwrl` and `@angular-devkit` packages can be replaced by a handful of n
 "nx" ... nx cli + basic executor
 ```
 
-### gitignore
+## gitignore
 
 With those new packages, nx has a new cache folder structure that needs to be set in the .gitignore file:
 
@@ -310,7 +305,7 @@ With those new packages, nx has a new cache folder structure that needs to be se
 .nx/workspace-data
 ```
 
-### tsconfig paths
+## tsconfig paths
 
 For an easy way to work with tsconfig paths include `ts-patch` and `typescript-transform-paths` as dev-dependency. Add a
 `prepare` script (for local use): `ts-patch install -s` and include
@@ -477,4 +472,8 @@ Same can be done for `build` and `server` by adding the `@diamir/nx-executors/pl
 
 With this setup, only project specific configuration overrides or targets need to be set in the `project.json` any
 generally used target like `test`, `lint`, `build` and `serve` will be available via the plugins and do not have to be
-set manually in each `project.json` anymore.
+set manually in each `project.json` any more.
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nx](https://nx.dev/)

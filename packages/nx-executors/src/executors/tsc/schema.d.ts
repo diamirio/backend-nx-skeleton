@@ -1,4 +1,4 @@
-import type { ExecutorOptions } from '@nx/js/src/utils/schema'
+import type { ExecutorOptions } from '@nx/js/dist/src/utils/schema'
 
 export interface TscExecutorSchema extends ExecutorOptions {
   cwd?: string

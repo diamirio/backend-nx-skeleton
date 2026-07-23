@@ -18,6 +18,7 @@ class MockService {
 
 describe('Maintenance Locker decorator', () => {
   let service: MockService
+  let maintenance: MaintenanceService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -26,6 +27,7 @@ describe('Maintenance Locker decorator', () => {
     }).compile()
 
     service = await moduleRef.get(MockService)
+    maintenance = await moduleRef.get(MaintenanceService)
   })
 
   test('should be defined', () => {
@@ -33,8 +35,8 @@ describe('Maintenance Locker decorator', () => {
   })
 
   test('should lock if methodA is called', async () => {
-    const enable = jest.spyOn(MaintenanceService.instance, 'enable')
-    const disable = jest.spyOn(MaintenanceService.instance, 'disable')
+    const enable = jest.spyOn(maintenance, 'enable')
+    const disable = jest.spyOn(maintenance, 'disable')
 
     await service.methodA()
     expect(enable).toHaveBeenCalled()

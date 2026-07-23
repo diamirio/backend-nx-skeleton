@@ -1,26 +1,22 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+# nx-skeleton
 
----
+NestJs and Nx utils/helper/tools
 
 <!-- TOC -->
-* [compatibility](#compatibility)
 * [nx-skeleton](#nx-skeleton)
-  * [eslint-config](#eslint-config)
-  * [nestjs-config](#nestjs-config)
-  * [nestjs-logger](#nestjs-logger)
-  * [nestjs-maintenance](#nestjs-maintenance)
-  * [nestjs-microservice](#nestjs-microservice)
-  * [nestjs-process](#nestjs-process)
-  * [nestjs-retry](#nestjs-retry)
-  * [nestjs-seeder](#nestjs-seeder)
-  * [nestjs-util-restful](#nestjs-util-restful)
-  * [nx-executors](#nx-executors)
-  * [nx-nest](#nx-nest)
+  * [compatibility](#compatibility)
+  * [packages](#packages)
+    * [eslint-config](#eslint-config)
+    * [nestjs-config](#nestjs-config)
+    * [nestjs-logger](#nestjs-logger)
+    * [nestjs-maintenance](#nestjs-maintenance)
+    * [nestjs-microservice](#nestjs-microservice)
+    * [nestjs-process](#nestjs-process)
+    * [nestjs-retry](#nestjs-retry)
+    * [nestjs-seeder](#nestjs-seeder)
+    * [nestjs-util-restful](#nestjs-util-restful)
+    * [nx-executors](#nx-executors)
+    * [nx-nest](#nx-nest)
 * [Development](#development)
   * [package.json](#packagejson)
   * [Targets](#targets)
@@ -30,7 +26,7 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 * [old skeleton](#old-skeleton)
 <!-- TOC -->
 
-# compatibility
+## compatibility
 
 | package                | dependency      |
 |------------------------|-----------------|
@@ -43,64 +39,62 @@ Web & Söhne is Austria's leading expert in programming and implementing complex
 | nestjs-retry@11        | nest@11         |
 | nestjs-seeder@11       | nest@11         |
 | nestjs-util-restful@11 | nest@11         |
-| nx-executorsl@22       | nx@22           |
+| nx-executors@22        | nx@22           |
 | nx-nest@22             | nx@22 & nest@11 |
 
-# nx-skeleton
+## packages
 
-NestJs and Nx utils/helper/tools
-
-## eslint-config
+### eslint-config
 
 Eslint-Config presets
 [eslint-config](./packages/eslint-config)
 
-## nestjs-config
+### nestjs-config
 
 Runtime config util and decorators
 [nestjs-config](./packages/nestjs-config)
 
-## nestjs-logger
+### nestjs-logger
 
 Winston nestjs logger instance
 [nestjs-logger](./packages/nestjs-logger)
 
-## nestjs-maintenance
+### nestjs-maintenance
 
 Maintenance middleware and module
 [nestjs-maintenance](./packages/nestjs-maintenance)
 
-## nestjs-microservice
+### nestjs-microservice
 
 Microservice utils
 [nestjs-microservice](./packages/nestjs-microservice)
 
-## nestjs-process
+### nestjs-process
 
 Node process/environment utils
 [nestjs-process](./packages/nestjs-process)
 
-## nestjs-retry
+### nestjs-retry
 
 Method retry decorator
 [nestjs-retry](./packages/nestjs-retry)
 
-## nestjs-seeder
+### nestjs-seeder
 
 Generic seeding module
 [nestjs-seeder](./packages/nestjs-seeder)
 
-## nestjs-util-restful
+### nestjs-util-restful
 
 Restful utils, swagger, exception-filter tools
 [nestjs-util-restful](./packages/nestjs-util-restful)
 
-## nx-executors
+### nx-executors
 
 NX executors and plugins
 [nx-executors](./packages/nx-executors)
 
-## nx-nest
+### nx-nest
 
 NX application/workspace generators
 [nx-nest](./packages/nx-nest)
@@ -116,10 +110,11 @@ Each package has a `package.json` and a `package.template.json`.
 The `package.template.json` only hold the `dependency` and `peerDependency` information linking the dependency version
 to the `pnpm-workspace.yml` catalogs, where the dependency versions can be managed in a single place.
 
-The `updateManifest` target (custom internal executor [manifest](tools/internal/src/executors/update-manifest)) will update the `package.json` replacing the
-dependency versions linked in the template from the pnpm catalogues.
+The `updateManifest` target (custom internal executor [manifest](tools/internal/src/executors/update-manifest)) will
+update the `package.json` replacing the dependency versions linked in the template from the pnpm catalogues.
 
-If you update a dependency in a catalog, you must **manually** run `npm run manifest:update` (or the `updateManifest` target another way) to update the `package.json` and `pnpm install` to update the lockfile.
+If you update a dependency in a catalog, you must **manually** run `npm run manifest:update` (or the `updateManifest`
+target another way) to update the `package.json` and `pnpm install` to update the lockfile.
 
 This way, we can utilize the pnpm catalog feature while still have the git change on version update to later generate a
 changelog and version based on the committed change.
@@ -129,8 +124,8 @@ changelog and version based on the committed change.
 The default nx targets are all stored in the [`nx.json`](nx.json) `targetDefaults` and applied in the `project.json` via
 e.g. `build: {}` (the target must be included per project, but the config is shared in the nx.json)
 
-By default, the `README.md` and the `LICENCE` files are included as asset on build, to add more, extend the `build` target for
-the package like
+By default, the `README.md` and the `LICENCE` files are included as asset on build, to add more, extend the `build`
+target for the package like
 
 ```json5
 // project.json
@@ -163,7 +158,8 @@ the package like
 
 ## Beta
 
-Once a branch is merged into the `beta` branch, the beta-release will be triggered, setting a pre-release tag like `0.1.1-beta.0`.
+Once a branch is merged into the `beta` branch, the beta-release will be triggered, setting a pre-release tag like
+`0.1.1-beta.0`.
 
 ## Master
 

@@ -1,21 +1,26 @@
 {
   "name": "@diamir/nestjs-microservice",
-  "version": "0.1.0-beta.1",
-  "description": "",
+  "version": "11.0.3",
+  "description": "Nestjs microservice-provider wrapper module and base-service",
   "author": "Backend <backend@diamir.io>",
   "repository": "https://github.com/tailoredmedia/backend-nx-skeleton",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "diamir",
+    "nestjs",
+    "microservice",
+    "rabbitmq"
+  ],
   "main": "./src/index.js",
   "dependencies": {},
   "peerDependencies": {
     "@nestjs/common": ">= 11.0.0",
     "@nestjs/core": ">= 11.0.0",
     "@nestjs/microservices": ">= 11.0.0",
-    "rxjs": "7.8.2"
+    "rxjs": "^7.8.2"
   },
   "peerDependenciesMeta": {},
   "engines": {

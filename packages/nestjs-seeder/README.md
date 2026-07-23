@@ -1,23 +1,20 @@
-<p align="center">
-  <a href="https://webundsoehne.com" target="blank">
-    <img src="https://webundsoehne.com/wp-content/uploads/webundsoehne-logo.png" width="320" alt="Web und Söhne - Logo" />
-  </a>
-</p>
-Web & Söhne is Austria's leading expert in programming and implementing complex and large web projects.
+# nestjs-seeder
+
+
+## Description
+
+A generic seeder to inject services in to and initiate an application programmatically.
 
 ---
-
-# nestjs-seeder
 
 <!-- TOC -->
 * [nestjs-seeder](#nestjs-seeder)
   * [Description](#description)
   * [Usage](#usage)
+* [Links](#links)
 <!-- TOC -->
 
-## Description
-
-A generic seeder to inject services in to and initiate an application programmatically.
+---
 
 ## Usage
 
@@ -39,3 +36,7 @@ export class ExampleSeed extends Seed {
 ```
 
 Those seeds can inject providers as usual in nestjs and can be used for more than just database seeding.
+
+# Links
+- [Diamir](https://diamir.io/)
+- [nestjs](https://nestjs.com/)

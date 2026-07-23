@@ -28,6 +28,16 @@
         }
       ],
       "fallbackCurrentVersionResolver": "disk"
+    },
+    "conventionalCommits": {
+      "types": {
+        "docs": {
+          "semverBump": "patch",
+          "changelog": {
+            "title": "Documentation"
+          }
+        }
+      }
     }
   },
   "targetDefaults": {
@@ -90,5 +100,6 @@
       }
     }
   },
-  "plugins": ["@nx/jest/plugin"]
+  "plugins": ["@nx/jest/plugin"],
+  "analytics": false
 }
