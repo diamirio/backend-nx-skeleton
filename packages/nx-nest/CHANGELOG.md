@@ -1,3 +1,17 @@
+## 23.0.0-beta.1 (2026-07-27)
+
+### 🚀 Features
+
+- ⚠️  **nx:** upgrade to nx 23
+
+### ⚠️  Breaking Changes
+
+- **nx:** upgrade to nx 23
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 22.0.2 (2026-05-19)
 
 This was a version bump only for nx-nest to align it with other projects, there were no code changes.
