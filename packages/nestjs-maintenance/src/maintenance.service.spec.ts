@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/useLiteralKeys: private key overrides */
 import { rm, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { vitest } from 'vitest'

@@ -42,8 +42,5 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npm exec lint-staged"
-  },
-  "volta": {
-    "node": "22.16.0"
   }
 }
