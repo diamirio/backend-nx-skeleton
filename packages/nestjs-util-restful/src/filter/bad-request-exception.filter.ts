@@ -30,7 +30,7 @@ export class BadRequestExceptionFilter extends AbstractExceptionFilter<BadReques
     let messages = ''
 
     if (Array.isArray(errors)) {
-      messages = `\n- ${errors.join('- \n')}`
+      messages = `\n${errors.map((v) => `- ${v}`).join('\n')}`
     }
 
     return `[${exception.name}] ${exception.message}${messages}`
