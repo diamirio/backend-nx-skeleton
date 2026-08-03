@@ -1,5 +1,5 @@
 import { dirname, resolve } from 'node:path'
-import type { CreateNodesContextV2, CreateNodesResult, CreateNodesV2 } from '@nx/devkit'
+import type { CreateNodes, CreateNodesContext, CreateNodesResult } from '@nx/devkit'
 import { createNodesFromFiles } from '@nx/devkit'
 import { loadConfigFile } from '@nx/devkit/internal'
 
@@ -17,12 +17,12 @@ export interface PluginOptions {
   jestOptions: JestPluginOptions
 }
 
-export const createNodes: CreateNodesV2<PluginOptions> = [
+export const createNodes: CreateNodes<PluginOptions> = [
   FILE_PATTERN,
   (
     configFiles: readonly string[],
     options: PluginOptions,
-    context: CreateNodesContextV2
+    context: CreateNodesContext
   ): Promise<[file: string, value: CreateNodesResult][]> => {
     return createNodesFromFiles(createNodeTargets, configFiles, options, context)
   }
@@ -31,7 +31,7 @@ export const createNodes: CreateNodesV2<PluginOptions> = [
 async function createNodeTargets(
   configFile: string,
   options: PluginOptions,
-  context: CreateNodesContextV2
+  context: CreateNodesContext
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFile)
   const projectConfig = await loadConfigFile(resolve(context.workspaceRoot, configFile))

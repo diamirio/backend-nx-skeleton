@@ -1,14 +1,8 @@
 import { dirname, resolve } from 'node:path'
-import type {
-  CreateNodesContextV2,
-  CreateNodesResult,
-  CreateNodesResultV2,
-  CreateNodesV2,
-  TargetConfiguration
-} from '@nx/devkit'
+import type { CreateNodes, CreateNodesContext, CreateNodesResult, TargetConfiguration } from '@nx/devkit'
 import { createNodesFromFiles } from '@nx/devkit'
-import { calculateHashesForCreateNodes } from '@nx/devkit/dist/src/utils/calculate-hash-for-create-nodes'
-import { loadConfigFile } from '@nx/devkit/internal'
+import { calculateHashesForCreateNodes, loadConfigFile } from '@nx/devkit/internal'
+import type { CreateNodesResultArray } from 'nx/src/project-graph/plugins/public-api'
 
 import type { TargetCache } from './cache'
 import { getCache, writeTargetsToCache } from './cache'
@@ -21,14 +15,14 @@ type Plugin<O> = new (...args: any[]) => PluginBuilder<O>
 export interface BuildTargetOptions<O> {
   options: O
   projectConfig: Record<string, any>
-  context: CreateNodesContextV2
+  context: CreateNodesContext
   projectRoot: string
 }
 
 interface BuildPluginResponse<O> {
-  createNodes: CreateNodesV2
+  createNodes: CreateNodes
   buildTarget: (options: BuildTargetOptions<O>) => Record<string, TargetConfiguration>
-  buildNodes: (configFiles: string[], options: O, context: CreateNodesContextV2) => Promise<CreateNodesResultV2>
+  buildNodes: (configFiles: string[], options: O, context: CreateNodesContext) => Promise<CreateNodesResult>
 }
 
 export function buildPlugin<O>(pluginBuilder: Plugin<O>): BuildPluginResponse<O> {
@@ -51,8 +45,8 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
   async internalCreateNode(
     configFiles: string[],
     options: O,
-    context: CreateNodesContextV2
-  ): Promise<CreateNodesResultV2> {
+    context: CreateNodesContext
+  ): Promise<CreateNodesResultArray> {
     const { cachePath, targetsCache } = getCache(options, this.name)
 
     try {
@@ -70,7 +64,7 @@ export abstract class PluginBuilder<O extends { targetName?: string }> {
   private async createNodeTargets(
     configFilePath: string,
     options: O,
-    context: CreateNodesContextV2,
+    context: CreateNodesContext,
     targetsCache: TargetCache
   ): Promise<CreateNodesResult> {
     const projectRoot = dirname(configFilePath)
