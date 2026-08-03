@@ -9,7 +9,7 @@ export const DEPENDENCY_VERSIONS = {
   '@diamir/nestjs-retry': '^11.0.0',
   '@diamir/nestjs-seeder': '^11.0.0',
   '@diamir/nestjs-util-restful': '^11.0.0',
-  '@diamir/nx-executors': '^22.0.0',
+  '@diamir/nx-executors': '^23.0.0-beta',
   // workspace
   eslint: '^9.39.4',
   'simple-git-hooks': '^2.13.1',
