@@ -24,13 +24,13 @@ export abstract class AbstractExceptionFilter<
     this.postConstructorHook()
   }
 
-  async catch(exception: E & { cause?: E }, host: ArgumentsHost): Promise<void> {
+  async catch(exception: E & { cause?: unknown }, host: ArgumentsHost): Promise<void> {
     exception.name ??= 'Error'
 
     if (this.options.logging) {
       this.logger.error(this.formatLogMessage(exception), this.options.printStack ? exception.stack : undefined)
 
-      if (exception.cause) {
+      if (exception.cause && exception.cause instanceof Error) {
         this.logger.error(
           `Caused by: ${exception.cause.message}`,
           this.options.printStack ? exception.cause.stack : undefined

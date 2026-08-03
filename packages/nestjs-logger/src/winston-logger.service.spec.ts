@@ -6,21 +6,21 @@ import { JsonFormat } from './format/json.format'
 import { LogLevel } from './logger.constants'
 import { WinstonLogger } from './winston-logger.service'
 
-jest.mock('winston', () => {
-  const winston = jest.requireActual('winston')
+vitest.mock('winston', async () => {
+  const winston = await vitest.importActual('winston')
 
   return {
     ...winston,
-    createLogger: jest.fn(),
+    createLogger: vitest.fn(),
     transports: {
-      Console: jest.fn()
+      Console: vitest.fn()
     }
   }
 })
 
 describe('Winston Logger', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vitest.clearAllMocks()
   })
 
   test('should use default logger constructor', () => {

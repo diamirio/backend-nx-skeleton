@@ -3,14 +3,14 @@ import { Logger } from '@nestjs/common'
 import { useRetry } from './use-retry'
 
 describe('Use retry', () => {
-  let loggerWarn: jest.SpyInstance
+  let loggerWarn: ReturnType<typeof vitest.spyOn>
 
   beforeAll(() => {
-    loggerWarn = jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => jest.fn())
+    loggerWarn = vitest.spyOn(Logger.prototype, 'warn').mockImplementation(() => vitest.fn())
   })
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    vitest.clearAllMocks()
   })
 
   test('should be defined', () => {
@@ -18,7 +18,7 @@ describe('Use retry', () => {
   })
 
   test('should not retry', async () => {
-    const fn = jest.fn().mockResolvedValue('mock')
+    const fn = vitest.fn().mockResolvedValue('mock')
 
     await expect(useRetry(fn, { retry: 2, interval: 5, name: 'none' })).resolves.toEqual('mock')
 
@@ -28,7 +28,7 @@ describe('Use retry', () => {
 
   test('should retry once', async () => {
     let i = 0
-    const fn = jest.fn().mockImplementation(() => {
+    const fn = vitest.fn().mockImplementation(() => {
       return i++ === 0 ? Promise.reject(i) : Promise.resolve(i)
     })
 
@@ -39,7 +39,7 @@ describe('Use retry', () => {
   })
 
   test('should retry until out of retries', async () => {
-    const fn = jest.fn().mockRejectedValue(new Error('mock'))
+    const fn = vitest.fn().mockRejectedValue(new Error('mock'))
 
     await expect(useRetry(fn, { retry: 3, interval: 5, name: 'fail' })).rejects.toThrow('mock')
 

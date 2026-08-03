@@ -217,7 +217,6 @@ SwaggerService.enable(app, {
   title: 'Swagger Docu',
   description: 'Some helpful description of the project'
 }, {
-  basePath: 'http://localhost:3000',
   apiPath: 'api'
 })
 // customise `DocumentBuilder`

@@ -2,8 +2,11 @@ packages:
   - packages/*
 
 allowBuilds:
+  '@scarf/scarf': false
+  '@swc/core': false
   nx: false
   simple-git-hooks: true
+  unrs-resolver: false
 
 catalog:
   config: '^4.1.1'

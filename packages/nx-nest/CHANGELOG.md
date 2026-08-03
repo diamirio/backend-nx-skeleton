@@ -1,3 +1,13 @@
+## 23.0.0-beta.2 (2026-08-03)
+
+### 🩹 Fixes
+
+- **nx-nest:** use nx-executors v23 beta
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 23.0.0-beta.1 (2026-07-27)
 
 ### 🚀 Features

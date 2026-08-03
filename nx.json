@@ -54,11 +54,6 @@
         "packageRoot": "dist/{projectName}"
       }
     },
-    "test": {
-      "options": {
-        "passWithNoTests": true
-      }
-    },
     "lint": {
       "executor": "nx:run-commands",
       "options": {
@@ -100,6 +95,6 @@
       }
     }
   },
-  "plugins": ["@nx/jest/plugin"],
+  "plugins": [],
   "analytics": false
 }

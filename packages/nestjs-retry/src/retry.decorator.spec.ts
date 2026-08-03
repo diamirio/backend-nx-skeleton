@@ -23,16 +23,16 @@ class Mock {
 
 describe('Retry decorator', () => {
   let mock: Mock
-  let loggerWarn: jest.SpyInstance
+  let loggerWarn: ReturnType<typeof vitest.spyOn>
 
   beforeAll(() => {
-    loggerWarn = jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => jest.fn())
+    loggerWarn = vitest.spyOn(Logger.prototype, 'warn').mockImplementation(() => vitest.fn())
 
     mock = new Mock()
   })
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    vitest.clearAllMocks()
   })
 
   test('should not retry', async () => {
