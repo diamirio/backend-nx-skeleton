@@ -1,3 +1,13 @@
+## 23.0.0-beta.3 (2026-09-08)
+
+### 🩹 Fixes
+
+- **nx-executors:** patch nx packages to access internal executor functions
+
+### ❤️ Thank You
+
+- Philipp Hiegetsberger
+
 ## 23.0.0-beta.2 (2026-08-03)
 
 ### 🩹 Fixes
