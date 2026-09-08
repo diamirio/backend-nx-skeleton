@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import type { ExecutorContext, TargetConfiguration } from '@nx/devkit'
-import nxTscExecutor from '@nx/js/dist/src/executors/tsc/tsc.impl'
+import { tscExecutor as nxTscExecutor } from '@nx/js/internal'
 import { fileExists, readJsonFile, writeJsonFile } from 'nx/src/utils/fileutils'
 
 import type { ExecutorResult } from '../inteface'

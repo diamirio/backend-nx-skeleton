@@ -12,7 +12,8 @@
           "{projectRoot}/generators.json",
           "{projectRoot}/migrations.json",
           "{projectRoot}/src/generators/**/*.json",
-          "{projectRoot}/src/generators/**/*.ejs"
+          "{projectRoot}/src/generators/**/*.ejs",
+          "{projectRoot}/src/generators/**/*.patch"
         ]
       }
     },

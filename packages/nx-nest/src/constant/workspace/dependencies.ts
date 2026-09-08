@@ -1,7 +1,9 @@
 import { DEPENDENCY_VERSIONS } from '../dependencies'
 import { NODE_VERSION } from '../index'
 
-export const DEPENDENCIES = {}
+export const DEPENDENCIES = {
+  'patch-package': DEPENDENCY_VERSIONS['patch-package']
+}
 
 export const DEV_DEPENDENCIES = {
   '@types/node': `^${NODE_VERSION}`,

@@ -24,10 +24,10 @@ catalogs:
     eslint-plugin-import-x: '^4.16.1'
     typescript-eslint: '^8.53.0'
   nx:
-    '@nx/devkit': '^23.1.0'
-    '@nx/jest': '^23.1.0'
-    '@nx/js': '^23.1.0'
-    '@nx/workspace': '^23.1.0'
+    '@nx/devkit': '^23.2.0'
+    '@nx/jest': '^23.2.0'
+    '@nx/js': '^23.2.0'
+    '@nx/workspace': '^23.2.0'
   # DEPENDENCY PEER
   nestjs:
     '@nestjs/common': '>= 11.0.0'
@@ -45,5 +45,9 @@ catalogs:
     ts-node-dev: '>= 2.0.0'
     typeorm: '>= 0.3.28'
     typescript: '>= 3.9.0'
+
+patchedDependencies:
+  '@nx/jest': patches/@nx__jest.patch
+  '@nx/js': patches/@nx__js.patch
 
 saveExact: true

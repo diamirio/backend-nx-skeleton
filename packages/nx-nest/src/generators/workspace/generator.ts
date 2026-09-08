@@ -91,6 +91,7 @@ function updatePackageJson(tree: Tree, options: NestWorkspaceGeneratorSchema, ta
     addPackageScripts(tree, 'package.json', {
       nx: SCRIPTS.nx,
       prepare: SCRIPTS.prepare,
+      postinstall: 'patch-package',
       lint: SCRIPTS.lint,
       'lint:check': SCRIPTS['lint:check'],
       'lint:fix': SCRIPTS['lint:fix'],

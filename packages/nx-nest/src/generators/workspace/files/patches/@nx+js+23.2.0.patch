@@ -1,0 +1,33 @@
+diff --git a/node_modules/@nx/js/dist/internal.d.ts b/node_modules/@nx/js/dist/internal.d.ts
+index f4ca8ed..1ab46ce 100644
+--- a/node_modules/@nx/js/dist/internal.d.ts
++++ b/node_modules/@nx/js/dist/internal.d.ts
+@@ -33,3 +33,4 @@ export { addLocalRegistryScripts } from './src/utils/add-local-registry-scripts'
+ export type { LibraryGeneratorSchema } from './src/generators/library/schema';
+ export { addReleaseConfigForNonTsSolution, addReleaseConfigForTsSolution, releaseTasks, } from './src/generators/library/utils/add-release-config';
+ export { nxVersion, esbuildVersion, prettierVersion, swcCliVersion, swcCoreVersion, swcHelpersVersion, swcNodeVersion, tsLibVersion, typesNodeVersion, } from './src/utils/versions';
++export { tscExecutor } from './src/executors/tsc/tsc.impl';
+diff --git a/node_modules/@nx/js/dist/internal.js b/node_modules/@nx/js/dist/internal.js
+index 74b1314..409f08c 100644
+--- a/node_modules/@nx/js/dist/internal.js
++++ b/node_modules/@nx/js/dist/internal.js
+@@ -124,3 +124,6 @@ Object.defineProperty(exports, "swcHelpersVersion", { enumerable: true, get: fun
+ Object.defineProperty(exports, "swcNodeVersion", { enumerable: true, get: function () { return versions_1.swcNodeVersion; } });
+ Object.defineProperty(exports, "tsLibVersion", { enumerable: true, get: function () { return versions_1.tsLibVersion; } });
+ Object.defineProperty(exports, "typesNodeVersion", { enumerable: true, get: function () { return versions_1.typesNodeVersion; } });
++// Executor function
++var tsc_executors_1 = require("./src/executors/tsc/tsc.impl");
++Object.defineProperty(exports, "tscExecutor", { enumerable: true, get: function () { return tsc_executors_1.tscExecutor; } });
+diff --git a/node_modules/@nx/js/dist/typescript.js b/node_modules/@nx/js/dist/typescript.js
+index 878310c..ae98048 100644
+--- a/node_modules/@nx/js/dist/typescript.js
++++ b/node_modules/@nx/js/dist/typescript.js
+@@ -2,6 +2,8 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.createNodesV2 = exports.createNodes = exports.createDependencies = void 0;
+ var plugin_1 = require("./src/plugins/typescript/plugin");
++var tsc_executors_1 = require("./src/executors/tsc/tsc.impl");
+ Object.defineProperty(exports, "createDependencies", { enumerable: true, get: function () { return plugin_1.createDependencies; } });
+ Object.defineProperty(exports, "createNodes", { enumerable: true, get: function () { return plugin_1.createNodes; } });
+ Object.defineProperty(exports, "createNodesV2", { enumerable: true, get: function () { return plugin_1.createNodesV2; } });
++Object.defineProperty(exports, "tscExecutor", { enumerable: true, get: function () { return tsc_executors_1.tscExecutor; } });

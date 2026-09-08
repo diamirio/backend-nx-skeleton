@@ -1,0 +1,24 @@
+diff --git a/dist/internal.d.ts b/dist/internal.d.ts
+index 1d25ef7fa80089312ce0f14b773ffe06b2c696b0..d6e8daa2a54a3f9e5a8bbf35f455719742f1b92a 100644
+--- a/dist/internal.d.ts
++++ b/dist/internal.d.ts
+@@ -1,5 +1,6 @@
+ export { versions, getInstalledJestMajorVersion } from './src/utils/versions';
+ export { findRootJestPreset } from './src/utils/config/config-file';
++export { jestExecutor } from './src/executors/jest/jest.impl';
+ /**
+  * The Oxlint plugins a Jest-tested project needs. Declared here so the linter
+  * does not have to know what a test runner requires; `@nx/js`'s
+diff --git a/dist/internal.js b/dist/internal.js
+index 0664f405aa674a771b2e28f861f7c112f7a57001..1a9ed49bd2fd0258d00a0bdd0c7ec9f3c9bbd554 100644
+--- a/dist/internal.js
++++ b/dist/internal.js
+@@ -11,6 +11,8 @@ Object.defineProperty(exports, "versions", { enumerable: true, get: function ()
+ Object.defineProperty(exports, "getInstalledJestMajorVersion", { enumerable: true, get: function () { return versions_1.getInstalledJestMajorVersion; } });
+ var config_file_1 = require("./src/utils/config/config-file");
+ Object.defineProperty(exports, "findRootJestPreset", { enumerable: true, get: function () { return config_file_1.findRootJestPreset; } });
++var executors_1 = require("./src/executors/jest/jest.impl");
++Object.defineProperty(exports, "jestExecutor", { enumerable: true, get: function () { return executors_1.jestExecutor; } });
+ /**
+  * The Oxlint plugins a Jest-tested project needs. Declared here so the linter
+  * does not have to know what a test runner requires; `@nx/js`'s

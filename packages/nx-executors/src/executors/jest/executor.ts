@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import * as process from 'node:process'
 import type { ExecutorContext } from '@nx/devkit'
-import jestExecutor from '@nx/jest/dist/src/executors/jest/jest.impl'
+import { jestExecutor as nxJestExecutor } from '@nx/jest/internal'
 
 import type { ExecutorResult } from '../inteface'
 import type { JestExecutorSchema } from './schema'
@@ -20,5 +20,5 @@ export default async function (options: JestExecutorSchema, context: ExecutorCon
   process.chdir(cwd)
   context.root = cwd
 
-  return jestExecutor(options, context)
+  return nxJestExecutor(options, context)
 }

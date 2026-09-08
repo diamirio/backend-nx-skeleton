@@ -1,0 +1,20 @@
+diff --git a/dist/internal.d.ts b/dist/internal.d.ts
+index f4ca8ed31941e95d5306d1f677275be1c5b127d8..1ab46cea30a17f9f21d2e2724b5c7ea17f517c72 100644
+--- a/dist/internal.d.ts
++++ b/dist/internal.d.ts
+@@ -33,3 +33,4 @@ export { addLocalRegistryScripts } from './src/utils/add-local-registry-scripts'
+ export type { LibraryGeneratorSchema } from './src/generators/library/schema';
+ export { addReleaseConfigForNonTsSolution, addReleaseConfigForTsSolution, releaseTasks, } from './src/generators/library/utils/add-release-config';
+ export { nxVersion, esbuildVersion, prettierVersion, swcCliVersion, swcCoreVersion, swcHelpersVersion, swcNodeVersion, tsLibVersion, typesNodeVersion, } from './src/utils/versions';
++export { tscExecutor } from './src/executors/tsc/tsc.impl';
+diff --git a/dist/internal.js b/dist/internal.js
+index 74b13140dd87298d53fedcb4e5c82492d374efb3..409f08c805934ecbeac9fbb0a95479b61499f67d 100644
+--- a/dist/internal.js
++++ b/dist/internal.js
+@@ -124,3 +124,6 @@ Object.defineProperty(exports, "swcHelpersVersion", { enumerable: true, get: fun
+ Object.defineProperty(exports, "swcNodeVersion", { enumerable: true, get: function () { return versions_1.swcNodeVersion; } });
+ Object.defineProperty(exports, "tsLibVersion", { enumerable: true, get: function () { return versions_1.tsLibVersion; } });
+ Object.defineProperty(exports, "typesNodeVersion", { enumerable: true, get: function () { return versions_1.typesNodeVersion; } });
++// Executor function
++var tsc_executors_1 = require("./src/executors/tsc/tsc.impl");
++Object.defineProperty(exports, "tscExecutor", { enumerable: true, get: function () { return tsc_executors_1.tscExecutor; } });

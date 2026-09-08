@@ -12,6 +12,7 @@ export const DEPENDENCY_VERSIONS = {
   '@diamir/nx-executors': '^23.0.0-beta',
   // workspace
   eslint: '^9.39.4',
+  'patch-package': '^8.0.1',
   'simple-git-hooks': '^2.13.1',
   'ts-node': '^10.9.2',
   'ts-node-dev': '^2.0.0',
